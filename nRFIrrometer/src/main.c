@@ -342,7 +342,7 @@ int main(void)
             nrfx_saadc_uninit();        
        }
 
-       if (ReadFromADC(NRF_SAADC_INPUT_AIN3, &nCBValue))
+       if (ReadFromADC(NRF_SAADC_INPUT_AIN4, &nCBValue))
        {
              memset(cbuffer, '\0', sizeof(cbuffer));
             sprintf(cbuffer,"CB=%d", abs(nCBValue));
