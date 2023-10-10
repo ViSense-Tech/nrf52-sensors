@@ -273,7 +273,10 @@ int main(void)
         printk("PressureZero: %d\n", pressureZero);
         printk("PressureMax: %d\n", pressureMax);
         #ifdef SLEEP_ENABLE
-         EnterSleepMode(180);
+        k_sleep(K_SECONDS(300));
+        #endif
+        #ifdef SLEEP_ENABLE
+         EnterSleepMode(3600);
          ExitSleepMode();
         #endif
     }
