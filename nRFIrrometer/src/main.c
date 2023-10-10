@@ -43,6 +43,7 @@ const long open_resistance = 35000;
 const long short_resistance = 200;
 const long short_CB = 240, open_CB = 255;
 const float SupplyV = 3.3;
+const float cFactor = 1.1;
 
 
 cJSON *pcData = NULL;
@@ -149,14 +150,17 @@ float readWMsensor(void)
     return (WM_ResistanceA + WM_ResistanceB) / 2.0;
 }
 
-void saadc_callback(nrfx_saadc_evt_t const * p_event) {
+void saadc_callback(nrfx_saadc_evt_t const * p_event) 
+{
     // Handle SAADC events here if needed.
 }
+
 /**
  * @brief function to initialize adc
+ * @param ADC channel
  * @return void
 */
-static void InitAdc(void)
+static void InitAdc(nrf_saadc_input_t eAdcChannel)
 {
     nrfx_err_t status;
     status = nrfx_saadc_init(NRFX_SAADC_DEFAULT_CONFIG_IRQ_PRIORITY);
@@ -172,7 +176,7 @@ static void InitAdc(void)
             .mode              = NRF_SAADC_MODE_SINGLE_ENDED,
             .burst             = NRF_SAADC_BURST_DISABLED,
         },
-        .pin_p             = NRF_SAADC_INPUT_AIN1,
+        .pin_p             = eAdcChannel,
         .pin_n             = NRF_SAADC_INPUT_DISABLED,
         .channel_index     = 1
     };
@@ -217,6 +221,12 @@ static bool SetPMState()
     bRetVal = pm_state_force(0, &info);
     return bRetVal;
 }
+
+/**
+ * @brief put in sleep 
+ * @param nDuration - duration to sleep
+ * @return None
+*/
 static void EnterSleepMode(int nDuration)
 {
     pm_device_action_run(pAdc, PM_DEVICE_ACTION_SUSPEND);
@@ -239,18 +249,50 @@ static void ExitSleepMode()
     gpio_pin_set(sSleepStatusLED.port, sSleepStatusLED.pin, 0);
 }
 
+/**
+ * @brief Read ADC reading from selected ADC channel
+ * @param eAdcChannel - ADC channel
+ * @param pnWM_CB - CB value
+ * @return true for success.
+*/
+static bool ReadFromADC(nrf_saadc_input_t eAdcChannel, int *pnWM_CB)
+{
+    bool bRetVal = false;
 
+    if (pnWM_CB)
+    {
+        InitAdc(NRF_SAADC_INPUT_AIN1);
+        k_msleep(50);
+        sAdcReadValue1 = GetAdcResult(&sSensorPwSpec1);
+        printk("Reading A1: %d\n", sAdcReadValue1);
+        sAdcReadValue2 = GetAdcResult(&sSensorPwSpec2);
+        printk("Reading A2: %d\n", sAdcReadValue2);
+        
+        float WM_Resistance = readWMsensor();
+        printk("WM Resistance(Ohms): %d\n", (int)WM_Resistance);
+        *pnWM_CB = myCBvalue((int)WM_Resistance, default_TempC, cFactor);
+        printk("WM1(cb/kPa): %d\n", abs(*pnWM_CB));
+        bRetVal = true;
+    }
+
+    return bRetVal;
+}
+
+/**
+ * @brief main function
+*/
 int main(void)
 {
     nrfx_err_t status;
     int Ret;
-    char cbuffer[60] = {0};
-    char cJsonBuffer[100] = {0};
+    char cbuffer[20] = {0};
+    char *cJsonBuffer = NULL;
     cJSON *pMainObject = NULL;
-    const float cFactor = 1.1;
     uint8_t *pucAdvBuffer = NULL;
+    int nCBValue = 0;
+    cJSON *pSensorObj = NULL;
 
-    InitAdc();
+
 
     pucAdvBuffer = GetAdvBuffer();
     Ret = bt_enable(NULL);
@@ -275,34 +317,56 @@ int main(void)
      while (1) 
      {
         pMainObject = cJSON_CreateObject();
-        sAdcReadValue1 = GetAdcResult(&sSensorPwSpec1);
-        printk("Reading A1: %d\n", sAdcReadValue1);
-        sAdcReadValue2 = GetAdcResult(&sSensorPwSpec2);
-        printk("Reading A2: %d\n", sAdcReadValue2);
-        
-        float WM_Resistance = readWMsensor();
-        printk("WM Resistance(Ohms): %d\n", (int)WM_Resistance);
-        int WM1_CB = myCBvalue((int)WM_Resistance, default_TempC, cFactor);
-        printk("WM1(cb/kPa): %d\n", abs(WM1_CB));
 
-        sprintf(cbuffer,"CB=%d", abs(WM1_CB));
-        printk("Data:%s\n", cbuffer);
+       if (ReadFromADC(NRF_SAADC_INPUT_AIN1, &nCBValue))
+        {
+            memset(cbuffer, '\0', sizeof(cbuffer));
+            sprintf(cbuffer,"CB=%d", abs(nCBValue));
+            printk("Data:%s\n", cbuffer);
+            pSensorObj=cJSON_AddObjectToObject(pMainObject, "S1");
+            AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC1", &sAdcReadValue1, sizeof(uint16_t));
+            AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC2", &sAdcReadValue2, sizeof(uint16_t));
+            AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer)); 
+            nrfx_saadc_uninit();
+       }
+
+       if (ReadFromADC(NRF_SAADC_INPUT_AIN2, &nCBValue))
+       {
+            memset(cbuffer, '\0', sizeof(cbuffer));
+            sprintf(cbuffer,"CB=%d", abs(nCBValue));
+            printk("Data:%s\n", cbuffer);
+            pSensorObj=cJSON_AddObjectToObject(pMainObject, "S2");
+            AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC1", &sAdcReadValue1, sizeof(uint16_t));
+            AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC2", &sAdcReadValue2, sizeof(uint16_t));
+            AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer)); 
+            nrfx_saadc_uninit();        
+       }
+
+       if (ReadFromADC(NRF_SAADC_INPUT_AIN3, &nCBValue))
+       {
+             memset(cbuffer, '\0', sizeof(cbuffer));
+            sprintf(cbuffer,"CB=%d", abs(nCBValue));
+            printk("Data:%s\n", cbuffer);
+            pSensorObj=cJSON_AddObjectToObject(pMainObject, "S3");
+            AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC1", &sAdcReadValue1, sizeof(uint16_t));
+            AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC2", &sAdcReadValue2, sizeof(uint16_t));
+            AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer)); 
+            nrfx_saadc_uninit();
+       }
         
-        
-        // AddItemtoJsonObject(&pMainObject, "data", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer));
-        AddItemtoJsonObject(&pMainObject, NUMBER, "ADCValue1", &sAdcReadValue1, sizeof(uint16_t));
-        AddItemtoJsonObject(&pMainObject, NUMBER, "ADCValue2", &sAdcReadValue2, sizeof(uint16_t));
-        AddItemtoJsonObject(&pMainObject, STRING, "CBValue", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer));
+    
+        cJsonBuffer = malloc(220 * sizeof(uint8_t));
         strcpy(cJsonBuffer, (char *)cJSON_Print(pMainObject));
         
         memset(cbuffer,0 , sizeof(cbuffer));
+      
         pucAdvBuffer[2] = 0x02;
         pucAdvBuffer[3] = (uint8_t)strlen(cJsonBuffer);
         memcpy(pucAdvBuffer+4, cJsonBuffer, strlen(cJsonBuffer));
 
         printk("JSON:\n%s\n", cJsonBuffer);
-        cJSON_Delete(pcData);
         cJSON_Delete(pMainObject);
+        free(cJsonBuffer);
 
         if(IsNotificationenabled())
         {
