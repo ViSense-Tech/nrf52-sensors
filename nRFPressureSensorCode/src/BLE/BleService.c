@@ -9,10 +9,10 @@
 /**************************** INCLUDES******************************************/
 #include "BleService.h"
 #include "JsonHandler.h"
-//#include "AdcHandler.h"
+#include "RtcHandler.h"
 
 /**************************** MACROS********************************************/
-#define VND_MAX_LEN 128
+#define VND_MAX_LEN 247
 /* Custom Service Variables */
 #define BT_UUID_CUSTOM_SERVICE_VAL \
 	BT_UUID_128_ENCODE(0xe076567e, 0x5d3b, 0x11ee, 0x8c99, 0x0242ac120002)
@@ -34,8 +34,8 @@ static bool bConnected = false;
 struct bt_conn *psConnHandle = NULL;
 
 
-extern void SetPressureZero(uint8_t *ucbuffer);
-extern void SetPressureMax(uint8_t *ucbuffer);
+extern void SetPressureZero(uint64_t *ucbuffer);
+extern void SetPressureMax(uint64_t *ucbuffer);
 /****************************FUNCTION DEFINITION********************************/
 
 
@@ -71,7 +71,7 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 			 uint8_t flags)
 {
 	uint8_t *value = attr->user_data;
-	uint32_t ucbuff = 0;
+	uint64_t ucbuff = 0;
 
 	if (offset + len > VND_MAX_LEN) {
 		return BT_GATT_ERR(BT_ATT_ERR_INVALID_OFFSET);
@@ -82,14 +82,27 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 
 	if (ParseRxData(ucConfigData2, "PressureZero", len, &ucbuff))
 	{
+		if (len)
 		SetPressureZero(ucbuff);
+		//printk("pzero:%lld\n\r",ucbuff);
 	}
 
 	if (ParseRxData(ucConfigData2, "PressureMax", len, &ucbuff))
 	{
+		if (len)
 	 	SetPressureMax(ucbuff);
+		//printk("pzero:%lld\n\r",ucbuff);
 	}
-	
+
+	if (ParseRxData(ucConfigData2, "TimeStamp", len, &ucbuff))
+	{
+		if (len)
+		{
+
+		SetRtcTime(ucbuff);
+		printk("time:%lld\n\r",ucbuff);
+		}
+	}
 	return len;
 }
 

@@ -27,7 +27,7 @@ bool AddItemtoJsonObject(cJSON **pcJsonHandle, _eJsonDataType JsondataType, cons
                     void *pcValue, uint8_t ucLen)
 {
     uint8_t ucIndex = 0;
-    cJSON *pcData = NULL;
+
     bool bRetVal = false;
 
     if (*pcJsonHandle && pcKey && pcValue)
@@ -41,7 +41,8 @@ bool AddItemtoJsonObject(cJSON **pcJsonHandle, _eJsonDataType JsondataType, cons
                          break;
             case OBJECT:    
                          break;
-            case ARRAY: pcData = cJSON_AddArrayToObject(*pcJsonHandle, "data");
+            case ARRAY:  cJSON *pcData = NULL;
+                        pcData = cJSON_AddArrayToObject(*pcJsonHandle, "data");
 
                         if (pcData)
                         {
@@ -61,25 +62,29 @@ bool AddItemtoJsonObject(cJSON **pcJsonHandle, _eJsonDataType JsondataType, cons
 }
 
 
-bool ParseRxData(uint8_t *pData,const char *pckey, uint8_t ucLen, uint32_t *pucData)
+bool ParseRxData(uint8_t *pData,const char *pckey, uint8_t ucLen, uint64_t *pucData)
 {
     bool bRetVal = false;
-    char *cbuff = NULL;
+    char cbuff[150];
     cJSON *RxData = NULL;
 
     if (pData && pckey && pucData)
     {
         if (pData[0] == 0x01)
         {
-            cbuff = (char *)pData+2;
-            cbuff[ucLen] = '\0';
-            printk("JsonData: %s\n", cbuff);
+           // cbuff =
+          // cbuff = malloc((ucLen+1) *sizeof(uint8_t));
+            memcpy(cbuff ,pData+2, ucLen);
+            //cbuff[ucLen] = '\0';
+            //printk("JsonData: %s\n", cbuff);
             cJSON *root = cJSON_Parse(cbuff);
             RxData = cJSON_GetObjectItem(root, pckey);
             *pucData = (RxData->valuedouble);
-
+            cJSON_Delete(root);
+           // free(cbuff);
             bRetVal = true;
         }
+
     }
     return bRetVal;
 }

@@ -78,7 +78,7 @@ uint16_t AnalogRead(void)
  * @param ucbuffer - buffer for setting pressureZero
  * @return void
 */
-void SetPressureZero(uint32_t ucbuffer)
+void SetPressureZero(uint64_t ucbuffer)
 {
     pressureZero = ucbuffer;
 }
@@ -87,7 +87,7 @@ void SetPressureZero(uint32_t ucbuffer)
  * @param ucbuffer - buffer for setting pressureMax
  * @return void
 */
-void SetPressureMax(uint8_t ucbuffer)
+void SetPressureMax(uint64_t ucbuffer)
 {
     pressureMax = ucbuffer;
 }
@@ -184,14 +184,13 @@ int main(void)
     uint16_t unPressureResult =0;
     uint32_t unPressureRaw = 0;
     char cbuffer[30] = {0};
-    char cJsonBuffer[150] = {0};
+    char *cJsonBuffer= NULL;
     uint8_t *pucAdvertisingdata = NULL;
     cJSON *pMainObject = NULL;
+    //cJSON_Hooks *pJsonHook. = NULL; 
     long long llEpochNow = 0;
 
-
-    
-    InitRtc();
+   InitRtc();
     SetPMState();
     pucAdvertisingdata = GetAdvertisingBuffer();
     InitADC();
@@ -213,12 +212,13 @@ int main(void)
     sprintf(cbuffer,"%dpsi", unPressureResult);
     StartAdvertising();
     gpio_pin_configure_dt(&sSleepStatusLED, GPIO_ACTIVE_LOW);
+    //cJSON_InitHooks(pJsonHook);    
 
     while (1) 
     {
-        if (GetCurrenTimeInEpoch(&llEpochNow))
+       if (GetCurrenTimeInEpoch(&llEpochNow))
         {
-            printk("CurrentTime=%llu\n\r", llEpochNow);
+           printk("CurrentTime=%llu\n\r", llEpochNow);
         }
         unPressureRaw = AnalogRead();
         if (unPressureRaw > ADC_MAX_VALUE)
@@ -246,7 +246,8 @@ int main(void)
             // No Op   
         }
 
-        strcpy(cJsonBuffer, (char *)cJSON_Print(pMainObject));
+        //cJsonBuffer = malloc(150 * sizeof(uint8_t));
+        cJsonBuffer = cJSON_Print(pMainObject);
         pucAdvertisingdata[2] = PRESSURE_SENSOR;
         pucAdvertisingdata[3] = (uint8_t)strlen(cJsonBuffer);
         memcpy(&pucAdvertisingdata[4], cJsonBuffer, strlen(cJsonBuffer));
@@ -269,13 +270,14 @@ int main(void)
         memset(pucAdvertisingdata, 0, ADV_BUFF_SIZE);
 
         cJSON_Delete(pMainObject);
+        cJSON_free(cJsonBuffer);
+        
         k_sleep(K_MSEC(1000));
         printk("PressureZero: %d\n", pressureZero);
         printk("PressureMax: %d\n", pressureMax);
+
         #ifdef SLEEP_ENABLE
-        k_sleep(K_SECONDS(300));
-        #endif
-        #ifdef SLEEP_ENABLE
+         k_sleep(K_SECONDS(300));
          EnterSleepMode(3600);
          ExitSleepMode();
         #endif

@@ -28,5 +28,5 @@
 /***************************************FUNCTION DECLARTAION*********************/
 bool InitRtc();
 bool GetCurrenTimeInEpoch(long long *pllCurrEpoch);
-
+void SetRtcTime(uint64_t ullTimestamp);
 #endif

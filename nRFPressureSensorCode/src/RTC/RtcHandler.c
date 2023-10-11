@@ -22,7 +22,14 @@ static long long llLastUpdatedTime = 1696585221;
 
 
 /***************************************FUNCTION DEFINITIONS********************/
+static bool SetTimeDate();
 
+void SetRtcTime(uint64_t ullTimestamp)
+{
+	llLastUpdatedTime = (long long)ullTimestamp;
+	InitRtc();	
+	//SetTimeDate();
+}
 /**
  * @brief Converting number format from BCD to Decimal
  * @param to_convert : number to convert
