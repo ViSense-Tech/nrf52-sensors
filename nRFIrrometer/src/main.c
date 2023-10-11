@@ -34,6 +34,9 @@
 
 /*******************************MACROS****************************************/
 //#define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
+#define ADC_READING_LOWER  0
+#define ADC_READING_UPPER  1024
+
 /*******************************GLOBAL VARIABLES********************************/
 nrf_saadc_value_t  sAdcReadValue1 = 0;
 nrf_saadc_value_t  sAdcReadValue2 = 0;
@@ -150,11 +153,9 @@ float readWMsensor(void)
     return (WM_ResistanceA + WM_ResistanceB) / 2.0;
 }
 
-void saadc_callback(nrfx_saadc_evt_t const * p_event) 
-{
+void saadc_callback(nrfx_saadc_evt_t const * p_event) {
     // Handle SAADC events here if needed.
 }
-
 /**
  * @brief function to initialize adc
  * @param ADC channel
@@ -223,9 +224,7 @@ static bool SetPMState()
 }
 
 /**
- * @brief put in sleep 
- * @param nDuration - duration to sleep
- * @return None
+ * 
 */
 static void EnterSleepMode(int nDuration)
 {
@@ -249,12 +248,6 @@ static void ExitSleepMode()
     gpio_pin_set(sSleepStatusLED.port, sSleepStatusLED.pin, 0);
 }
 
-/**
- * @brief Read ADC reading from selected ADC channel
- * @param eAdcChannel - ADC channel
- * @param pnWM_CB - CB value
- * @return true for success.
-*/
 static bool ReadFromADC(nrf_saadc_input_t eAdcChannel, int *pnWM_CB)
 {
     bool bRetVal = false;
@@ -262,10 +255,18 @@ static bool ReadFromADC(nrf_saadc_input_t eAdcChannel, int *pnWM_CB)
     if (pnWM_CB)
     {
         InitAdc(eAdcChannel);
-        k_msleep(70);
+        k_msleep(500);
         sAdcReadValue1 = GetAdcResult(&sSensorPwSpec1);
+        if (sAdcReadValue1 < ADC_READING_LOWER)
+        {
+            sAdcReadValue1 = 0;
+        }
         printk("Reading A1: %d\n", sAdcReadValue1);
         sAdcReadValue2 = GetAdcResult(&sSensorPwSpec2);
+        if (sAdcReadValue2 < ADC_READING_LOWER)
+        {
+           sAdcReadValue2 = 0;
+        }        
         printk("Reading A2: %d\n", sAdcReadValue2);
         
         float WM_Resistance = readWMsensor();
@@ -277,9 +278,8 @@ static bool ReadFromADC(nrf_saadc_input_t eAdcChannel, int *pnWM_CB)
 
     return bRetVal;
 }
-
 /**
- * @brief main function
+ * 
 */
 int main(void)
 {
@@ -355,9 +355,7 @@ int main(void)
        }
         
     
-        cJsonBuffer = malloc(220 * sizeof(uint8_t));
-        strcpy(cJsonBuffer, (char *)cJSON_Print(pMainObject));
-        
+        cJsonBuffer = cJSON_Print(pMainObject);
         memset(cbuffer,0 , sizeof(cbuffer));
       
         pucAdvBuffer[2] = 0x02;
@@ -366,7 +364,7 @@ int main(void)
 
         printk("JSON:\n%s\n", cJsonBuffer);
         cJSON_Delete(pMainObject);
-        free(cJsonBuffer);
+        cJSON_free(cJsonBuffer);
 
         if(IsNotificationenabled())
         {
