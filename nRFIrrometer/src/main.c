@@ -261,8 +261,8 @@ static bool ReadFromADC(nrf_saadc_input_t eAdcChannel, int *pnWM_CB)
 
     if (pnWM_CB)
     {
-        InitAdc(NRF_SAADC_INPUT_AIN1);
-        k_msleep(50);
+        InitAdc(eAdcChannel);
+        k_msleep(70);
         sAdcReadValue1 = GetAdcResult(&sSensorPwSpec1);
         printk("Reading A1: %d\n", sAdcReadValue1);
         sAdcReadValue2 = GetAdcResult(&sSensorPwSpec2);
