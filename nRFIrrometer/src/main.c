@@ -31,15 +31,19 @@
 #include "BleHandler.h"
 #include "BleService.h"
 #include "JsonHandler.h"
+#include "RtcHandler.h"
 
 /*******************************MACROS****************************************/
 #define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
 #define ADC_READING_LOWER  0
 #define ADC_READING_UPPER  1024
+#define ALIVE_TIME         300 //Time the device will be active after a sleep time(in seconds)
+#define TICK_RATE          32768
 
 /*******************************GLOBAL VARIABLES********************************/
 nrf_saadc_value_t  sAdcReadValue1 = 0;
 nrf_saadc_value_t  sAdcReadValue2 = 0;
+
 const int Rx = 10000;
 const float default_TempC = 24.0;
 const long open_resistance = 35000;
@@ -47,14 +51,12 @@ const long short_resistance = 200;
 const long short_CB = 240, open_CB = 255;
 const float SupplyV = 3.3;
 const float cFactor = 1.1;
-
-
 cJSON *pcData = NULL;
 const struct device *pAdc = NULL;
-
 const struct gpio_dt_spec sSensorPwSpec1 = GPIO_DT_SPEC_GET(DT_ALIAS(testpin0), gpios);
 const struct gpio_dt_spec sSensorPwSpec2 = GPIO_DT_SPEC_GET(DT_ALIAS(testpin1), gpios);
 const struct gpio_dt_spec sSleepStatusLED = GPIO_DT_SPEC_GET(DT_ALIAS(led0), gpios);
+const struct device *psUartHandle = DEVICE_DT_GET(DT_NODELABEL(uart0));
 
 
 
@@ -79,6 +81,11 @@ float AnalogRead(void)
     return sample_value;
 }
 
+/**
+ * @brief Get ADC reading
+ * @param Sensor excitation pins
+ * @return ADC readout
+*/
 int GetAdcResult( const struct gpio_dt_spec *excite_pin_spec)
 {
     int16_t AdcReadValue ;
@@ -98,7 +105,14 @@ int GetAdcResult( const struct gpio_dt_spec *excite_pin_spec)
     return AdcReadValue;
 }
 
-int myCBvalue(int res, float TC, float cF)
+/**
+ * @brief Calculating CB value 
+ * @param res: resistance value calculated
+ * @param TC:soil temperature
+ * @param CF
+ * @return CB value
+*/
+int CalculateCBvalue(int res, float TC, float cF)
 {  
 
 	int WM_CB;
@@ -139,6 +153,12 @@ int myCBvalue(int res, float TC, float cF)
 	
 	return WM_CB;
 }
+
+/**
+ * @brief calaculating irrometer resistamce
+ * @return Resistance value
+ * @return None
+*/
 float readWMsensor(void)
 {
     float SenVWM1 = (sAdcReadValue1 / 1024.0) * SupplyV;
@@ -153,15 +173,20 @@ float readWMsensor(void)
     return (WM_ResistanceA + WM_ResistanceB) / 2.0;
 }
 
-void saadc_callback(nrfx_saadc_evt_t const * p_event) {
+/**
+ * @brief ADC event handler
+*/
+void saadc_callback(nrfx_saadc_evt_t const * p_event) 
+{
     // Handle SAADC events here if needed.
 }
+
 /**
  * @brief function to initialize adc
  * @param ADC channel
  * @return void
 */
-static void InitAdc(nrf_saadc_input_t eAdcChannel)
+static void InitAdc(nrf_saadc_input_t eAdcChannel, int nChannelIdx)
 {
     nrfx_err_t status;
     status = nrfx_saadc_init(NRFX_SAADC_DEFAULT_CONFIG_IRQ_PRIORITY);
@@ -179,7 +204,7 @@ static void InitAdc(nrf_saadc_input_t eAdcChannel)
         },
         .pin_p             = eAdcChannel,
         .pin_n             = NRF_SAADC_INPUT_DISABLED,
-        .channel_index     = 1
+        .channel_index     = nChannelIdx
     };
 
     status = nrfx_saadc_channel_config(&saadc_channel);
@@ -192,9 +217,6 @@ static void InitAdc(nrf_saadc_input_t eAdcChannel)
                                         NULL);
     NRFX_ASSERT(status == NRFX_SUCCESS);
 
-
-    gpio_pin_configure_dt(&sSensorPwSpec1, GPIO_OUTPUT_LOW);
-    gpio_pin_configure_dt(&sSensorPwSpec2, GPIO_OUTPUT_LOW);
     k_sleep(K_MSEC(100)); 
 
 }
@@ -224,7 +246,9 @@ static bool SetPMState()
 }
 
 /**
- * 
+ * @brief function for entering sleep mode
+ * @param nDuration - time interval keeping device in sleep.
+ * @return None
 */
 static void EnterSleepMode(int nDuration)
 {
@@ -248,38 +272,48 @@ static void ExitSleepMode()
     gpio_pin_set(sSleepStatusLED.port, sSleepStatusLED.pin, 0);
 }
 
-static bool ReadFromADC(nrf_saadc_input_t eAdcChannel, int *pnWM_CB)
+/**
+ * @brief Read from ADC cahnnel
+ * @param eAdcChannel - ADC channel used
+ * @param nChannelIdx - Channel index needs to be used
+ * @param pnWM_CB - CB value 
+ * @return true for success
+*/
+static bool ReadFromADC(nrf_saadc_input_t eAdcChannel, int nChannelIdx, int *pnWM_CB)
 {
     bool bRetVal = false;
+    float WM_Resistance = 0.0;
 
     if (pnWM_CB)
     {
-        InitAdc(eAdcChannel);
-        k_msleep(500);
+        InitAdc(eAdcChannel, nChannelIdx);
+        k_msleep(50);
         sAdcReadValue1 = GetAdcResult(&sSensorPwSpec1);
-        if (sAdcReadValue1 < ADC_READING_LOWER)
+        if (sAdcReadValue1 < ADC_READING_LOWER || sAdcReadValue1 > ADC_READING_UPPER)
         {
             sAdcReadValue1 = 0;
         }
+        k_msleep(50);
         printk("Reading A1: %d\n", sAdcReadValue1);
         sAdcReadValue2 = GetAdcResult(&sSensorPwSpec2);
-        if (sAdcReadValue2 < ADC_READING_LOWER)
+        if (sAdcReadValue2 < ADC_READING_LOWER || sAdcReadValue1 > ADC_READING_UPPER)
         {
            sAdcReadValue2 = 0;
         }        
         printk("Reading A2: %d\n", sAdcReadValue2);
         
-        float WM_Resistance = readWMsensor();
+        WM_Resistance = readWMsensor();
         printk("WM Resistance(Ohms): %d\n", (int)WM_Resistance);
-        *pnWM_CB = myCBvalue((int)WM_Resistance, default_TempC, cFactor);
+        *pnWM_CB = CalculateCBvalue((int)WM_Resistance, default_TempC, cFactor);
         printk("WM1(cb/kPa): %d\n", abs(*pnWM_CB));
         bRetVal = true;
     }
 
     return bRetVal;
 }
+
 /**
- * 
+ * @brief Main function
 */
 int main(void)
 {
@@ -291,9 +325,12 @@ int main(void)
     uint8_t *pucAdvBuffer = NULL;
     int nCBValue = 0;
     cJSON *pSensorObj = NULL;
+    long long llEpochNow = 0;
+    int64_t Timenow =0;
 
-
-
+    InitRtc();
+    gpio_pin_configure_dt(&sSensorPwSpec1, GPIO_OUTPUT_LOW);
+    gpio_pin_configure_dt(&sSensorPwSpec2, GPIO_OUTPUT_LOW);
     pucAdvBuffer = GetAdvBuffer();
     Ret = bt_enable(NULL);
 	if (Ret) 
@@ -316,71 +353,91 @@ int main(void)
     
      while (1) 
      {
-        pMainObject = cJSON_CreateObject();
-
-       if (ReadFromADC(NRF_SAADC_INPUT_AIN1, &nCBValue))
-        {
-            memset(cbuffer, '\0', sizeof(cbuffer));
-            sprintf(cbuffer,"CB=%d", abs(nCBValue));
-            printk("Data:%s\n", cbuffer);
-            pSensorObj=cJSON_AddObjectToObject(pMainObject, "S1");
-            AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC1", &sAdcReadValue1, sizeof(uint16_t));
-            AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC2", &sAdcReadValue2, sizeof(uint16_t));
-            AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer)); 
-            nrfx_saadc_uninit();
-       }
-
-       if (ReadFromADC(NRF_SAADC_INPUT_AIN2, &nCBValue))
-       {
-            memset(cbuffer, '\0', sizeof(cbuffer));
-            sprintf(cbuffer,"CB=%d", abs(nCBValue));
-            printk("Data:%s\n", cbuffer);
-            pSensorObj=cJSON_AddObjectToObject(pMainObject, "S2");
-            AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC1", &sAdcReadValue1, sizeof(uint16_t));
-            AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC2", &sAdcReadValue2, sizeof(uint16_t));
-            AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer)); 
-            nrfx_saadc_uninit();        
-       }
-
-       if (ReadFromADC(NRF_SAADC_INPUT_AIN4, &nCBValue))
-       {
-             memset(cbuffer, '\0', sizeof(cbuffer));
-            sprintf(cbuffer,"CB=%d", abs(nCBValue));
-            printk("Data:%s\n", cbuffer);
-            pSensorObj=cJSON_AddObjectToObject(pMainObject, "S3");
-            AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC1", &sAdcReadValue1, sizeof(uint16_t));
-            AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC2", &sAdcReadValue2, sizeof(uint16_t));
-            AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer)); 
-            nrfx_saadc_uninit();
-       }
-        
-    
-        cJsonBuffer = cJSON_Print(pMainObject);
-        memset(cbuffer,0 , sizeof(cbuffer));
-      
-        pucAdvBuffer[2] = 0x02;
-        pucAdvBuffer[3] = (uint8_t)strlen(cJsonBuffer);
-        memcpy(pucAdvBuffer+4, cJsonBuffer, strlen(cJsonBuffer));
-
-        printk("JSON:\n%s\n", cJsonBuffer);
-        cJSON_Delete(pMainObject);
-        cJSON_free(cJsonBuffer);
-
-        if(IsNotificationenabled())
-        {
-            VisenseSensordataNotify(pucAdvBuffer+2, ADV_BUFF_SIZE);
-        }
-        else
-        {
-            UpdateAdvData();
-            StartAdv();
-        }
-        
-        memset(pucAdvBuffer, 0, ADV_BUFF_SIZE);
-
-        k_sleep(K_MSEC(1000));
         #ifdef SLEEP_ENABLE
-         k_sleep(K_SECONDS(300));
+        Timenow = sys_clock_tick_get();
+
+        while(sys_clock_tick_get() - Timenow < (ALIVE_TIME * TICK_RATE))
+        {
+        #endif    
+            pMainObject = cJSON_CreateObject();
+
+            if (GetCurrenTimeInEpoch(&llEpochNow))
+            {
+                printk("CurrentEpochTime=%llu\n\r", llEpochNow);
+            }
+            else
+            {
+                llEpochNow = 0; 
+                printk("Read RTC time failed\n\rCheck RTC chip is connected\n\r");
+            }
+
+            if (ReadFromADC(NRF_SAADC_INPUT_AIN1, 1,  &nCBValue))
+            {
+                memset(cbuffer, '\0', sizeof(cbuffer));
+                sprintf(cbuffer,"CB=%d", abs(nCBValue));
+                printk("Data:%s\n", cbuffer);
+                pSensorObj=cJSON_AddObjectToObject(pMainObject, "S1");
+                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC1", &sAdcReadValue1, sizeof(uint16_t));
+                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC2", &sAdcReadValue2, sizeof(uint16_t));
+                AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer)); 
+                nrfx_saadc_uninit();
+            }
+
+            if (ReadFromADC(NRF_SAADC_INPUT_AIN2, 2,  &nCBValue))
+            {
+                memset(cbuffer, '\0', sizeof(cbuffer));
+                sprintf(cbuffer,"CB=%d", abs(nCBValue));
+                printk("Data:%s\n", cbuffer);
+                pSensorObj=cJSON_AddObjectToObject(pMainObject, "S2");
+                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC1", &sAdcReadValue1, sizeof(uint16_t));
+                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC2", &sAdcReadValue2, sizeof(uint16_t));
+                AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer)); 
+                nrfx_saadc_uninit();        
+            }
+
+            if (ReadFromADC(NRF_SAADC_INPUT_AIN4, 4, &nCBValue))
+            {
+                    memset(cbuffer, '\0', sizeof(cbuffer));
+                sprintf(cbuffer,"CB=%d", abs(nCBValue));
+                printk("Data:%s\n", cbuffer);
+                pSensorObj=cJSON_AddObjectToObject(pMainObject, "S3");
+                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC1", &sAdcReadValue1, sizeof(uint16_t));
+                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC2", &sAdcReadValue2, sizeof(uint16_t));
+                AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer)); 
+                nrfx_saadc_uninit();
+            }
+                AddItemtoJsonObject(&pMainObject, NUMBER, "TimeStamp", &llEpochNow, sizeof(long long));
+
+            cJsonBuffer = cJSON_Print(pMainObject);
+            memset(cbuffer,0 , sizeof(cbuffer));
+
+            pucAdvBuffer[2] = 0x02;
+            pucAdvBuffer[3] = (uint8_t)strlen(cJsonBuffer);
+            memcpy(pucAdvBuffer+4, cJsonBuffer, strlen(cJsonBuffer));
+
+            printk("JSON:\n%s\n", cJsonBuffer);
+            cJSON_Delete(pMainObject);
+            cJSON_free(cJsonBuffer);
+
+            if(IsNotificationenabled())
+            {
+                VisenseSensordataNotify(pucAdvBuffer+2, ADV_BUFF_SIZE);
+            }
+            else
+            {
+                UpdateAdvData();
+                StartAdv();
+            }
+
+            memset(pucAdvBuffer, 0, ADV_BUFF_SIZE);
+            #ifndef SLEEP_ENABLE 
+            k_sleep(K_MSEC(1000));
+            #endif
+        #ifdef SLEEP_ENABLE
+        }
+        #endif
+
+        #ifdef SLEEP_ENABLE
          EnterSleepMode(3600);
          ExitSleepMode();
         #endif
