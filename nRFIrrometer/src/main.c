@@ -33,7 +33,7 @@
 #include "JsonHandler.h"
 
 /*******************************MACROS****************************************/
-//#define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
+#define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
 #define ADC_READING_LOWER  0
 #define ADC_READING_UPPER  1024
 
@@ -380,7 +380,8 @@ int main(void)
 
         k_sleep(K_MSEC(1000));
         #ifdef SLEEP_ENABLE
-         EnterSleepMode(60);
+         k_sleep(K_SECONDS(300));
+         EnterSleepMode(3600);
          ExitSleepMode();
         #endif
      }
