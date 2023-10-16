@@ -8,12 +8,9 @@
 
 
 /*******************************INCLUDES****************************************/
-#include <zephyr/device.h>
 #include <zephyr/pm/pm.h>
 #include <zephyr/pm/device.h>
-#include <zephyr/devicetree.h>
 #include <zephyr/drivers/gpio.h>
-#include <zephyr/kernel.h>
 #include <zephyr/sys/printk.h>
 #include <zephyr/sys/util.h>
 #include <nrfx_example.h>
@@ -22,11 +19,6 @@
 #include <nrfx_log.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <zephyr/bluetooth/bluetooth.h>
-#include <zephyr/bluetooth/hci.h>
-#include <zephyr/bluetooth/conn.h>
-#include <zephyr/bluetooth/uuid.h>
-#include <zephyr/bluetooth/gatt.h>
 #include "Json/cJSON.h"
 #include "BleHandler.h"
 #include "BleService.h"
@@ -37,12 +29,12 @@
 #define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
 #define ADC_READING_LOWER  0
 #define ADC_READING_UPPER  1024
-#define ALIVE_TIME         300 //Time the device will be active after a sleep time(in seconds)
+#define ALIVE_TIME         10 //Time the device will be active after a sleep time(in seconds)
 #define TICK_RATE          32768
 
 /*******************************GLOBAL VARIABLES********************************/
-nrf_saadc_value_t  sAdcReadValue1 = 0;
-nrf_saadc_value_t  sAdcReadValue2 = 0;
+int  sAdcReadValue1 = 0;
+int  sAdcReadValue2 = 0;
 
 const int Rx = 10000;
 const float default_TempC = 24.0;
@@ -438,7 +430,7 @@ int main(void)
         #endif
 
         #ifdef SLEEP_ENABLE
-         EnterSleepMode(3600);
+         EnterSleepMode(30);
          ExitSleepMode();
         #endif
      }
