@@ -30,6 +30,7 @@
 #define ADC_READING_LOWER  0
 #define ADC_READING_UPPER  1024
 #define ALIVE_TIME         10 //Time the device will be active after a sleep time(in seconds)
+#define SLEEP_TIME         30
 #define TICK_RATE          32768
 
 /*******************************GLOBAL VARIABLES********************************/
@@ -430,7 +431,7 @@ int main(void)
         #endif
 
         #ifdef SLEEP_ENABLE
-         EnterSleepMode(30);
+         EnterSleepMode(SLEEP_TIME);
          ExitSleepMode();
         #endif
      }
