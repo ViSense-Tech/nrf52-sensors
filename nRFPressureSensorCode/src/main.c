@@ -33,6 +33,7 @@
 //#define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
 #define ADC_MAX_VALUE 1023
 #define PRESSURE_SENSOR 0x01
+#define SENSOR_DIAGNOSTICS (1<<0)
 
 /*******************************TYPEDEFS****************************************/
 
@@ -42,7 +43,7 @@
     const int pressureMax = 929; //analog reading of pressure transducer at 100psi
     const int pressureZero = 110; //analog reading of pressure transducer at 0psi
 #else
-    static uint32_t pressureZero = 116; //analog reading of pressure transducer at 0psi
+    static uint32_t pressureZero = 118; //analog reading of pressure transducer at 0psi
                               //PressureZero = 0.5/3.3V*1024~150(supply voltage - 3.3v) taken from Arduino code refernce from visense 
     static uint32_t pressureMax = 564; //analog reading of pressure transducer at 100psi
                              //PressureMax = 2.5/3.3V*1024~775  taken from Arduino code refernce from visense       
@@ -187,6 +188,8 @@ int main(void)
     char *cJsonBuffer= NULL;
     uint8_t *pucAdvertisingdata = NULL;
     cJSON *pMainObject = NULL;
+    uint32_t diagnostic_data = 0;
+
     //cJSON_Hooks *pJsonHook. = NULL; 
     long long llEpochNow = 0;
 
@@ -239,18 +242,29 @@ int main(void)
             sprintf(cbuffer,"%dpsi", unPressureResult);
             printk("Data:%s\n", cbuffer);
             AddItemtoJsonObject(&pMainObject, STRING, "Pressure", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer));
+            diagnostic_data = 0;
 
+        }
+        else if(unPressureRaw > 100)
+        {
+            memset(cbuffer, '\0',sizeof(cbuffer));
+            unPressureResult = 0;
+            sprintf(cbuffer,"%dpsi", unPressureResult);
+            AddItemtoJsonObject(&pMainObject, STRING, "Pressure", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer));
+            diagnostic_data = 0;   
         }
         else
         {
-            // No Op   
+            diagnostic_data = diagnostic_data | SENSOR_DIAGNOSTICS;
         }
 
+        AddItemtoJsonObject(&pMainObject, NUMBER, "Diagnostic", &diagnostic_data, sizeof(uint32_t));
         //cJsonBuffer = malloc(150 * sizeof(uint8_t));
         cJsonBuffer = cJSON_Print(pMainObject);
         pucAdvertisingdata[2] = PRESSURE_SENSOR;
         pucAdvertisingdata[3] = (uint8_t)strlen(cJsonBuffer);
         memcpy(&pucAdvertisingdata[4], cJsonBuffer, strlen(cJsonBuffer));
+        
         printk("JSON:\n%s\n", cJsonBuffer);
 
         if(IsNotificationenabled())
