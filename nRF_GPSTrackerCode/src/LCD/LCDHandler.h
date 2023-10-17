@@ -53,7 +53,7 @@ void WriteStringToLCD(char* Str);
 void Backlight();
 void noBacklight();
 void ClearLCD();
-
+struct device *GetI2CDevice();
 
 #endif
 

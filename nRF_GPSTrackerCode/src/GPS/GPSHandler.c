@@ -296,14 +296,16 @@ bool ReadSOGData(float *pfSOG)
             {
                 pcSOGData++;
                 memcpy(cSOG, pcSOGData, strlen(pcSOGData));
-
+                
                 if (cSOG[0] == ',' && cSOG[1] != ',')
                 {
                     for (ucIdx = 1; cSOG[ucIdx] != ','; ucIdx++);
                     ucIdx++;
+                    memcpy(cSOG, cSOG+1, strlen(cSOG+1));
+                    printk("SOG str: %s\n\r", cSOG);
                     memset(cSOG+ucIdx, '\0', strlen(cSOG+ucIdx));
                     *pfSOG = atof(cSOG);
-                    printk("SOG %f\n\r", *pfSOG);
+                    //printk("SOG %f\n\r", *pfSOG);
                     bRetVal = true;
                 }
                 else

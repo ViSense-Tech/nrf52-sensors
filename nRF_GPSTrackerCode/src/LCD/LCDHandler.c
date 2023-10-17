@@ -51,17 +51,14 @@ void InitLCD(void)
 void IOExpanderWrite(unsigned char Data) 
 {
 
-    while(!device_is_ready(psI2CHandle));
-    // {
-    //     printk("Error: I2C not ready\n");
-    //     return -1;
-    // }
+    if (!device_is_ready(psI2CHandle))
+    {
+        printk("Error: I2C not ready\n");
+        return;
+    }
+
     Data = Data | LCD_BACKLIGHT;
     i2c_write(psI2CHandle, &Data, 1, LCD_DEV_ADDR);
-//   I2C__Start();
-//   I2C__Write(LCD_WR_ADDR);
-//   I2C__Write(Data | LCD_BACKLIGHT);
-//   I2C__Stop();
 }
 
 void WriteNibbleToLCD(unsigned char Nibble, unsigned char RS) 
@@ -124,22 +121,18 @@ void noBacklight()
   IOExpanderWrite(0);
 }
 
-#if 0
-void LCD_SL()
-{
-  WriteLCDCmd(0x18);
-  __delay_us(40);
-}
-
-void LCD_SR()
-{
-  WriteLCDCmd(0x1C);
-  __delay_us(40);
-}
-#endif
 
 void ClearLCD()
 {
   WriteLCDCmd(0x01); 
   k_usleep(40);
+}
+
+
+struct device *GetI2CDevice()
+{
+  if (psI2CHandle)
+  {
+      return psI2CHandle;
+  }
 }

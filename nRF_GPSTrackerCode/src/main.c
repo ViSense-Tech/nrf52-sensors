@@ -8,6 +8,7 @@
 /************************INCLUDES***************************/
 #include "GPSHandler.h"
 #include "LCDHandler.h"
+#include "Accelerometer.h"
 
 /*************************MACROS****************************/
 #define TICK_RATE 32768
@@ -30,14 +31,16 @@ int main(void)
 	long long TimeNow = 0;
 	char cLCDMessage[50] = {0};
 	uint8_t ucIdx = 0;
+	_sAcclData sAcclData = {0};
+
 
 	if (!InitUart())
 	{
 		printk("Device not initialised\n\r");
 		return 0;
 	}
+
 	InitLCD();
-	//Backlight();
 
 	while(1)
 	{
@@ -63,17 +66,7 @@ int main(void)
 			}
 			else
 			{
-				//WriteLCDCmd(0x01); //Clear
-				//printk("GPS module Waiting to get fix..\n\r");
-				//SetLCDCursor(0,1);
-				//strcpy(cLCDMessage, "Waiting for Loc fix..");
-				//WriteStringToLCD(cLCDMessage);
-				// for (ucIdx = 0; ucIdx < strlen(cLCDMessage)-16; ucIdx++)
-				// {
-				// 	k_sleep(K_MSEC(300));
-				// 	WriteLCDCmd(LCD_SHIFT_LEFT);
-				// }
-				
+				printk("GPS module Waiting to get fix..\n\r");
 			}
 		}
 
@@ -83,7 +76,6 @@ int main(void)
         {
 			if (ReadSOGData(&fSOG))
 			{
-				fSOG = fSOG*1.151;
 				printk("SOG: %f\n\r", fSOG);
 				WriteLCDCmd(0x01); //Clear
 				SetLCDCursor(0, 1);
@@ -91,6 +83,34 @@ int main(void)
 				WriteStringToLCD(cLCDMessage);
 				k_sleep(K_MSEC(200));
 			}
+		}
+
+		if (!InitAcclerometer())
+		{
+			printk("Acclmtr not initialised\n\r");		
+		}	
+		else
+		{
+			printk("init accelerometer succes\n\r");
+		}
+		if (ReadFromAccelerometer(&sAcclData))
+		{
+			printk("AccX: %d\n\r AccY: %d\n\r AccZ:%d\n\r", 
+										sAcclData.unAccX,
+										sAcclData.unAccY,
+										sAcclData.unAccZ);
+				WriteLCDCmd(0x01); //Clear
+				SetLCDCursor(1, 1);
+				sprintf(cLCDMessage, "AccX:%d AccY:%d", 
+									sAcclData.unAccX,
+									sAcclData.unAccY);
+				WriteStringToLCD(cLCDMessage);
+				k_sleep(K_MSEC(200));
+				SetLCDCursor(2, 1);
+				sprintf(cLCDMessage, "AccZ:%d", 
+									sAcclData.unAccZ);
+				WriteStringToLCD(cLCDMessage);
+
 		}	
 	}
 	return 0;
