@@ -143,6 +143,11 @@ int CalculateCBvalue(int res, float TC, float cF)
     {
 		WM_CB = open_CB;
 	}
+
+    if (WM_CB > 255)
+    {
+        WM_CB = 255;
+    }
 	
 	return WM_CB;
 }
