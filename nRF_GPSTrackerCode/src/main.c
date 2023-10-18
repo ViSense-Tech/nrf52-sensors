@@ -9,6 +9,9 @@
 #include "GPSHandler.h"
 #include "LCDHandler.h"
 #include "Accelerometer.h"
+#include "BleHandler.h"
+#include "BleService.h"
+#include "JsonHandler.h"
 
 /*************************MACROS****************************/
 #define TICK_RATE 32768
@@ -25,6 +28,7 @@
 int main(void)
 {
 	char pcLocation[100];
+	int Ret = 0;
 	float fLatitude = 0.00;
 	float fLongitude = 0.00;
 	float fSOG = 0.00;
@@ -32,6 +36,9 @@ int main(void)
 	char cLCDMessage[50] = {0};
 	uint8_t ucIdx = 0;
 	_sAcclData sAcclData = {0};
+	uint8_t *pucAdvBuffer = NULL;
+	char *cJsonBuffer = NULL;
+    cJSON *pMainObject = NULL;
 
 
 	if (!InitUart())
@@ -42,8 +49,35 @@ int main(void)
 
 	InitLCD();
 
+	pucAdvBuffer = GetAdvertisingBuffer();
+    // Ret = bt_enable(NULL);
+	// if (Ret) 
+    // {
+	// 	printk("Bluetooth init failed (err %d)\n", Ret);
+	// 	return 0;
+	// }
+	if (!EnableBLE())
+	{
+		printk("Enabling ble failed \n\r");
+		return 0;
+	}
+
+	if (InitExtendedAdv()) 
+    {
+		printk("Advertising failed to create (err %d)\n", Ret);
+		return 0;
+	}
+
+    if(	StartAdvertising())
+    {
+        printk("Advertising failed to start (err %d)\n", Ret);
+        return 0;
+    }
+
+
 	while(1)
 	{
+		pMainObject = cJSON_CreateObject();
 		TimeNow = sys_clock_tick_get();
 
         while(sys_clock_tick_get() - TimeNow < COORD_READ_TIMEOUT)
@@ -62,6 +96,8 @@ int main(void)
 					sprintf(cLCDMessage, "Lon:%f", fLongitude);
 					WriteStringToLCD(cLCDMessage);
 					k_sleep(K_MSEC(100));
+					AddItemtoJsonObject(&pMainObject, NUMBER, "Latitude", &fLatitude, sizeof(float));
+                	AddItemtoJsonObject(&pMainObject, NUMBER, "Longitude", &fLongitude, sizeof(float));
 				}
 			}
 			else
@@ -82,6 +118,7 @@ int main(void)
 				sprintf(cLCDMessage, "SOG:%f", fSOG);
 				WriteStringToLCD(cLCDMessage);
 				k_sleep(K_MSEC(200));
+				AddItemtoJsonObject(&pMainObject, NUMBER, "SOG", &fSOG, sizeof(float));
 			}
 		}
 
@@ -110,8 +147,25 @@ int main(void)
 				sprintf(cLCDMessage, "AccZ:%d", 
 									sAcclData.unAccZ);
 				WriteStringToLCD(cLCDMessage);
-
+				AddItemtoJsonObject(&pMainObject, NUMBER, "AccX", &sAcclData.unAccX, sizeof(float));
+				AddItemtoJsonObject(&pMainObject, NUMBER, "AccY", &sAcclData.unAccY, sizeof(float));
+				AddItemtoJsonObject(&pMainObject, NUMBER, "AccZ", &sAcclData.unAccZ, sizeof(float));
 		}	
+
+		    cJsonBuffer = cJSON_Print(pMainObject);
+
+            pucAdvBuffer[2] = 0x03;
+            pucAdvBuffer[3] = (uint8_t)strlen(cJsonBuffer);
+            memcpy(pucAdvBuffer+4, cJsonBuffer, strlen(cJsonBuffer));
+
+            printk("JSON:\n%s\n", cJsonBuffer);
+            cJSON_Delete(pMainObject);
+            cJSON_free(cJsonBuffer);
+
+            if(IsNotificationenabled())
+            {
+                VisenseSensordataNotify(pucAdvBuffer+2, ADV_BUFF_SIZE);
+            }
 	}
 	return 0;
 }

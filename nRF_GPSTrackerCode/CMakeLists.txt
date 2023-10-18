@@ -7,9 +7,15 @@ project(uart_echo_bot)
 
 target_include_directories(app PRIVATE src/GPS
                                         src/LCD
-                                        src/ACCLMTR)
+                                        src/ACCLMTR
+                                        src/BLE
+                                        src/Json)
                                         
 target_sources(app PRIVATE  src/GPS/GPSHandler.c
                             src/LCD/LCDHandler.c
                             src/ACCLMTR/Accelerometer.c
+                            src/BLE/BleHandler.c
+                            src/BLE/BleService.c
+                            src/Json/cJSON.c
+                            src/Json/Jsonhandler.c
                             src/main.c)
