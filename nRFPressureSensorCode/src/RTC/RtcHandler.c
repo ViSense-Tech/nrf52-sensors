@@ -8,6 +8,7 @@
 
 /***************************************INCLUDES*********************************/
 #include "RtcHandler.h"
+#include "LCDHandler.h"
 #include <string.h>
 
 /***************************************MACROS*********************************/
@@ -18,7 +19,7 @@
 /***************************************GLOBALS*********************************/
 
 static const struct device *i2c_dev = DEVICE_DT_GET(DT_NODELABEL(i2c0));
-static long long llLastUpdatedTime = 1696585221;
+static long long llLastUpdatedTime = 1697626916;
 
 
 /***************************************FUNCTION DEFINITIONS********************/
@@ -27,8 +28,7 @@ static bool SetTimeDate();
 void SetRtcTime(uint64_t ullTimestamp)
 {
 	llLastUpdatedTime = (long long)ullTimestamp;
-	InitRtc();	
-	//SetTimeDate();
+	InitRtc();
 }
 /**
  * @brief Converting number format from BCD to Decimal
@@ -201,7 +201,7 @@ bool GetCurrenTimeInEpoch(long long *pllCurrEpoch)
 {
 	struct tm sTimeStamp = {0};
 	uint16_t ucData = 0x00;
-	uint8_t ucReg = 0x00;
+	uint8_t ucReg = 0x00, ucIdx = 0;
 	char cTimeBuffer[MAX_TIME_BUFF_SIZE] = {0};
 	bool bRetval = false;
 
@@ -279,6 +279,19 @@ bool GetCurrenTimeInEpoch(long long *pllCurrEpoch)
 			//printk("Year: %d\n\r",sTimeStamp.tm_year+1900);
 			strftime(cTimeBuffer, sizeof(cTimeBuffer), "%a %Y-%m-%d %H:%M:%S %Z", &sTimeStamp);
 			printk("Current Time: %s\n\r", cTimeBuffer);
+			//WriteLCDCmd(0x01); //Clear
+			SetLCDCursor(2, 1);
+			
+			// printk("Latitude: %fN Longitude: %fE\n\r", fLatitude, fLongitude);
+			//sprintf(cLCDMsg, "Time: %llu", llEpochNow);
+			WriteStringToLCD(cTimeBuffer);
+			k_sleep(K_MSEC(200));
+			for (ucIdx = 0; ucIdx < strlen(cTimeBuffer)-16; ucIdx++)
+			{
+				WriteLCDCmd(LCD_SHIFT_LEFT);
+				k_sleep(K_MSEC(200));
+			}
+			k_sleep(K_MSEC(100));
 
 		} while (0);
 		
@@ -287,4 +300,12 @@ bool GetCurrenTimeInEpoch(long long *pllCurrEpoch)
 
 		bRetval = true;
 	}
+}
+
+struct device *GetI2CDevice()
+{
+  if (i2c_dev)
+  {
+      return i2c_dev;
+  }
 }

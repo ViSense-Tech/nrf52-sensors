@@ -16,7 +16,6 @@
 #include <zephyr/drivers/i2c.h>
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/devicetree.h>
-// #include <zephyr/drivers/rtc/maxim_ds3231.h>
 
 /***************************************MACROS**********************************/
 
@@ -29,4 +28,5 @@
 bool InitRtc();
 bool GetCurrenTimeInEpoch(long long *pllCurrEpoch);
 void SetRtcTime(uint64_t ullTimestamp);
+struct device *GetI2CDevice();
 #endif

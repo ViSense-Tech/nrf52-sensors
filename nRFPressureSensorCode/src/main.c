@@ -26,6 +26,7 @@
 #include "BleService.h"
 #include "JsonHandler.h"
 #include "RtcHandler.h"
+#include "LCDHandler.h"
 
 
 /*******************************MACROS****************************************/
@@ -34,6 +35,9 @@
 #define ADC_MAX_VALUE 1023
 #define PRESSURE_SENSOR 0x01
 #define SENSOR_DIAGNOSTICS (1<<0)
+#define ALIVE_TIME         10 //Time the device will be active after a sleep time(in seconds)
+#define SLEEP_TIME         30
+#define TICK_RATE          32768
 
 /*******************************TYPEDEFS****************************************/
 
@@ -189,11 +193,13 @@ int main(void)
     uint8_t *pucAdvertisingdata = NULL;
     cJSON *pMainObject = NULL;
     uint32_t diagnostic_data = 0;
+    int64_t llTimenow = 0;
+    char cLCDMsg[100] = {0};
 
     //cJSON_Hooks *pJsonHook. = NULL; 
     long long llEpochNow = 0;
-
-   InitRtc();
+    InitLCD();
+    InitRtc();
     SetPMState();
     pucAdvertisingdata = GetAdvertisingBuffer();
     InitADC();
@@ -219,80 +225,102 @@ int main(void)
 
     while (1) 
     {
-       if (GetCurrenTimeInEpoch(&llEpochNow))
+        #ifdef SLEEP_ENABLE
+        llTimenow = sys_clock_tick_get();
+
+        while(sys_clock_tick_get() - llTimenow < (ALIVE_TIME * TICK_RATE))
         {
-           printk("CurrentTime=%llu\n\r", llEpochNow);
-        }
-        unPressureRaw = AnalogRead();
-        if (unPressureRaw > ADC_MAX_VALUE)
-        {
-            unPressureRaw = 0;
-        }
-        printk("ADCRaw: %d\n", unPressureRaw);
-        pMainObject = cJSON_CreateObject();
-        AddItemtoJsonObject(&pMainObject, NUMBER, "ADCValue", &unPressureRaw, sizeof(uint32_t));
-        AddItemtoJsonObject(&pMainObject, NUMBER, "PressureZero", &pressureZero, sizeof(uint32_t));
-        AddItemtoJsonObject(&pMainObject, NUMBER, "PressureMax", &pressureMax, sizeof(uint32_t));
-        AddItemtoJsonObject(&pMainObject, NUMBER, "TimeStamp", &llEpochNow, sizeof(long long));
-        if (unPressureRaw > pressureZero && unPressureRaw < ADC_MAX_VALUE)
-        {
-            memset(cbuffer, '\0',sizeof(cbuffer));
-            unPressureResult = ((unPressureRaw-pressureZero)*pressuretransducermaxPSI)/(pressureMax-pressureZero);
+        #endif    
+            if (GetCurrenTimeInEpoch(&llEpochNow))
+            {
+            printk("CurrentTime=%llu\n\r", llEpochNow);
+            }
+            unPressureRaw = AnalogRead();
+            if (unPressureRaw > ADC_MAX_VALUE)
+            {
+                unPressureRaw = 0;
+            }
+            printk("ADCRaw: %d\n", unPressureRaw);
+            pMainObject = cJSON_CreateObject();
+            AddItemtoJsonObject(&pMainObject, NUMBER, "ADCValue", &unPressureRaw, sizeof(uint32_t));
+            WriteLCDCmd(0x01); //Clear
+            SetLCDCursor(1, 1);
+           // printk("Latitude: %fN Longitude: %fE\n\r", fLatitude, fLongitude);
+            sprintf(cLCDMsg, "ADC: %d", unPressureRaw);
+            WriteStringToLCD(cLCDMsg);
+            k_sleep(K_MSEC(50));
+            AddItemtoJsonObject(&pMainObject, NUMBER, "PressureZero", &pressureZero, sizeof(uint32_t));
+            AddItemtoJsonObject(&pMainObject, NUMBER, "PressureMax", &pressureMax, sizeof(uint32_t));
+            AddItemtoJsonObject(&pMainObject, NUMBER, "TimeStamp", &llEpochNow, sizeof(long long));
+            if (unPressureRaw > pressureZero && unPressureRaw < ADC_MAX_VALUE)
+            {
+                memset(cbuffer, '\0',sizeof(cbuffer));
+                unPressureResult = ((unPressureRaw-pressureZero)*pressuretransducermaxPSI)/(pressureMax-pressureZero);
+                //WriteLCDCmd(0x01); //Clear
+                SetLCDCursor(1, 10);
+                // printk("Latitude: %fN Longitude: %fE\n\r", fLatitude, fLongitude);
+                sprintf(cLCDMsg, "Pr: %d", unPressureResult);
+                WriteStringToLCD(cLCDMsg);
+                k_sleep(K_MSEC(50));
+                sprintf(cbuffer,"%dpsi", unPressureResult);
+                printk("Data:%s\n", cbuffer);
+                AddItemtoJsonObject(&pMainObject, STRING, "Pressure", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer));
+                diagnostic_data = 0;
+
+            }
+            else if(unPressureRaw > 100)
+            {
+                memset(cbuffer, '\0',sizeof(cbuffer));
+                unPressureResult = 0;
+                sprintf(cbuffer,"%dpsi", unPressureResult);
+                AddItemtoJsonObject(&pMainObject, STRING, "Pressure", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer));
+                diagnostic_data = 0;   
+            }
+            else
+            {
+                diagnostic_data = diagnostic_data | SENSOR_DIAGNOSTICS;
+            }
+
+            AddItemtoJsonObject(&pMainObject, NUMBER, "Diagnostic", &diagnostic_data, sizeof(uint32_t));
+            //cJsonBuffer = malloc(150 * sizeof(uint8_t));
+            cJsonBuffer = cJSON_Print(pMainObject);
+            pucAdvertisingdata[2] = PRESSURE_SENSOR;
+            pucAdvertisingdata[3] = (uint8_t)strlen(cJsonBuffer);
+            memcpy(&pucAdvertisingdata[4], cJsonBuffer, strlen(cJsonBuffer));
             
-            sprintf(cbuffer,"%dpsi", unPressureResult);
-            printk("Data:%s\n", cbuffer);
-            AddItemtoJsonObject(&pMainObject, STRING, "Pressure", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer));
-            diagnostic_data = 0;
+            printk("JSON:\n%s\n", cJsonBuffer);
 
-        }
-        else if(unPressureRaw > 100)
-        {
-            memset(cbuffer, '\0',sizeof(cbuffer));
-            unPressureResult = 0;
-            sprintf(cbuffer,"%dpsi", unPressureResult);
-            AddItemtoJsonObject(&pMainObject, STRING, "Pressure", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer));
-            diagnostic_data = 0;   
-        }
-        else
-        {
-            diagnostic_data = diagnostic_data | SENSOR_DIAGNOSTICS;
-        }
+            if(IsNotificationenabled())
+            {
+            VisenseSensordataNotify(pucAdvertisingdata+2, ADV_BUFF_SIZE);
+            }
+            else if (!IsNotificationenabled() && !IsConnected())
+            {
+                UpdateAdvertiseData();
+                StartAdvertising();
+            }
+            else
+            {
+                //NO OP
+            }
+            
+            memset(pucAdvertisingdata, 0, ADV_BUFF_SIZE);
 
-        AddItemtoJsonObject(&pMainObject, NUMBER, "Diagnostic", &diagnostic_data, sizeof(uint32_t));
-        //cJsonBuffer = malloc(150 * sizeof(uint8_t));
-        cJsonBuffer = cJSON_Print(pMainObject);
-        pucAdvertisingdata[2] = PRESSURE_SENSOR;
-        pucAdvertisingdata[3] = (uint8_t)strlen(cJsonBuffer);
-        memcpy(&pucAdvertisingdata[4], cJsonBuffer, strlen(cJsonBuffer));
-        
-        printk("JSON:\n%s\n", cJsonBuffer);
-
-        if(IsNotificationenabled())
-        {
-           VisenseSensordataNotify(pucAdvertisingdata+2, ADV_BUFF_SIZE);
+            cJSON_Delete(pMainObject);
+            cJSON_free(cJsonBuffer);
+            
+            //k_sleep(K_MSEC(1000));
+            printk("PressureZero: %d\n", pressureZero);
+            printk("PressureMax: %d\n", pressureMax);
+            #ifndef SLEEP_ENABLE 
+            k_sleep(K_MSEC(1000));
+            #endif
+        #ifdef SLEEP_ENABLE
         }
-        else if (!IsNotificationenabled() && !IsConnected())
-        {
-            UpdateAdvertiseData();
-            StartAdvertising();
-        }
-        else
-        {
-            //NO OP
-        }
-        
-        memset(pucAdvertisingdata, 0, ADV_BUFF_SIZE);
-
-        cJSON_Delete(pMainObject);
-        cJSON_free(cJsonBuffer);
-        
-        k_sleep(K_MSEC(1000));
-        printk("PressureZero: %d\n", pressureZero);
-        printk("PressureMax: %d\n", pressureMax);
+        #endif        
 
         #ifdef SLEEP_ENABLE
-         k_sleep(K_SECONDS(300));
-         EnterSleepMode(3600);
+         EnterSleepMode(SLEEP_TIME);
          ExitSleepMode();
         #endif
     }
