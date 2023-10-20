@@ -279,12 +279,14 @@ bool GetCurrenTimeInEpoch(long long *pllCurrEpoch)
 			//printk("Year: %d\n\r",sTimeStamp.tm_year+1900);
 			strftime(cTimeBuffer, sizeof(cTimeBuffer), "%a %Y-%m-%d %H:%M:%S %Z", &sTimeStamp);
 			printk("Current Time: %s\n\r", cTimeBuffer);
+			sTimeStamp.tm_isdst = -1;
+			*pllCurrEpoch = mktime(&sTimeStamp);
+
+			bRetval = true;
 
 		} while (0);
 		
-		sTimeStamp.tm_isdst = -1;
-		*pllCurrEpoch = mktime(&sTimeStamp);
-
-		bRetval = true;
+		
 	}
+	return bRetval;
 }
