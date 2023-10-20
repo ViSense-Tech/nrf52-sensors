@@ -32,6 +32,8 @@
 #define ALIVE_TIME         10 //Time the device will be active after a sleep time(in seconds)
 #define SLEEP_TIME         30
 #define TICK_RATE          32768
+#define TIME_STAMP_ERROR   (1<<1)
+#define TIME_STAMP_OK      ~(1<<1)
 
 /*******************************GLOBAL VARIABLES********************************/
 int  sAdcReadValue1 = 0;
@@ -162,8 +164,8 @@ float readWMsensor(void)
     float SenVWM1 = (sAdcReadValue1 / 1024.0) * SupplyV;
     float SenVWM2 = (sAdcReadValue2 / 1024.0) * SupplyV;
 
-    printk("Sensor Voltage A: %.3f V\n", SenVWM1);
-    printk("Sensor Voltage B: %.3f V\n", SenVWM2);
+    printk("Sensor Voltage A: %f V\n", SenVWM1);
+    printk("Sensor Voltage B: %f V\n", SenVWM2);
 
     double WM_ResistanceA = (Rx * (SupplyV - SenVWM1) / SenVWM1);
     double WM_ResistanceB = (Rx * SenVWM2) / (SupplyV - SenVWM2);
@@ -325,6 +327,7 @@ int main(void)
     cJSON *pSensorObj = NULL;
     long long llEpochNow = 0;
     int64_t Timenow =0;
+    int32_t diagnostic_data = 0; 
 
     InitRtc();
     gpio_pin_configure_dt(&sSensorPwSpec1, GPIO_OUTPUT_LOW);
@@ -362,11 +365,13 @@ int main(void)
             if (GetCurrenTimeInEpoch(&llEpochNow))
             {
                 printk("CurrentEpochTime=%llu\n\r", llEpochNow);
+                diagnostic_data = diagnostic_data & TIME_STAMP_OK;
             }
             else
             {
                 llEpochNow = 0; 
                 printk("Read RTC time failed\n\rCheck RTC chip is connected\n\r");
+                diagnostic_data = diagnostic_data | TIME_STAMP_ERROR;
             }
 
             if (ReadFromADC(NRF_SAADC_INPUT_AIN1, 1,  &nCBValue))
@@ -404,8 +409,8 @@ int main(void)
                 AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer)); 
                 nrfx_saadc_uninit();
             }
-                AddItemtoJsonObject(&pMainObject, NUMBER, "TimeStamp", &llEpochNow, sizeof(long long));
-
+            AddItemtoJsonObject(&pMainObject, NUMBER, "TS", &llEpochNow, sizeof(long long));
+            AddItemtoJsonObject(&pMainObject, NUMBER, "DIAG", &diagnostic_data, sizeof(uint32_t));
             cJsonBuffer = cJSON_Print(pMainObject);
             memset(cbuffer,0 , sizeof(cbuffer));
 
@@ -414,8 +419,7 @@ int main(void)
             memcpy(pucAdvBuffer+4, cJsonBuffer, strlen(cJsonBuffer));
 
             printk("JSON:\n%s\n", cJsonBuffer);
-            cJSON_Delete(pMainObject);
-            cJSON_free(cJsonBuffer);
+
 
             if(IsNotificationenabled())
             {
@@ -428,6 +432,9 @@ int main(void)
             }
 
             memset(pucAdvBuffer, 0, ADV_BUFF_SIZE);
+            cJSON_Delete(pMainObject);
+            cJSON_free(cJsonBuffer);
+
             #ifndef SLEEP_ENABLE 
             k_sleep(K_MSEC(1000));
             #endif
