@@ -20,8 +20,8 @@ uint8_t ucAdVertsingBuffer[ADV_BUFF_SIZE] = {0x00, 0x00, 0x00, 0x00, 0x00};
 
 static const struct bt_data ad[] = {
 	BT_DATA_BYTES(BT_DATA_FLAGS, (BT_LE_AD_GENERAL | BT_LE_AD_NO_BREDR)),
-	BT_DATA(BT_DATA_NAME_SHORTENED, DEVICE_NAME, DEVICE_NAME_LEN),
-	BT_DATA(BT_DATA_MANUFACTURER_DATA, ucAdVertsingBuffer, ADV_BUFF_SIZE)
+	BT_DATA(BT_DATA_NAME_COMPLETE, DEVICE_NAME, DEVICE_NAME_LEN)
+	//BT_DATA(BT_DATA_MANUFACTURER_DATA, ucAdVertsingBuffer, ADV_BUFF_SIZE)
 };
 
 /**********************************FUNCTION DEFINITION****************/
@@ -54,6 +54,7 @@ bool EnableBLE()
  * @brief function to initialize extended advertising
  * @return nRetVal - 0 for success
 */
+#ifdef EXTENDED_ADV
 int InitExtendedAdv(void)
 {
 	int nRetVal = 0;
@@ -86,6 +87,30 @@ int InitExtendedAdv(void)
     
 	return nRetVal;
 }
+#else
+int InitAdv(void)
+{
+
+	int nError = 0;
+    	struct bt_le_adv_param param =
+		BT_LE_ADV_PARAM_INIT(BT_LE_ADV_OPT_CONNECTABLE |
+				     BT_LE_ADV_OPT_USE_NAME,
+				     BT_GAP_ADV_FAST_INT_MIN_2,
+				     BT_GAP_ADV_FAST_INT_MAX_2,
+				     NULL);
+        	int err;
+
+	printk("Bluetooth initialized\n");
+
+	err = bt_le_adv_start(&param, ad, ARRAY_SIZE(ad), NULL, 0);
+	if (err) {
+		printk("Advertising failed to init (err %d)\n", err);
+		return;
+	}            
+
+    return nError;
+}
+#endif
 
 /**
  * @brief function to start advertising
@@ -94,7 +119,7 @@ int InitExtendedAdv(void)
 int StartAdvertising(void)
 {
 	int nError = 0;
-
+#ifdef EXTENDED_ADV
 	nError = bt_le_ext_adv_start(adv, NULL);
 
 	if (nError) 
@@ -105,7 +130,15 @@ int StartAdvertising(void)
     {
         printk("Advertiser %p set started\n", adv);
     }
+#else
 
+	nError = bt_le_adv_start(BT_LE_ADV_CONN, ad, ARRAY_SIZE(ad), NULL, 0);
+	if (nError) 
+    {
+		printk("Advertising failed to start (err %d)\n", nError);
+	}
+
+#endif
     return nError;
 }
 

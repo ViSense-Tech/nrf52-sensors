@@ -18,6 +18,7 @@
 
 /***************************************MACROS*******************************/
 #define ADV_BUFF_SIZE           (150)
+//#define EXTENDED_ADV
 /**************************************TYPEDEFS******************************/
 
 /*************************************FUNCTION DECLARATION*******************/
@@ -27,5 +28,6 @@ int InitExtendedAdv(void);
 int StartAdvertising(void);
 int UpdateAdvertiseData(void);
 bool BleStopAdvertise();
+int InitAdv(void);
 
 #endif

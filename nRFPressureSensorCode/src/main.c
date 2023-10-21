@@ -198,7 +198,7 @@ int main(void)
 
     //cJSON_Hooks *pJsonHook. = NULL; 
     long long llEpochNow = 0;
-    InitLCD();
+   // InitLCD();
     InitRtc();
     SetPMState();
     pucAdvertisingdata = GetAdvertisingBuffer();
@@ -212,19 +212,31 @@ int main(void)
         return 0;
     }
 
+#ifdef EXTENDED_ADV
     nError = InitExtendedAdv();
 	if (nError) 
     {
 		printk("Advertising failed to create (err %d)\n", nError);
 		return 0;
 	}
+#else
+
+    nError = InitAdv();
+     
+	if (nError) 
+    {
+		printk("Advertising failed to create (err %d)\n", nError);
+		return 0;
+	}
+
+#endif
     sprintf(cbuffer,"%dpsi", unPressureResult);
     StartAdvertising();
-    gpio_pin_configure_dt(&sSleepStatusLED, GPIO_ACTIVE_LOW);
-    //cJSON_InitHooks(pJsonHook);    
+    gpio_pin_configure_dt(&sSleepStatusLED, GPIO_ACTIVE_LOW); 
 
     while (1) 
     {
+        
         #ifdef SLEEP_ENABLE
         llTimenow = sys_clock_tick_get();
 
@@ -243,11 +255,10 @@ int main(void)
             printk("ADCRaw: %d\n", unPressureRaw);
             pMainObject = cJSON_CreateObject();
             AddItemtoJsonObject(&pMainObject, NUMBER, "ADCValue", &unPressureRaw, sizeof(uint32_t));
-            WriteLCDCmd(0x01); //Clear
-            SetLCDCursor(1, 1);
-           // printk("Latitude: %fN Longitude: %fE\n\r", fLatitude, fLongitude);
-            sprintf(cLCDMsg, "ADC: %d", unPressureRaw);
-            WriteStringToLCD(cLCDMsg);
+        //     WriteLCDCmd(0x01); //Clear
+        //     SetLCDCursor(1, 1);
+        //     sprintf(cLCDMsg, "ADC: %d", unPressureRaw);
+        //     WriteStringToLCD(cLCDMsg);
             k_sleep(K_MSEC(50));
             AddItemtoJsonObject(&pMainObject, NUMBER, "PressureZero", &pressureZero, sizeof(uint32_t));
             AddItemtoJsonObject(&pMainObject, NUMBER, "PressureMax", &pressureMax, sizeof(uint32_t));
@@ -256,12 +267,11 @@ int main(void)
             {
                 memset(cbuffer, '\0',sizeof(cbuffer));
                 unPressureResult = ((unPressureRaw-pressureZero)*pressuretransducermaxPSI)/(pressureMax-pressureZero);
-                //WriteLCDCmd(0x01); //Clear
-                SetLCDCursor(1, 10);
-                // printk("Latitude: %fN Longitude: %fE\n\r", fLatitude, fLongitude);
-                sprintf(cLCDMsg, "Pr: %d", unPressureResult);
-                WriteStringToLCD(cLCDMsg);
-                k_sleep(K_MSEC(50));
+                // WriteLCDCmd(0x01); //Clear
+                // SetLCDCursor(1, 10);
+                // sprintf(cLCDMsg, "Pr: %d", unPressureResult);
+                // WriteStringToLCD(cLCDMsg);
+                // k_sleep(K_MSEC(50));
                 sprintf(cbuffer,"%dpsi", unPressureResult);
                 printk("Data:%s\n", cbuffer);
                 AddItemtoJsonObject(&pMainObject, STRING, "Pressure", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer));
@@ -292,12 +302,12 @@ int main(void)
 
             if(IsNotificationenabled())
             {
-            VisenseSensordataNotify(pucAdvertisingdata+2, ADV_BUFF_SIZE);
+               VisenseSensordataNotify(pucAdvertisingdata+2, ADV_BUFF_SIZE);
             }
             else if (!IsNotificationenabled() && !IsConnected())
             {
-                UpdateAdvertiseData();
-                StartAdvertising();
+               // UpdateAdvertiseData();
+              // StartAdvertising();
             }
             else
             {
