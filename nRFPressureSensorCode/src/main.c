@@ -33,6 +33,7 @@
 //#define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
 #define ADC_MAX_VALUE 1023
 #define PRESSURE_SENSOR 0x01
+#define AVERAGE_COUNT 4
 
 // diagnostics
 #define SENSOR_DIAGNOSTICS (1<<0)
@@ -179,6 +180,17 @@ static void InitADC()
                                         NULL);
     NRFX_ASSERT(status == NRFX_SUCCESS);
 }
+uint8_t  AvgPsiCal(void)
+{
+    uint16_t unPressureRaw = 0;
+    uint16_t unPressureResult = 0;
+    for (uint8_t i = 0; i < AVERAGE_COUNT; i++)
+    {
+        unPressureRaw = AnalogRead();
+        unPressureResult += ((unPressureRaw-pressureZero)*pressuretransducermaxPSI)/(pressureMax-pressureZero);
+    }
+    return (unPressureResult/AVERAGE_COUNT);
+}
 
 /**
  * @brief  Main function
@@ -247,7 +259,7 @@ int main(void)
         if (unPressureRaw > pressureZero && unPressureRaw < ADC_MAX_VALUE)
         {
             memset(cbuffer, '\0',sizeof(cbuffer));
-            unPressureResult = ((unPressureRaw-pressureZero)*pressuretransducermaxPSI)/(pressureMax-pressureZero);
+            unPressureResult = AvgPsiCal();
             
             sprintf(cbuffer,"%dpsi", unPressureResult);
             printk("Data:%s\n", cbuffer);
