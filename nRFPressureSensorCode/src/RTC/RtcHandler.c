@@ -19,16 +19,53 @@
 
 static const struct device *i2c_dev = DEVICE_DT_GET(DT_NODELABEL(i2c0));
 static long long llLastUpdatedTime = 1696585221;
+static bool bTimeUpdated = false;
 
 
 /***************************************FUNCTION DEFINITIONS********************/
 static bool SetTimeDate();
 
-void SetRtcTime(uint64_t ullTimestamp)
+/**
+
+ * @brief Read time update status
+
+ * @param None
+
+ * @return true for success
+
+*/
+
+bool GetTimeUpdateStatus()
+
 {
-	llLastUpdatedTime = (long long)ullTimestamp;
-	InitRtc();	
-	//SetTimeDate();
+
+    return bTimeUpdated;
+
+}
+
+ 
+
+/**
+
+ * @brief Set time update status
+ * @param bStatus : Update status
+ * @return None
+
+*/
+
+void SetTimeUpdateStatus(bool bStatus)
+
+{
+    bTimeUpdated = bStatus;
+}
+
+ 
+
+void SetRtcTime(uint64_t ullTimestamp)
+
+{
+    llLastUpdatedTime = (long long)ullTimestamp;
+    bTimeUpdated = true;
 }
 /**
  * @brief Converting number format from BCD to Decimal

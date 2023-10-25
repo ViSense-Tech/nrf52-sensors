@@ -33,7 +33,7 @@
 //#define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
 #define ADC_MAX_VALUE 1023
 #define PRESSURE_SENSOR 0x01
-#define AVERAGE_COUNT 4
+#define PRESSURE_SAMPLE_COUNT 10
 
 // diagnostics
 #define SENSOR_DIAGNOSTICS (1<<0)
@@ -49,7 +49,7 @@
     const int pressureMax = 929; //analog reading of pressure transducer at 100psi
     const int pressureZero = 110; //analog reading of pressure transducer at 0psi
 #else
-    static uint32_t pressureZero = 121; //analog reading of pressure transducer at 0psi
+    static uint32_t pressureZero = 119; //analog reading of pressure transducer at 0psi
                               //PressureZero = 0.5/3.3V*1024~150(supply voltage - 3.3v) taken from Arduino code refernce from visense 
     static uint32_t pressureMax = 564; //analog reading of pressure transducer at 100psi
                              //PressureMax = 2.5/3.3V*1024~775  taken from Arduino code refernce from visense       
@@ -71,7 +71,7 @@ void setPressureMax(uint32_t ucbuff);
 uint16_t AnalogRead(void)
 {
     nrfx_err_t status;
-    uint16_t sample_value;
+    uint32_t sample_value;
 
     status = nrfx_saadc_buffer_set(&sample_value, 1);
     NRFX_ASSERT(status == NRFX_SUCCESS);
@@ -180,16 +180,38 @@ static void InitADC()
                                         NULL);
     NRFX_ASSERT(status == NRFX_SUCCESS);
 }
-uint8_t  AvgPsiCal(void)
+bool GetPressureReading(uint16_t *unPressureResult, uint32_t *unPressureRaw)
 {
-    uint16_t unPressureRaw = 0;
-    uint16_t unPressureResult = 0;
-    for (uint8_t i = 0; i < AVERAGE_COUNT; i++)
+    uint16_t unAdcSample = 0;
+    uint16_t unPressureSample = 0;
+    uint8_t count = 0;
+    *unPressureRaw = 0;
+    *unPressureResult = 0;
+    
+    for (uint8_t i = 0; i < PRESSURE_SAMPLE_COUNT; i++)
     {
-        unPressureRaw = AnalogRead();
-        unPressureResult += ((unPressureRaw-pressureZero)*pressuretransducermaxPSI)/(pressureMax-pressureZero);
+        
+        unAdcSample = AnalogRead();
+
+        if (unAdcSample > pressureZero && unAdcSample < ADC_MAX_VALUE)
+        {
+            unPressureSample += ((unAdcSample)-(pressureZero))*(pressuretransducermaxPSI)/(pressureMax-pressureZero);
+            count++;
+            *unPressureRaw += unAdcSample;   
+        }
+        k_msleep(100);
     }
-    return (unPressureResult/AVERAGE_COUNT);
+    if (count == 0)
+    {
+        *unPressureRaw = unAdcSample; 
+        return false;
+    }
+    else
+    {
+        *unPressureRaw = *unPressureRaw/count;
+        *unPressureResult = unPressureSample/count;
+        return true;
+    }
 }
 
 /**
@@ -206,7 +228,7 @@ int main(void)
     uint8_t *pucAdvertisingdata = NULL;
     cJSON *pMainObject = NULL;
     uint32_t diagnostic_data = 0;
-
+    
     //cJSON_Hooks *pJsonHook. = NULL; 
     long long llEpochNow = 0;
 
@@ -236,7 +258,15 @@ int main(void)
 
     while (1) 
     {
-       if (GetCurrenTimeInEpoch(&llEpochNow))
+        
+        if (GetTimeUpdateStatus())
+        {
+            InitRtc();
+            SetTimeUpdateStatus(false);
+            printk("Time updated\n");
+        }
+
+        if (GetCurrenTimeInEpoch(&llEpochNow))
         {
            printk("CurrentTime=%llu\n\r", llEpochNow);
            diagnostic_data = diagnostic_data & TIME_STAMP_OK;
@@ -245,21 +275,19 @@ int main(void)
         {
             diagnostic_data = diagnostic_data | TIME_STAMP_ERROR;
         }
-        unPressureRaw = AnalogRead();
-        if (unPressureRaw > ADC_MAX_VALUE)
+
+        if (GetPressureReading(&unPressureResult, &unPressureRaw))
         {
-            unPressureRaw = 0;
+            printk("PressureRaw: %d\n", unPressureRaw);
         }
-        printk("ADCRaw: %d\n", unPressureRaw);
         pMainObject = cJSON_CreateObject();
-        AddItemtoJsonObject(&pMainObject, NUMBER, "ADCValue", &unPressureRaw, sizeof(uint32_t));
+        AddItemtoJsonObject(&pMainObject, NUMBER, "ADCValue", &unPressureRaw, sizeof(uint16_t));
         AddItemtoJsonObject(&pMainObject, NUMBER, "PressureZero", &pressureZero, sizeof(uint32_t));
         AddItemtoJsonObject(&pMainObject, NUMBER, "PressureMax", &pressureMax, sizeof(uint32_t));
         AddItemtoJsonObject(&pMainObject, NUMBER, "TS", &llEpochNow, sizeof(long long));
         if (unPressureRaw > pressureZero && unPressureRaw < ADC_MAX_VALUE)
         {
             memset(cbuffer, '\0',sizeof(cbuffer));
-            unPressureResult = AvgPsiCal();
             
             sprintf(cbuffer,"%dpsi", unPressureResult);
             printk("Data:%s\n", cbuffer);
@@ -267,7 +295,7 @@ int main(void)
             diagnostic_data = diagnostic_data & SENSOR_STATUS_OK;
 
         }
-        else if(unPressureRaw > 100)
+        else if(unPressureRaw > 100) //
         {
             memset(cbuffer, '\0',sizeof(cbuffer));
             unPressureResult = 0;

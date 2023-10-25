@@ -83,8 +83,9 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 	if (ParseRxData(ucConfigData2, "PressureZero", len, &ucbuff))
 	{
 		if (len)
-		SetPressureZero(ucbuff);
-		//printk("pzero:%lld\n\r",ucbuff);
+		{
+			SetPressureZero(ucbuff);
+		}//printk("pzero:%lld\n\r",ucbuff);
 	}
 
 	if (ParseRxData(ucConfigData2, "PressureMax", len, &ucbuff))
@@ -98,9 +99,8 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 	{
 		if (len)
 		{
-
-		SetRtcTime(ucbuff);
-		printk("time:%lld\n\r",ucbuff);
+			SetRtcTime(ucbuff);
+			printk("time:%lld\n\r",ucbuff);
 		}
 	}
 	return len;
