@@ -26,7 +26,7 @@
 #include "RtcHandler.h"
 
 /*******************************MACROS****************************************/
-#define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
+//#define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
 #define ADC_READING_LOWER  0
 #define ADC_READING_UPPER  1024
 #define ALIVE_TIME         10 //Time the device will be active after a sleep time(in seconds)
@@ -89,12 +89,12 @@ int GetAdcResult( const struct gpio_dt_spec *excite_pin_spec)
         return -1;
     }
     gpio_pin_set(excite_pin_spec->port, excite_pin_spec->pin, 1);
-    k_sleep(K_USEC(90)); 
+    k_sleep(K_MSEC(30)); 
 
     AdcReadValue = AnalogRead();
 
     gpio_pin_set(excite_pin_spec->port, excite_pin_spec->pin, 0);
-    k_sleep(K_MSEC(100)); 
+    k_sleep(K_MSEC(30000)); 
 
     
     return AdcReadValue;
@@ -161,16 +161,20 @@ int CalculateCBvalue(int res, float TC, float cF)
 */
 float readWMsensor(void)
 {
+    /*Here only measuring resistance from single side only and avoiding ac short pulse method
+    and using currently is dc short pulse method*/
+    
     float SenVWM1 = (sAdcReadValue1 / 1024.0) * SupplyV;
-    float SenVWM2 = (sAdcReadValue2 / 1024.0) * SupplyV;
+    //float SenVWM2 = (sAdcReadValue2 / 1024.0) * SupplyV;
 
     printk("Sensor Voltage A: %f V\n", SenVWM1);
-    printk("Sensor Voltage B: %f V\n", SenVWM2);
+    //printk("Sensor Voltage B: %f V\n", SenVWM2);
 
     double WM_ResistanceA = (Rx * (SupplyV - SenVWM1) / SenVWM1);
-    double WM_ResistanceB = (Rx * SenVWM2) / (SupplyV - SenVWM2);
+    //double WM_ResistanceB = (Rx * SenVWM2) / (SupplyV - SenVWM2);
 
-    return (WM_ResistanceA + WM_ResistanceB) / 2.0;
+    //return (WM_ResistanceA + WM_ResistanceB) / 2.0;
+    return WM_ResistanceA;
 }
 
 /**
@@ -295,12 +299,16 @@ static bool ReadFromADC(nrf_saadc_input_t eAdcChannel, int nChannelIdx, int *pnW
         }
         k_msleep(50);
         printk("Reading A1: %d\n", sAdcReadValue1);
-        sAdcReadValue2 = GetAdcResult(&sSensorPwSpec2);
-        if (sAdcReadValue2 < ADC_READING_LOWER || sAdcReadValue1 > ADC_READING_UPPER)
-        {
-           sAdcReadValue2 = 0;
-        }        
-        printk("Reading A2: %d\n", sAdcReadValue2);
+
+        /*Commented here for testing the CB value and will remove or update here once the
+        CB measurement issue fixed*/
+
+        // sAdcReadValue2 = GetAdcResult(&sSensorPwSpec2);
+        // if (sAdcReadValue2 < ADC_READING_LOWER || sAdcReadValue1 > ADC_READING_UPPER)
+        // {
+        //    sAdcReadValue2 = 0;
+        // }        
+        // printk("Reading A2: %d\n", sAdcReadValue2);
         
         WM_Resistance = readWMsensor();
         printk("WM Resistance(Ohms): %d\n", (int)WM_Resistance);
@@ -360,6 +368,12 @@ int main(void)
         while(sys_clock_tick_get() - Timenow < (ALIVE_TIME * TICK_RATE))
         {
         #endif    
+            if (GetTimeUpdateStatus())
+            {
+                InitRtc();
+                SetTimeUpdateStatus(false);
+            }
+
             pMainObject = cJSON_CreateObject();
 
             if (GetCurrenTimeInEpoch(&llEpochNow))
@@ -386,29 +400,32 @@ int main(void)
                 nrfx_saadc_uninit();
             }
 
-            if (ReadFromADC(NRF_SAADC_INPUT_AIN2, 2,  &nCBValue))
-            {
-                memset(cbuffer, '\0', sizeof(cbuffer));
-                sprintf(cbuffer,"CB=%d", abs(nCBValue));
-                printk("Data:%s\n", cbuffer);
-                pSensorObj=cJSON_AddObjectToObject(pMainObject, "S2");
-                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC1", &sAdcReadValue1, sizeof(uint16_t));
-                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC2", &sAdcReadValue2, sizeof(uint16_t));
-                AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer)); 
-                nrfx_saadc_uninit();        
-            }
+            /*Commented here for measuring only from one sensor which also will be updated finally
+            after fixing the measurement of CB value issue*/
 
-            if (ReadFromADC(NRF_SAADC_INPUT_AIN4, 4, &nCBValue))
-            {
-                    memset(cbuffer, '\0', sizeof(cbuffer));
-                sprintf(cbuffer,"CB=%d", abs(nCBValue));
-                printk("Data:%s\n", cbuffer);
-                pSensorObj=cJSON_AddObjectToObject(pMainObject, "S3");
-                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC1", &sAdcReadValue1, sizeof(uint16_t));
-                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC2", &sAdcReadValue2, sizeof(uint16_t));
-                AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer)); 
-                nrfx_saadc_uninit();
-            }
+            // if (ReadFromADC(NRF_SAADC_INPUT_AIN2, 2,  &nCBValue))
+            // {
+            //     memset(cbuffer, '\0', sizeof(cbuffer));
+            //     sprintf(cbuffer,"CB=%d", abs(nCBValue));
+            //     printk("Data:%s\n", cbuffer);
+            //     pSensorObj=cJSON_AddObjectToObject(pMainObject, "S2");
+            //     AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC1", &sAdcReadValue1, sizeof(uint16_t));
+            //     AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC2", &sAdcReadValue2, sizeof(uint16_t));
+            //     AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer)); 
+            //     nrfx_saadc_uninit();        
+            // }
+
+            // if (ReadFromADC(NRF_SAADC_INPUT_AIN4, 4, &nCBValue))
+            // {
+            //         memset(cbuffer, '\0', sizeof(cbuffer));
+            //     sprintf(cbuffer,"CB=%d", abs(nCBValue));
+            //     printk("Data:%s\n", cbuffer);
+            //     pSensorObj=cJSON_AddObjectToObject(pMainObject, "S3");
+            //     AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC1", &sAdcReadValue1, sizeof(uint16_t));
+            //     AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC2", &sAdcReadValue2, sizeof(uint16_t));
+            //     AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer)); 
+            //     nrfx_saadc_uninit();
+            // }
             AddItemtoJsonObject(&pMainObject, NUMBER, "TS", &llEpochNow, sizeof(long long));
             AddItemtoJsonObject(&pMainObject, NUMBER, "DIAG", &diagnostic_data, sizeof(uint32_t));
             cJsonBuffer = cJSON_Print(pMainObject);

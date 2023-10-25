@@ -8,9 +8,11 @@
 
 /**************************** INCLUDES******************************************/
 #include "BleService.h"
+#include "RtcHandler.h"
+#include "JsonHandler.h"
 
 /**************************** MACROS********************************************/
-#define VND_MAX_LEN 12
+#define VND_MAX_LEN 247
 /* Custom Service Variables */
 #define BT_UUID_CUSTOM_SERVICE_VAL \
 	BT_UUID_128_ENCODE(0xb484afa8, 0x5dee, 0x11ee, 0x8c99, 0x0242ac120002)
@@ -22,7 +24,11 @@ static struct bt_uuid_128 sServiceUUID = BT_UUID_INIT_128(
 static struct bt_uuid_128 sSensorChara = BT_UUID_INIT_128(
 	BT_UUID_128_ENCODE(0xb484b246, 0x5d3b, 0x11ee, 0x8c99, 0x0242ac120002));
 
+static struct bt_uuid_128 sConfigChara = BT_UUID_INIT_128(
+	BT_UUID_128_ENCODE(0xb484b257, 0x5d3b, 0x11ee, 0x8c99, 0x0242ac120002));
+
 static uint8_t ucSensorData[VND_MAX_LEN + 1] = {0x11,0x22,0x33, 0x44, 0x55};
+static uint8_t ucConfigData2[VND_MAX_LEN + 1];
 static bool bNotificationEnabled = false; 
 struct bt_conn *psConnHandle = NULL;
 
@@ -60,14 +66,23 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 			 uint8_t flags)
 {
 	uint8_t *value = attr->user_data;
+	uint64_t ucbuff = 0;
 
 	if (offset + len > VND_MAX_LEN) {
 		return BT_GATT_ERR(BT_ATT_ERR_INVALID_OFFSET);
 	}
 
 	memcpy(value + offset, buf, len);
-	value[offset + len] = 0;
+	memcpy(ucConfigData2, value, len);
 
+	if (ParseRxData(ucConfigData2, "TimeStamp", len, &ucbuff))
+	{
+		if (len)
+		{
+			SetRtcTime(ucbuff);
+			printk("time:%lld\n\r",ucbuff);
+		}
+	}
 	return len;
 }
 
@@ -101,6 +116,11 @@ BT_GATT_SERVICE_DEFINE(VisenseService,
                 BT_GATT_PERM_READ | BT_GATT_PERM_WRITE,
                 CharaRead, CharaWrite, ucSensorData),
     BT_GATT_CCC(BleSensorDataNotify, BT_GATT_PERM_READ | BT_GATT_PERM_WRITE),
+	BT_GATT_CHARACTERISTIC(&sConfigChara.uuid,
+					BT_GATT_CHRC_READ | BT_GATT_CHRC_WRITE,
+					BT_GATT_PERM_READ | BT_GATT_PERM_WRITE,
+					CharaRead,CharaWrite, ucConfigData2),
+   BT_GATT_CCC(NULL, BT_GATT_PERM_READ | BT_GATT_PERM_WRITE)
 );
 
 static void connected(struct bt_conn *conn, uint8_t err)

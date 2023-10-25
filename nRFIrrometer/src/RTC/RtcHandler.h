@@ -28,4 +28,6 @@
 bool InitRtc();
 bool GetCurrenTimeInEpoch(long long *pllCurrEpoch);
 void SetRtcTime(uint64_t ullTimestamp);
+bool GetTimeUpdateStatus();
+void SetTimeUpdateStatus(bool bStatus);
 #endif
