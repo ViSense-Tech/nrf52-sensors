@@ -33,3 +33,4 @@ Software Version:
 nRFConnect v4.2.0
 Programmer v3.0.9
 Toolchain Manager v1.2.5
+test test test
