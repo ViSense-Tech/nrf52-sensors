@@ -24,6 +24,7 @@
 #include "BleService.h"
 #include "JsonHandler.h"
 #include "RtcHandler.h"
+#include "nvs_flash.h"
 
 /*******************************MACROS****************************************/
 #define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
@@ -52,6 +53,8 @@ const struct gpio_dt_spec sSensorPwSpec1 = GPIO_DT_SPEC_GET(DT_ALIAS(testpin0), 
 const struct gpio_dt_spec sSensorPwSpec2 = GPIO_DT_SPEC_GET(DT_ALIAS(testpin1), gpios);
 const struct gpio_dt_spec sSleepStatusLED = GPIO_DT_SPEC_GET(DT_ALIAS(led0), gpios);
 const struct device *psUartHandle = DEVICE_DT_GET(DT_NODELABEL(uart0));
+
+struct nvs_fs fs; 
 
 
 
@@ -328,6 +331,9 @@ int main(void)
     long long llEpochNow = 0;
     int64_t Timenow =0;
     int32_t diagnostic_data = 0; 
+    uint16_t data_count = 0;  // initialise data counter
+    uint32_t count_max=10;  // max data to be stored
+    char buf[ADV_BUFF_SIZE];
 
     InitRtc();
     gpio_pin_configure_dt(&sSensorPwSpec1, GPIO_OUTPUT_LOW);
@@ -351,6 +357,7 @@ int main(void)
         printk("Advertising failed to start (err %d)\n", Ret);
         return 0;
     }
+    nvs_initialisation(&fs); 
     
      while (1) 
      {
@@ -417,9 +424,34 @@ int main(void)
             pucAdvBuffer[2] = 0x02;
             pucAdvBuffer[3] = (uint8_t)strlen(cJsonBuffer);
             memcpy(pucAdvBuffer+4, cJsonBuffer, strlen(cJsonBuffer));
+            printk("JSON:\n%s\n", cJsonBuffer);
+            if(!IsConnected())              //save to flash only if Mobile Phone is NOT connected
+            {
+                memset(buf, '\0', sizeof(buf));
+                writeJsonToFlash(&fs, data_count, count_max, cJsonBuffer, strlen(cJsonBuffer));
+                k_msleep(50);
+                if (readJsonToFlash(&fs, data_count, count_max, buf, strlen(cJsonBuffer)))
+                {
+                    printk("\nId: %d, Stored_Data: %s\n",STRING_ID + data_count, buf);
+
+                }
+                    data_count++; 
+
+                if(data_count>= count_max || GetCharaStatus() == true ) 
+                {
+
+                    deleteFlash(&fs,data_count,count_max);       
+                    k_msleep(10);
+                    data_count=0;
+                }
+            }
 
             printk("JSON:\n%s\n", cJsonBuffer);
-
+            if(IshistoryNotificationenabled())
+            {
+                VisenseHistoryDataNotify((uint16_t)strlen(cJsonBuffer));
+                data_count = 0; 
+            }
 
             if(IsNotificationenabled())
             {

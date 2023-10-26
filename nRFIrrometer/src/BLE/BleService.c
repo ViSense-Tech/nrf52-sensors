@@ -8,6 +8,7 @@
 
 /**************************** INCLUDES******************************************/
 #include "BleService.h"
+#include "nvs_flash.h"
 
 /**************************** MACROS********************************************/
 #define VND_MAX_LEN 12
@@ -21,10 +22,15 @@ static struct bt_uuid_128 sServiceUUID = BT_UUID_INIT_128(
 
 static struct bt_uuid_128 sSensorChara = BT_UUID_INIT_128(
 	BT_UUID_128_ENCODE(0xb484b246, 0x5d3b, 0x11ee, 0x8c99, 0x0242ac120002));
+	static struct bt_uuid_128 sHistoryChara = BT_UUID_INIT_128(
+	BT_UUID_128_ENCODE(0xe0766000, 0x5d3b, 0x11ee, 0x8c99, 0x0242ac120002));
 
 static uint8_t ucSensorData[VND_MAX_LEN + 1] = {0x11,0x22,0x33, 0x44, 0x55};
 static bool bNotificationEnabled = false; 
 struct bt_conn *psConnHandle = NULL;
+static bool bConnected = false;
+static bool hNotificationEnabled = false; 
+struct nvs_fs *FileSys;
 
 /****************************FUNCTION DEFINITION********************************/
 
@@ -88,6 +94,20 @@ void BleSensorDataNotify(const struct bt_gatt_attr *attr, uint16_t value)
         bNotificationEnabled = false;
     }
 }
+/**
+ * @brief Notification callback for history
+ * @param attr - pointer to GATT attributes
+ * @param value - Client Characteristic Configuration Values
+ * @return None
+*/
+void BleHistoryDataNotify(const struct bt_gatt_attr *attr, uint16_t value)
+{
+    if (value == BT_GATT_CCC_NOTIFY)
+    {
+        hNotificationEnabled = true;
+    }
+    
+}
 
 /* VSENCE SERVICE DEFINITION*/
 /**
@@ -101,7 +121,18 @@ BT_GATT_SERVICE_DEFINE(VisenseService,
                 BT_GATT_PERM_READ | BT_GATT_PERM_WRITE,
                 CharaRead, CharaWrite, ucSensorData),
     BT_GATT_CCC(BleSensorDataNotify, BT_GATT_PERM_READ | BT_GATT_PERM_WRITE),
+    BT_GATT_CHARACTERISTIC(&sHistoryChara.uuid,
+                BT_GATT_CHRC_NOTIFY ,
+                BT_GATT_PERM_READ | BT_GATT_PERM_WRITE,
+                CharaRead, CharaWrite, ucSensorData),
+    BT_GATT_CCC(BleHistoryDataNotify, BT_GATT_PERM_READ | BT_GATT_PERM_WRITE)
 );
+
+void GetFileSystem(struct nvs_fs *fs)
+{
+	FileSys = fs;
+}
+
 
 static void connected(struct bt_conn *conn, uint8_t err)
 {
@@ -112,6 +143,7 @@ static void connected(struct bt_conn *conn, uint8_t err)
     else 
     {
 		bt_conn_le_data_len_update(conn, BT_LE_DATA_LEN_PARAM_MAX);
+		bConnected = true;
 		printk("Connected\n");
 	}
 }
@@ -119,6 +151,7 @@ static void connected(struct bt_conn *conn, uint8_t err)
 static void disconnected(struct bt_conn *conn, uint8_t reason)
 {
 	printk("Disconnected (reason 0x%02x)\n", reason);
+	bConnected = false;
 }
 
 BT_CONN_CB_DEFINE(conn_callbacks) = {
@@ -145,6 +178,50 @@ int VisenseSensordataNotify(uint8_t *pucSensorData, uint16_t unLen)
 	return nRetVal;
 }
 
+void VisenseHistoryDataNotify(uint16_t len)                                        //history
+{
+	bool bRetVal = false;
+	uint8_t ucIdx = 1;
+	char unLen[ADV_BUFF_SIZE];
+	int nRetVal = 0;
+
+	for (ucIdx = 0 ; ucIdx < 10; ucIdx++)
+	{	
+		memset(unLen, 0, ADV_BUFF_SIZE);
+		int rc = readJsonToFlash(FileSys, ucIdx, 0, unLen, len);
+		printk("\nId: %d, Ble_Stored_Data: %s\n",ucIdx, unLen);
+		if (rc<0)
+		{
+			break;
+		}
+		
+		  
+		
+
+		k_msleep(1000);
+
+		if (unLen > 0)
+		{
+			nRetVal = bt_gatt_notify(NULL, &VisenseService.attrs[8], 
+			unLen,len);
+			if (nRetVal < 0)
+			{
+				printk("Notification failed%d\n\r",nRetVal);
+			}
+			bRetVal = true;
+		}
+		
+	}
+	hNotificationEnabled = false;     //history callback set 
+	deleteFlash(FileSys,0,80);
+	printk("Flash Cleared");
+	return bRetVal;
+}
+bool IshistoryNotificationenabled()
+{
+    return hNotificationEnabled;
+}
+
 /**
  * @brief Check if notification is enabled
  * @param None
@@ -153,4 +230,12 @@ int VisenseSensordataNotify(uint8_t *pucSensorData, uint16_t unLen)
 bool IsNotificationenabled()
 {
     return bNotificationEnabled;
+}
+bool IsConnected()
+{
+	return bConnected;
+}
+bool GetCharaStatus()
+{
+	return  ;
 }
