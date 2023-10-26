@@ -224,7 +224,7 @@ int main(void)
     sprintf(cbuffer,"%dpsi", unPressureResult);
     StartAdvertising();
     gpio_pin_configure_dt(&sSleepStatusLED, GPIO_ACTIVE_LOW);
-    //GetFileSystem(&fs);
+    GetFileSystem(&fs);
 
     while (1) 
     {
