@@ -26,6 +26,7 @@
 #include "BleService.h"
 #include "JsonHandler.h"
 #include "RtcHandler.h"
+#include "nvs_flash.h"
 
 
 /*******************************MACROS****************************************/
@@ -61,6 +62,19 @@ const struct device *pAdc = NULL;
 const struct gpio_dt_spec sSleepStatusLED = GPIO_DT_SPEC_GET(DT_ALIAS(led0), gpios);
 void setPressureZero(uint32_t ucbuff);
 void setPressureMax(uint32_t ucbuff);
+bool bPressureZeroSet = false;
+bool bPressureMaxSet = false;
+uint8_t flag = 0;
+typedef struct __attribute__((packed)) __sConfigData
+{
+    //uint64_t ullLastUpdatedTimeStamp;
+    uint32_t pressureZero;
+    uint32_t pressureMax;
+    uint8_t flag;
+}_sConfigData;
+
+
+struct nvs_fs fs;    //file system
 /*******************************FUNCTION DEFINITIONS********************************/
 
 /**
@@ -85,18 +99,22 @@ uint16_t AnalogRead(void)
  * @param ucbuffer - buffer for setting pressureZero
  * @return void
 */
-void SetPressureZero(uint64_t ucbuffer)
+void SetPressureZero(uint32_t ucbuffer)
 {
     pressureZero = ucbuffer;
+    bPressureZeroSet = true;
+    // writeJsonToFlash(&fs, 82, 0, (char *) &pressureZero, sizeof(pressureZero));
 }
 /**
  * @brief Setting pressureMax
  * @param ucbuffer - buffer for setting pressureMax
  * @return void
 */
-void SetPressureMax(uint64_t ucbuffer)
+void SetPressureMax(uint32_t ucbuffer)
 {
     pressureMax = ucbuffer;
+    bPressureMaxSet = true;
+    // writeJsonToFlash(&fs, 83, 0, (char *) &pressureMax, sizeof(pressureMax));
 }
 
 /*
@@ -228,11 +246,15 @@ int main(void)
     uint8_t *pucAdvertisingdata = NULL;
     cJSON *pMainObject = NULL;
     uint32_t diagnostic_data = 0;
+    uint16_t data_count = 0;  // initialise data counter
+    uint32_t count_max=80;  // max data to be stored
+    char buf[ADV_BUFF_SIZE];
+    _sConfigData sConfigData = {0};
     
     //cJSON_Hooks *pJsonHook. = NULL; 
     long long llEpochNow = 0;
 
-   InitRtc();
+    InitRtc();
     SetPMState();
     pucAdvertisingdata = GetAdvertisingBuffer();
     InitADC();
@@ -251,13 +273,68 @@ int main(void)
 		printk("Advertising failed to create (err %d)\n", nError);
 		return 0;
 	}
+     nvs_initialisation(&fs); 
     sprintf(cbuffer,"%dpsi", unPressureResult);
     StartAdvertising();
     gpio_pin_configure_dt(&sSleepStatusLED, GPIO_ACTIVE_LOW);
-    //cJSON_InitHooks(pJsonHook);    
+    //cJSON_InitHooks(pJsonHook);   
+    GetFileSystem(&fs);
+	fs.offset = NVS_PARTITION_OFFSET+16384;
+	//rc = flash_get_page_info_by_offs(fs.flash_device, fs.offset, &info);
+    readJsonToFlash(&fs, 0, 0, (char *)&sConfigData, sizeof(sConfigData)); 
+   // if(sConfigData.flag)
+   // {
+               printk("\n\rPressureZero: %d\n", sConfigData.pressureZero);
+               printk("\n\rPressureMax: %d\n", sConfigData.pressureMax);
+               printk("\n\rFlag: %d\n", sConfigData.flag);
+
+        if (sConfigData.flag & (1 << 0))
+        {
+            pressureZero = sConfigData.pressureZero;
+        }
+        if (sConfigData.flag & (1 << 1))
+        {
+            pressureMax = sConfigData.pressureMax;
+        }
+        fs.offset = NVS_PARTITION_OFFSET;
+   // }
 
     while (1) 
     {
+        if (bPressureZeroSet && bPressureMaxSet)
+        {
+           // if (bPressureZeroSet)
+           // {
+                
+
+               // writeJsonToFlash(&fs, 0, 0, (char *) &pressureZero, sizeof(pressureZero));
+               sConfigData.pressureZero = pressureZero;
+               printk("\n\rPreero: %d\n", sConfigData.pressureZero);
+               
+                flag = flag | (1 << 0);
+                bPressureZeroSet = false;
+            //}
+           // if (bPressureMaxSet)
+          //  {
+                //writeJsonToFlash(&fs, 91, 0, (char *) &pressureMax, sizeof(pressureMax));
+                sConfigData.pressureMax = pressureMax;
+                flag = flag | (1 << 1);
+                bPressureMaxSet = false;
+           // }
+            sConfigData.flag = flag;
+            fs.offset = NVS_PARTITION_OFFSET + 16384;
+            //writeJsonToFlash(&fs, 0, 0, (char *) &sConfigData, sizeof(_sConfigData));
+            int rc= nvs_write(&fs, 0, (char *)&sConfigData, sizeof(_sConfigData));
+            printk("Size of written buf:%d\n",rc);
+            k_msleep(1000);
+            rc = nvs_read(&fs, 0, (char *)&sConfigData, sizeof(_sConfigData));
+            //readJsonToFlash(&fs, 0, 0, (char *) &sConfigData, sizeof(_sConfigData));
+            printk("\n\rPressureZero: %d\n", sConfigData.pressureZero);
+            printk("\n\rPressureMax: %d\n", sConfigData.pressureMax);
+            printk("\n\rFlag: %d\n", sConfigData.flag);
+            fs.offset = NVS_PARTITION_OFFSET;
+        }
+        
         
         if (GetTimeUpdateStatus())
         {
@@ -295,7 +372,7 @@ int main(void)
             diagnostic_data = diagnostic_data & SENSOR_STATUS_OK;
 
         }
-        else if(unPressureRaw > 100) //
+        else if(unPressureRaw > 100 && unPressureRaw < 1023) //
         {
             memset(cbuffer, '\0',sizeof(cbuffer));
             unPressureResult = 0;
@@ -303,10 +380,16 @@ int main(void)
             AddItemtoJsonObject(&pMainObject, STRING, "Pressure", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer));
             diagnostic_data = diagnostic_data & SENSOR_STATUS_OK;  
         }
-        else
+        else if(unPressureRaw < 100 || unPressureRaw > 1023)
         {
             diagnostic_data = diagnostic_data | SENSOR_DIAGNOSTICS;
         }
+        else
+        {
+            // NO OP
+        }
+
+       
 
         AddItemtoJsonObject(&pMainObject, NUMBER, "DIAG", &diagnostic_data, sizeof(uint32_t));
         //cJsonBuffer = malloc(150 * sizeof(uint8_t));
@@ -314,8 +397,34 @@ int main(void)
         pucAdvertisingdata[2] = PRESSURE_SENSOR;
         pucAdvertisingdata[3] = (uint8_t)strlen(cJsonBuffer);
         memcpy(&pucAdvertisingdata[4], cJsonBuffer, strlen(cJsonBuffer));
+        if(!IsConnected())              //save to flash only if Mobile Phone is NOT connected
+        {
+            memset(buf, '\0', sizeof(buf));
+            writeJsonToFlash(&fs, data_count, count_max, cJsonBuffer, strlen(cJsonBuffer));
+            k_msleep(50);
+            if (readJsonToFlash(&fs, data_count, count_max, buf, strlen(cJsonBuffer)))
+            {
+                printk("\nId: %d, Stored_Data: %s\n",STRING_ID + data_count, buf);
+
+            }
+                data_count++; 
+
+            if(data_count>= count_max || GetCharaStatus() == true ) 
+            {
+
+                deleteFlash(&fs,data_count,count_max);       
+                k_msleep(10);
+                data_count=0;
+            }
+        } 
         
         printk("JSON:\n%s\n", cJsonBuffer);
+
+        if(IshistoryNotificationenabled())
+        {
+            VisenseHistoryDataNotify((uint16_t)strlen(cJsonBuffer));
+            data_count = 0; 
+        }
 
         if(IsNotificationenabled())
         {
@@ -336,7 +445,7 @@ int main(void)
         cJSON_Delete(pMainObject);
         cJSON_free(cJsonBuffer);
         
-        k_sleep(K_MSEC(1000));
+        //k_sleep(K_MSEC(1000));
         printk("PressureZero: %d\n", pressureZero);
         printk("PressureMax: %d\n", pressureMax);
 
