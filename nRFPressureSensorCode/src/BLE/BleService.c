@@ -100,7 +100,7 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 		//printk("pzero:%lld\n\r",ucbuff);
 	}
 
-	if (ParseRxData(ucConfigData2, "TimeStamp", len, &ucbuff))
+	if (ParseRxData(ucConfigData2, "TS", len, &ucbuff))
 	{
 		if (len)
 		{
@@ -223,7 +223,7 @@ void VisenseHistoryDataNotify(uint16_t len)                                     
 	char unLen[ADV_BUFF_SIZE];
 	int nRetVal = 0;
 
-	for (ucIdx = 1 ; ucIdx < 80; ucIdx++)
+	for (ucIdx = 1 ; ucIdx < 50; ucIdx++)
 	{	
 		memset(unLen, 0, ADV_BUFF_SIZE);
 		int rc = readJsonToFlash(FileSys, ucIdx, 0, unLen, len);
@@ -251,7 +251,7 @@ void VisenseHistoryDataNotify(uint16_t len)                                     
 		
 	}
 	hNotificationEnabled = false;     //history callback set 
-	deleteFlash(FileSys,0,80);
+	deleteFlash(FileSys,0,50);
 	printk("Flash Cleared");
 	return bRetVal;
 }

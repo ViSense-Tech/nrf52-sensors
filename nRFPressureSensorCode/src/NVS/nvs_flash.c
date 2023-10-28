@@ -30,7 +30,7 @@ int nvs_initialisation( struct nvs_fs *fs)
 		return 0;
 	}
 	fs->sector_size = info.size;
-	fs->sector_count = 3U;
+	fs->sector_count = 7U;
 
 	rc = nvs_mount(fs);
 	if (rc) {
@@ -44,7 +44,7 @@ int nvs_initialisation( struct nvs_fs *fs)
 
 int writeJsonToFlash(struct nvs_fs *fs, uint16_t data_count,uint16_t count_max, char *data, uint8_t len)
 {
-	char writebuf[100]; 
+	char writebuf[180]; 
 	strcpy(writebuf, data);
 
 	int rc= nvs_write(fs, (STRING_ID + data_count), writebuf, len);
@@ -61,7 +61,7 @@ int readJsonToFlash(struct nvs_fs *fs, uint16_t data_count,uint16_t count_max, c
 	int rc;
 
 	rc= nvs_read(fs, (STRING_ID + data_count), buf, len);
-
+	k_msleep(10);
 	printk("Read Count:%d\n",rc);
 	if(rc!=len)
 	{

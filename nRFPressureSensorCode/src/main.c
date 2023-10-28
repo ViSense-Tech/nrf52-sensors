@@ -67,7 +67,7 @@ bool bPressureMaxSet = false;
 uint8_t flag = 0;
 typedef struct __attribute__((packed)) __sConfigData
 {
-    //uint64_t ullLastUpdatedTimeStamp;
+    uint64_t ullLastUpdatedTimeStamp;
     uint32_t pressureZero;
     uint32_t pressureMax;
     uint8_t flag;
@@ -241,20 +241,20 @@ int main(void)
     int nError;
     uint16_t unPressureResult =0;
     uint32_t unPressureRaw = 0;
-    char cbuffer[30] = {0};
+    char cbuffer[50] = {0};
     char *cJsonBuffer= NULL;
     uint8_t *pucAdvertisingdata = NULL;
     cJSON *pMainObject = NULL;
     uint32_t diagnostic_data = 0;
-    uint16_t data_count = 0;  // initialise data counter
-    uint32_t count_max=80;  // max data to be stored
+    uint16_t data_count = 1;  // initialise data counter
+    uint32_t count_max=50;  // max data to be stored
     char buf[ADV_BUFF_SIZE];
     _sConfigData sConfigData = {0};
     
     //cJSON_Hooks *pJsonHook. = NULL; 
     long long llEpochNow = 0;
 
-    InitRtc();
+    
     SetPMState();
     pucAdvertisingdata = GetAdvertisingBuffer();
     InitADC();
@@ -279,69 +279,71 @@ int main(void)
     gpio_pin_configure_dt(&sSleepStatusLED, GPIO_ACTIVE_LOW);
     //cJSON_InitHooks(pJsonHook);   
     GetFileSystem(&fs);
-	fs.offset = NVS_PARTITION_OFFSET+16384;
-	//rc = flash_get_page_info_by_offs(fs.flash_device, fs.offset, &info);
-    readJsonToFlash(&fs, 0, 0, (char *)&sConfigData, sizeof(sConfigData)); 
-   // if(sConfigData.flag)
-   // {
-               printk("\n\rPressureZero: %d\n", sConfigData.pressureZero);
-               printk("\n\rPressureMax: %d\n", sConfigData.pressureMax);
-               printk("\n\rFlag: %d\n", sConfigData.flag);
 
-        if (sConfigData.flag & (1 << 0))
-        {
-            pressureZero = sConfigData.pressureZero;
-        }
-        if (sConfigData.flag & (1 << 1))
-        {
-            pressureMax = sConfigData.pressureMax;
-        }
-        fs.offset = NVS_PARTITION_OFFSET;
-   // }
+	fs.offset = NVS_PARTITION_OFFSET;
+    k_msleep(100);
+    int rc = readJsonToFlash(&fs, 0, 0, (char *)&sConfigData, sizeof(sConfigData)); 
+    if((rc==sizeof(sConfigData)) || (sConfigData.flag & (1 << 0)))
+    {
+        printk("\n\rPressureZero: %d\n", sConfigData.pressureZero);
+        printk("\n\rPressureMax: %d\n", sConfigData.pressureMax);
+        printk("\n\rFlag: %d\n", sConfigData.flag);
+        pressureZero = sConfigData.pressureZero;       
+        pressureMax = sConfigData.pressureMax;
+    
+    }
+    else
+    {
+        printk("\n\rError occured while reading config data: %d\n", rc);
+        //return 0;
+    }
+    
+    if(rc == sizeof(sConfigData) || sConfigData.flag & (1<<4))
+    {
+        diagnostic_data = diagnostic_data & (~(1<<4));   
+    }
+    else
+    {
+        diagnostic_data = diagnostic_data | (1<<4);
+    }
+
+    fs.offset = NVS_PARTITION_OFFSET + 4096;
+
 
     while (1) 
     {
         if (bPressureZeroSet && bPressureMaxSet)
         {
-           // if (bPressureZeroSet)
-           // {
-                
-
-               // writeJsonToFlash(&fs, 0, 0, (char *) &pressureZero, sizeof(pressureZero));
-               sConfigData.pressureZero = pressureZero;
-               printk("\n\rPreero: %d\n", sConfigData.pressureZero);
-               
-                flag = flag | (1 << 0);
-                bPressureZeroSet = false;
-            //}
-           // if (bPressureMaxSet)
-          //  {
-                //writeJsonToFlash(&fs, 91, 0, (char *) &pressureMax, sizeof(pressureMax));
-                sConfigData.pressureMax = pressureMax;
-                flag = flag | (1 << 1);
-                bPressureMaxSet = false;
-           // }
+           
+            sConfigData.pressureZero = pressureZero;
+            sConfigData.pressureMax = pressureMax;
+            
+            bPressureZeroSet = false;
+            bPressureMaxSet = false;
+            flag = flag | (1 << 0);
             sConfigData.flag = flag;
-            fs.offset = NVS_PARTITION_OFFSET + 16384;
-            //writeJsonToFlash(&fs, 0, 0, (char *) &sConfigData, sizeof(_sConfigData));
+            fs.offset = NVS_PARTITION_OFFSET;
             int rc= nvs_write(&fs, 0, (char *)&sConfigData, sizeof(_sConfigData));
             printk("Size of written buf:%d\n",rc);
             k_msleep(1000);
             rc = nvs_read(&fs, 0, (char *)&sConfigData, sizeof(_sConfigData));
-            //readJsonToFlash(&fs, 0, 0, (char *) &sConfigData, sizeof(_sConfigData));
-            printk("\n\rPressureZero: %d\n", sConfigData.pressureZero);
-            printk("\n\rPressureMax: %d\n", sConfigData.pressureMax);
-            printk("\n\rFlag: %d\n", sConfigData.flag);
-            fs.offset = NVS_PARTITION_OFFSET;
+
+            fs.offset = NVS_PARTITION_OFFSET + 4096;
         }
-        
         
         if (GetTimeUpdateStatus())
         {
             InitRtc();
-            SetTimeUpdateStatus(false);
+            SetTimeUpdateStatus(false); 
+            fs.offset = NVS_PARTITION_OFFSET;
+            sConfigData.flag = sConfigData.flag | (1 << 4);
+            int rc= nvs_write(&fs, 0, (char *)&sConfigData, sizeof(_sConfigData));
+            fs.offset = NVS_PARTITION_OFFSET + 4096;
+            diagnostic_data = diagnostic_data & (~(1<<4));
             printk("Time updated\n");
         }
+        
+
 
         if (GetCurrenTimeInEpoch(&llEpochNow))
         {
@@ -397,8 +399,10 @@ int main(void)
         pucAdvertisingdata[2] = PRESSURE_SENSOR;
         pucAdvertisingdata[3] = (uint8_t)strlen(cJsonBuffer);
         memcpy(&pucAdvertisingdata[4], cJsonBuffer, strlen(cJsonBuffer));
+        //printk("JSON:\n%s\n", cJsonBuffer);
         if(!IsConnected())              //save to flash only if Mobile Phone is NOT connected
         {
+            fs.offset = NVS_PARTITION_OFFSET + 4096;
             memset(buf, '\0', sizeof(buf));
             writeJsonToFlash(&fs, data_count, count_max, cJsonBuffer, strlen(cJsonBuffer));
             k_msleep(50);
@@ -416,6 +420,7 @@ int main(void)
                 k_msleep(10);
                 data_count=0;
             }
+            fs.offset = NVS_PARTITION_OFFSET;
         } 
         
         printk("JSON:\n%s\n", cJsonBuffer);
