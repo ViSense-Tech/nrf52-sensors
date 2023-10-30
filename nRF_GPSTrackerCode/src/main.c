@@ -29,11 +29,13 @@ int main(void)
 {
 	char pcLocation[100];
 	int Ret = 0;
+	int mSog = 3;
 	float fLatitude = 0.00;
 	float fLongitude = 0.00;
 	float fSOG = 0.00;
 	long long TimeNow = 0;
 	char cLCDMessage[50] = {0};
+	char cLCDWarning[50] = {0};
 	uint8_t ucIdx = 0;
 	_sAcclData sAcclData = {0};
 	uint8_t *pucAdvBuffer = NULL;
@@ -96,13 +98,13 @@ int main(void)
 					sprintf(cLCDMessage, "Lon:%f", fLongitude);
 					WriteStringToLCD(cLCDMessage);
 					k_sleep(K_MSEC(100));
-					AddItemtoJsonObject(&pMainObject, NUMBER, "Latitude", &fLatitude, sizeof(float));
-                	AddItemtoJsonObject(&pMainObject, NUMBER, "Longitude", &fLongitude, sizeof(float));
+					// AddItemtoJsonObject(&pMainObject, NUMBER, "Latitude", &fLatitude, sizeof(float));
+                	// AddItemtoJsonObject(&pMainObject, NUMBER, "Longitude", &fLongitude, sizeof(float));
 				}
 			}
 			else
 			{
-				printk("GPS module Waiting to get fix..\n\r");
+				printk("GPS module Waiting to get fix...\n\r");
 			}
 		}
 
@@ -119,6 +121,15 @@ int main(void)
 				WriteStringToLCD(cLCDMessage);
 				k_sleep(K_MSEC(200));
 				AddItemtoJsonObject(&pMainObject, NUMBER, "SOG", &fSOG, sizeof(float));
+				if (fSOG>mSog)
+				{
+					printk("WARNING-SOG: %f\n\r", fSOG);
+					WriteLCDCmd(0x01); //Clear
+					SetLCDCursor(0, 1);
+					sprintf(cLCDWarning, "SOG:%f", fSOG);
+					WriteStringToLCD(cLCDWarning);
+					k_sleep(K_MSEC(200));
+				}
 			}
 		}
 
