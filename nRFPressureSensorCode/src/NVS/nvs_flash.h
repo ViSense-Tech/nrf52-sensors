@@ -9,8 +9,7 @@
 #define NVS_PARTITION_DEVICE	FIXED_PARTITION_DEVICE(NVS_PARTITION)
 #define NVS_PARTITION_OFFSET	FIXED_PARTITION_OFFSET(NVS_PARTITION)
 
-/* 1000 msec = 1 sec */
-#define SLEEP_TIME      100
+
 /* file system for storing Config data */
 #define CONFIG_DATA_FS 1
 /* File system for storing JSON payload */
@@ -22,7 +21,8 @@
 
 typedef struct __attribute__((packed)) __sConfigData
 {
-    uint64_t ullLastUpdatedTimeStamp;
+    long long lastUpdatedTime;
+    uint32_t sleepTime;
     uint32_t pressureZero;
     uint32_t pressureMax;
     uint8_t flag;

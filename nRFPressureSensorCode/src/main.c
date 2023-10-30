@@ -36,12 +36,17 @@
 #define ADC_MAX_VALUE 1023
 #define PRESSURE_SENSOR 0x01
 #define PRESSURE_SAMPLE_COUNT 10
+#define CONFIG_DATA_SIZE 80
 
 // diagnostics
 #define SENSOR_DIAGNOSTICS (1<<0)
 #define SENSOR_STATUS_OK    ~(1<<0)
 #define TIME_STAMP_ERROR   (1<<1)
 #define TIME_STAMP_OK      ~(1<<1)
+
+#define ALIVE_TIME         10 //Time the device will be active after a sleep time(in seconds)
+#define SLEEP_TIME         30
+#define TICK_RATE          32768
 
 /*******************************TYPEDEFS****************************************/
 
@@ -65,7 +70,9 @@ void setPressureZero(uint32_t ucbuff);
 void setPressureMax(uint32_t ucbuff);
 bool bPressureZeroSet = false;
 bool bPressureMaxSet = false;
+bool bSleepTimeSet = false;
 uint8_t flag = 0;
+uint32_t uSleepTime = SLEEP_TIME; 
 
 
 _sConfigData sConfigData = {0};
@@ -92,6 +99,16 @@ uint16_t AnalogRead(void)
     return sample_value;
 }
 /**
+ * @brief Setting Sleep time
+ * @param ucbuffer - buffer for setting sleep time
+ * @return void
+*/
+void SetSleepTime(uint32_t ucbuffer)
+{
+    uSleepTime = ucbuffer;
+    bSleepTimeSet = true;
+}
+/**
  * @brief Setting pressureZero
  * @param ucbuffer - buffer for setting pressureZero
  * @return void
@@ -100,9 +117,6 @@ void SetPressureZero(uint32_t ucbuffer)
 {
     pressureZero = ucbuffer;
     bPressureZeroSet = true;
-
-
-    // writeJsonToFlash(&fs, 82, 0, (char *) &pressureZero, sizeof(pressureZero));
 }
 /**
  * @brief Setting pressureMax
@@ -113,7 +127,6 @@ void SetPressureMax(uint32_t ucbuffer)
 {
     pressureMax = ucbuffer;
     bPressureMaxSet = true;
-    // writeJsonToFlash(&fs, 83, 0, (char *) &pressureMax, sizeof(pressureMax));
 }
 
 /*
@@ -142,7 +155,7 @@ static bool SetPMState()
  * @param nDuration - Duration for sleep
  * @return none
 */
-static void EnterSleepMode(int nDuration)
+static void EnterSleepMode(uint32_t nDuration)
 {
     pm_device_action_run(pAdc, PM_DEVICE_ACTION_SUSPEND);
     BleStopAdvertise();
@@ -252,8 +265,11 @@ int main(void)
     uint32_t unPressureRaw = 0;
     char cbuffer[50] = {0};
     char *cJsonBuffer= NULL;
+    char *cJsonConfigBuffer = NULL;
     uint8_t *pucAdvertisingdata = NULL;
+    uint8_t pucConfigdata[CONFIG_DATA_SIZE] = {0};
     cJSON *pMainObject = NULL;
+    cJSON *pConfigObject = NULL;
     uint32_t diagnostic_data = 0;
     uint16_t data_count = 1;  // initialise data counter
     uint32_t count_max=50;  // max data to be stored
@@ -300,27 +316,42 @@ int main(void)
         printk("\n\rError occured while reading config data: %d\n", rc);
         diagnostic_data = diagnostic_data | (1<<4);
     }
-    else if(sConfigData.flag & (1 << 0))
+    else
     {
         pressureZero = sConfigData.pressureZero;       
         pressureMax = sConfigData.pressureMax;
+        uSleepTime = sConfigData.sleepTime;
+        printk("PressureZero = %d, PressureMax = %d\n", pressureZero, pressureMax);
     }
 
     while (1) 
     {
-        if (bPressureZeroSet && bPressureMaxSet)
+        #ifdef SLEEP_ENABLE
+        Timenow = sys_clock_tick_get();
+
+        while(sys_clock_tick_get() - Timenow < (ALIVE_TIME * TICK_RATE))
+        {
+        #endif    
+        if (bPressureZeroSet && bPressureMaxSet && bSleepTimeSet)
         {
            
             sConfigData.pressureZero = pressureZero;
             sConfigData.pressureMax = pressureMax;
+            sConfigData.sleepTime = uSleepTime;
+            printk("PressureZero = %d, PressureMax = %d\n", pressureZero, pressureMax);
             
             bPressureZeroSet = false;
             bPressureMaxSet = false;
+            bSleepTimeSet = false;
+
             flag = flag | (1 << 0);
             sConfigData.flag = flag;
+
             int ReturnCode = nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
             printk("Size of written buf:%d\n",ReturnCode);
+
             k_msleep(1000);
+
             rc = nvs_read(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
             printk("Size of read buf:%d\n",ReturnCode);
         }
@@ -334,7 +365,15 @@ int main(void)
             diagnostic_data = diagnostic_data & (~(1<<4));
             printk("Time updated\n");
         }
-        
+        pConfigObject = cJSON_CreateObject();
+        AddItemtoJsonObject(&pConfigObject, NUMBER, "PressureZero", &pressureZero, sizeof(uint32_t));
+        AddItemtoJsonObject(&pConfigObject, NUMBER, "PressureMax", &pressureMax, sizeof(uint32_t));
+        AddItemtoJsonObject(&pConfigObject, NUMBER, "sleeptime", &uSleepTime, sizeof(uint32_t));
+
+        cJsonConfigBuffer = cJSON_Print(pConfigObject);
+        memcpy(pucConfigdata, cJsonConfigBuffer, strlen(cJsonConfigBuffer));
+        printk("ConfigJSON:\n%s\n", pucConfigdata);
+
 
 
         if (GetCurrenTimeInEpoch(&llEpochNow))
@@ -353,8 +392,8 @@ int main(void)
         }
         pMainObject = cJSON_CreateObject();
         AddItemtoJsonObject(&pMainObject, NUMBER, "ADCValue", &unPressureRaw, sizeof(uint16_t));
-        AddItemtoJsonObject(&pMainObject, NUMBER, "PressureZero", &pressureZero, sizeof(uint32_t));
-        AddItemtoJsonObject(&pMainObject, NUMBER, "PressureMax", &pressureMax, sizeof(uint32_t));
+//      AddItemtoJsonObject(&pMainObject, NUMBER, "PressureZero", &pressureZero, sizeof(uint32_t));
+//      AddItemtoJsonObject(&pMainObject, NUMBER, "PressureMax", &pressureMax, sizeof(uint32_t));
         AddItemtoJsonObject(&pMainObject, NUMBER, "TS", &llEpochNow, sizeof(long long));
         if (unPressureRaw > pressureZero && unPressureRaw < ADC_MAX_VALUE)
         {
@@ -416,6 +455,12 @@ int main(void)
         
         printk("JSON:\n%s\n", cJsonBuffer);
 
+        if (IsConfigNotifyEnabled())
+        {
+
+            VisenseConfigDataNotify(cJsonConfigBuffer, (uint16_t)strlen(cJsonConfigBuffer));
+        }
+        
         if(IshistoryNotificationenabled())
         {
             VisenseHistoryDataNotify((uint16_t)strlen(cJsonBuffer));
@@ -440,7 +485,6 @@ int main(void)
             // count++;
             printk("\n\rError occured while reading config data: %d\n", rc);
             diagnostic_data = diagnostic_data | (1<<4);
-            k_sleep(K_SECONDS(30));
             // if(count > 1)
             // {
             //     //deleteFlash(&fs, 0, 0);
@@ -452,15 +496,24 @@ int main(void)
         memset(pucAdvertisingdata, 0, ADV_BUFF_SIZE);
 
         cJSON_Delete(pMainObject);
+        cJSON_Delete(pConfigObject);
         cJSON_free(cJsonBuffer);
+
         
         //k_sleep(K_MSEC(1000));
         printk("PressureZero: %d\n", pressureZero);
         printk("PressureMax: %d\n", pressureMax);
 
+            #ifndef SLEEP_ENABLE 
+            k_sleep(K_MSEC(1000));
+            #endif
+        #ifdef SLEEP_ENABLE
+        }
+        #endif
+
         #ifdef SLEEP_ENABLE
          k_sleep(K_SECONDS(300));
-         EnterSleepMode(3600);
+         EnterSleepMode(uSleepTime);
          ExitSleepMode();
         #endif
     }

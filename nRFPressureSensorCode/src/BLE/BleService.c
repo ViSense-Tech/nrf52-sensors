@@ -37,6 +37,7 @@ static bool bConnected = false;
 struct bt_conn *psConnHandle = NULL;
 static bool hNotificationEnabled = false;
 struct nvs_fs *FileSys;
+static bool bConfigNotifyEnabled = false;
 
 
 extern void SetPressureZero(uint32_t *ucbuffer);
@@ -90,14 +91,13 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 		if (len)
 		{
 			SetPressureZero(ucbuff);
-		}//printk("pzero:%lld\n\r",ucbuff);
+		}
 	}
 
 	if (ParseRxData(ucConfigData2, "PressureMax", len, &ucbuff))
 	{
 		if (len)
 	 	SetPressureMax(ucbuff);
-		//printk("pzero:%lld\n\r",ucbuff);
 	}
 
 	if (ParseRxData(ucConfigData2, "TS", len, &ucbuff))
@@ -106,6 +106,14 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 		{
 			SetRtcTime(ucbuff);
 			printk("time:%lld\n\r",ucbuff);
+		}
+	}
+	if(ParseRxData(ucConfigData2, "Sleep", len, &ucbuff))
+	{
+		if(len)
+		{
+			SetSleepTime(ucbuff);
+			printk("sleep:%d\n\r",ucbuff);
 		}
 	}
 	return len;
@@ -142,6 +150,20 @@ void BleHistoryDataNotify(const struct bt_gatt_attr *attr, uint16_t value)
     }
     
 }
+/**
+ * @brief Notification callback for configuration
+ * @param attr - pointer to GATT attributes
+ * @param value - Client Characteristic Configuration Values
+ * @return None
+*/
+void BleConfigDataNotify(const struct bt_gatt_attr *attr, uint16_t value)
+{
+	if (value == BT_GATT_CCC_NOTIFY)
+	{
+		bConfigNotifyEnabled = true;
+	}
+	
+}
 
 /* VSENCE SERVICE DEFINITION*/
 /**
@@ -156,10 +178,10 @@ BT_GATT_SERVICE_DEFINE(VisenseService,
                 CharaRead, CharaWrite, ucSensorData),
 	BT_GATT_CCC(BleSensorDataNotify, BT_GATT_PERM_READ | BT_GATT_PERM_WRITE),
 	BT_GATT_CHARACTERISTIC(&sConfigChara.uuid,
-						BT_GATT_CHRC_READ | BT_GATT_CHRC_WRITE,
+					BT_GATT_CHRC_NOTIFY | BT_GATT_CHRC_WRITE,
 						BT_GATT_PERM_READ | BT_GATT_PERM_WRITE,
 						CharaRead,CharaWrite,ucConfigData2),
-   BT_GATT_CCC(NULL, BT_GATT_PERM_READ | BT_GATT_PERM_WRITE),
+   BT_GATT_CCC(BleConfigDataNotify, BT_GATT_PERM_READ | BT_GATT_PERM_WRITE),
    BT_GATT_CHARACTERISTIC(&sHistoryChara.uuid,
                 BT_GATT_CHRC_NOTIFY ,
                 BT_GATT_PERM_READ | BT_GATT_PERM_WRITE,
@@ -196,6 +218,22 @@ BT_CONN_CB_DEFINE(conn_callbacks) = {
 	.connected = connected,
 	.disconnected = disconnected,
 };
+/**
+ * @brief Sending Config data as notification
+ * @param pucConfigData - Data to notify
+ * @param unLen - Length of data to notify
+ * @return 0 in case of success or negative value in case of error
+*/
+int VisenseConfigDataNotify(uint8_t *pucCongigData, uint16_t unLen)
+{
+	int RetVal = 0;
+	if(pucCongigData)
+	{
+		RetVal = bt_gatt_notify(NULL, &VisenseService.attrs[5],
+								pucCongigData, unLen);
+	}
+	return RetVal;
+}
 
 /**
  * @brief Sending sensor data as notification
@@ -270,6 +308,10 @@ bool IsNotificationenabled()
     return bNotificationEnabled;
 }
 
+bool IsConfigNotifyEnabled()
+{
+	return bConfigNotifyEnabled;
+}
 /**
  * @brief Check if the device connected
  * @param None
