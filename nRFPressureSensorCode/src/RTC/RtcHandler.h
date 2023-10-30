@@ -16,7 +16,6 @@
 #include <zephyr/drivers/i2c.h>
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/devicetree.h>
-// #include <zephyr/drivers/rtc/maxim_ds3231.h>
 
 /***************************************MACROS**********************************/
 

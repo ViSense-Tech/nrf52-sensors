@@ -189,11 +189,19 @@ BT_GATT_SERVICE_DEFINE(VisenseService,
    BT_GATT_CCC(BleHistoryDataNotify, BT_GATT_PERM_READ | BT_GATT_PERM_WRITE)
 );
 
+/**
+ * @brief Set file pointer
+ * @param fs : file pointer structure
+ * @return None
+*/
 void SetFileSystem(struct nvs_fs *fs)
 {
 	FileSys = fs;
 }
 
+/**
+ * @brief Connect callabcak
+*/
 static void connected(struct bt_conn *conn, uint8_t err)
 {
 
@@ -208,12 +216,18 @@ static void connected(struct bt_conn *conn, uint8_t err)
 	}
 }
 
+/**
+ * @brief Disconnect callback
+*/
 static void disconnected(struct bt_conn *conn, uint8_t reason)
 {
 	bConnected = false;
 	printk("Disconnected (reason 0x%02x)\n", reason);
 }
 
+/**
+ * @note Callback definitions for connection
+*/
 BT_CONN_CB_DEFINE(conn_callbacks) = {
 	.connected = connected,
 	.disconnected = disconnected,
@@ -254,6 +268,11 @@ int VisenseSensordataNotify(uint8_t *pucSensorData, uint16_t unLen)
 	return nRetVal;
 }
 
+/**
+ * @brief 	History data notification 
+ * @param 	len : length of data
+ * @return 	None
+*/
 void VisenseHistoryDataNotify(uint16_t len)                                        //history
 {
 	bool bRetVal = false;
@@ -270,10 +289,7 @@ void VisenseHistoryDataNotify(uint16_t len)                                     
 		{
 			break;
 		}
-		
-		  
-		
-
+	
 		k_msleep(1000);
 
 		if (unLen > 0)
@@ -294,10 +310,17 @@ void VisenseHistoryDataNotify(uint16_t len)                                     
 	printk("Flash Cleared");
 	return bRetVal;
 }
+
+/**
+ * @brief Check if history notification is enabled
+ * @param None
+ * @return notification status
+*/
 bool IshistoryNotificationenabled()
 {
     return hNotificationEnabled;
 }
+
 /**
  * @brief Check if notification is enabled
  * @param None
