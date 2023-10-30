@@ -167,7 +167,7 @@ BT_GATT_SERVICE_DEFINE(VisenseService,
    BT_GATT_CCC(BleHistoryDataNotify, BT_GATT_PERM_READ | BT_GATT_PERM_WRITE)
 );
 
-void GetFileSystem(struct nvs_fs *fs)
+void SetFileSystem(struct nvs_fs *fs)
 {
 	FileSys = fs;
 }
@@ -251,7 +251,8 @@ void VisenseHistoryDataNotify(uint16_t len)                                     
 		
 	}
 	hNotificationEnabled = false;     //history callback set 
-	deleteFlash(FileSys,0,50);
+	//nvs_clear(FileSys);
+	 deleteFlash(FileSys,1,50);
 	printk("Flash Cleared");
 	return bRetVal;
 }

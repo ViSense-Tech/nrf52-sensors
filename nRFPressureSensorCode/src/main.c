@@ -22,6 +22,7 @@
 #include <nrfx_log.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <zephyr/sys/reboot.h>
 #include "BleHandler.h"
 #include "BleService.h"
 #include "JsonHandler.h"
@@ -65,16 +66,12 @@ void setPressureMax(uint32_t ucbuff);
 bool bPressureZeroSet = false;
 bool bPressureMaxSet = false;
 uint8_t flag = 0;
-typedef struct __attribute__((packed)) __sConfigData
-{
-    uint64_t ullLastUpdatedTimeStamp;
-    uint32_t pressureZero;
-    uint32_t pressureMax;
-    uint8_t flag;
-}_sConfigData;
 
+
+_sConfigData sConfigData = {0};
 
 struct nvs_fs fs;    //file system
+struct nvs_fs sConfigFs;
 /*******************************FUNCTION DEFINITIONS********************************/
 
 /**
@@ -103,6 +100,8 @@ void SetPressureZero(uint32_t ucbuffer)
 {
     pressureZero = ucbuffer;
     bPressureZeroSet = true;
+
+
     // writeJsonToFlash(&fs, 82, 0, (char *) &pressureZero, sizeof(pressureZero));
 }
 /**
@@ -149,6 +148,7 @@ static void EnterSleepMode(int nDuration)
     BleStopAdvertise();
     gpio_pin_set(sSleepStatusLED.port, sSleepStatusLED.pin, 1);
     k_sleep(K_SECONDS(nDuration));
+
 }
 
 /**
@@ -221,7 +221,13 @@ bool GetPressureReading(uint16_t *unPressureResult, uint32_t *unPressureRaw)
     }
     if (count == 0)
     {
-        *unPressureRaw = unAdcSample; 
+        if (unAdcSample > 1023)
+        {
+            *unPressureRaw = 0; 
+        }
+        else
+            *unPressureRaw = unAdcSample;
+        
         return false;
     }
     else
@@ -232,6 +238,8 @@ bool GetPressureReading(uint16_t *unPressureResult, uint32_t *unPressureRaw)
     }
 }
 
+
+
 /**
  * @brief  Main function
  * @return int
@@ -239,6 +247,7 @@ bool GetPressureReading(uint16_t *unPressureResult, uint32_t *unPressureRaw)
 int main(void)
 {
     int nError;
+    // int count = 0;
     uint16_t unPressureResult =0;
     uint32_t unPressureRaw = 0;
     char cbuffer[50] = {0};
@@ -249,7 +258,8 @@ int main(void)
     uint16_t data_count = 1;  // initialise data counter
     uint32_t count_max=50;  // max data to be stored
     char buf[ADV_BUFF_SIZE];
-    _sConfigData sConfigData = {0};
+    int rc;
+
     
     //cJSON_Hooks *pJsonHook. = NULL; 
     long long llEpochNow = 0;
@@ -273,42 +283,28 @@ int main(void)
 		printk("Advertising failed to create (err %d)\n", nError);
 		return 0;
 	}
-     nvs_initialisation(&fs); 
+
+    nvs_initialisation(&fs, DATA_FS); 
     sprintf(cbuffer,"%dpsi", unPressureResult);
     StartAdvertising();
     gpio_pin_configure_dt(&sSleepStatusLED, GPIO_ACTIVE_LOW);
     //cJSON_InitHooks(pJsonHook);   
-    GetFileSystem(&fs);
+    SetFileSystem(&fs);
 
-	fs.offset = NVS_PARTITION_OFFSET;
+
+    nvs_initialisation(&sConfigFs, CONFIG_DATA_FS); 
     k_msleep(100);
-    int rc = readJsonToFlash(&fs, 0, 0, (char *)&sConfigData, sizeof(sConfigData)); 
-    if((rc==sizeof(sConfigData)) || (sConfigData.flag & (1 << 0)))
-    {
-        printk("\n\rPressureZero: %d\n", sConfigData.pressureZero);
-        printk("\n\rPressureMax: %d\n", sConfigData.pressureMax);
-        printk("\n\rFlag: %d\n", sConfigData.flag);
-        pressureZero = sConfigData.pressureZero;       
-        pressureMax = sConfigData.pressureMax;
-    
-    }
-    else
+    rc = readJsonToFlash(&sConfigFs, 0, 0, (char *)&sConfigData, sizeof(sConfigData)); 
+    if(rc != sizeof(sConfigData))
     {
         printk("\n\rError occured while reading config data: %d\n", rc);
-        //return 0;
-    }
-    
-    if(rc == sizeof(sConfigData) || sConfigData.flag & (1<<4))
-    {
-        diagnostic_data = diagnostic_data & (~(1<<4));   
-    }
-    else
-    {
         diagnostic_data = diagnostic_data | (1<<4);
     }
-
-    fs.offset = NVS_PARTITION_OFFSET + 4096;
-
+    else if(sConfigData.flag & (1 << 0))
+    {
+        pressureZero = sConfigData.pressureZero;       
+        pressureMax = sConfigData.pressureMax;
+    }
 
     while (1) 
     {
@@ -322,23 +318,19 @@ int main(void)
             bPressureMaxSet = false;
             flag = flag | (1 << 0);
             sConfigData.flag = flag;
-            fs.offset = NVS_PARTITION_OFFSET;
-            int rc= nvs_write(&fs, 0, (char *)&sConfigData, sizeof(_sConfigData));
-            printk("Size of written buf:%d\n",rc);
+            int ReturnCode = nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
+            printk("Size of written buf:%d\n",ReturnCode);
             k_msleep(1000);
-            rc = nvs_read(&fs, 0, (char *)&sConfigData, sizeof(_sConfigData));
-
-            fs.offset = NVS_PARTITION_OFFSET + 4096;
+            rc = nvs_read(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
+            printk("Size of read buf:%d\n",ReturnCode);
         }
         
         if (GetTimeUpdateStatus())
         {
             InitRtc();
             SetTimeUpdateStatus(false); 
-            fs.offset = NVS_PARTITION_OFFSET;
             sConfigData.flag = sConfigData.flag | (1 << 4);
-            int rc= nvs_write(&fs, 0, (char *)&sConfigData, sizeof(_sConfigData));
-            fs.offset = NVS_PARTITION_OFFSET + 4096;
+            int RetCode = nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
             diagnostic_data = diagnostic_data & (~(1<<4));
             printk("Time updated\n");
         }
@@ -399,10 +391,10 @@ int main(void)
         pucAdvertisingdata[2] = PRESSURE_SENSOR;
         pucAdvertisingdata[3] = (uint8_t)strlen(cJsonBuffer);
         memcpy(&pucAdvertisingdata[4], cJsonBuffer, strlen(cJsonBuffer));
-        //printk("JSON:\n%s\n", cJsonBuffer);
+
         if(!IsConnected())              //save to flash only if Mobile Phone is NOT connected
         {
-            fs.offset = NVS_PARTITION_OFFSET + 4096;
+
             memset(buf, '\0', sizeof(buf));
             writeJsonToFlash(&fs, data_count, count_max, cJsonBuffer, strlen(cJsonBuffer));
             k_msleep(50);
@@ -416,11 +408,10 @@ int main(void)
             if(data_count>= count_max || GetCharaStatus() == true ) 
             {
 
-                deleteFlash(&fs,data_count,count_max);       
+                deleteFlash(&fs,data_count,count_max);    
                 k_msleep(10);
                 data_count=0;
             }
-            fs.offset = NVS_PARTITION_OFFSET;
         } 
         
         printk("JSON:\n%s\n", cJsonBuffer);
@@ -444,6 +435,19 @@ int main(void)
         {
             //NO OP
         }
+        if (rc != sizeof(sConfigData))
+        {
+            // count++;
+            printk("\n\rError occured while reading config data: %d\n", rc);
+            diagnostic_data = diagnostic_data | (1<<4);
+            k_sleep(K_SECONDS(30));
+            // if(count > 1)
+            // {
+            //     //deleteFlash(&fs, 0, 0);
+            //     sys_reboot(0);
+            // }
+        }
+        
         
         memset(pucAdvertisingdata, 0, ADV_BUFF_SIZE);
 

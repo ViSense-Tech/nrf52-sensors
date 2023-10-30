@@ -5,7 +5,7 @@
 
 
 
-int nvs_initialisation( struct nvs_fs *fs)
+int nvs_initialisation( struct nvs_fs *fs, uint8_t selector)
 {
     int rc = 0;
 
@@ -13,24 +13,37 @@ int nvs_initialisation( struct nvs_fs *fs)
 	uint32_t counter = 0U, counter_his;
 	struct flash_pages_info info;
 
-	/* 
-	 *	sector_size equal to the pagesize,
-	 *	3 sectors
-	 *	starting at NVS_PARTITION_OFFSET
-	 */
 	fs->flash_device = NVS_PARTITION_DEVICE;
 	if (!device_is_ready(fs->flash_device)) {
 		printk("Flash device %s is not ready\n", fs->flash_device->name);
 		return 0;
 	}
-	fs->offset = NVS_PARTITION_OFFSET;
-	rc = flash_get_page_info_by_offs(fs->flash_device, fs->offset, &info);
-	if (rc) {
-		printk("Unable to get page info\n");
-		return 0;
+
+	if (selector == 0) // data
+	{
+		fs->offset = NVS_PARTITION_OFFSET + 8192;
+		rc = flash_get_page_info_by_offs(fs->flash_device, fs->offset, &info);
+		if (rc) 
+		{
+			printk("Unable to get page info\n");
+			return 0;
+		}
+		fs->sector_size = info.size;
+		fs->sector_count = 4U;
 	}
-	fs->sector_size = info.size;
-	fs->sector_count = 7U;
+	
+	if (selector == 1) // config data
+	{
+		fs->offset = NVS_PARTITION_OFFSET;
+		rc = flash_get_page_info_by_offs(fs->flash_device, fs->offset, &info);
+		if (rc) 
+		{
+			printk("Unable to get page info\n");
+			return 0;
+		}
+		fs->sector_size = info.size;
+		fs->sector_count = 2U;
+	}
 
 	rc = nvs_mount(fs);
 	if (rc) {
@@ -74,12 +87,16 @@ int readJsonToFlash(struct nvs_fs *fs, uint16_t data_count,uint16_t count_max, c
 
 int deleteFlash(struct nvs_fs *fs, uint16_t data_count,uint16_t count_max)
 {
-	for(int i=0;i<count_max; i++)                        // read print and delete 10 values
-	{
-		nvs_delete(fs, STRING_ID+i); 
-		printk("Deleting[%d]",i);
-	}
-	 printk("Deleted all..");
+
+	// for(int i=1;i<count_max; i++)                        // read print and delete 10 values
+	// {
+	// 	nvs_delete(fs, STRING_ID+i); 
+	// 	printk("Deleting[%d]",i);
+	// }
+	nvs_clear(fs);
+	//nvs_mount(fs);
+	nvs_initialisation(fs,0); //deleting data
+	printk("Deleted all..");
 
 }
 
@@ -90,4 +107,6 @@ int freeSpaceCalc(struct nvs_fs *fs, uint16_t data_count,uint16_t count_max)
 	printk("\n free space %d ", free_space);
 	return free_space;
 }
+
+
 

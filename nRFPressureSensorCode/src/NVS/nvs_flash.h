@@ -2,6 +2,7 @@
 #include <zephyr/storage/flash_map.h>
 #include <zephyr/fs/nvs.h>
 #include <string.h>
+#include <zephyr/sys/reboot.h>
 //#include "BleService.h" 
 
 #define NVS_PARTITION		storage_partition
@@ -10,16 +11,25 @@
 
 /* 1000 msec = 1 sec */
 #define SLEEP_TIME      100
-/* maximum reboot counts, make high enough to trigger sector change (buffer */
-/* rotation). */
+/* file system for storing Config data */
+#define CONFIG_DATA_FS 1
+/* File system for storing JSON payload */
+#define DATA_FS 0
 
 
 #define STRING_ID 0
 // static struct nvs_fs fs;
 
+typedef struct __attribute__((packed)) __sConfigData
+{
+    uint64_t ullLastUpdatedTimeStamp;
+    uint32_t pressureZero;
+    uint32_t pressureMax;
+    uint8_t flag;
+}_sConfigData;
 
  int nvs_logger(char* cjson, int data_count);
-int nvs_initialisation( struct nvs_fs *fs);
+int nvs_initialisation( struct nvs_fs *fs, uint8_t selector);
 int writeJsonToFlash(struct nvs_fs *fs, uint16_t data_count,uint16_t count_max, char *buf, uint8_t len);
 int readJsonToFlash(struct nvs_fs *fs, uint16_t data_count,uint16_t count_max, char *buf, uint8_t len);
 int deleteFlash(struct nvs_fs *fs, uint16_t data_count,uint16_t count_max);
