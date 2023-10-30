@@ -28,4 +28,5 @@
 bool InitRtc();
 bool GetCurrenTimeInEpoch(long long *pllCurrEpoch);
 void SetRtcTime(uint64_t ullTimestamp);
+void SetSleepTime(uint32_t ucbuff);
 #endif

@@ -27,11 +27,11 @@
 #include "nvs_flash.h"
 
 /*******************************MACROS****************************************/
-#define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
+//#define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
 #define ADC_READING_LOWER  0
 #define ADC_READING_UPPER  1024
 #define ALIVE_TIME         10 //Time the device will be active after a sleep time(in seconds)
-#define SLEEP_TIME         30
+#define SLEEP_TIME         10
 #define TICK_RATE          32768
 #define TIME_STAMP_ERROR   (1<<1)
 #define TIME_STAMP_OK      ~(1<<1)
@@ -39,7 +39,7 @@
 /*******************************GLOBAL VARIABLES********************************/
 int  sAdcReadValue1 = 0;
 int  sAdcReadValue2 = 0;
-
+uint32_t uSleepTime = SLEEP_TIME; 
 const int Rx = 10000;
 const float default_TempC = 24.0;
 const long open_resistance = 35000;
@@ -53,6 +53,8 @@ const struct gpio_dt_spec sSensorPwSpec1 = GPIO_DT_SPEC_GET(DT_ALIAS(testpin0), 
 const struct gpio_dt_spec sSensorPwSpec2 = GPIO_DT_SPEC_GET(DT_ALIAS(testpin1), gpios);
 const struct gpio_dt_spec sSleepStatusLED = GPIO_DT_SPEC_GET(DT_ALIAS(led0), gpios);
 const struct device *psUartHandle = DEVICE_DT_GET(DT_NODELABEL(uart0));
+
+bool bSleepTimeSet = false;
 
 struct nvs_fs fs; 
 
@@ -77,6 +79,17 @@ float AnalogRead(void)
     status = nrfx_saadc_mode_trigger();
     NRFX_ASSERT(status == NRFX_SUCCESS);
     return sample_value;
+}
+
+/**
+ * @brief Setting Sleep time
+ * @param ucbuffer - buffer for setting sleep time
+ * @return void
+*/
+void SetSleepTime(uint32_t ucbuffer)
+{
+    uSleepTime = ucbuffer;
+    //bSleepTimeSet = true;
 }
 
 /**
@@ -328,12 +341,14 @@ int main(void)
     uint8_t *pucAdvBuffer = NULL;
     int nCBValue = 0;
     cJSON *pSensorObj = NULL;
+    cJSON *pConfigObject = NULL;
     long long llEpochNow = 0;
     int64_t Timenow =0;
     int32_t diagnostic_data = 0; 
     uint16_t data_count = 0;  // initialise data counter
     uint32_t count_max=10;  // max data to be stored
     char buf[ADV_BUFF_SIZE];
+    char *cJsonConfigBuffer = NULL;
 
     InitRtc();
     gpio_pin_configure_dt(&sSensorPwSpec1, GPIO_OUTPUT_LOW);
@@ -407,7 +422,7 @@ int main(void)
 
             if (ReadFromADC(NRF_SAADC_INPUT_AIN4, 4, &nCBValue))
             {
-                    memset(cbuffer, '\0', sizeof(cbuffer));
+                memset(cbuffer, '\0', sizeof(cbuffer));
                 sprintf(cbuffer,"CB=%d", abs(nCBValue));
                 printk("Data:%s\n", cbuffer);
                 pSensorObj=cJSON_AddObjectToObject(pMainObject, "S3");
@@ -418,6 +433,11 @@ int main(void)
             }
             AddItemtoJsonObject(&pMainObject, NUMBER, "TS", &llEpochNow, sizeof(long long));
             AddItemtoJsonObject(&pMainObject, NUMBER, "DIAG", &diagnostic_data, sizeof(uint32_t));
+            
+            pConfigObject = cJSON_CreateObject(); //create config object
+            AddItemtoJsonObject(&pConfigObject, NUMBER, "Sleep", &uSleepTime, sizeof(uint32_t));
+
+            cJsonConfigBuffer = cJSON_Print(pConfigObject);
             cJsonBuffer = cJSON_Print(pMainObject);
             memset(cbuffer,0 , sizeof(cbuffer));
 
@@ -445,8 +465,14 @@ int main(void)
                     data_count=0;
                 }
             }
-
+            printk("ConfigJSON:\n%s\n", cJsonConfigBuffer);
             printk("JSON:\n%s\n", cJsonBuffer);
+
+            if (IsConfigNotifyEnabled())
+            {
+
+                VisenseConfigDataNotify(cJsonConfigBuffer, (uint16_t)strlen(cJsonConfigBuffer));
+            }
             if(IshistoryNotificationenabled())
             {
                 VisenseHistoryDataNotify((uint16_t)strlen(cJsonBuffer));
@@ -465,6 +491,7 @@ int main(void)
 
             memset(pucAdvBuffer, 0, ADV_BUFF_SIZE);
             cJSON_Delete(pMainObject);
+            cJSON_Delete(pConfigObject);
             cJSON_free(cJsonBuffer);
 
             #ifndef SLEEP_ENABLE 
@@ -475,7 +502,7 @@ int main(void)
         #endif
 
         #ifdef SLEEP_ENABLE
-         EnterSleepMode(SLEEP_TIME);
+         EnterSleepMode(uSleepTime);
          ExitSleepMode();
         #endif
      }
