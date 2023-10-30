@@ -267,7 +267,6 @@ int main(void)
     char *cJsonBuffer= NULL;
     char *cJsonConfigBuffer = NULL;
     uint8_t *pucAdvertisingdata = NULL;
-    uint8_t pucConfigdata[CONFIG_DATA_SIZE] = {0};
     cJSON *pMainObject = NULL;
     cJSON *pConfigObject = NULL;
     uint32_t diagnostic_data = 0;
@@ -371,8 +370,7 @@ int main(void)
         AddItemtoJsonObject(&pConfigObject, NUMBER, "sleeptime", &uSleepTime, sizeof(uint32_t));
 
         cJsonConfigBuffer = cJSON_Print(pConfigObject);
-        memcpy(pucConfigdata, cJsonConfigBuffer, strlen(cJsonConfigBuffer));
-        printk("ConfigJSON:\n%s\n", pucConfigdata);
+        printk("ConfigJSON:\n%s\n", cJsonConfigBuffer);
 
 
 
