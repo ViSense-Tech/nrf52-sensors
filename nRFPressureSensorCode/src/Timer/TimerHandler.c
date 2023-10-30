@@ -9,7 +9,8 @@
 #include "TimerHandler.h"
 
 /***************************************MACROS**********************************/
-#define PERIOD 1000
+#define PERIOD          1000
+#define TIMER_INST_IDX  1
 
 /***************************************TYPEDEFS*********************************/
 
@@ -27,9 +28,8 @@ static void TimerExpiredCb(nrf_timer_event_t event_type, void * p_context)
 {
     if(event_type == NRF_TIMER_EVENT_COMPARE0)
     {
-        char * p_msg = p_context;
-        //NRFX_LOG_INFO("Timer finished. Context passed to the handler: >%s<", p_msg);
-        printk("INFO:1 second timeout\n\r");
+        /*For test only will remove the following line*/
+        printk("\n\r\n\rINFO:1 second timeout\n\r\n\r");
     }
 }
 
@@ -42,7 +42,7 @@ void InitTimer()
 {
     nrfx_err_t status;
 
-    nrfx_timer_t sTimer0 = NRFX_TIMER_INSTANCE(0);
+    nrfx_timer_t sTimer0 = NRFX_TIMER_INSTANCE(TIMER_INST_IDX);
     nrfx_timer_config_t config = NRFX_TIMER_DEFAULT_CONFIG;
 
 
@@ -52,10 +52,10 @@ void InitTimer()
     status = nrfx_timer_init(&sTimer0, &config, TimerExpiredCb);
     NRFX_ASSERT(status == NRFX_SUCCESS);
 
-// #if defined(__ZEPHYR__)
-//     IRQ_DIRECT_CONNECT(NRFX_IRQ_NUMBER_GET(NRF_TIMER_INST_GET(0)), IRQ_PRIO_LOWEST,
-//                        NRFX_TIMER_INST_HANDLER_GET(TIMER_INST_IDX), 0);
-// #endif
+#if defined(__ZEPHYR__)
+    IRQ_DIRECT_CONNECT(NRFX_IRQ_NUMBER_GET(NRF_TIMER_INST_GET(TIMER_INST_IDX)), IRQ_PRIO_LOWEST,
+                       NRFX_TIMER_INST_HANDLER_GET(TIMER_INST_IDX), 0);
+#endif
 
     nrfx_timer_clear(&sTimer0);
 
