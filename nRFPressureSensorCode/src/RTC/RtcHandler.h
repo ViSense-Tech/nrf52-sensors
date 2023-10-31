@@ -30,4 +30,9 @@ bool GetCurrenTimeInEpoch(long long *pllCurrEpoch);
 void SetRtcTime(uint64_t ullTimestamp);
 bool GetTimeUpdateStatus(void);
 void SetTimeUpdateStatus(bool bStatus);
+struct device *GetI2Chandle();
+void printCurrentTime();
+void SetCurrentTime(long long llEpochNow);
+bool GetCurrentTime( long long *pllEpochCurrent);
+void UpdateCurrentTime();
 #endif

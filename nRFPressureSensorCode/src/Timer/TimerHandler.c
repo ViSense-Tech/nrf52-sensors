@@ -7,12 +7,15 @@
 */
 /***************************************INCLUDES*********************************/
 #include "TimerHandler.h"
+#include "RtcHandler.h"
 
 /***************************************MACROS**********************************/
 #define PERIOD          1000
 #define TIMER_INST_IDX  1
 
 /***************************************TYPEDEFS*********************************/
+
+struct device *pRTC = NULL;
 
 /***************************************FUNCTION DECLARTAION*********************/
 /**
@@ -26,10 +29,15 @@
  */
 static void TimerExpiredCb(nrf_timer_event_t event_type, void * p_context)
 {
+    int64_t llEpochNow = 0;
     if(event_type == NRF_TIMER_EVENT_COMPARE0)
     {
         /*For test only will remove the following line*/
-        printk("\n\r\n\rINFO:1 second timeout\n\r\n\r");
+        if (device_is_ready(pRTC))
+        {
+            UpdateCurrentTime();
+            printCurrentTime();
+        }
     }
 }
 
@@ -42,12 +50,13 @@ void InitTimer()
 {
     nrfx_err_t status;
 
+    pRTC = GetI2Chandle();
     nrfx_timer_t sTimer0 = NRFX_TIMER_INSTANCE(TIMER_INST_IDX);
     nrfx_timer_config_t config = NRFX_TIMER_DEFAULT_CONFIG;
 
 
     config.bit_width = NRF_TIMER_BIT_WIDTH_32;
-    config.p_context = "TIMER0";
+    config.p_context = "TIMER1";
 
     status = nrfx_timer_init(&sTimer0, &config, TimerExpiredCb);
     NRFX_ASSERT(status == NRFX_SUCCESS);

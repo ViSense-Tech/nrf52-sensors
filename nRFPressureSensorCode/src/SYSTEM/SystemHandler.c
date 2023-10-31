@@ -9,6 +9,7 @@
 /***************************************INCLUDES*********************************/
 #include "SystemHandler.h"
 #include "AdcHandler.h"
+#include "RtcHandler.h"
 
 /***************************************MACROS*********************************/
 
@@ -49,14 +50,11 @@ void EnterSleepMode(int nDuration)
     struct device *pAdc = NULL;
 
     pAdc = GetADCHandle();
+    pm_device_action_run(pAdc, PM_DEVICE_ACTION_SUSPEND);
+    BleStopAdvertise();
+    gpio_pin_set(sSleepStatusLED.port, sSleepStatusLED.pin, 1);
+    k_sleep(K_SECONDS(nDuration));
 
-    if (pAdc)
-    {
-        pm_device_action_run(pAdc, PM_DEVICE_ACTION_SUSPEND);
-        BleStopAdvertise();
-        gpio_pin_set(sSleepStatusLED.port, sSleepStatusLED.pin, 1);
-        k_sleep(K_SECONDS(nDuration));
-    }
 }
 
 /**

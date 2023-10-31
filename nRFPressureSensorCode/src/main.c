@@ -20,7 +20,7 @@
 
 
 /*******************************MACROS****************************************/
-//#define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
+#define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
 #define PRESSURE_SENSOR         0x01
 // diagnostics
 #define SENSOR_DIAGNOSTICS       (1<<0)
@@ -37,14 +37,22 @@ struct nvs_fs fs;    //file system
 struct nvs_fs sConfigFs;
 uint8_t *pucAdvertisingdata = NULL;
 uint32_t diagnostic_data = 0;
+uint32_t pressureMax = 929; //analog reading of pressure transducer at 100psi
+uint32_t pressureZero = 110; //analog reading of pressure transducer at 0psi
 
-/*******************************FUNCTION DEFINITIONS********************************/
+/*******************************FUNCTION DECLARATIONS********************************/
+extern void SetFileSystem(struct nvs_fs *fs);
 static bool UpdateConfigurations();
 static bool InitPowerManager();
 static bool InitBle();
 static void InitDataPartition();
 static bool CheckForConfigChange();
 static bool InitAllModules();
+static void PrintBanner();
+static bool GetTimeFromRTC();
+static bool WriteConfiguredtimeToRTC(void);
+static void SendConfigDataToApp();
+static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength);
 
 /*******************************FUNCTION DEFINITIONS********************************/
 
@@ -60,16 +68,16 @@ int main(void)
     uint32_t unPressureRaw = 0;
     char cbuffer[50] = {0};
     char *cJsonBuffer= NULL;
-    char *cJsonConfigBuffer = NULL;
     cJSON *pMainObject = NULL;
-    cJSON *pConfigObject = NULL;
-    uint16_t data_count = 1;  // initialise data counter
-    uint32_t count_max=50;  // max data to be stored
-    uint32_t ulSleepTime = 0;
-    char buf[ADV_BUFF_SIZE];
     long long llEpochNow = 0;
-    uint32_t pressureMax = 929; //analog reading of pressure transducer at 100psi
-    uint32_t pressureZero = 110; //analog reading of pressure transducer at 0psi
+    int64_t Timenow = 0;
+
+    PrintBanner();
+    printk("VISENSE_PRESSURE_FIRMWARE_VERSION: %s\n\r", VISENSE_PRESSURE_SENSOR_FIRMWARE_VERSION);
+    k_msleep(1000);
+    printk("FEATURES: %s", VISENSE_PRESSURE_SENSOR_FEATURES);
+    k_msleep(1000);
+    printk("\n\r");
 
    if (!InitAllModules())
    {
@@ -81,163 +89,119 @@ int main(void)
         printk("ERROR: Initialising all modules failed \n\r");
     }
 
+    if (!GetTimeFromRTC())
+    {
+        printk("WARN: Getting time from RTC failed\n\r");
+    }
+
     while (1) 
     {
         #ifdef SLEEP_ENABLE
-        Timenow = sys_clock_tick_get();
+            Timenow = sys_clock_tick_get();
 
-        while(sys_clock_tick_get() - Timenow < (ALIVE_TIME * TICK_RATE))
-        {
+            while(sys_clock_tick_get() - Timenow < (ALIVE_TIME * TICK_RATE))
+            {
         #endif    
-        if (!UpdateConfigurations())
-        {
-            printk("ERROR: Updating config failed\n\r");           
-        }
+            if (UpdateConfigurations())
+            {
+                printk("INFO: Updating config \n\r");           
+            }
 
-        if (GetTimeUpdateStatus())
-        {
-            InitRtc();
-            SetTimeUpdateStatus(false); 
-            sConfigData.flag = sConfigData.flag | (1 << 4);
-            int RetCode = nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
-            diagnostic_data = diagnostic_data & (~(1<<4));
-            printk("Time updated\n");
-        }
+            WriteConfiguredtimeToRTC();
+            SendConfigDataToApp();
 
-        pConfigObject = cJSON_CreateObject();
-        ulSleepTime = GetSleepTime();
-        AddItemtoJsonObject(&pConfigObject, NUMBER, "PressureZero", &pressureZero, sizeof(uint32_t));
-        AddItemtoJsonObject(&pConfigObject, NUMBER, "PressureMax", &pressureMax, sizeof(uint32_t));
-        AddItemtoJsonObject(&pConfigObject, NUMBER, "sleeptime", &ulSleepTime, sizeof(uint32_t));
-        cJsonConfigBuffer = cJSON_Print(pConfigObject);
-        printk("ConfigJSON:\n%s\n", cJsonConfigBuffer);
+            if (GetPressureReading(&unPressureResult, &unPressureRaw))
+            {
+                printk("PressureRaw: %d\n", unPressureRaw);
+            }
 
-        if (GetCurrenTimeInEpoch(&llEpochNow))
-        {
-           printk("CurrentTime=%llu\n\r", llEpochNow);
-           diagnostic_data = diagnostic_data & TIME_STAMP_OK;
-        }
-        else
-        {
-            diagnostic_data = diagnostic_data | TIME_STAMP_ERROR;
-        }
+            pMainObject = cJSON_CreateObject();
+            pressureZero = GetPressureZero();
+            pressureMax = GetPressureMax();
 
-        if (GetPressureReading(&unPressureResult, &unPressureRaw))
-        {
-            printk("PressureRaw: %d\n", unPressureRaw);
-        }
+            if (GetCurrentTime(&llEpochNow))
+            {
+                printk("CurrentTime=%llu\n\r", llEpochNow);
+            }
+            AddItemtoJsonObject(&pMainObject, NUMBER, "ADCValue", &unPressureRaw, sizeof(uint16_t));
+            AddItemtoJsonObject(&pMainObject, NUMBER, "TS", &llEpochNow, sizeof(long long));
 
-        pMainObject = cJSON_CreateObject();
-        pressureZero = GetPressureZero();
-        pressureMax = GetPressureMax();
+            if (unPressureRaw > pressureZero && unPressureRaw < ADC_MAX_VALUE)
+            {
+                memset(cbuffer, '\0',sizeof(cbuffer));
+                
+                sprintf(cbuffer,"%dpsi", unPressureResult);
+                printk("Data:%s\n", cbuffer);
+                AddItemtoJsonObject(&pMainObject, STRING, "Pressure", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer));
+                diagnostic_data = diagnostic_data & SENSOR_STATUS_OK;
 
-        AddItemtoJsonObject(&pMainObject, NUMBER, "ADCValue", &unPressureRaw, sizeof(uint16_t));
-        AddItemtoJsonObject(&pMainObject, NUMBER, "TS", &llEpochNow, sizeof(long long));
+            }
+            else if(unPressureRaw > 100 && unPressureRaw < 1023) //
+            {
+                memset(cbuffer, '\0',sizeof(cbuffer));
+                unPressureResult = 0;
+                sprintf(cbuffer,"%dpsi", unPressureResult);
+                AddItemtoJsonObject(&pMainObject, STRING, "Pressure", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer));
+                diagnostic_data = diagnostic_data & SENSOR_STATUS_OK;  
+            }
+            else if(unPressureRaw < 100 || unPressureRaw > 1023)
+            {
+                diagnostic_data = diagnostic_data | SENSOR_DIAGNOSTICS;
+            }
+            else
+            {
+                // NO OP
+            }
+        
+            AddItemtoJsonObject(&pMainObject, NUMBER, "DIAG", &diagnostic_data, sizeof(uint32_t));
+            cJsonBuffer = cJSON_Print(pMainObject);
+            pucAdvertisingdata[2] = PRESSURE_SENSOR;
+            pucAdvertisingdata[3] = (uint8_t)strlen(cJsonBuffer);
+            memcpy(&pucAdvertisingdata[4], cJsonBuffer, strlen(cJsonBuffer));
 
-        if (unPressureRaw > pressureZero && unPressureRaw < ADC_MAX_VALUE)
-        {
-            memset(cbuffer, '\0',sizeof(cbuffer));
+                
+            SendHistoryDataToApp(cJsonBuffer, strlen(cJsonBuffer)); //save to flash only if Mobile Phone is NOT connected
             
-            sprintf(cbuffer,"%dpsi", unPressureResult);
-            printk("Data:%s\n", cbuffer);
-            AddItemtoJsonObject(&pMainObject, STRING, "Pressure", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer));
-            diagnostic_data = diagnostic_data & SENSOR_STATUS_OK;
+            printk("JSON:\n%s\n", cJsonBuffer);
 
-        }
-        else if(unPressureRaw > 100 && unPressureRaw < 1023) //
-        {
-            memset(cbuffer, '\0',sizeof(cbuffer));
-            unPressureResult = 0;
-            sprintf(cbuffer,"%dpsi", unPressureResult);
-            AddItemtoJsonObject(&pMainObject, STRING, "Pressure", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer));
-            diagnostic_data = diagnostic_data & SENSOR_STATUS_OK;  
-        }
-        else if(unPressureRaw < 100 || unPressureRaw > 1023)
-        {
-            diagnostic_data = diagnostic_data | SENSOR_DIAGNOSTICS;
-        }
-        else
-        {
-            // NO OP
-        }
-       
-        AddItemtoJsonObject(&pMainObject, NUMBER, "DIAG", &diagnostic_data, sizeof(uint32_t));
-        cJsonBuffer = cJSON_Print(pMainObject);
-        pucAdvertisingdata[2] = PRESSURE_SENSOR;
-        pucAdvertisingdata[3] = (uint8_t)strlen(cJsonBuffer);
-        memcpy(&pucAdvertisingdata[4], cJsonBuffer, strlen(cJsonBuffer));
-
-        if(!IsConnected())              //save to flash only if Mobile Phone is NOT connected
-        {
-            memset(buf, '\0', sizeof(buf));
-            writeJsonToFlash(&fs, data_count, count_max, cJsonBuffer, strlen(cJsonBuffer));
-            k_msleep(50);
-            if (readJsonToFlash(&fs, data_count, count_max, buf, strlen(cJsonBuffer)))
+            if(IsNotificationenabled())
             {
-                printk("\nId: %d, Stored_Data: %s\n",STRING_ID + data_count, buf);
-
+            VisenseSensordataNotify(pucAdvertisingdata+2, ADV_BUFF_SIZE);
             }
-            data_count++; 
-
-            if(data_count>= count_max || GetCharaStatus() == true ) 
+            else if (!IsNotificationenabled() && !IsConnected())
             {
-
-                deleteFlash(&fs,data_count,count_max);    
-                k_msleep(10);
-                data_count=0;
+                UpdateAdvertiseData();
+                StartAdvertising();
             }
-        } 
-        
-        printk("JSON:\n%s\n", cJsonBuffer);
+            else
+            {
+                //NO OP
+            }
+            if ((sConfigData.flag & (1 << 4)))
+            {
+                // NO OP
+            }
+            else
+            {
+                diagnostic_data = diagnostic_data | (1 << 4);
+            }
+            
+            memset(pucAdvertisingdata, 0, ADV_BUFF_SIZE);
+            cJSON_Delete(pMainObject);
+            cJSON_free(cJsonBuffer);
 
-        if (IsConfigNotifyEnabled())
-        {
-
-            VisenseConfigDataNotify(cJsonConfigBuffer, (uint16_t)strlen(cJsonConfigBuffer));
-        }
-        
-        if(IshistoryNotificationenabled())
-        {
-            VisenseHistoryDataNotify((uint16_t)strlen(cJsonBuffer));
-            data_count = 0; 
-        }
-
-        if(IsNotificationenabled())
-        {
-           VisenseSensordataNotify(pucAdvertisingdata+2, ADV_BUFF_SIZE);
-        }
-        else if (!IsNotificationenabled() && !IsConnected())
-        {
-            UpdateAdvertiseData();
-            StartAdvertising();
-        }
-        else
-        {
-            //NO OP
-        }
-        if (sConfigData.flag & (1 << 4))
-        {
-            //printk("\n\rError occured while reading config data: %d\n", rc);
-            diagnostic_data = diagnostic_data | (1<<4);
-            //k_sleep(K_SECONDS(30));
-        }
-        
-        memset(pucAdvertisingdata, 0, ADV_BUFF_SIZE);
-        cJSON_Delete(pMainObject);
-        cJSON_Delete(pConfigObject);
-        cJSON_free(cJsonBuffer);
-
-        printk("PressureZero: %d\n", pressureZero);
-        printk("PressureMax: %d\n", pressureMax);
-
-            #ifndef SLEEP_ENABLE 
+        #ifndef SLEEP_ENABLE 
             k_sleep(K_MSEC(100));
-            #endif
+        #endif
         #ifdef SLEEP_ENABLE
         }
-        k_sleep(K_SECONDS(300));
-        EnterSleepMode(uSleepTime);
+        //k_sleep(K_SECONDS(30));
+        EnterSleepMode(GetSleepTime());
         ExitSleepMode();
+        if (!GetTimeFromRTC())
+        {
+            printk("WARN: Getting time from RTC failed\n\r");
+        }
         #endif
     }
 }
@@ -287,6 +251,146 @@ static bool UpdateConfigurations()
             }
             bRetVal = true;
         } while (0);
+    }
+
+    return bRetVal;
+}
+
+/**
+ * @brief Sending history data over ble
+ * @param pcBuffer : data to send
+ * @param unLength : Length of data
+ * @return None
+*/
+static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
+{
+    static uint16_t data_count = 1;  // initialise data counter
+    uint32_t count_max=50;  // max data to be stored
+    char cBuffer[ADV_BUFF_SIZE];
+    bool bRetval = false;
+
+    if (pcBuffer)
+    {
+        if(!IsConnected())
+        {
+            memset(cBuffer, '\0', sizeof(cBuffer));
+            memcpy(cBuffer, pcBuffer, unLength);
+            writeJsonToFlash(&fs, data_count, count_max, cBuffer, strlen(cBuffer));
+            k_msleep(50);
+            if (readJsonToFlash(&fs, data_count, count_max, cBuffer, strlen(cBuffer)))
+            {
+                printk("\nId: %d, Stored_Data: %s\n",STRING_ID + data_count, cBuffer);
+            }
+            data_count++;
+            if(data_count>= count_max)
+            {
+                deleteFlash(&fs,data_count,count_max);    
+                k_msleep(10);
+                data_count=0;
+            }
+        }
+ 
+
+        if(IshistoryNotificationenabled() && IsConnected())
+        {
+            printk("In history notif\n\r");
+            VisenseHistoryDataNotify();
+            data_count = 0; 
+        }
+
+
+
+        bRetval = true;
+    }
+
+    return bRetval;
+}
+
+/**
+ * @brief send config data to application over ble
+ * @param None
+ * @return None
+*/
+static void SendConfigDataToApp()
+{
+    cJSON *pConfigObject = NULL;
+    char *cJsonConfigBuffer = NULL;
+    uint32_t ulSleepTime = 0;
+    char cBuffer[30] =  {0};
+
+    pConfigObject = cJSON_CreateObject();
+    ulSleepTime = GetSleepTime();
+    strcpy(cBuffer, VISENSE_PRESSURE_SENSOR_FIRMWARE_VERSION);
+    AddItemtoJsonObject(&pConfigObject, NUMBER, "PressureZero", &pressureZero, sizeof(uint32_t));
+    AddItemtoJsonObject(&pConfigObject, NUMBER, "PressureMax", &pressureMax, sizeof(uint32_t));
+    AddItemtoJsonObject(&pConfigObject, STRING, "VERSION", cBuffer, strlen(cBuffer));
+    memset(cBuffer, 0, sizeof(cBuffer));
+    sprintf(cBuffer, "%ds", ulSleepTime);
+    AddItemtoJsonObject(&pConfigObject, STRING, "SLEEP", cBuffer, strlen(cBuffer));
+    cJsonConfigBuffer = cJSON_Print(pConfigObject);
+    printk("ConfigJSON:\n%s\n", cJsonConfigBuffer);
+
+    if (IsConfigNotifyEnabled())
+    {
+        VisenseConfigDataNotify(cJsonConfigBuffer, (uint16_t)strlen(cJsonConfigBuffer));
+    }
+
+    cJSON_free(cJsonConfigBuffer);
+    cJSON_Delete(pConfigObject);
+}
+
+/**
+ * @brief Write the configured time from BLE to RTC
+ * @param None
+ * @return true for success
+*/
+static bool WriteConfiguredtimeToRTC(void)
+{
+    bool bRetVal = false;
+    int RetCode = 0;
+
+    if (GetTimeUpdateStatus())
+    {
+        InitRtc();
+        SetTimeUpdateStatus(false); 
+        sConfigData.flag = sConfigData.flag | (1 << 4);
+        RetCode = nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
+        if(RetCode < 0)
+        {
+            diagnostic_data = diagnostic_data | (1<<4);
+        }
+        else
+        {
+            diagnostic_data = diagnostic_data & (~(1<<4));
+            printk("Time updated\n");
+            bRetVal = true;
+        }
+
+    }
+
+    return bRetVal;
+}
+
+/**
+ * @brief Getting time from RTC
+ * @param None
+ * @return true for success
+*/
+static bool GetTimeFromRTC()
+{
+    long long llEpochNow = 0;
+    bool bRetVal = false;
+
+    if (GetCurrenTimeInEpoch(&llEpochNow))
+    {
+        printk("CurrentTime=%llu\n\r", llEpochNow);
+        SetCurrentTime(llEpochNow);
+        diagnostic_data = diagnostic_data & TIME_STAMP_OK;
+        bRetVal = true;
+    }
+    else
+    {
+        diagnostic_data = diagnostic_data | TIME_STAMP_ERROR;
     }
 
     return bRetVal;
@@ -380,9 +484,11 @@ static bool CheckForConfigChange()
         SetPressureZero(sConfigData.pressureZero);       
         SetPressureMax(sConfigData.pressureMax);
         SetSleepTime(sConfigData.sleepTime);
-        printk("PressureZero = %d, PressureMax = %d\n",
+        printk("PressureZero = %d, PressureMax = %d, sConfigFlag %d\n",
                                      sConfigData.pressureZero, 
-                                     sConfigData.pressureMax);
+                                     sConfigData.pressureMax,
+                                     sConfigData.flag);
+
         bRetVal = true;
     }
 
@@ -420,4 +526,31 @@ static bool InitAllModules()
     } while (0);
     
     return bRetVal;
+}
+
+/**
+ * @brief  printing visense banner
+ * @param  None
+ * @return None
+*/
+static void PrintBanner()
+{
+    printk("\n\r");
+    printk("'##::::'##:'####::'######::'########:'##::: ##::'######::'########:\n\r");
+    k_msleep(50);
+    printk("##:::: ##:. ##::'##... ##: ##.....:: ###:: ##:'##... ##: ##.....::\n\r");
+    k_msleep(50);
+    printk("##:::: ##:: ##:: ##:::..:: ##::::::: ####: ##: ##:::..:: ##:::::::\n\r");
+    k_msleep(50);
+    printk("##:::: ##:: ##::. ######:: ######::: ## ## ##:. ######:: ######:::\n\r");
+    k_msleep(50);
+    printk(". ##:: ##::: ##:::..... ##: ##...:::: ##. ####::..... ##: ##...::::\n\r");
+    k_msleep(50);
+    printk(":. ## ##:::: ##::'##::: ##: ##::::::: ##:. ###:'##::: ##: ##:::::::\n\r");
+    k_msleep(50);
+    printk("::. ###::::'####:. ######:: ########: ##::. ##:. ######:: ########:\n\r");
+    k_msleep(50);
+    printk(":::...:::::....:::......:::........::..::::..:::......:::........::\n\r");
+    k_msleep(50);
+    printk("\n\r");
 }

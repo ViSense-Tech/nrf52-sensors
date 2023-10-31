@@ -21,4 +21,4 @@ bool IsConnected();
 bool IsConfigNotifyEnabled();
 int VisenseConfigDataNotify(uint8_t *pucConfigData, uint16_t unLen);
 bool IshistoryNotificationenabled();
-void VisenseHistoryDataNotify(uint16_t len);
+void VisenseHistoryDataNotify(void);

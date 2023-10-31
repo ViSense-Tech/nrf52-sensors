@@ -20,53 +20,83 @@
 static const struct device *i2c_dev = DEVICE_DT_GET(DT_NODELABEL(i2c0));
 static long long llLastUpdatedTime = 1696585221;
 static bool bTimeUpdated = false;
+long long llCurrentTime = 0;
 
 
 /***************************************FUNCTION DEFINITIONS********************/
 static bool SetTimeDate();
 
 /**
-
- * @brief Read time update status
-
- * @param None
-
- * @return true for success
-
+ * @brief update the epoch
 */
-
-bool GetTimeUpdateStatus()
-
+void UpdateCurrentTime()
 {
-
-    return bTimeUpdated;
-
+	llCurrentTime++;
 }
 
- 
+/**
+ * @brief Getting currentTime
+*/
+bool GetCurrentTime( long long *pllEpochCurrent)
+{
+	bool bRetVal = false;
+
+	if (pllEpochCurrent)
+	{
+		*pllEpochCurrent = llCurrentTime;
+		bRetVal = true;
+	}
+
+	return bRetVal;
+}
 
 /**
+ * Setting the current epoch
+*/
+void SetCurrentTime(long long llEpochNow)
+{
+	llCurrentTime = llEpochNow;
+}
 
+
+
+/**
+ * @brief Read time update status
+ * @param None
+ * @return true for success
+*/
+bool GetTimeUpdateStatus()
+{
+    return bTimeUpdated;
+}
+
+struct device *GetI2Chandle()
+{
+	return i2c_dev;
+}
+
+/**
  * @brief Set time update status
  * @param bStatus : Update status
  * @return None
-
 */
-
 void SetTimeUpdateStatus(bool bStatus)
-
 {
     bTimeUpdated = bStatus;
 }
 
- 
-
+/**
+ * @brief Setting RTC time 
+ * @param ullTimeStamp : time stamp to set on RTC
+ * @return None
+*/
 void SetRtcTime(uint64_t ullTimestamp)
-
 {
     llLastUpdatedTime = (long long)ullTimestamp;
+	llCurrentTime = (long long)ullTimestamp;
     bTimeUpdated = true;
 }
+
 /**
  * @brief Converting number format from BCD to Decimal
  * @param to_convert : number to convert
@@ -118,6 +148,18 @@ static bool ConvertEpochToTime(long long llTimeStamp, struct tm *psTimeStruct, c
 	}
 
 	return bRetVal;
+}
+
+/**
+ * Getting current time
+*/
+void printCurrentTime()
+{
+	struct tm  ts = {0};
+	char Timebuffer[50] = {0};
+	ts = *localtime(&llCurrentTime);
+	strftime(Timebuffer, sizeof(Timebuffer), "%a %Y-%m-%d %H:%M:%S %Z", &ts);
+	printk("CurrentTime: %s\n\r", Timebuffer);
 }
 
 /**
@@ -241,6 +283,7 @@ bool GetCurrenTimeInEpoch(long long *pllCurrEpoch)
 	uint8_t ucReg = 0x00;
 	char cTimeBuffer[MAX_TIME_BUFF_SIZE] = {0};
 	bool bRetval = false;
+	uint8_t ucRetry = 3;
 
 	if (pllCurrEpoch)
 	{

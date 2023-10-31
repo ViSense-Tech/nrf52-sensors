@@ -273,29 +273,30 @@ int VisenseSensordataNotify(uint8_t *pucSensorData, uint16_t unLen)
  * @param 	len : length of data
  * @return 	None
 */
-void VisenseHistoryDataNotify(uint16_t len)                                        //history
+void VisenseHistoryDataNotify(void)                                        //history
 {
 	bool bRetVal = false;
 	uint8_t ucIdx = 1;
-	char unLen[ADV_BUFF_SIZE];
+	char NotifyBuf[ADV_BUFF_SIZE];
 	int nRetVal = 0;
+	int uReadCount = 0;
 
 	for (ucIdx = 1 ; ucIdx < 50; ucIdx++)
 	{	
-		memset(unLen, 0, ADV_BUFF_SIZE);
-		int rc = readJsonToFlash(FileSys, ucIdx, 0, unLen, len);
-		printk("\nId: %d, Ble_Stored_Data: %s\n",ucIdx, unLen);
-		if (rc<0)
+		memset(NotifyBuf, 0, ADV_BUFF_SIZE);
+		uReadCount = readJsonToFlash(FileSys, ucIdx, 0, NotifyBuf, ADV_BUFF_SIZE);
+		printk("\nId: %d, Ble_Stored_Data: %s\n",ucIdx, NotifyBuf);
+		if (uReadCount < 0)
 		{
 			break;
 		}
 	
-		k_msleep(1000);
+		k_msleep(100);
 
-		if (unLen > 0)
+		if (uReadCount > 0)
 		{
 			nRetVal = bt_gatt_notify(NULL, &VisenseService.attrs[8], 
-			unLen,len);
+			NotifyBuf,uReadCount);
 			if (nRetVal < 0)
 			{
 				printk("Notification failed%d\n\r",nRetVal);
@@ -306,7 +307,7 @@ void VisenseHistoryDataNotify(uint16_t len)                                     
 	}
 	hNotificationEnabled = false;     //history callback set 
 	//nvs_clear(FileSys);
-	 deleteFlash(FileSys,1,50);
+	 deleteFlash(FileSys,0,50);
 	printk("Flash Cleared");
 	return bRetVal;
 }
@@ -343,8 +344,4 @@ bool IsConfigNotifyEnabled()
 bool IsConnected()
 {
 	return bConnected;
-}
-bool GetCharaStatus()
-{
-	return  ;
 }

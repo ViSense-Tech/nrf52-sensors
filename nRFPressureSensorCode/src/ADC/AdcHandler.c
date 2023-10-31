@@ -21,7 +21,7 @@ static uint32_t pressureZero = 119; //analog reading of pressure transducer at 0
                             //PressureZero = 0.5/3.3V*1024~150(supply voltage - 3.3v) taken from Arduino code refernce from visense 
 static uint32_t pressureMax = 564; //analog reading of pressure transducer at 100psi
                             //PressureMax = 2.5/3.3V*1024~775  taken from Arduino code refernce from visense  
-const struct device *pAdc = NULL;
+ struct device *pAdc = NULL;
 /***************************************FUNCTION DEFINITIONS********************/
 /**
  * @brief  This function is to read raw adc value
@@ -136,8 +136,10 @@ bool GetPressureReading(uint16_t *unPressureResult, uint32_t *unPressureRaw)
             *unPressureRaw = 0; 
         }
         else
+        {
             *unPressureRaw = unAdcSample;
-        
+        }
+
         return false;
     }
     else
