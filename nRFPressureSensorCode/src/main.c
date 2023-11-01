@@ -260,7 +260,6 @@ static bool UpdateConfigurations()
 static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
 {
 
-    uint32_t count_max=100;  // max data to be stored
     char cBuffer[ADV_BUFF_SIZE];
     bool bRetval = false;
 
@@ -270,18 +269,18 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
         {
             memset(cBuffer, '\0', sizeof(cBuffer));
             memcpy(cBuffer, pcBuffer, unLength);
-            writeJsonToFlash(&fs, data_count, count_max, cBuffer, strlen(cBuffer));
+            writeJsonToFlash(&fs, data_count, NUMBER_OF_ENTRIES, cBuffer, strlen(cBuffer));
             k_msleep(50);
-            if (readJsonToFlash(&fs, data_count, count_max, cBuffer, strlen(cBuffer)))
+            if (readJsonToFlash(&fs, data_count, NUMBER_OF_ENTRIES, cBuffer, strlen(cBuffer)))
             {
                 printk("\nId: %d, Stored_Data: %s\n",STRING_ID + data_count, cBuffer);
             }
             data_count++;
             sConfigData.flashIdx = data_count;
             nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
-            if(data_count>= count_max)
+            if(data_count>= NUMBER_OF_ENTRIES)
             {
-                deleteFlash(&fs,data_count,count_max);    
+                deleteFlash(&fs,data_count,NUMBER_OF_ENTRIES);    
                 k_msleep(10);
                 data_count=0;
             }
