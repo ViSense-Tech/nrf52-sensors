@@ -17,11 +17,11 @@
 
 
 #define STRING_ID 0
-// static struct nvs_fs fs;
 
 typedef struct __attribute__((packed)) __sConfigData
 {
     long long lastUpdatedTime;
+     uint32_t flashIdx;
     uint32_t sleepTime;
     uint32_t pressureZero;
     uint32_t pressureMax;

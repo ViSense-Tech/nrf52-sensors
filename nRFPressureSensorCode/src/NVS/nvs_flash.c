@@ -29,7 +29,7 @@ int nvs_initialisation( struct nvs_fs *fs, uint8_t selector)
 			return 0;
 		}
 		fs->sector_size = info.size;
-		fs->sector_count = 4U;
+		fs->sector_count = 2U;
 	}
 	
 	if (selector == DATA_FS) // config data
@@ -42,7 +42,7 @@ int nvs_initialisation( struct nvs_fs *fs, uint8_t selector)
 			return 0;
 		}
 		fs->sector_size = info.size;
-		fs->sector_count = 2U;
+		fs->sector_count = 5U;
 	}
 
 	rc = nvs_mount(fs);
