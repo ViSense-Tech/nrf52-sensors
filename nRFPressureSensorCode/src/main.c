@@ -31,7 +31,6 @@
 /*******************************TYPEDEFS****************************************/
 
 /*******************************GLOBAL VARIABLES********************************/
-uint8_t flag = 0;
 _sConfigData sConfigData = {0};
 struct nvs_fs fs;    //file system
 struct nvs_fs sConfigFs;
@@ -85,7 +84,7 @@ int main(void)
 
     if (!CheckForConfigChange())
     {
-        printk("ERROR: Initialising all modules failed \n\r");
+        printk("ERROR: Config Check failed \n\r");
     }
 
     if (!GetTimeFromRTC())
@@ -295,8 +294,6 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
             uFlashIdx = 0; 
         }
 
-
-
         bRetval = true;
     }
 
@@ -369,8 +366,6 @@ static bool WriteConfiguredtimeToRTC(void)
         {
             diagnostic_data = diagnostic_data | TIME_STAMP_ERROR;
         }
-
-
     }
 
     return bRetVal;
