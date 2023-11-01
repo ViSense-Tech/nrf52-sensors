@@ -197,6 +197,7 @@ int main(void)
         //k_sleep(K_SECONDS(30));
         EnterSleepMode(GetSleepTime());
         ExitSleepMode();
+        printk("INFO: Syncing time with RTC\n\r");
         if (!GetTimeFromRTC())
         {
             printk("WARN: Getting time from RTC failed\n\r");
