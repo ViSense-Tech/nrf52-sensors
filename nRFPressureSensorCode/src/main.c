@@ -39,7 +39,7 @@ uint8_t *pucAdvertisingdata = NULL;
 uint32_t diagnostic_data = 0;
 uint32_t pressureMax = 929; //analog reading of pressure transducer at 100psi
 uint32_t pressureZero = 110; //analog reading of pressure transducer at 0psi
-uint32_t data_count = 0;  // initialise data counter
+uint32_t uFlashIdx = 0;  // initialise data counter
 
 /*******************************FUNCTION DECLARATIONS********************************/
 extern void SetFileSystem(struct nvs_fs *fs);
@@ -263,26 +263,26 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
     char cBuffer[ADV_BUFF_SIZE];
     bool bRetval = false;
 
+
     if (pcBuffer)
     {
-        if(!IsConnected())
+        if(!IsConnected()) // && sConfigData.flag & (1 << 4) can include this condition also if config is mandetory during initial setup
         {
+            
             memset(cBuffer, '\0', sizeof(cBuffer));
             memcpy(cBuffer, pcBuffer, unLength);
-            writeJsonToFlash(&fs, data_count, NUMBER_OF_ENTRIES, cBuffer, strlen(cBuffer));
+            writeJsonToFlash(&fs, uFlashIdx, NUMBER_OF_ENTRIES, cBuffer, strlen(cBuffer));
             k_msleep(50);
-            if (readJsonToFlash(&fs, data_count, NUMBER_OF_ENTRIES, cBuffer, strlen(cBuffer)))
+            if (readJsonToFlash(&fs, uFlashIdx, NUMBER_OF_ENTRIES, cBuffer, strlen(cBuffer)))
             {
-                printk("\nId: %d, Stored_Data: %s\n",STRING_ID + data_count, cBuffer);
+                printk("\nId: %d, Stored_Data: %s\n",STRING_ID + uFlashIdx, cBuffer);
             }
-            data_count++;
-            sConfigData.flashIdx = data_count;
+            uFlashIdx++;
+            sConfigData.flashIdx = uFlashIdx;
             nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
-            if(data_count>= NUMBER_OF_ENTRIES)
+            if(uFlashIdx>= NUMBER_OF_ENTRIES)
             {
-                deleteFlash(&fs,data_count,NUMBER_OF_ENTRIES);    
-                k_msleep(10);
-                data_count=0;
+                uFlashIdx = 0;
             }
         }
  
@@ -291,7 +291,7 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
         {
             printk("In history notif\n\r");
             VisenseHistoryDataNotify();
-            data_count = 0; 
+            uFlashIdx = 0; 
         }
 
 
@@ -488,7 +488,7 @@ static bool CheckForConfigChange()
         SetPressureZero(sConfigData.pressureZero);       
         SetPressureMax(sConfigData.pressureMax);
         SetSleepTime(sConfigData.sleepTime);
-        data_count = sConfigData.flashIdx;
+        uFlashIdx = sConfigData.flashIdx;
         printk("PressureZero = %d, PressureMax = %d, sConfigFlag %d ,flashIdx = %d\n",
                                      sConfigData.pressureZero, 
                                      sConfigData.pressureMax,
