@@ -39,6 +39,7 @@ uint8_t *pucAdvertisingdata = NULL;
 uint32_t diagnostic_data = 0;
 uint32_t pressureMax = 929; //analog reading of pressure transducer at 100psi
 uint32_t pressureZero = 110; //analog reading of pressure transducer at 0psi
+uint32_t uFlashIdx = 0;  // initialise data counter
 
 /*******************************FUNCTION DECLARATIONS********************************/
 extern void SetFileSystem(struct nvs_fs *fs);
@@ -62,8 +63,6 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength);
 */
 int main(void)
 {
-    int nError;
-    int ReturnCode;
     uint16_t unPressureResult =0;
     uint32_t unPressureRaw = 0;
     char cbuffer[50] = {0};
@@ -166,7 +165,7 @@ int main(void)
 
             if(IsNotificationenabled())
             {
-            VisenseSensordataNotify(pucAdvertisingdata+2, ADV_BUFF_SIZE);
+                VisenseSensordataNotify(pucAdvertisingdata+2, ADV_BUFF_SIZE);
             }
             else if (!IsNotificationenabled() && !IsConnected())
             {
@@ -177,13 +176,13 @@ int main(void)
             {
                 //NO OP
             }
-            if ((sConfigData.flag & (1 << 4)))
+            if ((sConfigData.flag & (1 << 4))) //check whether config data is read from the flash / updated from mobile
             {
                 // NO OP
             }
             else
             {
-                diagnostic_data = diagnostic_data | (1 << 4);
+                diagnostic_data = diagnostic_data | (1 << 4); //added a diagnostic information to the application
             }
             
             memset(pucAdvertisingdata, 0, ADV_BUFF_SIZE);
@@ -219,17 +218,13 @@ static bool UpdateConfigurations()
 
     if (IsPressureZeroSet() && IsPressureMaxSet() && IsSleepTimeSet())
     {
-        // sConfigData.sleepTime = uSleepTime;
         sConfigData.sleepTime = GetSleepTime();
         sConfigData.pressureZero = GetPressureZero();
         sConfigData.pressureMax = GetPressureMax();
         SetPressureZeroSetStatus(false);
         SetPressureMaxSetStatus(false);
-        
-        //bSleepTimeSet = false;
         SetSleepTimeSetStataus(false);
-        flag = flag | (1 << 0);
-        sConfigData.flag = flag;
+        sConfigData.flag = sConfigData.flag | (1 << 0); //set flag for config data update and store it into flash
 
         do
         {
@@ -264,29 +259,30 @@ static bool UpdateConfigurations()
 */
 static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
 {
-    static uint16_t data_count = 1;  // initialise data counter
-    uint32_t count_max=50;  // max data to be stored
+
     char cBuffer[ADV_BUFF_SIZE];
     bool bRetval = false;
 
+
     if (pcBuffer)
     {
-        if(!IsConnected())
+        if(!IsConnected()) // && sConfigData.flag & (1 << 4) can include this condition also if config is mandetory during initial setup
         {
+            
             memset(cBuffer, '\0', sizeof(cBuffer));
             memcpy(cBuffer, pcBuffer, unLength);
-            writeJsonToFlash(&fs, data_count, count_max, cBuffer, strlen(cBuffer));
+            writeJsonToFlash(&fs, uFlashIdx, NUMBER_OF_ENTRIES, cBuffer, strlen(cBuffer));
             k_msleep(50);
-            if (readJsonToFlash(&fs, data_count, count_max, cBuffer, strlen(cBuffer)))
+            if (readJsonToFlash(&fs, uFlashIdx, NUMBER_OF_ENTRIES, cBuffer, strlen(cBuffer)))
             {
-                printk("\nId: %d, Stored_Data: %s\n",STRING_ID + data_count, cBuffer);
+                printk("\nId: %d, Stored_Data: %s\n",STRING_ID + uFlashIdx, cBuffer);
             }
-            data_count++;
-            if(data_count>= count_max)
+            uFlashIdx++;
+            sConfigData.flashIdx = uFlashIdx;
+            nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
+            if(uFlashIdx>= NUMBER_OF_ENTRIES)
             {
-                deleteFlash(&fs,data_count,count_max);    
-                k_msleep(10);
-                data_count=0;
+                uFlashIdx = 0;
             }
         }
  
@@ -295,7 +291,7 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
         {
             printk("In history notif\n\r");
             VisenseHistoryDataNotify();
-            data_count = 0; 
+            uFlashIdx = 0; 
         }
 
 
@@ -351,20 +347,28 @@ static bool WriteConfiguredtimeToRTC(void)
 
     if (GetTimeUpdateStatus())
     {
-        InitRtc();
-        SetTimeUpdateStatus(false); 
-        sConfigData.flag = sConfigData.flag | (1 << 4);
-        RetCode = nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
-        if(RetCode < 0)
+        if (InitRtc())
         {
-            diagnostic_data = diagnostic_data | (1<<4);
+            SetTimeUpdateStatus(false); 
+            sConfigData.flag = sConfigData.flag | (1 << 4); //set flag for timestamp config data update and store it into flash
+            RetCode = nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
+            if(RetCode < 0)
+            {
+                diagnostic_data = diagnostic_data | (1<<4);
+            }
+            else
+            {
+                diagnostic_data = diagnostic_data & (~(1<<4));
+                diagnostic_data = diagnostic_data & TIME_STAMP_OK;
+                printk("Time updated\n");
+                bRetVal = true;
+            }
         }
         else
         {
-            diagnostic_data = diagnostic_data & (~(1<<4));
-            printk("Time updated\n");
-            bRetVal = true;
+            diagnostic_data = diagnostic_data | TIME_STAMP_ERROR;
         }
+
 
     }
 
@@ -473,21 +477,23 @@ static bool CheckForConfigChange()
 
     nvs_initialisation(&sConfigFs, CONFIG_DATA_FS); 
     k_msleep(100);
-    ulRetCode = readJsonToFlash(&sConfigFs, 0, 0, (char *)&sConfigData, sizeof(sConfigData)); 
-    if(ulRetCode != sizeof(sConfigData))
+    ulRetCode = readJsonToFlash(&sConfigFs, 0, 0, (char *)&sConfigData, sizeof(sConfigData)); // read config params from the flash
+    if(ulRetCode != sizeof(sConfigData)) 
     {
         printk("\n\rError occured while reading config data: %d\n", ulRetCode);
-        diagnostic_data = diagnostic_data | (1<<4);
+        diagnostic_data = diagnostic_data | (1<<4); // flag will shows error while reading config data from flash and added to the application
     }
     else
     {
         SetPressureZero(sConfigData.pressureZero);       
         SetPressureMax(sConfigData.pressureMax);
         SetSleepTime(sConfigData.sleepTime);
-        printk("PressureZero = %d, PressureMax = %d, sConfigFlag %d\n",
+        uFlashIdx = sConfigData.flashIdx;
+        printk("PressureZero = %d, PressureMax = %d, sConfigFlag %d ,flashIdx = %d\n",
                                      sConfigData.pressureZero, 
                                      sConfigData.pressureMax,
-                                     sConfigData.flag);
+                                     sConfigData.flag,
+                                     sConfigData.flashIdx); //get all the config params from the flash if a reboot occures
 
         bRetVal = true;
     }

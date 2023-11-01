@@ -24,6 +24,6 @@
 
 /***************************************MACROS**********************************/
 #define VISENSE_PRESSURE_SENSOR_FIRMWARE_VERSION     "0.0.1"
-#define VISENSE_PRESSURE_SENSOR_FEATURES             "Configurable Sleep Time\n\r\t  Configurable Thresholds\n\r\t  Supports RTC\n\r\t  Supports 50 writes of history\n\r\t  Supports diagnostics\n\r" 
+#define VISENSE_PRESSURE_SENSOR_FEATURES             "Configurable Sleep Time\n\r\t  Configurable Thresholds\n\r\t  Supports RTC\n\r\t  Supports 100 writes of history\n\r\t  Supports diagnostics\n\r" 
 
 #endif

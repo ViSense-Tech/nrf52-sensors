@@ -273,7 +273,7 @@ int VisenseSensordataNotify(uint8_t *pucSensorData, uint16_t unLen)
  * @param 	len : length of data
  * @return 	None
 */
-void VisenseHistoryDataNotify(void)                                        //history
+void VisenseHistoryDataNotify(void)  //history
 {
 	bool bRetVal = false;
 	uint8_t ucIdx = 1;
@@ -281,7 +281,7 @@ void VisenseHistoryDataNotify(void)                                        //his
 	int nRetVal = 0;
 	int uReadCount = 0;
 
-	for (ucIdx = 1 ; ucIdx < 50; ucIdx++)
+	for (ucIdx = 1 ; ucIdx < NUMBER_OF_ENTRIES; ucIdx++)
 	{	
 		memset(NotifyBuf, 0, ADV_BUFF_SIZE);
 		uReadCount = readJsonToFlash(FileSys, ucIdx, 0, NotifyBuf, ADV_BUFF_SIZE);
