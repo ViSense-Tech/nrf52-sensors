@@ -271,9 +271,9 @@ int VisenseSensordataNotify(uint8_t *pucSensorData, uint16_t unLen)
 /**
  * @brief 	History data notification 
  * @param 	len : length of data
- * @return 	None
+ * @return 	true for success
 */
-void VisenseHistoryDataNotify(void)  //history
+bool VisenseHistoryDataNotify(void)  //history
 {
 	bool bRetVal = false;
 	uint8_t ucIdx = 1;
@@ -305,9 +305,9 @@ void VisenseHistoryDataNotify(void)  //history
 		}
 		
 	}
+	
 	hNotificationEnabled = false;     //history callback set 
-	//nvs_clear(FileSys);
-	 deleteFlash(FileSys,0,50);
+	deleteFlash(FileSys,0,50);
 	printk("Flash Cleared");
 	return bRetVal;
 }
