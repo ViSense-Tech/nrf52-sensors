@@ -156,7 +156,7 @@ static bool ConvertEpochToTime(long long llTimeStamp, struct tm *psTimeStruct, c
 void printCurrentTime()
 {
 	struct tm  ts = {0};
-	char Timebuffer[50] = {0};
+	char Timebuffer[30] = {0};
 	ts = *localtime(&llCurrentTime);
 	strftime(Timebuffer, sizeof(Timebuffer), "%a %Y-%m-%d %H:%M:%S %Z", &ts);
 	printk("CurrentTime: %s\n\r", Timebuffer);

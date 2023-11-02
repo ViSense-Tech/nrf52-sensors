@@ -175,6 +175,7 @@ int main(void)
             {
                 //NO OP
             }
+            
             if ((sConfigData.flag & (1 << 4))) //check whether config data is read from the flash / updated from mobile
             {
                 // NO OP
@@ -193,7 +194,6 @@ int main(void)
         #endif
         #ifdef SLEEP_ENABLE
         }
-        //k_sleep(K_SECONDS(30));
         EnterSleepMode(GetSleepTime());
         ExitSleepMode();
         printk("INFO: Syncing time with RTC\n\r");

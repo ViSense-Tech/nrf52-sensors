@@ -20,3 +20,4 @@ bool IsNotificationenabled();
 bool IsConnected();
 bool IsConfigNotifyEnabled();
 int VisenseConfigDataNotify(uint8_t *pucConfigData, uint16_t unLen);
+bool VisenseHistoryDataNotify(void);

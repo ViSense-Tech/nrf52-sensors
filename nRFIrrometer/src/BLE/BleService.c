@@ -25,9 +25,9 @@ static struct bt_uuid_128 sServiceUUID = BT_UUID_INIT_128(
 static struct bt_uuid_128 sSensorChara = BT_UUID_INIT_128(
 	BT_UUID_128_ENCODE(0xb484b246, 0x5d3b, 0x11ee, 0x8c99, 0x0242ac120002));
 static struct bt_uuid_128 sConfigChara = BT_UUID_INIT_128(
-	BT_UUID_128_ENCODE(0xe0765909, 0x5d3b, 0x11ee, 0x8c99, 0x0242ac120002));
+	BT_UUID_128_ENCODE(0xb484b246, 0x5d3c, 0x11ee, 0x8c99, 0x0242ac120002));
 	static struct bt_uuid_128 sHistoryChara = BT_UUID_INIT_128(
-	BT_UUID_128_ENCODE(0xe0766000, 0x5d3b, 0x11ee, 0x8c99, 0x0242ac120002));
+	BT_UUID_128_ENCODE(0xb484b246, 0x5d3d, 0x11ee, 0x8c99, 0x0242ac120002));
 
 static uint8_t ucSensorData[VND_MAX_LEN + 1] = {0x11,0x22,0x33, 0x44, 0x55};
 static uint8_t ucConfigData2[VND_MAX_LEN + 1];
@@ -86,6 +86,7 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 		if (len)
 		{
 			SetRtcTime(ucbuff);
+			printk("Time write occured\n\r");
 			printk("time:%lld\n\r",ucbuff);
 		}
 	}
@@ -239,29 +240,35 @@ int VisenseConfigDataNotify(uint8_t *pucCongigData, uint16_t unLen)
 	return RetVal;
 }
 
-void VisenseHistoryDataNotify(uint16_t len)                                        //history
+/**
+ * @brief 	History data notification 
+ * @param 	len : length of data
+ * @return 	true for success
+*/
+bool VisenseHistoryDataNotify(void)  //history
 {
 	bool bRetVal = false;
 	uint8_t ucIdx = 1;
-	char unLen[ADV_BUFF_SIZE];
+	char NotifyBuf[ADV_BUFF_SIZE];
 	int nRetVal = 0;
+	int uReadCount = 0;
 
-	for (ucIdx = 0 ; ucIdx < 10; ucIdx++)
+	for (ucIdx = 1 ; ucIdx < NUMBER_OF_ENTRIES; ucIdx++)
 	{	
-		memset(unLen, 0, ADV_BUFF_SIZE);
-		int rc = readJsonToFlash(FileSys, ucIdx, 0, unLen, len);
-		printk("\nId: %d, Ble_Stored_Data: %s\n",ucIdx, unLen);
-		if (rc<0)
+		memset(NotifyBuf, 0, ADV_BUFF_SIZE);
+		uReadCount = readJsonToFlash(FileSys, ucIdx, 0, NotifyBuf, ADV_BUFF_SIZE);
+		printk("\nId: %d, Ble_Stored_Data: %s\n",ucIdx, NotifyBuf);
+		if (uReadCount < 0)
 		{
 			break;
 		}
-		
-		k_msleep(1000);
+	
+		k_msleep(100);
 
-		if (unLen > 0)
+		if (uReadCount > 0)
 		{
 			nRetVal = bt_gatt_notify(NULL, &VisenseService.attrs[8], 
-			unLen,len);
+			NotifyBuf,uReadCount);
 			if (nRetVal < 0)
 			{
 				printk("Notification failed%d\n\r",nRetVal);
@@ -270,11 +277,13 @@ void VisenseHistoryDataNotify(uint16_t len)                                     
 		}
 		
 	}
+	
 	hNotificationEnabled = false;     //history callback set 
-	deleteFlash(FileSys,0,80);
+	deleteFlash(FileSys,0,50);
 	printk("Flash Cleared");
 	return bRetVal;
 }
+
 bool IshistoryNotificationenabled()
 {
     return hNotificationEnabled;

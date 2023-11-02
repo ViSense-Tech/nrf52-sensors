@@ -19,7 +19,7 @@
 #include "Timerhandler.h"
 
 /*******************************MACROS****************************************/
-//#define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
+#define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
 #define TIME_STAMP_ERROR   (1<<1)
 #define TIME_STAMP_OK      ~(1<<1)
 
@@ -106,7 +106,7 @@ int main(void)
 
             pMainObject = cJSON_CreateObject();
 
-            if (ReadFromADC(NRF_SAADC_INPUT_AIN1, 1,  &nCBValue))
+           if (ReadFromADC(NRF_SAADC_INPUT_AIN1, 1,  &nCBValue))
             {
                 memset(cbuffer, '\0', sizeof(cbuffer));
                 sprintf(cbuffer,"CB=%d", abs(nCBValue));
@@ -119,7 +119,8 @@ int main(void)
                 AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer)); 
                 nrfx_saadc_uninit();
             }
-        #if 0 /*Commented for now since the mux part is not implemented*/
+        #if 0 /*Commented for now for test purpose. Below portion will get added after
+                single irrometer test is success*/
             if (ReadFromADC(NRF_SAADC_INPUT_AIN2, 2,  &nCBValue))
             {
                 memset(cbuffer, '\0', sizeof(cbuffer));
@@ -144,6 +145,12 @@ int main(void)
                 nrfx_saadc_uninit();
             }
            #endif 
+           
+            if (GetCurrentTime(&llEpochNow))
+            {
+                printk("CurrentTime=%llu\n\r", llEpochNow);
+            }
+            printCurrentTime();
             AddItemtoJsonObject(&pMainObject, NUMBER, "TS", &llEpochNow, sizeof(long long));
             AddItemtoJsonObject(&pMainObject, NUMBER, "DIAG", &lDiagnosticdata, sizeof(uint32_t));
             cJsonBuffer = cJSON_Print(pMainObject);
@@ -155,14 +162,27 @@ int main(void)
 
             SendHistoryDataToApp(cJsonBuffer, strlen(cJsonBuffer));
 
-            if(IsNotificationenabled())
+            if(IsNotificationenabled() && IsConnected())
             {
                 VisenseSensordataNotify(pucAdvBuffer+2, ADV_BUFF_SIZE);
             }
-            else
+            else if (!IsConnected())
             {
                 UpdateAdvData();
                 StartAdv();
+            }
+            else
+            {
+                //No Op
+            }
+
+            if ((sConfigData.flag & (1 << 4))) //check whether config data is read from the flash / updated from mobile
+            {
+                // NO OP
+            }
+            else
+            {
+                lDiagnosticdata = lDiagnosticdata | (1 << 4); //added a diagnostic information to the application
             }
 
             memset(pucAdvBuffer, 0, ADV_BUFF_SIZE);
@@ -170,14 +190,14 @@ int main(void)
             cJSON_free(cJsonBuffer);
 
             #ifndef SLEEP_ENABLE 
-            k_sleep(K_MSEC(50));
+            k_msleep(600);
             #endif
         #ifdef SLEEP_ENABLE
         }
         #endif
 
         #ifdef SLEEP_ENABLE
-         EnterSleepMode(uSleepTime);
+         EnterSleepMode(GetSleepTime());
          ExitSleepMode();
         #endif
      }
@@ -221,7 +241,7 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
             k_msleep(50);
             if (readJsonToFlash(&fs, uFlashIdx, NUMBER_OF_ENTRIES, cBuffer, strlen(cBuffer)))
             {
-                printk("\nId: %d, Stored_Data: %s\n",STRING_ID + uFlashIdx, cBuffer);
+                printk("Read succes\n\r");
             }
             uFlashIdx++;
             sConfigData.flashIdx = uFlashIdx;
@@ -263,7 +283,7 @@ static void SendConfigDataToApp()
     AddItemtoJsonObject(&pConfigObject, STRING, "VERSION", cBuffer, strlen(cBuffer));
     memset(cBuffer, 0, sizeof(cBuffer));
     sprintf(cBuffer, "%ds", ulSleepTime);
-    AddItemtoJsonObject(&pConfigObject, STRING, "SLEEP", cBuffer, strlen(cBuffer));
+    AddItemtoJsonObject(&pConfigObject, STRING, "Sleep", cBuffer, strlen(cBuffer));
     cJsonConfigBuffer = cJSON_Print(pConfigObject);
     printk("ConfigJSON:\n%s\n", cJsonConfigBuffer);
 
@@ -307,6 +327,8 @@ static bool WriteConfiguredtimeToRTC(void)
         }
         else
         {
+            printk("WARN: Check RTC is connected\n\r");
+            SetTimeUpdateStatus(false); 
             lDiagnosticdata = lDiagnosticdata | TIME_STAMP_ERROR;
         }
     }

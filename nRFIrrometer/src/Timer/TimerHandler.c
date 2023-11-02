@@ -29,14 +29,12 @@ struct device *pRTC = NULL;
  */
 static void TimerExpiredCb(nrf_timer_event_t event_type, void * p_context)
 {
-    int64_t llEpochNow = 0;
     if(event_type == NRF_TIMER_EVENT_COMPARE0)
     {
         /*For test only will remove the following line*/
         if (device_is_ready(pRTC))
         {
             UpdateCurrentTime();
-           //printCurrentTime();
         }
     }
 }

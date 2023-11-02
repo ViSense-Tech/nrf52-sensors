@@ -23,7 +23,7 @@ int nvs_initialisation( struct nvs_fs *fs, uint8_t selector)
 
 	if (selector == DATA_FS) // data
 	{
-		fs->offset = NVS_PARTITION_OFFSET + 8192;
+		fs->offset = NVS_PARTITION_OFFSET + 12288;
 		rc = flash_get_page_info_by_offs(fs->flash_device, fs->offset, &info);
 		if (rc) 
 		{
@@ -44,7 +44,7 @@ int nvs_initialisation( struct nvs_fs *fs, uint8_t selector)
 			return 0;
 		}
 		fs->sector_size = info.size;
-		fs->sector_count = 2U;
+		fs->sector_count = 3U;
 	}
 
 	rc = nvs_mount(fs);

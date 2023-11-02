@@ -125,35 +125,47 @@ int CalculateCBvalue(int res, float TC, float cF)
 	float resK = res / 1000.0;
 	float tempD = 1.00 + 0.018 * (TC - 24.00);
 
+    /*if Watermark sesnsor resistance is greater than 550ohms we are sensing 
+    moisture content but not too saturated soil */
 	if (res > 550.00)
     { 
 		if (res > 8000.00)
         { 
+            /*CB value calculation if resistance is above 8 k ohms*/
 			WM_CB = (-2.246 - 5.239 * resK * (1 + .018 * (TC - 24.00)) - .06756 * resK * resK * (tempD * tempD)) * cF;
 		}
         else if (res > 1000.00)
         {
+            /*CB value calculation if resistance is above 1 k ohms*/
 			WM_CB = (-3.213 * resK - 4.093) / (1 - 0.009733 * resK - 0.01205 * (TC)) * cF ;
 		}
         else
         {
+            /*CB value calculation if resistance is below 1 k ohms*/
 			WM_CB = (resK * 23.156 - 12.736) * tempD;
 		}
 	} 
     else
-    {
+    { 
 		if (res > 300.00)
         {
+        /*If resitance is calculated is more near to short resistance threshold 200 ohms
+        take CB as 0*/
+
 			WM_CB = 0.00;
 		}
 		if (res < 300.00 && res >= short_resistance)
         {
+            /*If resistance is reaching short resitance raise fault CB
+            240*/
 			WM_CB = short_CB;
 			printk("Sensor Short WM \n");
 		}
 	}
 	if (res >= open_resistance || res==0)
     {
+        /*If resistance is greater than open resistance threshold take CB as 255
+        for fault code indicating sensor is not connected or it is faulty*/        
 		WM_CB = open_CB;
 	}
 
