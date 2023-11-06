@@ -91,6 +91,11 @@ int main(void)
     {
         printk("WARN: Getting time from RTC failed\n\r");
     }
+    // if ()
+    // {
+    //     /* code */
+    // }
+    
 
     while (1) 
     {
@@ -271,17 +276,24 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
             
             memset(cBuffer, '\0', sizeof(cBuffer));
             memcpy(cBuffer, pcBuffer, unLength);
-            writeJsonToFlash(&fs, uFlashIdx, NUMBER_OF_ENTRIES, cBuffer, strlen(cBuffer));
-            k_msleep(50);
-            if (readJsonToFlash(&fs, uFlashIdx, NUMBER_OF_ENTRIES, cBuffer, strlen(cBuffer)))
+            printk("Flash Idex%d\n\r",uFlashIdx);
+
+            if(writeJsonToExternalFlash(cBuffer, uFlashIdx,(int) unLength))
             {
-                printk("\nId: %d, Stored_Data: %s\n",STRING_ID + uFlashIdx, cBuffer);
+                // NO OP
             }
+            k_msleep(50);
+            if (readJsonFromExternalFlash(cBuffer, uFlashIdx, unLength))
+            {
+                printk("\nId: %d, Stored_Data: %s\n",uFlashIdx, cBuffer);
+            }
+            
             uFlashIdx++;
             sConfigData.flashIdx = uFlashIdx;
             nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
-            if(uFlashIdx>= NUMBER_OF_ENTRIES)
+            if(uFlashIdx >= NUMBER_OF_ENTRIES)
             {
+                // EraseExternalFlash(8);
                 uFlashIdx = 0;
             }
         }
@@ -474,8 +486,9 @@ static bool CheckForConfigChange()
     nvs_initialisation(&sConfigFs, CONFIG_DATA_FS); 
     k_msleep(100);
     ulRetCode = readJsonToFlash(&sConfigFs, 0, 0, (char *)&sConfigData, sizeof(sConfigData)); // read config params from the flash
-    if(ulRetCode != sizeof(sConfigData)) 
+    if(sConfigData.flag == 0) 
     {
+        EraseExternalFlash(SECTOR_COUNT);   
         printk("\n\rError occured while reading config data: %d\n", ulRetCode);
         diagnostic_data = diagnostic_data | (1<<4); // flag will shows error while reading config data from flash and added to the application
     }
