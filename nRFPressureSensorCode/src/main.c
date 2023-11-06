@@ -474,7 +474,7 @@ static bool CheckForConfigChange()
     nvs_initialisation(&sConfigFs, CONFIG_DATA_FS); 
     k_msleep(100);
     ulRetCode = readJsonToFlash(&sConfigFs, 0, 0, (char *)&sConfigData, sizeof(sConfigData)); // read config params from the flash
-    if(ulRetCode != sizeof(sConfigData)) 
+    if(sConfigData.flag == 0) 
     {
         printk("\n\rError occured while reading config data: %d\n", ulRetCode);
         diagnostic_data = diagnostic_data | (1<<4); // flag will shows error while reading config data from flash and added to the application
