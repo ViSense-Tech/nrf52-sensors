@@ -52,7 +52,7 @@ static void PrintBanner();
 static bool GetTimeFromRTC();
 static bool WriteConfiguredtimeToRTC(void);
 static void SendConfigDataToApp();
-static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength);
+static bool SendHistoryDataToApp(uint16_t uPressureValue, char *pcBuffer, uint16_t unLength);
 
 /*******************************FUNCTION DEFINITIONS********************************/
 
@@ -158,7 +158,7 @@ int main(void)
             memcpy(&pucAdvertisingdata[4], cJsonBuffer, strlen(cJsonBuffer));
 
                 
-            SendHistoryDataToApp(cJsonBuffer, strlen(cJsonBuffer)); //save to flash only if Mobile Phone is NOT connected
+            SendHistoryDataToApp(unPressureResult, cJsonBuffer, strlen(cJsonBuffer)); //save to flash only if Mobile Phone is NOT connected
             
             printk("JSON:\n%s\n", cJsonBuffer);
 
@@ -166,11 +166,13 @@ int main(void)
             {
                 VisenseSensordataNotify(pucAdvertisingdata+2, ADV_BUFF_SIZE);
             }
+#ifdef EXTENDED_ADV
             else if (!IsNotificationenabled() && !IsConnected())
             {
                 UpdateAdvertiseData();
                 StartAdvertising();
             }
+#endif
             else
             {
                 //NO OP
@@ -257,7 +259,7 @@ static bool UpdateConfigurations()
  * @param unLength : Length of data
  * @return None
 */
-static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
+static bool SendHistoryDataToApp(uint16_t uPressureValue, char *pcBuffer, uint16_t unLength)
 {
 
     char cBuffer[ADV_BUFF_SIZE];
@@ -266,7 +268,7 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
 
     if (pcBuffer)
     {
-        if(!IsConnected()) // && sConfigData.flag & (1 << 4) can include this condition also if config is mandetory during initial setup
+        if(!IsConnected() && (uPressureValue != 0)) // && sConfigData.flag & (1 << 4) can include this condition also if config is mandetory during initial setup
         {
             
             memset(cBuffer, '\0', sizeof(cBuffer));
@@ -434,7 +436,7 @@ static bool InitBle()
             printk("Bluetooth init failed (err %d)\n", nError);
             break;
         }
-
+#ifdef EXTENDED_ADV
         nError = InitExtendedAdv();
         
         if (nError) 
@@ -442,8 +444,15 @@ static bool InitBle()
             printk("Advertising failed to create (err %d)\n", nError);
             break;
         }
-
         StartAdvertising();
+#else
+        nError = StartAdvertising();
+        if (nError)
+        {
+            printk("Advertising failed to create (err %d)\n", nError);
+            break;
+        }
+#endif
         bRetVal = true;
     } while (0);
     
