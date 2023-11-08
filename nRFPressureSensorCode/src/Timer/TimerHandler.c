@@ -36,7 +36,7 @@ static void TimerExpiredCb(nrf_timer_event_t event_type, void * p_context)
         if (device_is_ready(pRTC))
         {
             UpdateCurrentTime();
-            printCurrentTime();
+             printCurrentTime();
         }
     }
 }

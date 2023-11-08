@@ -38,6 +38,9 @@ struct bt_conn *psConnHandle = NULL;
 static bool hNotificationEnabled = false;
 struct nvs_fs *FileSys;
 static bool bConfigNotifyEnabled = false;
+/*Read index from flash*/
+uint8_t ucIdx = 0;
+
 
 
 extern void SetPressureZero(uint32_t *ucbuffer);
@@ -273,21 +276,32 @@ int VisenseSensordataNotify(uint8_t *pucSensorData, uint16_t unLen)
  * @param 	len : length of data
  * @return 	true for success
 */
-bool VisenseHistoryDataNotify(void)  //history
+bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 {
 	bool bRetVal = false;
-	uint8_t ucIdx = 1;
+	bool bFullDataRead = false;
 	char NotifyBuf[ADV_BUFF_SIZE];
 	int nRetVal = 0;
 	int uReadCount = 0;
+	uint8_t uFlashCounter = 0;
+	if (ucIdx > ulWritePos)
+	{
+		uFlashCounter = ucIdx - ulWritePos;
+	}
 
-	for (ucIdx = 1 ; ucIdx < NUMBER_OF_ENTRIES; ucIdx++)
+	while(ucIdx <= NUMBER_OF_ENTRIES)
 	{	
+		if (!IsConnected())
+		{
+			break;
+		}
+		
 		memset(NotifyBuf, 0, ADV_BUFF_SIZE);
 		uReadCount = readJsonToFlash(FileSys, ucIdx, 0, NotifyBuf, ADV_BUFF_SIZE);
 		printk("\nId: %d, Ble_Stored_Data: %s\n",ucIdx, NotifyBuf);
 		if (uReadCount < 0)
 		{
+			bFullDataRead = true;
 			break;
 		}
 	
@@ -301,14 +315,33 @@ bool VisenseHistoryDataNotify(void)  //history
 			{
 				printk("Notification failed%d\n\r",nRetVal);
 			}
-			bRetVal = true;
+			
+		}
+		ucIdx++;
+		uFlashCounter++;
+		if (ucIdx == NUMBER_OF_ENTRIES)
+		{
+			ucIdx = 0;
+		}
+		if (uFlashCounter > NUMBER_OF_ENTRIES )
+		{
+			bFullDataRead = true;
+			break;	
 		}
 		
+		
+		// bRetVal = true;
 	}
 	
 	hNotificationEnabled = false;     //history callback set 
-	deleteFlash(FileSys,0,50);
-	printk("Flash Cleared");
+	if (bFullDataRead == true) 
+	{
+		deleteFlash(FileSys);
+		printk("Flash Cleared");
+		ucIdx = 0;
+		bRetVal = true;
+	}
+	
 	return bRetVal;
 }
 
