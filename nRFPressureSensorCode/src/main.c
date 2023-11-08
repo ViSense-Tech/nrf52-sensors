@@ -292,8 +292,10 @@ static bool SendHistoryDataToApp(uint16_t uPressureValue, char *pcBuffer, uint16
         if(IshistoryNotificationenabled() && IsConnected())
         {
             printk("In history notif\n\r");
-            VisenseHistoryDataNotify();
-            uFlashIdx = 0; 
+            if (VisenseHistoryDataNotify(uFlashIdx))
+            {
+                uFlashIdx = 0;
+            } 
         }
 
         bRetval = true;

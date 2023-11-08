@@ -85,7 +85,7 @@ int readJsonToFlash(struct nvs_fs *fs, uint16_t data_count,uint16_t count_max, c
 }
 
 
-int deleteFlash(struct nvs_fs *fs, uint16_t data_count,uint16_t count_max)
+int deleteFlash(struct nvs_fs *fs)
 {
 	nvs_clear(fs);
 	nvs_initialisation(fs, DATA_FS); //deleting data
