@@ -72,6 +72,7 @@ void ExitSleepMode()
         pm_device_action_run(pAdc, PM_DEVICE_ACTION_RESUME);
         gpio_pin_set(sSleepStatusLED.port, sSleepStatusLED.pin, 0);
     }
+    StartAdvertising();
 }
 
 /**
