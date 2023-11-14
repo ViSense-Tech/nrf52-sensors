@@ -17,10 +17,12 @@
 #include "SystemHandler.h"
 #include "nvs_flash.h"
 #include "TimerHandler.h"
+#include "mesh_handler.h"
+#include "mesh_sub_sys.h"
 
 
 /*******************************MACROS****************************************/
-#define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
+// #define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
 #define PRESSURE_SENSOR         0x01
 // diagnostics
 #define SENSOR_DIAGNOSTICS       (1<<0)
@@ -69,6 +71,7 @@ int main(void)
     cJSON *pMainObject = NULL;
     long long llEpochNow = 0;
     int64_t Timenow = 0;
+    char bugg[100];
 
     PrintBanner();
     printk("VISENSE_PRESSURE_FIRMWARE_VERSION: %s\n\r", VISENSE_PRESSURE_SENSOR_FIRMWARE_VERSION);
@@ -158,9 +161,19 @@ int main(void)
             memcpy(&pucAdvertisingdata[4], cJsonBuffer, strlen(cJsonBuffer));
 
                 
-            SendHistoryDataToApp(unPressureResult, cJsonBuffer, strlen(cJsonBuffer)); //save to flash only if Mobile Phone is NOT connected
-            
+            // SendHistoryDataToApp(unPressureResult, cJsonBuffer, strlen(cJsonBuffer)); //save to flash only if Mobile Phone is NOT connected
+            SendMeshPayload();
             printk("JSON:\n%s\n", cJsonBuffer);
+            // if(writeJsonToExternalFlash(cJsonBuffer, uFlashIdx, WRITE_ALIGNMENT))
+            // {
+            //     // NO OP
+            // }
+            // k_msleep(50);
+            // // memset(cBuffer, 0, 100);
+            // if (readJsonFromExternalFlash(bugg, uFlashIdx, WRITE_ALIGNMENT))
+            // {
+            //     printk("\n\rId: %d, Stored_Data: %s\n",uFlashIdx, bugg);
+            // }
 
             if(IsNotificationenabled())
             {
@@ -169,8 +182,8 @@ int main(void)
 #ifdef EXTENDED_ADV
             else if (!IsNotificationenabled() && !IsConnected())
             {
-                UpdateAdvertiseData();
-                StartAdvertising();
+                // UpdateAdvertiseData();
+                // StartAdvertising();
             }
 #endif
             else
@@ -186,7 +199,7 @@ int main(void)
             {
                 diagnostic_data = diagnostic_data | (1 << 4); //added a diagnostic information to the application
             }
-            
+            uFlashIdx++;
             memset(pucAdvertisingdata, 0, ADV_BUFF_SIZE);
             cJSON_Delete(pMainObject);
             cJSON_free(cJsonBuffer);
@@ -439,16 +452,16 @@ static bool InitBle()
             break;
         }
 #ifdef EXTENDED_ADV
-        nError = InitExtendedAdv();
+        // nError = InitExtendedAdv();
         
-        if (nError) 
-        {
-            printk("Advertising failed to create (err %d)\n", nError);
-            break;
-        }
-        StartAdvertising();
+        // if (nError) 
+        // {
+        //     printk("Advertising failed to create (err %d)\n", nError);
+        //     break;
+        // }
+        // StartAdvertising();
 #else
-        nError = StartAdvertising();
+        // nError = StartAdvertising();
         if (nError)
         {
             printk("Advertising failed to create (err %d)\n", nError);
@@ -482,11 +495,12 @@ static bool CheckForConfigChange()
     uint32_t ulRetCode = 0;
     bool bRetVal = false;
 
-    nvs_initialisation(&sConfigFs, CONFIG_DATA_FS); 
+    //nvs_initialisation(&sConfigFs, CONFIG_DATA_FS); 
     k_msleep(100);
     ulRetCode = readJsonToFlash(&sConfigFs, 0, 0, (char *)&sConfigData, sizeof(sConfigData)); // read config params from the flash
     if(sConfigData.flag == 0) 
     {
+         EraseExternalFlash(SECTOR_COUNT); // erase flash if configflag is 0
         printk("\n\rError occured while reading config data: %d\n", ulRetCode);
         diagnostic_data = diagnostic_data | (1<<4); // flag will shows error while reading config data from flash and added to the application
     }
@@ -528,7 +542,7 @@ static bool InitAllModules()
        InitADC();
        k_sleep(K_TICKS(100));
 
-       InitDataPartition();
+        InitDataPartition();
 
        if (!InitBle())
        {

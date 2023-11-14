@@ -39,7 +39,7 @@ static bool hNotificationEnabled = false;
 struct nvs_fs *FileSys;
 static bool bConfigNotifyEnabled = false;
 /*Read index from flash*/
-uint8_t ucIdx = 0;
+uint32_t ucIdx = 0;
 
 
 
@@ -283,7 +283,7 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 	char NotifyBuf[ADV_BUFF_SIZE];
 	int nRetVal = 0;
 	int uReadCount = 0;
-	uint8_t uFlashCounter = 0;
+	uint32_t uFlashCounter = 0;
 	if (ucIdx > ulWritePos)
 	{
 		uFlashCounter = ucIdx - ulWritePos;
@@ -297,14 +297,18 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 		}
 		
 		memset(NotifyBuf, 0, ADV_BUFF_SIZE);
-		uReadCount = readJsonToFlash(FileSys, ucIdx, 0, NotifyBuf, ADV_BUFF_SIZE);
+		uReadCount = readJsonFromExternalFlash(NotifyBuf, ucIdx, WRITE_ALIGNMENT);
 		printk("\nId: %d, Ble_Stored_Data: %s\n",ucIdx, NotifyBuf);
-		if (uReadCount < 0)
+		// if (uReadCount == true)
+		// {
+		// 	bFullDataRead = true;
+		// 	break;
+		// }
+		if (NotifyBuf[0] != 0x7B)
 		{
-			bFullDataRead = true;
+			// bFullDataRead = true;
 			break;
 		}
-	
 		k_msleep(100);
 
 		if (uReadCount > 0)
@@ -336,7 +340,11 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 	hNotificationEnabled = false;     //history callback set 
 	if (bFullDataRead == true) 
 	{
-		deleteFlash(FileSys);
+		if(!EraseExternalFlash(SECTOR_COUNT))
+		{
+			printk("Flash erase failed!\n");
+			return bRetVal;
+		}
 		printk("Flash Cleared");
 		ucIdx = 0;
 		bRetVal = true;

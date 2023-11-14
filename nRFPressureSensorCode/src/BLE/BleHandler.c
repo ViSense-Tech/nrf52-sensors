@@ -33,7 +33,7 @@ static const struct bt_data ad[] = {
  * @brief  This function isfor Enabling BLE
  * @param  None 
  * @return True for success
-*/
+
 bool EnableBLE()
 {
     int nError = 0;
