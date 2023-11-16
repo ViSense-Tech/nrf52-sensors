@@ -3,10 +3,14 @@
 #include "BleService.h"
 #include "nvs_flash.h"
 /*************************************MACROS****************************************************/
+#define PRESSURE_SENSOR_STATUS           0x01
+#define IRROMETER_SENSOR_STATUS          0x02
+#define RELAY_NODE_STATUS                0x03
 
 #define RECIEVE_OPCODE_VISENSE          BT_MESH_MODEL_OP_3(0x0A, VISENSE_COMPANY_ID)
 #define IRROMETER_RX_OPCODE_VISENSE     BT_MESH_MODEL_OP_3(0x0B, VISENSE_COMPANY_ID)
 #define RELAY_NODE_OPCODE               BT_MESH_MODEL_OP_3(0x0C, VISENSE_COMPANY_ID)
+#define ACK_OPCODE_VISENSE              BT_MESH_MODEL_OP_3(0x0D, VISENSE_COMPANY_ID)
 
 /*************************************GLOBAL VARIABLES********************************************/
 static bool attention;
@@ -100,6 +104,7 @@ static int handle_message(struct bt_mesh_model *model, struct bt_mesh_msg_ctx *c
         printk("\n\rId: %d, Stored_Data: %s\n",uFlashIdx, cBuffer);
     }
     printk("\n\rpressure message: %s\n",msgg);
+    sendAck(ctx, PRESSURE_SENSOR_STATUS);
     uFlashIdx++;
 	return 0;
 }
@@ -109,8 +114,9 @@ static int irrometer_handle(struct bt_mesh_model *model, struct bt_mesh_msg_ctx 
 	bool bRetVal = false;
 	char *msgg;
     msgg = extract_msg(buf);
-    bRetVal = writeJsonToExternalFlash(msgg, uFlashIdx, sizeof(msgg));
+    // bRetVal = writeJsonToExternalFlash(msgg, uFlashIdx, sizeof(msgg));
     printk("irrometer message: %s\n",msgg);
+    sendAck(ctx, IRROMETER_SENSOR_STATUS);
 	return 0;
 }
 
@@ -131,4 +137,28 @@ void SendMeshPayload(void)
             uFlashIdx = 0;
         } 
     }    
+}
+/**
+ * @brief send ack over ble mesh
+ * @param addr : address
+ * @param opcode : opcode
+ * @return None
+ */
+void sendAck(struct bt_mesh_msg_ctx *ctx, uint8_t uSensorStatus)
+{
+    struct net_buf_simple *msg = NET_BUF_SIMPLE(BT_MESH_TX_SDU_MAX);
+
+    bt_mesh_model_msg_init(msg, ACK_OPCODE_VISENSE);
+    // Build your status message payload
+    net_buf_simple_add_u8(msg, uSensorStatus);
+
+    // Send the status message back to the sender
+    if (bt_mesh_model_send(elements->vnd_models, ctx, msg, NULL, NULL) != 0) 
+    {
+        printk("Failed to send status message\n");
+    }
+    else
+    {
+        printk("Sent status message\n");
+    }
 }

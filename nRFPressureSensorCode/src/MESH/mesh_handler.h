@@ -23,3 +23,4 @@ static int relay_node_handle(struct bt_mesh_model *model, struct bt_mesh_msg_ctx
 static void attention_off(struct bt_mesh_model *mod);
 static void attention_on(struct bt_mesh_model *mod);
 void SendMeshPayload(void);
+void sendAck(struct bt_mesh_msg_ctx *ctx, uint8_t status);

@@ -314,7 +314,7 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 		if (uReadCount > 0)
 		{
 			nRetVal = bt_gatt_notify(NULL, &VisenseService.attrs[8], 
-			NotifyBuf,uReadCount);
+			NotifyBuf,WRITE_ALIGNMENT);
 			if (nRetVal < 0)
 			{
 				printk("Notification failed%d\n\r",nRetVal);
