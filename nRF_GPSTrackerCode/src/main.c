@@ -64,11 +64,11 @@ int main(void)
 		return 0;
 	}
 
-	if (InitExtendedAdv()) 
-    {
-		printk("Advertising failed to create (err %d)\n", Ret);
-		return 0;
-	}
+	// if (InitExtendedAdv()) 
+    // {
+	// 	printk("Advertising failed to create (err %d)\n", Ret);
+	// 	return 0;
+	// }
 
     if(	StartAdvertising())
     {
