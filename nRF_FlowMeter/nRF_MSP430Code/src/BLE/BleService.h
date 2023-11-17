@@ -8,6 +8,7 @@
 
 /**************************************INCLUDES******************************/
 #include "BleHandler.h"
+#include "FlashHandler.h"
 
 /***************************************MACROS*******************************/
 
@@ -18,3 +19,4 @@ int VisenseSensordataNotify(uint8_t *pucSensorData, uint16_t unLen);
 void BleSensorDataNotify(const struct bt_gatt_attr *attr, uint16_t value);
 bool IsNotificationenabled();
 bool IsConnected();
+void SetFileSystem(struct nvs_fs *fs);

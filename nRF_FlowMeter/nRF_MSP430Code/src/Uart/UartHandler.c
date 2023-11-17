@@ -1,13 +1,13 @@
 /**
- * @file    GPSHandler.c
- * @brief   GPS related functions are handled here
+ * @file    UartHandler.c
+ * @brief   Uart related functions are defined here
  * @author  Adhil
  * @date    14-10-2023
- * @see     GSPHandler.h
+ * @see     UartHandler.h
 */
 
 /***************************INCLUDES*********************************/
-#include "GPSHandler.h"
+#include "UartHandler.h"
 
 /***************************MACROS***********************************/
 #define MSG_SIZE 255
@@ -56,60 +56,6 @@ void SendData(const char *pcData)
 }
 
 /**
- * @brief Convert NMEA format of degrees minutes to coordinates
- * @param pcLocData : Location data
- * @param pfLat     : Latitude coordinate
- * @param pfLon     : Longitude coordinate
- * @return true for success
-*/
-// bool ConvertNMEAtoCoordinates(char *pcLocData, float *pfLat, float *pfLon)
-// {
-//     char *cSubstr = NULL;
-//     bool bRetVal = false;
-//     float fDegrees = 0.00;
-//     float fMinutes = 0;
-
-//     if (pcLocData && pfLat && pfLon)
-//     {
-//         cSubstr = strtok(pcLocData, ",");
-
-//         if (cSubstr == NULL)
-//         {
-//             return bRetVal;
-//         }
-        
-//         *pfLat = atof(cSubstr);
-//         fDegrees = *pfLat;
-//         fMinutes = (int)fDegrees%100;
-//         *pfLat = ((int)fDegrees/100) + (fMinutes/60);
-//         cSubstr = strtok(NULL, ",");
-
-//         if (cSubstr == NULL)
-//         {
-//             return bRetVal;
-//         } 
-
-//         cSubstr = strtok(NULL, ",");
-
-//         if (cSubstr == NULL)
-//         {
-//             return bRetVal;
-//         }
-
-//         if (strlen(cSubstr) > 2)
-//         {
-//             *pfLon = atof(cSubstr);
-//             fDegrees = *pfLon;
-//             fMinutes = (int)fDegrees%100;
-//             *pfLon = ((int)fDegrees/100) + (fMinutes/60);
-//             bRetVal = true;
-//         }
-//     }
-
-//     return bRetVal;
-// }
-
-/**
  * @brief Set Rx status
  * @param bStatus : status
  * @return None
@@ -148,7 +94,6 @@ static void ReadFlowRate(uint8_t ucByte)
 
         case END:   RxState = START;
                     nRxBuffIdx = 0;
-                    //bRxCmplt = false;
                     break;
 
         default:    break;            
@@ -186,7 +131,6 @@ bool ProcessRxdData(void)
         /* read until FIFO empty */
     if (uart_fifo_read(psUartDev, &ucByte, 1) > 0) 
     {
-        //printk("Rx: %c\n\r", ucByte);// ReadGPSPacket(ucByte);
         ReadFlowRate(ucByte);
         bRetval = true;
     }
@@ -220,48 +164,6 @@ void ReceptionCallback(const struct device *psUartDev, void *pvUserData)
         }
     }
 }
-
-/**
- * @brief Read Location data
- * @param None
- * @return true for success
-*/
-// bool ReadLocationData(char *pcLocation)
-// {
-//     bool bRetVal = false;
-//     char *cSubString = NULL;
-//     uint8_t ucIdx = 0;
-
-//     if (bRxCmplt)
-//     {
-//         cSubString = strstr(cRxBuffer, "$GNGGA");
-//         if (cSubString != NULL)
-//         {
-//             memcpy(pcLocation, cSubString, strlen(cSubString));
-//             for (ucIdx = 0; pcLocation[ucIdx] != ','; ucIdx++);
-//             ucIdx++;
-//             memcpy(pcLocation, pcLocation+ucIdx, strlen(pcLocation+ucIdx));
-//             for (ucIdx = 0; pcLocation[ucIdx] != ','; ucIdx++);
-//             ucIdx++;
-//             memcpy(pcLocation, pcLocation+ucIdx, strlen(pcLocation+ucIdx));
-
-//             if (strchr(pcLocation, 'E') != NULL && strchr(pcLocation, 'N') != NULL)
-//             {
-//                 for (ucIdx = 0; pcLocation[ucIdx] != 'E'; ucIdx++);
-//                 ucIdx++;
-//                 memset(pcLocation+ucIdx, '\0', strlen(pcLocation+ucIdx));
-//             }
-//             else
-//             {
-//                 //strcpy(pcLocation, "xxxxxxxxx,N,xxxxxxxxxx,E");
-//             }
-//         }
-//         bRxCmplt = false;
-//         bRetVal = true;
-//     }
-
-//     return bRetVal;
-// }
 
 /**
  * @brief  Initialising uart 
@@ -306,50 +208,3 @@ bool InitUart(void)
 
     return bRetVal;
 }
-
-// bool ReadSOGData(float *pfSOG)
-// {
-//     bool bRetVal = false;
-//     char *pcSubString = NULL;
-//     char *pcSOGData = NULL;
-//     char cSOG[50] = {0};
-//     uint8_t ucIdx = 0;
-
-//     if (bRxCmplt)
-//     {
-//         //printk(cRxBuffer);
-//         //printk("\n\r");
-//         pcSubString = strstr(cRxBuffer, "$GNRMC");
-
-//         if (pcSubString != NULL)
-//         {
-//             pcSOGData = strchr(pcSubString, 'E');
-
-//             if (pcSOGData != NULL)
-//             {
-//                 pcSOGData++;
-//                 memcpy(cSOG, pcSOGData, strlen(pcSOGData));
-                
-//                 if (cSOG[0] == ',' && cSOG[1] != ',')
-//                 {
-//                     for (ucIdx = 1; cSOG[ucIdx] != ','; ucIdx++);
-//                     ucIdx++;
-//                     memcpy(cSOG, cSOG+1, strlen(cSOG+1));
-//                     printk("SOG str: %s\n\r", cSOG);
-//                     memset(cSOG+ucIdx, '\0', strlen(cSOG+ucIdx));
-//                     *pfSOG = atof(cSOG);
-//                     //printk("SOG %f\n\r", *pfSOG);
-//                     bRetVal = true;
-//                 }
-//                 else
-//                 {
-//                     *pfSOG = 0.00;
-//                 }
-//             }
-//         }
-
-//         bRxCmplt = false;
-//     }
-
-//     return bRetVal;
-// }

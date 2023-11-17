@@ -15,22 +15,23 @@
 #define VND_MAX_LEN 247
 /* Custom Service Variables */
 #define BT_UUID_CUSTOM_SERVICE_VAL \
-	BT_UUID_128_ENCODE(0x842744ce, 0x6d9d, 0x11ee, 0xb962, 0x0242ac120002)
+	BT_UUID_128_ENCODE(0xe3ddaba8, 0x8551, 0x11ee, 0xb9d1, 0x0242ac120002)
 
 /**************************** GLOBALS*******************************************/
 static struct bt_uuid_128 sServiceUUID = BT_UUID_INIT_128(
 	BT_UUID_CUSTOM_SERVICE_VAL);
 
 static struct bt_uuid_128 sSensorChara = BT_UUID_INIT_128(
-	BT_UUID_128_ENCODE(0x84274794, 0x6d9d, 0x11ee, 0xb962, 0x0242ac120002));
+	BT_UUID_128_ENCODE(0xe3ddaf72, 0x8551, 0x11ee, 0xb9d1, 0x0242ac120002));
 
 static struct bt_uuid_128 sConfigChara = BT_UUID_INIT_128(
-	BT_UUID_128_ENCODE(0x84274bc2, 0x6d9d, 0x11ee, 0xb962, 0x0242ac120002));
+	BT_UUID_128_ENCODE(0xe3ddb576, 0x8551, 0x11ee, 0xb9d1, 0x0242ac120002));
 
 static uint8_t ucSensorData[VND_MAX_LEN + 1] = {0x11,0x22,0x33, 0x44, 0x55};
 static uint8_t ucConfigData2[VND_MAX_LEN + 1];
 static bool bNotificationEnabled = false; 
 static bool bConnected = false;
+struct nvs_fs *FileSys;
 struct bt_conn *psConnHandle = NULL;
 
 
@@ -162,6 +163,16 @@ int VisenseSensordataNotify(uint8_t *pucSensorData, uint16_t unLen)
     }
 
 	return nRetVal;
+}
+
+/**
+ * @brief Set file pointer
+ * @param fs : file pointer structure
+ * @return None
+*/
+void SetFileSystem(struct nvs_fs *fs)
+{
+	FileSys = fs;
 }
 
 /**
