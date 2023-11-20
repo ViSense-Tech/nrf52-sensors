@@ -1,0 +1,1121 @@
+<module name="SIMCOP" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="SIMCOP_HL_REVISION" acronym="SIMCOP_HL_REVISION" offset="0x0" width="32" description="IP Revision Identifier (X.Y.R) Used by software to track features, bugs, and compatibility">
+    <bitfield id="REVISION" width="32" begin="31" end="0" resetval="See" description="IP Revision" range="" rwaccess="R"/>
+  </register>
+  <register id="SIMCOP_HL_HWINFO" acronym="SIMCOP_HL_HWINFO" offset="0x4" width="32" description="Information about the IP module's hardware configuration. It provides information about the RTL generic parameters.">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VTNF_ENABLE" width="1" begin="16" end="16" resetval="0x1" description="The VTNF module is present when this parameter is set." range="" rwaccess="R"/>
+    <bitfield id="LDCIMXNSF_BOOST" width="2" begin="15" end="14" resetval="0x3" description="" range="" rwaccess="R">
+      <bitenum value="0" id="ZERO" token="LDCIMXNSF_BOOST_0" description="SIMCOP receives a 200 MHz clock driving all sub-modules"/>
+      <bitenum value="1" id="ONE" token="LDCIMXNSF_BOOST_1" description="SIMCOP receives a 400 MHz clock. Some modules receive the 400 Mhz clock and others receive 400/2=200 Mhz."/>
+      <bitenum value="3" id="THREE" token="LDCIMXNSF_BOOST_3" description="SIMCOP receives only one main clock for all the modules."/>
+      <bitenum value="2" id="TWO" token="LDCIMXNSF_BOOST_2" description="SIMCOP receives a main clock @ 304 Mhz plus a clock @ 426 Mhz for LDC, NSF and iMX."/>
+    </bitfield>
+    <bitfield id="RESERVED" width="4" begin="13" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IMAGE_BUFFERS" width="2" begin="9" end="8" resetval="0x0" description="This parameter defines the image buffer count." range="" rwaccess="R">
+      <bitenum value="0" id="IM4" token="IMAGE_BUFFERS_0" description="4 Image buffers (#e, #f, #g, #h)"/>
+      <bitenum value="1" id="IM8" token="IMAGE_BUFFERS_1" description="8 Image buffers"/>
+    </bitfield>
+    <bitfield id="NSF3_ENABLE" width="1" begin="7" end="7" resetval="0x0" description="The NSF3 module is present when this parameter is set." range="" rwaccess="R">
+      <bitenum value="0" id="DISABLE" token="NSF3_ENABLE_0" description="Disabled at design time"/>
+      <bitenum value="1" id="ENABLE" token="NSF3_ENABLE_1" description="Enabled at design time"/>
+    </bitfield>
+    <bitfield id="ROT_A_ENABLE" width="1" begin="6" end="6" resetval="0x0" description="The ROT #a module is present when this parameter is set." range="" rwaccess="R">
+      <bitenum value="0" id="DISABLE" token="ROT_A_ENABLE_0" description="Disabled at design time"/>
+      <bitenum value="1" id="ENABLE" token="ROT_A_ENABLE_1" description="Enabled at design time"/>
+    </bitfield>
+    <bitfield id="IMX_B_ENABLE" width="1" begin="5" end="5" resetval="0x0" description="The iMX #b module and the CMD#b, COEFF#b memories are present when this parameter is set." range="" rwaccess="R">
+      <bitenum value="0" id="DISABLE" token="IMX_B_ENABLE_0" description="Disabled at design time"/>
+      <bitenum value="1" id="ENABLE" token="IMX_B_ENABLE_1" description="Enabled at design time"/>
+    </bitfield>
+    <bitfield id="IMX_A_ENABLE" width="1" begin="4" end="4" resetval="0x0" description="The iMX #a module and the CMD#a, COEFF#a memories are present when this parameter is set." range="" rwaccess="R">
+      <bitenum value="0" id="DISABLE" token="IMX_A_ENABLE_0" description="Disabled at design time"/>
+      <bitenum value="1" id="ENABLE" token="IMX_A_ENABLE_1" description="Enabled at design time"/>
+    </bitfield>
+    <bitfield id="NSF_ENABLE" width="1" begin="3" end="3" resetval="0x0" description="The NSF2 module is present when this parameter is set." range="" rwaccess="R">
+      <bitenum value="0" id="DISABLE" token="NSF_ENABLE_0" description="Disabled at design time"/>
+      <bitenum value="1" id="ENABLE" token="NSF_ENABLE_1" description="Enabled at design time"/>
+    </bitfield>
+    <bitfield id="VLCDJ_ENABLE" width="1" begin="2" end="2" resetval="0x0" description="The VLCD module and the QUANT, HUFFMAN, BITSTREAM memories are present when this parameter is set." range="" rwaccess="R">
+      <bitenum value="0" id="DISABLE" token="VLCDJ_ENABLE_0" description="Disabled at design time"/>
+      <bitenum value="1" id="ENABLE" token="VLCDJ_ENABLE_1" description="Enabled at design time"/>
+    </bitfield>
+    <bitfield id="DCT_ENABLE" width="1" begin="1" end="1" resetval="0x0" description="The DCT module is present when this parameter is set." range="" rwaccess="R">
+      <bitenum value="0" id="DISABLE" token="DCT_ENABLE_0" description="Disabled at design time"/>
+      <bitenum value="1" id="ENABLE" token="DCT_ENABLE_1" description="Enabled at design time"/>
+    </bitfield>
+    <bitfield id="LDC_ENABLE" width="1" begin="0" end="0" resetval="0x1" description="The LDC module and the LDC LUT are present when this parameter is set." range="" rwaccess="R">
+      <bitenum value="0" id="DISABLE" token="LDC_ENABLE_0" description="Disabled at design time"/>
+      <bitenum value="1" id="ENABLE" token="LDC_ENABLE_1" description="Enabled at design time"/>
+    </bitfield>
+  </register>
+  <register id="SIMCOP_HL_SYSCONFIG" acronym="SIMCOP_HL_SYSCONFIG" offset="0x10" width="32" description="This register controls the various parameters of the OCP interface">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SOFTRESET" width="1" begin="0" end="0" resetval="0x0" description="Software reset" range="" rwaccess="RW">
+      <bitenum value="0" id="DONE" token="SOFTRESET_0" description="Reset done, no pending action"/>
+      <bitenum value="1" id="PENDING" token="SOFTRESET_1" description="Reset (software or other) ongoing"/>
+    </bitfield>
+  </register>
+  <register id="SIMCOP_HL_IRQ_EOI" acronym="SIMCOP_HL_IRQ_EOI" offset="0x1C" width="32" description="End Of Interrupt number specification">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LINE_NUMBER" width="2" begin="1" end="0" resetval="0x0" description="Software End Of Interrupt (EOI) control. Write number of interrupt output." range="" rwaccess="RW">
+      <bitenum value="0" id="READ0" token="LINE_NUMBER_0" description="Reads always 0 (no EOI memory)"/>
+      <bitenum value="1" id="EOI1" token="LINE_NUMBER_1" description="EOI for interrupt output line #1"/>
+      <bitenum value="3" id="EOI3" token="LINE_NUMBER_3" description="EOI for interrupt output line #3"/>
+      <bitenum value="2" id="EOI2" token="LINE_NUMBER_2" description="EOI for interrupt output line #2"/>
+    </bitfield>
+  </register>
+  <register id="SIMCOP_HL_IRQSTATUS_RAW_i_0" acronym="SIMCOP_HL_IRQSTATUS_RAW_i_0" offset="0x20" width="32" description="Per-event raw interrupt status vector Raw status is set even if event is not enabled. Write 1 to set the (raw) status, mostly for debug.">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="CPU_PROC_START_IRQ" width="1" begin="19" end="19" resetval="0x0" description="Event triggered by the HW sequencer to instruct the CPU to process a macro block" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CPU_PROC_START_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="CPU_PROC_START_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ1" width="1" begin="18" end="18" resetval="0x0" description="Event triggered by the SIMCOP DMA. This event is automatically cleared at SIMCOP level when it is cleared at SIMCOP DMA level Check SIMCOP DMA IRQ registers." range="" rwaccess="R">
+      <bitenum value="0" id="NOEVENT" token="SIMCOP_DMA_IRQ1_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="SIMCOP_DMA_IRQ1_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="17" end="17" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="OCP_ERR_IRQ" width="1" begin="16" end="16" resetval="0x0" description="An OCP error has been received on the OCPMB master port." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="OCP_ERR_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="OCP_ERR_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="VLCDJ_DECODE_ERR_IRQ" width="1" begin="15" end="15" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. A decode error has been signaled by the VLCDJ module" range="" rwaccess="R"/>
+    <bitfield id="DONE_IRQ" width="1" begin="14" end="14" resetval="0x0" description="Event triggered when the HW sequencer finishes the sequence: - the sequence step counter has reached the limit - all accelerator and DMA events for the last sequence step have been received." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="DONE_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="DONE_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="STEP3_IRQ" width="1" begin="13" end="13" resetval="0x0" description="Event triggered when STEP3 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP3_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="STEP3_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="STEP2_IRQ" width="1" begin="12" end="12" resetval="0x0" description="Event triggered when STEP2 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP2_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="STEP2_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="STEP1_IRQ" width="1" begin="11" end="11" resetval="0x0" description="Event triggered when STEP1 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP1_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="STEP1_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="STEP0_IRQ" width="1" begin="10" end="10" resetval="0x0" description="Event triggered when STEP0 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP0_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="STEP0_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="LDC_BLOCK_IRQ" width="1" begin="9" end="9" resetval="0x0" description="This event is triggered by LDC when a macro-block has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_BLOCK_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="LDC_BLOCK_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="VTNF_IRQ" width="1" begin="8" end="8" resetval="0x0" description="Event triggered by the VTNF imaging accelerator when processing of a block is done." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="VTNF_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="VTNF_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="ROT_A" width="1" begin="7" end="7" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the ROT #a engine" range="" rwaccess="R"/>
+    <bitfield id="IMX_B_IRQ" width="1" begin="6" end="6" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="IMX_A_IRQ" width="1" begin="5" end="5" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="NSF_IRQ" width="1" begin="4" end="4" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the NSF2 imaging accelerator when processing of a block is done." range="" rwaccess="R"/>
+    <bitfield id="VLCDJ_BLOC_IRQ" width="1" begin="3" end="3" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. This event is triggered by VLCDJ when a macro-bloc has been processed (encode/decode)" range="" rwaccess="R"/>
+    <bitfield id="DCT_IRQ" width="1" begin="2" end="2" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location.Event triggered when a block has been processed by the DCT module and the filter outcome has been stored to an image buffer." range="" rwaccess="R"/>
+    <bitfield id="LDC_FRAME_IRQ" width="1" begin="1" end="1" resetval="0x0" description="This event is triggered by LDC when a full frame has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_FRAME_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="LDC_FRAME_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ0" width="1" begin="0" end="0" resetval="0x0" description="Event triggered by the SIMCOP DMA. This event is automatically cleared at SIMCOP level when it is cleared at SIMCOP DMA level Check SIMCOP DMA IRQ registers." range="" rwaccess="R">
+      <bitenum value="0" id="NOEVENT" token="SIMCOP_DMA_IRQ0_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="SIMCOP_DMA_IRQ0_1" description="Event pending"/>
+    </bitfield>
+  </register>
+  <register id="SIMCOP_HL_IRQSTATUS_RAW_i_1" acronym="SIMCOP_HL_IRQSTATUS_RAW_i_1" offset="0x30" width="32" description="Per-event raw interrupt status vector Raw status is set even if event is not enabled. Write 1 to set the (raw) status, mostly for debug.">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="CPU_PROC_START_IRQ" width="1" begin="19" end="19" resetval="0x0" description="Event triggered by the HW sequencer to instruct the CPU to process a macro block" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CPU_PROC_START_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="CPU_PROC_START_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ1" width="1" begin="18" end="18" resetval="0x0" description="Event triggered by the SIMCOP DMA. This event is automatically cleared at SIMCOP level when it is cleared at SIMCOP DMA level Check SIMCOP DMA IRQ registers." range="" rwaccess="R">
+      <bitenum value="0" id="NOEVENT" token="SIMCOP_DMA_IRQ1_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="SIMCOP_DMA_IRQ1_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="17" end="17" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="OCP_ERR_IRQ" width="1" begin="16" end="16" resetval="0x0" description="An OCP error has been received on the OCPMB master port." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="OCP_ERR_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="OCP_ERR_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="VLCDJ_DECODE_ERR_IRQ" width="1" begin="15" end="15" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. A decode error has been signaled by the VLCDJ module" range="" rwaccess="R"/>
+    <bitfield id="DONE_IRQ" width="1" begin="14" end="14" resetval="0x0" description="Event triggered when the HW sequencer finishes the sequence: - the sequence step counter has reached the limit - all accelerator and DMA events for the last sequence step have been received." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="DONE_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="DONE_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="STEP3_IRQ" width="1" begin="13" end="13" resetval="0x0" description="Event triggered when STEP3 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP3_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="STEP3_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="STEP2_IRQ" width="1" begin="12" end="12" resetval="0x0" description="Event triggered when STEP2 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP2_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="STEP2_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="STEP1_IRQ" width="1" begin="11" end="11" resetval="0x0" description="Event triggered when STEP1 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP1_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="STEP1_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="STEP0_IRQ" width="1" begin="10" end="10" resetval="0x0" description="Event triggered when STEP0 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP0_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="STEP0_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="LDC_BLOCK_IRQ" width="1" begin="9" end="9" resetval="0x0" description="This event is triggered by LDC when a macro-block has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_BLOCK_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="LDC_BLOCK_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="VTNF_IRQ" width="1" begin="8" end="8" resetval="0x0" description="Event triggered by the VTNF imaging accelerator when processing of a block is done." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="VTNF_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="VTNF_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="ROT_A" width="1" begin="7" end="7" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the ROT #a engine" range="" rwaccess="R"/>
+    <bitfield id="IMX_B_IRQ" width="1" begin="6" end="6" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="IMX_A_IRQ" width="1" begin="5" end="5" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="NSF_IRQ" width="1" begin="4" end="4" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the NSF2 imaging accelerator when processing of a block is done." range="" rwaccess="R"/>
+    <bitfield id="VLCDJ_BLOC_IRQ" width="1" begin="3" end="3" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. This event is triggered by VLCDJ when a macro-bloc has been processed (encode/decode)" range="" rwaccess="R"/>
+    <bitfield id="DCT_IRQ" width="1" begin="2" end="2" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location.Event triggered when a block has been processed by the DCT module and the filter outcome has been stored to an image buffer." range="" rwaccess="R"/>
+    <bitfield id="LDC_FRAME_IRQ" width="1" begin="1" end="1" resetval="0x0" description="This event is triggered by LDC when a full frame has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_FRAME_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="LDC_FRAME_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ0" width="1" begin="0" end="0" resetval="0x0" description="Event triggered by the SIMCOP DMA. This event is automatically cleared at SIMCOP level when it is cleared at SIMCOP DMA level Check SIMCOP DMA IRQ registers." range="" rwaccess="R">
+      <bitenum value="0" id="NOEVENT" token="SIMCOP_DMA_IRQ0_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="SIMCOP_DMA_IRQ0_1" description="Event pending"/>
+    </bitfield>
+  </register>
+  <register id="SIMCOP_HL_IRQSTATUS_RAW_i_2" acronym="SIMCOP_HL_IRQSTATUS_RAW_i_2" offset="0x40" width="32" description="Per-event raw interrupt status vector Raw status is set even if event is not enabled. Write 1 to set the (raw) status, mostly for debug.">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="CPU_PROC_START_IRQ" width="1" begin="19" end="19" resetval="0x0" description="Event triggered by the HW sequencer to instruct the CPU to process a macro block" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CPU_PROC_START_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="CPU_PROC_START_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ1" width="1" begin="18" end="18" resetval="0x0" description="Event triggered by the SIMCOP DMA. This event is automatically cleared at SIMCOP level when it is cleared at SIMCOP DMA level Check SIMCOP DMA IRQ registers." range="" rwaccess="R">
+      <bitenum value="0" id="NOEVENT" token="SIMCOP_DMA_IRQ1_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="SIMCOP_DMA_IRQ1_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="17" end="17" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="OCP_ERR_IRQ" width="1" begin="16" end="16" resetval="0x0" description="An OCP error has been received on the OCPMB master port." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="OCP_ERR_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="OCP_ERR_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="VLCDJ_DECODE_ERR_IRQ" width="1" begin="15" end="15" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. A decode error has been signaled by the VLCDJ module" range="" rwaccess="R"/>
+    <bitfield id="DONE_IRQ" width="1" begin="14" end="14" resetval="0x0" description="Event triggered when the HW sequencer finishes the sequence: - the sequence step counter has reached the limit - all accelerator and DMA events for the last sequence step have been received." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="DONE_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="DONE_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="STEP3_IRQ" width="1" begin="13" end="13" resetval="0x0" description="Event triggered when STEP3 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP3_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="STEP3_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="STEP2_IRQ" width="1" begin="12" end="12" resetval="0x0" description="Event triggered when STEP2 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP2_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="STEP2_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="STEP1_IRQ" width="1" begin="11" end="11" resetval="0x0" description="Event triggered when STEP1 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP1_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="STEP1_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="STEP0_IRQ" width="1" begin="10" end="10" resetval="0x0" description="Event triggered when STEP0 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP0_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="STEP0_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="LDC_BLOCK_IRQ" width="1" begin="9" end="9" resetval="0x0" description="This event is triggered by LDC when a macro-block has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_BLOCK_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="LDC_BLOCK_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="VTNF_IRQ" width="1" begin="8" end="8" resetval="0x0" description="Event triggered by the VTNF imaging accelerator when processing of a block is done." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="VTNF_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="VTNF_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="ROT_A" width="1" begin="7" end="7" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the ROT #a engine" range="" rwaccess="R"/>
+    <bitfield id="IMX_B_IRQ" width="1" begin="6" end="6" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="IMX_A_IRQ" width="1" begin="5" end="5" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="NSF_IRQ" width="1" begin="4" end="4" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the NSF2 imaging accelerator when processing of a block is done." range="" rwaccess="R"/>
+    <bitfield id="VLCDJ_BLOC_IRQ" width="1" begin="3" end="3" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. This event is triggered by VLCDJ when a macro-bloc has been processed (encode/decode)" range="" rwaccess="R"/>
+    <bitfield id="DCT_IRQ" width="1" begin="2" end="2" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location.Event triggered when a block has been processed by the DCT module and the filter outcome has been stored to an image buffer." range="" rwaccess="R"/>
+    <bitfield id="LDC_FRAME_IRQ" width="1" begin="1" end="1" resetval="0x0" description="This event is triggered by LDC when a full frame has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_FRAME_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="LDC_FRAME_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ0" width="1" begin="0" end="0" resetval="0x0" description="Event triggered by the SIMCOP DMA. This event is automatically cleared at SIMCOP level when it is cleared at SIMCOP DMA level Check SIMCOP DMA IRQ registers." range="" rwaccess="R">
+      <bitenum value="0" id="NOEVENT" token="SIMCOP_DMA_IRQ0_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="SIMCOP_DMA_IRQ0_1" description="Event pending"/>
+    </bitfield>
+  </register>
+  <register id="SIMCOP_HL_IRQSTATUS_RAW_i_3" acronym="SIMCOP_HL_IRQSTATUS_RAW_i_3" offset="0x50" width="32" description="Per-event raw interrupt status vector Raw status is set even if event is not enabled. Write 1 to set the (raw) status, mostly for debug.">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="CPU_PROC_START_IRQ" width="1" begin="19" end="19" resetval="0x0" description="Event triggered by the HW sequencer to instruct the CPU to process a macro block" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CPU_PROC_START_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="CPU_PROC_START_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ1" width="1" begin="18" end="18" resetval="0x0" description="Event triggered by the SIMCOP DMA. This event is automatically cleared at SIMCOP level when it is cleared at SIMCOP DMA level Check SIMCOP DMA IRQ registers." range="" rwaccess="R">
+      <bitenum value="0" id="NOEVENT" token="SIMCOP_DMA_IRQ1_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="SIMCOP_DMA_IRQ1_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="17" end="17" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="OCP_ERR_IRQ" width="1" begin="16" end="16" resetval="0x0" description="An OCP error has been received on the OCPMB master port." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="OCP_ERR_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="OCP_ERR_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="VLCDJ_DECODE_ERR_IRQ" width="1" begin="15" end="15" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. A decode error has been signaled by the VLCDJ module" range="" rwaccess="R"/>
+    <bitfield id="DONE_IRQ" width="1" begin="14" end="14" resetval="0x0" description="Event triggered when the HW sequencer finishes the sequence: - the sequence step counter has reached the limit - all accelerator and DMA events for the last sequence step have been received." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="DONE_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="DONE_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="STEP3_IRQ" width="1" begin="13" end="13" resetval="0x0" description="Event triggered when STEP3 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP3_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="STEP3_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="STEP2_IRQ" width="1" begin="12" end="12" resetval="0x0" description="Event triggered when STEP2 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP2_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="STEP2_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="STEP1_IRQ" width="1" begin="11" end="11" resetval="0x0" description="Event triggered when STEP1 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP1_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="STEP1_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="STEP0_IRQ" width="1" begin="10" end="10" resetval="0x0" description="Event triggered when STEP0 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP0_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="STEP0_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="LDC_BLOCK_IRQ" width="1" begin="9" end="9" resetval="0x0" description="This event is triggered by LDC when a macro-block has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_BLOCK_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="LDC_BLOCK_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="VTNF_IRQ" width="1" begin="8" end="8" resetval="0x0" description="Event triggered by the VTNF imaging accelerator when processing of a block is done." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="VTNF_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="VTNF_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="ROT_A" width="1" begin="7" end="7" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the ROT #a engine" range="" rwaccess="R"/>
+    <bitfield id="IMX_B_IRQ" width="1" begin="6" end="6" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="IMX_A_IRQ" width="1" begin="5" end="5" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="NSF_IRQ" width="1" begin="4" end="4" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the NSF2 imaging accelerator when processing of a block is done." range="" rwaccess="R"/>
+    <bitfield id="VLCDJ_BLOC_IRQ" width="1" begin="3" end="3" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. This event is triggered by VLCDJ when a macro-bloc has been processed (encode/decode)" range="" rwaccess="R"/>
+    <bitfield id="DCT_IRQ" width="1" begin="2" end="2" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location.Event triggered when a block has been processed by the DCT module and the filter outcome has been stored to an image buffer." range="" rwaccess="R"/>
+    <bitfield id="LDC_FRAME_IRQ" width="1" begin="1" end="1" resetval="0x0" description="This event is triggered by LDC when a full frame has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_FRAME_IRQ_0" description="No action"/>
+      <bitenum value="1" id="SET" token="LDC_FRAME_IRQ_1" description="Set event (debug)"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ0" width="1" begin="0" end="0" resetval="0x0" description="Event triggered by the SIMCOP DMA. This event is automatically cleared at SIMCOP level when it is cleared at SIMCOP DMA level Check SIMCOP DMA IRQ registers." range="" rwaccess="R">
+      <bitenum value="0" id="NOEVENT" token="SIMCOP_DMA_IRQ0_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="SIMCOP_DMA_IRQ0_1" description="Event pending"/>
+    </bitfield>
+  </register>
+  <register id="SIMCOP_HL_IRQSTATUS_i_0" acronym="SIMCOP_HL_IRQSTATUS_i_0" offset="0x24" width="32" description="Per-event 'enabled' interrupt status vector Enabled status isn't set unless event is enabled. Write 1 to clear the status after interrupt has been serviced (raw status gets cleared, i.e. even if not enabled). When AND mode is selected (.IRQx_MODE=1, x is the IRQ line number), the SIMCOP_HL_IRQSTATUS__x register equals 0 until all enabled events have occured. Intermediate state can be read from SIMCOP_HL_IRQSTATUS_RAW__x">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="CPU_PROC_START_IRQ" width="1" begin="19" end="19" resetval="0x0" description="Event triggered by the HW sequencer to instruct the CPU to process a macro block" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CPU_PROC_START_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="CPU_PROC_START_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ1" width="1" begin="18" end="18" resetval="0x0" description="Event triggered by the SIMCOP DMA. This event is automatically cleared at SIMCOP level when it is cleared at SIMCOP DMA level Check SIMCOP DMA IRQ registers." range="" rwaccess="R">
+      <bitenum value="0" id="NOEVENT" token="SIMCOP_DMA_IRQ1_0" description="No (enabled) event pending"/>
+      <bitenum value="1" id="PENDING" token="SIMCOP_DMA_IRQ1_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="17" end="17" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="OCP_ERR_IRQ" width="1" begin="16" end="16" resetval="0x0" description="An OCP error has been received on the OCPMB master port." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="OCP_ERR_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="OCP_ERR_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="VLCDJ_DECODE_ERR_IRQ" width="1" begin="15" end="15" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. A decode error has been signaled by the VLCDJ module" range="" rwaccess="R"/>
+    <bitfield id="DONE_IRQ" width="1" begin="14" end="14" resetval="0x0" description="Event triggered when the HW sequencer finishes the sequence: - the sequence step counter has reached the limit - all accelerator and DMA events for the last sequence step have been received." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="DONE_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="DONE_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="STEP3_IRQ" width="1" begin="13" end="13" resetval="0x0" description="Event triggered when STEP3 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP3_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="STEP3_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="STEP2_IRQ" width="1" begin="12" end="12" resetval="0x0" description="Event triggered when STEP2 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP2_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="STEP2_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="STEP1_IRQ" width="1" begin="11" end="11" resetval="0x0" description="Event triggered when STEP1 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP1_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="STEP1_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="STEP0_IRQ" width="1" begin="10" end="10" resetval="0x0" description="Event triggered when STEP0 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP0_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="STEP0_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="LDC_BLOCK_IRQ" width="1" begin="9" end="9" resetval="0x0" description="This event is triggered by LDC when a macro-block has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_BLOCK_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="LDC_BLOCK_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="VTNF_IRQ" width="1" begin="8" end="8" resetval="0x0" description="Event triggered by the VTNF imaging accelerator when processing of a block is done." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="VTNF_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="VTNF_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="ROT_A" width="1" begin="7" end="7" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the ROT #a engine" range="" rwaccess="R"/>
+    <bitfield id="IMX_B_IRQ" width="1" begin="6" end="6" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="IMX_A_IRQ" width="1" begin="5" end="5" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="NSF_IRQ" width="1" begin="4" end="4" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the NSF2 imaging accelerator when processing of a block is done." range="" rwaccess="R"/>
+    <bitfield id="VLCDJ_BLOC_IRQ" width="1" begin="3" end="3" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. This event is triggered by VLCDJ when a macro-bloc has been processed (encode/decode)" range="" rwaccess="R"/>
+    <bitfield id="DCT_IRQ" width="1" begin="2" end="2" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when a block has been processed by the DCT module and the filter outcome has been stored to an image buffer." range="" rwaccess="R"/>
+    <bitfield id="LDC_FRAME_IRQ" width="1" begin="1" end="1" resetval="0x0" description="This event is triggered by LDC when a full frame has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_FRAME_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="LDC_FRAME_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ0" width="1" begin="0" end="0" resetval="0x0" description="Event triggered by the SIMCOP DMA. This event is automatically cleared at SIMCOP level when it is cleared at SIMCOP DMA level Check SIMCOP DMA IRQ registers." range="" rwaccess="R">
+      <bitenum value="0" id="NOEVENT" token="SIMCOP_DMA_IRQ0_0" description="No (enabled) event pending"/>
+      <bitenum value="1" id="PENDING" token="SIMCOP_DMA_IRQ0_1" description="Event pending"/>
+    </bitfield>
+  </register>
+  <register id="SIMCOP_HL_IRQSTATUS_i_1" acronym="SIMCOP_HL_IRQSTATUS_i_1" offset="0x34" width="32" description="Per-event 'enabled' interrupt status vector Enabled status isn't set unless event is enabled. Write 1 to clear the status after interrupt has been serviced (raw status gets cleared, i.e. even if not enabled). When AND mode is selected (.IRQx_MODE=1, x is the IRQ line number), the SIMCOP_HL_IRQSTATUS__x register equals 0 until all enabled events have occured. Intermediate state can be read from SIMCOP_HL_IRQSTATUS_RAW__x">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="CPU_PROC_START_IRQ" width="1" begin="19" end="19" resetval="0x0" description="Event triggered by the HW sequencer to instruct the CPU to process a macro block" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CPU_PROC_START_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="CPU_PROC_START_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ1" width="1" begin="18" end="18" resetval="0x0" description="Event triggered by the SIMCOP DMA. This event is automatically cleared at SIMCOP level when it is cleared at SIMCOP DMA level Check SIMCOP DMA IRQ registers." range="" rwaccess="R">
+      <bitenum value="0" id="NOEVENT" token="SIMCOP_DMA_IRQ1_0" description="No (enabled) event pending"/>
+      <bitenum value="1" id="PENDING" token="SIMCOP_DMA_IRQ1_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="17" end="17" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="OCP_ERR_IRQ" width="1" begin="16" end="16" resetval="0x0" description="An OCP error has been received on the OCPMB master port." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="OCP_ERR_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="OCP_ERR_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="VLCDJ_DECODE_ERR_IRQ" width="1" begin="15" end="15" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. A decode error has been signaled by the VLCDJ module" range="" rwaccess="R"/>
+    <bitfield id="DONE_IRQ" width="1" begin="14" end="14" resetval="0x0" description="Event triggered when the HW sequencer finishes the sequence: - the sequence step counter has reached the limit - all accelerator and DMA events for the last sequence step have been received." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="DONE_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="DONE_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="STEP3_IRQ" width="1" begin="13" end="13" resetval="0x0" description="Event triggered when STEP3 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP3_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="STEP3_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="STEP2_IRQ" width="1" begin="12" end="12" resetval="0x0" description="Event triggered when STEP2 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP2_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="STEP2_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="STEP1_IRQ" width="1" begin="11" end="11" resetval="0x0" description="Event triggered when STEP1 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP1_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="STEP1_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="STEP0_IRQ" width="1" begin="10" end="10" resetval="0x0" description="Event triggered when STEP0 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP0_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="STEP0_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="LDC_BLOCK_IRQ" width="1" begin="9" end="9" resetval="0x0" description="This event is triggered by LDC when a macro-block has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_BLOCK_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="LDC_BLOCK_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="VTNF_IRQ" width="1" begin="8" end="8" resetval="0x0" description="Event triggered by the VTNF imaging accelerator when processing of a block is done." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="VTNF_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="VTNF_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="ROT_A" width="1" begin="7" end="7" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the ROT #a engine" range="" rwaccess="R"/>
+    <bitfield id="IMX_B_IRQ" width="1" begin="6" end="6" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="IMX_A_IRQ" width="1" begin="5" end="5" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="NSF_IRQ" width="1" begin="4" end="4" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the NSF2 imaging accelerator when processing of a block is done." range="" rwaccess="R"/>
+    <bitfield id="VLCDJ_BLOC_IRQ" width="1" begin="3" end="3" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. This event is triggered by VLCDJ when a macro-bloc has been processed (encode/decode)" range="" rwaccess="R"/>
+    <bitfield id="DCT_IRQ" width="1" begin="2" end="2" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when a block has been processed by the DCT module and the filter outcome has been stored to an image buffer." range="" rwaccess="R"/>
+    <bitfield id="LDC_FRAME_IRQ" width="1" begin="1" end="1" resetval="0x0" description="This event is triggered by LDC when a full frame has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_FRAME_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="LDC_FRAME_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ0" width="1" begin="0" end="0" resetval="0x0" description="Event triggered by the SIMCOP DMA. This event is automatically cleared at SIMCOP level when it is cleared at SIMCOP DMA level Check SIMCOP DMA IRQ registers." range="" rwaccess="R">
+      <bitenum value="0" id="NOEVENT" token="SIMCOP_DMA_IRQ0_0" description="No (enabled) event pending"/>
+      <bitenum value="1" id="PENDING" token="SIMCOP_DMA_IRQ0_1" description="Event pending"/>
+    </bitfield>
+  </register>
+  <register id="SIMCOP_HL_IRQSTATUS_i_2" acronym="SIMCOP_HL_IRQSTATUS_i_2" offset="0x44" width="32" description="Per-event 'enabled' interrupt status vector Enabled status isn't set unless event is enabled. Write 1 to clear the status after interrupt has been serviced (raw status gets cleared, i.e. even if not enabled). When AND mode is selected (.IRQx_MODE=1, x is the IRQ line number), the SIMCOP_HL_IRQSTATUS__x register equals 0 until all enabled events have occured. Intermediate state can be read from SIMCOP_HL_IRQSTATUS_RAW__x">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="CPU_PROC_START_IRQ" width="1" begin="19" end="19" resetval="0x0" description="Event triggered by the HW sequencer to instruct the CPU to process a macro block" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CPU_PROC_START_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="CPU_PROC_START_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ1" width="1" begin="18" end="18" resetval="0x0" description="Event triggered by the SIMCOP DMA. This event is automatically cleared at SIMCOP level when it is cleared at SIMCOP DMA level Check SIMCOP DMA IRQ registers." range="" rwaccess="R">
+      <bitenum value="0" id="NOEVENT" token="SIMCOP_DMA_IRQ1_0" description="No (enabled) event pending"/>
+      <bitenum value="1" id="PENDING" token="SIMCOP_DMA_IRQ1_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="17" end="17" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="OCP_ERR_IRQ" width="1" begin="16" end="16" resetval="0x0" description="An OCP error has been received on the OCPMB master port." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="OCP_ERR_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="OCP_ERR_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="VLCDJ_DECODE_ERR_IRQ" width="1" begin="15" end="15" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. A decode error has been signaled by the VLCDJ module" range="" rwaccess="R"/>
+    <bitfield id="DONE_IRQ" width="1" begin="14" end="14" resetval="0x0" description="Event triggered when the HW sequencer finishes the sequence: - the sequence step counter has reached the limit - all accelerator and DMA events for the last sequence step have been received." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="DONE_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="DONE_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="STEP3_IRQ" width="1" begin="13" end="13" resetval="0x0" description="Event triggered when STEP3 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP3_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="STEP3_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="STEP2_IRQ" width="1" begin="12" end="12" resetval="0x0" description="Event triggered when STEP2 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP2_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="STEP2_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="STEP1_IRQ" width="1" begin="11" end="11" resetval="0x0" description="Event triggered when STEP1 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP1_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="STEP1_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="STEP0_IRQ" width="1" begin="10" end="10" resetval="0x0" description="Event triggered when STEP0 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP0_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="STEP0_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="LDC_BLOCK_IRQ" width="1" begin="9" end="9" resetval="0x0" description="This event is triggered by LDC when a macro-block has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_BLOCK_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="LDC_BLOCK_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="VTNF_IRQ" width="1" begin="8" end="8" resetval="0x0" description="Event triggered by the VTNF imaging accelerator when processing of a block is done." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="VTNF_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="VTNF_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="ROT_A" width="1" begin="7" end="7" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the ROT #a engine" range="" rwaccess="R"/>
+    <bitfield id="IMX_B_IRQ" width="1" begin="6" end="6" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="IMX_A_IRQ" width="1" begin="5" end="5" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="NSF_IRQ" width="1" begin="4" end="4" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the NSF2 imaging accelerator when processing of a block is done." range="" rwaccess="R"/>
+    <bitfield id="VLCDJ_BLOC_IRQ" width="1" begin="3" end="3" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. This event is triggered by VLCDJ when a macro-bloc has been processed (encode/decode)" range="" rwaccess="R"/>
+    <bitfield id="DCT_IRQ" width="1" begin="2" end="2" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when a block has been processed by the DCT module and the filter outcome has been stored to an image buffer." range="" rwaccess="R"/>
+    <bitfield id="LDC_FRAME_IRQ" width="1" begin="1" end="1" resetval="0x0" description="This event is triggered by LDC when a full frame has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_FRAME_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="LDC_FRAME_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ0" width="1" begin="0" end="0" resetval="0x0" description="Event triggered by the SIMCOP DMA. This event is automatically cleared at SIMCOP level when it is cleared at SIMCOP DMA level Check SIMCOP DMA IRQ registers." range="" rwaccess="R">
+      <bitenum value="0" id="NOEVENT" token="SIMCOP_DMA_IRQ0_0" description="No (enabled) event pending"/>
+      <bitenum value="1" id="PENDING" token="SIMCOP_DMA_IRQ0_1" description="Event pending"/>
+    </bitfield>
+  </register>
+  <register id="SIMCOP_HL_IRQSTATUS_i_3" acronym="SIMCOP_HL_IRQSTATUS_i_3" offset="0x54" width="32" description="Per-event 'enabled' interrupt status vector Enabled status isn't set unless event is enabled. Write 1 to clear the status after interrupt has been serviced (raw status gets cleared, i.e. even if not enabled). When AND mode is selected (.IRQx_MODE=1, x is the IRQ line number), the SIMCOP_HL_IRQSTATUS__x register equals 0 until all enabled events have occured. Intermediate state can be read from SIMCOP_HL_IRQSTATUS_RAW__x">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="CPU_PROC_START_IRQ" width="1" begin="19" end="19" resetval="0x0" description="Event triggered by the HW sequencer to instruct the CPU to process a macro block" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CPU_PROC_START_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="CPU_PROC_START_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ1" width="1" begin="18" end="18" resetval="0x0" description="Event triggered by the SIMCOP DMA. This event is automatically cleared at SIMCOP level when it is cleared at SIMCOP DMA level Check SIMCOP DMA IRQ registers." range="" rwaccess="R">
+      <bitenum value="0" id="NOEVENT" token="SIMCOP_DMA_IRQ1_0" description="No (enabled) event pending"/>
+      <bitenum value="1" id="PENDING" token="SIMCOP_DMA_IRQ1_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="17" end="17" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="OCP_ERR_IRQ" width="1" begin="16" end="16" resetval="0x0" description="An OCP error has been received on the OCPMB master port." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="OCP_ERR_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="OCP_ERR_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="VLCDJ_DECODE_ERR_IRQ" width="1" begin="15" end="15" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. A decode error has been signaled by the VLCDJ module" range="" rwaccess="R"/>
+    <bitfield id="DONE_IRQ" width="1" begin="14" end="14" resetval="0x0" description="Event triggered when the HW sequencer finishes the sequence: - the sequence step counter has reached the limit - all accelerator and DMA events for the last sequence step have been received." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="DONE_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="DONE_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="STEP3_IRQ" width="1" begin="13" end="13" resetval="0x0" description="Event triggered when STEP3 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP3_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="STEP3_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="STEP2_IRQ" width="1" begin="12" end="12" resetval="0x0" description="Event triggered when STEP2 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP2_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="STEP2_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="STEP1_IRQ" width="1" begin="11" end="11" resetval="0x0" description="Event triggered when STEP1 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP1_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="STEP1_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="STEP0_IRQ" width="1" begin="10" end="10" resetval="0x0" description="Event triggered when STEP0 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP0_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="STEP0_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="LDC_BLOCK_IRQ" width="1" begin="9" end="9" resetval="0x0" description="This event is triggered by LDC when a macro-block has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_BLOCK_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="LDC_BLOCK_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="VTNF_IRQ" width="1" begin="8" end="8" resetval="0x0" description="Event triggered by the VTNF imaging accelerator when processing of a block is done." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="VTNF_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="VTNF_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="ROT_A" width="1" begin="7" end="7" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the ROT #a engine" range="" rwaccess="R"/>
+    <bitfield id="IMX_B_IRQ" width="1" begin="6" end="6" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="IMX_A_IRQ" width="1" begin="5" end="5" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="NSF_IRQ" width="1" begin="4" end="4" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the NSF2 imaging accelerator when processing of a block is done." range="" rwaccess="R"/>
+    <bitfield id="VLCDJ_BLOC_IRQ" width="1" begin="3" end="3" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. This event is triggered by VLCDJ when a macro-bloc has been processed (encode/decode)" range="" rwaccess="R"/>
+    <bitfield id="DCT_IRQ" width="1" begin="2" end="2" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when a block has been processed by the DCT module and the filter outcome has been stored to an image buffer." range="" rwaccess="R"/>
+    <bitfield id="LDC_FRAME_IRQ" width="1" begin="1" end="1" resetval="0x0" description="This event is triggered by LDC when a full frame has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_FRAME_IRQ_0" description="No action"/>
+      <bitenum value="1" id="CLEAR" token="LDC_FRAME_IRQ_1" description="Clear (raw) event"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ0" width="1" begin="0" end="0" resetval="0x0" description="Event triggered by the SIMCOP DMA. This event is automatically cleared at SIMCOP level when it is cleared at SIMCOP DMA level Check SIMCOP DMA IRQ registers." range="" rwaccess="R">
+      <bitenum value="0" id="NOEVENT" token="SIMCOP_DMA_IRQ0_0" description="No (enabled) event pending"/>
+      <bitenum value="1" id="PENDING" token="SIMCOP_DMA_IRQ0_1" description="Event pending"/>
+    </bitfield>
+  </register>
+  <register id="SIMCOP_HL_IRQENABLE_SET_i_0" acronym="SIMCOP_HL_IRQENABLE_SET_i_0" offset="0x28" width="32" description="Per-event interrupt enable bit vector Write 1 to set (enable interrupt). Readout equal to corresponding _CLR register.">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="CPU_PROC_START_IRQ" width="1" begin="19" end="19" resetval="0x0" description="Event triggered by the HW sequencer to instruct the CPU to process a macro block" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CPU_PROC_START_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="CPU_PROC_START_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ1" width="1" begin="18" end="18" resetval="0x0" description="Event triggered by the SIMCOP DMA. Check SIMCOP DMA IRQ registers." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="SIMCOP_DMA_IRQ1_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="SIMCOP_DMA_IRQ1_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="17" end="17" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="OCP_ERR_IRQ" width="1" begin="16" end="16" resetval="0x0" description="An OCP error has been received on the OCPMB master port." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="OCP_ERR_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="OCP_ERR_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="VLCDJ_DECODE_ERR_IRQ" width="1" begin="15" end="15" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. A decode error has been signaled by the VLCDJ module" range="" rwaccess="R"/>
+    <bitfield id="DONE_IRQ" width="1" begin="14" end="14" resetval="0x0" description="Event triggered when the HW sequencer finishes the sequence: - the sequence step counter has reached the limit - all accelerator and DMA events for the last sequence step have been received." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="DONE_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="DONE_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP3_IRQ" width="1" begin="13" end="13" resetval="0x0" description="Event triggered when STEP3 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP3_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="STEP3_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP2_IRQ" width="1" begin="12" end="12" resetval="0x0" description="Event triggered when STEP2 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP2_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="STEP2_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP1_IRQ" width="1" begin="11" end="11" resetval="0x0" description="Event triggered when STEP1 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP1_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="STEP1_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP0_IRQ" width="1" begin="10" end="10" resetval="0x0" description="Event triggered when STEP0 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP0_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="STEP0_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="LDC_BLOCK_IRQ" width="1" begin="9" end="9" resetval="0x0" description="This event is triggered by LDC when a macro-block has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_BLOCK_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="LDC_BLOCK_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="VTNF_IRQ" width="1" begin="8" end="8" resetval="0x0" description="Event triggered by the VTNF imaging accelerator when processing of a block is done." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="VTNF_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="VTNF_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="ROT_A" width="1" begin="7" end="7" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the ROT #a engine" range="" rwaccess="R"/>
+    <bitfield id="IMX_B_IRQ" width="1" begin="6" end="6" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="IMX_A_IRQ" width="1" begin="5" end="5" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="NSF_IRQ" width="1" begin="4" end="4" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the NSF2 imaging accelerator when processing of a block is done." range="" rwaccess="R"/>
+    <bitfield id="VLCDJ_BLOC_IRQ" width="1" begin="3" end="3" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. This event is triggered by VLCDJ when a macro-bloc has been processed (encode/decode)" range="" rwaccess="R"/>
+    <bitfield id="DCT_IRQ" width="1" begin="2" end="2" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when a block has been processed by the DCT module and the filter outcome has been stored to an image buffer." range="" rwaccess="R"/>
+    <bitfield id="LDC_FRAME_IRQ" width="1" begin="1" end="1" resetval="0x0" description="This event is triggered by LDC when a full frame has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_FRAME_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="LDC_FRAME_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ0" width="1" begin="0" end="0" resetval="0x0" description="Event triggered by the SIMCOP DMA. Check SIMCOP DMA IRQ registers." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="SIMCOP_DMA_IRQ0_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="SIMCOP_DMA_IRQ0_1" description="Enable interrupt"/>
+    </bitfield>
+  </register>
+  <register id="SIMCOP_HL_IRQENABLE_SET_i_1" acronym="SIMCOP_HL_IRQENABLE_SET_i_1" offset="0x38" width="32" description="Per-event interrupt enable bit vector Write 1 to set (enable interrupt). Readout equal to corresponding _CLR register.">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="CPU_PROC_START_IRQ" width="1" begin="19" end="19" resetval="0x0" description="Event triggered by the HW sequencer to instruct the CPU to process a macro block" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CPU_PROC_START_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="CPU_PROC_START_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ1" width="1" begin="18" end="18" resetval="0x0" description="Event triggered by the SIMCOP DMA. Check SIMCOP DMA IRQ registers." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="SIMCOP_DMA_IRQ1_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="SIMCOP_DMA_IRQ1_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="17" end="17" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="OCP_ERR_IRQ" width="1" begin="16" end="16" resetval="0x0" description="An OCP error has been received on the OCPMB master port." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="OCP_ERR_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="OCP_ERR_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="VLCDJ_DECODE_ERR_IRQ" width="1" begin="15" end="15" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. A decode error has been signaled by the VLCDJ module" range="" rwaccess="R"/>
+    <bitfield id="DONE_IRQ" width="1" begin="14" end="14" resetval="0x0" description="Event triggered when the HW sequencer finishes the sequence: - the sequence step counter has reached the limit - all accelerator and DMA events for the last sequence step have been received." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="DONE_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="DONE_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP3_IRQ" width="1" begin="13" end="13" resetval="0x0" description="Event triggered when STEP3 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP3_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="STEP3_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP2_IRQ" width="1" begin="12" end="12" resetval="0x0" description="Event triggered when STEP2 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP2_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="STEP2_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP1_IRQ" width="1" begin="11" end="11" resetval="0x0" description="Event triggered when STEP1 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP1_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="STEP1_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP0_IRQ" width="1" begin="10" end="10" resetval="0x0" description="Event triggered when STEP0 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP0_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="STEP0_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="LDC_BLOCK_IRQ" width="1" begin="9" end="9" resetval="0x0" description="This event is triggered by LDC when a macro-block has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_BLOCK_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="LDC_BLOCK_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="VTNF_IRQ" width="1" begin="8" end="8" resetval="0x0" description="Event triggered by the VTNF imaging accelerator when processing of a block is done." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="VTNF_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="VTNF_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="ROT_A" width="1" begin="7" end="7" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the ROT #a engine" range="" rwaccess="R"/>
+    <bitfield id="IMX_B_IRQ" width="1" begin="6" end="6" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="IMX_A_IRQ" width="1" begin="5" end="5" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="NSF_IRQ" width="1" begin="4" end="4" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the NSF2 imaging accelerator when processing of a block is done." range="" rwaccess="R"/>
+    <bitfield id="VLCDJ_BLOC_IRQ" width="1" begin="3" end="3" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. This event is triggered by VLCDJ when a macro-bloc has been processed (encode/decode)" range="" rwaccess="R"/>
+    <bitfield id="DCT_IRQ" width="1" begin="2" end="2" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when a block has been processed by the DCT module and the filter outcome has been stored to an image buffer." range="" rwaccess="R"/>
+    <bitfield id="LDC_FRAME_IRQ" width="1" begin="1" end="1" resetval="0x0" description="This event is triggered by LDC when a full frame has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_FRAME_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="LDC_FRAME_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ0" width="1" begin="0" end="0" resetval="0x0" description="Event triggered by the SIMCOP DMA. Check SIMCOP DMA IRQ registers." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="SIMCOP_DMA_IRQ0_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="SIMCOP_DMA_IRQ0_1" description="Enable interrupt"/>
+    </bitfield>
+  </register>
+  <register id="SIMCOP_HL_IRQENABLE_SET_i_2" acronym="SIMCOP_HL_IRQENABLE_SET_i_2" offset="0x48" width="32" description="Per-event interrupt enable bit vector Write 1 to set (enable interrupt). Readout equal to corresponding _CLR register.">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="CPU_PROC_START_IRQ" width="1" begin="19" end="19" resetval="0x0" description="Event triggered by the HW sequencer to instruct the CPU to process a macro block" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CPU_PROC_START_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="CPU_PROC_START_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ1" width="1" begin="18" end="18" resetval="0x0" description="Event triggered by the SIMCOP DMA. Check SIMCOP DMA IRQ registers." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="SIMCOP_DMA_IRQ1_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="SIMCOP_DMA_IRQ1_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="17" end="17" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="OCP_ERR_IRQ" width="1" begin="16" end="16" resetval="0x0" description="An OCP error has been received on the OCPMB master port." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="OCP_ERR_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="OCP_ERR_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="VLCDJ_DECODE_ERR_IRQ" width="1" begin="15" end="15" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. A decode error has been signaled by the VLCDJ module" range="" rwaccess="R"/>
+    <bitfield id="DONE_IRQ" width="1" begin="14" end="14" resetval="0x0" description="Event triggered when the HW sequencer finishes the sequence: - the sequence step counter has reached the limit - all accelerator and DMA events for the last sequence step have been received." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="DONE_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="DONE_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP3_IRQ" width="1" begin="13" end="13" resetval="0x0" description="Event triggered when STEP3 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP3_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="STEP3_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP2_IRQ" width="1" begin="12" end="12" resetval="0x0" description="Event triggered when STEP2 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP2_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="STEP2_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP1_IRQ" width="1" begin="11" end="11" resetval="0x0" description="Event triggered when STEP1 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP1_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="STEP1_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP0_IRQ" width="1" begin="10" end="10" resetval="0x0" description="Event triggered when STEP0 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP0_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="STEP0_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="LDC_BLOCK_IRQ" width="1" begin="9" end="9" resetval="0x0" description="This event is triggered by LDC when a macro-block has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_BLOCK_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="LDC_BLOCK_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="VTNF_IRQ" width="1" begin="8" end="8" resetval="0x0" description="Event triggered by the VTNF imaging accelerator when processing of a block is done." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="VTNF_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="VTNF_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="ROT_A" width="1" begin="7" end="7" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the ROT #a engine" range="" rwaccess="R"/>
+    <bitfield id="IMX_B_IRQ" width="1" begin="6" end="6" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="IMX_A_IRQ" width="1" begin="5" end="5" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="NSF_IRQ" width="1" begin="4" end="4" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the NSF2 imaging accelerator when processing of a block is done." range="" rwaccess="R"/>
+    <bitfield id="VLCDJ_BLOC_IRQ" width="1" begin="3" end="3" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. This event is triggered by VLCDJ when a macro-bloc has been processed (encode/decode)" range="" rwaccess="R"/>
+    <bitfield id="DCT_IRQ" width="1" begin="2" end="2" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when a block has been processed by the DCT module and the filter outcome has been stored to an image buffer." range="" rwaccess="R"/>
+    <bitfield id="LDC_FRAME_IRQ" width="1" begin="1" end="1" resetval="0x0" description="This event is triggered by LDC when a full frame has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_FRAME_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="LDC_FRAME_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ0" width="1" begin="0" end="0" resetval="0x0" description="Event triggered by the SIMCOP DMA. Check SIMCOP DMA IRQ registers." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="SIMCOP_DMA_IRQ0_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="SIMCOP_DMA_IRQ0_1" description="Enable interrupt"/>
+    </bitfield>
+  </register>
+  <register id="SIMCOP_HL_IRQENABLE_SET_i_3" acronym="SIMCOP_HL_IRQENABLE_SET_i_3" offset="0x58" width="32" description="Per-event interrupt enable bit vector Write 1 to set (enable interrupt). Readout equal to corresponding _CLR register.">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="CPU_PROC_START_IRQ" width="1" begin="19" end="19" resetval="0x0" description="Event triggered by the HW sequencer to instruct the CPU to process a macro block" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CPU_PROC_START_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="CPU_PROC_START_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ1" width="1" begin="18" end="18" resetval="0x0" description="Event triggered by the SIMCOP DMA. Check SIMCOP DMA IRQ registers." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="SIMCOP_DMA_IRQ1_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="SIMCOP_DMA_IRQ1_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="17" end="17" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="OCP_ERR_IRQ" width="1" begin="16" end="16" resetval="0x0" description="An OCP error has been received on the OCPMB master port." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="OCP_ERR_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="OCP_ERR_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="VLCDJ_DECODE_ERR_IRQ" width="1" begin="15" end="15" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. A decode error has been signaled by the VLCDJ module" range="" rwaccess="R"/>
+    <bitfield id="DONE_IRQ" width="1" begin="14" end="14" resetval="0x0" description="Event triggered when the HW sequencer finishes the sequence: - the sequence step counter has reached the limit - all accelerator and DMA events for the last sequence step have been received." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="DONE_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="DONE_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP3_IRQ" width="1" begin="13" end="13" resetval="0x0" description="Event triggered when STEP3 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP3_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="STEP3_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP2_IRQ" width="1" begin="12" end="12" resetval="0x0" description="Event triggered when STEP2 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP2_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="STEP2_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP1_IRQ" width="1" begin="11" end="11" resetval="0x0" description="Event triggered when STEP1 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP1_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="STEP1_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP0_IRQ" width="1" begin="10" end="10" resetval="0x0" description="Event triggered when STEP0 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP0_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="STEP0_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="LDC_BLOCK_IRQ" width="1" begin="9" end="9" resetval="0x0" description="This event is triggered by LDC when a macro-block has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_BLOCK_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="LDC_BLOCK_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="VTNF_IRQ" width="1" begin="8" end="8" resetval="0x0" description="Event triggered by the VTNF imaging accelerator when processing of a block is done." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="VTNF_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="VTNF_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="ROT_A" width="1" begin="7" end="7" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the ROT #a engine" range="" rwaccess="R"/>
+    <bitfield id="IMX_B_IRQ" width="1" begin="6" end="6" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="IMX_A_IRQ" width="1" begin="5" end="5" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="NSF_IRQ" width="1" begin="4" end="4" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the NSF2 imaging accelerator when processing of a block is done." range="" rwaccess="R"/>
+    <bitfield id="VLCDJ_BLOC_IRQ" width="1" begin="3" end="3" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. This event is triggered by VLCDJ when a macro-bloc has been processed (encode/decode)" range="" rwaccess="R"/>
+    <bitfield id="DCT_IRQ" width="1" begin="2" end="2" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when a block has been processed by the DCT module and the filter outcome has been stored to an image buffer." range="" rwaccess="R"/>
+    <bitfield id="LDC_FRAME_IRQ" width="1" begin="1" end="1" resetval="0x0" description="This event is triggered by LDC when a full frame has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_FRAME_IRQ_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="LDC_FRAME_IRQ_1" description="Enable interrupt"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ0" width="1" begin="0" end="0" resetval="0x0" description="Event triggered by the SIMCOP DMA. Check SIMCOP DMA IRQ registers." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="SIMCOP_DMA_IRQ0_0" description="No action"/>
+      <bitenum value="1" id="ENABLE" token="SIMCOP_DMA_IRQ0_1" description="Enable interrupt"/>
+    </bitfield>
+  </register>
+  <register id="SIMCOP_HL_IRQENABLE_CLR_i_0" acronym="SIMCOP_HL_IRQENABLE_CLR_i_0" offset="0x2C" width="32" description="Per-event interrupt enable bit vector Write 1 to clear (disable interrupt). Readout equal to corresponding _SET register.">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="CPU_PROC_START_IRQ" width="1" begin="19" end="19" resetval="0x0" description="Event triggered by the HW sequencer to instruct the CPU to process a macro block" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CPU_PROC_START_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="CPU_PROC_START_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ1" width="1" begin="18" end="18" resetval="0x0" description="Event triggered by the SIMCOP DMA. Check SIMCOP DMA IRQ registers." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="SIMCOP_DMA_IRQ1_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="SIMCOP_DMA_IRQ1_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="17" end="17" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="OCP_ERR_IRQ" width="1" begin="16" end="16" resetval="0x0" description="An OCP error has been received on the OCPMB master port." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="OCP_ERR_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="OCP_ERR_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="VLCDJ_DECODE_ERR_IRQ" width="1" begin="15" end="15" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. A decode error has been signaled by the VLCDJ module" range="" rwaccess="R"/>
+    <bitfield id="DONE_IRQ" width="1" begin="14" end="14" resetval="0x0" description="Event triggered when the HW sequencer finishes the sequence: - the sequence step counter has reached the limit - all accelerator and DMA events for the last sequence step have been received." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="DONE_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="DONE_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP3_IRQ" width="1" begin="13" end="13" resetval="0x0" description="Event triggered when STEP3 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP3_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="STEP3_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP2_IRQ" width="1" begin="12" end="12" resetval="0x0" description="Event triggered when STEP2 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP2_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="STEP2_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP1_IRQ" width="1" begin="11" end="11" resetval="0x0" description="Event triggered when STEP1 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP1_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="STEP1_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP0_IRQ" width="1" begin="10" end="10" resetval="0x0" description="Event triggered when STEP0 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP0_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="STEP0_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="LDC_BLOCK_IRQ" width="1" begin="9" end="9" resetval="0x0" description="This event is triggered by LDC when a macro-block has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_BLOCK_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="LDC_BLOCK_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="VTNF_IRQ" width="1" begin="8" end="8" resetval="0x0" description="Event triggered by the VTNF imaging accelerator when processing of a block is done." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="VTNF_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="VTNF_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="ROT_A" width="1" begin="7" end="7" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the ROT #a engine" range="" rwaccess="R"/>
+    <bitfield id="IMX_B_IRQ" width="1" begin="6" end="6" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="IMX_A_IRQ" width="1" begin="5" end="5" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="NSF_IRQ" width="1" begin="4" end="4" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the NSF2 imaging accelerator when processing of a block is done." range="" rwaccess="R"/>
+    <bitfield id="VLCDJ_BLOC_IRQ" width="1" begin="3" end="3" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. This event is triggered by VLCDJ when a macro-bloc has been processed (encode/decode)" range="" rwaccess="R"/>
+    <bitfield id="DCT_IRQ" width="1" begin="2" end="2" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when a block has been processed by the DCT module and the filter outcome has been stored to an image buffer." range="" rwaccess="R"/>
+    <bitfield id="LDC_FRAME_IRQ" width="1" begin="1" end="1" resetval="0x0" description="This event is triggered by LDC when a full frame has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_FRAME_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="LDC_FRAME_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ0" width="1" begin="0" end="0" resetval="0x0" description="Event triggered by the SIMCOP DMA. Check SIMCOP DMA IRQ registers." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="SIMCOP_DMA_IRQ0_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="SIMCOP_DMA_IRQ0_1" description="Disable interrupt"/>
+    </bitfield>
+  </register>
+  <register id="SIMCOP_HL_IRQENABLE_CLR_i_1" acronym="SIMCOP_HL_IRQENABLE_CLR_i_1" offset="0x3C" width="32" description="Per-event interrupt enable bit vector Write 1 to clear (disable interrupt). Readout equal to corresponding _SET register.">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="CPU_PROC_START_IRQ" width="1" begin="19" end="19" resetval="0x0" description="Event triggered by the HW sequencer to instruct the CPU to process a macro block" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CPU_PROC_START_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="CPU_PROC_START_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ1" width="1" begin="18" end="18" resetval="0x0" description="Event triggered by the SIMCOP DMA. Check SIMCOP DMA IRQ registers." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="SIMCOP_DMA_IRQ1_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="SIMCOP_DMA_IRQ1_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="17" end="17" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="OCP_ERR_IRQ" width="1" begin="16" end="16" resetval="0x0" description="An OCP error has been received on the OCPMB master port." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="OCP_ERR_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="OCP_ERR_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="VLCDJ_DECODE_ERR_IRQ" width="1" begin="15" end="15" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. A decode error has been signaled by the VLCDJ module" range="" rwaccess="R"/>
+    <bitfield id="DONE_IRQ" width="1" begin="14" end="14" resetval="0x0" description="Event triggered when the HW sequencer finishes the sequence: - the sequence step counter has reached the limit - all accelerator and DMA events for the last sequence step have been received." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="DONE_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="DONE_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP3_IRQ" width="1" begin="13" end="13" resetval="0x0" description="Event triggered when STEP3 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP3_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="STEP3_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP2_IRQ" width="1" begin="12" end="12" resetval="0x0" description="Event triggered when STEP2 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP2_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="STEP2_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP1_IRQ" width="1" begin="11" end="11" resetval="0x0" description="Event triggered when STEP1 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP1_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="STEP1_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP0_IRQ" width="1" begin="10" end="10" resetval="0x0" description="Event triggered when STEP0 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP0_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="STEP0_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="LDC_BLOCK_IRQ" width="1" begin="9" end="9" resetval="0x0" description="This event is triggered by LDC when a macro-block has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_BLOCK_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="LDC_BLOCK_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="VTNF_IRQ" width="1" begin="8" end="8" resetval="0x0" description="Event triggered by the VTNF imaging accelerator when processing of a block is done." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="VTNF_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="VTNF_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="ROT_A" width="1" begin="7" end="7" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the ROT #a engine" range="" rwaccess="R"/>
+    <bitfield id="IMX_B_IRQ" width="1" begin="6" end="6" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="IMX_A_IRQ" width="1" begin="5" end="5" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="NSF_IRQ" width="1" begin="4" end="4" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the NSF2 imaging accelerator when processing of a block is done." range="" rwaccess="R"/>
+    <bitfield id="VLCDJ_BLOC_IRQ" width="1" begin="3" end="3" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. This event is triggered by VLCDJ when a macro-bloc has been processed (encode/decode)" range="" rwaccess="R"/>
+    <bitfield id="DCT_IRQ" width="1" begin="2" end="2" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when a block has been processed by the DCT module and the filter outcome has been stored to an image buffer." range="" rwaccess="R"/>
+    <bitfield id="LDC_FRAME_IRQ" width="1" begin="1" end="1" resetval="0x0" description="This event is triggered by LDC when a full frame has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_FRAME_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="LDC_FRAME_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ0" width="1" begin="0" end="0" resetval="0x0" description="Event triggered by the SIMCOP DMA. Check SIMCOP DMA IRQ registers." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="SIMCOP_DMA_IRQ0_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="SIMCOP_DMA_IRQ0_1" description="Disable interrupt"/>
+    </bitfield>
+  </register>
+  <register id="SIMCOP_HL_IRQENABLE_CLR_i_2" acronym="SIMCOP_HL_IRQENABLE_CLR_i_2" offset="0x4C" width="32" description="Per-event interrupt enable bit vector Write 1 to clear (disable interrupt). Readout equal to corresponding _SET register.">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="CPU_PROC_START_IRQ" width="1" begin="19" end="19" resetval="0x0" description="Event triggered by the HW sequencer to instruct the CPU to process a macro block" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CPU_PROC_START_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="CPU_PROC_START_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ1" width="1" begin="18" end="18" resetval="0x0" description="Event triggered by the SIMCOP DMA. Check SIMCOP DMA IRQ registers." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="SIMCOP_DMA_IRQ1_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="SIMCOP_DMA_IRQ1_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="17" end="17" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="OCP_ERR_IRQ" width="1" begin="16" end="16" resetval="0x0" description="An OCP error has been received on the OCPMB master port." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="OCP_ERR_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="OCP_ERR_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="VLCDJ_DECODE_ERR_IRQ" width="1" begin="15" end="15" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. A decode error has been signaled by the VLCDJ module" range="" rwaccess="R"/>
+    <bitfield id="DONE_IRQ" width="1" begin="14" end="14" resetval="0x0" description="Event triggered when the HW sequencer finishes the sequence: - the sequence step counter has reached the limit - all accelerator and DMA events for the last sequence step have been received." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="DONE_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="DONE_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP3_IRQ" width="1" begin="13" end="13" resetval="0x0" description="Event triggered when STEP3 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP3_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="STEP3_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP2_IRQ" width="1" begin="12" end="12" resetval="0x0" description="Event triggered when STEP2 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP2_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="STEP2_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP1_IRQ" width="1" begin="11" end="11" resetval="0x0" description="Event triggered when STEP1 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP1_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="STEP1_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP0_IRQ" width="1" begin="10" end="10" resetval="0x0" description="Event triggered when STEP0 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP0_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="STEP0_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="LDC_BLOCK_IRQ" width="1" begin="9" end="9" resetval="0x0" description="This event is triggered by LDC when a macro-block has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_BLOCK_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="LDC_BLOCK_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="VTNF_IRQ" width="1" begin="8" end="8" resetval="0x0" description="Event triggered by the VTNF imaging accelerator when processing of a block is done." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="VTNF_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="VTNF_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="ROT_A" width="1" begin="7" end="7" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the ROT #a engine" range="" rwaccess="R"/>
+    <bitfield id="IMX_B_IRQ" width="1" begin="6" end="6" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="IMX_A_IRQ" width="1" begin="5" end="5" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="NSF_IRQ" width="1" begin="4" end="4" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the NSF2 imaging accelerator when processing of a block is done." range="" rwaccess="R"/>
+    <bitfield id="VLCDJ_BLOC_IRQ" width="1" begin="3" end="3" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. This event is triggered by VLCDJ when a macro-bloc has been processed (encode/decode)" range="" rwaccess="R"/>
+    <bitfield id="DCT_IRQ" width="1" begin="2" end="2" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when a block has been processed by the DCT module and the filter outcome has been stored to an image buffer." range="" rwaccess="R"/>
+    <bitfield id="LDC_FRAME_IRQ" width="1" begin="1" end="1" resetval="0x0" description="This event is triggered by LDC when a full frame has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_FRAME_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="LDC_FRAME_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ0" width="1" begin="0" end="0" resetval="0x0" description="Event triggered by the SIMCOP DMA. Check SIMCOP DMA IRQ registers." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="SIMCOP_DMA_IRQ0_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="SIMCOP_DMA_IRQ0_1" description="Disable interrupt"/>
+    </bitfield>
+  </register>
+  <register id="SIMCOP_HL_IRQENABLE_CLR_i_3" acronym="SIMCOP_HL_IRQENABLE_CLR_i_3" offset="0x5C" width="32" description="Per-event interrupt enable bit vector Write 1 to clear (disable interrupt). Readout equal to corresponding _SET register.">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="CPU_PROC_START_IRQ" width="1" begin="19" end="19" resetval="0x0" description="Event triggered by the HW sequencer to instruct the CPU to process a macro block" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CPU_PROC_START_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="CPU_PROC_START_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ1" width="1" begin="18" end="18" resetval="0x0" description="Event triggered by the SIMCOP DMA. Check SIMCOP DMA IRQ registers." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="SIMCOP_DMA_IRQ1_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="SIMCOP_DMA_IRQ1_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="17" end="17" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="OCP_ERR_IRQ" width="1" begin="16" end="16" resetval="0x0" description="An OCP error has been received on the OCPMB master port." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="OCP_ERR_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="OCP_ERR_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="VLCDJ_DECODE_ERR_IRQ" width="1" begin="15" end="15" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. A decode error has been signaled by the VLCDJ module" range="" rwaccess="R"/>
+    <bitfield id="DONE_IRQ" width="1" begin="14" end="14" resetval="0x0" description="Event triggered when the HW sequencer finishes the sequence: - the sequence step counter has reached the limit - all accelerator and DMA events for the last sequence step have been received." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="DONE_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="DONE_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP3_IRQ" width="1" begin="13" end="13" resetval="0x0" description="Event triggered when STEP3 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP3_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="STEP3_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP2_IRQ" width="1" begin="12" end="12" resetval="0x0" description="Event triggered when STEP2 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP2_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="STEP2_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP1_IRQ" width="1" begin="11" end="11" resetval="0x0" description="Event triggered when STEP1 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP1_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="STEP1_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="STEP0_IRQ" width="1" begin="10" end="10" resetval="0x0" description="Event triggered when STEP0 is activated by the HW sequencer" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="STEP0_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="STEP0_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="LDC_BLOCK_IRQ" width="1" begin="9" end="9" resetval="0x0" description="This event is triggered by LDC when a macro-block has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_BLOCK_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="LDC_BLOCK_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="VTNF_IRQ" width="1" begin="8" end="8" resetval="0x0" description="Event triggered by the VTNF imaging accelerator when processing of a block is done." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="VTNF_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="VTNF_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="ROT_A" width="1" begin="7" end="7" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the ROT #a engine" range="" rwaccess="R"/>
+    <bitfield id="IMX_B_IRQ" width="1" begin="6" end="6" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="IMX_A_IRQ" width="1" begin="5" end="5" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when iMX has executed a SLEEP instruction." range="" rwaccess="R"/>
+    <bitfield id="NSF_IRQ" width="1" begin="4" end="4" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered by the NSF2 imaging accelerator when processing of a block is done." range="" rwaccess="R"/>
+    <bitfield id="VLCDJ_BLOC_IRQ" width="1" begin="3" end="3" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. This event is triggered by VLCDJ when a macro-bloc has been processed (encode/decode)" range="" rwaccess="R"/>
+    <bitfield id="DCT_IRQ" width="1" begin="2" end="2" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Event triggered when a block has been processed by the DCT module and the filter outcome has been stored to an image buffer." range="" rwaccess="R"/>
+    <bitfield id="LDC_FRAME_IRQ" width="1" begin="1" end="1" resetval="0x0" description="This event is triggered by LDC when a full frame has been processed" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="LDC_FRAME_IRQ_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="LDC_FRAME_IRQ_1" description="Disable interrupt"/>
+    </bitfield>
+    <bitfield id="SIMCOP_DMA_IRQ0" width="1" begin="0" end="0" resetval="0x0" description="Event triggered by the SIMCOP DMA. Check SIMCOP DMA IRQ registers." range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="SIMCOP_DMA_IRQ0_0" description="No action"/>
+      <bitenum value="1" id="DISABLE" token="SIMCOP_DMA_IRQ0_1" description="Disable interrupt"/>
+    </bitfield>
+  </register>
+  <register id="SIMCOP_CTRL" acronym="SIMCOP_CTRL" offset="0x60" width="32" description="SIMCOP control register">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="LDC_R_BURST_BREAK" width="1" begin="28" end="28" resetval="0x0" description="Controls if bursts issued by LDC bridge could cross burst length boundaries. When this register is set, the LDC module only issues OCP aligned bursts. Register can only be used when LDC_R_MAX_BURST_LENGTH is 32, 64 or 128 bytes." range="" rwaccess="RW">
+      <bitenum value="0" id="YES" token="LDC_R_BURST_BREAK_0" description="Yes."/>
+      <bitenum value="1" id="NO" token="LDC_R_BURST_BREAK_1" description="No. OCP transactions must be splitted"/>
+    </bitfield>
+    <bitfield id="LDC_R_MAX_BURST_LENGTH" width="2" begin="27" end="26" resetval="0x0" description="Limits the maximum burst length that could be used by LDC" range="" rwaccess="RW">
+      <bitenum value="0" id="B128" token="LDC_R_MAX_BURST_LENGTH_0" description="8x128"/>
+      <bitenum value="1" id="B96" token="LDC_R_MAX_BURST_LENGTH_1" description="6x128"/>
+      <bitenum value="3" id="B32" token="LDC_R_MAX_BURST_LENGTH_3" description="2x128"/>
+      <bitenum value="2" id="B64" token="LDC_R_MAX_BURST_LENGTH_2" description="4x128"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="25" end="25" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="LDC_R_TAG_CNT" width="4" begin="24" end="21" resetval="0x3" description="Limits the maximum number of outstanding LDC requests to LDC_R_TAG_CNT+1" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="20" end="20" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="LDC_R_TAG_OFST" width="4" begin="19" end="16" resetval="0xc" description="Reserved. Values written to this register are ignored. (register required for legacy SW)" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="15" end="15" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="IMX_B_CMD" width="1" begin="14" end="14" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Switch for iMX # command memory" range="" rwaccess="RW">
+      <bitenum value="0" id="COPR" token="IMX_B_CMD_0" description="Coprocessor bus"/>
+      <bitenum value="1" id="IMXB" token="IMX_B_CMD_1" description="IMX #B instruction read / write"/>
+    </bitfield>
+    <bitfield id="IMX_A_CMD" width="2" begin="13" end="12" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Switch for iMX #a command memory" range="" rwaccess="RW">
+      <bitenum value="0" id="COPR" token="IMX_A_CMD_0" description="Coprocessor bus"/>
+      <bitenum value="1" id="IMXA" token="IMX_A_CMD_1" description="IMX #A instruction read / write"/>
+      <bitenum value="2" id="IMXB" token="IMX_A_CMD_2" description="IMX #B instruction read / write"/>
+    </bitfield>
+    <bitfield id="HUFF" width="1" begin="11" end="11" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Switch for huffman table" range="" rwaccess="RW">
+      <bitenum value="0" id="COPR" token="HUFF_0" description="Coprocessor"/>
+      <bitenum value="1" id="VLCDJ" token="HUFF_1" description="VLCDJ huffman table read"/>
+    </bitfield>
+    <bitfield id="QUANT" width="1" begin="10" end="10" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Switch for quantization table" range="" rwaccess="RW">
+      <bitenum value="0" id="COPR" token="QUANT_0" description="Coprocessor bus"/>
+      <bitenum value="1" id="VLCDJ" token="QUANT_1" description="VLCDJ quantization table read"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="9" end="9" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="8" end="8" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="LDC_INPUT" width="2" begin="7" end="6" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Selects input data buffer for LDC. Memories attached to LDC as working memories can't be used by any other accelerators. HWSEQ or HWSEQ SW override settings are ignored for those memories." range="" rwaccess="RW">
+      <bitenum value="0" id="NONE" token="LDC_INPUT_0" description="No input memory attached"/>
+      <bitenum value="1" id="IMBUF2" token="LDC_INPUT_1" description="reserved"/>
+      <bitenum value="3" id="LDC_PRIVATE" token="LDC_INPUT_3" description="Use LDC private input memory."/>
+      <bitenum value="2" id="IMBUF4" token="LDC_INPUT_2" description="use image buffers #a #b #c #d"/>
+    </bitfield>
+    <bitfield id="NSF_WMEM" width="2" begin="5" end="4" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. Selects working memory for NSF. Memories attached to NSF as working memories can't be used by any other accelerators. HWSEQ or HWSEQ SW override settings are ignored for those memories." range="" rwaccess="RW">
+      <bitenum value="0" id="NONE" token="NSF_WMEM_0" description="No working memory attached to NSF2. NSF2 can't be used."/>
+      <bitenum value="1" id="COEFF_A" token="NSF_WMEM_1" description="iMX #a coefficient memory used."/>
+      <bitenum value="3" id="IMBUFF_4" token="NSF_WMEM_3" description="Image buffers #a, #b, #c, #d used. Those image buffers can't be used for other purposes. This setting has higher priority than the context configuration"/>
+      <bitenum value="2" id="IMBUFF_2" token="NSF_WMEM_2" description="Image buffers #a #b used. Those image buffers can't be used for other purposes. This setting has higher priority than the context configuration"/>
+    </bitfield>
+    <bitfield id="IRQ3_MODE" width="1" begin="3" end="3" resetval="0x0" description="Interrupt generation method" range="" rwaccess="RW">
+      <bitenum value="0" id="OR" token="IRQ3_MODE_0" description="The interrupt line is asserted when one of the events enabled in SIMCOP_HL_IRQENABLE_SET__3 / SIMCOP_HL_IRQENABLE_CLR__3 is pending"/>
+      <bitenum value="1" id="AND" token="IRQ3_MODE_1" description="The interrupt line is asserted when all events enabled in SIMCOP_HL_IRQENABLE_SET__3 / SIMCOP_HL_IRQENABLE_CLR__3 are pending"/>
+    </bitfield>
+    <bitfield id="IRQ2_MODE" width="1" begin="2" end="2" resetval="0x0" description="Interrupt generation method" range="" rwaccess="RW">
+      <bitenum value="0" id="OR" token="IRQ2_MODE_0" description="The interrupt line is asserted when one of the events enabled in SIMCOP_HL_IRQENABLE_SET__2 / SIMCOP_HL_IRQENABLE_CLR__2 is pending"/>
+      <bitenum value="1" id="AND" token="IRQ2_MODE_1" description="The interrupt line is asserted when all events enabled in SIMCOP_HL_IRQENABLE_SET__2 / SIMCOP_HL_IRQENABLE_CLR__2 are pending"/>
+    </bitfield>
+    <bitfield id="IRQ1_MODE" width="1" begin="1" end="1" resetval="0x0" description="Interrupt generation method" range="" rwaccess="RW">
+      <bitenum value="0" id="OR" token="IRQ1_MODE_0" description="The interrupt line is asserted when one of the events enabled in SIMCOP_HL_IRQENABLE_SET__1 / SIMCOP_HL_IRQENABLE_CLR__1 is pending"/>
+      <bitenum value="1" id="AND" token="IRQ1_MODE_1" description="The interrupt line is asserted when all events enabled in SIMCOP_HL_IRQENABLE_SET__1 / SIMCOP_HL_IRQENABLE_CLR__1 are pending"/>
+    </bitfield>
+    <bitfield id="IRQ0_MODE" width="1" begin="0" end="0" resetval="0x0" description="Interrupt generation method" range="" rwaccess="RW">
+      <bitenum value="0" id="OR" token="IRQ0_MODE_0" description="The interrupt line is asserted when one of the events enabled in SIMCOP_HL_IRQENABLE_SET__0 / SIMCOP_HL_IRQENABLE_CLR__0 is pending"/>
+      <bitenum value="1" id="AND" token="IRQ0_MODE_1" description="The interrupt line is asserted when all events enabled in SIMCOP_HL_IRQENABLE_SET__0 / SIMCOP_HL_IRQENABLE_CLR__0 are pending"/>
+    </bitfield>
+  </register>
+  <register id="SIMCOP_CLKCTRL" acronym="SIMCOP_CLKCTRL" offset="0x64" width="32" description="SIMCOP clock control register. Use to enable/disable the interface and functional clock of SIMCOP sub-modules. Disabled modules can't be accessed: read/writes return SResp=ERR">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="VTNF" width="1" begin="9" end="9" resetval="0x0" description="VTNF" range="" rwaccess="RW">
+      <bitenum value="0" id="WOFF" token="VTNF_0" description="Request shutdown of the sub-module. No effect if the sub-module clock is already off."/>
+      <bitenum value="1" id="WON" token="VTNF_1" description="Request enable of the sub-module. No effect if the sub-module clock is already on."/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="8" end="8" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="ROT_A" width="1" begin="7" end="7" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. ROT A" range="" rwaccess="RW">
+      <bitenum value="0" id="WOFF" token="ROT_A_0" description="Request shutdown of the sub-module. No effect if the sub-module clock is already off."/>
+      <bitenum value="1" id="WON" token="ROT_A_1" description="Request enable of the sub-module. No effect if the sub-module clock is already on."/>
+    </bitfield>
+    <bitfield id="IMX_B" width="1" begin="6" end="6" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. IMX B" range="" rwaccess="RW">
+      <bitenum value="0" id="WOFF" token="IMX_B_0" description="Request shutdown of the sub-module. No effect if the sub-module clock is already off."/>
+      <bitenum value="1" id="WON" token="IMX_B_1" description="Request enable of the sub-module. No effect if the sub-module clock is already on."/>
+    </bitfield>
+    <bitfield id="IMX_A" width="1" begin="5" end="5" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. IMX A" range="" rwaccess="RW">
+      <bitenum value="0" id="WOFF" token="IMX_A_0" description="Request shutdown of the sub-module. No effect if the sub-module clock is already off."/>
+      <bitenum value="1" id="WON" token="IMX_A_1" description="Request enable of the sub-module. No effect if the sub-module clock is already on."/>
+    </bitfield>
+    <bitfield id="NSF2" width="1" begin="4" end="4" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. NSF2" range="" rwaccess="RW">
+      <bitenum value="0" id="WOFF" token="NSF2_0" description="Request shutdown of the sub-module. No effect if the sub-module clock is already off."/>
+      <bitenum value="1" id="WON" token="NSF2_1" description="Request enable of the sub-module. No effect if the sub-module clock is already on."/>
+    </bitfield>
+    <bitfield id="VLCDJ" width="1" begin="3" end="3" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. VLCDJ" range="" rwaccess="RW">
+      <bitenum value="0" id="WOFF" token="VLCDJ_0" description="Request shutdown of the sub-module. No effect if the sub-module clock is already off."/>
+      <bitenum value="1" id="WON" token="VLCDJ_1" description="Request enable of the sub-module. No effect if the sub-module clock is already on."/>
+    </bitfield>
+    <bitfield id="DCT" width="1" begin="2" end="2" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location. DCT" range="" rwaccess="RW">
+      <bitenum value="0" id="WOFF" token="DCT_0" description="Request shutdown of the sub-module. No effect if the sub-module clock is already off."/>
+      <bitenum value="1" id="WON" token="DCT_1" description="Request enable of the sub-module. No effect if the sub-module clock is already on."/>
+    </bitfield>
+    <bitfield id="LDC" width="1" begin="1" end="1" resetval="0x0" description="LDC" range="" rwaccess="RW">
+      <bitenum value="0" id="WOFF" token="LDC_0" description="Request shutdown of the sub-module. No effect if the sub-module clock is already off."/>
+      <bitenum value="1" id="WON" token="LDC_1" description="Request enable of the sub-module. No effect if the sub-module clock is already on."/>
+    </bitfield>
+    <bitfield id="DMA" width="1" begin="0" end="0" resetval="0x0" description="DMA" range="" rwaccess="RW">
+      <bitenum value="0" id="WOFF" token="DMA_0" description="Request shutdown of the sub-module. No effect if the sub-module clock is already off."/>
+      <bitenum value="1" id="WON" token="DMA_1" description="Request enable of the sub-module. No effect if the sub-module clock is already on."/>
+    </bitfield>
+  </register>
+  <register id="SIMCOP_CTRL2" acronym="SIMCOP_CTRL2" offset="0xFC" width="32" description="Simcop control register">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0x0" description="This bit field is reserved and users should write the reset value to this bit location." range="" rwaccess="R"/>
+    <bitfield id="LDCR_BW_CTRL" width="12" begin="11" end="0" resetval="0x0" description="Limits the mean bandwidth (computed over one block) that the LDC module can request for read from system memory 0: The BW limiter is bypassed 1~4095: maximum number of bytes per cycle multiplied by 2^8. Examples: 1 : 1.6 MBytes/s @ 426 MHz 4095 : 6.8 GBytes/s @ 426 Mhz" range="" rwaccess="RW"/>
+  </register>
+</module>

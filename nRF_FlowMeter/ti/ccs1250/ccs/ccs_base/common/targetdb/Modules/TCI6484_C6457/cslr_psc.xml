@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module id="PSC" HW_revision="" XML_version="1" description="Power and Sleep Controller">
+     <register id="PID" acronym="PID" offset="0x000" width="32" description="Peripheral ID Register">
+<bitfield id="PID" width="32" begin="31" end="0" resetval="1149385216" description="Peripheral ID used to differentiate different modules in the system" range="" rwaccess="R"></bitfield>
+</register>
+     <register id="PTCMD" acronym="PTCMD" offset="0x120" width="32" description="Power Transtion Command Register ">
+<bitfield id="_RESV_1" width="26" begin="31" end="6" resetval="0" description="Reserved for future expansion" range="" rwaccess="N"></bitfield>
+<bitfield id="GO" width="6" begin="5" end="0" resetval="0" description="Power Domain GO Transition Command" range="" rwaccess="W">
+<bitenum id="SET" value="1" token="SET" description="Writes of 1 sets corresponding PTSTAT.GOSTAT field, which causes PSC hardware to evaluate PDCTL.NEXT and MDCTL.NEXT" />
+</bitfield>
+</register>
+     <register id="PTSTAT" acronym="PTSTAT" offset="0x128" width="32" description="Power Domain Transition Status">
+<bitfield id="_RESV_1" width="26" begin="31" end="6" resetval="0" description="Reserved for future expansion" range="" rwaccess="N"></bitfield>
+<bitfield id="GOSTAT" width="6" begin="5" end="0" resetval="0" description="Power domain transition status" range="" rwaccess="R">
+<bitenum id="NO_PWRDMN_TRANS" value="0" token="NO_PWRDMN_TRANS" description="No transitions in progress" />
+<bitenum id="PWRDMN_TRANS_PROG" value="1" token="PWRDMN_TRANS_PROG" description="Transition in progress" />
+</bitfield>
+</register>
+     <register id="PDSTAT0" acronym="PDSTAT0" offset="0x200" width="32" description="Power Domain Status Register">
+<bitfield id="_RESV_1" width="20" begin="31" end="12" resetval="0" description="Reserved for future expansion" range="" rwaccess="N"></bitfield>
+<bitfield id="_RESV_2" width="2" begin="11" end="10" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="_RESV_3" width="1" begin="9" end="9" resetval="1" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="_RESV_4" width="1" begin="8" end="8" resetval="1" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="_RESV_5" width="6" begin="7" end="2" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="STATE" width="2" begin="1" end="0" resetval="1" description="Power domain status" range="" rwaccess="">
+<bitenum id="OFF" value="0" token="OFF" description="Power Domain is in the OFF state." />
+<bitenum id="ON" value="1" token="ON" description="Power Domain is in the ON state." />
+</bitfield>
+</register>
+     <register id="PDSTAT1" acronym="PDSTAT1" offset="0x204" width="32" description="Power Domain Status Register">
+<bitfield id="_RESV_1" width="20" begin="31" end="12" resetval="0" description="Reserved for future expansion" range="" rwaccess="N"></bitfield>
+<bitfield id="_RESV_2" width="2" begin="11" end="10" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="_RESV_3" width="1" begin="9" end="9" resetval="1" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="_RESV_4" width="1" begin="8" end="8" resetval="1" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="_RESV_5" width="6" begin="7" end="2" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="STATE" width="2" begin="1" end="0" resetval="0" description="Power domain status" range="" rwaccess="">
+<bitenum id="OFF" value="0" token="OFF" description="Power Domain is in the OFF state." />
+<bitenum id="ON" value="1" token="ON" description="Power Domain is in the ON state." />
+</bitfield>
+</register>
+     <register id="PDSTAT2" acronym="PDSTAT2" offset="0x208" width="32" description="Power Domain Status Register">
+<bitfield id="_RESV_1" width="20" begin="31" end="12" resetval="0" description="Reserved for future expansion" range="" rwaccess="N"></bitfield>
+<bitfield id="_RESV_2" width="2" begin="11" end="10" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="_RESV_3" width="1" begin="9" end="9" resetval="1" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="_RESV_4" width="1" begin="8" end="8" resetval="1" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="_RESV_5" width="6" begin="7" end="2" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="STATE" width="2" begin="1" end="0" resetval="0" description="Power domain status" range="" rwaccess="">
+<bitenum id="OFF" value="0" token="OFF" description="Power Domain is in the OFF state." />
+<bitenum id="ON" value="1" token="ON" description="Power Domain is in the ON state." />
+</bitfield>
+</register>
+     <register id="PDSTAT3" acronym="PDSTAT3" offset="0x20C" width="32" description="Power Domain Status Register">
+<bitfield id="_RESV_1" width="20" begin="31" end="12" resetval="0" description="Reserved for future expansion" range="" rwaccess="N"></bitfield>
+<bitfield id="_RESV_2" width="2" begin="11" end="10" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="_RESV_3" width="1" begin="9" end="9" resetval="1" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="_RESV_4" width="1" begin="8" end="8" resetval="1" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="_RESV_5" width="6" begin="7" end="2" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="STATE" width="2" begin="1" end="0" resetval="0" description="Power domain status" range="" rwaccess="">
+<bitenum id="OFF" value="0" token="OFF" description="Power Domain is in the OFF state." />
+<bitenum id="ON" value="1" token="ON" description="Power Domain is in the ON state." />
+</bitfield>
+</register>
+     <register id="PDSTAT4" acronym="PDSTAT4" offset="0x210" width="32" description="Power Domain Status Register">
+<bitfield id="_RESV_1" width="20" begin="31" end="12" resetval="0" description="Reserved for future expansion" range="" rwaccess="N"></bitfield>
+<bitfield id="_RESV_2" width="2" begin="11" end="10" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="_RESV_3" width="1" begin="9" end="9" resetval="1" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="_RESV_4" width="1" begin="8" end="8" resetval="1" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="_RESV_5" width="6" begin="7" end="2" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="STATE" width="2" begin="1" end="0" resetval="0" description="Power domain status" range="" rwaccess="">
+<bitenum id="OFF" value="0" token="OFF" description="Power Domain is in the OFF state." />
+<bitenum id="ON" value="1" token="ON" description="Power Domain is in the ON state." />
+</bitfield>
+</register>
+     <register id="PDCTL0" acronym="PDCTL0" offset="0x300" width="32" description="Power Domain Control Register">
+<bitfield id="_RESV_1" width="31" begin="31" end="1" resetval="55296" description="Reserved for future expansion" range="" rwaccess="N"></bitfield>
+<bitfield id="NEXT" width="1" begin="0" end="0" resetval="1" description="Power domain next state" range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="Power Domain OFF." />
+<bitenum id="ON" value="1" token="ON" description="Power Domain ON." />
+</bitfield>
+</register>
+     <register id="PDCTL1" acronym="PDCTL1" offset="0x304" width="32" description="Power Domain Control Register">
+<bitfield id="_RESV_1" width="31" begin="31" end="1" resetval="1687552" description="Reserved for future expansion" range="" rwaccess="N"></bitfield>
+<bitfield id="NEXT" width="1" begin="0" end="0" resetval="0" description="Power domain next state" range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="Power Domain OFF." />
+<bitenum id="ON" value="1" token="ON" description="Power Domain ON." />
+</bitfield>
+</register>
+     <register id="PDCTL2" acronym="PDCTL2" offset="0x308" width="32" description="Power Domain Control Register">
+<bitfield id="_RESV_1" width="31" begin="31" end="1" resetval="1687552" description="Reserved for future expansion" range="" rwaccess="N"></bitfield>
+<bitfield id="NEXT" width="1" begin="0" end="0" resetval="0" description="Power domain next state" range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="Power Domain OFF." />
+<bitenum id="ON" value="1" token="ON" description="Power Domain ON." />
+</bitfield>
+</register>
+     <register id="PDCTL3" acronym="PDCTL3" offset="0x30C" width="32" description="Power Domain Control Register">
+<bitfield id="_RESV_1" width="31" begin="31" end="1" resetval="1687552" description="Reserved for future expansion" range="" rwaccess="N"></bitfield>
+<bitfield id="NEXT" width="1" begin="0" end="0" resetval="0" description="Power domain next state" range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="Power Domain OFF." />
+<bitenum id="ON" value="1" token="ON" description="Power Domain ON." />
+</bitfield>
+</register>
+     <register id="PDCTL4" acronym="PDCTL4" offset="0x310" width="32" description="Power Domain Control Register">
+<bitfield id="_RESV_1" width="31" begin="31" end="1" resetval="1687552" description="Reserved for future expansion" range="" rwaccess="N"></bitfield>
+<bitfield id="NEXT" width="1" begin="0" end="0" resetval="0" description="Power domain next state" range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="Power Domain OFF." />
+<bitenum id="ON" value="1" token="ON" description="Power Domain ON." />
+</bitfield>
+</register>
+     <register id="MDSTAT0" acronym="MDSTAT0" offset="0x800" width="32" description="Module Status Register">
+<bitfield id="_RESV_1" width="19" begin="31" end="13" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="MCKOUT" width="1" begin="12" end="12" resetval="0" description="Actual module output to module" range="" rwaccess="R">
+<bitenum id="OFF" value="0" token="OFF" description="" />
+<bitenum id="ON" value="1" token="ON" description="" />
+</bitfield>
+<bitfield id="MRSTDONE" width="1" begin="11" end="11" resetval="1" description="Module reset done. Software is responsible for checking that mode reset is done before accessing" range="" rwaccess="R">
+<bitenum id="NO" value="0" token="NO" description="" />
+<bitenum id="YES" value="1" token="YES" description="" />
+</bitfield>
+<bitfield id="MRST" width="1" begin="10" end="10" resetval="0" description="Module reset actual status" range="" rwaccess="R">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="" />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="" />
+</bitfield>
+<bitfield id="LRSTDONE" width="1" begin="9" end="9" resetval="1" description="Local reset done. Software is responsible for checking that local reset is done before accessing this module" range="" rwaccess="R">
+<bitenum id="NO" value="0" token="NO" description="" />
+<bitenum id="YES" value="1" token="YES" description="" />
+</bitfield>
+<bitfield id="LRST" width="1" begin="8" end="8" resetval="0" description="Module Local Reset status." range="" rwaccess="R">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="" />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="" />
+</bitfield>
+<bitfield id="_RESV_7" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="STATE" width="6" begin="5" end="0" resetval="0" description="These bits indicate the current module state" range="" rwaccess="R">
+<bitenum id="SwRstDisable" value="11" token="SwRstDisable" description="" />
+<bitenum id="Enable" value="283" token="Enable" description="" />
+</bitfield>
+</register>
+     <register id="MDSTAT1" acronym="MDSTAT1" offset="0x804" width="32" description="Module Status Register">
+<bitfield id="_RESV_1" width="19" begin="31" end="13" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="MCKOUT" width="1" begin="12" end="12" resetval="1" description="Actual module output to module" range="" rwaccess="R">
+<bitenum id="OFF" value="0" token="OFF" description="" />
+<bitenum id="ON" value="1" token="ON" description="" />
+</bitfield>
+<bitfield id="MRSTDONE" width="1" begin="11" end="11" resetval="1" description="Module reset done. Software is responsible for checking that mode reset is done before accessing" range="" rwaccess="R">
+<bitenum id="NO" value="0" token="NO" description="" />
+<bitenum id="YES" value="1" token="YES" description="" />
+</bitfield>
+<bitfield id="MRST" width="1" begin="10" end="10" resetval="1" description="Module reset actual status" range="" rwaccess="R">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="" />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="" />
+</bitfield>
+<bitfield id="LRSTDONE" width="1" begin="9" end="9" resetval="0" description="Local reset done. Software is responsible for checking that local reset is done before accessing this module" range="" rwaccess="R">
+<bitenum id="NO" value="0" token="NO" description="" />
+<bitenum id="YES" value="1" token="YES" description="" />
+</bitfield>
+<bitfield id="LRST" width="1" begin="8" end="8" resetval="1" description="Module Local Reset status." range="" rwaccess="R">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="" />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="" />
+</bitfield>
+<bitfield id="_RESV_7" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="STATE" width="6" begin="5" end="0" resetval="3" description="These bits indicate the current module state" range="" rwaccess="R">
+<bitenum id="SwRstDisable" value="11" token="SwRstDisable" description="" />
+<bitenum id="Enable" value="283" token="Enable" description="" />
+</bitfield>
+</register>
+     <register id="MDSTAT2" acronym="MDSTAT2" offset="0x808" width="32" description="Module Status Register">
+<bitfield id="_RESV_1" width="19" begin="31" end="13" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="MCKOUT" width="1" begin="12" end="12" resetval="0" description="Actual module output to module" range="" rwaccess="R">
+<bitenum id="OFF" value="0" token="OFF" description="" />
+<bitenum id="ON" value="1" token="ON" description="" />
+</bitfield>
+<bitfield id="MRSTDONE" width="1" begin="11" end="11" resetval="1" description="Module reset done. Software is responsible for checking that mode reset is done before accessing" range="" rwaccess="R">
+<bitenum id="NO" value="0" token="NO" description="" />
+<bitenum id="YES" value="1" token="YES" description="" />
+</bitfield>
+<bitfield id="MRST" width="1" begin="10" end="10" resetval="0" description="Module reset actual status" range="" rwaccess="R">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="" />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="" />
+</bitfield>
+<bitfield id="LRSTDONE" width="1" begin="9" end="9" resetval="1" description="Local reset done. Software is responsible for checking that local reset is done before accessing this module" range="" rwaccess="R">
+<bitenum id="NO" value="0" token="NO" description="" />
+<bitenum id="YES" value="1" token="YES" description="" />
+</bitfield>
+<bitfield id="LRST" width="1" begin="8" end="8" resetval="0" description="Module Local Reset status." range="" rwaccess="R">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="" />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="" />
+</bitfield>
+<bitfield id="_RESV_7" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="STATE" width="6" begin="5" end="0" resetval="0" description="These bits indicate the current module state" range="" rwaccess="R">
+<bitenum id="SwRstDisable" value="11" token="SwRstDisable" description="" />
+<bitenum id="Enable" value="283" token="Enable" description="" />
+</bitfield>
+</register>
+     <register id="MDSTAT3" acronym="MDSTAT3" offset="0x80C" width="32" description="Module Status Register">
+<bitfield id="_RESV_1" width="19" begin="31" end="13" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="MCKOUT" width="1" begin="12" end="12" resetval="0" description="Actual module output to module" range="" rwaccess="R">
+<bitenum id="OFF" value="0" token="OFF" description="" />
+<bitenum id="ON" value="1" token="ON" description="" />
+</bitfield>
+<bitfield id="MRSTDONE" width="1" begin="11" end="11" resetval="1" description="Module reset done. Software is responsible for checking that mode reset is done before accessing" range="" rwaccess="R">
+<bitenum id="NO" value="0" token="NO" description="" />
+<bitenum id="YES" value="1" token="YES" description="" />
+</bitfield>
+<bitfield id="MRST" width="1" begin="10" end="10" resetval="0" description="Module reset actual status" range="" rwaccess="R">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="" />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="" />
+</bitfield>
+<bitfield id="LRSTDONE" width="1" begin="9" end="9" resetval="1" description="Local reset done. Software is responsible for checking that local reset is done before accessing this module" range="" rwaccess="R">
+<bitenum id="NO" value="0" token="NO" description="" />
+<bitenum id="YES" value="1" token="YES" description="" />
+</bitfield>
+<bitfield id="LRST" width="1" begin="8" end="8" resetval="0" description="Module Local Reset status." range="" rwaccess="R">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="" />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="" />
+</bitfield>
+<bitfield id="_RESV_7" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="STATE" width="6" begin="5" end="0" resetval="0" description="These bits indicate the current module state" range="" rwaccess="R">
+<bitenum id="SwRstDisable" value="11" token="SwRstDisable" description="" />
+<bitenum id="Enable" value="283" token="Enable" description="" />
+</bitfield>
+</register>
+     <register id="MDSTAT4" acronym="MDSTAT4" offset="0x810" width="32" description="Module Status Register">
+<bitfield id="_RESV_1" width="19" begin="31" end="13" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="MCKOUT" width="1" begin="12" end="12" resetval="0" description="Actual module output to module" range="" rwaccess="R">
+<bitenum id="OFF" value="0" token="OFF" description="" />
+<bitenum id="ON" value="1" token="ON" description="" />
+</bitfield>
+<bitfield id="MRSTDONE" width="1" begin="11" end="11" resetval="1" description="Module reset done. Software is responsible for checking that mode reset is done before accessing" range="" rwaccess="R">
+<bitenum id="NO" value="0" token="NO" description="" />
+<bitenum id="YES" value="1" token="YES" description="" />
+</bitfield>
+<bitfield id="MRST" width="1" begin="10" end="10" resetval="0" description="Module reset actual status" range="" rwaccess="R">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="" />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="" />
+</bitfield>
+<bitfield id="LRSTDONE" width="1" begin="9" end="9" resetval="1" description="Local reset done. Software is responsible for checking that local reset is done before accessing this module" range="" rwaccess="R">
+<bitenum id="NO" value="0" token="NO" description="" />
+<bitenum id="YES" value="1" token="YES" description="" />
+</bitfield>
+<bitfield id="LRST" width="1" begin="8" end="8" resetval="0" description="Module Local Reset status." range="" rwaccess="R">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="" />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="" />
+</bitfield>
+<bitfield id="_RESV_7" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="STATE" width="6" begin="5" end="0" resetval="0" description="These bits indicate the current module state" range="" rwaccess="R">
+<bitenum id="SwRstDisable" value="11" token="SwRstDisable" description="" />
+<bitenum id="Enable" value="283" token="Enable" description="" />
+</bitfield>
+</register>
+     <register id="MDSTAT5" acronym="MDSTAT5" offset="0x814" width="32" description="Module Status Register">
+<bitfield id="_RESV_1" width="19" begin="31" end="13" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="MCKOUT" width="1" begin="12" end="12" resetval="1" description="Actual module output to module" range="" rwaccess="R">
+<bitenum id="OFF" value="0" token="OFF" description="" />
+<bitenum id="ON" value="1" token="ON" description="" />
+</bitfield>
+<bitfield id="MRSTDONE" width="1" begin="11" end="11" resetval="1" description="Module reset done. Software is responsible for checking that mode reset is done before accessing" range="" rwaccess="R">
+<bitenum id="NO" value="0" token="NO" description="" />
+<bitenum id="YES" value="1" token="YES" description="" />
+</bitfield>
+<bitfield id="MRST" width="1" begin="10" end="10" resetval="1" description="Module reset actual status" range="" rwaccess="R">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="" />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="" />
+</bitfield>
+<bitfield id="LRSTDONE" width="1" begin="9" end="9" resetval="1" description="Local reset done. Software is responsible for checking that local reset is done before accessing this module" range="" rwaccess="R">
+<bitenum id="NO" value="0" token="NO" description="" />
+<bitenum id="YES" value="1" token="YES" description="" />
+</bitfield>
+<bitfield id="LRST" width="1" begin="8" end="8" resetval="1" description="Module Local Reset status." range="" rwaccess="R">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="" />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="" />
+</bitfield>
+<bitfield id="_RESV_7" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="STATE" width="6" begin="5" end="0" resetval="3" description="These bits indicate the current module state" range="" rwaccess="R">
+<bitenum id="SwRstDisable" value="11" token="SwRstDisable" description="" />
+<bitenum id="Enable" value="283" token="Enable" description="" />
+</bitfield>
+</register>
+     <register id="MDSTAT6" acronym="MDSTAT6" offset="0x818" width="32" description="Module Status Register">
+<bitfield id="_RESV_1" width="19" begin="31" end="13" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="MCKOUT" width="1" begin="12" end="12" resetval="0" description="Actual module output to module" range="" rwaccess="R">
+<bitenum id="OFF" value="0" token="OFF" description="" />
+<bitenum id="ON" value="1" token="ON" description="" />
+</bitfield>
+<bitfield id="MRSTDONE" width="1" begin="11" end="11" resetval="1" description="Module reset done. Software is responsible for checking that mode reset is done before accessing" range="" rwaccess="R">
+<bitenum id="NO" value="0" token="NO" description="" />
+<bitenum id="YES" value="1" token="YES" description="" />
+</bitfield>
+<bitfield id="MRST" width="1" begin="10" end="10" resetval="0" description="Module reset actual status" range="" rwaccess="R">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="" />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="" />
+</bitfield>
+<bitfield id="LRSTDONE" width="1" begin="9" end="9" resetval="1" description="Local reset done. Software is responsible for checking that local reset is done before accessing this module" range="" rwaccess="R">
+<bitenum id="NO" value="0" token="NO" description="" />
+<bitenum id="YES" value="1" token="YES" description="" />
+</bitfield>
+<bitfield id="LRST" width="1" begin="8" end="8" resetval="0" description="Module Local Reset status." range="" rwaccess="R">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="" />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="" />
+</bitfield>
+<bitfield id="_RESV_7" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="STATE" width="6" begin="5" end="0" resetval="0" description="These bits indicate the current module state" range="" rwaccess="R">
+<bitenum id="SwRstDisable" value="11" token="SwRstDisable" description="" />
+<bitenum id="Enable" value="283" token="Enable" description="" />
+</bitfield>
+</register>
+     <register id="MDSTAT7" acronym="MDSTAT7" offset="0x81C" width="32" description="Module Status Register">
+<bitfield id="_RESV_1" width="19" begin="31" end="13" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="MCKOUT" width="1" begin="12" end="12" resetval="0" description="Actual module output to module" range="" rwaccess="R">
+<bitenum id="OFF" value="0" token="OFF" description="" />
+<bitenum id="ON" value="1" token="ON" description="" />
+</bitfield>
+<bitfield id="MRSTDONE" width="1" begin="11" end="11" resetval="1" description="Module reset done. Software is responsible for checking that mode reset is done before accessing" range="" rwaccess="R">
+<bitenum id="NO" value="0" token="NO" description="" />
+<bitenum id="YES" value="1" token="YES" description="" />
+</bitfield>
+<bitfield id="MRST" width="1" begin="10" end="10" resetval="0" description="Module reset actual status" range="" rwaccess="R">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="" />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="" />
+</bitfield>
+<bitfield id="LRSTDONE" width="1" begin="9" end="9" resetval="1" description="Local reset done. Software is responsible for checking that local reset is done before accessing this module" range="" rwaccess="R">
+<bitenum id="NO" value="0" token="NO" description="" />
+<bitenum id="YES" value="1" token="YES" description="" />
+</bitfield>
+<bitfield id="LRST" width="1" begin="8" end="8" resetval="0" description="Module Local Reset status." range="" rwaccess="R">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="" />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="" />
+</bitfield>
+<bitfield id="_RESV_7" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="STATE" width="6" begin="5" end="0" resetval="0" description="These bits indicate the current module state" range="" rwaccess="R">
+<bitenum id="SwRstDisable" value="11" token="SwRstDisable" description="" />
+<bitenum id="Enable" value="283" token="Enable" description="" />
+</bitfield>
+</register>
+     <register id="MDSTAT8" acronym="MDSTAT8" offset="0x820" width="32" description="Module Status Register">
+<bitfield id="_RESV_1" width="19" begin="31" end="13" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="MCKOUT" width="1" begin="12" end="12" resetval="0" description="Actual module output to module" range="" rwaccess="R">
+<bitenum id="OFF" value="0" token="OFF" description="" />
+<bitenum id="ON" value="1" token="ON" description="" />
+</bitfield>
+<bitfield id="MRSTDONE" width="1" begin="11" end="11" resetval="1" description="Module reset done. Software is responsible for checking that mode reset is done before accessing" range="" rwaccess="R">
+<bitenum id="NO" value="0" token="NO" description="" />
+<bitenum id="YES" value="1" token="YES" description="" />
+</bitfield>
+<bitfield id="MRST" width="1" begin="10" end="10" resetval="0" description="Module reset actual status" range="" rwaccess="R">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="" />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="" />
+</bitfield>
+<bitfield id="LRSTDONE" width="1" begin="9" end="9" resetval="1" description="Local reset done. Software is responsible for checking that local reset is done before accessing this module" range="" rwaccess="R">
+<bitenum id="NO" value="0" token="NO" description="" />
+<bitenum id="YES" value="1" token="YES" description="" />
+</bitfield>
+<bitfield id="LRST" width="1" begin="8" end="8" resetval="0" description="Module Local Reset status." range="" rwaccess="R">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="" />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="" />
+</bitfield>
+<bitfield id="_RESV_7" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="STATE" width="6" begin="5" end="0" resetval="0" description="These bits indicate the current module state" range="" rwaccess="R">
+<bitenum id="SwRstDisable" value="11" token="SwRstDisable" description="" />
+<bitenum id="Enable" value="283" token="Enable" description="" />
+</bitfield>
+</register>
+     <register id="MDSTAT9" acronym="MDSTAT9" offset="0x824" width="32" description="Module Status Register">
+<bitfield id="_RESV_1" width="19" begin="31" end="13" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="MCKOUT" width="1" begin="12" end="12" resetval="0" description="Actual module output to module" range="" rwaccess="R">
+<bitenum id="OFF" value="0" token="OFF" description="" />
+<bitenum id="ON" value="1" token="ON" description="" />
+</bitfield>
+<bitfield id="MRSTDONE" width="1" begin="11" end="11" resetval="1" description="Module reset done. Software is responsible for checking that mode reset is done before accessing" range="" rwaccess="R">
+<bitenum id="NO" value="0" token="NO" description="" />
+<bitenum id="YES" value="1" token="YES" description="" />
+</bitfield>
+<bitfield id="MRST" width="1" begin="10" end="10" resetval="0" description="Module reset actual status" range="" rwaccess="R">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="" />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="" />
+</bitfield>
+<bitfield id="LRSTDONE" width="1" begin="9" end="9" resetval="1" description="Local reset done. Software is responsible for checking that local reset is done before accessing this module" range="" rwaccess="R">
+<bitenum id="NO" value="0" token="NO" description="" />
+<bitenum id="YES" value="1" token="YES" description="" />
+</bitfield>
+<bitfield id="LRST" width="1" begin="8" end="8" resetval="0" description="Module Local Reset status." range="" rwaccess="R">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="" />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="" />
+</bitfield>
+<bitfield id="_RESV_7" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="STATE" width="6" begin="5" end="0" resetval="0" description="These bits indicate the current module state" range="" rwaccess="R">
+<bitenum id="SwRstDisable" value="11" token="SwRstDisable" description="" />
+<bitenum id="Enable" value="283" token="Enable" description="" />
+</bitfield>
+</register>
+     <register id="MDSTAT10" acronym="MDSTAT10" offset="0x828" width="32" description="Module Status Register">
+<bitfield id="_RESV_1" width="19" begin="31" end="13" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="MCKOUT" width="1" begin="12" end="12" resetval="0" description="Actual module output to module" range="" rwaccess="R">
+<bitenum id="OFF" value="0" token="OFF" description="" />
+<bitenum id="ON" value="1" token="ON" description="" />
+</bitfield>
+<bitfield id="MRSTDONE" width="1" begin="11" end="11" resetval="1" description="Module reset done. Software is responsible for checking that mode reset is done before accessing" range="" rwaccess="R">
+<bitenum id="NO" value="0" token="NO" description="" />
+<bitenum id="YES" value="1" token="YES" description="" />
+</bitfield>
+<bitfield id="MRST" width="1" begin="10" end="10" resetval="0" description="Module reset actual status" range="" rwaccess="R">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="" />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="" />
+</bitfield>
+<bitfield id="LRSTDONE" width="1" begin="9" end="9" resetval="1" description="Local reset done. Software is responsible for checking that local reset is done before accessing this module" range="" rwaccess="R">
+<bitenum id="NO" value="0" token="NO" description="" />
+<bitenum id="YES" value="1" token="YES" description="" />
+</bitfield>
+<bitfield id="LRST" width="1" begin="8" end="8" resetval="0" description="Module Local Reset status." range="" rwaccess="R">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="" />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="" />
+</bitfield>
+<bitfield id="_RESV_7" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="STATE" width="6" begin="5" end="0" resetval="0" description="These bits indicate the current module state" range="" rwaccess="R">
+<bitenum id="SwRstDisable" value="11" token="SwRstDisable" description="" />
+<bitenum id="Enable" value="283" token="Enable" description="" />
+</bitfield>
+</register>
+     <register id="MDCTL0" acronym="MDCTL0" offset="0xA00" width="32" description="Module Control Register">
+<bitfield id="Reserved" width="23" begin="31" end="9" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="LRST" width="1" begin="8" end="8" resetval="1" description="Module local reset control" range="" rwaccess="RW">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="Assert local reset." />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="De-assert local reset." />
+</bitfield>
+<bitfield id="_RESV_3" width="3" begin="7" end="5" resetval="0" description="Reserved for future expansion" range="" rwaccess="N"></bitfield>
+<bitfield id="NEXT" width="5" begin="4" end="0" resetval="0" description="Module Next State" range="" rwaccess="RW">
+<bitenum id="SwRstDisable" value="11" token="SwRstDisable" description="SwRstDisable state." />
+<bitenum id="Enable" value="283" token="Enable" description="Enable state." />
+</bitfield>
+</register>
+     <register id="MDCTL1" acronym="MDCTL1" offset="0xA04" width="32" description="Module Control Register">
+<bitfield id="Reserved" width="23" begin="31" end="9" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="LRST" width="1" begin="8" end="8" resetval="1" description="Module local reset control" range="" rwaccess="RW">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="Assert local reset." />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="De-assert local reset." />
+</bitfield>
+<bitfield id="_RESV_3" width="3" begin="7" end="5" resetval="0" description="Reserved for future expansion" range="" rwaccess="N"></bitfield>
+<bitfield id="NEXT" width="5" begin="4" end="0" resetval="3" description="Module Next State" range="" rwaccess="RW">
+<bitenum id="SwRstDisable" value="11" token="SwRstDisable" description="SwRstDisable state." />
+<bitenum id="Enable" value="283" token="Enable" description="Enable state." />
+</bitfield>
+</register>
+     <register id="MDCTL2" acronym="MDCTL2" offset="0xA08" width="32" description="Module Control Register">
+<bitfield id="Reserved" width="23" begin="31" end="9" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="LRST" width="1" begin="8" end="8" resetval="1" description="Module local reset control" range="" rwaccess="RW">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="Assert local reset." />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="De-assert local reset." />
+</bitfield>
+<bitfield id="_RESV_3" width="3" begin="7" end="5" resetval="0" description="Reserved for future expansion" range="" rwaccess="N"></bitfield>
+<bitfield id="NEXT" width="5" begin="4" end="0" resetval="0" description="Module Next State" range="" rwaccess="RW">
+<bitenum id="SwRstDisable" value="11" token="SwRstDisable" description="SwRstDisable state." />
+<bitenum id="Enable" value="283" token="Enable" description="Enable state." />
+</bitfield>
+</register>
+     <register id="MDCTL3" acronym="MDCTL3" offset="0xA0C" width="32" description="Module Control Register">
+<bitfield id="Reserved" width="23" begin="31" end="9" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="LRST" width="1" begin="8" end="8" resetval="1" description="Module local reset control" range="" rwaccess="RW">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="Assert local reset." />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="De-assert local reset." />
+</bitfield>
+<bitfield id="_RESV_3" width="3" begin="7" end="5" resetval="0" description="Reserved for future expansion" range="" rwaccess="N"></bitfield>
+<bitfield id="NEXT" width="5" begin="4" end="0" resetval="0" description="Module Next State" range="" rwaccess="RW">
+<bitenum id="SwRstDisable" value="11" token="SwRstDisable" description="SwRstDisable state." />
+<bitenum id="Enable" value="283" token="Enable" description="Enable state." />
+</bitfield>
+</register>
+     <register id="MDCTL4" acronym="MDCTL4" offset="0xA10" width="32" description="Module Control Register">
+<bitfield id="Reserved" width="23" begin="31" end="9" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="LRST" width="1" begin="8" end="8" resetval="1" description="Module local reset control" range="" rwaccess="RW">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="Assert local reset." />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="De-assert local reset." />
+</bitfield>
+<bitfield id="_RESV_3" width="3" begin="7" end="5" resetval="0" description="Reserved for future expansion" range="" rwaccess="N"></bitfield>
+<bitfield id="NEXT" width="5" begin="4" end="0" resetval="0" description="Module Next State" range="" rwaccess="RW">
+<bitenum id="SwRstDisable" value="11" token="SwRstDisable" description="SwRstDisable state." />
+<bitenum id="Enable" value="283" token="Enable" description="Enable state." />
+</bitfield>
+</register>
+     <register id="MDCTL5" acronym="MDCTL5" offset="0xA14" width="32" description="Module Control Register">
+<bitfield id="Reserved" width="23" begin="31" end="9" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="LRST" width="1" begin="8" end="8" resetval="1" description="Module local reset control" range="" rwaccess="RW">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="Assert local reset." />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="De-assert local reset." />
+</bitfield>
+<bitfield id="_RESV_3" width="3" begin="7" end="5" resetval="0" description="Reserved for future expansion" range="" rwaccess="N"></bitfield>
+<bitfield id="NEXT" width="5" begin="4" end="0" resetval="3" description="Module Next State" range="" rwaccess="RW">
+<bitenum id="SwRstDisable" value="11" token="SwRstDisable" description="SwRstDisable state." />
+<bitenum id="Enable" value="283" token="Enable" description="Enable state." />
+</bitfield>
+</register>
+     <register id="MDCTL6" acronym="MDCTL6" offset="0xA18" width="32" description="Module Control Register">
+<bitfield id="Reserved" width="23" begin="31" end="9" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="LRST" width="1" begin="8" end="8" resetval="1" description="Module local reset control" range="" rwaccess="RW">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="Assert local reset." />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="De-assert local reset." />
+</bitfield>
+<bitfield id="_RESV_3" width="3" begin="7" end="5" resetval="0" description="Reserved for future expansion" range="" rwaccess="N"></bitfield>
+<bitfield id="NEXT" width="5" begin="4" end="0" resetval="0" description="Module Next State" range="" rwaccess="RW">
+<bitenum id="SwRstDisable" value="11" token="SwRstDisable" description="SwRstDisable state." />
+<bitenum id="Enable" value="283" token="Enable" description="Enable state." />
+</bitfield>
+</register>
+     <register id="MDCTL7" acronym="MDCTL7" offset="0xA1C" width="32" description="Module Control Register">
+<bitfield id="Reserved" width="23" begin="31" end="9" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="LRST" width="1" begin="8" end="8" resetval="1" description="Module local reset control" range="" rwaccess="RW">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="Assert local reset." />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="De-assert local reset." />
+</bitfield>
+<bitfield id="_RESV_3" width="3" begin="7" end="5" resetval="0" description="Reserved for future expansion" range="" rwaccess="N"></bitfield>
+<bitfield id="NEXT" width="5" begin="4" end="0" resetval="0" description="Module Next State" range="" rwaccess="RW">
+<bitenum id="SwRstDisable" value="11" token="SwRstDisable" description="SwRstDisable state." />
+<bitenum id="Enable" value="283" token="Enable" description="Enable state." />
+</bitfield>
+</register>
+     <register id="MDCTL8" acronym="MDCTL8" offset="0xA20" width="32" description="Module Control Register">
+<bitfield id="Reserved" width="23" begin="31" end="9" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="LRST" width="1" begin="8" end="8" resetval="1" description="Module local reset control" range="" rwaccess="RW">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="Assert local reset." />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="De-assert local reset." />
+</bitfield>
+<bitfield id="_RESV_3" width="3" begin="7" end="5" resetval="0" description="Reserved for future expansion" range="" rwaccess="N"></bitfield>
+<bitfield id="NEXT" width="5" begin="4" end="0" resetval="0" description="Module Next State" range="" rwaccess="RW">
+<bitenum id="SwRstDisable" value="11" token="SwRstDisable" description="SwRstDisable state." />
+<bitenum id="Enable" value="283" token="Enable" description="Enable state." />
+</bitfield>
+</register>
+     <register id="MDCTL9" acronym="MDCTL9" offset="0xA24" width="32" description="Module Control Register">
+<bitfield id="Reserved" width="23" begin="31" end="9" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="LRST" width="1" begin="8" end="8" resetval="1" description="Module local reset control" range="" rwaccess="RW">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="Assert local reset." />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="De-assert local reset." />
+</bitfield>
+<bitfield id="_RESV_3" width="3" begin="7" end="5" resetval="0" description="Reserved for future expansion" range="" rwaccess="N"></bitfield>
+<bitfield id="NEXT" width="5" begin="4" end="0" resetval="0" description="Module Next State" range="" rwaccess="RW">
+<bitenum id="SwRstDisable" value="11" token="SwRstDisable" description="SwRstDisable state." />
+<bitenum id="Enable" value="283" token="Enable" description="Enable state." />
+</bitfield>
+</register>
+     <register id="MDCTL10" acronym="MDCTL10" offset="0xA28" width="32" description="Module Control Register">
+<bitfield id="Reserved" width="23" begin="31" end="9" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="LRST" width="1" begin="8" end="8" resetval="1" description="Module local reset control" range="" rwaccess="RW">
+<bitenum id="ASSERT" value="0" token="ASSERT" description="Assert local reset." />
+<bitenum id="DE_ASSERT" value="1" token="DE_ASSERT" description="De-assert local reset." />
+</bitfield>
+<bitfield id="_RESV_3" width="3" begin="7" end="5" resetval="0" description="Reserved for future expansion" range="" rwaccess="N"></bitfield>
+<bitfield id="NEXT" width="5" begin="4" end="0" resetval="0" description="Module Next State" range="" rwaccess="RW">
+<bitenum id="SwRstDisable" value="11" token="SwRstDisable" description="SwRstDisable state." />
+<bitenum id="Enable" value="283" token="Enable" description="Enable state." />
+</bitfield>
+</register>
+</module>

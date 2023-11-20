@@ -1,0 +1,89 @@
+<module name="CPSW0_NUSS_SS" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="CPSW_SS_CPSW_NUSS_IDVER_REG" acronym="CPSW_SS_CPSW_NUSS_IDVER_REG" offset="0x0" width="32" description="ID Version Register.">
+    <bitfield id="IDENT" width="16" begin="31" end="16" resetval="0x6BA0" description="Identification value" range="" rwaccess="R"/>
+    <bitfield id="RTL_VER" width="5" begin="15" end="11" resetval="0x4" description="RTL version value" range="" rwaccess="R"/>
+    <bitfield id="MAJOR_VER" width="3" begin="10" end="8" resetval="0x1" description="Major version value" range="" rwaccess="R"/>
+    <bitfield id="MINOR_VER" width="8" begin="7" end="0" resetval="0x2" description="Minor version value" range="" rwaccess="R"/>
+  </register>
+  <register id="CPSW_SS_SYNCE_COUNT_REG" acronym="CPSW_SS_SYNCE_COUNT_REG" offset="0x4" width="32" description="SyncE Count Register">
+    <bitfield id="SYNCE_CNT" width="32" begin="31" end="0" resetval="0x0" description="Sync E Count Value" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_SS_SYNCE_MUX_REG" acronym="CPSW_SS_SYNCE_MUX_REG" offset="0x8" width="32" description="SyncE Mux Register">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SYNCE_SEL" width="6" begin="5" end="0" resetval="0x0" description="Sync E Select Value" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_SS_CONTROL_REG" acronym="CPSW_SS_CONTROL_REG" offset="0xC" width="32" description="Control Register">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="EEE_PHY_ONLY" width="1" begin="1" end="1" resetval="0x0" description="Energy Efficient Enable Phy Only Mode:" range="" rwaccess="RW"/>
+    <bitfield id="EEE_EN" width="1" begin="0" end="0" resetval="0x0" description="Energy Efficient Ethernet Enable:" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_SS_SGMII_NON_FIBER_MODE_REG" acronym="CPSW_SS_SGMII_NON_FIBER_MODE_REG" offset="0x10" width="32" description="SGMII NON FIBER Mode Register">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SGMII_NON_FIBER_MODE" width="4" begin="3" end="0" resetval="0xF" description="This register bit goes to the CPSGMII mode input only" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_SS_SERDES_RESET_ISO_REG" acronym="CPSW_SS_SERDES_RESET_ISO_REG" offset="0x14" width="32" description="SyncE Mux Register.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SERDES_RESET_ISO" width="4" begin="3" end="0" resetval="0x0" description="These bits control whether the SERDES ignores the hard reset for isolation or not" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_SS_SUBSSYSTEM_STATUS_REG" acronym="CPSW_SS_SUBSSYSTEM_STATUS_REG" offset="0x1C" width="32" description="Subsystem Status Register.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="EEE_CLKSTOP_ACK" width="1" begin="0" end="0" resetval="0x0" description="Energy Efficient Ethernet clockstop acknowledge from CPSW." range="" rwaccess="R"/>
+  </register>
+  <register id="CPSW_SS_SUBSYSTEM_CONFIG_REG" acronym="CPSW_SS_SUBSYSTEM_CONFIG_REG" offset="0x20" width="32" description="Return to the . Subsystem Configuration Register">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="XGMII" width="8" begin="27" end="20" resetval="0x1" description="The Number of XGMII Ports included in the CPSW_NUSS" range="" rwaccess="R"/>
+    <bitfield id="QSGMII" width="1" begin="19" end="19" resetval="0x1" description="QSGMII is included in the CPSW_NUSS" range="" rwaccess="R"/>
+    <bitfield id="SGMII" width="1" begin="18" end="18" resetval="0x1" description="SGMII is included in the CPSW_NUSS" range="" rwaccess="R"/>
+    <bitfield id="RGMII" width="1" begin="17" end="17" resetval="0x1" description="RGMII is included in the CPSW_NUSS" range="" rwaccess="R"/>
+    <bitfield id="RMII" width="1" begin="16" end="16" resetval="0x1" description="RMII is included in the CPSW_NUSS" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="NUM_GENF" width="5" begin="12" end="8" resetval="0x2" description="The number of CPTS GENF outputs" range="" rwaccess="R"/>
+    <bitfield id="NUM_PORTS" width="8" begin="7" end="0" resetval="0x5" description="The total number of ports including the host port 0" range="" rwaccess="R"/>
+  </register>
+  <register id="CPSW_SS_RGMII1_STATUS_REG" acronym="CPSW_SS_RGMII1_STATUS_REG" offset="0x30" width="32" description="RGMII Port 1 Status Register.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="FULLDUPLEX" width="1" begin="3" end="3" resetval="0x0" description="RGMII Port 1 full duplex:" range="" rwaccess="R"/>
+    <bitfield id="SPEED" width="2" begin="2" end="1" resetval="0x0" description="RGMII Port 1 speed:" range="" rwaccess="R"/>
+    <bitfield id="LINK" width="1" begin="0" end="0" resetval="0x0" description="RGMII Port 1 link indicator:" range="" rwaccess="R"/>
+  </register>
+  <register id="CPSW_SS_RGMII2_STATUS_REG" acronym="CPSW_SS_RGMII2_STATUS_REG" offset="0x34" width="32" description="RGMII Port 2 Status Register.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="FULLDUPLEX" width="1" begin="3" end="3" resetval="0x0" description="RGMII Port 2 full dulex:" range="" rwaccess="R"/>
+    <bitfield id="SPEED" width="2" begin="2" end="1" resetval="0x0" description="RGMII Port 2 speed:" range="" rwaccess="R"/>
+    <bitfield id="LINK" width="1" begin="0" end="0" resetval="0x0" description="RGMII Port 2 link indicator:" range="" rwaccess="R"/>
+  </register>
+  <register id="CPSW_SS_RGMII3_STATUS_REG" acronym="CPSW_SS_RGMII3_STATUS_REG" offset="0x38" width="32" description="RGMII 3 Port Status Register.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="FULLDUPLEX" width="1" begin="3" end="3" resetval="0x0" description="RGMII Port 3 full dulex:" range="" rwaccess="R"/>
+    <bitfield id="SPEED" width="2" begin="2" end="1" resetval="0x0" description="RGMII Port 3 speed:" range="" rwaccess="R"/>
+    <bitfield id="LINK" width="1" begin="0" end="0" resetval="0x0" description="RGMII Port 3 link indicator:" range="" rwaccess="R"/>
+  </register>
+  <register id="CPSW_SS_RGMII4_STATUS_REG" acronym="CPSW_SS_RGMII4_STATUS_REG" offset="0x3C" width="32" description="RGMII Port 4 Status Register.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="FULLDUPLEX" width="1" begin="3" end="3" resetval="0x0" description="RGMII Port 4 full dulex:" range="" rwaccess="R"/>
+    <bitfield id="SPEED" width="2" begin="2" end="1" resetval="0x0" description="RGMII Port 4 speed:" range="" rwaccess="R"/>
+    <bitfield id="LINK" width="1" begin="0" end="0" resetval="0x0" description="RGMII Port 4 link indicator:" range="" rwaccess="R"/>
+  </register>
+  <register id="CPSW_SS_QSGMII_CONTROL_REG" acronym="CPSW_SS_QSGMII_CONTROL_REG" offset="0x60" width="32" description="QSGMII Control Register.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="Q0_RDCD" width="1" begin="0" end="0" resetval="0x0" description="QSGMII0 Running Disparity Check Disable" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_SS_QSGMII_STATUS_REG" acronym="CPSW_SS_QSGMII_STATUS_REG" offset="0x64" width="32" description="QSGMII Status Register.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="Q0_RX_SYNC" width="1" begin="0" end="0" resetval="0x0" description="QSGMII0 RX Sync Detected" range="" rwaccess="R"/>
+  </register>
+  <register id="CPSW_SS_STATUS_XGMII_LINK_REG" acronym="CPSW_SS_STATUS_XGMII_LINK_REG" offset="0x74" width="32" description="XGMII Link Status Register.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="XGMII1_LINK" width="1" begin="0" end="0" resetval="0x0" description="Port 1 XGMII Link Indicator" range="" rwaccess="R"/>
+  </register>
+  <register id="CPSW_SS_STATUS_SGMII_LINK_REG" acronym="CPSW_SS_STATUS_SGMII_LINK_REG" offset="0x78" width="32" description="SGMII Link Status Register.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="SGMII1_LINK" width="1" begin="0" end="0" resetval="0x0" description="Port 1 SGMII Link Indicator" range="" rwaccess="R"/>
+  </register>
+  <register id="CPSW_SS_SUBSYSTEM_USXGMII0_CONTROL" acronym="CPSW_SS_SUBSYSTEM_USXGMII0_CONTROL" offset="0x80" width="32" description="Return to the . USXGMII0 Control Register">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="USXGMII_HALF_RATE_PCSR" width="1" begin="4" end="4" resetval="0x0" description="USXGMII Half Rate PCSR" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="USXGMII_REP_RATE" width="3" begin="2" end="0" resetval="0x3" description="USXGMII Rep Rate" range="" rwaccess="RW"/>
+  </register>
+</module>

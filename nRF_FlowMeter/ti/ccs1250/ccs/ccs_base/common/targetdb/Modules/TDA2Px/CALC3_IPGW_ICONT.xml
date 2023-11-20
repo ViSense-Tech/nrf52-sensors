@@ -1,0 +1,102 @@
+<module name="CALC3_IPGW_ICONT" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="CALC3_SYSCONFIG" acronym="CALC3_SYSCONFIG" offset="0x8" width="32" description="Clock management configuration">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0000000" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLEMODE" width="2" begin="3" end="2" resetval="0x2" description="Configuration of the local target state management mode.By definition, target can handle read/write transaction as long as it is out of IDLE state. . Backup mode, for debug only. . Backup mode, for debug only. . IP module shall not generate (IRQ- or DMA-request-related) wakeup events. . IP module may generate (IRQ- or DMA-request-related) wakeup events when in IDLE state. ." range="" rwaccess="RW">
+      <bitenum value="0" id="IDLE_IDLE_IP_0" token="IDLEMODE_0" description="Force-idle mode: local target's IDLE state follows (acknowledges) the system's IDLE requests unconditionally; that is, regardless of the IP module's internal requirements."/>
+      <bitenum value="1" id="IDLE_1" token="IDLEMODE_1" description="No-idle mode: local target never enters IDLE state."/>
+      <bitenum value="2" id="IDLE_IP_2" token="IDLEMODE_2" description="Smart-idle mode: local target's IDLE state eventually follows (acknowledges) the system's idle requests, depending on the IP module's internal requirements."/>
+      <bitenum value="3" id="IDLE_IDLE_IP_3" token="IDLEMODE_3" description="Smart-idle wakeup-capable mode: local target's IDLE state eventually follows (acknowledges) the system's IDLE requests, depending on the IP module's internal requirements."/>
+    </bitfield>
+    <bitfield id="FREEEMU" width="1" begin="1" end="1" resetval="0" description="Sensitivity to emulation (debug) suspend input signal." range="" rwaccess="RW">
+      <bitenum value="0" id="IP_0" token="FREEEMU_0" description="IP module is sensitive to emulation suspend"/>
+      <bitenum value="1" id="IP_1" token="FREEEMU_1" description="IP module is not sensitive to emulation suspend"/>
+    </bitfield>
+    <bitfield id="SOFTRESET" width="1" begin="0" end="0" resetval="0" description="Software reset" range="" rwaccess="RW">
+      <bitenum value="0" id="Reset_done,_no_pending_action" token="SOFTRESET_0_r" description="Reset done, no pending action"/>
+      <bitenum value="1" id="Reset_(software_or_other)_ongoing" token="SOFTRESET_1_r" description="Reset (software or other) ongoing"/>
+      <bitenum value="0" id="No_action" token="SOFTRESET_0_w" description="No action"/>
+      <bitenum value="1" id="Initiate_software_reset" token="SOFTRESET_1_w" description="Initiate software reset"/>
+    </bitfield>
+  </register>
+  <register id="CALC3_IRQ_EOI" acronym="CALC3_IRQ_EOI" offset="0xC" width="32" description="End Of Interrupt number specification">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LINE_NUMBER" width="2" begin="1" end="0" resetval="0x0" description="Software End Of Interrupt (EOI) control. Write number of interrupt output." range="" rwaccess="RW">
+      <bitenum value="0" id="EOI_(LSE)_0" token="LINE_NUMBER_0_w" description="EOI for interrupt output int_end load (LSE)"/>
+      <bitenum value="1" id="EOI_(CALC3_1" token="LINE_NUMBER_1_w" description="EOI for interrupt output int_end (CALC3 Core)"/>
+      <bitenum value="2" id="EOI_(LSE)_2" token="LINE_NUMBER_2_w" description="EOI for interrupt output int_end store (LSE)"/>
+      <bitenum value="3" id="EOI_(LSE)_3" token="LINE_NUMBER_3_w" description="EOI for interrupt output int_undef (LSE)"/>
+      <bitenum value="0" id="Reads_always_0_(no_EOI_memory)" token="LINE_NUMBER_0_r" description="Reads always 0 (no EOI memory)"/>
+    </bitfield>
+  </register>
+  <register id="CALC3_IPQSTATUS_RAW_0" acronym="CALC3_IPQSTATUS_RAW_0" offset="0x14" width="32" description="Per-event raw interrupt status vector, int_end load (LSE). Raw status is set even if event is not enabled. Write 1 to set the (raw) status, mostly for debug.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="EVENT0" width="1" begin="0" end="0" resetval="0" description="Settable raw status for int_end load (LSE). Write 0: No action Read 0: No event pending Read 1: Event pending Write 1: Set event (debug)" range="" rwaccess="RW W1toSet"/>
+  </register>
+  <register id="CALC3_IPQSTATUS_RAW_1" acronym="CALC3_IPQSTATUS_RAW_1" offset="0x18" width="32" description="Per-event raw interrupt status vector, int_end (CALC3 core). Raw status is set even if event is not enabled. Write 1 to set the (raw) status, mostly for debug.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="EVENT0" width="1" begin="0" end="0" resetval="0" description="Settable raw status for int_end (CALC3 core). Write 0: No action Read 0: No event pending Read 1: Event pending Write 1: Set event (debug)" range="" rwaccess="RW W1toSet"/>
+  </register>
+  <register id="CALC3_IPQSTATUS_RAW_2" acronym="CALC3_IPQSTATUS_RAW_2" offset="0x1C" width="32" description="Per-event raw interrupt status vector, int_end store (LSE). Raw status is set even if event is not enabled. Write 1 to set the (raw) status, mostly for debug.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="EVENT0" width="1" begin="0" end="0" resetval="0" description="Settable raw status for int_end store (LSE). Write 0: No action Read 0: No event pending Read 1: Event pending Write 1: Set event (debug)" range="" rwaccess="RW W1toSet"/>
+  </register>
+  <register id="CALC3_IPQSTATUS_RAW_3" acronym="CALC3_IPQSTATUS_RAW_3" offset="0x20" width="32" description="Per-event raw interrupt status vector, int_undef (LSE). Raw status is set even if event is not enabled. Write 1 to set the (raw) status, mostly for debug.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="EVENT0" width="1" begin="0" end="0" resetval="0" description="Settable raw status for int_undef (LSE). Write 0: No action Read 0: No event pending Read 1: Event pending Write 1: Set event (debug)" range="" rwaccess="RW W1toSet"/>
+  </register>
+  <register id="CALC3_IRQSTATUS_0" acronym="CALC3_IRQSTATUS_0" offset="0x30" width="32" description="Per-event 'enabled' interrupt status vector, int_end load (LSE). Enabled status is not set unless event is enabled. Write 1 to clear the status after interrupt has been serviced (raw status gets cleared, that is, even if not enabled).">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="EVENT0" width="1" begin="0" end="0" resetval="0" description="Clearable, enabled status for int_end load (LSE). Write 0: No action Read 0: No (enabled) event pending Read 1: Event pending Write 1: Clear (raw) event" range="" rwaccess="RW W1toClr"/>
+  </register>
+  <register id="CALC3_IRQSTATUS_1" acronym="CALC3_IRQSTATUS_1" offset="0x34" width="32" description="Per-event 'enabled' interrupt status vector, int_end (CALC3 Core). Enabled status is not set unless event is enabled. Write 1 to clear the status after interrupt has been serviced (raw status gets cleared, that is, even if not enabled).">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="EVENT0" width="1" begin="0" end="0" resetval="0" description="Clearable, enabled status for int_end (CALC3 core). Write 0: No action Read 0: No (enabled) event pending Read 1: Event pending Write 1: Clear (raw) event" range="" rwaccess="RW W1toClr"/>
+  </register>
+  <register id="CALC3_IRQSTATUS_2" acronym="CALC3_IRQSTATUS_2" offset="0x38" width="32" description="Per-event 'enabled' interrupt status vector, int_end store (LSE). Enabled status is not set unless event is enabled. Write 1 to clear the status after interrupt has been serviced (raw status gets cleared, that is, even if not enabled).">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="EVENT0" width="1" begin="0" end="0" resetval="0" description="Clearable, enabled status for int_end store (LSE) Write 0: No action Read 0: No (enabled) event pending Read 1: Event pending Write 1: Clear (raw) event" range="" rwaccess="RW W1toClr"/>
+  </register>
+  <register id="CALC3_IRQSTATUS_3" acronym="CALC3_IRQSTATUS_3" offset="0x3C" width="32" description="Per-event 'enabled' interrupt status vector, int_undef (LSE). Enabled status is not set unless event is enabled. Write 1 to clear the status after interrupt has been serviced (raw status gets cleared, that is, even if not enabled).">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="EVENT0" width="1" begin="0" end="0" resetval="0" description="Clearable, enabled status for int_undef (LSE). Write 0: No action Read 0: No (enabled) event pending Read 1: Event pending Write 1: Clear (raw) event" range="" rwaccess="RW W1toClr"/>
+  </register>
+  <register id="CALC3_IRQENABLE_SET_0" acronym="CALC3_IRQENABLE_SET_0" offset="0x4C" width="32" description="Per-event interrupt enable bit vector, int_end load (LSE). Write 1 to set (enable interrupt). Readout equal to corresponding _CLR register.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="ENABLE0" width="1" begin="0" end="0" resetval="0" description="Enable for int_end load (LSE) Write 0: No action Read 0: Interrupt disabled (masked) Read 1: Interrupt enabled Write 1: Enable interrupt" range="" rwaccess="RW W1toSet"/>
+  </register>
+  <register id="CALC3_IRQENABLE_SET_1" acronym="CALC3_IRQENABLE_SET_1" offset="0x50" width="32" description="Per-event interrupt enable bit vector, int_end (CALC3 core). Write 1 to set (enable interrupt). Readout equal to corresponding _CLR register.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="ENABLE0" width="1" begin="0" end="0" resetval="0" description="Enable for int_end (CALC3 core) Write 0: No action Read 0: Interrupt disabled (masked) Read 1: Interrupt enabled Write 1: Enable interrupt" range="" rwaccess="RW W1toSet"/>
+  </register>
+  <register id="CALC3_IRQENABLE_SET_2" acronym="CALC3_IRQENABLE_SET_2" offset="0x54" width="32" description="Per-event interrupt enable bit vector, int_end store (LSE). Write 1 to set (enable interrupt). Readout equal to corresponding _CLR register.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="ENABLE0" width="1" begin="0" end="0" resetval="0" description="Enable for int_end store (LSE) Write 0: No action Read 0: Interrupt disabled (masked) Read 1: Interrupt enabled Write 1: Enable interrupt" range="" rwaccess="RW W1toSet"/>
+  </register>
+  <register id="CALC3_IRQENABLE_SET_3" acronym="CALC3_IRQENABLE_SET_3" offset="0x58" width="32" description="Per-event interrupt enable bit vector, int_undef (LSE). Write 1 to set (enable interrupt). Readout equal to corresponding _CLR register.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="ENABLE0" width="1" begin="0" end="0" resetval="0" description="Enable for int_undef (LSE) Write 0: No action Read 0: Interrupt disabled (masked) Read 1: Interrupt enabled Write 1: Enable interrupt" range="" rwaccess="RW W1toSet"/>
+  </register>
+  <register id="CALC3_IRQENABLE_CLR_0" acronym="CALC3_IRQENABLE_CLR_0" offset="0x68" width="32" description="Per-event interrupt enable bit vector, int_end load (LSE). Write 1 to clear (disable interrupt). Readout equal to corresponding _SET register.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="ENABLE0" width="1" begin="0" end="0" resetval="0" description="Enable for int_end load (LSE) Write 0: No action Read 0: Interrupt disabled (masked) Read 1: Interrupt enabled Write 1: Disable interrupt" range="" rwaccess="RW W1toClr"/>
+  </register>
+  <register id="CALC3_IRQENABLE_CLR_1" acronym="CALC3_IRQENABLE_CLR_1" offset="0x6C" width="32" description="Per-event interrupt enable bit vector, int_end (CALC3 core). Write 1 to clear (disable interrupt). Readout equal to corresponding _SET register.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="ENABLE0" width="1" begin="0" end="0" resetval="0" description="Enable for int_end (CALC3 core) Write 0: No action Read 0: Interrupt disabled (masked) Read 1: Interrupt enabled Write 1: Disable interrupt" range="" rwaccess="RW W1toClr"/>
+  </register>
+  <register id="CALC3_IRQENABLE_CLR_2" acronym="CALC3_IRQENABLE_CLR_2" offset="0x70" width="32" description="Per-event interrupt enable bit vector, int_end store (LSE). Write 1 to clear (disable interrupt). Readout equal to corresponding _SET register.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="ENABLE0" width="1" begin="0" end="0" resetval="0" description="Enable for int_end store (LSE) Write 0: No action Read 0: Interrupt disabled (masked) Read 1: Interrupt enabled Write 1: Disable interrupt" range="" rwaccess="RW W1toClr"/>
+  </register>
+  <register id="CALC3_IRQENABLE_CLR_3" acronym="CALC3_IRQENABLE_CLR_3" offset="0x74" width="32" description="Per-event interrupt enable bit vector, int_undef (LSE). Write 1 to clear (disable interrupt). Readout equal to corresponding _SET register.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="ENABLE0" width="1" begin="0" end="0" resetval="0" description="Enable for int_undef (LSE) Write 0: No action Read 0: Interrupt disabled (masked) Read 1: Interrupt enabled Write 1: Disable interrupt" range="" rwaccess="RW W1toClr"/>
+  </register>
+  <register id="CALC3_IRQSTATUS_ACLREN" acronym="CALC3_IRQSTATUS_ACLREN" offset="0xC0" width="32" description="Auto Clear enable">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0000000" description="" range="" rwaccess="R"/>
+    <bitfield id="ACLREN3" width="1" begin="3" end="3" resetval="0" description="For int_undef (LSE)" range="" rwaccess="RW"/>
+    <bitfield id="ACLREN2" width="1" begin="2" end="2" resetval="0" description="For int_end store (LSE)" range="" rwaccess="RW"/>
+    <bitfield id="ACLREN1" width="1" begin="1" end="1" resetval="0" description="For int_end (CALC3 core)" range="" rwaccess="RW"/>
+    <bitfield id="ACLREN0" width="1" begin="0" end="0" resetval="0" description="For int_end load (LSE)" range="" rwaccess="RW"/>
+  </register>
+</module>

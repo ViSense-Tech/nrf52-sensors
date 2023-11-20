@@ -1,0 +1,50 @@
+<module name="DPHY_TX0" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="DPHY_TX_MOD_VER" acronym="DPHY_TX_MOD_VER" offset="0xF00" width="32" description="The Module and Version Register identifies the module identifier and revision of the WIZ16B8M4CDT module.">
+    <bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x1" description="Module Scheme" range="" rwaccess="R"/>
+    <bitfield id="BU" width="2" begin="29" end="28" resetval="0x2" description="Module Business Unit" range="" rwaccess="R"/>
+    <bitfield id="MODULE_ID" width="12" begin="27" end="16" resetval="0x992" description="WIZ16B8M4CDT module ID." range="" rwaccess="R"/>
+    <bitfield id="RTL_VERSION" width="5" begin="15" end="11" resetval="0x7" description="RTL Version." range="" rwaccess="R"/>
+    <bitfield id="MAJOR_REVISION" width="3" begin="10" end="8" resetval="0x0" description="Major Revision." range="" rwaccess="R"/>
+    <bitfield id="CUSTOM_REVISION" width="2" begin="7" end="6" resetval="0x0" description="Custom Revision." range="" rwaccess="R"/>
+    <bitfield id="MINOR_REVISION" width="6" begin="5" end="0" resetval="0x1" description="Minor Revision." range="" rwaccess="R"/>
+  </register>
+  <register id="DPHY_TX_PLL_CTRL" acronym="DPHY_TX_PLL_CTRL" offset="0xF04" width="32" description="Sets the PLL info.">
+    <bitfield id="PLL_LOCK" width="1" begin="31" end="31" resetval="0x0" description="Signal to indicate that PLL has got locked. 1: PLL locked to required frequency 0: PLL not yet locked" range="" rwaccess="R"/>
+    <bitfield id="PSO_DISABLE" width="1" begin="30" end="30" resetval="0x0" description="Disables the ability to switch off the analog switched power islands in the lane when in the ultra-low power state" range="" rwaccess="RW"/>
+    <bitfield id="PLL_PSO" width="1" begin="29" end="29" resetval="0x0" description="Power Shut Off signal for PLL 1: PLL shutoff 0: PLL power ON" range="" rwaccess="RW"/>
+    <bitfield id="PLL_PD" width="1" begin="28" end="28" resetval="0x1" description="Power down signal for PLL (Does not switch off the PLL supply) 1: PLL is powered down 0: PLL is active" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="27" end="26" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PLL_FBDIV" width="10" begin="25" end="16" resetval="0xFF" description="DPHY TX PLL VCO Feedback Divider ratio. Feedback divider value = ROUND ((Data Rate * 2 * pll_opdiv * pll_ipdiv) / PLL reference clock frequency)" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PLL_OPDIV" width="6" begin="13" end="8" resetval="0x1" description="DPHY TX PLL OUTCLK Divider ratio.&amp;amp;lt;BR&amp;amp;gt; 6'h 01: Div by 1, 2.5 Gbps - 1.25 Gbps&amp;amp;lt;BR&amp;amp;gt; 6'h 02: Div by 2, 1.24 Gbps - 630 Mbps&amp;amp;lt;BR&amp;amp;gt; 6'h 04: Div by 4, 620 Mbps - 320 Mbps&amp;amp;lt;BR&amp;amp;gt; 6'h 08: Div by 8, 310 Mbps - 160 Mbps&amp;amp;lt;BR&amp;amp;gt; 6'h 10: Div by 16, 150 Mbps - 80 Mbps" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PLL_IPDIV" width="5" begin="4" end="0" resetval="0x1" description="DPHY TX PLL REFCLK Input Divider ratio.&amp;amp;lt;BR&amp;amp;gt; 5'h 01: Div by 1, 9.6 MHz - &amp;amp;lt;19.2 MHz&amp;amp;lt;BR&amp;amp;gt; 5'h 02: Div by 2, 19.2 MHz - &amp;amp;lt;38.4 MHz&amp;amp;lt;BR&amp;amp;gt; 5'h 04: Div by 4, 38.4 MHz - &amp;amp;lt; 76.8 MHz&amp;amp;lt;BR&amp;amp;gt; 5'h 08: Div by 8, 76.8 MHz - &amp;amp;lt; 150 MHz" range="" rwaccess="RW"/>
+  </register>
+  <register id="DPHY_TX_STATUS" acronym="DPHY_TX_STATUS" offset="0xF08" width="32" description="The register reports of the DPHYTS sub module.">
+    <bitfield id="O_CMN_READY" width="1" begin="31" end="31" resetval="0x0" description="System Should check this during Power up Initialisation" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="28" begin="30" end="3" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="O_SUPPLY_CORE_PG" width="1" begin="2" end="2" resetval="0x0" description="The indicates the core supply is good." range="" rwaccess="R"/>
+    <bitfield id="O_SUPPLY_IO_PG" width="1" begin="1" end="1" resetval="0x0" description="The indicates the IO supply is good." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="0" end="0" resetval="0xX" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DPHY_TX_RST_CTRL" acronym="DPHY_TX_RST_CTRL" offset="0xF0C" width="32" description="Sets the RST info.">
+    <bitfield id="LANE_RSTB_CMN" width="1" begin="31" end="31" resetval="0x0" description="DPHY System Reset for Common Module - required to be released after APB register programming See DPHY PMA specification for details of DPHY power up sequence" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="31" begin="30" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DPHY_TX_PSM_FREQ" acronym="DPHY_TX_PSM_FREQ" offset="0xF10" width="32" description="The PSM Frequency register configures the so that it knows hoe fast the PSM clock is.">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PSM_CLOCK_FREQ" width="8" begin="7" end="0" resetval="0x1" description="Static value based on System PSM clock frequency. The signal must be driven with a value such that the internal psm frequency of the divided psm clock is 1 MHz" range="" rwaccess="RW"/>
+  </register>
+  <register id="DPHY_TX_IPCONFIG" acronym="DPHY_TX_IPCONFIG" offset="0xF14" width="32" description="IP Config">
+    <bitfield id="PSO_CMN" width="1" begin="31" end="31" resetval="0x0" description="Power Shutoff signal for CMN 1: CMN is power OFF 0: CMN is power ON" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="28" begin="30" end="3" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="IPCONFIG_CMN" width="3" begin="2" end="0" resetval="0x1" description="This signal decides which clock lane acts as master clock lane to all data lanes. Needed only for RXIP. Bit[2]: Reserved CASE {Bit[1],Bit[0]}: 00: Left RX clk lane provides clock to all left and right data lanes. 01: Left RX clk lane provides clock to all right data lanes, Right RX clk lane provides clock to all left data lanes. 10: Right RX clk lane provides clock to all right data lanes, Left RX clk lane provides clock to all left data lanes. 11: Right RX clk lane provides clock to all left and right data lanes." range="" rwaccess="RW"/>
+  </register>
+  <register id="DPHY_TX_PLLRES" acronym="DPHY_TX_PLLRES" offset="0xFF8" width="32" description="The PLL Reserved register is not being used currently">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PLLREFSEL_CMN" width="8" begin="7" end="0" resetval="0x0" description="PLL frequency range. This signal is not being used currently. Should be 8'd0" range="" rwaccess="RW"/>
+  </register>
+  <register id="DPHY_TX_DIAG_TEST" acronym="DPHY_TX_DIAG_TEST" offset="0xFFC" width="32" description="The Diagnostic Test Register allows the system to validate the read and write of all data bits.">
+    <bitfield id="DIAG_REG" width="32" begin="31" end="0" resetval="0x0" description="Diagnostic register." range="" rwaccess="RW"/>
+  </register>
+</module>

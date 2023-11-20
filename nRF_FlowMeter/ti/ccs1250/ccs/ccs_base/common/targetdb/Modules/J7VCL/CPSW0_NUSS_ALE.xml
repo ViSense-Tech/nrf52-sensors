@@ -1,0 +1,242 @@
+<module name="CPSW0_NUSS_ALE" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="CPSW_ALE_MOD_VER" acronym="CPSW_ALE_MOD_VER" offset="0x3E000" width="32" description="The Module and Version Register identifies the module identifier and revision of the ALE module.">
+    <bitfield id="MODULE_ID" width="16" begin="31" end="16" resetval="0x29" description="ALE module ID." range="" rwaccess="R"/>
+    <bitfield id="RTL_VERSION" width="5" begin="15" end="11" resetval="0x8" description="RTL Version." range="" rwaccess="R"/>
+    <bitfield id="MAJOR_REVISION" width="3" begin="10" end="8" resetval="0x1" description="Major Revision." range="" rwaccess="R"/>
+    <bitfield id="CUSTOM_REVISION" width="2" begin="7" end="6" resetval="0x0" description="Custom Revision." range="" rwaccess="R"/>
+    <bitfield id="MINOR_REVISION" width="6" begin="5" end="0" resetval="0x4" description="Minor Revision." range="" rwaccess="R"/>
+  </register>
+  <register id="CPSW_ALE_STATUS" acronym="CPSW_ALE_STATUS" offset="0x3E004" width="32" description="The ALE status provides information on the ALE configuration and state. The RAMDEPTH is used to determine how IPv6 entries are stored in the table. IPv6 entries are stored in two entries where IPv6 Entry Hi is designated by the odd slice index and Lo is designated by the even slice index. The slice index is above the ram depth like {SlixeIndex,RamIndex}. So for a 64 deep RAM index of 0x005, the Hi portion of the IPv6 entry is located at 0x005|0x040 and the Lo portion is located at 0x005&amp;amp;(~0x040).">
+    <bitfield id="UREGANDREGMSK12" width="1" begin="31" end="31" resetval="0x1" description="When set, the unregistered multicast field is a mask versus an index on 12 bit boundary in the ALE table." range="" rwaccess="R"/>
+    <bitfield id="UREGANDREGMSK08" width="1" begin="30" end="30" resetval="0x0" description="When set, the unregistered multicast field is a mask versus an index on 8 bit boundary in the ALE table." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="14" begin="29" end="16" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="POLCNTDIV8" width="8" begin="15" end="8" resetval="0x8" description="This is the number of policer engines the ALE implements divided by 8." range="" rwaccess="R"/>
+    <bitfield id="RAMDEPTH128" width="1" begin="7" end="7" resetval="0x0" description="The number of ALE entries per slice of the table when this is set it indicates the depth is 128 if both ramdepth128 and ramdepth32 are zero the depth is 64." range="" rwaccess="R"/>
+    <bitfield id="RAMDEPTH32" width="1" begin="6" end="6" resetval="0x0" description="The number of ALE entries per slice of the table when this is set it indicates the depth is 32 if both ramdepth128 and ramdepth32 are zero the depth is 64." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="5" end="5" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="KLUENTRIES" width="5" begin="4" end="0" resetval="0x0" description="This is the number of table entries total divided by 1024." range="" rwaccess="R"/>
+  </register>
+  <register id="CPSW_ALE_CONTROL" acronym="CPSW_ALE_CONTROL" offset="0x3E008" width="32" description="The ALE Control Register is used to set the ALE modes used for all ports.">
+    <bitfield id="ENABLE_ALE" width="1" begin="31" end="31" resetval="0x0" description="Enable ALE." range="" rwaccess="RW"/>
+    <bitfield id="CLEAR_TABLE" width="1" begin="30" end="30" resetval="0x0" description="Clear ALE address table. Setting this bit causes the ALE hardware to write all table bit values to zero." range="" rwaccess="RW"/>
+    <bitfield id="AGE_OUT_NOW" width="1" begin="29" end="29" resetval="0x0" description="Age Out Address Table Now. Setting this bit causes the ALE hardware to remove (free up) any ageable table entry that does not have a set touch bit." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="28" end="27" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="MIRROR_DP" width="3" begin="26" end="24" resetval="0x0" description="Mirror Destination Port. This field defines the port to which destination traffic destined will be duplicated." range="" rwaccess="RW"/>
+    <bitfield id="UPD_BW_CTRL" width="3" begin="23" end="21" resetval="0x0" description="The UPD_BW_CTRL field allows for up to 8 times the rate in which adds, updates, touches, writes, and aging updates can occur." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="20" end="19" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="MIRROR_TOP" width="3" begin="18" end="16" resetval="0x0" description="Mirror To Port. This field defines the destination port for the mirror traffic." range="" rwaccess="RW"/>
+    <bitfield id="UPD_STATIC" width="1" begin="15" end="15" resetval="0x0" description="Update Static Entries. A static Entry is an entry that is not agable." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="14" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="UVLAN_NO_LEARN" width="1" begin="13" end="13" resetval="0x0" description="Unknown VLAN No Learn. This field when set will prevent source addresses of unknown VLAN IDs from being automatically added into the look up table if learning is enabled." range="" rwaccess="RW"/>
+    <bitfield id="MIRROR_MEN" width="1" begin="12" end="12" resetval="0x0" description="Mirror Match Entry Enable. This field enables the match mirror option." range="" rwaccess="RW"/>
+    <bitfield id="MIRROR_DEN" width="1" begin="11" end="11" resetval="0x0" description="Mirror Destination Port Enable. This field enables the destination port mirror option." range="" rwaccess="RW"/>
+    <bitfield id="MIRROR_SEN" width="1" begin="10" end="10" resetval="0x0" description="Mirror Source Port Enable. This field enables the source port mirror option." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="9" end="9" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="EN_HOST_UNI_FLOOD" width="1" begin="8" end="8" resetval="0x0" description="Unknown unicast packets flood to host." range="" rwaccess="RW"/>
+    <bitfield id="LEARN_NO_VLANID" width="1" begin="7" end="7" resetval="0x0" description="Learn No VID." range="" rwaccess="RW"/>
+    <bitfield id="ENABLE_VID0_MODE" width="1" begin="6" end="6" resetval="0x0" description="Enable VLAN ID = 0 Mode." range="" rwaccess="RW"/>
+    <bitfield id="ENABLE_OUI_DENY" width="1" begin="5" end="5" resetval="0x0" description="Enable OUI Deny Mode. When set, any packet with a non-matching OUI source address will be dropped to the host unless the packet destination address matches a supervisory destination address table entry." range="" rwaccess="RW"/>
+    <bitfield id="ENABLE_BYPASS" width="1" begin="4" end="4" resetval="0x0" description="ALE Bypass. When set, packets received on non-host ports are sent to the host." range="" rwaccess="RW"/>
+    <bitfield id="BCAST_MCAST_CTL" width="1" begin="3" end="3" resetval="0x0" description="Rate Limit Transmit mode." range="" rwaccess="RW"/>
+    <bitfield id="ALE_VLAN_AWARE" width="1" begin="2" end="2" resetval="0x0" description="ALE VLAN Aware. Determines how traffic is forwarded using VLAN rules." range="" rwaccess="RW"/>
+    <bitfield id="ENABLE_AUTH_MODE" width="1" begin="1" end="1" resetval="0x0" description="Enable MAC Authorization Mode. Mac authorization mode requires that all table entries be made by the host software." range="" rwaccess="RW"/>
+    <bitfield id="ENABLE_RATE_LIMIT" width="1" begin="0" end="0" resetval="0x0" description="Enable Broadcast and Multicast Rate Limit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_CTRL2" acronym="CPSW_ALE_CTRL2" offset="0x3E00C" width="32" description="The ALE Control 2 Register is used to set the extended features used for all ports.">
+    <bitfield id="TRK_EN_DST" width="1" begin="31" end="31" resetval="0x0" description="Trunk Enable Destination Address. This field enables the destination MAC address to be used with the hash function G(X) = 1 + X + X^3 and affect the trunk port transmit link determination." range="" rwaccess="RW"/>
+    <bitfield id="TRK_EN_SRC" width="1" begin="30" end="30" resetval="0x0" description="Trunk Enable Source Address. This field enables the source MAC address to be used with the hash function G(X) = 1 + X + X^3 and affect the trunk port transmit link determination." range="" rwaccess="RW"/>
+    <bitfield id="TRK_EN_PRI" width="1" begin="29" end="29" resetval="0x0" description="Trunk Enable Priority. This field enables the VLAN Priority bits to be used with the hash function G(X) = 1 + X + X^3 and affect the trunk port transmit link determination." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="28" end="28" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="TRK_EN_IVLAN" width="1" begin="27" end="27" resetval="0x0" description="Trunk Enable Inner VLAN. This field enables the inner VLAN ID value (C-VLANID) to be used with the hash function G(X) = 1 + X + X^3 and affect the trunk port transmit link determination." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="26" end="26" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="TRK_EN_SIP" width="1" begin="25" end="25" resetval="0x0" description="Trunk Enable Source IP Address. This field enables the source IP address to be used with the hash function G(X) = 1 + X + X^3 and affect the trunk port transmit link determination." range="" rwaccess="RW"/>
+    <bitfield id="TRK_EN_DIP" width="1" begin="24" end="24" resetval="0x0" description="Trunk Enable Destination IP Address. This field enables the destination IP address to be used with the hash function G(X) = 1 + X + X^3 and affect the trunk port transmit link determination." range="" rwaccess="RW"/>
+    <bitfield id="DROP_BADLEN" width="1" begin="23" end="23" resetval="0x0" description="Drop Bad Length will drop any packet that the 802.3 length field is larger than the packet." range="" rwaccess="RW"/>
+    <bitfield id="NODROP_SRCMCST" width="1" begin="22" end="22" resetval="0x0" description="No Drop Source Multicast will disable the dropping of any source address with the multicast bit set." range="" rwaccess="RW"/>
+    <bitfield id="DEFNOFRAG" width="1" begin="21" end="21" resetval="0x0" description="Default No Frag field will cause an IPv4 fragmented packet to be dropped if a VLAN entry is not found." range="" rwaccess="RW"/>
+    <bitfield id="DEFLMTNXTHDR" width="1" begin="20" end="20" resetval="0x0" description="Default limit next header field will cause an IPv4 protocol or IPv6 next header packet to be dropped if a VLAN entry is not found and the protocol or next header does not match the" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="19" end="19" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="TRK_BASE" width="3" begin="18" end="16" resetval="0x0" description="Trunk Base - This field is the hash formula starting value." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="7" begin="15" end="9" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="MIRROR_MIDX" width="9" begin="8" end="0" resetval="0x0" description="Mirror Index. This field is the ALE lookup table entry index that when a match occurs will cause this traffic to be mirrored to the MIRROR_TOP port." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_PRESCALE" acronym="CPSW_ALE_PRESCALE" offset="0x3E010" width="32" description="The ALE Prescale Register is used to set the Broadcast and Multicast rate limiting prescaler value.">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ALE_PRESCALE" width="20" begin="19" end="0" resetval="0x0" description="ALE Prescale. The input clock is divided by this value for use in the multicast/broadcast rate limiters." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_AGING_CTRL" acronym="CPSW_ALE_AGING_CTRL" offset="0x3E014" width="32" description="The ALE Aging Control sets the aging interval which will cause periodic aging to occur. This value specifies the minimum time between aging starts.">
+    <bitfield id="PRESCALE_2_DISABLE" width="1" begin="31" end="31" resetval="0x0" description="ALE Prescaler 2 Disable. When set will divide the aging interval by 1000. This bit is designed for device verification and should not be used in production software. Combination of PreScale1Disable and PreScale2Disable will divide the aging interval by 1,000,000 for test purposes." range="" rwaccess="RW"/>
+    <bitfield id="PRESCALE_1_DISABLE" width="1" begin="30" end="30" resetval="0x0" description="ALE Prescaler 1 Disable. When set will divide the aging interval by 1000. This bit is designed for device verification and should not be used in production software. Combination of PreScale1Disable and PreScale2Disable will divide the aging interval by 1,000,000 for test purposes." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="29" end="24" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ALE_AGING_TIMER" width="24" begin="23" end="0" resetval="0x0" description="ALE Aging Timer." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_NXT_HDR" acronym="CPSW_ALE_NXT_HDR" offset="0x3E01C" width="32" description="The ALE Next Header is used to limit the IPv6 Next header or IPv4 Protocol values found in the IP header. It is enabled via the DEFLMTNXTHDR bit in the VLAN entry. All four IP_NXT_HDR0 to IP_NXT_HDR3 bits are compared when enabled, so if only one is required, set them all to the one value to be tested.">
+    <bitfield id="IP_NXT_HDR3" width="8" begin="31" end="24" resetval="0x0" description="The IP_NXT_HDR3 is the forth protocol or next header compared when enabled." range="" rwaccess="RW"/>
+    <bitfield id="IP_NXT_HDR2" width="8" begin="23" end="16" resetval="0x0" description="The IP_NXT_HDR2 is the third protocol or next header compared when enabled." range="" rwaccess="RW"/>
+    <bitfield id="IP_NXT_HDR1" width="8" begin="15" end="8" resetval="0x0" description="The IP_NXT_HDR1 is the second protocol or next header compared when enabled." range="" rwaccess="RW"/>
+    <bitfield id="IP_NXT_HDR0" width="8" begin="7" end="0" resetval="0x0" description="The IP_NXT_HDR0 is the first protocol or next header compared when enabled." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_TBLCTL" acronym="CPSW_ALE_TBLCTL" offset="0x3E020" width="32" description="The ALE table control register is used to read or write that ALE table entries. After writing to this register any read or write to any ALE register will be stalled until the read or write operation completes.">
+    <bitfield id="TABLEWR" width="1" begin="31" end="31" resetval="0x0" description="Table Write. This bit is used to write the table words to the lookup table." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="22" begin="30" end="9" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="TABLEIDX" width="9" begin="8" end="0" resetval="0x0" description="The table index is used to determine which lookup table entry is read or written." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_TBLW2" acronym="CPSW_ALE_TBLW2" offset="0x3E034" width="32" description="The ALE Table Word 2 is the most significant word of an ALE table entry.">
+    <bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="TABLEWRD2" width="7" begin="6" end="0" resetval="0x0" description="Table Entry bits [71:64]" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_TBLW1" acronym="CPSW_ALE_TBLW1" offset="0x3E038" width="32" description="The ALE Table Word 1 is the middle word of an ALE table entry.">
+    <bitfield id="TABLEWRD1" width="32" begin="31" end="0" resetval="0x0" description="Table Entry bits [63:32]." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_TBLW0" acronym="CPSW_ALE_TBLW0" offset="0x3E03C" width="32" description="The ALE Table Word 0 is the least significant word of an ALE table entry.">
+    <bitfield id="TABLEWRD0" width="32" begin="31" end="0" resetval="0x0" description="Table Entry bits [31:0]." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_Iy_ALE_PORTCTL0_y" acronym="CPSW_Iy_ALE_PORTCTL0_y" offset="0x3E040" width="32" description="The ALE Port Control Register sets the port specific modes of operation. Offset = 0003E040h + (y * 4h); where y = 0h to 4h">
+    <bitfield id="Iy_REG_Py_BCAST_LIMIT" width="8" begin="31" end="24" resetval="0x0" description="Broadcast Packet Rate Limit. Each prescale pulse loads this field into the port broadcast rate limit counter." range="" rwaccess="RW"/>
+    <bitfield id="Iy_REG_Py_MCAST_LIMIT" width="8" begin="23" end="16" resetval="0x0" description="Multicast Packet Rate Limit. Each prescale pulse loads this field into the port multicast rate limit counter." range="" rwaccess="RW"/>
+    <bitfield id="Iy_REG_Py_DROP_DOUBLE_VLAN" width="1" begin="15" end="15" resetval="0x0" description="Drop Double VLAN. When set cause any received packet with double VLANs to be dropped." range="" rwaccess="RW"/>
+    <bitfield id="Iy_REG_Py_DROP_DUAL_VLAN" width="1" begin="14" end="14" resetval="0x0" description="Drop Dual VLAN. When set will cause any received packet with dual VLAN stag followed by ctag to be dropped." range="" rwaccess="RW"/>
+    <bitfield id="Iy_REG_Py_MACONLY_CAF" width="1" begin="13" end="13" resetval="0x0" description="Mac Only Copy All Frames. When set a Mac Only port will transfer all received good frames to the host." range="" rwaccess="RW"/>
+    <bitfield id="Iy_REG_Py_DIS_PAUTHMOD" width="1" begin="12" end="12" resetval="0x0" description="Disable Port authorization. When set will allow unknown addresses to arrive on a switch in authorization mode." range="" rwaccess="RW"/>
+    <bitfield id="Iy_REG_Py_MACONLY" width="1" begin="11" end="11" resetval="0x0" description="MAC Only. When set enables this port be treated like a MAC port for the host." range="" rwaccess="RW"/>
+    <bitfield id="Iy_REG_Py_TRUNKEN" width="1" begin="10" end="10" resetval="0x0" description="Trunk Enable. This field is used to enable a port into a trunk." range="" rwaccess="RW"/>
+    <bitfield id="Iy_REG_Py_TRUNKNUM" width="2" begin="9" end="8" resetval="0x0" description="Trunk Number. This field is used as the trunk number when the Iy_REG_Py_TRUNKEN is also set." range="" rwaccess="RW"/>
+    <bitfield id="Iy_REG_Py_MIRROR_SP" width="1" begin="7" end="7" resetval="0x0" description="Mirror Source Port. This field enables the source port mirror option." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="6" end="6" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="Iy_REG_Py_NO_SA_UPDATE" width="1" begin="5" end="5" resetval="0x0" description="No Source Address Update. When set will not update the source addresses for this port." range="" rwaccess="RW"/>
+    <bitfield id="Iy_REG_Py_NO_LEARN" width="1" begin="4" end="4" resetval="0x0" description="No Learn. When set will not learn the source addresses for this port." range="" rwaccess="RW"/>
+    <bitfield id="Iy_REG_Py_VID_INGRESS_CHECK" width="1" begin="3" end="3" resetval="0x0" description="VLAN Ingress Check. When set if a packet received is not a member of the VLAN, the packet will be dropped." range="" rwaccess="RW"/>
+    <bitfield id="Iy_REG_Py_DROP_UN_TAGGED" width="1" begin="2" end="2" resetval="0x0" description="If Drop Untagged. When set will drop packets without a VLAN tag." range="" rwaccess="RW"/>
+    <bitfield id="Iy_REG_Py_PORTSTATE" width="2" begin="1" end="0" resetval="0x0" description="Port State. Defins the current port state used for lookup operations." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_UVLAN_MEMBER" acronym="CPSW_ALE_UVLAN_MEMBER" offset="0x3E090" width="32" description="The ALE Unknown VLAN Member Mask Register is used to specify the member list for unknown VLAN ID.">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="UVLAN_MEMBER_LIST" width="5" begin="4" end="0" resetval="0x0" description="Unknown VLAN Member List." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_UVLAN_URCAST" acronym="CPSW_ALE_UVLAN_URCAST" offset="0x3E094" width="32" description="The ALE Unknown VLAN Unregistered Multicast Flood Mask Register is used to specify which egress ports unregistered multicast addresses egress for the unregistered VLAN ID.">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="UVLAN_UNREG_MCAST_FLOOD_MASK" width="5" begin="4" end="0" resetval="0x0" description="Unknown VLAN Unregister Multicast Flood Mask." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_UVLAN_RMCAST" acronym="CPSW_ALE_UVLAN_RMCAST" offset="0x3E098" width="32" description="The ALE Unknown VLAN Registered Multicast Flood Mask Register is used to specify which egress ports registered multicast addresses egress for the unregistered VLAN ID.">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="UVLAN_REG_MCAST_FLOOD_MASK" width="5" begin="4" end="0" resetval="0x0" description="Unknown VLAN Register Multicast Flood Mask. Each bit represents the port to which registered multicast are sent for unregistered VLANs." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_UVLAN_UNTAG" acronym="CPSW_ALE_UVLAN_UNTAG" offset="0x3E09C" width="32" description="The ALE Unknown VLAN force Untagged Egress Mask Register is used to specify which egress ports the VLAN ID will be removed.">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="UVLAN_FORCE_UNTAGGED_EGRESS" width="5" begin="4" end="0" resetval="0x0" description="Unknown VLAN Force Untagged Egress Mask. Each bit represents the port where the VLAN will be removed for unregistered VLANs." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_STAT_DIAG" acronym="CPSW_ALE_STAT_DIAG" offset="0x3E0B8" width="32" description="The ALE Statistic Output Diagnostic Register allows the output statistics to diagnose the SW counters. This register is for diagnostice only.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PBCAST_DIAG" width="1" begin="15" end="15" resetval="0x0" description="When set and the PORT_DIAG is set to zero, will allow all ports to see the same stat diagnostic increment." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="14" end="11" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PORT_DIAG" width="3" begin="10" end="8" resetval="0x0" description="The port selected that a received packet will cause the selected error to increment." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="STAT_DIAG" width="4" begin="3" end="0" resetval="0x0" description="When non-zero will cause the selected statistic to increment on the next frame received." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_OAM_LB_CTRL" acronym="CPSW_ALE_OAM_LB_CTRL" offset="0x3E0BC" width="32" description="The ALE OAM Control allows ports to be put into OAM Loopback, only non-supervisor packet are looped back to the source port.">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="OAM_LB_CTRL" width="5" begin="4" end="0" resetval="0x0" description="The OAM_LB_CTRL bit field allows any port to be put into OAM loopback, that is any packet received will be returned to the same port with an" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_EGRESSOP" acronym="CPSW_ALE_EGRESSOP" offset="0x3E0FC" width="32" description="The Egress Operation register allows enabled classifiers with IPSA or IPDA match to use the CPSW Egress Packet Operations Inter VLAN Routing sub functions. If the packet was destined for the host, but matches a clasifier that has a programmed egress opcode, it will be forwarded to the destination ports where the destination ports will use the thier egress opcode entry to modify the packet. InterVLAN Routing and mirroring need to be understood, they are orthogonal functions.">
+    <bitfield id="EGRESS_OP" width="8" begin="31" end="24" resetval="0x0" description="The Egress Operation defines the operation performed by the CPSW Egress Packet Operations 0h = NOP : 1-n: Defines which egress Operation will be performed. This allows Inter VLAN routing to be configured for high bandwidth traffic, reducing CPU load. FFh: Swaps source address (SA) and destination address (DA) of packet, this is intended to allow OAM diagnostics for a link." range="" rwaccess="RW"/>
+    <bitfield id="EGRESS_TRK" width="3" begin="23" end="21" resetval="0x0" description="The Egress Trunk Index is the calculated trunk index from the SA, DA or VLAN if modified to that InterVLAN routing will work on trunks as well." range="" rwaccess="RW"/>
+    <bitfield id="TTL_CHECK" width="1" begin="20" end="20" resetval="0x0" description="The TTL Check will cause any packet that fails TTL checks to not be routed to the Inter VLAN Routing sub functions." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="15" begin="19" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="DEST_PORTS" width="5" begin="4" end="0" resetval="0x0" description="The Destination Ports is a list of the ports the classified packet will be set to." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_POLICECFG0" acronym="CPSW_ALE_POLICECFG0" offset="0x3E100" width="32" description="The Policing Config 0 holds the port, frame priority and ONU address index as well as match enables for port, frame priority and ONU address matching.">
+    <bitfield id="PORT_MEN" width="1" begin="31" end="31" resetval="0x0" description="Port Match Enable." range="" rwaccess="RW"/>
+    <bitfield id="TRUNKID" width="1" begin="30" end="30" resetval="0x0" description="Trunk ID." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="29" end="28" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PORT_NUM" width="3" begin="27" end="25" resetval="0x0" description="Port Number." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="24" end="20" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PRI_MEN" width="1" begin="19" end="19" resetval="0x0" description="Priority Match Enable." range="" rwaccess="RW"/>
+    <bitfield id="PRI_VAL" width="3" begin="18" end="16" resetval="0x0" description="Priority Value." range="" rwaccess="RW"/>
+    <bitfield id="ONU_MEN" width="1" begin="15" end="15" resetval="0x0" description="OUI Match Enable." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="14" end="9" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ONU_INDEX" width="9" begin="8" end="0" resetval="0x0" description="OUI Table Entry Index." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_POLICECFG1" acronym="CPSW_ALE_POLICECFG1" offset="0x3E104" width="32" description="The Policing Config 1 holds the match enable/match index for the L2 Destination and L2 source addresses.">
+    <bitfield id="DST_MEN" width="1" begin="31" end="31" resetval="0x0" description="Destination Address Match Enable - Enables frame L2 destination address match for the selected policing/classifier entry" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="30" end="25" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="DST_INDEX" width="9" begin="24" end="16" resetval="0x0" description="Destination Address Table Entry Index - Specifies the ALE L2 destination address lookup table index to match for the selected policing/classifier entry" range="" rwaccess="RW"/>
+    <bitfield id="SRC_MEN" width="1" begin="15" end="15" resetval="0x0" description="Source Address Match Enable - Enables frame L2 source address match for the selected policing/classifier entry" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="14" end="9" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SRC_INDEX" width="9" begin="8" end="0" resetval="0x0" description="Source Address Table Entry Index - Specifies the ALE L2 source address lookup table index to match for the selected policing/classifier entry" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_POLICECFG2" acronym="CPSW_ALE_POLICECFG2" offset="0x3E108" width="32" description="The Policing Config 2 holds the match enable/match index for the Outer VLAN and Inner VLAN addresses.">
+    <bitfield id="OVLAN_MEN" width="1" begin="31" end="31" resetval="0x0" description="Outer VLAN Match Enable." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="30" end="25" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="OVLAN_INDEX" width="9" begin="24" end="16" resetval="0x0" description="Outer VLAN Table Entry Index." range="" rwaccess="RW"/>
+    <bitfield id="IVLAN_MEN" width="1" begin="15" end="15" resetval="0x0" description="Inner VLAN Match Enable." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="14" end="9" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="IVLAN_INDEX" width="9" begin="8" end="0" resetval="0x0" description="Inner VLAN Table Entry Index." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_POLICECFG3" acronym="CPSW_ALE_POLICECFG3" offset="0x3E10C" width="32" description="The Policing Config 3 holds the match enable/match index for the Ether Type and IP Source address.">
+    <bitfield id="ETHERTYPE_MEN" width="1" begin="31" end="31" resetval="0x0" description="EtherType Match Enable." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="30" end="25" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ETHERTYPE_INDEX" width="9" begin="24" end="16" resetval="0x0" description="EtherType Table Entry Index." range="" rwaccess="RW"/>
+    <bitfield id="IPSRC_MEN" width="1" begin="15" end="15" resetval="0x0" description="IP Source Address Match Enable." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="14" end="9" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="IPSRC_INDEX" width="9" begin="8" end="0" resetval="0x0" description="IP Source Address Table Entry Index." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_POLICECFG4" acronym="CPSW_ALE_POLICECFG4" offset="0x3E110" width="32" description="The Policing Config 4 holds the match enable/match index for the IP Destination address.">
+    <bitfield id="IPDST_MEN" width="1" begin="31" end="31" resetval="0x0" description="IP Destination Address Match Enable." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="30" end="25" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="IPDST_INDEX" width="9" begin="24" end="16" resetval="0x0" description="IP Destination Address Table Entry Index." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="16" begin="15" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_POLICECFG6" acronym="CPSW_ALE_POLICECFG6" offset="0x3E118" width="32" description="The PIR counter is a 37-bit internal counter where PIR_IDLE_INC_VAL is added every clock and the frame size &amp;lt;&amp;lt; 18 is subtracted at EOF if not RED at LUT time. If the counter is negative the packet will be marked RED, else it can be YELLOW or GREEN based on the CIR counter. If only this counter is used (CIR_IDLE_INC_VAL = 0h), then packets are marked RED or GREEN based on PIR counter only.">
+    <bitfield id="PIR_IDLE_INC_VAL" width="32" begin="31" end="0" resetval="0x0" description="Peak Information Rate Idle Increment Value." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_POLICECFG7" acronym="CPSW_ALE_POLICECFG7" offset="0x3E11C" width="32" description="The CIR counter is a 37-bit internal counter where CIR_IDLE_INC_VAL is added every clock and the frame size &amp;lt;&amp;lt; 18 is subtracted at EOF if not RED or YELLOW at LUT time. If the counter is positive the packet will be marked GREEN, else it can be YELLOW or RED based on the PIR counter. If only this counter is used (PIR_IDLE_INC_VAL= 0h), then packets are marked YELLOW or GREEN based on CIR counter only.">
+    <bitfield id="CIR_IDLE_INC_VAL" width="32" begin="31" end="0" resetval="0x0" description="Committed Information Idle Increment Value." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_POLICETBLCTL" acronym="CPSW_ALE_POLICETBLCTL" offset="0x3E120" width="32" description="The Policing Table Control is used to read or write the selected policing/classifier entry. The selected policing/classifier entry is only read or written after this register is written based on the value of the WRITE_ENABLE bit.">
+    <bitfield id="WRITE_ENABLE" width="1" begin="31" end="31" resetval="0x0" description="Write Enable - Setting this bit will write the" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="25" begin="30" end="6" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POL_TBL_IDX" width="6" begin="5" end="0" resetval="0x0" description="Policer Entry Index - This field specifies the policing/classifier entry to be read or written." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_POLICECONTROL" acronym="CPSW_ALE_POLICECONTROL" offset="0x3E124" width="32" description="The Control Enables color marking as well as internal ALE packet dropping rules.">
+    <bitfield id="POLICING_EN" width="1" begin="31" end="31" resetval="0x0" description="Policing Enable." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="RED_DROP_EN" width="1" begin="29" end="29" resetval="0x0" description="RED Drop Enable." range="" rwaccess="RW"/>
+    <bitfield id="YELLOW_DROP_EN" width="1" begin="28" end="28" resetval="0x0" description="WELLOW Drop Enable." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="27" end="27" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="YELLOWTHRESH" width="3" begin="26" end="24" resetval="0x0" description="Yellow Threshold." range="" rwaccess="RW"/>
+    <bitfield id="POLMCHMODE" width="2" begin="23" end="22" resetval="0x0" description="Policing Match Mode." range="" rwaccess="RW"/>
+    <bitfield id="PRIORITY_THREAD_EN" width="1" begin="21" end="21" resetval="0x0" description="Priority Thread Enable." range="" rwaccess="RW"/>
+    <bitfield id="MAC_ONLY_DEF_DIS" width="1" begin="20" end="20" resetval="0x0" description="MAC Only Default Disable." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="20" begin="19" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_POLICETESTCTL" acronym="CPSW_ALE_POLICETESTCTL" offset="0x3E128" width="32" description="The Policing Test Control enables the ability to determine which policing entry has been hit and whether they reported a red or yellow rate condition.">
+    <bitfield id="POL_CLRALL_HIT" width="1" begin="31" end="31" resetval="0x0" description="Policer Clear. This bit clears all the policing/ classifier hit bits." range="" rwaccess="RW"/>
+    <bitfield id="POL_CLRALL_REDHIT" width="1" begin="30" end="30" resetval="0x0" description="Policer Clear RED. This bit clears all the policing/ classifier RED hit bits." range="" rwaccess="RW"/>
+    <bitfield id="POL_CLRALL_YELLOWHIT" width="1" begin="29" end="29" resetval="0x0" description="Policer Clear YELLOW. This bit clears all the policing/ classifier YELLOW hit bits." range="" rwaccess="RW"/>
+    <bitfield id="POL_CLRSEL_ALL" width="1" begin="28" end="28" resetval="0x0" description="Police Clear Selected. This bit clears the selected policing/ classifier hit, redhit and yellowhit bits." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="22" begin="27" end="6" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POL_TEST_IDX" width="6" begin="5" end="0" resetval="0x0" description="Policer Test Index. This field selects which policing/ classifier hit bits will be read or written." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_POLICEHSTAT" acronym="CPSW_ALE_POLICEHSTAT" offset="0x3E12C" width="32" description="The policing hit status is a read only register that reads the hit bits of the selected policing/classifier.">
+    <bitfield id="POL_HIT" width="1" begin="31" end="31" resetval="0x0" description="Policer Hit." range="" rwaccess="R"/>
+    <bitfield id="POL_REDHIT" width="1" begin="30" end="30" resetval="0x0" description="Policer Hit RED." range="" rwaccess="R"/>
+    <bitfield id="POL_YELLOWHIT" width="1" begin="29" end="29" resetval="0x0" description="Policer Hit YELLOW." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="29" begin="28" end="0" resetval="0xX" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CPSW_ALE_THREADMAPDEF" acronym="CPSW_ALE_THREADMAPDEF" offset="0x3E134" width="32" description="The THREAD Mapping Default Value register is used to set the default thread ID when no classifier is matched.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="DEFTHREAD_EN" width="1" begin="15" end="15" resetval="0x0" description="Default Tread Enable." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="9" begin="14" end="6" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="DEFTHREADVAL" width="6" begin="5" end="0" resetval="0x0" description="Default Thread Value." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_THREADMAPCTL" acronym="CPSW_ALE_THREADMAPCTL" offset="0x3E138" width="32" description="The THREAD Mapping Control register allows the highest matched classifier to return a particular thread ID for traffic sent to the host. This allows particular classifier matched traffic to be placed an a particular hosts queue.">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CLASSINDEX" width="6" begin="5" end="0" resetval="0x0" description="Classifier Index - This is the classifier index entry that the thread enable and thread value will be read or written by the Classifier Index." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_ALE_THREADMAPVAL" acronym="CPSW_ALE_THREADMAPVAL" offset="0x3E13C" width="32" description="The THREAD Mapping Value register is used to set the thread ID for a particular classifier entry.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="THREAD_EN" width="1" begin="15" end="15" resetval="0x0" description="Thread Enable." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="9" begin="14" end="6" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="THREADVAL" width="6" begin="5" end="0" resetval="0x0" description="Thread Value." range="" rwaccess="RW"/>
+  </register>
+</module>

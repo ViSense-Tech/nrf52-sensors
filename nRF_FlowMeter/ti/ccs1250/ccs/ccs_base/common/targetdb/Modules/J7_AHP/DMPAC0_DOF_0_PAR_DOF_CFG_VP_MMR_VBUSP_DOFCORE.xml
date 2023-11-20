@@ -1,0 +1,116 @@
+<module name="DMPAC0_DOF_0_PAR_DOF_CFG_VP_MMR_VBUSP_DOFCORE" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_PID" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_PID" offset="0x0" width="32" description="">
+		<bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x1" description="Used to  distinguish between old scheme and new scheme. Spare bit to encode future schemes" range="31 - 30" rwaccess="R"/> 
+		<bitfield id="BU" width="2" begin="29" end="28" resetval="0x2" description="BU indicator DSPS ==> 0x0  WTBU ==> 0x1  Processors ==> 0x2" range="29 - 28" rwaccess="R"/> 
+		<bitfield id="FUNC" width="12" begin="27" end="16" resetval="0x1168" description="Function indicates a software compatible module family. If there is no level of software compatibility a new FUNC number, and hence PID, should be assigned." range="27 - 16" rwaccess="R"/> 
+		<bitfield id="RTL" width="5" begin="15" end="11" resetval="0x0" description="RTL Version.  R as described in PDR with additional clarifications and definitions below.  Must be easily ECO-able or controlled during fabrication.  Ideally through a top level metal mask or e-fuse. This number is maintained/owned by IP design owner.   RTL follows a numbering such as X.Y.R.Z which are explained in this table.   R changes ONLY when:  (1) PDS uploads occur which may have been due to spec changes  (2) Bug fixes occur  (3) Resets to '0' when X or Y changes.   Design team has an internal 'Z' (customer invisible) number which increments on every drop that happens due to DV and RTL updates. Z resets to 0 when R increments. " range="15 - 11" rwaccess="R"/> 
+		<bitfield id="MAJOR" width="3" begin="10" end="8" resetval="0x1" description="Major Revision.   X as described in PDR with additional clarifications/definitions below. This number is owned/maintained by IP specification owner. X is part of IP numbering X.Y.R.Z.  X changes ONLY when:  (1) There is a major feature addition. An example would be adding Master Mode to Utopia Level2. The Func field (or Class/Type in old PID format) will remain the same.   X does NOT change due to:  (1) Bug fixes  (2) Change in feature parameters. " range="10 - 8" rwaccess="R"/> 
+		<bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Indicates a special version for a particular device.  Consequence of use may avoid use of standard Chip Support Library (CSL) / Drivers.   0 if non-custom. " range="7 - 6" rwaccess="R"/> 
+		<bitfield id="MINOR" width="6" begin="5" end="0" resetval="0x0" description="Minor Revision.   Y as described in PDR with additional clarifications/definitions below.  This number is owned/maintained by IP specification owner.   Y changes ONLY when:  (1) Features are scaled (up or down). Flexibility exists in that this feature scalability may either be represented in the Y change or a specific register in the IP that indicates which features are exactly available.  (2) When feature creeps from Is-Not list to Is list. But this may not be the case once it sees silicon - in which case X will change.   Y does NOT change due to:  (1) Bug fixes  (2) Typos or clarifications  (3) major functional/feature change/addition/deletion. Instead these changes may be reflected via R, S, X as applicable.   Spec owner maintains a customer-invisible number 'S' which changes due to:  (1) Typos/clarifications  (2) Bug documentation. Note that this bug is not due to a spec change but due to implementation. Nevertheless, the spec tracks the IP bugs. An RTL release (say for silicon PG1.1) that occurs due to bug fix should document the corresponding spec number (X.Y.S) in its release notes. " range="5 - 0" rwaccess="R"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_dofcr" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_dofcr" offset="0x4" width="32" description="">
+		<bitfield id="REF_CT_TYPE_CFG" width="1" begin="25" end="25" resetval="0x0" description="Census transform type for reference image. 0: 24 bits generated for census transform by using a 5x5 neighborhood around the pixel. 1: 32 bits generated for census transform by using a 7x7 neighborhood around the pixel where only 8 pixels are used from the periphery." range="25" rwaccess="R/W"/> 
+		<bitfield id="CUR_CT_TYPE_CFG" width="1" begin="24" end="24" resetval="0x0" description="Census transform type for current image. 0: 24 bits generated for census transform by using a 5x5 neighborhood around the pixel. 1: 32 bits generated for census transform by using a 7x7 neighborhood around the pixel where only 8 pixels are used from the periphery." range="24" rwaccess="R/W"/> 
+		<bitfield id="SOFSPARSEEN_CFG" width="1" begin="18" end="18" resetval="0x0" description="sparse optical flow enable bit. Set to 0x1 to enable sparse optical flow processing." range="18" rwaccess="R/W"/> 
+		<bitfield id="MF_EN_CFG" width="1" begin="17" end="17" resetval="0x0" description="Median filter enable bit. Set to 0x1 to enable median filter processing." range="17" rwaccess="R/W"/> 
+		<bitfield id="LK_CS_EN_CFG" width="1" begin="16" end="16" resetval="0x0" description="LK refinement and confidence score generation enable bit. Set to 0x1 to enable LK and CS processing." range="16" rwaccess="R/W"/> 
+		<bitfield id="DL_EN_CFG" width="1" begin="4" end="4" resetval="0x0" description="Delayed Left Predictor Enable bit. Set to 0x1 to enable use of delayed left predictor during the DOF processing." range="4" rwaccess="R/W"/> 
+		<bitfield id="TP_EN_CFG" width="1" begin="3" end="3" resetval="0x0" description="Temporal Predictor Enable bit. Set to 0x1 to enable use of temporal predictor during the DOF processing." range="3" rwaccess="R/W"/> 
+		<bitfield id="PYL_EN_CFG" width="1" begin="2" end="2" resetval="0x0" description="Pyramidal Top Left Predictor Enable bit. Set to 0x1 to enable use of pyramidal top left predictor during DOF processing." range="2" rwaccess="R/W"/> 
+		<bitfield id="PYC_EN_CFG" width="1" begin="1" end="1" resetval="0x0" description="Pyramidal Top Co-located Predictor Enable bit. Set to 0x1 to enable use of pyramidal top colocated predictor during DOF processing." range="1" rwaccess="R/W"/> 
+		<bitfield id="DOF_EN_CFG" width="1" begin="0" end="0" resetval="0x0" description="DOF Enable. Set to 0x1 to enable DOF engine." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_dofstat" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_dofstat" offset="0x8" width="32" description="">
+		<bitfield id="CURPAXADDRX_STS" width="10" begin="19" end="10" resetval="0x0" description="Current Paxel Address X co-ordinate.  Provides address of 2x2 paxel currently being processed." range="19 - 10" rwaccess="R"/> 
+		<bitfield id="CURPAXADDRY_STS" width="9" begin="9" end="1" resetval="0x0" description="Current Paxel Address Y co-ordinate.  Provides address of 2x2 paxel currently being processed." range="9 - 1" rwaccess="R"/> 
+		<bitfield id="DOFACT_STS" width="1" begin="0" end="0" resetval="0x0" description="DOF Active Status. When read as 0x1, indicates DOF engine is in active state processing flow vector for the frame." range="0" rwaccess="R"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_dofres" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_dofres" offset="0x10" width="32" description="">
+		<bitfield id="HEIGHT_CFG" width="11" begin="26" end="16" resetval="0x0" description="Height of frame (in pixel) to be processed by Optical Flow engine. 1024 pixel max and 16 pixels min. Refer to algorithm parameter section for restrictions." range="26 - 16" rwaccess="R/W"/> 
+		<bitfield id="WIDTH_CFG" width="12" begin="11" end="0" resetval="0x0" description="Width of frame (in pixel) to be processed by Optical Flow engine. 2048 pixel max and 32 pixels min. Refer to algorithm parameter section for restrictions." range="11 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_dofsr" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_dofsr" offset="0x14" width="32" description="">
+		<bitfield id="VSR_N_CFG" width="6" begin="29" end="24" resetval="0x48" description="Negative or Upward direction Vertical Search Range in pixels." range="29 - 24" rwaccess="R/W"/> 
+		<bitfield id="VSR_P_CFG" width="6" begin="21" end="16" resetval="0x48" description="Positive or Downward direction Vertical Search Range in pixels." range="21 - 16" rwaccess="R/W"/> 
+		<bitfield id="HSR_CFG" width="8" begin="7" end="0" resetval="0x191" description="Horizontal Search Range in pixels in both the directions." range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_sof" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_sof" offset="0x18" width="32" description="">
+		<bitfield id="MAX_OUTPUT_COUNT_PER_LINE_CFG" width="12" begin="11" end="0" resetval="0x0" description="Maximum number of MV output per line in case of sparse optical flow processing" range="11 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_cfgwbase" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_cfgwbase" offset="0x20" width="32" description="">
+		<bitfield id="ADDR_CFG" width="20" begin="19" end="0" resetval="0x0" description="SL2 base byte address. Should be aligned to 64 bytes" range="19 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_cfgwwidth" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_cfgwwidth" offset="0x24" width="32" description="">
+		<bitfield id="WIDTH_CFG" width="13" begin="12" end="0" resetval="0x0" description="Width of Frame Growing Window in bytes. Should be multiple of 64 bytes" range="12 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_cfgwheight" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_cfgwheight" offset="0x28" width="32" description="">
+		<bitfield id="HEIGHT_CFG" width="5" begin="4" end="0" resetval="0x0" description="Height of Frame Growing Window.  Max 31 rows." range="4 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_rfgwbase" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_rfgwbase" offset="0x30" width="32" description="">
+		<bitfield id="ADDR_CFG" width="20" begin="19" end="0" resetval="0x0" description="SL2 base byte address. Should be aligned to 64 bytes" range="19 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_rfgwwidth" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_rfgwwidth" offset="0x34" width="32" description="">
+		<bitfield id="WIDTH_CFG" width="13" begin="12" end="0" resetval="0x0" description="Width of Frame Growing Window in bytes. Should be multiple of 64 bytes" range="12 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_rfgwheight" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_rfgwheight" offset="0x38" width="32" description="">
+		<bitfield id="HEIGHT_CFG" width="8" begin="7" end="0" resetval="0x0" description="Height of Frame Growing Window.  Max 255 rows." range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_spbufbase" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_spbufbase" offset="0x40" width="32" description="">
+		<bitfield id="DEPTH_CFG" width="3" begin="26" end="24" resetval="0x2" description="Depth of SL2 buffer" range="26 - 24" rwaccess="R/W"/> 
+		<bitfield id="ADDR_CFG" width="20" begin="19" end="0" resetval="0x0" description="SL2 base byte address. Should be aligned to 64 bytes" range="19 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_tpbufbase" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_tpbufbase" offset="0x44" width="32" description="">
+		<bitfield id="DEPTH_CFG" width="3" begin="26" end="24" resetval="0x2" description="Depth of SL2 buffer" range="26 - 24" rwaccess="R/W"/> 
+		<bitfield id="ADDR_CFG" width="20" begin="19" end="0" resetval="0x0" description="SL2 base byte address. Should be aligned to 64 bytes" range="19 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_bmbufbase" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_bmbufbase" offset="0x48" width="32" description="">
+		<bitfield id="DEPTH_CFG" width="3" begin="26" end="24" resetval="0x2" description="Depth of SL2 buffer" range="26 - 24" rwaccess="R/W"/> 
+		<bitfield id="ADDR_CFG" width="20" begin="19" end="0" resetval="0x0" description="SL2 base byte address. Should be aligned to 64 bytes" range="19 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_fvbufbase" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_fvbufbase" offset="0x4C" width="32" description="">
+		<bitfield id="DEPTH_CFG" width="3" begin="26" end="24" resetval="0x2" description="Depth of SL2 buffer" range="26 - 24" rwaccess="R/W"/> 
+		<bitfield id="ADDR_CFG" width="20" begin="19" end="0" resetval="0x0" description="SL2 base byte address. Should be aligned to 64 bytes" range="19 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_msfr" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_msfr" offset="0x60" width="32" description="">
+		<bitfield id="MSF_CFG" width="5" begin="4" end="0" resetval="0x24" description="Motion smoothness factor" range="4 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_cscfgr" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_cscfgr" offset="0x64" width="32" description="">
+		<bitfield id="CS_GAIN_CFG" width="10" begin="25" end="16" resetval="0x0" description="Multiplier factor (Gain) for the combined confidence score. The sum of individual scores from different decision trees are multiplied by CS Gain before scaling to final 4bit (16 levels) confidence score value." range="25 - 16" rwaccess="R/W"/> 
+		<bitfield id="IIR_ALPHA_CFG" width="8" begin="7" end="0" resetval="0x0" description="Coefficient for IIR filter used for smoothing horizontal flow vector gradient. The usage can be illustrated as: SmoothU(i,j)= [ U(i,j)*alpha + SmoothU(i-1,j)*beta + round ]>>8 where beta = 256-alpha round = 128" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_psa_ctrl" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_psa_ctrl" offset="0x70" width="32" description="">
+		<bitfield id="PSA_EN_CFG" width="1" begin="0" end="0" resetval="0x0" description="Enable calculating 32b CRC signature on 32b flow vector and confidence score output" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_psa_signature" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_psa_signature" offset="0x74" width="32" description="">
+		<bitfield id="CRC_STS" width="32" begin="31" end="0" resetval="0x4294967295" description="32b CRC signature value as calculated on 32b flow vector and confidence score output" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_dofcshist" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_dofcshist" offset="0x300" width="32" description="">
+		<bitfield id="BIN_STS" width="24" begin="23" end="0" resetval="0x0" description="Number of pixels having confidence score value of Bin Index" range="23 - 0" rwaccess="R"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_th0" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_th0" offset="0x0" width="32" description="">
+		<bitfield id="THRESHOLD_CFG" width="16" begin="15" end="0" resetval="0x0" description="Threshold 0 value.  If Feature(Index0).ge.Thresh0 then 2ndBranch11 else 2ndBranch10" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_th10" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_th10" offset="0x4" width="32" description="">
+		<bitfield id="THRESHOLD_CFG" width="16" begin="15" end="0" resetval="0x0" description="Threshold 10 value.  If Feature(Index10).ge.Thresh10 then Weight01 else Weight00" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_th11" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_th11" offset="0x8" width="32" description="">
+		<bitfield id="THRESHOLD_CFG" width="16" begin="15" end="0" resetval="0x0" description="Threshold 11 value.  If Feature(Index11).ge.Thresh11 then Weight11 else Weight10" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_wt00" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_wt00" offset="0xC" width="32" description="">
+		<bitfield id="WEIGHT_CFG" width="16" begin="15" end="0" resetval="0x0" description="Weight 00 value for Confidence Score Decision Tree" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_wt01" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_wt01" offset="0x10" width="32" description="">
+		<bitfield id="WEIGHT_CFG" width="16" begin="15" end="0" resetval="0x0" description="Weight 01 value for Confidence Score Decision Tree" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_wt10" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_wt10" offset="0x14" width="32" description="">
+		<bitfield id="WEIGHT_CFG" width="16" begin="15" end="0" resetval="0x0" description="Weight 10 value for Confidence Score Decision Tree" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_wt11" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_wt11" offset="0x18" width="32" description="">
+		<bitfield id="WEIGHT_CFG" width="16" begin="15" end="0" resetval="0x0" description="Weight 11 value for Confidence Score Decision Tree" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_fids" acronym="PAR_DOF__CFG_VP__MMR__MMR_VBUSP__DOFCORE_REG_fids" offset="0x1C" width="32" description="">
+		<bitfield id="INDEX2_CFG" width="3" begin="8" end="6" resetval="0x0" description="Specifies the index of a feature (in the confidence score feature vector) to be used as the 3rd feature in the decision tree traversal     0: Winner Cost     1: Texture     2: Flow Grad U     3: Flow Grad V     4: Aggregated Winner Cost     5: Aggregated Texture     6: Aggregated Flow Grad U     7: Aggregated Flow Grad V" range="8 - 6" rwaccess="R/W"/> 
+		<bitfield id="INDEX1_CFG" width="3" begin="5" end="3" resetval="0x0" description="Specifies the index of a feature (in the confidence score feature vector) to be used as the 2nd feature in the decision tree traversal     0: Winner Cost     1: Texture     2: Flow Grad U     3: Flow Grad V     4: Aggregated Winner Cost     5: Aggregated Texture     6: Aggregated Flow Grad U     7: Aggregated Flow Grad V" range="5 - 3" rwaccess="R/W"/> 
+		<bitfield id="INDEX0_CFG" width="3" begin="2" end="0" resetval="0x0" description="Specifies the index of a feature (in the confidence score feature vector) to be used as the 1st feature in the decision tree traversal     0: Winner Cost     1: Texture     2: Flow Grad U     3: Flow Grad V     4: Aggregated Winner Cost     5: Aggregated Texture     6: Aggregated Flow Grad U     7: Aggregated Flow Grad V" range="2 - 0" rwaccess="R/W"/>
+	</register>
+</module>

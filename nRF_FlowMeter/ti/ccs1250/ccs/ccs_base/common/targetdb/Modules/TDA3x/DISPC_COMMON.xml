@@ -1,0 +1,468 @@
+<module name="DISPC_COMMON" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="DISPC_REVISION" acronym="DISPC_REVISION" offset="0x0" width="32" description="This register contains the IP revision code">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="Write 0's for future compatibility. Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="REV" width="8" begin="7" end="0" resetval="See" description="IP revision" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_SYSCONFIG" acronym="DISPC_SYSCONFIG" offset="0x4" width="32" description="This register allows to control various parameters of the OCP interface.">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0x0" description="Write 0's for future compatibility. Reads returns 0" range="" rwaccess="R"/>
+    <bitfield id="MIDLEMODE" width="2" begin="13" end="12" resetval="0x2" description="Master interface power management, standby/wait control" range="" rwaccess="RW">
+      <bitenum value="0" id="FSTANDBY" token="MIDLEMODE_0" description="Force-standby.MStandby is only asserted when the module is disabled. MStandby is only asserted when the module is disabled."/>
+      <bitenum value="1" id="NSTANDBY" token="MIDLEMODE_1" description="No-Standby:MStandby is never asserted"/>
+      <bitenum value="3" id="RES" token="MIDLEMODE_3" description="Reserved"/>
+      <bitenum value="2" id="SSTANDBY" token="MIDLEMODE_2" description="Smart-Standby.MStandby is asserted based on the internal activity of the module"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="2" begin="11" end="10" resetval="0x0" description="Write 0's for future compatibility. Reads returns 0" range="" rwaccess="R"/>
+    <bitfield id="CLOCKACTIVITY" width="2" begin="9" end="8" resetval="0x0" description="Clocks activity during wake up mode period" range="" rwaccess="RW">
+      <bitenum value="0" id="OCPFUNCOFF" token="CLOCKACTIVITY_0" description="OCP and Functional clocks can be switched off"/>
+      <bitenum value="1" id="FUNCOFF" token="CLOCKACTIVITY_1" description="Functional clocks can be switched off and OCP clocks are mantained during wake up period"/>
+      <bitenum value="3" id="OCPFUNCON" token="CLOCKACTIVITY_3" description="OCP and Functional clocks are maintained during wake up period"/>
+      <bitenum value="2" id="OCPOFF" token="CLOCKACTIVITY_2" description="OCP clocks can be switched off and Functional clocks are maintained during wake up period"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="2" begin="7" end="6" resetval="0x0" description="Write 0's for future compatibility. Reads returns 0" range="" rwaccess="R"/>
+    <bitfield id="WARMRESET" width="1" begin="5" end="5" resetval="0x0" description="Warm reset. Set this bit to 1 triggers a module warm reset. The bit is automatically reset by the hardware. During reads, it always returns 0. The warm reset keep the configuration registers unchanged." range="" rwaccess="RW">
+      <bitenum value="0" id="NORMAL" token="WARMRESET_0" description="Normal mode"/>
+      <bitenum value="1" id="WARMRESET" token="WARMRESET_1" description="the warmreset is set"/>
+    </bitfield>
+    <bitfield id="SIDLEMODE" width="2" begin="4" end="3" resetval="0x2" description="Slave interface power management, Idle req/ack control" range="" rwaccess="RW">
+      <bitenum value="0" id="FIDLE" token="SIDLEMODE_0" description="Force-idle.An idle request is acknowledged unconditionally"/>
+      <bitenum value="1" id="NIDLE" token="SIDLEMODE_1" description="No-idle. An idle request is never acknowledged"/>
+      <bitenum value="3" id="RES" token="SIDLEMODE_3" description="Reserved"/>
+      <bitenum value="2" id="SIDLE" token="SIDLEMODE_2" description="Smart-idle. Acknowledgement to an idle request is given based on the internal activity of the module."/>
+    </bitfield>
+    <bitfield id="ENWAKEUP" width="1" begin="2" end="2" resetval="0x0" description="WakeUp feature control" range="" rwaccess="RW">
+      <bitenum value="0" id="WAKEUPDIS" token="ENWAKEUP_0" description="Wakeup is disabled"/>
+      <bitenum value="1" id="WAKEUPENB" token="ENWAKEUP_1" description="Wakeup is enabled"/>
+    </bitfield>
+    <bitfield id="SOFTRESET" width="1" begin="1" end="1" resetval="0x0" description="Software reset. Set this bit to 1 to trigger a module reset. The bit is automatically reset by the hardware. During reads, it always returns 0." range="" rwaccess="RW">
+      <bitenum value="0" id="NMODE" token="SOFTRESET_0" description="Normal mode"/>
+      <bitenum value="1" id="RST" token="SOFTRESET_1" description="The module is reset"/>
+    </bitfield>
+    <bitfield id="AUTOIDLE" width="1" begin="0" end="0" resetval="0x1" description="Internal OCP clock gating strategy" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKFREE" token="AUTOIDLE_0" description="OCP clock is free-running"/>
+      <bitenum value="1" id="CLKGATED" token="AUTOIDLE_1" description="Automatic OCP L3 and L4 clocks gating strategy is applied, based on the OCP interface activity.. Automatic functional clock gating is also applied to the functional clock based on the module activity (for instance DISPC_ pipe _ATTRIBUTES.ENABLE)"/>
+    </bitfield>
+  </register>
+  <register id="DISPC_SYSSTATUS" acronym="DISPC_SYSSTATUS" offset="0x8" width="32" description="This register provides status information about the module, excluding the interrupt status information.">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DISPC_VP1_RESETDONE" width="1" begin="1" end="1" resetval="0x0" description="Reset status of DISPC VP1 pixel clock domain" range="" rwaccess="R">
+      <bitenum value="0" id="RSTONGOING" token="DISPC_VP1_RESETDONE_0" description="Internal module reset is on-going"/>
+      <bitenum value="1" id="RSTCOMP" token="DISPC_VP1_RESETDONE_1" description="Reset completed"/>
+    </bitfield>
+    <bitfield id="DISPC_FUNC_RESETDONE" width="1" begin="0" end="0" resetval="0x0" description="Reset status of DISPC Functional clock domain" range="" rwaccess="R">
+      <bitenum value="0" id="RSTONGOING" token="DISPC_FUNC_RESETDONE_0" description="Internal module reset is on-going"/>
+      <bitenum value="1" id="RSTCOMP" token="DISPC_FUNC_RESETDONE_1" description="Reset completed"/>
+    </bitfield>
+  </register>
+  <register id="DISPC_IRQ_EOI" acronym="DISPC_IRQ_EOI" offset="0x20" width="32" description="End Of Interrupt number (for H08 interrupt)">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LINE_NUMBER" width="1" begin="0" end="0" resetval="0x0" description="Software End Of Interrupt (EOI) control. Write number of interrupt output. The IP has 1 interrupt compliant with H08." range="" rwaccess="RW">
+      <bitenum value="0" id="READ0" token="LINE_NUMBER_0" description="Reads always 0 (no EOI memory)"/>
+    </bitfield>
+  </register>
+  <register id="DISPC_IRQSTATUS_RAW" acronym="DISPC_IRQSTATUS_RAW" offset="0x24" width="32" description="Per-end of group (31 down to 0) internal signaling raw interrupt status vector, line #0. Raw status is set even if end of group (31 down to 0) interrupt is not enabled. Write 1 to set the (raw) status, mostly for debug.">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="WAKEUP_IRQ" width="1" begin="13" end="13" resetval="0x0" description="Wake-up" range="" rwaccess="RW">
+      <bitenum value="0" id="NONE" token="WAKEUP_IRQ_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="WAKEUP_IRQ_1" description="IRQ event pending"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="WB_IRQ" width="1" begin="11" end="11" resetval="0x0" description="WB IRQ STATUS register indicates the write-back pipeline interrupt events" range="" rwaccess="RW">
+      <bitenum value="0" id="NONE" token="WB_IRQ_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="WB_IRQ_1" description="IRQ event pending"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VID2_IRQ" width="1" begin="8" end="8" resetval="0x0" description="VID2 IRQ STATUS register indicates the video pipeline 2 interrupt events" range="" rwaccess="RW">
+      <bitenum value="0" id="NONE" token="VID2_IRQ_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="VID2_IRQ_1" description="IRQ event pending"/>
+    </bitfield>
+    <bitfield id="VID1_IRQ" width="1" begin="7" end="7" resetval="0x0" description="VID1 IRQ STATUS register indicates the video pipeline 1 interrupt events" range="" rwaccess="RW">
+      <bitenum value="0" id="NONE" token="VID1_IRQ_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="VID1_IRQ_1" description="IRQ event pending"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="GFX1_IRQ" width="1" begin="4" end="4" resetval="0x0" description="GFX1 IRQ STATUS register indicates the graphics pipeline 1 interrupt events" range="" rwaccess="RW">
+      <bitenum value="0" id="NONE" token="GFX1_IRQ_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="GFX1_IRQ_1" description="IRQ event pending"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VP1_IRQ" width="1" begin="0" end="0" resetval="0x0" description="VP1 IRQ STATUS register indicates the Video Port 1 interrupt events" range="" rwaccess="RW">
+      <bitenum value="0" id="NONE" token="VP1_IRQ_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="VP1_IRQ_1" description="IRQ event pending"/>
+    </bitfield>
+  </register>
+  <register id="DISPC_IRQSTATUS" acronym="DISPC_IRQSTATUS" offset="0x28" width="32" description="Per-end of group (31 down to 0) internal signaling 'enabled' interrupt status vector, line #0. Enabled status isn't set unless event is enabled. Write 1 to clear the status after interrupt has been serviced (raw status gets cleared, i.e. even if not enabled).">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="WAKEUP_IRQ" width="1" begin="13" end="13" resetval="0x0" description="Wake-up" range="" rwaccess="RW">
+      <bitenum value="0" id="NONE" token="WAKEUP_IRQ_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="WAKEUP_IRQ_1" description="IRQ event pending"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="WB_IRQ" width="1" begin="11" end="11" resetval="0x0" description="WB IRQ STATUS register indicates the write-back pipeline interrupt events" range="" rwaccess="RW">
+      <bitenum value="0" id="NONE" token="WB_IRQ_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="WB_IRQ_1" description="IRQ event pending"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VID2_IRQ" width="1" begin="8" end="8" resetval="0x0" description="VID2 IRQ STATUS register indicates the video pipeline 2 interrupt events" range="" rwaccess="RW">
+      <bitenum value="0" id="NONE" token="VID2_IRQ_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="VID2_IRQ_1" description="IRQ event pending"/>
+    </bitfield>
+    <bitfield id="VID1_IRQ" width="1" begin="7" end="7" resetval="0x0" description="VID1 IRQ STATUS register indicates the video pipeline 1 interrupt events" range="" rwaccess="RW">
+      <bitenum value="0" id="NONE" token="VID1_IRQ_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="VID1_IRQ_1" description="IRQ event pending"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="GFX1_IRQ" width="1" begin="4" end="4" resetval="0x0" description="GFX1 IRQ STATUS register indicates the graphics pipeline 1 interrupt events" range="" rwaccess="RW">
+      <bitenum value="0" id="NONE" token="GFX1_IRQ_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="GFX1_IRQ_1" description="IRQ event pending"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VP1_IRQ" width="1" begin="0" end="0" resetval="0x0" description="VP1 IRQ STATUS register indicates the Video Port 1 interrupt events" range="" rwaccess="RW">
+      <bitenum value="0" id="NONE" token="VP1_IRQ_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="VP1_IRQ_1" description="IRQ event pending"/>
+    </bitfield>
+  </register>
+  <register id="DISPC_IRQENABLE_SET" acronym="DISPC_IRQENABLE_SET" offset="0x2C" width="32" description="Per-end of group (31 down to 0) internal event interrupt enable bit vector, line #0. Write 1 to set (enable interrupt). Readout equal to corresponding _CLR register.">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SET_WAKEUP_IRQ" width="1" begin="13" end="13" resetval="0x0" description="Wake Up Mask" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLED" token="SET_WAKEUP_IRQ_0" description="interrupt disabled"/>
+      <bitenum value="1" id="ENABLED" token="SET_WAKEUP_IRQ_1" description="interrupt enabled"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SET_WB_IRQ" width="1" begin="11" end="11" resetval="0x0" description="WB IRQ" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLED" token="SET_WB_IRQ_0" description="interrupt disabled"/>
+      <bitenum value="1" id="ENABLED" token="SET_WB_IRQ_1" description="interrupt enabled"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SET_VID2_IRQ" width="1" begin="8" end="8" resetval="0x0" description="VID2 IRQ" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLED" token="SET_VID2_IRQ_0" description="interrupt disabled"/>
+      <bitenum value="1" id="ENABLED" token="SET_VID2_IRQ_1" description="interrupt enabled"/>
+    </bitfield>
+    <bitfield id="SET_VID1_IRQ" width="1" begin="7" end="7" resetval="0x0" description="VID1 IRQ" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLED" token="SET_VID1_IRQ_0" description="interrupt disabled"/>
+      <bitenum value="1" id="ENABLED" token="SET_VID1_IRQ_1" description="interrupt enabled"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SET_GFX1_IRQ" width="1" begin="4" end="4" resetval="0x0" description="GFX1 IRQ" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLED" token="SET_GFX1_IRQ_0" description="interrupt disabled"/>
+      <bitenum value="1" id="ENABLED" token="SET_GFX1_IRQ_1" description="interrupt enabled"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SET_VP1_IRQ" width="1" begin="0" end="0" resetval="0x0" description="VP1 IRQ" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLED" token="SET_VP1_IRQ_0" description="interrupt disabled"/>
+      <bitenum value="1" id="ENABLED" token="SET_VP1_IRQ_1" description="interrupt enabled"/>
+    </bitfield>
+  </register>
+  <register id="DISPC_IRQENABLE_CLR" acronym="DISPC_IRQENABLE_CLR" offset="0x30" width="32" description="">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CLR_WAKEUP_IRQ" width="1" begin="13" end="13" resetval="0x0" description="Wake Up Mask" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLED" token="CLR_WAKEUP_IRQ_0" description="interrupt disabled"/>
+      <bitenum value="1" id="ENABLED" token="CLR_WAKEUP_IRQ_1" description="interrupt enabled"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CLR_WB_IRQ" width="1" begin="11" end="11" resetval="0x0" description="WB IRQ" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLED" token="CLR_WB_IRQ_0" description="interrupt disabled"/>
+      <bitenum value="1" id="ENABLED" token="CLR_WB_IRQ_1" description="interrupt enabled"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CLR_VID2_IRQ" width="1" begin="8" end="8" resetval="0x0" description="VID2 IRQ" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLED" token="CLR_VID2_IRQ_0" description="interrupt disabled"/>
+      <bitenum value="1" id="ENABLED" token="CLR_VID2_IRQ_1" description="interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CLR_VID1_IRQ" width="1" begin="7" end="7" resetval="0x0" description="VID1 IRQ" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLED" token="CLR_VID1_IRQ_0" description="interrupt disabled"/>
+      <bitenum value="1" id="ENABLED" token="CLR_VID1_IRQ_1" description="interrupt enabled"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CLR_GFX1_IRQ" width="1" begin="4" end="4" resetval="0x0" description="GFX1 IRQ" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLED" token="CLR_GFX1_IRQ_0" description="interrupt disabled"/>
+      <bitenum value="1" id="ENABLED" token="CLR_GFX1_IRQ_1" description="interrupt enabled"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CLR_VP1_IRQ" width="1" begin="0" end="0" resetval="0x0" description="VP1 IRQ" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLED" token="CLR_VP1_IRQ_0" description="interrupt disabled"/>
+      <bitenum value="1" id="ENABLED" token="CLR_VP1_IRQ_1" description="interrupt enabled"/>
+    </bitfield>
+  </register>
+  <register id="DISPC_IRQWAKEEN" acronym="DISPC_IRQWAKEEN" offset="0x34" width="32" description="IRQ wake up register">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="WB_IRQWAKEEN" width="1" begin="11" end="11" resetval="0x0" description="wakeupen for WB first level interrupt" range="" rwaccess="RW">
+      <bitenum value="0" id="SWAKEUPDIS" token="WB_IRQWAKEEN_0" description="Swakeup is not generated when this interrupt is asserted in idle mode"/>
+      <bitenum value="1" id="SWAKEUPEN" token="WB_IRQWAKEEN_1" description="Swakeup is generated when this interrupt is asserted in idle mode"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VID2_IRQWAKEEN" width="1" begin="8" end="8" resetval="0x0" description="wakeupen for VID2 first level interrupt" range="" rwaccess="RW">
+      <bitenum value="0" id="SWAKEUPDIS" token="VID2_IRQWAKEEN_0" description="Swakeup is not generated when this interrupt is asserted in idle mode"/>
+      <bitenum value="1" id="SWAKEUPEN" token="VID2_IRQWAKEEN_1" description="Swakeup is generated when this interrupt is asserted in idle mode"/>
+    </bitfield>
+    <bitfield id="VID1_IRQWAKEEN" width="1" begin="7" end="7" resetval="0x0" description="wakeupen for VID1 first level interrupt" range="" rwaccess="RW">
+      <bitenum value="0" id="SWAKEUPDIS" token="VID1_IRQWAKEEN_0" description="Swakeup is not generated when this interrupt is asserted in idle mode"/>
+      <bitenum value="1" id="SWAKEUPEN" token="VID1_IRQWAKEEN_1" description="Swakeup is generated when this interrupt is asserted in idle mode"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="GFX1_IRQWAKEEN" width="1" begin="4" end="4" resetval="0x0" description="wakeupen for GFX1 first level interrupt" range="" rwaccess="RW">
+      <bitenum value="0" id="SWAKEUPDIS" token="GFX1_IRQWAKEEN_0" description="Swakeup is not generated when this interrupt is asserted in idle mode"/>
+      <bitenum value="1" id="SWAKEUPEN" token="GFX1_IRQWAKEEN_1" description="Swakeup is generated when this interrupt is asserted in idle mode"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VP1_IRQWAKEEN" width="1" begin="0" end="0" resetval="0x0" description="wakeupen for VP1 first level interrupt" range="" rwaccess="RW">
+      <bitenum value="0" id="SWAKEUPDIS" token="VP1_IRQWAKEEN_0" description="Swakeup is not generated when this interrupt is asserted in idle mode"/>
+      <bitenum value="1" id="SWAKEUPEN" token="VP1_IRQWAKEEN_1" description="Swakeup is generated when this interrupt is asserted in idle mode"/>
+    </bitfield>
+  </register>
+  <register id="DISPC_GLOBAL_MFLAG_ATTRIBUTE" acronym="DISPC_GLOBAL_MFLAG_ATTRIBUTE" offset="0x40" width="32" description="MFLAG control register">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MFLAG_START" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW">
+      <bitenum value="0" id="MFLAGNORMALSTARTMODE" token="MFLAG_START_0" description="reset value, when the DMA buffer is empty at the beginning of the frame, the MFLAG of each pipe is kept at 0 until PRELOAD is reached, then based on MFLAG_CTRL, MFLAG[1:0] are generated and internal logic is arbitrating between pipeline requests"/>
+      <bitenum value="1" id="MFLAGFORCESTARTMODE" token="MFLAG_START_1" description="Even at the beginning of the frame when the DMA buffer is empty, MFLAG_CTRL is used to determine how MFLAG dedicated to each pipe signal shall be driven"/>
+    </bitfield>
+    <bitfield id="MFLAG_CTRL" width="2" begin="1" end="0" resetval="0x0" description="" range="" rwaccess="RW">
+      <bitenum value="0" id="MFLAGDIS" token="MFLAG_CTRL_0" description="MFLAG mechanism is disabled: MFLAG[1:0] out band signals are set to 0"/>
+      <bitenum value="1" id="MFLAGFORCE" token="MFLAG_CTRL_1" description="MFLAG mechanism is enabled: MFLAG[1:0] out band signals are always set to 1"/>
+      <bitenum value="2" id="MFLAGEN" token="MFLAG_CTRL_2" description="MFLAG mechanism is enabled and MFLAG[1:0] out band signals are dynamically set to 0 or 1 depending on the MFLAG rules"/>
+    </bitfield>
+  </register>
+  <register id="DISPC_GLOBAL_BUFFER" acronym="DISPC_GLOBAL_BUFFER" offset="0x44" width="32" description="The register configures the DMA buffers allocations to the pipeline.">
+    <bitfield id="BUFFERFILLING" width="1" begin="31" end="31" resetval="0x0" description="Controls if the DMA buffers are re-filled only when the LOW threshold is reached or if all DMA buffers are re-filled when at least one of them reaches the LOW threshold. wr: immediate" range="" rwaccess="RW">
+      <bitenum value="0" id="INDIVIDUALPIPE" token="BUFFERFILLING_0" description="Each DMA buffer is re-filled when it reaches LOW threshold."/>
+      <bitenum value="1" id="ALLPIPES" token="BUFFERFILLING_1" description="All DMA buffers are re-filled up to high threshold when at least one of them reaches the LOW threshold. (only active DMA buffers shall be considered and when reaching the end of the frame the DMA buffer goes to empty condition so no need to fill it again)."/>
+    </bitfield>
+    <bitfield id="RESERVED" width="10" begin="30" end="21" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="WB_BUFFER" width="3" begin="20" end="18" resetval="0x7" description="WB DMA buffer allocation to one of the pipelines. By default to video 1 pipeline." range="" rwaccess="RW">
+      <bitenum value="6" id="VID3" token="WB_BUFFER_6" description="DMA buffer allocated to the vdieo3 pipeline."/>
+      <bitenum value="1" id="GFX1" token="WB_BUFFER_1" description="DMA buffer allocated to the gfx1 pipeline."/>
+      <bitenum value="7" id="WB" token="WB_BUFFER_7" description="DMA buffer allocated to the write-back pipeline."/>
+      <bitenum value="0" id="UNUSED" token="WB_BUFFER_0" description="DMA buffer is not allocated to a pipeline."/>
+      <bitenum value="2" id="GFX2" token="WB_BUFFER_2" description="DMA buffer allocated to the gfx2 pipeline."/>
+      <bitenum value="4" id="VID1" token="WB_BUFFER_4" description="DMA buffer allocated to the video1 pipeline."/>
+      <bitenum value="5" id="VID2" token="WB_BUFFER_5" description="DMA buffer allocated to the vdieo2 pipeline."/>
+      <bitenum value="3" id="GFX3" token="WB_BUFFER_3" description="DMA buffer allocated to the gfx3 pipeline."/>
+    </bitfield>
+    <bitfield id="RESERVED" width="3" begin="17" end="15" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VID2_BUFFER" width="3" begin="14" end="12" resetval="0x5" description="Video2 DMA buffer allocation to one of the pipelines. By default to video 2 pipeline." range="" rwaccess="RW">
+      <bitenum value="6" id="VID3" token="VID2_BUFFER_6" description="DMA buffer allocated to the vdieo3 pipeline."/>
+      <bitenum value="1" id="GFX1" token="VID2_BUFFER_1" description="DMA buffer allocated to the gfx1 pipeline."/>
+      <bitenum value="7" id="WB" token="VID2_BUFFER_7" description="DMA buffer allocated to the write-back pipeline."/>
+      <bitenum value="0" id="UNUSED" token="VID2_BUFFER_0" description="DMA buffer is not allocated to a pipeline."/>
+      <bitenum value="2" id="GFX2" token="VID2_BUFFER_2" description="DMA buffer allocated to the gfx2 pipeline."/>
+      <bitenum value="4" id="VID1" token="VID2_BUFFER_4" description="DMA buffer allocated to the video1 pipeline."/>
+      <bitenum value="5" id="VID2" token="VID2_BUFFER_5" description="DMA buffer allocated to the vdieo2 pipeline."/>
+      <bitenum value="3" id="GFX3" token="VID2_BUFFER_3" description="DMA buffer allocated to the gfx3 pipeline."/>
+    </bitfield>
+    <bitfield id="VID1_BUFFER" width="3" begin="11" end="9" resetval="0x4" description="Video1 DMA buffer allocation to one of the pipelines. By default to video 1 pipeline." range="" rwaccess="RW">
+      <bitenum value="6" id="VID3" token="VID1_BUFFER_6" description="DMA buffer allocated to the vdieo3 pipeline."/>
+      <bitenum value="1" id="GFX1" token="VID1_BUFFER_1" description="DMA buffer allocated to the gfx1 pipeline."/>
+      <bitenum value="7" id="WB" token="VID1_BUFFER_7" description="DMA buffer allocated to the write-back pipeline."/>
+      <bitenum value="0" id="UNUSED" token="VID1_BUFFER_0" description="DMA buffer is not allocated to a pipeline."/>
+      <bitenum value="2" id="GFX2" token="VID1_BUFFER_2" description="DMA buffer allocated to the gfx2 pipeline."/>
+      <bitenum value="4" id="VID1" token="VID1_BUFFER_4" description="DMA buffer allocated to the video1 pipeline."/>
+      <bitenum value="5" id="VID2" token="VID1_BUFFER_5" description="DMA buffer allocated to the vdieo2 pipeline."/>
+      <bitenum value="3" id="GFX3" token="VID1_BUFFER_3" description="DMA buffer allocated to the gfx3 pipeline."/>
+    </bitfield>
+    <bitfield id="RESERVED" width="3" begin="8" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="5" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="GFX1_BUFFER" width="3" begin="2" end="0" resetval="0x1" description="Gfx1 DMA buffer allocation to one of the pipelines. By default to gfx1 pipeline." range="" rwaccess="RW">
+      <bitenum value="6" id="VID3" token="GFX1_BUFFER_6" description="DMA buffer allocated to the vdieo3 pipeline."/>
+      <bitenum value="1" id="GFX1" token="GFX1_BUFFER_1" description="DMA buffer allocated to the gfx1 pipeline."/>
+      <bitenum value="7" id="WB" token="GFX1_BUFFER_7" description="DMA buffer allocated to the write-back pipeline."/>
+      <bitenum value="0" id="UNUSED" token="GFX1_BUFFER_0" description="DMA buffer is not allocated to a pipeline."/>
+      <bitenum value="2" id="GFX2" token="GFX1_BUFFER_2" description="DMA buffer allocated to the gfx2 pipeline."/>
+      <bitenum value="4" id="VID1" token="GFX1_BUFFER_4" description="DMA buffer allocated to the video1 pipeline."/>
+      <bitenum value="5" id="VID2" token="GFX1_BUFFER_5" description="DMA buffer allocated to the vdieo2 pipeline."/>
+      <bitenum value="3" id="GFX3" token="GFX1_BUFFER_3" description="DMA buffer allocated to the gfx3 pipeline."/>
+    </bitfield>
+  </register>
+  <register id="DISPC_BA0_FLIPIMMEDIATE_EN" acronym="DISPC_BA0_FLIPIMMEDIATE_EN" offset="0x48" width="32" description="Note: Register is not supported in this family of devices.">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_DBG_CONTROL" acronym="DISPC_DBG_CONTROL" offset="0x4C" width="32" description="DISPC debug bus control register Note: GFX2, GFX3, VID-3, OVR3, OVR4, VP2, VP3, VP4, GLBCE1 and GLBCE2 are not supported in this family of devices.">
+    <bitfield id="RESERVED" width="23" begin="31" end="9" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBGMUXSEL" width="8" begin="8" end="1" resetval="0x0" description="" range="" rwaccess="RW">
+      <bitenum value="13" id="VID2SEL5" token="DBGMUXSEL_13" description="Select first [191:160] bits of VID-2 debug bus"/>
+      <bitenum value="9" id="VID2SEL1" token="DBGMUXSEL_9" description="Select first [63:32] bits of VID-2 debug bus"/>
+      <bitenum value="21" id="VID3SEL5" token="DBGMUXSEL_21" description="Select first [191:160] bits of VID-3 debug bus"/>
+      <bitenum value="30" id="GFX2SEL" token="DBGMUXSEL_30" description="Select GFX2 debug bus"/>
+      <bitenum value="8" id="VID2SEL0" token="DBGMUXSEL_8" description="Select first [31:0] bits of VID-2 debug bus"/>
+      <bitenum value="5" id="VID1SEL5" token="DBGMUXSEL_5" description="Select first [191:160] bits of VID-1 debug bus"/>
+      <bitenum value="27" id="OVR3SEL" token="DBGMUXSEL_27" description="Select OVR3 debug bus"/>
+      <bitenum value="2" id="VID1SEL2" token="DBGMUXSEL_2" description="Select first [95:64] bits of VID-1 debug bus"/>
+      <bitenum value="4" id="VID1SEL4" token="DBGMUXSEL_4" description="Select first [159:128] bits of VID-1 debug bus"/>
+      <bitenum value="35" id="VP4SEL" token="DBGMUXSEL_35" description="Select VP4 debug bus"/>
+      <bitenum value="1" id="VID1SEL1" token="DBGMUXSEL_1" description="Select first [63:32] bits of VID-1 debug bus"/>
+      <bitenum value="29" id="GFX1SEL" token="DBGMUXSEL_29" description="Select GFX1 debug bus"/>
+      <bitenum value="36" id="GLBCE1SEL" token="DBGMUXSEL_36" description="Select GLBCE1 debug bus"/>
+      <bitenum value="0" id="VID1SEL0" token="DBGMUXSEL_0" description="Select first [31:0] bits of VID-1 debug bus"/>
+      <bitenum value="11" id="VID2SEL3" token="DBGMUXSEL_11" description="Select first [127:96] bits of VID-2 debug bus"/>
+      <bitenum value="32" id="VP1SEL" token="DBGMUXSEL_32" description="Select VP1 debug bus"/>
+      <bitenum value="25" id="OVR1SEL" token="DBGMUXSEL_25" description="Select OVR1 debug bus"/>
+      <bitenum value="23" id="VID3SEL7" token="DBGMUXSEL_23" description="Select first [255:224] bits of VID-3 debug bus"/>
+      <bitenum value="17" id="VID3SEL1" token="DBGMUXSEL_17" description="Select first [63:32] bits of VID-3 debug bus"/>
+      <bitenum value="6" id="VID1SEL6" token="DBGMUXSEL_6" description="Select first [223:192] bits of VID-1 debug bus"/>
+      <bitenum value="10" id="VID2SEL2" token="DBGMUXSEL_10" description="Select first [95:64] bits of VID-2 debug bus"/>
+      <bitenum value="38" id="RESERVED" token="DBGMUXSEL_38" description="Reserved"/>
+      <bitenum value="16" id="VID3SEL0" token="DBGMUXSEL_16" description="Select first [31:0] bits of VID-3 debug bus"/>
+      <bitenum value="33" id="VP2SEL" token="DBGMUXSEL_33" description="Select VP2 debug bus"/>
+      <bitenum value="37" id="GLBCE2SEL" token="DBGMUXSEL_37" description="Select GLBCE2 debug bus"/>
+      <bitenum value="18" id="VID3SEL2" token="DBGMUXSEL_18" description="Select first [95:64] bits of VID-3 debug bus"/>
+      <bitenum value="19" id="VID3SEL3" token="DBGMUXSEL_19" description="Select first [127:96] bits of VID-3 debug bus"/>
+      <bitenum value="24" id="WBSEL" token="DBGMUXSEL_24" description="Select WB debug bus"/>
+      <bitenum value="20" id="VID3SEL4" token="DBGMUXSEL_20" description="Select first [159:128] bits of VID-3 debug bus"/>
+      <bitenum value="14" id="VID2SEL6" token="DBGMUXSEL_14" description="Select first [223:192] bits of VID-2 debug bus"/>
+      <bitenum value="22" id="VID3SEL6" token="DBGMUXSEL_22" description="Select first [223:192] bits of VID-3 debug bus"/>
+      <bitenum value="28" id="OVR4SEL" token="DBGMUXSEL_28" description="Select OVR4 debug bus"/>
+      <bitenum value="7" id="VID1SEL7" token="DBGMUXSEL_7" description="Select first [255:224] bits of VID-1 debug bus"/>
+      <bitenum value="3" id="VID1SEL3" token="DBGMUXSEL_3" description="Select first [127:96] bits of VID-1 debug bus"/>
+      <bitenum value="31" id="GFX3SEL" token="DBGMUXSEL_31" description="Select GFX3 debug bus"/>
+      <bitenum value="26" id="OVR2SEL" token="DBGMUXSEL_26" description="Select OVR2 debug bus"/>
+      <bitenum value="15" id="VID2SEL7" token="DBGMUXSEL_15" description="Select first [255:224] bits of VID-2 debug bus"/>
+      <bitenum value="12" id="VID2SEL4" token="DBGMUXSEL_12" description="Select first [159:128] bits of VID-2 debug bus"/>
+      <bitenum value="34" id="VP3SEL" token="DBGMUXSEL_34" description="Select VP3 debug bus"/>
+    </bitfield>
+    <bitfield id="DBGEN" width="1" begin="0" end="0" resetval="0x0" description="Enable debug ports" range="" rwaccess="RW">
+      <bitenum value="0" id="DBGDIS" token="DBGEN_0" description="DBGDIS"/>
+      <bitenum value="1" id="DBGEN" token="DBGEN_1" description="DBGEN"/>
+    </bitfield>
+  </register>
+  <register id="DISPC_DBG_STATUS" acronym="DISPC_DBG_STATUS" offset="0x50" width="32" description="DISPC debug status register">
+    <bitfield id="DBGOUT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_CLKGATING_DISABLE" acronym="DISPC_CLKGATING_DISABLE" offset="0x54" width="32" description="Register to control clock gating at DISPC sub-module level Note: CUR, GFX2, GFX3, VID3, OVR3, OVR4, VP2, VP3, VP4, GLBCE1 and GLBCE2 are not supported in this family of devices.">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VP4" width="1" begin="26" end="26" resetval="0x0" description="Clock gating control for VP4" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKGATINGEN" token="VP4_0" description="Clock-Gating is enabled"/>
+      <bitenum value="1" id="CLKGATINGDIS" token="VP4_1" description="Clock-gating is disabled. Clocks are free running"/>
+    </bitfield>
+    <bitfield id="VP3" width="1" begin="25" end="25" resetval="0x0" description="Clock gating control for VP3" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKGATINGEN" token="VP3_0" description="Clock-Gating is enabled"/>
+      <bitenum value="1" id="CLKGATINGDIS" token="VP3_1" description="Clock-gating is disabled. Clocks are free running"/>
+    </bitfield>
+    <bitfield id="VP2" width="1" begin="24" end="24" resetval="0x0" description="Clock gating control for VP2" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKGATINGEN" token="VP2_0" description="Clock-Gating is enabled"/>
+      <bitenum value="1" id="CLKGATINGDIS" token="VP2_1" description="Clock-gating is disabled. Clocks are free running"/>
+    </bitfield>
+    <bitfield id="VP1" width="1" begin="23" end="23" resetval="0x0" description="Clock gating control for VP1" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKGATINGEN" token="VP1_0" description="Clock-Gating is enabled"/>
+      <bitenum value="1" id="CLKGATINGDIS" token="VP1_1" description="Clock-gating is disabled. Clocks are free running"/>
+    </bitfield>
+    <bitfield id="OVR4" width="1" begin="22" end="22" resetval="0x0" description="Clock gating control for OVR4" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKGATINGEN" token="OVR4_0" description="Clock-Gating is enabled"/>
+      <bitenum value="1" id="CLKGATINGDIS" token="OVR4_1" description="Clock-gating is disabled. Clocks are free running"/>
+    </bitfield>
+    <bitfield id="OVR3" width="1" begin="21" end="21" resetval="0x0" description="Clock gating control for OVR3" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKGATINGEN" token="OVR3_0" description="Clock-Gating is enabled"/>
+      <bitenum value="1" id="CLKGATINGDIS" token="OVR3_1" description="Clock-gating is disabled. Clocks are free running"/>
+    </bitfield>
+    <bitfield id="OVR2" width="1" begin="20" end="20" resetval="0x0" description="Clock gating control for OVR2" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKGATINGEN" token="OVR2_0" description="Clock-Gating is enabled"/>
+      <bitenum value="1" id="CLKGATINGDIS" token="OVR2_1" description="Clock-gating is disabled. Clocks are free running"/>
+    </bitfield>
+    <bitfield id="OVR1" width="1" begin="19" end="19" resetval="0x0" description="Clock gating control for OVR1" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKGATINGEN" token="OVR1_0" description="Clock-Gating is enabled"/>
+      <bitenum value="1" id="CLKGATINGDIS" token="OVR1_1" description="Clock-gating is disabled. Clocks are free running"/>
+    </bitfield>
+    <bitfield id="CUR" width="1" begin="18" end="18" resetval="0x0" description="Clock gating control for CUR" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKGATINGEN" token="CUR_0" description="Clock-Gating is enabled"/>
+      <bitenum value="1" id="CLKGATINGDIS" token="CUR_1" description="Clock-gating is disabled. Clocks are free running"/>
+    </bitfield>
+    <bitfield id="WB" width="1" begin="17" end="17" resetval="0x0" description="Clock gating control for WB" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKGATINGEN" token="WB_0" description="Clock-Gating is enabled"/>
+      <bitenum value="1" id="CLKGATINGDIS" token="WB_1" description="Clock-gating is disabled. Clocks are free running"/>
+    </bitfield>
+    <bitfield id="GLBCE2" width="1" begin="16" end="16" resetval="0x0" description="Clock gating control for GLBCE2" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKGATINGEN" token="GLBCE2_0" description="Clock-Gating is enabled"/>
+      <bitenum value="1" id="CLKGATINGDIS" token="GLBCE2_1" description="Clock-gating is disabled. Clocks are free running"/>
+    </bitfield>
+    <bitfield id="GLBCE1" width="1" begin="15" end="15" resetval="0x0" description="Clock gating control for GLBCE1" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKGATINGEN" token="GLBCE1_0" description="Clock-Gating is enabled"/>
+      <bitenum value="1" id="CLKGATINGDIS" token="GLBCE1_1" description="Clock-gating is disabled. Clocks are free running"/>
+    </bitfield>
+    <bitfield id="GFX3" width="1" begin="14" end="14" resetval="0x0" description="Clock gating control for GFX3" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKGATINGEN" token="GFX3_0" description="Clock-Gating is enabled"/>
+      <bitenum value="1" id="CLKGATINGDIS" token="GFX3_1" description="Clock-gating is disabled. Clocks are free running"/>
+    </bitfield>
+    <bitfield id="GFX2" width="1" begin="13" end="13" resetval="0x0" description="Clock gating control for GFX2" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKGATINGEN" token="GFX2_0" description="Clock-Gating is enabled"/>
+      <bitenum value="1" id="CLKGATINGDIS" token="GFX2_1" description="Clock-gating is disabled. Clocks are free running"/>
+    </bitfield>
+    <bitfield id="GFX1" width="1" begin="12" end="12" resetval="0x0" description="Clock gating control for GFX1" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKGATINGEN" token="GFX1_0" description="Clock-Gating is enabled"/>
+      <bitenum value="1" id="CLKGATINGDIS" token="GFX1_1" description="Clock-gating is disabled. Clocks are free running"/>
+    </bitfield>
+    <bitfield id="VID3" width="1" begin="11" end="11" resetval="0x0" description="Clock gating control for VID3" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKGATINGEN" token="VID3_0" description="Clock-Gating is enabled"/>
+      <bitenum value="1" id="CLKGATINGDIS" token="VID3_1" description="Clock-gating is disabled. Clocks are free running"/>
+    </bitfield>
+    <bitfield id="VID2" width="1" begin="10" end="10" resetval="0x0" description="Clock gating control for VID2" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKGATINGEN" token="VID2_0" description="Clock-Gating is enabled"/>
+      <bitenum value="1" id="CLKGATINGDIS" token="VID2_1" description="Clock-gating is disabled. Clocks are free running"/>
+    </bitfield>
+    <bitfield id="VID1" width="1" begin="9" end="9" resetval="0x0" description="Clock gating control for VID1" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKGATINGEN" token="VID1_0" description="Clock-Gating is enabled"/>
+      <bitenum value="1" id="CLKGATINGDIS" token="VID1_1" description="Clock-gating is disabled. Clocks are free running"/>
+    </bitfield>
+    <bitfield id="DMA_CH8" width="1" begin="8" end="8" resetval="0x0" description="Clock gating control for DMA Channel-8" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKGATINGEN" token="DMA_CH8_0" description="Clock-Gating is enabled"/>
+      <bitenum value="1" id="CLKGATINGDIS" token="DMA_CH8_1" description="Clock-gating is disabled. Clocks are free running"/>
+    </bitfield>
+    <bitfield id="DMA_CH7" width="1" begin="7" end="7" resetval="0x0" description="Clock gating control for DMA Channel-7" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKGATINGEN" token="DMA_CH7_0" description="Clock-Gating is enabled"/>
+      <bitenum value="1" id="CLKGATINGDIS" token="DMA_CH7_1" description="Clock-gating is disabled. Clocks are free running"/>
+    </bitfield>
+    <bitfield id="DMA_CH6" width="1" begin="6" end="6" resetval="0x0" description="Clock gating control for DMA Channel-6" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKGATINGEN" token="DMA_CH6_0" description="Clock-Gating is enabled"/>
+      <bitenum value="1" id="CLKGATINGDIS" token="DMA_CH6_1" description="Clock-gating is disabled. Clocks are free running"/>
+    </bitfield>
+    <bitfield id="DMA_CH5" width="1" begin="5" end="5" resetval="0x0" description="Clock gating control for DMA Channel-5" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKGATINGEN" token="DMA_CH5_0" description="Clock-Gating is enabled"/>
+      <bitenum value="1" id="CLKGATINGDIS" token="DMA_CH5_1" description="Clock-gating is disabled. Clocks are free running"/>
+    </bitfield>
+    <bitfield id="DMA_CH4" width="1" begin="4" end="4" resetval="0x0" description="Clock gating control for DMA Channel-4" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKGATINGEN" token="DMA_CH4_0" description="Clock-Gating is enabled"/>
+      <bitenum value="1" id="CLKGATINGDIS" token="DMA_CH4_1" description="Clock-gating is disabled. Clocks are free running"/>
+    </bitfield>
+    <bitfield id="DMA_CH3" width="1" begin="3" end="3" resetval="0x0" description="Clock gating control for DMA Channel-3" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKGATINGEN" token="DMA_CH3_0" description="Clock-Gating is enabled"/>
+      <bitenum value="1" id="CLKGATINGDIS" token="DMA_CH3_1" description="Clock-gating is disabled. Clocks are free running"/>
+    </bitfield>
+    <bitfield id="DMA_CH2" width="1" begin="2" end="2" resetval="0x0" description="Clock gating control for DMA Channel-2" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKGATINGEN" token="DMA_CH2_0" description="Clock-Gating is enabled"/>
+      <bitenum value="1" id="CLKGATINGDIS" token="DMA_CH2_1" description="Clock-gating is disabled. Clocks are free running"/>
+    </bitfield>
+    <bitfield id="DMA_CH1" width="1" begin="1" end="1" resetval="0x0" description="Clock gating control for DMA Channel-1" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKGATINGEN" token="DMA_CH1_0" description="Clock-Gating is enabled"/>
+      <bitenum value="1" id="CLKGATINGDIS" token="DMA_CH1_1" description="Clock-gating is disabled. Clocks are free running"/>
+    </bitfield>
+    <bitfield id="DMA_COMMON" width="1" begin="0" end="0" resetval="0x0" description="Clock gating control for DMA_COMMON module" range="" rwaccess="RW">
+      <bitenum value="0" id="CLKGATINGEN" token="DMA_COMMON_0" description="Clock-Gating is enabled"/>
+      <bitenum value="1" id="CLKGATINGDIS" token="DMA_COMMON_1" description="Clock-gating is disabled. Clocks are free running"/>
+    </bitfield>
+  </register>
+</module>

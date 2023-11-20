@@ -1,0 +1,64 @@
+<module name="CSI_TX_IF0_CP_INTD_CFG_INTD_CFG" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="CSI_TX_IF_REVISION" acronym="CSI_TX_IF_REVISION" offset="0x0" width="32" description="Revision Register">
+    <bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x1" description="Scheme" range="" rwaccess="R"/>
+    <bitfield id="BU" width="2" begin="29" end="28" resetval="0x2" description="BU" range="" rwaccess="R"/>
+    <bitfield id="FUNCTION" width="12" begin="27" end="16" resetval="0x690" description="Module ID" range="" rwaccess="R"/>
+    <bitfield id="RTLVER" width="5" begin="15" end="11" resetval="0x14" description="RTL revisions" range="" rwaccess="R"/>
+    <bitfield id="MAJREV" width="3" begin="10" end="8" resetval="0x2" description="Major" range="" rwaccess="R"/>
+    <bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom" range="" rwaccess="R"/>
+    <bitfield id="MINREV" width="6" begin="5" end="0" resetval="0x0" description="Minor" range="" rwaccess="R"/>
+  </register>
+  <register id="CSI_TX_IF_EOI_REG" acronym="CSI_TX_IF_EOI_REG" offset="0x10" width="32" description="End of Interrupt Register The EOI register is used to re-trigger the pulse interrupt signal to ensure that any nested interrupt events are serviced. The software interrupt handler must write to the EOI register at the end of the current interrupt processing routine, so that new events can re-trigger the pulse interrupt signal again. For level interrupt signals the EOI register is not functional and must not be used.">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="EOI_VECTOR" width="8" begin="7" end="0" resetval="0x0" description="End of Interrupt Vector" range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_INTR_VECTOR_REG" acronym="CSI_TX_IF_INTR_VECTOR_REG" offset="0x14" width="32" description="Interrupt Vector Register">
+    <bitfield id="INTR_VECTOR" width="32" begin="31" end="0" resetval="0x0" description="Interrupt Vector Register" range="" rwaccess="R"/>
+  </register>
+  <register id="CSI_TX_IF_ENABLE_REG_LEVEL_0" acronym="CSI_TX_IF_ENABLE_REG_LEVEL_0" offset="0x100" width="32" description="Enable Register 0">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE_LEVEL_EN_RETRANS3" width="1" begin="1" end="1" resetval="0x0" description="Enable Set for level_en_retrans3" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_LEVEL_EN_RETRANS2" width="1" begin="0" end="0" resetval="0x0" description="Enable Set for level_en_retrans2" range="" rwaccess="RW1S"/>
+  </register>
+  <register id="CSI_TX_IF_ENABLE_REG_PULSE_0" acronym="CSI_TX_IF_ENABLE_REG_PULSE_0" offset="0x104" width="32" description="Enable Register 1">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE_PULSE_EN_RETRANS3" width="1" begin="1" end="1" resetval="0x0" description="Enable Set for pulse_en_retrans3" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_PULSE_EN_RETRANS2" width="1" begin="0" end="0" resetval="0x0" description="Enable Set for pulse_en_retrans2" range="" rwaccess="RW1S"/>
+  </register>
+  <register id="CSI_TX_IF_ENABLE_CLR_REG_LEVEL_0" acronym="CSI_TX_IF_ENABLE_CLR_REG_LEVEL_0" offset="0x300" width="32" description="Enable Clear Register 0">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE_LEVEL_EN_RETRANS3_CLR" width="1" begin="1" end="1" resetval="0x0" description="Enable Clear for level_en_retrans3" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_LEVEL_EN_RETRANS2_CLR" width="1" begin="0" end="0" resetval="0x0" description="Enable Clear for level_en_retrans2" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="CSI_TX_IF_ENABLE_CLR_REG_PULSE_0" acronym="CSI_TX_IF_ENABLE_CLR_REG_PULSE_0" offset="0x304" width="32" description="Enable Clear Register 1">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE_PULSE_EN_RETRANS3_CLR" width="1" begin="1" end="1" resetval="0x0" description="Enable Clear for pulse_en_retrans3" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_PULSE_EN_RETRANS2_CLR" width="1" begin="0" end="0" resetval="0x0" description="Enable Clear for pulse_en_retrans2" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="CSI_TX_IF_STATUS_REG_LEVEL_0" acronym="CSI_TX_IF_STATUS_REG_LEVEL_0" offset="0x500" width="32" description="Status Register 0">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="STATUS_LEVEL_RETRANS3" width="1" begin="1" end="1" resetval="0x0" description="Status ,write 1 to set, for level_en_retrans3" range="" rwaccess="RW1S"/>
+    <bitfield id="STATUS_LEVEL_RETRANS2" width="1" begin="0" end="0" resetval="0x0" description="Status ,write 1 to set, for level_en_retrans2" range="" rwaccess="RW1S"/>
+  </register>
+  <register id="CSI_TX_IF_STATUS_REG_PULSE_0" acronym="CSI_TX_IF_STATUS_REG_PULSE_0" offset="0x504" width="32" description="Status Register 1">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="STATUS_PULSE_RETRANS3" width="1" begin="1" end="1" resetval="0x0" description="Status ,write 1 to set, for pulse_en_retrans3" range="" rwaccess="RW1S"/>
+    <bitfield id="STATUS_PULSE_RETRANS2" width="1" begin="0" end="0" resetval="0x0" description="Status ,write 1 to set, for pulse_en_retrans2" range="" rwaccess="RW1S"/>
+  </register>
+  <register id="CSI_TX_IF_STATUS_CLR_REG_LEVEL_0" acronym="CSI_TX_IF_STATUS_CLR_REG_LEVEL_0" offset="0x700" width="32" description="Status Clear Register 0">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="STATUS_LEVEL_RETRANS3_CLR" width="1" begin="1" end="1" resetval="0x0" description="Status ,write 1 to clear, for level_en_retrans3" range="" rwaccess="RW1C"/>
+    <bitfield id="STATUS_LEVEL_RETRANS2_CLR" width="1" begin="0" end="0" resetval="0x0" description="Status ,write 1 to clear, for level_en_retrans2" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="CSI_TX_IF_STATUS_CLR_REG_PULSE_0" acronym="CSI_TX_IF_STATUS_CLR_REG_PULSE_0" offset="0x704" width="32" description="Status Clear Register 1">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="STATUS_PULSE_RETRANS3_CLR" width="1" begin="1" end="1" resetval="0x0" description="Status ,write 1 to clear, for pulse_en_retrans3" range="" rwaccess="RW1C"/>
+    <bitfield id="STATUS_PULSE_RETRANS2_CLR" width="1" begin="0" end="0" resetval="0x0" description="Status ,write 1 to clear, for pulse_en_retrans2" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="CSI_TX_IF_INTR_VECTOR_REG_LEVEL" acronym="CSI_TX_IF_INTR_VECTOR_REG_LEVEL" offset="0xA80" width="32" description="Interrupt Vector for level">
+    <bitfield id="INTR_VECTOR_LEVEL" width="32" begin="31" end="0" resetval="0x0" description="Interrupt Vector" range="" rwaccess="R"/>
+  </register>
+  <register id="CSI_TX_IF_INTR_VECTOR_REG_PULSE" acronym="CSI_TX_IF_INTR_VECTOR_REG_PULSE" offset="0xA84" width="32" description="Interrupt Vector for pulse">
+    <bitfield id="INTR_VECTOR_PULSE" width="32" begin="31" end="0" resetval="0x0" description="Interrupt Vector" range="" rwaccess="R"/>
+  </register>
+</module>

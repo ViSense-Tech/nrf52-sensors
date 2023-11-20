@@ -1,0 +1,360 @@
+<module name="ISP6P5_NSF3V" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="NSF3V_SYSCONFIG" acronym="NSF3V_SYSCONFIG" offset="0x0" width="32" description="OCP interface">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SOFTRESET" width="1" begin="0" end="0" resetval="0x0" description="Software reset Read 0: Reset done, no pending action Write 0: No action Write 1: Initiate software reset Read 1: Reset (software or other) ongoing" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_CTRL" acronym="NSF3V_CTRL" offset="0x8" width="32" description="Control">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="Enable NSF3V operation, for either single frame or video, depending onNSF3V_CFG.ONESHOT. Writing 0 stops NSF3V operation and puts it in idle mode." range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_CFG" acronym="NSF3V_CFG" offset="0xC" width="32" description="Configuration">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FORCE_CLKON" width="1" begin="17" end="17" resetval="0x0" description="Force clock to be on, disabling clock autogating." range="" rwaccess="RW"/>
+    <bitfield id="SUPPRS_ALL" width="1" begin="16" end="16" resetval="0x0" description="Suppress all subband signals (debug mode). In normal operation, this should be set 0." range="" rwaccess="RW"/>
+    <bitfield id="BYPASS_W_DELAY" width="1" begin="15" end="15" resetval="0x0" description="Bypass all processing, so that output = input, but maintain the same latency" range="" rwaccess="RW"/>
+    <bitfield id="BBORDER_REP" width="1" begin="14" end="14" resetval="0x0" description="Replicate top border to not lose 7 lines per color on the bottom." range="" rwaccess="RW"/>
+    <bitfield id="TBORDER_REP" width="1" begin="13" end="13" resetval="0x0" description="Replicate top border to not lose 7 lines per color on the top." range="" rwaccess="RW"/>
+    <bitfield id="RBORDER_REP" width="1" begin="12" end="12" resetval="0x0" description="Replicate right border to not lose 8 data points per color on the right." range="" rwaccess="RW"/>
+    <bitfield id="LBORDER_REP" width="1" begin="11" end="11" resetval="0x0" description="Replicate left border to not lose 8 data points per color on the left." range="" rwaccess="RW"/>
+    <bitfield id="DESAT_EN" width="1" begin="10" end="10" resetval="0x0" description="enable chroma desaturation" range="" rwaccess="RW"/>
+    <bitfield id="SHD_EN" width="1" begin="9" end="9" resetval="0x0" description="enable shading gain" range="" rwaccess="RW"/>
+    <bitfield id="EE_EN" width="1" begin="8" end="8" resetval="0x0" description="enable edge enhancement" range="" rwaccess="RW"/>
+    <bitfield id="ONESHOT" width="1" begin="7" end="7" resetval="0x0" description="Video (continuous operation) or one shot (single-frame): 0 = video 1 = one-shot" range="" rwaccess="RW"/>
+    <bitfield id="HARD_THR_EN_422UV" width="1" begin="6" end="6" resetval="0x1" description="Hard thresholding enable, applicable to YUV422 (normal and interleaved) UV path" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="5" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="4" begin="3" end="0" resetval="0x0" description="Mode of operation: 0 = Bayer 1 = Bayer interleaved 2x2 2 = Bayer interleaved 3x3 3 = YUV422 4 = YUV420 Y plane 5 = YuV420 UV plane 6 = YUV422 interleaved 7 = YUV420 Y interleaved 8 = YUV420 UV interleaved 9 ~ 15 = reserved" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_DIM" acronym="NSF3V_DIM" offset="0x10" width="32" description="Image block dimension">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IH" width="14" begin="29" end="16" resetval="0x0" description="Image height, in lines. For Bayer, YUV422, and YUV420_Y, this is same as vertical resolution in pixels. For YUV420_UV, image height is half of vertical resolution in pixels." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IW" width="14" begin="13" end="0" resetval="0x0" description="Image width, in pixels. For Bayer and YUV420_Y, YUV420_UV, this is the same as number of data points horizontally. For YUV422, this is half of number of data points horizontally." range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_VPOUT_CTRL" acronym="NSF3V_VPOUT_CTRL" offset="0x14" width="32" description="Video port output control">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="PCLK" width="16" begin="15" end="0" resetval="0xffff" description="Video port output data rate, indicate that VPOUT EN signal should be sent functional clock * PCLK / 65536. Must be 0, = 65535" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_SHD_ST" acronym="NSF3V_SHD_ST" offset="0x18" width="32" description="Shading gain starting coordinate">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="Y" width="14" begin="29" end="16" resetval="0x0" description="shading gain starting Y coordinate" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="X" width="14" begin="13" end="0" resetval="0x0" description="shading gain starting X coordinate" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_SHD_HA" acronym="NSF3V_SHD_HA" offset="0x1C" width="32" description="Shading gain HA1/HA2">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="HA2" width="13" begin="28" end="16" resetval="0x0" description="shading gain HA2 coefficient" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="HA1" width="13" begin="12" end="0" resetval="0x0" description="shading gain HA1 coefficient" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_SHD_VA" acronym="NSF3V_SHD_VA" offset="0x20" width="32" description="Shading gain VA1/VA2">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VA2" width="13" begin="28" end="16" resetval="0x0" description="shading gain VA2 coefficient" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VA1" width="13" begin="12" end="0" resetval="0x0" description="shading gain VA1 coefficient" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_SHD_HSVS" acronym="NSF3V_SHD_HSVS" offset="0x24" width="32" description="Shading gain shift counts">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VCS" width="2" begin="29" end="28" resetval="0x0" description="Vshading gain VCS shift count, only 1 or 2 allowed" range="" rwaccess="RW"/>
+    <bitfield id="VS2" width="4" begin="27" end="24" resetval="0x0" description="shading gain VS2 shift count" range="" rwaccess="RW"/>
+    <bitfield id="VS1" width="4" begin="23" end="20" resetval="0x0" description="shading gain VS1 bit count" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="19" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="HCS" width="2" begin="13" end="12" resetval="0x0" description="shading gain HCS shift count, only 1 or 2 allowed" range="" rwaccess="RW"/>
+    <bitfield id="HS2" width="4" begin="11" end="8" resetval="0x0" description="shading gain HS2 bit count" range="" rwaccess="RW"/>
+    <bitfield id="HS1" width="4" begin="7" end="4" resetval="0x0" description="shading gain HS1 shift count" range="" rwaccess="RW"/>
+    <bitfield id="S0" width="4" begin="3" end="0" resetval="0x0" description="shading gain S0 shift count" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_SHD_ADJ" acronym="NSF3V_SHD_ADJ" offset="0x28" width="32" description="Shading gain adjustment">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OADJ" width="13" begin="28" end="16" resetval="0x0" description="shading gain offset adjustment" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="GADJ" width="8" begin="7" end="0" resetval="0x0" description="shading gain gain adjustment, unsigned" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_SHD_MAXG" acronym="NSF3V_SHD_MAXG" offset="0x2C" width="32" description="Max shading gain">
+    <bitfield id="RESERVED" width="23" begin="31" end="9" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MAXG" width="9" begin="8" end="0" resetval="0x0" description="Max shading gain" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_TN_C00" acronym="NSF3V_TN_C00" offset="0x30" width="32" description="Color 0 noise threshold">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S0_Y" width="11" begin="26" end="16" resetval="0x0" description="segment 0 Y coordinate, U11" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S0_X" width="12" begin="11" end="0" resetval="0x0" description="segment 0 X coordinate, U12, fixed to 0 (read-only)" range="" rwaccess="R"/>
+  </register>
+  <register id="NSF3V_TN_C01" acronym="NSF3V_TN_C01" offset="0x34" width="32" description="Color 0 noise threshold">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S1_X" width="12" begin="27" end="16" resetval="0x0" description="segment 1 X coordinate, U12" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S0_S" width="14" begin="13" end="0" resetval="0x0" description="segment 0 slope, S3.11" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_TN_C02" acronym="NSF3V_TN_C02" offset="0x38" width="32" description="Color 0 noise threshold">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S1_S" width="14" begin="29" end="16" resetval="0x0" description="segment 1 slope, S3.11" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S1_Y" width="11" begin="10" end="0" resetval="0x0" description="segment 1 Y coordinate, U11" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_TN_C03" acronym="NSF3V_TN_C03" offset="0x3C" width="32" description="Color 0 noise threshold">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S2_Y" width="11" begin="26" end="16" resetval="0x0" description="segment 2 Y coordinate, U11" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S2_X" width="12" begin="11" end="0" resetval="0x0" description="segment 2 X coordinate, U12" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_TN_C04" acronym="NSF3V_TN_C04" offset="0x40" width="32" description="Color 0 noise threshold">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S3_X" width="12" begin="27" end="16" resetval="0x0" description="segment 3 X coordinate, U12" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S2_S" width="14" begin="13" end="0" resetval="0x0" description="segment 2 slope, S3.11" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_TN_C05" acronym="NSF3V_TN_C05" offset="0x44" width="32" description="Color 0 noise threshold">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S3_S" width="14" begin="29" end="16" resetval="0x0" description="segment 3 slope, S3.11" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S3_Y" width="11" begin="10" end="0" resetval="0x0" description="segment 3 Y coordinate, U11" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_TN_C10" acronym="NSF3V_TN_C10" offset="0x48" width="32" description="Color 1 noise threshold">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S0_Y" width="11" begin="26" end="16" resetval="0x0" description="segment 0 Y coordinate, U11" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S0_X" width="12" begin="11" end="0" resetval="0x0" description="segment 0 X coordinate, U12, fixed to 0 (read-only)" range="" rwaccess="R"/>
+  </register>
+  <register id="NSF3V_TN_C11" acronym="NSF3V_TN_C11" offset="0x4C" width="32" description="Color 1 noise threshold">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S1_X" width="12" begin="27" end="16" resetval="0x0" description="segment 1 X coordinate, U12" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S0_S" width="14" begin="13" end="0" resetval="0x0" description="segment 0 slope, S3.11" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_TN_C12" acronym="NSF3V_TN_C12" offset="0x50" width="32" description="Color 1 noise threshold">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S1_S" width="14" begin="29" end="16" resetval="0x0" description="segment 1 slope, S3.11" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S1_Y" width="11" begin="10" end="0" resetval="0x0" description="segment 1 Y coordinate, U11" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_TN_C13" acronym="NSF3V_TN_C13" offset="0x54" width="32" description="Color 1 noise threshold">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S2_Y" width="11" begin="26" end="16" resetval="0x0" description="segment 2 Y coordinate, U11" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S2_X" width="12" begin="11" end="0" resetval="0x0" description="segment 2 X coordinate, U12" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_TN_C14" acronym="NSF3V_TN_C14" offset="0x58" width="32" description="Color 1 noise threshold">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S3_X" width="12" begin="27" end="16" resetval="0x0" description="segment 3 X coordinate, U12" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S2_S" width="14" begin="13" end="0" resetval="0x0" description="segment 2 slope, S3.11" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_TN_C15" acronym="NSF3V_TN_C15" offset="0x5C" width="32" description="Color 1 noise threshold">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S3_S" width="14" begin="29" end="16" resetval="0x0" description="segment 3 slope, S3.11" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S3_Y" width="11" begin="10" end="0" resetval="0x0" description="segment 3 Y coordinate, U11" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_TN_C20" acronym="NSF3V_TN_C20" offset="0x60" width="32" description="Color 2 noise threshold">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S0_Y" width="11" begin="26" end="16" resetval="0x0" description="segment 0 Y coordinate, U11" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S0_X" width="12" begin="11" end="0" resetval="0x0" description="segment 0 X coordinate, U12, fixed to 0 (read-only)" range="" rwaccess="R"/>
+  </register>
+  <register id="NSF3V_TN_C21" acronym="NSF3V_TN_C21" offset="0x64" width="32" description="Color 2 noise threshold">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S1_X" width="12" begin="27" end="16" resetval="0x0" description="segment 1 X coordinate, U12" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S0_S" width="14" begin="13" end="0" resetval="0x0" description="segment 0 slope, S3.11" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_TN_C22" acronym="NSF3V_TN_C22" offset="0x68" width="32" description="Color 2 noise threshold">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S1_S" width="14" begin="29" end="16" resetval="0x0" description="segment 1 slope, S3.11" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S1_Y" width="11" begin="10" end="0" resetval="0x0" description="segment 1 Y coordinate, U11" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_TN_C23" acronym="NSF3V_TN_C23" offset="0x6C" width="32" description="Color 2 noise threshold">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S2_Y" width="11" begin="26" end="16" resetval="0x0" description="segment 2 Y coordinate, U11" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S2_X" width="12" begin="11" end="0" resetval="0x0" description="segment 2 X coordinate, U12" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_TN_C24" acronym="NSF3V_TN_C24" offset="0x70" width="32" description="Color 2 noise threshold">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S3_X" width="12" begin="27" end="16" resetval="0x0" description="segment 3 X coordinate, U12" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S2_S" width="14" begin="13" end="0" resetval="0x0" description="segment 2 slope, S3.11" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_TN_C25" acronym="NSF3V_TN_C25" offset="0x74" width="32" description="Color 2 noise threshold">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S3_S" width="14" begin="29" end="16" resetval="0x0" description="segment 3 slope, S3.11" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S3_Y" width="11" begin="10" end="0" resetval="0x0" description="segment 3 Y coordinate, U11" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_TN_C30" acronym="NSF3V_TN_C30" offset="0x78" width="32" description="Color 3 noise threshold">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S0_Y" width="11" begin="26" end="16" resetval="0x0" description="segment 0 Y coordinate, U11" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S0_X" width="12" begin="11" end="0" resetval="0x0" description="segment 0 X coordinate, U12, fixed to 0 (read-only)" range="" rwaccess="R"/>
+  </register>
+  <register id="NSF3V_TN_C31" acronym="NSF3V_TN_C31" offset="0x7C" width="32" description="Color 3 noise threshold">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S1_X" width="12" begin="27" end="16" resetval="0x0" description="segment 1 X coordinate, U12" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S0_S" width="14" begin="13" end="0" resetval="0x0" description="segment 0 slope, S3.11" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_TN_C32" acronym="NSF3V_TN_C32" offset="0x80" width="32" description="Color 3 noise threshold">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S1_S" width="14" begin="29" end="16" resetval="0x0" description="segment 1 slope, S3.11" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S1_Y" width="11" begin="10" end="0" resetval="0x0" description="segment 1 Y coordinate, U11" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_TN_C33" acronym="NSF3V_TN_C33" offset="0x84" width="32" description="Color 3 noise threshold">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S2_Y" width="11" begin="26" end="16" resetval="0x0" description="segment 2 Y coordinate, U11" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S2_X" width="12" begin="11" end="0" resetval="0x0" description="segment 2 X coordinate, U12" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_TN_C34" acronym="NSF3V_TN_C34" offset="0x88" width="32" description="Color 3 noise threshold">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S3_X" width="12" begin="27" end="16" resetval="0x0" description="segment 3 X coordinate, U12" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S2_S" width="14" begin="13" end="0" resetval="0x0" description="segment 2 slope, S3.11" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_TN_C35" acronym="NSF3V_TN_C35" offset="0x8C" width="32" description="Color 3 noise threshold">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S3_S" width="14" begin="29" end="16" resetval="0x0" description="segment 3 slope, S3.11" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="S3_Y" width="11" begin="10" end="0" resetval="0x0" description="segment 3 Y coordinate, U11" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_TN_SCALE" acronym="NSF3V_TN_SCALE" offset="0x90" width="32" description="">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="TN3_TO_TN2" width="8" begin="23" end="16" resetval="0x0" description="Scaling factor to get TN3, noise threshold for level 3 subbands, U3.5." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="TN1_TO_TN2" width="8" begin="7" end="0" resetval="0x0" description="Scaling factor to get TN1, noise threshold for level 1 subbands, U3.5." range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_THR_KNEE" acronym="NSF3V_THR_KNEE" offset="0x94" width="32" description="Thresholding knee points">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="U3" width="8" begin="23" end="16" resetval="0x0" description="Knee point u3, above which ee = ee_max. U2.6 representation, 64 = u2 u3 = 255." range="" rwaccess="RW"/>
+    <bitfield id="U2" width="8" begin="15" end="8" resetval="0x0" description="Knee point u2, below which ee = 0. Above u2, ee increases linearly to ee_max at u = u3. U2.6 representation, 64 = u2 u3 = 255." range="" rwaccess="RW"/>
+    <bitfield id="U1" width="8" begin="7" end="0" resetval="0x0" description="Knee point u1, below which suppression = suppression_max. Above u1, suppression decreases linearly to 0 at u = 1.0. U2.6 representation, between 0 and 63." range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_SUP_C00" acronym="NSF3V_SUP_C00" offset="0x98" width="32" description="Color 0 suppression max">
+    <bitfield id="L2_HH" width="8" begin="31" end="24" resetval="0x0" description="Level 2 HH subband suppression_max, U1.7." range="" rwaccess="RW"/>
+    <bitfield id="L2_LH" width="8" begin="23" end="16" resetval="0x0" description="Level 2 LH and HL subband suppression_max, U1.7." range="" rwaccess="RW"/>
+    <bitfield id="L1_HH" width="8" begin="15" end="8" resetval="0x0" description="Level 1 HH subband suppression_max, U1.7." range="" rwaccess="RW"/>
+    <bitfield id="L1_LH" width="8" begin="7" end="0" resetval="0x0" description="Level 1 LH and HL subband suppression_max, U1.7." range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_SUP_C01" acronym="NSF3V_SUP_C01" offset="0x9C" width="32" description="Color 0 suppression max">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L3_HH" width="8" begin="15" end="8" resetval="0x0" description="Level 3 HH subband suppression_max, U1.7." range="" rwaccess="RW"/>
+    <bitfield id="L3_LH" width="8" begin="7" end="0" resetval="0x0" description="Level 3 LH and HL subband suppression_max, U1.7." range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_SUP_C10" acronym="NSF3V_SUP_C10" offset="0xA0" width="32" description="Color 1 suppression max">
+    <bitfield id="L2_HH" width="8" begin="31" end="24" resetval="0x0" description="Level 2 HH subband suppression_max, U1.7." range="" rwaccess="RW"/>
+    <bitfield id="L2_LH" width="8" begin="23" end="16" resetval="0x0" description="Level 2 LH and HL subband suppression_max, U1.7." range="" rwaccess="RW"/>
+    <bitfield id="L1_HH" width="8" begin="15" end="8" resetval="0x0" description="Level 1 HH subband suppression_max, U1.7." range="" rwaccess="RW"/>
+    <bitfield id="L1_LH" width="8" begin="7" end="0" resetval="0x0" description="Level 1 LH and HL subband suppression_max, U1.7." range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_SUP_C11" acronym="NSF3V_SUP_C11" offset="0xA4" width="32" description="Color 1 suppression max">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L3_HH" width="8" begin="15" end="8" resetval="0x0" description="Level 3 HH subband suppression_max, U1.7." range="" rwaccess="RW"/>
+    <bitfield id="L3_LH" width="8" begin="7" end="0" resetval="0x0" description="Level 3 LH and HL subband suppression_max, U1.7." range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_SUP_C20" acronym="NSF3V_SUP_C20" offset="0xA8" width="32" description="Color 2 suppression max">
+    <bitfield id="L2_HH" width="8" begin="31" end="24" resetval="0x0" description="Level 2 HH subband suppression_max, U1.7." range="" rwaccess="RW"/>
+    <bitfield id="L2_LH" width="8" begin="23" end="16" resetval="0x0" description="Level 2 LH and HL subband suppression_max, U1.7." range="" rwaccess="RW"/>
+    <bitfield id="L1_HH" width="8" begin="15" end="8" resetval="0x0" description="Level 1 HH subband suppression_max, U1.7." range="" rwaccess="RW"/>
+    <bitfield id="L1_LH" width="8" begin="7" end="0" resetval="0x0" description="Level 1 LH and HL subband suppression_max, U1.7." range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_SUP_C21" acronym="NSF3V_SUP_C21" offset="0xAC" width="32" description="Color 2 suppression max">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L3_HH" width="8" begin="15" end="8" resetval="0x0" description="Level 3 HH subband suppression_max, U1.7." range="" rwaccess="RW"/>
+    <bitfield id="L3_LH" width="8" begin="7" end="0" resetval="0x0" description="Level 3 LH and HL subband suppression_max, U1.7." range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_SUP_C30" acronym="NSF3V_SUP_C30" offset="0xB0" width="32" description="Color 3 suppression max">
+    <bitfield id="L2_HH" width="8" begin="31" end="24" resetval="0x0" description="Level 2 HH subband suppression_max, U1.7." range="" rwaccess="RW"/>
+    <bitfield id="L2_LH" width="8" begin="23" end="16" resetval="0x0" description="Level 2 LH and HL subband suppression_max, U1.7." range="" rwaccess="RW"/>
+    <bitfield id="L1_HH" width="8" begin="15" end="8" resetval="0x0" description="Level 1 HH subband suppression_max, U1.7." range="" rwaccess="RW"/>
+    <bitfield id="L1_LH" width="8" begin="7" end="0" resetval="0x0" description="Level 1 LH and HL subband suppression_max, U1.7." range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_SUP_C31" acronym="NSF3V_SUP_C31" offset="0xB4" width="32" description="Color 3 suppression max">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L3_HH" width="8" begin="15" end="8" resetval="0x0" description="Level 3 HH subband suppression_max, U1.7." range="" rwaccess="RW"/>
+    <bitfield id="L3_LH" width="8" begin="7" end="0" resetval="0x0" description="Level 3 LH and HL subband suppression_max, U1.7." range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_EE_C00" acronym="NSF3V_EE_C00" offset="0xB8" width="32" description="Color 0 edge enhancement max">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L1_HH" width="12" begin="27" end="16" resetval="0x0" description="Level 1 HH suband ee_max, U10.2" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L1_LH" width="12" begin="11" end="0" resetval="0x0" description="Level 1 LH and HL subband ee_max, U10.2" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_EE_C01" acronym="NSF3V_EE_C01" offset="0xBC" width="32" description="Color 0 edge enhancement max">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L2_HH" width="12" begin="27" end="16" resetval="0x0" description="Level 2 HH suband ee_max, U10.2" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L2_LH" width="12" begin="11" end="0" resetval="0x0" description="Level 2 LH and HL subband ee_max, U10.2" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_EE_C02" acronym="NSF3V_EE_C02" offset="0xC0" width="32" description="Color 0 edge enhancement max">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L3_HH" width="12" begin="27" end="16" resetval="0x0" description="Level 3 HH suband ee_max, U10.2" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L3_LH" width="12" begin="11" end="0" resetval="0x0" description="Level 3 LH and HL subband ee_max, U10.2" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_EE_C10" acronym="NSF3V_EE_C10" offset="0xC4" width="32" description="Color 1 edge enhancement max">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L1_HH" width="12" begin="27" end="16" resetval="0x0" description="Level 1 HH suband ee_max, U10.2" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L1_LH" width="12" begin="11" end="0" resetval="0x0" description="Level 1 LH and HL subband ee_max, U10.2" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_EE_C11" acronym="NSF3V_EE_C11" offset="0xC8" width="32" description="Color 1 edge enhancement max">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L2_HH" width="12" begin="27" end="16" resetval="0x0" description="Level 2 HH suband ee_max, U10.2" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L2_LH" width="12" begin="11" end="0" resetval="0x0" description="Level 2 LH and HL subband ee_max, U10.2" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_EE_C12" acronym="NSF3V_EE_C12" offset="0xCC" width="32" description="Color 1 edge enhancement max">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L3_HH" width="12" begin="27" end="16" resetval="0x0" description="Level 3 HH suband ee_max, U10.2" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L3_LH" width="12" begin="11" end="0" resetval="0x0" description="Level 3 LH and HL subband ee_max, U10.2" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_EE_C20" acronym="NSF3V_EE_C20" offset="0xD0" width="32" description="Color 2 edge enhancement max">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L1_HH" width="12" begin="27" end="16" resetval="0x0" description="Level 1 HH suband ee_max, U10.2" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L1_LH" width="12" begin="11" end="0" resetval="0x0" description="Level 1 LH and HL subband ee_max, U10.2" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_EE_C21" acronym="NSF3V_EE_C21" offset="0xD4" width="32" description="Color 2 edge enhancement max">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L2_HH" width="12" begin="27" end="16" resetval="0x0" description="Level 2 HH suband ee_max, U10.2" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L2_LH" width="12" begin="11" end="0" resetval="0x0" description="Level 2 LH and HL subband ee_max, U10.2" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_EE_C22" acronym="NSF3V_EE_C22" offset="0xD8" width="32" description="Color 2 edge enhancement max">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L3_HH" width="12" begin="27" end="16" resetval="0x0" description="Level 3 HH suband ee_max, U10.2" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L3_LH" width="12" begin="11" end="0" resetval="0x0" description="Level 3 LH and HL subband ee_max, U10.2" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_EE_C30" acronym="NSF3V_EE_C30" offset="0xDC" width="32" description="Color 3 edge enhancement max">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L1_HH" width="12" begin="27" end="16" resetval="0x0" description="Level 1 HH suband ee_max, U10.2" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L1_LH" width="12" begin="11" end="0" resetval="0x0" description="Level 1 LH and HL subband ee_max, U10.2" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_EE_C31" acronym="NSF3V_EE_C31" offset="0xE0" width="32" description="Color 3 edge enhancement max">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L2_HH" width="12" begin="27" end="16" resetval="0x0" description="Level 2 HH suband ee_max, U10.2" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L2_LH" width="12" begin="11" end="0" resetval="0x0" description="Level 2 LH and HL subband ee_max, U10.2" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_EE_C32" acronym="NSF3V_EE_C32" offset="0xE4" width="32" description="Color 3 edge enhancement max">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L3_HH" width="12" begin="27" end="16" resetval="0x0" description="Level 3 HH suband ee_max, U10.2" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="L3_LH" width="12" begin="11" end="0" resetval="0x0" description="Level 3 LH and HL subband ee_max, U10.2" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_DS_THR" acronym="NSF3V_DS_THR" offset="0xE8" width="32" description="Desaturation thresholds">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="THR2" width="6" begin="21" end="16" resetval="0x0" description="desaturation threshold 2, U6.0" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="15" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="THR1" width="6" begin="5" end="0" resetval="0x0" description="desaturation threhsold 1, U6.0" range="" rwaccess="RW"/>
+  </register>
+  <register id="NSF3V_DS_SLOPE" acronym="NSF3V_DS_SLOPE" offset="0xEC" width="32" description="Desaturation slopes">
+    <bitfield id="RESERVED" width="6" begin="31" end="26" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SLOPE2" width="10" begin="25" end="16" resetval="0x0" description="desaturation slope 2, U0.10" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SLOPE1" width="10" begin="9" end="0" resetval="0x0" description="desaturation slope 1, U0.10" range="" rwaccess="RW"/>
+  </register>
+</module>

@@ -1,0 +1,106 @@
+<module name="LDC" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="LDC_PID" acronym="LDC_PID" offset="0x0" width="32" description="IP Revision Identifier (X.Y.R) Used by software to track features, bugs, and compatibility">
+    <bitfield id="REVISION" width="32" begin="31" end="0" resetval="See" description="IP Revision" range="" rwaccess="R"/>
+  </register>
+  <register id="LDC_PCR" acronym="LDC_PCR" offset="0x4" width="32" description="LDC Peripheral Control">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="Reserved." range="" rwaccess="R"/>
+    <bitfield id="STANDBYMODE" width="2" begin="17" end="16" resetval="0x2" description="Configuration of the local initiator state management mode. By definition, initiator may generate read/write transaction as long as it is out of STANDBY state. 0x0 FORCE Force-standby mode: local initiator is unconditionally placed in standby state. Backup mode, for debug only. 0x1 NO No-standby mode: local initiator is unconditionally placed out of standby state. Backup mode, for debug only. 0x2 SMART Smart-standby mode: local initiator standby status depends on local conditions, i.e. the module's functional requirement from the initiator." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="Reserved." range="" rwaccess="R"/>
+    <bitfield id="SCS_SUPPORT" width="1" begin="11" end="11" resetval="0x0" description="Reports '1' if SCS feature is supported by LDC." range="" rwaccess="R"/>
+    <bitfield id="AFF_EXPANDEN" width="1" begin="10" end="10" resetval="0x0" description="Enables expanded format of affine warp coefficients (A, B, D, and E). 0: A, B, D, E are treated as S14Q12 1: A, B, D, E are treated as S16Q12" range="" rwaccess="RW"/>
+    <bitfield id="CIRCEN" width="1" begin="9" end="9" resetval="0x0" description="Enables circular addressing mode. 0 - Disable circular addressing for input data. 1 - Enable circular addressing." range="" rwaccess="RW"/>
+    <bitfield id="SCSEN" width="1" begin="8" end="8" resetval="0x0" description="Enable/Disable smart codec statistic (SCS) function. 0 - Disable SCS 1 - Enable SCS" range="" rwaccess="RW"/>
+    <bitfield id="PWARPEN" width="1" begin="7" end="7" resetval="0x0" description="Enable perspective warp transform. Set to 1 to enable use ofLDC_GH[15:0] G and LDC_GH[31:16] H." range="" rwaccess="RW"/>
+    <bitfield id="BMODE" width="2" begin="6" end="5" resetval="0x0" description="Bayer data format (only applicable when MODE=1). 3: A-law data in/out, 2: Packed 8-bit data in/out, 1: Packed 12-bit data in/out, 0: Unpacked 12-bit data in/out" range="" rwaccess="RW"/>
+    <bitfield id="MODE" width="2" begin="4" end="3" resetval="0x0" description="2: YCbCr 4:2:0 Lens Distortion, 1: Bayer chromatic aberration mode, 0: YCbCr 4:2:2 Lens Distortion" range="" rwaccess="RW"/>
+    <bitfield id="BUSY" width="1" begin="2" end="2" resetval="0x0" description="Idle/busy status, 0: Idle, 1: Busy, asserted when function is started, cleared when function is complete" range="" rwaccess="R"/>
+    <bitfield id="LDMAPEN" width="1" begin="1" end="1" resetval="0x0" description="LD Mapping Enable, 1: Enabled, 0: Disabled" range="" rwaccess="RW"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="Write 1 to start the function, as specified in MODE" range="" rwaccess="RW"/>
+  </register>
+  <register id="LDC_RD_BASE" acronym="LDC_RD_BASE" offset="0x8" width="32" description="LDC Read Frame Base">
+    <bitfield id="RBASE" width="32" begin="31" end="0" resetval="0x0" description="Read frame base, must be 16-byte aligned so internally [3:0] bits are hard-wired zero." range="" rwaccess="RW"/>
+  </register>
+  <register id="LDC_RD_OFST" acronym="LDC_RD_OFST" offset="0xC" width="32" description="">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="Reserved." range="" rwaccess="R"/>
+    <bitfield id="MOD" width="14" begin="29" end="16" resetval="0x0" description="Sets the circular buffer size if circular buffering mode is used. The circular buffer is sized in terms of number of rows." range="" rwaccess="RW"/>
+    <bitfield id="ROFST" width="16" begin="15" end="0" resetval="0x0" description="Read frame line offset, must be 16-byte aligned so internally [3:0] bits are hard-wired zero." range="" rwaccess="RW"/>
+  </register>
+  <register id="LDC_FRAME_SIZE" acronym="LDC_FRAME_SIZE" offset="0x10" width="32" description="LDC Frame Size">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="Reserved." range="" rwaccess="R"/>
+    <bitfield id="H" width="14" begin="29" end="16" resetval="0x0" description="Frame number of lines" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="Reserved." range="" rwaccess="R"/>
+    <bitfield id="W" width="14" begin="13" end="0" resetval="0x0" description="Frame width" range="" rwaccess="RW"/>
+  </register>
+  <register id="LDC_INITXY" acronym="LDC_INITXY" offset="0x14" width="32" description="LDC Initial XY">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="Reserved." range="" rwaccess="R"/>
+    <bitfield id="INITY" width="14" begin="29" end="16" resetval="0x0" description="Output starting Y-coordinate (must be even)" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="Reserved." range="" rwaccess="R"/>
+    <bitfield id="INITX" width="14" begin="13" end="0" resetval="0x0" description="Output starting X-coordiinate (must be even)" range="" rwaccess="RW"/>
+  </register>
+  <register id="LDC_WR_BASE" acronym="LDC_WR_BASE" offset="0x18" width="32" description="LDC Write Frame Base">
+    <bitfield id="WBASE" width="32" begin="31" end="0" resetval="0x0" description="Write frame base, must be 16-byte aligned so internally [3:0] bits are hard-wired zero." range="" rwaccess="RW"/>
+  </register>
+  <register id="LDC_WR_OFST" acronym="LDC_WR_OFST" offset="0x1C" width="32" description="LDC Write Frame Line Offset">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="Reserved." range="" rwaccess="R"/>
+    <bitfield id="WOFST" width="16" begin="15" end="0" resetval="0x0" description="Write frame line offset, must be 16-byte aligned so internally [3:0] bits are hard-wired zero." range="" rwaccess="RW"/>
+  </register>
+  <register id="LDC_420C_RD_BASE" acronym="LDC_420C_RD_BASE" offset="0x20" width="32" description="LDC Read Frame Base For Cb/Cr in 420 Mode">
+    <bitfield id="RBASE" width="32" begin="31" end="0" resetval="0x0" description="Read frame base for Cb/Cr in 420 mode, must be 16-byte aligned so internally [3:0] bits are hard-wired zero" range="" rwaccess="RW"/>
+  </register>
+  <register id="LDC_420C_WR_BASE" acronym="LDC_420C_WR_BASE" offset="0x24" width="32" description="LDC Write Frame Base for Cb/Cr in 420 Mode">
+    <bitfield id="WBASE" width="32" begin="31" end="0" resetval="0x0" description="Write frame base for Cb/Cr in 420 mode, must be 16-byte aligned so internally [3:0] bits are hard-wired zero" range="" rwaccess="RW"/>
+  </register>
+  <register id="LDC_CONFIG" acronym="LDC_CONFIG" offset="0x28" width="32" description="LDC Configuration">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="Reserved." range="" rwaccess="R"/>
+    <bitfield id="CNST_MD" width="1" begin="7" end="7" resetval="0x0" description="Constant output address mode" range="" rwaccess="RW"/>
+    <bitfield id="YINT_TYP" width="1" begin="6" end="6" resetval="0x0" description="Interpolation type for Y data, 0: bicubic, 1: bilinear" range="" rwaccess="RW"/>
+    <bitfield id="INITC" width="2" begin="5" end="4" resetval="0x0" description="Initial color for LD back mapping (Bayer mode only), 0: R, 1: Gr, 2: Gb, 3: B" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="3" end="0" resetval="0x0" description="Reserved." range="" rwaccess="R"/>
+  </register>
+  <register id="LDC_BLOCK" acronym="LDC_BLOCK" offset="0x34" width="32" description="LDC Block Size">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="Reserved." range="" rwaccess="R"/>
+    <bitfield id="PIXPAD" width="4" begin="19" end="16" resetval="0x0" description="Pixel pad (must be greater than 1)" range="" rwaccess="RW"/>
+    <bitfield id="OBH" width="8" begin="15" end="8" resetval="0x0" description="Output block height (must be 0 and even)" range="" rwaccess="RW"/>
+    <bitfield id="OBW" width="8" begin="7" end="0" resetval="0x0" description="Output block width (must be 0 and multiple of 8 in 422 mode or in 420 mode, 16, or in Bayer mode, 8, 16, or 32 depending on Bayer format)" range="" rwaccess="RW"/>
+  </register>
+  <register id="LDC_AB" acronym="LDC_AB" offset="0x44" width="32" description="LDC Affine Transwarp A/B">
+    <bitfield id="B" width="16" begin="31" end="16" resetval="0x0" description="Affine transwarp B (S16Q12)" range="" rwaccess="RW"/>
+    <bitfield id="A" width="16" begin="15" end="0" resetval="0x1000" description="Affine transwarp A (S16Q12)" range="" rwaccess="RW"/>
+  </register>
+  <register id="LDC_CD" acronym="LDC_CD" offset="0x48" width="32" description="LDC Affine Transwarp C/D">
+    <bitfield id="D" width="16" begin="31" end="16" resetval="0x0" description="Affine transwarp D (S16Q12)" range="" rwaccess="RW"/>
+    <bitfield id="C" width="16" begin="15" end="0" resetval="0x0" description="Affine transwarp C (S16Q3)" range="" rwaccess="RW"/>
+  </register>
+  <register id="LDC_EF" acronym="LDC_EF" offset="0x4C" width="32" description="LDC Affine Transwarp EF">
+    <bitfield id="F" width="16" begin="31" end="16" resetval="0x0" description="Affine transwarp F (S16Q3)" range="" rwaccess="RW"/>
+    <bitfield id="E" width="16" begin="15" end="0" resetval="0x1000" description="Affine transwarp E (S16Q12)" range="" rwaccess="RW"/>
+  </register>
+  <register id="LDC_GH" acronym="LDC_GH" offset="0x50" width="32" description="LDC Perspective Transformation Parameters, G and H">
+    <bitfield id="H" width="16" begin="31" end="16" resetval="0x0" description="Perspective Transformation H (S16Q23)" range="" rwaccess="RW"/>
+    <bitfield id="G" width="16" begin="15" end="0" resetval="0x0" description="Perspective Transformation G (S16Q23)" range="" rwaccess="RW"/>
+  </register>
+  <register id="LDC_SCS_CTL" acronym="LDC_SCS_CTL" offset="0x54" width="32" description="Define number of regions and output divider for region based statistics.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="Reserved." range="" rwaccess="R"/>
+    <bitfield id="SLICE_SIZE" width="14" begin="29" end="16" resetval="0x0" description="Sets the number of output lines computed by LDC before the computed macroblock row statistics are transferred to system memory. This must be a multiple of 16 so bits [19:16] are internally fixed to zero. The maximum possible value is 8176 (0x1FF0)." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="9" begin="15" end="7" resetval="0x0" description="Reserved." range="" rwaccess="R"/>
+    <bitfield id="REGION" width="2" begin="6" end="5" resetval="0x0" description="Sets the number of regions in both directions for the region based statistics. Possible values: 0 - 1x1 1 - 2x2 2 - 3x3 3 - 4x4" range="" rwaccess="RW"/>
+    <bitfield id="ACCSHIFT" width="5" begin="4" end="0" resetval="0x0" description="Sets the output divider for sum of pixels in a region and sum of squares of pixels in a region. This parameter right shifts the final accumulator prior to writing the output statistics." range="" rwaccess="RW"/>
+  </register>
+  <register id="LDC_INPUT_FRAME_SIZE" acronym="LDC_INPUT_FRAME_SIZE" offset="0x58" width="32" description="Defines the total input frame size.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="Reserved." range="" rwaccess="R"/>
+    <bitfield id="H" width="14" begin="29" end="16" resetval="0x0" description="Height of input image." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="Reserved." range="" rwaccess="R"/>
+    <bitfield id="W" width="14" begin="13" end="0" resetval="0x0" description="Width of input image." range="" rwaccess="RW"/>
+  </register>
+  <register id="LDC_MESHTABLE_BASE" acronym="LDC_MESHTABLE_BASE" offset="0x5C" width="32" description="Read address for mesh offset table.">
+    <bitfield id="BASE" width="32" begin="31" end="0" resetval="0x0" description="Read address for mesh offset table. (Must be 16-byte aligned so four LSB are coded to 0)" range="" rwaccess="RW"/>
+  </register>
+  <register id="LDC_MESHTABLE_OFST" acronym="LDC_MESHTABLE_OFST" offset="0x60" width="32" description="Defines the stride between rows for the offset table (in bytes).">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="Reserved." range="" rwaccess="R"/>
+    <bitfield id="OFST" width="16" begin="15" end="0" resetval="0x0" description="LDC Mesh table line offset, must be 16-byte aligned so internally [3:0] bits are hard-wired zero." range="" rwaccess="RW"/>
+  </register>
+  <register id="LDC_MESHTABLE_CONFIG" acronym="LDC_MESHTABLE_CONFIG" offset="0x64" width="32" description="Defines the downsampling factors used for the mesh offset tables.">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="Reserved." range="" rwaccess="R"/>
+    <bitfield id="M" width="3" begin="2" end="0" resetval="0x0" description="Mesh table downsampling factor. 0: 1 - no downsampling 1: 2 - 2x downsampling 2: 4 3: 8 4: 16 5: 32 6: 64 7: 128" range="" rwaccess="RW"/>
+  </register>
+</module>

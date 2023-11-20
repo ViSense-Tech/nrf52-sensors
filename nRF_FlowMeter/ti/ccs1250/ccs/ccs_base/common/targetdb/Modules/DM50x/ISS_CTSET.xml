@@ -1,0 +1,882 @@
+<module name="ISS_CTSET" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="CTSETIDEN" acronym="CTSETIDEN" offset="0x0" width="32" description="CTSET identification register.">
+    <bitfield id="REVISION" width="32" begin="31" end="0" resetval="See" description="IP Revision" range="" rwaccess="R"/>
+  </register>
+  <register id="CTSETSYSCFG" acronym="CTSETSYSCFG" offset="0x10" width="32" description="CTSET system configuration register">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLEMODE" width="2" begin="3" end="2" resetval="0x2" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SOFTRESET" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="SETSTR" acronym="SETSTR" offset="0x14" width="32" description="SET status register">
+    <bitfield id="RESERVED" width="23" begin="31" end="9" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="HWFIFOEMPTY" width="1" begin="8" end="8" resetval="0x1" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="7" begin="7" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESETDONE" width="1" begin="0" end="0" resetval="0x1" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTSETCFG" acronym="CTSETCFG" offset="0x24" width="32" description="CTSET configuration register">
+    <bitfield id="OWNERSHIP" width="4" begin="31" end="28" resetval="0x2" description="Claim control and status." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="20" begin="27" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CAPENABLE" width="1" begin="7" end="7" resetval="0x0" description="When high, the system event capture is enabled." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="6" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EVENTEDGE" width="1" begin="4" end="4" resetval="0x1" description="High or Low level event detection" range="" rwaccess="RW"/>
+    <bitfield id="DETECTMODE" width="1" begin="3" end="3" resetval="0x0" description="Message generated based on event detection or sampling window." range="" rwaccess="RW"/>
+    <bitfield id="STOPCAPONTRIG" width="1" begin="2" end="2" resetval="0x0" description="Stop capturing system events from external trigger detection." range="" rwaccess="RW"/>
+    <bitfield id="STARTCAPONTRIG" width="1" begin="1" end="1" resetval="0x0" description="Start capturing systetm events from external trigger detection" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="SETSPLREG" acronym="SETSPLREG" offset="0x28" width="32" description="System event sampling window register">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="WINDOWSIZE" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="SETEVTENBL1" acronym="SETEVTENBL1" offset="0x30" width="32" description="System event detection enable register 1">
+    <bitfield id="EVTENABLE" width="32" begin="31" end="0" resetval="0x0" description="Event 1 to 32 detection enable bits. Bit 0 corresponds to Event 1, bit 1 is for event 2, ... , bit 31 is for event 32." range="" rwaccess="RW"/>
+  </register>
+  <register id="SETEVTENBL2" acronym="SETEVTENBL2" offset="0x34" width="32" description="System event detection enable register 2">
+    <bitfield id="EVTENABLE" width="32" begin="31" end="0" resetval="0x0" description="Event 33 to 64 detection enable bits. Bit 0 corresponds to Event 33, bit 1 is for event 34, ... , bit 31 is for event 64." range="" rwaccess="RW"/>
+  </register>
+  <register id="SETEVTENBL3" acronym="SETEVTENBL3" offset="0x38" width="32" description="">
+    <bitfield id="EVTENABLE" width="32" begin="31" end="0" resetval="0x0" description="Event 65 to 96 detection enable bits. Bit 0 corresponds to Event 65, bit 1 is for event 66, ... , bit 31 is for event 96." range="" rwaccess="RW"/>
+  </register>
+  <register id="SETEVTENBL4" acronym="SETEVTENBL4" offset="0x3C" width="32" description="">
+    <bitfield id="EVTENABLE" width="32" begin="31" end="0" resetval="0x0" description="Event 97 to 128 detection enable bits. Bit 0 corresponds to Event 97, bit 1 is for event 98, ... , bit 31 is for event 128." range="" rwaccess="RW"/>
+  </register>
+  <register id="SETEVTENBL5" acronym="SETEVTENBL5" offset="0x40" width="32" description="">
+    <bitfield id="EVTENABLE" width="32" begin="31" end="0" resetval="0x0" description="Event 129 to 160 detection enable bits. Bit 0 corresponds to Event 129, bit 1 is for event 130, ... , bit 31 is for event 160." range="" rwaccess="RW"/>
+  </register>
+  <register id="SETEVTENBL6" acronym="SETEVTENBL6" offset="0x44" width="32" description="">
+    <bitfield id="EVTENABLE" width="32" begin="31" end="0" resetval="0x0" description="Event 161 to 192 detection enable bits. Bit 0 corresponds to Event 161, bit 1 is for event 162, ... , bit 31 is for event 192." range="" rwaccess="RW"/>
+  </register>
+  <register id="SETEVTENBL7" acronym="SETEVTENBL7" offset="0x48" width="32" description="">
+    <bitfield id="EVTENABLE" width="32" begin="31" end="0" resetval="0x0" description="Event 193 to 224 detection enable bits. Bit 0 corresponds to Event 193, bit 1 is for event 194, ... , bit 31 is for event 224." range="" rwaccess="RW"/>
+  </register>
+  <register id="SETEVTENBL8" acronym="SETEVTENBL8" offset="0x4C" width="32" description="">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EVTENABLE" width="31" begin="30" end="0" resetval="0x0" description="Event 225 to 255 detection enable bits. Bit 0 corresponds to Event 225, bit 1 is for event 226, ... , bit 31 is for event 255." range="" rwaccess="RW"/>
+  </register>
+  <register id="SETMSTID" acronym="SETMSTID" offset="0x50" width="32" description="System Event Master ID. Note that the reset value is not necessarily 0 but based on tieoff value at CTSET boundary.">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MASTID" width="8" begin="7" end="0" resetval="0x0" description="HW Master ID for SET." range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCNTL" acronym="CTCNTL" offset="0x800" width="32" description="Counter Timer Control">
+    <bitfield id="NUMSTM" width="6" begin="31" end="26" resetval="0x10" description="" range="" rwaccess="R"/>
+    <bitfield id="NUMINPT" width="8" begin="25" end="18" resetval="0x10" description="" range="" rwaccess="R"/>
+    <bitfield id="NUMTIMR" width="5" begin="17" end="13" resetval="0x8" description="" range="" rwaccess="R"/>
+    <bitfield id="NUMCNTR" width="6" begin="12" end="7" resetval="0x10" description="" range="" rwaccess="R"/>
+    <bitfield id="REVID" width="4" begin="6" end="3" resetval="0x2" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="2" begin="2" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTSTMCNTL" acronym="CTSTMCNTL" offset="0x820" width="32" description="Counter Timer STM Control">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="NUMXPORT" width="6" begin="11" end="6" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="XPORTACT" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CCMXPORT" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CCMAVAIL" width="1" begin="3" end="3" resetval="0x1" description="" range="" rwaccess="R"/>
+    <bitfield id="CSMXPORT" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SENDOVR" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTSTMMSTID" acronym="CTSTMMSTID" offset="0x824" width="32" description="CTM STM Master ID register.">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MASTID" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTSTMINTVL" acronym="CTSTMINTVL" offset="0x828" width="32" description="CTM STM interval register.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="INTERVAL" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTSTMSEL0" acronym="CTSTMSEL0" offset="0x82C" width="32" description="CTM STM counter select register.">
+    <bitfield id="COUNTSEL" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTSTMSEL1" acronym="CTSTMSEL1" offset="0x830" width="32" description="CTM STM counter select register.">
+    <bitfield id="COUNTSEL" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="TINTVLR0" acronym="TINTVLR0" offset="0x840" width="32" description="Timer Interval Register 0">
+    <bitfield id="INTERVAL" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="TINTVLR1" acronym="TINTVLR1" offset="0x844" width="32" description="Timer Interval Register 1">
+    <bitfield id="INTERVAL" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="TINTVLR2" acronym="TINTVLR2" offset="0x848" width="32" description="Timer Interval Register 2">
+    <bitfield id="INTERVAL" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="TINTVLR3" acronym="TINTVLR3" offset="0x84C" width="32" description="Timer Interval Register 3">
+    <bitfield id="INTERVAL" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="TINTVLR4" acronym="TINTVLR4" offset="0x850" width="32" description="Timer Interval Register 4">
+    <bitfield id="INTERVAL" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="TINTVLR5" acronym="TINTVLR5" offset="0x854" width="32" description="Timer Interval Register 5">
+    <bitfield id="INTERVAL" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="TINTVLR6" acronym="TINTVLR6" offset="0x858" width="32" description="Timer Interval Register 6">
+    <bitfield id="INTERVAL" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="TINTVLR7" acronym="TINTVLR7" offset="0x85C" width="32" description="Timer Interval Register 7">
+    <bitfield id="INTERVAL" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="TINTVLR8" acronym="TINTVLR8" offset="0x860" width="32" description="Timer Interval Register 8">
+    <bitfield id="INTERVAL" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="TINTVLR9" acronym="TINTVLR9" offset="0x864" width="32" description="Timer Interval Register 9">
+    <bitfield id="INTERVAL" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="TINTVLR10" acronym="TINTVLR10" offset="0x868" width="32" description="Timer Interval Register 10">
+    <bitfield id="INTERVAL" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="TINTVLR11" acronym="TINTVLR11" offset="0x86C" width="32" description="Timer Interval Register 11">
+    <bitfield id="INTERVAL" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="TINTVLR12" acronym="TINTVLR12" offset="0x870" width="32" description="Timer Interval Register 12">
+    <bitfield id="INTERVAL" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="TINTVLR13" acronym="TINTVLR13" offset="0x874" width="32" description="Timer Interval Register 13">
+    <bitfield id="INTERVAL" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="TINTVLR14" acronym="TINTVLR14" offset="0x878" width="32" description="Timer Interval Register 14">
+    <bitfield id="INTERVAL" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="TINTVLR15" acronym="TINTVLR15" offset="0x87C" width="32" description="Timer Interval Register 15">
+    <bitfield id="INTERVAL" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTNUMDBG" acronym="CTNUMDBG" offset="0x8C0" width="32" description="CTM Debug Event Register">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="NUMEVNT" width="4" begin="3" end="0" resetval="0x2" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTDBGSGL0" acronym="CTDBGSGL0" offset="0x8C4" width="32" description="CTM Debug Event Register">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="INPSEL" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTDBGSGL1" acronym="CTDBGSGL1" offset="0x8C8" width="32" description="CTM Debug Event Register">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="INPSEL" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTDBGSGL2" acronym="CTDBGSGL2" offset="0x8CC" width="32" description="CTM Debug Event Register">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="INPSEL" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTDBGSGL3" acronym="CTDBGSGL3" offset="0x8D0" width="32" description="CTM Debug Event Register">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="INPSEL" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTDBGSGL4" acronym="CTDBGSGL4" offset="0x8D4" width="32" description="CTM Debug Event Register">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="INPSEL" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTDBGSGL5" acronym="CTDBGSGL5" offset="0x8D8" width="32" description="CTM Debug Event Register">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="INPSEL" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTDBGSGL6" acronym="CTDBGSGL6" offset="0x8DC" width="32" description="CTM Debug Event Register">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="INPSEL" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTDBGSGL7" acronym="CTDBGSGL7" offset="0x8E0" width="32" description="CTM Debug Event Register">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="INPSEL" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTGNBL0" acronym="CTGNBL0" offset="0x9F0" width="32" description="CTM Global Enable Register 0">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTGNBL1" acronym="CTGNBL1" offset="0x9F4" width="32" description="CTM Global Enable Register 1">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTGRST0" acronym="CTGRST0" offset="0x9F8" width="32" description="CTM Global Reset Register 0">
+    <bitfield id="RESET" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTGRST1" acronym="CTGRST1" offset="0x9FC" width="32" description="CTM Global Reset Register 0">
+    <bitfield id="RESET" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR0" acronym="CTCR0" offset="0xA00" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR1" acronym="CTCR1" offset="0xA04" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR2" acronym="CTCR2" offset="0xA08" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR3" acronym="CTCR3" offset="0xA0C" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR4" acronym="CTCR4" offset="0xA10" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR5" acronym="CTCR5" offset="0xA14" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR6" acronym="CTCR6" offset="0xA18" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR7" acronym="CTCR7" offset="0xA1C" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR8" acronym="CTCR8" offset="0xA20" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR9" acronym="CTCR9" offset="0xA24" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR10" acronym="CTCR10" offset="0xA28" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR11" acronym="CTCR11" offset="0xA2C" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR12" acronym="CTCR12" offset="0xA30" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR13" acronym="CTCR13" offset="0xA34" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR14" acronym="CTCR14" offset="0xA38" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR15" acronym="CTCR15" offset="0xA3C" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR16" acronym="CTCR16" offset="0xA40" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR17" acronym="CTCR17" offset="0xA44" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR18" acronym="CTCR18" offset="0xA48" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR19" acronym="CTCR19" offset="0xA4C" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR20" acronym="CTCR20" offset="0xA50" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR21" acronym="CTCR21" offset="0xA54" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR22" acronym="CTCR22" offset="0xA58" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR23" acronym="CTCR23" offset="0xA5C" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR24" acronym="CTCR24" offset="0xA60" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR25" acronym="CTCR25" offset="0xA64" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR26" acronym="CTCR26" offset="0xA68" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR27" acronym="CTCR27" offset="0xA6C" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR28" acronym="CTCR28" offset="0xA70" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR29" acronym="CTCR29" offset="0xA74" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR30" acronym="CTCR30" offset="0xA78" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCR31" acronym="CTCR31" offset="0xA7C" width="32" description="Counter Timer Control Register">
+    <bitfield id="WDRESET" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INPSEL" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DBG_TRIG_STAT" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WDMODE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESTART" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHNSDW" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRFLW" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FREE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DURMODE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHAIN" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESET" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="ENBL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTCNTR0" acronym="CTCNTR0" offset="0xB00" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR1" acronym="CTCNTR1" offset="0xB04" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR2" acronym="CTCNTR2" offset="0xB08" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR3" acronym="CTCNTR3" offset="0xB0C" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR4" acronym="CTCNTR4" offset="0xB10" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR5" acronym="CTCNTR5" offset="0xB14" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR6" acronym="CTCNTR6" offset="0xB18" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR7" acronym="CTCNTR7" offset="0xB1C" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR8" acronym="CTCNTR8" offset="0xB20" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR9" acronym="CTCNTR9" offset="0xB24" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR10" acronym="CTCNTR10" offset="0xB28" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR11" acronym="CTCNTR11" offset="0xB2C" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR12" acronym="CTCNTR12" offset="0xB30" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR13" acronym="CTCNTR13" offset="0xB34" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR14" acronym="CTCNTR14" offset="0xB38" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR15" acronym="CTCNTR15" offset="0xB3C" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR16" acronym="CTCNTR16" offset="0xB40" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR17" acronym="CTCNTR17" offset="0xB44" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR18" acronym="CTCNTR18" offset="0xB48" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR19" acronym="CTCNTR19" offset="0xB4C" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR20" acronym="CTCNTR20" offset="0xB50" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR21" acronym="CTCNTR21" offset="0xB54" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR22" acronym="CTCNTR22" offset="0xB58" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR23" acronym="CTCNTR23" offset="0xB5C" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR24" acronym="CTCNTR24" offset="0xB60" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR25" acronym="CTCNTR25" offset="0xB64" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR26" acronym="CTCNTR26" offset="0xB68" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR27" acronym="CTCNTR27" offset="0xB6C" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR28" acronym="CTCNTR28" offset="0xB70" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR29" acronym="CTCNTR29" offset="0xB74" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR30" acronym="CTCNTR30" offset="0xB78" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTCNTR31" acronym="CTCNTR31" offset="0xB7C" width="32" description="Counter Timer Counter Register">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTEOI" acronym="CTEOI" offset="0xC00" width="32" description="Counter Timer EOI Register">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EOI" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTIRQSTAT_RAW" acronym="CTIRQSTAT_RAW" offset="0xC04" width="32" description="Counter Timer IRQ raw status register">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="TIM_INT_IRQ" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTIRQSTAT" acronym="CTIRQSTAT" offset="0xC08" width="32" description="Counter Timer IRQ Status Register">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="TIM_INT" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTIRQENABLE_SET" acronym="CTIRQENABLE_SET" offset="0xC0C" width="32" description="Counter Timer IRQ eable set register">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="TIM_INT_IES" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTIRQENABLE_CLR" acronym="CTIRQENABLE_CLR" offset="0xC10" width="32" description="Counter Timer IRQ enable clear register.">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="TIM_INT_IEC" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+</module>

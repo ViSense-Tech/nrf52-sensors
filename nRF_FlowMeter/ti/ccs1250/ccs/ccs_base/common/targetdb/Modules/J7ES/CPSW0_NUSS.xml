@@ -1,0 +1,204 @@
+<module name="CPSW0_NUSS" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="CPSW_STAT_RXGOODFRAMES_k" acronym="CPSW_STAT_RXGOODFRAMES_k" offset="0x3A000" width="32" description="The total number of good frames received on the port. A good frame is defined to be:- Any data or MAC control frame which matched a unicast, broadcast or multicast address, or matched due to promiscuous mode- Had a length of 64 to SL_RX_MAXLEN[13-0] RX_MAXLEN bytes inclusive- Had no CRC error, alignment error or code error.See the RX_ALIGN_CODE_ERRORS and CPSW_STAT0_RXCRCERRORS statistic descriptions for definitions of alignment, code and CRC errors. Overruns have no effect upon this statistic. Offset = 0003A000h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of good frames received." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_RXBROADCASTFRAMES_k" acronym="CPSW_STAT_RXBROADCASTFRAMES_k" offset="0x3A004" width="32" description="The total number of good broadcast frames received on the port. A good broadcast frame is defined to be:- Any data or MAC control frame which was destined for only address 0xFFFFFFFFFFFF- Had a length of [13-0] RX_MAXLEN bytes inclusive- Had no CRC error, alignment error or code error.See the CPSW_STAT0_RXCRCERRORS statistic descriptions for total number of CRC errors. Overruns have no effect upon this statistic. Offset = 0003A004h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of good broadcast frames received." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_RXMULTICASTFRAMES_k" acronym="CPSW_STAT_RXMULTICASTFRAMES_k" offset="0x3A008" width="32" description="The total number of good multicast frames received on the port. A good multicast frame is defined to be:- Any data or MAC control frame which was destined for any multicast address other than 0xFFFFFFFFFFFF- Had a length of [13-0] RX_MAXLEN bytes inclusive- Had no CRC error, alignment error or code error.See the CPSW_STAT0_RXCRCERRORS statistic descriptions for total number of CRC errors. Overruns have no effect upon this statistic. Offset = 0003A008h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of good multicast frames received." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_RXPAUSEFRAMES_k" acronym="CPSW_STAT_RXPAUSEFRAMES_k" offset="0x3A00C" width="32" description="Total number of pause frames received Offset = 0003A00Ch + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of pause frames received." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_RXCRCERRORS_k" acronym="CPSW_STAT_RXCRCERRORS_k" offset="0x3A010" width="32" description="The total number of frames received on the port that experienced a CRC error. Such a frame:- Was any data or MAC control frame which matched a unicast, broadcast or multicast address, or matched due to promiscuous mode- Was of length 64 to CPSW0_P0_RX_MAXLEN_REG[13-0] RX_MAXLEN bytes inclusive- Had no code/align error,- Had a CRC error Overruns have no effect upon this statistic.A CRC error is defined to be:- A frame containing an even number of nibbles- Failing the Frame Check Sequence test. Offset = 0003A010h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of CRC errors frames received" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_RXALIGNCODEERRORS_k" acronym="CPSW_STAT_RXALIGNCODEERRORS_k" offset="0x3A014" width="32" description="Total number of alignment/code errors received Offset = 0003A014h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of alignment/code errors received" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_RXOVERSIZEDFRAMES_k" acronym="CPSW_STAT_RXOVERSIZEDFRAMES_k" offset="0x3A018" width="32" description="The total number of oversized frames received on the port. An oversized frame is defined to be:- Was any data or MAC control frame which matched a unicast, broadcast or multicast address, or matched due to promiscuous mode- Was greater than [13-0] RX_MAXLEN in bytes- Had no CRC error, alignment error or code errorSee the CPSW_STAT0_RXCRCERRORS statistic descriptions for total number of CRC errors. Overruns have no effect upon this statistic. Offset = 0003A018h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of oversized frames received." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_RXJABBERFRAMES_k" acronym="CPSW_STAT_RXJABBERFRAMES_k" offset="0x3A01C" width="32" description="Total number of jabber frames received Offset = 0003A01Ch + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of jabber frames received" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_RXUNDERSIZEDFRAMES_k" acronym="CPSW_STAT_RXUNDERSIZEDFRAMES_k" offset="0x3A020" width="32" description="The total number of undersized frames received on the port. An undersized frame is defined to be:- Was any data frame which matched a unicast, broadcast or multicast address, or matched due to promiscuous mode- Was less than 64 octets long- Had no CRC error, alignment error or code errorSee the CPSW_STAT0_RXCRCERRORS statistic descriptions for total number of CRC errors. Overruns have no effect upon this statistic. Offset = 0003A020h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of undersized frames received" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_RXFRAGMENTS_k" acronym="CPSW_STAT_RXFRAGMENTS_k" offset="0x3A024" width="32" description="The total number of frame fragments received on the port. A frame fragment is defined to be:- Any data frame (address matching does not matter)- Less than 64 bytes long- Having a CRC error, an alignment error, or a code error- Not the result of a collision caused by half duplex, collision based flow controlSee the CPSW_STAT0_RXCRCERRORS statistic descriptions for total number of CRC errors. Overruns have no effect upon this statistic. Offset = 0003A024h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of fragmented frames received." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_ALE_DROP_k" acronym="CPSW_STAT_ALE_DROP_k" offset="0x3A028" width="32" description="Total number of frames dropped by the ALE. Offset = 0003A028h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of frames dropped by the ALE." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_ALE_OVERRUN_DROP_k" acronym="CPSW_STAT_ALE_OVERRUN_DROP_k" offset="0x3A02C" width="32" description="Total number of overrun frames dropped by the ALE. Offset = 0003A02Ch + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of overrun frames dropped by the ALE." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_RXOCTETS_k" acronym="CPSW_STAT_RXOCTETS_k" offset="0x3A030" width="32" description="The total number of bytes in all good frames received on the port. A good frame is defined to be:- Any data or MAC control frame which matched a unicast, broadcast or multicast address, or matched due to promiscuous mode- Of length 64 to [13-0] RX_MAXLEN bytes inclusive- Had no CRC error, alignment error or code errorSee the CPSW_STAT0_RXCRCERRORS statistic descriptions for total number of CRC errors. Overruns have no effect upon this statistic. Offset = 0003A030h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of received bytes in good frames" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_TXGOODFRAMES_k" acronym="CPSW_STAT_TXGOODFRAMES_k" offset="0x3A034" width="32" description="The total number of good frames transmitted on the port. A good frame is defined to be:- Any data or MAC control frame which matched a unicast, broadcast or multicast address, or matched due to promiscuous mode- Any length- Had no late or excessive collisions, no carrier loss and no underrun Offset = 0003A034h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of good frames transmitted" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_TXBROADCASTFRAMES_k" acronym="CPSW_STAT_TXBROADCASTFRAMES_k" offset="0x3A038" width="32" description="The total number of good broadcast frames transmitted on the port. A good broadcast frame is defined to be:- Any data or MAC control frame which was destined for only address 0xFFFFFFFFFFFF- Any length- Had no late or excessive collisions, no carrier loss and no underrun Offset = 0003A038h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of good broadcast frames transmitted" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_TXMULTICASTFRAMES_k" acronym="CPSW_STAT_TXMULTICASTFRAMES_k" offset="0x3A03C" width="32" description="The total number of good multicast frames transmitted on the port. A good multicast frame is defined to be:- Any data or MAC control frame which was destined for any multicast address other than 0xFFFFFFFFFFFF- Any length- Had no late or excessive collisions, no carrier loss and no underrun Offset = 0003A03Ch + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of good multicast frames transmitted" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_TXPAUSEFRAMES_k" acronym="CPSW_STAT_TXPAUSEFRAMES_k" offset="0x3A040" width="32" description="Total number of pause frames transmitted Offset = 0003A040h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of pause frames transmitted" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_TXDEFERREDFRAMES_k" acronym="CPSW_STAT_TXDEFERREDFRAMES_k" offset="0x3A044" width="32" description="Total number of deferred frames transmitted Offset = 0003A044h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of deferred frames transmitted" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_TXCOLLISIONFRAMES_k" acronym="CPSW_STAT_TXCOLLISIONFRAMES_k" offset="0x3A048" width="32" description="Total number of transmitted frames experiencing a collision Offset = 0003A048h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of transmitted frames experiencing a collision" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_TXSINGLECOLLFRAMES_k" acronym="CPSW_STAT_TXSINGLECOLLFRAMES_k" offset="0x3A04C" width="32" description="Total number of transmitted frames experiencing a single collision Offset = 0003A04Ch + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of transmitted frames experiencing a single collision" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_TXMULTCOLLFRAMES_k" acronym="CPSW_STAT_TXMULTCOLLFRAMES_k" offset="0x3A050" width="32" description="Total number of transmitted frames experiencing multiple collisions Offset = 0003A050h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of transmitted frames experiencing multiple collisions" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_TXEXCESSIVECOLLISIONS_k" acronym="CPSW_STAT_TXEXCESSIVECOLLISIONS_k" offset="0x3A054" width="32" description="Total number of transmitted frames abandoned due to excessive collisions Offset = 0003A054h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of transmitted frames abandoned due to excessive collisions" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_TXLATECOLLISIONS_k" acronym="CPSW_STAT_TXLATECOLLISIONS_k" offset="0x3A058" width="32" description="Total number of transmitted frames abandoned due to a late collision Offset = 0003A058h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of transmitted frames abandoned due to a late collision" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_RXIPGERROR_k" acronym="CPSW_STAT_RXIPGERROR_k" offset="0x3A05C" width="32" description="Total number of receive inter-packet gap errors (10G only) Offset = 0003A05Ch + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of receive inter-packet gap errors (10G only)" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_TXCARRIERSENSEERRORS_k" acronym="CPSW_STAT_TXCARRIERSENSEERRORS_k" offset="0x3A060" width="32" description="Total number of transmitted frames that experienced a carrier loss Offset = 0003A060h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of transmitted frames that experienced a carrier loss" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_TXOCTETS_k" acronym="CPSW_STAT_TXOCTETS_k" offset="0x3A064" width="32" description="The total number of bytes in all good frames transmitted on the port. A good frame is defined to be:- Any data or MAC control frame which was destined for any unicast, broadcast or multicast address- Was any size- Had no late or excessive collisions, no carrier loss and no underrun. Offset = 0003A064h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of bytes in all good frames transmitted" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_OCTETFRAMES64_k" acronym="CPSW_STAT_OCTETFRAMES64_k" offset="0x3A068" width="32" description="The total number of 64-byte frames received and transmitted on the port. Such a frame is defined to be:- Any data or MAC control frame which was destined for any unicast, broadcast or multicast address- Did not experience late collisions, excessive collisions, or carrier sense error- Was exactly 64 bytes long. (If the frame was being transmitted and experienced carrier loss that resulted in a frame of this size being transmitted, then the frame will be recorded in this statistic).CRC errors, code/align errors and overruns do not affect the recording of frames in this statistic. Offset = 0003A068h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of 64-byte frames received and transmitted" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_OCTETFRAMES65T127_k" acronym="CPSW_STAT_OCTETFRAMES65T127_k" offset="0x3A06C" width="32" description="The total number of frames of size 65 to 127 bytes received and transmitted on the port. Such a frame is defined to be:- Any data or MAC control frame which was destined for any unicast, broadcast or multicast address- Did not experience late collisions, excessive collisions, or carrier sense error- Was 65 to 127 bytes longCRC errors, code/align errors, underruns and overruns do not affect the recording of frames in this statistic. Offset = 0003A06Ch + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of frames of size 65 to 127 bytes received and transmitted" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_OCTETFRAMES128T255_k" acronym="CPSW_STAT_OCTETFRAMES128T255_k" offset="0x3A070" width="32" description="The total number of frames of size 128 to 255 bytes received and transmitted on the port. Such a frame is defined to be:- Any data or MAC control frame which was destined for any unicast, broadcast or multicast address- Did not experience late collisions, excessive collisions, or carrier sense error- Was 128 to 255 bytes longCRC errors, code/align errors, underruns and overruns do not affect the recording of frames in this statistic. Offset = 0003A070h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of frames of size 128 to 255 bytes received and transmitted" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_OCTETFRAMES256T511_k" acronym="CPSW_STAT_OCTETFRAMES256T511_k" offset="0x3A074" width="32" description="The total number of frames of size 256 to 511 bytes received and transmitted on the port. Such a frame is defined to be:- Any data or MAC control frame which was destined for any unicast, broadcast or multicast address- Did not experience late collisions, excessive collisions, or carrier sense error- Was 256 to 511 bytes longCRC errors, code/align errors, underruns and overruns do not affect the recording of frames in this statistic. Offset = 0003A074h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of frames of size 256 to 511 bytes received and transmitted" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_OCTETFRAMES512T1023_k" acronym="CPSW_STAT_OCTETFRAMES512T1023_k" offset="0x3A078" width="32" description="The total number of frames of size 512 to 1023 bytes received and transmitted on the port. Such a frame is defined to be:- Any data or MAC control frame which was destined for any unicast, broadcast or multicast address- Did not experience late collisions, excessive collisions, or carrier sense error- Was 512 to 1023 bytes longCRC errors, code/align errors, underruns and overruns do not affect the recording of frames in this statistic. Offset = 0003A078h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of frames of size 512 to 1023 bytes received and transmitted" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_OCTETFRAMES1024TUP_k" acronym="CPSW_STAT_OCTETFRAMES1024TUP_k" offset="0x3A07C" width="32" description="The total number of frames of size 1024 to [13-0] RX_MAXLEN bytes for receive or 1024 up for transmit on the port. Such a frame is defined to be:- Any data or MAC control frame which was destined for any unicast, broadcast or multicast address- Did not experience late collisions, excessive collisions, or carrier sense error- Was 1024 to [13-0] RX_MAXLEN bytes long on receive, or any size on transmitCRC errors, code/align errors, underruns and overruns do not affect the recording of frames in this statistic. Offset = 0003A07Ch + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of frames of size 1024 to" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_NETOCTETS_k" acronym="CPSW_STAT_NETOCTETS_k" offset="0x3A080" width="32" description="The total number of bytes of frame data received and transmitted on the port. Each frame counted:- was any data or MAC control frame destined for any unicast, broadcast or multicast address (address match does not matter)- Any length (including less than 64 bytes and greater than [13-0] RX_MAXLEN bytes)Also counted in this statistic is:- Every byte transmitted before a carrier- loss was experienced- Every byte transmitted before each collision was experienced, (i.e. multiple retries are counted each time)- Every byte received if the port is in half-duplex mode until a jam sequence was transmitted to initiate flow control. (The jam sequence was not counted to prevent double-counting)Error conditions such as alignment errors, CRC errors, code errors, overruns and underruns do not affect the recording of bytes by this statistic. The objective of this statistic is to give a reasonable indication of ethernet utilization Offset = 0003A080h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of bytes received and transmitted" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_RX_BOTTOM_OF_FIFO_DROP_k" acronym="CPSW_STAT_RX_BOTTOM_OF_FIFO_DROP_k" offset="0x3A084" width="32" description="Receive Bottom of FIFO Drop. Offset = 0003A084h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Receive Bottom of FIFO Drop." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_PORTMASK_DROP_k" acronym="CPSW_STAT_PORTMASK_DROP_k" offset="0x3A088" width="32" description="Total number of dropped frames received due to portmask. Offset = 0003A088h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of dropped frames received due to portmask." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_RX_TOP_OF_FIFO_DROP_k" acronym="CPSW_STAT_RX_TOP_OF_FIFO_DROP_k" offset="0x3A08C" width="32" description="Receive Top of FIFO Drop. Offset = 0003A08Ch + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Receive Top of FIFO Drop." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_ALE_RATE_LIMIT_DROP_k" acronym="CPSW_STAT_ALE_RATE_LIMIT_DROP_k" offset="0x3A090" width="32" description="Total number of dropped frames due to ALE Rate Limiting. Offset = 0003A090h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of dropped frames due to ALE Rate Limiting." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_ALE_VID_INGRESS_DROP_k" acronym="CPSW_STAT_ALE_VID_INGRESS_DROP_k" offset="0x3A094" width="32" description="Total number of dropped frames due to ALE VID Ingress. Offset = 0003A094h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of dropped frames due to ALE VID Ingress." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_ALE_DA_EQ_SA_DROP_k" acronym="CPSW_STAT_ALE_DA_EQ_SA_DROP_k" offset="0x3A098" width="32" description="Total number of dropped frames due to DA=SA. Offset = 0003A098h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of dropped frames due to DA=SA." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_ALE_BLOCK_DROP_k" acronym="CPSW_STAT_ALE_BLOCK_DROP_k" offset="0x3A09C" width="32" description="Total number of dropped frames due to ALE Block Mode. Offset = 0003A09Ch + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of dropped frames due to ALE Block Mode." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_ALE_SECURE_DROP_k" acronym="CPSW_STAT_ALE_SECURE_DROP_k" offset="0x3A0A0" width="32" description="Total number of dropped frames due to ALE Secure Mode. Offset = 0003A0A0h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of dropped frames due to ALE Secure Mode." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_ALE_AUTH_DROP_k" acronym="CPSW_STAT_ALE_AUTH_DROP_k" offset="0x3A0A4" width="32" description="Total number of dropped frames due to ALE Authentication. Offset = 0003A0A4h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="Total number of dropped frames due to ALE Authentication." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_ALE_UNKN_UNI_k" acronym="CPSW_STAT_ALE_UNKN_UNI_k" offset="0x3A0A8" width="32" description="ALE Receive Unknown Unicast. Offset = 0003A0A8h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="ALE Receive Unknown Unicast." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_ALE_UNKN_UNI_BCNT_k" acronym="CPSW_STAT_ALE_UNKN_UNI_BCNT_k" offset="0x3A0AC" width="32" description="ALE Receive Unknown Unicast Bytecount. Offset = 0003A0ACh + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="ALE Receive Unknown Unicast Bytecount." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_ALE_UNKN_MLT_K" acronym="CPSW_STAT_ALE_UNKN_MLT_K" offset="0x3A0B0" width="32" description="ALE Receive Unknown Multicast. Offset = 0003A0B0h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="ALE Receive Unknown Multicast." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_ALE_UNKN_MLT_BCNT_k" acronym="CPSW_STAT_ALE_UNKN_MLT_BCNT_k" offset="0x3A0B4" width="32" description="ALE Receive Unknown Multicast Bytecount. Offset = 0003A0B4h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="ALE Receive Unknown Multicast Bytecount." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_ALE_UNKN_BRD_k" acronym="CPSW_STAT_ALE_UNKN_BRD_k" offset="0x3A0B8" width="32" description="ALE Receive Unknown Broadcast. Offset = 0003A0B8h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="ALE Receive Unknown Broadcast." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_ALE_UNKN_BRD_BCNT_k" acronym="CPSW_STAT_ALE_UNKN_BRD_BCNT_k" offset="0x3A0BC" width="32" description="ALE Receive Unknown Broadcast Bytecount. Offset = 0003A0BCh + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="ALE Receive Unknown Broadcast Bytecount." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_ALE_POL_MATCH_k" acronym="CPSW_STAT_ALE_POL_MATCH_k" offset="0x3A0C0" width="32" description="ALE Policer Matched. Offset = 0003A0C0h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="ALE Policer Matched." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_ALE_POL_MATCH_RED_k" acronym="CPSW_STAT_ALE_POL_MATCH_RED_k" offset="0x3A0C4" width="32" description="ALE Policer Matched and Condition Red. Offset = 0003A0C4h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="ALE Policer Matched and Condition Red." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_ALE_POL_MATCH_YELLOW_k" acronym="CPSW_STAT_ALE_POL_MATCH_YELLOW_k" offset="0x3A0C8" width="32" description="ALE Policer Matched and Condition Yellow. Offset = 0003A0C8h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="ALE Policer Matched and Condition Yellow." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_ALE_MULT_SA_DROP_k" acronym="CPSW_STAT_ALE_MULT_SA_DROP_k" offset="0x3A0CC" width="32" description="ALE Multicast Source Address Drop. Offset = 0003A0CCh + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="ALE Multicast Source Address drop." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_ALE_DUAL_VLAN_DROP_k" acronym="CPSW_STAT_ALE_DUAL_VLAN_DROP_k" offset="0x3A0D0" width="32" description="ALE Dual VLAN Drop. Offset = 0003A0D0h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="ALE Dual VLAN drop." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_ALE_LEN_ERROR_DROP_k" acronym="CPSW_STAT_ALE_LEN_ERROR_DROP_k" offset="0x3A0D4" width="32" description="ALE Length Error Drop. Offset = 0003A0D4h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="ALE Length Error drop." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_ALE_IP_NEXT_HDR_DROP_k" acronym="CPSW_STAT_ALE_IP_NEXT_HDR_DROP_k" offset="0x3A0D8" width="32" description="ALE IP Next Header Drop. Offset = 0003A0D8h + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="ALE Next Header drop." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_ALE_IPV4_FRAG_DROP_k" acronym="CPSW_STAT_ALE_IPV4_FRAG_DROP_k" offset="0x3A0DC" width="32" description="ALE IPV4 Frag Drop. Offset = 0003A0DCh + (k * 200h); where k = 0h to 8h">
+    <bitfield id="COUNT" width="32" begin="31" end="0" resetval="0x0" description="ALE IPV4 Fragment drop." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_IET_RX_ASSEMBLY_ERROR_REG_k" acronym="CPSW_STAT_IET_RX_ASSEMBLY_ERROR_REG_k" offset="0x3A140" width="32" description="IET Receive Assembly Error. Offset = 0003A140h + (k * 200h); where k = 0h to 8h Note: IET functionallity is not supported for CPSW0 Port 0.">
+    <bitfield id="IET_RX_ASSEMBLY_ERROR" width="32" begin="31" end="0" resetval="0x0" description="IET Receive Assembly Error.Note: IET functionallity is not supported for CPSW0 Port 0." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_IET_RX_ASSEMBLY_OK_REG_k" acronym="CPSW_STAT_IET_RX_ASSEMBLY_OK_REG_k" offset="0x3A144" width="32" description="IET Receive Assembly Ok. Offset = 0003A144h + (k * 200h); where k = 0h to 8h Note: IET functionallity is not supported for CPSW0 Port 0.">
+    <bitfield id="IET_RX_ASSEMBLY_OK" width="32" begin="31" end="0" resetval="0x0" description="IET Receive Assembly Ok.Note: IET functionallity is not supported for CPSW0 Port 0." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_IET_RX_SMD_ERROR_REG_k" acronym="CPSW_STAT_IET_RX_SMD_ERROR_REG_k" offset="0x3A148" width="32" description="IET Receive Smd Error. Offset = 0003A148h + (k * 200h); where k = 0h to 8h Note: IET functionallity is not supported for CPSW0 Port 0.">
+    <bitfield id="IET_RX_SMD_ERROR" width="32" begin="31" end="0" resetval="0x0" description="IET Receive Smd Error.Note: IET functionallity is not supported for CPSW0 Port 0." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_IET_RX_FRAG_REG_k" acronym="CPSW_STAT_IET_RX_FRAG_REG_k" offset="0x3A14C" width="32" description="IET Receive Frag. Offset = 0003A14Ch + (k * 200h); where k = 0h to 8h Note: IET functionallity is not supported for CPSW0 Port 0.">
+    <bitfield id="IET_RX_FRAG" width="32" begin="31" end="0" resetval="0x0" description="IET Receive Frag.Note: IET functionallity is not supported for CPSW0 Port 0." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_IET_TX_HOLD_REG_k" acronym="CPSW_STAT_IET_TX_HOLD_REG_k" offset="0x3A150" width="32" description="IET Transmit Hold. Offset = 0003A150h + (k * 200h); where k = 0h to 8h Note: IET functionallity is not supported for CPSW0 Port 0.">
+    <bitfield id="IET_TX_HOLD" width="32" begin="31" end="0" resetval="0x0" description="IET Transmit Hold.Note: IET functionallity is not supported for CPSW0 Port 0." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_IET_TX_FRAG_REG_k" acronym="CPSW_STAT_IET_TX_FRAG_REG_k" offset="0x3A154" width="32" description="IET Transmit Frag. Offset = 0003A154h + (k * 200h); where k = 0h to 8h Note: IET functionallity is not supported for CPSW0 Port 0.">
+    <bitfield id="IET_TX_FRAG" width="32" begin="31" end="0" resetval="0x0" description="IET Transmit Frag.Note: IET functionallity is not supported for CPSW0 Port 0." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_TX_MEMORY_PROTECT_ERROR_k" acronym="CPSW_STAT_TX_MEMORY_PROTECT_ERROR_k" offset="0x3A17C" width="32" description="Transmit Memory Protect CRC Error. Offset = 0003A17Ch + (k * 200h); where k = 0h to 8h">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="COUNT" width="8" begin="7" end="0" resetval="0x0" description="Transmit Memory Protect CRC Error.Note: If there is a memorry protect error, then this COUNT value will increment and issue a STAT_PEND0 interrupt, when this bit field is non-zero.That is different from the other stats which only issue an interrupt when their values are greater than 0xFFFF." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_ENET_PN_TX_PRI_REG_k_y" acronym="CPSW_STAT_ENET_PN_TX_PRI_REG_k_y" offset="0x3A180" width="32" description="ENET Port n PRIORITY N Packet Count. Offset = 0003A180h + (k * 200h) + (y * 4h); where k = 0h to 8h, y = 0h to 7h">
+    <bitfield id="PN_TX_PRIN" width="32" begin="31" end="0" resetval="0x0" description="ENET TX Priority Packet Count." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_ENET_PN_TX_PRI_BCNT_REG_k_y" acronym="CPSW_STAT_ENET_PN_TX_PRI_BCNT_REG_k_y" offset="0x3A1A0" width="32" description="ENET Port n PRIORITY N Packet Byte Count. Offset = 0003A1A0h + (k * 200h) + (y * 4h); where k = 0h to 8h, y = 0h to 7h">
+    <bitfield id="PN_TX_PRIN_BCNT" width="32" begin="31" end="0" resetval="0x0" description="ENET Port n PRIORITY N Packet Byte Count." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_ENET_PN_TX_PRI_DROP_REG_k_y" acronym="CPSW_STAT_ENET_PN_TX_PRI_DROP_REG_k_y" offset="0x3A1C0" width="32" description="ENET Port n PRIORITY N Packet Drop Count. Offset = 0003A1C0h + (k * 200h) + (y * 4h); where k = 0h to 8h, y = 0h to 7h">
+    <bitfield id="PN_TX_PRIN_DROP" width="32" begin="31" end="0" resetval="0x0" description="ENET Port n PRIORITY N Packet Drop Count." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_STAT_ENET_PN_TX_PRI_DROP_BCNT_REG_k_y" acronym="CPSW_STAT_ENET_PN_TX_PRI_DROP_BCNT_REG_k_y" offset="0x3A1E0" width="32" description="ENET Port n PRIORITY N Packet Drop Byte Count. Offset = 0003A1E0h + (k * 200h) + (y * 4h); where k = 0h to 8h, y = 0h to 7h">
+    <bitfield id="PN_TX_PRIN_DROP_BCNT" width="32" begin="31" end="0" resetval="0x0" description="ENET Port n PRIORITY N Packet Drop Byte Count." range="" rwaccess="RW"/>
+  </register>
+</module>

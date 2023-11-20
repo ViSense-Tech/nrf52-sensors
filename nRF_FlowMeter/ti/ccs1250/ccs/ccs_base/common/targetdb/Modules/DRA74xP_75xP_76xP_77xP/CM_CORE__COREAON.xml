@@ -1,0 +1,77 @@
+<module name="CM_CORE__COREAON" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="CM_COREAON_CLKSTCTRL" acronym="CM_COREAON_CLKSTCTRL" offset="0x0" width="32" description="This register enables the domain power state transition. It controls the HW supervised domain power state transition between ON-ACTIVE and ON-INACTIVE states. It also hold one status bit per clock input of the domain.">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CLKACTIVITY_ABE_GICLK" width="1" begin="16" end="16" resetval="0x0" description="This field indicates the state of the ABE_GICLK clock input of the domain. [warm reset insensitive]" range="" rwaccess="R">
+      <bitenum value="0" id="INACT" token="CLKACTIVITY_ABE_GICLK_0" description="Corresponding clock is definitely gated"/>
+      <bitenum value="1" id="ACT" token="CLKACTIVITY_ABE_GICLK_1" description="Corresponding clock is running or gating/ungating transition is on-going"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CLKACTIVITY_COREAON_32K_GFCLK" width="1" begin="12" end="12" resetval="0x0" description="This field indicates the state of the COREAON_32K_GFCLK clock in the domain. [warm reset insensitive]" range="" rwaccess="R">
+      <bitenum value="0" id="INACT" token="CLKACTIVITY_COREAON_32K_GFCLK_0" description="Corresponding clock is definitely gated"/>
+      <bitenum value="1" id="ACT" token="CLKACTIVITY_COREAON_32K_GFCLK_1" description="Corresponding clock is running or gating/ungating transition is on-going"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="10" begin="11" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CLKTRCTRL" width="2" begin="1" end="0" resetval="0x3" description="Controls the clock state transition of the COREAON clock domain." range="" rwaccess="RW">
+      <bitenum value="0" id="NO_SLEEP" token="CLKTRCTRL_0" description="NO_SLEEP: Sleep transition cannot be initiated. Wakeup transition may however occur."/>
+      <bitenum value="1" id="RESERVED" token="CLKTRCTRL_1" description="Reserved"/>
+      <bitenum value="2" id="SW_WKUP" token="CLKTRCTRL_2" description="SW_WKUP: Start a software forced wake-up transition on the domain."/>
+      <bitenum value="3" id="HW_AUTO" token="CLKTRCTRL_3" description="HW_AUTO: Automatic transition is enabled. Sleep and wakeup transition are based upon hardware conditions."/>
+    </bitfield>
+  </register>
+  <register id="CM_COREAON_USB_PHY1_CORE_CLKCTRL" acronym="CM_COREAON_USB_PHY1_CORE_CLKCTRL" offset="0x40" width="32" description="This register manages the USB PHY 32KHz clock.">
+    <bitfield id="RESERVED" width="23" begin="31" end="9" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OPTFCLKEN_CLK32K" width="1" begin="8" end="8" resetval="0x0" description="Optional functional clock control." range="" rwaccess="RW">
+      <bitenum value="0" id="FCLK_DIS" token="OPTFCLKEN_CLK32K_0" description="Optional functional clock is disabled"/>
+      <bitenum value="1" id="FCLK_EN" token="OPTFCLKEN_CLK32K_1" description="Optional functional clock is enabled"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CM_COREAON_USB_PHY2_CORE_CLKCTRL" acronym="CM_COREAON_USB_PHY2_CORE_CLKCTRL" offset="0x88" width="32" description="This register manages the USB PHY 32KHz clock.">
+    <bitfield id="RESERVED" width="23" begin="31" end="9" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OPTFCLKEN_CLK32K" width="1" begin="8" end="8" resetval="0x0" description="Optional functional clock control." range="" rwaccess="RW">
+      <bitenum value="0" id="FCLK_DIS" token="OPTFCLKEN_CLK32K_0" description="Optional functional clock is disabled"/>
+      <bitenum value="1" id="FCLK_EN" token="OPTFCLKEN_CLK32K_1" description="Optional functional clock is enabled"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CM_COREAON_USB_PHY3_CORE_CLKCTRL" acronym="CM_COREAON_USB_PHY3_CORE_CLKCTRL" offset="0x98" width="32" description="This register manages the USB PHY 32KHz clock.">
+    <bitfield id="RESERVED" width="23" begin="31" end="9" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OPTFCLKEN_CLK32K" width="1" begin="8" end="8" resetval="0x0" description="Optional functional clock control." range="" rwaccess="RW">
+      <bitenum value="0" id="FCLK_DIS" token="OPTFCLKEN_CLK32K_0" description="Optional functional clock is disabled"/>
+      <bitenum value="1" id="FCLK_EN" token="OPTFCLKEN_CLK32K_1" description="Optional functional clock is enabled"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CM_COREAON_CLKOUTMUX1_CLKCTRL" acronym="CM_COREAON_CLKOUTMUX1_CLKCTRL" offset="0xA0" width="32" description="Used for controlling the CLKOUTMUX 1 gate.">
+    <bitfield id="RESERVED" width="23" begin="31" end="9" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OPTFCLKEN_CLKOUTMUX1_CLK" width="1" begin="8" end="8" resetval="0x0" description="Optional functional clock control." range="" rwaccess="RW">
+      <bitenum value="0" id="FCLK_DIS" token="OPTFCLKEN_CLKOUTMUX1_CLK_0" description="Optional functional clock is disabled"/>
+      <bitenum value="1" id="FCLK_EN" token="OPTFCLKEN_CLKOUTMUX1_CLK_1" description="Optional functional clock is enabled"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CM_COREAON_CLKOUTMUX2_CLKCTRL" acronym="CM_COREAON_CLKOUTMUX2_CLKCTRL" offset="0xB0" width="32" description="Used for controlling the CLKOUTMUX 2 gate.">
+    <bitfield id="RESERVED" width="23" begin="31" end="9" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OPTFCLKEN_CLKOUTMUX2_CLK" width="1" begin="8" end="8" resetval="0x0" description="Optional functional clock control." range="" rwaccess="RW">
+      <bitenum value="0" id="FCLK_DIS" token="OPTFCLKEN_CLKOUTMUX2_CLK_0" description="Optional functional clock is disabled"/>
+      <bitenum value="1" id="FCLK_EN" token="OPTFCLKEN_CLKOUTMUX2_CLK_1" description="Optional functional clock is enabled"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CM_COREAON_L3INIT_60M_GFCLK_CLKCTRL" acronym="CM_COREAON_L3INIT_60M_GFCLK_CLKCTRL" offset="0xC0" width="32" description="Used for controlling the L3INIT_60M_GFCLK gate.">
+    <bitfield id="RESERVED" width="23" begin="31" end="9" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OPTFCLKEN_L3INIT_60M_GFCLK" width="1" begin="8" end="8" resetval="0x0" description="Optional functional clock control; used to control the clock of USB2PHY2." range="" rwaccess="RW">
+      <bitenum value="0" id="FCLK_DIS" token="OPTFCLKEN_L3INIT_60M_GFCLK_0" description="Optional functional clock is disabled"/>
+      <bitenum value="1" id="FCLK_EN" token="OPTFCLKEN_L3INIT_60M_GFCLK_1" description="Optional functional clock is enabled"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CM_COREAON_ABE_GICLK_CLKCTRL" acronym="CM_COREAON_ABE_GICLK_CLKCTRL" offset="0xD0" width="32" description="Used for controlling ABE_GICLK gate.">
+    <bitfield id="RESERVED" width="23" begin="31" end="9" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OPTFCLKEN_ABE_GICLK" width="1" begin="8" end="8" resetval="0x0" description="Optional functional clock control." range="" rwaccess="RW">
+      <bitenum value="0" id="FCLK_DIS" token="OPTFCLKEN_ABE_GICLK_0" description="Optional functional clock is disabled"/>
+      <bitenum value="1" id="FCLK_EN" token="OPTFCLKEN_ABE_GICLK_1" description="Optional functional clock is enabled"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+</module>

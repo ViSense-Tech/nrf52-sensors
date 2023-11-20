@@ -1,0 +1,36 @@
+<module name="COMPUTE_CLUSTER_J7AHP0_C71SS3_0_AW7_DRU_DRU_CHCORE" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="AW7_DRU_DRU_CHCORE_submit_word0_1" acronym="AW7_DRU_DRU_CHCORE_submit_word0_1" offset="0x0" width="64" description="">
+		<bitfield id="ICNT1" width="16" begin="63" end="48" resetval="0x0" description="Lines in a transfer" range="63 - 48" rwaccess="W"/> 
+		<bitfield id="ICNT0" width="16" begin="47" end="32" resetval="0x0" description="Bytes in a transfer" range="47 - 32" rwaccess="W"/> 
+		<bitfield id="FLAGS" width="32" begin="31" end="0" resetval="0x0" description="Flags for the operation and type of descriptor" range="31 - 0" rwaccess="W"/>
+	</register>
+	<register id="AW7_DRU_DRU_CHCORE_submit_word2_3" acronym="AW7_DRU_DRU_CHCORE_submit_word2_3" offset="0x8" width="64" description="">
+		<bitfield id="SRC_ADDR" width="48" begin="47" end="0" resetval="0x0" description="Source transfer address virtual or physical allowed" range="47 - 0" rwaccess="W"/>
+	</register>
+	<register id="AW7_DRU_DRU_CHCORE_submit_word4_5" acronym="AW7_DRU_DRU_CHCORE_submit_word4_5" offset="0x10" width="64" description="">
+		<bitfield id="ICNT3" width="16" begin="63" end="48" resetval="0x0" description="The size of the 4th loop in the TR transfer" range="63 - 48" rwaccess="W"/> 
+		<bitfield id="ICNT2" width="16" begin="47" end="32" resetval="0x0" description="The size of the 3rd loop in the TR transfer" range="47 - 32" rwaccess="W"/> 
+		<bitfield id="DIM1" width="32" begin="31" end="0" resetval="0x0" description="The first dimension width of the source data" range="31 - 0" rwaccess="W"/>
+	</register>
+	<register id="AW7_DRU_DRU_CHCORE_submit_word6_7" acronym="AW7_DRU_DRU_CHCORE_submit_word6_7" offset="0x18" width="64" description="">
+		<bitfield id="DIM3" width="32" begin="63" end="32" resetval="0x0" description="The third dimension width of the source data" range="63 - 32" rwaccess="W"/> 
+		<bitfield id="DIM2" width="32" begin="31" end="0" resetval="0x0" description="The second dimension width of the source data" range="31 - 0" rwaccess="W"/>
+	</register>
+	<register id="AW7_DRU_DRU_CHCORE_submit_word8_9" acronym="AW7_DRU_DRU_CHCORE_submit_word8_9" offset="0x20" width="64" description="">
+		<bitfield id="DDIM1" width="32" begin="63" end="32" resetval="0x0" description="The first dimension width of the destination data" range="63 - 32" rwaccess="W"/> 
+		<bitfield id="FMTFLAGS" width="32" begin="31" end="0" resetval="0x0" description="The data formatting flags to be used for the TR" range="31 - 0" rwaccess="W"/>
+	</register>
+	<register id="AW7_DRU_DRU_CHCORE_submit_word10_11" acronym="AW7_DRU_DRU_CHCORE_submit_word10_11" offset="0x28" width="64" description="">
+		<bitfield id="DADDR" width="48" begin="47" end="0" resetval="0x0" description="Destination transfer address virtual or physical allowed" range="47 - 0" rwaccess="W"/>
+	</register>
+	<register id="AW7_DRU_DRU_CHCORE_submit_word12_13" acronym="AW7_DRU_DRU_CHCORE_submit_word12_13" offset="0x30" width="64" description="">
+		<bitfield id="DDIM3" width="32" begin="63" end="32" resetval="0x0" description="The third dimension width of the destination data" range="63 - 32" rwaccess="W"/> 
+		<bitfield id="DDIM2" width="32" begin="31" end="0" resetval="0x0" description="The second dimension width of the destination data" range="31 - 0" rwaccess="W"/>
+	</register>
+	<register id="AW7_DRU_DRU_CHCORE_submit_word14_15" acronym="AW7_DRU_DRU_CHCORE_submit_word14_15" offset="0x38" width="64" description="">
+		<bitfield id="DICNT3" width="16" begin="63" end="48" resetval="0x0" description="The fourth count of the destination if different than the source" range="63 - 48" rwaccess="W"/> 
+		<bitfield id="DICNT2" width="16" begin="47" end="32" resetval="0x0" description="The third count of the destination if different than the source" range="47 - 32" rwaccess="W"/> 
+		<bitfield id="DICNT1" width="16" begin="31" end="16" resetval="0x0" description="The second innermost count of the destination if different than the source" range="31 - 16" rwaccess="W"/> 
+		<bitfield id="DICNT0" width="16" begin="15" end="0" resetval="0x0" description="The innermost count of the destination if different than the source" range="15 - 0" rwaccess="W"/>
+	</register>
+</module>

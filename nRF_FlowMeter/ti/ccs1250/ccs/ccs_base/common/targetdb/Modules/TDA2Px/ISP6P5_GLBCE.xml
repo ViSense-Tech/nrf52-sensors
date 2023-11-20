@@ -1,0 +1,1832 @@
+<module name="ISP6P5_GLBCE" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="GLBCE_CFG" acronym="GLBCE_CFG" offset="0x0" width="32" description="GLBCE Configuration Registers">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SWRST" width="1" begin="0" end="0" resetval="0x0" description="This bit initiate software reset process" range="" rwaccess="RW">
+      <bitenum value="0" id="OFF" token="SWRST_0" description="SW Reset off or SW reset finished"/>
+      <bitenum value="1" id="ON" token="SWRST_1" description="SW reset start"/>
+    </bitfield>
+  </register>
+  <register id="GLBCE_MODE" acronym="GLBCE_MODE" offset="0x4" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OST" width="1" begin="0" end="0" resetval="0x0" description="One shot mode or continuous mode. One shot mode turns itself off after each frame. Note that this bit only controls the enable signal, and does not revert the statistics to the default status. To revert the cache content to the default status, you either need to SW reset GLBCE module, or load the default value from SDRAM to cache memory. To perform the latter option, default cache table needs to be copied to SDRAM before hand." range="" rwaccess="RW">
+      <bitenum value="0" id="CONTINUOUT" token="OST_0" description="Continuous mode. GLBCE module keep running after each frame until the enable bit is turned off."/>
+      <bitenum value="1" id="ONE_SHOT" token="OST_1" description="One shot mode. GLBCE turns off it self at the beginning of each frame."/>
+    </bitfield>
+  </register>
+  <register id="GLBCE_CONTROL0" acronym="GLBCE_CONTROL0" offset="0x8" width="32" description="GLBCE Configuration Port GLBCE Control Register 0 (control_0)">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CCTL" width="1" begin="4" end="4" resetval="0x0" description="Color Control (CCTL) - Enabling this processing will result in more accurate colors processing. The color correction algorithm is required on gamma corrected sources It reduces the saturation in dark areas when they are being amplified, and saturates bright parts when they get darker. This bit is reserved and tied zero in ISS6 0b: Disable color correction 1b: Enable color correction" range="" rwaccess="R"/>
+    <bitfield id="MB" width="1" begin="3" end="3" resetval="0x1" description="Max Bayer Type- Use this bit to select the algorithm used for calculating intensity. 0b: Algorithm 1 1b: Algorithm 2 (Recommended)" range="" rwaccess="RW">
+      <bitenum value="0" id="ALGORITHM1" token="MB_0" description="0b: Algorithm 1"/>
+      <bitenum value="1" id="ALGORITHM2" token="MB_1" description="1b: Algorithm 2 (Recommended)"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="2" begin="2" end="1" resetval="0x0" description="These bits are read only. Controls the storage of image sensor RAW data in memory. This bit is loaded with the timing of the internal VD signal: it becomes active starting at the lead of the VD signal that comes after 1 is written in this bit." range="" rwaccess="R"/>
+    <bitfield id="ONOFF" width="1" begin="0" end="0" resetval="0x0" description="GLBCE On/Off - This bit turns GLBCE processing ON and OFF. When GLBCE is OFF, the video data passes to the output without any changes. Disabling GLBCE using this bit is equivalent to setting the Strength parameter to 0. Many internal modules run in idle mode when this bit is 0. The Latency Delays between the input and the output signals are the same in both ON and OFF modes. 0b: Disable GLBCE processing 1b: Enable GLBCE processing" range="" rwaccess="RW">
+      <bitenum value="0" id="OFF" token="ONOFF_0" description="Disable"/>
+      <bitenum value="1" id="ON" token="ONOFF_1" description="Enable"/>
+    </bitfield>
+  </register>
+  <register id="GLBCE_CONTROL1" acronym="GLBCE_CONTROL1" offset="0xC" width="32" description="GLBCE Configuration Port Reserved for future connection to CONTROL1 port Not used in OMAP6 as the port is not connected.">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="GLBCE_BLACK_LEVEL" acronym="GLBCE_BLACK_LEVEL" offset="0x10" width="32" description="GLBCE Configuration Port Black Level Register (black_level)">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x0" description="The value stored in Black Level Port will be used as zero level for GLBCE processing in all unsigned data channels. Data below Black level will not be processed and stay unchanged." range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WHITE_LEVEL" acronym="GLBCE_WHITE_LEVEL" offset="0x14" width="32" description="GLBCE Configuration Port White Level Register (white_level)">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xffff" description="The value stored in White Level Port will be used as white level for GLBCE processing in all unsigned data channels. Data above White level will not be processed and stay unchanged." range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_VARIANCE" acronym="GLBCE_VARIANCE" offset="0x18" width="32" description="GLBCE Configuration Port Affects the sensitivity of the transform to different areas of the image, and can be increased in order to emphasize small regions (e.g. faces). If this parameter is set to zero, the sensitivity to the small areas is maximal. The transform becomes more local. When the parameter is set to 0xFF the transform deemphasizes small local details, and transform becomes more global e.g. the sky at the top of the frame can affect flowers at the bottom of the frame.">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VARIANCEINTENSITY" width="4" begin="7" end="4" resetval="0x4" description="Variance Intensity - Sets the degree of sensitivity in the luminance domain. Maximum Variance is 0xF, and minimum Variance is 0x0." range="" rwaccess="RW"/>
+    <bitfield id="VARIANCESPACE" width="4" begin="3" end="0" resetval="0x1" description="Variance Space - Sets the degree of spatial sensitivity of the algorithm. As this parameter is made smaller, the algorithm focuses on smaller regions within the image. Maximum Variance is 0xF, and minimum Variance is 0x0." range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LIMIT_AMPL" acronym="GLBCE_LIMIT_AMPL" offset="0x1C" width="32" description="GLBCE Configuration Port The parameters ? dark amplification limit ? bright amplification limit are used to restrict the luminance space in which GLBCE can adaptively generate tone curves for each pixel.">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="BRIGHTAMPLIFICATIONLIMIT" width="4" begin="7" end="4" resetval="0xf" description="Bright amplification limit - The resultant tone curve cannot be lower than bright amplification limit line controlled by the bright amplification limit parameter. See Chapter 4 of the spec document for more explanation. Maximum limit is 0xF, when the value is 0x0 there is no limit." range="" rwaccess="RW"/>
+    <bitfield id="DARKAMPLIFICATIONLIMIT" width="4" begin="3" end="0" resetval="0x0" description="Dark amplification limit - The resultant tone curve cannot be higher than dark amplification limit line controlled by the dark amplification limit parameter. See Chapter 4 of the spec for more explanation. Maximum limit is 0xF, when the value is 0x0 there is no limit." range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_DITHER" acronym="GLBCE_DITHER" offset="0x20" width="32" description="GLBCE Configuration Port Dithering Register (dither)">
+    <bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="6" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DITHER" width="3" begin="2" end="0" resetval="0x0" description="000b: No dithering 001b: One least significant bit of the output signal is dithered 010b: Two bits are dithered 011b: Three bits are dithered 100b: Four bits are dithered All other values : Four bits are dithered" range="" rwaccess="RW">
+      <bitenum value="0" id="NO_DITHER" token="DITHER_0" description="No dithering"/>
+      <bitenum value="1" id="ONE_LSB" token="DITHER_1" description="One least significant bit of the output signal is dithered"/>
+      <bitenum value="3" id="THREE_LSBS" token="DITHER_3" description="Three bits are dithered"/>
+      <bitenum value="4" id="FOUR_LSBS" token="DITHER_4" description="Four bits are dithered"/>
+      <bitenum value="2" id="TWO_LSBS" token="DITHER_2" description="Two bits are dithered"/>
+    </bitfield>
+  </register>
+  <register id="GLBCE_SLOPE_MAX" acronym="GLBCE_SLOPE_MAX" offset="0x24" width="32" description="GLBCE Configuration Port Slope Max Limit Register (slope_max)">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SLOPEMAXLIMIT" width="8" begin="7" end="0" resetval="0x28" description="Slope Max Limit - Slope Max Limit is used to restrict the slope of the tone-curve generated by GLBCE. When Slope Max Limit parameter is set to 0xFF, the tone curve slope, generated by GLBCE is not limited (maximum slope 15). When this value is set to 00 GLBCE will not generate the tone-curve with slope greater than 16/15 (48?). Intermediate values of Slope Limit are linear interpolation between minimum and maximum values. Recommended Slope Max Limit range is 20h-60h. For noisy images less value should be used. See Chapter 4 of GLBCE datasheet for more explanation." range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_SLOPE_MIN" acronym="GLBCE_SLOPE_MIN" offset="0x28" width="32" description="GLBCE Configuration Port Slope Min Limit Register (slope_min)">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SLOPEMINLIMIT" width="8" begin="7" end="0" resetval="0x80" description="Slope Min Limit - Slope Min Limit is used to restrict the slope of the tone-curve generated by GLBCE. When Slope Min Limit parameter is set to 0x00, the tone curve slope, generated by GLBCE is not limited. When this value is set to FF GLBCE will not generate the tone-curve with slope less than 3/4. Intermediate values of Slope Limit are linear interpolation between minimum and maximum values. Recommended Slope Min Limit range is 00h-C0h. See Chapter 4 in GLBCE datasheet for more explanation." range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_00" acronym="GLBCE_LUT_FI_00" offset="0x2C" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_01" acronym="GLBCE_LUT_FI_01" offset="0x30" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x1605" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_02" acronym="GLBCE_LUT_FI_02" offset="0x34" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x29ae" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_03" acronym="GLBCE_LUT_FI_03" offset="0x38" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x3b59" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_04" acronym="GLBCE_LUT_FI_04" offset="0x3C" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x4b4e" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_05" acronym="GLBCE_LUT_FI_05" offset="0x40" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x59ca" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_06" acronym="GLBCE_LUT_FI_06" offset="0x44" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x6700" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_07" acronym="GLBCE_LUT_FI_07" offset="0x48" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x7318" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_08" acronym="GLBCE_LUT_FI_08" offset="0x4C" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x7e36" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_09" acronym="GLBCE_LUT_FI_09" offset="0x50" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x8875" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_10" acronym="GLBCE_LUT_FI_10" offset="0x54" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x91f1" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_11" acronym="GLBCE_LUT_FI_11" offset="0x58" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x9abc" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_12" acronym="GLBCE_LUT_FI_12" offset="0x5C" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xa2eb" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_13" acronym="GLBCE_LUT_FI_13" offset="0x60" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xaa8d" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_14" acronym="GLBCE_LUT_FI_14" offset="0x64" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xb1b0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_15" acronym="GLBCE_LUT_FI_15" offset="0x68" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xb85f" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_16" acronym="GLBCE_LUT_FI_16" offset="0x6C" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xbea5" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_17" acronym="GLBCE_LUT_FI_17" offset="0x70" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xc48c" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_18" acronym="GLBCE_LUT_FI_18" offset="0x74" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xca1c" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_19" acronym="GLBCE_LUT_FI_19" offset="0x78" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xcf5d" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_20" acronym="GLBCE_LUT_FI_20" offset="0x7C" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xd454" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_21" acronym="GLBCE_LUT_FI_21" offset="0x80" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xd907" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_22" acronym="GLBCE_LUT_FI_22" offset="0x84" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xdd7c" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_23" acronym="GLBCE_LUT_FI_23" offset="0x88" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xe1b8" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_24" acronym="GLBCE_LUT_FI_24" offset="0x8C" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xe5bf" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_25" acronym="GLBCE_LUT_FI_25" offset="0x90" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xe994" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_26" acronym="GLBCE_LUT_FI_26" offset="0x94" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xed3b" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_27" acronym="GLBCE_LUT_FI_27" offset="0x98" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xf0b7" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_28" acronym="GLBCE_LUT_FI_28" offset="0x9C" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xf40c" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_29" acronym="GLBCE_LUT_FI_29" offset="0xA0" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xf73b" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_30" acronym="GLBCE_LUT_FI_30" offset="0xA4" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xfa47" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_31" acronym="GLBCE_LUT_FI_31" offset="0xA8" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xfd32" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_LUT_FI_32" acronym="GLBCE_LUT_FI_32" offset="0xAC" width="32" description="GLBCE Configuration Port Asymmetry Function LUT The Asymmetry Function Lookup Table port geometry is 33 words, each of which is 16 bits. The Asymmetry function is used to balance the GLBCE effect between the dark and bright regions of the image.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xffff" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FORMAT_CONTROL_REG0" acronym="GLBCE_FORMAT_CONTROL_REG0" offset="0xB0" width="32" description="GLBCE Configuration Port The Data format port specifies the input data format so that the GLBCE core can process the different input data formats This register is reserved for ISS6.">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="7" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DATAFORMAT" width="2" begin="1" end="0" resetval="0x0" description="This value is reserved. The color format is always RGB, and this value should be fixed 0." range="" rwaccess="R"/>
+  </register>
+  <register id="GLBCE_FORMAT_CONTROL_REG1" acronym="GLBCE_FORMAT_CONTROL_REG1" offset="0xB4" width="32" description="GLBCE Configuration Port Control Reg1">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="AUTOSIZE" width="1" begin="7" end="7" resetval="0x0" description="This value is read only. GLBCE in ISP6 nver use Auto-size mode." range="" rwaccess="R">
+      <bitenum value="0" id="OFF" token="AUTOSIZE_0" description="Auto size off. The GLBCE core will use frame_width, frame_height ports values."/>
+      <bitenum value="1" id="ON" token="AUTOSIZE_1" description="Auto size on. The GLBCE core will calculate the frame geometry based on the active line and field signals. The size of current frame will be used for the estimation of the next frame. The Frame size will be updated when the Field signal toggles."/>
+    </bitfield>
+    <bitfield id="AUTOPOS" width="1" begin="6" end="6" resetval="0x1" description="This value is read only. GLBCE in ISP6 always runs in Auto Position mode." range="" rwaccess="R">
+      <bitenum value="0" id="OFF" token="AUTOPOS_0" description="Auto Position off"/>
+      <bitenum value="1" id="ON" token="AUTOPOS_1" description="Auto Position On"/>
+    </bitfield>
+    <bitfield id="FCMODE" width="2" begin="5" end="4" resetval="0x0" description="Field Correction Mode" range="" rwaccess="R">
+      <bitenum value="0" id="INTERNAL" token="FCMODE_0" description="Internal field signal will be the same as external field signal. Internal generation of field is not available in this mode"/>
+      <bitenum value="1" id="VSYNC" token="FCMODE_1" description="Adjust field signal with v_sync"/>
+      <bitenum value="2" id="ACTIVELINE" token="FCMODE_2" description="Adjust field signal with active line"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="2" begin="3" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VSPOL" width="1" begin="1" end="1" resetval="0x0" description="Vertical Sync Polarity This value is read only. The SWITCH block always convert the polarity to rising edge active." range="" rwaccess="R">
+      <bitenum value="0" id="RISING" token="VSPOL_0" description="Rising edge active"/>
+      <bitenum value="1" id="FALLING" token="VSPOL_1" description="Falling edge active"/>
+    </bitfield>
+    <bitfield id="HSPOL" width="1" begin="0" end="0" resetval="0x0" description="Horizontal Sync Polarity This value is read only. The SWITCH block always convert the polarity to rising edge active." range="" rwaccess="R">
+      <bitenum value="0" id="RISING" token="HSPOL_0" description="Rising edge active"/>
+      <bitenum value="1" id="FALLING" token="HSPOL_1" description="Falling edge active"/>
+    </bitfield>
+  </register>
+  <register id="GLBCE_FRAME_WIDTH" acronym="GLBCE_FRAME_WIDTH" offset="0xB8" width="32" description="GLBCE Configuration Port Frame Width is the number of pixels in an active line. This port is used only in ?non-automatic? mode.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FRAME_HEIGHT" acronym="GLBCE_FRAME_HEIGHT" offset="0xBC" width="32" description="GLBCE Configuration Port Frame Height is the number of active lines in one field.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_STRENGTH_IR" acronym="GLBCE_STRENGTH_IR" offset="0xC0" width="32" description="GLBCE Configuration Port Strength (Strength of GLBCE) - This Port sets processing Strength. Minimum value is 0, maximum is 255.">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="8" begin="7" end="0" resetval="0x80" description="0x00: Video data will not be processed at all, and will go to the output unchanged. 0xFF: Maximum strength" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_PERCEPT_EN" acronym="GLBCE_PERCEPT_EN" offset="0xC4" width="32" description="">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FWD_EN" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="FWD_EN_0" description="DISABLE"/>
+      <bitenum value="1" id="ENABLE" token="FWD_EN_1" description="ENABLE"/>
+    </bitfield>
+    <bitfield id="REV_EN" width="1" begin="0" end="0" resetval="0x0" description="Reverse Perceptual LUT enable[" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="REV_EN_0" description="DISABLE"/>
+      <bitenum value="1" id="ENABLE" token="REV_EN_1" description="ENABLE"/>
+    </bitfield>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_00" acronym="GLBCE_REV_PERCEPT_LUT_00" offset="0xC8" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_01" acronym="GLBCE_REV_PERCEPT_LUT_01" offset="0xCC" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xe4" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_02" acronym="GLBCE_REV_PERCEPT_LUT_02" offset="0xD0" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x1c7" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_03" acronym="GLBCE_REV_PERCEPT_LUT_03" offset="0xD4" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x2ab" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_04" acronym="GLBCE_REV_PERCEPT_LUT_04" offset="0xD8" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x38e" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_05" acronym="GLBCE_REV_PERCEPT_LUT_05" offset="0xDC" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x472" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_06" acronym="GLBCE_REV_PERCEPT_LUT_06" offset="0xE0" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x559" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_07" acronym="GLBCE_REV_PERCEPT_LUT_07" offset="0xE4" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x65c" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_08" acronym="GLBCE_REV_PERCEPT_LUT_08" offset="0xE8" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x778" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_09" acronym="GLBCE_REV_PERCEPT_LUT_09" offset="0xEC" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x8ad" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_10" acronym="GLBCE_REV_PERCEPT_LUT_10" offset="0xF0" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x9fc" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_11" acronym="GLBCE_REV_PERCEPT_LUT_11" offset="0xF4" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xb64" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_12" acronym="GLBCE_REV_PERCEPT_LUT_12" offset="0xF8" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xce8" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_13" acronym="GLBCE_REV_PERCEPT_LUT_13" offset="0xFC" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xe85" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_14" acronym="GLBCE_REV_PERCEPT_LUT_14" offset="0x100" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x103e" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_15" acronym="GLBCE_REV_PERCEPT_LUT_15" offset="0x104" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x1212" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_16" acronym="GLBCE_REV_PERCEPT_LUT_16" offset="0x108" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x1402" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_17" acronym="GLBCE_REV_PERCEPT_LUT_17" offset="0x10C" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x160d" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_18" acronym="GLBCE_REV_PERCEPT_LUT_18" offset="0x110" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x1835" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_19" acronym="GLBCE_REV_PERCEPT_LUT_19" offset="0x114" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x1a79" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_20" acronym="GLBCE_REV_PERCEPT_LUT_20" offset="0x118" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x1cda" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_21" acronym="GLBCE_REV_PERCEPT_LUT_21" offset="0x11C" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x1f58" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_22" acronym="GLBCE_REV_PERCEPT_LUT_22" offset="0x120" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x21f3" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_23" acronym="GLBCE_REV_PERCEPT_LUT_23" offset="0x124" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x24ab" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_24" acronym="GLBCE_REV_PERCEPT_LUT_24" offset="0x128" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x2781" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_25" acronym="GLBCE_REV_PERCEPT_LUT_25" offset="0x12C" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x2a75" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_26" acronym="GLBCE_REV_PERCEPT_LUT_26" offset="0x130" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x2d86" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_27" acronym="GLBCE_REV_PERCEPT_LUT_27" offset="0x134" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x30b7" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_28" acronym="GLBCE_REV_PERCEPT_LUT_28" offset="0x138" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x3405" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_29" acronym="GLBCE_REV_PERCEPT_LUT_29" offset="0x13C" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x3772" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_30" acronym="GLBCE_REV_PERCEPT_LUT_30" offset="0x140" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x3aff" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_31" acronym="GLBCE_REV_PERCEPT_LUT_31" offset="0x144" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x3eaa" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_32" acronym="GLBCE_REV_PERCEPT_LUT_32" offset="0x148" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x4274" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_33" acronym="GLBCE_REV_PERCEPT_LUT_33" offset="0x14C" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x465e" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_34" acronym="GLBCE_REV_PERCEPT_LUT_34" offset="0x150" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x4a68" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_35" acronym="GLBCE_REV_PERCEPT_LUT_35" offset="0x154" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x4e91" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_36" acronym="GLBCE_REV_PERCEPT_LUT_36" offset="0x158" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x52da" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_37" acronym="GLBCE_REV_PERCEPT_LUT_37" offset="0x15C" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x5744" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_38" acronym="GLBCE_REV_PERCEPT_LUT_38" offset="0x160" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x5bcd" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_39" acronym="GLBCE_REV_PERCEPT_LUT_39" offset="0x164" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x6078" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_40" acronym="GLBCE_REV_PERCEPT_LUT_40" offset="0x168" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x6542" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_41" acronym="GLBCE_REV_PERCEPT_LUT_41" offset="0x16C" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x6a2e" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_42" acronym="GLBCE_REV_PERCEPT_LUT_42" offset="0x170" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x6f3b" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_43" acronym="GLBCE_REV_PERCEPT_LUT_43" offset="0x174" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x7468" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_44" acronym="GLBCE_REV_PERCEPT_LUT_44" offset="0x178" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x79b7" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_45" acronym="GLBCE_REV_PERCEPT_LUT_45" offset="0x17C" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x7f28" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_46" acronym="GLBCE_REV_PERCEPT_LUT_46" offset="0x180" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x84b9" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_47" acronym="GLBCE_REV_PERCEPT_LUT_47" offset="0x184" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x8a6d" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_48" acronym="GLBCE_REV_PERCEPT_LUT_48" offset="0x188" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x9042" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_49" acronym="GLBCE_REV_PERCEPT_LUT_49" offset="0x18C" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x963a" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_50" acronym="GLBCE_REV_PERCEPT_LUT_50" offset="0x190" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x9c53" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_51" acronym="GLBCE_REV_PERCEPT_LUT_51" offset="0x194" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xa28f" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_52" acronym="GLBCE_REV_PERCEPT_LUT_52" offset="0x198" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xa8ed" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_53" acronym="GLBCE_REV_PERCEPT_LUT_53" offset="0x19C" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xaf6e" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_54" acronym="GLBCE_REV_PERCEPT_LUT_54" offset="0x1A0" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xb611" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_55" acronym="GLBCE_REV_PERCEPT_LUT_55" offset="0x1A4" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xbcd7" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_56" acronym="GLBCE_REV_PERCEPT_LUT_56" offset="0x1A8" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xc3c0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_57" acronym="GLBCE_REV_PERCEPT_LUT_57" offset="0x1AC" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xcacc" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_58" acronym="GLBCE_REV_PERCEPT_LUT_58" offset="0x1B0" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xd1fb" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_59" acronym="GLBCE_REV_PERCEPT_LUT_59" offset="0x1B4" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xd94e" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_60" acronym="GLBCE_REV_PERCEPT_LUT_60" offset="0x1B8" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xe0c3" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_61" acronym="GLBCE_REV_PERCEPT_LUT_61" offset="0x1BC" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xe85d" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_62" acronym="GLBCE_REV_PERCEPT_LUT_62" offset="0x1C0" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xf01a" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_63" acronym="GLBCE_REV_PERCEPT_LUT_63" offset="0x1C4" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xf7fa" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_REV_PERCEPT_LUT_64" acronym="GLBCE_REV_PERCEPT_LUT_64" offset="0x1C8" width="32" description="Reverse Perceptual LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xffff" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_00" acronym="GLBCE_FWD_PERCEPT_LUT_00" offset="0x1CC" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x0" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_01" acronym="GLBCE_FWD_PERCEPT_LUT_01" offset="0x1D0" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x120e" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_02" acronym="GLBCE_FWD_PERCEPT_LUT_02" offset="0x1D4" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x21cd" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_03" acronym="GLBCE_FWD_PERCEPT_LUT_03" offset="0x1D8" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x2da4" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_04" acronym="GLBCE_FWD_PERCEPT_LUT_04" offset="0x1DC" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x3773" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_05" acronym="GLBCE_FWD_PERCEPT_LUT_05" offset="0x1E0" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x3ffc" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_06" acronym="GLBCE_FWD_PERCEPT_LUT_06" offset="0x1E4" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x479f" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_07" acronym="GLBCE_FWD_PERCEPT_LUT_07" offset="0x1E8" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x4e96" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_08" acronym="GLBCE_FWD_PERCEPT_LUT_08" offset="0x1EC" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x5506" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_09" acronym="GLBCE_FWD_PERCEPT_LUT_09" offset="0x1F0" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x5b08" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_10" acronym="GLBCE_FWD_PERCEPT_LUT_10" offset="0x1F4" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x60af" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_11" acronym="GLBCE_FWD_PERCEPT_LUT_11" offset="0x1F8" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x6607" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_12" acronym="GLBCE_FWD_PERCEPT_LUT_12" offset="0x1FC" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x6b1e" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_13" acronym="GLBCE_FWD_PERCEPT_LUT_13" offset="0x200" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x6ff9" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_14" acronym="GLBCE_FWD_PERCEPT_LUT_14" offset="0x204" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x74a1" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_15" acronym="GLBCE_FWD_PERCEPT_LUT_15" offset="0x208" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x791b" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_16" acronym="GLBCE_FWD_PERCEPT_LUT_16" offset="0x20C" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x7d6c" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_17" acronym="GLBCE_FWD_PERCEPT_LUT_17" offset="0x210" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x8198" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_18" acronym="GLBCE_FWD_PERCEPT_LUT_18" offset="0x214" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x85a1" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_19" acronym="GLBCE_FWD_PERCEPT_LUT_19" offset="0x218" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x898b" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_20" acronym="GLBCE_FWD_PERCEPT_LUT_20" offset="0x21C" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x8d59" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_21" acronym="GLBCE_FWD_PERCEPT_LUT_21" offset="0x220" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x910c" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_22" acronym="GLBCE_FWD_PERCEPT_LUT_22" offset="0x224" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x94a7" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_23" acronym="GLBCE_FWD_PERCEPT_LUT_23" offset="0x228" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x982b" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_24" acronym="GLBCE_FWD_PERCEPT_LUT_24" offset="0x22C" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x9b9a" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_25" acronym="GLBCE_FWD_PERCEPT_LUT_25" offset="0x230" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x9ef5" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_26" acronym="GLBCE_FWD_PERCEPT_LUT_26" offset="0x234" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xa23d" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_27" acronym="GLBCE_FWD_PERCEPT_LUT_27" offset="0x238" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xa573" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_28" acronym="GLBCE_FWD_PERCEPT_LUT_28" offset="0x23C" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xa899" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_29" acronym="GLBCE_FWD_PERCEPT_LUT_29" offset="0x240" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xabaf" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_30" acronym="GLBCE_FWD_PERCEPT_LUT_30" offset="0x244" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xaeb7" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_31" acronym="GLBCE_FWD_PERCEPT_LUT_31" offset="0x248" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xb1b0" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_32" acronym="GLBCE_FWD_PERCEPT_LUT_32" offset="0x24C" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xb49c" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_33" acronym="GLBCE_FWD_PERCEPT_LUT_33" offset="0x250" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xb77b" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_34" acronym="GLBCE_FWD_PERCEPT_LUT_34" offset="0x254" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xba4e" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_35" acronym="GLBCE_FWD_PERCEPT_LUT_35" offset="0x258" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xbd15" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_36" acronym="GLBCE_FWD_PERCEPT_LUT_36" offset="0x25C" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xbfd2" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_37" acronym="GLBCE_FWD_PERCEPT_LUT_37" offset="0x260" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xc283" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_38" acronym="GLBCE_FWD_PERCEPT_LUT_38" offset="0x264" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xc52b" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_39" acronym="GLBCE_FWD_PERCEPT_LUT_39" offset="0x268" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xc7c9" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_40" acronym="GLBCE_FWD_PERCEPT_LUT_40" offset="0x26C" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xca5d" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_41" acronym="GLBCE_FWD_PERCEPT_LUT_41" offset="0x270" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xcce8" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_42" acronym="GLBCE_FWD_PERCEPT_LUT_42" offset="0x274" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xcf6b" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_43" acronym="GLBCE_FWD_PERCEPT_LUT_43" offset="0x278" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xd1e5" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_44" acronym="GLBCE_FWD_PERCEPT_LUT_44" offset="0x27C" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xd458" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_45" acronym="GLBCE_FWD_PERCEPT_LUT_45" offset="0x280" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xd6c2" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_46" acronym="GLBCE_FWD_PERCEPT_LUT_46" offset="0x284" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xd925" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_47" acronym="GLBCE_FWD_PERCEPT_LUT_47" offset="0x288" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xdb81" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_48" acronym="GLBCE_FWD_PERCEPT_LUT_48" offset="0x28C" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xddd5" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_49" acronym="GLBCE_FWD_PERCEPT_LUT_49" offset="0x290" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xe023" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_50" acronym="GLBCE_FWD_PERCEPT_LUT_50" offset="0x294" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xe26b" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_51" acronym="GLBCE_FWD_PERCEPT_LUT_51" offset="0x298" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xe4ab" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_52" acronym="GLBCE_FWD_PERCEPT_LUT_52" offset="0x29C" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xe6e6" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_53" acronym="GLBCE_FWD_PERCEPT_LUT_53" offset="0x2A0" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xe91b" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_54" acronym="GLBCE_FWD_PERCEPT_LUT_54" offset="0x2A4" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xeb4a" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_55" acronym="GLBCE_FWD_PERCEPT_LUT_55" offset="0x2A8" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xed73" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_56" acronym="GLBCE_FWD_PERCEPT_LUT_56" offset="0x2AC" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xef97" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_57" acronym="GLBCE_FWD_PERCEPT_LUT_57" offset="0x2B0" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xf1b5" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_58" acronym="GLBCE_FWD_PERCEPT_LUT_58" offset="0x2B4" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xf3ce" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_59" acronym="GLBCE_FWD_PERCEPT_LUT_59" offset="0x2B8" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xf5e2" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_60" acronym="GLBCE_FWD_PERCEPT_LUT_60" offset="0x2BC" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xf7f1" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_61" acronym="GLBCE_FWD_PERCEPT_LUT_61" offset="0x2C0" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xf9fc" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_62" acronym="GLBCE_FWD_PERCEPT_LUT_62" offset="0x2C4" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xfc01" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_63" acronym="GLBCE_FWD_PERCEPT_LUT_63" offset="0x2C8" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xfe02" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_FWD_PERCEPT_LUT_64" acronym="GLBCE_FWD_PERCEPT_LUT_64" offset="0x2CC" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xffff" description="Forward Perceptual LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_EN" acronym="GLBCE_WDR_GAMMA_EN" offset="0x2D0" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="Frontend WDR LUT enable" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="EN_0" description="DISABLE"/>
+      <bitenum value="1" id="ENABLE" token="EN_1" description="ENABLE"/>
+    </bitfield>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_00" acronym="GLBCE_WDR_GAMMA_LUT_00" offset="0x2D4" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_01" acronym="GLBCE_WDR_GAMMA_LUT_01" offset="0x2D8" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x100" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_02" acronym="GLBCE_WDR_GAMMA_LUT_02" offset="0x2DC" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x200" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_03" acronym="GLBCE_WDR_GAMMA_LUT_03" offset="0x2E0" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x300" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_04" acronym="GLBCE_WDR_GAMMA_LUT_04" offset="0x2E4" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x400" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_05" acronym="GLBCE_WDR_GAMMA_LUT_05" offset="0x2E8" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x500" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_06" acronym="GLBCE_WDR_GAMMA_LUT_06" offset="0x2EC" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x600" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_07" acronym="GLBCE_WDR_GAMMA_LUT_07" offset="0x2F0" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x700" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_08" acronym="GLBCE_WDR_GAMMA_LUT_08" offset="0x2F4" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x800" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_09" acronym="GLBCE_WDR_GAMMA_LUT_09" offset="0x2F8" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x900" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_10" acronym="GLBCE_WDR_GAMMA_LUT_10" offset="0x2FC" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xa00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_11" acronym="GLBCE_WDR_GAMMA_LUT_11" offset="0x300" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xb00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_12" acronym="GLBCE_WDR_GAMMA_LUT_12" offset="0x304" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xc00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_13" acronym="GLBCE_WDR_GAMMA_LUT_13" offset="0x308" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xd00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_14" acronym="GLBCE_WDR_GAMMA_LUT_14" offset="0x30C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xe00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_15" acronym="GLBCE_WDR_GAMMA_LUT_15" offset="0x310" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xf00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_16" acronym="GLBCE_WDR_GAMMA_LUT_16" offset="0x314" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x1000" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_17" acronym="GLBCE_WDR_GAMMA_LUT_17" offset="0x318" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x1100" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_18" acronym="GLBCE_WDR_GAMMA_LUT_18" offset="0x31C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x1200" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_19" acronym="GLBCE_WDR_GAMMA_LUT_19" offset="0x320" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x1300" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_20" acronym="GLBCE_WDR_GAMMA_LUT_20" offset="0x324" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x1400" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_21" acronym="GLBCE_WDR_GAMMA_LUT_21" offset="0x328" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x1500" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_22" acronym="GLBCE_WDR_GAMMA_LUT_22" offset="0x32C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x1600" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_23" acronym="GLBCE_WDR_GAMMA_LUT_23" offset="0x330" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x1700" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_24" acronym="GLBCE_WDR_GAMMA_LUT_24" offset="0x334" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x1800" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_25" acronym="GLBCE_WDR_GAMMA_LUT_25" offset="0x338" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x1900" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_26" acronym="GLBCE_WDR_GAMMA_LUT_26" offset="0x33C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x1a00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_27" acronym="GLBCE_WDR_GAMMA_LUT_27" offset="0x340" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x1b00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_28" acronym="GLBCE_WDR_GAMMA_LUT_28" offset="0x344" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x1c00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_29" acronym="GLBCE_WDR_GAMMA_LUT_29" offset="0x348" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x1d00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_30" acronym="GLBCE_WDR_GAMMA_LUT_30" offset="0x34C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x1e00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_31" acronym="GLBCE_WDR_GAMMA_LUT_31" offset="0x350" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x1f00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_32" acronym="GLBCE_WDR_GAMMA_LUT_32" offset="0x354" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x2000" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_33" acronym="GLBCE_WDR_GAMMA_LUT_33" offset="0x358" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x2100" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_34" acronym="GLBCE_WDR_GAMMA_LUT_34" offset="0x35C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x2200" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_35" acronym="GLBCE_WDR_GAMMA_LUT_35" offset="0x360" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x2300" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_36" acronym="GLBCE_WDR_GAMMA_LUT_36" offset="0x364" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x2400" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_37" acronym="GLBCE_WDR_GAMMA_LUT_37" offset="0x368" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x2500" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_38" acronym="GLBCE_WDR_GAMMA_LUT_38" offset="0x36C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x2600" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_39" acronym="GLBCE_WDR_GAMMA_LUT_39" offset="0x370" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x2700" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_40" acronym="GLBCE_WDR_GAMMA_LUT_40" offset="0x374" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x2800" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_41" acronym="GLBCE_WDR_GAMMA_LUT_41" offset="0x378" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x2900" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_42" acronym="GLBCE_WDR_GAMMA_LUT_42" offset="0x37C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x2a00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_43" acronym="GLBCE_WDR_GAMMA_LUT_43" offset="0x380" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x2b00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_44" acronym="GLBCE_WDR_GAMMA_LUT_44" offset="0x384" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x2c00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_45" acronym="GLBCE_WDR_GAMMA_LUT_45" offset="0x388" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x2d00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_46" acronym="GLBCE_WDR_GAMMA_LUT_46" offset="0x38C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x2e00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_47" acronym="GLBCE_WDR_GAMMA_LUT_47" offset="0x390" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x2f00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_48" acronym="GLBCE_WDR_GAMMA_LUT_48" offset="0x394" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x3000" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_49" acronym="GLBCE_WDR_GAMMA_LUT_49" offset="0x398" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x3100" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_50" acronym="GLBCE_WDR_GAMMA_LUT_50" offset="0x39C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x3200" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_51" acronym="GLBCE_WDR_GAMMA_LUT_51" offset="0x3A0" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x3300" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_52" acronym="GLBCE_WDR_GAMMA_LUT_52" offset="0x3A4" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x3400" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_53" acronym="GLBCE_WDR_GAMMA_LUT_53" offset="0x3A8" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x3500" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_54" acronym="GLBCE_WDR_GAMMA_LUT_54" offset="0x3AC" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x3600" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_55" acronym="GLBCE_WDR_GAMMA_LUT_55" offset="0x3B0" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x3700" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_56" acronym="GLBCE_WDR_GAMMA_LUT_56" offset="0x3B4" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x3800" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_57" acronym="GLBCE_WDR_GAMMA_LUT_57" offset="0x3B8" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x3900" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_58" acronym="GLBCE_WDR_GAMMA_LUT_58" offset="0x3BC" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x3a00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_59" acronym="GLBCE_WDR_GAMMA_LUT_59" offset="0x3C0" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x3b00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_60" acronym="GLBCE_WDR_GAMMA_LUT_60" offset="0x3C4" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x3c00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_61" acronym="GLBCE_WDR_GAMMA_LUT_61" offset="0x3C8" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x3d00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_62" acronym="GLBCE_WDR_GAMMA_LUT_62" offset="0x3CC" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x3e00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_63" acronym="GLBCE_WDR_GAMMA_LUT_63" offset="0x3D0" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x3f00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_64" acronym="GLBCE_WDR_GAMMA_LUT_64" offset="0x3D4" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x4000" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_65" acronym="GLBCE_WDR_GAMMA_LUT_65" offset="0x3D8" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x4100" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_66" acronym="GLBCE_WDR_GAMMA_LUT_66" offset="0x3DC" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x4200" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_67" acronym="GLBCE_WDR_GAMMA_LUT_67" offset="0x3E0" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x4300" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_68" acronym="GLBCE_WDR_GAMMA_LUT_68" offset="0x3E4" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x4400" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_69" acronym="GLBCE_WDR_GAMMA_LUT_69" offset="0x3E8" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x4500" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_70" acronym="GLBCE_WDR_GAMMA_LUT_70" offset="0x3EC" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x4600" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_71" acronym="GLBCE_WDR_GAMMA_LUT_71" offset="0x3F0" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x4700" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_72" acronym="GLBCE_WDR_GAMMA_LUT_72" offset="0x3F4" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x4800" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_73" acronym="GLBCE_WDR_GAMMA_LUT_73" offset="0x3F8" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x4900" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_74" acronym="GLBCE_WDR_GAMMA_LUT_74" offset="0x3FC" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x4a00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_75" acronym="GLBCE_WDR_GAMMA_LUT_75" offset="0x400" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x4b00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_76" acronym="GLBCE_WDR_GAMMA_LUT_76" offset="0x404" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x4c00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_77" acronym="GLBCE_WDR_GAMMA_LUT_77" offset="0x408" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x4d00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_78" acronym="GLBCE_WDR_GAMMA_LUT_78" offset="0x40C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x4e00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_79" acronym="GLBCE_WDR_GAMMA_LUT_79" offset="0x410" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x4f00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_80" acronym="GLBCE_WDR_GAMMA_LUT_80" offset="0x414" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x5000" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_81" acronym="GLBCE_WDR_GAMMA_LUT_81" offset="0x418" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x5100" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_82" acronym="GLBCE_WDR_GAMMA_LUT_82" offset="0x41C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x5200" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_83" acronym="GLBCE_WDR_GAMMA_LUT_83" offset="0x420" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x5300" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_84" acronym="GLBCE_WDR_GAMMA_LUT_84" offset="0x424" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x5400" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_85" acronym="GLBCE_WDR_GAMMA_LUT_85" offset="0x428" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x5500" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_86" acronym="GLBCE_WDR_GAMMA_LUT_86" offset="0x42C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x5600" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_87" acronym="GLBCE_WDR_GAMMA_LUT_87" offset="0x430" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x5700" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_88" acronym="GLBCE_WDR_GAMMA_LUT_88" offset="0x434" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x5800" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_89" acronym="GLBCE_WDR_GAMMA_LUT_89" offset="0x438" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x5900" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_90" acronym="GLBCE_WDR_GAMMA_LUT_90" offset="0x43C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x5a00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_91" acronym="GLBCE_WDR_GAMMA_LUT_91" offset="0x440" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x5b00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_92" acronym="GLBCE_WDR_GAMMA_LUT_92" offset="0x444" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x5c00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_93" acronym="GLBCE_WDR_GAMMA_LUT_93" offset="0x448" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x5d00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_94" acronym="GLBCE_WDR_GAMMA_LUT_94" offset="0x44C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x5e00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_95" acronym="GLBCE_WDR_GAMMA_LUT_95" offset="0x450" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x5f00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_96" acronym="GLBCE_WDR_GAMMA_LUT_96" offset="0x454" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x6000" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_97" acronym="GLBCE_WDR_GAMMA_LUT_97" offset="0x458" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x6100" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_98" acronym="GLBCE_WDR_GAMMA_LUT_98" offset="0x45C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x6200" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_99" acronym="GLBCE_WDR_GAMMA_LUT_99" offset="0x460" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x6300" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_100" acronym="GLBCE_WDR_GAMMA_LUT_100" offset="0x464" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x6400" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_101" acronym="GLBCE_WDR_GAMMA_LUT_101" offset="0x468" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x6500" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_102" acronym="GLBCE_WDR_GAMMA_LUT_102" offset="0x46C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x6600" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_103" acronym="GLBCE_WDR_GAMMA_LUT_103" offset="0x470" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x6700" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_104" acronym="GLBCE_WDR_GAMMA_LUT_104" offset="0x474" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x6800" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_105" acronym="GLBCE_WDR_GAMMA_LUT_105" offset="0x478" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x6900" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_106" acronym="GLBCE_WDR_GAMMA_LUT_106" offset="0x47C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x6a00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_107" acronym="GLBCE_WDR_GAMMA_LUT_107" offset="0x480" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x6b00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_108" acronym="GLBCE_WDR_GAMMA_LUT_108" offset="0x484" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x6c00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_109" acronym="GLBCE_WDR_GAMMA_LUT_109" offset="0x488" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x6d00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_110" acronym="GLBCE_WDR_GAMMA_LUT_110" offset="0x48C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x6e00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_111" acronym="GLBCE_WDR_GAMMA_LUT_111" offset="0x490" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x6f00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_112" acronym="GLBCE_WDR_GAMMA_LUT_112" offset="0x494" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x7000" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_113" acronym="GLBCE_WDR_GAMMA_LUT_113" offset="0x498" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x7100" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_114" acronym="GLBCE_WDR_GAMMA_LUT_114" offset="0x49C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x7200" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_115" acronym="GLBCE_WDR_GAMMA_LUT_115" offset="0x4A0" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x7300" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_116" acronym="GLBCE_WDR_GAMMA_LUT_116" offset="0x4A4" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x7400" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_117" acronym="GLBCE_WDR_GAMMA_LUT_117" offset="0x4A8" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x7500" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_118" acronym="GLBCE_WDR_GAMMA_LUT_118" offset="0x4AC" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x7600" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_119" acronym="GLBCE_WDR_GAMMA_LUT_119" offset="0x4B0" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x7700" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_120" acronym="GLBCE_WDR_GAMMA_LUT_120" offset="0x4B4" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x7800" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_121" acronym="GLBCE_WDR_GAMMA_LUT_121" offset="0x4B8" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x7900" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_122" acronym="GLBCE_WDR_GAMMA_LUT_122" offset="0x4BC" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x7a00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_123" acronym="GLBCE_WDR_GAMMA_LUT_123" offset="0x4C0" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x7b00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_124" acronym="GLBCE_WDR_GAMMA_LUT_124" offset="0x4C4" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x7c00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_125" acronym="GLBCE_WDR_GAMMA_LUT_125" offset="0x4C8" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x7d00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_126" acronym="GLBCE_WDR_GAMMA_LUT_126" offset="0x4CC" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x7e00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_127" acronym="GLBCE_WDR_GAMMA_LUT_127" offset="0x4D0" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x7f00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_128" acronym="GLBCE_WDR_GAMMA_LUT_128" offset="0x4D4" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x8000" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_129" acronym="GLBCE_WDR_GAMMA_LUT_129" offset="0x4D8" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x8100" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_130" acronym="GLBCE_WDR_GAMMA_LUT_130" offset="0x4DC" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x8200" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_131" acronym="GLBCE_WDR_GAMMA_LUT_131" offset="0x4E0" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x8300" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_132" acronym="GLBCE_WDR_GAMMA_LUT_132" offset="0x4E4" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x8400" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_133" acronym="GLBCE_WDR_GAMMA_LUT_133" offset="0x4E8" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x8500" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_134" acronym="GLBCE_WDR_GAMMA_LUT_134" offset="0x4EC" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x8600" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_135" acronym="GLBCE_WDR_GAMMA_LUT_135" offset="0x4F0" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x8700" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_136" acronym="GLBCE_WDR_GAMMA_LUT_136" offset="0x4F4" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x8800" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_137" acronym="GLBCE_WDR_GAMMA_LUT_137" offset="0x4F8" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x8900" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_138" acronym="GLBCE_WDR_GAMMA_LUT_138" offset="0x4FC" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x8a00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_139" acronym="GLBCE_WDR_GAMMA_LUT_139" offset="0x500" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x8b00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_140" acronym="GLBCE_WDR_GAMMA_LUT_140" offset="0x504" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x8c00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_141" acronym="GLBCE_WDR_GAMMA_LUT_141" offset="0x508" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x8d00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_142" acronym="GLBCE_WDR_GAMMA_LUT_142" offset="0x50C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x8e00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_143" acronym="GLBCE_WDR_GAMMA_LUT_143" offset="0x510" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x8f00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_144" acronym="GLBCE_WDR_GAMMA_LUT_144" offset="0x514" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x9000" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_145" acronym="GLBCE_WDR_GAMMA_LUT_145" offset="0x518" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x9100" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_146" acronym="GLBCE_WDR_GAMMA_LUT_146" offset="0x51C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x9200" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_147" acronym="GLBCE_WDR_GAMMA_LUT_147" offset="0x520" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x9300" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_148" acronym="GLBCE_WDR_GAMMA_LUT_148" offset="0x524" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x9400" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_149" acronym="GLBCE_WDR_GAMMA_LUT_149" offset="0x528" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x9500" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_150" acronym="GLBCE_WDR_GAMMA_LUT_150" offset="0x52C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x9600" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_151" acronym="GLBCE_WDR_GAMMA_LUT_151" offset="0x530" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x9700" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_152" acronym="GLBCE_WDR_GAMMA_LUT_152" offset="0x534" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x9800" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_153" acronym="GLBCE_WDR_GAMMA_LUT_153" offset="0x538" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x9900" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_154" acronym="GLBCE_WDR_GAMMA_LUT_154" offset="0x53C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x9a00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_155" acronym="GLBCE_WDR_GAMMA_LUT_155" offset="0x540" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x9b00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_156" acronym="GLBCE_WDR_GAMMA_LUT_156" offset="0x544" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x9c00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_157" acronym="GLBCE_WDR_GAMMA_LUT_157" offset="0x548" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x9d00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_158" acronym="GLBCE_WDR_GAMMA_LUT_158" offset="0x54C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x9e00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_159" acronym="GLBCE_WDR_GAMMA_LUT_159" offset="0x550" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x9f00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_160" acronym="GLBCE_WDR_GAMMA_LUT_160" offset="0x554" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xa000" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_161" acronym="GLBCE_WDR_GAMMA_LUT_161" offset="0x558" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xa100" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_162" acronym="GLBCE_WDR_GAMMA_LUT_162" offset="0x55C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xa200" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_163" acronym="GLBCE_WDR_GAMMA_LUT_163" offset="0x560" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xa300" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_164" acronym="GLBCE_WDR_GAMMA_LUT_164" offset="0x564" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xa400" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_165" acronym="GLBCE_WDR_GAMMA_LUT_165" offset="0x568" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xa500" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_166" acronym="GLBCE_WDR_GAMMA_LUT_166" offset="0x56C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xa600" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_167" acronym="GLBCE_WDR_GAMMA_LUT_167" offset="0x570" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xa700" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_168" acronym="GLBCE_WDR_GAMMA_LUT_168" offset="0x574" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xa800" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_169" acronym="GLBCE_WDR_GAMMA_LUT_169" offset="0x578" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xa900" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_170" acronym="GLBCE_WDR_GAMMA_LUT_170" offset="0x57C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xaa00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_171" acronym="GLBCE_WDR_GAMMA_LUT_171" offset="0x580" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xab00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_172" acronym="GLBCE_WDR_GAMMA_LUT_172" offset="0x584" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xac00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_173" acronym="GLBCE_WDR_GAMMA_LUT_173" offset="0x588" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xad00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_174" acronym="GLBCE_WDR_GAMMA_LUT_174" offset="0x58C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xae00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_175" acronym="GLBCE_WDR_GAMMA_LUT_175" offset="0x590" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xaf00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_176" acronym="GLBCE_WDR_GAMMA_LUT_176" offset="0x594" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xb000" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_177" acronym="GLBCE_WDR_GAMMA_LUT_177" offset="0x598" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xb100" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_178" acronym="GLBCE_WDR_GAMMA_LUT_178" offset="0x59C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xb200" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_179" acronym="GLBCE_WDR_GAMMA_LUT_179" offset="0x5A0" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xb300" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_180" acronym="GLBCE_WDR_GAMMA_LUT_180" offset="0x5A4" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xb400" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_181" acronym="GLBCE_WDR_GAMMA_LUT_181" offset="0x5A8" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xb500" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_182" acronym="GLBCE_WDR_GAMMA_LUT_182" offset="0x5AC" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xb600" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_183" acronym="GLBCE_WDR_GAMMA_LUT_183" offset="0x5B0" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xb700" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_184" acronym="GLBCE_WDR_GAMMA_LUT_184" offset="0x5B4" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xb800" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_185" acronym="GLBCE_WDR_GAMMA_LUT_185" offset="0x5B8" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xb900" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_186" acronym="GLBCE_WDR_GAMMA_LUT_186" offset="0x5BC" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xba00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_187" acronym="GLBCE_WDR_GAMMA_LUT_187" offset="0x5C0" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xbb00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_188" acronym="GLBCE_WDR_GAMMA_LUT_188" offset="0x5C4" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xbc00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_189" acronym="GLBCE_WDR_GAMMA_LUT_189" offset="0x5C8" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xbd00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_190" acronym="GLBCE_WDR_GAMMA_LUT_190" offset="0x5CC" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xbe00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_191" acronym="GLBCE_WDR_GAMMA_LUT_191" offset="0x5D0" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xbf00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_192" acronym="GLBCE_WDR_GAMMA_LUT_192" offset="0x5D4" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xc000" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_193" acronym="GLBCE_WDR_GAMMA_LUT_193" offset="0x5D8" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xc100" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_194" acronym="GLBCE_WDR_GAMMA_LUT_194" offset="0x5DC" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xc200" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_195" acronym="GLBCE_WDR_GAMMA_LUT_195" offset="0x5E0" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xc300" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_196" acronym="GLBCE_WDR_GAMMA_LUT_196" offset="0x5E4" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xc400" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_197" acronym="GLBCE_WDR_GAMMA_LUT_197" offset="0x5E8" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xc500" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_198" acronym="GLBCE_WDR_GAMMA_LUT_198" offset="0x5EC" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xc600" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_199" acronym="GLBCE_WDR_GAMMA_LUT_199" offset="0x5F0" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xc700" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_200" acronym="GLBCE_WDR_GAMMA_LUT_200" offset="0x5F4" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xc800" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_201" acronym="GLBCE_WDR_GAMMA_LUT_201" offset="0x5F8" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xc900" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_202" acronym="GLBCE_WDR_GAMMA_LUT_202" offset="0x5FC" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xca00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_203" acronym="GLBCE_WDR_GAMMA_LUT_203" offset="0x600" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xcb00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_204" acronym="GLBCE_WDR_GAMMA_LUT_204" offset="0x604" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xcc00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_205" acronym="GLBCE_WDR_GAMMA_LUT_205" offset="0x608" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xcd00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_206" acronym="GLBCE_WDR_GAMMA_LUT_206" offset="0x60C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xce00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_207" acronym="GLBCE_WDR_GAMMA_LUT_207" offset="0x610" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xcf00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_208" acronym="GLBCE_WDR_GAMMA_LUT_208" offset="0x614" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xd000" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_209" acronym="GLBCE_WDR_GAMMA_LUT_209" offset="0x618" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xd100" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_210" acronym="GLBCE_WDR_GAMMA_LUT_210" offset="0x61C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xd200" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_211" acronym="GLBCE_WDR_GAMMA_LUT_211" offset="0x620" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xd300" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_212" acronym="GLBCE_WDR_GAMMA_LUT_212" offset="0x624" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xd400" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_213" acronym="GLBCE_WDR_GAMMA_LUT_213" offset="0x628" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xd500" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_214" acronym="GLBCE_WDR_GAMMA_LUT_214" offset="0x62C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xd600" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_215" acronym="GLBCE_WDR_GAMMA_LUT_215" offset="0x630" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xd700" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_216" acronym="GLBCE_WDR_GAMMA_LUT_216" offset="0x634" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xd800" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_217" acronym="GLBCE_WDR_GAMMA_LUT_217" offset="0x638" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xd900" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_218" acronym="GLBCE_WDR_GAMMA_LUT_218" offset="0x63C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xda00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_219" acronym="GLBCE_WDR_GAMMA_LUT_219" offset="0x640" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xdb00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_220" acronym="GLBCE_WDR_GAMMA_LUT_220" offset="0x644" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xdc00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_221" acronym="GLBCE_WDR_GAMMA_LUT_221" offset="0x648" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xdd00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_222" acronym="GLBCE_WDR_GAMMA_LUT_222" offset="0x64C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xde00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_223" acronym="GLBCE_WDR_GAMMA_LUT_223" offset="0x650" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xdf00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_224" acronym="GLBCE_WDR_GAMMA_LUT_224" offset="0x654" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xe000" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_225" acronym="GLBCE_WDR_GAMMA_LUT_225" offset="0x658" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xe100" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_226" acronym="GLBCE_WDR_GAMMA_LUT_226" offset="0x65C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xe200" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_227" acronym="GLBCE_WDR_GAMMA_LUT_227" offset="0x660" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xe300" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_228" acronym="GLBCE_WDR_GAMMA_LUT_228" offset="0x664" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xe400" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_229" acronym="GLBCE_WDR_GAMMA_LUT_229" offset="0x668" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xe500" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_230" acronym="GLBCE_WDR_GAMMA_LUT_230" offset="0x66C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xe600" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_231" acronym="GLBCE_WDR_GAMMA_LUT_231" offset="0x670" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xe700" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_232" acronym="GLBCE_WDR_GAMMA_LUT_232" offset="0x674" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xe800" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_233" acronym="GLBCE_WDR_GAMMA_LUT_233" offset="0x678" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xe900" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_234" acronym="GLBCE_WDR_GAMMA_LUT_234" offset="0x67C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xea00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_235" acronym="GLBCE_WDR_GAMMA_LUT_235" offset="0x680" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xeb00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_236" acronym="GLBCE_WDR_GAMMA_LUT_236" offset="0x684" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xec00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_237" acronym="GLBCE_WDR_GAMMA_LUT_237" offset="0x688" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xed00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_238" acronym="GLBCE_WDR_GAMMA_LUT_238" offset="0x68C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xee00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_239" acronym="GLBCE_WDR_GAMMA_LUT_239" offset="0x690" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xef00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_240" acronym="GLBCE_WDR_GAMMA_LUT_240" offset="0x694" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xf000" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_241" acronym="GLBCE_WDR_GAMMA_LUT_241" offset="0x698" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xf100" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_242" acronym="GLBCE_WDR_GAMMA_LUT_242" offset="0x69C" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xf200" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_243" acronym="GLBCE_WDR_GAMMA_LUT_243" offset="0x6A0" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xf300" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_244" acronym="GLBCE_WDR_GAMMA_LUT_244" offset="0x6A4" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xf400" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_245" acronym="GLBCE_WDR_GAMMA_LUT_245" offset="0x6A8" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xf500" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_246" acronym="GLBCE_WDR_GAMMA_LUT_246" offset="0x6AC" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xf600" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_247" acronym="GLBCE_WDR_GAMMA_LUT_247" offset="0x6B0" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xf700" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_248" acronym="GLBCE_WDR_GAMMA_LUT_248" offset="0x6B4" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xf800" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_249" acronym="GLBCE_WDR_GAMMA_LUT_249" offset="0x6B8" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xf900" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_250" acronym="GLBCE_WDR_GAMMA_LUT_250" offset="0x6BC" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xfa00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_251" acronym="GLBCE_WDR_GAMMA_LUT_251" offset="0x6C0" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xfb00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_252" acronym="GLBCE_WDR_GAMMA_LUT_252" offset="0x6C4" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xfc00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_253" acronym="GLBCE_WDR_GAMMA_LUT_253" offset="0x6C8" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xfd00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_254" acronym="GLBCE_WDR_GAMMA_LUT_254" offset="0x6CC" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xfe00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_255" acronym="GLBCE_WDR_GAMMA_LUT_255" offset="0x6D0" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xff00" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_WDR_GAMMA_LUT_256" acronym="GLBCE_WDR_GAMMA_LUT_256" offset="0x6D4" width="32" description="Frontend WDR LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0xffff" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_TILE_OUT_POS" acronym="GLBCE_TILE_OUT_POS" offset="0x6D8" width="32" description="Tile processing signals [TBD]">
+    <bitfield id="TOP" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LEFT" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_TILE_OUT_SIZE" acronym="GLBCE_TILE_OUT_SIZE" offset="0x6E0" width="32" description="Tile processing signals [TBD]">
+    <bitfield id="HEIGHT" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="WIDTH" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_TILE_CONTROL" acronym="GLBCE_TILE_CONTROL" offset="0x6E8" width="32" description="TBD">
+    <bitfield id="RESERVED" width="17" begin="31" end="15" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="10" begin="14" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LAST" width="1" begin="4" end="4" resetval="0x0" description="Last time" range="" rwaccess="RW"/>
+    <bitfield id="COLLECTION_DISABLE" width="1" begin="3" end="3" resetval="0x0" description="Statistics collection disable" range="" rwaccess="RW"/>
+    <bitfield id="UPDATE_DSABLE" width="1" begin="2" end="2" resetval="0x0" description="Statistics update disable" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Tile processing Enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="GLBCE_OUTPUT_FLAGS" acronym="GLBCE_OUTPUT_FLAGS" offset="0x6EC" width="32" description="TBD">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="TILE_STATUS" width="16" begin="15" end="0" resetval="0x0" description="Tile Status" range="" rwaccess="R"/>
+  </register>
+</module>

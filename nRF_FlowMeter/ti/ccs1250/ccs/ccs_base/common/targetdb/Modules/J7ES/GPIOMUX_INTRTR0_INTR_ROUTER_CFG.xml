@@ -1,0 +1,11 @@
+<module name="GPIOMUX_INTRTR0_INTR_ROUTER_CFG" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="GPIOMUX_INTRTR0_PID" acronym="GPIOMUX_INTRTR0_PID" offset="0x0" width="32" description="Peripheral identification register. Uniquely identifies the module and its specific revision.">
+    <bitfield id="REV" width="32" begin="31" end="0" resetval="0x66948100" description="TI internal data. Identifies revision of peripheral." range="" rwaccess="R"/>
+  </register>
+  <register id="GPIOMUX_INTRTR0_MUXCNTL_n" acronym="GPIOMUX_INTRTR0_MUXCNTL_n" offset="0x4" width="32" description="Interrupt mux control register. Offset = 4h + (n * 4h); where n = 0h to 3Fh.">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="INT_ENABLE" width="1" begin="16" end="16" resetval="0x0" description="Enable for interrupt output N" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="7" begin="15" end="9" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ENABLE" width="9" begin="8" end="0" resetval="0x0" description="Mux control for interrupt output N" range="" rwaccess="RW"/>
+  </register>
+</module>

@@ -1,0 +1,65 @@
+<module name="DSS_EDP0_INTG_CFG_VP" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="EDP_REVISION" acronym="EDP_REVISION" offset="0x0" width="32" description="The Register contains the major and minor revisions for the VPAC dptx HWA module.">
+    <bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x1" description="Used to distinguish between old scheme and new scheme." range="" rwaccess="R"/>
+    <bitfield id="BU" width="2" begin="29" end="28" resetval="0x2" description="BU indicator" range="" rwaccess="R"/>
+    <bitfield id="FUNC" width="12" begin="27" end="16" resetval="0x40C" description="Function indicates a software compatible module family." range="" rwaccess="R"/>
+    <bitfield id="RTL" width="5" begin="15" end="11" resetval="0x8" description="RTL Version." range="" rwaccess="R"/>
+    <bitfield id="MAJOR" width="3" begin="10" end="8" resetval="0x1" description="Major" range="" rwaccess="R"/>
+    <bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Indicates a special version for a particular device." range="" rwaccess="R"/>
+    <bitfield id="MINOR" width="6" begin="5" end="0" resetval="0x0" description="Minor" range="" rwaccess="R"/>
+  </register>
+  <register id="EDP_DPTX_IPCFG" acronym="EDP_DPTX_IPCFG" offset="0x4" width="32" description="The Register - Configures DPTX Core security mode and fw memory clock enable.">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="FW_MEM_CLK_EN" width="1" begin="1" end="1" resetval="0x1" description="DPTX firmware memory (I/Dram) clock enable (set to 1 by default after a reset)" range="" rwaccess="RW"/>
+    <bitfield id="APB_SECURE_REG_BLOCK_EN" width="1" begin="0" end="0" resetval="0x0" description="DPTX - APB secure region access block enable mode" range="" rwaccess="RW"/>
+  </register>
+  <register id="EDP_ECC_MEM_CFG" acronym="EDP_ECC_MEM_CFG" offset="0x8" width="32" description="The Register - Enables clocks to the ECC-aggregator/memories for ECC logic access. The setting of 1 forces the functional clock gating to be bypassed during memory ECC CTRL/Aggregator accesses during ECC diagnostic mode.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CLK_EN" width="1" begin="0" end="0" resetval="0x0" description="Clk Force Enable for ECC access\n" range="" rwaccess="RW"/>
+  </register>
+  <register id="EDP_DPTX_DSC_CFG" acronym="EDP_DPTX_DSC_CFG" offset="0xC" width="32" description="The Register - Configures DSC usaged of the DPTX Core. The settings are used by the wrapper to control the source clock gating for DSC sub-module and also to force enable vif memory clocks as necessary.">
+    <bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="DSC_1_10BPC" width="1" begin="6" end="6" resetval="0x0" description="DPTX - DSC encoder 1 - 10-bit input enable" range="" rwaccess="RW"/>
+    <bitfield id="DSC_0_10BPC" width="1" begin="5" end="5" resetval="0x0" description="DPTX - DSC encoder 0 - 10-bit input enable" range="" rwaccess="RW"/>
+    <bitfield id="BOTH_CLK_EN" width="1" begin="4" end="4" resetval="0x0" description="DPTX - DSC force both clock on whenever DSC is active" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SPLIT_PANEL_EN" width="1" begin="2" end="2" resetval="0x0" description="DPTX - DSC encoder mode select" range="" rwaccess="RW"/>
+    <bitfield id="MODE_SEL" width="2" begin="1" end="0" resetval="0x0" description="DPTX - DSC encoder mode select" range="" rwaccess="RW"/>
+  </register>
+  <register id="EDP_DPTX_SRC_CFG" acronym="EDP_DPTX_SRC_CFG" offset="0x10" width="32" description="The Register - Configures VIF and AIF port channel enables (for memory clock gating) and VIF source mux selection (for mapping DPI to VIF ports). \nThe VIF_#_en also enables the clock for the # channel PIF memory. If a PIF channel is enabled, the vif_#_en must be set regardless of whether the associated video channel has the video enabled or not.\nNote that these settings are only used in the K3_DSS_eDP wrapper level (for controlling the memory clocks). The DPTX core requires separate configuration for enabling the video/audio streams for transmission. The enable settings between the core and wrapper should match for proper operation.">
+    <bitfield id="VIF_FMT_SEL" width="4" begin="31" end="28" resetval="0x0" description="Reserved - must be set to 0" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="11" begin="27" end="17" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="AIF_EN" width="1" begin="16" end="16" resetval="0x0" description="DPTX Audio I2S channel memory clk enable" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VIF_3_IN30B" width="1" begin="11" end="11" resetval="0x0" description="DPTX vif_3 source data width is 30 bits" range="" rwaccess="RW"/>
+    <bitfield id="VIF_2_IN30B" width="1" begin="10" end="10" resetval="0x0" description="DPTX vif_2 source data width is 30 bits" range="" rwaccess="RW"/>
+    <bitfield id="VIF_1_IN30B" width="1" begin="9" end="9" resetval="0x0" description="DPTX vif_1 source data width is 30 bits" range="" rwaccess="RW"/>
+    <bitfield id="VIF_0_IN30B" width="1" begin="8" end="8" resetval="0x0" description="DPTX vif_0 source data width is 30 bits" range="" rwaccess="RW"/>
+    <bitfield id="VIF_3_SEL" width="1" begin="7" end="7" resetval="0x0" description="DPTX vif_3 source select - between dpi_3 or dpi_5" range="" rwaccess="RW"/>
+    <bitfield id="VIF_2_SEL" width="1" begin="6" end="6" resetval="0x0" description="DPTX vif_2 source select - between dpi_2 or dpi_4" range="" rwaccess="RW"/>
+    <bitfield id="VIF_1_SEL" width="1" begin="5" end="5" resetval="0x0" description="DPTX vif_1 source select - between dpi_1 or dpi_3" range="" rwaccess="RW"/>
+    <bitfield id="VIF_0_SEL" width="1" begin="4" end="4" resetval="0x0" description="DPTX vif_0 source select - between dpi_0 or dpi_2\n" range="" rwaccess="RW"/>
+    <bitfield id="VIF_3_EN" width="1" begin="3" end="3" resetval="0x0" description="DPTX vif_3 channel memory clk enable" range="" rwaccess="RW"/>
+    <bitfield id="VIF_2_EN" width="1" begin="2" end="2" resetval="0x0" description="DPTX vif_2 channel memory clk enable" range="" rwaccess="RW"/>
+    <bitfield id="VIF_1_EN" width="1" begin="1" end="1" resetval="0x0" description="DPTX vif_1 channel memory clk enable" range="" rwaccess="RW"/>
+    <bitfield id="VIF_0_EN" width="1" begin="0" end="0" resetval="0x0" description="DPTX vif_0 channel memory clk enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="EDP_DPTX_VIF_SECURE_MODE_CFG" acronym="EDP_DPTX_VIF_SECURE_MODE_CFG" offset="0x14" width="32" description="The Register - Configures the security level of the VIF channel (for protecting secure content from going to a non-protected display interface). \nWhen a VIF channel is configured as 'non-secure', the K3_DSS_eDP wrapper prevents secure DPI source data to be mapped to the VIF input. When this condition is detected, the wrapper forces the VIF source input to be 0x0. Therefore, if the DPI source from DSS is 'secure', then the mapped VIF channel must also be configured as 'secure'.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VIF_3" width="1" begin="3" end="3" resetval="0x0" description="vif_3 channel secure mode:" range="" rwaccess="RW"/>
+    <bitfield id="VIF_2" width="1" begin="2" end="2" resetval="0x0" description="vif_2 channel secure mode:" range="" rwaccess="RW"/>
+    <bitfield id="VIF_1" width="1" begin="1" end="1" resetval="0x0" description="vif_1 channel secure mode:" range="" rwaccess="RW"/>
+    <bitfield id="VIF_0" width="1" begin="0" end="0" resetval="0x0" description="vif_0 channel secure mode:" range="" rwaccess="RW"/>
+  </register>
+  <register id="EDP_DPTX_VIF_CONN_STATUS" acronym="EDP_DPTX_VIF_CONN_STATUS" offset="0x18" width="32" description="The Register - Returns the status of DPI-VIF connection based on the security mode check.\n 0 indicates that the connection is allowed\n 1 indicates that the connection is not allowed due to security setting mismatch\n When a security mode mismatch is found on a VIF input channel, the source data signals for the channel are forced to 0 - resulting in black color output">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="VIF_3" width="1" begin="3" end="3" resetval="0x0" description="vif_0 security check status:" range="" rwaccess="R"/>
+    <bitfield id="VIF_2" width="1" begin="2" end="2" resetval="0x0" description="vif_0 security check status:" range="" rwaccess="R"/>
+    <bitfield id="VIF_1" width="1" begin="1" end="1" resetval="0x0" description="vif_0 security check status:" range="" rwaccess="R"/>
+    <bitfield id="VIF_0" width="1" begin="0" end="0" resetval="0x0" description="vif_0 security check status:" range="" rwaccess="R"/>
+  </register>
+  <register id="EDP_PHY_CLK_STATUS" acronym="EDP_PHY_CLK_STATUS" offset="0x1C" width="32" description="The Register - Returns the current status of the phy data clock from DP phy. When the clock is not running, the ECC_aggr_PHY_cfg_regs will return 0x0 on a read">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="VALID" width="1" begin="0" end="0" resetval="0x0" description="Phy Data Clock Valid Status" range="" rwaccess="R"/>
+  </register>
+</module>

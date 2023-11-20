@@ -1,0 +1,52 @@
+<module name="VPAC1_COMMON_0_PAR_VPAC_VISS0_S_VBUSP_VISS_NSF4V_CFG_MMR_VBUSP_NSF4VCORE" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="PAR_VPAC_VISS0__S_VBUSP__VISS_NSF4V__CFG__MMR__MMR_VBUSP__NSF4VCORE_REG_dbg" acronym="PAR_VPAC_VISS0__S_VBUSP__VISS_NSF4V__CFG__MMR__MMR_VBUSP__NSF4VCORE_REG_dbg" offset="0x4" width="32" description="">
+		<bitfield id="RAM_MUX_CFG" width="6" begin="5" end="0" resetval="0x0" description="Diagnostic Rd Wr access to Embedded RAM Selector Mux.  This bit controls the mux select or which RAM and which section of that RAM are assessed via the VBUSP read of RAM.  (This MMR is not shadowed)" range="5 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_VPAC_VISS0__S_VBUSP__VISS_NSF4V__CFG__MMR__MMR_VBUSP__NSF4VCORE_REG_ctrl" acronym="PAR_VPAC_VISS0__S_VBUSP__VISS_NSF4V__CFG__MMR__MMR_VBUSP__NSF4VCORE_REG_ctrl" offset="0x8" width="32" description="">
+		<bitfield id="LSCC_EN_CFG" width="1" begin="12" end="12" resetval="0x0" description="enable Lens Shading Correction Compensation.  When disabled, implments a unity gain " range="12" rwaccess="R/W"/> 
+		<bitfield id="LSCC_SETSEL_CFG" width="4" begin="11" end="8" resetval="0x0" description="bit per BAYER color component indicating which of two sets of 16 segment PWL Curve to use for LSCC.    0: use set0  1: use set1" range="11 - 8" rwaccess="R/W"/> 
+		<bitfield id="TN_MODE_CFG" width="1" begin="4" end="4" resetval="0x0" description="single bit controlling T_n calculation    0: use u_mode bits to indicate which LL2 to average and which bits to keep independent without averaging  1: independent no averaging " range="4" rwaccess="R/W"/> 
+		<bitfield id="U_MODE_CFG" width="4" begin="3" end="0" resetval="0x0" description="bit per BAYER color component indicating Decomp sub component    0: average with others  1: independent color component do not average for calculation of U Suppress.     bit[0]:color 0 at (v=0, h=0)  bit[1]:color 1 at (v=0, h=1) bit[2]:color 2 at (v=1, h=0) bit[3]:color 3 at (v=1, h=1)" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_VPAC_VISS0__S_VBUSP__VISS_NSF4V__CFG__MMR__MMR_VBUSP__NSF4VCORE_REG_dim" acronym="PAR_VPAC_VISS0__S_VBUSP__VISS_NSF4V__CFG__MMR__MMR_VBUSP__NSF4VCORE_REG_dim" offset="0xC" width="32" description="">
+		<bitfield id="IH_CFG" width="13" begin="28" end="16" resetval="0x0" description="(U13) input height in units of pixels minus 1. " range="28 - 16" rwaccess="R/W"/> 
+		<bitfield id="IW_CFG" width="13" begin="12" end="0" resetval="0x0" description="(U13) input width in units of pixels minus 1. Max usable value determined by populated line buffer RAM size" range="12 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_VPAC_VISS0__S_VBUSP__VISS_NSF4V__CFG__MMR__MMR_VBUSP__NSF4VCORE_REG_LSCC" acronym="PAR_VPAC_VISS0__S_VBUSP__VISS_NSF4V__CFG__MMR__MMR_VBUSP__NSF4VCORE_REG_LSCC" offset="0x10" width="32" description="">
+		<bitfield id="GMAX_CFG" width="9" begin="28" end="20" resetval="0x0" description="(U4.5) LSCC maximum gain.  Any calculated value is clipped to this max value" range="28 - 20" rwaccess="R/W"/> 
+		<bitfield id="T_CFG" width="4" begin="19" end="16" resetval="0x0" description="(U4) LSCC radius dynamic range select.  T is the right shift amount prior to MSB clip." range="19 - 16" rwaccess="R/W"/> 
+		<bitfield id="KV_CFG" width="8" begin="15" end="8" resetval="0x0" description="(U2.6) LSCC horizontal or Y Gain for elliptical lens" range="15 - 8" rwaccess="R/W"/> 
+		<bitfield id="KH_CFG" width="8" begin="7" end="0" resetval="0x0" description="(U2.6) LSCC vertical or X Gain for elliptical lens" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_VPAC_VISS0__S_VBUSP__VISS_NSF4V__CFG__MMR__MMR_VBUSP__NSF4VCORE_REG_LSCC_cent" acronym="PAR_VPAC_VISS0__S_VBUSP__VISS_NSF4V__CFG__MMR__MMR_VBUSP__NSF4VCORE_REG_LSCC_cent" offset="0x14" width="32" description="">
+		<bitfield id="Y_CFG" width="14" begin="29" end="16" resetval="0x0" description="(S14) Vertical (Y) position of lens center. Negative value supports the case where processed frame starts after the center. HW supports center config with below constraint.     if (Y_cfg &#60; 0) # negative       DIM.ih_cfg + abs(Y_cfg) &#60; 8K   else # positive       Y_cfg &#60; 8K " range="29 - 16" rwaccess="R/W"/> 
+		<bitfield id="X_CFG" width="14" begin="13" end="0" resetval="0x0" description="(S14) Horizontal (X) position of lens center. Negative value supports the case where processed frame starts after the center. HW supports center config with below constraint.     if (X_cfg &#60; 0) # negative       DIM.iw_cfg + abs(X_cfg) &#60; 8K   else # positive       X_cfg &#60; 8K " range="13 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_VPAC_VISS0__S_VBUSP__VISS_NSF4V__CFG__MMR__MMR_VBUSP__NSF4VCORE_REG_Tn_Scale" acronym="PAR_VPAC_VISS0__S_VBUSP__VISS_NSF4V__CFG__MMR__MMR_VBUSP__NSF4VCORE_REG_Tn_Scale" offset="0x1C" width="32" description="">
+		<bitfield id="TN3_CFG" width="8" begin="23" end="16" resetval="0x0" description="(U3.5) Level3.  Sub-bands 7, 8, 9" range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="TN2_CFG" width="8" begin="15" end="8" resetval="0x0" description="(U3.5) Level2.  Sub-bands 4, 5, 6" range="15 - 8" rwaccess="R/W"/> 
+		<bitfield id="TN1_CFG" width="8" begin="7" end="0" resetval="0x0" description="(U3.5) Level1.  Sub-bands 0, 1, 2" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_VPAC_VISS0__S_VBUSP__VISS_NSF4V__CFG__MMR__MMR_VBUSP__NSF4VCORE_REG_U_knee" acronym="PAR_VPAC_VISS0__S_VBUSP__VISS_NSF4V__CFG__MMR__MMR_VBUSP__NSF4VCORE_REG_U_knee" offset="0x20" width="32" description="">
+		<bitfield id="U_KNEE_CFG" width="6" begin="5" end="0" resetval="0x0" description="(U0.6) U Suppress curve knee.  X (LL2) value which separates constant suppression of 1.0 from linear suppression." range="5 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_VPAC_VISS0__S_VBUSP__VISS_NSF4V__CFG__MMR__MMR_VBUSP__NSF4VCORE_REG_WhiteBal0" acronym="PAR_VPAC_VISS0__S_VBUSP__VISS_NSF4V__CFG__MMR__MMR_VBUSP__NSF4VCORE_REG_WhiteBal0" offset="0x24" width="32" description="">
+		<bitfield id="GAIN1_CFG" width="13" begin="28" end="16" resetval="0x0" description="(U4.9) Gain for color 1" range="28 - 16" rwaccess="R/W"/> 
+		<bitfield id="GAIN0_CFG" width="13" begin="12" end="0" resetval="0x0" description="(U4.9) Gain for color 0" range="12 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_VPAC_VISS0__S_VBUSP__VISS_NSF4V__CFG__MMR__MMR_VBUSP__NSF4VCORE_REG_WhiteBal1" acronym="PAR_VPAC_VISS0__S_VBUSP__VISS_NSF4V__CFG__MMR__MMR_VBUSP__NSF4VCORE_REG_WhiteBal1" offset="0x28" width="32" description="">
+		<bitfield id="GAIN3_CFG" width="13" begin="28" end="16" resetval="0x0" description="(U4.9) Gain for color 3" range="28 - 16" rwaccess="R/W"/> 
+		<bitfield id="GAIN2_CFG" width="13" begin="12" end="0" resetval="0x0" description="(U4.9) Gain for color 2" range="12 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_VPAC_VISS0__S_VBUSP__VISS_NSF4V__CFG__MMR__MMR_VBUSP__NSF4VCORE_REG_DWB_CNTL" acronym="PAR_VPAC_VISS0__S_VBUSP__VISS_NSF4V__CFG__MMR__MMR_VBUSP__NSF4VCORE_REG_DWB_CNTL" offset="0x3F0" width="32" description="">
+		<bitfield id="DWB_EN" width="1" begin="0" end="0" resetval="0x0" description="Dynamic White Balance Enable" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_VPAC_VISS0__S_VBUSP__VISS_NSF4V__CFG__MMR__MMR_VBUSP__NSF4VCORE_REG_Hist_Ctrl" acronym="PAR_VPAC_VISS0__S_VBUSP__VISS_NSF4V__CFG__MMR__MMR_VBUSP__NSF4VCORE_REG_Hist_Ctrl" offset="0x5F0" width="32" description="">
+		<bitfield id="ROI_EN" width="8" begin="23" end="16" resetval="0x0" description="Enable for ROIs. Each bit corresponds to one ROI. bit[x] to ROI[x]. Use lower index regions if less than 8 regions are needed." range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="INBITWDTH" width="5" begin="13" end="9" resetval="0x16" description="BitWidth of the input image, values greater than 16 will be treated as 16 and values less than 12 will be treated as 12" range="13 - 9" rwaccess="R/W"/> 
+		<bitfield id="LUT_EN" width="1" begin="8" end="8" resetval="0x0" description="0->Use shift(bitwidth-12), 1->Use LUT" range="8" rwaccess="R/W"/> 
+		<bitfield id="BANK" width="1" begin="5" end="5" resetval="0x0" description="Bank attached to Histogram HW Datapath. Shadowed and internal control is updated outisde of active frame   0 -> HW access Bank0 &#38; Cfg MMR access Bank1   1 -> HW access Bank1 &#38; Cfg MMR access Bank0." range="5" rwaccess="R/W"/> 
+		<bitfield id="PHASESEL" width="4" begin="4" end="1" resetval="0x0" description="Histogram Phase select enable; one bit for each color channel. Up to 2 bits can be enabled; only bit can be enabled per line.  bit[0]:color 0 at (v=0, h=0)  bit[1]:color 1 at (v=0, h=1) bit[2]:color 2 at (v=1, h=0) bit[3]:color 3 at (v=1, h=1)" range="4 - 1" rwaccess="R/W"/> 
+		<bitfield id="HIST_EN" width="1" begin="0" end="0" resetval="0x0" description="Raw domain Histogram Enable. When enbaled minimum frame width has to be 128" range="0" rwaccess="R/W"/>
+	</register>
+</module>

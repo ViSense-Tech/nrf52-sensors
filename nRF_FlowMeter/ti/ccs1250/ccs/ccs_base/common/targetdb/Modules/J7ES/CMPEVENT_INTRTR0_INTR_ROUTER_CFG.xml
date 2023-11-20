@@ -1,0 +1,11 @@
+<module name="CMPEVENT_INTRTR0_INTR_ROUTER_CFG" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="CMPEVT_INTRTR0_PID" acronym="CMPEVT_INTRTR0_PID" offset="0x0" width="32" description="Description: Peripheral identification register. Uniquely identifies the module and its specific revision.">
+    <bitfield id="REV" width="32" begin="31" end="0" resetval="0x66947900" description="TI internal data. Identifies revision of peripheral." range="" rwaccess="R"/>
+  </register>
+  <register id="CMPEVT_INTRTR0_MUXCNTL_y" acronym="CMPEVT_INTRTR0_MUXCNTL_y" offset="0x4" width="32" description="Description: Event mux control register. Offset = 4h + (y * 4h); where y = 0h to 1Fh.">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="INT_ENABLE" width="1" begin="16" end="16" resetval="0x0" description="Enable for event output N" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="9" begin="15" end="7" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ENABLE" width="7" begin="6" end="0" resetval="0x0" description="Mux control for event output N" range="" rwaccess="RW"/>
+  </register>
+</module>

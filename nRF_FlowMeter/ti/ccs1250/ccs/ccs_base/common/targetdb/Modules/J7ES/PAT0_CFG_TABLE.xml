@@ -1,0 +1,13 @@
+<module name="PAT0_CFG_TABLE" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="PAT_BASE_REG_L_j_k" acronym="PAT_BASE_REG_L_j_k" offset="0x0" width="32" description="The Base Low Address bits 43 to 12 for Page. This register must be written as a full 32-bit word. Offset = 0h + (j * 1000h) + (k * 8h); where j = 0h to 3Fh, k = 0h to FFh for PAT0, PAT1, and PAT2 Offset = 0h + (j * 1000h) + (k * 8h); where j = 0h to 7h, k = 0h to FFh for PAT3 and PAT4">
+    <bitfield id="BASE_L" width="32" begin="31" end="0" resetval="0x0" description="Translated Base Address bits 43 to 12 for Page. Always minimum 4KB aligned." range="" rwaccess="RW"/>
+  </register>
+  <register id="PAT_BASE_REG_H_j_k" acronym="PAT_BASE_REG_H_j_k" offset="0x4" width="32" description="The Base High Address bits 47 to 44 for Page. This register must be written as a full 32-bit word. Offset = 4h + (j * 1000h) + (k * 8h); where j = 0h to 3Fh, k = 0h to FFh for PAT0, PAT1, and PAT2 Offset = 4h + (j * 1000h) + (k * 8h); where j = 0h to 7h, k = 0h to FFh for PAT3 and PAT4">
+    <bitfield id="ENABLE" width="1" begin="31" end="31" resetval="0x0" description="Translation Enable for Page. 0 = disabled. 1 = enabled." range="" rwaccess="RW"/>
+    <bitfield id="REPLACE_OID" width="1" begin="30" end="30" resetval="0x0" description="OrderID replacement Enable for Page. It will be ignored if the global replace orderid is disabled. 0 = use input orderid. 1 = force replacement to orderid in page." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="2" begin="29" end="28" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ORDERID" width="4" begin="27" end="24" resetval="0x0" description="Translated orderid to use with translation address." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="23" end="4" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="BASE_H" width="4" begin="3" end="0" resetval="0x0" description="Translated Base Address bits 47 to 44 for Page" range="" rwaccess="RW"/>
+  </register>
+</module>

@@ -1,0 +1,223 @@
+<module name="VPAC0_PAR_VPAC_LDC0_S_VBUSP_MMR_VBUSP" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="VPAC_LDC_REVISION_REG" acronym="VPAC_LDC_REVISION_REG" offset="0x0" width="32" description="LDC PID">
+    <bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x1" description="Used to distinguish between old scheme and new scheme." range="" rwaccess="R"/>
+    <bitfield id="BU" width="2" begin="29" end="28" resetval="0x2" description="BU indicator DSPS ==&amp;amp;gt; 0x0 WTBU ==&amp;amp;gt; 0x1 Processors ==&amp;amp;gt; 0x2" range="" rwaccess="R"/>
+    <bitfield id="FUNC" width="12" begin="27" end="16" resetval="0x4C6" description="Function indicates a software compatible module family." range="" rwaccess="R"/>
+    <bitfield id="RTL" width="5" begin="15" end="11" resetval="0x0" description="RTL Version." range="" rwaccess="R"/>
+    <bitfield id="MAJOR" width="3" begin="10" end="8" resetval="0x0" description="Major Revision." range="" rwaccess="R"/>
+    <bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Indicates a special version for a particular device." range="" rwaccess="R"/>
+    <bitfield id="MINOR" width="6" begin="5" end="0" resetval="0x0" description="Minor Revision." range="" rwaccess="R"/>
+  </register>
+  <register id="VPAC_LDC_PRIVATE_MEMSIZE" acronym="VPAC_LDC_PRIVATE_MEMSIZE" offset="0x4" width="32" description="Memory size mentioned is for both ping and pong combined. Error interrupts are generated based on the memory size available.">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="MESH" width="8" begin="23" end="16" resetval="0xA" description="Mesh Private pixel memory size in KBytes" range="" rwaccess="R"/>
+    <bitfield id="CHROMA" width="8" begin="15" end="8" resetval="0x1E" description="Chroma Private pixel memory size in KBytes" range="" rwaccess="R"/>
+    <bitfield id="LUMA" width="8" begin="7" end="0" resetval="0x2A" description="Luma Private pixel memory size in KBytes" range="" rwaccess="R"/>
+  </register>
+  <register id="VPAC_LDC_CTRL" acronym="VPAC_LDC_CTRL" offset="0x8" width="32" description="Control Register to Enable/Disable and select modes of operation">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="REGMODE_EN" width="1" begin="13" end="13" resetval="0x0" description="Enables for Frame division into multiple regions." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="12" end="12" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="OP_DATAMODE" width="1" begin="11" end="11" resetval="0x1" description="Output Pixel Data Mode" range="" rwaccess="RW"/>
+    <bitfield id="IP_HTS_ROWSYNC" width="1" begin="10" end="10" resetval="0x0" description="Enables control of Input Fetch with HTS at Block Row level." range="" rwaccess="RW"/>
+    <bitfield id="IP_CIRCEN" width="1" begin="9" end="9" resetval="0x0" description="Enables circular addressing mode on input pixel fetch." range="" rwaccess="RW"/>
+    <bitfield id="ALIGN_12BIT" width="1" begin="8" end="8" resetval="0x0" description="Alignment of" range="" rwaccess="RW"/>
+    <bitfield id="PWARPEN" width="1" begin="7" end="7" resetval="0x0" description="Perspective warp transform Enable." range="" rwaccess="RW"/>
+    <bitfield id="IP_DFMT" width="2" begin="6" end="5" resetval="0x1" description="Input Pixel Data Format" range="" rwaccess="RW"/>
+    <bitfield id="IP_DATAMODE" width="2" begin="4" end="3" resetval="0x2" description="Input Pixel Data Mode" range="" rwaccess="RW"/>
+    <bitfield id="BUSY" width="1" begin="2" end="2" resetval="0x0" description="Idle/Busy Status," range="" rwaccess="R"/>
+    <bitfield id="LDMAPEN" width="1" begin="1" end="1" resetval="0x0" description="Distortion Back Mapping Enable." range="" rwaccess="RW"/>
+    <bitfield id="LDC_EN" width="1" begin="0" end="0" resetval="0x0" description="Write 1 to Start LDC function." range="" rwaccess="RW1S"/>
+  </register>
+  <register id="VPAC_LDC_CFG" acronym="VPAC_LDC_CFG" offset="0xC" width="32" description="LDC Configuration register. YINT_TYP parameter is used The YINT_TYP parameter only applies to the Y component (Luma). If YINT_TYP = 0, Y pixels are processed using bicubic interpolation, which requires 2 cycles per pixel to process. If YINT_TYP = 1, Y pixels are processed using bilinear interpolation, which requires 1 cycle per pixel to process. This allows a tradeoff between performance versus quality. CbCr (Chroma) pixels are always processed using bilinear interpolation. Thus, the overall performance of pixel processing is based on the Y interpolation type setting.">
+    <bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="YINT_TYP" width="1" begin="6" end="6" resetval="0x0" description="Interpolation type for Y data." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="5" end="2" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CLKCG_OVERIDE" width="1" begin="1" end="1" resetval="0x0" description="Override power saving clock gating inserted by design." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="0" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_MESHTABLE_CFG" acronym="VPAC_LDC_MESHTABLE_CFG" offset="0x10" width="32" description="Defines the down-sampling factors used for the mesh offset tables">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="M" width="3" begin="2" end="0" resetval="0x0" description="Mesh table down-sampling factor (by 2" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_MESH_FRSZ" acronym="VPAC_LDC_MESH_FRSZ" offset="0x14" width="32" description="Mesh data mapping is available for this Frame size. Actual number of mesh data entires depend Mesh Frame size and Mesh sampling factor. This Frame size is independent from">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="H" width="14" begin="29" end="16" resetval="0x0" description="Mesh Frame height in Lines" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="W" width="14" begin="13" end="0" resetval="0x0" description="Mesh Frame Width" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_COMPUTE_FRSZ" acronym="VPAC_LDC_COMPUTE_FRSZ" offset="0x18" width="32" description="H corresponds to the total number of lines to process. W corresponds to the number of pixels to process in each line. This parameters must be loaded as actual pixel counts, NOT pixel counts - 1. W and H must both be less than or equal to 8192. The hardware does not support output coordinates larger than 8192. Therefore, .W + .INITX must be no larger than 8192. Also .H + .INITY must be no larger than 8192.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="H" width="14" begin="29" end="16" resetval="0x0" description="Output Frame height in Lines." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="W" width="14" begin="13" end="0" resetval="0x0" description="Output Frame Width." range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_INITXY" acronym="VPAC_LDC_INITXY" offset="0x1C" width="32" description="LDC Initial Output Co-ordinate to process">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="INITY" width="13" begin="28" end="16" resetval="0x0" description="Output starting Y-coordinate." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="INITX" width="13" begin="12" end="0" resetval="0x0" description="Output starting X-coordinate." range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_INPUT_FRSZ" acronym="VPAC_LDC_INPUT_FRSZ" offset="0x20" width="32" description="Defines the total input frame size">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="H" width="14" begin="29" end="16" resetval="0x0" description="Input Frame height in Lines." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="W" width="14" begin="13" end="0" resetval="0x0" description="Input Frame Width in Pixels." range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_OUT_BLKSZ" acronym="VPAC_LDC_OUT_BLKSZ" offset="0x24" width="32" description="LDC Output Block parameter registers. These parameters represent actual pixel counts, NOT pixel counts - 1. OBW must be greater than 0 and less than or equal to frame width (.W). OBH must be greater than 0 and less than or equal to frame height (.H).">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PIXPAD" width="4" begin="19" end="16" resetval="0x0" description="Pixel pad" range="" rwaccess="RW"/>
+    <bitfield id="OBH" width="8" begin="15" end="8" resetval="0x0" description="Output block height must be &amp;amp;gt;0 and even" range="" rwaccess="RW"/>
+    <bitfield id="OBW" width="8" begin="7" end="0" resetval="0x0" description="Output block width, must be &amp;amp;gt;0 and multiple of 8" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_AFF_AB" acronym="VPAC_LDC_AFF_AB" offset="0x28" width="32" description="LDC Affine Transwarp A/B">
+    <bitfield id="B" width="16" begin="31" end="16" resetval="0x0" description="Affine transwarp B (S16Q12)" range="" rwaccess="RW"/>
+    <bitfield id="A" width="16" begin="15" end="0" resetval="0x1000" description="Affine transwarp A (S16Q12)" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_AFF_CD" acronym="VPAC_LDC_AFF_CD" offset="0x2C" width="32" description="LDC Affine Transwarp C/D">
+    <bitfield id="D" width="16" begin="31" end="16" resetval="0x0" description="Affine transwarp D (S16Q12)" range="" rwaccess="RW"/>
+    <bitfield id="C" width="16" begin="15" end="0" resetval="0x0" description="Affine transwarp C (S16Q3)" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_AFF_EF" acronym="VPAC_LDC_AFF_EF" offset="0x30" width="32" description="LDC Affine Transwarp E/F">
+    <bitfield id="F" width="16" begin="31" end="16" resetval="0x0" description="Affine transwarp F (S16Q3)" range="" rwaccess="RW"/>
+    <bitfield id="E" width="16" begin="15" end="0" resetval="0x1000" description="Affine transwarp E (S16Q12)" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_PWARP_GH" acronym="VPAC_LDC_PWARP_GH" offset="0x34" width="32" description="LDC Perspective Transformation Parameters, G and H">
+    <bitfield id="H" width="16" begin="31" end="16" resetval="0x0" description="Perspective Transformation H (S16Q23)" range="" rwaccess="RW"/>
+    <bitfield id="G" width="16" begin="15" end="0" resetval="0x0" description="Perspective Transformation H (S16Q23)" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_MESH_BASE_H" acronym="VPAC_LDC_MESH_BASE_H" offset="0x38" width="32" description="Higher 16-bit of Mesh Table Base Address">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ADDR" width="16" begin="15" end="0" resetval="0x0" description="Higher" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_MESH_BASE_l" acronym="VPAC_LDC_MESH_BASE_l" offset="0x3C" width="32" description="Lower 32-bit of Mesh Table Base Address">
+    <bitfield id="ADDR" width="32" begin="31" end="0" resetval="0x0" description="Lower 32-bit of Read Base address for mesh offset table." range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_MESH_OFST" acronym="VPAC_LDC_MESH_OFST" offset="0x40" width="32" description="Defines the stride between rows for the Mesh table in bytes.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="OFST" width="16" begin="15" end="0" resetval="0x0" description="LDC Mesh table line offset, must be" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_RD_BASE_H" acronym="VPAC_LDC_RD_BASE_H" offset="0x44" width="32" description="Higher 16-bit of Input Frame Base Address">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ADDR" width="16" begin="15" end="0" resetval="0x0" description="Higher" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_RD_BASE_l" acronym="VPAC_LDC_RD_BASE_l" offset="0x48" width="32" description="Lower 32-bit of Input Frame Base Address">
+    <bitfield id="ADDR" width="32" begin="31" end="0" resetval="0x0" description="Lower 32-bit of Read Base address of Input Frame Base Address." range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_RD_420C_BASE_H" acronym="VPAC_LDC_RD_420C_BASE_H" offset="0x4C" width="32" description="Higher 16-bit of Input Frame 420C Base Address">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ADDR" width="16" begin="15" end="0" resetval="0x0" description="Higher" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_RD_420C_BASE_l" acronym="VPAC_LDC_RD_420C_BASE_l" offset="0x50" width="32" description="Lower 32-bit of Input Frame Chroma Base Address in YUV420">
+    <bitfield id="ADDR" width="32" begin="31" end="0" resetval="0x0" description="Lower 32-bit of Read Base address of Input Frame Chroma Base Address in YUV420." range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_RD_OFST" acronym="VPAC_LDC_RD_OFST" offset="0x54" width="32" description="Defines the stride between rows for the Input Frame in bytes.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="MOD" width="14" begin="29" end="16" resetval="0x0" description="Sets the circular buffer size if circular buffering mode is used." range="" rwaccess="RW"/>
+    <bitfield id="OFST" width="16" begin="15" end="0" resetval="0x0" description="Read frame line offset, must be" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_VBUSMR_CFG" acronym="VPAC_LDC_VBUSMR_CFG" offset="0x58" width="32" description="Control VBUSM Read Interface">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="BW_CTRL" width="12" begin="27" end="16" resetval="0x0" description="Limits the mean bandwidth (computed over one block) that the LDC module can request for read from system memory." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="TAG_CNT" width="5" begin="7" end="3" resetval="0x1F" description="Limits the maximum number of outstanding LDC requests to TAG_CNT+1" range="" rwaccess="RW"/>
+    <bitfield id="MAX_BURSTLEN" width="2" begin="2" end="1" resetval="0x1" description="Limits the maximum burst length that could be used by LDC." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="0" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_COREOUT_CHANCFG" acronym="VPAC_LDC_COREOUT_CHANCFG" offset="0x5C" width="32" description="LDC Core to LSE output channel enable control">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CH3_EN" width="1" begin="3" end="3" resetval="0x0" description="Enable for LDC Core to LSE Channel_3 connection used for Chroma Dual output" range="" rwaccess="RW"/>
+    <bitfield id="CH2_EN" width="1" begin="2" end="2" resetval="0x0" description="Enable for LDC Core to LSE Channel_2 connection used for Luma Dual output" range="" rwaccess="RW"/>
+    <bitfield id="RSRV_CH1" width="1" begin="1" end="1" resetval="0x0" description="Primary Chroma channel (LSE Channel_1) enable extracted from output data mode" range="" rwaccess="R"/>
+    <bitfield id="RSRV_CH0" width="1" begin="0" end="0" resetval="0x0" description="Primary Luuma channel (LSE Channel_0) enable extracted from output data mode" range="" rwaccess="R"/>
+  </register>
+  <register id="VPAC_LDC_DUALOUT_CFG" acronym="VPAC_LDC_DUALOUT_CFG" offset="0x60" width="32" description="Configuration for Dual Luma and Chroma channels and LUT">
+    <bitfield id="RESERVED" width="7" begin="31" end="25" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="COUT_BITDPTH" width="4" begin="24" end="21" resetval="0x8" description="Chroma Output Data Bit depth." range="" rwaccess="RW"/>
+    <bitfield id="CIN_BITDPTH" width="4" begin="20" end="17" resetval="0xC" description="Chroma Input Data Bit depth." range="" rwaccess="RW"/>
+    <bitfield id="CLUT_EN" width="1" begin="16" end="16" resetval="0x0" description="Chroma LUT mapping enable." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="7" begin="15" end="9" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="YOUT_BITDPTH" width="4" begin="8" end="5" resetval="0x8" description="Luma Output Data Bit depth." range="" rwaccess="RW"/>
+    <bitfield id="YIN_BITDPTH" width="4" begin="4" end="1" resetval="0xC" description="Luma Input Data Bit depth." range="" rwaccess="RW"/>
+    <bitfield id="YLUT_EN" width="1" begin="0" end="0" resetval="0x0" description="Luma LUT mapping enable." range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_REGN_W12_SZ" acronym="VPAC_LDC_REGN_W12_SZ" offset="0x80" width="32" description="Horizontal slice width for Region division">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="W2" width="14" begin="29" end="16" resetval="0x0" description="Width of second horizontal slice." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="W1" width="14" begin="13" end="0" resetval="0x0" description="Width of first horizontal slice." range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_REGN_W3_SZ" acronym="VPAC_LDC_REGN_W3_SZ" offset="0x84" width="32" description="Horizontal slice width for Region division">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="W3" width="14" begin="13" end="0" resetval="0x0" description="Width of third horizontal slice." range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_REGN_H12_SZ" acronym="VPAC_LDC_REGN_H12_SZ" offset="0x88" width="32" description="vertical slice height for Region division">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="H2" width="14" begin="29" end="16" resetval="0x0" description="Height of second vertical slice." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="H1" width="14" begin="13" end="0" resetval="0x0" description="Height of first vertical slice." range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_REGN_H3_SZ" acronym="VPAC_LDC_REGN_H3_SZ" offset="0x8C" width="32" description="vertical slice height for Region division">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="H3" width="14" begin="13" end="0" resetval="0x0" description="Height of third vertical slice." range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_CTRL_j" acronym="VPAC_LDC_CTRL_j" offset="0xA0" width="32" description="Region Control Register Offset = 000200A0h + (j * 8h); where j = 0h to 8h">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x1" description="Enable for processing of this region." range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_OUT_BLKSZ_j" acronym="VPAC_LDC_OUT_BLKSZ_j" offset="0xA4" width="32" description="Block size and Pixel Pad config Offset = 000200A4h + (j * 8h); where j = 0h to 8h">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PIXPAD" width="4" begin="19" end="16" resetval="0x0" description="Pixel pad" range="" rwaccess="RW"/>
+    <bitfield id="OBH" width="8" begin="15" end="8" resetval="0x0" description="Output block height must be &amp;amp;gt;0 and even." range="" rwaccess="RW"/>
+    <bitfield id="OBW" width="8" begin="7" end="0" resetval="0x0" description="Output block width, must be &amp;amp;gt;0 and multiple of 8." range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_ERR_STATUS" acronym="VPAC_LDC_ERR_STATUS" offset="0x200" width="32" description="Control VBUSM Read Interface">
+    <bitfield id="RESERVED" width="21" begin="31" end="11" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VBUSMR_ERR" width="3" begin="10" end="8" resetval="0x0" description="VBUSM Read I/F Last Error Status." range="" rwaccess="RW1C"/>
+    <bitfield id="RESERVED" width="2" begin="7" end="6" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT_SZOVF" width="1" begin="5" end="5" resetval="0x0" description="Internal operation has overflown the HW supported block or frame sizes." range="" rwaccess="RW1C"/>
+    <bitfield id="M_IBLK_MEMOVF" width="1" begin="4" end="4" resetval="0x0" description="Mesh block storage requirement is more than internal memory available." range="" rwaccess="RW1C"/>
+    <bitfield id="P_IBLK_MEMOVF" width="1" begin="3" end="3" resetval="0x0" description="Input pixel block storage requirement is more than internal memory available." range="" rwaccess="RW1C"/>
+    <bitfield id="IFRAME_OUTB" width="1" begin="2" end="2" resetval="0x0" description="Either Mesh data or Input pixel data required is going out of valid frame available" range="" rwaccess="RW1C"/>
+    <bitfield id="M_IBLK_OUTB" width="1" begin="1" end="1" resetval="0x0" description="Mesh Input Block out of Bound." range="" rwaccess="RW1C"/>
+    <bitfield id="P_IBLK_OUTB" width="1" begin="0" end="0" resetval="0x0" description="Pixel Input Block out of Bound." range="" rwaccess="RW1C"/>
+  </register>
+  <register id="VPAC_LDC_DEBUG_CTRL" acronym="VPAC_LDC_DEBUG_CTRL" offset="0x204" width="32" description="Control the memory access selection">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CFG_MEMACC_SEL" width="1" begin="0" end="0" resetval="0x0" description="VBUSP Configuration access control." range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_LDC_DEBUG_STATUS" acronym="VPAC_LDC_DEBUG_STATUS" offset="0x208" width="32" description="LDC Debug Status Register">
+    <bitfield id="RESERVED" width="7" begin="31" end="25" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="PROC_STATUS" width="1" begin="24" end="24" resetval="0x1" description="Block Processing status." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="23" end="19" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="FETCH_RESPSTATE" width="3" begin="18" end="16" resetval="0x0" description="VBUSM Fetch Response state machine 3'd" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="FETCH_REQSTATE" width="5" begin="12" end="8" resetval="0x0" description="VBUSM Fetch Request state machine 5'b00_" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="CTRL_STATE" width="4" begin="3" end="0" resetval="0x0" description="Main Control State machine 4'd" range="" rwaccess="R"/>
+  </register>
+  <register id="VPAC_LDC_FR_PDFTCH" acronym="VPAC_LDC_FR_PDFTCH" offset="0x20C" width="32" description="Pixel bytes fetched by VBUSM Read Interface. It is updated on every command issued and cleared at the beginning frame fetch. Reading at the end of the frame will provide total number of pixel data fetched for entire frame">
+    <bitfield id="PBYTES" width="32" begin="31" end="0" resetval="0x0" description="Pixel bytes fetched for current Frame." range="" rwaccess="R"/>
+  </register>
+  <register id="VPAC_LDC_FR_MDFTCH" acronym="VPAC_LDC_FR_MDFTCH" offset="0x210" width="32" description="Mesh bytes fetched by VBUSM Read Interface. It is updated on every command issued and cleared at the beginning frame fetch. Reading at the end of the frame will provide total number of mesh data band fetched for entire frame">
+    <bitfield id="MBYTES" width="32" begin="31" end="0" resetval="0x0" description="Mesh bytes fetched for current Frame." range="" rwaccess="R"/>
+  </register>
+  <register id="VPAC_LDC_PIXMEMOVF_BLK" acronym="VPAC_LDC_PIXMEMOVF_BLK" offset="0x214" width="32" description="Starting co-ordinates of first output block for which input pixel buffer overflowed">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="Y" width="13" begin="28" end="16" resetval="0x0" description="Start Y Co-ordinate" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="X" width="13" begin="12" end="0" resetval="0x0" description="Start X Co-ordinate" range="" rwaccess="R"/>
+  </register>
+  <register id="VPAC_LDC_MESHMEMOVF_BLK" acronym="VPAC_LDC_MESHMEMOVF_BLK" offset="0x218" width="32" description="Starting co-ordinates of first output block for which input mesh buffer overflowed">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="Y" width="13" begin="28" end="16" resetval="0x0" description="Start Y Co-ordinate" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="X" width="13" begin="12" end="0" resetval="0x0" description="Start X Co-ordinate" range="" rwaccess="R"/>
+  </register>
+  <register id="VPAC_LDC_OUTOFBOUND_BLK" acronym="VPAC_LDC_OUTOFBOUND_BLK" offset="0x21C" width="32" description="Starting co-ordinates of first output block for which PIX_PAD is not enough">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="Y" width="13" begin="28" end="16" resetval="0x0" description="Start Y Co-ordinate" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="X" width="13" begin="12" end="0" resetval="0x0" description="Start X Co-ordinate" range="" rwaccess="R"/>
+  </register>
+</module>

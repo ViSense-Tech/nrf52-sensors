@@ -1,0 +1,98 @@
+<module name="WKUP_DDPA0" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="DDPA_REVISION_REG" acronym="DDPA_REVISION_REG" offset="0x0" width="32" description="">
+		<bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x1" description="Used to  distinguish between old scheme and new scheme. Spare bit to encode future schemes" range="31 - 30" rwaccess="R"/> 
+		<bitfield id="BU" width="2" begin="29" end="28" resetval="0x2" description="BU indicator DSPS ==> 0x0  WTBU ==> 0x1  Processors ==> 0x2" range="29 - 28" rwaccess="R"/> 
+		<bitfield id="FUNC" width="12" begin="27" end="16" resetval="0x2592" description="Function indicates a software compatible module family. If there is no level of software compatibility a new FUNC number, and hence PID, should be assigned." range="27 - 16" rwaccess="R"/> 
+		<bitfield id="RTL" width="5" begin="15" end="11" resetval="0x0" description="RTL Version.  R as described in PDR with additional clarifications and definitions below.  Must be easily ECO-able or controlled during fabrication.  Ideally through a top level metal mask or e-fuse. This number is maintained/owned by IP design owner.   RTL follows a numbering such as X.Y.R.Z which are explained in this table.   R changes ONLY when:  (1) PDS uploads occur which may have been due to spec changes  (2) Bug fixes occur  (3) Resets to '0' when X or Y changes.   Design team has an internal 'Z' (customer invisible) number which increments on every drop that happens due to DV and RTL updates. Z resets to 0 when R increments. " range="15 - 11" rwaccess="R"/> 
+		<bitfield id="MAJOR" width="3" begin="10" end="8" resetval="0x1" description="Major Revision.   X as described in PDR with additional clarifications/definitions below. This number is owned/maintained by IP specification owner. X is part of IP numbering X.Y.R.Z.  X changes ONLY when:  (1) There is a major feature addition. An example would be adding Master Mode to Utopia Level2. The Func field (or Class/Type in old PID format) will remain the same.   X does NOT change due to:  (1) Bug fixes  (2) Change in feature parameters. " range="10 - 8" rwaccess="R"/> 
+		<bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Indicates a special version for a particular device.  Consequence of use may avoid use of standard Chip Support Library (CSL) / Drivers.   0 if non-custom. " range="7 - 6" rwaccess="R"/> 
+		<bitfield id="MINOR" width="6" begin="5" end="0" resetval="0x0" description="Minor Revision.   Y as described in PDR with additional clarifications/definitions below.  This number is owned/maintained by IP specification owner.   Y changes ONLY when:  (1) Features are scaled (up or down). Flexibility exists in that this feature scalability may either be represented in the Y change or a specific register in the IP that indicates which features are exactly available.  (2) When feature creeps from Is-Not list to Is list. But this may not be the case once it sees silicon - in which case X will change.   Y does NOT change due to:  (1) Bug fixes  (2) Typos or clarifications  (3) major functional/feature change/addition/deletion. Instead these changes may be reflected via R, S, X as applicable.   Spec owner maintains a customer-invisible number 'S' which changes due to:  (1) Typos/clarifications  (2) Bug documentation. Note that this bug is not due to a spec change but due to implementation. Nevertheless, the spec tracks the IP bugs. An RTL release (say for silicon PG1.1) that occurs due to bug fix should document the corresponding spec number (X.Y.S) in its release notes. " range="5 - 0" rwaccess="R"/>
+	</register>
+	<register id="DDPA_DEBUGSS_INHIBITSLEEP_REQ_STAT" acronym="DDPA_DEBUGSS_INHIBITSLEEP_REQ_STAT" offset="0x4" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description="Status bits showing the level of the Inhibit_sleep request inputs from Power-AP into DDPA." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="DDPA_DEBUGSS_INHIBITSLEEP_REQ_SET" acronym="DDPA_DEBUGSS_INHIBITSLEEP_REQ_SET" offset="0x14" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description=" Write-operation:   0: Nothing happens.  1: Causes the interrupt flag to be set. Used to manually force/drive an interrupt pending event.   Reads:   This MMR reflects the RAW status of the interrupt flag due to inhibitsleep request events by any of the 32 power-AP ports.  0: The values of the corresponding power-AP port in MMRs DEBUGSS_INHIBIT_SLEEP_REQ_STAT and DEBUGSS_INHIBIT_SLEEP_REQ_SET/CLR are equal.  1: The values of the corresponding power-AP port in MMRs DEBUGSS_INHIBIT_SLEEP_REQ_STAT and DEBUGSS_INHIBIT_SLEEP_REQ_SET/CLR are different" range="31 - 0" rwaccess="R/W1TS"/>
+	</register>
+	<register id="DDPA_DEBUGSS_INHIBITSLEEP_REQ_CLR" acronym="DDPA_DEBUGSS_INHIBITSLEEP_REQ_CLR" offset="0x24" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description=" Write-operation:   0: Nothing happens.  1: Causes the bit to be cleared.   Reads: This MMR reflects the MASKED status of the interrupt flag due to inhibitsleep request events by any of the 32 power-AP ports. The mask source is DDPA_INT_EN_SET/CLR.  0: The values of the corresponding power-AP port in MMRs DEBUGSS_INHIBIT_SLEEP_REQ_STAT and DEBUGSS_INHIBIT_SLEEP_REQ_SET/CLR are equal.  1: The values of the corresponding power-AP port in MMRs DEBUGSS_INHIBIT_SLEEP_REQ_STAT and DEBUGSS_INHIBIT_SLEEP_REQ_SET/CLR are different." range="31 - 0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="DDPA_DEBUGSS_INHIBITSLEEP_ACK_SET" acronym="DDPA_DEBUGSS_INHIBITSLEEP_ACK_SET" offset="0x34" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description=" Write-operation:   0: Nothing happens.  1: Set the inhibit sleep acknowledgement" range="31 - 0" rwaccess="R/W1TS"/>
+	</register>
+	<register id="DDPA_DEBUGSS_INHIBITSLEEP_ACK_CLR" acronym="DDPA_DEBUGSS_INHIBITSLEEP_ACK_CLR" offset="0x44" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description=" Write-operation:   0: Nothing happens.  1: clears the inhibit sleep acknowledgement" range="31 - 0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="DDPA_DEBUGSS_FORCEACTIVE_REQ_STAT" acronym="DDPA_DEBUGSS_FORCEACTIVE_REQ_STAT" offset="0x54" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description="Status bits showing the level of the FORCE_ACTIVE request inputs from Power-AP into DDPA." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="DDPA_DEBUGSS_FORCEACTIVE_REQ_SET" acronym="DDPA_DEBUGSS_FORCEACTIVE_REQ_SET" offset="0x64" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description=" Write-operation:   0: Nothing happens.  1: Causes the interrupt flag to be set. Used to manually force/drive an interrupt pending event.   Reads:   This MMR reflects the RAW status of the interrupt flag due to inhibitsleep request events by any of the 32 power-AP ports.  0: The values of the corresponding power-AP port in MMRs DEBUGSS_FORCE_ACTIVE_REQ_STAT and DEBUGSS_FORCE_ACTIVE_REQ_SET/CLR are equal.  1: The values of the corresponding power-AP port in MMRs DEBUGSS_FORCE_ACTIVE_REQ_STAT and DEBUGSS_FORCE_ACTIVE_REQ_SET/CLR are different" range="31 - 0" rwaccess="R/W1TS"/>
+	</register>
+	<register id="DDPA_DEBUGSS_FORCEACTIVE_REQ_CLR" acronym="DDPA_DEBUGSS_FORCEACTIVE_REQ_CLR" offset="0x74" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description=" Write-operation:   0: Nothing happens.  1: Causes the bit to be cleared.   Reads: This MMR reflects the MASKED status of the interrupt flag due to inhibitsleep request events by any of the 32 power-AP ports. The mask source is DDPA_INT_EN_SET/CLR.  0: The values of the corresponding power-AP port in MMRs DEBUGSS_FORCE_ACTIVE_REQ_STAT and DEBUGSS_FORCE_ACTIVE_REQ_SET/CLR are equal.  1: The values of the corresponding power-AP port in MMRs DEBUGSS_FORCE_ACTIVE_REQ_STAT and DEBUGSS_FORCE_ACTIVE_REQ_SET/CLR are different." range="31 - 0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="DDPA_DEBUGSS_FORCEACTIVE_ACK_SET" acronym="DDPA_DEBUGSS_FORCEACTIVE_ACK_SET" offset="0x84" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description=" Write-operation:   0: Nothing happens.  1: Set the force active acknowledgement" range="31 - 0" rwaccess="R/W1TS"/>
+	</register>
+	<register id="DDPA_DEBUGSS_FORCEACTIVE_ACK_CLR" acronym="DDPA_DEBUGSS_FORCEACTIVE_ACK_CLR" offset="0x94" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description=" Write-operation:   0: Nothing happens.  1: clears the force active acknowledgement" range="31 - 0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="DDPA_DEBUGSS_BLOCKRESET_REQ_STAT" acronym="DDPA_DEBUGSS_BLOCKRESET_REQ_STAT" offset="0xA4" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description="Status bits showing the level of the BLOCK_RESET request inputs from Power-AP into DDPA." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="DDPA_DEBUGSS_BLOCKRESET_REQ_SET" acronym="DDPA_DEBUGSS_BLOCKRESET_REQ_SET" offset="0xB4" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description=" Write-operation:   0: Nothing happens.  1: Causes the interrupt flag to be set. Used to manually force/drive an interrupt pending event.   Reads:   This MMR reflects the RAW status of the interrupt flag due to inhibitsleep request events by any of the 32 power-AP ports.  0: The values of the corresponding power-AP port in MMRs DEBUGSS_BLOCK_RESET_REQ_STAT and DEBUGSS_BLOCK_RESET_REQ_SET/CLR are equal.  1: The values of the corresponding power-AP port in MMRs DEBUGSS_BLOCK_RESET_REQ_STAT and DEBUGSS_BLOCK_RESET_REQ_SET/CLR are different" range="31 - 0" rwaccess="R/W1TS"/>
+	</register>
+	<register id="DDPA_DEBUGSS_BLOCKRESET_REQ_CLR" acronym="DDPA_DEBUGSS_BLOCKRESET_REQ_CLR" offset="0xC4" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description=" Write-operation:   0: Nothing happens.  1: Causes the bit to be cleared.   Reads: This MMR reflects the MASKED status of the interrupt flag due to inhibitsleep request events by any of the 32 power-AP ports. The mask source is DDPA_INT_EN_SET/CLR.  0: The values of the corresponding power-AP port in MMRs DEBUGSS_BLOCK_RESET_REQ_STAT and DEBUGSS_BLOCK_RESET_REQ_SET/CLR are equal.  1: The values of the corresponding power-AP port in MMRs DEBUGSS_BLOCK_RESET_REQ_STAT and DEBUGSS_BLOCK_RESET_REQ_SET/CLR are different." range="31 - 0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="DDPA_DEBUGSS_ASSERTRESET_REQ_STAT" acronym="DDPA_DEBUGSS_ASSERTRESET_REQ_STAT" offset="0xD4" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description="Status bits showing the level of the ASSERT_RESET request inputs from Power-AP into DDPA." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="DDPA_DEBUGSS_ASSERTRESET_REQ_SET" acronym="DDPA_DEBUGSS_ASSERTRESET_REQ_SET" offset="0xE4" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description=" Write-operation:   0: Nothing happens.  1: Causes the interrupt flag to be set. Used to manually force/drive an interrupt pending event.   Reads:   This MMR reflects the RAW status of the interrupt flag due to inhibitsleep request events by any of the 32 power-AP ports.  0: The values of the corresponding power-AP port in MMRs DEBUGSS_ASSERT_RESET_REQ_STAT and DEBUGSS_ASSERT_RESET_REQ_SET/CLR are equal.  1: The values of the corresponding power-AP port in MMRs DEBUGSS_ASSERT_RESET_REQ_STAT and DEBUGSS_ASSERT_RESET_REQ_SET/CLR are different" range="31 - 0" rwaccess="R/W1TS"/>
+	</register>
+	<register id="DDPA_DEBUGSS_ASSERTRESET_REQ_CLR" acronym="DDPA_DEBUGSS_ASSERTRESET_REQ_CLR" offset="0xF4" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description=" Write-operation:   0: Nothing happens.  1: Causes the bit to be cleared.   Reads: This MMR reflects the MASKED status of the interrupt flag due to inhibitsleep request events by any of the 32 power-AP ports. The mask source is DDPA_INT_EN_SET/CLR.  0: The values of the corresponding power-AP port in MMRs DEBUGSS_ASSERT_RESET_REQ_STAT and DEBUGSS_ASSERT_RESET_REQ_SET/CLR are equal.  1: The values of the corresponding power-AP port in MMRs DEBUGSS_ASSERT_RESET_REQ_STAT and DEBUGSS_ASSERT_RESET_REQ_SET/CLR are different." range="31 - 0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="DDPA_PSC_INHIBITSLEEP_SET" acronym="DDPA_PSC_INHIBITSLEEP_SET" offset="0x104" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description="0: Writing 0 to this field produces no effect.  1: Writing 1 to any of the bits in this field sets to '1' the corresponding bit in that field." range="31 - 0" rwaccess="R/W1TS"/>
+	</register>
+	<register id="DDPA_PSC_INHIBITSLEEP_CLR" acronym="DDPA_PSC_INHIBITSLEEP_CLR" offset="0x124" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description="0: Writing 0 to this field produces no effect.  1: Writing 1 to any of the bits in this field sets to '0' the corresponding bit in that field." range="31 - 0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="DDPA_PSC_INHIBITSLEEP_STAT" acronym="DDPA_PSC_INHIBITSLEEP_STAT" offset="0x144" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description="Status bits showing the level of the INHIBIT_SLEEP request ACK inputs from PSC into DDPA." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="DDPA_PSC_FORCEACTIVE_SET" acronym="DDPA_PSC_FORCEACTIVE_SET" offset="0x164" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description="0: Writing 0 to this field produces no effect.  1: Writing 1 to any of the bits in this field sets to '1' the corresponding bit in that field." range="31 - 0" rwaccess="R/W1TS"/>
+	</register>
+	<register id="DDPA_PSC_FORCEACTIVE_CLR" acronym="DDPA_PSC_FORCEACTIVE_CLR" offset="0x184" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description="0: Writing 0 to this field produces no effect.  1: Writing 1 to any of the bits in this field sets to '0' the corresponding bit in that field." range="31 - 0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="DDPA_PSC_FORCEACTIVE_STAT" acronym="DDPA_PSC_FORCEACTIVE_STAT" offset="0x1A4" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description="Status bits showing the level of the FORCE_ACTIVE request ACK inputs from PSC into DDPA." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="DDPA_PSC_BLOCKRESET_SET" acronym="DDPA_PSC_BLOCKRESET_SET" offset="0x1C4" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description="0: Writing 0 to this field produces no effect.  1: Writing 1 to any of the bits in this field sets to '1' the corresponding bit in that field." range="31 - 0" rwaccess="R/W1TS"/>
+	</register>
+	<register id="DDPA_PSC_BLOCKRESET_CLR" acronym="DDPA_PSC_BLOCKRESET_CLR" offset="0x1E4" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description="0: Writing 0 to this field produces no effect.  1: Writing 1 to any of the bits in this field sets to '0' the corresponding bit in that field." range="31 - 0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="DDPA_PSC_ASSERTRESET_SET" acronym="DDPA_PSC_ASSERTRESET_SET" offset="0x204" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description="0: Writing 0 to this field produces no effect.  1: Writing 1 to any of the bits in this field sets to '1' the corresponding bit in that field." range="31 - 0" rwaccess="R/W1TS"/>
+	</register>
+	<register id="DDPA_PSC_ASSERTRESET_CLR" acronym="DDPA_PSC_ASSERTRESET_CLR" offset="0x224" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description="0: Writing 0 to this field produces no effect.  1: Writing 1 to any of the bits in this field sets to '0' the corresponding bit in that field." range="31 - 0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="DDPA_BYPASS_OVERRIDE" acronym="DDPA_BYPASS_OVERRIDE" offset="0x244" width="32" description="">
+		<bitfield id="PORT" width="1" begin="0" end="0" resetval="0x0" description="Enable/Disable the DMSC firmware bypass   0: Disable   1:Enable" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DDPA_INT_EN_SET" acronym="DDPA_INT_EN_SET" offset="0x248" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description="0: Writing 0 to this field produces no effect.  1: Writing 1 to any of the bits in this field sets to '1' the corresponding bit in that field." range="31 - 0" rwaccess="R/W1TS"/>
+	</register>
+	<register id="DDPA_INT_EN_CLR" acronym="DDPA_INT_EN_CLR" offset="0x258" width="32" description="">
+		<bitfield id="PORT" width="32" begin="31" end="0" resetval="0x0" description="0: Writing 0 to this field produces no effect.  1: Writing 1 to any of the bits in this field sets to '0' the corresponding bit in that field." range="31 - 0" rwaccess="R/W1TC"/>
+	</register>
+</module>

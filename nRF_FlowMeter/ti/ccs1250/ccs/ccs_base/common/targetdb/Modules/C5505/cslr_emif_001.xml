@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="UTF-8"?><module id="EMIF" HW_revision="" XML_version="1" description="External Memory Interface">
+     <register id="REV" acronym="REV" page="2" offset="0X0000" width="16" description="Revision Register">
+<bitfield id="MAJOR_REVISION" width="8" begin="15" end="8" resetval="2" description="Major revision code for EMIF." range="02h" rwaccess="R"/>
+<bitfield id="MINOR_REVISION" width="8" begin="7" end="0" resetval="5" description="Minor revision code for EMIF." range="05h" rwaccess="R"/>
+</register>
+     <register id="STATUS" acronym="STATUS" page="2" offset="0x0001" width="16" description="Status Register">
+<bitfield id="BIGENDIAN" width="1" begin="15" end="15" resetval="1" description="Big endian value, defining big endian mode (data R/W order)" range="" rwaccess="R">
+<bitenum id="LITTLE" value="0" token="LITTLE" description="EMIF is running in little endian."/>
+<bitenum id="BIG" value="1" token="BIG" description="EMIF is running in big endian."/>
+</bitfield>
+<bitfield id="FULLRATE" width="1" begin="14" end="14" resetval="1" description="Full rate status bit. This bit reflects the clock rate being used by the EMIF." range="" rwaccess="R">
+<bitenum id="HALFRATE" value="0" token="HALFRATE" description="EMIF is running at half the CPU clock frequency."/>
+<bitenum id="FULLRATE" value="1" token="FULLRATE" description="EMIF is running at the same speed as the CPU clock."/>
+</bitfield>
+<bitfield id="MODULE_ID" width="14" begin="13" end="0" resetval="0" description="Module ID code for EMIF." range="0h" rwaccess="R"/>
+</register>
+     <register id="AWCCR1" acronym="AWCCR1" page="2" offset="0X0004" width="16" description="Asynchronous Wait Cycle Configuration Register 1">
+<bitfield id="_RESV_1" width="8" begin="15" end="8" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="MEWC" width="8" begin="7" end="0" resetval="64" description="Maximum extended wait cycles. The EMIF will wait for a maximum of (MEWC + 1) x 16 clock cycles before it stops inserting asynchronous wait cycles and procedes to the hold period of the access. This setting applies to all the wait pins." range="" rwaccess="RW"/>
+</register>
+     <register id="AWCCR2" acronym="AWCCR2" page="2" offset="0X0005" width="16" description="Asynchronous Wait Cycle Configuration Register 2">
+<bitfield id="WP3" width="1" begin="15" end="15" resetval="1" description="EM_WAIT3 polarity bit. This bit defines the polarity of the EM_WAIT3 pin." range="" rwaccess="RW">
+<bitenum id="LOW" value="0" token="LOW" description="Insert wait cycles if wait pin is low."/>
+<bitenum id="HIGH" value="1" token="HIGH" description="Insert wait cycles if wait pin is high."/>
+</bitfield>
+<bitfield id="WP2" width="1" begin="14" end="14" resetval="1" description="EM_WAIT2 polarity bit. This bit defines the polarity of the EM_WAIT2 pin." range="" rwaccess="RW">
+<bitenum id="LOW" value="0" token="LOW" description="Insert wait cycles if wait pin is low."/>
+<bitenum id="HIGH" value="1" token="HIGH" description="Insert wait cycles if wait pin is high."/>
+</bitfield>
+<bitfield id="WP1" width="1" begin="13" end="13" resetval="1" description="EM_WAIT1 polarity bit. This bit defines the polarity of the EM_WAIT1 pin." range="" rwaccess="RW">
+<bitenum id="LOW" value="0" token="LOW" description="Insert wait cycles if wait pin is low."/>
+<bitenum id="HIGH" value="1" token="HIGH" description="Insert wait cycles if wait pin is high."/>
+</bitfield>
+<bitfield id="WP0" width="1" begin="12" end="12" resetval="1" description="EM_WAIT0 polarity bit. This bit defines the polarity of the EM_WAIT0 pin." range="" rwaccess="RW">
+<bitenum id="LOW" value="0" token="LOW" description="Insert wait cycles if wait pin is low."/>
+<bitenum id="HIGH" value="1" token="HIGH" description="Insert wait cycles if wait pin is high."/>
+</bitfield>
+<bitfield id="_RESV_5" width="4" begin="11" end="8" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="CS5_WAIT" width="2" begin="7" end="6" resetval="3" description="Wait pin mapping bits for EMIF CS5. By default, each asynchronous chip select space is assigned a wait input pin. You can use the wait pin mapping bits to change the default assignment." range="" rwaccess="RW">
+<bitenum id="WAIT0" value="0" token="WAIT0" description="Use the EM_WAIT0 pin."/>
+<bitenum id="WAIT1" value="1" token="WAIT1" description="Use the EM_WAIT1 pin."/>
+<bitenum id="WAIT2" value="2" token="WAIT2" description="Use the EM_WAIT2 pin."/>
+<bitenum id="WAIT3" value="3" token="WAIT3" description="Use the EM_WAIT3 pin."/>
+</bitfield>
+<bitfield id="CS4_WAIT" width="2" begin="5" end="4" resetval="2" description="Wait pin mapping bits for EMIF CS4. By default, each asynchronous chip select space is assigned a wait input pin. You can use the wait pin mapping bits to change the default assignment." range="" rwaccess="RW">
+<bitenum id="WAIT0" value="0" token="WAIT0" description="Use the EM_WAIT0 pin."/>
+<bitenum id="WAIT1" value="1" token="WAIT1" description="Use the EM_WAIT1 pin."/>
+<bitenum id="WAIT2" value="2" token="WAIT2" description="Use the EM_WAIT2 pin."/>
+<bitenum id="WAIT3" value="3" token="WAIT3" description="Use the EM_WAIT3 pin."/>
+</bitfield>
+<bitfield id="CS3_WAIT" width="2" begin="3" end="2" resetval="1" description="Wait pin mapping bits for EMIF CS3. By default, each asynchronous chip select space is assigned a wait input pin. You can use the wait pin mapping bits to change the default assignment." range="" rwaccess="RW">
+<bitenum id="WAIT0" value="0" token="WAIT0" description="Use the EM_WAIT0 pin."/>
+<bitenum id="WAIT1" value="1" token="WAIT1" description="Use the EM_WAIT1 pin."/>
+<bitenum id="WAIT2" value="2" token="WAIT2" description="Use the EM_WAIT2 pin."/>
+<bitenum id="WAIT3" value="3" token="WAIT3" description="Use the EM_WAIT3 pin."/>
+</bitfield>
+<bitfield id="CS2_WAIT" width="2" begin="1" end="0" resetval="0" description="Wait pin mapping bits for EMIF CS2. By default, each asynchronous chip select space is assigned a wait input pin. You can use the wait pin mapping bits to change the default assignment." range="" rwaccess="RW">
+<bitenum id="WAIT0" value="0" token="WAIT0" description="Use the EM_WAIT0 pin."/>
+<bitenum id="WAIT1" value="1" token="WAIT1" description="Use the EM_WAIT1 pin."/>
+<bitenum id="WAIT2" value="2" token="WAIT2" description="Use the EM_WAIT2 pin."/>
+<bitenum id="WAIT3" value="3" token="WAIT3" description="Use the EM_WAIT3 pin."/>
+</bitfield>
+</register>
+     <register id="SDCR1" acronym="SDCR1" page="2" offset="0X0008" width="16" description="SDRAM Configuration Register 1">
+<bitfield id="_RESV_1" width="1" begin="15" end="15" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="NM" width="1" begin="14" end="14" resetval="0" description="Narrow mode bit. This bit should always be set to 1. A write to this field will cause the EMIF to start the SDRAM initialization sequence. " range="" rwaccess="RW"/>
+<bitfield id="_RESV_3" width="2" begin="13" end="12" resetval="0" description="Reserved. The reserved bit location is always read as 0. If writing to this field, always write the default value of 0." range="" rwaccess="N"/>
+<bitfield id="CL" width="3" begin="11" end="9" resetval="3" description="CAS latency. This field defines the CAS latency to be used when accessing connected SDRAM devices. A 1 must be simultaniously written to the BIT_11_9_LOCK bit field of this register in order to write to the CL bit field. Writing to this field triggers the SDRAM initialization sequence." range="" rwaccess="RW">
+<bitenum id="RSV0" value="0" token="RSV0" description="Reserved."/>
+<bitenum id="RSV1" value="1" token="RSV1" description="Reserved."/>
+<bitenum id="TWO" value="2" token="TWO" description="CAS latency set to 2 EM_SDCLK cycles."/>
+<bitenum id="THREE" value="3" token="THREE" description="CAS latency set to 3 EM_SDCLK cycles."/>
+<bitenum id="RSV4" value="4" token="RSV4" description="Reserved."/>
+<bitenum id="RSV5" value="5" token="RSV5" description="Reserved."/>
+<bitenum id="RSV6" value="6" token="RSV6" description="Reserved."/>
+<bitenum id="RSV7" value="7" token="RSV7" description="Reserved."/>
+</bitfield>
+<bitfield id="BIT_11_9_LOCK" width="1" begin="8" end="8" resetval="0" description="Bits 11 to 9 lock. CL can only be written if BIT_11_9_LOCK is simultaniously written with a 1. BIT_11_9_LOCK is always read as 0." range="" rwaccess="RW">
+<bitenum id="NOWRITES" value="0" token="NOWRITES" description="Writes to bits 11 through 9 are disabled."/>
+<bitenum id="WRITES" value="1" token="WRITES" description="Writes to bits 11 through 9 are enabled."/>
+</bitfield>
+<bitfield id="_RESV_6" width="1" begin="7" end="7" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="IBANK" width="3" begin="6" end="4" resetval="2" description="Internal SDRAM Bank size. This field defines number of banks inside the connected SDRAM devices. Writing to this field triggers the SDRAM initialization sequence." range="" rwaccess="RW">
+<bitenum id="ONE" value="0" token="ONE" description="1 bank SDRAM devices."/>
+<bitenum id="TWO" value="1" token="TWO" description="2 bank SDRAM devices."/>
+<bitenum id="FOUR" value="2" token="FOUR" description="4 bank SDRAM devices."/>
+<bitenum id="RSV3" value="3" token="RSV3" description="Reserved."/>
+<bitenum id="RSV4" value="4" token="RSV4" description="Reserved."/>
+<bitenum id="RSV5" value="5" token="RSV5" description="Reserved."/>
+<bitenum id="RSV6" value="6" token="RSV6" description="Reserved."/>
+<bitenum id="RSV7" value="7" token="RSV7" description="Reserved."/>
+</bitfield>
+<bitfield id="EBANK" width="1" begin="3" end="3" resetval="0" description="External chip select setup. Defines whether SDRAM accesses will use 1 or 2 chip select lines. A write to this field will cause the EMIF to start the SDRAM initialization sequence." range="" rwaccess="RW">
+<bitenum id="ONE" value="0" token="ONE" description="EMIF will use SD_CE0 for all SDRAM accesses."/>
+<bitenum id="TWO" value="1" token="TWO" description="EMIF will use SD_CE0 and SD_CE1 for all SDRAM accesses."/>
+</bitfield>
+<bitfield id="PAGESIZE" width="3" begin="2" end="0" resetval="0" description="Page size. This field defines the internal page size of connected SDRAM devices. Writing to this field triggers the SDRAM initialization sequence." range="" rwaccess="RW">
+<bitenum id="EIGHT" value="0" token="EIGHT" description="8 column address bits (256 elements per row)"/>
+<bitenum id="NINE" value="1" token="NINE" description="9 column address bits (512 elements per row)"/>
+<bitenum id="TEN" value="2" token="TEN" description="10 column address bits (1024 elements per row)"/>
+<bitenum id="ELEVEN" value="3" token="ELEVEN" description="11 column address bits (2048 elements per row)"/>
+<bitenum id="RSV4" value="4" token="RSV4" description="Reserved."/>
+<bitenum id="RSV5" value="5" token="RSV5" description="Reserved."/>
+<bitenum id="RSV6" value="6" token="RSV6" description="Reserved."/>
+<bitenum id="RSV7" value="7" token="RSV7" description="Reserved."/>
+</bitfield>
+</register>
+     <register id="SDCR2" acronym="SDCR2" page="2" offset="0X0009" width="16" description="SDRAM Configuration Register 2">
+<bitfield id="SR" width="1" begin="15" end="15" resetval="0" description="Self-Refresh mode bit. This bit controls entering and exiting of the Self-Refresh mode. The field should be written using a byte-write to the upper byte of SDCR to avoid triggering the SDRAM initialization sequence." range="" rwaccess="RW">
+<bitenum id="EXIT" value="0" token="EXIT" description="Writing a 0 to this bit will cause connected SDRAM devices and the EMIF to exit the self-refresh mode."/>
+<bitenum id="ENTER" value="1" token="ENTER" description="Writing a 1 to this bit will cause connected SDRAM devices and the EMIF to enter the self-refresh mode."/>
+</bitfield>
+<bitfield id="PD" width="1" begin="14" end="14" resetval="0" description="Power down bit. This bit controls entering and exiting of the power down mode. The field should be written using a byte-write to the upper byte of SDCR to avoid triggering the SDRAM initialization sequence. If both SR and PD bits are set, the EMIF will go into Self Refresh." range="" rwaccess="RW">
+<bitenum id="EXIT" value="0" token="EXIT" description="Writing a 0 to this bit will cause connected SDRAM devices and the EMIF to exit the power down mode."/>
+<bitenum id="ENTER" value="1" token="ENTER" description="Writing a 1 to this bit will cause connected SDRAM devices and the EMIF to enter the power down mode."/>
+</bitfield>
+<bitfield id="PDWR" width="1" begin="13" end="13" resetval="0" description="Perform refreshes during power down bit. Writign a 1 to this bit will cause EMIF to exit powerdown state and issue and AUTO REFRESH command every time Refresh May level is set." range="" rwaccess="RW">
+<bitenum id="NOREFR" value="0" token="NOREFR" description="Do not perform refreshes during power down."/>
+<bitenum id="REFR" value="1" token="REFR" description="Perform refreshes during power down."/>
+</bitfield>
+<bitfield id="_RESV_4" width="3" begin="12" end="10" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="PASR" width="3" begin="9" end="7" resetval="0" description="Partial array self refresh. These bits get loaded into the Extended Mode Register of a mobile SDR during initialization. A write to this field will cause the EMIF to start the SDRAM initialization sequence. To write to this field you must simultaneously set BIT_9_1_LOCK to 1." range="" rwaccess="RW">
+<bitenum id="FOUR" value="0" token="FOUR" description="4 banks will be refreshed."/>
+<bitenum id="TWO" value="1" token="TWO" description="2 banks will be refreshed."/>
+<bitenum id="ONE" value="2" token="ONE" description="1 bank will be refreshed."/>
+<bitenum id="RSV3" value="3" token="RSV3" description="Reserved."/>
+<bitenum id="RSV4" value="4" token="RSV4" description="Reserved."/>
+<bitenum id="HALF" value="5" token="HALF" description="Half a bank will be refreshed."/>
+<bitenum id="QUARTER" value="6" token="QUARTER" description="One quarter of a bank will be refreshed."/>
+<bitenum id="RSV7" value="7" token="RSV7" description="Reserved."/>
+</bitfield>
+<bitfield id="ROWSIZE" width="3" begin="6" end="4" resetval="0" description="Row size. Defines the number of row address bits of connected SDRAM devices. This field is only used when IBANK_POS is set to 1. A write to this field will cause the EMIF to start the SDRAM initialization sequence. To write to this field you must simultaneously set BIT_9_1_LOCK to 1." range="" rwaccess="RW">
+<bitenum id="NINE" value="0" token="NINE" description="9 row address bits."/>
+<bitenum id="TEN" value="1" token="TEN" description="10 row address bits."/>
+<bitenum id="ELEVEN" value="2" token="ELEVEN" description="11 row address bits."/>
+<bitenum id="TWELVE" value="3" token="TWELVE" description="12 row address bits."/>
+<bitenum id="THIRTEEN" value="4" token="THIRTEEN" description="13 row address bits."/>
+<bitenum id="FOURTEEN" value="5" token="FOURTEEN" description="14 row address bits."/>
+<bitenum id="RSV6" value="6" token="RSV6" description="Reserved."/>
+<bitenum id="RSV7" value="7" token="RSV7" description="Reserved."/>
+</bitfield>
+<bitfield id="IBANK_POS" width="1" begin="3" end="3" resetval="0" description="Internal bank position. This bit specifies the mapping of the logical address to the SDRAM address. A write to this field will cause the EMIF to start the SDRAM initialization sequence. To write to this field you must simultaneously set BIT_9_1_LOCK to 1." range="" rwaccess="RW"/>
+<bitfield id="SDRAM_DRIVE" width="2" begin="2" end="1" resetval="0" description="SDRAM drive strength. These bits specify the the SDRAM drive strength configuration the EMIF uses while initializing the SDRAM device. A write to this field will cause the EMIF to start the SDRAM initialization sequence. To write to this field you must simultaneously set BIT_9_1_LOCK to 1." range="" rwaccess="RW">
+<bitenum id="FULL" value="0" token="FULL" description="Full drive strength."/>
+<bitenum id="HALF" value="1" token="HALF" description="Half drive strength."/>
+<bitenum id="QUARTER" value="2" token="QUARTER" description="One fourth drive strength."/>
+<bitenum id="EIGTH" value="3" token="EIGTH" description="One eigth drive strength."/>
+</bitfield>
+<bitfield id="BIT_9_1_LOCK" width="1" begin="0" end="0" resetval="0" description="Bits 9 to 1 lock. Bits 9 through 1 can only be written if BIT_9_1_LOCK is simultaneously written with a 1. BIT_9_1_LOCK is always read as a 0." range="" rwaccess="RW">
+<bitenum id="NOWRITES" value="0" token="NOWRITES" description="Writes to bits 9 through 1 are disabled."/>
+<bitenum id="WRITES" value="1" token="WRITES" description="Writes to bits 9 through 1 are enabled."/>
+</bitfield>
+</register>
+     <register id="SDRCR" acronym="SDRCR" page="2" offset="0X000C" width="16" description="SDRAM Refresh Control Register">
+<bitfield id="_RESV_1" width="3" begin="15" end="13" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="REFRATE" width="13" begin="12" end="0" resetval="125" description="Refresh Rate. This field is used to define the SDRAM refresh period in terms of EM_SDCLK cycles. Writing a value &amp;lt; 0x0020 to this field will cause it to be loaded with (2 * T_RFC) + 1 value from SDRAM timing register." range="0-1FFFh" rwaccess="RW"/>
+</register>
+     <register id="ACS2CR1" acronym="ACS2CR1" page="2" offset="0X0010" width="16" description="Asynchronous CS2 Configuration Register 1">
+<bitfield id="RSETUPLSB" width="3" begin="15" end="13" resetval="3" description="These bits in conjuction with RSETUPMSB in NCE0CR2 define the read setup timing in EM_SDCLK cycles, minus one cycle." range="0-7h" rwaccess="RW"/>
+<bitfield id="RSTROBE" width="6" begin="12" end="7" resetval="63" description="Read strobe width in EM_SDCLK cycles, minus one cycle." range="0-3h" rwaccess="RW"/>
+<bitfield id="RHOLD" width="3" begin="6" end="4" resetval="7" description="Read hold width in EM_SDCLK cycles, minus one cycle." range="0-7h" rwaccess="RW"/>
+<bitfield id="TA" width="2" begin="3" end="2" resetval="3" description="Minimum turn-around time. This field defines the minimum number of EM_SDCLK cycles between reads and writes, minus one cycle." range="0-3h" rwaccess="RW"/>
+<bitfield id="ASIZE" width="2" begin="1" end="0" resetval="0" description="Asynchronous data bus width. This field defines the width of the asynchronous device's data bus." range="0-3h" rwaccess="RW">
+<bitenum id="EIGHTBIT" value="0" token="EIGHTBIT" description="8-bit data bus."/>
+<bitenum id="SIXTEENBIT" value="1" token="SIXTEENBIT" description="16-bit data bus."/>
+<bitenum id="RSV2" value="2" token="RSV2" description="Reserved."/>
+<bitenum id="RSV3" value="3" token="RSV3" description="Reserved."/>
+</bitfield>
+</register>
+     <register id="ACS2CR2" acronym="ACS2CR2" page="2" offset="0X0011" width="16" description="Asynchronous CS2 Configuration Register 2">
+<bitfield id="SS" width="1" begin="15" end="15" resetval="0" description="Select Strobe bit. This bit defines whether the asynchronous interface operates in WE Strobe Mode or Select Strobe Mode." range="" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description="WE Strobe Mode enabled."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="Select Strobe Mode enabled."/>
+</bitfield>
+<bitfield id="EW" width="1" begin="14" end="14" resetval="0" description="Extended wait cycles enable bit. This bit defines whether extended wait cycles will be enabled." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Extended wait cycles disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Extended wait cycles enabled."/>
+</bitfield>
+<bitfield id="WSETUP" width="4" begin="13" end="10" resetval="15" description="Write setup width in EM_SDCLK cycles, minus one cycle." range="0-Fh" rwaccess="RW"/>
+<bitfield id="WSTROBE" width="6" begin="9" end="4" resetval="63" description="Write strobe width in EM_SDCLK cycles, minus one cycle." range="0-3Fh" rwaccess="RW"/>
+<bitfield id="WHOLD" width="3" begin="3" end="1" resetval="7" description="Write hold width in EM_SDCLK cycles, minus one cycle." range="0-7h" rwaccess="RW"/>
+<bitfield id="RSETUPMSB" width="1" begin="0" end="0" resetval="1" description="These bits in conjuction with RSETUPLSB in NCE0CR1 define the read setup timing in EM_SDCLK cycles, minus one cycle." range="0-1h" rwaccess="RW"/>
+</register>
+     <register id="ACS3CR1" acronym="ACS3CR1" page="2" offset="0X0014" width="16" description="Asynchronous CS3 Configuration Register 1">
+<bitfield id="RSETUPLSB" width="3" begin="15" end="13" resetval="3" description="These bits in conjuction with RSETUPMSB in NCE1CR2 define the read setup timing in EM_SDCLK cycles, minus one cycle." range="0-7h" rwaccess="RW"/>
+<bitfield id="RSTROBE" width="6" begin="12" end="7" resetval="63" description="Read strobe width in EM_SDCLK cycles, minus one cycle." range="0-3h" rwaccess="RW"/>
+<bitfield id="RHOLD" width="3" begin="6" end="4" resetval="7" description="Read hold width in EM_SDCLK cycles, minus one cycle." range="0-7h" rwaccess="RW"/>
+<bitfield id="TA" width="2" begin="3" end="2" resetval="3" description="Minimum turn-around time. This field defines the minimum number of EM_SDCLK cycles between reads and writes, minus one cycle." range="0-3h" rwaccess="RW"/>
+<bitfield id="ASIZE" width="2" begin="1" end="0" resetval="1" description="Asynchronous data bus width. This field defines the width of the asynchronous device's data bus." range="0-3h" rwaccess="RW">
+<bitenum id="EIGHTBIT" value="0" token="EIGHTBIT" description="8-bit data bus."/>
+<bitenum id="SIXTEENBIT" value="1" token="SIXTEENBIT" description="16-bit data bus."/>
+<bitenum id="RSV2" value="2" token="RSV2" description="Reserved."/>
+<bitenum id="RSV3" value="3" token="RSV3" description="Reserved."/>
+</bitfield>
+</register>
+     <register id="ACS3CR2" acronym="ACS3CR2" page="2" offset="0X0015" width="16" description="Asynchronous CS3 Configuration Register 2">
+<bitfield id="SS" width="1" begin="15" end="15" resetval="0" description="Select Strobe bit. This bit defines whether the asynchronous interface operates in WE Strobe Mode or Select Strobe Mode." range="" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description="WE Strobe Mode enabled."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="Select Strobe Mode enabled."/>
+</bitfield>
+<bitfield id="EW" width="1" begin="14" end="14" resetval="0" description="Extended wait cycles enable bit. This bit defines whether extended wait cycles will be enabled." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Extended wait cycles disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Extended wait cycles enabled."/>
+</bitfield>
+<bitfield id="WSETUP" width="4" begin="13" end="10" resetval="15" description="Write setup width in EM_SDCLK cycles, minus one cycle." range="0-Fh" rwaccess="RW"/>
+<bitfield id="WSTROBE" width="6" begin="9" end="4" resetval="63" description="Write strobe width in EM_SDCLK cycles, minus one cycle." range="0-3Fh" rwaccess="RW"/>
+<bitfield id="WHOLD" width="3" begin="3" end="1" resetval="7" description="Write hold width in EM_SDCLK cycles, minus one cycle." range="0-7h" rwaccess="RW"/>
+<bitfield id="RSETUPMSB" width="1" begin="0" end="0" resetval="1" description="These bits in conjuction with RSETUPLSB in NCE1CR1 define the read setup timing in EM_SDCLK cycles, minus one cycle." range="0-1h" rwaccess="RW"/>
+</register>
+     <register id="ACS4CR1" acronym="ACS4CR1" page="2" offset="0X0018" width="16" description="Asynchronous CS4 Configuration Register 1">
+<bitfield id="RSETUPLSB" width="3" begin="15" end="13" resetval="3" description="These bits in conjuction with RSETUPMSB in ACE0CR2 define the read setup timing in EM_SDCLK cycles, minus one cycle." range="0-7h" rwaccess="RW"/>
+<bitfield id="RSTROBE" width="6" begin="12" end="7" resetval="63" description="Read strobe width in EM_SDCLK cycles, minus one cycle." range="0-3h" rwaccess="RW"/>
+<bitfield id="RHOLD" width="3" begin="6" end="4" resetval="7" description="Read hold width in EM_SDCLK cycles, minus one cycle." range="0-7h" rwaccess="RW"/>
+<bitfield id="TA" width="2" begin="3" end="2" resetval="3" description="Minimum turn-around time. This field defines the minimum number of EM_SDCLK cycles between reads and writes, minus one cycle." range="0-3h" rwaccess="RW"/>
+<bitfield id="ASIZE" width="2" begin="1" end="0" resetval="0" description="Asynchronous data bus width. This field defines the width of the asynchronous device's data bus." range="0-3h" rwaccess="RW">
+<bitenum id="EIGHTBIT" value="0" token="EIGHTBIT" description="8-bit data bus."/>
+<bitenum id="SIXTEENBIT" value="1" token="SIXTEENBIT" description="16-bit data bus."/>
+<bitenum id="RSV2" value="2" token="RSV2" description="Reserved."/>
+<bitenum id="RSV3" value="3" token="RSV3" description="Reserved."/>
+</bitfield>
+</register>
+     <register id="ACS4CR2" acronym="ACS4CR2" page="2" offset="0X0019" width="16" description="Asynchronous CE0 Configuration Register 2">
+<bitfield id="SS" width="1" begin="15" end="15" resetval="0" description="Select Strobe bit. This bit defines whether the asynchronous interface operates in WE Strobe Mode or Select Strobe Mode." range="" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description="WE Strobe Mode enabled."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="Select Strobe Mode enabled."/>
+</bitfield>
+<bitfield id="EW" width="1" begin="14" end="14" resetval="0" description="Extended wait cycles enable bit. This bit defines whether extended wait cycles will be enabled." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Extended wait cycles disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Extended wait cycles enabled."/>
+</bitfield>
+<bitfield id="WSETUP" width="4" begin="13" end="10" resetval="15" description="Write setup width in EM_SDCLK cycles, minus one cycle." range="0-Fh" rwaccess="RW"/>
+<bitfield id="WSTROBE" width="6" begin="9" end="4" resetval="63" description="Write strobe width in EM_SDCLK cycles, minus one cycle." range="0-3Fh" rwaccess="RW"/>
+<bitfield id="WHOLD" width="3" begin="3" end="1" resetval="7" description="Write hold width in EM_SDCLK cycles, minus one cycle." range="0-7h" rwaccess="RW"/>
+<bitfield id="RSETUPMSB" width="1" begin="0" end="0" resetval="1" description="These bits in conjuction with RSETUPLSB in ACE0CR1 define the read setup timing in EM_SDCLK cycles, minus one cycle." range="0-1h" rwaccess="RW"/>
+</register>
+     <register id="ACS5CR1" acronym="ACS5CR1" page="2" offset="0X001C" width="16" description="Asynchronous CS5 Configuration Register 1">
+<bitfield id="RSETUPLSB" width="3" begin="15" end="13" resetval="3" description="These bits in conjuction with RSETUPMSB in ACE1CR2 define the read setup timing in EM_SDCLK cycles, minus one cycle." range="0-7h" rwaccess="RW"/>
+<bitfield id="RSTROBE" width="6" begin="12" end="7" resetval="63" description="Read strobe width in EM_SDCLK cycles, minus one cycle." range="0-3h" rwaccess="RW"/>
+<bitfield id="RHOLD" width="3" begin="6" end="4" resetval="7" description="Read hold width in EM_SDCLK cycles, minus one cycle." range="0-7h" rwaccess="RW"/>
+<bitfield id="TA" width="2" begin="3" end="2" resetval="3" description="Minimum turn-around time. This field defines the minimum number of EM_SDCLK cycles between reads and writes, minus one cycle." range="0-3h" rwaccess="RW"/>
+<bitfield id="ASIZE" width="2" begin="1" end="0" resetval="1" description="Asynchronous data bus width. This field defines the width of the asynchronous device's data bus." range="0-3h" rwaccess="RW">
+<bitenum id="EIGHTBIT" value="0" token="EIGHTBIT" description="8-bit data bus."/>
+<bitenum id="SIXTEENBIT" value="1" token="SIXTEENBIT" description="16-bit data bus."/>
+<bitenum id="RSV2" value="2" token="RSV2" description="Reserved."/>
+<bitenum id="RSV3" value="3" token="RSV3" description="Reserved."/>
+</bitfield>
+</register>
+     <register id="ACS5CR2" acronym="ACS5CR2" page="2" offset="0X001D" width="16" description="Asynchronous CS5 Configuration Register 2">
+<bitfield id="SS" width="1" begin="15" end="15" resetval="0" description="Select Strobe bit. This bit defines whether the asynchronous interface operates in WE Strobe Mode or Select Strobe Mode." range="" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description="WE Strobe Mode enabled."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="Select Strobe Mode enabled."/>
+</bitfield>
+<bitfield id="EW" width="1" begin="14" end="14" resetval="0" description="Extended wait cycles enable bit. This bit defines whether extended wait cycles will be enabled." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Extended wait cycles disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Extended wait cycles enabled."/>
+</bitfield>
+<bitfield id="WSETUP" width="4" begin="13" end="10" resetval="15" description="Write setup width in EM_SDCLK cycles, minus one cycle." range="0-Fh" rwaccess="RW"/>
+<bitfield id="WSTROBE" width="6" begin="9" end="4" resetval="63" description="Write strobe width in EM_SDCLK cycles, minus one cycle." range="0-3Fh" rwaccess="RW"/>
+<bitfield id="WHOLD" width="3" begin="3" end="1" resetval="7" description="Write hold width in EM_SDCLK cycles, minus one cycle." range="0-7h" rwaccess="RW"/>
+<bitfield id="RSETUPMSB" width="1" begin="0" end="0" resetval="1" description="These bits in conjuction with RSETUPLSB in ACE1CR1 define the read setup timing in EM_SDCLK cycles, minus one cycle." range="0-1h" rwaccess="RW"/>
+</register>
+     <register id="SDTIMR1" acronym="SDTIMR1" page="2" offset="0X0020" width="16" description="SDRAM Timing Register 1">
+<bitfield id="TRAS" width="4" begin="15" end="12" resetval="5" description="Specifies the Tras value of the SDRAM. This defines the minimum number of EM_SDCLK clock cycles from Activate (ACTV) to Precharge (PRE), minus 1: T_RAS = (Tras/tEM_SDCLK) - 1" range="0-Fh" rwaccess="RW"/>
+<bitfield id="TRC" width="4" begin="11" end="8" resetval="8" description="Specifies the Trc value of the SDRAM. This defines the minimum number of EM_SDCLK clock cycles from Activate (ACTV) to Activate (ACTV), minus 1: T_RC = (Trc/tEM_SDCLK) - 1" range="0-Fh" rwaccess="RW"/>
+<bitfield id="_RESV_3" width="1" begin="7" end="7" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="TRRD" width="3" begin="6" end="4" resetval="2" description="Specifies the Trrd value of the SDRAM. This defines the minimum number of EM_SDCLK clock cycles from Activate (ACTV) to Activate (ACTV) for a different bank, minus 1: T_RRD = (Trrd/tEM_SDCLK) - 1" range="0-7h" rwaccess="RW"/>
+<bitfield id="_RESV_5" width="4" begin="3" end="0" resetval="0" description="Reserved" range="" rwaccess="N"/>
+</register>
+     <register id="SDTIMR2" acronym="SDTIMR2" page="2" offset="0X0021" width="16" description="SDRAM Timing Register 1">
+<bitfield id="TRFC" width="5" begin="15" end="11" resetval="8" description="Specifies the Trfc value of the SDRAM. This defines the minimum number of EM_SDCLK cycles from Refresh (REFR) to Refresh (REFR), minus 1: T_RFC = (Trfc/tEM_SDCLK) - 1" range="1-1Fh" rwaccess="RW"/>
+<bitfield id="TRP" width="3" begin="10" end="8" resetval="2" description="Specifies the Trp value of the SDRAM. This defines the minimum number of EM_SDCLK cycles from Precharge (PRE) to Activate (ACTV) or Refresh (REFR) command, minus 1: T_RP = (Trp/tEM_SDCLK) - 1" range="0-7h" rwaccess="RW"/>
+<bitfield id="_RESV_3" width="1" begin="7" end="7" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="TRCD" width="3" begin="6" end="4" resetval="2" description="Specifies the Trcd value of the SDRAM. This defines the minimum number of EM_SDCLK cycles from Active (ACTV) to Read (READ) or Write (WRT), minus 1: T_RCD = (Trcd/tEM_SDCLK) - 1" range="0-7h" rwaccess="RW"/>
+<bitfield id="_RESV_5" width="1" begin="3" end="3" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="TWR" width="3" begin="2" end="0" resetval="1" description="Specifies the Twr value of the SDRAM. This defines the minimum number of EM_SDCLK cycles from last Write (WRT) to Precharge (PRE), minus 1: T_WR = (Twr/tEM_SDCLK) - 1" range="0-7h" rwaccess="RW"/>
+</register>
+     <register id="SDSRETR" acronym="SDSRETR" page="2" offset="0X003C" width="16" description="SDRAM Self Refresh Exit Timing Register">
+<bitfield id="_RESV_1" width="11" begin="15" end="5" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="TXS" width="5" begin="4" end="0" resetval="5" description="This field specifies the minimum number of EM_SDCLK cycles from Self-Refresh exit to any command, minus one. T_XS = Txsr / tEM_SDCLK - 1" range="0-1Fh" rwaccess="RW"/>
+</register>
+     <register id="EIRR" acronym="EIRR" page="2" offset="0X0040" width="16" description="Interrupt Raw Register">
+<bitfield id="_RESV_1" width="10" begin="15" end="6" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="WR" width="4" begin="5" end="2" resetval="0" description="Wait rise bits. These bits are set to 1 by hardware when a rising edge is detected on the wait pins. The polarity bits of AWCCR2 have not effect on these bits. Writing a 1 will clear these bits as well as the WRMASKED bits in the interrupt masked register (EMIR).  Writing a 0 has no effect." range="" rwaccess="R/W1C"/>
+<bitfield id="LT" width="1" begin="1" end="1" resetval="0" description="Line trap. These bits are set to 1 by hardware to indicate illegal memory access. Writing a 1 will clear this bit as well as the LTMASKED bit in the interrupt masked register (EMIR).  Writing a 0 has no effect." range="" rwaccess="R/W1C"/>
+<bitfield id="AT" width="1" begin="0" end="0" resetval="0" description="Asynchronous timeout. This bit is set to 1 by hardware to indicate that during an extended asynchronous memory access cycle, a wait pin did not go inactive within the number of cycles defined by the MEWC field in asynchronous wait cycle configuration register 1 (AWCCR1). Writing a 1 will clear these bits as well as the ATMASKED bit in the interrupt masked register (EMIR).  Writing a 0 has no effect." range="" rwaccess="R/W1C"/>
+</register>
+     <register id="EIMR" acronym="EIMR" page="2" offset="0X0044" width="16" description="Interrupt Mask Register">
+<bitfield id="_RESV_1" width="10" begin="15" end="6" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="WRMASKED" width="4" begin="5" end="2" resetval="0" description="Masked wait rise. These bits are set to 1 by hardware when a rising edge is detected on the wait pins. The polarity bits of AWCCR2 have not effect on these bits. Writing a 1 will clear these bits as well as the WR bits in the interrupt raw register (EIRR). Writing a 0 has no effect." range="" rwaccess="R/W1C"/>
+<bitfield id="LTMASKED" width="1" begin="1" end="1" resetval="0" description="Masked line trap. These bits are set to 1 by hardware to indicate illegal memory access, only if the LTMASKSET bit in the interrupt mask set register (EIMSR) is set to 1. Writing a 1 will clear these bits as well as the LT bit in the interrupt raw register (EIRR). Writing a 0 has no effect." range="" rwaccess="R/W1C"/>
+<bitfield id="ATMASKED" width="1" begin="0" end="0" resetval="0" description="Masked asynchronous timeout. This bit is set to 1 by hardware to indicate that during an extended asynchronous memory access cycle, a wait pin did not go inactive within the number of cycles defined by the MEWC field in asynchronous wait cycle configuration register 1 (AWCCR1), only if the ATMASKSET bit in the interrupt mask set register (EIMSR) is set to 1. Writing a 1 will clear these bits as well as the AT bit in the interrupt raw register (EIRR).  Writing a 0 has no effect." range="" rwaccess="R/W1C"/>
+</register>
+     <register id="EIMSR" acronym="EIMSR" page="2" offset="0X0048" width="16" description="Interrupt Mask Set Register">
+<bitfield id="_RESV_1" width="10" begin="15" end="6" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="WRMASKSET" width="4" begin="5" end="2" resetval="0" description="Mask set for WRMASKED bits in interrupt mask register (EIMR). Writing a 1 will enable the wait rise interrupts and set these bits as well as the WRMASKCLR bits in the interrupt mask clear register (EIMCR). Writing a 0 has no effect." range="" rwaccess="R/W1S"/>
+<bitfield id="LTMASKSET" width="1" begin="1" end="1" resetval="0" description="Mask set for LTMASKED bit in interrupt mask register (EIMR). Writing a 1 will enable the interrupt and set this bit as well as the LTMASKCLR bit in the interrupt mask clear register (EIMCR). Writing a 0 has no effect." range="" rwaccess="R/W1S"/>
+<bitfield id="ATMASKSET" width="1" begin="0" end="0" resetval="0" description="Mask set for ATMASKED bit in interrupt mask register (EIMR). Writing a 1 will enable the interrupt and set this bit as well as the ATMASKCLR bit in the interrupt mask clear register (EIMCR). Writing a 0 has no effect." range="" rwaccess="R/W1S"/>
+</register>
+     <register id="EIMCR" acronym="EIMCR" page="2" offset="0X004C" width="16" description="Interrupt Mask clear Register">
+<bitfield id="_RESV_1" width="10" begin="15" end="6" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="WRMASKCLR" width="4" begin="5" end="2" resetval="0" description="Mask clear for WRMASKED bits in interrupt mask register (EIMR). Writing a 1 will disable the wait rise interrupts and clear these bits as well as the WRMASKSET bits in the interrupt mask set register (EIMSR). Writing a 0 has no effect." range="" rwaccess="R/W1C"/>
+<bitfield id="LTMASKCLR" width="1" begin="1" end="1" resetval="0" description="Mask clear for LTMASKED bit in interrupt mask register (EIMR). Writing a 1 will disable the interrupt and clear this bit as well as the LTMASKSET bit in the interrupt mask set register (EIMSR). Writing a 0 has no effect." range="" rwaccess="R/W1C"/>
+<bitfield id="ATMASKCLR" width="1" begin="0" end="0" resetval="0" description="Mask clear for ATMASKED bit in interrupt mask register (EIMR). Writing a 1 will disable the interrupt and clear this bit as well as the ATMASKSET bit in the interrupt mask set register (EIMSR). Writing a 0 has no effect." range="" rwaccess="R/W1C"/>
+</register>
+     <register id="NANDFCR" acronym="NANDFCR" page="2" offset="0X0060" width="16" description="NAND Flash Control Register">
+<bitfield id="_RESV_1" width="2" begin="15" end="14" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="ADDR_CALC_ST" width="1" begin="13" end="13" resetval="0" description="NAND flash 4-bit ECC error address and error value calculation start. Set to 1 to start 4-bit ECC error address and error value calculation on read syndrome. This bit is cleared when any of the NAND flash error addres registers or NAND flash error value registers are read. Writing a 0 has no effect." range="" rwaccess="RW"/>
+<bitfield id="_4BIT_ECC_START" width="1" begin="12" end="12" resetval="0" description="NAND flash 4-bit ECC start for the selected chip select. Set to 1 to start 4-bit ECC calculation on data for NAND flash on chip select selected by 4BIT_ECC_SEL field. This bit is cleared when any of the NAND flash 4-Bit ECC registers are read. Writing a 0 has no effect." range="" rwaccess="RW"/>
+<bitfield id="CS5_ECC_START" width="1" begin="11" end="11" resetval="0" description="NAND flash 1-bit ECC start for EMIF CS5. Set to 1 to start 1-bit ECC calculation on data for NAND flash on EMIF CS5. This bit is cleared when NAND flash CS5 1-Bit ECC register is read. Writing a 0 has no effect." range="" rwaccess="RW"/>
+<bitfield id="CS4_ECC_START" width="1" begin="10" end="10" resetval="0" description="NAND flash 1-bit ECC start for EMIF CS4. Set to 1 to start 1-bit ECC calculation on data for NAND flash on EMIF CS4. This bit is cleared when NAND flash CS4 1-Bit ECC register is read. Writing a 0 has no effect." range="" rwaccess="RW"/>
+<bitfield id="CS3_ECC_START" width="1" begin="9" end="9" resetval="0" description="NAND flash 1-bit ECC start for EMIF CS3. Set to 1 to start 1-bit ECC calculation on data for NAND flash on EMIF CS3. This bit is cleared when NAND flash CS3 1-Bit ECC register is read. Writing a 0 has no effect." range="" rwaccess="RW"/>
+<bitfield id="CS2_ECC_START" width="1" begin="8" end="8" resetval="0" description="NAND flash 1-bit ECC start for EMIF CS2. Set to 1 to start 1-bit ECC calculation on data for NAND flash on EMIF CS2. This bit is cleared when NAND flash CS2 1-Bit ECC register is read. Writing a 0 has no effect." range="" rwaccess="RW"/>
+<bitfield id="_RESV_8" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="_4BIT_ECC_SEL" width="2" begin="5" end="4" resetval="0" description="NAND flash 4-bit ECC chip select selection. This field selects the chip select on which the 4-bit ECC will be calculated." range="" rwaccess="RW">
+<bitenum id="CS2" value="0" token="CS2" description="Select EMIF CS2 for 4-bit ECC calculation."/>
+<bitenum id="CS3" value="1" token="CS3" description="Select EMIF CS3 for 4-bit ECC calculation."/>
+<bitenum id="CS4" value="2" token="CS4" description="Select EMIF CS4 for 4-bit ECC calculation."/>
+<bitenum id="CS5" value="3" token="CS5" description="Select EMIF CS5 for 4-bit ECC calculation."/>
+</bitfield>
+<bitfield id="CS5_USE_NAND" width="1" begin="3" end="3" resetval="0" description="NAND flash mode for EM_CS5. Set to 1 if using NAND flash on EM_CS5." range="" rwaccess="RW">
+<bitenum id="NONAND" value="0" token="NONAND" description="Not using NAND flash."/>
+<bitenum id="NAND" value="1" token="NAND" description="Using NAND flash on chip select pin."/>
+</bitfield>
+<bitfield id="CS4_USE_NAND" width="1" begin="2" end="2" resetval="0" description="NAND flash mode for EM_CS4. Set to 1 if using NAND flash on EM_CS4." range="" rwaccess="RW">
+<bitenum id="NONAND" value="0" token="NONAND" description="Not using NAND flash."/>
+<bitenum id="NAND" value="1" token="NAND" description="Using NAND flash on chip select pin."/>
+</bitfield>
+<bitfield id="CS3_USE_NAND" width="1" begin="1" end="1" resetval="0" description="NAND flash mode for EM_CS3. Set to 1 if using NAND flash on EM_CS3." range="" rwaccess="RW">
+<bitenum id="NONAND" value="0" token="NONAND" description="Not using NAND flash."/>
+<bitenum id="NAND" value="1" token="NAND" description="Using NAND flash on chip select pin."/>
+</bitfield>
+<bitfield id="CS2_USE_NAND" width="1" begin="0" end="0" resetval="1" description="NAND flash mode for EM_CS2. Set to 1 if using NAND flash on EM_CS2." range="" rwaccess="RW">
+<bitenum id="NONAND" value="0" token="NONAND" description="Not using NAND flash."/>
+<bitenum id="NAND" value="1" token="NAND" description="Using NAND flash on chip select pin."/>
+</bitfield>
+</register>
+     <register id="NANDFSR1" acronym="NANDFSR1" page="2" offset="0X0064" width="16" description="NAND Flash Status Register 1">
+<bitfield id="_RESV_1" width="4" begin="15" end="12" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="CORRSTATE" width="4" begin="11" end="8" resetval="0" description="4-bit ECC state value when performing error address and error value calculation." range="" rwaccess="R">
+<bitenum id="NOERR" value="0" token="NOERR" description="No error."/>
+<bitenum id="ERROR" value="1" token="ERROR" description="Errors cannot be corrected (five or more errors)."/>
+<bitenum id="COMP89" value="2" token="COMP89" description="Error correction complete (errors on bit 8 or 9)."/>
+<bitenum id="COMP" value="3" token="COMP" description="Error correction complete (error exists)."/>
+<bitenum id="RSV4" value="4" token="RSV4" description="Reserved."/>
+<bitenum id="CALCNUMERR" value="5" token="CALCNUMERR" description="Calculating number of errors."/>
+<bitenum id="PREP" value="6" token="PREP" description="Preparing for error search."/>
+<bitenum id="PREP2" value="7" token="PREP2" description="Preparing for error search."/>
+<bitenum id="SEARCH" value="8" token="SEARCH" description="Searching for errors."/>
+<bitenum id="RSV9" value="9" token="RSV9" description="Reserved."/>
+<bitenum id="RSV10" value="16" token="RSV10" description="Reserved."/>
+<bitenum id="RSV11" value="17" token="RSV11" description="Reserved."/>
+<bitenum id="CALCERR" value="18" token="CALCERR" description="Calculating error value."/>
+<bitenum id="CALCERR2" value="19" token="CALCERR2" description="Calculating error value."/>
+<bitenum id="CALCERR3" value="20" token="CALCERR3" description="Calculating error value."/>
+<bitenum id="CALCERR4" value="21" token="CALCERR4" description="Calculating error value."/>
+</bitfield>
+<bitfield id="_RESV_3" width="4" begin="7" end="4" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="WAITSTAT" width="4" begin="3" end="0" resetval="0" description="These bits shows the raw status of the four wait input signals (EM_WAIT[3:0]). The polarity bits in the asynchronous wait cycle configuration register 2 (AWCCR2) have no effect on these bits. WAITSTAT[0] corresponds to EM_WAIT[0], WAITSTAT[1] to EM_WAIT[1], and so on." range="" rwaccess="R"/>
+</register>
+     <register id="NANDFSR2" acronym="NANDFSR2" page="2" offset="0X0065" width="16" description="NAND Flash Status Register 2">
+<bitfield id="_RESV_1" width="14" begin="15" end="2" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="ERRNUM" width="2" begin="1" end="0" resetval="0" description="4-bit ECC error number. This field shows the number for errors found after the error address calculation and error value calculation is done." range="" rwaccess="R">
+<bitenum id="ERR1" value="0" token="ERR1" description="1 error found."/>
+<bitenum id="ERR2" value="1" token="ERR2" description="2 errors found."/>
+<bitenum id="ERR3" value="2" token="ERR3" description="3 errors found."/>
+<bitenum id="ERR4" value="3" token="ERR4" description="4 errors found."/>
+</bitfield>
+</register>
+     <register id="PAGEMODCTRL1" acronym="PAGEMODCTRL1" page="2" offset="0X0068" width="16" description="Page Mode Control Register 1">
+<bitfield id="CS3_PAGE_DELAY" width="6" begin="15" end="10" resetval="63" description="Page access delay for NOR flash connected on EM_CS3. Number of EMIF clock cycles required for the page read data to be valid, minus one cycle. This value must not be set to 0." range="" rwaccess="RW"/>
+<bitfield id="CS3_PAGE_SIZE" width="1" begin="9" end="9" resetval="0" description="Page size for NOR flash connected on EM_CS3." range="" rwaccess="RW">
+<bitenum id="FOUR" value="0" token="FOUR" description="4-word page."/>
+<bitenum id="EIGHT" value="1" token="EIGHT" description="8-word page."/>
+</bitfield>
+<bitfield id="CS3_PAGEMOD_EN" width="1" begin="8" end="8" resetval="0" description="Page mode enable for NOR flash connected on EM_CS3." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable page mode."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable page mode."/>
+</bitfield>
+<bitfield id="CS2_PAGE_DELAY" width="6" begin="7" end="2" resetval="63" description="Page access delay for NOR flash connected on EM_CS2. Number of EMIF clock cycles required for the page read data to be valid, minus one cycle. This value must not be set to 0." range="" rwaccess="RW"/>
+<bitfield id="CS2_PAGE_SIZE" width="1" begin="1" end="1" resetval="1" description="Page size for NOR flash connected on EM_CS2." range="" rwaccess="RW">
+<bitenum id="FOUR" value="0" token="FOUR" description="4-word page."/>
+<bitenum id="EIGHT" value="1" token="EIGHT" description="8-word page."/>
+</bitfield>
+<bitfield id="CS2_PAGEMOD_EN" width="1" begin="0" end="0" resetval="0" description="Page mode enable for NOR flash connected on EM_CS2." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable page mode."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable page mode."/>
+</bitfield>
+</register>
+     <register id="PAGEMODCTRL2" acronym="PAGEMODCTRL2" page="2" offset="0X0069" width="16" description="Page Mode Control Register 2">
+<bitfield id="CS5_PAGE_DELAY" width="6" begin="15" end="10" resetval="63" description="Page access delay for NOR flash connected on EM_CS5. Number of EMIF clock cycles required for the page read data to be valid, minus one cycle. This value must not be set to 0." range="" rwaccess="RW"/>
+<bitfield id="CS5_PAGE_SIZE" width="1" begin="9" end="9" resetval="0" description="Page size for NOR flash connected on EM_CS5." range="" rwaccess="RW">
+<bitenum id="FOUR" value="0" token="FOUR" description="4-word page."/>
+<bitenum id="EIGHT" value="1" token="EIGHT" description="8-word page."/>
+</bitfield>
+<bitfield id="CS5_PAGEMOD_EN" width="1" begin="8" end="8" resetval="0" description="Page mode enable for NOR flash connected on EM_CS5." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable page mode."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable page mode."/>
+</bitfield>
+<bitfield id="CS4_PAGE_DELAY" width="6" begin="7" end="2" resetval="63" description="Page access delay for NOR flash connected on EM_CS4. Number of EMIF clock cycles required for the page read data to be valid, minus one cycle. This value must not be set to 0." range="" rwaccess="RW"/>
+<bitfield id="CS4_PAGE_SIZE" width="1" begin="1" end="1" resetval="0" description="Page size for NOR flash connected on EM_CS4." range="" rwaccess="RW">
+<bitenum id="FOUR" value="0" token="FOUR" description="4-word page."/>
+<bitenum id="EIGHT" value="1" token="EIGHT" description="8-word page."/>
+</bitfield>
+<bitfield id="CS4_PAGEMOD_EN" width="1" begin="0" end="0" resetval="0" description="Page mode enable for NOR flash connected on EM_CS4." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable page mode."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable page mode."/>
+</bitfield>
+</register>
+     <register id="NCS2ECC1" acronym="NCS2ECC1" page="2" offset="0X0070" width="16" description="NAND Flash CS2 1-Bit ECC Register 1">
+<bitfield id="_RESV_1" width="4" begin="15" end="12" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="P2048E" width="1" begin="11" end="11" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P1024E" width="1" begin="10" end="10" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P512E" width="1" begin="9" end="9" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P256E" width="1" begin="8" end="8" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P128E" width="1" begin="7" end="7" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P64E" width="1" begin="6" end="6" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P32E" width="1" begin="5" end="5" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P16E" width="1" begin="4" end="4" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P8E" width="1" begin="3" end="3" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P4E" width="1" begin="2" end="2" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P2E" width="1" begin="1" end="1" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P1E" width="1" begin="0" end="0" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+</register>
+     <register id="NCS2ECC2" acronym="NCS2ECC2" page="2" offset="0X0071" width="16" description="NAND Flash CS2 1-Bit ECC Register 2">
+<bitfield id="_RESV_1" width="4" begin="15" end="12" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="P2048O" width="1" begin="11" end="11" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P1024O" width="1" begin="10" end="10" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P512O" width="1" begin="9" end="9" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P256O" width="1" begin="8" end="8" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P128O" width="1" begin="7" end="7" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P64O" width="1" begin="6" end="6" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P32O" width="1" begin="5" end="5" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P16O" width="1" begin="4" end="4" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P8O" width="1" begin="3" end="3" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P4O" width="1" begin="2" end="2" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P2O" width="1" begin="1" end="1" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P1O" width="1" begin="0" end="0" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+</register>
+     <register id="NCS3ECC1" acronym="NCS3ECC1" page="2" offset="0X0074" width="16" description="NAND Flash CS3 1-Bit ECC Register 1">
+<bitfield id="_RESV_1" width="4" begin="15" end="12" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="P2048E" width="1" begin="11" end="11" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P1024E" width="1" begin="10" end="10" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P512E" width="1" begin="9" end="9" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P256E" width="1" begin="8" end="8" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P128E" width="1" begin="7" end="7" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P64E" width="1" begin="6" end="6" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P32E" width="1" begin="5" end="5" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P16E" width="1" begin="4" end="4" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P8E" width="1" begin="3" end="3" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P4E" width="1" begin="2" end="2" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P2E" width="1" begin="1" end="1" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P1E" width="1" begin="0" end="0" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+</register>
+     <register id="NCS3ECC2" acronym="NCS3ECC2" page="2" offset="0X0075" width="16" description="NAND Flash CS3 1-Bit ECC Register 2">
+<bitfield id="_RESV_1" width="4" begin="15" end="12" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="P2048O" width="1" begin="11" end="11" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P1024O" width="1" begin="10" end="10" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P512O" width="1" begin="9" end="9" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P256O" width="1" begin="8" end="8" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P128O" width="1" begin="7" end="7" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P64O" width="1" begin="6" end="6" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P32O" width="1" begin="5" end="5" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P16O" width="1" begin="4" end="4" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P8O" width="1" begin="3" end="3" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P4O" width="1" begin="2" end="2" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P2O" width="1" begin="1" end="1" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P1O" width="1" begin="0" end="0" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+</register>
+     <register id="NCS4ECC1" acronym="NCS4ECC1" page="2" offset="0X0078" width="16" description="NAND Flash CS4 1-Bit ECC Register 1">
+<bitfield id="_RESV_1" width="4" begin="15" end="12" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="P2048E" width="1" begin="11" end="11" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P1024E" width="1" begin="10" end="10" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P512E" width="1" begin="9" end="9" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P256E" width="1" begin="8" end="8" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P128E" width="1" begin="7" end="7" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P64E" width="1" begin="6" end="6" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P32E" width="1" begin="5" end="5" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P16E" width="1" begin="4" end="4" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P8E" width="1" begin="3" end="3" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P4E" width="1" begin="2" end="2" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P2E" width="1" begin="1" end="1" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P1E" width="1" begin="0" end="0" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+</register>
+     <register id="NCS4ECC2" acronym="NCS4ECC2" page="2" offset="0X0079" width="16" description="NAND Flash CS4 1-Bit ECC Register 2">
+<bitfield id="_RESV_1" width="4" begin="15" end="12" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="P2048O" width="1" begin="11" end="11" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P1024O" width="1" begin="10" end="10" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P512O" width="1" begin="9" end="9" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P256O" width="1" begin="8" end="8" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P128O" width="1" begin="7" end="7" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P64O" width="1" begin="6" end="6" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P32O" width="1" begin="5" end="5" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P16O" width="1" begin="4" end="4" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P8O" width="1" begin="3" end="3" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P4O" width="1" begin="2" end="2" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P2O" width="1" begin="1" end="1" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P1O" width="1" begin="0" end="0" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+</register>
+     <register id="NCS5ECC1" acronym="NCS5ECC1" page="2" offset="0X007C" width="16" description="NAND Flash CS5 1-Bit ECC Register 1">
+<bitfield id="_RESV_1" width="4" begin="15" end="12" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="P2048E" width="1" begin="11" end="11" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P1024E" width="1" begin="10" end="10" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P512E" width="1" begin="9" end="9" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P256E" width="1" begin="8" end="8" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P128E" width="1" begin="7" end="7" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P64E" width="1" begin="6" end="6" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P32E" width="1" begin="5" end="5" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P16E" width="1" begin="4" end="4" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P8E" width="1" begin="3" end="3" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P4E" width="1" begin="2" end="2" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P2E" width="1" begin="1" end="1" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P1E" width="1" begin="0" end="0" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1E, P2E, and P4E are column parities and P8E to P2048E are row parities. For 16-bit NAND Flash, P1E, P2E, P4E, and P8E are column parities and P16E to P2048E are row parities." range="0-1" rwaccess="RW"/>
+</register>
+     <register id="NCS5ECC2" acronym="NCS5ECC2" page="2" offset="0X007D" width="16" description="NAND Flash CS5 1-Bit ECC Register 2">
+<bitfield id="_RESV_1" width="4" begin="15" end="12" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="P2048O" width="1" begin="11" end="11" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P1024O" width="1" begin="10" end="10" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P512O" width="1" begin="9" end="9" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P256O" width="1" begin="8" end="8" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P128O" width="1" begin="7" end="7" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P64O" width="1" begin="6" end="6" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P32O" width="1" begin="5" end="5" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P16O" width="1" begin="4" end="4" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P8O" width="1" begin="3" end="3" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P4O" width="1" begin="2" end="2" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P2O" width="1" begin="1" end="1" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+<bitfield id="P1O" width="1" begin="0" end="0" resetval="0" description="1-Bit ECC code calculated while reading/writing NAND Flash. For 8-bit NAND Flash, P1O, P2O, and P4O are column parities and P8O to P2048O are row parities. For 16-bit NAND Flash, P1O, P2O, P4O, and P8O are column parities and P16O to P2048O are row parities." range="0-1" rwaccess="RW"/>
+</register>
+     <register id="NAND4BITECCLOAD" acronym="NAND4BITECCLOAD" page="2" offset="0X00BC" width="16" description="NAND Flash 4-Bit ECC Load Register">
+<bitfield id="_RESV_1" width="6" begin="15" end="10" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="_4BIT_ECC_LOAD" width="10" begin="9" end="0" resetval="0" description="4-Bit ECC Load. This register is used to load 4-bit ECC values when performing syndrome calculation during NAND Flash reads." range="0-3FFh" rwaccess="RW"/>
+</register>
+     <register id="NAND4BITECC1" acronym="NAND4BITECC1" page="2" offset="0X00C0" width="16" description="NAND Flash 4-Bit ECC Register 1">
+<bitfield id="_RESV_1" width="6" begin="15" end="10" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="_4BIT_ECC_VAL1" width="10" begin="9" end="0" resetval="0" description="4-Bit ECC or syndrome value 1 calculated while writing or reading NAND Flash." range="0-3FFh" rwaccess="R"/>
+</register>
+     <register id="NAND4BITECC2" acronym="NAND4BITECC2" page="2" offset="0X00C1" width="16" description="NAND Flash 4-Bit ECC Register 2">
+<bitfield id="_RESV_1" width="6" begin="15" end="10" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="_4BIT_ECC_VAL2" width="10" begin="9" end="0" resetval="0" description="4-Bit ECC or syndrome value 2 calculated while writing or reading NAND Flash." range="0-3FFh" rwaccess="R"/>
+</register>
+     <register id="NAND4BITECC3" acronym="NAND4BITECC3" page="2" offset="0X00C4" width="16" description="NAND Flash 4-Bit ECC Register 3">
+<bitfield id="_RESV_1" width="6" begin="15" end="10" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="_4BIT_ECC_VAL3" width="10" begin="9" end="0" resetval="0" description="4-Bit ECC or syndrome value 3 calculated while writing or reading NAND Flash." range="0-3FFh" rwaccess="R"/>
+</register>
+     <register id="NAND4BITECC4" acronym="NAND4BITECC4" page="2" offset="0X00C5" width="16" description="NAND Flash 4-Bit ECC Register 4">
+<bitfield id="_RESV_1" width="6" begin="15" end="10" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="_4BIT_ECC_VAL4" width="10" begin="9" end="0" resetval="0" description="4-Bit ECC or syndrome value 4 calculated while writing or reading NAND Flash." range="0-3FFh" rwaccess="R"/>
+</register>
+     <register id="NAND4BITECC5" acronym="NAND4BITECC5" page="2" offset="0X00C8" width="16" description="NAND Flash 4-Bit ECC Register 5">
+<bitfield id="_RESV_1" width="6" begin="15" end="10" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="_4BIT_ECC_VAL5" width="10" begin="9" end="0" resetval="0" description="4-Bit ECC or syndrome value 5 calculated while writing or reading NAND Flash." range="0-3FFh" rwaccess="R"/>
+</register>
+     <register id="NAND4BITECC6" acronym="NAND4BITECC6" page="2" offset="0X00C9" width="16" description="NAND Flash 4-Bit ECC Register 6">
+<bitfield id="_RESV_1" width="6" begin="15" end="10" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="_4BIT_ECC_VAL6" width="10" begin="9" end="0" resetval="0" description="4-Bit ECC or syndrome value 6 calculated while writing or reading NAND Flash." range="0-3FFh" rwaccess="R"/>
+</register>
+     <register id="NAND4BITECC7" acronym="NAND4BITECC7" page="2" offset="0X00CC" width="16" description="NAND Flash 4-Bit ECC Register 7">
+<bitfield id="_RESV_1" width="6" begin="15" end="10" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="_4BIT_ECC_VAL7" width="10" begin="9" end="0" resetval="0" description="4-Bit ECC or syndrome value 7 calculated while writing or reading NAND Flash." range="0-3FFh" rwaccess="R"/>
+</register>
+     <register id="NAND4BITECC8" acronym="NAND4BITECC8" page="2" offset="0X00CD" width="16" description="NAND Flash 4-Bit ECC Register 8">
+<bitfield id="_RESV_1" width="6" begin="15" end="10" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="_4BIT_ECC_VAL8" width="10" begin="9" end="0" resetval="0" description="4-Bit ECC or syndrome value 8 calculated while writing or reading NAND Flash." range="0-3FFh" rwaccess="R"/>
+</register>
+     <register id="NANDERRADD1" acronym="NANDERRADD1" page="2" offset="0X00D0" width="16" description="NAND Flash 4-Bit ECC Error Address Register 1">
+<bitfield id="_RESV_1" width="6" begin="15" end="10" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="ERR_ADDR1" width="10" begin="9" end="0" resetval="0" description="4-bit ECC error address 1." range="0-3FFh" rwaccess="R"/>
+</register>
+     <register id="NANDERRADD2" acronym="NANDERRADD2" page="2" offset="0X00D1" width="16" description="NAND Flash 4-Bit ECC Error Address Register 2">
+<bitfield id="_RESV_1" width="6" begin="15" end="10" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="ERR_ADDR2" width="10" begin="9" end="0" resetval="0" description="4-bit ECC error address 2." range="0-3FFh" rwaccess="R"/>
+</register>
+     <register id="NANDERRADD3" acronym="NANDERRADD3" page="2" offset="0X00D4" width="16" description="NAND Flash 4-Bit ECC Error Address Register 3">
+<bitfield id="_RESV_1" width="6" begin="15" end="10" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="ERR_ADDR3" width="10" begin="9" end="0" resetval="0" description="4-bit ECC error address 3." range="0-3FFh" rwaccess="R"/>
+</register>
+     <register id="NANDERRADD4" acronym="NANDERRADD4" page="2" offset="0X00D5" width="16" description="NAND Flash 4-Bit ECC Error Address Register 4">
+<bitfield id="_RESV_1" width="6" begin="15" end="10" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="ERR_ADDR4" width="10" begin="9" end="0" resetval="0" description="4-bit ECC error address 4." range="0-3FFh" rwaccess="R"/>
+</register>
+     <register id="NANDERRVAL1" acronym="NANDERRVAL1" page="2" offset="0X00D8" width="16" description="NAND Flash 4-Bit ECC Error Value Register 1">
+<bitfield id="_RESV_1" width="6" begin="15" end="10" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="ERR_VALUE1" width="10" begin="9" end="0" resetval="0" description="4-bit ECC error value 1." range="0-3FFh" rwaccess="R"/>
+</register>
+     <register id="NANDERRVAL2" acronym="NANDERRVAL2" page="2" offset="0X00D9" width="16" description="NAND Flash 4-Bit ECC Error Value Register 2">
+<bitfield id="_RESV_1" width="6" begin="15" end="10" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="ERR_VALUE2" width="10" begin="9" end="0" resetval="0" description="4-bit ECC error value 2." range="0-3FFh" rwaccess="R"/>
+</register>
+     <register id="NANDERRVAL3" acronym="NANDERRVAL3" page="2" offset="0X00DC" width="16" description="NAND Flash 4-Bit ECC Error Value Register 3">
+<bitfield id="_RESV_1" width="6" begin="15" end="10" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="ERR_VALUE3" width="10" begin="9" end="0" resetval="0" description="4-bit ECC error value 3." range="0-3FFh" rwaccess="R"/>
+</register>
+     <register id="NANDERRVAL4" acronym="NANDERRVAL4" page="2" offset="0X00DD" width="16" description="NAND Flash 4-Bit ECC Error Value Register 4">
+<bitfield id="_RESV_1" width="6" begin="15" end="10" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="ERR_VALUE4" width="10" begin="9" end="0" resetval="0" description="4-bit ECC error value 4." range="0-3FFh" rwaccess="R"/>
+</register>
+</module>

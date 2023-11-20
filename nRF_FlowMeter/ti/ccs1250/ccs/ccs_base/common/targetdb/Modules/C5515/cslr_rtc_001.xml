@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?><module id="RTC" HW_revision="" XML_version="1" description="Real Time Clock">
+     <register id="RTCINTEN" acronym="RTCINTEN" page="2" offset="0X0000" width="16" description="RTC Interrupt Enable">
+<bitfield id="_RESV_1" width="15" begin="15" end="1" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="RTCINTEN" width="1" begin="0" end="0" resetval="0" description="RTC interrupt enable" range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="RTC interrupt is disabled"/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="RTC interrupt is enabled"/>
+</bitfield>
+</register>
+     <register id="RTCUPDATE" acronym="RTCUPDATE" page="2" offset="0X0001" width="16" description="Update RTC registers">
+<bitfield id="TIMEUPDT" width="1" begin="15" end="15" resetval="0" description="Initiates the Time updates" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="RTC time comparison registers updated"/>
+<bitenum id="SET" value="1" token="SET" description="Initiate update of the time registers"/>
+</bitfield>
+<bitfield id="ALARMUPDT" width="1" begin="14" end="14" resetval="0" description="Initiates the alarm updates" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="RTC alarm comparison registers updated"/>
+<bitenum id="SET" value="1" token="SET" description="Initiate update of the Alamr Regiters"/>
+</bitfield>
+<bitfield id="_RESV_3" width="14" begin="13" end="0" resetval="0" description="Reserved" range="" rwaccess="N"/>
+</register>
+     <register id="RTCMIL" acronym="RTCMIL" page="2" offset="0X0004" width="16" description="Milli Seconds Register">
+<bitfield id="_RESV_1" width="3" begin="15" end="13" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="MS3" width="1" begin="12" end="12" resetval="0" description="Milli Seconds in BCD format digit 3" range="0 - 1 " rwaccess="RW">
+<bitenum id="zero" value="0" token="zero" description="digit 3 of the MS BCD is 0 "/>
+<bitenum id="one" value="1" token="one" description="digit 3 of the MS BCD is 1 "/>
+</bitfield>
+<bitfield id="MS2" width="4" begin="11" end="8" resetval="0" description="Milli Seconds in BCD format digit 2" range="0 - 9" rwaccess="RW"/>
+<bitfield id="MS1" width="4" begin="7" end="4" resetval="0" description="milisecond in BCD fromat digit 1" range="0 - 9" rwaccess="RW"/>
+<bitfield id="MS0" width="4" begin="3" end="0" resetval="0" description="milisecond in BCD form at digit 0" range="0 - 9" rwaccess="RW"/>
+</register>
+     <register id="RTCMILA" acronym="RTCMILA" page="2" offset="0X0005" width="16" description="Milli Seconds Alarm Register">
+<bitfield id="_RESV_1" width="3" begin="15" end="13" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="MSA3" width="1" begin="12" end="12" resetval="0" description="Triggers MS Alarm digit 3 (BCD)" range="0 - 1 " rwaccess="RW">
+<bitenum id="zero" value="0" token="zero" description="digit 3 of the MS Alarm BCD is 0 "/>
+<bitenum id="one" value="1" token="one" description="digit 3 of the MS Alarm BCD is 1 "/>
+</bitfield>
+<bitfield id="MSA2" width="4" begin="11" end="8" resetval="0" description="Triggers MS Alarm digit 2 (BCD)" range="0 - 9" rwaccess="RW"/>
+<bitfield id="MSA1" width="4" begin="7" end="4" resetval="0" description="Triggers MS Alarm digit 1 (BCD)" range="0 - 9" rwaccess="RW"/>
+<bitfield id="MSA0" width="4" begin="3" end="0" resetval="0" description="Triggers MS Alarm digit 0 (BCD)" range="0 - 9" rwaccess="RW"/>
+</register>
+     <register id="RTCSEC" acronym="RTCSEC" page="2" offset="0X0008" width="16" description="Seconds Register">
+<bitfield id="_RESV_1" width="9" begin="15" end="7" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="SEC1" width="3" begin="6" end="4" resetval="0" description="Seconds in BCD format digit 1" range="0 - 5" rwaccess="RW"/>
+<bitfield id="SEC0" width="4" begin="3" end="0" resetval="0" description="Seconds in BCD format digit 0" range="0 - 9" rwaccess="RW"/>
+</register>
+     <register id="RTCSECA" acronym="RTCSECA" page="2" offset="0X0009" width="16" description="Seconds Alarm Register">
+<bitfield id="_RESV_1" width="9" begin="15" end="7" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="SECA1" width="3" begin="6" end="4" resetval="0" description="Triggers Seconds Alarm in BCD format digit 1" range="0 - 5" rwaccess="RW"/>
+<bitfield id="SECA0" width="4" begin="3" end="0" resetval="0" description="Triggers Seconds Alarm in BCD format digit 0" range="0 - 9" rwaccess="RW"/>
+</register>
+     <register id="RTCMIN" acronym="RTCMIN" page="2" offset="0X000C" width="16" description="Minutes Register">
+<bitfield id="_RESV_1" width="9" begin="15" end="7" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="MIN1" width="3" begin="6" end="4" resetval="0" description="Minutes in BCD format digit 1" range="0 - 5" rwaccess="RW"/>
+<bitfield id="MIN0" width="4" begin="3" end="0" resetval="0" description="Minutes in BCD format digit 0" range="0 - 9" rwaccess="RW"/>
+</register>
+     <register id="RTCMINA" acronym="RTCMINA" page="2" offset="0X000D" width="16" description="Minutes Alarm Register">
+<bitfield id="_RESV_1" width="9" begin="15" end="7" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="MINA1" width="3" begin="6" end="4" resetval="0" description="Triggers Minutes Alarm in BCD format digit 1" range="0 - 5" rwaccess="RW"/>
+<bitfield id="MINA0" width="4" begin="3" end="0" resetval="0" description="Triggers Minutes Alarm in BCD format digit 0" range="0 - 9" rwaccess="RW"/>
+</register>
+     <register id="RTCHOUR" acronym="RTCHOUR" page="2" offset="0X0010" width="16" description="Hours Register">
+<bitfield id="_RESV_1" width="10" begin="15" end="6" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="HOUR1" width="2" begin="5" end="4" resetval="0" description="Hours in BCD format digit 1" range="0 - 2" rwaccess="RW"/>
+<bitfield id="HOUR0" width="4" begin="3" end="0" resetval="0" description="Hours in BCD format digit 0" range="0 - 9" rwaccess="RW"/>
+</register>
+     <register id="RTCHOURA" acronym="RTCHOURA" page="2" offset="0X0011" width="16" description="Hours Alarm Register">
+<bitfield id="_RESV_1" width="10" begin="15" end="6" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="HOURA1" width="2" begin="5" end="4" resetval="0" description="Triggers Hours Alarm (BCD format digit 1)" range="0 - 2" rwaccess="RW"/>
+<bitfield id="HOURA0" width="4" begin="3" end="0" resetval="0" description="Triggers Hours Alarm (BCD format digit 0)" range="0 - 9" rwaccess="RW"/>
+</register>
+     <register id="RTCDAY" acronym="RTCDAY" page="2" offset="0X0014" width="16" description="Days Register">
+<bitfield id="_RESV_1" width="10" begin="15" end="6" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="DAY1" width="2" begin="5" end="4" resetval="0" description="Day in BCD format digit 1" range="0 - 3" rwaccess="RW"/>
+<bitfield id="DAY0" width="4" begin="3" end="0" resetval="0" description="Day in BCD format digit 0" range="0 - 9" rwaccess="RW"/>
+</register>
+     <register id="RTCDAYA" acronym="RTCDAYA" page="2" offset="0X0015" width="16" description="Days Alarm Register">
+<bitfield id="_RESV_1" width="10" begin="15" end="6" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="DAYA1" width="2" begin="5" end="4" resetval="0" description="Triggers Day Alarm (BCD format digit 1)" range="0 - 3" rwaccess="RW"/>
+<bitfield id="DAYA0" width="4" begin="3" end="0" resetval="0" description="Triggers Day Alarm (BCD format digit 0)" range="0 - 9" rwaccess="RW"/>
+</register>
+     <register id="RTCMONTH" acronym="RTCMONTH" page="2" offset="0X0018" width="16" description="Months Register">
+<bitfield id="_RESV_1" width="11" begin="15" end="5" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="MONTH1" width="1" begin="4" end="4" resetval="0" description="Month in BCD format digit 1" range="0 - 1" rwaccess="RW"/>
+<bitfield id="MONTH0" width="4" begin="3" end="0" resetval="0" description="Month in BCD format digit 0" range="0 - 9" rwaccess="RW"/>
+</register>
+     <register id="RTCMONTHA" acronym="RTCMONTHA" page="2" offset="0X0019" width="16" description="Months  Alarm Register">
+<bitfield id="_RESV_1" width="11" begin="15" end="5" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="MONTHA1" width="1" begin="4" end="4" resetval="0" description="Triggers Month Alarm (BCD format digit 1)" range="0 - 1" rwaccess="RW"/>
+<bitfield id="MONTHA0" width="4" begin="3" end="0" resetval="0" description="Triggers Month Alarm (BCD format digit 0)" range="0 - 9" rwaccess="RW"/>
+</register>
+     <register id="RTCYEAR" acronym="RTCYEAR" page="2" offset="0X001C" width="16" description="Year Register">
+<bitfield id="_RESV_1" width="8" begin="15" end="8" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="YEAR1" width="4" begin="7" end="4" resetval="0" description="Year in BCD format digit 1 (20XX)" range="0 - 9" rwaccess="RW"/>
+<bitfield id="YEAR0" width="4" begin="3" end="0" resetval="0" description="Year in BCD format digit 0 (20XX)" range="0 - 9" rwaccess="RW"/>
+</register>
+     <register id="RTCYEARA" acronym="RTCYEARA" page="2" offset="0X001D" width="16" description="Years Alarm Register">
+<bitfield id="_RESV_1" width="8" begin="15" end="8" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="YEARA1" width="4" begin="7" end="4" resetval="0" description="Triggers Year Alarm (BCD format digit 1 (20XX))" range="0 - 9" rwaccess="RW"/>
+<bitfield id="YEARA0" width="4" begin="3" end="0" resetval="0" description="Triggers Year Alarm (BCD format digit 0 (20XX))" range="0 - 9" rwaccess="RW"/>
+</register>
+     <register id="RTCINTFL" acronym="RTCINTFL" page="2" offset="0X0020" width="16" description="RTC Status Register">
+<bitfield id="ALARMFL" width="1" begin="15" end="15" resetval="0" description="Indicates that an alarm interrupt has been generated" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Alarm interrupt did not occur"/>
+<bitenum id="SET" value="1" token="SET" description="Alarm interrupt occurred (write 1 to clear)"/>
+</bitfield>
+<bitfield id="_RESV_2" width="9" begin="14" end="6" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="EXTFL" width="1" begin="5" end="5" resetval="0" description="Ext event has occurred" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="External event interrupt has not occurred"/>
+<bitenum id="SET" value="1" token="SET" description="external event interrupt occurred (write 1 to clear)"/>
+</bitfield>
+<bitfield id="DAYFL" width="1" begin="4" end="4" resetval="0" description="Day event has occurred" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Periodic day event has not occurred"/>
+<bitenum id="SET" value="1" token="SET" description="Periodic Day event occurred (write 1 to clear)"/>
+</bitfield>
+<bitfield id="HOURFL" width="1" begin="3" end="3" resetval="0" description="hour event has occurred" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Periodic Hour event has not occurred"/>
+<bitenum id="SET" value="1" token="SET" description="Periodic Hour event occurred (write 1 to clear)"/>
+</bitfield>
+<bitfield id="MINFL" width="1" begin="2" end="2" resetval="0" description="Minute Event has occurred" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Periodic Minute event has not occurred"/>
+<bitenum id="SET" value="1" token="SET" description="Periodic Minute event occurred (write 1 to clear)"/>
+</bitfield>
+<bitfield id="SECFL" width="1" begin="1" end="1" resetval="0" description="Second Event occurred" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Periodic Second event has not occurred"/>
+<bitenum id="SET" value="1" token="SET" description="Periodic Second event occurred (write 1 to clear)"/>
+</bitfield>
+<bitfield id="MSFL" width="1" begin="0" end="0" resetval="0" description="Milli second event occurred" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Periodic Milisecond event has not occurred"/>
+<bitenum id="SET" value="1" token="SET" description="Periodic Milisecond event occurred (write 1 to clear)"/>
+</bitfield>
+</register>
+     <register id="RTCNOPWR" acronym="RTCNOPWR" page="2" offset="0X0021" width="16" description="Power lost status bit">
+<bitfield id="_RESV_1" width="15" begin="15" end="1" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="PWRUP" width="1" begin="0" end="0" resetval="1" description="RTC has lost power Flag" range="" rwaccess="R">
+<bitenum id="clear" value="0" token="clear" description="RTC has not lost power since software reset"/>
+<bitenum id="set" value="1" token="set" description="RTC has lost power and requires a software reset"/>
+</bitfield>
+</register>
+     <register id="RTCINTREG" acronym="RTCINTREG" page="2" offset="0X0024" width="16" description="RTC Interrupt Register">
+<bitfield id="ALARMINTEN" width="1" begin="15" end="15" resetval="0" description="Alarm interrupt enable" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Alarm interrupt did not occur"/>
+<bitenum id="SET" value="1" token="SET" description="Alarm interrupt occurred (write 1 to clear)"/>
+</bitfield>
+<bitfield id="_RESV_2" width="9" begin="14" end="6" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="EXTINTEN" width="1" begin="5" end="5" resetval="0" description="Ext event interrupt enable" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="External event interrupt not enabled"/>
+<bitenum id="SET" value="1" token="SET" description="external event interrupt enabled"/>
+</bitfield>
+<bitfield id="DAYINTEN" width="1" begin="4" end="4" resetval="0" description="Day event  interrupt enable" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Periodic day event not enabled"/>
+<bitenum id="SET" value="1" token="SET" description="Periodic Day event enabled"/>
+</bitfield>
+<bitfield id="HOURINTEN" width="1" begin="3" end="3" resetval="0" description="hour event  interrupt enable" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Periodic Hour event not enabled"/>
+<bitenum id="SET" value="1" token="SET" description="Periodic Hour event enabled"/>
+</bitfield>
+<bitfield id="MININTEN" width="1" begin="2" end="2" resetval="0" description="Minute Event interrupt enable" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Periodic Minute event not enabled"/>
+<bitenum id="SET" value="1" token="SET" description="Periodic Minute event enabled"/>
+</bitfield>
+<bitfield id="SECINTEN" width="1" begin="1" end="1" resetval="0" description="Second Event interrupt enable" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Periodic Second event not enabled"/>
+<bitenum id="SET" value="1" token="SET" description="Periodic Second event enabled"/>
+</bitfield>
+<bitfield id="MSINTEN" width="1" begin="0" end="0" resetval="0" description="Milli second event interrupt enable" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Periodic Milisecond event not enabled"/>
+<bitenum id="SET" value="1" token="SET" description="Periodic Milisecond event enabled"/>
+</bitfield>
+</register>
+     <register id="RTCDRIFT" acronym="RTCDRIFT" page="2" offset="0X0028" width="16" description="RTC Compensation Register in Milliseconds (BCD)">
+<bitfield id="DRIFT" width="1" begin="15" end="15" resetval="0" description="Positive or Negative Compensation" range="" rwaccess="RW">
+<bitenum id="NEG" value="0" token="NEG" description="Negative compensation"/>
+<bitenum id="POS" value="1" token="POS" description="Positive compensation"/>
+</bitfield>
+<bitfield id="_RESV_2" width="2" begin="14" end="13" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="COMP3" width="1" begin="12" end="12" resetval="0" description="Digit 3 of compensation BCD" range="" rwaccess="RW">
+<bitenum id="zero" value="0" token="zero" description="BCD digit is 0"/>
+<bitenum id="one" value="1" token="one" description="BCD digit is 1"/>
+</bitfield>
+<bitfield id="COMP2" width="4" begin="11" end="8" resetval="0" description="Digit 2 of compensation register (BCD)" range="0 - 9" rwaccess="RW"/>
+<bitfield id="COMP1" width="4" begin="7" end="4" resetval="0" description="Digit 1 of compensation register (BCD)" range="0 - 9" rwaccess="RW"/>
+<bitfield id="COMP0" width="4" begin="3" end="0" resetval="0" description="Digit 0 of compensation register (BCD)" range="0 - 9" rwaccess="RW"/>
+</register>
+     <register id="RTCOSC" acronym="RTCOSC" page="2" offset="0X002C" width="16" description="RTC Oscillator Register">
+<bitfield id="RTCRESET" width="1" begin="15" end="15" resetval="0" description="RTC software reset.  The RTC only resets when this bit is set.  The RTC is not reset when RESTN goes low.  Once set, this bit is cleared by the RTC.  Do not access any RTC register for three 32KHz clock cycles after setting this bit. " range="" rwaccess="RW">
+<bitenum id="clear" value="0" token="clear" description="RTC not reset"/>
+<bitenum id="set" value="1" token="set" description="RTC reset"/>
+</bitfield>
+<bitfield id="_RESV_2" width="10" begin="14" end="5" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="OSC32KPWD" width="1" begin="4" end="4" resetval="0" description="Control of 32khz Oscillator  powerdown (Func. Mode)" range="" rwaccess="RW">
+<bitenum id="clear" value="0" token="clear" description="RTC 32KHz oscillator enabled"/>
+<bitenum id="set" value="1" token="set" description="RTC 32KHz oscillator disabled.  External crystal connected through 2 internal buffers."/>
+</bitfield>
+<bitfield id="OSCRES" width="4" begin="3" end="0" resetval="8" description="Value of the oscillator resistance" range="0 - FFFFh" rwaccess="RW"/>
+</register>
+     <register id="RTCPMGT" acronym="RTCPMGT" page="2" offset="0X0030" width="16" description="RTC Power Management Register">
+<bitfield id="_RESV_1" width="11" begin="15" end="5" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="WU_DOUT" width="1" begin="4" end="4" resetval="0" description="Wakeup output, activelow/Opnedrain" range="" rwaccess="RW">
+<bitenum id="Low" value="0" token="Low" description="WAKEUP pin driven low"/>
+<bitenum id="High" value="1" token="High" description="WAKEUP pin is open drain output"/>
+</bitfield>
+<bitfield id="WU_DIR" width="1" begin="3" end="3" resetval="0" description="Wakup pin control,High or opendrain" range="" rwaccess="RW">
+<bitenum id="In" value="0" token="In" description="WAKEUP pin is configured as and active high input"/>
+<bitenum id="Out" value="1" token="Out" description="WAKEUP pin is configured as an open drain output"/>
+</bitfield>
+<bitfield id="BG_PD" width="1" begin="2" end="2" resetval="0" description="Bandgap power down" range="" rwaccess="RW">
+<bitenum id="clear" value="0" token="clear" description="Normal"/>
+<bitenum id="Set" value="1" token="Set" description="request to powerdown Bandgap"/>
+</bitfield>
+<bitfield id="LDO_PD" width="1" begin="1" end="1" resetval="0" description="LDO   powerdown (Func. Mode)" range="" rwaccess="RW">
+<bitenum id="clear" value="0" token="clear" description="Normal"/>
+<bitenum id="Set" value="1" token="Set" description="request to powerdown LDO"/>
+</bitfield>
+<bitfield id="RTCCLKOUTEN" width="1" begin="0" end="0" resetval="0" description="Clockout output enable" range="" rwaccess="RW">
+<bitenum id="disable" value="0" token="disable" description="Clock output disabled"/>
+<bitenum id="enable" value="1" token="enable" description="Clock output enabled"/>
+</bitfield>
+</register>
+     <register id="RTCSCR1" acronym="RTCSCR1" page="2" offset="0X0060" width="16" description="RTC LSW Scratch Register 1">
+<bitfield id="SCRATCH0" width="16" begin="15" end="0" resetval="0" description="Scratch registers, available to program" range="0 - FFFFh" rwaccess="RW"/>
+</register>
+     <register id="RTCSCR2" acronym="RTCSCR2" page="2" offset="0X0061" width="16" description="RTC MSW Scratch Register 2">
+<bitfield id="SCRATCH2" width="16" begin="15" end="0" resetval="0" description="Scratch registers, available to program" range="0 - FFFFh" rwaccess="RW"/>
+</register>
+     <register id="RTCSCR3" acronym="RTCSCR3" page="2" offset="0X0064" width="16" description="RTC LSW Scratch Register 3">
+<bitfield id="SCRATCH3" width="16" begin="15" end="0" resetval="0" description="Scratch registers, available to program" range="0 - FFFFh" rwaccess="RW"/>
+</register>
+     <register id="RTCSCR4" acronym="RTCSCR4" page="2" offset="0X0065" width="16" description="RTC MSW Scratch Register 4">
+<bitfield id="SCRATCH4" width="16" begin="15" end="0" resetval="0" description="Scratch registers, available to program" range="0 - FFFFh" rwaccess="RW"/>
+</register>
+</module>

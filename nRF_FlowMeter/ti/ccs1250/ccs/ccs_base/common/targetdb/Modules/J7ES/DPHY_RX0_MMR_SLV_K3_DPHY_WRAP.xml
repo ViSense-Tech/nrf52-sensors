@@ -1,0 +1,22 @@
+<module name="DPHY_RX0_MMR_SLV_K3_DPHY_WRAP" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="DPHY_RX_MMR_SLV_LANE" acronym="DPHY_RX_MMR_SLV_LANE" offset="0x1000" width="32" description="control and status">
+    <bitfield id="RXCLKACTIVEHSCLK" width="1" begin="31" end="31" resetval="0x0" description="Receiver high speed clock active: Driven active when the receiver high speed clock is active." range="" rwaccess="R"/>
+    <bitfield id="CMN_READY" width="1" begin="30" end="30" resetval="0x0" description="Common ready indication: Indicates the completion of the startup process of the common module." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="29" end="27" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PSO_DISABLE" width="1" begin="26" end="26" resetval="0x0" description="Disable power shut off: Disables the ability to switch off the analog switched power islands in the" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="25" end="25" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PSO_CMN" width="1" begin="24" end="24" resetval="0x0" description="Disable power shut off: Power Shutoff signal for CMN" range="" rwaccess="RW"/>
+    <bitfield id="PSM_CLOCK_FREQ" width="8" begin="23" end="16" resetval="0x0" description="PMA state machine clock frequency divider control: This signal specifies a divider value used to create an internal divided clock that is a function of the psm_clock clock." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="IPCONFIG_CMN" width="3" begin="11" end="9" resetval="0x0" description="This signal decides which clock" range="" rwaccess="RW"/>
+    <bitfield id="CLK_SWAPDPDN_DL_L_3" width="1" begin="8" end="8" resetval="0x0" description="Swap DP and DN: When enabled, the rx_p and rx_m differential pins will be swapped." range="" rwaccess="RW"/>
+    <bitfield id="CLK_SWAPDPDN_DL_L_2" width="1" begin="7" end="7" resetval="0x0" description="Swap DP and DN: When enabled, the rx_p and rx_m differential pins will be swapped." range="" rwaccess="RW"/>
+    <bitfield id="DATA_SWAPDPDN_DL_L_3" width="1" begin="6" end="6" resetval="0x0" description="Swap DP and DN: When enabled, the rx_p and rx_m differential pins will be swapped." range="" rwaccess="RW"/>
+    <bitfield id="DATA_SWAPDPDN_DL_L_2" width="1" begin="5" end="5" resetval="0x0" description="Swap DP and DN: When enabled, the rx_p and rx_m differential pins will be swapped." range="" rwaccess="RW"/>
+    <bitfield id="CLK_SWAPDPDN_DL_L_1" width="1" begin="4" end="4" resetval="0x0" description="Swap DP and DN: When enabled, the rx_p and rx_m differential pins will be swapped." range="" rwaccess="RW"/>
+    <bitfield id="CLK_SWAPDPDN_DL_L_0" width="1" begin="3" end="3" resetval="0x0" description="Swap DP and DN: When enabled, the rx_p and rx_m differential pins will be swapped." range="" rwaccess="RW"/>
+    <bitfield id="DATA_SWAPDPDN_DL_L_1" width="1" begin="2" end="2" resetval="0x0" description="Swap DP and DN: When enabled, the rx_p and rx_m differential pins will be swapped." range="" rwaccess="RW"/>
+    <bitfield id="DATA_SWAPDPDN_DL_L_0" width="1" begin="1" end="1" resetval="0x0" description="Swap DP and DN: When enabled, the rx_p and rx_m differential pins will be swapped." range="" rwaccess="RW"/>
+    <bitfield id="CLK_SWAPDPDN_CL_L" width="1" begin="0" end="0" resetval="0x0" description="Swap DP and DN: When enabled, the rx_p and rx_m differential pins will be swapped." range="" rwaccess="RW"/>
+  </register>
+</module>

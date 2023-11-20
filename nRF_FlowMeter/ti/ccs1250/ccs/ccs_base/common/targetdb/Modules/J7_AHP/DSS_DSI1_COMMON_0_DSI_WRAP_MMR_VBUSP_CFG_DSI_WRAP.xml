@@ -1,0 +1,29 @@
+<module name="DSS_DSI1_COMMON_0_DSI_WRAP_MMR_VBUSP_CFG_DSI_WRAP" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="DSI_WRAP_MMR__VBUSP_CFG__DSI_WRAP_revision" acronym="DSI_WRAP_MMR__VBUSP_CFG__DSI_WRAP_revision" offset="0x0" width="32" description="">
+		<bitfield id="MODID" width="16" begin="31" end="16" resetval="0x25610" description="Module ID Field" range="31 - 16" rwaccess="R"/> 
+		<bitfield id="REVRTL" width="5" begin="15" end="11" resetval="0x2" description="RTL Revision" range="15 - 11" rwaccess="R"/> 
+		<bitfield id="REVMAJOR" width="3" begin="10" end="8" resetval="0x1" description="Major Revision" range="10 - 8" rwaccess="R"/> 
+		<bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom" range="7 - 6" rwaccess="R"/> 
+		<bitfield id="REVMIN" width="6" begin="5" end="0" resetval="0x1" description="Minor Revision" range="5 - 0" rwaccess="R"/>
+	</register>
+	<register id="DSI_WRAP_MMR__VBUSP_CFG__DSI_WRAP_DPI_CONTROL" acronym="DSI_WRAP_MMR__VBUSP_CFG__DSI_WRAP_DPI_CONTROL" offset="0x4" width="32" description="">
+		<bitfield id="DSI2_MUX_SEL" width="1" begin="4" end="4" resetval="0x0" description="Select between DPI-1 and DPI-2 to drive the DPI input of DSITX2" range="4" rwaccess="R/W"/> 
+		<bitfield id="DPI_0_EN" width="1" begin="0" end="0" resetval="0x0" description="Enable for DPI-0 input" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_WRAP_MMR__VBUSP_CFG__DSI_WRAP_DSC_CONTROL" acronym="DSI_WRAP_MMR__VBUSP_CFG__DSI_WRAP_DSC_CONTROL" offset="0x8" width="32" description="">
+		
+	</register>
+	<register id="DSI_WRAP_MMR__VBUSP_CFG__DSI_WRAP_DPI_SECURE" acronym="DSI_WRAP_MMR__VBUSP_CFG__DSI_WRAP_DPI_SECURE" offset="0xC" width="32" description="">
+		<bitfield id="DPI_0_SECURE_VIOLATION" width="1" begin="1" end="1" resetval="0x0" description="SECURE VIOLATION status for DPI-0 input. Write-1 to clear the status" range="1" rwaccess="R/W1TC"/> 
+		<bitfield id="DPI_0_SECURE" width="1" begin="0" end="0" resetval="0x0" description="SECURE bit for DPI-0 input" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_WRAP_MMR__VBUSP_CFG__DSI_WRAP_DSI_0_ASF_STATUS" acronym="DSI_WRAP_MMR__VBUSP_CFG__DSI_WRAP_DSI_0_ASF_STATUS" offset="0x10" width="32" description="">
+		<bitfield id="INTEGRITY_ERR" width="1" begin="6" end="6" resetval="0x0" description="INTEGRITY_ERR  " range="6" rwaccess="R"/> 
+		<bitfield id="PROTOCOL_ERR" width="1" begin="5" end="5" resetval="0x0" description="PROTOCOL_ERR   " range="5" rwaccess="R"/> 
+		<bitfield id="TRANS_TO_ERR" width="1" begin="4" end="4" resetval="0x0" description="TRANS_TO_ERR   " range="4" rwaccess="R"/> 
+		<bitfield id="CSR_ERR" width="1" begin="3" end="3" resetval="0x0" description="CSR_ERR        " range="3" rwaccess="R"/> 
+		<bitfield id="DAP_ERR" width="1" begin="2" end="2" resetval="0x0" description="DAP_ERR        " range="2" rwaccess="R"/> 
+		<bitfield id="SRAM_UNCORR_ERR" width="1" begin="1" end="1" resetval="0x0" description="SRAM_UNCORR_ERR" range="1" rwaccess="R"/> 
+		<bitfield id="SRAM_CORR_ERR" width="1" begin="0" end="0" resetval="0x0" description="SRAM_CORR_ERR  " range="0" rwaccess="R"/>
+	</register>
+</module>

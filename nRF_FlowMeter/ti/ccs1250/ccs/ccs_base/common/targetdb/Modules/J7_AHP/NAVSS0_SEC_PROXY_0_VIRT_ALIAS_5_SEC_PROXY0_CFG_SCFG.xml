@@ -1,0 +1,30 @@
+<module name="NAVSS0_SEC_PROXY_0_VIRT_ALIAS_5_SEC_PROXY0_CFG_SCFG" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="VIRT_ALIAS_5_SEC_PROXY0__CFG__SCFG_buffer_l" acronym="VIRT_ALIAS_5_SEC_PROXY0__CFG__SCFG_buffer_l" offset="0x0" width="32" description="">
+		<bitfield id="BASE_L" width="32" begin="31" end="0" resetval="0x0" description="The base address for the external buffer, lower 32 bits." range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_5_SEC_PROXY0__CFG__SCFG_buffer_h" acronym="VIRT_ALIAS_5_SEC_PROXY0__CFG__SCFG_buffer_h" offset="0x4" width="32" description="">
+		<bitfield id="BASE_H" width="16" begin="15" end="0" resetval="0x0" description="The base address for the external buffer, upper 16 bits." range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_5_SEC_PROXY0__CFG__SCFG_target_l" acronym="VIRT_ALIAS_5_SEC_PROXY0__CFG__SCFG_target_l" offset="0x8" width="32" description="">
+		<bitfield id="BASE_L" width="32" begin="31" end="0" resetval="0x942669824" description="The base address for the external target, lower 32 bits." range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_5_SEC_PROXY0__CFG__SCFG_target_h" acronym="VIRT_ALIAS_5_SEC_PROXY0__CFG__SCFG_target_h" offset="0xC" width="32" description="">
+		<bitfield id="BASE_H" width="16" begin="15" end="0" resetval="0x0" description="The base address for the external target, upper 16 bits." range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_5_SEC_PROXY0__CFG__SCFG_ORDERID" acronym="VIRT_ALIAS_5_SEC_PROXY0__CFG__SCFG_ORDERID" offset="0x10" width="32" description="">
+		<bitfield id="REPLACE" width="1" begin="4" end="4" resetval="0x0" description="Indicates to replace the bus orderid value for the buffer access with the orderid MMR field. This allows control over the orderid value when it must be restricted due to the topology for QoS reasons. 0 = bypass and use the orderid from the source transaction for the destination transaction. 1 = use the orderid MMR field value for the destination transaction." range="4" rwaccess="R/W"/> 
+		<bitfield id="ORDERID" width="4" begin="3" end="0" resetval="0x0" description="Defines the bus orderid value for the buffer access." range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_5_SEC_PROXY0__CFG__SCFG_ctl" acronym="VIRT_ALIAS_5_SEC_PROXY0__CFG__SCFG_ctl" offset="0x0" width="32" description="">
+		<bitfield id="DIR" width="1" begin="31" end="31" resetval="0x0" description="Direction for the proxy thread. 0 = outbound, write only. 1 = inbound, read only." range="31" rwaccess="R/W"/> 
+		<bitfield id="MAX_CNT" width="8" begin="23" end="16" resetval="0x0" description="Max message count allowed for an outbound proxy thread. Is not used otherwise." range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="QUEUE" width="16" begin="15" end="0" resetval="0x0" description="Queue number in the target to use for the proxy thread. If the target base does not start at queue 0 then this is the relative queue number from that base queue." range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_5_SEC_PROXY0__CFG__SCFG_evt_map" acronym="VIRT_ALIAS_5_SEC_PROXY0__CFG__SCFG_evt_map" offset="0x4" width="32" description="">
+		<bitfield id="ERR_EVT" width="16" begin="31" end="16" resetval="0x65535" description="Event number for an error from the proxy thread." range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="THR_EVT" width="16" begin="15" end="0" resetval="0x65535" description="Event number for a threshold event from the proxy thread." range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_5_SEC_PROXY0__CFG__SCFG_dst" acronym="VIRT_ALIAS_5_SEC_PROXY0__CFG__SCFG_dst" offset="0x8" width="32" description="">
+		<bitfield id="THREAD" width="16" begin="15" end="0" resetval="0x0" description="The proxy thread that is the destination of messages from this outbound proxy thread, based on the queue numbers. This is ignored for inbound proxy threads." range="15 - 0" rwaccess="R/W"/>
+	</register>
+</module>

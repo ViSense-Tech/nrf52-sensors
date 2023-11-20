@@ -1,0 +1,318 @@
+<module name="DECODER0_ENTROPY_DMAC" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="DECODER0_DMAC_SETUP_00" acronym="DECODER0_DMAC_SETUP_00" offset="0x0" width="32" description="">
+    <bitfield id="START_ADDRESS" width="32" begin="31" end="0" resetval="0x0" description="If LIST_EN = '1' then" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_COUNT_00" acronym="DECODER0_DMAC_COUNT_00" offset="0x4" width="32" description="">
+    <bitfield id="LIST_IEN" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BSWAP" width="1" begin="30" end="30" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TRANSFER_IEN" width="1" begin="29" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="PW" width="2" begin="28" end="27" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DIR" width="1" begin="26" end="26" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="PI" width="2" begin="25" end="24" resetval="0x0" description="Specifies how much to increment the peripheral address by i [only set when LIST_EN = '0'] 0i0" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LIST_FIN_CTL" width="1" begin="22" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="21" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DREQ" width="1" begin="20" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SRST" width="1" begin="19" end="19" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LIST_EN" width="1" begin="18" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE_2D_MODE" width="1" begin="17" end="17" resetval="0x0" description="2D DMA transfer mode enable." range="" rwaccess="RW"/>
+    <bitfield id="EN" width="1" begin="16" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CNT" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_PERIPH_00" acronym="DECODER0_DMAC_PERIPH_00" offset="0x8" width="32" description="">
+    <bitfield id="ACC_DEL" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="28" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INCR" width="1" begin="27" end="27" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BURST" width="3" begin="26" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="EXT_BURST" width="4" begin="19" end="16" resetval="0x0" description="Additional bits for BURST if a burst size of 8 or larger is required." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="15" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="EXT_SA" width="4" begin="3" end="0" resetval="0x0" description="If LIST_EN = '1' then" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_IRQ_STAT_00" acronym="DECODER0_DMAC_IRQ_STAT_00" offset="0xC" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LIST_FIN" width="1" begin="21" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LIST_INT" width="1" begin="20" end="20" resetval="0x0" description="List element status for current linked-list state." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="19" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TRANSFER_FIN" width="1" begin="17" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="17" begin="16" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_2D_MODE_00" acronym="DECODER0_DMAC_2D_MODE_00" offset="0x10" width="32" description="">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REP_COUNT" width="11" begin="30" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LINE_ADDR_OFFSET" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_LENGTH" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_PERIPHERAL_ADDR_00" acronym="DECODER0_DMAC_PERIPHERAL_ADDR_00" offset="0x14" width="32" description="">
+    <bitfield id="RESERVED" width="9" begin="31" end="23" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ADDR" width="23" begin="22" end="0" resetval="0x0" description="Specifies the address of the peripheral register to be accessed in this DMA channel." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_PER_HOLD_00" acronym="DECODER0_DMAC_PER_HOLD_00" offset="0x18" width="32" description="">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="PER_HOLD" width="5" begin="4" end="0" resetval="0x7" description="Specifies the holdover period to use for the channel." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_SETUP_01" acronym="DECODER0_DMAC_SETUP_01" offset="0x20" width="32" description="">
+    <bitfield id="START_ADDRESS" width="32" begin="31" end="0" resetval="0x0" description="If LIST_EN = '1' then" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_COUNT_01" acronym="DECODER0_DMAC_COUNT_01" offset="0x24" width="32" description="">
+    <bitfield id="LIST_IEN" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BSWAP" width="1" begin="30" end="30" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TRANSFER_IEN" width="1" begin="29" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="PW" width="2" begin="28" end="27" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DIR" width="1" begin="26" end="26" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="PI" width="2" begin="25" end="24" resetval="0x0" description="Specifies how much to increment the peripheral address by i [only set when LIST_EN = '0'] 0i0" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LIST_FIN_CTL" width="1" begin="22" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="21" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DREQ" width="1" begin="20" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SRST" width="1" begin="19" end="19" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LIST_EN" width="1" begin="18" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE_2D_MODE" width="1" begin="17" end="17" resetval="0x0" description="2D DMA transfer mode enable." range="" rwaccess="RW"/>
+    <bitfield id="EN" width="1" begin="16" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CNT" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_PERIPH_01" acronym="DECODER0_DMAC_PERIPH_01" offset="0x28" width="32" description="">
+    <bitfield id="ACC_DEL" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="28" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INCR" width="1" begin="27" end="27" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BURST" width="3" begin="26" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="EXT_BURST" width="4" begin="19" end="16" resetval="0x0" description="Additional bits for BURST if a burst size of 8 or larger is required." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="15" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="EXT_SA" width="4" begin="3" end="0" resetval="0x0" description="If LIST_EN = '1' then" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_IRQ_STAT_01" acronym="DECODER0_DMAC_IRQ_STAT_01" offset="0x2C" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LIST_FIN" width="1" begin="21" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LIST_INT" width="1" begin="20" end="20" resetval="0x0" description="List element status for current linked-list state." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="19" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TRANSFER_FIN" width="1" begin="17" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="17" begin="16" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_2D_MODE_01" acronym="DECODER0_DMAC_2D_MODE_01" offset="0x30" width="32" description="">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REP_COUNT" width="11" begin="30" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LINE_ADDR_OFFSET" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_LENGTH" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_PERIPHERAL_ADDR_01" acronym="DECODER0_DMAC_PERIPHERAL_ADDR_01" offset="0x34" width="32" description="">
+    <bitfield id="RESERVED" width="9" begin="31" end="23" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ADDR" width="23" begin="22" end="0" resetval="0x0" description="Specifies the address of the peripheral register to be accessed in this DMA channel." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_PER_HOLD_01" acronym="DECODER0_DMAC_PER_HOLD_01" offset="0x38" width="32" description="">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="PER_HOLD" width="5" begin="4" end="0" resetval="0x7" description="Specifies the holdover period to use for the channel." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_SETUP_02" acronym="DECODER0_DMAC_SETUP_02" offset="0x40" width="32" description="">
+    <bitfield id="START_ADDRESS" width="32" begin="31" end="0" resetval="0x0" description="If LIST_EN = '1' then" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_COUNT_02" acronym="DECODER0_DMAC_COUNT_02" offset="0x44" width="32" description="">
+    <bitfield id="LIST_IEN" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BSWAP" width="1" begin="30" end="30" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TRANSFER_IEN" width="1" begin="29" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="PW" width="2" begin="28" end="27" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DIR" width="1" begin="26" end="26" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="PI" width="2" begin="25" end="24" resetval="0x0" description="Specifies how much to increment the peripheral address by i [only set when LIST_EN = '0'] 0i0" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LIST_FIN_CTL" width="1" begin="22" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="21" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DREQ" width="1" begin="20" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SRST" width="1" begin="19" end="19" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LIST_EN" width="1" begin="18" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE_2D_MODE" width="1" begin="17" end="17" resetval="0x0" description="2D DMA transfer mode enable." range="" rwaccess="RW"/>
+    <bitfield id="EN" width="1" begin="16" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CNT" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_PERIPH_02" acronym="DECODER0_DMAC_PERIPH_02" offset="0x48" width="32" description="">
+    <bitfield id="ACC_DEL" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="28" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INCR" width="1" begin="27" end="27" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BURST" width="3" begin="26" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="EXT_BURST" width="4" begin="19" end="16" resetval="0x0" description="Additional bits for BURST if a burst size of 8 or larger is required." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="15" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="EXT_SA" width="4" begin="3" end="0" resetval="0x0" description="If LIST_EN = '1' then" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_IRQ_STAT_02" acronym="DECODER0_DMAC_IRQ_STAT_02" offset="0x4C" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LIST_FIN" width="1" begin="21" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LIST_INT" width="1" begin="20" end="20" resetval="0x0" description="List element status for current linked-list state." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="19" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TRANSFER_FIN" width="1" begin="17" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="17" begin="16" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_2D_MODE_02" acronym="DECODER0_DMAC_2D_MODE_02" offset="0x50" width="32" description="">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REP_COUNT" width="11" begin="30" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LINE_ADDR_OFFSET" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_LENGTH" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_PERIPHERAL_ADDR_02" acronym="DECODER0_DMAC_PERIPHERAL_ADDR_02" offset="0x54" width="32" description="">
+    <bitfield id="RESERVED" width="9" begin="31" end="23" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ADDR" width="23" begin="22" end="0" resetval="0x0" description="Specifies the address of the peripheral register to be accessed in this DMA channel." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_PER_HOLD_02" acronym="DECODER0_DMAC_PER_HOLD_02" offset="0x58" width="32" description="">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="PER_HOLD" width="5" begin="4" end="0" resetval="0x7" description="Specifies the holdover period to use for the channel." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_SETUP_03" acronym="DECODER0_DMAC_SETUP_03" offset="0x60" width="32" description="">
+    <bitfield id="START_ADDRESS" width="32" begin="31" end="0" resetval="0x0" description="If LIST_EN = '1' then" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_COUNT_03" acronym="DECODER0_DMAC_COUNT_03" offset="0x64" width="32" description="">
+    <bitfield id="LIST_IEN" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BSWAP" width="1" begin="30" end="30" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TRANSFER_IEN" width="1" begin="29" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="PW" width="2" begin="28" end="27" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DIR" width="1" begin="26" end="26" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="PI" width="2" begin="25" end="24" resetval="0x0" description="Specifies how much to increment the peripheral address by i [only set when LIST_EN = '0'] 0i0" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LIST_FIN_CTL" width="1" begin="22" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="21" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DREQ" width="1" begin="20" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SRST" width="1" begin="19" end="19" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LIST_EN" width="1" begin="18" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE_2D_MODE" width="1" begin="17" end="17" resetval="0x0" description="2D DMA transfer mode enable." range="" rwaccess="RW"/>
+    <bitfield id="EN" width="1" begin="16" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CNT" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_PERIPH_03" acronym="DECODER0_DMAC_PERIPH_03" offset="0x68" width="32" description="">
+    <bitfield id="ACC_DEL" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="28" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INCR" width="1" begin="27" end="27" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BURST" width="3" begin="26" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="EXT_BURST" width="4" begin="19" end="16" resetval="0x0" description="Additional bits for BURST if a burst size of 8 or larger is required." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="15" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="EXT_SA" width="4" begin="3" end="0" resetval="0x0" description="If LIST_EN = '1' then" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_IRQ_STAT_03" acronym="DECODER0_DMAC_IRQ_STAT_03" offset="0x6C" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LIST_FIN" width="1" begin="21" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LIST_INT" width="1" begin="20" end="20" resetval="0x0" description="List element status for current linked-list state." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="19" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TRANSFER_FIN" width="1" begin="17" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="17" begin="16" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_2D_MODE_03" acronym="DECODER0_DMAC_2D_MODE_03" offset="0x70" width="32" description="">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REP_COUNT" width="11" begin="30" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LINE_ADDR_OFFSET" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_LENGTH" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_PERIPHERAL_ADDR_03" acronym="DECODER0_DMAC_PERIPHERAL_ADDR_03" offset="0x74" width="32" description="">
+    <bitfield id="RESERVED" width="9" begin="31" end="23" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ADDR" width="23" begin="22" end="0" resetval="0x0" description="Specifies the address of the peripheral register to be accessed in this DMA channel." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_PER_HOLD_03" acronym="DECODER0_DMAC_PER_HOLD_03" offset="0x78" width="32" description="">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="PER_HOLD" width="5" begin="4" end="0" resetval="0x7" description="Specifies the holdover period to use for the channel." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_SETUP_04" acronym="DECODER0_DMAC_SETUP_04" offset="0x80" width="32" description="">
+    <bitfield id="START_ADDRESS" width="32" begin="31" end="0" resetval="0x0" description="If LIST_EN = '1' then" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_COUNT_04" acronym="DECODER0_DMAC_COUNT_04" offset="0x84" width="32" description="">
+    <bitfield id="LIST_IEN" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BSWAP" width="1" begin="30" end="30" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TRANSFER_IEN" width="1" begin="29" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="PW" width="2" begin="28" end="27" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DIR" width="1" begin="26" end="26" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="PI" width="2" begin="25" end="24" resetval="0x0" description="Specifies how much to increment the peripheral address by i [only set when LIST_EN = '0'] 0i0" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LIST_FIN_CTL" width="1" begin="22" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="21" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DREQ" width="1" begin="20" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SRST" width="1" begin="19" end="19" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LIST_EN" width="1" begin="18" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE_2D_MODE" width="1" begin="17" end="17" resetval="0x0" description="2D DMA transfer mode enable." range="" rwaccess="RW"/>
+    <bitfield id="EN" width="1" begin="16" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CNT" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_PERIPH_04" acronym="DECODER0_DMAC_PERIPH_04" offset="0x88" width="32" description="">
+    <bitfield id="ACC_DEL" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="28" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INCR" width="1" begin="27" end="27" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BURST" width="3" begin="26" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="EXT_BURST" width="4" begin="19" end="16" resetval="0x0" description="Additional bits for BURST if a burst size of 8 or larger is required." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="15" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="EXT_SA" width="4" begin="3" end="0" resetval="0x0" description="If LIST_EN = '1' then" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_IRQ_STAT_04" acronym="DECODER0_DMAC_IRQ_STAT_04" offset="0x8C" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LIST_FIN" width="1" begin="21" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LIST_INT" width="1" begin="20" end="20" resetval="0x0" description="List element status for current linked-list state." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="19" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TRANSFER_FIN" width="1" begin="17" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="17" begin="16" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_2D_MODE_04" acronym="DECODER0_DMAC_2D_MODE_04" offset="0x90" width="32" description="">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REP_COUNT" width="11" begin="30" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LINE_ADDR_OFFSET" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_LENGTH" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_PERIPHERAL_ADDR_04" acronym="DECODER0_DMAC_PERIPHERAL_ADDR_04" offset="0x94" width="32" description="">
+    <bitfield id="RESERVED" width="9" begin="31" end="23" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ADDR" width="23" begin="22" end="0" resetval="0x0" description="Specifies the address of the peripheral register to be accessed in this DMA channel." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_PER_HOLD_04" acronym="DECODER0_DMAC_PER_HOLD_04" offset="0x98" width="32" description="">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="PER_HOLD" width="5" begin="4" end="0" resetval="0x7" description="Specifies the holdover period to use for the channel." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_SETUP_05" acronym="DECODER0_DMAC_SETUP_05" offset="0xA0" width="32" description="">
+    <bitfield id="START_ADDRESS" width="32" begin="31" end="0" resetval="0x0" description="If LIST_EN = '1' then" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_COUNT_05" acronym="DECODER0_DMAC_COUNT_05" offset="0xA4" width="32" description="">
+    <bitfield id="LIST_IEN" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BSWAP" width="1" begin="30" end="30" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TRANSFER_IEN" width="1" begin="29" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="PW" width="2" begin="28" end="27" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DIR" width="1" begin="26" end="26" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="PI" width="2" begin="25" end="24" resetval="0x0" description="Specifies how much to increment the peripheral address by i [only set when LIST_EN = '0'] 0i0" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LIST_FIN_CTL" width="1" begin="22" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="21" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DREQ" width="1" begin="20" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SRST" width="1" begin="19" end="19" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LIST_EN" width="1" begin="18" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE_2D_MODE" width="1" begin="17" end="17" resetval="0x0" description="2D DMA transfer mode enable." range="" rwaccess="RW"/>
+    <bitfield id="EN" width="1" begin="16" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CNT" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_PERIPH_05" acronym="DECODER0_DMAC_PERIPH_05" offset="0xA8" width="32" description="">
+    <bitfield id="ACC_DEL" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="28" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INCR" width="1" begin="27" end="27" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BURST" width="3" begin="26" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="EXT_BURST" width="4" begin="19" end="16" resetval="0x0" description="Additional bits for BURST if a burst size of 8 or larger is required." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="15" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="EXT_SA" width="4" begin="3" end="0" resetval="0x0" description="If LIST_EN = '1' then" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_IRQ_STAT_05" acronym="DECODER0_DMAC_IRQ_STAT_05" offset="0xAC" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LIST_FIN" width="1" begin="21" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LIST_INT" width="1" begin="20" end="20" resetval="0x0" description="List element status for current linked-list state." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="19" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TRANSFER_FIN" width="1" begin="17" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="17" begin="16" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_2D_MODE_05" acronym="DECODER0_DMAC_2D_MODE_05" offset="0xB0" width="32" description="">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REP_COUNT" width="11" begin="30" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LINE_ADDR_OFFSET" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_LENGTH" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_PERIPHERAL_ADDR_05" acronym="DECODER0_DMAC_PERIPHERAL_ADDR_05" offset="0xB4" width="32" description="">
+    <bitfield id="RESERVED" width="9" begin="31" end="23" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ADDR" width="23" begin="22" end="0" resetval="0x0" description="Specifies the address of the peripheral register to be accessed in this DMA channel." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_PER_HOLD_05" acronym="DECODER0_DMAC_PER_HOLD_05" offset="0xB8" width="32" description="">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="PER_HOLD" width="5" begin="4" end="0" resetval="0x7" description="Specifies the holdover period to use for the channel." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_DMAC_SOFT_RESET" acronym="DECODER0_DMAC_SOFT_RESET" offset="0xC0" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SOFT_RESET" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+</module>

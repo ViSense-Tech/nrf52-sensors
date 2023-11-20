@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?><module id="UHPI" HW_revision="" XML_version="1" description="Parallel port interface for accessing CPU s memory space by external host processor.">
+     <register id="PIDL" acronym="PIDL" page="2" offset="0X0000" width="16" description="This Register stores versioning information used to identify the specific UHPI peripheral implemented in a particular device">
+<bitfield id="RTL" width="5" begin="15" end="11" resetval="0" description="RTL Version." range="" rwaccess="R"/>
+<bitfield id="MAJOR" width="3" begin="10" end="8" resetval="1" description="Major Revision.  001b for module releases corresponding to this functional spec." range="" rwaccess="R"/>
+<bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0" description="Non-custom." range="" rwaccess="R"/>
+<bitfield id="MINOR" width="6" begin="5" end="0" resetval="10" description="Minor Revision.  001010b for module releases corresponding to this functional spec." range="" rwaccess="R"/>
+</register>
+     <register id="PIDU" acronym="PIDU" page="2" offset="0X0001" width="16" description="This Register stores versioning information used to identify the specific UHPI peripheral implemented in a particular device">
+<bitfield id="TYPE" width="2" begin="15" end="14" resetval="1" description="Used to distinguish between old Scheme and current. Spare bit to encode future schemes." range="" rwaccess="R"/>
+<bitfield id="_RESV_2" width="2" begin="13" end="12" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="FUNC" width="12" begin="11" end="0" resetval="1057" description="Function. 421h for UHPI." range="" rwaccess="R"/>
+</register>
+     <register id="PWREMU_MGMT" acronym="PWREMU_MGMT" page="2" offset="0X0004" width="16" description="This Register control the operation of the peripheral during emulation suspend and / or idle states">
+<bitfield id="_RESV_1" width="14" begin="15" end="2" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="SOFT" width="1" begin="1" end="1" resetval="0" description="Emulation Suspend bit" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Upon emulation suspend the peripheral operation is not affected."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Upon emulation suspend current host and Vbus operations will complete, after which the Vbus interfaces will remain in the idle state"/>
+</bitfield>
+<bitfield id="FREE" width="1" begin="0" end="0" resetval="0" description="Free run mode operation bit" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="SOFT bit takes effect"/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Upon emulation suspend the peripheral operation will not be affected (regardless of SOFT)."/>
+</bitfield>
+</register>
+     <register id="GPINT_CTRLL" acronym="GPINT_CTRLL" page="2" offset="0X0008" width="16" description="GPIO interrupts control Register lower">
+<bitfield id="_RESV_1" width="13" begin="15" end="3" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="GPINT_EN" width="1" begin="2" end="2" resetval="0" description="GPIO Interrupt Enable bit" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Enabled /HAS as a GPINT sourcing the CPU Interrupt"/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Disabled /HAS as a GPINT sourcing the CPU Interrupt"/>
+</bitfield>
+<bitfield id="_RESV_3" width="1" begin="1" end="1" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="_RESV_4" width="1" begin="0" end="0" resetval="0" description="Reserved" range="" rwaccess="N"/>
+</register>
+     <register id="GPINT_CTRLU" acronym="GPINT_CTRLU" page="2" offset="0X0009" width="16" description="GPIO interrupts control Register Upper">
+<bitfield id="_RESV_1" width="13" begin="15" end="3" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="GPINT_INV" width="1" begin="2" end="2" resetval="0" description="GPINT Invert bit" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="GPINT not inverted"/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="GPINT inverted"/>
+</bitfield>
+<bitfield id="_RESV_3" width="1" begin="1" end="1" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="_RESV_4" width="1" begin="0" end="0" resetval="0" description="Reserved" range="" rwaccess="N"/>
+</register>
+     <register id="GPIO_EN" acronym="GPIO_EN" page="2" offset="0X000C" width="16" description="GPIO enable Register">
+<bitfield id="_RESV_1" width="7" begin="15" end="9" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="GPIO_EN8" width="1" begin="8" end="8" resetval="0" description="GPIO Enable bit 8" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="HD[15:8] pins will work as HPI."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="HD[15:8] pins will work as GPIO."/>
+</bitfield>
+<bitfield id="GPIO_EN7" width="1" begin="7" end="7" resetval="0" description="GPIO Enable bit 7" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="HD[7:0] pins will work as HPI."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="HD[7:0] pins will work as GPIO."/>
+</bitfield>
+<bitfield id="GPIO_EN6" width="1" begin="6" end="6" resetval="0" description="GPIO Enable bit 6" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="/HINT pin will work as HPI."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="/HINT pin will work as GPIO."/>
+</bitfield>
+<bitfield id="GPIO_EN5" width="1" begin="5" end="5" resetval="0" description="GPIO Enable bit 5" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="HRDY and /HRDY pins will work as HPI."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="HRDY and /HRDY pins will work as GPIO."/>
+</bitfield>
+<bitfield id="GPIO_EN4" width="1" begin="4" end="4" resetval="0" description="GPIO Enable bit 4" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="HHWIL pin will work as HPI."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="HHWIL pin will work as GPIO."/>
+</bitfield>
+<bitfield id="GPIO_EN3" width="1" begin="3" end="3" resetval="0" description="GPIO Enable bit 3" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="/HBE[3:0] pins will work as HPI."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="/HBE[3:0] pins will work as GPIO."/>
+</bitfield>
+<bitfield id="GPIO_EN2" width="1" begin="2" end="2" resetval="0" description="GPIO Enable bit 2" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="/HAS pin will work as HPI."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="/HAS pin will work as GPIO."/>
+</bitfield>
+<bitfield id="GPIO_EN1" width="1" begin="1" end="1" resetval="0" description="GPIO Enable bit 1" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="HCNTL[B:A] pins will work as HPI."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="HCNTL[B:A] pins will work as GPIO."/>
+</bitfield>
+<bitfield id="GPIO_EN0" width="1" begin="0" end="0" resetval="0" description="GPIO Enable bit 0" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="/HCS, /HDS1, /HDS2 and HR/W pins will work as HPI."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="/HCS, /HDS1, /HDS2 and HR/W pins will work as GPIO."/>
+</bitfield>
+</register>
+     <register id="GPIO_DIR1" acronym="GPIO_DIR1" page="2" offset="0X0010" width="16" description="GPIO direction control Register">
+<bitfield id="DIR" width="16" begin="15" end="0" resetval="0" description="The DIR bits control the direction of the HD[15:0] pins when they are configured as general purpose I/O. DIRx=1 configures the HDx pin as an output and DIRx=0 configures theHDx pin as an input. " range="" rwaccess="RW"/>
+</register>
+     <register id="GPIO_DAT1" acronym="GPIO_DAT1" page="2" offset="0X0014" width="16" description="GPIO Data Register">
+<bitfield id="DAT" width="16" begin="15" end="0" resetval="0" description="The value written in this will reflect on HD[15:0], when configured as output.And will read the logical level on the pin when configured as input." range="" rwaccess="RW"/>
+</register>
+     <register id="GPIO_DIR2" acronym="GPIO_DIR2" page="2" offset="0X0018" width="16" description="GPIO direction control Register">
+<bitfield id="_RESV_1" width="1" begin="15" end="15" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="_RESV_2" width="2" begin="14" end="13" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="DIR12" width="1" begin="12" end="12" resetval="0" description="Direction control for /HBE1 pin when configured as GPIO" range="" rwaccess="RW">
+<bitenum id="OUTPUT" value="1" token="OUTPUT" description="/HBE1 pin configured as output."/>
+<bitenum id="INPUT" value="0" token="INPUT" description="/HBE1 pin configured as input."/>
+</bitfield>
+<bitfield id="DIR11" width="1" begin="11" end="11" resetval="0" description="Direction control for /HBE0 pin when configured as GPIO" range="" rwaccess="RW">
+<bitenum id="OUTPUT" value="1" token="OUTPUT" description="/HBE0 pin configured as output."/>
+<bitenum id="INPUT" value="0" token="INPUT" description="/HBE0 pin configured as input."/>
+</bitfield>
+<bitfield id="_RESV_5" width="1" begin="10" end="10" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="DIR9" width="1" begin="9" end="9" resetval="0" description="Direction control for HRDY pin when configured as GPIO" range="" rwaccess="RW">
+<bitenum id="OUTPUT" value="1" token="OUTPUT" description="HRDY pin configured as output."/>
+<bitenum id="INPUT" value="0" token="INPUT" description="/HRDY pin configured as input."/>
+</bitfield>
+<bitfield id="DIR8" width="1" begin="8" end="8" resetval="0" description="Direction control for /HINT pin when configured as GPIO" range="" rwaccess="RW">
+<bitenum id="OUTPUT" value="1" token="OUTPUT" description="/HINT pin configured as output."/>
+<bitenum id="INPUT" value="0" token="INPUT" description="HRDY pin configured as input."/>
+</bitfield>
+<bitfield id="DIR7" width="1" begin="7" end="7" resetval="0" description="Direction control for HCNTLA pin when configured as GPIO" range="" rwaccess="RW">
+<bitenum id="OUTPUT" value="1" token="OUTPUT" description="HCNTLA pin configured as output."/>
+<bitenum id="INPUT" value="0" token="INPUT" description="/HINT pin configured as input."/>
+</bitfield>
+<bitfield id="DIR6" width="1" begin="6" end="6" resetval="0" description="Direction control for HCNTLB pin when configured as GPIO" range="" rwaccess="RW">
+<bitenum id="OUTPUT" value="1" token="OUTPUT" description="HCNTLB pin configured as output."/>
+<bitenum id="INPUT" value="0" token="INPUT" description="HCNTLA pin configured as input."/>
+</bitfield>
+<bitfield id="DIR5" width="1" begin="5" end="5" resetval="0" description="Direction control for HHWIL pin when configured as GPIO" range="" rwaccess="RW">
+<bitenum id="OUTPUT" value="1" token="OUTPUT" description="HHWIL pin configured as output."/>
+<bitenum id="INPUT" value="0" token="INPUT" description="HCNTLB pin configured as input."/>
+</bitfield>
+<bitfield id="DIR4" width="1" begin="4" end="4" resetval="0" description="Direction control for HR/W  pin when configured as GPIO" range="" rwaccess="RW">
+<bitenum id="OUTPUT" value="1" token="OUTPUT" description="HR/W  pin configured as output."/>
+<bitenum id="INPUT" value="0" token="INPUT" description="HHWIL pin configured as input."/>
+</bitfield>
+<bitfield id="DIR3" width="1" begin="3" end="3" resetval="0" description="Direction control for /HDS2 pin when configured as GPIO" range="" rwaccess="RW">
+<bitenum id="OUTPUT" value="1" token="OUTPUT" description="/HDS2 pin configured as output."/>
+<bitenum id="INPUT" value="0" token="INPUT" description="HR/W  pin configured as input."/>
+</bitfield>
+<bitfield id="DIR2" width="1" begin="2" end="2" resetval="0" description="Direction control for /HDS1 pin when configured as GPIO" range="" rwaccess="RW">
+<bitenum id="OUTPUT" value="1" token="OUTPUT" description="/HDS1 pin configured as output."/>
+<bitenum id="INPUT" value="0" token="INPUT" description="/HDS2 pin configured as input."/>
+</bitfield>
+<bitfield id="DIR1" width="1" begin="1" end="1" resetval="0" description="Direction control for /HCS pin when configured as GPIO" range="" rwaccess="RW">
+<bitenum id="OUTPUT" value="1" token="OUTPUT" description="/HCS pin configured as output."/>
+<bitenum id="INPUT" value="0" token="INPUT" description="/HDS1 pin configured as input."/>
+</bitfield>
+<bitfield id="DIR0" width="1" begin="0" end="0" resetval="0" description="Direction control for /HAS pin when configured as GPIO" range="" rwaccess="RW">
+<bitenum id="OUTPUT" value="1" token="OUTPUT" description="/HAS pin configured as output."/>
+<bitenum id="INPUT" value="0" token="INPUT" description="/HCS pin configured as input."/>
+</bitfield>
+</register>
+     <register id="GPIO_DAT2" acronym="GPIO_DAT2" page="2" offset="0X001C" width="16" description="GPIO Data Register">
+<bitfield id="_RESV_1" width="1" begin="15" end="15" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="_RESV_2" width="2" begin="14" end="13" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="DAT12" width="1" begin="12" end="12" resetval="0" description="Controls the output level of the /HBE1 pin when configured as output and reads the status of /HBE1 when configured as input" range="" rwaccess="RW">
+<bitenum id="HIGH" value="1" token="HIGH" description="/HBE1 pin is at logical high or driven high"/>
+<bitenum id="LOW" value="0" token="LOW" description="/HBE2 pin is at logical low or driven low"/>
+</bitfield>
+<bitfield id="DAT11" width="1" begin="11" end="11" resetval="0" description="Controls the output level of the /HBE0 pin when configured as output and reads the status of /HBE0 when configured as input" range="" rwaccess="RW">
+<bitenum id="HIGH" value="1" token="HIGH" description="/HBE0 pin is at logical high or driven high"/>
+<bitenum id="LOW" value="0" token="LOW" description="/HBE1 pin is at logical low or driven low"/>
+</bitfield>
+<bitfield id="_RESV_5" width="1" begin="10" end="10" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="DAT9" width="1" begin="9" end="9" resetval="0" description="Controls the output level of the HRDY pin when configured as output and reads the status of HRDY when configured as input" range="" rwaccess="RW">
+<bitenum id="HIGH" value="1" token="HIGH" description="HRDY pin is at logical high or driven high"/>
+<bitenum id="LOW" value="0" token="LOW" description="/HRDY pin is at logical low or driven low"/>
+</bitfield>
+<bitfield id="DAT8" width="1" begin="8" end="8" resetval="0" description="Controls the output level of the /HINT pin when configured as output and reads the status of /HINT when configured as input" range="" rwaccess="RW">
+<bitenum id="HIGH" value="1" token="HIGH" description="/HINTpin is at logical high or driven high"/>
+<bitenum id="LOW" value="0" token="LOW" description="HRDY pin is at logical low or driven low"/>
+</bitfield>
+<bitfield id="DAT7" width="1" begin="7" end="7" resetval="0" description="Controls the output level of the HCNTLA pin when configured as output and reads the status of HCNTLA when configured as input" range="" rwaccess="RW">
+<bitenum id="HIGH" value="1" token="HIGH" description="HCNTLA pin is at logical high or driven high"/>
+<bitenum id="LOW" value="0" token="LOW" description="/HINT pin is at logical low or driven low"/>
+</bitfield>
+<bitfield id="DAT6" width="1" begin="6" end="6" resetval="0" description="Controls the output level of the HCNTLB pin when configured as output and reads the status of HCNTLB when configured as input" range="" rwaccess="RW">
+<bitenum id="HIGH" value="1" token="HIGH" description="HCNTLB pin is at logical high or driven high"/>
+<bitenum id="LOW" value="0" token="LOW" description="HCNTLA pin is at logical low or driven low"/>
+</bitfield>
+<bitfield id="DAT5" width="1" begin="5" end="5" resetval="0" description="Controls the output level of the HHWIL pin when configured as output and reads the status of HHWIL when configured as input" range="" rwaccess="RW">
+<bitenum id="HIGH" value="1" token="HIGH" description="HHWIL pin is at logical high or driven high"/>
+<bitenum id="LOW" value="0" token="LOW" description="HCNTLB pin is at logical low or driven low"/>
+</bitfield>
+<bitfield id="DAT4" width="1" begin="4" end="4" resetval="0" description="Controls the output level of the HR/W pin when configured as output and reads the status of HR/W when configured as input" range="" rwaccess="RW">
+<bitenum id="HIGH" value="1" token="HIGH" description="HR/W pin is at logical high or driven high"/>
+<bitenum id="LOW" value="0" token="LOW" description="HHWIL pin is at logical low or driven low"/>
+</bitfield>
+<bitfield id="DAT3" width="1" begin="3" end="3" resetval="0" description="Controls the output level of the /HDS2 pin when configured as output and reads the status of /HDS2 when configured as input" range="" rwaccess="RW">
+<bitenum id="HIGH" value="1" token="HIGH" description="/HDS2 pin is at logical high or driven high"/>
+<bitenum id="LOW" value="0" token="LOW" description="HR/W pin is at logical low or driven low"/>
+</bitfield>
+<bitfield id="DAT2" width="1" begin="2" end="2" resetval="0" description="Controls the output level of the /HDS1 pin when configured as output and reads the status of /HDS1 when configured as input" range="" rwaccess="RW">
+<bitenum id="HIGH" value="1" token="HIGH" description="/HDS1 pin is at logical high or driven high"/>
+<bitenum id="LOW" value="0" token="LOW" description="/HDS2 pin is at logical low or driven low"/>
+</bitfield>
+<bitfield id="DAT1" width="1" begin="1" end="1" resetval="0" description="Controls the output level of the /HCS pin when configured as output and reads the status of /HCS when configured as input" range="" rwaccess="RW">
+<bitenum id="HIGH" value="1" token="HIGH" description="/HCS pin is at logical high or driven high"/>
+<bitenum id="LOW" value="0" token="LOW" description="/HDS1 pin is at logical low or driven low"/>
+</bitfield>
+<bitfield id="DAT0" width="1" begin="0" end="0" resetval="0" description="Controls the output level of the /HAS pin when configured as output and reads the status of /HAS when configured as input" range="" rwaccess="RW">
+<bitenum id="HIGH" value="1" token="HIGH" description="/HAS pin is at logical high or driven high"/>
+<bitenum id="LOW" value="0" token="LOW" description="/HCS pin is at logical low or driven low"/>
+</bitfield>
+</register>
+     <register id="HPICL" acronym="HPICL" page="2" offset="0X0030" width="16" description="Host Port Interface Control Register-Lower">
+<bitfield id="NRDY_HPID_WR" width="1" begin="15" end="15" resetval="0" description="HPID Non-Incrementing Write Not Ready 0: It is safe to perform a single HPID non-incrementing write because the write FIFO is empty. 1: The write FIFO is not empty or is flushing, therefore an HPID non-incrementing write would result in HRDY pin deassertion. The write data is lost or corrupted and the HPI interface could be corrupted." range="" rwaccess="R">
+<bitenum id="NRDY" value="1" token="NRDY" description="The write FIFO is not empty or is flushing, therefore an HPID non-incrementing write would result in HRDY pin deassertion. The write data is lost or corrupted and the HPI interface could be corrupted."/>
+</bitfield>
+<bitfield id="NRDY_HPIDP_WR" width="1" begin="14" end="14" resetval="0" description="HPID+ Incrementing Write Not Ready 0: It is safe to perform a single HPID+ incrementing write because the write FIFO is not full. 1: The write FIFO is full.  Therefore HPID+ incrementing write would result in HRDY pin deassertion. The write data is lost or corrupted and subsequent writes may be out of sync or the HPI interface could be corrupted." range="" rwaccess="R">
+<bitenum id="NRDY" value="1" token="NRDY" description="The write FIFO is full.  Therefore HPID+ incrementing write would result in HRDY pin deassertion. The write data is lost or corrupted and subsequent writes may be out of sync or the HPI interface could be corrupted."/>
+<bitenum id="READY" value="0" token="READY" description=" It is safe to perform a single HPID non-incrementing write because the write FIFO is empty."/>
+</bitfield>
+<bitfield id="NRDY_HPID_RD" width="1" begin="13" end="13" resetval="0" description="HPID Read Not Ready 0: It is safe to perform a single HPID read (incrementing or non-incrementing) because the read FIFO is not empty. 1: The read FIFO is empty or flushing.  Therefore any HPID read would result in HRDY pin deassertion. The read data is not guaranteed and subsequent reads may also be out of sync or the HPI interface could be corrupted." range="" rwaccess="R">
+<bitenum id="NRDY" value="1" token="NRDY" description="The read FIFO is empty or flushing.  Therefore any HPID read would result in HRDY pin deassertion. The read data is not guaranteed and subsequent reads may also be out of sync or the HPI interface could be corrupted."/>
+<bitenum id="READY" value="0" token="READY" description="It is safe to perform a single HPID+ incrementing write because the write FIFO is not full."/>
+</bitfield>
+<bitfield id="NRDY_HPIA_WR" width="1" begin="12" end="12" resetval="0" description="HPIA Write Not Ready 0: It is safe to perform a single HPIA write because any previous HPIA write has already been fully synchronized. 1: A previous HPIA write has not finished synchronizing.  Therefore any HPIA write could result in HRDY pin deassertion and the HPIA value and the host interface could be corrupted." range="" rwaccess="R">
+<bitenum id="NRDY" value="1" token="NRDY" description=" A previous HPIA write has not finished synchronizing.  Therefore any HPIA write could result in HRDY pin deassertion and the HPIA value and the host interface could be corrupted."/>
+<bitenum id="READY" value="0" token="READY" description="It is safe to perform a single HPID read (incrementing or non-incrementing) because the read FIFO is not empty."/>
+</bitfield>
+<bitfield id="HPIA_RW_SEL" width="1" begin="11" end="11" resetval="0" description="HPIA Register select bit, When DUAL_HPIA=1, this bit is used to select the HPIA Register to be accessed" range="" rwaccess="R">
+<bitenum id="READ" value="1" token="READ" description="HPIA-R (read address) Register selected."/>
+<bitenum id="READY" value="0" token="READY" description="It is safe to perform a single HPIA write because any previous HPIA write has already been fully synchronized."/>
+</bitfield>
+<bitfield id="LB_MODE" width="1" begin="10" end="10" resetval="0" description="Loop-back mode configuration bit, valid only when HOSTLESS=1" range="" rwaccess="R">
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Loopback is disabled"/>
+<bitenum id="WRITE" value="0" token="WRITE" description="HPIA-W (write address) Register is selected"/>
+</bitfield>
+<bitfield id="DUAL_HPIA" width="1" begin="9" end="9" resetval="0" description="Dual HPIA mode configuration bit" range="" rwaccess="R">
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Dual HPIA mode enabled"/>
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Loopback is enabled"/>
+</bitfield>
+<bitfield id="HWOB_STAT" width="1" begin="8" end="8" resetval="0" description="HWOB status. The value of the HWOB bit is also stored in this bit position" range="" rwaccess="R">
+<bitenum id="ONE" value="1" token="ONE" description="The HWOB bit is one"/>
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Dual HPIA mode disabled"/>
+</bitfield>
+<bitfield id="HPI_RST" width="1" begin="7" end="7" resetval="1" description="HPI_RESET bit" range="" rwaccess="RW">
+<bitenum id="GENERATE" value="1" token="GENERATE" description="The FIFO pointers are held in reset as soon as the pending vbus transactions are complete"/>
+<bitenum id="ZERO" value="0" token="ZERO" description="The HWOB bit is zero"/>
+</bitfield>
+<bitfield id="RESET" width="1" begin="6" end="6" resetval="1" description="CPU core reset bit" range="" rwaccess="R">
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Reset signal to the CPU core is active "/>
+<bitenum id="CLEAR" value="0" token="CLEAR" description=""/>
+</bitfield>
+<bitfield id="XHPIA" width="1" begin="5" end="5" resetval="0" description="Extended address enable." range="" rwaccess="R">
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Extended address enabled."/>
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Reset signal to the CPU core is not active "/>
+</bitfield>
+<bitfield id="FETCH" width="1" begin="4" end="4" resetval="0" description="Host data fetch request bit" range="" rwaccess="R">
+<bitenum id="ONE" value="1" token="ONE" description=""/>
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Extended address disabled."/>
+</bitfield>
+<bitfield id="HRDY" width="1" begin="3" end="3" resetval="0" description="The logic level of the internal HRDY signal appears in this field" range="" rwaccess="R">
+<bitenum id="READY" value="1" token="READY" description="UHPI has completed the current data access"/>
+<bitenum id="ZERO" value="0" token="ZERO" description=""/>
+</bitfield>
+<bitfield id="HINT" width="1" begin="2" end="2" resetval="0" description="DSP to host interrupt" range="" rwaccess="RW">
+<bitenum id="GENERATE" value="1" token="GENERATE" description="DSP to host interrupt has been generated"/>
+<bitenum id="BUSY" value="0" token="BUSY" description="UHPI has not completed the current data access"/>
+</bitfield>
+<bitfield id="DSP_INT" width="1" begin="1" end="1" resetval="0" description="Host to DSP interrupt" range="" rwaccess="RW">
+<bitenum id="GENERATE" value="1" token="GENERATE" description="Host to DSP interrupt is generated"/>
+<bitenum id="CLEAR" value="0" token="CLEAR" description="DSP to host interrupt bit don't have any effect"/>
+</bitfield>
+<bitfield id="HWOB" width="1" begin="0" end="0" resetval="0" description="Half-word Ordering Bit" range="" rwaccess="R">
+<bitenum id="LSB" value="1" token="LSB" description="First half-word is least significant."/>
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Host to DSP interrupt is not generated"/>
+</bitfield>
+</register>
+     <register id="UHPIAWL" acronym="UHPIAWL" page="2" offset="0X0034" width="16" description="Register stores lower address UHPI write operation">
+<bitfield id="DIR" width="16" begin="15" end="0" resetval="0" description="Register stores Lower address UHPI write operation. " range="" rwaccess="R"/>
+</register>
+     <register id="UHPIAWU" acronym="UHPIAWU" page="2" offset="0X0035" width="16" description="Register stores upper address UHPI write operation">
+<bitfield id="DIR" width="16" begin="15" end="0" resetval="0" description="Register stores upper address UHPI write operation. " range="" rwaccess="R"/>
+</register>
+     <register id="UHPIARL" acronym="UHPIARL" page="2" offset="0X0038" width="16" description="Register stores Lower address UHPI Read operation">
+<bitfield id="DIR" width="16" begin="15" end="0" resetval="0" description="Register stores Lower address UHPI Read operation. " range="" rwaccess="R"/>
+</register>
+     <register id="UHPIARU" acronym="UHPIARU" page="2" offset="0X0039" width="16" description="Register stores Upper address UHPI Read operation">
+<bitfield id="DIR" width="16" begin="15" end="0" resetval="0" description="Register stores Upper address UHPI Read operation. " range="" rwaccess="R"/>
+</register>
+     <register id="XUHPIAWL" acronym="XUHPIAWL" page="2" offset="0X003C" width="16" description="Register stores extended lower address UHPI write operation">
+<bitfield id="DIR" width="16" begin="15" end="0" resetval="0" description="Register stores extended lower address UHPI write operation. " range="" rwaccess="R"/>
+</register>
+     <register id="XUHPIAWU" acronym="XUHPIAWU" page="2" offset="0X003D" width="16" description="Register stores extended Upper address UHPI write operation">
+<bitfield id="DIR" width="16" begin="15" end="0" resetval="0" description="Register stores extended Upper address UHPI write operation. " range="" rwaccess="R"/>
+</register>
+     <register id="XUHPIARL" acronym="XUHPIARL" page="2" offset="0X0040" width="16" description="Register stores extended Lower address UHPI Read operation">
+<bitfield id="DIR" width="16" begin="15" end="0" resetval="0" description="Register stores extended Lower address UHPI Read operation. " range="" rwaccess="R"/>
+</register>
+     <register id="XUHPIARU" acronym="XUHPIARU" page="2" offset="0X0041" width="16" description="Register stores extended Upper address UHPI Read operation">
+<bitfield id="DIR" width="16" begin="15" end="0" resetval="0" description="Register stores Extended Upper address UHPI Read operation. " range="" rwaccess="R"/>
+</register>
+</module>

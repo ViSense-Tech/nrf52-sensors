@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><module id="TIM" HW_revision="" XML_version="1" description="The TIM controller is used to setup the internal timers.  Each timer can be configured as a Watchdog or a General purpose timer.">
+     <register id="TCR" acronym="TCR" page="2" offset="0X0000" width="16" description="Timer Control">
+<bitfield id="TIMEN" width="1" begin="15" end="15" resetval="0" description="Enables/disables the clocks for the counters to run.  This starts both the Prescaler and the main counter.  " range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Timer counters are disabled "/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Timer coutners are enabled and the prescaler and counter will begin to count down"/>
+</bitfield>
+<bitfield id="RSV" width="9" begin="14" end="6" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="PSCDIV" width="4" begin="5" end="2" resetval="0" description="Prescaler divider.  The range is 0000 = divide by 2 to 1100 = divide by 8192" range="0h - Ch" rwaccess="RW"/>
+<bitfield id="AUTORELOAD" width="1" begin="1" end="1" resetval="0" description="automatically reloads the counter when it reaches 0  " range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Auto Reload is disabled"/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Auto Reload is enabled"/>
+</bitfield>
+<bitfield id="START" width="1" begin="0" end="0" resetval="0" description="When written to this bit loads and starts the counter.  If the device is already in the process of counting down and a &quot;1&quot; is written to this bit the counter will be re-loaded with the start value and begin counting down again.  When read the bit will be 1 when the counter is counting down this register will read 0 when the counter has stopped. " range="" rwaccess="RW"/>
+</register>
+     <register id="TIMPRD1" acronym="TIMPRD1" page="2" offset="0X0002" width="16" description="Timer period LSW">
+<bitfield id="PRD1" width="16" begin="15" end="0" resetval="0" description="The Timer period register is 32 bits wide.  This is the LSW for the Timer period.  " range="0000h-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="TIMPRD2" acronym="TIMPRD2" page="2" offset="0X0003" width="16" description="Timer period MSW">
+<bitfield id="PRD2" width="16" begin="15" end="0" resetval="0" description="The Timer period register is 32 bits wide.  This is the MSW for the Timer period.  " range="0000h-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="TIMCNT1" acronym="TIMCNT1" page="2" offset="0X0004" width="16" description="Timer Counter LSW">
+<bitfield id="TIM1" width="16" begin="15" end="0" resetval="0" description="The timer is 32bits wide.  This is the LSW for the timer counter" range="0000h-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="TIMCNT2" acronym="TIMCNT2" page="2" offset="0X0005" width="16" description="Timer Counter MSW">
+<bitfield id="TIM2" width="16" begin="15" end="0" resetval="0" description="The timer is 32bits wide.  This is the MSW for the timer counter" range="0000h-FFFFh" rwaccess="RW"/>
+</register>
+</module>

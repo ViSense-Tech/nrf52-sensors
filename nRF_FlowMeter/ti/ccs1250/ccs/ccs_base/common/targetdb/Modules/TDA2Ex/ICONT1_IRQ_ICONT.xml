@@ -1,0 +1,119 @@
+<module name="ICONT1_IRQ_ICONT" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="ICONT_IRQ_EOI" acronym="ICONT_IRQ_EOI" offset="0x20" width="32" description="End Of Interrupt register - Interrupt handler">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="LINE_NUMBER" width="1" begin="0" end="0" resetval="0x0" description="End Of Interrupt (EOI) control. Write number of interrupt output." range="" rwaccess="RW">
+      <bitenum value="0" id="EOI0" token="LINE_NUMBER_0_w" description="EOI for interrupt handler interrupt output"/>
+      <bitenum value="0" id="READ0" token="LINE_NUMBER_0_r" description="Reads always 0 (no EOI memory)"/>
+    </bitfield>
+  </register>
+  <register id="ICONT_IRQSTATUS_RAW" acronym="ICONT_IRQSTATUS_RAW" offset="0x24" width="32" description="Per-event raw interrupt status vector (interrupt handler). Raw status is set even if event is not enabled. Write 1 to set the (raw) status, mostly for debug.">
+    <bitfield id="IRQ31_1" width="32" begin="31" end="0" resetval="0x0000 0000" description="Settable raw status for interrupt event. For each bit of the bit field: Read 0: No event pending Read 1: Event pending Write 0: No action Write 1: Set event (debug)" range="" rwaccess="RW W1toSet"/>
+  </register>
+  <register id="ICONT_IRQSTATUS" acronym="ICONT_IRQSTATUS" offset="0x28" width="32" description="Per-event 'enabled' interrupt status vector (interrupt handler). Enabled status is not set unless event is enabled. Write 1 to clear the status after interrupt has been serviced (raw status gets cleared, that is, even if not enabled).">
+    <bitfield id="IRQ31_0" width="32" begin="31" end="0" resetval="0x0000 0000" description="Clearable, enabled status for interrupt event. For each bit of the bit field: Read 0: No (enabled) event pending Read 1: Event pending Write 0: No action Write 1: Clear (raw) event" range="" rwaccess="RW W1toClr"/>
+  </register>
+  <register id="ICONT_IRQENABLE_SET" acronym="ICONT_IRQENABLE_SET" offset="0x2C" width="32" description="Per-event interrupt enable bit vector (interrupt handler). Write 1 to set (enable interrupt). Readout equal to corresponding _CLR register.">
+    <bitfield id="IRQ31_0" width="32" begin="31" end="0" resetval="0x0000 0000" description="Enable for interrupt event. For each bit of the bit field: Read 0: Interrupt disabled (masked) Read 1: Interrupt enabled Write 0: No action Write 1: Enable interrupt" range="" rwaccess="RW W1toSet"/>
+  </register>
+  <register id="ICONT_IRQENABLE_CLR" acronym="ICONT_IRQENABLE_CLR" offset="0x30" width="32" description="Per-event interrupt enable bit vector (interrupt handler). Write 1 to clear (disable interrupt). Readout equal to corresponding _SET register.">
+    <bitfield id="IRQ31_0" width="32" begin="31" end="0" resetval="0x0000 0000" description="Enable for interrupt event. For each bit of the bitfiled: Read 0: Interrupt disabled (masked) Read 1: Interrupt enabled Write 0: No action Write 1: Disable interrupt" range="" rwaccess="RW W1toClr"/>
+  </register>
+  <register id="ICONT_SWI_EOI" acronym="ICONT_SWI_EOI" offset="0x40" width="32" description="End Of Interrupt register - Software interrupt">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="LINE_NUMBER" width="1" begin="0" end="0" resetval="0x0" description="End Of Interrupt (EOI) control. Write number of interrupt output." range="" rwaccess="RW">
+      <bitenum value="0" id="EOI0" token="LINE_NUMBER_0_w" description="EOI for software interrupt output"/>
+      <bitenum value="0" id="READ0" token="LINE_NUMBER_0_r" description="Reads always 0 (no EOI memory)"/>
+    </bitfield>
+  </register>
+  <register id="ICONT_SWISTATUS_RAW" acronym="ICONT_SWISTATUS_RAW" offset="0x44" width="32" description="Per-event raw interrupt status vector (software interrupt). Raw status is set even if event is not enabled. Write 1 to set the (raw) status, mostly for debug.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="SWI_IRQ" width="1" begin="0" end="0" resetval="0" description="Settable raw status for software interrupt event" range="" rwaccess="RW W1toSet">
+      <bitenum value="0" id="No_action" token="SWI_IRQ_0_w" description="No action"/>
+      <bitenum value="0" id="No_event_pending" token="SWI_IRQ_0_r" description="No event pending"/>
+      <bitenum value="1" id="Event_pending" token="SWI_IRQ_1_r" description="Event pending"/>
+      <bitenum value="1" id="Set_event_(debug)" token="SWI_IRQ_1_w" description="Set event (debug)"/>
+    </bitfield>
+  </register>
+  <register id="ICONT_SWISTATUS" acronym="ICONT_SWISTATUS" offset="0x48" width="32" description="Per-event 'enabled' interrupt status vector (software interrupt). Enabled status is not set unless event is enabled. Write 1 to clear the status after interrupt has been serviced (raw status gets cleared, that is, even if not enabled).">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="SWI_IRQ" width="1" begin="0" end="0" resetval="0" description="Clearable, enabled status for software interrupt event" range="" rwaccess="RW W1toClr">
+      <bitenum value="0" id="No_action" token="SWI_IRQ_0_w" description="No action"/>
+      <bitenum value="0" id="No_(enabled)_event_pending" token="SWI_IRQ_0_r" description="No (enabled) event pending"/>
+      <bitenum value="1" id="Event_pending" token="SWI_IRQ_1_r" description="Event pending"/>
+      <bitenum value="1" id="Clear_(raw)_event" token="SWI_IRQ_1_w" description="Clear (raw) event"/>
+    </bitfield>
+  </register>
+  <register id="ICONT_SWIENABLE_SET" acronym="ICONT_SWIENABLE_SET" offset="0x4C" width="32" description="Per-event interrupt enable bit vector (software interrupt). Write 1 to set (enable interrupt). Readout equal to corresponding _CLR register.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="SWI_IRQ" width="1" begin="0" end="0" resetval="0" description="Enable for software interrupt event" range="" rwaccess="RW W1toSet">
+      <bitenum value="0" id="No_action" token="SWI_IRQ_0_w" description="No action"/>
+      <bitenum value="0" id="Interrupt_disabled_(masked)" token="SWI_IRQ_0_r" description="Interrupt disabled (masked)"/>
+      <bitenum value="1" id="Interrupt_enabled" token="SWI_IRQ_1_r" description="Interrupt enabled"/>
+      <bitenum value="1" id="Enable_interrupt" token="SWI_IRQ_1_w" description="Enable interrupt"/>
+    </bitfield>
+  </register>
+  <register id="ICONT_SWIENABLE_CLR" acronym="ICONT_SWIENABLE_CLR" offset="0x50" width="32" description="Per-event interrupt enable bit vector (software interrupt). Write 1 to clear (disable interrupt). Readout equal to corresponding _SET register.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="SWI_IRQ" width="1" begin="0" end="0" resetval="0" description="Enable for software interrupt event" range="" rwaccess="RW W1toClr">
+      <bitenum value="0" id="No_action" token="SWI_IRQ_0_w" description="No action"/>
+      <bitenum value="0" id="Interrupt_disabled_(masked)" token="SWI_IRQ_0_r" description="Interrupt disabled (masked)"/>
+      <bitenum value="1" id="Interrupt_enabled" token="SWI_IRQ_1_r" description="Interrupt enabled"/>
+      <bitenum value="1" id="Disable_interrupt" token="SWI_IRQ_1_w" description="Disable interrupt"/>
+    </bitfield>
+  </register>
+  <register id="ICONT_SYNCMASK" acronym="ICONT_SYNCMASK" offset="0x60" width="32" description="This register allow to mask each input of Sync logic. When.SYN_IRQn is set, input event n is disabled When .SYNC_IRQn is cleared, input event n is enabled">
+    <bitfield id="SYNC_IRQ31_0" width="32" begin="31" end="0" resetval="0xFFFF FFFF" description="Sync IRQ mask" range="" rwaccess="RW"/>
+  </register>
+  <register id="ICONT_SYNCCLR" acronym="ICONT_SYNCCLR" offset="0x64" width="32" description="Clear Interrupt line This register is used to clear status bit of interrupt n. write 0: no effect write 1: clears corresponding bit in IRQ_SYNCSTATUS and IRQ_SYNCRAWSTATUS registers">
+    <bitfield id="SYNC_IRQ31_0" width="32" begin="31" end="0" resetval="0x0000 0000" description="Sync IRQ clear" range="" rwaccess="W W1toClr"/>
+  </register>
+  <register id="ICONT_SYNCSTATUS" acronym="ICONT_SYNCSTATUS" offset="0x68" width="32" description="Status of masked Sync interrupt input n 0: Interrupt n has not occured or masked 1: Interrupt n is enabled and has occured">
+    <bitfield id="SYNC_IRQ31_0" width="32" begin="31" end="0" resetval="0x0000 0000" description="Sync IRQ status" range="" rwaccess="R"/>
+  </register>
+  <register id="ICONT_SYNCRAWSTATUS" acronym="ICONT_SYNCRAWSTATUS" offset="0x70" width="32" description="Status of Sync interrupt n input before mask 0: Interrupt n has not occured 1: Interrupt n has occured">
+    <bitfield id="SYNC_IRQ31_0" width="32" begin="31" end="0" resetval="0x0000 0000" description="Sync IRQ raw status" range="" rwaccess="R"/>
+  </register>
+  <register id="ICONT_SYNC_IRQ_EOI" acronym="ICONT_SYNC_IRQ_EOI" offset="0x80" width="32" description="End Of Interrupt - SYNC interrupt">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="LINE_NUMBER" width="1" begin="0" end="0" resetval="0x0" description="Software End Of Interrupt (EOI) control. Write number of interrupt output." range="" rwaccess="RW">
+      <bitenum value="0" id="EOI0" token="LINE_NUMBER_0_w" description="EOI for SYNC interrupt output"/>
+      <bitenum value="0" id="READ0" token="LINE_NUMBER_0_r" description="Reads always 0 (no EOI memory)"/>
+    </bitfield>
+  </register>
+  <register id="ICONT_SYNC_IRQSTATUS_RAW" acronym="ICONT_SYNC_IRQSTATUS_RAW" offset="0x84" width="32" description="Per-event raw interrupt status vector. Raw status is set even if event is not enabled. Write 1 to set the (raw) status, mostly for debug.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="SYNC_IRQ" width="1" begin="0" end="0" resetval="0" description="Settable raw status for outgoing Sync IRQ event" range="" rwaccess="RW W1toSet">
+      <bitenum value="0" id="No_action" token="SYNC_IRQ_0_w" description="No action"/>
+      <bitenum value="0" id="No_event_pending" token="SYNC_IRQ_0_r" description="No event pending"/>
+      <bitenum value="1" id="Event_pending" token="SYNC_IRQ_1_r" description="Event pending"/>
+      <bitenum value="1" id="Set_event_(debug)" token="SYNC_IRQ_1_w" description="Set event (debug)"/>
+    </bitfield>
+  </register>
+  <register id="ICONT_SYNC_IRQSTATUS" acronym="ICONT_SYNC_IRQSTATUS" offset="0x88" width="32" description="Per-event 'enabled' interrupt status vector, line #0. Enabled status is not set unless event is enabled. Write 1 to clear the status after interrupt has been serviced (raw status gets cleared, that is, even if not enabled).">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="SYNC_IRQ" width="1" begin="0" end="0" resetval="0" description="Clearable, enabled status for outgoing Sync IRQ event" range="" rwaccess="RW W1toClr">
+      <bitenum value="0" id="No_action" token="SYNC_IRQ_0_w" description="No action"/>
+      <bitenum value="0" id="No_(enabled)_event_pending" token="SYNC_IRQ_0_r" description="No (enabled) event pending"/>
+      <bitenum value="1" id="Event_pending" token="SYNC_IRQ_1_r" description="Event pending"/>
+      <bitenum value="1" id="Clear_(raw)_event" token="SYNC_IRQ_1_w" description="Clear (raw) event"/>
+    </bitfield>
+  </register>
+  <register id="ICONT_SYNC_IRQENABLE_SET" acronym="ICONT_SYNC_IRQENABLE_SET" offset="0x8C" width="32" description="Per-event interrupt enable bit vector. Write 1 to set (enable interrupt). Readout equal to corresponding _CLR register.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="SYNC_IRQ" width="1" begin="0" end="0" resetval="0" description="Enable for Outgoing Sync IRQ event" range="" rwaccess="RW W1toSet">
+      <bitenum value="0" id="No_action" token="SYNC_IRQ_0_w" description="No action"/>
+      <bitenum value="0" id="Interrupt_disabled_(masked)" token="SYNC_IRQ_0_r" description="Interrupt disabled (masked)"/>
+      <bitenum value="1" id="Interrupt_enabled" token="SYNC_IRQ_1_r" description="Interrupt enabled"/>
+      <bitenum value="1" id="Enable_interrupt" token="SYNC_IRQ_1_w" description="Enable interrupt"/>
+    </bitfield>
+  </register>
+  <register id="ICONT_SYNC_IRQENABLE_CLR" acronym="ICONT_SYNC_IRQENABLE_CLR" offset="0x90" width="32" description="Per-event interrupt enable bit vector. Write 1 to clear (disable interrupt). Readout equal to corresponding _SET register.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="SYNC_IRQ" width="1" begin="0" end="0" resetval="0" description="Enable for Outgoing Sync IRQ event" range="" rwaccess="RW W1toClr">
+      <bitenum value="0" id="No_action" token="SYNC_IRQ_0_w" description="No action"/>
+      <bitenum value="0" id="Interrupt_disabled_(masked)" token="SYNC_IRQ_0_r" description="Interrupt disabled (masked)"/>
+      <bitenum value="1" id="Interrupt_enabled" token="SYNC_IRQ_1_r" description="Interrupt enabled"/>
+      <bitenum value="1" id="Disable_interrupt" token="SYNC_IRQ_1_w" description="Disable interrupt"/>
+    </bitfield>
+  </register>
+</module>

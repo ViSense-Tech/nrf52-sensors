@@ -1,0 +1,183 @@
+<module name="COMPUTE_CLUSTER_J7AHP0_C71SS2_0_AW6_MSMC1_CFGS0" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="AW6_MSMC1_CFGS0_pid" acronym="AW6_MSMC1_CFGS0_pid" offset="0x0" width="64" description="">
+		<bitfield id="REVISION" width="32" begin="31" end="0" resetval="0x0" description="PID Revision" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_cache_ctrl" acronym="AW6_MSMC1_CFGS0_cache_ctrl" offset="0x1000" width="64" description="">
+		<bitfield id="ALLOCATION_POLICY" width="1" begin="10" end="10" resetval="0x0" description="Allocation Policy" range="10" rwaccess="R/W"/> 
+		<bitfield id="REPLACEMENT_POLICY" width="1" begin="8" end="8" resetval="0x0" description="Replacement Policy" range="8" rwaccess="R/W"/> 
+		<bitfield id="SZ_TRANSITION" width="1" begin="4" end="4" resetval="0x0" description="Cache Size Change in Progress" range="4" rwaccess="R"/> 
+		<bitfield id="CACHE_SIZE" width="4" begin="3" end="0" resetval="0x0" description="Cache Size Control" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_cache_stat" acronym="AW6_MSMC1_CFGS0_cache_stat" offset="0x1008" width="64" description="">
+		
+	</register>
+	<register id="AW6_MSMC1_CFGS0_cohctrl" acronym="AW6_MSMC1_CFGS0_cohctrl" offset="0x2048" width="64" description="">
+		<bitfield id="BCM" width="1" begin="0" end="0" resetval="0x0" description="Broadcast Mode" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_smedcc" acronym="AW6_MSMC1_CFGS0_smedcc" offset="0x3080" width="64" description="">
+		<bitfield id="SEN" width="1" begin="31" end="31" resetval="0x1" description="Scrub Engine Enable" range="31" rwaccess="R/W"/> 
+		<bitfield id="REFDEL" width="8" begin="7" end="0" resetval="0x0" description="Number of Clock Cycles Between Scrubs" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_wbinv_ctrl" acronym="AW6_MSMC1_CFGS0_wbinv_ctrl" offset="0x4000" width="64" description="">
+		<bitfield id="WBINV_ACTIVE" width="1" begin="8" end="8" resetval="0x0" description="Writeback Invalidate in Progress" range="8" rwaccess="R"/> 
+		<bitfield id="SRAM_SF_WBINV" width="1" begin="4" end="4" resetval="0x0" description="SRAM Snoop Filter Writeback Invalidation Trigger" range="4" rwaccess="W"/> 
+		<bitfield id="EMIF_SF_WBINV" width="1" begin="0" end="0" resetval="0x0" description="EMIF Snoop Filter Writeback Invalidation Trigger" range="0" rwaccess="W"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_smestat" acronym="AW6_MSMC1_CFGS0_smestat" offset="0x5000" width="64" description="">
+		<bitfield id="NULL_SLV" width="1" begin="0" end="0" resetval="0x0" description="Null slave error is enabled and pending" range="0" rwaccess="R"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_smirstat" acronym="AW6_MSMC1_CFGS0_smirstat" offset="0x5008" width="64" description="">
+		<bitfield id="NULL_SLV" width="1" begin="0" end="0" resetval="0x0" description="Null slave error flagged" range="0" rwaccess="R"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_smirws" acronym="AW6_MSMC1_CFGS0_smirws" offset="0x5008" width="64" description="">
+		<bitfield id="NULL_SLV" width="1" begin="0" end="0" resetval="0x0" description="Set software null slave error" range="0" rwaccess="W"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_smirc" acronym="AW6_MSMC1_CFGS0_smirc" offset="0x5010" width="64" description="">
+		<bitfield id="NULL_SLV" width="1" begin="0" end="0" resetval="0x0" description="Clear null slave error flag" range="0" rwaccess="W"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_smiestat" acronym="AW6_MSMC1_CFGS0_smiestat" offset="0x5018" width="64" description="">
+		<bitfield id="NULL_SLV" width="1" begin="0" end="0" resetval="0x0" description="Null slave error interrupt is enabled" range="0" rwaccess="R"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_smiews" acronym="AW6_MSMC1_CFGS0_smiews" offset="0x5018" width="64" description="">
+		<bitfield id="NULL_SLV" width="1" begin="0" end="0" resetval="0x0" description="Enable null slave error" range="0" rwaccess="W"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_smiec" acronym="AW6_MSMC1_CFGS0_smiec" offset="0x5020" width="64" description="">
+		<bitfield id="NULL_SLV" width="1" begin="0" end="0" resetval="0x0" description="clear null slave error interrupt enable" range="0" rwaccess="W"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_sbndcoh0" acronym="AW6_MSMC1_CFGS0_sbndcoh0" offset="0x6000" width="64" description="">
+		<bitfield id="SBNDE_RT" width="8" begin="55" end="48" resetval="0x63" description="Starvation Bound for Real-Time External Memory" range="55 - 48" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_RT" width="8" begin="39" end="32" resetval="0x63" description="Starvation Bound for Real-Time On-Chip Memory" range="39 - 32" rwaccess="R/W"/> 
+		<bitfield id="SBNDE_NRT" width="8" begin="23" end="16" resetval="0x63" description="Starvation Bound for Non-Real-Time External Memory" range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_NRT" width="8" begin="7" end="0" resetval="0x63" description="Starvation Bound for Non-Real-Time On-Chip Memory" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_sbndcoh1" acronym="AW6_MSMC1_CFGS0_sbndcoh1" offset="0x6008" width="64" description="">
+		<bitfield id="SBNDE_RT" width="8" begin="55" end="48" resetval="0x63" description="Starvation Bound for Real-Time External Memory" range="55 - 48" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_RT" width="8" begin="39" end="32" resetval="0x63" description="Starvation Bound for Real-Time On-Chip Memory" range="39 - 32" rwaccess="R/W"/> 
+		<bitfield id="SBNDE_NRT" width="8" begin="23" end="16" resetval="0x63" description="Starvation Bound for Non-Real-Time External Memory" range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_NRT" width="8" begin="7" end="0" resetval="0x63" description="Starvation Bound for Non-Real-Time On-Chip Memory" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_sbndcoh2" acronym="AW6_MSMC1_CFGS0_sbndcoh2" offset="0x6010" width="64" description="">
+		<bitfield id="SBNDE_RT" width="8" begin="55" end="48" resetval="0x63" description="Starvation Bound for Real-Time External Memory" range="55 - 48" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_RT" width="8" begin="39" end="32" resetval="0x63" description="Starvation Bound for Real-Time On-Chip Memory" range="39 - 32" rwaccess="R/W"/> 
+		<bitfield id="SBNDE_NRT" width="8" begin="23" end="16" resetval="0x63" description="Starvation Bound for Non-Real-Time External Memory" range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_NRT" width="8" begin="7" end="0" resetval="0x63" description="Starvation Bound for Non-Real-Time On-Chip Memory" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_sbndcoh3" acronym="AW6_MSMC1_CFGS0_sbndcoh3" offset="0x6018" width="64" description="">
+		<bitfield id="SBNDE_RT" width="8" begin="55" end="48" resetval="0x63" description="Starvation Bound for Real-Time External Memory" range="55 - 48" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_RT" width="8" begin="39" end="32" resetval="0x63" description="Starvation Bound for Real-Time On-Chip Memory" range="39 - 32" rwaccess="R/W"/> 
+		<bitfield id="SBNDE_NRT" width="8" begin="23" end="16" resetval="0x63" description="Starvation Bound for Non-Real-Time External Memory" range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_NRT" width="8" begin="7" end="0" resetval="0x63" description="Starvation Bound for Non-Real-Time On-Chip Memory" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_sbndcoh4" acronym="AW6_MSMC1_CFGS0_sbndcoh4" offset="0x6020" width="64" description="">
+		<bitfield id="SBNDE_RT" width="8" begin="55" end="48" resetval="0x63" description="Starvation Bound for Real-Time External Memory" range="55 - 48" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_RT" width="8" begin="39" end="32" resetval="0x63" description="Starvation Bound for Real-Time On-Chip Memory" range="39 - 32" rwaccess="R/W"/> 
+		<bitfield id="SBNDE_NRT" width="8" begin="23" end="16" resetval="0x63" description="Starvation Bound for Non-Real-Time External Memory" range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_NRT" width="8" begin="7" end="0" resetval="0x63" description="Starvation Bound for Non-Real-Time On-Chip Memory" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_sbndcoh5" acronym="AW6_MSMC1_CFGS0_sbndcoh5" offset="0x6028" width="64" description="">
+		<bitfield id="SBNDE_RT" width="8" begin="55" end="48" resetval="0x63" description="Starvation Bound for Real-Time External Memory" range="55 - 48" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_RT" width="8" begin="39" end="32" resetval="0x63" description="Starvation Bound for Real-Time On-Chip Memory" range="39 - 32" rwaccess="R/W"/> 
+		<bitfield id="SBNDE_NRT" width="8" begin="23" end="16" resetval="0x63" description="Starvation Bound for Non-Real-Time External Memory" range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_NRT" width="8" begin="7" end="0" resetval="0x63" description="Starvation Bound for Non-Real-Time On-Chip Memory" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_sbndcoh6" acronym="AW6_MSMC1_CFGS0_sbndcoh6" offset="0x6030" width="64" description="">
+		<bitfield id="SBNDE_RT" width="8" begin="55" end="48" resetval="0x63" description="Starvation Bound for Real-Time External Memory" range="55 - 48" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_RT" width="8" begin="39" end="32" resetval="0x63" description="Starvation Bound for Real-Time On-Chip Memory" range="39 - 32" rwaccess="R/W"/> 
+		<bitfield id="SBNDE_NRT" width="8" begin="23" end="16" resetval="0x63" description="Starvation Bound for Non-Real-Time External Memory" range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_NRT" width="8" begin="7" end="0" resetval="0x63" description="Starvation Bound for Non-Real-Time On-Chip Memory" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_sbndcoh7" acronym="AW6_MSMC1_CFGS0_sbndcoh7" offset="0x6038" width="64" description="">
+		<bitfield id="SBNDE_RT" width="8" begin="55" end="48" resetval="0x63" description="Starvation Bound for Real-Time External Memory" range="55 - 48" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_RT" width="8" begin="39" end="32" resetval="0x63" description="Starvation Bound for Real-Time On-Chip Memory" range="39 - 32" rwaccess="R/W"/> 
+		<bitfield id="SBNDE_NRT" width="8" begin="23" end="16" resetval="0x63" description="Starvation Bound for Non-Real-Time External Memory" range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_NRT" width="8" begin="7" end="0" resetval="0x63" description="Starvation Bound for Non-Real-Time On-Chip Memory" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_sbndcoh8" acronym="AW6_MSMC1_CFGS0_sbndcoh8" offset="0x6040" width="64" description="">
+		<bitfield id="SBNDE_RT" width="8" begin="55" end="48" resetval="0x63" description="Starvation Bound for Real-Time External Memory" range="55 - 48" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_RT" width="8" begin="39" end="32" resetval="0x63" description="Starvation Bound for Real-Time On-Chip Memory" range="39 - 32" rwaccess="R/W"/> 
+		<bitfield id="SBNDE_NRT" width="8" begin="23" end="16" resetval="0x63" description="Starvation Bound for Non-Real-Time External Memory" range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_NRT" width="8" begin="7" end="0" resetval="0x63" description="Starvation Bound for Non-Real-Time On-Chip Memory" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_sbndcoh9" acronym="AW6_MSMC1_CFGS0_sbndcoh9" offset="0x6048" width="64" description="">
+		<bitfield id="SBNDE_RT" width="8" begin="55" end="48" resetval="0x63" description="Starvation Bound for Real-Time External Memory" range="55 - 48" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_RT" width="8" begin="39" end="32" resetval="0x63" description="Starvation Bound for Real-Time On-Chip Memory" range="39 - 32" rwaccess="R/W"/> 
+		<bitfield id="SBNDE_NRT" width="8" begin="23" end="16" resetval="0x63" description="Starvation Bound for Non-Real-Time External Memory" range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_NRT" width="8" begin="7" end="0" resetval="0x63" description="Starvation Bound for Non-Real-Time On-Chip Memory" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_sbndcoh10" acronym="AW6_MSMC1_CFGS0_sbndcoh10" offset="0x6050" width="64" description="">
+		<bitfield id="SBNDE_RT" width="8" begin="55" end="48" resetval="0x63" description="Starvation Bound for Real-Time External Memory" range="55 - 48" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_RT" width="8" begin="39" end="32" resetval="0x63" description="Starvation Bound for Real-Time On-Chip Memory" range="39 - 32" rwaccess="R/W"/> 
+		<bitfield id="SBNDE_NRT" width="8" begin="23" end="16" resetval="0x63" description="Starvation Bound for Non-Real-Time External Memory" range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_NRT" width="8" begin="7" end="0" resetval="0x63" description="Starvation Bound for Non-Real-Time On-Chip Memory" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_sbndcoh11" acronym="AW6_MSMC1_CFGS0_sbndcoh11" offset="0x6058" width="64" description="">
+		<bitfield id="SBNDE_RT" width="8" begin="55" end="48" resetval="0x63" description="Starvation Bound for Real-Time External Memory" range="55 - 48" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_RT" width="8" begin="39" end="32" resetval="0x63" description="Starvation Bound for Real-Time On-Chip Memory" range="39 - 32" rwaccess="R/W"/> 
+		<bitfield id="SBNDE_NRT" width="8" begin="23" end="16" resetval="0x63" description="Starvation Bound for Non-Real-Time External Memory" range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_NRT" width="8" begin="7" end="0" resetval="0x63" description="Starvation Bound for Non-Real-Time On-Chip Memory" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_sbndcoh12" acronym="AW6_MSMC1_CFGS0_sbndcoh12" offset="0x6060" width="64" description="">
+		<bitfield id="SBNDE_RT" width="8" begin="55" end="48" resetval="0x63" description="Starvation Bound for Real-Time External Memory" range="55 - 48" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_RT" width="8" begin="39" end="32" resetval="0x63" description="Starvation Bound for Real-Time On-Chip Memory" range="39 - 32" rwaccess="R/W"/> 
+		<bitfield id="SBNDE_NRT" width="8" begin="23" end="16" resetval="0x63" description="Starvation Bound for Non-Real-Time External Memory" range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_NRT" width="8" begin="7" end="0" resetval="0x63" description="Starvation Bound for Non-Real-Time On-Chip Memory" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_sbnddru" acronym="AW6_MSMC1_CFGS0_sbnddru" offset="0x6100" width="64" description="">
+		<bitfield id="SBNDE_RT" width="8" begin="55" end="48" resetval="0x63" description="Starvation Bound for Real-Time External Memory" range="55 - 48" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_RT" width="8" begin="39" end="32" resetval="0x63" description="Starvation Bound for Real-Time On-Chip Memory" range="39 - 32" rwaccess="R/W"/> 
+		<bitfield id="SBNDE_NRT" width="8" begin="23" end="16" resetval="0x63" description="Starvation Bound for Non-Real-Time External Memory" range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_NRT" width="8" begin="7" end="0" resetval="0x63" description="Starvation Bound for Non-Real-Time On-Chip Memory" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_sbndresp" acronym="AW6_MSMC1_CFGS0_sbndresp" offset="0x6200" width="64" description="">
+		<bitfield id="SBNDE_RT" width="8" begin="55" end="48" resetval="0x63" description="Starvation Bound for Real-Time External Memory" range="55 - 48" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_RT" width="8" begin="39" end="32" resetval="0x63" description="Starvation Bound for Real-Time On-Chip Memory" range="39 - 32" rwaccess="R/W"/> 
+		<bitfield id="SBNDE_NRT" width="8" begin="23" end="16" resetval="0x63" description="Starvation Bound for Non-Real-Time External Memory" range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="SBNDM_NRT" width="8" begin="7" end="0" resetval="0x63" description="Starvation Bound for Non-Real-Time On-Chip Memory" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_dbgtagctl" acronym="AW6_MSMC1_CFGS0_dbgtagctl" offset="0x7000" width="64" description="">
+		<bitfield id="L3CACHE" width="1" begin="40" end="40" resetval="0x0" description="Level 3 Cache Tag Select" range="40" rwaccess="R/W"/> 
+		<bitfield id="BANK" width="4" begin="35" end="32" resetval="0x0" description="Physical Bank Select" range="35 - 32" rwaccess="R/W"/> 
+		<bitfield id="INDEX" width="14" begin="29" end="16" resetval="0x0" description="Index Select" range="29 - 16" rwaccess="R/W"/> 
+		<bitfield id="WAY" width="5" begin="4" end="0" resetval="0x0" description="Way Select" range="4 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_dbgtagview" acronym="AW6_MSMC1_CFGS0_dbgtagview" offset="0x7080" width="64" description="">
+		<bitfield id="SF" width="5" begin="58" end="54" resetval="0x0" description="Snoop Filter" range="58 - 54" rwaccess="R"/> 
+		<bitfield id="DIRTY" width="1" begin="52" end="52" resetval="0x0" description="Dirty" range="52" rwaccess="R"/> 
+		<bitfield id="DATA_VALID" width="1" begin="50" end="50" resetval="0x0" description="Data Valid" range="50" rwaccess="R"/> 
+		<bitfield id="ADDR_VALID" width="1" begin="48" end="48" resetval="0x0" description="Address Valid" range="48" rwaccess="R"/> 
+		<bitfield id="ADDRESS" width="46" begin="47" end="2" resetval="0x0" description="Tag Address" range="47 - 2" rwaccess="R"/> 
+		<bitfield id="SECURE" width="1" begin="0" end="0" resetval="0x0" description="Secure" range="0" rwaccess="R"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_rt_way_select" acronym="AW6_MSMC1_CFGS0_rt_way_select" offset="0x8000" width="64" description="">
+		<bitfield id="NON_DATABACKED_GROUPS" width="4" begin="27" end="24" resetval="0x0" description="Number of available non-databacked way groups" range="27 - 24" rwaccess="R/W"/> 
+		<bitfield id="DATABACKED_GROUPS" width="4" begin="19" end="16" resetval="0x0" description="Number of available databacked way groups" range="19 - 16" rwaccess="R/W"/> 
+		<bitfield id="NON_SECURE_OR_MASK" width="2" begin="13" end="12" resetval="0x0" description="Non-secure transaction OR mask for way-select" range="13 - 12" rwaccess="R/W"/> 
+		<bitfield id="NON_SECURE_AND_MASK" width="2" begin="9" end="8" resetval="0x3" description="Non-secure transaction AND mask for way-select" range="9 - 8" rwaccess="R/W"/> 
+		<bitfield id="SECURE_OR_MASK" width="2" begin="5" end="4" resetval="0x0" description="Secure transaction OR mask for way-select" range="5 - 4" rwaccess="R/W"/> 
+		<bitfield id="SECURE_AND_MASK" width="2" begin="1" end="0" resetval="0x3" description="Secure transaction AND mask for way-select" range="1 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_nrt_way_select" acronym="AW6_MSMC1_CFGS0_nrt_way_select" offset="0x8008" width="64" description="">
+		<bitfield id="NON_DATABACKED_GROUPS" width="4" begin="27" end="24" resetval="0x0" description="Number of available non-databacked way groups" range="27 - 24" rwaccess="R/W"/> 
+		<bitfield id="DATABACKED_GROUPS" width="4" begin="19" end="16" resetval="0x0" description="Number of available databacked way groups" range="19 - 16" rwaccess="R/W"/> 
+		<bitfield id="NON_SECURE_OR_MASK" width="2" begin="13" end="12" resetval="0x0" description="Non-secure transaction OR mask for way-select" range="13 - 12" rwaccess="R/W"/> 
+		<bitfield id="NON_SECURE_AND_MASK" width="2" begin="9" end="8" resetval="0x3" description="Non-secure transaction AND mask for way-select" range="9 - 8" rwaccess="R/W"/> 
+		<bitfield id="SECURE_OR_MASK" width="2" begin="5" end="4" resetval="0x0" description="Secure transaction OR mask for way-select" range="5 - 4" rwaccess="R/W"/> 
+		<bitfield id="SECURE_AND_MASK" width="2" begin="1" end="0" resetval="0x3" description="Secure transaction AND mask for way-select" range="1 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_null_slv_stat0" acronym="AW6_MSMC1_CFGS0_null_slv_stat0" offset="0xA000" width="64" description="">
+		<bitfield id="ADDR" width="64" begin="63" end="0" resetval="0x0" description="Address" range="63 - 0" rwaccess="R"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_null_slv_stat1" acronym="AW6_MSMC1_CFGS0_null_slv_stat1" offset="0xA008" width="64" description="">
+		<bitfield id="PRIV" width="2" begin="53" end="52" resetval="0x0" description="Privilege" range="53 - 52" rwaccess="R"/> 
+		<bitfield id="SECURE" width="1" begin="48" end="48" resetval="0x0" description="Secure" range="48" rwaccess="R"/> 
+		<bitfield id="EMU" width="1" begin="44" end="44" resetval="0x0" description="Emulation" range="44" rwaccess="R"/> 
+		<bitfield id="MEMTYPE" width="2" begin="41" end="40" resetval="0x0" description="Memory Type" range="41 - 40" rwaccess="R"/> 
+		<bitfield id="OPCODE" width="6" begin="37" end="32" resetval="0x0" description="Opcode" range="37 - 32" rwaccess="R"/> 
+		<bitfield id="PRIVID" width="8" begin="31" end="24" resetval="0x0" description="Priv ID" range="31 - 24" rwaccess="R"/> 
+		<bitfield id="ROUTEID" width="12" begin="23" end="12" resetval="0x0" description="Route ID" range="23 - 12" rwaccess="R"/> 
+		<bitfield id="BYTECNT" width="10" begin="9" end="0" resetval="0x0" description="Byte Count" range="9 - 0" rwaccess="R"/>
+	</register>
+	<register id="AW6_MSMC1_CFGS0_null_slv_cnt" acronym="AW6_MSMC1_CFGS0_null_slv_cnt" offset="0xA018" width="64" description="">
+		<bitfield id="COUNT" width="8" begin="7" end="0" resetval="0x0" description="Count" range="7 - 0" rwaccess="R/W"/>
+	</register>
+</module>

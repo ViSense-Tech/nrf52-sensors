@@ -1,0 +1,28 @@
+<module name="PCIE0_CORE_VMAP_MMRS" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="CORE__VMAP__MMRS_defmap" acronym="CORE__VMAP__MMRS_defmap" offset="0x200" width="32" description="">
+		<bitfield id="ATS_DIS" width="1" begin="20" end="20" resetval="0x1" description="ATS mode. 1-ATS is disabled, 0-ATS is enabled" range="20" rwaccess="R/W"/> 
+		<bitfield id="BDF_MODE" width="1" begin="19" end="19" resetval="0x0" description="Bus default mode. 0-Use default bus numbers, 1-Use offset bus numbers" range="19" rwaccess="R/W"/> 
+		<bitfield id="DEF_ATYPE" width="2" begin="17" end="16" resetval="0x0" description="Default address type attribute. 0-Physical Address, 1-Intermediate Address, 2-Virtual Address, 3-Translated Address" range="17 - 16" rwaccess="R/W"/> 
+		<bitfield id="DEF_VID" width="12" begin="11" end="0" resetval="0x4095" description="Default match ID" range="11 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CORE__VMAP__MMRS_ob_virtid_match" acronym="CORE__VMAP__MMRS_ob_virtid_match" offset="0x400" width="32" description="">
+		<bitfield id="VAL" width="7" begin="11" end="5" resetval="0x0" description="Outbound virtid[11:5] match value. When outbound VBUSM slave interface virtid[11:5] matches the value in this register and the ASEL value is non-zero, the PCIe controller address translation unit (ATU) is bypassed. The PCIe TLP descriptor values are taken from the ext_desc registers." range="11 - 5" rwaccess="R/W"/>
+	</register>
+	<register id="CORE__VMAP__MMRS_ctrl" acronym="CORE__VMAP__MMRS_ctrl" offset="0x0" width="32" description="">
+		<bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="ID enable" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CORE__VMAP__MMRS_reqid" acronym="CORE__VMAP__MMRS_reqid" offset="0x4" width="32" description="">
+		<bitfield id="MASK" width="16" begin="31" end="16" resetval="0x0" description="RequesterID mask" range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="RID" width="16" begin="15" end="0" resetval="0x0" description="RequesterID" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CORE__VMAP__MMRS_virtid" acronym="CORE__VMAP__MMRS_virtid" offset="0x8" width="32" description="">
+		<bitfield id="ATYPE" width="2" begin="17" end="16" resetval="0x0" description="Address type attribute. 0-Physical Address, 1-Intermediate Address, 2-Virtual Address, 3-Translated Address" range="17 - 16" rwaccess="R/W"/> 
+		<bitfield id="VID" width="12" begin="11" end="0" resetval="0x4095" description="Match ID" range="11 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CORE__VMAP__MMRS_desc" acronym="CORE__VMAP__MMRS_desc" offset="0x0" width="32" description="">
+		<bitfield id="TRAFFIC_CLASS" width="3" begin="31" end="29" resetval="0x0" description="PCIe Traffic Class (TC) associated with the non-zero ASEL request." range="31 - 29" rwaccess="R/W"/> 
+		<bitfield id="BD_EN" width="1" begin="16" end="16" resetval="0x0" description="External bus and device number enable. This bit enables the client to supply the bus and device numbers to be used in the requester ID.  If this bit is 0, the core uses the captured values of the bus and device numbers to form the Requester ID. If this bit is 1, the core uses the bus and device numbers supplied by the client on dev_func_num[7:4] and bus_num[15:8] to form the Requester ID. This bit must always be set while originating requests in the RP mode, and the corresponding Requester ID must be placed on dev_func_num[7:4] and bus_num[15:8]." range="16" rwaccess="R/W"/> 
+		<bitfield id="BUS_NUM" width="8" begin="15" end="8" resetval="0x0" description="PCI Bus Number associated with the request. When descriptor bit[16] is set, this field must specify the bus number to be used for the Requester ID. Otherwise, this field is ignored by the core." range="15 - 8" rwaccess="R/W"/> 
+		<bitfield id="DEV_FUNC_NUM" width="8" begin="7" end="0" resetval="0x0" description="PCI Function and Device Number associated with the request. In ARI mode, all 8 bits are used to indicate the requesting function number. In legacy mode, only bits [3:0] are used to specify function number and bits [7:4] are used to specify the device number to be used within the Requester ID, if the descriptor bit[16] is set. If the descriptor bit[16] is not set, then bits[7:4] are ignored." range="7 - 0" rwaccess="R/W"/>
+	</register>
+</module>

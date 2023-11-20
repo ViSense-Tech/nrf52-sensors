@@ -1,0 +1,90 @@
+<module name="VPAC0_PAR_VPAC_NF_S_VBUSP_VPAC_NF_LSE_CFG_VP" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="VPAC_NF_LSE_STATUS_PARAM" acronym="VPAC_NF_LSE_STATUS_PARAM" offset="0x0" width="32" description="The register returns the LSE compile configuration parameters.">
+    <bitfield id="BYPASS_CH" width="2" begin="31" end="30" resetval="0x1" description="Number of available input channel selection for loopback mode" range="" rwaccess="R"/>
+    <bitfield id="OUT_SKIP_EN" width="1" begin="29" end="29" resetval="0x0" description="Output Auto-Skip Enable" range="" rwaccess="R"/>
+    <bitfield id="CORE_OUT_2D" width="1" begin="28" end="28" resetval="0x0" description="1D or 2D output addressing mode(2D if 1)" range="" rwaccess="R"/>
+    <bitfield id="CORE_OUT_DW" width="5" begin="27" end="23" resetval="0xC" description="Core Output Channel Data Width" range="" rwaccess="R"/>
+    <bitfield id="LINE_SKIP_EN" width="1" begin="22" end="22" resetval="0x1" description="Source Line Inc by 2 Supported (if 1)" range="" rwaccess="R"/>
+    <bitfield id="BIT_AOFFSET" width="1" begin="21" end="21" resetval="0x1" description="Source nibble offset address Supported (if 1)" range="" rwaccess="R"/>
+    <bitfield id="HV_INSERT" width="1" begin="20" end="20" resetval="0x0" description="H/VBLANK Insertion Supported (if 1)" range="" rwaccess="R"/>
+    <bitfield id="PIX_MX_HT" width="3" begin="19" end="17" resetval="0x5" description="Core_Input Pixel Matrix Height" range="" rwaccess="R"/>
+    <bitfield id="CORE_DW" width="5" begin="16" end="12" resetval="0xC" description="Core Input Data Bus Width" range="" rwaccess="R"/>
+    <bitfield id="SL2_OUT_H3A_CH" width="2" begin="11" end="10" resetval="0x0" description="Number of SL2 H3A Output Channels" range="" rwaccess="R"/>
+    <bitfield id="SL2_OUT_CH" width="4" begin="9" end="6" resetval="0x1" description="Number of SL2 Output Channels" range="" rwaccess="R"/>
+    <bitfield id="SL2_IN_CH_THR" width="3" begin="5" end="3" resetval="0x1" description="Number of Input Channels per thread" range="" rwaccess="R"/>
+    <bitfield id="VPORT_THR" width="1" begin="2" end="2" resetval="0x0" description="Number of VPORT input enabled" range="" rwaccess="R"/>
+    <bitfield id="NTHR" width="2" begin="1" end="0" resetval="0x1" description="Number of threads supported" range="" rwaccess="R"/>
+  </register>
+  <register id="VPAC_NF_LSE_STATUS_ERROR" acronym="VPAC_NF_LSE_STATUS_ERROR" offset="0x4" width="32" description="The register returns the LSE error status.">
+    <bitfield id="RESERVED" width="17" begin="31" end="15" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VM_WR_ERR" width="7" begin="14" end="8" resetval="0x0" description="VBUSM I/F Last Write Error Status" range="" rwaccess="RW1C"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VM_RD_ERR" width="5" begin="4" end="0" resetval="0x0" description="VBUSM I/F Last Read Error Status" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="VPAC_NF_LSE_STATUS_IDLE_MODE" acronym="VPAC_NF_LSE_STATUS_IDLE_MODE" offset="0x8" width="32" description="The register returns IDLE status of LSE VBUSM port and in/output channels - 0: IDLE 1: ACTIVE">
+    <bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="LSE_OUT_CHAN" width="1" begin="12" end="12" resetval="0x0" description="Output Channel" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="7" begin="11" end="5" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="LSE_IN_CHAN" width="1" begin="4" end="4" resetval="0x0" description="Input Channel" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="2" begin="3" end="2" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="VM_WR_PORT" width="1" begin="1" end="1" resetval="0x0" description="SL2 vbusm I/F Write Port Status" range="" rwaccess="R"/>
+    <bitfield id="VM_RD_PORT" width="1" begin="0" end="0" resetval="0x0" description="SL2 vbusm I/F Read Port Status" range="" rwaccess="R"/>
+  </register>
+  <register id="VPAC_NF_LSE_CFG_LSE" acronym="VPAC_NF_LSE_CFG_LSE" offset="0xC" width="32" description="The register configures the LSE general hardware modes.">
+    <bitfield id="RESERVED" width="23" begin="31" end="9" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PSA_EN" width="1" begin="8" end="8" resetval="0x0" description="Test mode Output Channel Signature Generation Enable" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VM_ARB_FIXED_MODE" width="1" begin="4" end="4" resetval="0x0" description="VBUSM Arbitration Fixed Mode select" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="3" end="2" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LOOPBACK_CORE_EN" width="1" begin="1" end="1" resetval="0x0" description="Functional path (data to HWA core) enable during loopback mode" range="" rwaccess="RW"/>
+    <bitfield id="LOOPBACK_EN" width="1" begin="0" end="0" resetval="0x0" description="LSE loopback mode enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_NF_LSE_CFG" acronym="VPAC_NF_LSE_CFG" offset="0x10" width="32" description="The SRC_CFG register configures the input channels for the processing thread">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="KERN_TPAD_SZ" width="3" begin="21" end="19" resetval="0x0" description="Input kernel top padding lines valid=0..2 for nf" range="" rwaccess="RW"/>
+    <bitfield id="KERN_BPAD_SZ" width="3" begin="18" end="16" resetval="0x0" description="Input kernel bottom padding lines valid=0..2 for nf" range="" rwaccess="RW"/>
+    <bitfield id="KERN_LN_OFFSET" width="4" begin="15" end="12" resetval="0x0" description="Input kernel starting line position valid=0..4 for nf" range="" rwaccess="RW"/>
+    <bitfield id="KERN_SZ_HEIGHT" width="4" begin="11" end="8" resetval="0x0" description="Actual number of input kernel lines (height) valid=1..5 for nf" range="" rwaccess="RW"/>
+    <bitfield id="SRC_LN_INC_2" width="1" begin="7" end="7" resetval="0x0" description="Source Line address Increment by 2 enable" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="6" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PIX_FMT_ALIGN" width="1" begin="4" end="4" resetval="0x0" description="Input Pixel Container Alignment" range="" rwaccess="RW"/>
+    <bitfield id="PIX_FMT_CNTRSZ" width="2" begin="3" end="2" resetval="0x0" description="Input Pixel Container Size Sel" range="" rwaccess="RW"/>
+    <bitfield id="PIX_FMT_PW" width="2" begin="1" end="0" resetval="0x0" description="Input Pixel Width Sel" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_NF_LSE_FRAME_SIZE" acronym="VPAC_NF_LSE_FRAME_SIZE" offset="0x18" width="32" description="The SRC_FRAME_SIZE register configures the frame size of all input buffers for the processing thread .">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HEIGHT" width="13" begin="28" end="16" resetval="0x0" description="SL" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="WIDTH" width="13" begin="12" end="0" resetval="0x0" description="SL" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_NF_LSE_BUF_ATTR" acronym="VPAC_NF_LSE_BUF_ATTR" offset="0x1C" width="32" description="The SRC_BUF_ATTR register configures the common attributes of all SL2 source buffers for the processing thread .">
+    <bitfield id="START_NIB_OFFSET" width="7" begin="31" end="25" resetval="0x0" description="Buffer Line start offset within the first SL2 data word - in half-byte (nibble) resolution" range="" rwaccess="RW"/>
+    <bitfield id="CBUF_SIZE" width="9" begin="24" end="16" resetval="0x0" description="SL2 Circular Buffer Size (number of line buffers)" range="" rwaccess="RW"/>
+    <bitfield id="BUF_STRIDE" width="10" begin="15" end="6" resetval="0x0" description="Buffer Stride Size" range="" rwaccess="RW"/>
+    <bitfield id="BUF_STRIDE_6_LSB" width="6" begin="5" end="0" resetval="0x0" description="Buffer Stride Size" range="" rwaccess="R"/>
+  </register>
+  <register id="VPAC_NF_LSE_BUF_CFG" acronym="VPAC_NF_LSE_BUF_CFG" offset="0x50" width="32" description="The DST_BUF_CFG register configures the output buffer channel .">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PIX_FMT_ALIGN" width="1" begin="4" end="4" resetval="0x0" description="Output Pixel Container Alignment" range="" rwaccess="RW"/>
+    <bitfield id="PIX_FMT_CNTRSZ" width="2" begin="3" end="2" resetval="0x0" description="Output Pixel Container Size Sel" range="" rwaccess="RW"/>
+    <bitfield id="PIX_FMT_PW" width="2" begin="1" end="0" resetval="0x0" description="Output Pixel Width Sel" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_NF_LSE_BUF_ATTR0" acronym="VPAC_NF_LSE_BUF_ATTR0" offset="0x54" width="32" description="The DST_BUF_ATTR0 register configures the attributes of the output SL2 buffer .">
+    <bitfield id="RESERVED" width="7" begin="31" end="25" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CBUF_SIZE" width="9" begin="24" end="16" resetval="0x0" description="SL2 Circular Buffer Size (number of line buffers)" range="" rwaccess="RW"/>
+    <bitfield id="BUF_STRIDE" width="10" begin="15" end="6" resetval="0x0" description="Buffer Stride Size" range="" rwaccess="RW"/>
+    <bitfield id="BUF_STRIDE_6_LSB" width="6" begin="5" end="0" resetval="0x0" description="Buffer Stride Size" range="" rwaccess="R"/>
+  </register>
+  <register id="VPAC_NF_LSE_BUF_BA" acronym="VPAC_NF_LSE_BUF_BA" offset="0x5C" width="32" description="The SRC_BUF_BA register configures the base address of the SL2 source buffer for the processing thread .">
+    <bitfield id="ENABLE" width="1" begin="31" end="31" resetval="0x0" description="Input Buffer Enable" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="7" begin="30" end="24" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ADDR" width="18" begin="23" end="6" resetval="0x0" description="Base Address" range="" rwaccess="RW"/>
+    <bitfield id="ADDR_6_LSB" width="6" begin="5" end="0" resetval="0x0" description="Base Address" range="" rwaccess="R"/>
+  </register>
+  <register id="VPAC_NF_LSE_PSA_SIGNATURE" acronym="VPAC_NF_LSE_PSA_SIGNATURE" offset="0x140" width="32" description="The register returns the captured PSA signature value of the last frame data of output channel [a].">
+    <bitfield id="VALUE" width="32" begin="31" end="0" resetval="0x0" description="32-bit CRC signature value" range="" rwaccess="R"/>
+  </register>
+  <register id="VPAC_NF_LSE_DBG_y" acronym="VPAC_NF_LSE_DBG_y" offset="0x1E0" width="32" description="The DBG register returns the current status of internal FSM - TI internal use only. Offset = 001C31E0h + (y * 4h); where y = 0h to 4h">
+    <bitfield id="STATUS" width="32" begin="31" end="0" resetval="0x0" description="Debug status" range="" rwaccess="R"/>
+  </register>
+</module>

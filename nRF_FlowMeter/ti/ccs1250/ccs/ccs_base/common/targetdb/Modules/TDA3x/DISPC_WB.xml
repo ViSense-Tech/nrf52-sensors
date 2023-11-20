@@ -1,0 +1,865 @@
+<module name="DISPC_WB" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="DISPC_WB_ACCUH_j_0" acronym="DISPC_WB_ACCUH_j_0" offset="0x0" width="32" description="The register configures the resize accumulator init values for horizontal up/down-sampling of the wirte-back window It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="HORIZONTALACCU" width="24" begin="23" end="0" resetval="0x0" description="Horizontal initialization accu signed value." range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_ACCUH_j_1" acronym="DISPC_WB_ACCUH_j_1" offset="0x4" width="32" description="The register configures the resize accumulator init values for horizontal up/down-sampling of the wirte-back window It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="HORIZONTALACCU" width="24" begin="23" end="0" resetval="0x0" description="Horizontal initialization accu signed value." range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_ACCUH2_j_0" acronym="DISPC_WB_ACCUH2_j_0" offset="0x8" width="32" description="The register configures the resize accumulator init value for horizontal up/down-sampling of the write-back window It is used for Cb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="HORIZONTALACCU" width="24" begin="23" end="0" resetval="0x0" description="Horizontal initialization accu signed value" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_ACCUH2_j_1" acronym="DISPC_WB_ACCUH2_j_1" offset="0xC" width="32" description="The register configures the resize accumulator init value for horizontal up/down-sampling of the write-back window It is used for Cb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="HORIZONTALACCU" width="24" begin="23" end="0" resetval="0x0" description="Horizontal initialization accu signed value" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_ACCUV_j_0" acronym="DISPC_WB_ACCUV_j_0" offset="0x10" width="32" description="The register configures the resize accumulator init value for vertical up/down-sampling of the wirte-back window It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VERTICALACCU" width="24" begin="23" end="0" resetval="0x0" description="Vertical initialization accu signed value." range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_ACCUV_j_1" acronym="DISPC_WB_ACCUV_j_1" offset="0x14" width="32" description="The register configures the resize accumulator init value for vertical up/down-sampling of the wirte-back window It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VERTICALACCU" width="24" begin="23" end="0" resetval="0x0" description="Vertical initialization accu signed value." range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_ACCUV2_j_0" acronym="DISPC_WB_ACCUV2_j_0" offset="0x18" width="32" description="The register configures the resize accumulator init value for vertical up/down-sampling of the write-back window It is used for Cb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VERTICALACCU" width="24" begin="23" end="0" resetval="0x0" description="Vertical initialization accu signed value." range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_ACCUV2_j_1" acronym="DISPC_WB_ACCUV2_j_1" offset="0x1C" width="32" description="The register configures the resize accumulator init value for vertical up/down-sampling of the write-back window It is used for Cb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VERTICALACCU" width="24" begin="23" end="0" resetval="0x0" description="Vertical initialization accu signed value." range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_ATTRIBUTES" acronym="DISPC_WB_ATTRIBUTES" offset="0x20" width="32" description="The register configures the attributes of the viwrite back pipeline. Shadow register.">
+    <bitfield id="IDLENUMBER" width="4" begin="31" end="28" resetval="0x0" description="Determines the number of idles between requests on the L3 interconnect. It is only used when the write-back pipeline does data transfer from memory to memory. When the output of an overlay is stored in memory through the write-back pipeline in capture mode, the bit-field IDLENUMBER is ignored since a timing generator is used to time the transfer. The number of IDLE cycles is IDLENUMBER (from 0 to 15) if IDLESIZE=0. The number of IDLE cycles is IDLENUMBERx8 (from 0 to 120) if IDLESIZE=1 and BURSTSIZE=2. The number of IDLE cycles is IDLENUMBERx4 (from 0 to 60) if IDLESIZE=1 and BURSTSIZE=1. The number of IDLE cycles is IDLENUMBERx2 (from 0 to 30) if IDLESIZE=1 and BURSTSIZE=0." range="" rwaccess="RW"/>
+    <bitfield id="IDLESIZE" width="1" begin="27" end="27" resetval="0x0" description="Determines if the IDLENUMBER corresponds to a number of bursts or singles." range="" rwaccess="RW">
+      <bitenum value="0" id="IDLESINGLE" token="IDLESIZE_0" description="The number of idles between requests is defined by IDLENUMBER as number of cycles."/>
+      <bitenum value="1" id="IDLEBURST" token="IDLESIZE_1" description="The number of idles between requests is defined by IDLENUMBER multiplied by burst size as number of cycles."/>
+    </bitfield>
+    <bitfield id="CAPTUREMODE" width="3" begin="26" end="24" resetval="0x0" description="Defines the frame rate capture." range="" rwaccess="RW">
+      <bitenum value="6" id="ONLY1_6" token="CAPTUREMODE_6" description="Only one out of six frames is captured. The first one is captured then the second one is skipped and so on."/>
+      <bitenum value="1" id="ONLY1" token="CAPTUREMODE_1" description="Only one frame is captured."/>
+      <bitenum value="7" id="ONLY1_7" token="CAPTUREMODE_7" description="Only one out of seven frames is captured. The first one is captured then the second one is skipped and so on."/>
+      <bitenum value="0" id="ALL" token="CAPTUREMODE_0" description="All frames are captures until the write-back channel is disabled or there is no more data generated by the overlay or the pipeline attached to the write-back channel."/>
+      <bitenum value="2" id="ONLY1_2" token="CAPTUREMODE_2" description="Only one out of two frames is captured. The first one is captured then the second one is skipped and so on."/>
+      <bitenum value="4" id="ONLY1_4" token="CAPTUREMODE_4" description="Only one out of four frames is captured. The first one is captured then the second one is skipped and so on."/>
+      <bitenum value="5" id="ONLY1_5" token="CAPTUREMODE_5" description="Only one out of five frames is captured. The first one is captured then the second one is skipped and so on."/>
+      <bitenum value="3" id="ONLY1_3" token="CAPTUREMODE_3" description="Only one out of three frames is captured. The first one is captured then the second one is skipped and so on."/>
+    </bitfield>
+    <bitfield id="ARBITRATION" width="1" begin="23" end="23" resetval="0x0" description="Determines the priority of the write-back pipeline. The write-back pipeline is one of the high priority pipeline. The arbitration gives always the priority first to the high priority pipelines using round-robin between them. When there is only normal priority pipelines sending requests, the round-robin applies between them." range="" rwaccess="RW">
+      <bitenum value="0" id="NORMALPRIO" token="ARBITRATION_0" description="The write-back pipeline is one of the normal priority pipeline."/>
+      <bitenum value="1" id="HIGHPRIO" token="ARBITRATION_1" description="The write-back pipeline is one of the high priority pipeline."/>
+    </bitfield>
+    <bitfield id="DOUBLESTRIDE" width="1" begin="22" end="22" resetval="0x0" description="Determines if the stride for CbCr buffer is the 1x or 2x of the Y buffer stride. It is only used in case of YUV420 and 2D access" range="" rwaccess="RW">
+      <bitenum value="0" id="INITIAL" token="DOUBLESTRIDE_0" description="The CbCr stride value is equal to the Y stride."/>
+      <bitenum value="1" id="DOUBLE" token="DOUBLESTRIDE_1" description="The CbCr stride value is double to the Y stride."/>
+    </bitfield>
+    <bitfield id="VERTICALTAPS" width="1" begin="21" end="21" resetval="0x0" description="Video Vertical Resize Tap Number" range="" rwaccess="RW">
+      <bitenum value="0" id="TAPS3" token="VERTICALTAPS_0" description="3 taps are used for the vertical filtering logic. The 2 other taps are not used."/>
+      <bitenum value="1" id="TAPS5" token="VERTICALTAPS_1" description="5 taps are used for the vertical filtering logic."/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="20" end="20" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="WRITEBACKMODE" width="1" begin="19" end="19" resetval="0x0" description="When connected to the overlay output of a channel the write back can operate as a simple transfer from memory to memory (composition engine) or as a capture channel." range="" rwaccess="RW">
+      <bitenum value="0" id="CAPTURE" token="WRITEBACKMODE_0" description="Capture mode (default mode"/>
+      <bitenum value="1" id="MEM2MEM" token="WRITEBACKMODE_1" description="Memory to memory mode"/>
+    </bitfield>
+    <bitfield id="CHANNELIN" width="4" begin="18" end="15" resetval="0x0" description="WB Channel In configuration wr: immediate" range="" rwaccess="RW">
+      <bitenum value="0" id="VP1SEL" token="CHANNELIN_0" description="OVR1 (VP1)"/>
+      <bitenum value="1" id="VP1SEL" token="CHANNELIN_1" description="OVR2"/>
+      <bitenum value="4" id="GFX1SEL" token="CHANNELIN_4" description="GFX1SEL"/>
+      <bitenum value="7" id="VID1SEL" token="CHANNELIN_7" description="VID1SEL"/>
+      <bitenum value="8" id="VID2SEL" token="CHANNELIN_8" description="VID2SEL"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="2" begin="14" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FULLRANGE" width="1" begin="12" end="12" resetval="0x0" description="Color Space Conversion full range setting." range="" rwaccess="RW">
+      <bitenum value="0" id="LIMRANGE" token="FULLRANGE_0" description="Limited range selected: 16 subtracted from Y before color space conversion"/>
+      <bitenum value="1" id="FULLRANGE" token="FULLRANGE_1" description="Full range selected: Y is not modified before the color space conversion"/>
+    </bitfield>
+    <bitfield id="COLORCONVENABLE" width="1" begin="11" end="11" resetval="0x0" description="Enable the color space conversion. The HW does not enable/disable the conversion based on the pixel format. The bit-field shall be reset when the format is not YUV." range="" rwaccess="RW">
+      <bitenum value="0" id="COLSPCDIS" token="COLORCONVENABLE_0" description="Disable Color Space Conversion RGB to YUV"/>
+      <bitenum value="1" id="COLSPCENB" token="COLORCONVENABLE_1" description="Enable Color Space Conversion RGB to YUV"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ALPHAENABLE" width="1" begin="9" end="9" resetval="0x0" description="Premultiplied alpha enable" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="ALPHAENABLE_0" description="disabled.Disabled. This bit also disable the logic present in the associated channel out that compute the alpha component sent to the WB pipe"/>
+      <bitenum value="1" id="ENABLE" token="ALPHAENABLE_1" description="enabled."/>
+    </bitfield>
+    <bitfield id="RESIZEENABLE" width="2" begin="8" end="7" resetval="0x0" description="Resize Enable" range="" rwaccess="RW">
+      <bitenum value="0" id="RESIZEPROC" token="RESIZEENABLE_0" description="Disable the resize processing"/>
+      <bitenum value="1" id="HRESIZE" token="RESIZEENABLE_1" description="Enable the horizontal resize processing"/>
+      <bitenum value="3" id="HVRESIZE" token="RESIZEENABLE_3" description="Enable both horizontal and vertical resize processing"/>
+      <bitenum value="2" id="VRESIZE" token="RESIZEENABLE_2" description="Enable the vertical resize processing"/>
+    </bitfield>
+    <bitfield id="FORMAT" width="6" begin="6" end="1" resetval="0x0" description="Write-back Format. It defines the pixel format when storing the write-back picture into memory." range="" rwaccess="RW">
+      <bitenum value="9" id="RGBA32_8888" token="FORMAT_9" description="RGBA32-8888"/>
+      <bitenum value="8" id="ABGR32_8888" token="FORMAT_8" description="ABGR32-8888"/>
+      <bitenum value="5" id="ARGB16_1555" token="FORMAT_5" description="ARGB16-1555"/>
+      <bitenum value="2" id="RGBA16_4444" token="FORMAT_2" description="RGBA16-4444"/>
+      <bitenum value="11" id="RGB24P_888" token="FORMAT_11" description="RGB24-888 (24-bit container)"/>
+      <bitenum value="4" id="BGR16_565" token="FORMAT_4" description="BGR16-565"/>
+      <bitenum value="50" id="RESERVED4" token="FORMAT_50" description="RESERVED4"/>
+      <bitenum value="35" id="RESERVED2" token="FORMAT_35" description="RESERVED2"/>
+      <bitenum value="1" id="ABGR16_4444" token="FORMAT_1" description="ABGR16-4444"/>
+      <bitenum value="63" id="UYVY" token="FORMAT_63" description="UYVY 4:2:2 co-sited"/>
+      <bitenum value="40" id="XBGR32_8888" token="FORMAT_40" description="xBGR32_8888"/>
+      <bitenum value="0" id="ARGB16_4444" token="FORMAT_0" description="ARGB16-4444"/>
+      <bitenum value="62" id="YUV2" token="FORMAT_62" description="YUV2 4:2:2 co-sited"/>
+      <bitenum value="37" id="XRGB16_1555" token="FORMAT_37" description="xRGB16-1555"/>
+      <bitenum value="61" id="NV12" token="FORMAT_61" description="NV12/NV21 4:2:0 2 buffers (Y + UV)"/>
+      <bitenum value="32" id="XRGB16_4444" token="FORMAT_32" description="xRGB12-4444"/>
+      <bitenum value="3" id="RGB16_565" token="FORMAT_3" description="RGB16-565"/>
+      <bitenum value="23" id="BGR565A8" token="FORMAT_23" description="BGR565A8"/>
+      <bitenum value="48" id="XRGB64_16161616" token="FORMAT_48" description="xRGB64-16161616"/>
+      <bitenum value="17" id="RGBA64_16161616" token="FORMAT_17" description="RGBA64_16161616"/>
+      <bitenum value="6" id="ABGR16_1555" token="FORMAT_6" description="ABGR16-1555"/>
+      <bitenum value="49" id="RGBX64_16161616" token="FORMAT_49" description="RGBX64_16161616"/>
+      <bitenum value="10" id="BGRA32_8888" token="FORMAT_10" description="BGRA32-8888"/>
+      <bitenum value="38" id="XBGR16_1555" token="FORMAT_38" description="xBGR16-1555"/>
+      <bitenum value="16" id="ARGB64_16161616" token="FORMAT_16" description="ARGB64-16161616"/>
+      <bitenum value="33" id="XBGR16_4444" token="FORMAT_33" description="xBGR16-4444"/>
+      <bitenum value="18" id="RESERVED5" token="FORMAT_18" description="RESERVED5"/>
+      <bitenum value="43" id="RESERVED3" token="FORMAT_43" description="RESERVED3"/>
+      <bitenum value="24" id="RESERVED1" token="FORMAT_24" description="RESERVED1"/>
+      <bitenum value="22" id="RGB565A8" token="FORMAT_22" description="RGB565A8"/>
+      <bitenum value="42" id="BGRX32_8888" token="FORMAT_42" description="BGRX32_8888"/>
+      <bitenum value="7" id="ARGB32_8888" token="FORMAT_7" description="ARGB32-8888"/>
+      <bitenum value="39" id="XRGB32_8888" token="FORMAT_39" description="xRGB32-8888 (32-bit container)"/>
+      <bitenum value="41" id="RGBX32_8888" token="FORMAT_41" description="RGBx32-8888 (24-bit RGB aligned on MSB of the 32-bit container)"/>
+      <bitenum value="12" id="RESERVED" token="FORMAT_12" description="RESERVED"/>
+      <bitenum value="34" id="RGBX16_4444" token="FORMAT_34" description="RGBx16-4444"/>
+    </bitfield>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Write-back Enable. wr: immediate" range="" rwaccess="RW">
+      <bitenum value="0" id="WBDIS" token="ENABLE_0" description="Write-back disabled"/>
+      <bitenum value="1" id="WBENB" token="ENABLE_1" description="Write-back enabled"/>
+    </bitfield>
+  </register>
+  <register id="DISPC_WB_ATTRIBUTES2" acronym="DISPC_WB_ATTRIBUTES2" offset="0x24" width="32" description="The register set the WB pipe. Shadow register.">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="TAGS" width="5" begin="30" end="26" resetval="0x1f" description="Number of OCP TAGS to be used for the pipeline (from 1 to 32)" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="25" end="25" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="REGION_BASED" width="1" begin="24" end="24" resetval="0x0" description="Enable region-based mechanism for WBPipe" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="REGION_BASED_0" description="DISABLE"/>
+      <bitenum value="1" id="ENABLE" token="REGION_BASED_1" description="ENABLE"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="6" begin="23" end="18" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="17" end="17" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SECURE" width="1" begin="16" end="16" resetval="0x0" description="OCP requests corresponds to pipeline data are secure/unsecure. The bit-field can be modified only by secure transaction using MReqSecure qualifier." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FSC" width="1" begin="0" end="0" resetval="0x0" description="Field Sequential Color generation : R,G, and B buffers are generated from RGB buffer." range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="FSC_0" description="DISABLE"/>
+      <bitenum value="1" id="ENABLE" token="FSC_1" description="ENABLE"/>
+    </bitfield>
+  </register>
+  <register id="DISPC_WB_BA_j_0" acronym="DISPC_WB_BA_j_0" offset="0x28" width="32" description="The register configures the base address of the WB buffer (DISPC_WB_BA__0 DISPC_WB_BA__1 for ping-pong mechanism with external trigger, based on the field polarity otherwise only DISPC_WB_BA__0 is used). Shadow register.">
+    <bitfield id="BA" width="32" begin="31" end="0" resetval="0x0" description="Write-back base address Base address of the WB buffer (aligned on pixel size boundary except in case of RGB24 packed format, 4-pixel alignment is required; in case of YUV422, 2-pixel alignment is required, and YUV420, byte alignment is supported)). It case of YUV 4:2:0 format, it indicates the base address of the Y buffer. When the TILER is addressed, the bits: [28:27] = 0x0 for 8-bit tiled [28:27] = 0x1 for 16-bit tiled [28:27] = 0x2 for 32-bit tiled [28:27] = 0x3 for page mode [31:29] = 0x0 for 0-degree view [31:29] = 0x1 for 180-degree view + mirroring [31:29] = 0x2 for 0-degree view + mirroring [31:29] = 0x3 for 180-degree view [31:29] = 0x4 for 270-degree view + mirroring [31:29] = 0x5 for 270-degree view [31:29] = 0x6 for 90-degree view [31:29] = 0x7 for 90-degree view + mirroring Otherwise the bits indicated the corresponding bit address to access the SDRAM." range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_BA_j_1" acronym="DISPC_WB_BA_j_1" offset="0x2C" width="32" description="The register configures the base address of the WB buffer (DISPC_WB_BA__0 DISPC_WB_BA__1 for ping-pong mechanism with external trigger, based on the field polarity otherwise only DISPC_WB_BA__0 is used). Shadow register.">
+    <bitfield id="BA" width="32" begin="31" end="0" resetval="0x0" description="Write-back base address Base address of the WB buffer (aligned on pixel size boundary except in case of RGB24 packed format, 4-pixel alignment is required; in case of YUV422, 2-pixel alignment is required, and YUV420, byte alignment is supported)). It case of YUV 4:2:0 format, it indicates the base address of the Y buffer. When the TILER is addressed, the bits: [28:27] = 0x0 for 8-bit tiled [28:27] = 0x1 for 16-bit tiled [28:27] = 0x2 for 32-bit tiled [28:27] = 0x3 for page mode [31:29] = 0x0 for 0-degree view [31:29] = 0x1 for 180-degree view + mirroring [31:29] = 0x2 for 0-degree view + mirroring [31:29] = 0x3 for 180-degree view [31:29] = 0x4 for 270-degree view + mirroring [31:29] = 0x5 for 270-degree view [31:29] = 0x6 for 90-degree view [31:29] = 0x7 for 90-degree view + mirroring Otherwise the bits indicated the corresponding bit address to access the SDRAM." range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_BA_UV_j_0" acronym="DISPC_WB_BA_UV_j_0" offset="0x30" width="32" description="The register configures the base address of the UV buffer for the write-back pipeline. (DISPC_WB_BA_UV_0 and DISPC_WB_BA_UV_1 for ping-pong mechanism with external trigger, based on the field polarity, otherwise only DISPC_WB_BA_UV_0 is used)). The register is also used to configure the RGB plane BA for RGB565A8 format. Shadow register.">
+    <bitfield id="BA" width="32" begin="31" end="0" resetval="0x0" description="Video base address alinged on 16-bit boundary Base address of the UV video buffer used only in case of YUV420-NV12 When the TILER is addressed, the bits: [28:27] = 0x0 for 8-bit tiled [28:27] = 0x1 for 16-bit tiled [28:27] = 0x2 for 32-bit tiled [28:27] = 0x3 for page mode [31:29] = 0x0 for 0-degree view [31:29] = 0x1 for 180-degree view + mirroring [31:29] = 0x2 for 0-degree view + mirroring [31:29] = 0x3 for 180-degree view [31:29] = 0x4 for 270-degree view + mirroring [31:29] = 0x5 for 270-degree view [31:29] = 0x6 for 90-degree view [31:29] = 0x7 for 90-degree view + mirroring Otherwise the bits indicated the corresponding bit address to access the SDRAM." range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_BA_UV_j_1" acronym="DISPC_WB_BA_UV_j_1" offset="0x34" width="32" description="The register configures the base address of the UV buffer for the write-back pipeline. (DISPC_WB_BA_UV_0 and DISPC_WB_BA_UV_1 for ping-pong mechanism with external trigger, based on the field polarity, otherwise only DISPC_WB_BA_UV_0 is used)). The register is also used to configure the RGB plane BA for RGB565A8 format. Shadow register.">
+    <bitfield id="BA" width="32" begin="31" end="0" resetval="0x0" description="Video base address alinged on 16-bit boundary Base address of the UV video buffer used only in case of YUV420-NV12 When the TILER is addressed, the bits: [28:27] = 0x0 for 8-bit tiled [28:27] = 0x1 for 16-bit tiled [28:27] = 0x2 for 32-bit tiled [28:27] = 0x3 for page mode [31:29] = 0x0 for 0-degree view [31:29] = 0x1 for 180-degree view + mirroring [31:29] = 0x2 for 0-degree view + mirroring [31:29] = 0x3 for 180-degree view [31:29] = 0x4 for 270-degree view + mirroring [31:29] = 0x5 for 270-degree view [31:29] = 0x6 for 90-degree view [31:29] = 0x7 for 90-degree view + mirroring Otherwise the bits indicated the corresponding bit address to access the SDRAM." range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_BUF_SIZE_STATUS" acronym="DISPC_WB_BUF_SIZE_STATUS" offset="0x38" width="32" description="The register defines the DMA buufer size for the write back pipeline.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="Write 0's for future compatibility. Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="BUFSIZE" width="16" begin="15" end="0" resetval="0xa00" description="DMA buffer Size in number of 128-bits." range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_BUF_THRESHOLD" acronym="DISPC_WB_BUF_THRESHOLD" offset="0x3C" width="32" description="The register configures the DMA buffer associated with the write-back pipeline. Shadow register.">
+    <bitfield id="BUFHIGHTHRESHOLD" width="16" begin="31" end="16" resetval="0x9ff" description="DMA buffer High Threshold Number of 128-bits defining the threshold value." range="" rwaccess="RW"/>
+    <bitfield id="BUFLOWTHRESHOLD" width="16" begin="15" end="0" resetval="0x9f8" description="DMA buffer High Threshold Number of 128-bits defining the threshold value." range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_CONV_COEF0" acronym="DISPC_WB_CONV_COEF0" offset="0x40" width="32" description="The register configures the color space conversion matrix coefficients for the write back pipeline (YUV444 to RGB24) Shadow register.">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="Write 0's for future compatibility. Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="YG" width="11" begin="26" end="16" resetval="0x0" description="YG Coefficient Encoded signed value (from -1024 to 1023)." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="Write 0's for future compatibility. Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="YR" width="11" begin="10" end="0" resetval="0x0" description="YR Coefficient Encoded signed value (from -1024 to 1023)." range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_CONV_COEF1" acronym="DISPC_WB_CONV_COEF1" offset="0x44" width="32" description="The register configures the color space conversion matrix coefficients for the write back pipeline. Shadow register.">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="Write 0's for future compatibility. Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="CRR" width="11" begin="26" end="16" resetval="0x0" description="CrR Coefficient Encoded signed value (from -1024 to 1023)." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="Write 0's for future compatibility. Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="YB" width="11" begin="10" end="0" resetval="0x0" description="YB Coefficient Encoded signed value (from -1024 to 1023)." range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_CONV_COEF2" acronym="DISPC_WB_CONV_COEF2" offset="0x48" width="32" description="The register configures the color space conversion matrix coefficients for the write back pipeline. Shadow register.">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="Write 0's for future compatibility. Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="CRB" width="11" begin="26" end="16" resetval="0x0" description="CrB Coefficient Encoded signed value (from -1024 to 1023)." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="Write 0's for future compatibility. Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="CRG" width="11" begin="10" end="0" resetval="0x0" description="CrG Coefficient Encoded signed value (from -1024 to 1023)." range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_CONV_COEF3" acronym="DISPC_WB_CONV_COEF3" offset="0x4C" width="32" description="The register configures the color space conversion matrix coefficients for the write back pipeline. Shadow register.">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="Write 0's for future compatibility. Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="CBG" width="11" begin="26" end="16" resetval="0x0" description="CbG coefficient Encoded signed value (from -1024 to 1023)." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="Write 0's for future compatibility. Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="CBR" width="11" begin="10" end="0" resetval="0x0" description="CbR coefficient Encoded signed value (from -1024 to 1023)." range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_CONV_COEF4" acronym="DISPC_WB_CONV_COEF4" offset="0x50" width="32" description="The register configures the color space conversion matrix coefficients for the write back pipeline. Shadow register.">
+    <bitfield id="RESERVED" width="21" begin="31" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CBB" width="11" begin="10" end="0" resetval="0x0" description="CbB Coefficient Encoded signed value (from -1024 to 1023)." range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_CONV_COEF5" acronym="DISPC_WB_CONV_COEF5" offset="0x54" width="32" description="The register configures the color space conversion matrix coefficients for the write-back pipeline. Shadow register.">
+    <bitfield id="GOFFSET" width="13" begin="31" end="19" resetval="0x0" description="G offset Encoded signed value (from -4096 to 4095)." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="18" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ROFFSET" width="13" begin="15" end="3" resetval="0x0" description="R offset Encoded signed value (from -4096 to 4095)." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="2" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_CONV_COEF6" acronym="DISPC_WB_CONV_COEF6" offset="0x58" width="32" description="The register configures the color space conversion matrix coefficients for the write-back pipeline. Shadow register.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="BOFFSET" width="13" begin="15" end="3" resetval="0x0" description="B offset Encoded signed value (from -4096 to 4095)." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="2" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIRH" acronym="DISPC_WB_FIRH" offset="0x5C" width="32" description="The register configures the resize factor for horizontal up/down-sampling of the write-back window. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHINC" width="24" begin="23" end="0" resetval="0x200000" description="Horizontal increment of the up/down-sampling filter. The value 0 is invalid." range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIRH2" acronym="DISPC_WB_FIRH2" offset="0x60" width="32" description="The register configures the resize factor for horizontal up/down-sampling of the wirte-back window. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHINC" width="24" begin="23" end="0" resetval="0x200000" description="Horizontal increment of the up/down-sampling filter for Cb and Cr. The value 0 is invalid." range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIRV" acronym="DISPC_WB_FIRV" offset="0x64" width="32" description="The register configures the resize factor for vertical up/down-sampling of the write-back window It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVINC" width="24" begin="23" end="0" resetval="0x200000" description="Vertical increment of the up/down-sampling filter. The value 0 is invalid." range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIRV2" acronym="DISPC_WB_FIRV2" offset="0x68" width="32" description="The register configures the resize factor for vertical up/down-sampling of the wirte-back window. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVINC" width="24" begin="23" end="0" resetval="0x200000" description="Vertical increment of the up/down-sampling filter for Cb and Cr. The value 0 is invalid." range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H0_i_0" acronym="DISPC_WB_FIR_COEF_H0_i_0" offset="0x6C" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H0_i_1" acronym="DISPC_WB_FIR_COEF_H0_i_1" offset="0x70" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H0_i_2" acronym="DISPC_WB_FIR_COEF_H0_i_2" offset="0x74" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H0_i_3" acronym="DISPC_WB_FIR_COEF_H0_i_3" offset="0x78" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H0_i_4" acronym="DISPC_WB_FIR_COEF_H0_i_4" offset="0x7C" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H0_i_5" acronym="DISPC_WB_FIR_COEF_H0_i_5" offset="0x80" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H0_i_6" acronym="DISPC_WB_FIR_COEF_H0_i_6" offset="0x84" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H0_i_7" acronym="DISPC_WB_FIR_COEF_H0_i_7" offset="0x88" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H0_i_8" acronym="DISPC_WB_FIR_COEF_H0_i_8" offset="0x8C" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H0_C_i_0" acronym="DISPC_WB_FIR_COEF_H0_C_i_0" offset="0x90" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H0_C_i_1" acronym="DISPC_WB_FIR_COEF_H0_C_i_1" offset="0x94" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H0_C_i_2" acronym="DISPC_WB_FIR_COEF_H0_C_i_2" offset="0x98" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H0_C_i_3" acronym="DISPC_WB_FIR_COEF_H0_C_i_3" offset="0x9C" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H0_C_i_4" acronym="DISPC_WB_FIR_COEF_H0_C_i_4" offset="0xA0" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H0_C_i_5" acronym="DISPC_WB_FIR_COEF_H0_C_i_5" offset="0xA4" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H0_C_i_6" acronym="DISPC_WB_FIR_COEF_H0_C_i_6" offset="0xA8" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H0_C_i_7" acronym="DISPC_WB_FIR_COEF_H0_C_i_7" offset="0xAC" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H0_C_i_8" acronym="DISPC_WB_FIR_COEF_H0_C_i_8" offset="0xB0" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_k_0" acronym="DISPC_WB_FIR_COEF_H12_k_0" offset="0xB4" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_k_1" acronym="DISPC_WB_FIR_COEF_H12_k_1" offset="0xB8" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_k_2" acronym="DISPC_WB_FIR_COEF_H12_k_2" offset="0xBC" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_k_3" acronym="DISPC_WB_FIR_COEF_H12_k_3" offset="0xC0" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_k_4" acronym="DISPC_WB_FIR_COEF_H12_k_4" offset="0xC4" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_k_5" acronym="DISPC_WB_FIR_COEF_H12_k_5" offset="0xC8" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_k_6" acronym="DISPC_WB_FIR_COEF_H12_k_6" offset="0xCC" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_k_7" acronym="DISPC_WB_FIR_COEF_H12_k_7" offset="0xD0" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_k_8" acronym="DISPC_WB_FIR_COEF_H12_k_8" offset="0xD4" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_k_9" acronym="DISPC_WB_FIR_COEF_H12_k_9" offset="0xD8" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_k_10" acronym="DISPC_WB_FIR_COEF_H12_k_10" offset="0xDC" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_k_11" acronym="DISPC_WB_FIR_COEF_H12_k_11" offset="0xE0" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_k_12" acronym="DISPC_WB_FIR_COEF_H12_k_12" offset="0xE4" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_k_13" acronym="DISPC_WB_FIR_COEF_H12_k_13" offset="0xE8" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_k_14" acronym="DISPC_WB_FIR_COEF_H12_k_14" offset="0xEC" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_k_15" acronym="DISPC_WB_FIR_COEF_H12_k_15" offset="0xF0" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_C_k_0" acronym="DISPC_WB_FIR_COEF_H12_C_k_0" offset="0xF4" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_C_k_1" acronym="DISPC_WB_FIR_COEF_H12_C_k_1" offset="0xF8" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_C_k_2" acronym="DISPC_WB_FIR_COEF_H12_C_k_2" offset="0xFC" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_C_k_3" acronym="DISPC_WB_FIR_COEF_H12_C_k_3" offset="0x100" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_C_k_4" acronym="DISPC_WB_FIR_COEF_H12_C_k_4" offset="0x104" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_C_k_5" acronym="DISPC_WB_FIR_COEF_H12_C_k_5" offset="0x108" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_C_k_6" acronym="DISPC_WB_FIR_COEF_H12_C_k_6" offset="0x10C" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_C_k_7" acronym="DISPC_WB_FIR_COEF_H12_C_k_7" offset="0x110" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_C_k_8" acronym="DISPC_WB_FIR_COEF_H12_C_k_8" offset="0x114" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_C_k_9" acronym="DISPC_WB_FIR_COEF_H12_C_k_9" offset="0x118" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_C_k_10" acronym="DISPC_WB_FIR_COEF_H12_C_k_10" offset="0x11C" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_C_k_11" acronym="DISPC_WB_FIR_COEF_H12_C_k_11" offset="0x120" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_C_k_12" acronym="DISPC_WB_FIR_COEF_H12_C_k_12" offset="0x124" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_C_k_13" acronym="DISPC_WB_FIR_COEF_H12_C_k_13" offset="0x128" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_C_k_14" acronym="DISPC_WB_FIR_COEF_H12_C_k_14" offset="0x12C" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_H12_C_k_15" acronym="DISPC_WB_FIR_COEF_H12_C_k_15" offset="0x130" width="32" description="The bank of registers configure the up/down-scaling coefficients for the horizontal resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V0_i_0" acronym="DISPC_WB_FIR_COEF_V0_i_0" offset="0x134" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V0_i_1" acronym="DISPC_WB_FIR_COEF_V0_i_1" offset="0x138" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V0_i_2" acronym="DISPC_WB_FIR_COEF_V0_i_2" offset="0x13C" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V0_i_3" acronym="DISPC_WB_FIR_COEF_V0_i_3" offset="0x140" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V0_i_4" acronym="DISPC_WB_FIR_COEF_V0_i_4" offset="0x144" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V0_i_5" acronym="DISPC_WB_FIR_COEF_V0_i_5" offset="0x148" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V0_i_6" acronym="DISPC_WB_FIR_COEF_V0_i_6" offset="0x14C" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V0_i_7" acronym="DISPC_WB_FIR_COEF_V0_i_7" offset="0x150" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V0_i_8" acronym="DISPC_WB_FIR_COEF_V0_i_8" offset="0x154" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V0_C_i_0" acronym="DISPC_WB_FIR_COEF_V0_C_i_0" offset="0x158" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V0_C_i_1" acronym="DISPC_WB_FIR_COEF_V0_C_i_1" offset="0x15C" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V0_C_i_2" acronym="DISPC_WB_FIR_COEF_V0_C_i_2" offset="0x160" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V0_C_i_3" acronym="DISPC_WB_FIR_COEF_V0_C_i_3" offset="0x164" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V0_C_i_4" acronym="DISPC_WB_FIR_COEF_V0_C_i_4" offset="0x168" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V0_C_i_5" acronym="DISPC_WB_FIR_COEF_V0_C_i_5" offset="0x16C" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V0_C_i_6" acronym="DISPC_WB_FIR_COEF_V0_C_i_6" offset="0x170" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V0_C_i_7" acronym="DISPC_WB_FIR_COEF_V0_C_i_7" offset="0x174" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V0_C_i_8" acronym="DISPC_WB_FIR_COEF_V0_C_i_8" offset="0x178" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="29" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_k_0" acronym="DISPC_WB_FIR_COEF_V12_k_0" offset="0x17C" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_k_1" acronym="DISPC_WB_FIR_COEF_V12_k_1" offset="0x180" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_k_2" acronym="DISPC_WB_FIR_COEF_V12_k_2" offset="0x184" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_k_3" acronym="DISPC_WB_FIR_COEF_V12_k_3" offset="0x188" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_k_4" acronym="DISPC_WB_FIR_COEF_V12_k_4" offset="0x18C" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_k_5" acronym="DISPC_WB_FIR_COEF_V12_k_5" offset="0x190" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_k_6" acronym="DISPC_WB_FIR_COEF_V12_k_6" offset="0x194" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_k_7" acronym="DISPC_WB_FIR_COEF_V12_k_7" offset="0x198" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_k_8" acronym="DISPC_WB_FIR_COEF_V12_k_8" offset="0x19C" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_k_9" acronym="DISPC_WB_FIR_COEF_V12_k_9" offset="0x1A0" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_k_10" acronym="DISPC_WB_FIR_COEF_V12_k_10" offset="0x1A4" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_k_11" acronym="DISPC_WB_FIR_COEF_V12_k_11" offset="0x1A8" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_k_12" acronym="DISPC_WB_FIR_COEF_V12_k_12" offset="0x1AC" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_k_13" acronym="DISPC_WB_FIR_COEF_V12_k_13" offset="0x1B0" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_k_14" acronym="DISPC_WB_FIR_COEF_V12_k_14" offset="0x1B4" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_k_15" acronym="DISPC_WB_FIR_COEF_V12_k_15" offset="0x1B8" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for ARGB and Y setting. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_C_k_0" acronym="DISPC_WB_FIR_COEF_V12_C_k_0" offset="0x1BC" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_C_k_1" acronym="DISPC_WB_FIR_COEF_V12_C_k_1" offset="0x1C0" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_C_k_2" acronym="DISPC_WB_FIR_COEF_V12_C_k_2" offset="0x1C4" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_C_k_3" acronym="DISPC_WB_FIR_COEF_V12_C_k_3" offset="0x1C8" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_C_k_4" acronym="DISPC_WB_FIR_COEF_V12_C_k_4" offset="0x1CC" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_C_k_5" acronym="DISPC_WB_FIR_COEF_V12_C_k_5" offset="0x1D0" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_C_k_6" acronym="DISPC_WB_FIR_COEF_V12_C_k_6" offset="0x1D4" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_C_k_7" acronym="DISPC_WB_FIR_COEF_V12_C_k_7" offset="0x1D8" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_C_k_8" acronym="DISPC_WB_FIR_COEF_V12_C_k_8" offset="0x1DC" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_C_k_9" acronym="DISPC_WB_FIR_COEF_V12_C_k_9" offset="0x1E0" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_C_k_10" acronym="DISPC_WB_FIR_COEF_V12_C_k_10" offset="0x1E4" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_C_k_11" acronym="DISPC_WB_FIR_COEF_V12_C_k_11" offset="0x1E8" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_C_k_12" acronym="DISPC_WB_FIR_COEF_V12_C_k_12" offset="0x1EC" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_C_k_13" acronym="DISPC_WB_FIR_COEF_V12_C_k_13" offset="0x1F0" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_C_k_14" acronym="DISPC_WB_FIR_COEF_V12_C_k_14" offset="0x1F4" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_FIR_COEF_V12_C_k_15" acronym="DISPC_WB_FIR_COEF_V12_C_k_15" offset="0x1F8" width="32" description="The bank of registers configure the down/up/down-scaling coefficients for the vertical resize of the video picture associated with the write back pipeline for the phases from 0 to 15. It is used for Crb and Cr setting. It is used only when the pixel format at the input of the filter is one of the YUV formats. If the pixel format at the input of the filter is ARGB (all ARGB, RGB, RGBA are converted to ARGB32-8888 by the color space conversion before going to the filter is the color space conversion is done before the filter). When the register is not used by the HW, any value can be used for the bit-fields. Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DISPC_WB_IRQENABLE" acronym="DISPC_WB_IRQENABLE" offset="0x1FC" width="32" description="This register allows to mask/unmask the module internal sources of interrupt, on an event-by-event basis">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="WBSYNC_EN" width="1" begin="4" end="4" resetval="0x0" description="Write-back synced (configuration copied from shadow to work)" range="" rwaccess="RW">
+      <bitenum value="0" id="MASKED" token="WBSYNC_EN_0" description="WBBufferOverflow is masked"/>
+      <bitenum value="1" id="GENINT" token="WBSYNC_EN_1" description="WBBufferOverflow generates an interrupt when it occurs"/>
+    </bitfield>
+    <bitfield id="WBREGIONBASEDEVENT_EN" width="1" begin="3" end="3" resetval="0x0" description="For Write-back region-based, event indicating end of current window" range="" rwaccess="RW">
+      <bitenum value="0" id="MASKED" token="WBREGIONBASEDEVENT_EN_0" description="WBBufferOverflow is masked"/>
+      <bitenum value="1" id="GENINT" token="WBREGIONBASEDEVENT_EN_1" description="WBBufferOverflow generates an interrupt when it occurs"/>
+    </bitfield>
+    <bitfield id="WBFRAMEDONE_EN" width="1" begin="2" end="2" resetval="0x0" description="Write-back Frame Done." range="" rwaccess="RW">
+      <bitenum value="0" id="MASKED" token="WBFRAMEDONE_EN_0" description="WBBufferOverflow is masked"/>
+      <bitenum value="1" id="GENINT" token="WBFRAMEDONE_EN_1" description="WBBufferOverflow generates an interrupt when it occurs"/>
+    </bitfield>
+    <bitfield id="WBUNCOMPLETEERROR_EN" width="1" begin="1" end="1" resetval="0x0" description="The write back buffer has been flushed before been fully drained. Enable" range="" rwaccess="RW">
+      <bitenum value="0" id="MASKED" token="WBUNCOMPLETEERROR_EN_0" description="Interrupt is masked"/>
+      <bitenum value="1" id="GENINT" token="WBUNCOMPLETEERROR_EN_1" description="Interrupt is enabled"/>
+    </bitfield>
+    <bitfield id="WBBUFFEROVERFLOW_EN" width="1" begin="0" end="0" resetval="0x0" description="Write-back DMA Buffer Overflow. The DMA buffer is full" range="" rwaccess="RW">
+      <bitenum value="0" id="MASKED" token="WBBUFFEROVERFLOW_EN_0" description="WBBufferOverflow is masked"/>
+      <bitenum value="1" id="GENINT" token="WBBUFFEROVERFLOW_EN_1" description="WBBufferOverflow generates an interrupt when it occurs"/>
+    </bitfield>
+  </register>
+  <register id="DISPC_WB_IRQSTATUS" acronym="DISPC_WB_IRQSTATUS" offset="0x200" width="32" description="This register regroups all the status of the module internal events that generate an interrupt. Write 1 to a given bit resets this bit">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="WBSYNC_IRQ" width="1" begin="4" end="4" resetval="0x0" description="Write-back synced (configuration copied from shadow to work)" range="" rwaccess="RW">
+      <bitenum value="0" id="FALSE" token="WBSYNC_IRQ_0" description="READS: Event is false. WRITES: Status bit unchanged."/>
+      <bitenum value="1" id="TRUE" token="WBSYNC_IRQ_1" description="READS: Event is true (pending). WRITES: Status bit is reset."/>
+    </bitfield>
+    <bitfield id="WBREGIONBASEDEVENT_IRQ" width="1" begin="3" end="3" resetval="0x0" description="Write-back Frame Done." range="" rwaccess="RW">
+      <bitenum value="0" id="FALSE" token="WBREGIONBASEDEVENT_IRQ_0" description="READS: Event is false. WRITES: Status bit unchanged."/>
+      <bitenum value="1" id="TRUE" token="WBREGIONBASEDEVENT_IRQ_1" description="READS: Event is true (pending). WRITES: Status bit is reset."/>
+    </bitfield>
+    <bitfield id="WBFRAMEDONE_IRQ" width="1" begin="2" end="2" resetval="0x0" description="Write-back Frame Done." range="" rwaccess="RW">
+      <bitenum value="0" id="FALSE" token="WBFRAMEDONE_IRQ_0" description="READS: Event is false. WRITES: Status bit unchanged."/>
+      <bitenum value="1" id="TRUE" token="WBFRAMEDONE_IRQ_1" description="READS: Event is true (pending). WRITES: Status bit is reset."/>
+    </bitfield>
+    <bitfield id="WBUNCOMPLETEERROR_IRQ" width="1" begin="1" end="1" resetval="0x0" description="Write back DMA buffer is flushed before been completely drained." range="" rwaccess="RW">
+      <bitenum value="0" id="FALSE" token="WBUNCOMPLETEERROR_IRQ_0" description="READS: Event is false. WRITES: Status bit unchanged."/>
+      <bitenum value="1" id="TRUE" token="WBUNCOMPLETEERROR_IRQ_1" description="READS: Event is true (Pending) WRITE: Status bit is reset"/>
+    </bitfield>
+    <bitfield id="WBBUFFEROVERFLOW_IRQ" width="1" begin="0" end="0" resetval="0x0" description="Write-back DMA Buffer Overrflow. The DMA buffer is full." range="" rwaccess="RW">
+      <bitenum value="0" id="FALSE" token="WBBUFFEROVERFLOW_IRQ_0" description="READS: Event is false. WRITES: Status bit unchanged."/>
+      <bitenum value="1" id="TRUE" token="WBBUFFEROVERFLOW_IRQ_1" description="READS: Event is true (pending). WRITES: Status bit is reset."/>
+    </bitfield>
+  </register>
+  <register id="DISPC_WB_MFLAG_THRESHOLD" acronym="DISPC_WB_MFLAG_THRESHOLD" offset="0x204" width="32" description="">
+    <bitfield id="HT_MFLAG" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LT_MFLAG" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_PICTURE_SIZE" acronym="DISPC_WB_PICTURE_SIZE" offset="0x208" width="32" description="The register configures the size of the write-back picture associated with the write back pipeline after up/down-scaling (size of the image stored in DDR memory, generated by WB pipe). Shadow register.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MEMSIZEY" width="12" begin="27" end="16" resetval="0x0" description="Number of lines of the wb picture in memory Encoded value (from 1 to 4096) to specify the number of lines of the picture store in memory (program to value minus one)." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MEMSIZEX" width="12" begin="11" end="0" resetval="0x0" description="Number of pixels of the wb picture in memory. Encoded value (from 1 to 4096) to specify the number of pixels of the picture stored in memory (program to value minus one). In case of 32-bit RGB/ARGB/RGBA pixel formats and 2D burst, the maximum width is limited to 2048 pixels." range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_SIZE" acronym="DISPC_WB_SIZE" offset="0x210" width="32" description="The register configures the size of the output of overlay connected to the write-back pipeline when the overlay output is only used by the write-back pipeline. When the overlay is output on the VP1 output, the size of the frame is defined in the register. Shadow register.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SIZEY" width="12" begin="27" end="16" resetval="0x0" description="Number of lines of the Write-back picture Encoded value (from 1 to 4096) to specify the number of lines of the write-back picture from overlay or pipeline." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SIZEX" width="12" begin="11" end="0" resetval="0x0" description="Number of pixels of the Write-back picture Encoded value (from 1 to 4096) to specify the number of pixels of the write-back picture from overlay or pipeline.." range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_POSITION" acronym="DISPC_WB_POSITION" offset="0x214" width="32" description="The register configures the start position of the window on overlay which wb will capture Shadow register.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="POSY" width="12" begin="27" end="16" resetval="0x0" description="Y position of the video window Encoded value (from 0 to 4095) to specify the Y position of the video window #1 .The line at the top has the Y-position 0." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="POSX" width="12" begin="11" end="0" resetval="0x0" description="X position of the video window Encoded value (from 0 to 4095) to specify the X position of the video window #1. The first pixel on the left of the display screen has the X-position 0." range="" rwaccess="RW"/>
+  </register>
+  <register id="DISPC_WB_REGION_BASED_TOTAL_PICTURE_SIZEY" acronym="DISPC_WB_REGION_BASED_TOTAL_PICTURE_SIZEY" offset="0x218" width="32" description="The register configures the total sizey (total number of lines) of all the windows written back to the memory in Write-Back Region-based mode. Shadow register.">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SIZEY" width="12" begin="11" end="0" resetval="0x0" description="Total number of lines of the Write-back picture in Region-based mode Encoded value (from 1 to 4096) to specify the number of lines of the write-back picture from overlay or pipeline." range="" rwaccess="RW"/>
+  </register>
+</module>

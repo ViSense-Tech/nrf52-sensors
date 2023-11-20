@@ -1,0 +1,55 @@
+<module name="USB0_COMMON_0_MMR_MMRVBP_USBSS_CMN" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="MMR__MMRVBP__USBSS_CMN_PID" acronym="MMR__MMRVBP__USBSS_CMN_PID" offset="0x0" width="32" description="">
+		<bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x1" description="PID register scheme" range="31 - 30" rwaccess="R"/> 
+		<bitfield id="BU" width="2" begin="29" end="28" resetval="0x2" description="Business Unit: 10 = Processors" range="29 - 28" rwaccess="R"/> 
+		<bitfield id="MODULE_ID" width="12" begin="27" end="16" resetval="0x2082" description="Module ID" range="27 - 16" rwaccess="R"/> 
+		<bitfield id="RTL" width="5" begin="15" end="11" resetval="0x13" description="RTL revision. Will vary depending on release." range="15 - 11" rwaccess="R"/> 
+		<bitfield id="MAJOR" width="3" begin="10" end="8" resetval="0x1" description="Major revision" range="10 - 8" rwaccess="R"/> 
+		<bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom" range="7 - 6" rwaccess="R"/> 
+		<bitfield id="MINOR" width="6" begin="5" end="0" resetval="0x0" description="Minor revision" range="5 - 0" rwaccess="R"/>
+	</register>
+	<register id="MMR__MMRVBP__USBSS_CMN_USB3P0SS_W1" acronym="MMR__MMRVBP__USBSS_CMN_USB3P0SS_W1" offset="0x4" width="32" description="">
+		<bitfield id="RSVD3" width="12" begin="31" end="20" resetval="0x0" description="Reserved bits set 3" range="31 - 20" rwaccess="R"/> 
+		<bitfield id="USB2_ONLY_MODE" width="1" begin="19" end="19" resetval="0x0" description="Selects USB2 only mode. Has to be written before setting pwrup_rst_n bit. This bit has to be set when SERDES is not assigned to this USB instance. For example, when the Wiz is configured to allocate the serdes lanes for another function, like PCIe. Without setting this bit in those cases, the Controller will not function even at USB2 speeds, or may be erratic." range="19" rwaccess="R/W"/> 
+		<bitfield id="MODESTRAP" width="2" begin="18" end="17" resetval="0x0" description="Modestrap input to the Controller. Has to be written before setting pwrup_rst_n bit. 00 - Controller not configured as Host or Device, 01 - Controller is initially configured as Host, 10 - Controller is initially configured as Device. Please refer to section 5.2 in DRD Controller Design Specification R1 for more information." range="18 - 17" rwaccess="R/W"/> 
+		<bitfield id="OVERCURRENT_N" width="1" begin="16" end="16" resetval="0x1" description="Overcurrent indicator to the Controller" range="16" rwaccess="R/W"/> 
+		<bitfield id="RSVD2" width="6" begin="15" end="10" resetval="0x0" description="Reserved bits set 2" range="15 - 10" rwaccess="R"/> 
+		<bitfield id="MODESTRAP_SEL" width="1" begin="9" end="9" resetval="0x0" description="Select signal. Has to be written before setting pwrup_rst_n bit. 1 - modestrap MMR bits are used, 0 - usb_mode_strap input is used" range="9" rwaccess="R/W"/> 
+		<bitfield id="OVERCURRENT_SEL" width="1" begin="8" end="8" resetval="0x0" description="Overcurrent MMR select. Has to be written before setting pwrup_rst_n bit. 1 - overcurrent MMR bit is used, 0 - port_overcurrent_n input is used" range="8" rwaccess="R/W"/> 
+		<bitfield id="RSVD1" width="7" begin="7" end="1" resetval="0x0" description="Reserved bits set 1" range="7 - 1" rwaccess="R"/> 
+		<bitfield id="PWRUP_RST_N" width="1" begin="0" end="0" resetval="0x0" description="Power up reset for the Controller. Set this bit after initialization steps like modestrap configuration, extended capability register configuration etc." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="MMR__MMRVBP__USBSS_CMN_STATIC_CONFIG" acronym="MMR__MMRVBP__USBSS_CMN_STATIC_CONFIG" offset="0x8" width="32" description="">
+		<bitfield id="RSVD" width="23" begin="31" end="9" resetval="0x0" description="Reserved bits" range="31 - 9" rwaccess="R"/> 
+		<bitfield id="PLL_REF_SEL" width="4" begin="8" end="5" resetval="0x4" description="This register directly drives the pllrefsel[3:0] input to USB2 PHY. Indicates the frequency of the REF_CLOCK input used by the USB PLL.  This value should match the frequency value of either the HFOSC0 or HFOSC1 oscillator as selected by the USB0_CLKSEL register. Field values (Others are reserved): 4'b0000 - 9.6 MHz 4'b0001 - 10 MHz 4'b0010 - 12 MHz 4'b0011 - 18.2 MHz 4'b0100 - 20 MHz 4'b0101 - 24 MHz 4'b0110 - 25 MHz 4'b0111 - 26 MHz 4'b1000 - 38.4 MHz 4'b1001 - 40 MHz 4'b1010 - 48 MHz 4'b1011 - 50 MHz 4'b1100 - 52 MHz " range="8 - 5" rwaccess="R/W"/> 
+		<bitfield id="LOOPBACK_MODE" width="2" begin="4" end="3" resetval="0x0" description="This register directly drives the loopback[1:0] input to USB2 PHY. Loopback mode selection - 00: Loopback OFF, 01: LS Loopback ON, 10: FS Loopback ON, 11: HS Loopback ON." range="4 - 3" rwaccess="R/W"/> 
+		<bitfield id="VBUS_SEL" width="2" begin="2" end="1" resetval="0x0" description="This register directly drives the vbus_sel[1:0] input to the PHY. VBUS select - 00: VBUS = 5.25V/3.3V, 01: VBUS/3 external divider is active, so VBUS could be upto 11V." range="2 - 1" rwaccess="R/W"/> 
+		<bitfield id="LANE_REVERSE" width="1" begin="0" end="0" resetval="0x0" description="This register directly drives the lane_reverse input to USB2 PHY. Lane reverse selection. When set, this bit indicates that D+ and D- lines have to be swapped." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="MMR__MMRVBP__USBSS_CMN_PHY_TEST" acronym="MMR__MMRVBP__USBSS_CMN_PHY_TEST" offset="0xC" width="32" description="">
+		<bitfield id="RSVD" width="14" begin="31" end="18" resetval="0x0" description="Reserved bits" range="31 - 18" rwaccess="R"/> 
+		<bitfield id="BIST_MODE" width="1" begin="17" end="17" resetval="0x0" description="Set for bist mode. This is used for overriding PHY ports for BIST." range="17" rwaccess="R/W"/> 
+		<bitfield id="BIST_ERROR_COUNT" width="8" begin="16" end="9" resetval="0x0" description="Number of bytes that have errors while running BIST. The count resets when bist_on is set." range="16 - 9" rwaccess="R"/> 
+		<bitfield id="BIST_ERROR" width="1" begin="8" end="8" resetval="0x0" description="If set, this bit indicates that BIST completed with error." range="8" rwaccess="R"/> 
+		<bitfield id="BIST_COMPLETE" width="1" begin="7" end="7" resetval="0x0" description="If set, this bit indicates that the BIST operation is completed." range="7" rwaccess="R"/> 
+		<bitfield id="BIST_ON" width="1" begin="6" end="6" resetval="0x0" description="Setting this bit starts the BIST operation." range="6" rwaccess="R/W"/> 
+		<bitfield id="BIST_MODE_EN" width="1" begin="5" end="5" resetval="0x0" description="BIST Mode Enable. 0 = BIST not enabled, 1 = BIST enabled" range="5" rwaccess="R/W"/> 
+		<bitfield id="BIST_MODE_SEL" width="4" begin="4" end="1" resetval="0x0" description="BIST Mode Selection. bist_mode_sel[3]: 0 = 8-bit interface, 1 = 16-bit interface; bist_mode_sel[2]: 0 = error injection disabled, 1 = error injection enabled; bist_mode_sel[1]: 0 = device mode, 1 = host mode; bist_mode_sel[0]: 0 = High Speed mode, 1 = Full Speed mode." range="4 - 1" rwaccess="R/W"/> 
+		<bitfield id="PLL_BYPASS_MODE" width="1" begin="0" end="0" resetval="0x0" description="Setting this bit disables the PLL clock and bypasses it with PLL reference clock." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="MMR__MMRVBP__USBSS_CMN_USB3P0SS_DEBUG_CTRL" acronym="MMR__MMRVBP__USBSS_CMN_USB3P0SS_DEBUG_CTRL" offset="0x10" width="32" description="">
+		<bitfield id="RSVD" width="27" begin="31" end="5" resetval="0x0" description="Reserved bits" range="31 - 5" rwaccess="R"/> 
+		<bitfield id="DEBUG_SEL" width="5" begin="4" end="0" resetval="0x0" description="Debug selection" range="4 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="MMR__MMRVBP__USBSS_CMN_USB3P0SS_DEBUG_INFO" acronym="MMR__MMRVBP__USBSS_CMN_USB3P0SS_DEBUG_INFO" offset="0x14" width="32" description="">
+		<bitfield id="DEBUG_INFO" width="32" begin="31" end="0" resetval="0x0" description="Debug information selected by debug_sel" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="MMR__MMRVBP__USBSS_CMN_USB3P0SS_DEBUG_LINK_STATE" acronym="MMR__MMRVBP__USBSS_CMN_USB3P0SS_DEBUG_LINK_STATE" offset="0x18" width="32" description="">
+		<bitfield id="RSVD" width="1" begin="31" end="31" resetval="0x0" description="Reserved bits" range="31" rwaccess="R"/> 
+		<bitfield id="DEBUG_LINK_STATE" width="31" begin="30" end="0" resetval="0x0" description="Debug link state information" range="30 - 0" rwaccess="R"/>
+	</register>
+	<register id="MMR__MMRVBP__USBSS_CMN_USB3P0SS_DEVICE_CTRL" acronym="MMR__MMRVBP__USBSS_CMN_USB3P0SS_DEVICE_CTRL" offset="0x1C" width="32" description="">
+		<bitfield id="RSVD" width="31" begin="31" end="1" resetval="0x0" description="Reserved bits" range="31 - 1" rwaccess="R"/> 
+		<bitfield id="DEV_WAKEUP" width="1" begin="0" end="0" resetval="0x0" description="Set this bit to trigger device wakeup interrupt on irq_intr[7]" range="0" rwaccess="R/W"/>
+	</register>
+</module>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><module id="LDO " HW_revision="" XML_version="1" description="LDO Control">
+     <register id="LDOCTRL" acronym="LDOCTRL" page="2" offset="0X0004" width="16" description="LDO enable register">
+<bitfield id="_RESV_1" width="14" begin="15" end="2" resetval="0" description="" range="" rwaccess="N"/>
+<bitfield id="DSPLDOCNTL" width="1" begin="1" end="1" resetval="0" description="Used to select the DSP LDO voltage" range="" rwaccess="RW">
+<bitenum id="1PT3V" value="0" token="1PT3V" description="DSP LDO Output Voltage is regulated to 1.3 V."/>
+<bitenum id="1PT05V" value="1" token="1PT05V" description="DSP LDO Output Voltage is regulated to 1.05 V."/>
+</bitfield>
+<bitfield id="USBLDOEN" width="1" begin="0" end="0" resetval="0" description="Used to enable the USB LDO" range="" rwaccess="RW">
+<bitenum id="disabled" value="0" token="disabled" description="USB LDO is disabled "/>
+<bitenum id="enabled" value="1" token="enabled" description="USB LDO is enabled "/>
+</bitfield>
+</register>
+</module>

@@ -1,0 +1,147 @@
+<module name="ESM" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="ESMIEPSR1" acronym="ESMIEPSR1" offset="0x0" width="32" description="ESM Influence Error Pin Set/Status Register 1">
+    <bitfield id="IEPSET" width="32" begin="31" end="0" resetval="0x0" description="User and privilege mode (read): 0 = failure on channel x has no influence on error pin 1 = failure on channel x has influence on error pin Privilege mode (write): 0 = leaves the bit and the corresponding clear bit in theESMIEPCR1 register unchanged 1 = enables failure influence on error pin and sets the corresponding clear bit in the ESMIEPCR1 register" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMIEPCR1" acronym="ESMIEPCR1" offset="0x4" width="32" description="ESM Influence Error Pin Clear/Status Register 1">
+    <bitfield id="IEPCLR" width="32" begin="31" end="0" resetval="0x0" description="User and privilege mode (read): 0 = failure on channel x has no influence on error pin 1 = failure on channel x has influence on error pin Privilege mode (write): 0 = leaves the bit and the corresponding set bit in theESMIEPSR1 register unchanged 1 = disables failure influence on error pin and clears the corresponding set bit in the ESMIEPSR1 register" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMIESR1" acronym="ESMIESR1" offset="0x8" width="32" description="ESM Interrupt Enable Set/Status Register 1">
+    <bitfield id="INTENSET" width="32" begin="31" end="0" resetval="0x0" description="User and privilege mode (read): 0 = interrupt is disabled 1 = interrupt is enabled Privilege mode (write): 0 = leaves the bit and the corresponding clear bit in theESMIECR1 register unchanged 1 = enables interrupt and sets the corresponding clear bit in the ESMIECR1 register" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMIECR1" acronym="ESMIECR1" offset="0xC" width="32" description="ESM Interrupt Enable Clear/Status Register 1">
+    <bitfield id="INTENCLR" width="32" begin="31" end="0" resetval="0x0" description="User and privilege mode (read): 0 = interrupt is disabled 1 = interrupt is enabled Privilege mode (write): 0 = leaves the bit and the corresponding set bit in theESMIESR1 register unchanged 1 = disables interrupt and clears the corresponding set bit in the ESMIESR1 register" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMILSR1" acronym="ESMILSR1" offset="0x10" width="32" description="ESM Interrupt Level Set/Status Register 1">
+    <bitfield id="INTLVLSET" width="32" begin="31" end="0" resetval="0x0" description="User and privilege mode (read): 0 = interrupt of channel x is mapped to low level interrupt line 1 = interrupt of channel x is mapped to high level interrupt line Privilege mode (write): 0 = leaves the bit and the corresponding clear bit in theESMILCR1 register unchanged 1 = maps interrupt of channel x to high level interrupt line and sets the corresponding clear bit in the ESMILCR1 register" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMILCR1" acronym="ESMILCR1" offset="0x14" width="32" description="ESM Interrupt Level Clear/Status Register 1">
+    <bitfield id="INTLVLCLR" width="32" begin="31" end="0" resetval="0x0" description="User and privilege mode (read): 0 = interrupt of channel x is mapped to low level interrupt line 1 = interrupt of channel x is mapped to high level interrupt line Privilege mode (write): 0 = leaves the bit and the corresponding set bit in theESMILSR1 register unchanged 1 = maps interrupt of channel x to low level interrupt line and clears the corresponding set bit in the ESMILSR1 register" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMSR1" acronym="ESMSR1" offset="0x18" width="32" description="ESM Status Register 1">
+    <bitfield id="ESF" width="32" begin="31" end="0" resetval="0x0" description="Provides status information on pending error. User and privilege mode (read): 0 = no error occurred; no interrupt is pending 1 = error occurred; interrupt is pending Privilege mode (write): 0 = leaves the bit unchanged 1 = clears the bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMSR2" acronym="ESMSR2" offset="0x1C" width="32" description="ESM Status Register 2">
+    <bitfield id="ESF" width="32" begin="31" end="0" resetval="0x0" description="Provides status information on pending error. User and privilege mode (read): 0 = no error occurred; no interrupt is pending 1 = error occurred; interrupt is pending Privilege mode (write): 0 = leaves the bit unchanged 1 = clears the bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMSR3" acronym="ESMSR3" offset="0x20" width="32" description="ESM Status Register 3">
+    <bitfield id="ESF" width="32" begin="31" end="0" resetval="0x0" description="Provides status information on pending error. User and privilege mode (read): 0 = no error occurred 1 = error occurred Privilege mode (write): 0 = leaves the bit unchanged 1 = clears the bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMEPSR" acronym="ESMEPSR" offset="0x24" width="32" description="ESM Error Pin Status Register">
+    <bitfield id="RES" width="31" begin="31" end="1" resetval="0x0" description="Reads return 0 and writes have no effect" range="" rwaccess="R"/>
+    <bitfield id="EPSF" width="1" begin="0" end="0" resetval="0x1" description="Provides status information for the Error Pin. User and privilege mode (read): 0 = Error Pin is low (active) if any error has occurred 1 = Error Pin is high if no error has occurred User and privilege mode (write): Writes have no effect." range="" rwaccess="R"/>
+  </register>
+  <register id="ESMIOFFHR" acronym="ESMIOFFHR" offset="0x28" width="32" description="ESM Interrupt Offset High Register">
+    <bitfield id="RES" width="23" begin="31" end="9" resetval="0x0" description="Reads return 0 and writes have no effect" range="" rwaccess="R"/>
+    <bitfield id="INTOFFH" width="9" begin="8" end="0" resetval="0x0" description="This vector gives the channel number of the highest pending interrupt request for the high level interrupt line. Interrupts of error group 2 have higher priority than interrupts of error group 1. Inside a group, channel 0 has highest priority and channel 63 has lowest priority. User and privilege mode (read): Returns number of pending interrupt with the highest priority for the high level interrupt line: 0000_0000 = no pending interrupt 0000_0001 = interrupt pending for channel 0, error group1 ... 0010_0000 = interrupt pending for channel 31, error group1 0010_0001 = interrupt pending for channel 0, error group2 ... 0100_0000 = interrupt pending for channel 31, error group2 0100_0001 = interrupt pending for channel 32, error group1 ... 0110_0000 = interrupt pending for channel 63, error group1 0110_0001 = interrupt pending for channel 32, error group2 ... 1000_0000 = interrupt pending for channel 63, error group2 1000_0001 = interrupt pending for channel 64, error group1 ... 1010_0000 = interrupt pending for channel 95, error group1 1010_0001 = interrupt pending for channel 64, error group2 ... 1100_0000 = interrupt pending for channel 95, error group2 1100_0001 = interrupt pending for channel 96, error group1 ... 1110_0000 = interrupt pending for channel 127, error group1 1110_0001 = interrupt pending for channel 96, error group2 ... 1_0000_0000 = interrupt pending for channel 127, error group2 Reading the interrupt vector will clear the corresponding flag in theESMSR2, ESMSR5, ESMSR8 and ESMSR11 registers and the offset register gets updated. User and privilege mode (write): Writes have no effect." range="" rwaccess="R"/>
+  </register>
+  <register id="ESMIOFFLR" acronym="ESMIOFFLR" offset="0x2C" width="32" description="ESM Interrupt Offset Low Register">
+    <bitfield id="RES" width="24" begin="31" end="8" resetval="0x0" description="Reads return 0 and writes have no effect" range="" rwaccess="R"/>
+    <bitfield id="INTOFFL" width="8" begin="7" end="0" resetval="0x0" description="This vector gives the channel number of the highest pending interrupt request for the low level interrupt line. Inside a group, channel 0 has highest priority and channel 63 has lowest priority. User and privilege mode (read): Returns number of pending interrupt with the highest priority for the low level interrupt line: 0000_0000 = no pending interrupt 0000_0001 = interrupt pending for channel 0, error group1 ... 0010_0000 = interrupt pending for channel 31, error group1 0100_0001 = interrupt pending for channel 32, error group1 ... 0110_0000 = interrupt pending for channel 63, error group1 1000_0001 = interrupt pending for channel 64, error group1 ... 1010_0000 = interrupt pending for channel 95, error group1 1100_0001 = interrupt pending for channel 96, error group1 ... 1110_0000 = interrupt pending for channel 127, error group1 Group2 interrupts are fixed to the high level interrupt line only. User and privilege mode (write): Writes have no effect." range="" rwaccess="R"/>
+  </register>
+  <register id="ESMLTCR" acronym="ESMLTCR" offset="0x30" width="32" description="ESM Low-Time Counter Register">
+    <bitfield id="RES" width="16" begin="31" end="16" resetval="0x0" description="Reads return 0 and writes have no effect" range="" rwaccess="R"/>
+    <bitfield id="LTC" width="16" begin="15" end="0" resetval="0x3fff" description="16bit pre-loadable down-counter to control low-time of error pin. The lowtime counter is triggered by the peripheral clock (VCLK). Note: After reset the low time counter is set to the default preload value of theESMLTCPR to ensure a minimum low time of 100us running at a maximum frequency of 100MHz." range="" rwaccess="R"/>
+  </register>
+  <register id="ESMLTCPR" acronym="ESMLTCPR" offset="0x34" width="32" description="ESM Low-Time Counter Preload Register">
+    <bitfield id="RES" width="16" begin="31" end="16" resetval="0x0" description="Reads return 0 and writes have no effect" range="" rwaccess="R"/>
+    <bitfield id="LTCPW" width="2" begin="15" end="14" resetval="0x0" description="LTCP.15 and LTCP.14 are configurable (privilege mode write) to ensure a minimum low time of 100us running at a maximum frequency of 100MHz." range="" rwaccess="RW"/>
+    <bitfield id="LTCPR" width="14" begin="13" end="0" resetval="0x3fff" description="pre-load value for the error pin low-time counter." range="" rwaccess="R"/>
+  </register>
+  <register id="ESMEKR" acronym="ESMEKR" offset="0x38" width="32" description="ESM Error Key Register">
+    <bitfield id="RES" width="28" begin="31" end="4" resetval="0x0" description="Reads return 0 and writes have no effect" range="" rwaccess="R"/>
+    <bitfield id="EKEY" width="4" begin="3" end="0" resetval="0x0" description="Key to reset the error pin or to force an error on the error pin. User and privilege mode (read): Returns current value of the EKEY. Privilege mode (write): 0000 = activates normal mode (recommended default mode) 1010 = forces error on error pin 0101 = error pin will be set to high when the low time counter (LTC) has completed; then theESMEKR.EKEY bit will switch back to normal mode (EKEY = 0000). others = activates normal mode" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMSSR2" acronym="ESMSSR2" offset="0x3C" width="32" description="ESM Status Shadow Register 2">
+    <bitfield id="ESF" width="32" begin="31" end="0" resetval="0x0" description="Shadow register for status information on pending error. User and privilege mode (read): 0 = no error occurred 1 = error occurred Privilege mode (write): 0 = leaves the bit unchanged 1 = clears the bit Note: Errors are stored until they are cleared by the software or at power-on reset (PORRST). In case of system failure with SYS_nRST, software can read the shadow registers to determine the source of pending G2 errors." range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMIEPSR4" acronym="ESMIEPSR4" offset="0x40" width="32" description="ESM Influence Error Pin Set/Status Register 4">
+    <bitfield id="IEPSET" width="32" begin="31" end="0" resetval="0x0" description="User and privilege mode (read): 0 = failure on channel x has no influence on error pin 1 = failure on channel x has influence on error pin Privilege mode (write): 0 = leaves the bit and the corresponding clear bit in theESMIEPCR4 register unchanged 1 = enables failure influence on error pin and sets the corresponding clear bit in the ESMIEPCR4 register" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMIEPCR4" acronym="ESMIEPCR4" offset="0x44" width="32" description="ESM Influence Error Pin Clear/Status Register 4">
+    <bitfield id="IEPCLR" width="32" begin="31" end="0" resetval="0x0" description="User and privilege mode (read): 0 = failure on channel x has no influence on error pin 1 = failure on channel x has influence on error pin Privilege mode (write): 0 = leaves the bit and the corresponding set bit in theESMIEPSR4 register unchanged 1 = disables failure influence on error pin and clears the corresponding set bit in the ESMIEPSR4 register" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMIESR4" acronym="ESMIESR4" offset="0x48" width="32" description="ESM Interrupt Enable Set/Status Register 4">
+    <bitfield id="INTENSET" width="32" begin="31" end="0" resetval="0x0" description="User and privilege mode (read): 0 = interrupt is disabled 1 = interrupt is enabled Privilege mode (write): 0 = leaves the bit and the corresponding clear bit in theESMIECR4 register unchanged 1 = enables interrupt and sets the corresponding clear bit in the ESMIECR4 register" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMIECR4" acronym="ESMIECR4" offset="0x4C" width="32" description="ESM Interrupt Enable Clear/Status Register 4">
+    <bitfield id="INTENCLR" width="32" begin="31" end="0" resetval="0x0" description="User and privilege mode (read): 0 = interrupt is disabled 1 = interrupt is enabled Privilege mode (write): 0 = leaves the bit and the corresponding set bit in theESMIESR4 register unchanged 1 = disables interrupt and clears the corresponding set bit in the ESMIESR4 register" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMILSR4" acronym="ESMILSR4" offset="0x50" width="32" description="ESM Interrupt Level Set/Status Register 4">
+    <bitfield id="INTLVLSET" width="32" begin="31" end="0" resetval="0x0" description="User and privilege mode (read): 0 = interrupt of channel x is mapped to low level interrupt line 1 = interrupt of channel x is mapped to high level interrupt line Privilege mode (write): 0 = leaves the bit and the corresponding clear bit in theESMILCR4 register unchanged 1 = maps interrupt of channel x to high level interrupt line and sets the corresponding clear bit in the ESMILCR4 register" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMILCR4" acronym="ESMILCR4" offset="0x54" width="32" description="ESM Interrupt Level Clear/Status Register 4">
+    <bitfield id="INTLVLCLR" width="32" begin="31" end="0" resetval="0x0" description="User and privilege mode (read): 0 = interrupt of channel x is mapped to low level interrupt line 1 = interrupt of channel x is mapped to high level interrupt line Privilege mode (write): 0 = leaves the bit and the corresponding set bit in theESMILSR4 register unchanged 1 = maps interrupt of channel x to low level interrupt line and clears the corresponding set bit in the ESMILSR4 register" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMSR4" acronym="ESMSR4" offset="0x58" width="32" description="ESM Status Register 4">
+    <bitfield id="ESF" width="32" begin="31" end="0" resetval="0x0" description="Provides status information on pending error. User and privilege mode (read): 0 = no error occurred; no interrupt is pending 1 = error occurred; interrupt is pending Privilege mode (write): 0 = leaves the bit unchanged 1 = clears the bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMSR5" acronym="ESMSR5" offset="0x5C" width="32" description="ESM Status Register 5">
+    <bitfield id="ESF" width="32" begin="31" end="0" resetval="0x0" description="Provides status information on pending error. User and privilege mode (read): 0 = no error occurred; no interrupt is pending 1 = error occurred; interrupt is pending Privilege mode (write): 0 = leaves the bit unchanged 1 = clears the bit Note: In normal operation the flag gets cleared when reading the appropriate vector in theESMIOFFHR offset register." range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMSR6" acronym="ESMSR6" offset="0x60" width="32" description="ESM Status Register 6">
+    <bitfield id="ESF" width="32" begin="31" end="0" resetval="0x0" description="Provides status information on pending error. User and privilege mode (read): 0 = no error occurred 1 = error occurred Privilege mode (write): 0 = leaves the bit unchanged 1 = clears the bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMSSR5" acronym="ESMSSR5" offset="0x64" width="32" description="ESM Status Shadow Register 5">
+    <bitfield id="ESF" width="32" begin="31" end="0" resetval="0x0" description="Shadow register for status information on pending error. User and privilege mode (read): 0 = no error occurred 1 = error occurred Privilege mode (write): 0 = leaves the bit unchanged 1 = clears the bit Note: Errors are stored until they are cleared by the software or at power-on reset (PORRST). In case of system failure with SYS_nRST, software can read the shadow registers to determine the source of pending G2 errors." range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMIEPSR7" acronym="ESMIEPSR7" offset="0x80" width="32" description="ESM Influence Error Pin Set/Status Register 7">
+    <bitfield id="IEPSET" width="32" begin="31" end="0" resetval="0x0" description="User and privilege mode (read): 0 = failure on channel x has no influence on error pin 1 = failure on channel x has influence on error pin Privilege mode (write): 0 = leaves the bit and the corresponding clear bit in theESMIEPCR7 register unchanged 1 = enables failure influence on error pin and sets the corresponding clear bit in the ESMIEPCR7 register" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMIEPCR7" acronym="ESMIEPCR7" offset="0x84" width="32" description="ESM Influence Error Pin Clear/Status Register 7">
+    <bitfield id="IEPCLR" width="32" begin="31" end="0" resetval="0x0" description="User and privilege mode (read): 0 = failure on channel x has no influence on error pin 1 = failure on channel x has influence on error pin Privilege mode (write): 0 = leaves the bit and the corresponding set bit in theESMIEPSR7 register unchanged 1 = disables failure influence on error pin and clears the corresponding set bit in the ESMIEPSR7 register" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMIESR7" acronym="ESMIESR7" offset="0x88" width="32" description="ESM Interrupt Enable Set/Status Register 7">
+    <bitfield id="INTENSET" width="32" begin="31" end="0" resetval="0x0" description="User and privilege mode (read): 0 = interrupt is disabled 1 = interrupt is enabled Privilege mode (write): 0 = leaves the bit and the corresponding clear bit in theESMIECR7 register unchanged 1 = enables interrupt and sets the corresponding clear bit in the ESMIECR7 register" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMIECR7" acronym="ESMIECR7" offset="0x8C" width="32" description="ESM Interrupt Enable Clear/Status Register 7">
+    <bitfield id="INTENCLR" width="32" begin="31" end="0" resetval="0x0" description="User and privilege mode (read): 0 = interrupt is disabled 1 = interrupt is enabled Privilege mode (write): 0 = leaves the bit and the corresponding set bit in theESMIESR7 register unchanged 1 = disables interrupt and clears the corresponding set bit in the ESMIESR7 register" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMILSR7" acronym="ESMILSR7" offset="0x90" width="32" description="ESM Interrupt Level Set/Status Register 7">
+    <bitfield id="INTLVLSET" width="32" begin="31" end="0" resetval="0x0" description="User and privilege mode (read): 0 = interrupt of channel x is mapped to low level interrupt line 1 = interrupt of channel x is mapped to high level interrupt line Privilege mode (write): 0 = leaves the bit and the corresponding clear bit in theESMILCR7 register unchanged 1 = maps interrupt of channel x to high level interrupt line and sets the corresponding clear bit in the ESMILCR7 register" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMILCR7" acronym="ESMILCR7" offset="0x94" width="32" description="ESM Interrupt Level Clear/Status Register 7">
+    <bitfield id="INTLVLCLR" width="32" begin="31" end="0" resetval="0x0" description="User and privilege mode (read): 0 = interrupt of channel x is mapped to low level interrupt line 1 = interrupt of channel x is mapped to high level interrupt line Privilege mode (write): 0 = leaves the bit and the corresponding set bit in theESMILSR7 register unchanged 1 = maps interrupt of channel x to low level interrupt line and clears the corresponding set bit in the ESMILSR7 register" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMSR7" acronym="ESMSR7" offset="0x98" width="32" description="ESM Status Register 7">
+    <bitfield id="ESF" width="32" begin="31" end="0" resetval="0x0" description="Provides status information on pending error. User and privilege mode (read): 0 = no error occurred; no interrupt is pending 1 = error occurred; interrupt is pending Privilege mode (write): 0 = leaves the bit unchanged 1 = clears the bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMSR8" acronym="ESMSR8" offset="0x9C" width="32" description="ESM Status Register 8">
+    <bitfield id="ESF" width="32" begin="31" end="0" resetval="0x0" description="Provides status information on pending error. User and privilege mode (read): 0 = no error occurred; no interrupt is pending 1 = error occurred; interrupt is pending Privilege mode (write): 0 = leaves the bit unchanged 1 = clears the bit Note: In normal operation the flag gets cleared when reading the appropriate vector in theESMIOFFHR offset register." range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMSR9" acronym="ESMSR9" offset="0xA0" width="32" description="ESM Status Register 9">
+    <bitfield id="ESF" width="32" begin="31" end="0" resetval="0x0" description="Provides status information on pending error. User and privilege mode (read): 0 = no error occurred 1 = error occurred Privilege mode (write): 0 = leaves the bit unchanged 1 = clears the bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMSSR8" acronym="ESMSSR8" offset="0xA4" width="32" description="ESM Status Shadow Register 8">
+    <bitfield id="ESF" width="32" begin="31" end="0" resetval="0x0" description="Shadow register for status information on pending error. User and privilege mode (read): 0 = no error occurred 1 = error occurred Privilege mode (write): 0 = leaves the bit unchanged 1 = clears the bit Note: Errors are stored until they are cleared by the software or at power-on reset (PORRST). In case of system failure with SYS_nRST, software can read the shadow registers to determine the source of pending G2 errors." range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMIEPSR10" acronym="ESMIEPSR10" offset="0xC0" width="32" description="ESM Influence Error Pin Set/Status Register 10">
+    <bitfield id="IEPSET" width="32" begin="31" end="0" resetval="0x0" description="User and privilege mode (read): 0 = failure on channel x has no influence on error pin 1 = failure on channel x has influence on error pin Privilege mode (write): 0 = leaves the bit and the corresponding clear bit in theESMIEPCR10 register unchanged 1 = enables failure influence on error pin and sets the corresponding clear bit in the ESMIEPCR10 register" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMIEPCR10" acronym="ESMIEPCR10" offset="0xC4" width="32" description="ESM Influence Error Pin Clear/Status Register 10">
+    <bitfield id="IEPCLR" width="32" begin="31" end="0" resetval="0x0" description="User and privilege mode (read): 0 = failure on channel x has no influence on error pin 1 = failure on channel x has influence on error pin Privilege mode (write): 0 = leaves the bit and the corresponding set bit in theESMIEPSR10 register unchanged 1 = disables failure influence on error pin and clears the corresponding set bit in the ESMIEPSR10 register" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMIESR10" acronym="ESMIESR10" offset="0xC8" width="32" description="ESM Interrupt Enable Set/Status Register 10">
+    <bitfield id="INTENSET" width="32" begin="31" end="0" resetval="0x0" description="User and privilege mode (read): 0 = interrupt is disabled 1 = interrupt is enabled Privilege mode (write): 0 = leaves the bit and the corresponding clear bit in theESMIECR10 register unchanged 1 = enables interrupt and sets the corresponding clear bit in the ESMIECR10 register" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMIECR10" acronym="ESMIECR10" offset="0xCC" width="32" description="ESM Interrupt Enable Clear/Status Register 10">
+    <bitfield id="INTENCLR" width="32" begin="31" end="0" resetval="0x0" description="User and privilege mode (read): 0 = interrupt is disabled 1 = interrupt is enabled Privilege mode (write): 0 = leaves the bit and the corresponding set bit in theESMIESR10 register unchanged 1 = disables interrupt and clears the corresponding set bit in the ESMIESR10 register" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMILSR10" acronym="ESMILSR10" offset="0xD0" width="32" description="ESM Interrupt Level Set/Status Register 10">
+    <bitfield id="INTLVLSET" width="32" begin="31" end="0" resetval="0x0" description="User and privilege mode (read): 0 = interrupt of channel x is mapped to low level interrupt line 1 = interrupt of channel x is mapped to high level interrupt line Privilege mode (write): 0 = leaves the bit and the corresponding clear bit in theESMILCR10 register unchanged 1 = maps interrupt of channel x to high level interrupt line and sets the corresponding clear bit in the ESMILCR10 register" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMILCR10" acronym="ESMILCR10" offset="0xD4" width="32" description="ESM Interrupt Level Clear/Status Register 10">
+    <bitfield id="INTLVLCLR" width="32" begin="31" end="0" resetval="0x0" description="User and privilege mode (read): 0 = interrupt of channel x is mapped to low level interrupt line 1 = interrupt of channel x is mapped to high level interrupt line Privilege mode (write): 0 = leaves the bit and the corresponding set bit in theESMILSR10 register unchanged 1 = maps interrupt of channel x to low level interrupt line and clears the corresponding set bit in the ESMILSR10 register" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMSR10" acronym="ESMSR10" offset="0xD8" width="32" description="ESM Status Register 10">
+    <bitfield id="ESF" width="32" begin="31" end="0" resetval="0x0" description="Provides status information on pending error. User and privilege mode (read): 0 = no error occurred; no interrupt is pending 1 = error occurred; interrupt is pending Privilege mode (write): 0 = leaves the bit unchanged 1 = clears the bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMSR11" acronym="ESMSR11" offset="0xDC" width="32" description="ESM Status Register 11">
+    <bitfield id="ESF" width="32" begin="31" end="0" resetval="0x0" description="Provides status information on pending error. User and privilege mode (read): 0 = no error occurred; no interrupt is pending 1 = error occurred; interrupt is pending Privilege mode (write): 0 = leaves the bit unchanged 1 = clears the bit Note: In normal operation the flag gets cleared when reading the appropriate vector in theESMIOFFHR offset register." range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMSR12" acronym="ESMSR12" offset="0xE0" width="32" description="ESM Status Register 12">
+    <bitfield id="ESF" width="32" begin="31" end="0" resetval="0x0" description="Provides status information on pending error. User and privilege mode (read): 0 = no error occurred 1 = error occurred Privilege mode (write): 0 = leaves the bit unchanged 1 = clears the bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="ESMSSR11" acronym="ESMSSR11" offset="0xE4" width="32" description="ESM Status Shadow Register 11">
+    <bitfield id="ESF" width="32" begin="31" end="0" resetval="0x0" description="Shadow register for status information on pending error. User and privilege mode (read): 0 = no error occurred 1 = error occurred Privilege mode (write): 0 = leaves the bit unchanged 1 = clears the bit Note: Errors are stored until they are cleared by the software or at power-on reset (PORRST). In case of system failure with SYS_nRST, software can read the shadow registers to determine the source of pending G2 errors." range="" rwaccess="RW"/>
+  </register>
+</module>

@@ -1,0 +1,77 @@
+<module name="PCIE0_CORE_DBN_CFG_PCIE_CORE" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="PCIE_CORE_ATU_WRAPPER_OB_i_ADDR0" acronym="PCIE_CORE_ATU_WRAPPER_OB_i_ADDR0" offset="0x400000" width="32" description="Return to the . Provides bits 31:8 of the PCIe address and the number of AXI address bits passed through Offset = 400000h + (i * 20h); where i = 0h to 1Fh">
+    <bitfield id="DATA" width="24" begin="31" end="8" resetval="0x0" description="Bits[31:8] of PCIe Address Register for region N" range="" rwaccess="RW"/>
+    <bitfield id="RSVD" width="2" begin="7" end="6" resetval="0x0" description="Bits 7 and 6 are reserved" range="" rwaccess="R"/>
+    <bitfield id="NUM_BITS" width="6" begin="5" end="0" resetval="0x0" description="Number_bits + 1 bits are passed through from AXI address to the PCIe address" range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_CORE_ATU_WRAPPER_OB_i_ADDR1" acronym="PCIE_CORE_ATU_WRAPPER_OB_i_ADDR1" offset="0x400004" width="32" description="Return to the . Provides bits 63:32 of the PCIe address Offset = 400004h + (i * 20h); where i = 0h to 1Fh">
+    <bitfield id="DATA" width="32" begin="31" end="0" resetval="0x0" description="Bits [63:32] of PCIe Address Register for region N" range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_CORE_ATU_WRAPPER_OB_i_DESC0" acronym="PCIE_CORE_ATU_WRAPPER_OB_i_DESC0" offset="0x400008" width="32" description="Return to the . Provides bits 31:0 of the Outbound PCIe Descriptor Offset = 400008h + (i * 20h); where i = 0h to 1Fh">
+    <bitfield id="DATA" width="32" begin="31" end="0" resetval="0x0" description="Lowest 32-bits of PCIe Descriptor Register for region N" range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_CORE_ATU_WRAPPER_OB_i_DESC1" acronym="PCIE_CORE_ATU_WRAPPER_OB_i_DESC1" offset="0x40000C" width="32" description="Return to the . Provides bits 63:32 of the PCIe Descriptor Offset = 40000Ch + (i * 20h); where i = 0h to 1Fh">
+    <bitfield id="DATA" width="32" begin="31" end="0" resetval="0x0" description="Lower middle 32-bits of PCIe Descriptor Register for region N" range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_CORE_ATU_WRAPPER_OB_i_DESC3" acronym="PCIE_CORE_ATU_WRAPPER_OB_i_DESC3" offset="0x400014" width="32" description="Return to the . Provides PASID Value and The present bit Offset = 400014h + (i * 20h); where i = 0h to 1Fh">
+    <bitfield id="RSVD" width="9" begin="31" end="23" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="DATA" width="23" begin="22" end="0" resetval="0x0" description="{Execute Permission Supported, Privileged Mode Supported, PASID Value, PASID present bit}" range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_CORE_ATU_WRAPPER_OB_i_AXI_ADDR0" acronym="PCIE_CORE_ATU_WRAPPER_OB_i_AXI_ADDR0" offset="0x400018" width="32" description="Return to the . holds the base address [31:8] of this region. Lower [5:0] is used for region size programmability Offset = 400018h + (i * 20h); where i = 0h to 1Fh">
+    <bitfield id="DATA" width="24" begin="31" end="8" resetval="0x0" description="Bits[31:8] of Outbound AXI Region Base Address Register used to decode the region" range="" rwaccess="RW"/>
+    <bitfield id="RSVD" width="2" begin="7" end="6" resetval="0x0" description="These needs to be forced to 0" range="" rwaccess="RW"/>
+    <bitfield id="REGION_SIZE" width="6" begin="5" end="0" resetval="0x0" description="the value programmed in this field + 1 gives the region size" range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_CORE_ATU_WRAPPER_OB_i_AXI_ADDR1" acronym="PCIE_CORE_ATU_WRAPPER_OB_i_AXI_ADDR1" offset="0x40001C" width="32" description="Return to the . holds the base address [63:32] of this region. Offset = 40001Ch + (i * 20h); where i = 0h to 1Fh">
+    <bitfield id="DATA" width="32" begin="31" end="0" resetval="0x0" description="Bits [63:32] of AXI outbound Base Address Register used to decode the region" range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_CORE_ATU_HP_WRAPPER_OB_i_ADDR0" acronym="PCIE_CORE_ATU_HP_WRAPPER_OB_i_ADDR0" offset="0x400400" width="32" description="Return to the . Provides bits 31:8 of the PCIe address and the number of AXI address bits passed through Offset = 400400h + (i * 20h); where i = 0h to 1Fh">
+    <bitfield id="DATA" width="24" begin="31" end="8" resetval="0x0" description="Bits[31:8] of PCIe Address Register for region N" range="" rwaccess="RW"/>
+    <bitfield id="RSVD" width="2" begin="7" end="6" resetval="0x0" description="Bits 7 and 6 are reserved" range="" rwaccess="R"/>
+    <bitfield id="NUM_BITS" width="6" begin="5" end="0" resetval="0x0" description="Number_bits + 1 bits are passed through from AXI address to the PCIe address" range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_CORE_ATU_HP_WRAPPER_OB_i_ADDR1" acronym="PCIE_CORE_ATU_HP_WRAPPER_OB_i_ADDR1" offset="0x400404" width="32" description="Return to the . Provides bits 63:32 of the PCIe address Offset = 400404h + (i * 20h); where i = 0h to 1Fh">
+    <bitfield id="DATA" width="32" begin="31" end="0" resetval="0x0" description="Bits [63:32] of PCIe Address Register for region N" range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_CORE_ATU_HP_WRAPPER_OB_i_DESC0" acronym="PCIE_CORE_ATU_HP_WRAPPER_OB_i_DESC0" offset="0x400408" width="32" description="Return to the . Provides bits 31:0 of the Outbound PCIe Descriptor Offset = 400408h + (i * 20h); where i = 0h to 1Fh">
+    <bitfield id="DATA" width="32" begin="31" end="0" resetval="0x0" description="Lowest 32-bits of PCIe Descriptor Register for region N" range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_CORE_ATU_HP_WRAPPER_OB_i_DESC1" acronym="PCIE_CORE_ATU_HP_WRAPPER_OB_i_DESC1" offset="0x40040C" width="32" description="Return to the . Provides bits 63:32 of the PCIe Descriptor Offset = 40040Ch + (i * 20h); where i = 0h to 1Fh">
+    <bitfield id="DATA" width="32" begin="31" end="0" resetval="0x0" description="Lower middle 32-bits of PCIe Descriptor Register for region N" range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_CORE_ATU_HP_WRAPPER_OB_i_DESC3" acronym="PCIE_CORE_ATU_HP_WRAPPER_OB_i_DESC3" offset="0x400414" width="32" description="Return to the . Provides PASID Value and The present bit Offset = 400414h + (i * 20h); where i = 0h to 1Fh">
+    <bitfield id="RSVD" width="9" begin="31" end="23" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="DATA" width="23" begin="22" end="0" resetval="0x0" description="{Execute Permission Supported, Privileged Mode Supported, PASID Value, PASID present bit}" range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_CORE_ATU_HP_WRAPPER_OB_i_AXI_ADDR0" acronym="PCIE_CORE_ATU_HP_WRAPPER_OB_i_AXI_ADDR0" offset="0x400418" width="32" description="Return to the . Holds the base address [31:8] of this region. Lower [5:0] is used for region size programmability Offset = 400418h + (i * 20h); where i = 0h to 1Fh">
+    <bitfield id="DATA" width="24" begin="31" end="8" resetval="0x0" description="Bits[31:8] of Outbound AXI Region Base Address Register used to decode the region" range="" rwaccess="RW"/>
+    <bitfield id="RSVD" width="2" begin="7" end="6" resetval="0x0" description="These needs to be forced to 0" range="" rwaccess="RW"/>
+    <bitfield id="REGION_SIZE" width="6" begin="5" end="0" resetval="0x0" description="the value programmed in this field + 1 gives the region size" range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_CORE_ATU_HP_WRAPPER_OB_i_AXI_ADDR1" acronym="PCIE_CORE_ATU_HP_WRAPPER_OB_i_AXI_ADDR1" offset="0x40041C" width="32" description="Return to the . holds the base address [63:32] of this region. Offset = 40041Ch + (i * 20h); where i = 0h to 1Fh">
+    <bitfield id="DATA" width="32" begin="31" end="0" resetval="0x0" description="Bits [63:32] of AXI outbound Base Address Register used to decode the region" range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_CORE_ATU_WRAPPER_IB_k_ADDR0" acronym="PCIE_CORE_ATU_WRAPPER_IB_k_ADDR0" offset="0x400800" width="32" description="Return to the . Provides bits 31:8 of the AXI Address and the number of PCIE address bits passed through Offset = 400800h + (k * 8h); where k = 0h to 2h">
+    <bitfield id="DATA" width="24" begin="31" end="8" resetval="0x0" description="Bits[31:8] of AXI Address Register for BAR N" range="" rwaccess="RW"/>
+    <bitfield id="RSVD0" width="2" begin="7" end="6" resetval="0x0" description="Bits 7 and 6 are reserved" range="" rwaccess="R"/>
+    <bitfield id="NUM_BITS" width="6" begin="5" end="0" resetval="0x0" description="The value programmed in this register +1 bits are passed through from PCIe to AXI" range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_CORE_ATU_WRAPPER_IB_k_ADDR1" acronym="PCIE_CORE_ATU_WRAPPER_IB_k_ADDR1" offset="0x400804" width="32" description="Return to the . Provides bits 63:32 of the AXI Address Offset = 400804h + (k * 8h); where k = 0h to 2h">
+    <bitfield id="DATA" width="32" begin="31" end="0" resetval="0x0" description="Bits [63:32] of AXI Address Register for BAR N" range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_CORE_ATU_CREDIT_THRESHOLD_C0" acronym="PCIE_CORE_ATU_CREDIT_THRESHOLD_C0" offset="0x400820" width="32" description="Return to the . N/A">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HEADER" width="8" begin="19" end="12" resetval="0x1" description="This is the threshold value of the header credits required which is used to flag credit availability in AXI wrapper" range="" rwaccess="RW"/>
+    <bitfield id="DATA" width="12" begin="11" end="0" resetval="0x10" description="This is the threshold value of the payload credits required which is used to flag credit availability in AXI wrapper" range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_CORE_ATU_LINK_DOWN_INDICATOR_BIT_L0" acronym="PCIE_CORE_ATU_LINK_DOWN_INDICATOR_BIT_L0" offset="0x400824" width="32" description="Return to the . N/A">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CLEAR_LINK_DOWN_BIT_TO_PROCEED" width="1" begin="0" end="0" resetval="0x0" description="This bit will be set when link down reset comes.client should clear this bit before issueing new traffic to the core" range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_CORE_ATU_FUNCm_WRAPPER_IB_EP_n_ADDR0" acronym="PCIE_CORE_ATU_FUNCm_WRAPPER_IB_EP_n_ADDR0" offset="0x400840" width="32" description="Return to the . Provides bits 31:0 of the AXI address Offset = 400840h + (m * 40h) + (n * 8h); where m = 0 to 15h, n = 0h to 7h">
+    <bitfield id="DATA" width="32" begin="31" end="0" resetval="0x0" description="Bits [31:0] of Address Register for BAR N" range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_CORE_ATU_FUNCm_WRAPPER_IB_EP_n_ADDR1" acronym="PCIE_CORE_ATU_FUNCm_WRAPPER_IB_EP_n_ADDR1" offset="0x400844" width="32" description="Return to the . Provides bits 63:32 of the AXI address Offset = 400844h + (m * 40h) + (n * 8h); where m = 0 to 15h, n = 0h to 7h">
+    <bitfield id="DATA" width="32" begin="31" end="0" resetval="0x0" description="Bits [63:32] of AXI Address Register for BAR N" range="" rwaccess="RW"/>
+  </register>
+</module>

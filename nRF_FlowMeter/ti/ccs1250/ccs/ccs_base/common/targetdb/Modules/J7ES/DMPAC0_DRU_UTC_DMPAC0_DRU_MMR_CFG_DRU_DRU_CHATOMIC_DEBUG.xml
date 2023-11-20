@@ -1,0 +1,74 @@
+<module name="DMPAC0_DRU_UTC_DMPAC0_DRU_MMR_CFG_DRU_DRU_CHATOMIC_DEBUG" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="DMPAC_UTC_DRU_ATOMIC_SUBMIT_CURR_TR_WORD0_1_j" acronym="DMPAC_UTC_DRU_ATOMIC_SUBMIT_CURR_TR_WORD0_1_j" offset="0x0" width="64" description="The first TR submission word">
+    <bitfield id="ICNT1" width="16" begin="63" end="48" resetval="0x0" description="Lines in a transfer" range="" rwaccess="R"/>
+    <bitfield id="ICNT0" width="16" begin="47" end="32" resetval="0x0" description="Bytes in a transfer" range="" rwaccess="R"/>
+    <bitfield id="FLAGS" width="32" begin="31" end="0" resetval="0x0" description="Flags for the operation and type of descriptor" range="" rwaccess="R"/>
+  </register>
+  <register id="DMPAC_UTC_DRU_ATOMIC_SUBMIT_CURR_TR_WORD2_3_j" acronym="DMPAC_UTC_DRU_ATOMIC_SUBMIT_CURR_TR_WORD2_3_j" offset="0x8" width="64" description="The second TR submission word">
+    <bitfield id="RSVD" width="16" begin="63" end="48" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="SRC_ADDR" width="48" begin="47" end="0" resetval="0x0" description="Source transfer address virtual or physical allowed" range="" rwaccess="R"/>
+  </register>
+  <register id="DMPAC_UTC_DRU_ATOMIC_SUBMIT_CURR_TR_WORD4_5_j" acronym="DMPAC_UTC_DRU_ATOMIC_SUBMIT_CURR_TR_WORD4_5_j" offset="0x10" width="64" description="The third TR submission word">
+    <bitfield id="ICNT3" width="16" begin="63" end="48" resetval="0x0" description="The size of the 4th loop in the TR transfer" range="" rwaccess="R"/>
+    <bitfield id="ICNT2" width="16" begin="47" end="32" resetval="0x0" description="The size of the 3rd loop in the TR transfer" range="" rwaccess="R"/>
+    <bitfield id="DIM1" width="32" begin="31" end="0" resetval="0x0" description="The first dimension width of the source data" range="" rwaccess="R"/>
+  </register>
+  <register id="DMPAC_UTC_DRU_ATOMIC_SUBMIT_CURR_TR_WORD6_7_j" acronym="DMPAC_UTC_DRU_ATOMIC_SUBMIT_CURR_TR_WORD6_7_j" offset="0x18" width="64" description="The fourth TR submission word">
+    <bitfield id="DIM3" width="32" begin="63" end="32" resetval="0x0" description="The third dimension width of the source data" range="" rwaccess="R"/>
+    <bitfield id="DIM2" width="32" begin="31" end="0" resetval="0x0" description="The second dimension width of the source data" range="" rwaccess="R"/>
+  </register>
+  <register id="DMPAC_UTC_DRU_ATOMIC_SUBMIT_CURR_TR_WORD8_9_j" acronym="DMPAC_UTC_DRU_ATOMIC_SUBMIT_CURR_TR_WORD8_9_j" offset="0x20" width="64" description="The fifth TR submission word">
+    <bitfield id="DDIM1" width="32" begin="63" end="32" resetval="0x0" description="The first dimension width of the destination data" range="" rwaccess="R"/>
+    <bitfield id="FMTFLAGS" width="32" begin="31" end="0" resetval="0x0" description="The data formatting flags to be used for the TR" range="" rwaccess="R"/>
+  </register>
+  <register id="DMPAC_UTC_DRU_ATOMIC_SUBMIT_CURR_TR_WORD10_11_j" acronym="DMPAC_UTC_DRU_ATOMIC_SUBMIT_CURR_TR_WORD10_11_j" offset="0x28" width="64" description="The sixth TR submission word">
+    <bitfield id="RSVD" width="16" begin="63" end="48" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="DADDR" width="48" begin="47" end="0" resetval="0x0" description="Destination transfer address virtual or physical allowed" range="" rwaccess="R"/>
+  </register>
+  <register id="DMPAC_UTC_DRU_ATOMIC_SUBMIT_CURR_TR_WORD12_13_j" acronym="DMPAC_UTC_DRU_ATOMIC_SUBMIT_CURR_TR_WORD12_13_j" offset="0x30" width="64" description="The seventh TR submission word">
+    <bitfield id="DDIM3" width="32" begin="63" end="32" resetval="0x0" description="The third dimension width of the destination data" range="" rwaccess="R"/>
+    <bitfield id="DDIM2" width="32" begin="31" end="0" resetval="0x0" description="The second dimension width of the destination data" range="" rwaccess="R"/>
+  </register>
+  <register id="DMPAC_UTC_DRU_ATOMIC_SUBMIT_CURR_TR_WORD14_15_j" acronym="DMPAC_UTC_DRU_ATOMIC_SUBMIT_CURR_TR_WORD14_15_j" offset="0x38" width="64" description="The eight TR submission word">
+    <bitfield id="DICNT3" width="16" begin="63" end="48" resetval="0x0" description="The fourth count of the destination if different than the source" range="" rwaccess="R"/>
+    <bitfield id="DICNT2" width="16" begin="47" end="32" resetval="0x0" description="The third count of the destination if different than the source" range="" rwaccess="R"/>
+    <bitfield id="DICNT1" width="16" begin="31" end="16" resetval="0x0" description="The second innermost count of the destination if different than the source" range="" rwaccess="R"/>
+    <bitfield id="DICNT0" width="16" begin="15" end="0" resetval="0x0" description="The innermost count of the destination if different than the source" range="" rwaccess="R"/>
+  </register>
+  <register id="DMPAC_UTC_DRU_NEXT_TR_WORD0_1_j_k" acronym="DMPAC_UTC_DRU_NEXT_TR_WORD0_1_j_k" offset="0x40" width="64" description="The first TR submission word">
+    <bitfield id="ICNT1" width="16" begin="63" end="48" resetval="0x0" description="Lines in a transfer" range="" rwaccess="R"/>
+    <bitfield id="ICNT0" width="16" begin="47" end="32" resetval="0x0" description="Bytes in a transfer" range="" rwaccess="R"/>
+    <bitfield id="FLAGS" width="32" begin="31" end="0" resetval="0x0" description="Flags for the operation and type of descriptor" range="" rwaccess="R"/>
+  </register>
+  <register id="DMPAC_UTC_DRU_NEXT_TR_WORD2_3_j_k" acronym="DMPAC_UTC_DRU_NEXT_TR_WORD2_3_j_k" offset="0x48" width="64" description="The second TR submission word">
+    <bitfield id="RSVD" width="16" begin="63" end="48" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="SRC_ADDR" width="48" begin="47" end="0" resetval="0x0" description="Source transfer address virtual or physical allowed" range="" rwaccess="R"/>
+  </register>
+  <register id="DMPAC_UTC_DRU_NEXT_TR_WORD4_5_j_k" acronym="DMPAC_UTC_DRU_NEXT_TR_WORD4_5_j_k" offset="0x50" width="64" description="The third TR submission word">
+    <bitfield id="ICNT3" width="16" begin="63" end="48" resetval="0x0" description="The size of the 4th loop in the TR transfer" range="" rwaccess="R"/>
+    <bitfield id="ICNT2" width="16" begin="47" end="32" resetval="0x0" description="The size of the 3rd loop in the TR transfer" range="" rwaccess="R"/>
+    <bitfield id="DIM1" width="32" begin="31" end="0" resetval="0x0" description="The first dimension width of the source data" range="" rwaccess="R"/>
+  </register>
+  <register id="DMPAC_UTC_DRU_NEXT_TR_WORD6_7_j_k" acronym="DMPAC_UTC_DRU_NEXT_TR_WORD6_7_j_k" offset="0x58" width="64" description="The fourth TR submission word">
+    <bitfield id="DIM3" width="32" begin="63" end="32" resetval="0x0" description="The third dimension width of the source data" range="" rwaccess="R"/>
+    <bitfield id="DIM2" width="32" begin="31" end="0" resetval="0x0" description="The second dimension width of the source data" range="" rwaccess="R"/>
+  </register>
+  <register id="DMPAC_UTC_DRU_NEXT_TR_WORD8_9_j_k" acronym="DMPAC_UTC_DRU_NEXT_TR_WORD8_9_j_k" offset="0x60" width="64" description="The fifth TR submission word">
+    <bitfield id="DDIM1" width="32" begin="63" end="32" resetval="0x0" description="The first dimension width of the destination data" range="" rwaccess="R"/>
+    <bitfield id="FMTFLAGS" width="32" begin="31" end="0" resetval="0x0" description="The data formatting flags to be used for the TR" range="" rwaccess="R"/>
+  </register>
+  <register id="DMPAC_UTC_DRU_NEXT_TR_WORD10_11_j_k" acronym="DMPAC_UTC_DRU_NEXT_TR_WORD10_11_j_k" offset="0x68" width="64" description="The sixth TR submission word">
+    <bitfield id="RSVD" width="16" begin="63" end="48" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="DADDR" width="48" begin="47" end="0" resetval="0x0" description="Destination transfer address virtual or physical allowed" range="" rwaccess="R"/>
+  </register>
+  <register id="DMPAC_UTC_DRU_NEXT_TR_WORD12_13_j_k" acronym="DMPAC_UTC_DRU_NEXT_TR_WORD12_13_j_k" offset="0x70" width="64" description="The seventh TR submission word">
+    <bitfield id="DDIM3" width="32" begin="63" end="32" resetval="0x0" description="The third dimension width of the destination data" range="" rwaccess="R"/>
+    <bitfield id="DDIM2" width="32" begin="31" end="0" resetval="0x0" description="The second dimension width of the destination data" range="" rwaccess="R"/>
+  </register>
+  <register id="DMPAC_UTC_DRU_NEXT_TR_WORD14_15_j_k" acronym="DMPAC_UTC_DRU_NEXT_TR_WORD14_15_j_k" offset="0x78" width="64" description="The eight TR submission word">
+    <bitfield id="DICNT3" width="16" begin="63" end="48" resetval="0x0" description="The fourth count of the destination if different than the source" range="" rwaccess="R"/>
+    <bitfield id="DICNT2" width="16" begin="47" end="32" resetval="0x0" description="The third count of the destination if different than the source" range="" rwaccess="R"/>
+    <bitfield id="DICNT1" width="16" begin="31" end="16" resetval="0x0" description="The second innermost count of the destination if different than the source" range="" rwaccess="R"/>
+    <bitfield id="DICNT0" width="16" begin="15" end="0" resetval="0x0" description="The innermost count of the destination if different than the source" range="" rwaccess="R"/>
+  </register>
+</module>

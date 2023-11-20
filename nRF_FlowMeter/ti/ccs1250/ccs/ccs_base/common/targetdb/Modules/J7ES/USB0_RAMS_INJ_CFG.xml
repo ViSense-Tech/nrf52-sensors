@@ -1,0 +1,44 @@
+<module name="USB0_RAMS_INJ_CFG" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="USB_PID" acronym="USB_PID" offset="0x0" width="32" description="The Revision Register contains the major and minor revisions for the module.">
+    <bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x1" description="" range="" rwaccess="R"/>
+    <bitfield id="BU" width="2" begin="29" end="28" resetval="0x2" description="Business Unit:" range="" rwaccess="R"/>
+    <bitfield id="FUNC" width="12" begin="27" end="16" resetval="0x0" description="Module ID" range="" rwaccess="R"/>
+    <bitfield id="RTL" width="5" begin="15" end="11" resetval="0x0" description="RTL revision." range="" rwaccess="R"/>
+    <bitfield id="MAJOR" width="3" begin="10" end="8" resetval="0x0" description="Major revision" range="" rwaccess="R"/>
+    <bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom" range="" rwaccess="R"/>
+    <bitfield id="MINOR" width="6" begin="5" end="0" resetval="0x1" description="Minor revision" range="" rwaccess="R"/>
+  </register>
+  <register id="USB_INFO" acronym="USB_INFO" offset="0x4" width="32" description="The Info Register gives the configuration Inforrmation of this module.">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="ENDPOINTS" width="6" begin="5" end="0" resetval="0x1E" description="Total number of Targets supported by this configuration" range="" rwaccess="R"/>
+  </register>
+  <register id="USB_SFT_RST" acronym="USB_SFT_RST" offset="0x8" width="32" description="The Global Soft Reset Register clears all programmable registers and returns the injector to idle state">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="KEY" width="4" begin="3" end="0" resetval="0x0" description="Write 4'b1010 to issue a soft reset." range="" rwaccess="W"/>
+  </register>
+  <register id="USB_BIT1" acronym="USB_BIT1" offset="0x10" width="32" description="This register defines the first bit to be flipped when injection is enabled">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="BIT1" width="16" begin="15" end="0" resetval="0x0" description="First bit to be flipped on an error injection" range="" rwaccess="RW"/>
+  </register>
+  <register id="USB_BIT2" acronym="USB_BIT2" offset="0x14" width="32" description="This register defines the second bit to be flipped if 2-bit injection is enabled">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="BIT2" width="16" begin="15" end="0" resetval="0x0" description="Second bit to be flipped on an error injection if" range="" rwaccess="RW"/>
+  </register>
+  <register id="USB_TRGT" acronym="USB_TRGT" offset="0x18" width="32" description="This is the target selection register">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="TRGT" width="5" begin="4" end="0" resetval="0x0" description="Select which target to interact with." range="" rwaccess="RW"/>
+  </register>
+  <register id="USB_CTRL" acronym="USB_CTRL" offset="0x1C" width="32" description="Controls the injection">
+    <bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="TRGT" width="5" begin="12" end="8" resetval="0x0" description="Indicates which target is selected by the" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="7" end="3" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="DONE" width="1" begin="2" end="2" resetval="0x0" description="Indicates that the target selected by" range="" rwaccess="R"/>
+    <bitfield id="TWOBIT" width="1" begin="1" end="1" resetval="0x0" description="Write 1 to trigger a 2-bit error in target selected by" range="" rwaccess="RW"/>
+    <bitfield id="ONEBIT" width="1" begin="0" end="0" resetval="0x0" description="Write 1 to trigger a 1-bit error in target selected by" range="" rwaccess="RW"/>
+  </register>
+  <register id="USB_STATUS" acronym="USB_STATUS" offset="0x20" width="32" description="Controls the injection">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="ARMED" width="1" begin="2" end="2" resetval="0x0" description="Indicates that the target selected by" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="2" begin="1" end="0" resetval="0xX" description="" range="" rwaccess="R"/>
+  </register>
+</module>

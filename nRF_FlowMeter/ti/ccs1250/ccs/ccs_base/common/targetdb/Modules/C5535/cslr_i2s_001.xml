@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><module id="I2S" HW_revision="" XML_version="1" description="I2S">
+     <register id="I2SSCTRL" acronym="I2SSCTRL" page="2" offset="0X0000" width="16" description="Serializer Control  Register">
+<bitfield id="ENABLE" width="1" begin="15" end="15" resetval="0" description="Resets or enables the serializer transmission or reception." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="The I2S Peripheral (Data xfr, clock generation, and event gen logix) is disabled and held in reset state.  "/>
+<bitenum id="SET" value="1" token="SET" description="I2S enabled"/>
+</bitfield>
+<bitfield id="_RESV_2" width="2" begin="14" end="13" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="MONO" width="1" begin="12" end="12" resetval="0" description="Sets I2S into mono or Stereo mode" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Stereo mode"/>
+<bitenum id="SET" value="1" token="SET" description="Mono mode"/>
+</bitfield>
+<bitfield id="LOOPBACK" width="1" begin="11" end="11" resetval="0" description="Routes data from transmit shift register back to receive shift register for internal digital loopback" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Normal operation, no loopback"/>
+<bitenum id="SET" value="1" token="SET" description="Digital loopback mode enabled "/>
+</bitfield>
+<bitfield id="FSPOL" width="1" begin="10" end="10" resetval="0" description="Inverts I2S frame-synchronization polarity" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="I2S/LJ: Frame-sync pulse is low for left word and high for right word. DSP: Frame-sync is pulsed high"/>
+<bitenum id="SET" value="1" token="SET" description="I2S/LJ: Frame-sync pulse is high for left word and low for right word. DSP: Frame-sync is pulsed low"/>
+</bitfield>
+<bitfield id="CLKPOL" width="1" begin="9" end="9" resetval="0" description="controls I2S clock polarity " range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Receive data is sampled on the rising edge and transmit data shifted on the falling edge of the bit clock."/>
+<bitenum id="SET" value="1" token="SET" description="Receive data is sampled on the falling edge and transmit data shifted on the rising edge of the bit clock"/>
+</bitfield>
+<bitfield id="DATADLY" width="1" begin="8" end="8" resetval="0" description="Sets the I2S receive/transmit data delay." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="1 bit data delay"/>
+<bitenum id="SET" value="1" token="SET" description="2 bit data delay"/>
+</bitfield>
+<bitfield id="PACK" width="1" begin="7" end="7" resetval="0" description="divides down the generation of interrupts so that data is packed into the 32-bit receive/transmit word registers for each channel (left/right)" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Data packing mode disabled"/>
+<bitenum id="SET" value="1" token="SET" description="Data packing mode enabled"/>
+</bitfield>
+<bitfield id="SIGN_EXT" width="1" begin="6" end="6" resetval="0" description="enable/disable sign externsionof words" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="no sign extension"/>
+<bitenum id="SET" value="1" token="SET" description="received data is sign extended. Transmit data is expected to be sign extended"/>
+</bitfield>
+<bitfield id="WDLNGTH" width="4" begin="5" end="2" resetval="0" description="Choose serializer word length.  0000 = 8-bit data word; 0001 10-bit data &amp;1000 = 32-bit data word" range="0h - 8h" rwaccess="RW"/>
+<bitfield id="MODE" width="1" begin="1" end="1" resetval="0" description="set the serializer in master or slave mode. " range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="serializer is configured as slave.  I2S_BCLK and I2S_FS pins are configured as inputs.  The bit-clock and frame-sync signals are derived from an external source and are provided directly to the I2S synchronizer without being further divided."/>
+<bitenum id="SET" value="1" token="SET" description="Serializer is configured as master.  I2S_BCLK and FS pins are configured as outputs and driven by the clock generators.  The bit clock and drame sync signals are derived from the internal CPU clock."/>
+</bitfield>
+<bitfield id="FRMT" width="1" begin="0" end="0" resetval="0" description="Sets the derializer data format." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="I2S/left-justified format"/>
+<bitenum id="SET" value="1" token="SET" description="DSP format"/>
+</bitfield>
+</register>
+     <register id="I2SSRATE" acronym="I2SSRATE" page="2" offset="0X0004" width="16" description="Sample Rate Generator Register">
+<bitfield id="_RESV_1" width="10" begin="15" end="6" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="FSDIV" width="3" begin="5" end="3" resetval="0" description="Divider to genreate I2S frame sync clock.  The I2S_BCLK is divided down by the configured value to generate the frame sync clock.  (no effect when configured as slave.)" range="" rwaccess="RW">
+<bitenum id="DIV8" value="0" token="DIV8" description="Divide by 8"/>
+<bitenum id="DIV16" value="1" token="DIV16" description="Divide by 16"/>
+<bitenum id="DIV32" value="2" token="DIV32" description="Divide by 32"/>
+<bitenum id="DIV64" value="3" token="DIV64" description="Divide by 64"/>
+<bitenum id="DIV128" value="4" token="DIV128" description="Divide by 128"/>
+<bitenum id="DIV256" value="5" token="DIV256" description="Divide by 256"/>
+<bitenum id="RES1" value="6" token="RES1" description="reserved"/>
+<bitenum id="RES2" value="7" token="RES2" description="reserved"/>
+</bitfield>
+<bitfield id="CLKDIV" width="3" begin="2" end="0" resetval="0" description="Divider to generate I2S bit clock.  The system clock to the I2S is divided down by the configured value to generate the bit clock.  (no effect when configured as slave.)" range="" rwaccess="RW">
+<bitenum id="DIV2" value="0" token="DIV2" description="Divide by 2"/>
+<bitenum id="DIV4" value="1" token="DIV4" description="Divide by 4"/>
+<bitenum id="DIV8" value="2" token="DIV8" description="Divide by 8"/>
+<bitenum id="DIV16" value="3" token="DIV16" description="Divide by 16"/>
+<bitenum id="DIV32" value="4" token="DIV32" description="Divide by 32"/>
+<bitenum id="DIV64" value="5" token="DIV64" description="Divide by 64"/>
+<bitenum id="DIV128" value="6" token="DIV128" description="Divide by 128"/>
+<bitenum id="DIV256" value="7" token="DIV256" description="Divide by 256"/>
+</bitfield>
+</register>
+     <register id="I2STXLT0" acronym="I2STXLT0" page="2" offset="0X0008" width="16" description="Transmit Left Data 0">
+<bitfield id="DATA" width="16" begin="15" end="0" resetval="0" description="Transmit Left Data Lower 16 bits" range="0000h - FFFFh" rwaccess="RW"/>
+</register>
+     <register id="I2STXLT1" acronym="I2STXLT1" page="2" offset="0X0009" width="16" description="Transmit Left Data 1">
+<bitfield id="DATA" width="16" begin="15" end="0" resetval="0" description="Transmit Left Data Upper 16 bits" range="0000h - FFFFh" rwaccess="RW"/>
+</register>
+     <register id="I2STXRT0" acronym="I2STXRT0" page="2" offset="0X000C" width="16" description="Transmit Right Data 0">
+<bitfield id="DATA" width="16" begin="15" end="0" resetval="0" description="Transmit Right Data Lower 16 bits" range="0000h - FFFFh" rwaccess="RW"/>
+</register>
+     <register id="I2STXRT1" acronym="I2STXRT1" page="2" offset="0X000D" width="16" description="Transmit Right Data 1">
+<bitfield id="DATA" width="16" begin="15" end="0" resetval="0" description="Transmit Right Data Upper 16 bits" range="0000h - FFFFh" rwaccess="RW"/>
+</register>
+     <register id="I2SINTFL" acronym="I2SINTFL" page="2" offset="0X0010" width="16" description="I2S Interrupt Flag register">
+<bitfield id="_RESV_1" width="10" begin="15" end="6" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="XMITSTFL" width="1" begin="5" end="5" resetval="0" description="Stereo data transmit flag" range="" rwaccess="R">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="no pending stereo transmit interrupt"/>
+<bitenum id="SET" value="1" token="SET" description="stereo transmit interrupt pending.  Write new data value to I2S Transmit Left and Right data 0 and 1 registers"/>
+</bitfield>
+<bitfield id="XMITMONFL" width="1" begin="4" end="4" resetval="0" description="Mono Data Transmit flag" range="" rwaccess="R">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="No pending mono transmit interrupt"/>
+<bitenum id="SET" value="1" token="SET" description="Mono transmit interrupt pending.  Write new data value to Transmit Left Data 0 and 1 registers"/>
+</bitfield>
+<bitfield id="RCVSTFL" width="1" begin="3" end="3" resetval="0" description="Stereo Data Receive flag" range="" rwaccess="R">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="No pending Stereo receive interrupt"/>
+<bitenum id="SET" value="1" token="SET" description="stereo receive interrupt pending.  Read Receive Left and Right data 0 and 1 registers"/>
+</bitfield>
+<bitfield id="RCVMONFL" width="1" begin="2" end="2" resetval="0" description="Mono Data Receive flag" range="" rwaccess="R">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="No pending mono receive interrupt"/>
+<bitenum id="SET" value="1" token="SET" description="Mono receive interrupt pending.  Read Receive Left data 0 and 1 registers"/>
+</bitfield>
+<bitfield id="FERRFL" width="1" begin="1" end="1" resetval="0" description="Frame Sync Error flag" range="" rwaccess="R">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="No Frame-sync errors"/>
+<bitenum id="SET" value="1" token="SET" description="Frame-sync error(s) occurred"/>
+</bitfield>
+<bitfield id="OUERRFL" width="1" begin="0" end="0" resetval="0" description="Overrun or Underrun condition" range="" rwaccess="R">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="No overrun/under-run errors"/>
+<bitenum id="SET" value="1" token="SET" description="The data registers were not read from or written to before the receive/transmit buffer was overwritten. "/>
+</bitfield>
+</register>
+     <register id="I2SINTMASK" acronym="I2SINTMASK" page="2" offset="0X0014" width="16" description="I2S Interrupt Mask Register">
+<bitfield id="_RESV_1" width="10" begin="15" end="6" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="XMITST" width="1" begin="5" end="5" resetval="0" description="Enable Stereo Left/right Transmit Data Interrupt" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable Stereo TX data interrupt"/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable Stereo TX data interrupt"/>
+</bitfield>
+<bitfield id="XMITMON" width="1" begin="4" end="4" resetval="0" description="Enable Mono Left Transmit Data Interrupt" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable Mono TX data interrupt"/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable Mono TX data Interrupt"/>
+</bitfield>
+<bitfield id="RCVST" width="1" begin="3" end="3" resetval="0" description="Enable Stereo Left/Right Receive Data Interrupt" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable Stereo RX data interrupt"/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable Stereo RX data interrupt"/>
+</bitfield>
+<bitfield id="RCVMON" width="1" begin="2" end="2" resetval="0" description="Enable Mono Left Receive Data Interrupt" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable Mono RX data interrupt"/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable Mono RX data Interrupt"/>
+</bitfield>
+<bitfield id="FERR" width="1" begin="1" end="1" resetval="0" description="Enable Frame Sync error" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable Frame-Sync error interrupt"/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable Frame-Sync error interrupt"/>
+</bitfield>
+<bitfield id="OUERR" width="1" begin="0" end="0" resetval="0" description="Enable Overrun or Underrun condition" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable Overrun/underrun error interrupt"/>
+</bitfield>
+</register>
+     <register id="I2SRXLT0" acronym="I2SRXLT0" page="2" offset="0X0028" width="16" description="Receive Left Data 0">
+<bitfield id="DATA" width="16" begin="15" end="0" resetval="0" description="Receive Left Data Lower 16 bits" range="0000h - FFFFh" rwaccess="RW"/>
+</register>
+     <register id="I2SRXLT1" acronym="I2SRXLT1" page="2" offset="0X0029" width="16" description="Receive Left Data 1">
+<bitfield id="DATA" width="16" begin="15" end="0" resetval="0" description="Receive Left Data Upper 16 bits" range="0000h - FFFFh" rwaccess="RW"/>
+</register>
+     <register id="I2SRXRT0" acronym="I2SRXRT0" page="2" offset="0X002C" width="16" description="Receive Right Data 0">
+<bitfield id="DATA" width="16" begin="15" end="0" resetval="0" description="Receive Right Data Lower 16 bits" range="0000h - FFFFh" rwaccess="RW"/>
+</register>
+     <register id="I2SRXRT1" acronym="I2SRXRT1" page="2" offset="0X002D" width="16" description="Receive Right Data 1">
+<bitfield id="DATA" width="16" begin="15" end="0" resetval="0" description="Receive Right Data Upper 16 bits" range="0000h - FFFFh" rwaccess="RW"/>
+</register>
+</module>

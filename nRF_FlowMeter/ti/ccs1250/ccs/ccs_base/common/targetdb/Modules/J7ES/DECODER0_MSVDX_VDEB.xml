@@ -1,0 +1,137 @@
+<module name="DECODER0_MSVDX_VDEB" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="DECODER0_CR_VDEB_OPERATING_MODE" acronym="DECODER0_CR_VDEB_OPERATING_MODE" offset="0x0" width="32" description="VDEB operating mode. Used to alter operation implied by the codec mode">
+    <bitfield id="RESERVED" width="23" begin="31" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_DISABLE_SCALER_PRELOADS" width="1" begin="8" end="8" resetval="0x0" description="Disable MMU page preloads from the Alternative buffer [Scaler or rotation output]" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_DISABLE_SMC_PRELOADS" width="1" begin="7" end="7" resetval="0x0" description="Disable MMU page preloads from the SMC." range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_SCALE_AUTO_RESTART_DISABLE" width="1" begin="6" end="6" resetval="0x0" description="Disable Scaler auto restart." range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_BB_DISABLE_B4WRITE" width="1" begin="5" end="5" resetval="0x0" description="Disable burst4 writes generated in the burst buffer." range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_BB_DISABLE_B4READ" width="1" begin="4" end="4" resetval="0x0" description="Disable burst4 reads generated in the burst buffer." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_VC1_ERR_BIAS_ABOVE" width="1" begin="2" end="2" resetval="0x0" description="For error concealment force bias/clip of above data" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_VC1_BIAS_IN_HOST" width="1" begin="1" end="1" resetval="0x0" description="Bias and clip filtering may be performed by the host or in hardware" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_VC1_INLOOP_BOUNDARY" width="1" begin="0" end="0" resetval="0x0" description="VC1 In-loop boundary flags may be supplied via command for in-loop deblock filtering" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_PREFETCH_FIFO" acronym="DECODER0_CR_VDEB_PREFETCH_FIFO" offset="0x4" width="32" description="VDEB Pre-fetch FIFO control and status">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_PREFETCH_FIFO_DISABLED" width="1" begin="0" end="0" resetval="0x0" description="Use of Pre-fetch FIFO may be disabled for error handling" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_SYS_MEM_RDATA_LUMA_SIGNATURE" acronym="DECODER0_CR_VDEB_SYS_MEM_RDATA_LUMA_SIGNATURE" offset="0x8" width="32" description="">
+    <bitfield id="CR_VDEB_SYS_MEM_RDATA_LUMA_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="VDEB signature analysis on the system-memory luma read-data bus" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_SYS_MEM_RDATA_CHROMA_SIGNATURE" acronym="DECODER0_CR_VDEB_SYS_MEM_RDATA_CHROMA_SIGNATURE" offset="0xC" width="32" description="">
+    <bitfield id="CR_VDEB_SYS_MEM_RDATA_CHROMA_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="VDEB signature analysis on the system-memory chroma read-data bus" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_SYS_MEM_ADDR_SIGNATURE" acronym="DECODER0_CR_VDEB_SYS_MEM_ADDR_SIGNATURE" offset="0x10" width="32" description="The address signature includes a base address id added to the bottom 3 bits of the signature input. The id is as follows 0x0: Chroma2 reconstructed 0x1: Luma reconstructed 0x2: Chroma reconstructed 0x3: Aux MSB buffer 0x4: Aux Line buffer 0x5: Luma alternate 0x6: Chroma alternate 0x7: Chroma2 alternate">
+    <bitfield id="CR_VDEB_SYS_MEM_ADDR_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="VDEB signature analysis on the system-memory address bus" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_SYS_MEM_WDATA_SIGNATURE" acronym="DECODER0_CR_VDEB_SYS_MEM_WDATA_SIGNATURE" offset="0x14" width="32" description="">
+    <bitfield id="CR_VDEB_SYS_MEM_WDATA_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="VDEB signature analysis on the system-memory write-data bus" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_VIRTUAL_FIFO_CONTROL" acronym="DECODER0_CR_VDEB_VIRTUAL_FIFO_CONTROL" offset="0x18" width="32" description="The Virtual FIFO enables dynamic control of the 'Time to Expire' output for the system memory interface">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_VF_MIN_METRIC" width="8" begin="23" end="16" resetval="0x0" description="The minimum value of the 'time to expire metric'" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_VF_FLOWRATE_DIV" width="8" begin="15" end="8" resetval="0x0" description="Virtual FIFO divisor control." range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_VF_FLOWRATE_MUL" width="4" begin="7" end="4" resetval="0x0" description="Virtual FIFO multiple control." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="3" end="1" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_VF_ENABLED" width="1" begin="0" end="0" resetval="0x0" description="Enable the Virtual FIFO" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_VIRTUAL_FIFO_ACCUM" acronym="DECODER0_CR_VDEB_VIRTUAL_FIFO_ACCUM" offset="0x1C" width="32" description="Virtual FIFO flow rate accumulator defines the effective size and the number of words of deficit in the data flow that can be controlled">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_VF_MAX_ACC" width="12" begin="23" end="12" resetval="0x0" description="Virtual FIFO max internal accumulator value defines the upper range for the accumulator which prevents the metric getting set unrealistically high" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_VF_MIN_ACC" width="12" begin="11" end="0" resetval="0x0" description="Virtual FIFO min internal accumulator value defines the lower range for the accumulator, allowing a low priority to be applied to all" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_RECON_BUF_STATUS" acronym="DECODER0_CR_VDEB_RECON_BUF_STATUS" offset="0x20" width="32" description="">
+    <bitfield id="RESERVED" width="7" begin="31" end="25" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_RECON_BUF_MB_ERROR" width="1" begin="24" end="24" resetval="0x0" description="Recon Buf MB Error flag - MB has been marked as with an error" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_RECON_BUF_RD_STATE" width="2" begin="23" end="22" resetval="0x0" description="Recon Buf internal read state" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_RECON_BUF_RD_PTR" width="3" begin="21" end="19" resetval="0x0" description="Recon Buf read pointer" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_RECON_BUF_WR_PTR" width="3" begin="18" end="16" resetval="0x0" description="Recon Buf write pointer" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_RECON_BUF_MB_NO_Y" width="8" begin="15" end="8" resetval="0x0" description="Recon Buf macroblock number Y" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_RECON_BUF_MB_NO_X" width="8" begin="7" end="0" resetval="0x0" description="Recon Buf macroblock number X" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_PARAMS_STORE_STATUS" acronym="DECODER0_CR_VDEB_PARAMS_STORE_STATUS" offset="0x24" width="32" description="">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_PARAMS_STORE_SLICE_FLUSH" width="1" begin="29" end="29" resetval="0x0" description="Param Store slice flush" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_PARAMS_STORE_MB_EOP" width="1" begin="28" end="28" resetval="0x0" description="Param Store macroblock end of picture" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_PARAMS_STORE_MB_EOS" width="1" begin="27" end="27" resetval="0x0" description="Param Store macroblock end of slice" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_PARAMS_STORE_MB_WR_PTR" width="3" begin="26" end="24" resetval="0x0" description="Param Store macroblock write pointer" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_PARAMS_STORE_MB_RD_PTR" width="3" begin="23" end="21" resetval="0x0" description="Param Store macroblock read pointer" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_PARAMS_STORE_MB_AVAILABLE" width="1" begin="20" end="20" resetval="0x0" description="Param Store macroblock available" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_PARAMS_STORE_FLUSH_AVAILABLE" width="1" begin="19" end="19" resetval="0x0" description="Param Store flush available" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_PARAMS_STORE_FLUSH_STATE" width="3" begin="18" end="16" resetval="0x0" description="Param Store Flush state" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_PARAMS_STORE_MB_NO_Y" width="8" begin="15" end="8" resetval="0x0" description="Param Store macroblock number Y" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_PARAMS_STORE_MB_NO_X" width="8" begin="7" end="0" resetval="0x0" description="Param Store macroblock number X" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_SLICE_INTERRUPT_COUNT" acronym="DECODER0_CR_VDEB_SLICE_INTERRUPT_COUNT" offset="0x28" width="32" description="Register to keep track of interrupts generated">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_SLICE_INTERRUPT_COUNT" width="3" begin="2" end="0" resetval="0x0" description="Wrapping counter incremented every end of slice interrupt" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_HL_PARAMS_STATUS" acronym="DECODER0_CR_VDEB_HL_PARAMS_STATUS" offset="0x2C" width="32" description="Register to keep track of internal setup programmed via firmware or otherwise inaccesible values:">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_HL_PARAMS_SCALE_ENABLE" width="1" begin="21" end="21" resetval="0x0" description="Scale Enable" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_HL_PARAMS_REF_PIC_MMU_TILED" width="1" begin="20" end="20" resetval="0x0" description="Ref Pic MMU Tiled" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_HL_PARAMS_AUX_LINE_BUFFER_ENABLE" width="1" begin="19" end="19" resetval="0x0" description="Auxiliary Line Buffer Enable" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_HL_PARAMS_RECON_WRITE_DISABLE" width="1" begin="18" end="18" resetval="0x0" description="Recon Write Disable" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_HL_PARAMS_ALT_PICTURE_ENABLE" width="1" begin="17" end="17" resetval="0x0" description="Alternative Picture Enable" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_HL_PARAMS_CHROMA_INTERLEAVED" width="1" begin="16" end="16" resetval="0x0" description="Chroma Interleaved" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_HL_PARAMS_ALT_MEMORY_PACKING" width="1" begin="15" end="15" resetval="0x0" description="Alternative Memory Packing" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_HL_PARAMS_MEMORY_PACKING" width="1" begin="14" end="14" resetval="0x0" description="Memory Packing" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_HL_PARAMS_ROTATION_MODE" width="2" begin="13" end="12" resetval="0x0" description="Rotation Mode" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_HL_PARAMS_ALT_OUTPUT_FORMAT" width="2" begin="11" end="10" resetval="0x0" description="Alternative Output Format" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_HL_PARAMS_CHROMA_FORMAT" width="2" begin="9" end="8" resetval="0x0" description="Chroma Format" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_HL_PARAMS_CODEC_PROFILE" width="2" begin="7" end="6" resetval="0x0" description="Codec Profile" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_HL_PARAMS_CODEC_MODE" width="4" begin="5" end="2" resetval="0x0" description="Codec Mode" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_HL_PARAMS_ASYNC_MODE" width="2" begin="1" end="0" resetval="0x0" description="Async Mode" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_BLOCK_MEM_DIAGNOSTICS" acronym="DECODER0_CR_VDEB_BLOCK_MEM_DIAGNOSTICS" offset="0x30" width="32" description="">
+    <bitfield id="CR_VDEB_BLOCK_MEM_DIAGNOSTICS" width="32" begin="31" end="0" resetval="0x0" description="VDEB block_mem diagnostics [debug use only]" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_PARAMS_DIAGNOSTICS" acronym="DECODER0_CR_VDEB_PARAMS_DIAGNOSTICS" offset="0x34" width="32" description="">
+    <bitfield id="CR_VDEB_PARAMS_DIAGNOSTICS" width="32" begin="31" end="0" resetval="0x0" description="VDEB param-store diagnostics [debug use only]" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_FILTER_DIAGNOSTICS" acronym="DECODER0_CR_VDEB_FILTER_DIAGNOSTICS" offset="0x38" width="32" description="">
+    <bitfield id="CR_VDEB_FILTER_DIAGNOSTICS" width="32" begin="31" end="0" resetval="0x0" description="VDEB filter diagnostics [debug use only]" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_MAIN_DIAGNOSTICS" acronym="DECODER0_CR_VDEB_MAIN_DIAGNOSTICS" offset="0x3C" width="32" description="">
+    <bitfield id="CR_VDEB_MAIN_DIAGNOSTICS" width="32" begin="31" end="0" resetval="0xB000" description="VDEB main-control diagnostics [debug use only]" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_SYS_MEM_ADDR_WR_LUMA_SIGNATURE" acronym="DECODER0_CR_VDEB_SYS_MEM_ADDR_WR_LUMA_SIGNATURE" offset="0x40" width="32" description="The address signature includes a base address id added to the bottom 3 bits of the signature input. The id is as follows 0x1: Luma reconstructed 0x3: Aux MSB buffer 0x4: Aux Line buffer 0x5: Luma alternate">
+    <bitfield id="CR_VDEB_SYS_MEM_ADDR_WR_LUMA_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="VDEB signature analysis on the system-memory addr bus for luma" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_SYS_MEM_ADDR_WR_CHROMA_SIGNATURE" acronym="DECODER0_CR_VDEB_SYS_MEM_ADDR_WR_CHROMA_SIGNATURE" offset="0x44" width="32" description="The address signature includes a base address id added to the bottom 3 bits of the signature input. The id is as follows 0x0: Chroma2 reconstructed 0x2: Chroma reconstructed 0x3: Aux MSB buffer 0x4: Aux Line buffer 0x6: Chroma alternate 0x7: Chroma2 alternate">
+    <bitfield id="CR_VDEB_SYS_MEM_ADDR_WR_CHROMA_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="VDEB signature analysis on the system-memory addr bus for chroma" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_SCALE_ADDR_SIGNATURE" acronym="DECODER0_CR_VDEB_SCALE_ADDR_SIGNATURE" offset="0x48" width="32" description="The address signature includes a base address id added to the bottom 3 bits of the signature input. The id is as follows 0x0: Chroma2 reconstructed 0x1: Luma reconstructed 0x2: Chroma reconstructed 0x3: Aux MSB buffer 0x4: Aux Line buffer 0x5: Luma alternate 0x6: Chroma alternate 0x7: Chroma2 alternate">
+    <bitfield id="CR_VDEB_SCALE_ADDR_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="VDEB signature analysis on the scale address bus" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_SCALE_WDATA_SIGNATURE" acronym="DECODER0_CR_VDEB_SCALE_WDATA_SIGNATURE" offset="0x4C" width="32" description="">
+    <bitfield id="CR_VDEB_SCALE_WDATA_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="VDEB signature analysis on the scale write-data bus" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_MULTICORE_DIAGNOSTICS" acronym="DECODER0_CR_VDEB_MULTICORE_DIAGNOSTICS" offset="0x50" width="32" description="">
+    <bitfield id="CR_VDEB_MULTICORE_DIAGNOSTICS" width="32" begin="31" end="0" resetval="0x0" description="VDEB Multicore diagnostics [debug use only]" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_SYS_MEM_ADDR_RD_LUMA_SIGNATURE" acronym="DECODER0_CR_VDEB_SYS_MEM_ADDR_RD_LUMA_SIGNATURE" offset="0x54" width="32" description="The address signature includes a base address id added to the bottom 3 bits of the signature input. The id is as follows 0x1: Luma reconstructed 0x3: Aux MSB buffer 0x4: Aux Line buffer 0x5: Luma alternate">
+    <bitfield id="CR_VDEB_SYS_MEM_ADDR_RD_LUMA_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="VDEB signature analysis on the system-memory addr bus for luma" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_SYS_MEM_ADDR_RD_CHROMA_SIGNATURE" acronym="DECODER0_CR_VDEB_SYS_MEM_ADDR_RD_CHROMA_SIGNATURE" offset="0x58" width="32" description="The address signature includes a base address id added to the bottom 3 bits of the signature input. The id is as follows 0x0: Chroma2 reconstructed 0x2: Chroma reconstructed 0x3: Aux MSB buffer 0x4: Aux Line buffer 0x6: Chroma alternate 0x7: Chroma2 alternate">
+    <bitfield id="CR_VDEB_SYS_MEM_ADDR_RD_CHROMA_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="VDEB signature analysis on the system-memory addr bus for chroma" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_NCORE_WDATA_SIGNATURE" acronym="DECODER0_CR_VDEB_NCORE_WDATA_SIGNATURE" offset="0x5C" width="32" description="">
+    <bitfield id="CR_VDEB_NCORE_WDATA_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="VDEB signature analys for ncore data bus" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_HEVC_CHECKSUM_LUMA" acronym="DECODER0_CR_VDEB_HEVC_CHECKSUM_LUMA" offset="0x60" width="32" description="">
+    <bitfield id="CR_VDEB_HEVC_CHECKSUM_LUMA" width="32" begin="31" end="0" resetval="0x0" description="A checksum on luma plane pixels caculated in the same way as 'picture_checksum' used in HEVC Decoded picture hash SEI message" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_HEVC_CHECKSUM_CB" acronym="DECODER0_CR_VDEB_HEVC_CHECKSUM_CB" offset="0x64" width="32" description="">
+    <bitfield id="CR_VDEB_HEVC_CHECKSUM_CB" width="32" begin="31" end="0" resetval="0x0" description="A checksum on Cb plane pixels caculated in the same way as 'picture_checksum' used in HEVC Decoded picture hash SEI message" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_HEVC_CHECKSUM_CR" acronym="DECODER0_CR_VDEB_HEVC_CHECKSUM_CR" offset="0x68" width="32" description="">
+    <bitfield id="CR_VDEB_HEVC_CHECKSUM_CR" width="32" begin="31" end="0" resetval="0x0" description="A checksum on Cr plane pixels caculated in the same way as 'picture_checksum' used in HEVC Decoded picture hash SEI message" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_SCALE_PRELOAD_ADDR_SIGNATURE" acronym="DECODER0_CR_VDEB_SCALE_PRELOAD_ADDR_SIGNATURE" offset="0x6C" width="32" description="">
+    <bitfield id="CR_VDEB_SCALE_PRELOAD_ADDR_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="VDEB signature analys for scaler write address bus when doing preload" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDEB_SYS_MEM_PRELOAD_ADDR_WR_SIGNATURE" acronym="DECODER0_CR_VDEB_SYS_MEM_PRELOAD_ADDR_WR_SIGNATURE" offset="0x70" width="32" description="">
+    <bitfield id="CR_VDEB_SYS_MEM_PRELOAD_ADDR_WR_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="VDEB signature analys on sys mem write address bus when doing preload" range="" rwaccess="R"/>
+  </register>
+</module>

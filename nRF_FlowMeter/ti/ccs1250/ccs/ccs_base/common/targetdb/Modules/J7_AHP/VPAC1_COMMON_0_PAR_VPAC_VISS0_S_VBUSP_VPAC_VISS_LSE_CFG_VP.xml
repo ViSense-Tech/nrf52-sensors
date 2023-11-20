@@ -1,0 +1,48 @@
+<module name="VPAC1_COMMON_0_PAR_VPAC_VISS0_S_VBUSP_VPAC_VISS_LSE_CFG_VP" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="PAR_VPAC_VISS0__S_VBUSP__VPAC_VISS_LSE__CFG_VP__REGS_status_param" acronym="PAR_VPAC_VISS0__S_VBUSP__VPAC_VISS_LSE__CFG_VP__REGS_status_param" offset="0x0" width="32" description="">
+		<bitfield id="BYPASS_CH" width="2" begin="31" end="30" resetval="0x3" description="Number of available input channel selection for loopback mode" range="31 - 30" rwaccess="R"/> 
+		<bitfield id="OUT_SKIP_EN" width="1" begin="29" end="29" resetval="0x1" description="Output Auto-Skip Enable" range="29" rwaccess="R"/> 
+		<bitfield id="CORE_OUT_2D" width="1" begin="28" end="28" resetval="0x0" description="1D or 2D output addressing mode(2D if 1)" range="28" rwaccess="R"/> 
+		<bitfield id="CORE_OUT_DW" width="5" begin="27" end="23" resetval="0x12" description="Core Output Channel Data Width" range="27 - 23" rwaccess="R"/> 
+		<bitfield id="LINE_SKIP_EN" width="1" begin="22" end="22" resetval="0x0" description="Source Line Inc by 2 Supported (if 1)" range="22" rwaccess="R"/> 
+		<bitfield id="BIT_AOFFSET" width="1" begin="21" end="21" resetval="0x0" description="Source nibble offset address Supported (if 1)" range="21" rwaccess="R"/> 
+		<bitfield id="HV_INSERT" width="1" begin="20" end="20" resetval="0x1" description="H/VBLANK Insertion Supported (if 1)" range="20" rwaccess="R"/> 
+		<bitfield id="PIX_MX_HT" width="3" begin="19" end="17" resetval="0x1" description="Core_Input Pixel Matrix Height" range="19 - 17" rwaccess="R"/> 
+		<bitfield id="CORE_DW" width="5" begin="16" end="12" resetval="0x16" description="Core Input Data Bus Width" range="16 - 12" rwaccess="R"/> 
+		<bitfield id="SL2_OUT_H3A_CH" width="2" begin="11" end="10" resetval="0x1" description="Number of SL2 H3A Output Channels" range="11 - 10" rwaccess="R"/> 
+		<bitfield id="SL2_OUT_CH" width="4" begin="9" end="6" resetval="0x5" description="Number of SL2 Output Channels" range="9 - 6" rwaccess="R"/> 
+		<bitfield id="SL2_IN_CH_THR" width="3" begin="5" end="3" resetval="0x3" description="Number of Input Channels per thread" range="5 - 3" rwaccess="R"/> 
+		<bitfield id="VPORT_THR" width="1" begin="2" end="2" resetval="0x1" description="Number of VPORT input enabled" range="2" rwaccess="R"/> 
+		<bitfield id="NTHR" width="2" begin="1" end="0" resetval="0x1" description="Number of threads supported" range="1 - 0" rwaccess="R"/>
+	</register>
+	<register id="PAR_VPAC_VISS0__S_VBUSP__VPAC_VISS_LSE__CFG_VP__REGS_status_error" acronym="PAR_VPAC_VISS0__S_VBUSP__VPAC_VISS_LSE__CFG_VP__REGS_status_error" offset="0x4" width="32" description="">
+		<bitfield id="VPORT_IN_ERR" width="11" begin="26" end="16" resetval="0x0" description="VPORT_CAL Input Error Status  Protocol Errors  [26] VS without HS  [25] VE without HE  [24] VS-VS (missing VE) Error  [23] HS-HS (missing HE) Error  [22] HE-HE (missing HS) Error  [21] VE-VE (missing VS) Error   Frame Size Errors   [20] Frame Skipped during Error Handling  [19] Long Frame detected  [18] Short Frame detected  [17] Long Line detected  [16] Short Line Detected" range="26 - 16" rwaccess="R/W1TC"/> 
+		<bitfield id="VM_WR_ERR" width="7" begin="14" end="8" resetval="0x0" description="VBUSM I/F Last Write Error Status  [14:11] Write Channel Number  [10:8] VBUSM write error status" range="14 - 8" rwaccess="R/W1TC"/> 
+		<bitfield id="VM_RD_ERR" width="5" begin="4" end="0" resetval="0x0" description="VBUSM I/F Last Read Error Status  [4:3] Read Channel Number  [2:0] VBUSM read error status" range="4 - 0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="PAR_VPAC_VISS0__S_VBUSP__VPAC_VISS_LSE__CFG_VP__REGS_status_idle_mode" acronym="PAR_VPAC_VISS0__S_VBUSP__VPAC_VISS_LSE__CFG_VP__REGS_status_idle_mode" offset="0x8" width="32" description="">
+		<bitfield id="LSE_OUT_H3A_CHAN" width="1" begin="24" end="24" resetval="0x0" description="Output H3A Channel Status" range="24" rwaccess="R"/> 
+		<bitfield id="LSE_OUT_CHAN" width="5" begin="16" end="12" resetval="0x0" description="Output Channel[4:0] Status" range="16 - 12" rwaccess="R"/> 
+		<bitfield id="VPORT_IN_CHAN" width="1" begin="11" end="11" resetval="0x0" description="CAL I/F Vport Input Cahnnel Status" range="11" rwaccess="R"/> 
+		<bitfield id="LSE_IN_CHAN" width="3" begin="6" end="4" resetval="0x0" description="Input Channel[2:0] Status" range="6 - 4" rwaccess="R"/> 
+		<bitfield id="VM_WR_PORT" width="1" begin="1" end="1" resetval="0x0" description="SL2 vbusm I/F Write Port Status" range="1" rwaccess="R"/> 
+		<bitfield id="VM_RD_PORT" width="1" begin="0" end="0" resetval="0x0" description="SL2 vbusm I/F Read Port Status" range="0" rwaccess="R"/>
+	</register>
+	<register id="PAR_VPAC_VISS0__S_VBUSP__VPAC_VISS_LSE__CFG_VP__REGS_cfg_lse" acronym="PAR_VPAC_VISS0__S_VBUSP__VPAC_VISS_LSE__CFG_VP__REGS_cfg_lse" offset="0xC" width="32" description="">
+		<bitfield id="PSA_EN" width="1" begin="8" end="8" resetval="0x0" description="Test mode Output Channel Signature Generation Enable   0:  Disable (default)  1:  Enable  When enabled, LSE generates a unique CRC signature for each output channel's frame data at frame completion." range="8" rwaccess="R/W"/> 
+		<bitfield id="IN_CH_SYNC_MODE" width="1" begin="5" end="5" resetval="0x0" description="Input Channel Transfer Sync Mode (applicable only for VISS)  0:  Line Mode   1:  Frame Mode (default)  When set to 0 (Line Mode), LSE waits for a HTS_TSTART on every line reads from SL2.     When set to 1 (Frame Mode), LSE waits for the first HTS_TSTART after HTS_INIT to start reading the first line of the frame.  Afterward, it continues to read frame data (next lines) from the SL2 without waiting for HTS_TSTART as long as LSE is able to send the data to the core logic without being stalled." range="5" rwaccess="R/W"/> 
+		<bitfield id="VM_ARB_FIXED_MODE" width="1" begin="4" end="4" resetval="0x0" description="VBUSM Arbitration Fixed Mode select  0:  Round-Robin Arbitration (default)  1:  Fixed-mode Arbitration" range="4" rwaccess="R/W"/> 
+		<bitfield id="LOOPBACK_IN_CH_SEL" width="2" begin="3" end="2" resetval="0x0" description="Loopback Input Channel Select (applicable only for VISS)  0: Ch0/CAL_Vport_In  1: Ch1  2: Ch2" range="3 - 2" rwaccess="R/W"/> 
+		<bitfield id="LOOPBACK_CORE_EN" width="1" begin="1" end="1" resetval="0x0" description="Functional path (data to HWA core) enable during loopback mode  0: Disable  1: Enable When enabled, the loopback-enabled input channel is used also for CORE data input. Otherwise, it is strictly used for the loopback path." range="1" rwaccess="R/W"/> 
+		<bitfield id="LOOPBACK_EN" width="1" begin="0" end="0" resetval="0x0" description="LSE loopback mode enable  0: Disable  1: Enable When enabled, selected input channel data is looped back out to the last (#4) output channel." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_VPAC_VISS0__S_VBUSP__VPAC_VISS_LSE__CFG_VP__REGS_dst_common_cfg" acronym="PAR_VPAC_VISS0__S_VBUSP__VPAC_VISS_LSE__CFG_VP__REGS_dst_common_cfg" offset="0x13C" width="32" description="">
+		<bitfield id="ROUNDING_OFFSET" width="6" begin="5" end="0" resetval="0x8" description="output channel rounding offset value.  Default value to be considered 6'h08" range="5 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_VPAC_VISS0__S_VBUSP__VPAC_VISS_LSE__CFG_VP__REGS_psa_signature" acronym="PAR_VPAC_VISS0__S_VBUSP__VPAC_VISS_LSE__CFG_VP__REGS_psa_signature" offset="0x140" width="32" description="">
+		<bitfield id="VALUE" width="32" begin="31" end="0" resetval="0x0" description="32-bit CRC signature value " range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="PAR_VPAC_VISS0__S_VBUSP__VPAC_VISS_LSE__CFG_VP__REGS_dbg" acronym="PAR_VPAC_VISS0__S_VBUSP__VPAC_VISS_LSE__CFG_VP__REGS_dbg" offset="0x1E0" width="32" description="">
+		<bitfield id="STATUS" width="32" begin="31" end="0" resetval="0x0" description="Debug status" range="31 - 0" rwaccess="R"/>
+	</register>
+</module>

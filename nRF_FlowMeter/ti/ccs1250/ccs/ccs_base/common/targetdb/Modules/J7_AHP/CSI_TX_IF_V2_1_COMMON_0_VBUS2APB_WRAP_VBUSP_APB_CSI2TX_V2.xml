@@ -1,0 +1,529 @@
+<module name="CSI_TX_IF_V2_1_COMMON_0_VBUS2APB_WRAP_VBUSP_APB_CSI2TX_V2" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_device_config" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_device_config" offset="0x0" width="32" description="">
+		<bitfield id="V1_3_FEATURES" width="1" begin="26" end="26" resetval="0x0" description=": 1=CSI-2 v1.3 features only, 0=v2.1 features available" range="26" rwaccess="R"/> 
+		<bitfield id="RX_COMP_MODE_PRESENT" width="1" begin="25" end="25" resetval="0x1" description="RX Compatibility Mode: 1=implemented" range="25" rwaccess="R"/> 
+		<bitfield id="SCRAMBLER_PRESENT" width="1" begin="20" end="20" resetval="0x1" description="Scrambler: 1=implemented" range="20" rwaccess="R"/> 
+		<bitfield id="ASF_PRESENT" width="1" begin="19" end="19" resetval="0x1" description="Automotive Safety Features: 1=implemented" range="19" rwaccess="R"/> 
+		<bitfield id="NUM_DTS" width="5" begin="18" end="14" resetval="0x8" description="Number of Datatypes supported               8 or 16 only" range="18 - 14" rwaccess="R"/> 
+		<bitfield id="NUM_VCS" width="5" begin="13" end="9" resetval="0x16" description="Number of Virtual Channels supported               4 or 16 only" range="13 - 9" rwaccess="R"/> 
+		<bitfield id="DATAPATH_SIZE" width="2" begin="8" end="7" resetval="0x0" description="Internal datapath width               00: 32-bit." range="8 - 7" rwaccess="R"/> 
+		<bitfield id="NUM_STREAMS" width="3" begin="6" end="4" resetval="0x2" description="Number of Stream interfaces               1, 2, or 4 only using direct encoding" range="6 - 4" rwaccess="R"/> 
+		<bitfield id="CDNS_PHY_PRESENT" width="1" begin="3" end="3" resetval="0x1" description="Cadence D-PHY present               1 = Yes" range="3" rwaccess="R"/> 
+		<bitfield id="MAX_LANE_NB" width="3" begin="2" end="0" resetval="0x4" description="Max Number of Lanes [1-4]" range="2 - 0" rwaccess="R"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_status" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_status" offset="0x4" width="32" description="">
+		<bitfield id="RX_COMP_MODE_ACTIVE" width="1" begin="7" end="7" resetval="0x0" description="RX Compatibility Mode Active Flag.  When HIGH this bit indicates that RX Compatibility Mode is enabled." range="7" rwaccess="R"/> 
+		<bitfield id="ULP_MODE_ACTIVE" width="1" begin="6" end="6" resetval="0x0" description="Ultra Low Power Mode Active Flag When HIGH this bit indicates that Ultra Low Power mode is active. " range="6" rwaccess="R"/> 
+		<bitfield id="HS_MODE_ACTIVE" width="1" begin="5" end="5" resetval="0x0" description="High Speed Mode Active Flag When HIGH this bit indicates that High Speed mode is active. " range="5" rwaccess="R"/> 
+		<bitfield id="FRAME_TRANSMISSION_ACTIVE" width="1" begin="4" end="4" resetval="0x0" description="Frame Transmission Active Flag When HIGH this bit indicates that frame transmission is active. " range="4" rwaccess="R"/> 
+		<bitfield id="SCRAMBLER_ACTIVE" width="1" begin="3" end="3" resetval="0x0" description="Scrambler Active Flag.  When HIGH this bit indicates that the scrambler is enabled." range="3" rwaccess="R"/> 
+		<bitfield id="CONFIGURATION_ACTIVE" width="1" begin="2" end="2" resetval="0x1" description="Configuration Mode Active Flag When HIGH this bit indicates that the CSI2TX module is in the configuration mode. " range="2" rwaccess="R"/> 
+		<bitfield id="SOFT_RESET_ACTIVE" width="1" begin="1" end="1" resetval="0x0" description="Soft Reset Active Flag When HIGH this bit indicates that soft reset is active. " range="1" rwaccess="R"/> 
+		<bitfield id="BYPASS_MODE_ACTIVE" width="1" begin="0" end="0" resetval="0x0" description="Bypass Mode Active Flag When HIGH this bit indicates that bypass mode is active. " range="0" rwaccess="R"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_irq" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_irq" offset="0x8" width="32" description="">
+		<bitfield id="LINE_NUMBER_ERROR3" width="1" begin="31" end="31" resetval="0x0" description="Pixel IF 3 Line Number Error Flag - When HIGH this bit indicates that a line number error occurred. " range="31" rwaccess="R/W1TC"/> 
+		<bitfield id="BYTE_COUNT_MISMATCH_IRQ3" width="1" begin="30" end="30" resetval="0x0" description="Pixel IF 3 Byte Count Mismatch Flag - When HIGH this bit indicates that a byte count mismatch occurred. " range="30" rwaccess="R/W1TC"/> 
+		<bitfield id="DATA_FLOW_ERR_IRQ3" width="1" begin="29" end="29" resetval="0x0" description="Pixel IF 3 Data Flow Error Flag - When HIGH this bit indicates that data flow error has occurred, caused by the Frame/Line valid being asserted when the D-PHY is not ready. " range="29" rwaccess="R/W1TC"/> 
+		<bitfield id="FIFO_UNDERFLOW_IRQ3" width="1" begin="28" end="28" resetval="0x0" description="Pixel IF 3 FIFO Underflow Flag - When HIGH this bit indicates that at least one internal FIFO underflow occurred. " range="28" rwaccess="R/W1TC"/> 
+		<bitfield id="LINE_END_IRQ3" width="1" begin="27" end="27" resetval="0x0" description="Pixel IF 3 Line End Flag - When HIGH this bit indicates that a line end occurred. " range="27" rwaccess="R/W1TC"/> 
+		<bitfield id="LINE_START_IRQ3" width="1" begin="26" end="26" resetval="0x0" description="Pixel IF 3 Line Start Flag - When HIGH this bit indicates that a line start occurred. " range="26" rwaccess="R/W1TC"/> 
+		<bitfield id="FRAME_END_IRQ3" width="1" begin="25" end="25" resetval="0x0" description="Pixel IF 3 Frame End Flag - When HIGH this bit indicates that a frame end occurred. " range="25" rwaccess="R/W1TC"/> 
+		<bitfield id="FRAME_START_IRQ3" width="1" begin="24" end="24" resetval="0x0" description="Pixel IF 3 Frame Start Flag - When HIGH this bit indicates that a frame start occurred. " range="24" rwaccess="R/W1TC"/> 
+		<bitfield id="LINE_NUMBER_ERROR2" width="1" begin="23" end="23" resetval="0x0" description="Pixel IF 2 Line Number Error Flag - When HIGH this bit indicates that a line number error occurred. " range="23" rwaccess="R/W1TC"/> 
+		<bitfield id="BYTE_COUNT_MISMATCH_IRQ2" width="1" begin="22" end="22" resetval="0x0" description="Pixel IF 2 Byte Count Mismatch Flag - When HIGH this bit indicates that a byte count mismatch occurred. " range="22" rwaccess="R/W1TC"/> 
+		<bitfield id="DATA_FLOW_ERR_IRQ2" width="1" begin="21" end="21" resetval="0x0" description="Pixel IF 2 Data Flow Error Flag - When HIGH this bit indicates that data flow error has occurred, caused by the Frame/Line valid being asserted when the D-PHY is not ready. " range="21" rwaccess="R/W1TC"/> 
+		<bitfield id="FIFO_UNDERFLOW_IRQ2" width="1" begin="20" end="20" resetval="0x0" description="Pixel IF 2 FIFO Underflow Flag - When HIGH this bit indicates that at least one internal FIFO underflow occurred. " range="20" rwaccess="R/W1TC"/> 
+		<bitfield id="LINE_END_IRQ2" width="1" begin="19" end="19" resetval="0x0" description="Pixel IF 2 Line End Flag - When HIGH this bit indicates that a line end occurred. " range="19" rwaccess="R/W1TC"/> 
+		<bitfield id="LINE_START_IRQ2" width="1" begin="18" end="18" resetval="0x0" description="Pixel IF 2 Line Start Flag - When HIGH this bit indicates that a line start occurred. " range="18" rwaccess="R/W1TC"/> 
+		<bitfield id="FRAME_END_IRQ2" width="1" begin="17" end="17" resetval="0x0" description="Pixel IF 2 Frame End Flag - When HIGH this bit indicates that a frame end occurred. " range="17" rwaccess="R/W1TC"/> 
+		<bitfield id="FRAME_START_IRQ2" width="1" begin="16" end="16" resetval="0x0" description="Pixel IF 2 Frame Start Flag - When HIGH this bit indicates that a frame start occurred. " range="16" rwaccess="R/W1TC"/> 
+		<bitfield id="LINE_NUMBER_ERROR1" width="1" begin="15" end="15" resetval="0x0" description="Pixel IF 1 Line Number Error Flag - When HIGH this bit indicates that a line number error occurred. " range="15" rwaccess="R/W1TC"/> 
+		<bitfield id="BYTE_COUNT_MISMATCH_IRQ1" width="1" begin="14" end="14" resetval="0x0" description="Pixel IF 1 Byte Count Mismatch Flag - When HIGH this bit indicates that a byte count mismatch occurred. " range="14" rwaccess="R/W1TC"/> 
+		<bitfield id="DATA_FLOW_ERR_IRQ1" width="1" begin="13" end="13" resetval="0x0" description="Pixel IF 1 Data Flow Error Flag - When HIGH this bit indicates that data flow error has occurred, caused by the Frame/Line valid being asserted when the D-PHY is not ready. " range="13" rwaccess="R/W1TC"/> 
+		<bitfield id="FIFO_UNDERFLOW_IRQ1" width="1" begin="12" end="12" resetval="0x0" description="Pixel IF 1 FIFO Underflow Flag - When HIGH this bit indicates that at least one internal FIFO underflow occurred. " range="12" rwaccess="R/W1TC"/> 
+		<bitfield id="LINE_END_IRQ1" width="1" begin="11" end="11" resetval="0x0" description="Pixel IF 1 Line End Flag - When HIGH this bit indicates that a line end occurred. " range="11" rwaccess="R/W1TC"/> 
+		<bitfield id="LINE_START_IRQ1" width="1" begin="10" end="10" resetval="0x0" description="Pixel IF 1 Line Start Flag - When HIGH this bit indicates that a line start occurred. " range="10" rwaccess="R/W1TC"/> 
+		<bitfield id="FRAME_END_IRQ1" width="1" begin="9" end="9" resetval="0x0" description="Pixel IF 1 Frame End Flag - When HIGH this bit indicates that a frame end occurred. " range="9" rwaccess="R/W1TC"/> 
+		<bitfield id="FRAME_START_IRQ1" width="1" begin="8" end="8" resetval="0x0" description="Pixel IF 1 Frame Start Flag - When HIGH this bit indicates that a frame start occurred. " range="8" rwaccess="R/W1TC"/> 
+		<bitfield id="LINE_NUMBER_ERROR0" width="1" begin="7" end="7" resetval="0x0" description="Pixel IF 0 Line Number Error Flag - When HIGH this bit indicates that a line number error occurred. " range="7" rwaccess="R/W1TC"/> 
+		<bitfield id="BYTE_COUNT_MISMATCH_IRQ0" width="1" begin="6" end="6" resetval="0x0" description="Pixel IF 0 Byte Count Mismatch Flag - When HIGH this bit indicates that a byte count mismatch occurred. " range="6" rwaccess="R/W1TC"/> 
+		<bitfield id="DATA_FLOW_ERR_IRQ0" width="1" begin="5" end="5" resetval="0x0" description="Pixel IF 0 Data Flow Error Flag - When HIGH this bit indicates that data flow error has occurred, caused by the Frame/Line valid being asserted when the D-PHY is not ready. " range="5" rwaccess="R/W1TC"/> 
+		<bitfield id="FIFO_UNDERFLOW_IRQ0" width="1" begin="4" end="4" resetval="0x0" description="Pixel IF 0 FIFO Underflow Flag - When HIGH this bit indicates that at least one internal FIFO underflow occurred. " range="4" rwaccess="R/W1TC"/> 
+		<bitfield id="LINE_END_IRQ0" width="1" begin="3" end="3" resetval="0x0" description="Pixel IF 0 Line End Flag - When HIGH this bit indicates that a line end occurred. " range="3" rwaccess="R/W1TC"/> 
+		<bitfield id="LINE_START_IRQ0" width="1" begin="2" end="2" resetval="0x0" description="Pixel IF 0 Line Start Flag - When HIGH this bit indicates that a line start occurred. " range="2" rwaccess="R/W1TC"/> 
+		<bitfield id="FRAME_END_IRQ0" width="1" begin="1" end="1" resetval="0x0" description="Pixel IF 0 Frame End Flag - When HIGH this bit indicates that a frame end occurred. " range="1" rwaccess="R/W1TC"/> 
+		<bitfield id="FRAME_START_IRQ0" width="1" begin="0" end="0" resetval="0x0" description="Pixel IF 0 Frame Start Flag - When HIGH this bit indicates that a frame start occurred. " range="0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_irq_mask" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_irq_mask" offset="0xC" width="32" description="">
+		<bitfield id="MASK_LINE_NUMBER_ERROR1" width="1" begin="15" end="15" resetval="0x0" description="Pixel IF 1 Line Number Error Mask - Writing 1 to this bit enables interrupt generation from the line_number_error_irq bit. " range="15" rwaccess="R/W"/> 
+		<bitfield id="MASK_BYTE_COUNT_MISMATCH_IRQ1" width="1" begin="14" end="14" resetval="0x0" description="Pixel IF 1 Byte Count Mismatch Mask - Writing 1 to this bit enables interrupt generation from the byte_count_mismatch_irq bit. " range="14" rwaccess="R/W"/> 
+		<bitfield id="MASK_DATA_FLOW_ERR_IRQ1" width="1" begin="13" end="13" resetval="0x0" description="Pixel IF 1 Data Flow Error Mask - Writing 1 to this bit enables interrupt generation from the data_flow_err_irq bit. " range="13" rwaccess="R/W"/> 
+		<bitfield id="MASK_FIFO_UNDERFLOW_IRQ1" width="1" begin="12" end="12" resetval="0x0" description="Pixel IF 1 FIFO Underflow Mask - Writing 1 to this bit enables interrupt generation from the fifo_underflow_irq bit. " range="12" rwaccess="R/W"/> 
+		<bitfield id="MASK_LINE_END_IRQ1" width="1" begin="11" end="11" resetval="0x0" description="Pixel IF 1 Line End Mask - Writing 1 to this bit enables interrupt generation from the line_en_irq bit. " range="11" rwaccess="R/W"/> 
+		<bitfield id="MASK_LINE_START_IRQ1" width="1" begin="10" end="10" resetval="0x0" description="Pixel IF 1 Line Start Mask - Writing 1 to this bit enables interrupt generation from the line_start_irq bit. " range="10" rwaccess="R/W"/> 
+		<bitfield id="MASK_FRAME_END_IRQ1" width="1" begin="9" end="9" resetval="0x0" description="Pixel IF 1 Frame End Mask - Writing 1 to this bit enables interrupt generation from the frame_end_irq bit. " range="9" rwaccess="R/W"/> 
+		<bitfield id="MASK_FRAME_START_IRQ1" width="1" begin="8" end="8" resetval="0x0" description="Pixel IF 1 Frame Start Mask - Writing 1 to this bit enables interrupt generation from the frame_start_irq bit. " range="8" rwaccess="R/W"/> 
+		<bitfield id="MASK_LINE_NUMBER_ERROR0" width="1" begin="7" end="7" resetval="0x0" description="Pixel IF 0 Line Number Error Mask - Writing 1 to this bit enables interrupt generation from the line_number_error_irq bit. " range="7" rwaccess="R/W"/> 
+		<bitfield id="MASK_BYTE_COUNT_MISMATCH_IRQ0" width="1" begin="6" end="6" resetval="0x0" description="Pixel IF 0 Byte Count Mismatch Mask - Writing 1 to this bit enables interrupt generation from the byte_count_mismatch_irq bit. " range="6" rwaccess="R/W"/> 
+		<bitfield id="MASK_DATA_FLOW_ERR_IRQ0" width="1" begin="5" end="5" resetval="0x0" description="Pixel IF 0 Data Flow Error Mask - Writing 1 to this bit enables interrupt generation from the data_flow_err_irq bit. " range="5" rwaccess="R/W"/> 
+		<bitfield id="MASK_FIFO_UNDERFLOW_IRQ0" width="1" begin="4" end="4" resetval="0x0" description="Pixel IF 0 FIFO Underflow Mask - Writing 1 to this bit enables interrupt generation from the fifo_underflow_irq bit. " range="4" rwaccess="R/W"/> 
+		<bitfield id="MASK_LINE_END_IRQ0" width="1" begin="3" end="3" resetval="0x0" description="Pixel IF 0 Line End Mask - Writing 1 to this bit enables interrupt generation from the line_en_irq bit. " range="3" rwaccess="R/W"/> 
+		<bitfield id="MASK_LINE_START_IRQ0" width="1" begin="2" end="2" resetval="0x0" description="Pixel IF 0 Line Start Mask - Writing 1 to this bit enables interrupt generation from the line_start_irq bit. " range="2" rwaccess="R/W"/> 
+		<bitfield id="MASK_FRAME_END_IRQ0" width="1" begin="1" end="1" resetval="0x0" description="Pixel IF 0 Frame End Mask - Writing 1 to this bit enables interrupt generation from the frame_end_irq bit. " range="1" rwaccess="R/W"/> 
+		<bitfield id="MASK_FRAME_START_IRQ0" width="1" begin="0" end="0" resetval="0x0" description="Pixel IF 0 Frame Start Mask - Writing 1 to this bit enables interrupt generation from the frame_start_irq bit. " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dphy_irq" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dphy_irq" offset="0x10" width="32" description="">
+		<bitfield id="ERR_CTRL_TX3_IRQ" width="1" begin="15" end="15" resetval="0x0" description="D-PHY Transmitter Lane 3 ERR_CONTROL_IRQ" range="15" rwaccess="R/W1TC"/> 
+		<bitfield id="ERR_CTRL_TX2_IRQ" width="1" begin="14" end="14" resetval="0x0" description="D-PHY Transmitter Lane 2 ERR_CONTROL_IRQ" range="14" rwaccess="R/W1TC"/> 
+		<bitfield id="ERR_CTRL_TX1_IRQ" width="1" begin="13" end="13" resetval="0x0" description="D-PHY Transmitter Lane 1 ERR_CONTROL_IRQ" range="13" rwaccess="R/W1TC"/> 
+		<bitfield id="ERR_CTRL_TX0_IRQ" width="1" begin="12" end="12" resetval="0x0" description="D-PHY Transmitter Lane 0 ERR_CONTROL_IRQ" range="12" rwaccess="R/W1TC"/> 
+		<bitfield id="ERR_ESC_TX3_IRQ" width="1" begin="11" end="11" resetval="0x0" description="D-PHY Transmitter Lane 3 ERR_ESC_IRQ" range="11" rwaccess="R/W1TC"/> 
+		<bitfield id="ERR_ESC_TX2_IRQ" width="1" begin="10" end="10" resetval="0x0" description="D-PHY Transmitter Lane 2 ERR_ESC_IRQ" range="10" rwaccess="R/W1TC"/> 
+		<bitfield id="ERR_ESC_TX1_IRQ" width="1" begin="9" end="9" resetval="0x0" description="D-PHY Transmitter Lane 1 ERR_ESC_IRQ" range="9" rwaccess="R/W1TC"/> 
+		<bitfield id="ERR_ESC_TX0_IRQ" width="1" begin="8" end="8" resetval="0x0" description="D-PHY Transmitter Lane 0 ERR_ESC_IRQ" range="8" rwaccess="R/W1TC"/> 
+		<bitfield id="ERR_SYNC_TX3_IRQ" width="1" begin="7" end="7" resetval="0x0" description="D-PHY Transmitter Lane 3 ERR_SYNC_ESC_IRQ" range="7" rwaccess="R/W1TC"/> 
+		<bitfield id="ERR_SYNC_TX2_IRQ" width="1" begin="6" end="6" resetval="0x0" description="D-PHY Transmitter Lane 2 ERR_SYNC_ESC_IRQ" range="6" rwaccess="R/W1TC"/> 
+		<bitfield id="ERR_SYNC_TX1_IRQ" width="1" begin="5" end="5" resetval="0x0" description="D-PHY Transmitter Lane 1 ERR_SYNC_ESC_IRQ" range="5" rwaccess="R/W1TC"/> 
+		<bitfield id="ERR_SYNC_TX0_IRQ" width="1" begin="4" end="4" resetval="0x0" description="D-PHY Transmitter Lane 0 ERR_SYNC_ESC_IRQ" range="4" rwaccess="R/W1TC"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dphy_irq_mask" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dphy_irq_mask" offset="0x14" width="32" description="">
+		<bitfield id="MASK_ERR_CTRL_TX3_IRQ" width="1" begin="15" end="15" resetval="0x0" description="D-PHY Transmitter Mask Lane 3 ERR_CONTROL_IRQ" range="15" rwaccess="R/W"/> 
+		<bitfield id="MASK_ERR_CTRL_TX2_IRQ" width="1" begin="14" end="14" resetval="0x0" description="D-PHY Transmitter Mask Lane 2 ERR_CONTROL_IRQ" range="14" rwaccess="R/W"/> 
+		<bitfield id="MASK_ERR_CTRL_TX1_IRQ" width="1" begin="13" end="13" resetval="0x0" description="D-PHY Transmitter Mask Lane 1 ERR_CONTROL_IRQ" range="13" rwaccess="R/W"/> 
+		<bitfield id="MASK_ERR_CTRL_TX0_IRQ" width="1" begin="12" end="12" resetval="0x0" description="D-PHY Transmitter Mask Lane 0 ERR_CONTROL_IRQ" range="12" rwaccess="R/W"/> 
+		<bitfield id="MASK_ERR_ESC_TX3_IRQ" width="1" begin="11" end="11" resetval="0x0" description="D-PHY Transmitter Mask Lane 3 ERR_ESC_IRQ" range="11" rwaccess="R/W"/> 
+		<bitfield id="MASK_ERR_ESC_TX2_IRQ" width="1" begin="10" end="10" resetval="0x0" description="D-PHY Transmitter Mask Lane 2 ERR_ESC_IRQ" range="10" rwaccess="R/W"/> 
+		<bitfield id="MASK_ERR_ESC_TX1_IRQ" width="1" begin="9" end="9" resetval="0x0" description="D-PHY Transmitter Mask Lane 1 ERR_ESC_IRQ" range="9" rwaccess="R/W"/> 
+		<bitfield id="MASK_ERR_ESC_TX0_IRQ" width="1" begin="8" end="8" resetval="0x0" description="D-PHY Transmitter Mask Lane 0 ERR_ESC_IRQ" range="8" rwaccess="R/W"/> 
+		<bitfield id="MASK_ERR_SYNC_TX3_IRQ" width="1" begin="7" end="7" resetval="0x0" description="D-PHY Transmitter Mask Lane 3 ERR_SYNC_ESC_IRQ" range="7" rwaccess="R/W"/> 
+		<bitfield id="MASK_ERR_SYNC_TX2_IRQ" width="1" begin="6" end="6" resetval="0x0" description="D-PHY Transmitter Mask Lane 2 ERR_SYNC_ESC_IRQ" range="6" rwaccess="R/W"/> 
+		<bitfield id="MASK_ERR_SYNC_TX1_IRQ" width="1" begin="5" end="5" resetval="0x0" description="D-PHY Transmitter Mask Lane 1 ERR_SYNC_ESC_IRQ" range="5" rwaccess="R/W"/> 
+		<bitfield id="MASK_ERR_SYNC_TX0_IRQ" width="1" begin="4" end="4" resetval="0x0" description="D-PHY Transmitter Mask Lane 0 ERR_SYNC_ESC_IRQ" range="4" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_tx_conf" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_tx_conf" offset="0x20" width="32" description="">
+		<bitfield id="IRQ_ENABLE" width="1" begin="31" end="31" resetval="0x0" description="Interrupt Enable - Writing 1 to this bit enables interrupts. " range="31" rwaccess="R/W"/> 
+		<bitfield id="RX_V1_3_MAPPING" width="1" begin="5" end="5" resetval="0x0" description="RX v1.3 Mapping Enable - Writing 1 to this bit make the TX Controller use               pixel mappings for 8-bit data types which match that of the               Cadence CSI-2 RX v1.3 Controller.               This includes RAW8, Null, Blanking, Embedded, User Defined and               Generic Long Packet data types.               This bit is only available if RX_COMP_MODE is configured. " range="5" rwaccess="R/W"/> 
+		<bitfield id="RX_COMP_ENABLE" width="1" begin="4" end="4" resetval="0x0" description="RX Compatibility Mode Enable - Writing 1 to this bit enables RX Compatibility Mode. " range="4" rwaccess="R/W"/> 
+		<bitfield id="SCRAMBLER_ENABLE" width="1" begin="3" end="3" resetval="0x0" description="Scrambler Enable - Writing 1 to this bit enables scrambling on the ppi tx data bus. " range="3" rwaccess="R/W"/> 
+		<bitfield id="CONFIGURATION_REQUEST" width="1" begin="2" end="2" resetval="0x1" description="Configuration Request - Writing 1 to this bit enables configuration mode. " range="2" rwaccess="R/W"/> 
+		<bitfield id="SOFT_RESET_REQUEST" width="1" begin="1" end="1" resetval="0x0" description="Soft Reset Request - Writing 1 to this bit enables soft reset. " range="1" rwaccess="R/W"/> 
+		<bitfield id="BYPASS_MODE_ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Bypass Mode - Enable Writing 1 to this bit enables bypass mode. " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_wait_burst_time" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_wait_burst_time" offset="0x24" width="32" description="">
+		<bitfield id="TX_CLOCK_EXIT_TIME" width="8" begin="23" end="16" resetval="0x5" description="Tx clock exit time - Number of ppi_tx_word_hs_clk cycles corresponding to the HS clock exit time. " range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="WAIT_BURST_TIME_CNT" width="8" begin="7" end="0" resetval="0x5" description="Wait Burst Time - Number of ppi_tx_word_hs_clk cycles corresponding to the inter HS burst gap. " range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dphy_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dphy_cfg" offset="0x28" width="32" description="">
+		<bitfield id="DPHY_RESET_N" width="1" begin="12" end="12" resetval="0x0" description="D-PHY Reset - Active low reset for D-PHY." range="12" rwaccess="R/W"/> 
+		<bitfield id="DPHY_CAL_ENABLE" width="1" begin="11" end="11" resetval="0x0" description="D-PHY Calibration Enable. Enables calibration for D-PHY speeds over 1.5G. " range="11" rwaccess="R/W"/> 
+		<bitfield id="DPHY_CLOCK_MODE" width="1" begin="10" end="10" resetval="0x0" description="D-PHY Clock Mode. Select the D-PHY Clock Lane mode               0: Continuous               1: Non Continuous" range="10" rwaccess="R/W"/> 
+		<bitfield id="DPHY_MODE" width="2" begin="9" end="8" resetval="0x2" description="D-PHY Mode. Select the D-PHY clock mode during Non Continuous operation               00: Ultra Low Power               01: High Speed               10: Low Power Stop State               11: Reserved" range="9 - 8" rwaccess="R/W"/> 
+		<bitfield id="DPHY_CLK_ENABLE" width="1" begin="4" end="4" resetval="0x0" description="D-PHY Clock Lane - Active high enable for D-PHY clock lane. " range="4" rwaccess="R/W"/> 
+		<bitfield id="DPHY_LN_3_ENABLE" width="1" begin="3" end="3" resetval="0x0" description="D-PHY Lane 3 Enable - Active high enable for D-PHY data lane 0. " range="3" rwaccess="R/W"/> 
+		<bitfield id="DPHY_LN_2_ENABLE" width="1" begin="2" end="2" resetval="0x0" description="D-PHY Lane 2 Enable - Active high enable for D-PHY data lane 0. " range="2" rwaccess="R/W"/> 
+		<bitfield id="DPHY_LN_1_ENABLE" width="1" begin="1" end="1" resetval="0x0" description="D-PHY Lane 1 Enable - Active high enable for D-PHY data lane 0. " range="1" rwaccess="R/W"/> 
+		<bitfield id="DPHY_LN_0_ENABLE" width="1" begin="0" end="0" resetval="0x0" description="D-PHY Lane 0 Enable - Active high enable for D-PHY data lane 0. " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dphy_clk_wakeup" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dphy_clk_wakeup" offset="0x2C" width="32" description="">
+		<bitfield id="ULPS_CLK_LANE_WAKEUP" width="16" begin="15" end="0" resetval="0x20000" description="D-PHY clock lane wakeup time in ppi_tx_esc_clk cycles. " range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dphy_ulps_wakeup" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dphy_ulps_wakeup" offset="0x30" width="32" description="">
+		<bitfield id="ULPS_DATA_LANE_WAKEUP" width="16" begin="15" end="0" resetval="0x20000" description="D-PHY data lane wakeup time in in ppi_tx_esc_clk cycles. " range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dphy_cfg1" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dphy_cfg1" offset="0x34" width="32" description="">
+		<bitfield id="DPHY_DIFF_INVERT_C" width="1" begin="8" end="8" resetval="0x0" description="D-PHY Transmitter invert differential pair on TX Clock Lane" range="8" rwaccess="R/W"/> 
+		<bitfield id="DPHY_DIFF_INVERT_LN_3" width="1" begin="7" end="7" resetval="0x0" description="D-PHY Transmitter invert differential pair on TX Data Lane 3." range="7" rwaccess="R/W"/> 
+		<bitfield id="DPHY_DIFF_INVERT_LN_2" width="1" begin="6" end="6" resetval="0x0" description="D-PHY Transmitter invert differential pair on TX Data Lane 2." range="6" rwaccess="R/W"/> 
+		<bitfield id="DPHY_DIFF_INVERT_LN_1" width="1" begin="5" end="5" resetval="0x0" description="D-PHY Transmitter invert differential pair on TX Data Lane 1." range="5" rwaccess="R/W"/> 
+		<bitfield id="DPHY_DIFF_INVERT_LN_0" width="1" begin="4" end="4" resetval="0x0" description="D-PHY Transmitter invert differential pair on TX Data Lane 0." range="4" rwaccess="R/W"/> 
+		<bitfield id="FORCE_STOP_MODE_LN_3" width="1" begin="3" end="3" resetval="0x0" description="D-PHY Transmitter FORCE_STOP_MODE TX Data Lane 3." range="3" rwaccess="R/W"/> 
+		<bitfield id="FORCE_STOP_MODE_LN_2" width="1" begin="2" end="2" resetval="0x0" description="D-PHY Transmitter FORCE_STOP_MODE TX Data Lane 2." range="2" rwaccess="R/W"/> 
+		<bitfield id="FORCE_STOP_MODE_LN_1" width="1" begin="1" end="1" resetval="0x0" description="D-PHY Transmitter FORCE_STOP_MODE TX Data Lane 1." range="1" rwaccess="R/W"/> 
+		<bitfield id="FORCE_STOP_MODE_LN_0" width="1" begin="0" end="0" resetval="0x0" description="D-PHY Transmitter FORCE_STOP_MODE TX Data Lane 0." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dphy_status" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dphy_status" offset="0x38" width="32" description="">
+		<bitfield id="DPHY_ULPS_ACTIVE_N_CLK" width="1" begin="12" end="12" resetval="0x1" description="D-PHY Transmitter ULPS_ACTIVE_N Clock Lane Status. " range="12" rwaccess="R"/> 
+		<bitfield id="DPHY_ULPS_ACTIVE_N_LN_3" width="1" begin="11" end="11" resetval="0x1" description="D-PHY Transmitter ULPS_ACTIVE_N Data Lane 3 Status. " range="11" rwaccess="R"/> 
+		<bitfield id="DPHY_ULPS_ACTIVE_N_LN_2" width="1" begin="10" end="10" resetval="0x1" description="D-PHY Transmitter ULPS_ACTIVE_N Data Lane 2 Status. " range="10" rwaccess="R"/> 
+		<bitfield id="DPHY_ULPS_ACTIVE_N_LN_1" width="1" begin="9" end="9" resetval="0x1" description="D-PHY Transmitter ULPS_ACTIVE_N Data Lane 1 Status. " range="9" rwaccess="R"/> 
+		<bitfield id="DPHY_ULPS_ACTIVE_N_LN_0" width="1" begin="8" end="8" resetval="0x1" description="D-PHY Transmitter ULPS_ACTIVE_N Data Lane 0 Status. " range="8" rwaccess="R"/> 
+		<bitfield id="DPHY_STOPSTATE_CLK" width="1" begin="4" end="4" resetval="0x1" description="D-PHY Transmitter STOP_STATE Clock Lane Status. " range="4" rwaccess="R"/> 
+		<bitfield id="DPHY_STOPSTATE_LN_3" width="1" begin="3" end="3" resetval="0x1" description="D-PHY Transmitter STOP_STATE Data Lane 3 Status. " range="3" rwaccess="R"/> 
+		<bitfield id="DPHY_STOPSTATE_LN_2" width="1" begin="2" end="2" resetval="0x1" description="D-PHY Transmitter STOP_STATE Data Lane 2 Status. " range="2" rwaccess="R"/> 
+		<bitfield id="DPHY_STOPSTATE_LN_1" width="1" begin="1" end="1" resetval="0x1" description="D-PHY Transmitter STOP_STATE Data Lane 1 Status. " range="1" rwaccess="R"/> 
+		<bitfield id="DPHY_STOPSTATE_LN_0" width="1" begin="0" end="0" resetval="0x1" description="D-PHY Transmitter STOP_STATE Data Lane 0 Status. " range="0" rwaccess="R"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc0_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc0_cfg" offset="0x40" width="32" description="">
+		<bitfield id="VC_0_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 0. " range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="VC_0_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 0. " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc1_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc1_cfg" offset="0x44" width="32" description="">
+		<bitfield id="VC_1_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 1. " range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="VC_1_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 1. " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc2_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc2_cfg" offset="0x48" width="32" description="">
+		<bitfield id="VC_2_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 2. " range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="VC_2_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 2. " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc3_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc3_cfg" offset="0x4C" width="32" description="">
+		<bitfield id="VC_3_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 3. " range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="VC_3_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 3. " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc4_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc4_cfg" offset="0x50" width="32" description="">
+		<bitfield id="VC_4_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 4. " range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="VC_4_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 4. " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc5_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc5_cfg" offset="0x54" width="32" description="">
+		<bitfield id="VC_5_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 5. " range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="VC_5_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 5. " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc6_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc6_cfg" offset="0x58" width="32" description="">
+		<bitfield id="VC_6_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 6. " range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="VC_6_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 6. " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc7_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc7_cfg" offset="0x5C" width="32" description="">
+		<bitfield id="VC_7_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 7. " range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="VC_7_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 7. " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc8_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc8_cfg" offset="0x60" width="32" description="">
+		<bitfield id="VC_8_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 8. " range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="VC_8_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 8. " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc9_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc9_cfg" offset="0x64" width="32" description="">
+		<bitfield id="VC_9_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 9. " range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="VC_9_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 9. " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc10_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc10_cfg" offset="0x68" width="32" description="">
+		<bitfield id="VC_10_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 10. " range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="VC_10_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 10. " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc11_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc11_cfg" offset="0x6C" width="32" description="">
+		<bitfield id="VC_11_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 11. " range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="VC_11_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 11. " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc12_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc12_cfg" offset="0x70" width="32" description="">
+		<bitfield id="VC_12_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 12. " range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="VC_12_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 12. " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc13_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc13_cfg" offset="0x74" width="32" description="">
+		<bitfield id="VC_13_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 13. " range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="VC_13_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 13. " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc14_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc14_cfg" offset="0x78" width="32" description="">
+		<bitfield id="VC_14_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 14. " range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="VC_14_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 14. " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc15_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_vc15_cfg" offset="0x7C" width="32" description="">
+		<bitfield id="VC_15_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 15. " range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="VC_15_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 15. " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt0_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt0_cfg" offset="0x80" width="32" description="">
+		<bitfield id="DT_0_PACKED_ENABLE" width="1" begin="9" end="9" resetval="0x0" description="Packed Enable - data stream is prepacked in to 32-bit words on the pixel interface, the data is sent with the defined Data Type 0 with pixel_dt_sel[:] = 0.               This bit is also used for quad pixel 8-bit data types. " range="9" rwaccess="R/W"/> 
+		<bitfield id="DT_0_EXTD_DATA_TYPE" width="1" begin="8" end="8" resetval="0x0" description="Extended Data Type - Type of data on Data Type 0 with pixel_dt_sel[:] = 0. " range="8" rwaccess="R/W"/> 
+		<bitfield id="DT_0_DATA_TYPE" width="6" begin="7" end="2" resetval="0x18" description="Data Type - Type of data on Data Type 0 with pixel_dt_sel[:] = 0. Default ED [0x12]" range="7 - 2" rwaccess="R/W"/> 
+		<bitfield id="DT_0_LSLE_GENERATION_EN" width="1" begin="1" end="1" resetval="0x0" description="Line Start And Line End Short Packet Generation Enable - Writing 1 to this bit enables Line Start and Line End generation on Data Type 0. " range="1" rwaccess="R/W"/> 
+		<bitfield id="DT_0_LINE_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Line Count Enable - Writing 1 to this bit enables line count on Data Type 0. " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt0_format" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt0_format" offset="0x84" width="32" description="">
+		<bitfield id="DT_0_BYTES_LINE_NUMBER" width="16" begin="31" end="16" resetval="0x100" description="Bytes Per Line - Bytes per line on Data Type 0 with pixel_dt_sel[:] = 0. " range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="DT_0_MAX_LINE_NUMBER" width="16" begin="15" end="0" resetval="0x1" description="Max Line Number - Maximum number of lines on Data Type 0 with pixel_dt_sel[:] = 0. " range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt1_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt1_cfg" offset="0x88" width="32" description="">
+		<bitfield id="DT_1_PACKED_ENABLE" width="1" begin="9" end="9" resetval="0x0" description="Packed Enable - data stream is prepacked in to 32-bit words on the pixel interface, the data is sent with the defined Data Type 1 with pixel_dt_sel[:] = 1.               This bit is also used for quad pixel 8-bit data types. " range="9" rwaccess="R/W"/> 
+		<bitfield id="DT_1_EXTD_DATA_TYPE" width="1" begin="8" end="8" resetval="0x0" description="Extended Data Type - Type of data on Data Type 1 with pixel_dt_sel[:] = 1. " range="8" rwaccess="R/W"/> 
+		<bitfield id="DT_1_DATA_TYPE" width="6" begin="7" end="2" resetval="0x30" description="Data Type - Type of data on Data Type 1 with pixel_dt_sel[:] = 1. Default YUV422 8bit [0x1E]" range="7 - 2" rwaccess="R/W"/> 
+		<bitfield id="DT_1_LSLE_GENERATION_EN" width="1" begin="1" end="1" resetval="0x0" description="Line Start And Line End Short Packet Generation Enable - Writing 1 to this bit enables Line Start and Line End generation on Data Type 1. " range="1" rwaccess="R/W"/> 
+		<bitfield id="DT_1_LINE_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Line Count Enable - Writing 1 to this bit enables line count on Data Type 1. " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt1_format" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt1_format" offset="0x8C" width="32" description="">
+		<bitfield id="DT_1_BYTES_LINE_NUMBER" width="16" begin="31" end="16" resetval="0x100" description="Bytes Per Line - Bytes per line on Data Type 1 with pixel_dt_sel[:] = 1. " range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="DT_1_MAX_LINE_NUMBER" width="16" begin="15" end="0" resetval="0x0" description="Max Line Number - Maximum number of lines on Data Type 1 with pixel_dt_sel[:] = 1. " range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt2_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt2_cfg" offset="0x90" width="32" description="">
+		<bitfield id="DT_2_PACKED_ENABLE" width="1" begin="9" end="9" resetval="0x0" description="Packed Enable - data stream is prepacked in to 32-bit words on the pixel interface, the data is sent with the defined Data Type 2 with pixel_dt_sel[:] = 2.               This bit is also used for quad pixel 8-bit data types. " range="9" rwaccess="R/W"/> 
+		<bitfield id="DT_2_EXTD_DATA_TYPE" width="1" begin="8" end="8" resetval="0x0" description="Extended Data Type - Type of data on Data Type 2 with pixel_dt_sel[:] = 2. " range="8" rwaccess="R/W"/> 
+		<bitfield id="DT_2_DATA_TYPE" width="6" begin="7" end="2" resetval="0x42" description="Data Type - Type of data on Data Type 2 with pixel_dt_sel[:] = 2. Default RAW8 [0x2A]" range="7 - 2" rwaccess="R/W"/> 
+		<bitfield id="DT_2_LSLE_GENERATION_EN" width="1" begin="1" end="1" resetval="0x0" description="Line Start And Line End Short Packet Generation Enable - Writing 1 to this bit enables Line Start and Line End generation on Data Type 2. " range="1" rwaccess="R/W"/> 
+		<bitfield id="DT_2_LINE_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Line Count Enable - Writing 1 to this bit enables line count on Data Type 2. " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt2_format" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt2_format" offset="0x94" width="32" description="">
+		<bitfield id="DT_2_BYTES_LINE_NUMBER" width="16" begin="31" end="16" resetval="0x100" description="Bytes Per Line - Bytes per line on Data Type 2 with pixel_dt_sel[:] = 2. " range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="DT_2_MAX_LINE_NUMBER" width="16" begin="15" end="0" resetval="0x0" description="Max Line Number - Maximum number of lines on Data Type 2 with pixel_dt_sel[:] = 2. " range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt3_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt3_cfg" offset="0x98" width="32" description="">
+		<bitfield id="DT_3_PACKED_ENABLE" width="1" begin="9" end="9" resetval="0x0" description="Packed Enable - data stream is prepacked in to 32-bit words on the pixel interface, the data is sent with the defined Data Type 3 with pixel_dt_sel[:] = 3.               This bit is also used for quad pixel 8-bit data types. " range="9" rwaccess="R/W"/> 
+		<bitfield id="DT_3_EXTD_DATA_TYPE" width="1" begin="8" end="8" resetval="0x0" description="Extended Data Type - Type of data on Data Type 3 with pixel_dt_sel[:] = 3. " range="8" rwaccess="R/W"/> 
+		<bitfield id="DT_3_DATA_TYPE" width="6" begin="7" end="2" resetval="0x36" description="Data Type - Type of data on Data Type 3 with pixel_dt_sel[:] = 3. Default RGB888 [0x24] " range="7 - 2" rwaccess="R/W"/> 
+		<bitfield id="DT_3_LSLE_GENERATION_EN" width="1" begin="1" end="1" resetval="0x0" description="Line Start And Line End Short Packet Generation Enable - Writing 1 to this bit enables Line Start and Line End generation on Data Type 3. " range="1" rwaccess="R/W"/> 
+		<bitfield id="DT_3_LINE_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Line Count Enable - Writing 1 to this bit enables line count on Data Type 3. " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt3_format" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt3_format" offset="0x9C" width="32" description="">
+		<bitfield id="DT_3_BYTES_LINE_NUMBER" width="16" begin="31" end="16" resetval="0x100" description="Bytes Per Line - Bytes per line on Data Type 3 with pixel_dt_sel[:] = 3. " range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="DT_3_MAX_LINE_NUMBER" width="16" begin="15" end="0" resetval="0x0" description="Max Line Number - Maximum number of lines on Data Type 3 with pixel_dt_sel[:] = 3. " range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt4_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt4_cfg" offset="0xA0" width="32" description="">
+		<bitfield id="DT_4_PACKED_ENABLE" width="1" begin="9" end="9" resetval="0x0" description="Packed Enable - data stream is prepacked in to 32-bit words on the pixel interface, the data is sent with the defined Data Type 4 with pixel_dt_sel[:] = 4.               This bit is also used for quad pixel 8-bit data types. " range="9" rwaccess="R/W"/> 
+		<bitfield id="DT_4_EXTD_DATA_TYPE" width="1" begin="8" end="8" resetval="0x0" description="Extended Data Type - Type of data on Data Type 4 with pixel_dt_sel[:] = 4. " range="8" rwaccess="R/W"/> 
+		<bitfield id="DT_4_DATA_TYPE" width="6" begin="7" end="2" resetval="0x0" description="Data Type - Type of data on Data Type 4 with pixel_dt_sel[:] = 4." range="7 - 2" rwaccess="R/W"/> 
+		<bitfield id="DT_4_LSLE_GENERATION_EN" width="1" begin="1" end="1" resetval="0x0" description="Line Start And Line End Short Packet Generation Enable - Writing 1 to this bit enables Line Start and Line End generation on Data Type 4. " range="1" rwaccess="R/W"/> 
+		<bitfield id="DT_4_LINE_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Line Count Enable - Writing 1 to this bit enables line count on Data Type 4. " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt4_format" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt4_format" offset="0xA4" width="32" description="">
+		<bitfield id="DT_4_BYTES_LINE_NUMBER" width="16" begin="31" end="16" resetval="0x100" description="Bytes Per Line - Bytes per line on Data Type 4 with pixel_dt_sel[:] = 4. " range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="DT_4_MAX_LINE_NUMBER" width="16" begin="15" end="0" resetval="0x0" description="Max Line Number - Maximum number of lines on Data Type 4 with pixel_dt_sel[:] = 4. " range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt5_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt5_cfg" offset="0xA8" width="32" description="">
+		<bitfield id="DT_5_PACKED_ENABLE" width="1" begin="9" end="9" resetval="0x0" description="Packed Enable - data stream is prepacked in to 32-bit words on the pixel interface, the data is sent with the defined Data Type 5 with pixel_dt_sel[:] = 5.               This bit is also used for quad pixel 8-bit data types. " range="9" rwaccess="R/W"/> 
+		<bitfield id="DT_5_EXTD_DATA_TYPE" width="1" begin="8" end="8" resetval="0x0" description="Extended Data Type - Type of data on Data Type 5 with pixel_dt_sel[:] = 5. " range="8" rwaccess="R/W"/> 
+		<bitfield id="DT_5_DATA_TYPE" width="6" begin="7" end="2" resetval="0x0" description="Data Type - Type of data on Data Type 5 with pixel_dt_sel[:] = 5." range="7 - 2" rwaccess="R/W"/> 
+		<bitfield id="DT_5_LSLE_GENERATION_EN" width="1" begin="1" end="1" resetval="0x0" description="Line Start And Line End Short Packet Generation Enable - Writing 1 to this bit enables Line Start and Line End generation on Data Type 5. " range="1" rwaccess="R/W"/> 
+		<bitfield id="DT_5_LINE_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Line Count Enable - Writing 1 to this bit enables line count on Data Type 5. " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt5_format" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt5_format" offset="0xAC" width="32" description="">
+		<bitfield id="DT_5_BYTES_LINE_NUMBER" width="16" begin="31" end="16" resetval="0x100" description="Bytes Per Line - Bytes per line on Data Type 5 with pixel_dt_sel[:] = 5. " range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="DT_5_MAX_LINE_NUMBER" width="16" begin="15" end="0" resetval="0x0" description="Max Line Number - Maximum number of lines on Data Type 5 with pixel_dt_sel[:] = 5. " range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt6_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt6_cfg" offset="0xB0" width="32" description="">
+		<bitfield id="DT_6_PACKED_ENABLE" width="1" begin="9" end="9" resetval="0x0" description="Packed Enable - data stream is prepacked in to 32-bit words on the pixel interface, the data is sent with the defined Data Type 6 with pixel_dt_sel[:] = 6.               This bit is also used for quad pixel 8-bit data types. " range="9" rwaccess="R/W"/> 
+		<bitfield id="DT_6_EXTD_DATA_TYPE" width="1" begin="8" end="8" resetval="0x0" description="Extended Data Type - Type of data on Data Type 6 with pixel_dt_sel[:] = 6. " range="8" rwaccess="R/W"/> 
+		<bitfield id="DT_6_DATA_TYPE" width="6" begin="7" end="2" resetval="0x0" description="Data Type - Type of data on Data Type 6 with pixel_dt_sel[:] = 6." range="7 - 2" rwaccess="R/W"/> 
+		<bitfield id="DT_6_LSLE_GENERATION_EN" width="1" begin="1" end="1" resetval="0x0" description="Line Start And Line End Short Packet Generation Enable - Writing 1 to this bit enables Line Start and Line End generation on Data Type 6. " range="1" rwaccess="R/W"/> 
+		<bitfield id="DT_6_LINE_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Line Count Enable - Writing 1 to this bit enables line count on Data Type 6. " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt6_format" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt6_format" offset="0xB4" width="32" description="">
+		<bitfield id="DT_6_BYTES_LINE_NUMBER" width="16" begin="31" end="16" resetval="0x100" description="Bytes Per Line - Bytes per line on Data Type 6 with pixel_dt_sel[:] = 6. " range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="DT_6_MAX_LINE_NUMBER" width="16" begin="15" end="0" resetval="0x0" description="Max Line Number - Maximum number of lines on Data Type 6 with pixel_dt_sel[:] = 6. " range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt7_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt7_cfg" offset="0xB8" width="32" description="">
+		<bitfield id="DT_7_PACKED_ENABLE" width="1" begin="9" end="9" resetval="0x0" description="Packed Enable - data stream is prepacked in to 32-bit words on the pixel interface, the data is sent with the defined Data Type 7 with pixel_dt_sel[:] = 7.               This bit is also used for quad pixel 8-bit data types. " range="9" rwaccess="R/W"/> 
+		<bitfield id="DT_7_EXTD_DATA_TYPE" width="1" begin="8" end="8" resetval="0x0" description="Extended Data Type - Type of data on Data Type 7 with pixel_dt_sel[:] = 7. " range="8" rwaccess="R/W"/> 
+		<bitfield id="DT_7_DATA_TYPE" width="6" begin="7" end="2" resetval="0x0" description="Data Type - Type of data on Data Type 7 with pixel_dt_sel[:] = 7." range="7 - 2" rwaccess="R/W"/> 
+		<bitfield id="DT_7_LSLE_GENERATION_EN" width="1" begin="1" end="1" resetval="0x0" description="Line Start And Line End Short Packet Generation Enable - Writing 1 to this bit enables Line Start and Line End generation on Data Type 7. " range="1" rwaccess="R/W"/> 
+		<bitfield id="DT_7_LINE_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Line Count Enable - Writing 1 to this bit enables line count on Data Type 7. " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt7_format" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_dt7_format" offset="0xBC" width="32" description="">
+		<bitfield id="DT_7_BYTES_LINE_NUMBER" width="16" begin="31" end="16" resetval="0x100" description="Bytes Per Line - Bytes per line on Data Type 7 with pixel_dt_sel[:] = 7. " range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="DT_7_MAX_LINE_NUMBER" width="16" begin="15" end="0" resetval="0x0" description="Max Line Number - Maximum number of lines on Data Type 7 with pixel_dt_sel[:] = 7. " range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_stream_if_0_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_stream_if_0_cfg" offset="0x100" width="32" description="">
+		<bitfield id="STREAM_IF_0_FILL_LEVEL" width="12" begin="11" end="0" resetval="0x0" description="Fill Level - Minimum number of packed 32 words loaded into the stream fifo before Tx will start for Stream if 0. " range="11 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_stream_if_1_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_stream_if_1_cfg" offset="0x104" width="32" description="">
+		<bitfield id="STREAM_IF_1_SLAVE_MODE" width="1" begin="23" end="23" resetval="0x0" description="Stream Slave Mode suppresses frame start/end packets in stream 1. To be used when DT interleving is required in the same VC. NOTE: the stream must then be paired with stream O as the master on the StreamIF" range="23" rwaccess="R/W"/> 
+		<bitfield id="STREAM_IF_1_FILL_LEVEL" width="12" begin="11" end="0" resetval="0x0" description="Fill Level - Minimum number of packed 32 words loaded into the stream fifo before Tx will start for Stream if 1. " range="11 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_epd_en_ssp" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_epd_en_ssp" offset="0x200" width="32" description="">
+		<bitfield id="EPD_ENABLE" width="1" begin="15" end="15" resetval="0x0" description="EPD enable.  Set high to enable EPD operation." range="15" rwaccess="R/W"/> 
+		<bitfield id="EPD_SP_SPACERS" width="15" begin="14" end="0" resetval="0x0" description="EPD Short Packet Spacers:               EPD Option 1: Minimum number of Spacer Bytes per Lane following a                             Short Packet.               EPD Option 2: Fixed number of Spacer Bytes per Lane following a                             Short Packet." range="14 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_epd_op_slp" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_epd_op_slp" offset="0x204" width="32" description="">
+		<bitfield id="EPD_OPTION" width="1" begin="15" end="15" resetval="0x0" description="EPD Option.               1'b0: D-PHY EPD Option 1               1'b1: D-PHY EPD Option 2" range="15" rwaccess="R/W"/> 
+		<bitfield id="EPD_LP_SPACERS" width="15" begin="14" end="0" resetval="0x0" description="EPD Long Packet Spacers:               EPD Option 1: Minimum number of Spacer Bytes per Lane following a                             Long Packet.               EPD Option 2: Fixed number of Spacer Bytes per Lane following a                             Long Packet." range="14 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_epd_clkidlehs_min" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_epd_clkidlehs_min" offset="0x208" width="32" description="">
+		<bitfield id="EPD_OPTION1_CLKIDLEHS_MIN" width="16" begin="15" end="0" resetval="0x16" description="For LRTE EPD Option 1, this sets the minimum number of pclk cycles               required to meet the D-PHY timing requirement for THS-IDLE-CLKHS0." range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_debug_cfg" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_debug_cfg" offset="0xD00" width="32" description="">
+		<bitfield id="DBG_EN" width="1" begin="0" end="0" resetval="0x0" description="Debug Enable. This bit enables debug when high. If low then other DEBUG registers read 0." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_debug_ln_fsm" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_debug_ln_fsm" offset="0xD04" width="32" description="">
+		<bitfield id="NEW_BURST_ALLOWED" width="1" begin="9" end="9" resetval="0x0" description="Lane Mangement FSM. New burst allowed - WAIT_BURST_TIME expired" range="9" rwaccess="R"/> 
+		<bitfield id="PACKET_VALID_R" width="1" begin="8" end="8" resetval="0x0" description="Lane Mangement FSM. Valid packet in packet register" range="8" rwaccess="R"/> 
+		<bitfield id="PACKET_VALID_IN" width="1" begin="7" end="7" resetval="0x0" description="Lane Mangement FSM. Valid packet at input" range="7" rwaccess="R"/> 
+		<bitfield id="END_OF_BURST" width="1" begin="6" end="6" resetval="0x0" description="Lane Mangement FSM. End of High speed burst" range="6" rwaccess="R"/> 
+		<bitfield id="TRANS_ACTIVE" width="1" begin="5" end="5" resetval="0x0" description="Lane Mangement FSM. HS transmission active" range="5" rwaccess="R"/> 
+		<bitfield id="START_HS_TRANS" width="1" begin="4" end="4" resetval="0x0" description="Lane Mangement FSM. HS transmission ready" range="4" rwaccess="R"/> 
+		<bitfield id="LANE_MGR_FSM_ST" width="3" begin="2" end="0" resetval="0x0" description="Lane Mangement FSM. State of Lane Management FSM " range="2 - 0" rwaccess="R"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_debug_clk_ln_fsm" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_debug_clk_ln_fsm" offset="0xD08" width="32" description="">
+		<bitfield id="ULPS_ACTIVE_CLK" width="1" begin="13" end="13" resetval="0x0" description="Clock Lane FSM. ULPS active from D-PHY" range="13" rwaccess="R"/> 
+		<bitfield id="ULPS_MODE_ACTIVE" width="1" begin="12" end="12" resetval="0x0" description="Clock Lane FSM. ULPS mode active" range="12" rwaccess="R"/> 
+		<bitfield id="ULPS_EXIT_CLK_PPI" width="1" begin="11" end="11" resetval="0x0" description="Clock Lane FSM. ULPS EXIT Request to D-PHY" range="11" rwaccess="R"/> 
+		<bitfield id="ULPS_REQUEST_CLK_PPI" width="1" begin="10" end="10" resetval="0x0" description="Clock Lane FSM. ULPS request to D-PHY" range="10" rwaccess="R"/> 
+		<bitfield id="HS_MODE_ACTIVE_CLK" width="1" begin="9" end="9" resetval="0x0" description="Clock Lane FSM. High speed mode active" range="9" rwaccess="R"/> 
+		<bitfield id="REQUEST_HS_CLK_PPI" width="1" begin="8" end="8" resetval="0x0" description="Clock Lane FSM. High speed clock request" range="8" rwaccess="R"/> 
+		<bitfield id="READY_HS_CLK" width="1" begin="7" end="7" resetval="0x0" description="Clock Lane FSM. High speed clock active from D-PHY" range="7" rwaccess="R"/> 
+		<bitfield id="ULPS_WAKEUP_COUNT_DONE_CL" width="1" begin="6" end="6" resetval="0x0" description="Clock Lane FSM. Clock lane ULPS wakeup counter expired" range="6" rwaccess="R"/> 
+		<bitfield id="ULPS_REQUEST_CLK" width="1" begin="5" end="5" resetval="0x0" description="Clock Lane FSM. Request ULPS mode" range="5" rwaccess="R"/> 
+		<bitfield id="HS_MODE_REQ" width="1" begin="4" end="4" resetval="0x0" description="Clock Lane FSM. Request High Speed mode" range="4" rwaccess="R"/> 
+		<bitfield id="ULPS_CLK_FSM" width="2" begin="3" end="2" resetval="0x0" description="Clock Lane FSM. State of ULPS control FSM." range="3 - 2" rwaccess="R"/> 
+		<bitfield id="HS_CLK_FSM" width="2" begin="1" end="0" resetval="0x0" description="Clock Lane FSM. State of High Speed Clock FSM." range="1 - 0" rwaccess="R"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_debug_data_ln_fsm" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_debug_data_ln_fsm" offset="0xD0C" width="32" description="">
+		<bitfield id="ULPS_ACTIVE" width="1" begin="16" end="16" resetval="0x0" description="Data Lane FSM. Clock and data lane ULPS active" range="16" rwaccess="R"/> 
+		<bitfield id="DATA_ULPS_ACTIVE" width="1" begin="15" end="15" resetval="0x0" description="Debug Register for Data Lane FSM. Data lane ULPS active" range="15" rwaccess="R"/> 
+		<bitfield id="TX_ULPS_EXIT_ESC" width="1" begin="14" end="14" resetval="0x0" description="Data Lane FSM. Exit escape mode to D-PHY" range="14" rwaccess="R"/> 
+		<bitfield id="TX_ULPS_ESC" width="1" begin="13" end="13" resetval="0x0" description="Data Lane FSM. ULPS escape mode to D-PHY" range="13" rwaccess="R"/> 
+		<bitfield id="TX_REQUEST_ESC" width="1" begin="12" end="12" resetval="0x0" description="Data Lane FSM. Request escape mode to D-PHY" range="12" rwaccess="R"/> 
+		<bitfield id="ULPS_WAKEUP_COUNT_DONE_DL" width="1" begin="10" end="10" resetval="0x0" description="Data Lane FSM. Data Lane ULPS wakeup counter expired" range="10" rwaccess="R"/> 
+		<bitfield id="ULPS_ACTIVE_N" width="4" begin="9" end="6" resetval="0x0" description="Data Lane FSM. Data Lane ULPS active from D-PHY " range="9 - 6" rwaccess="R"/> 
+		<bitfield id="HS_MODE_REQ_SYNC" width="1" begin="5" end="5" resetval="0x0" description="Data Lane FSM. HS Mode request" range="5" rwaccess="R"/> 
+		<bitfield id="ULPS_REQ_SYNC" width="1" begin="4" end="4" resetval="0x0" description="Data Lane FSM. ULPS Request" range="4" rwaccess="R"/> 
+		<bitfield id="ULPS_DATA_LANE_FSM" width="2" begin="1" end="0" resetval="0x0" description="Data Lane FSM. State of Data Lane FSM FSM" range="1 - 0" rwaccess="R"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_debug_prot0_fsm" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_debug_prot0_fsm" offset="0xD10" width="32" description="">
+		<bitfield id="VIRTUAL_CHANNEL_IF0" width="4" begin="18" end="15" resetval="0x0" description="Pixel IF0 Protocol FSM. State of the top level Virtual Channel select signals       State of the Virtual Channel[3:2] select signals when VCX enabled, otherwise '00'       and state of the Virtual Channel[1:0] " range="18 - 15" rwaccess="R"/> 
+		<bitfield id="DATA_TYPE_IF0" width="3" begin="14" end="12" resetval="0x0" description="Pixel IF0 Protocol FSM. State of the Data Type select signals" range="14 - 12" rwaccess="R"/> 
+		<bitfield id="FRAME_VALID_IF0" width="1" begin="11" end="11" resetval="0x0" description="Pixel IF0 Protocol FSM. State of the Frame Valid signal" range="11" rwaccess="R"/> 
+		<bitfield id="LINE_VALID_IF0" width="1" begin="10" end="10" resetval="0x0" description="Pixel IF0 Protocol FSM. State of the Line Valid signal" range="10" rwaccess="R"/> 
+		<bitfield id="LAST_PAYLOAD_DATA_IF0" width="1" begin="8" end="8" resetval="0x0" description="Pixel IF0 Protocol FSM. Last payload data in long packet" range="8" rwaccess="R"/> 
+		<bitfield id="PAYLOAD_FIFO_EMPTY_IF0" width="1" begin="7" end="7" resetval="0x0" description="Pixel IF0 Protocol FSM. Payload FIFO empty" range="7" rwaccess="R"/> 
+		<bitfield id="PROT_FSM_IF0" width="7" begin="6" end="0" resetval="0x0" description="Pixel IF0 Protocol FSM. State of Protocol Control FSM" range="6 - 0" rwaccess="R"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_debug_prot1_fsm" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_debug_prot1_fsm" offset="0xD14" width="32" description="">
+		<bitfield id="VIRTUAL_CHANNEL_IF1" width="4" begin="18" end="15" resetval="0x0" description="Pixel IF1 Protocol FSM. State of the top level Virtual Channel select signals       State of the Virtual Channel[3:2] select signals when VCX enabled, otherwise '00'       and state of the Virtual Channel[1:0] " range="18 - 15" rwaccess="R"/> 
+		<bitfield id="DATA_TYPE_IF1" width="3" begin="14" end="12" resetval="0x0" description="Pixel IF1 Protocol FSM. State of the Data Type select signals" range="14 - 12" rwaccess="R"/> 
+		<bitfield id="FRAME_VALID_IF1" width="1" begin="11" end="11" resetval="0x0" description="Pixel IF1 Protocol FSM. State of the Frame Valid signal" range="11" rwaccess="R"/> 
+		<bitfield id="LINE_VALID_IF1" width="1" begin="10" end="10" resetval="0x0" description="Pixel IF1 Protocol FSM. State of the Line Valid signal" range="10" rwaccess="R"/> 
+		<bitfield id="LAST_PAYLOAD_DATA_IF1" width="1" begin="8" end="8" resetval="0x0" description="Pixel IF1 Protocol FSM. Last payload data in long packet" range="8" rwaccess="R"/> 
+		<bitfield id="PAYLOAD_FIFO_EMPTY_IF1" width="1" begin="7" end="7" resetval="0x0" description="Pixel IF1 Protocol FSM. Payload FIFO empty" range="7" rwaccess="R"/> 
+		<bitfield id="PROT_FSM_IF1" width="7" begin="6" end="0" resetval="0x0" description="Pixel IF1 Protocol FSM. State of Protocol Control FSM" range="6 - 0" rwaccess="R"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_debug_prot2_fsm" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_debug_prot2_fsm" offset="0xD18" width="32" description="">
+		<bitfield id="VIRTUAL_CHANNEL_IF2" width="4" begin="18" end="15" resetval="0x0" description="Pixel IF2 Protocol FSM. State of the top level Virtual Channel select signals       State of the Virtual Channel[3:2] select signals when VCX enabled, otherwise '00'       and state of the Virtual Channel[1:0] " range="18 - 15" rwaccess="R"/> 
+		<bitfield id="DATA_TYPE_IF2" width="3" begin="14" end="12" resetval="0x0" description="Pixel IF2 Protocol FSM. State of the Data Type select signals" range="14 - 12" rwaccess="R"/> 
+		<bitfield id="FRAME_VALID_IF2" width="1" begin="11" end="11" resetval="0x0" description="Pixel IF2 Protocol FSM. State of the Frame Valid signal" range="11" rwaccess="R"/> 
+		<bitfield id="LINE_VALID_IF2" width="1" begin="10" end="10" resetval="0x0" description="Pixel IF2 Protocol FSM. State of the Line Valid signal" range="10" rwaccess="R"/> 
+		<bitfield id="LAST_PAYLOAD_DATA_IF2" width="1" begin="8" end="8" resetval="0x0" description="Pixel IF2 Protocol FSM. Last payload data in long packet" range="8" rwaccess="R"/> 
+		<bitfield id="PAYLOAD_FIFO_EMPTY_IF2" width="1" begin="7" end="7" resetval="0x0" description="Pixel IF2 Protocol FSM. Payload FIFO empty" range="7" rwaccess="R"/> 
+		<bitfield id="PROT_FSM_IF2" width="7" begin="6" end="0" resetval="0x0" description="Pixel IF2 Protocol FSM. State of Protocol Control FSM" range="6 - 0" rwaccess="R"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_debug_prot3_fsm" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_debug_prot3_fsm" offset="0xD1C" width="32" description="">
+		<bitfield id="VIRTUAL_CHANNEL_IF3" width="4" begin="18" end="15" resetval="0x0" description="Pixel IF3 Protocol FSM. State of the top level Virtual Channel select signals       State of the Virtual Channel[3:2] select signals when VCX enabled, otherwise '00'       and state of the Virtual Channel[1:0] " range="18 - 15" rwaccess="R"/> 
+		<bitfield id="DATA_TYPE_IF3" width="3" begin="14" end="12" resetval="0x0" description="Pixel IF3 Protocol FSM. State of the Data Type select signals" range="14 - 12" rwaccess="R"/> 
+		<bitfield id="FRAME_VALID_IF3" width="1" begin="11" end="11" resetval="0x0" description="Pixel IF3 Protocol FSM. State of the Frame Valid signal" range="11" rwaccess="R"/> 
+		<bitfield id="LINE_VALID_IF3" width="1" begin="10" end="10" resetval="0x0" description="Pixel IF3 Protocol FSM. State of the Line Valid signal" range="10" rwaccess="R"/> 
+		<bitfield id="LAST_PAYLOAD_DATA_IF3" width="1" begin="8" end="8" resetval="0x0" description="Pixel IF3 Protocol FSM. Last payload data in long packet" range="8" rwaccess="R"/> 
+		<bitfield id="PAYLOAD_FIFO_EMPTY_IF3" width="1" begin="7" end="7" resetval="0x0" description="Pixel IF3 Protocol FSM. Payload FIFO empty" range="7" rwaccess="R"/> 
+		<bitfield id="PROT_FSM_IF3" width="7" begin="6" end="0" resetval="0x0" description="Pixel IF3 Protocol FSM. State of Protocol Control FSM" range="6 - 0" rwaccess="R"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_test_generic_status" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_test_generic_status" offset="0xDF8" width="32" description="">
+		<bitfield id="STATUS" width="16" begin="15" end="0" resetval="0x0" description="Test status - Directly reflects, after resynchronisation into the pclk domain, the                state of 'test_generic_status' primary inputs." range="15 - 0" rwaccess="R"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_test_generic_ctrl" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_test_generic_ctrl" offset="0xDFC" width="32" description="">
+		<bitfield id="CTRL" width="16" begin="15" end="0" resetval="0x0" description="Test control - Directly controls primary outputs 'test_generic_ctrl' " range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_asf_int_status" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_asf_int_status" offset="0xE00" width="32" description="">
+		<bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="Reserved, read as 0, ignored on write." range="31 - 7" rwaccess="N/A"/> 
+		<bitfield id="ASF_INTEGRITY_ERR" width="1" begin="6" end="6" resetval="0x0" description="Integrity error interrupt" range="6" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_ERR" width="1" begin="5" end="5" resetval="0x0" description="Protocol error interrupt" range="5" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_TRANS_TO_ERR" width="1" begin="4" end="4" resetval="0x0" description="Transaction timeouts error interrupt" range="4" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_CSR_ERR" width="1" begin="3" end="3" resetval="0x0" description="Configuration and status registers error interrupt" range="3" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_DAP_ERR" width="1" begin="2" end="2" resetval="0x0" description="Data and address paths parity error interrupt" range="2" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_SRAM_UNCORR_ERR" width="1" begin="1" end="1" resetval="0x0" description="SRAM uncorrectable error interrupt" range="1" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_SRAM_CORR_ERR" width="1" begin="0" end="0" resetval="0x0" description="SRAM correctable error interrupt" range="0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_asf_int_raw_status" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_asf_int_raw_status" offset="0xE04" width="32" description="">
+		<bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="Reserved, read as 0, ignored on write." range="31 - 7" rwaccess="N/A"/> 
+		<bitfield id="ASF_INTEGRITY_ERR" width="1" begin="6" end="6" resetval="0x0" description="Integrity error interrupt" range="6" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_ERR" width="1" begin="5" end="5" resetval="0x0" description="Protocol error interrupt" range="5" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_TRANS_TO_ERR" width="1" begin="4" end="4" resetval="0x0" description="Transaction timeouts error interrupt" range="4" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_CSR_ERR" width="1" begin="3" end="3" resetval="0x0" description="Configuration and status registers error interrupt" range="3" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_DAP_ERR" width="1" begin="2" end="2" resetval="0x0" description="Data and address paths parity error interrupt" range="2" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_SRAM_UNCORR_ERR" width="1" begin="1" end="1" resetval="0x0" description="SRAM uncorrectable error interrupt" range="1" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_SRAM_CORR_ERR" width="1" begin="0" end="0" resetval="0x0" description="SRAM correctable error interrupt" range="0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_asf_int_mask" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_asf_int_mask" offset="0xE08" width="32" description="">
+		<bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="Reserved, read as 0, ignored on write." range="31 - 7" rwaccess="N/A"/> 
+		<bitfield id="ASF_INTEGRITY_ERR_MASK" width="1" begin="6" end="6" resetval="0x1" description="Mask bit for integrity error interrupt" range="6" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_ERR_MASK" width="1" begin="5" end="5" resetval="0x1" description="Mask bit for protocol error interrupt." range="5" rwaccess="R/W"/> 
+		<bitfield id="ASF_TRANS_TO_ERR_MASK" width="1" begin="4" end="4" resetval="0x1" description="Mask bit for transaction timeouts error interrupt." range="4" rwaccess="R/W"/> 
+		<bitfield id="ASF_CSR_ERR_MASK" width="1" begin="3" end="3" resetval="0x1" description="Mask bit for configuration and status registers error interrupt." range="3" rwaccess="R/W"/> 
+		<bitfield id="ASF_DAP_ERR_MASK" width="1" begin="2" end="2" resetval="0x1" description="Mask bit for data and address paths parity error interrupt." range="2" rwaccess="R/W"/> 
+		<bitfield id="ASF_SRAM_UNCORR_ERR_MASK" width="1" begin="1" end="1" resetval="0x1" description="Mask bit for SRAM uncorrectable error interrupt." range="1" rwaccess="R/W"/> 
+		<bitfield id="ASF_SRAM_CORR_ERR_MASK" width="1" begin="0" end="0" resetval="0x1" description="Mask bit for SRAM correctable error interrupt." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_asf_int_test" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_asf_int_test" offset="0xE0C" width="32" description="">
+		<bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="Reserved, read as 0, ignored on write." range="31 - 7" rwaccess="N/A"/> 
+		<bitfield id="ASF_INTEGRITY_ERR_TEST" width="1" begin="6" end="6" resetval="0x0" description="Test bit for integrity error interrupt" range="6" rwaccess="W"/> 
+		<bitfield id="ASF_PROTOCOL_ERR_TEST" width="1" begin="5" end="5" resetval="0x0" description="Test bit for protocol error interrupt." range="5" rwaccess="W"/> 
+		<bitfield id="ASF_TRANS_TO_ERR_TEST" width="1" begin="4" end="4" resetval="0x0" description="Test bit for transaction timeouts error interrupt." range="4" rwaccess="W"/> 
+		<bitfield id="ASF_CSR_ERR_TEST" width="1" begin="3" end="3" resetval="0x0" description="Test bit for configuration and status registers error interrupt." range="3" rwaccess="W"/> 
+		<bitfield id="ASF_DAP_ERR_TEST" width="1" begin="2" end="2" resetval="0x0" description="Test bit for data and address paths parity error interrupt." range="2" rwaccess="W"/> 
+		<bitfield id="ASF_SRAM_UNCORR_ERR_TEST" width="1" begin="1" end="1" resetval="0x0" description="Test bit for SRAM uncorrectable error interrupt." range="1" rwaccess="W"/> 
+		<bitfield id="ASF_SRAM_CORR_ERR_TEST" width="1" begin="0" end="0" resetval="0x0" description="Test bit for SRAM correctable error interrupt." range="0" rwaccess="W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_asf_fatal_nonfatal_select" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_asf_fatal_nonfatal_select" offset="0xE10" width="32" description="">
+		<bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="Reserved, read as 0, ignored on write." range="31 - 7" rwaccess="N/A"/> 
+		<bitfield id="ASF_INTEGRITY_ERR" width="1" begin="6" end="6" resetval="0x1" description="Enable integrity error interrupt as fatal" range="6" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_ERR" width="1" begin="5" end="5" resetval="0x1" description="Enable protocol error interrupt as fatal." range="5" rwaccess="R/W"/> 
+		<bitfield id="ASF_TRANS_TO_ERR" width="1" begin="4" end="4" resetval="0x1" description="Enable transaction timeouts error interrupt as fatal." range="4" rwaccess="R/W"/> 
+		<bitfield id="ASF_CSR_ERR" width="1" begin="3" end="3" resetval="0x1" description="Enable configuration and status registers error interrupt as fatal." range="3" rwaccess="R/W"/> 
+		<bitfield id="ASF_DAP_ERR" width="1" begin="2" end="2" resetval="0x1" description="Enable data and address paths parity error interrupt as fatal." range="2" rwaccess="R/W"/> 
+		<bitfield id="ASF_SRAM_UNCORR_ERR" width="1" begin="1" end="1" resetval="0x1" description="Enable SRAM uncorrectable error interrupt as fatal." range="1" rwaccess="R/W"/> 
+		<bitfield id="ASF_SRAM_CORR_ERR" width="1" begin="0" end="0" resetval="0x1" description="Enable SRAM correctable error interrupt as fatal." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_asf_sram_corr_fault_status" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_asf_sram_corr_fault_status" offset="0xE20" width="32" description="">
+		<bitfield id="ASF_SRAM_CORR_FAULT_INST" width="8" begin="31" end="24" resetval="0x0" description="Last SRAM instance that generated fault." range="31 - 24" rwaccess="R"/> 
+		<bitfield id="ASF_SRAM_CORR_FAULT_ADDR" width="24" begin="23" end="0" resetval="0x0" description="Last SRAM address that generated fault." range="23 - 0" rwaccess="R"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_asf_sram_uncorr_fault_status" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_asf_sram_uncorr_fault_status" offset="0xE24" width="32" description="">
+		<bitfield id="ASF_SRAM_UNCORR_FAULT_INST" width="8" begin="31" end="24" resetval="0x0" description="Last SRAM instance that generated fault." range="31 - 24" rwaccess="R"/> 
+		<bitfield id="ASF_SRAM_UNCORR_FAULT_ADDR" width="24" begin="23" end="0" resetval="0x0" description="Last SRAM address that generated fault." range="23 - 0" rwaccess="R"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_asf_sram_fault_stats" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_asf_sram_fault_stats" offset="0xE28" width="32" description="">
+		<bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="Reserved, read as 0, ignored on write." range="31 - 16" rwaccess="N/A"/> 
+		<bitfield id="ASF_SRAM_FAULT_CORR_STATS" width="16" begin="15" end="0" resetval="0x0" description="Count of number of correctable errors if implemented. Count value will saturate at 0xffff." range="15 - 0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_asf_trans_to_ctrl" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_asf_trans_to_ctrl" offset="0xE30" width="32" description="">
+		<bitfield id="ASF_TRANS_TO_EN" width="1" begin="31" end="31" resetval="0x0" description="Enable transaction timeout monitoring." range="31" rwaccess="R/W"/> 
+		<bitfield id="ASF_TRANS_TO_CTRL" width="16" begin="15" end="0" resetval="0x0" description="Timer value to use for transaction timeout monitor." range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_asf_trans_to_fault_mask" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_asf_trans_to_fault_mask" offset="0xE34" width="32" description="">
+		<bitfield id="ASF_TRANS_TO_FAULT_4_MASK" width="1" begin="4" end="4" resetval="0x1" description="Mask register for each ASF transaction timeout fault source." range="4" rwaccess="R/W"/> 
+		<bitfield id="ASF_TRANS_TO_FAULT_3_MASK" width="1" begin="3" end="3" resetval="0x1" description="Mask register for each ASF transaction timeout fault source." range="3" rwaccess="R/W"/> 
+		<bitfield id="ASF_TRANS_TO_FAULT_2_MASK" width="1" begin="2" end="2" resetval="0x1" description="Mask register for each ASF transaction timeout fault source." range="2" rwaccess="R/W"/> 
+		<bitfield id="ASF_TRANS_TO_FAULT_1_MASK" width="1" begin="1" end="1" resetval="0x1" description="Mask register for each ASF transaction timeout fault source." range="1" rwaccess="R/W"/> 
+		<bitfield id="ASF_TRANS_TO_FAULT_0_MASK" width="1" begin="0" end="0" resetval="0x1" description="Mask register for each ASF transaction timeout fault source." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_asf_trans_to_fault_status" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_asf_trans_to_fault_status" offset="0xE38" width="32" description="">
+		<bitfield id="ASF_TRANS_TO_FAULT_4_STATUS" width="1" begin="4" end="4" resetval="0x0" description="Status bits for transaction timeouts faults." range="4" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_TRANS_TO_FAULT_3_STATUS" width="1" begin="3" end="3" resetval="0x0" description="Status bits for transaction timeouts faults." range="3" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_TRANS_TO_FAULT_2_STATUS" width="1" begin="2" end="2" resetval="0x0" description="Status bits for transaction timeouts faults." range="2" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_TRANS_TO_FAULT_1_STATUS" width="1" begin="1" end="1" resetval="0x0" description="Status bits for transaction timeouts faults." range="1" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_TRANS_TO_FAULT_0_STATUS" width="1" begin="0" end="0" resetval="0x0" description="Status bits for transaction timeouts faults." range="0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_asf_protocol_fault_mask" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_asf_protocol_fault_mask" offset="0xE40" width="32" description="">
+		<bitfield id="ASF_PROTOCOL_FAULT_16_MASK" width="1" begin="16" end="16" resetval="0x1" description="Mask register for each ASF protocol fault source." range="16" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_15_MASK" width="1" begin="15" end="15" resetval="0x1" description="Mask register for each ASF protocol fault source." range="15" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_14_MASK" width="1" begin="14" end="14" resetval="0x1" description="Mask register for each ASF protocol fault source." range="14" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_13_MASK" width="1" begin="13" end="13" resetval="0x1" description="Mask register for each ASF protocol fault source." range="13" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_12_MASK" width="1" begin="12" end="12" resetval="0x1" description="Mask register for each ASF protocol fault source." range="12" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_11_MASK" width="1" begin="11" end="11" resetval="0x1" description="Mask register for each ASF protocol fault source." range="11" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_10_MASK" width="1" begin="10" end="10" resetval="0x1" description="Mask register for each ASF protocol fault source." range="10" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_9_MASK" width="1" begin="9" end="9" resetval="0x1" description="Mask register for each ASF protocol fault source." range="9" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_8_MASK" width="1" begin="8" end="8" resetval="0x1" description="Mask register for each ASF protocol fault source." range="8" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_7_MASK" width="1" begin="7" end="7" resetval="0x1" description="Mask register for each ASF protocol fault source." range="7" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_6_MASK" width="1" begin="6" end="6" resetval="0x1" description="Mask register for each ASF protocol fault source." range="6" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_5_MASK" width="1" begin="5" end="5" resetval="0x1" description="Mask register for each ASF protocol fault source." range="5" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_4_MASK" width="1" begin="4" end="4" resetval="0x1" description="Mask register for each ASF protocol fault source." range="4" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_3_MASK" width="1" begin="3" end="3" resetval="0x1" description="Mask register for each ASF protocol fault source." range="3" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_2_MASK" width="1" begin="2" end="2" resetval="0x1" description="Mask register for each ASF protocol fault source." range="2" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_1_MASK" width="1" begin="1" end="1" resetval="0x1" description="Mask register for each ASF protocol fault source." range="1" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_0_MASK" width="1" begin="0" end="0" resetval="0x1" description="Mask register for each ASF protocol fault source." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_asf_protocol_fault_status" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_asf_protocol_fault_status" offset="0xE44" width="32" description="">
+		<bitfield id="ASF_PROTOCOL_FAULT_16_STATUS" width="1" begin="16" end="16" resetval="0x0" description="Status bits for protocol faults." range="16" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_15_STATUS" width="1" begin="15" end="15" resetval="0x0" description="Status bits for protocol faults." range="15" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_14_STATUS" width="1" begin="14" end="14" resetval="0x0" description="Status bits for protocol faults." range="14" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_13_STATUS" width="1" begin="13" end="13" resetval="0x0" description="Status bits for protocol faults." range="13" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_12_STATUS" width="1" begin="12" end="12" resetval="0x0" description="Status bits for protocol faults." range="12" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_11_STATUS" width="1" begin="11" end="11" resetval="0x0" description="Status bits for protocol faults." range="11" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_10_STATUS" width="1" begin="10" end="10" resetval="0x0" description="Status bits for protocol faults." range="10" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_9_STATUS" width="1" begin="9" end="9" resetval="0x0" description="Status bits for protocol faults." range="9" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_8_STATUS" width="1" begin="8" end="8" resetval="0x0" description="Status bits for protocol faults." range="8" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_7_STATUS" width="1" begin="7" end="7" resetval="0x0" description="Status bits for protocol faults." range="7" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_6_STATUS" width="1" begin="6" end="6" resetval="0x0" description="Status bits for protocol faults." range="6" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_5_STATUS" width="1" begin="5" end="5" resetval="0x0" description="Status bits for protocol faults." range="5" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_4_STATUS" width="1" begin="4" end="4" resetval="0x0" description="Status bits for protocol faults." range="4" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_3_STATUS" width="1" begin="3" end="3" resetval="0x0" description="Status bits for protocol faults." range="3" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_2_STATUS" width="1" begin="2" end="2" resetval="0x0" description="Status bits for protocol faults." range="2" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_1_STATUS" width="1" begin="1" end="1" resetval="0x0" description="Status bits for protocol faults." range="1" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_0_STATUS" width="1" begin="0" end="0" resetval="0x0" description="Status bits for protocol faults." range="0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_id_prod_ver" acronym="VBUS2APB_WRAP__VBUSP_APB__CSI2TX_V2_REGS_id_prod_ver" offset="0xFFC" width="32" description="">
+		<bitfield id="PRODUCT_ID" width="16" begin="31" end="16" resetval="0x20517" description="CSI-2 Transmitter Product Identification Number. " range="31 - 16" rwaccess="R"/> 
+		<bitfield id="VERSION_ID" width="16" begin="15" end="0" resetval="0x768" description="CSI-2 Transmitter Product Version Number. " range="15 - 0" rwaccess="R"/>
+	</register>
+</module>

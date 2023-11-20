@@ -1,0 +1,198 @@
+<module name="PCIE1_CORE_PCIE_INTD_CFG_INTD_CFG" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="PCIE_INTD_REVISION" acronym="PCIE_INTD_REVISION" offset="0x0" width="32" description="Register">
+    <bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x1" description="Scheme" range="" rwaccess="R"/>
+    <bitfield id="BU" width="2" begin="29" end="28" resetval="0x2" description="BU" range="" rwaccess="R"/>
+    <bitfield id="FUNCTION" width="12" begin="27" end="16" resetval="0x690" description="Module ID" range="" rwaccess="R"/>
+    <bitfield id="RTLVER" width="5" begin="15" end="11" resetval="0x14" description="RTL revisions" range="" rwaccess="R"/>
+    <bitfield id="MAJREV" width="3" begin="10" end="8" resetval="0x2" description="Major" range="" rwaccess="R"/>
+    <bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom" range="" rwaccess="R"/>
+    <bitfield id="MINREV" width="6" begin="5" end="0" resetval="0x0" description="Minor" range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_INTD_EOI_REG" acronym="PCIE_INTD_EOI_REG" offset="0x10" width="32" description="End of Interrupt Register">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="EOI_VECTOR" width="8" begin="7" end="0" resetval="0x0" description="End of Interrupt Vector" range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_INTD_INTR_VECTOR_REG" acronym="PCIE_INTD_INTR_VECTOR_REG" offset="0x14" width="32" description="Interrupt Vector Register">
+    <bitfield id="INTR_VECTOR" width="32" begin="31" end="0" resetval="0x0" description="Interrupt Vector Register" range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_INTD_ENABLE_REG_SYS_0" acronym="PCIE_INTD_ENABLE_REG_SYS_0" offset="0x100" width="32" description="Enable Register 0">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0xX" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_DOWNSTREAM_5" width="1" begin="5" end="5" resetval="0x0" description="Enable Set for sys_en_pcie_downstream_5" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_DOWNSTREAM_4" width="1" begin="4" end="4" resetval="0x0" description="Enable Set for sys_en_pcie_downstream_4" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_DOWNSTREAM_3" width="1" begin="3" end="3" resetval="0x0" description="Enable Set for sys_en_pcie_downstream_3" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_DOWNSTREAM_2" width="1" begin="2" end="2" resetval="0x0" description="Enable Set for sys_en_pcie_downstream_2" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_DOWNSTREAM_1" width="1" begin="1" end="1" resetval="0x0" description="Enable Set for sys_en_pcie_downstream_1" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_DOWNSTREAM_0" width="1" begin="0" end="0" resetval="0x0" description="Enable Set for sys_en_pcie_downstream_0" range="" rwaccess="RW1S"/>
+  </register>
+  <register id="PCIE_INTD_ENABLE_REG_SYS_1" acronym="PCIE_INTD_ENABLE_REG_SYS_1" offset="0x104" width="32" description="Enable Register 1">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0xX" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_PWR_STATE" width="1" begin="26" end="26" resetval="0x0" description="Enable Set for sys_en_pcie_pwr_state" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_LEGACY_3" width="1" begin="25" end="25" resetval="0x0" description="Enable Set for sys_en_pcie_legacy_3" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_LEGACY_2" width="1" begin="24" end="24" resetval="0x0" description="Enable Set for sys_en_pcie_legacy_2" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_LEGACY_1" width="1" begin="23" end="23" resetval="0x0" description="Enable Set for sys_en_pcie_legacy_1" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_LEGACY_0" width="1" begin="22" end="22" resetval="0x0" description="Enable Set for sys_en_pcie_legacy_0" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_21" width="1" begin="21" end="21" resetval="0x0" description="Enable Set for sys_en_pcie_flr_21" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_20" width="1" begin="20" end="20" resetval="0x0" description="Enable Set for sys_en_pcie_flr_20" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_19" width="1" begin="19" end="19" resetval="0x0" description="Enable Set for sys_en_pcie_flr_19" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_18" width="1" begin="18" end="18" resetval="0x0" description="Enable Set for sys_en_pcie_flr_18" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_17" width="1" begin="17" end="17" resetval="0x0" description="Enable Set for sys_en_pcie_flr_17" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_16" width="1" begin="16" end="16" resetval="0x0" description="Enable Set for sys_en_pcie_flr_16" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_15" width="1" begin="15" end="15" resetval="0x0" description="Enable Set for sys_en_pcie_flr_15" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_14" width="1" begin="14" end="14" resetval="0x0" description="Enable Set for sys_en_pcie_flr_14" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_13" width="1" begin="13" end="13" resetval="0x0" description="Enable Set for sys_en_pcie_flr_13" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_12" width="1" begin="12" end="12" resetval="0x0" description="Enable Set for sys_en_pcie_flr_12" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_11" width="1" begin="11" end="11" resetval="0x0" description="Enable Set for sys_en_pcie_flr_11" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_10" width="1" begin="10" end="10" resetval="0x0" description="Enable Set for sys_en_pcie_flr_10" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_9" width="1" begin="9" end="9" resetval="0x0" description="Enable Set for sys_en_pcie_flr_9" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_8" width="1" begin="8" end="8" resetval="0x0" description="Enable Set for sys_en_pcie_flr_8" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_7" width="1" begin="7" end="7" resetval="0x0" description="Enable Set for sys_en_pcie_flr_7" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_6" width="1" begin="6" end="6" resetval="0x0" description="Enable Set for sys_en_pcie_flr_6" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_5" width="1" begin="5" end="5" resetval="0x0" description="Enable Set for sys_en_pcie_flr_5" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_4" width="1" begin="4" end="4" resetval="0x0" description="Enable Set for sys_en_pcie_flr_4" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_3" width="1" begin="3" end="3" resetval="0x0" description="Enable Set for sys_en_pcie_flr_3" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_2" width="1" begin="2" end="2" resetval="0x0" description="Enable Set for sys_en_pcie_flr_2" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_1" width="1" begin="1" end="1" resetval="0x0" description="Enable Set for sys_en_pcie_flr_1" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_0" width="1" begin="0" end="0" resetval="0x0" description="Enable Set for sys_en_pcie_flr_0" range="" rwaccess="RW1S"/>
+  </register>
+  <register id="PCIE_INTD_ENABLE_REG_SYS_2" acronym="PCIE_INTD_ENABLE_REG_SYS_2" offset="0x108" width="32" description="Enable Register 2">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0xX" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_PTM" width="1" begin="11" end="11" resetval="0x0" description="Enable Set for sys_en_pcie_ptm" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_LINK_STATE" width="1" begin="10" end="10" resetval="0x0" description="Enable Set for sys_en_pcie_link_state" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_HOT_RESET" width="1" begin="9" end="9" resetval="0x0" description="Enable Set for sys_en_pcie_hot_reset" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_ERROR_2" width="1" begin="8" end="8" resetval="0x0" description="Enable Set for sys_en_pcie_error_2" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_ERROR_1" width="1" begin="7" end="7" resetval="0x0" description="Enable Set for sys_en_pcie_error_1" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_ERROR_0" width="1" begin="6" end="6" resetval="0x0" description="Enable Set for sys_en_pcie_error_0" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_DPA_5" width="1" begin="5" end="5" resetval="0x0" description="Enable Set for sys_en_pcie_dpa_5" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_DPA_4" width="1" begin="4" end="4" resetval="0x0" description="Enable Set for sys_en_pcie_dpa_4" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_DPA_3" width="1" begin="3" end="3" resetval="0x0" description="Enable Set for sys_en_pcie_dpa_3" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_DPA_2" width="1" begin="2" end="2" resetval="0x0" description="Enable Set for sys_en_pcie_dpa_2" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_DPA_1" width="1" begin="1" end="1" resetval="0x0" description="Enable Set for sys_en_pcie_dpa_1" range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_DPA_0" width="1" begin="0" end="0" resetval="0x0" description="Enable Set for sys_en_pcie_dpa_0" range="" rwaccess="RW1S"/>
+  </register>
+  <register id="PCIE_INTD_ENABLE_CLR_REG_SYS_0" acronym="PCIE_INTD_ENABLE_CLR_REG_SYS_0" offset="0x300" width="32" description="Enable Clear Register 0">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0xX" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_DOWNSTREAM_5_CLR" width="1" begin="5" end="5" resetval="0x0" description="Enable Clear for sys_en_pcie_downstream_5" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_DOWNSTREAM_4_CLR" width="1" begin="4" end="4" resetval="0x0" description="Enable Clear for sys_en_pcie_downstream_4" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_DOWNSTREAM_3_CLR" width="1" begin="3" end="3" resetval="0x0" description="Enable Clear for sys_en_pcie_downstream_3" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_DOWNSTREAM_2_CLR" width="1" begin="2" end="2" resetval="0x0" description="Enable Clear for sys_en_pcie_downstream_2" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_DOWNSTREAM_1_CLR" width="1" begin="1" end="1" resetval="0x0" description="Enable Clear for sys_en_pcie_downstream_1" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_DOWNSTREAM_0_CLR" width="1" begin="0" end="0" resetval="0x0" description="Enable Clear for sys_en_pcie_downstream_0" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="PCIE_INTD_ENABLE_CLR_REG_SYS_1" acronym="PCIE_INTD_ENABLE_CLR_REG_SYS_1" offset="0x304" width="32" description="Enable Clear Register 1">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0xX" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_PWR_STATE_CLR" width="1" begin="26" end="26" resetval="0x0" description="Enable Clear for sys_en_pcie_pwr_state" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_LEGACY_3_CLR" width="1" begin="25" end="25" resetval="0x0" description="Enable Clear for sys_en_pcie_legacy_3" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_LEGACY_2_CLR" width="1" begin="24" end="24" resetval="0x0" description="Enable Clear for sys_en_pcie_legacy_2" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_LEGACY_1_CLR" width="1" begin="23" end="23" resetval="0x0" description="Enable Clear for sys_en_pcie_legacy_1" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_LEGACY_0_CLR" width="1" begin="22" end="22" resetval="0x0" description="Enable Clear for sys_en_pcie_legacy_0" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_21_CLR" width="1" begin="21" end="21" resetval="0x0" description="Enable Clear for sys_en_pcie_flr_21" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_20_CLR" width="1" begin="20" end="20" resetval="0x0" description="Enable Clear for sys_en_pcie_flr_20" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_19_CLR" width="1" begin="19" end="19" resetval="0x0" description="Enable Clear for sys_en_pcie_flr_19" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_18_CLR" width="1" begin="18" end="18" resetval="0x0" description="Enable Clear for sys_en_pcie_flr_18" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_17_CLR" width="1" begin="17" end="17" resetval="0x0" description="Enable Clear for sys_en_pcie_flr_17" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_16_CLR" width="1" begin="16" end="16" resetval="0x0" description="Enable Clear for sys_en_pcie_flr_16" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_15_CLR" width="1" begin="15" end="15" resetval="0x0" description="Enable Clear for sys_en_pcie_flr_15" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_14_CLR" width="1" begin="14" end="14" resetval="0x0" description="Enable Clear for sys_en_pcie_flr_14" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_13_CLR" width="1" begin="13" end="13" resetval="0x0" description="Enable Clear for sys_en_pcie_flr_13" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_12_CLR" width="1" begin="12" end="12" resetval="0x0" description="Enable Clear for sys_en_pcie_flr_12" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_11_CLR" width="1" begin="11" end="11" resetval="0x0" description="Enable Clear for sys_en_pcie_flr_11" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_10_CLR" width="1" begin="10" end="10" resetval="0x0" description="Enable Clear for sys_en_pcie_flr_10" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_9_CLR" width="1" begin="9" end="9" resetval="0x0" description="Enable Clear for sys_en_pcie_flr_9" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_8_CLR" width="1" begin="8" end="8" resetval="0x0" description="Enable Clear for sys_en_pcie_flr_8" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_7_CLR" width="1" begin="7" end="7" resetval="0x0" description="Enable Clear for sys_en_pcie_flr_7" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_6_CLR" width="1" begin="6" end="6" resetval="0x0" description="Enable Clear for sys_en_pcie_flr_6" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_5_CLR" width="1" begin="5" end="5" resetval="0x0" description="Enable Clear for sys_en_pcie_flr_5" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_4_CLR" width="1" begin="4" end="4" resetval="0x0" description="Enable Clear for sys_en_pcie_flr_4" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_3_CLR" width="1" begin="3" end="3" resetval="0x0" description="Enable Clear for sys_en_pcie_flr_3" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_2_CLR" width="1" begin="2" end="2" resetval="0x0" description="Enable Clear for sys_en_pcie_flr_2" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_1_CLR" width="1" begin="1" end="1" resetval="0x0" description="Enable Clear for sys_en_pcie_flr_1" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_FLR_0_CLR" width="1" begin="0" end="0" resetval="0x0" description="Enable Clear for sys_en_pcie_flr_0" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="PCIE_INTD_ENABLE_CLR_REG_SYS_2" acronym="PCIE_INTD_ENABLE_CLR_REG_SYS_2" offset="0x308" width="32" description="Enable Clear Register 2">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0xX" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_PTM_CLR" width="1" begin="11" end="11" resetval="0x0" description="Enable Clear for sys_en_pcie_ptm" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_LINK_STATE_CLR" width="1" begin="10" end="10" resetval="0x0" description="Enable Clear for sys_en_pcie_link_state" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_HOT_RESET_CLR" width="1" begin="9" end="9" resetval="0x0" description="Enable Clear for sys_en_pcie_hot_reset" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_ERROR_2_CLR" width="1" begin="8" end="8" resetval="0x0" description="Enable Clear for sys_en_pcie_error_2" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_ERROR_1_CLR" width="1" begin="7" end="7" resetval="0x0" description="Enable Clear for sys_en_pcie_error_1" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_ERROR_0_CLR" width="1" begin="6" end="6" resetval="0x0" description="Enable Clear for sys_en_pcie_error_0" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_DPA_5_CLR" width="1" begin="5" end="5" resetval="0x0" description="Enable Clear for sys_en_pcie_dpa_5" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_DPA_4_CLR" width="1" begin="4" end="4" resetval="0x0" description="Enable Clear for sys_en_pcie_dpa_4" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_DPA_3_CLR" width="1" begin="3" end="3" resetval="0x0" description="Enable Clear for sys_en_pcie_dpa_3" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_DPA_2_CLR" width="1" begin="2" end="2" resetval="0x0" description="Enable Clear for sys_en_pcie_dpa_2" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_DPA_1_CLR" width="1" begin="1" end="1" resetval="0x0" description="Enable Clear for sys_en_pcie_dpa_1" range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_SYS_EN_PCIE_DPA_0_CLR" width="1" begin="0" end="0" resetval="0x0" description="Enable Clear for sys_en_pcie_dpa_0" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="PCIE_INTD_STATUS_REG_SYS_0" acronym="PCIE_INTD_STATUS_REG_SYS_0" offset="0x500" width="32" description="Status Register 0">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0xX" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_DOWNSTREAM_5" width="1" begin="5" end="5" resetval="0x0" description="Status for sys_en_pcie_downstream_5" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_DOWNSTREAM_4" width="1" begin="4" end="4" resetval="0x0" description="Status for sys_en_pcie_downstream_4" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_DOWNSTREAM_3" width="1" begin="3" end="3" resetval="0x0" description="Status for sys_en_pcie_downstream_3" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_DOWNSTREAM_2" width="1" begin="2" end="2" resetval="0x0" description="Status for sys_en_pcie_downstream_2" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_DOWNSTREAM_1" width="1" begin="1" end="1" resetval="0x0" description="Status for sys_en_pcie_downstream_1" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_DOWNSTREAM_0" width="1" begin="0" end="0" resetval="0x0" description="Status for sys_en_pcie_downstream_0" range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_INTD_STATUS_REG_SYS_1" acronym="PCIE_INTD_STATUS_REG_SYS_1" offset="0x504" width="32" description="Status Register 1">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0xX" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_PWR_STATE" width="1" begin="26" end="26" resetval="0x0" description="Status for sys_en_pcie_pwr_state" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_LEGACY_3" width="1" begin="25" end="25" resetval="0x0" description="Status for sys_en_pcie_legacy_3" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_LEGACY_2" width="1" begin="24" end="24" resetval="0x0" description="Status for sys_en_pcie_legacy_2" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_LEGACY_1" width="1" begin="23" end="23" resetval="0x0" description="Status for sys_en_pcie_legacy_1" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_LEGACY_0" width="1" begin="22" end="22" resetval="0x0" description="Status for sys_en_pcie_legacy_0" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_FLR_21" width="1" begin="21" end="21" resetval="0x0" description="Status for sys_en_pcie_flr_21" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_FLR_20" width="1" begin="20" end="20" resetval="0x0" description="Status for sys_en_pcie_flr_20" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_FLR_19" width="1" begin="19" end="19" resetval="0x0" description="Status for sys_en_pcie_flr_19" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_FLR_18" width="1" begin="18" end="18" resetval="0x0" description="Status for sys_en_pcie_flr_18" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_FLR_17" width="1" begin="17" end="17" resetval="0x0" description="Status for sys_en_pcie_flr_17" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_FLR_16" width="1" begin="16" end="16" resetval="0x0" description="Status for sys_en_pcie_flr_16" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_FLR_15" width="1" begin="15" end="15" resetval="0x0" description="Status for sys_en_pcie_flr_15" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_FLR_14" width="1" begin="14" end="14" resetval="0x0" description="Status for sys_en_pcie_flr_14" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_FLR_13" width="1" begin="13" end="13" resetval="0x0" description="Status for sys_en_pcie_flr_13" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_FLR_12" width="1" begin="12" end="12" resetval="0x0" description="Status for sys_en_pcie_flr_12" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_FLR_11" width="1" begin="11" end="11" resetval="0x0" description="Status for sys_en_pcie_flr_11" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_FLR_10" width="1" begin="10" end="10" resetval="0x0" description="Status for sys_en_pcie_flr_10" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_FLR_9" width="1" begin="9" end="9" resetval="0x0" description="Status for sys_en_pcie_flr_9" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_FLR_8" width="1" begin="8" end="8" resetval="0x0" description="Status for sys_en_pcie_flr_8" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_FLR_7" width="1" begin="7" end="7" resetval="0x0" description="Status for sys_en_pcie_flr_7" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_FLR_6" width="1" begin="6" end="6" resetval="0x0" description="Status for sys_en_pcie_flr_6" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_FLR_5" width="1" begin="5" end="5" resetval="0x0" description="Status for sys_en_pcie_flr_5" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_FLR_4" width="1" begin="4" end="4" resetval="0x0" description="Status for sys_en_pcie_flr_4" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_FLR_3" width="1" begin="3" end="3" resetval="0x0" description="Status for sys_en_pcie_flr_3" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_FLR_2" width="1" begin="2" end="2" resetval="0x0" description="Status for sys_en_pcie_flr_2" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_FLR_1" width="1" begin="1" end="1" resetval="0x0" description="Status for sys_en_pcie_flr_1" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_FLR_0" width="1" begin="0" end="0" resetval="0x0" description="Status for sys_en_pcie_flr_0" range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_INTD_STATUS_REG_SYS_2" acronym="PCIE_INTD_STATUS_REG_SYS_2" offset="0x508" width="32" description="Status Register 2">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0xX" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_PTM" width="1" begin="11" end="11" resetval="0x0" description="Status ,write 1 to set, for sys_en_pcie_ptm" range="" rwaccess="RW1S"/>
+    <bitfield id="STATUS_SYS_PCIE_LINK_STATE" width="1" begin="10" end="10" resetval="0x0" description="Status ,write 1 to set, for sys_en_pcie_link_state" range="" rwaccess="RW1S"/>
+    <bitfield id="STATUS_SYS_PCIE_HOT_RESET" width="1" begin="9" end="9" resetval="0x0" description="Status ,write 1 to set, for sys_en_pcie_hot_reset" range="" rwaccess="RW1S"/>
+    <bitfield id="STATUS_SYS_PCIE_ERROR_2" width="1" begin="8" end="8" resetval="0x0" description="Status ,write 1 to set, for sys_en_pcie_error_2" range="" rwaccess="RW1S"/>
+    <bitfield id="STATUS_SYS_PCIE_ERROR_1" width="1" begin="7" end="7" resetval="0x0" description="Status ,write 1 to set, for sys_en_pcie_error_1" range="" rwaccess="RW1S"/>
+    <bitfield id="STATUS_SYS_PCIE_ERROR_0" width="1" begin="6" end="6" resetval="0x0" description="Status ,write 1 to set, for sys_en_pcie_error_0" range="" rwaccess="RW1S"/>
+    <bitfield id="STATUS_SYS_PCIE_DPA_5" width="1" begin="5" end="5" resetval="0x0" description="Status ,write 1 to set, for sys_en_pcie_dpa_5" range="" rwaccess="RW1S"/>
+    <bitfield id="STATUS_SYS_PCIE_DPA_4" width="1" begin="4" end="4" resetval="0x0" description="Status ,write 1 to set, for sys_en_pcie_dpa_4" range="" rwaccess="RW1S"/>
+    <bitfield id="STATUS_SYS_PCIE_DPA_3" width="1" begin="3" end="3" resetval="0x0" description="Status ,write 1 to set, for sys_en_pcie_dpa_3" range="" rwaccess="RW1S"/>
+    <bitfield id="STATUS_SYS_PCIE_DPA_2" width="1" begin="2" end="2" resetval="0x0" description="Status ,write 1 to set, for sys_en_pcie_dpa_2" range="" rwaccess="RW1S"/>
+    <bitfield id="STATUS_SYS_PCIE_DPA_1" width="1" begin="1" end="1" resetval="0x0" description="Status ,write 1 to set, for sys_en_pcie_dpa_1" range="" rwaccess="RW1S"/>
+    <bitfield id="STATUS_SYS_PCIE_DPA_0" width="1" begin="0" end="0" resetval="0x0" description="Status ,write 1 to set, for sys_en_pcie_dpa_0" range="" rwaccess="RW1S"/>
+  </register>
+  <register id="PCIE_INTD_STATUS_CLR_REG_SYS_2" acronym="PCIE_INTD_STATUS_CLR_REG_SYS_2" offset="0x708" width="32" description="Status Clear Register 2">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0xX" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="STATUS_SYS_PCIE_PTM_CLR" width="1" begin="11" end="11" resetval="0x0" description="Status ,write 1 to clear, for sys_en_pcie_ptm" range="" rwaccess="RW1C"/>
+    <bitfield id="STATUS_SYS_PCIE_LINK_STATE_CLR" width="1" begin="10" end="10" resetval="0x0" description="Status ,write 1 to clear, for sys_en_pcie_link_state" range="" rwaccess="RW1C"/>
+    <bitfield id="STATUS_SYS_PCIE_HOT_RESET_CLR" width="1" begin="9" end="9" resetval="0x0" description="Status ,write 1 to clear, for sys_en_pcie_hot_reset" range="" rwaccess="RW1C"/>
+    <bitfield id="STATUS_SYS_PCIE_ERROR_2_CLR" width="1" begin="8" end="8" resetval="0x0" description="Status ,write 1 to clear, for sys_en_pcie_error_2" range="" rwaccess="RW1C"/>
+    <bitfield id="STATUS_SYS_PCIE_ERROR_1_CLR" width="1" begin="7" end="7" resetval="0x0" description="Status ,write 1 to clear, for sys_en_pcie_error_1" range="" rwaccess="RW1C"/>
+    <bitfield id="STATUS_SYS_PCIE_ERROR_0_CLR" width="1" begin="6" end="6" resetval="0x0" description="Status ,write 1 to clear, for sys_en_pcie_error_0" range="" rwaccess="RW1C"/>
+    <bitfield id="STATUS_SYS_PCIE_DPA_5_CLR" width="1" begin="5" end="5" resetval="0x0" description="Status ,write 1 to clear, for sys_en_pcie_dpa_5" range="" rwaccess="RW1C"/>
+    <bitfield id="STATUS_SYS_PCIE_DPA_4_CLR" width="1" begin="4" end="4" resetval="0x0" description="Status ,write 1 to clear, for sys_en_pcie_dpa_4" range="" rwaccess="RW1C"/>
+    <bitfield id="STATUS_SYS_PCIE_DPA_3_CLR" width="1" begin="3" end="3" resetval="0x0" description="Status ,write 1 to clear, for sys_en_pcie_dpa_3" range="" rwaccess="RW1C"/>
+    <bitfield id="STATUS_SYS_PCIE_DPA_2_CLR" width="1" begin="2" end="2" resetval="0x0" description="Status ,write 1 to clear, for sys_en_pcie_dpa_2" range="" rwaccess="RW1C"/>
+    <bitfield id="STATUS_SYS_PCIE_DPA_1_CLR" width="1" begin="1" end="1" resetval="0x0" description="Status ,write 1 to clear, for sys_en_pcie_dpa_1" range="" rwaccess="RW1C"/>
+    <bitfield id="STATUS_SYS_PCIE_DPA_0_CLR" width="1" begin="0" end="0" resetval="0x0" description="Status ,write 1 to clear, for sys_en_pcie_dpa_0" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="PCIE_INTD_INTR_VECTOR_REG_SYS" acronym="PCIE_INTD_INTR_VECTOR_REG_SYS" offset="0xA80" width="32" description="Interrupt Vector for sys">
+    <bitfield id="INTR_VECTOR_SYS" width="32" begin="31" end="0" resetval="0x0" description="Interrupt Vector" range="" rwaccess="R"/>
+  </register>
+</module>

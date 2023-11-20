@@ -1,0 +1,110 @@
+<module name="DSS_EDP0_COMMON_0_V2A_S_CORE_VP_REGS_SAPB" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="V2A_S__CORE_VP__REGS_SAPB_APB_CTRL_s" acronym="V2A_S__CORE_VP__REGS_SAPB_APB_CTRL_s" offset="0x0" width="32" description="">
+		<bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description=" Reserved field. 0x0 when read. Writes ignored. " range="31 - 4" rwaccess="N/A"/> 
+		<bitfield id="APB_XT_RUNSTALL" width="1" begin="3" end="3" resetval="0x1" description="  Not used     " range="3" rwaccess="R/W"/> 
+		<bitfield id="APB_IRAM_PATH" width="1" begin="2" end="2" resetval="0x1" description="  Not used     " range="2" rwaccess="R/W"/> 
+		<bitfield id="APB_DRAM_PATH" width="1" begin="1" end="1" resetval="0x1" description="  Not used     " range="1" rwaccess="R/W"/> 
+		<bitfield id="APB_XT_RESET" width="1" begin="0" end="0" resetval="0x1" description="  Not used     " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="V2A_S__CORE_VP__REGS_SAPB_xt_int_ctrl_s" acronym="V2A_S__CORE_VP__REGS_SAPB_xt_int_ctrl_s" offset="0x4" width="32" description="">
+		<bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description=" Reserved field. 0x0 when read. Writes ignored. " range="31 - 2" rwaccess="N/A"/> 
+		<bitfield id="XT_INT_POLARITY" width="2" begin="1" end="0" resetval="0x0" description="  Not used     " range="1 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="V2A_S__CORE_VP__REGS_SAPB_MAILBOX_FULL_ADDR_s" acronym="V2A_S__CORE_VP__REGS_SAPB_MAILBOX_FULL_ADDR_s" offset="0x8" width="32" description="">
+		<bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description=" Reserved field. 0x0 when read. Writes ignored. " range="31 - 1" rwaccess="N/A"/> 
+		<bitfield id="MAILBOX_FULL" width="1" begin="0" end="0" resetval="0x0" description="  Mailbox full indication.  0x1-mailbox full. No more messages can be sent to mailbox   0x0-mailbox not-full. At least 1 write can be performed to mailbox " range="0" rwaccess="R"/>
+	</register>
+	<register id="V2A_S__CORE_VP__REGS_SAPB_MAILBOX_EMPTY_ADDR_s" acronym="V2A_S__CORE_VP__REGS_SAPB_MAILBOX_EMPTY_ADDR_s" offset="0xC" width="32" description="">
+		<bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description=" Reserved field. 0x0 when read. Writes ignored. " range="31 - 1" rwaccess="N/A"/> 
+		<bitfield id="MAILBOX_EMPTY" width="1" begin="0" end="0" resetval="0x1" description="  Mailbox Empty indication   0x1-mailbox empty. No response available   0x0-mailbox not-empty. There is at least 1 byte of a response in mailbox available to read by Host processor " range="0" rwaccess="R"/>
+	</register>
+	<register id="V2A_S__CORE_VP__REGS_SAPB_mailbox0_wr_data_s" acronym="V2A_S__CORE_VP__REGS_SAPB_mailbox0_wr_data_s" offset="0x10" width="32" description="">
+		<bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description=" Reserved field. 0x0 when read. Writes ignored. " range="31 - 8" rwaccess="N/A"/> 
+		<bitfield id="MAILBOX0_WR_DATA" width="8" begin="7" end="0" resetval="0x0" description="  Mailbox write Data.  " range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="V2A_S__CORE_VP__REGS_SAPB_mailbox0_rd_data_s" acronym="V2A_S__CORE_VP__REGS_SAPB_mailbox0_rd_data_s" offset="0x14" width="32" description="">
+		<bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description=" Reserved field. 0x0 when read. Writes ignored. " range="31 - 8" rwaccess="N/A"/> 
+		<bitfield id="MAILBOX0_RD_DATA" width="8" begin="7" end="0" resetval="0x0" description="  Mailbox Read data      " range="7 - 0" rwaccess="R"/>
+	</register>
+	<register id="V2A_S__CORE_VP__REGS_SAPB_KEEP_ALIVE_s" acronym="V2A_S__CORE_VP__REGS_SAPB_KEEP_ALIVE_s" offset="0x18" width="32" description="">
+		<bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description=" Reserved field. 0x0 when read. Writes ignored. " range="31 - 8" rwaccess="N/A"/> 
+		<bitfield id="KEEP_ALIVE_CNT" width="8" begin="7" end="0" resetval="0x0" description=" Software keep alive counter. Counter is initialized to 0x0 after reset and incremented by 0x1 with every FW kernel loop. It can be used to determine if internal CPU started running correctly. " range="7 - 0" rwaccess="R"/>
+	</register>
+	<register id="V2A_S__CORE_VP__REGS_SAPB_VER_L_s" acronym="V2A_S__CORE_VP__REGS_SAPB_VER_L_s" offset="0x1C" width="32" description="">
+		<bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description=" Reserved field. 0x0 when read. Writes ignored. " range="31 - 8" rwaccess="N/A"/> 
+		<bitfield id="VER_LSB" width="8" begin="7" end="0" resetval="0x0" description=" Software Version lower byte. Loaded by Firmware at the beggining of firmware operation. " range="7 - 0" rwaccess="R"/>
+	</register>
+	<register id="V2A_S__CORE_VP__REGS_SAPB_VER_H_s" acronym="V2A_S__CORE_VP__REGS_SAPB_VER_H_s" offset="0x20" width="32" description="">
+		<bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description=" Reserved field. 0x0 when read. Writes ignored. " range="31 - 8" rwaccess="N/A"/> 
+		<bitfield id="VER_MSB" width="8" begin="7" end="0" resetval="0x0" description=" Software Version higher byte. Loaded by Firmware at the beggining of firmware operation. " range="7 - 0" rwaccess="R"/>
+	</register>
+	<register id="V2A_S__CORE_VP__REGS_SAPB_VER_LIB_L_ADDR_s" acronym="V2A_S__CORE_VP__REGS_SAPB_VER_LIB_L_ADDR_s" offset="0x24" width="32" description="">
+		<bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description=" Reserved field. 0x0 when read. Writes ignored. " range="31 - 8" rwaccess="N/A"/> 
+		<bitfield id="SW_LIB_VER_L" width="8" begin="7" end="0" resetval="0x0" description=" Software Library Version lower byte. Loaded by Firmware at the beggining of firmware operation. " range="7 - 0" rwaccess="R"/>
+	</register>
+	<register id="V2A_S__CORE_VP__REGS_SAPB_VER_LIB_H_ADDR_s" acronym="V2A_S__CORE_VP__REGS_SAPB_VER_LIB_H_ADDR_s" offset="0x28" width="32" description="">
+		<bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description=" Reserved field. 0x0 when read. Writes ignored. " range="31 - 8" rwaccess="N/A"/> 
+		<bitfield id="SW_LIB_VER_H" width="8" begin="7" end="0" resetval="0x0" description=" Software Library Version higher byte. Loaded by Firmware at the beggining of firmware operation. " range="7 - 0" rwaccess="R"/>
+	</register>
+	<register id="V2A_S__CORE_VP__REGS_SAPB_SW_DEBUG_L_s" acronym="V2A_S__CORE_VP__REGS_SAPB_SW_DEBUG_L_s" offset="0x2C" width="32" description="">
+		<bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description=" Reserved field. 0x0 when read. Writes ignored. " range="31 - 8" rwaccess="N/A"/> 
+		<bitfield id="SW_DEBUG_7_0" width="8" begin="7" end="0" resetval="0x0" description=" Register used for debug purposes [lower byte]. Can be written internally by firmware to allow Core Driver to read the internal status. Not used during normal operation since it requires a special version of firmware with a debug capabilities. " range="7 - 0" rwaccess="R"/>
+	</register>
+	<register id="V2A_S__CORE_VP__REGS_SAPB_SW_DEBUG_H_s" acronym="V2A_S__CORE_VP__REGS_SAPB_SW_DEBUG_H_s" offset="0x30" width="32" description="">
+		<bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description=" Reserved field. 0x0 when read. Writes ignored. " range="31 - 8" rwaccess="N/A"/> 
+		<bitfield id="SW_DEBUG_15_8" width="8" begin="7" end="0" resetval="0x0" description=" Register used for debug purposes [higher byte]. Can be written internally by firmware to allow Core Driver to read the internal status. Not used during normal operation since it requires a special version of firmware with a debug capabilities. " range="7 - 0" rwaccess="R"/>
+	</register>
+	<register id="V2A_S__CORE_VP__REGS_SAPB_MAILBOX_INT_MASK_s" acronym="V2A_S__CORE_VP__REGS_SAPB_MAILBOX_INT_MASK_s" offset="0x34" width="32" description="">
+		<bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description=" Reserved field. 0x0 when read. Writes ignored. " range="31 - 2" rwaccess="N/A"/> 
+		<bitfield id="MAILBOX_FULL_INT_MASK" width="1" begin="1" end="1" resetval="0x0" description=" Mailbox Full Interrupt mask   0x0-interrupt enabled   0x1-interrupt disabled" range="1" rwaccess="R/W"/> 
+		<bitfield id="MAILBOX_EMPTY_INT_MASK" width="1" begin="0" end="0" resetval="0x0" description=" Mailbox Not-empty Interrupt mask   0x0-interrupt enabled   0x1-interrupt disabled" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="V2A_S__CORE_VP__REGS_SAPB_MAILBOX_INT_STATUS_s" acronym="V2A_S__CORE_VP__REGS_SAPB_MAILBOX_INT_STATUS_s" offset="0x38" width="32" description="">
+		<bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description=" Reserved field. 0x0 when read. Writes ignored. " range="31 - 2" rwaccess="N/A"/> 
+		<bitfield id="MAILBOX_FULL_INT_STATUS" width="1" begin="1" end="1" resetval="0x0" description=" Mailbox full interrupt. Active HIGH. Cleared on read.    This interrupt is set when mailbox becomes full which means there is no more space for messages sent from Host processor to internal uCPU and when this interrupt is enabled in MAILBOX_INT_MASK_p register. It is set when mailbox_full bit transitions from 0 to 1. " range="1" rwaccess="R"/> 
+		<bitfield id="MAILBOX_EMPTY_INT_STATUS" width="1" begin="0" end="0" resetval="0x0" description=" Mailbox not-empty interrupt. Active HIGH. Cleared on read.    This interrupt is set when mailbox becomes not-empty which means there is a response in the mailbox available to read by the Host processer and when interrupt is enabled in MAILBOX_INT_MASK_p register. It is set when mailbox_empty bit transitions from 1 to 0. " range="0" rwaccess="R"/>
+	</register>
+	<register id="V2A_S__CORE_VP__REGS_SAPB_SW_CLK_L_s" acronym="V2A_S__CORE_VP__REGS_SAPB_SW_CLK_L_s" offset="0x3C" width="32" description="">
+		<bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description=" Reserved field. 0x0 when read. Writes ignored. " range="31 - 8" rwaccess="N/A"/> 
+		<bitfield id="SW_CLOCK_VAL_L" width="8" begin="7" end="0" resetval="0x0" description=" Not used. " range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="V2A_S__CORE_VP__REGS_SAPB_SW_CLK_H_s" acronym="V2A_S__CORE_VP__REGS_SAPB_SW_CLK_H_s" offset="0x40" width="32" description="">
+		<bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description=" Reserved field. 0x0 when read. Writes ignored. " range="31 - 8" rwaccess="N/A"/> 
+		<bitfield id="SW_CLOCK_VAL_H" width="8" begin="7" end="0" resetval="0x100" description=" Not used. " range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="V2A_S__CORE_VP__REGS_SAPB_SW_EVENTS0_s" acronym="V2A_S__CORE_VP__REGS_SAPB_SW_EVENTS0_s" offset="0x44" width="32" description="">
+		<bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description=" Reserved field. 0x0 when read. Writes ignored. " range="31 - 8" rwaccess="N/A"/> 
+		<bitfield id="SW_EVENTS7_0" width="8" begin="7" end="0" resetval="0x0" description=" Not used. 0x0 when read. " range="7 - 0" rwaccess="R"/>
+	</register>
+	<register id="V2A_S__CORE_VP__REGS_SAPB_SW_EVENTS1_s" acronym="V2A_S__CORE_VP__REGS_SAPB_SW_EVENTS1_s" offset="0x48" width="32" description="">
+		<bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description=" Reserved field. 0x0 when read. Writes ignored. " range="31 - 8" rwaccess="N/A"/> 
+		<bitfield id="SW_EVENTS15_8" width="8" begin="7" end="0" resetval="0x0" description=" Not used. 0x0 when read. " range="7 - 0" rwaccess="R"/>
+	</register>
+	<register id="V2A_S__CORE_VP__REGS_SAPB_SW_EVENTS2_s" acronym="V2A_S__CORE_VP__REGS_SAPB_SW_EVENTS2_s" offset="0x4C" width="32" description="">
+		<bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description=" Reserved field. 0x0 when read. Writes ignored. " range="31 - 8" rwaccess="N/A"/> 
+		<bitfield id="SW_EVENTS23_16" width="8" begin="7" end="0" resetval="0x0" description=" Not used. 0x0 when read. " range="7 - 0" rwaccess="R"/>
+	</register>
+	<register id="V2A_S__CORE_VP__REGS_SAPB_SW_EVENTS3_s" acronym="V2A_S__CORE_VP__REGS_SAPB_SW_EVENTS3_s" offset="0x50" width="32" description="">
+		<bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description=" Reserved field. 0x0 when read. Writes ignored. " range="31 - 8" rwaccess="N/A"/> 
+		<bitfield id="SW_EVENTS31_24" width="8" begin="7" end="0" resetval="0x0" description=" Not used. 0x0 when read. " range="7 - 0" rwaccess="R"/>
+	</register>
+	<register id="V2A_S__CORE_VP__REGS_SAPB_XT_OCD_CTRL_s" acronym="V2A_S__CORE_VP__REGS_SAPB_XT_OCD_CTRL_s" offset="0x60" width="32" description="">
+		<bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description=" Reserved field. 0x0 when read. Writes ignored. " range="31 - 2" rwaccess="N/A"/> 
+		<bitfield id="XT_OCDHALTONRESET" width="1" begin="1" end="1" resetval="0x1" description="  Not used     " range="1" rwaccess="R/W"/> 
+		<bitfield id="XT_DRESET" width="1" begin="0" end="0" resetval="0x1" description="  Not used     " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="V2A_S__CORE_VP__REGS_SAPB_XT_OCD_CTRL_RO_s" acronym="V2A_S__CORE_VP__REGS_SAPB_XT_OCD_CTRL_RO_s" offset="0x64" width="32" description="">
+		<bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description=" Reserved field. 0x0 when read. Writes ignored. " range="31 - 1" rwaccess="N/A"/> 
+		<bitfield id="XT_XOCDMODE" width="1" begin="0" end="0" resetval="0x0" description="  Internal CPU - OCD mode configuration     " range="0" rwaccess="R"/>
+	</register>
+	<register id="V2A_S__CORE_VP__REGS_SAPB_APB_INT_MASK_s" acronym="V2A_S__CORE_VP__REGS_SAPB_APB_INT_MASK_s" offset="0x6C" width="32" description="">
+		<bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description=" Reserved field. 0x0 when read. Writes ignored. " range="31 - 2" rwaccess="N/A"/> 
+		<bitfield id="APB_SW_INTR_MASK" width="1" begin="1" end="1" resetval="0x1" description="Not used." range="1" rwaccess="R/W"/> 
+		<bitfield id="APB_MAILBOX_INTR_MASK" width="1" begin="0" end="0" resetval="0x1" description="Mailbox Interrupt mask   0x0-interrupt enabled   0x1-interrupt disabled" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="V2A_S__CORE_VP__REGS_SAPB_APB_STATUS_s" acronym="V2A_S__CORE_VP__REGS_SAPB_APB_STATUS_s" offset="0x70" width="32" description="">
+		<bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description=" Reserved field. 0x0 when read. Writes ignored. " range="31 - 2" rwaccess="N/A"/> 
+		<bitfield id="APB_SW_INTR_STATUS" width="1" begin="1" end="1" resetval="0x0" description=" Not used. " range="1" rwaccess="R"/> 
+		<bitfield id="APB_MAILBOX_INTR_STATUS" width="1" begin="0" end="0" resetval="0x0" description=" Mailbox Interrupt status. Active HIGH. If this bit is set further status should be read from MAILBOX_INT_STATUS register. This bit is cleared automatically on read from MAILBOX_INT_STATUS register." range="0" rwaccess="R"/>
+	</register>
+</module>

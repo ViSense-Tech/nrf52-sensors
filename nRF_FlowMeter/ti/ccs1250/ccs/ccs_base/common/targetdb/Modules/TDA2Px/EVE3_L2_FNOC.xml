@@ -1,0 +1,132 @@
+<module name="EVE3_L2_FNOC" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="ERRLOGGER_i_ID_COREID_0" acronym="ERRLOGGER_i_ID_COREID_0" offset="0x20616000" width="32" description="">
+    <bitfield id="CORECHECKSUM" width="24" begin="31" end="8" resetval="0x220210" description="Field containing a checksum of the parameters of the IP." range="" rwaccess="R"/>
+    <bitfield id="CORETYPEID" width="8" begin="7" end="0" resetval="0xd" description="Field identifying the type of IP." range="" rwaccess="R"/>
+  </register>
+  <register id="ERRLOGGER_i_ID_COREID_1" acronym="ERRLOGGER_i_ID_COREID_1" offset="0x20616200" width="32" description="">
+    <bitfield id="CORECHECKSUM" width="24" begin="31" end="8" resetval="0x220210" description="Field containing a checksum of the parameters of the IP." range="" rwaccess="R"/>
+    <bitfield id="CORETYPEID" width="8" begin="7" end="0" resetval="0xd" description="Field identifying the type of IP." range="" rwaccess="R"/>
+  </register>
+  <register id="ERRLOGGER_i_ID_REVISIONID_0" acronym="ERRLOGGER_i_ID_REVISIONID_0" offset="0x20616040" width="32" description="">
+    <bitfield id="FLEXNOCID" width="24" begin="31" end="8" resetval="0x10167" description="Field containing the build revision of the software used to generate the IP HDL code." range="" rwaccess="R"/>
+    <bitfield id="USERID" width="8" begin="7" end="0" resetval="0x0" description="Field containing a user defined value, not used anywhere inside the IP itself." range="" rwaccess="R"/>
+  </register>
+  <register id="ERRLOGGER_i_ID_REVISIONID_1" acronym="ERRLOGGER_i_ID_REVISIONID_1" offset="0x20616240" width="32" description="">
+    <bitfield id="FLEXNOCID" width="24" begin="31" end="8" resetval="0x10167" description="Field containing the build revision of the software used to generate the IP HDL code." range="" rwaccess="R"/>
+    <bitfield id="USERID" width="8" begin="7" end="0" resetval="0x0" description="Field containing a user defined value, not used anywhere inside the IP itself." range="" rwaccess="R"/>
+  </register>
+  <register id="ERRLOGGER_i_FAULTEN_0" acronym="ERRLOGGER_i_FAULTEN_0" offset="0x20616080" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FAULTEN" width="1" begin="0" end="0" resetval="0x0" description="Enable Fault output" range="" rwaccess="RW"/>
+  </register>
+  <register id="ERRLOGGER_i_FAULTEN_1" acronym="ERRLOGGER_i_FAULTEN_1" offset="0x20616280" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FAULTEN" width="1" begin="0" end="0" resetval="0x0" description="Enable Fault output" range="" rwaccess="RW"/>
+  </register>
+  <register id="ERRLOGGER_i_ERRVLD_0" acronym="ERRLOGGER_i_ERRVLD_0" offset="0x206160C0" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ERRVLD" width="1" begin="0" end="0" resetval="0x0" description="Error logged Valid" range="" rwaccess="R"/>
+  </register>
+  <register id="ERRLOGGER_i_ERRVLD_1" acronym="ERRLOGGER_i_ERRVLD_1" offset="0x206162C0" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ERRVLD" width="1" begin="0" end="0" resetval="0x0" description="Error logged Valid" range="" rwaccess="R"/>
+  </register>
+  <register id="ERRLOGGER_i_ERRCLR_0" acronym="ERRLOGGER_i_ERRCLR_0" offset="0x20616100" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ERRCLR" width="1" begin="0" end="0" resetval="0x0" description="Clr ErrVld status" range="" rwaccess="RW"/>
+  </register>
+  <register id="ERRLOGGER_i_ERRCLR_1" acronym="ERRLOGGER_i_ERRCLR_1" offset="0x20616300" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ERRCLR" width="1" begin="0" end="0" resetval="0x0" description="Clr ErrVld status" range="" rwaccess="RW"/>
+  </register>
+  <register id="ERRLOGGER_i_ERRLOG0_0" acronym="ERRLOGGER_i_ERRLOG0_0" offset="0x20616140" width="32" description="Header: Lock, Opcode, Len1, ErrCode values">
+    <bitfield id="FORMAT" width="1" begin="31" end="31" resetval="0x1" description="Format of ErrLog0 register" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="30" end="26" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LEN1" width="10" begin="25" end="16" resetval="0x0" description="Header: Len1 value" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ERRCODE" width="3" begin="10" end="8" resetval="0x0" description="Header: Error Code value" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OPC" width="4" begin="4" end="1" resetval="0x0" description="Header: Opcode value" range="" rwaccess="R"/>
+    <bitfield id="LOCK" width="1" begin="0" end="0" resetval="0x0" description="Header: Lock bit value" range="" rwaccess="R"/>
+  </register>
+  <register id="ERRLOGGER_i_ERRLOG0_1" acronym="ERRLOGGER_i_ERRLOG0_1" offset="0x20616340" width="32" description="Header: Lock, Opcode, Len1, ErrCode values">
+    <bitfield id="FORMAT" width="1" begin="31" end="31" resetval="0x1" description="Format of ErrLog0 register" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="30" end="26" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LEN1" width="10" begin="25" end="16" resetval="0x0" description="Header: Len1 value" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ERRCODE" width="3" begin="10" end="8" resetval="0x0" description="Header: Error Code value" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OPC" width="4" begin="4" end="1" resetval="0x0" description="Header: Opcode value" range="" rwaccess="R"/>
+    <bitfield id="LOCK" width="1" begin="0" end="0" resetval="0x0" description="Header: Lock bit value" range="" rwaccess="R"/>
+  </register>
+  <register id="ERRLOGGER_i_ERRLOG1_0" acronym="ERRLOGGER_i_ERRLOG1_0" offset="0x20616180" width="32" description="">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ERRLOG1" width="14" begin="13" end="0" resetval="0x0" description="Header: RouteId lsb value" range="" rwaccess="R"/>
+  </register>
+  <register id="ERRLOGGER_i_ERRLOG1_1" acronym="ERRLOGGER_i_ERRLOG1_1" offset="0x20616380" width="32" description="">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ERRLOG1" width="14" begin="13" end="0" resetval="0x0" description="Header: RouteId lsb value" range="" rwaccess="R"/>
+  </register>
+  <register id="ERRLOGGER_i_ERRLOG3_0" acronym="ERRLOGGER_i_ERRLOG3_0" offset="0x20616200" width="32" description="">
+    <bitfield id="ERRLOG3" width="32" begin="31" end="0" resetval="0x0" description="Header: Addr lsb value" range="" rwaccess="R"/>
+  </register>
+  <register id="ERRLOGGER_i_ERRLOG3_1" acronym="ERRLOGGER_i_ERRLOG3_1" offset="0x20616400" width="32" description="">
+    <bitfield id="ERRLOG3" width="32" begin="31" end="0" resetval="0x0" description="Header: Addr lsb value" range="" rwaccess="R"/>
+  </register>
+  <register id="ERRLOGGER_i_ERRLOG5_0" acronym="ERRLOGGER_i_ERRLOG5_0" offset="0x20616280" width="32" description="">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ERRLOG5" width="17" begin="16" end="0" resetval="0x0" description="Header: User lsb value" range="" rwaccess="R"/>
+  </register>
+  <register id="ERRLOGGER_i_ERRLOG5_1" acronym="ERRLOGGER_i_ERRLOG5_1" offset="0x20616480" width="32" description="">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ERRLOG5" width="17" begin="16" end="0" resetval="0x0" description="Header: User lsb value" range="" rwaccess="R"/>
+  </register>
+  <register id="FLAGMUX_i_ID_COREID_0" acronym="FLAGMUX_i_ID_COREID_0" offset="0x20617000" width="32" description="">
+    <bitfield id="CORECHECKSUM" width="24" begin="31" end="8" resetval="0x2589ca" description="Field containing a checksum of the parameters of the IP." range="" rwaccess="R"/>
+    <bitfield id="CORETYPEID" width="8" begin="7" end="0" resetval="0xb" description="Field identifying the type of IP." range="" rwaccess="R"/>
+  </register>
+  <register id="FLAGMUX_i_ID_COREID_1" acronym="FLAGMUX_i_ID_COREID_1" offset="0x20617200" width="32" description="">
+    <bitfield id="CORECHECKSUM" width="24" begin="31" end="8" resetval="0x2589ca" description="Field containing a checksum of the parameters of the IP." range="" rwaccess="R"/>
+    <bitfield id="CORETYPEID" width="8" begin="7" end="0" resetval="0xb" description="Field identifying the type of IP." range="" rwaccess="R"/>
+  </register>
+  <register id="FLAGMUX_i_ID_REVISIONID_0" acronym="FLAGMUX_i_ID_REVISIONID_0" offset="0x20617040" width="32" description="">
+    <bitfield id="FLEXNOCID" width="24" begin="31" end="8" resetval="0x10167" description="Field containing the build revision of the software used to generate the IP HDL code." range="" rwaccess="R"/>
+    <bitfield id="USERID" width="8" begin="7" end="0" resetval="0x0" description="Field containing a user defined value, not used anywhere inside the IP itself." range="" rwaccess="R"/>
+  </register>
+  <register id="FLAGMUX_i_ID_REVISIONID_1" acronym="FLAGMUX_i_ID_REVISIONID_1" offset="0x20617240" width="32" description="">
+    <bitfield id="FLEXNOCID" width="24" begin="31" end="8" resetval="0x10167" description="Field containing the build revision of the software used to generate the IP HDL code." range="" rwaccess="R"/>
+    <bitfield id="USERID" width="8" begin="7" end="0" resetval="0x0" description="Field containing a user defined value, not used anywhere inside the IP itself." range="" rwaccess="R"/>
+  </register>
+  <register id="FLAGMUX_i_FAULTEN_0" acronym="FLAGMUX_i_FAULTEN_0" offset="0x20617080" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FAULTEN" width="1" begin="0" end="0" resetval="0x0" description="Global Fault Enable register" range="" rwaccess="RW"/>
+  </register>
+  <register id="FLAGMUX_i_FAULTEN_1" acronym="FLAGMUX_i_FAULTEN_1" offset="0x20617280" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FAULTEN" width="1" begin="0" end="0" resetval="0x0" description="Global Fault Enable register" range="" rwaccess="RW"/>
+  </register>
+  <register id="FLAGMUX_i_FAULTSTATUS_0" acronym="FLAGMUX_i_FAULTSTATUS_0" offset="0x206170C0" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FAULTSTATUS" width="1" begin="0" end="0" resetval="0x0" description="Global Fault Status register" range="" rwaccess="R"/>
+  </register>
+  <register id="FLAGMUX_i_FAULTSTATUS_1" acronym="FLAGMUX_i_FAULTSTATUS_1" offset="0x206172C0" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FAULTSTATUS" width="1" begin="0" end="0" resetval="0x0" description="Global Fault Status register" range="" rwaccess="R"/>
+  </register>
+  <register id="FLAGMUX_i_FLAGINEN0_0" acronym="FLAGMUX_i_FLAGINEN0_0" offset="0x20617100" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FLAGINEN0" width="1" begin="0" end="0" resetval="0x0" description="FlagIn Enable register #0" range="" rwaccess="RW"/>
+  </register>
+  <register id="FLAGMUX_i_FLAGINEN0_1" acronym="FLAGMUX_i_FLAGINEN0_1" offset="0x20617300" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FLAGINEN0" width="1" begin="0" end="0" resetval="0x0" description="FlagIn Enable register #0" range="" rwaccess="RW"/>
+  </register>
+  <register id="FLAGMUX_i_FLAGINSTATUS0_0" acronym="FLAGMUX_i_FLAGINSTATUS0_0" offset="0x20617140" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FLAGINSTATUS0" width="1" begin="0" end="0" resetval="0x0" description="FlagIn Status register #0" range="" rwaccess="R"/>
+  </register>
+  <register id="FLAGMUX_i_FLAGINSTATUS0_1" acronym="FLAGMUX_i_FLAGINSTATUS0_1" offset="0x20617340" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FLAGINSTATUS0" width="1" begin="0" end="0" resetval="0x0" description="FlagIn Status register #0" range="" rwaccess="R"/>
+  </register>
+</module>

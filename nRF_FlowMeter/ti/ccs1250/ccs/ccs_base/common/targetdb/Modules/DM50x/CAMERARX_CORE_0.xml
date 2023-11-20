@@ -1,0 +1,137 @@
+<module name="CAMERARX_CORE_0" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="REG0" acronym="REG0" offset="0x0" width="32" description="First register">
+    <bitfield id="RESERVED" width="7" begin="31" end="25" resetval="0x00" description="Reserved fields" range="" rwaccess="NA"/>
+    <bitfield id="HSCLOCKCONFIG" width="1" begin="24" end="24" resetval="0" description="Disable clock missing detector" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="23" end="16" resetval="0x00" description="Read returns zero" range="" rwaccess="R"/>
+    <bitfield id="THS_TERM" width="8" begin="15" end="8" resetval="0x04" description="THS_TERM timing parameter in multiples of DDR clock frequency. Effective time for enabling of termination = synchronizer delay + timer delay + LPRX delay + combinational routing delay ~ (1&#8211;2)* DDRCLK + THS-TERM + ~ (1 &#8211;15) ns. Programmed value = floor(20 ns/DDR_CLK), where DDR_CLK is the period of the CSI-2 I/O lane rate. Default value: 4 (for 400 MHz)." range="" rwaccess="RW"/>
+    <bitfield id="THS_SETTLE" width="8" begin="7" end="0" resetval="0x27" description="THS_SETTLE timing parameter in multiples of DDR clock frequency. Effective THS_SETTLE seen on line (starting to look for sync pattern) = synchronizer delay + timer delay + LPRX delay + combinational routing delay &#8211; pipeline delay in HS data path ~ (1&#8211;2)* DDRCLK + THS-SETTLE + ~ (1&#8211;15) ns &#8211;1*DDRCLK. Programmed value = floor(105 ns/DDR_CLK) + 4, where DDR_CLK is the period of the CSI-2 I/O lane rate. Default value: 39 (for 400 MHz). Minimum supported THS-SETTLE programmed value = 3." range="" rwaccess="RW"/>
+  </register>
+  <register id="REG1" acronym="REG1" offset="0x4" width="32" description="Second register">
+    <bitfield id="RESVD_READ_BIT" width="2" begin="31" end="30" resetval="0x0" description="Reserved bit" range="" rwaccess="NA"/>
+    <bitfield id="RESET_DONE_STATUS" width="2" begin="29" end="28" resetval="0x0" description="Reset done read bits." range="" rwaccess="R">
+      <bitenum value="28" id="RESETDONERXBYTECLK_BYTECLK_CSI2_28" token="RESET_DONE_STATUS_28" description="RESETDONERXBYTECLK Note: BYTECLK is provided to the CSI2 low level protocol"/>
+      <bitenum value="29" id="RESETDONECTRLCLK_CTRLCLK_PHY_PRCM_29" token="RESET_DONE_STATUS_29" description="RESETDONECTRLCLK Note: This is the CTRLCLK provided to the PHY from the PRCM module."/>
+    </bitfield>
+    <bitfield id="RESERVED" width="2" begin="27" end="26" resetval="0x0" description="Write 0 for future compatibility." range="" rwaccess="RW"/>
+    <bitfield id="CLOCK_MISS_DETECTOR_STATUS" width="1" begin="25" end="25" resetval="0" description="Clock missing detector status. Internal debug bit. 1: Error in clock missing detector." range="" rwaccess="R">
+      <bitenum value="0" id="CLKMISS_0" token="CLOCK_MISS_DETECTOR_STATUS_0" description="Clock missing detector successful Note: CLKMISS detector is likely to malfunction, if tclk-trail spec (60ns) is not honoured."/>
+    </bitfield>
+    <bitfield id="TCLK_TERM" width="7" begin="24" end="18" resetval="0x00" description="TCLK_TERM timing parameter in multiples of CTRLCLK Effective time for enabling of termination = synchronizer delay + timer delay + LPRX delay + combinational routing delay ~ (1&#8211;2)* CTRLCLK + TCLK_TERM + ~ (1&#8211;15) ns Programmed value = ceil(9.5 / CTRLCLK period) &#8211; 1 Default value : 0 (for 96 MHz)" range="" rwaccess="RW"/>
+    <bitfield id="DPHY_HS_SYNC_PATTERN" width="8" begin="17" end="10" resetval="0xB8" description="DPHY mode HS sync pattern in byte order (reverse of received order) See," range="" rwaccess="RW"/>
+    <bitfield id="TCLK_DIV" width="2" begin="9" end="8" resetval="0x1" description="CTRLCLK_DIV_FACTOR Divide factor for CTRLCLK for CLKMISS detector Programmed value = ceil (15ns/CTRLCLK Period) - 1 Default value: 1 (for 96 MHz) CLKMISS detection time = (5*TCLK_DIV+1)*(CTRLCLK period) &amp;amp;lt; 60ns Note: Only the CTRLCLK frequencies that satisfie above relationship are allowed. Typically, 96MHz will be used at CTRLCLK." range="" rwaccess="RW"/>
+    <bitfield id="TCLK_SETTLE" width="8" begin="7" end="0" resetval="0x0E" description="TCLK_SETTLE timing parameter in multiples of CTRLCLK Clock Effective TCLK_SETTLE = synchronizer delay + timer delay + LPRX delay + combinational routing delay ~ (1&#8211;2)* CTRLCLK + Tclk-settle + ~ (1 &#8211;15) ns Programmed value = max[3, ceil(155 ns/CTRLCLK period) &#8211;1] Default value: 14 (for 96 MHz)" range="" rwaccess="RW"/>
+  </register>
+  <register id="REG2" acronym="REG2" offset="0x8" width="32" description="Third register">
+    <bitfield id="TRIGGER_CMD_RXTRIGESC0" width="2" begin="31" end="30" resetval="0x0" description="Mapping of Trigger escape entry command to PPI output RXTRIGGERESC0 00 : '01100010' 01 : '01011101' 10: '00100001' 11: '10100000'" range="" rwaccess="RW"/>
+    <bitfield id="TRIGGER_CMD_RXTRIGESC1" width="2" begin="29" end="28" resetval="0x0" description="Mapping of Trigger escape entry command to PPI output RXTRIGGERESC1 00 : '01011101' 01 : '00100001' 10: '10100000' 11: '01100010'" range="" rwaccess="RW"/>
+    <bitfield id="TRIGGER_CMD_RXTRIGESC2" width="2" begin="27" end="26" resetval="0x0" description="Mapping of Trigger escape entry command to PPI output RXTRIGGERESC2 00 : '00100001' 01 : '01100010' 10: '01100010' 11: '01011101'" range="" rwaccess="RW"/>
+    <bitfield id="TRIGGER_CMD_RXTRIGESC3" width="2" begin="25" end="24" resetval="0x0" description="Mapping of Trigger escape entry command to PPI output RXTRIGGERESC3 00 : '10100000' 01 : '01100010' 10: '01011101' 11: '00100001'" range="" rwaccess="RW"/>
+    <bitfield id="CCP2_SYNC_PATTERN" width="24" begin="23" end="0" resetval="0x0000FF" description="CCP2 mode sync pattern in byte order (reverse of received order) See ," range="" rwaccess="R"/>
+  </register>
+  <register id="REG3" acronym="REG3" offset="0xC" width="32" description="Forth register">
+    <bitfield id="OVRD_HSRXEN" width="1" begin="31" end="31" resetval="0x0" description="Override with register bit. 1:Override.0:Default" range="" rwaccess="RW"/>
+    <bitfield id="ENHSRX" width="5" begin="30" end="26" resetval="0x00" description="HSRX Enable on LANE5-0.1:Enable. 0:Disable" range="" rwaccess="RW"/>
+    <bitfield id="OVRD_HSRXTERM" width="1" begin="25" end="25" resetval="0x0" description="Override with register bit.1:Override. 0:Default" range="" rwaccess="RW"/>
+    <bitfield id="ENRXTERM" width="5" begin="24" end="20" resetval="0x00" description="HS-RX Termination enable on LANE5-0.1:Enable.0:Default" range="" rwaccess="RW"/>
+    <bitfield id="OVRD_LPRXEN_ULPRXEN" width="1" begin="19" end="19" resetval="0x0" description="Override LP-RX and ULP-RX Enable.1:Override. 0:Default" range="" rwaccess="RW"/>
+    <bitfield id="ENLPRX" width="5" begin="18" end="14" resetval="0x00" description="Enable for LP-RX on LANE5-01 : Enable 0 : Disable" range="" rwaccess="RW"/>
+    <bitfield id="ENULPRX" width="5" begin="13" end="9" resetval="0x00" description="Enable for ULP-RX on LANE5-01 : Enable 0 : Disable" range="" rwaccess="RW"/>
+    <bitfield id="LDO_EN_OVRD" width="1" begin="8" end="8" resetval="0x0" description="LDO Enable Override.1:Override. 0:Default" range="" rwaccess="RW"/>
+    <bitfield id="EN_LDO" width="1" begin="7" end="7" resetval="0x0" description="Enable LDO.1:Enable.0:Default" range="" rwaccess="RW"/>
+    <bitfield id="BIAS_EN_OVRD" width="1" begin="6" end="6" resetval="0x0" description="BIAS Enable Override.1 :Override with register bit. 0:Default" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE_BIAS" width="1" begin="5" end="5" resetval="" description="Enable BIAS.1:Enable 0:Disable" range="" rwaccess="RW"/>
+    <bitfield id="OVERRIDE_ENCCP" width="1" begin="4" end="4" resetval="0x0" description="Override ENCCP to anatop.1: Override with register bit0:Default" range="" rwaccess="RW"/>
+    <bitfield id="ENCCP_OVRRD_HSRX" width="1" begin="3" end="3" resetval="0x0" description="ENCCP override to HSRX.1: Enable0: Disable" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="2" end="2" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="RECALIB_HSRX_COMP_OFFSET" width="1" begin="1" end="1" resetval="0x0" description="Recalibrate HS-RX comparator offset.Make this bit 0'1 to restart offset calibration. Usually offset calibration happens after PWRCMDON is received" range="" rwaccess="RW"/>
+    <bitfield id="RECALIB_BIAS_CURRENT" width="1" begin="0" end="0" resetval="0x0" description="Recalibrate biasgen.Make this bit 0'1 to restart bias calibration. Biasgen trim code in efuse is overridden with new calibrated value till this bit is '1'." range="" rwaccess="RW"/>
+  </register>
+  <register id="REG6" acronym="REG6" offset="0x18" width="32" description="Seventh register">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0x0" description="Reserved." range="" rwaccess="RW"/>
+    <bitfield id="BGAP_EN_OVRRD" width="1" begin="30" end="30" resetval="0x0" description="BGAP enable override0: Default 1: Override bandgap enable with following register bit" range="" rwaccess="RW"/>
+    <bitfield id="BGAP_EN" width="1" begin="29" end="29" resetval="0x0" description="BANDGAP enable0: Disable 1: enable" range="" rwaccess="RW"/>
+    <bitfield id="HS_SYNC_BYPASS" width="1" begin="28" end="28" resetval="0x0" description="To bypass HS Sync sequence0: Normal 1: Bypass the HS Sync sequence" range="" rwaccess="RW"/>
+    <bitfield id="LP_SOT_BYPASS_LPBK" width="1" begin="27" end="27" resetval="0x0" description="To bypass the LP SoT sequence in loopback mode0: Normal 1: Bypass the LP SoT sequence" range="" rwaccess="RW"/>
+    <bitfield id="LDO_RDY_OVRRD" width="1" begin="26" end="26" resetval="0x0" description="LDO_RDY override0: Default 1: Override LDO_RDY with the following register bit" range="" rwaccess="RW"/>
+    <bitfield id="LDO_RDY" width="1" begin="25" end="25" resetval="0x0" description="LDO_RDY makes internal LDO_RDY=1" range="" rwaccess="RW"/>
+    <bitfield id="ENCALIB_OVRRD" width="1" begin="24" end="24" resetval="0x0" description="ENCALIB override0: Default 1: Override ENCALIBA and ENCALIBB with the following register bit" range="" rwaccess="RW"/>
+    <bitfield id="ENCALIB" width="1" begin="23" end="23" resetval="0x0" description="ENCALIB* Override ENCALIBA and ENCALIBB with the register bit" range="" rwaccess="RW"/>
+    <bitfield id="ENBIASCALIB_OVRRD" width="1" begin="22" end="22" resetval="0x0" description="ENBIASCALIB override0: Default 1: ENBIASCALIB override with the following bit" range="" rwaccess="RW"/>
+    <bitfield id="ENBIASCALIB" width="1" begin="21" end="21" resetval="0x0" description="Override ENBIASCALIB with this register bit" range="" rwaccess="RW"/>
+    <bitfield id="OVRD_AFE_INPUTS" width="1" begin="20" end="20" resetval="0x0" description="Override LANEENABLE and POLARITY AFE inputs.0:Normal. 1:Override" range="" rwaccess="RW"/>
+    <bitfield id="AFE_LANE_SELECT" width="8" begin="19" end="12" resetval="0x00" description="Selects clock lane and data lane mapping for AFE. 8 bit LANESEL for AFE" range="" rwaccess="RW"/>
+    <bitfield id="SEL_AFE_LANE_POLARITY" width="1" begin="11" end="11" resetval="0x0" description="Select AFE lane polarity. Polarity for clock lane in AFE" range="" rwaccess="RW"/>
+    <bitfield id="HSCOMPOUT_FAR" width="1" begin="10" end="10" resetval="0x0" description="Select FAR lane HSCOMP output to HSCOMOOUT in AFE." range="" rwaccess="RW"/>
+    <bitfield id="BYPASS_LDO_REF" width="1" begin="9" end="9" resetval="0x0" description="0:Normal.1:Bypass reference with VDD" range="" rwaccess="RW"/>
+    <bitfield id="LDO_VLTG_DYA" width="1" begin="8" end="8" resetval="0x0" description="Observe LDO voltage on DYA pad.0:Normal. 1:Observe LDO voltage" range="" rwaccess="RW"/>
+    <bitfield id="BIAS_CRNT_DXA" width="1" begin="7" end="7" resetval="0x0" description="Observe bias current on DXA pad.0:Normal. 1:Observe bias current" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="6" end="6" resetval="0x0" description="Reserved." range="" rwaccess="RW"/>
+    <bitfield id="OVRD_BIASGEN_CALIB" width="1" begin="5" end="5" resetval="0x0" description="1:Override the EFUSE bits with register value.0:Default" range="" rwaccess="RW"/>
+    <bitfield id="BIAS_CALIB_OVRD_VAL" width="5" begin="4" end="0" resetval="0x00" description="Biasgen calibration code override value" range="" rwaccess="RW"/>
+  </register>
+  <register id="REG7" acronym="REG7" offset="0x1C" width="32" description="Eight register">
+    <bitfield id="BGAP_TRIM_OVRRD" width="1" begin="31" end="31" resetval="0x0" description="Bandgap trim bits override 0: Normal (default mode) 1: Override Bandgap trim bits with SCP register bits" range="" rwaccess="RW"/>
+    <bitfield id="BGAP_TRIM" width="8" begin="30" end="23" resetval="0x00" description="Bandgap trim bits 00000000 : Minimum bandgap voltage 11111111 : Maximum bandgap voltage" range="" rwaccess="RW"/>
+    <bitfield id="BGAP_MAGTRIM_OVRRD" width="1" begin="22" end="22" resetval="0x0" description="Bandgap magnitude trim bits override0: Normal (default mode) 1: Override Bandgap trim bits with SCP register bits" range="" rwaccess="RW"/>
+    <bitfield id="BGAP_MAGTRIM" width="8" begin="21" end="14" resetval="0x00" description="Bandgap magnitude trim bits00000000 : Minimum bandgap voltage 11111111 : Maximum bandgap voltage" range="" rwaccess="RW"/>
+    <bitfield id="DTCY_MEAS_HSRX" width="2" begin="13" end="12" resetval="0x0" description="Duty cycle measurement in HSRX mode00: Default 11: TBD" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="11" end="7" resetval="0x00" description="Write 0 for future compatibility" range="" rwaccess="RW"/>
+    <bitfield id="BIASCALIB_OVRRD" width="1" begin="6" end="6" resetval="0x0" description="BIASCALIB override 0: Default 1: Override BIASCALIB with the register bit[5]" range="" rwaccess="RW"/>
+    <bitfield id="BIASCALIB" width="1" begin="5" end="5" resetval="0x0" description="BIASCALIB bit from SCP reg" range="" rwaccess="RW"/>
+    <bitfield id="CDISABLE_HS_TERM" width="5" begin="4" end="0" resetval="0x00" description="Disable HS Termination 00000: Normal 11111: Disable Lane4,3,2,1,0 resp" range="" rwaccess="RW"/>
+  </register>
+  <register id="REG8" acronym="REG8" offset="0x20" width="32" description="Ninth register">
+    <bitfield id="CCP_OVRRD" width="1" begin="31" end="31" resetval="0x0" description="CCP override0: Normal 1: Override CCP outputs with the register bits" range="" rwaccess="RW"/>
+    <bitfield id="CCPF" width="1" begin="30" end="30" resetval="0x0" description="Override CCPF from analog with this register bit" range="" rwaccess="RW"/>
+    <bitfield id="CCPR" width="1" begin="29" end="29" resetval="0x0" description="Override CCPR from analog with this register bit" range="" rwaccess="RW"/>
+    <bitfield id="HSRX_OVRRD" width="1" begin="28" end="28" resetval="0x0" description="HSRX override 0: Normal 1: Override HSRX signals with the following register bits" range="" rwaccess="RW"/>
+    <bitfield id="CSI2R3_0" width="4" begin="27" end="24" resetval="0x0" description="Override CSI2R[3:0] for 4 lanes from analog with these register bits" range="" rwaccess="RW"/>
+    <bitfield id="CSI2F3_0" width="4" begin="23" end="20" resetval="0x0" description="Override CSI2F[3:0] for 4 lanes from analog with these register bits" range="" rwaccess="RW"/>
+    <bitfield id="HSCOMPOUT" width="1" begin="19" end="19" resetval="0x0" description="Override HSCOMPOUT from analog with this register bit" range="" rwaccess="RW"/>
+    <bitfield id="SELDX_Y_OVRRD" width="1" begin="18" end="18" resetval="0x0" description="SELDX*/Y* override0: Overrides the control to bypass of LPRX delay on DX/DY pads depending on testmode_sel_reg[6] and WPI_PMT[0] for DX pads and WPI_PMT[1] for DY pads. 1: Override the control to bypass the LPRX delay on DY/DX pads with the following register bits for all lanes" range="" rwaccess="RW"/>
+    <bitfield id="SELDY" width="5" begin="17" end="13" resetval="0x00" description="SELDY*controls bypass of LPRY delay on DY pads (5 lanes) Bit Mapping: 17 -&amp;amp;gt; ADDON3 16 -&amp;amp;gt; ADDON2 17 -&amp;amp;gt; LaneB 14 -&amp;amp;gt; LaneA 13 -&amp;amp;gt; ADDON1" range="" rwaccess="RW"/>
+    <bitfield id="SELDX" width="5" begin="12" end="8" resetval="0x00" description="SELDX*controls bypass of LPRX delay on DX pads (5 lanes) Bit Mapping: 12 -&amp;amp;gt; ADDON3 11 -&amp;amp;gt; ADDON2 10 -&amp;amp;gt; LaneB 9 -&amp;amp;gt; LaneA 8 -&amp;amp;gt; ADDON1" range="" rwaccess="RW"/>
+    <bitfield id="ENLOOPBACK_OVRRD" width="1" begin="7" end="7" resetval="0x0" description="ENLOOPBACK Override0: Normal 1: Override ENLOOPBACK transmitter enable (in self or internal loopback mode) with register bit[6]" range="" rwaccess="RW"/>
+    <bitfield id="ENLOOPBACK" width="1" begin="6" end="6" resetval="0x0" description="ENLOOPBACK transmitter enable (in self or internal loopback mode) from SCP register bit" range="" rwaccess="RW"/>
+    <bitfield id="IE_OVRRD" width="1" begin="5" end="5" resetval="0x0" description="IE override 0: Normal 1: Override IE (4 lanes) with the following register bit" range="" rwaccess="RW"/>
+    <bitfield id="IE3_0" width="1" begin="4" end="4" resetval="0x0" description="Override IE[3:0] (4 lanes) with this single bit." range="" rwaccess="RW"/>
+    <bitfield id="PIPU_OVRRD" width="1" begin="3" end="3" resetval="0x0" description="PIPU override0: Normal 1: Override PIPU (4 lanes) with the following register bit" range="" rwaccess="RW"/>
+    <bitfield id="PIPU3_0" width="1" begin="2" end="2" resetval="0x0" description="Override PIPU[3:0] (4 lanes) with this single bit." range="" rwaccess="RW"/>
+    <bitfield id="PIPD_OVRRD" width="1" begin="1" end="1" resetval="0x0" description="PIPD override 0: Normal 1: Override PIPD (4 lanes) with the following register bit" range="" rwaccess="RW"/>
+    <bitfield id="PIPD3_0" width="1" begin="0" end="0" resetval="0x0" description="Override PIPD[3:0] (4 lanes) with this single bit." range="" rwaccess="RW"/>
+  </register>
+  <register id="REG9" acronym="REG9" offset="0x24" width="32" description="Tenth register">
+    <bitfield id="LPRX_OVRRD" width="1" begin="31" end="31" resetval="0x0" description="LPRX override0: Normal (defautlt mode) 1: Override the LPRXD* signals with SCP register bits" range="" rwaccess="RW"/>
+    <bitfield id="LPRXDXA" width="1" begin="30" end="30" resetval="0x0" description="Bypass LPRXD* comparator output with this bit" range="" rwaccess="RW"/>
+    <bitfield id="LPRXDYA" width="1" begin="29" end="29" resetval="0x0" description="Bypass LPRXD* comparator output with this bit" range="" rwaccess="RW"/>
+    <bitfield id="LPRXDXB" width="1" begin="28" end="28" resetval="0x0" description="Bypass LPRXD* comparator output with this bit" range="" rwaccess="RW"/>
+    <bitfield id="LPRXDYB" width="1" begin="27" end="27" resetval="0x0" description="Bypass LPRXD* comparator output with this bit" range="" rwaccess="RW"/>
+    <bitfield id="LPRXDX_ADDON1" width="1" begin="26" end="26" resetval="0x0" description="Bypass LPRXD* comparator output with this bit" range="" rwaccess="RW"/>
+    <bitfield id="LPRXDY_ADDON1" width="1" begin="25" end="25" resetval="0x0" description="Bypass LPRXD* comparator output with this bit" range="" rwaccess="RW"/>
+    <bitfield id="LPRXDX_ADDON2" width="1" begin="24" end="24" resetval="0x0" description="Bypass LPRXD* comparator output with this bit" range="" rwaccess="RW"/>
+    <bitfield id="LPRXDY_ADDON2" width="1" begin="23" end="23" resetval="0x0" description="Bypass LPRXD* comparator output with this bit" range="" rwaccess="RW"/>
+    <bitfield id="LPRXDX_ADDON3" width="1" begin="22" end="22" resetval="0x0" description="Bypass LPRXD* comparator output with this bit" range="" rwaccess="RW"/>
+    <bitfield id="LPRXDY_ADDON3" width="1" begin="21" end="21" resetval="0x0" description="Bypass LPRXD* comparator output with this bit" range="" rwaccess="RW"/>
+    <bitfield id="ULPRX_OVRRD" width="1" begin="20" end="20" resetval="0x0" description="ULPRX Override0: Normal (default mode) 1: Override the ULPRXD* signals with SCP register bits" range="" rwaccess="RW"/>
+    <bitfield id="ULPRXDXA" width="1" begin="19" end="19" resetval="0x0" description="Bypass ULPRXD* comparator output with this bit" range="" rwaccess="RW"/>
+    <bitfield id="ULPRXDYA" width="1" begin="18" end="18" resetval="0x0" description="Bypass ULPRXD* comparator output with this bit" range="" rwaccess="RW"/>
+    <bitfield id="ULPRXDXB" width="1" begin="17" end="17" resetval="0x0" description="Bypass ULPRXD* comparator output with this bit" range="" rwaccess="RW"/>
+    <bitfield id="ULPRXDYB" width="1" begin="16" end="16" resetval="0x0" description="Bypass ULPRXD* comparator output with this bit" range="" rwaccess="RW"/>
+    <bitfield id="ULPRXDX_ADDON1" width="1" begin="15" end="15" resetval="0x0" description="Bypass ULPRXD* comparator output with this bit" range="" rwaccess="RW"/>
+    <bitfield id="ULPRXDY_ADDON1" width="1" begin="14" end="14" resetval="0x0" description="Bypass ULPRXD* comparator output with this bit" range="" rwaccess="RW"/>
+    <bitfield id="ULPRXDX_ADDON2" width="1" begin="13" end="13" resetval="0x0" description="Bypass ULPRXD* comparator output with this bit" range="" rwaccess="RW"/>
+    <bitfield id="ULPRXDY_ADDON2" width="1" begin="12" end="12" resetval="0x0" description="Bypass ULPRXD* comparator output with this bit" range="" rwaccess="RW"/>
+    <bitfield id="ULPRXDX_ADDON3" width="1" begin="11" end="11" resetval="0x0" description="Bypass ULPRXD* comparator output with this bit" range="" rwaccess="RW"/>
+    <bitfield id="ULPRXDY_ADDON3" width="1" begin="10" end="10" resetval="0x0" description="Bypass ULPRXD* comparator output with this bit" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="9" end="8" resetval="0x0" description="Reserved." range="" rwaccess="RW"/>
+    <bitfield id="HISPI_MODE_EN" width="1" begin="7" end="7" resetval="0x0" description="This bit enables the PHY in HiSPi mode0: HiSPi mode disabled (Default) 1: HiSPI mode enabled" range="" rwaccess="RW"/>
+    <bitfield id="ENCCP_HSRX_ADDON1" width="1" begin="6" end="6" resetval="0x0" description="ENCCP override to HSRX of ADDON1.1: Enable0: Disable" range="" rwaccess="RW"/>
+    <bitfield id="ENCCP_HSRX_ADDON2" width="1" begin="5" end="5" resetval="0x0" description="ENCCP override to HSRX of ADDON2.1: Enable 0: Disable" range="" rwaccess="RW"/>
+    <bitfield id="ENCCP_HSRX_ADDON_FAR" width="1" begin="4" end="4" resetval="0x0" description="ENCCP override to HSRX of ADDON_FAR.1: Enable0: Disable" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="3" end="0" resetval="0x0" description="Reserved." range="" rwaccess="RW"/>
+  </register>
+  <register id="REG10" acronym="REG10" offset="0x28" width="32" description="Eleventh register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0000" description="Reserved." range="" rwaccess="RW"/>
+    <bitfield id="SPAREIN_ANATOP" width="16" begin="15" end="0" resetval="0x0000" description="Sparein AnatopThese bits are directly mapped to SPAREIN* pins of Analog (both LDO and Core voltage domains) and ADDONs for future use." range="" rwaccess="RW"/>
+  </register>
+</module>

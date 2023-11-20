@@ -1,0 +1,139 @@
+<module name="PSC0" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="PSC0_PID" acronym="PSC0_PID" offset="0x0" width="32" description="The peripheral identification register is a constant register that contains the ID and ID revision number for that module. The PSC0_PID stores version information used to identify the module. All bits within this register are read-only (writes have no effect) meaning that the values within this register should be hard-coded with the appropriate values and must not change from their hard-coded values.">
+    <bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x1" description="PSC0_PID register scheme" range="" rwaccess="R"/>
+    <bitfield id="BU" width="2" begin="29" end="28" resetval="0x0" description="Business Unit" range="" rwaccess="R"/>
+    <bitfield id="FUNC" width="12" begin="27" end="16" resetval="0x482" description="Module ID" range="" rwaccess="R"/>
+    <bitfield id="RTL" width="5" begin="15" end="11" resetval="0x0" description="RTL revision." range="" rwaccess="R"/>
+    <bitfield id="MAJOR" width="3" begin="10" end="8" resetval="0x2" description="Major revision" range="" rwaccess="R"/>
+    <bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom" range="" rwaccess="R"/>
+    <bitfield id="MINOR" width="6" begin="5" end="0" resetval="0x0" description="Minor revision" range="" rwaccess="R"/>
+  </register>
+  <register id="PSC0_GBLCTL" acronym="PSC0_GBLCTL" offset="0x10" width="32" description="This register contains global control to PSC.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="IO_ANA_CTL" width="8" begin="15" end="8" resetval="0x0" description="General purpose IO/Analog PowerDown control." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="7" end="0" resetval="0xX" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="PSC0_GBLSTAT" acronym="PSC0_GBLSTAT" offset="0x14" width="32" description="This register shows the PSC global status.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="EF_SMRFLEX" width="12" begin="27" end="16" resetval="0x0" description="Smart reflex class0 bits" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="OVRIDE" width="1" begin="0" end="0" resetval="0x0" description="PSC Override Status" range="" rwaccess="R"/>
+  </register>
+  <register id="PSC0_INTEVAL" acronym="PSC0_INTEVAL" offset="0x18" width="32" description="This register has no storage. Read from this register returns 0.">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="GOSET" width="1" begin="19" end="19" resetval="0x0" description="GOSTAT Interrupt Set" range="" rwaccess="W"/>
+    <bitfield id="EPCSET" width="1" begin="18" end="18" resetval="0x0" description="External Power Control Interrupt Set" range="" rwaccess="W"/>
+    <bitfield id="ERRSET" width="1" begin="17" end="17" resetval="0x0" description="Combined Interrupt Set" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="14" begin="16" end="3" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="EPCEV" width="1" begin="2" end="2" resetval="0x0" description="External Power Control Interrupt Set" range="" rwaccess="W"/>
+    <bitfield id="ERREV" width="1" begin="1" end="1" resetval="0x0" description="Re_evaluate Error Interrupt" range="" rwaccess="W"/>
+    <bitfield id="ALLEV" width="1" begin="0" end="0" resetval="0x0" description="Re_evaluate combined PSC interrupt" range="" rwaccess="W"/>
+  </register>
+  <register id="PSC0_MERRPR_y" acronym="PSC0_MERRPR_y" offset="0x40" width="32" description="This register records pending error conditions for all modules. Each bit represents one module (index 0 for modules 0-31, index 1 for modules 32-63, etc.). Offset = 40h + (y * 4h); where y = 0h to 3h">
+    <bitfield id="M" width="32" begin="31" end="0" resetval="0x0" description="Records pending error conditions." range="" rwaccess="R"/>
+  </register>
+  <register id="PSC0_MERRCR_y" acronym="PSC0_MERRCR_y" offset="0x50" width="32" description="This register has no storage. Read from this register returns 0. Each bit represents one module (index 0 for modules 0-31, index 1 for modules 32-63, etc.). Offset = 50h + (y * 4h); where y = 0h to 3h">
+    <bitfield id="M" width="32" begin="31" end="0" resetval="0x0" description="Write of 1 clears the corresponding MERRPR bit." range="" rwaccess="W1C"/>
+  </register>
+  <register id="PSC0_PERRPR" acronym="PSC0_PERRPR" offset="0x60" width="32" description="This register records pending error conditions for each power domain. Each bit represents one domain (index 0 for domains 0-31, index 1 for domains 32-63, etc.).">
+    <bitfield id="P" width="32" begin="31" end="0" resetval="0x0" description="Power Domain n Error Condition." range="" rwaccess="R"/>
+  </register>
+  <register id="PSC0_PERRCR" acronym="PSC0_PERRCR" offset="0x68" width="32" description="This register has no storage. Read from this register returns 0. Each bit represents one domain (index 0 for domains 0-31, index 1 for domains 32-63, etc.).">
+    <bitfield id="P" width="32" begin="31" end="0" resetval="0x0" description="Write of 1 clears the corresponding PSC0_PERRPR bit." range="" rwaccess="W1C"/>
+  </register>
+  <register id="PSC0_EPCPR" acronym="PSC0_EPCPR" offset="0x70" width="32" description="This register records pending external power control conditions. Each bit represents one domain (index 0 for domains 0-31, index 1 for domains 32-63, etc.).">
+    <bitfield id="EPC" width="32" begin="31" end="0" resetval="0x0" description="External Power Control Intervention Request for Power Domain n" range="" rwaccess="R"/>
+  </register>
+  <register id="PSC0_EPCCR" acronym="PSC0_EPCCR" offset="0x78" width="32" description="This register has no storage. Read from this register returns 0. Each bit represents one domain (index 0 for domains 0-31, index 1 for domains 32-63, etc.).">
+    <bitfield id="EPC" width="32" begin="31" end="0" resetval="0x0" description="Write of 1 clears the corresponding PSC0_EPCPR bit" range="" rwaccess="W1C"/>
+  </register>
+  <register id="PSC0_RAILSTAT" acronym="PSC0_RAILSTAT" offset="0x100" width="32" description="This register is a read-only and shows the current rail requestor whose request is being granted and the current value of the counter associated with this requestor.">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="RAILNUM" width="5" begin="28" end="24" resetval="0x0" description="Indicates Current Rail Requestor being processed by GPSC" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="16" begin="23" end="8" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="RAILCNT" width="8" begin="7" end="0" resetval="0x0" description="Indicates the current rail counter value" range="" rwaccess="R"/>
+  </register>
+  <register id="PSC0_RAILCTL" acronym="PSC0_RAILCTL" offset="0x104" width="32" description="This register is user programmable. It holds the counter values for rail counter. User can select one of the two counter values to be used for each power domain (see PSC0_RAILSEL register).">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="RAILCTR1" width="8" begin="15" end="8" resetval="0x0" description="Rail Counter Value 1" range="" rwaccess="RW"/>
+    <bitfield id="RAILCTR0" width="8" begin="7" end="0" resetval="0x0" description="Rail Counter Value 0" range="" rwaccess="RW"/>
+  </register>
+  <register id="PSC0_RAILSEL" acronym="PSC0_RAILSEL" offset="0x108" width="32" description="User can use this register to select the counter value (PSC0_RAILCTL) for each power domain.">
+    <bitfield id="P" width="32" begin="31" end="0" resetval="0x0" description="Rail Counter Select for Power Domain" range="" rwaccess="RW"/>
+  </register>
+  <register id="PSC0_PTCMD" acronym="PSC0_PTCMD" offset="0x120" width="32" description="This is a pseudo-command register with no actual storage. Reads return 0. One bit for each power domain (index 0 for domains 0-31, index 1 for domains 32-63, etc.).">
+    <bitfield id="GO" width="32" begin="31" end="0" resetval="0x0" description="Power Domain n GO Transition" range="" rwaccess="W1S"/>
+  </register>
+  <register id="PSC0_PTSTAT" acronym="PSC0_PTSTAT" offset="0x128" width="32" description="This is a status register. One bit for each power domain (index 0 for domains 0-31, index 1 for domains 32-63, etc.).">
+    <bitfield id="GOSTAT" width="32" begin="31" end="0" resetval="0x0" description="Power Domain n Transition Command Status" range="" rwaccess="R"/>
+  </register>
+  <register id="PSC0_PDSTAT_y" acronym="PSC0_PDSTAT_y" offset="0x200" width="32" description="This is a status register. One register per power domain. Each register contains the status for the given power domain. Offset = 200h + (y * 4h); where y = 0h to 1Dh">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="EMUIHB" width="1" begin="11" end="11" resetval="0x0" description="Emulation Alters Domain State" range="" rwaccess="R"/>
+    <bitfield id="PWRBAD" width="1" begin="10" end="10" resetval="0x0" description="Power Bad error" range="" rwaccess="R"/>
+    <bitfield id="PORDONE" width="1" begin="9" end="9" resetval="0x0" description="POR Done Input Status" range="" rwaccess="R"/>
+    <bitfield id="PORZ" width="1" begin="8" end="8" resetval="0x0" description="PORz output actual status" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="STATE" width="5" begin="4" end="0" resetval="0x0" description="Current Power Domain State" range="" rwaccess="R"/>
+  </register>
+  <register id="PSC0_PDCTL_y" acronym="PSC0_PDCTL_y" offset="0x300" width="32" description="This is a control register. One register per power domain. Offset = 300h + (y * 4h); where y = 0h to 1Dh">
+    <bitfield id="FORCE" width="1" begin="31" end="31" resetval="0x0" description="Force Bit" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PWRSW" width="1" begin="29" end="29" resetval="0x0" description="Power shorting Switch Control" range="" rwaccess="RW"/>
+    <bitfield id="ISO" width="1" begin="28" end="28" resetval="0x0" description="Isolation Cell control" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="27" end="24" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="WAKECNT" width="8" begin="23" end="16" resetval="0x0" description="RAM wake count delay value" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="15" end="15" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PDMODE" width="3" begin="14" end="12" resetval="0x0" description="Power Down mode" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="11" end="10" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="EMUIHBIE" width="1" begin="9" end="9" resetval="0x0" description="Emulation alters domain state" range="" rwaccess="RW"/>
+    <bitfield id="EPCGOOD" width="1" begin="8" end="8" resetval="0x0" description="External Power Control Power Good Indication" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="7" begin="7" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="NEXT" width="1" begin="0" end="0" resetval="0x0" description="User_Desired Next Power Domain State" range="" rwaccess="RW"/>
+  </register>
+  <register id="PSC0_PDCFG_y" acronym="PSC0_PDCFG_y" offset="0x400" width="32" description="This is a status register. It shows PSC settings for easy debug. Offset = 400h + (y * 4h); where y = 0h to 1Dh">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="ICEPICK" width="1" begin="3" end="3" resetval="0x0" description="Icepick support" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="2" end="2" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="MEMSLPKWK" width="1" begin="1" end="1" resetval="0x0" description="Memory sleep-wake domain" range="" rwaccess="R"/>
+    <bitfield id="ALWAYSON" width="1" begin="0" end="0" resetval="0x0" description="Always on power domain" range="" rwaccess="R"/>
+  </register>
+  <register id="PSC0_MDCFG_y" acronym="PSC0_MDCFG_y" offset="0x600" width="32" description="This is a constant register showing some PSC settings for easy debug. This register is read only. Offset = 600h + (y * 4h); where y = 0h to 6Bh">
+    <bitfield id="RESERVED" width="11" begin="31" end="21" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="PWRDOM" width="5" begin="20" end="16" resetval="0x0" description="Indicates which power domain this module belongs to" range="" rwaccess="R"/>
+    <bitfield id="AUTOONLY" width="1" begin="15" end="15" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESETISO" width="1" begin="14" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="NEXTLOCK" width="1" begin="13" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ASYNC" width="1" begin="12" end="12" resetval="0x0" description="Async Lpsc" range="" rwaccess="R"/>
+    <bitfield id="ICEPICK" width="1" begin="11" end="11" resetval="0x0" description="IcePick support" range="" rwaccess="R"/>
+    <bitfield id="PERMDIS" width="1" begin="10" end="10" resetval="0x0" description="Permanently disable" range="" rwaccess="R"/>
+    <bitfield id="PLLHANDSHAKE" width="1" begin="9" end="9" resetval="0x0" description="RTL parameter PLL_HANDSHAKE" range="" rwaccess="R"/>
+    <bitfield id="NUMSCRDISBALE" width="3" begin="8" end="6" resetval="0x0" description="Number of PWR_SCR_DISABLE interfaces required on LPSC" range="" rwaccess="R"/>
+    <bitfield id="NUMCLKEN" width="3" begin="5" end="3" resetval="0x0" description="Number of PWR_CLK_EN interfaces required on LPSC" range="" rwaccess="R"/>
+    <bitfield id="NUMCLK" width="3" begin="2" end="0" resetval="0x0" description="Number of PWR_CLKSTOP interfaces required on LPSC" range="" rwaccess="R"/>
+  </register>
+  <register id="PSC0_MDSTAT_y" acronym="PSC0_MDSTAT_y" offset="0x800" width="32" description="This register shows the status of each module. Requires one register per module on the device. Offset = 800h + (y * 4h); where y = 0h to 6Bh">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="EMUIHB" width="1" begin="17" end="17" resetval="0x0" description="Emulation Alters Module State." range="" rwaccess="R"/>
+    <bitfield id="EMURST" width="1" begin="16" end="16" resetval="0x0" description="Emulation Alters Reset" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="MCKOUT" width="1" begin="12" end="12" resetval="0x0" description="Actual modclk output to module" range="" rwaccess="R"/>
+    <bitfield id="MRSTDONE" width="1" begin="11" end="11" resetval="0x0" description="Module reset initialization done status" range="" rwaccess="R"/>
+    <bitfield id="MRSTZ" width="1" begin="10" end="10" resetval="0x0" description="Module reset actual status" range="" rwaccess="R"/>
+    <bitfield id="LRSTDONE" width="1" begin="9" end="9" resetval="0x0" description="Module local reset initialization done status" range="" rwaccess="R"/>
+    <bitfield id="LRSTZ" width="1" begin="8" end="8" resetval="0x0" description="Module local reset actual status" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="2" begin="7" end="6" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="STATE" width="6" begin="5" end="0" resetval="0x0" description="These bits indicate the current module state" range="" rwaccess="R"/>
+  </register>
+  <register id="PSC0_MDCTL_y" acronym="PSC0_MDCTL_y" offset="0xA00" width="32" description="This register provides specific control for the individual module. One register per module on the device. Offset = A00h + (y * 4h); where y = 0h to 6Bh">
+    <bitfield id="FORCE" width="1" begin="31" end="31" resetval="0x0" description="Force Bit" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="18" begin="30" end="13" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESETISO" width="1" begin="12" end="12" resetval="0x0" description="Reset Isolation" range="" rwaccess="RW"/>
+    <bitfield id="BLKCHIP1RST" width="1" begin="11" end="11" resetval="0x0" description="Block Chip_1_Reset" range="" rwaccess="RW"/>
+    <bitfield id="EMUIHBIE" width="1" begin="10" end="10" resetval="0x0" description="Emulation Alters Module State." range="" rwaccess="RW"/>
+    <bitfield id="EMURSTIE" width="1" begin="9" end="9" resetval="0x0" description="Emulation Alter Reset Interrupt Enable" range="" rwaccess="RW"/>
+    <bitfield id="LRSTZ" width="1" begin="8" end="8" resetval="0x0" description="Module local reset control" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="NEXT" width="5" begin="4" end="0" resetval="0x0" description="Module Next State" range="" rwaccess="RW"/>
+  </register>
+</module>

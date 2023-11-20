@@ -1,0 +1,482 @@
+<module name="DSS0_VP1" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="DSS0_VP_CONFIG" acronym="DSS0_VP_CONFIG" offset="0x0" width="32" description="The register configures the Display Controller module for the VP output. Shadow register.">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="COLORCONVPOS" width="1" begin="26" end="26" resetval="0x0" description="Determines the position of the COLORCONV module" range="" rwaccess="RW"/>
+    <bitfield id="FULLRANGE" width="1" begin="25" end="25" resetval="0x0" description="Color Space Conversion full range setting" range="" rwaccess="RW"/>
+    <bitfield id="COLORCONVENABLE" width="1" begin="24" end="24" resetval="0x0" description="Enable the color space conversion." range="" rwaccess="RW"/>
+    <bitfield id="FIDFIRST" width="1" begin="23" end="23" resetval="0x0" description="Selects the first field to output in case of interlace mode." range="" rwaccess="RW"/>
+    <bitfield id="OUTPUTMODEENABLE" width="1" begin="22" end="22" resetval="0x0" description="Selects between progressive and interlace mode for the VP output" range="" rwaccess="RW"/>
+    <bitfield id="BT1120ENABLE" width="1" begin="21" end="21" resetval="0x0" description="Selects BT-1120 format on the VP output." range="" rwaccess="RW"/>
+    <bitfield id="BT656ENABLE" width="1" begin="20" end="20" resetval="0x0" description="Selects BT-656 format on the VP output." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="19" end="17" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="BUFFERHANDSHAKE" width="1" begin="16" end="16" resetval="0x0" description="Deprecated." range="" rwaccess="RW"/>
+    <bitfield id="CPR" width="1" begin="15" end="15" resetval="0x0" description="Deprecated." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="14" end="9" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="EXTERNALSYNCEN" width="1" begin="8" end="8" resetval="0x0" description="Deprecated." range="" rwaccess="RW"/>
+    <bitfield id="VSYNCGATED" width="1" begin="7" end="7" resetval="0x0" description="VSYNC Gated Enabled [VP output]." range="" rwaccess="RW"/>
+    <bitfield id="HSYNCGATED" width="1" begin="6" end="6" resetval="0x0" description="HSYNC Gated Enabled [VP output]." range="" rwaccess="RW"/>
+    <bitfield id="PIXELCLOCKGATED" width="1" begin="5" end="5" resetval="0x0" description="Pixel Clock Gated Enabled [VP output]." range="" rwaccess="RW"/>
+    <bitfield id="PIXELDATAGATED" width="1" begin="4" end="4" resetval="0x0" description="Pixel Data Gated Enabled [VP output]." range="" rwaccess="RW"/>
+    <bitfield id="HDMIMODE" width="1" begin="3" end="3" resetval="0x0" description="Deprecated." range="" rwaccess="RW"/>
+    <bitfield id="GAMMAENABLE" width="1" begin="2" end="2" resetval="0x0" description="Enable the gamma Shadow bit-field" range="" rwaccess="RW"/>
+    <bitfield id="DATAENABLEGATED" width="1" begin="1" end="1" resetval="0x0" description="DE Gated Enable Shadow bit-field" range="" rwaccess="RW"/>
+    <bitfield id="PIXELGATED" width="1" begin="0" end="0" resetval="0x0" description="Pixel Gated Enable." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_CONTROL" acronym="DSS0_VP_CONTROL" offset="0x4" width="32" description="The register configures the Display Controller module for the VP output">
+    <bitfield id="SPATIALTEMPORALDITHERINGFRAMES" width="2" begin="31" end="30" resetval="0x0" description="Spatial/Temporal dithering number of frames for the VP output Shadow bit-field" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="29" end="27" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="TDMUNUSEDBITS" width="2" begin="26" end="25" resetval="0x0" description="State of unused bits [TDM mode only] for the VP output Shadow bit-field" range="" rwaccess="RW"/>
+    <bitfield id="TDMCYCLEFORMAT" width="2" begin="24" end="23" resetval="0x0" description="Cycle format [TDM mode only] for the VP output Shadow bit-field" range="" rwaccess="RW"/>
+    <bitfield id="TDMPARALLELMODE" width="2" begin="22" end="21" resetval="0x0" description="Output Interface width [TDM mode only] for the VP output Shadow bit-field" range="" rwaccess="RW"/>
+    <bitfield id="TDMENABLE" width="1" begin="20" end="20" resetval="0x0" description="Enable the multiple cycle format for the VP output Shadow bit-field" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="19" end="17" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="HT" width="3" begin="16" end="14" resetval="0x0" description="Hold Time for output." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="13" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="STALLMODETYPE" width="1" begin="12" end="12" resetval="0x0" description="The type of transfer in STALLMODE - If STALLMODE is enabled" range="" rwaccess="RW"/>
+    <bitfield id="STALLMODE" width="1" begin="11" end="11" resetval="0x0" description="Enable the STALLMODE on DPI output" range="" rwaccess="RW"/>
+    <bitfield id="DATALINES" width="3" begin="10" end="8" resetval="0x0" description="Width of the data bus on VP output Shadow bit-field" range="" rwaccess="RW"/>
+    <bitfield id="STDITHERENABLE" width="1" begin="7" end="7" resetval="0x0" description="Spatial Temporal dithering enable for the VP output Shadow bit-field" range="" rwaccess="RW"/>
+    <bitfield id="DPIENABLE" width="1" begin="6" end="6" resetval="0x1" description="Enable the DPI output." range="" rwaccess="RW"/>
+    <bitfield id="GOBIT" width="1" begin="5" end="5" resetval="0x0" description="GO Command for the VP output." range="" rwaccess="RW"/>
+    <bitfield id="M8B" width="1" begin="4" end="4" resetval="0x0" description="Deprecated." range="" rwaccess="RW"/>
+    <bitfield id="STN" width="1" begin="3" end="3" resetval="0x0" description="Deprecated." range="" rwaccess="RW"/>
+    <bitfield id="MONOCOLOR" width="1" begin="2" end="2" resetval="0x0" description="Deprecated." range="" rwaccess="RW"/>
+    <bitfield id="VPPROGLINENUMBERMODULO" width="1" begin="1" end="1" resetval="0x0" description="Enable the modulo of the line number interrupt generation" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Enable the video port output." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_CSC_COEF0" acronym="DSS0_VP_CSC_COEF0" offset="0x8" width="32" description="The register configures the color space conversion matrix coefficients. Shadow register">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="Write 0's for future compatibility." range="" rwaccess="R"/>
+    <bitfield id="C01" width="11" begin="26" end="16" resetval="0x0" description="C01 Coefficient." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="Write 0's for future compatibility." range="" rwaccess="R"/>
+    <bitfield id="C00" width="11" begin="10" end="0" resetval="0x0" description="C00 Coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_CSC_COEF1" acronym="DSS0_VP_CSC_COEF1" offset="0xC" width="32" description="The register configures the color space conversion matrix coefficients. Shadow register">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="Write 0's for future compatibility." range="" rwaccess="R"/>
+    <bitfield id="C10" width="11" begin="26" end="16" resetval="0x0" description="C10 Coefficient." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="Write 0's for future compatibility." range="" rwaccess="R"/>
+    <bitfield id="C02" width="11" begin="10" end="0" resetval="0x0" description="C02 Coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_CSC_COEF2" acronym="DSS0_VP_CSC_COEF2" offset="0x10" width="32" description="The register configures the color space conversion matrix coefficients. Shadow register">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="C12" width="11" begin="26" end="16" resetval="0x0" description="C12 Coefficient." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="C11" width="11" begin="10" end="0" resetval="0x0" description="C11 Coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_DATA_CYCLE_0" acronym="DSS0_VP_DATA_CYCLE_0" offset="0x14" width="32" description="The register configures the output data format over up to 3 cycles. Shadow register">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="BITALIGNMENTPIXEL2" width="4" begin="27" end="24" resetval="0x0" description="Bit alignment Alignment of the bits from pixel 2 on the output interface" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="23" end="21" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="NBBITSPIXEL2" width="5" begin="20" end="16" resetval="0x0" description="Number of bits Number of bits from the pixel 2 [value from 0 to 16 bits]." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="Write 0's for future compatibility." range="" rwaccess="R"/>
+    <bitfield id="BITALIGNMENTPIXEL1" width="4" begin="11" end="8" resetval="0x0" description="Bit alignment Alignment of the bits from pixel 1 on the output interface" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="NBBITSPIXEL1" width="5" begin="4" end="0" resetval="0x0" description="Number of bits Number of bits from the pixel 1 [value from 0 to 16 bits]." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_DATA_CYCLE_1" acronym="DSS0_VP_DATA_CYCLE_1" offset="0x18" width="32" description="The register configures the output data format over up to 3 cycles. Shadow register">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="BITALIGNMENTPIXEL2" width="4" begin="27" end="24" resetval="0x0" description="Bit alignment Alignment of the bits from pixel 2 on the output interface" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="23" end="21" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="NBBITSPIXEL2" width="5" begin="20" end="16" resetval="0x0" description="Number of bits Number of bits from the pixel 2 [value from 0 to 16 bits]." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="Write 0's for future compatibility." range="" rwaccess="R"/>
+    <bitfield id="BITALIGNMENTPIXEL1" width="4" begin="11" end="8" resetval="0x0" description="Bit alignment Alignment of the bits from pixel 1 on the output interface" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="NBBITSPIXEL1" width="5" begin="4" end="0" resetval="0x0" description="Number of bits Number of bits from the pixel 1 [value from 0 to 16 bits]." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_DATA_CYCLE_2" acronym="DSS0_VP_DATA_CYCLE_2" offset="0x1C" width="32" description="The register configures the output data format over up to 3 cycles. Shadow register">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="BITALIGNMENTPIXEL2" width="4" begin="27" end="24" resetval="0x0" description="Bit alignment Alignment of the bits from pixel 2 on the output interface" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="23" end="21" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="NBBITSPIXEL2" width="5" begin="20" end="16" resetval="0x0" description="Number of bits Number of bits from the pixel 2 [value from 0 to 16 bits]." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="Write 0's for future compatibility." range="" rwaccess="R"/>
+    <bitfield id="BITALIGNMENTPIXEL1" width="4" begin="11" end="8" resetval="0x0" description="Bit alignment Alignment of the bits from pixel 1 on the output interface" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="NBBITSPIXEL1" width="5" begin="4" end="0" resetval="0x0" description="Number of bits Number of bits from the pixel 1 [value from 0 to 16 bits]." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_LINE_NUMBER" acronym="DSS0_VP_LINE_NUMBER" offset="0x44" width="32" description="The register indicates the panel display line number for the interrupt and the DMA request. Shadow register">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LINENUMBER" width="14" begin="13" end="0" resetval="0x0" description="LCD panel line number programming LCD line number defines the line on which the programmable interrupt is generated and the DMA request occurs" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_POL_FREQ" acronym="DSS0_VP_POL_FREQ" offset="0x4C" width="32" description="The register configures the signal configuration. Shadow register">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="ALIGN" width="1" begin="18" end="18" resetval="0x0" description="Defines the alignment between HSYNC and VSYNC assertion" range="" rwaccess="RW"/>
+    <bitfield id="ONOFF" width="1" begin="17" end="17" resetval="0x0" description="HSYNC/VSYNC Pixel clock" range="" rwaccess="RW"/>
+    <bitfield id="RF" width="1" begin="16" end="16" resetval="0x0" description="Program HSYNC/VSYNC Rise or Fall" range="" rwaccess="RW"/>
+    <bitfield id="IEO" width="1" begin="15" end="15" resetval="0x0" description="Invert output enable" range="" rwaccess="RW"/>
+    <bitfield id="IPC" width="1" begin="14" end="14" resetval="0x0" description="Invert pixel clock" range="" rwaccess="RW"/>
+    <bitfield id="IHS" width="1" begin="13" end="13" resetval="0x0" description="Invert HSYNC" range="" rwaccess="RW"/>
+    <bitfield id="IVS" width="1" begin="12" end="12" resetval="0x0" description="Invert VSYNC" range="" rwaccess="RW"/>
+    <bitfield id="ACBI" width="4" begin="11" end="8" resetval="0x0" description="AC Bias Pin transitions per interrupt Value [from 0 to 15] used to specify the number of AC Bias pin transitions" range="" rwaccess="RW"/>
+    <bitfield id="ACB" width="8" begin="7" end="0" resetval="0x0" description="AC Bias Pin Frequency Value [from 0 to 255] used to specify the number of line clocks to count before transitioning the AC Bias pin." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SIZE_SCREEN" acronym="DSS0_VP_SIZE_SCREEN" offset="0x50" width="32" description="The register configures the panel size horizontal and vertical. Shadow register. A delta value is used to indicate if the odd field has same vertical size as the even field or +/- one line.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPP" width="14" begin="29" end="16" resetval="0x0" description="Lines per panel Encoded value [from 1 to 16384] to specify the number of lines per panel [program to value minus one]" range="" rwaccess="RW"/>
+    <bitfield id="DELTA_LPP" width="2" begin="15" end="14" resetval="0x0" description="Indicates the delta size value of the odd field compared to the even field" range="" rwaccess="RW"/>
+    <bitfield id="PPL" width="14" begin="13" end="0" resetval="0x0" description="Pixels per line Encoded value [from 1 to 16384] to specify the number of pixels contains within each line on the display [program to value minus one]." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_TIMING_H" acronym="DSS0_VP_TIMING_H" offset="0x54" width="32" description="The register configures the timing logic for the HSYNC signal. Shadow register">
+    <bitfield id="HBP" width="12" begin="31" end="20" resetval="0x0" description="Horizontal Back Porch Encoded value [from 1 to 4096] to specify the number of pixel clock periods to add to the beginning of a line transmission before the first set of pixels is output to the display [program to value minus one] When in BT mode and interlaced, this field corresponds to the vertical field blanking No 2 for Even Field" range="" rwaccess="RW"/>
+    <bitfield id="HFP" width="12" begin="19" end="8" resetval="0x0" description="Horizontal front porch Encoded value [from 1 to 4096] to specify the number of pixel clock periods to add to the end of a line transmission before line clock is asserted display [program to value minus one] When in BT mode and interlaced, this field corresponds to the vertical field blanking No 1 for Even Field" range="" rwaccess="RW"/>
+    <bitfield id="HSW" width="8" begin="7" end="0" resetval="0x0" description="Horizontal synchronization pulse width Encoded value [from 1 to 256] to specify the number of pixel clock periods to pulse the line clock at the end of each line display [program to value minus one] When in BT mode, this field corresponds to the LSB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_TIMING_V" acronym="DSS0_VP_TIMING_V" offset="0x58" width="32" description="The register configures the timing logic for the VSYNC signal. Shadow register">
+    <bitfield id="VBP" width="12" begin="31" end="20" resetval="0x0" description="Vertical back porch Encoded value [from 0 to 4095] to specify the number of line clock periods to add to the beginning of a frame When in BT mode and interlaced, this field corresponds to the vertical field blanking No 2 for Odd Field When in BT and in progressive mode, this field corresponds to the Vertical frame blanking No 2 before the first set of pixels is output to the display" range="" rwaccess="RW"/>
+    <bitfield id="VFP" width="12" begin="19" end="8" resetval="0x0" description="Vertical front porch Encoded value [from 0 to 4095] to specify the number of line clock periods to add to the end of each frame When in BT mode and interlaced, this field corresponds to the vertical field blanking No 1 for Odd Field When in BT and in progressive mode, this field corresponds to the Vertical frame blanking No 2" range="" rwaccess="RW"/>
+    <bitfield id="VSW" width="8" begin="7" end="0" resetval="0x0" description="Vertical synchronization pulse width Encoded value [from 1 to 256] to specify the number of line clock periods to pulse the frame clock [VSYNC] pin at the end of each frame after the end of frame wait [VFP] period elapses Frame clock uses as VSYNC signal in active mode When in BT mode, the lsb" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_CSC_COEF3" acronym="DSS0_VP_CSC_COEF3" offset="0x5C" width="32" description="The register configures the color space conversion matrix coefficients. Shadow register">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="Write 0's for future compatibility." range="" rwaccess="R"/>
+    <bitfield id="C21" width="11" begin="26" end="16" resetval="0x0" description="C21 coefficient." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="Write 0's for future compatibility." range="" rwaccess="R"/>
+    <bitfield id="C20" width="11" begin="10" end="0" resetval="0x0" description="C20 coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_CSC_COEF4" acronym="DSS0_VP_CSC_COEF4" offset="0x60" width="32" description="The register configures the color space conversion matrix coefficients. Shadow register">
+    <bitfield id="RESERVED" width="21" begin="31" end="11" resetval="0x0" description="Write 0's for future compatibility." range="" rwaccess="R"/>
+    <bitfield id="C22" width="11" begin="10" end="0" resetval="0x0" description="C22 Coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_CSC_COEF5" acronym="DSS0_VP_CSC_COEF5" offset="0x64" width="32" description="The register configures the color space conversion matrix coefficients. Shadow register">
+    <bitfield id="PREOFFSET2" width="13" begin="31" end="19" resetval="0x0" description="Row-2 pre-offset." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="18" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="PREOFFSET1" width="13" begin="15" end="3" resetval="0x0" description="Row1 pre-offset." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="2" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DSS0_VP_CSC_COEF6" acronym="DSS0_VP_CSC_COEF6" offset="0x68" width="32" description="The register configures the color space conversion matrix coefficients. Shadow register">
+    <bitfield id="POSTOFFSET1" width="13" begin="31" end="19" resetval="0x0" description="Row-1 post-offset." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="18" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="PREOFFSET3" width="13" begin="15" end="3" resetval="0x0" description="Row-3 pre-offset." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="2" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DSS0_VP_CSC_COEF7" acronym="DSS0_VP_CSC_COEF7" offset="0x6C" width="32" description="The register configures the color space conversion matrix coefficients. Shadow register">
+    <bitfield id="POSTOFFSET3" width="13" begin="31" end="19" resetval="0x0" description="Row-3 post-offset." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="18" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="POSTOFFSET2" width="13" begin="15" end="3" resetval="0x0" description="Row-2 post-offset." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="2" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_ATTRIBUTES_0" acronym="DSS0_VP_SAFETY_ATTRIBUTES_0" offset="0x70" width="32" description="The register configures the safety sub-region n. Shadow register">
+    <bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FRAMESKIP" width="2" begin="12" end="11" resetval="0x0" description="Indicates which frames to be skipped while doing FRAMEFREEZE or DATACHECK [Useful for interlaced displays]." range="" rwaccess="RW"/>
+    <bitfield id="THRESHOLD" width="8" begin="10" end="3" resetval="0x0" description="Allowed maximum number of frames with the same frame signature When the freeze frame counter reaches 1 over this value [freeze_frame_thold+1], a freeze frame detection will occur Note: The freeze frame counter is cleared on reset -OR- MISR not enabled -OR- terminal count reached -OR- compare == no match" range="" rwaccess="RW"/>
+    <bitfield id="SEEDSELECT" width="1" begin="2" end="2" resetval="0x0" description="Initial seed selection" range="" rwaccess="RW"/>
+    <bitfield id="CAPTUREMODE" width="1" begin="1" end="1" resetval="0x0" description="Mode of operation of the safety check module" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Safety check Enable for the region Note: Transition from 0 to 1 clears the signature register" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_ATTRIBUTES_1" acronym="DSS0_VP_SAFETY_ATTRIBUTES_1" offset="0x74" width="32" description="The register configures the safety sub-region n. Shadow register">
+    <bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FRAMESKIP" width="2" begin="12" end="11" resetval="0x0" description="Indicates which frames to be skipped while doing FRAMEFREEZE or DATACHECK [Useful for interlaced displays]." range="" rwaccess="RW"/>
+    <bitfield id="THRESHOLD" width="8" begin="10" end="3" resetval="0x0" description="Allowed maximum number of frames with the same frame signature When the freeze frame counter reaches 1 over this value [freeze_frame_thold+1], a freeze frame detection will occur Note: The freeze frame counter is cleared on reset -OR- MISR not enabled -OR- terminal count reached -OR- compare == no match" range="" rwaccess="RW"/>
+    <bitfield id="SEEDSELECT" width="1" begin="2" end="2" resetval="0x0" description="Initial seed selection" range="" rwaccess="RW"/>
+    <bitfield id="CAPTUREMODE" width="1" begin="1" end="1" resetval="0x0" description="Mode of operation of the safety check module" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Safety check Enable for the region Note: Transition from 0 to 1 clears the signature register" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_ATTRIBUTES_2" acronym="DSS0_VP_SAFETY_ATTRIBUTES_2" offset="0x78" width="32" description="The register configures the safety sub-region n. Shadow register">
+    <bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FRAMESKIP" width="2" begin="12" end="11" resetval="0x0" description="Indicates which frames to be skipped while doing FRAMEFREEZE or DATACHECK [Useful for interlaced displays]." range="" rwaccess="RW"/>
+    <bitfield id="THRESHOLD" width="8" begin="10" end="3" resetval="0x0" description="Allowed maximum number of frames with the same frame signature When the freeze frame counter reaches 1 over this value [freeze_frame_thold+1], a freeze frame detection will occur Note: The freeze frame counter is cleared on reset -OR- MISR not enabled -OR- terminal count reached -OR- compare == no match" range="" rwaccess="RW"/>
+    <bitfield id="SEEDSELECT" width="1" begin="2" end="2" resetval="0x0" description="Initial seed selection" range="" rwaccess="RW"/>
+    <bitfield id="CAPTUREMODE" width="1" begin="1" end="1" resetval="0x0" description="Mode of operation of the safety check module" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Safety check Enable for the region Note: Transition from 0 to 1 clears the signature register" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_ATTRIBUTES_3" acronym="DSS0_VP_SAFETY_ATTRIBUTES_3" offset="0x7C" width="32" description="The register configures the safety sub-region n. Shadow register">
+    <bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FRAMESKIP" width="2" begin="12" end="11" resetval="0x0" description="Indicates which frames to be skipped while doing FRAMEFREEZE or DATACHECK [Useful for interlaced displays]." range="" rwaccess="RW"/>
+    <bitfield id="THRESHOLD" width="8" begin="10" end="3" resetval="0x0" description="Allowed maximum number of frames with the same frame signature When the freeze frame counter reaches 1 over this value [freeze_frame_thold+1], a freeze frame detection will occur Note: The freeze frame counter is cleared on reset -OR- MISR not enabled -OR- terminal count reached -OR- compare == no match" range="" rwaccess="RW"/>
+    <bitfield id="SEEDSELECT" width="1" begin="2" end="2" resetval="0x0" description="Initial seed selection" range="" rwaccess="RW"/>
+    <bitfield id="CAPTUREMODE" width="1" begin="1" end="1" resetval="0x0" description="Mode of operation of the safety check module" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Safety check Enable for the region Note: Transition from 0 to 1 clears the signature register" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_ATTRIBUTES_4" acronym="DSS0_VP_SAFETY_ATTRIBUTES_4" offset="0x80" width="32" description="The register configures the safety sub-region n. Shadow register">
+    <bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FRAMESKIP" width="2" begin="12" end="11" resetval="0x0" description="Indicates which frames to be skipped while doing FRAMEFREEZE or DATACHECK [Useful for interlaced displays]." range="" rwaccess="RW"/>
+    <bitfield id="THRESHOLD" width="8" begin="10" end="3" resetval="0x0" description="Allowed maximum number of frames with the same frame signature When the freeze frame counter reaches 1 over this value [freeze_frame_thold+1], a freeze frame detection will occur Note: The freeze frame counter is cleared on reset -OR- MISR not enabled -OR- terminal count reached -OR- compare == no match" range="" rwaccess="RW"/>
+    <bitfield id="SEEDSELECT" width="1" begin="2" end="2" resetval="0x0" description="Initial seed selection" range="" rwaccess="RW"/>
+    <bitfield id="CAPTUREMODE" width="1" begin="1" end="1" resetval="0x0" description="Mode of operation of the safety check module" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Safety check Enable for the region Note: Transition from 0 to 1 clears the signature register" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_ATTRIBUTES_5" acronym="DSS0_VP_SAFETY_ATTRIBUTES_5" offset="0x84" width="32" description="The register configures the safety sub-region n. Shadow register">
+    <bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FRAMESKIP" width="2" begin="12" end="11" resetval="0x0" description="Indicates which frames to be skipped while doing FRAMEFREEZE or DATACHECK [Useful for interlaced displays]." range="" rwaccess="RW"/>
+    <bitfield id="THRESHOLD" width="8" begin="10" end="3" resetval="0x0" description="Allowed maximum number of frames with the same frame signature When the freeze frame counter reaches 1 over this value [freeze_frame_thold+1], a freeze frame detection will occur Note: The freeze frame counter is cleared on reset -OR- MISR not enabled -OR- terminal count reached -OR- compare == no match" range="" rwaccess="RW"/>
+    <bitfield id="SEEDSELECT" width="1" begin="2" end="2" resetval="0x0" description="Initial seed selection" range="" rwaccess="RW"/>
+    <bitfield id="CAPTUREMODE" width="1" begin="1" end="1" resetval="0x0" description="Mode of operation of the safety check module" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Safety check Enable for the region Note: Transition from 0 to 1 clears the signature register" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_ATTRIBUTES_6" acronym="DSS0_VP_SAFETY_ATTRIBUTES_6" offset="0x88" width="32" description="The register configures the safety sub-region n. Shadow register">
+    <bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FRAMESKIP" width="2" begin="12" end="11" resetval="0x0" description="Indicates which frames to be skipped while doing FRAMEFREEZE or DATACHECK [Useful for interlaced displays]." range="" rwaccess="RW"/>
+    <bitfield id="THRESHOLD" width="8" begin="10" end="3" resetval="0x0" description="Allowed maximum number of frames with the same frame signature When the freeze frame counter reaches 1 over this value [freeze_frame_thold+1], a freeze frame detection will occur Note: The freeze frame counter is cleared on reset -OR- MISR not enabled -OR- terminal count reached -OR- compare == no match" range="" rwaccess="RW"/>
+    <bitfield id="SEEDSELECT" width="1" begin="2" end="2" resetval="0x0" description="Initial seed selection" range="" rwaccess="RW"/>
+    <bitfield id="CAPTUREMODE" width="1" begin="1" end="1" resetval="0x0" description="Mode of operation of the safety check module" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Safety check Enable for the region Note: Transition from 0 to 1 clears the signature register" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_ATTRIBUTES_7" acronym="DSS0_VP_SAFETY_ATTRIBUTES_7" offset="0x8C" width="32" description="The register configures the safety sub-region n. Shadow register">
+    <bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FRAMESKIP" width="2" begin="12" end="11" resetval="0x0" description="Indicates which frames to be skipped while doing FRAMEFREEZE or DATACHECK [Useful for interlaced displays]." range="" rwaccess="RW"/>
+    <bitfield id="THRESHOLD" width="8" begin="10" end="3" resetval="0x0" description="Allowed maximum number of frames with the same frame signature When the freeze frame counter reaches 1 over this value [freeze_frame_thold+1], a freeze frame detection will occur Note: The freeze frame counter is cleared on reset -OR- MISR not enabled -OR- terminal count reached -OR- compare == no match" range="" rwaccess="RW"/>
+    <bitfield id="SEEDSELECT" width="1" begin="2" end="2" resetval="0x0" description="Initial seed selection" range="" rwaccess="RW"/>
+    <bitfield id="CAPTUREMODE" width="1" begin="1" end="1" resetval="0x0" description="Mode of operation of the safety check module" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Safety check Enable for the region Note: Transition from 0 to 1 clears the signature register" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_CAPT_SIGNATURE_0" acronym="DSS0_VP_SAFETY_CAPT_SIGNATURE_0" offset="0x90" width="32" description="The register captures the signature from the MISR of the safety sub-region n. Shadow register">
+    <bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="The register configures the reference signature of the safety sub-region n Shadow register" range="" rwaccess="R"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_CAPT_SIGNATURE_1" acronym="DSS0_VP_SAFETY_CAPT_SIGNATURE_1" offset="0x94" width="32" description="The register captures the signature from the MISR of the safety sub-region n. Shadow register">
+    <bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="The register configures the reference signature of the safety sub-region n Shadow register" range="" rwaccess="R"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_CAPT_SIGNATURE_2" acronym="DSS0_VP_SAFETY_CAPT_SIGNATURE_2" offset="0x98" width="32" description="The register captures the signature from the MISR of the safety sub-region n. Shadow register">
+    <bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="The register configures the reference signature of the safety sub-region n Shadow register" range="" rwaccess="R"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_CAPT_SIGNATURE_3" acronym="DSS0_VP_SAFETY_CAPT_SIGNATURE_3" offset="0x9C" width="32" description="The register captures the signature from the MISR of the safety sub-region n. Shadow register">
+    <bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="The register configures the reference signature of the safety sub-region n Shadow register" range="" rwaccess="R"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_CAPT_SIGNATURE_4" acronym="DSS0_VP_SAFETY_CAPT_SIGNATURE_4" offset="0xA0" width="32" description="The register captures the signature from the MISR of the safety sub-region n. Shadow register">
+    <bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="The register configures the reference signature of the safety sub-region n Shadow register" range="" rwaccess="R"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_CAPT_SIGNATURE_5" acronym="DSS0_VP_SAFETY_CAPT_SIGNATURE_5" offset="0xA4" width="32" description="The register captures the signature from the MISR of the safety sub-region n. Shadow register">
+    <bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="The register configures the reference signature of the safety sub-region n Shadow register" range="" rwaccess="R"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_CAPT_SIGNATURE_6" acronym="DSS0_VP_SAFETY_CAPT_SIGNATURE_6" offset="0xA8" width="32" description="The register captures the signature from the MISR of the safety sub-region n. Shadow register">
+    <bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="The register configures the reference signature of the safety sub-region n Shadow register" range="" rwaccess="R"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_CAPT_SIGNATURE_7" acronym="DSS0_VP_SAFETY_CAPT_SIGNATURE_7" offset="0xAC" width="32" description="The register captures the signature from the MISR of the safety sub-region n. Shadow register">
+    <bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="The register configures the reference signature of the safety sub-region n Shadow register" range="" rwaccess="R"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_POSITION_0" acronym="DSS0_VP_SAFETY_POSITION_0" offset="0xB0" width="32" description="The register configures the position of the safety sub-region n. Shadow register">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSY" width="14" begin="29" end="16" resetval="0x0" description="Y position of the safety sub-region n." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSX" width="14" begin="13" end="0" resetval="0x0" description="X position of the safety sub-region n." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_POSITION_1" acronym="DSS0_VP_SAFETY_POSITION_1" offset="0xB4" width="32" description="The register configures the position of the safety sub-region n. Shadow register">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSY" width="14" begin="29" end="16" resetval="0x0" description="Y position of the safety sub-region n." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSX" width="14" begin="13" end="0" resetval="0x0" description="X position of the safety sub-region n." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_POSITION_2" acronym="DSS0_VP_SAFETY_POSITION_2" offset="0xB8" width="32" description="The register configures the position of the safety sub-region n. Shadow register">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSY" width="14" begin="29" end="16" resetval="0x0" description="Y position of the safety sub-region n." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSX" width="14" begin="13" end="0" resetval="0x0" description="X position of the safety sub-region n." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_POSITION_3" acronym="DSS0_VP_SAFETY_POSITION_3" offset="0xBC" width="32" description="The register configures the position of the safety sub-region n. Shadow register">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSY" width="14" begin="29" end="16" resetval="0x0" description="Y position of the safety sub-region n." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSX" width="14" begin="13" end="0" resetval="0x0" description="X position of the safety sub-region n." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_POSITION_4" acronym="DSS0_VP_SAFETY_POSITION_4" offset="0xC0" width="32" description="The register configures the position of the safety sub-region n. Shadow register">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSY" width="14" begin="29" end="16" resetval="0x0" description="Y position of the safety sub-region n." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSX" width="14" begin="13" end="0" resetval="0x0" description="X position of the safety sub-region n." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_POSITION_5" acronym="DSS0_VP_SAFETY_POSITION_5" offset="0xC4" width="32" description="The register configures the position of the safety sub-region n. Shadow register">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSY" width="14" begin="29" end="16" resetval="0x0" description="Y position of the safety sub-region n." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSX" width="14" begin="13" end="0" resetval="0x0" description="X position of the safety sub-region n." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_POSITION_6" acronym="DSS0_VP_SAFETY_POSITION_6" offset="0xC8" width="32" description="The register configures the position of the safety sub-region n. Shadow register">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSY" width="14" begin="29" end="16" resetval="0x0" description="Y position of the safety sub-region n." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSX" width="14" begin="13" end="0" resetval="0x0" description="X position of the safety sub-region n." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_POSITION_7" acronym="DSS0_VP_SAFETY_POSITION_7" offset="0xCC" width="32" description="The register configures the position of the safety sub-region n. Shadow register">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSY" width="14" begin="29" end="16" resetval="0x0" description="Y position of the safety sub-region n." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSX" width="14" begin="13" end="0" resetval="0x0" description="X position of the safety sub-region n." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_REF_SIGNATURE_0" acronym="DSS0_VP_SAFETY_REF_SIGNATURE_0" offset="0xD0" width="32" description="The register configures the reference signature of the safety sub-region n. Shadow register">
+    <bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="The register configures the reference signature of the safety sub-region n." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_REF_SIGNATURE_1" acronym="DSS0_VP_SAFETY_REF_SIGNATURE_1" offset="0xD4" width="32" description="The register configures the reference signature of the safety sub-region n. Shadow register">
+    <bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="The register configures the reference signature of the safety sub-region n." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_REF_SIGNATURE_2" acronym="DSS0_VP_SAFETY_REF_SIGNATURE_2" offset="0xD8" width="32" description="The register configures the reference signature of the safety sub-region n. Shadow register">
+    <bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="The register configures the reference signature of the safety sub-region n." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_REF_SIGNATURE_3" acronym="DSS0_VP_SAFETY_REF_SIGNATURE_3" offset="0xDC" width="32" description="The register configures the reference signature of the safety sub-region n. Shadow register">
+    <bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="The register configures the reference signature of the safety sub-region n." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_REF_SIGNATURE_4" acronym="DSS0_VP_SAFETY_REF_SIGNATURE_4" offset="0xE0" width="32" description="The register configures the reference signature of the safety sub-region n. Shadow register">
+    <bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="The register configures the reference signature of the safety sub-region n." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_REF_SIGNATURE_5" acronym="DSS0_VP_SAFETY_REF_SIGNATURE_5" offset="0xE4" width="32" description="The register configures the reference signature of the safety sub-region n. Shadow register">
+    <bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="The register configures the reference signature of the safety sub-region n." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_REF_SIGNATURE_6" acronym="DSS0_VP_SAFETY_REF_SIGNATURE_6" offset="0xE8" width="32" description="The register configures the reference signature of the safety sub-region n. Shadow register">
+    <bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="The register configures the reference signature of the safety sub-region n." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_REF_SIGNATURE_7" acronym="DSS0_VP_SAFETY_REF_SIGNATURE_7" offset="0xEC" width="32" description="The register configures the reference signature of the safety sub-region n. Shadow register">
+    <bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="The register configures the reference signature of the safety sub-region n." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_SIZE_0" acronym="DSS0_VP_SAFETY_SIZE_0" offset="0xF0" width="32" description="The register configures the size of the safety sub-region n Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SIZEY" width="14" begin="29" end="16" resetval="0x0" description="Height of the safety sub-region n Encoded value [from 0 to 16383] to specify the height of the sub-region on the screen One line height region has value of 0" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SIZEX" width="14" begin="13" end="0" resetval="0x0" description="Width of the safety sub-region n Encoded value [from 0 to 16383] to specify the width of the sub-region on the screen One pixel wide region has value of 0" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_SIZE_1" acronym="DSS0_VP_SAFETY_SIZE_1" offset="0xF4" width="32" description="The register configures the size of the safety sub-region n Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SIZEY" width="14" begin="29" end="16" resetval="0x0" description="Height of the safety sub-region n Encoded value [from 0 to 16383] to specify the height of the sub-region on the screen One line height region has value of 0" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SIZEX" width="14" begin="13" end="0" resetval="0x0" description="Width of the safety sub-region n Encoded value [from 0 to 16383] to specify the width of the sub-region on the screen One pixel wide region has value of 0" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_SIZE_2" acronym="DSS0_VP_SAFETY_SIZE_2" offset="0xF8" width="32" description="The register configures the size of the safety sub-region n Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SIZEY" width="14" begin="29" end="16" resetval="0x0" description="Height of the safety sub-region n Encoded value [from 0 to 16383] to specify the height of the sub-region on the screen One line height region has value of 0" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SIZEX" width="14" begin="13" end="0" resetval="0x0" description="Width of the safety sub-region n Encoded value [from 0 to 16383] to specify the width of the sub-region on the screen One pixel wide region has value of 0" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_SIZE_3" acronym="DSS0_VP_SAFETY_SIZE_3" offset="0xFC" width="32" description="The register configures the size of the safety sub-region n Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SIZEY" width="14" begin="29" end="16" resetval="0x0" description="Height of the safety sub-region n Encoded value [from 0 to 16383] to specify the height of the sub-region on the screen One line height region has value of 0" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SIZEX" width="14" begin="13" end="0" resetval="0x0" description="Width of the safety sub-region n Encoded value [from 0 to 16383] to specify the width of the sub-region on the screen One pixel wide region has value of 0" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_SIZE_4" acronym="DSS0_VP_SAFETY_SIZE_4" offset="0x100" width="32" description="The register configures the size of the safety sub-region n Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SIZEY" width="14" begin="29" end="16" resetval="0x0" description="Height of the safety sub-region n Encoded value [from 0 to 16383] to specify the height of the sub-region on the screen One line height region has value of 0" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SIZEX" width="14" begin="13" end="0" resetval="0x0" description="Width of the safety sub-region n Encoded value [from 0 to 16383] to specify the width of the sub-region on the screen One pixel wide region has value of 0" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_SIZE_5" acronym="DSS0_VP_SAFETY_SIZE_5" offset="0x104" width="32" description="The register configures the size of the safety sub-region n Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SIZEY" width="14" begin="29" end="16" resetval="0x0" description="Height of the safety sub-region n Encoded value [from 0 to 16383] to specify the height of the sub-region on the screen One line height region has value of 0" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SIZEX" width="14" begin="13" end="0" resetval="0x0" description="Width of the safety sub-region n Encoded value [from 0 to 16383] to specify the width of the sub-region on the screen One pixel wide region has value of 0" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_SIZE_6" acronym="DSS0_VP_SAFETY_SIZE_6" offset="0x108" width="32" description="The register configures the size of the safety sub-region n Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SIZEY" width="14" begin="29" end="16" resetval="0x0" description="Height of the safety sub-region n Encoded value [from 0 to 16383] to specify the height of the sub-region on the screen One line height region has value of 0" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SIZEX" width="14" begin="13" end="0" resetval="0x0" description="Width of the safety sub-region n Encoded value [from 0 to 16383] to specify the width of the sub-region on the screen One pixel wide region has value of 0" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_SIZE_7" acronym="DSS0_VP_SAFETY_SIZE_7" offset="0x10C" width="32" description="The register configures the size of the safety sub-region n Shadow register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SIZEY" width="14" begin="29" end="16" resetval="0x0" description="Height of the safety sub-region n Encoded value [from 0 to 16383] to specify the height of the sub-region on the screen One line height region has value of 0" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SIZEX" width="14" begin="13" end="0" resetval="0x0" description="Width of the safety sub-region n Encoded value [from 0 to 16383] to specify the width of the sub-region on the screen One pixel wide region has value of 0" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_SAFETY_LFSR_SEED" acronym="DSS0_VP_SAFETY_LFSR_SEED" offset="0x110" width="32" description="The register configures the seed initial signature value of MISRs that are to be initialized with a user programmed initial value. Otherwise, the MISR is initialized with 0xFFFF_FFFF. Shadow register.">
+    <bitfield id="SEED" width="32" begin="31" end="0" resetval="0x0" description="The register configures the seed [initial signature value] of MISRs that are to be initialized with a user programmed initial value Otherwise, the MISR is initialized with 0xFFFF_FFFF Shadow register" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VP_GAMMA_TABLE_0" acronym="DSS0_VP_GAMMA_TABLE_0" offset="0x120" width="32" description="The register configures the gamma table on VP output.">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VP_GAMMA_TABLE_1" acronym="DSS0_VP_GAMMA_TABLE_1" offset="0x124" width="32" description="The register configures the gamma table on VP output.">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VP_GAMMA_TABLE_2" acronym="DSS0_VP_GAMMA_TABLE_2" offset="0x128" width="32" description="The register configures the gamma table on VP output.">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VP_GAMMA_TABLE_3" acronym="DSS0_VP_GAMMA_TABLE_3" offset="0x12C" width="32" description="The register configures the gamma table on VP output.">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VP_GAMMA_TABLE_4" acronym="DSS0_VP_GAMMA_TABLE_4" offset="0x130" width="32" description="The register configures the gamma table on VP output.">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VP_GAMMA_TABLE_5" acronym="DSS0_VP_GAMMA_TABLE_5" offset="0x134" width="32" description="The register configures the gamma table on VP output.">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VP_GAMMA_TABLE_6" acronym="DSS0_VP_GAMMA_TABLE_6" offset="0x138" width="32" description="The register configures the gamma table on VP output.">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VP_GAMMA_TABLE_7" acronym="DSS0_VP_GAMMA_TABLE_7" offset="0x13C" width="32" description="The register configures the gamma table on VP output.">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VP_GAMMA_TABLE_8" acronym="DSS0_VP_GAMMA_TABLE_8" offset="0x140" width="32" description="The register configures the gamma table on VP output.">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VP_GAMMA_TABLE_9" acronym="DSS0_VP_GAMMA_TABLE_9" offset="0x144" width="32" description="The register configures the gamma table on VP output.">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VP_GAMMA_TABLE_10" acronym="DSS0_VP_GAMMA_TABLE_10" offset="0x148" width="32" description="The register configures the gamma table on VP output.">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VP_GAMMA_TABLE_11" acronym="DSS0_VP_GAMMA_TABLE_11" offset="0x14C" width="32" description="The register configures the gamma table on VP output.">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VP_GAMMA_TABLE_12" acronym="DSS0_VP_GAMMA_TABLE_12" offset="0x150" width="32" description="The register configures the gamma table on VP output.">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VP_GAMMA_TABLE_13" acronym="DSS0_VP_GAMMA_TABLE_13" offset="0x154" width="32" description="The register configures the gamma table on VP output.">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VP_GAMMA_TABLE_14" acronym="DSS0_VP_GAMMA_TABLE_14" offset="0x158" width="32" description="The register configures the gamma table on VP output.">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VP_GAMMA_TABLE_15" acronym="DSS0_VP_GAMMA_TABLE_15" offset="0x15C" width="32" description="The register configures the gamma table on VP output.">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VP_SECURE" acronym="DSS0_VP_SECURE" offset="0x178" width="32" description="Security bit settings for the sub-module">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="SECURE" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+</module>

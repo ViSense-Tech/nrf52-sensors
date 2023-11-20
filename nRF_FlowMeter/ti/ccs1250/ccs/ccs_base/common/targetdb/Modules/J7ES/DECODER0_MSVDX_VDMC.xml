@@ -1,0 +1,142 @@
+<module name="DECODER0_MSVDX_VDMC" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="DECODER0_CR_VDMC_REFERENCE_CACHE_SIGNATURE" acronym="DECODER0_CR_VDMC_REFERENCE_CACHE_SIGNATURE" offset="0x0" width="32" description="">
+    <bitfield id="CR_VDMC_REFCACHE_SIG" width="32" begin="31" end="0" resetval="0x0" description="VDMC reference cache signature analysis output." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDMC_REFERENCE_CACHE_EFFICIENCY" acronym="DECODER0_CR_VDMC_REFERENCE_CACHE_EFFICIENCY" offset="0x4" width="32" description="">
+    <bitfield id="CR_VDMC_REFCACHE_EFFICIENCY" width="32" begin="31" end="0" resetval="0x0" description="VDMC reference cache efficiency." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDMC_2D_FILTER_PIPELINE_SIGNATURE" acronym="DECODER0_CR_VDMC_2D_FILTER_PIPELINE_SIGNATURE" offset="0x8" width="32" description="">
+    <bitfield id="CR_VDMC_FILT_SIG" width="32" begin="31" end="0" resetval="0x0" description="VDMC 2D filter pipeline signature analysis output." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDMC_PIXEL_RECONSTRUCTION_SIGNATURE" acronym="DECODER0_CR_VDMC_PIXEL_RECONSTRUCTION_SIGNATURE" offset="0xC" width="32" description="">
+    <bitfield id="CR_VDMC_RECON_SIG" width="32" begin="31" end="0" resetval="0x0" description="VDMC pixel reconstruction signature analysis output." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDMC_ERROR_STATUS" acronym="DECODER0_CR_VDMC_ERROR_STATUS" offset="0x10" width="32" description="">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_VDMC_SLICE_REALIGNMENT" width="1" begin="16" end="16" resetval="0x0" description="VDMC residual slice boundary re-aligned to command bus slice boundary" range="" rwaccess="R"/>
+    <bitfield id="CR_VDMC_SLICE_LATE_ERROR" width="1" begin="15" end="15" resetval="0x0" description="VDMC residual slice boundary flag not set when command bus indicated slice boundary" range="" rwaccess="R"/>
+    <bitfield id="CR_VDMC_SLICE_EARLY_ERROR" width="1" begin="14" end="14" resetval="0x0" description="VDMC residual slice boundary flag set when command bus indicated more residual data in slice" range="" rwaccess="R"/>
+    <bitfield id="CR_VDMC_MB_ALIGNMENT_ERROR" width="1" begin="13" end="13" resetval="0x0" description="VDMC residual interface macroblock boundary does not match expected residual macroblock boundary" range="" rwaccess="R"/>
+    <bitfield id="CR_VDMC_FILT_SYNC_ERROR" width="1" begin="12" end="12" resetval="0x0" description="VDMC 2D filter intra and inter paths out-of-sync" range="" rwaccess="R"/>
+    <bitfield id="CR_VDMC_READ_OVERFLOW" width="1" begin="11" end="11" resetval="0x0" description="VDMC reference cache read buffer overflow" range="" rwaccess="R"/>
+    <bitfield id="CR_VDMC_INTER_INTRA_ERROR" width="1" begin="10" end="10" resetval="0x0" description="VDMC intra and inter commands for the same block" range="" rwaccess="R"/>
+    <bitfield id="CR_VDMC_MBNO_SMALL_ERROR" width="1" begin="9" end="9" resetval="0x0" description="VDMC expected macroblock number from VEC is too small" range="" rwaccess="R"/>
+    <bitfield id="CR_VDMC_MBNO_LARGE_ERROR" width="1" begin="8" end="8" resetval="0x0" description="VDMC expected macroblock number from VEC is too large" range="" rwaccess="R"/>
+    <bitfield id="CR_VDMC_INTRAMV_ERROR" width="1" begin="7" end="7" resetval="0x0" description="VDMC motion vector with an intra block" range="" rwaccess="R"/>
+    <bitfield id="CR_VDMC_MVACC_ERROR" width="1" begin="6" end="6" resetval="0x0" description="VDMC 1/" range="" rwaccess="R"/>
+    <bitfield id="CR_VDMC_MVSIZE_ERROR" width="1" begin="5" end="5" resetval="0x0" description="VDMC smaller motion vector than 8x8 in non H.264 streams" range="" rwaccess="R"/>
+    <bitfield id="CR_VDMC_NOOFMV_FEW" width="1" begin="4" end="4" resetval="0x0" description="VDMC too few motion vectors per block" range="" rwaccess="R"/>
+    <bitfield id="CR_VDMC_NOOFMV_MANY" width="1" begin="3" end="3" resetval="0x0" description="VDMC too many motion vectors per block" range="" rwaccess="R"/>
+    <bitfield id="CR_VDMC_NOOFBLK_FEW" width="1" begin="2" end="2" resetval="0x0" description="VDMC too few block predictions per block" range="" rwaccess="R"/>
+    <bitfield id="CR_VDMC_NOOFBLK_MANY" width="1" begin="1" end="1" resetval="0x0" description="VDMC too many block predictions per block" range="" rwaccess="R"/>
+    <bitfield id="CR_VDMC_MBNO_PICTSIZE_MISMATCH" width="1" begin="0" end="0" resetval="0x0" description="VDMC macroblock number and picture size mismatch" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDMC_ENAB_INTERRUPT" acronym="DECODER0_CR_VDMC_ENAB_INTERRUPT" offset="0x14" width="32" description="">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_ENAB_SLICE_REALIGNMENT" width="1" begin="16" end="16" resetval="0x0" description="Write '1' to enable interrupt for residual slice boundary re-aligned" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_ENAB_SLICE_LATE_ERROR" width="1" begin="15" end="15" resetval="0x0" description="Write '1' to enable interrupt for residual slice boundary late flag" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_ENAB_SLICE_EARLY_ERROR" width="1" begin="14" end="14" resetval="0x0" description="Write '1' to enable interrupt for residual slice boundary early flag" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_ENAB_MB_ALIGN_ERROR" width="1" begin="13" end="13" resetval="0x0" description="Write '1' to enable interrupt for residual macroblock miss-alignment flag" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_ENAB_FILT_SYNC_ERROR" width="1" begin="12" end="12" resetval="0x0" description="Write '1' to enable interrupt for 2D filter intra and inter paths out-of-sync" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_ENAB_READ_OVERFLOW" width="1" begin="11" end="11" resetval="0x0" description="Write '1' to enable interrupt for reference cache read buffer overflow" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_ENAB_INTER_INTRA_ERROR" width="1" begin="10" end="10" resetval="0x0" description="Write '1' to enable interrupt for intra and inter commands for the same block" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_ENAB_MBNO_SMALL_ERROR" width="1" begin="9" end="9" resetval="0x0" description="Write '1' to enable interrupt for expected macroblock number from VEC is too small" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_ENAB_MBNO_LARGE_ERROR" width="1" begin="8" end="8" resetval="0x0" description="Write '1' to enable interrupt for expected macroblock number from VEC is too large" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_ENAB_INTRAMV_ERROR" width="1" begin="7" end="7" resetval="0x0" description="Write '1' to enable interrupt for motion vector with an intra block" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_ENAB_MVACC_ERROR" width="1" begin="6" end="6" resetval="0x0" description="Write '1' to enable interrupt for 1/" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_ENAB_MVSIZE_ERROR" width="1" begin="5" end="5" resetval="0x0" description="Write '1' to enable interrupt for smaller motion vector than 8x8 in non H.264 streams" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_ENAB_NOOFMV_FEW" width="1" begin="4" end="4" resetval="0x0" description="Write '1' to enable interrupt for too few motion vectors per block" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_ENAB_NOOFMV_MANY" width="1" begin="3" end="3" resetval="0x0" description="Write '1' to enable interrupt for too many motion vectors per block" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_EANB_NOOFBLK_FEW" width="1" begin="2" end="2" resetval="0x0" description="Write '1' to enable interrupt for too few block predictions per block" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_ENAB_NOOFBLK_MANY" width="1" begin="1" end="1" resetval="0x0" description="Write '1' to enable interrupt for too many block predictions per block" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_ENAB_MBNO_PICTSIZE_MISMATCH" width="1" begin="0" end="0" resetval="0x0" description="Write '1' to enable interrupt for macroblock number and picture size mismatch" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VDMC_CLR_STATUS" acronym="DECODER0_CR_VDMC_CLR_STATUS" offset="0x18" width="32" description="">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="CR_VDMC_CLR_SLICE_REALIGNMENT" width="1" begin="16" end="16" resetval="0x0" description="Write '1' to clear status for residual slice boundary re-aligned" range="" rwaccess="W"/>
+    <bitfield id="CR_VDMC_CLR_SLICE_LATE_ERROR" width="1" begin="15" end="15" resetval="0x0" description="Write '1' to clear status for residual slice boundary late flag" range="" rwaccess="W"/>
+    <bitfield id="CR_VDMC_CLR_SLICE_EARLY_ERROR" width="1" begin="14" end="14" resetval="0x0" description="Write '1' to clear status for residual slice boundary early flag" range="" rwaccess="W"/>
+    <bitfield id="CR_VDMC_CLR_MB_ALIGN_ERROR" width="1" begin="13" end="13" resetval="0x0" description="Write '1' to clear status for residual macroblock miss-alignment flag" range="" rwaccess="W"/>
+    <bitfield id="CR_VDMC_CLR_FILT_SYNC_ERROR" width="1" begin="12" end="12" resetval="0x0" description="Write '1' to clear status for 2D filter intra and inter paths out-of-sync" range="" rwaccess="W"/>
+    <bitfield id="CR_VDMC_CLR_READ_OVERFLOW" width="1" begin="11" end="11" resetval="0x0" description="Write '1' to clear status for reference cache read buffer overflow" range="" rwaccess="W"/>
+    <bitfield id="CR_VDMC_CLR_INTER_INTRA_ERROR" width="1" begin="10" end="10" resetval="0x0" description="Write '1' to clear status for intra and inter commands for the same block" range="" rwaccess="W"/>
+    <bitfield id="CR_VDMC_CLR_MBNO_SMALL_ERROR" width="1" begin="9" end="9" resetval="0x0" description="Write '1' to clear status for expected macroblock number from VEC is too small" range="" rwaccess="W"/>
+    <bitfield id="CR_VDMC_CLR_MBNO_LARGE_ERROR" width="1" begin="8" end="8" resetval="0x0" description="Write '1' to clear status for expected macroblock number from VEC is too large" range="" rwaccess="W"/>
+    <bitfield id="CR_VDMC_CLR_INTRAMV_ERROR" width="1" begin="7" end="7" resetval="0x0" description="Write '1' to clear status for motion vector with an Intra block" range="" rwaccess="W"/>
+    <bitfield id="CR_VDMC_CLR_MVACC_ERROR" width="1" begin="6" end="6" resetval="0x0" description="Write '1' to clear status for 1/" range="" rwaccess="W"/>
+    <bitfield id="CR_VDMC_CLR_MVSIZE_ERROR" width="1" begin="5" end="5" resetval="0x0" description="Write '1' to clear status for smaller motion vector than 8x8 in non H.264 streams" range="" rwaccess="W"/>
+    <bitfield id="CR_VDMC_CLR_NOOFMV_FEW" width="1" begin="4" end="4" resetval="0x0" description="Write '1' to clear status for too few motion vectors per block" range="" rwaccess="W"/>
+    <bitfield id="CR_VDMC_CLR_NOOFMV_MANY" width="1" begin="3" end="3" resetval="0x0" description="Write '1' to clear status for too many motion vectors per block" range="" rwaccess="W"/>
+    <bitfield id="CR_VDMC_CLR_NOOFBLK_FEW" width="1" begin="2" end="2" resetval="0x0" description="Write '1' to clear status for too few block predictions per block" range="" rwaccess="W"/>
+    <bitfield id="CR_VDMC_CLR_NOOFBLK_MANY" width="1" begin="1" end="1" resetval="0x0" description="Write '1' to clear status for too many block predictions per block" range="" rwaccess="W"/>
+    <bitfield id="CR_VDMC_CLR_MBNO_PICTSIZE_MISMATCH" width="1" begin="0" end="0" resetval="0x0" description="Write '1' to clear status for macroblock number and picture size mismatch" range="" rwaccess="W"/>
+  </register>
+  <register id="DECODER0_CR_VDMC_2D_FILTER_PIPELINE_DIRECT_INSERT_DATA" acronym="DECODER0_CR_VDMC_2D_FILTER_PIPELINE_DIRECT_INSERT_DATA" offset="0x20" width="32" description="">
+    <bitfield id="CR_VDMC_FILT_DIRECT_DATA" width="32" begin="31" end="0" resetval="0x0" description="VDMC 2D filter pipeline direct insert data." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VDMC_2D_FILTER_PIPELINE_DIRECT_INSERT_CONTROL" acronym="DECODER0_CR_VDMC_2D_FILTER_PIPELINE_DIRECT_INSERT_CONTROL" offset="0x24" width="32" description="">
+    <bitfield id="CR_VDMC_FILT_DIRECT_CONTROL" width="32" begin="31" end="0" resetval="0x0" description="VDMC 2D filter pipeline direct insert control." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VDMC_PIXEL_RECONSTRUCTION_DIRECT_INSERT_DATA" acronym="DECODER0_CR_VDMC_PIXEL_RECONSTRUCTION_DIRECT_INSERT_DATA" offset="0x28" width="32" description="">
+    <bitfield id="CR_VDMC_RECON_DIRECT_DATA" width="32" begin="31" end="0" resetval="0x0" description="VDMC pixel reconstruction direct insert data." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VDMC_PIXEL_RECONSTRUCTION_DIRECT_INSERT_CONTROL" acronym="DECODER0_CR_VDMC_PIXEL_RECONSTRUCTION_DIRECT_INSERT_CONTROL" offset="0x2C" width="32" description="">
+    <bitfield id="RESERVED" width="17" begin="31" end="15" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_RECON_DIRECT_CONTROL" width="15" begin="14" end="0" resetval="0x0" description="VDMC pixel reconstruction direct insert control." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VDMC_RESIDUAL_DIRECT_INSERT_DATA" acronym="DECODER0_CR_VDMC_RESIDUAL_DIRECT_INSERT_DATA" offset="0x30" width="32" description="">
+    <bitfield id="CR_VDMC_RESIDUAL_DIRECT_DATA" width="32" begin="31" end="0" resetval="0x0" description="VDMC residual direct insert data." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VDMC_RESIDUAL_DIRECT_INSERT_CONTROL" acronym="DECODER0_CR_VDMC_RESIDUAL_DIRECT_INSERT_CONTROL" offset="0x34" width="32" description="">
+    <bitfield id="CR_VDMC_HD_SUPPORTED" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="28" begin="30" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_ADD_128_INTRA_IN_INTER" width="1" begin="2" end="2" resetval="0x0" description="In the case of intra prediction tiles within inter MB [i.e." range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_RESIDUAL_DISABLE_MB_CHECK" width="1" begin="1" end="1" resetval="0x0" description="VDMC residual disable macroblock alignment check." range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_RESIDUAL_DIRECT_CONTROL" width="1" begin="0" end="0" resetval="0x0" description="VDMC residual direct insert control." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VDMC_LUMA_ERROR_BASE_ADDR" acronym="DECODER0_CR_VDMC_LUMA_ERROR_BASE_ADDR" offset="0x40" width="32" description="">
+    <bitfield id="CR_VDMC_LUMA_ERROR_BASE" width="26" begin="31" end="6" resetval="0x0" description="VDMC luma base addr" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="5" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VDMC_CHROMA_ERROR_BASE_ADDR" acronym="DECODER0_CR_VDMC_CHROMA_ERROR_BASE_ADDR" offset="0x44" width="32" description="">
+    <bitfield id="CR_VDMC_CHROMA_ERROR_BASE" width="26" begin="31" end="6" resetval="0x0" description="VDMC chroma base addr" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="5" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VDMC_MACROBLOCK_NUMBER" acronym="DECODER0_CR_VDMC_MACROBLOCK_NUMBER" offset="0x48" width="32" description="">
+    <bitfield id="CR_VDMC_MACROBLOCK_Y_OFFSET" width="16" begin="31" end="16" resetval="0x0" description="VDMC vertical offset of macroblock at input to pixel reconstruction unit" range="" rwaccess="R"/>
+    <bitfield id="CR_VDMC_MACROBLOCK_X_OFFSET" width="16" begin="15" end="0" resetval="0x0" description="VDMC horizontal offset of macroblock at input to pixel reconstruction unit" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDMC_ERROR_FLUSH_CTRL" acronym="DECODER0_CR_VDMC_ERROR_FLUSH_CTRL" offset="0x4C" width="32" description="">
+    <bitfield id="CR_VDMC_BURST4_DISABLE_JPEG" width="1" begin="31" end="31" resetval="0x0" description="when set this bit will disable burst4 accesses for jpeg cache writes" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_BURST4_DISABLE_MBAFF" width="1" begin="30" end="30" resetval="0x0" description="when set this bit will disable burst4 accesses for intra mbaff cache reads" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_BURST4_DISABLE_INTRA" width="1" begin="29" end="29" resetval="0x0" description="when set this bit will disable burst4 accesses for intra cache reads" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_BURST4_DISABLE_INTER" width="1" begin="28" end="28" resetval="0x0" description="when set this bit will disable burst4 accesses for inter cache reads" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_FORCE_INTRA_WRITE" width="1" begin="27" end="27" resetval="0x0" description="when set this bit will force all above intra data to be written to the intra buffer" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_MINIMUM_REQUEST" width="1" begin="26" end="26" resetval="0x0" description="when set this bit will only request the data it requires" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="23" begin="25" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_INTER_FILL" width="1" begin="2" end="2" resetval="0x0" description="If the error detected flag is set, and this flag is 1, zero motion P macroblocks relative to LUMA/CHROMA_ERROR_BASE_ADDR will be output." range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_SLICE_FLUSH_FLAG" width="1" begin="1" end="1" resetval="0x0" description="Slice flush flag set to indicate VDMC input should be flushed to next slice boundary [no zero motion vector output blocks will be generated]." range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_ERROR_DETECTED_FLAG" width="1" begin="0" end="0" resetval="0x0" description="Error detected flag set to indicate VDMC input should be flushed to next slice boundary, and zero motion vector P macroblocks should be output." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VDMC_MCU_SIGNATURE" acronym="DECODER0_CR_VDMC_MCU_SIGNATURE" offset="0x50" width="32" description="">
+    <bitfield id="CR_VDMC_MCU_SIG" width="32" begin="31" end="0" resetval="0x0" description="VDMC MCU signature analysis output." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDMC_RES_BUFFER_WRITES" acronym="DECODER0_CR_VDMC_RES_BUFFER_WRITES" offset="0x54" width="32" description="">
+    <bitfield id="CR_VDMC_RES_WRITES" width="32" begin="31" end="0" resetval="0x0" description="VDMC residual buffer write space." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDMC_REFERENCE_CACHE_MEM_WADDR_SIGNATURE" acronym="DECODER0_CR_VDMC_REFERENCE_CACHE_MEM_WADDR_SIGNATURE" offset="0x58" width="32" description="">
+    <bitfield id="CR_VDMC_REFCACHE_MEM_WADDR_SIG" width="32" begin="31" end="0" resetval="0x0" description="VDMC reference cache memory write address signature analysis output." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDMC_REFERENCE_CACHE_MEM_RADDR_SIGNATURE" acronym="DECODER0_CR_VDMC_REFERENCE_CACHE_MEM_RADDR_SIGNATURE" offset="0x5C" width="32" description="">
+    <bitfield id="CR_VDMC_REFCACHE_MEM_RADDR_SIG" width="32" begin="31" end="0" resetval="0x0" description="VDMC reference cache memory read address signature analysis output." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDMC_REFERENCE_CACHE_MEM_WDATA_SIGNATURE" acronym="DECODER0_CR_VDMC_REFERENCE_CACHE_MEM_WDATA_SIGNATURE" offset="0x60" width="32" description="">
+    <bitfield id="CR_VDMC_REFCACHE_MEM_WDATA_SIG" width="32" begin="31" end="0" resetval="0x0" description="VDMC reference cache memory write data signature analysis output." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDMC_REFERENCE_CACHE_MEM_RDATA_SIGNATURE" acronym="DECODER0_CR_VDMC_REFERENCE_CACHE_MEM_RDATA_SIGNATURE" offset="0x64" width="32" description="">
+    <bitfield id="CR_VDMC_REFCACHE_MEM_RDATA_SIG" width="32" begin="31" end="0" resetval="0x0" description="VDMC reference cache memory read data signature analysis output." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDMC_REFERENCE_CACHE_MEM_PRELOAD_SIGNATURE" acronym="DECODER0_CR_VDMC_REFERENCE_CACHE_MEM_PRELOAD_SIGNATURE" offset="0x68" width="32" description="">
+    <bitfield id="CR_VDMC_REFCACHE_MEM_PRELOAD_SIG" width="32" begin="31" end="0" resetval="0x0" description="VDMC reference cache memory preload data signature analysis output." range="" rwaccess="R"/>
+  </register>
+</module>

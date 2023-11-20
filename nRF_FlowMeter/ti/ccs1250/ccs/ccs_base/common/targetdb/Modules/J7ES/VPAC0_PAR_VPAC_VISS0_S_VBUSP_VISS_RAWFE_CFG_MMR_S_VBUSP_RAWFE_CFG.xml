@@ -1,0 +1,560 @@
+<module name="VPAC0_PAR_VPAC_VISS0_S_VBUSP_VISS_RAWFE_CFG_MMR_S_VBUSP_RAWFE_CFG" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="VISS_RAWFE_IMAGE_CFG" acronym="VISS_RAWFE_IMAGE_CFG" offset="0x0" width="32" description="Input image width and height.">
+    <bitfield id="RSVD_1" width="3" begin="31" end="29" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="HEIGHT" width="13" begin="28" end="16" resetval="0x0" description="image height" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="3" begin="15" end="13" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WIDTH" width="13" begin="12" end="0" resetval="0x0" description="image width" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_SHADOW_CFG" acronym="VISS_RAWFE_SHADOW_CFG" offset="0x4" width="32" description="shadow configuration">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LUT3_SHDW_EN" width="1" begin="0" end="0" resetval="0x0" description="use LUT2 ram as LUT table for LUT3 processing" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL1_MASK_SH" acronym="VISS_RAWFE_PWL1_MASK_SH" offset="0x8" width="32" description="Long frame PWL mask and shift values">
+    <bitfield id="RSVD" width="12" begin="31" end="20" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="SHIFT" width="4" begin="19" end="16" resetval="0x0" description="number of right shift" range="" rwaccess="RW"/>
+    <bitfield id="MASK" width="16" begin="15" end="0" resetval="0x0" description="mask bit pattern" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL1_EN" acronym="VISS_RAWFE_PWL1_EN" offset="0xC" width="32" description="Long frame PWL enable">
+    <bitfield id="RSVD" width="31" begin="31" end="1" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL1_THRX12" acronym="VISS_RAWFE_PWL1_THRX12" offset="0x10" width="32" description="Long frame PWL threshold X1 and X2 - Unsigned">
+    <bitfield id="THR_X2" width="16" begin="31" end="16" resetval="0x0" description="threshold X2" range="" rwaccess="RW"/>
+    <bitfield id="THR_X1" width="16" begin="15" end="0" resetval="0x0" description="threshold X1" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL1_THRX3" acronym="VISS_RAWFE_PWL1_THRX3" offset="0x14" width="32" description="Long frame PWL threshold X3 - Unsigned">
+    <bitfield id="RSVD" width="16" begin="31" end="16" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="THR_X3" width="16" begin="15" end="0" resetval="0x0" description="threshold X3" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL1_THRY1" acronym="VISS_RAWFE_PWL1_THRY1" offset="0x18" width="32" description="Long frame PWL threshold Y1 - Unsigned">
+    <bitfield id="RSVD" width="8" begin="31" end="24" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="THR_Y1" width="24" begin="23" end="0" resetval="0x0" description="threshold Y1" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL1_THRY2" acronym="VISS_RAWFE_PWL1_THRY2" offset="0x1C" width="32" description="Long frame PWL threshold Y2 - Unsigned">
+    <bitfield id="RSVD" width="8" begin="31" end="24" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="THR_Y2" width="24" begin="23" end="0" resetval="0x0" description="threshold Y2" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL1_THRY3" acronym="VISS_RAWFE_PWL1_THRY3" offset="0x20" width="32" description="Long frame PWL threshold Y3 - Unsigned">
+    <bitfield id="RSVD" width="8" begin="31" end="24" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="THR_Y3" width="24" begin="23" end="0" resetval="0x0" description="threshold Y3" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL1_SLP12" acronym="VISS_RAWFE_PWL1_SLP12" offset="0x24" width="32" description="Long frame PWL slope 1 and 2 - Unsigned">
+    <bitfield id="SLOPE_2" width="16" begin="31" end="16" resetval="0x0" description="slope 2" range="" rwaccess="RW"/>
+    <bitfield id="SLOPE_1" width="16" begin="15" end="0" resetval="0x0" description="slope 1" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL1_SLP34" acronym="VISS_RAWFE_PWL1_SLP34" offset="0x28" width="32" description="Long frame PWL slope 3 and 4 - Unsigned">
+    <bitfield id="SLOPE_4" width="16" begin="31" end="16" resetval="0x0" description="slope 4" range="" rwaccess="RW"/>
+    <bitfield id="SLOPE_3" width="16" begin="15" end="0" resetval="0x0" description="slope 3" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL1_SLPSH_CLIP" acronym="VISS_RAWFE_PWL1_SLPSH_CLIP" offset="0x2C" width="32" description="Long frame PWL slope shift and clip">
+    <bitfield id="CLIP" width="24" begin="31" end="8" resetval="0x0" description="clip value" range="" rwaccess="RW"/>
+    <bitfield id="SLOPE_SHIFT" width="8" begin="7" end="0" resetval="0x0" description="shift value for slope, must not exceed decimal 33." range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL1_OFF1" acronym="VISS_RAWFE_PWL1_OFF1" offset="0x30" width="32" description="Long frame Offset 1">
+    <bitfield id="RSVD" width="8" begin="31" end="24" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="OFST00" width="24" begin="23" end="0" resetval="0x0" description="S24, Offset at pixel 00" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL1_OFF2" acronym="VISS_RAWFE_PWL1_OFF2" offset="0x34" width="32" description="Long frame Offset 2">
+    <bitfield id="RSVD" width="8" begin="31" end="24" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="OFST01" width="24" begin="23" end="0" resetval="0x0" description="S24, Offset at pixel 01" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL1_OFF3" acronym="VISS_RAWFE_PWL1_OFF3" offset="0x38" width="32" description="Long frame Offset 3">
+    <bitfield id="RSVD" width="8" begin="31" end="24" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="OFST10" width="24" begin="23" end="0" resetval="0x0" description="S24, Offset at pixel 10" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL1_OFF4" acronym="VISS_RAWFE_PWL1_OFF4" offset="0x3C" width="32" description="Long frame Offset 4">
+    <bitfield id="RSVD" width="8" begin="31" end="24" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="OFST11" width="24" begin="23" end="0" resetval="0x0" description="S24, Offset at pixel 11" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL1_WB_GAIN12" acronym="VISS_RAWFE_PWL1_WB_GAIN12" offset="0x40" width="32" description="Long Frame white balance gain 1 and 2">
+    <bitfield id="RSVD_1" width="3" begin="31" end="29" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB_GAIN01" width="13" begin="28" end="16" resetval="0x0" description="U13Q9, WB gain at pixel 01" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="3" begin="15" end="13" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB_GAIN00" width="13" begin="12" end="0" resetval="0x0" description="U13Q9, WB gain at pixel 00" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL1_WB_GAIN34" acronym="VISS_RAWFE_PWL1_WB_GAIN34" offset="0x44" width="32" description="Long Frame white balance gain 3 and 4">
+    <bitfield id="RSVD_1" width="3" begin="31" end="29" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB_GAIN11" width="13" begin="28" end="16" resetval="0x0" description="U13Q9, WB gain at pixel 11" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="3" begin="15" end="13" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB_GAIN10" width="13" begin="12" end="0" resetval="0x0" description="U13Q9, WB gain at pixel 10" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL1_LUT" acronym="VISS_RAWFE_PWL1_LUT" offset="0x48" width="32" description="Long frame PWL LUT configuration">
+    <bitfield id="RSVD" width="26" begin="31" end="6" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="LUT_BITS" width="5" begin="5" end="1" resetval="0x0" description="LUT input bit depth, up to 24" range="" rwaccess="RW"/>
+    <bitfield id="LUT_EN" width="1" begin="0" end="0" resetval="0x0" description="enable LUT based compression" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL1_LUTCLIP" acronym="VISS_RAWFE_PWL1_LUTCLIP" offset="0x4C" width="32" description="Long frame PWL LUT output clip value">
+    <bitfield id="RSVD" width="16" begin="31" end="16" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="LUTCLIP" width="16" begin="15" end="0" resetval="0x0" description="LUT clip value" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL2_MASK_SH" acronym="VISS_RAWFE_PWL2_MASK_SH" offset="0x50" width="32" description="Short frame PWL mask and shift values">
+    <bitfield id="RSVD" width="12" begin="31" end="20" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="SHIFT" width="4" begin="19" end="16" resetval="0x0" description="number of right shift" range="" rwaccess="RW"/>
+    <bitfield id="MASK" width="16" begin="15" end="0" resetval="0x0" description="mask bit pattern" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL2_EN" acronym="VISS_RAWFE_PWL2_EN" offset="0x54" width="32" description="Short frame PWL enable">
+    <bitfield id="RSVD" width="31" begin="31" end="1" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL2_THRX12" acronym="VISS_RAWFE_PWL2_THRX12" offset="0x58" width="32" description="Short frame PWL threshold X1 and X2 - Unsigned">
+    <bitfield id="THR_X2" width="16" begin="31" end="16" resetval="0x0" description="threshold X2" range="" rwaccess="RW"/>
+    <bitfield id="THR_X1" width="16" begin="15" end="0" resetval="0x0" description="threshold X1" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL2_THRX3" acronym="VISS_RAWFE_PWL2_THRX3" offset="0x5C" width="32" description="Short frame PWL threshold X3 - Unsigned">
+    <bitfield id="RSVD" width="16" begin="31" end="16" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="THR_X3" width="16" begin="15" end="0" resetval="0x0" description="threshold X3" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL2_THRY1" acronym="VISS_RAWFE_PWL2_THRY1" offset="0x60" width="32" description="Short frame PWL threshold Y1 - Unsigned">
+    <bitfield id="RSVD" width="8" begin="31" end="24" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="THR_Y1" width="24" begin="23" end="0" resetval="0x0" description="threshold Y1" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL2_THRY2" acronym="VISS_RAWFE_PWL2_THRY2" offset="0x64" width="32" description="Short frame PWL threshold Y2 - Unsigned">
+    <bitfield id="RSVD" width="8" begin="31" end="24" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="THR_Y2" width="24" begin="23" end="0" resetval="0x0" description="threshold Y2" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL2_THRY3" acronym="VISS_RAWFE_PWL2_THRY3" offset="0x68" width="32" description="Short frame PWL threshold Y3 - Unsigned">
+    <bitfield id="RSVD" width="8" begin="31" end="24" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="THR_Y3" width="24" begin="23" end="0" resetval="0x0" description="threshold Y3" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL2_SLP12" acronym="VISS_RAWFE_PWL2_SLP12" offset="0x6C" width="32" description="Short frame PWL slope 1 and 2 - Unsigned">
+    <bitfield id="SLOPE_2" width="16" begin="31" end="16" resetval="0x0" description="slope 2" range="" rwaccess="RW"/>
+    <bitfield id="SLOPE_1" width="16" begin="15" end="0" resetval="0x0" description="slope 1" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL2_SLP34" acronym="VISS_RAWFE_PWL2_SLP34" offset="0x70" width="32" description="Short frame PWL slope 3 and 4 - Unsigned">
+    <bitfield id="SLOPE_4" width="16" begin="31" end="16" resetval="0x0" description="slope 4" range="" rwaccess="RW"/>
+    <bitfield id="SLOPE_3" width="16" begin="15" end="0" resetval="0x0" description="slope 3" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL2_SLPSH_CLIP" acronym="VISS_RAWFE_PWL2_SLPSH_CLIP" offset="0x74" width="32" description="Short frame PWL slope shift and clip">
+    <bitfield id="CLIP" width="24" begin="31" end="8" resetval="0x0" description="clip value" range="" rwaccess="RW"/>
+    <bitfield id="SLOPE_SHIFT" width="8" begin="7" end="0" resetval="0x0" description="shift value for slope, must not exceed decimal 33" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL2_LUT" acronym="VISS_RAWFE_PWL2_LUT" offset="0x78" width="32" description="Short frame PWL LUT configuration">
+    <bitfield id="RSVD" width="26" begin="31" end="6" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="LUT_BITS" width="5" begin="5" end="1" resetval="0x0" description="LUT input bit depth, up to 24" range="" rwaccess="RW"/>
+    <bitfield id="LUT_EN" width="1" begin="0" end="0" resetval="0x0" description="enable LUT based compression" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL2_LUTCLIP" acronym="VISS_RAWFE_PWL2_LUTCLIP" offset="0x7C" width="32" description="Short frame PWL LUT output clip value">
+    <bitfield id="RSVD" width="16" begin="31" end="16" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="LUTCLIP" width="16" begin="15" end="0" resetval="0x0" description="LUT clip value" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL2_OFF1" acronym="VISS_RAWFE_PWL2_OFF1" offset="0x80" width="32" description="Short frame WB Offset 1">
+    <bitfield id="RSVD" width="8" begin="31" end="24" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="OFST00" width="24" begin="23" end="0" resetval="0x0" description="S24, WB Offset at pixel 00" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL2_OFF2" acronym="VISS_RAWFE_PWL2_OFF2" offset="0x84" width="32" description="Short frame Offset 2">
+    <bitfield id="RSVD" width="8" begin="31" end="24" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="OFST01" width="24" begin="23" end="0" resetval="0x0" description="S24, Offset at pixel 01" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL2_OFF3" acronym="VISS_RAWFE_PWL2_OFF3" offset="0x88" width="32" description="Short frame Offset 3">
+    <bitfield id="RSVD" width="8" begin="31" end="24" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="OFST10" width="24" begin="23" end="0" resetval="0x0" description="S24, Offset at pixel 10" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL2_OFF4" acronym="VISS_RAWFE_PWL2_OFF4" offset="0x8C" width="32" description="Short frame Offset 4">
+    <bitfield id="RSVD" width="8" begin="31" end="24" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="OFST11" width="24" begin="23" end="0" resetval="0x0" description="S24, Offset at pixel 11" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL2_WB_GAIN12" acronym="VISS_RAWFE_PWL2_WB_GAIN12" offset="0x90" width="32" description="Short Frame white balance gain 1 and 2">
+    <bitfield id="RSVD_1" width="3" begin="31" end="29" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB_GAIN01" width="13" begin="28" end="16" resetval="0x0" description="U13Q9, WB gain at pixel 01" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="3" begin="15" end="13" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB_GAIN00" width="13" begin="12" end="0" resetval="0x0" description="U13Q9, WB gain at pixel 00" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL2_WB_GAIN34" acronym="VISS_RAWFE_PWL2_WB_GAIN34" offset="0x94" width="32" description="Short Frame white balance gain 3 and 4">
+    <bitfield id="RSVD_1" width="3" begin="31" end="29" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB_GAIN11" width="13" begin="28" end="16" resetval="0x0" description="U13Q9, WB gain at pixel 11" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="3" begin="15" end="13" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB_GAIN10" width="13" begin="12" end="0" resetval="0x0" description="U13Q9, WB gain at pixel 10" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL3_MASK_SH" acronym="VISS_RAWFE_PWL3_MASK_SH" offset="0x98" width="32" description="Very short frame PWL mask and shift values">
+    <bitfield id="RSVD" width="12" begin="31" end="20" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="SHIFT" width="4" begin="19" end="16" resetval="0x0" description="number of right shift" range="" rwaccess="RW"/>
+    <bitfield id="MASK" width="16" begin="15" end="0" resetval="0x0" description="mask bit pattern" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL3_EN" acronym="VISS_RAWFE_PWL3_EN" offset="0x9C" width="32" description="Very short frame PWL enable">
+    <bitfield id="RSVD" width="31" begin="31" end="1" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL3_THRX12" acronym="VISS_RAWFE_PWL3_THRX12" offset="0xA0" width="32" description="Very short frame PWL threshold X1 and X2 - Unsigned">
+    <bitfield id="THR_X2" width="16" begin="31" end="16" resetval="0x0" description="threshold X2" range="" rwaccess="RW"/>
+    <bitfield id="THR_X1" width="16" begin="15" end="0" resetval="0x0" description="threshold X1" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL3_THRX3" acronym="VISS_RAWFE_PWL3_THRX3" offset="0xA4" width="32" description="Very short frame PWL threshold X3 - Unsigned">
+    <bitfield id="RSVD" width="16" begin="31" end="16" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="THR_X3" width="16" begin="15" end="0" resetval="0x0" description="threshold X3" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL3_THRY1" acronym="VISS_RAWFE_PWL3_THRY1" offset="0xA8" width="32" description="Very short frame PWL threshold Y1 - Unsigned">
+    <bitfield id="RSVD" width="8" begin="31" end="24" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="THR_Y1" width="24" begin="23" end="0" resetval="0x0" description="threshold Y1" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL3_THRY2" acronym="VISS_RAWFE_PWL3_THRY2" offset="0xAC" width="32" description="Very short frame PWL threshold Y2 - Unsigned">
+    <bitfield id="RSVD" width="8" begin="31" end="24" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="THR_Y2" width="24" begin="23" end="0" resetval="0x0" description="threshold Y2" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL3_THRY3" acronym="VISS_RAWFE_PWL3_THRY3" offset="0xB0" width="32" description="Very short frame PWL threshold Y3 - Unsigned">
+    <bitfield id="RSVD" width="8" begin="31" end="24" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="THR_Y3" width="24" begin="23" end="0" resetval="0x0" description="threshold Y3" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL3_SLP12" acronym="VISS_RAWFE_PWL3_SLP12" offset="0xB4" width="32" description="Very short frame PWL slope 1 and 2 - Unsigned">
+    <bitfield id="SLOPE_2" width="16" begin="31" end="16" resetval="0x0" description="slope 2" range="" rwaccess="RW"/>
+    <bitfield id="SLOPE_1" width="16" begin="15" end="0" resetval="0x0" description="slope 1" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL3_SLP34" acronym="VISS_RAWFE_PWL3_SLP34" offset="0xB8" width="32" description="Very short frame PWL slope 3 and 4 - Unsigned">
+    <bitfield id="SLOPE_4" width="16" begin="31" end="16" resetval="0x0" description="slope 4" range="" rwaccess="RW"/>
+    <bitfield id="SLOPE_3" width="16" begin="15" end="0" resetval="0x0" description="slope 3" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL3_SLPSH_CLIP" acronym="VISS_RAWFE_PWL3_SLPSH_CLIP" offset="0xBC" width="32" description="Very short frame PWL slope shift and clip">
+    <bitfield id="CLIP" width="24" begin="31" end="8" resetval="0x0" description="clip value" range="" rwaccess="RW"/>
+    <bitfield id="SLOPE_SHIFT" width="8" begin="7" end="0" resetval="0x0" description="shift value for slope, must not exceed decimal 33" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL3_LUT" acronym="VISS_RAWFE_PWL3_LUT" offset="0xC0" width="32" description="Very short frame PWL LUT configuration">
+    <bitfield id="RSVD" width="26" begin="31" end="6" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="LUT_BITS" width="5" begin="5" end="1" resetval="0x0" description="LUT input bit depth, up to 24" range="" rwaccess="RW"/>
+    <bitfield id="LUT_EN" width="1" begin="0" end="0" resetval="0x0" description="enable LUT based compression" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL3_LUTCLIP" acronym="VISS_RAWFE_PWL3_LUTCLIP" offset="0xC4" width="32" description="Very short frame PWL LUT output clip value">
+    <bitfield id="RSVD" width="16" begin="31" end="16" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="LUTCLIP" width="16" begin="15" end="0" resetval="0x0" description="LUT clip value" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL3_OFF1" acronym="VISS_RAWFE_PWL3_OFF1" offset="0xC8" width="32" description="Very Short frame Offset 1">
+    <bitfield id="RSVD" width="8" begin="31" end="24" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="OFST00" width="24" begin="23" end="0" resetval="0x0" description="S24, Offset at pixel 00" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL3_OFF2" acronym="VISS_RAWFE_PWL3_OFF2" offset="0xCC" width="32" description="Very Short frame Offset 2">
+    <bitfield id="RSVD" width="8" begin="31" end="24" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="OFST01" width="24" begin="23" end="0" resetval="0x0" description="S24, Offset at pixel 01" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL3_OFF3" acronym="VISS_RAWFE_PWL3_OFF3" offset="0xD0" width="32" description="Very Short frame Offset 3">
+    <bitfield id="RSVD" width="8" begin="31" end="24" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="OFST10" width="24" begin="23" end="0" resetval="0x0" description="S24, Offset at pixel 10" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL3_OFF4" acronym="VISS_RAWFE_PWL3_OFF4" offset="0xD4" width="32" description="Very Short frame Offset 4">
+    <bitfield id="RSVD" width="8" begin="31" end="24" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="OFST11" width="24" begin="23" end="0" resetval="0x0" description="S24, Offset at pixel 11" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL3_WB_GAIN12" acronym="VISS_RAWFE_PWL3_WB_GAIN12" offset="0xD8" width="32" description="Very Short Frame white balance gain 1 and 2">
+    <bitfield id="RSVD_1" width="3" begin="31" end="29" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB_GAIN01" width="13" begin="28" end="16" resetval="0x0" description="U13Q9, WB gain at pixel 01" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="3" begin="15" end="13" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB_GAIN00" width="13" begin="12" end="0" resetval="0x0" description="U13Q9, WB gain at pixel 00" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_PWL3_WB_GAIN34" acronym="VISS_RAWFE_PWL3_WB_GAIN34" offset="0xDC" width="32" description="Very Short Frame white balance gain 3 and 4">
+    <bitfield id="RSVD_1" width="3" begin="31" end="29" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB_GAIN11" width="13" begin="28" end="16" resetval="0x0" description="U13Q9, WB gain at pixel 11" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="3" begin="15" end="13" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB_GAIN10" width="13" begin="12" end="0" resetval="0x0" description="U13Q9, WB gain at pixel 10" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG1_CFG" acronym="VISS_RAWFE_WDRMRG1_CFG" offset="0xE0" width="32" description="First stage WDR merge configuration">
+    <bitfield id="RSVD" width="17" begin="31" end="15" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="CFG_WGT_SEL" width="1" begin="14" end="14" resetval="0x0" description="Select source for weight calculation (" range="" rwaccess="RW"/>
+    <bitfield id="CFG_SBIT" width="4" begin="13" end="10" resetval="0x0" description="U4, short exposure image bit shift" range="" rwaccess="RW"/>
+    <bitfield id="CFG_LBIT" width="4" begin="9" end="6" resetval="0x0" description="U4, long exposure image bit shift" range="" rwaccess="RW"/>
+    <bitfield id="CFG_DST" width="5" begin="5" end="1" resetval="0x0" description="U5, down shift value after WDR merge" range="" rwaccess="RW"/>
+    <bitfield id="CFG_EN" width="1" begin="0" end="0" resetval="0x0" description="enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG1_GAIN" acronym="VISS_RAWFE_WDRMRG1_GAIN" offset="0xE4" width="32" description="First stage WDR merge gain">
+    <bitfield id="GSHORT" width="16" begin="31" end="16" resetval="0x0" description="U16Q15, gain for long frame" range="" rwaccess="RW"/>
+    <bitfield id="GLONG" width="16" begin="15" end="0" resetval="0x0" description="U16Q15, gain for short frame" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG1_LBLK12" acronym="VISS_RAWFE_WDRMRG1_LBLK12" offset="0xE8" width="32" description="First stage WDR merge black level 1 and 2 for long frame">
+    <bitfield id="RSVD_1" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="LBK01" width="12" begin="27" end="16" resetval="0x0" description="U12, black level for long frame at pixel 01" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="4" begin="15" end="12" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="LBK00" width="12" begin="11" end="0" resetval="0x0" description="U12, black level for long frame at pixel 00" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG1_LBLK34" acronym="VISS_RAWFE_WDRMRG1_LBLK34" offset="0xEC" width="32" description="First stage WDR merge black level 3 and 4 for long frame">
+    <bitfield id="RSVD_1" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="LBK11" width="12" begin="27" end="16" resetval="0x0" description="U12, black level for long frame at pixel 11" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="4" begin="15" end="12" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="LBK10" width="12" begin="11" end="0" resetval="0x0" description="U12, black level for long frame at pixel 10" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG1_SBLK12" acronym="VISS_RAWFE_WDRMRG1_SBLK12" offset="0xF0" width="32" description="First stage WDR merge black level 1 and 2 for short frame">
+    <bitfield id="RSVD_1" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="SBK01" width="12" begin="27" end="16" resetval="0x0" description="U12, black level for short frame at pixel 01" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="4" begin="15" end="12" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="SBK00" width="12" begin="11" end="0" resetval="0x0" description="U12, black level for short frame at pixel 00" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG1_SBLK34" acronym="VISS_RAWFE_WDRMRG1_SBLK34" offset="0xF4" width="32" description="First stage WDR merge black level 3 and 4 for short frame">
+    <bitfield id="RSVD_1" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="SBK11" width="12" begin="27" end="16" resetval="0x0" description="U12, black level for short frame at pixel 11" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="4" begin="15" end="12" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="SBK10" width="12" begin="11" end="0" resetval="0x0" description="U12, black level for short frame at pixel 10" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG1_LWB12" acronym="VISS_RAWFE_WDRMRG1_LWB12" offset="0xF8" width="32" description="First stage WDR merge WB gain 1 and 2 for long frame">
+    <bitfield id="RSVD_1" width="3" begin="31" end="29" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB01" width="13" begin="28" end="16" resetval="0x0" description="U13Q9, WB gain for long frame at pixel 01" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="3" begin="15" end="13" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB00" width="13" begin="12" end="0" resetval="0x0" description="U13Q9, WB gain for long frame at pixel 00" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG1_LWB34" acronym="VISS_RAWFE_WDRMRG1_LWB34" offset="0xFC" width="32" description="First stage WDR merge WB gain 3 and 4 for long frame">
+    <bitfield id="RSVD_1" width="3" begin="31" end="29" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB11" width="13" begin="28" end="16" resetval="0x0" description="U13Q9, WB gain for long frame at pixel 11" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="3" begin="15" end="13" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB10" width="13" begin="12" end="0" resetval="0x0" description="U13Q9, WB gain for long frame at pixel 10" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG1_SWB12" acronym="VISS_RAWFE_WDRMRG1_SWB12" offset="0x100" width="32" description="First stage WDR merge WB gain 1 and 2 for short frame">
+    <bitfield id="RSVD_1" width="3" begin="31" end="29" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB01" width="13" begin="28" end="16" resetval="0x0" description="U13Q9, WB gain for short frame at pixel 01" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="3" begin="15" end="13" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB00" width="13" begin="12" end="0" resetval="0x0" description="U13Q9, WB gain for short frame at pixel 00" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG1_SWB34" acronym="VISS_RAWFE_WDRMRG1_SWB34" offset="0x104" width="32" description="First stage WDR merge WB gain 3 and 4 for short frame">
+    <bitfield id="RSVD_1" width="3" begin="31" end="29" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB11" width="13" begin="28" end="16" resetval="0x0" description="U13Q9, WB gain for short frame at pixel 11" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="3" begin="15" end="13" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB10" width="13" begin="12" end="0" resetval="0x0" description="U13Q9, WB gain for short frame at pixel 10" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG1_WDRTHR_BF" acronym="VISS_RAWFE_WDRMRG1_WDRTHR_BF" offset="0x108" width="32" description="First stage WDR merge parameter WDRTHR and BF">
+    <bitfield id="BF" width="16" begin="31" end="16" resetval="0x0" description="S16, bf parameter for merge" range="" rwaccess="RW"/>
+    <bitfield id="WDRTHR" width="16" begin="15" end="0" resetval="0x0" description="U16, WDR threshold for merge" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG1_AF" acronym="VISS_RAWFE_WDRMRG1_AF" offset="0x10C" width="32" description="First stage WDR merge parameter AF">
+    <bitfield id="RSVD" width="10" begin="31" end="22" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="AFE" width="6" begin="21" end="16" resetval="0x0" description="U6, af_e parameter for merge" range="" rwaccess="RW"/>
+    <bitfield id="AFM" width="16" begin="15" end="0" resetval="0x0" description="S16, af_m parameter for merge" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG1_MA" acronym="VISS_RAWFE_WDRMRG1_MA" offset="0x110" width="32" description="First stage WDR merge parameter MA">
+    <bitfield id="MAS" width="16" begin="31" end="16" resetval="0x0" description="U16, slope for merge MA filter" range="" rwaccess="RW"/>
+    <bitfield id="MAD" width="16" begin="15" end="0" resetval="0x0" description="U16, lower threshold for merge MA filter" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG1_CLIP_SFT" acronym="VISS_RAWFE_WDRMRG1_CLIP_SFT" offset="0x114" width="32" description="First stage WDR merge clip value and shift before weight block">
+    <bitfield id="RSVD" width="9" begin="31" end="23" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WTSFT" width="3" begin="22" end="20" resetval="0x0" description="U3, shift before weight block" range="" rwaccess="RW"/>
+    <bitfield id="CLIP" width="20" begin="19" end="0" resetval="0x0" description="U20, output clip value." range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG2_CFG" acronym="VISS_RAWFE_WDRMRG2_CFG" offset="0x118" width="32" description="Second stage WDR merge configuration">
+    <bitfield id="RSVD" width="17" begin="31" end="15" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="CFG_WGT_SEL" width="1" begin="14" end="14" resetval="0x0" description="Select source for weight calculation (" range="" rwaccess="RW"/>
+    <bitfield id="CFG_SBIT" width="4" begin="13" end="10" resetval="0x0" description="U4, short exposure image bit shift" range="" rwaccess="RW"/>
+    <bitfield id="CFG_LBIT" width="4" begin="9" end="6" resetval="0x0" description="U4, long exposure image bit shift" range="" rwaccess="RW"/>
+    <bitfield id="CFG_DST" width="5" begin="5" end="1" resetval="0x0" description="U5, down shift value after WDR merge" range="" rwaccess="RW"/>
+    <bitfield id="CFG_EN" width="1" begin="0" end="0" resetval="0x0" description="enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG2_GAIN" acronym="VISS_RAWFE_WDRMRG2_GAIN" offset="0x11C" width="32" description="Second stage WDR merge gain">
+    <bitfield id="GSHORT" width="16" begin="31" end="16" resetval="0x0" description="U16Q15, gain for long frame" range="" rwaccess="RW"/>
+    <bitfield id="GLONG" width="16" begin="15" end="0" resetval="0x0" description="U16Q15, gain for short frame" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG2_LBLK12" acronym="VISS_RAWFE_WDRMRG2_LBLK12" offset="0x120" width="32" description="Second stage WDR merge black level 1 and 2 for long frame">
+    <bitfield id="RSVD_1" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="LBK01" width="12" begin="27" end="16" resetval="0x0" description="U12, black level for long frame at pixel 01" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="4" begin="15" end="12" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="LBK00" width="12" begin="11" end="0" resetval="0x0" description="U12, black level for long frame at pixel 00" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG2_LBLK34" acronym="VISS_RAWFE_WDRMRG2_LBLK34" offset="0x124" width="32" description="Second stage WDR merge black level 3 and 4 for long frame">
+    <bitfield id="RSVD_1" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="LBK11" width="12" begin="27" end="16" resetval="0x0" description="U12, black level for long frame at pixel 11" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="4" begin="15" end="12" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="LBK10" width="12" begin="11" end="0" resetval="0x0" description="U12, black level for long frame at pixel 10" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG2_SBLK12" acronym="VISS_RAWFE_WDRMRG2_SBLK12" offset="0x128" width="32" description="Second stage WDR merge black level 1 and 2 for short frame">
+    <bitfield id="RSVD_1" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="SBK01" width="12" begin="27" end="16" resetval="0x0" description="U12, black level for short frame at pixel 01" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="4" begin="15" end="12" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="SBK00" width="12" begin="11" end="0" resetval="0x0" description="U12, black level for short frame at pixel 00" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG2_SBLK34" acronym="VISS_RAWFE_WDRMRG2_SBLK34" offset="0x12C" width="32" description="Second stage WDR merge black level 3 and 4 for short frame">
+    <bitfield id="RSVD_1" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="SBK11" width="12" begin="27" end="16" resetval="0x0" description="U12, black level for short frame at pixel 11" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="4" begin="15" end="12" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="SBK10" width="12" begin="11" end="0" resetval="0x0" description="U12, black level for short frame at pixel 10" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG2_LWB12" acronym="VISS_RAWFE_WDRMRG2_LWB12" offset="0x130" width="32" description="Second stage WDR merge WB gain 1 and 2 for long frame">
+    <bitfield id="RSVD_1" width="3" begin="31" end="29" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB01" width="13" begin="28" end="16" resetval="0x0" description="U13Q9, WB gain for long frame at pixel 01" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="3" begin="15" end="13" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB00" width="13" begin="12" end="0" resetval="0x0" description="U13Q9, WB gain for long frame at pixel 00" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG2_LWB34" acronym="VISS_RAWFE_WDRMRG2_LWB34" offset="0x134" width="32" description="Second stage WDR merge WB gain 3 and 4 for long frame">
+    <bitfield id="RSVD_1" width="3" begin="31" end="29" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB11" width="13" begin="28" end="16" resetval="0x0" description="U13Q9, WB gain for long frame at pixel 11" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="3" begin="15" end="13" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB10" width="13" begin="12" end="0" resetval="0x0" description="U13Q9, WB gain for long frame at pixel 10" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG2_SWB12" acronym="VISS_RAWFE_WDRMRG2_SWB12" offset="0x138" width="32" description="Second stage WDR merge WB gain 1 and 2 for short frame">
+    <bitfield id="RSVD_1" width="3" begin="31" end="29" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB01" width="13" begin="28" end="16" resetval="0x0" description="U13Q9, WB gain for short frame at pixel 01" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="3" begin="15" end="13" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB00" width="13" begin="12" end="0" resetval="0x0" description="U13Q9, WB gain for short frame at pixel 00" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG2_SWB34" acronym="VISS_RAWFE_WDRMRG2_SWB34" offset="0x13C" width="32" description="Second stage WDR merge WB gain 3 and 4 for short frame">
+    <bitfield id="RSVD_1" width="3" begin="31" end="29" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB11" width="13" begin="28" end="16" resetval="0x0" description="U13Q9, WB gain for short frame at pixel 11" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="3" begin="15" end="13" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB10" width="13" begin="12" end="0" resetval="0x0" description="U13Q9, WB gain for short frame at pixel 10" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG2_WDRTHR_BF" acronym="VISS_RAWFE_WDRMRG2_WDRTHR_BF" offset="0x140" width="32" description="Second stage WDR merge parameter WDRTHR and BF">
+    <bitfield id="BF" width="16" begin="31" end="16" resetval="0x0" description="S16, bf parameter for merge" range="" rwaccess="RW"/>
+    <bitfield id="WDRTHR" width="16" begin="15" end="0" resetval="0x0" description="U16, WDR threshold for merge" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG2_AF" acronym="VISS_RAWFE_WDRMRG2_AF" offset="0x144" width="32" description="Second stage WDR merge parameter AF">
+    <bitfield id="RSVD" width="10" begin="31" end="22" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="AFE" width="6" begin="21" end="16" resetval="0x0" description="U6, af_e parameter for merge" range="" rwaccess="RW"/>
+    <bitfield id="AFM" width="16" begin="15" end="0" resetval="0x0" description="S16, af_m parameter for merge" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG2_MA" acronym="VISS_RAWFE_WDRMRG2_MA" offset="0x148" width="32" description="Second stage WDR merge parameter MA">
+    <bitfield id="MAS" width="16" begin="31" end="16" resetval="0x0" description="U16, slope for merge MA filter" range="" rwaccess="RW"/>
+    <bitfield id="MAD" width="16" begin="15" end="0" resetval="0x0" description="U16, lower threshold for merge MA filter" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WDRMRG2_CLIP_SFT" acronym="VISS_RAWFE_WDRMRG2_CLIP_SFT" offset="0x14C" width="32" description="Second stage WDR merge clip value and shift before weight block">
+    <bitfield id="RSVD" width="9" begin="31" end="23" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WTSFT" width="3" begin="22" end="20" resetval="0x0" description="U3, shift before weight block" range="" rwaccess="RW"/>
+    <bitfield id="CLIP" width="20" begin="19" end="0" resetval="0x0" description="U20, output clip value" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_MRGLUT_CFG" acronym="VISS_RAWFE_MRGLUT_CFG" offset="0x150" width="32" description="Merge LUT configuration">
+    <bitfield id="CLIP" width="16" begin="31" end="16" resetval="0x0" description="U16, LUT output clip" range="" rwaccess="RW"/>
+    <bitfield id="RSVD" width="10" begin="15" end="6" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="BITS" width="5" begin="5" end="1" resetval="0x0" description="U5, LUT input bit depth, up to 24" range="" rwaccess="RW"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_LUTDPC_CFG" acronym="VISS_RAWFE_LUTDPC_CFG" offset="0x154" width="32" description="LUTDPC configuration">
+    <bitfield id="RSVD" width="22" begin="31" end="10" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="SIZE" width="8" begin="9" end="2" resetval="0x0" description="U8, number of LUT entires - 1" range="" rwaccess="RW"/>
+    <bitfield id="SEL" width="1" begin="1" end="1" resetval="0x0" description="replace with black (0) or whithe (1)" range="" rwaccess="RW"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="LUTDPC enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_OTFDPC_EN" acronym="VISS_RAWFE_OTFDPC_EN" offset="0x158" width="32" description="OTFDPC enable">
+    <bitfield id="RSVD" width="31" begin="31" end="1" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="OTF DPC enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_OTFDPC_THRSLP1" acronym="VISS_RAWFE_OTFDPC_THRSLP1" offset="0x15C" width="32" description="OTFDPC threshold and slope 1">
+    <bitfield id="RSVD" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="SLP1" width="12" begin="27" end="16" resetval="0x0" description="S12Q8, slope at 0" range="" rwaccess="RW"/>
+    <bitfield id="THR1" width="16" begin="15" end="0" resetval="0x0" description="U16, threshold at 0" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_OTFDPC_THRSLP2" acronym="VISS_RAWFE_OTFDPC_THRSLP2" offset="0x160" width="32" description="OTFDPC threshold and slope 2">
+    <bitfield id="RSVD" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="SLP1" width="12" begin="27" end="16" resetval="0x0" description="S12Q8, slope at 512" range="" rwaccess="RW"/>
+    <bitfield id="THR1" width="16" begin="15" end="0" resetval="0x0" description="U16, threshold at 512" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_OTFDPC_THRSLP3" acronym="VISS_RAWFE_OTFDPC_THRSLP3" offset="0x164" width="32" description="OTFDPC threshold and slope 3">
+    <bitfield id="RSVD" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="SLP1" width="12" begin="27" end="16" resetval="0x0" description="S12Q8, slope at 1024" range="" rwaccess="RW"/>
+    <bitfield id="THR1" width="16" begin="15" end="0" resetval="0x0" description="U16, threshold at 1024" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_OTFDPC_THRSLP4" acronym="VISS_RAWFE_OTFDPC_THRSLP4" offset="0x168" width="32" description="OTFDPC threshold and slope 4">
+    <bitfield id="RSVD" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="SLP1" width="12" begin="27" end="16" resetval="0x0" description="S12Q8, slope at 2048" range="" rwaccess="RW"/>
+    <bitfield id="THR1" width="16" begin="15" end="0" resetval="0x0" description="U16, threshold at 2048" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_OTFDPC_THRSLP5" acronym="VISS_RAWFE_OTFDPC_THRSLP5" offset="0x16C" width="32" description="OTFDPC threshold and slope 5">
+    <bitfield id="RSVD" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="SLP1" width="12" begin="27" end="16" resetval="0x0" description="S12Q8, slope at 4096" range="" rwaccess="RW"/>
+    <bitfield id="THR1" width="16" begin="15" end="0" resetval="0x0" description="U16, threshold at 4096" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_OTFDPC_THRSLP6" acronym="VISS_RAWFE_OTFDPC_THRSLP6" offset="0x170" width="32" description="OTFDPC threshold and slope 6">
+    <bitfield id="RSVD" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="SLP1" width="12" begin="27" end="16" resetval="0x0" description="S12Q8, slope at 8192" range="" rwaccess="RW"/>
+    <bitfield id="THR1" width="16" begin="15" end="0" resetval="0x0" description="U16, threshold at 8192" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_OTFDPC_THRSLP7" acronym="VISS_RAWFE_OTFDPC_THRSLP7" offset="0x174" width="32" description="OTFDPC threshold and slope 7">
+    <bitfield id="RSVD" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="SLP1" width="12" begin="27" end="16" resetval="0x0" description="S12Q8, slope at 16384" range="" rwaccess="RW"/>
+    <bitfield id="THR1" width="16" begin="15" end="0" resetval="0x0" description="U16, threshold at 16384" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_OTFDPC_THRSLP8" acronym="VISS_RAWFE_OTFDPC_THRSLP8" offset="0x178" width="32" description="OTFDPC threshold and slope 8">
+    <bitfield id="RSVD" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="SLP1" width="12" begin="27" end="16" resetval="0x0" description="S12Q8, slope at 32768" range="" rwaccess="RW"/>
+    <bitfield id="THR1" width="16" begin="15" end="0" resetval="0x0" description="U16, threshold at 32768" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_LSC_CFG" acronym="VISS_RAWFE_LSC_CFG" offset="0x17C" width="32" description="LSC configuration">
+    <bitfield id="RSVD" width="22" begin="31" end="10" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="GAIN_FORMAT" width="3" begin="9" end="7" resetval="0x0" description="LSC LUT gain format," range="" rwaccess="RW"/>
+    <bitfield id="MODE_N" width="3" begin="6" end="4" resetval="0x0" description="vertical LSC LUT downsampling," range="" rwaccess="RW"/>
+    <bitfield id="MODE_M" width="3" begin="3" end="1" resetval="0x0" description="horizontal LSC LUT downsampling," range="" rwaccess="RW"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="LSC enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WB2_OFFSET12" acronym="VISS_RAWFE_WB2_OFFSET12" offset="0x180" width="32" description="WB2 white balance offset 1 and 2">
+    <bitfield id="WB_OFST01" width="16" begin="31" end="16" resetval="0x0" description="S16, WB offset at pixel 01" range="" rwaccess="RW"/>
+    <bitfield id="WB_OFST00" width="16" begin="15" end="0" resetval="0x0" description="S16, WB offset at pixel 00" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WB2_OFFSET34" acronym="VISS_RAWFE_WB2_OFFSET34" offset="0x184" width="32" description="WB2 white balance offset 3 and 4">
+    <bitfield id="WB_OFST11" width="16" begin="31" end="16" resetval="0x0" description="S16, WB offset at pixel 11" range="" rwaccess="RW"/>
+    <bitfield id="WB_OFST10" width="16" begin="15" end="0" resetval="0x0" description="S16, WB offset at pixel 10" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WB2_GAIN12" acronym="VISS_RAWFE_WB2_GAIN12" offset="0x188" width="32" description="WB2 white balance gain 1 and 2">
+    <bitfield id="RSVD_1" width="3" begin="31" end="29" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB_GAIN01" width="13" begin="28" end="16" resetval="0x0" description="U13Q9, WB gain at pixel 01" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="3" begin="15" end="13" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB_GAIN00" width="13" begin="12" end="0" resetval="0x0" description="U13Q9, WB gain at pixel 00" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_WB2_GAIN34" acronym="VISS_RAWFE_WB2_GAIN34" offset="0x18C" width="32" description="WB2 white balance gain 3 and 4">
+    <bitfield id="RSVD_1" width="3" begin="31" end="29" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB_GAIN11" width="13" begin="28" end="16" resetval="0x0" description="U13Q9, WB gain at pixel 11" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="3" begin="15" end="13" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WB_GAIN10" width="13" begin="12" end="0" resetval="0x0" description="U13Q9, WB gain at pixel 10" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_H3AMUX_CFG" acronym="VISS_RAWFE_H3AMUX_CFG" offset="0x190" width="32" description="H3A MUX configuration">
+    <bitfield id="RSVD" width="26" begin="31" end="6" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="SHIFT" width="4" begin="5" end="2" resetval="0x0" description="U8, number of right shift, from 0 to 14" range="" rwaccess="RW"/>
+    <bitfield id="SEL" width="2" begin="1" end="0" resetval="0x0" description="H3A input selection," range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_H3ALUT_CFG" acronym="VISS_RAWFE_H3ALUT_CFG" offset="0x194" width="32" description="H3A LUT configuration">
+    <bitfield id="RSVD_2" width="6" begin="31" end="26" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="CLIP" width="10" begin="25" end="16" resetval="0x0" description="U10, LUT output clip value" range="" rwaccess="RW"/>
+    <bitfield id="RSVD" width="10" begin="15" end="6" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="BITS" width="5" begin="5" end="1" resetval="0x0" description="U5, LUT input bit depth, up to 24" range="" rwaccess="RW"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="LUT enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_INT_STAT" acronym="VISS_RAWFE_INT_STAT" offset="0x198" width="32" description="status/clear register for rawfe interrupts">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LSC_CFG_ERR" width="1" begin="9" end="9" resetval="0x0" description="status/clear for lsc config error." range="" rwaccess="RW1C"/>
+    <bitfield id="DPC_LINE_CFG_ERR" width="1" begin="8" end="8" resetval="0x0" description="status/clear for dpc line config error." range="" rwaccess="RW1C"/>
+    <bitfield id="DPC_LUT_CFG_ERR" width="1" begin="7" end="7" resetval="0x0" description="status/clear for dpc lut configuration error." range="" rwaccess="RW1C"/>
+    <bitfield id="H3A_ACCM_CFG_ERR" width="1" begin="6" end="6" resetval="0x0" description="status/clear for h3a accum configuration error." range="" rwaccess="RW1C"/>
+    <bitfield id="H3A_LINE_CFG_ERR" width="1" begin="5" end="5" resetval="0x0" description="status/clear for h3a line configuration error." range="" rwaccess="RW1C"/>
+    <bitfield id="H3A_LUT_CFG_ERR" width="1" begin="4" end="4" resetval="0x0" description="status/clear for h3a lut configuration error." range="" rwaccess="RW1C"/>
+    <bitfield id="WDR_LUT_CFG_ERR" width="1" begin="3" end="3" resetval="0x0" description="status/clear for wdr lut configuration error." range="" rwaccess="RW1C"/>
+    <bitfield id="LUT3_CFG_ERR" width="1" begin="2" end="2" resetval="0x0" description="status/clear for lut3 configuration error." range="" rwaccess="RW1C"/>
+    <bitfield id="LUT2_CFG_ERR" width="1" begin="1" end="1" resetval="0x0" description="status/clear for lut2 configuration error." range="" rwaccess="RW1C"/>
+    <bitfield id="LUT1_CFG_ERR" width="1" begin="0" end="0" resetval="0x0" description="status/clear for lut1 configuration error." range="" rwaccess="RW1C"/>
+  </register>
+  <register id="VISS_RAWFE_DBG_CTL" acronym="VISS_RAWFE_DBG_CTL" offset="0x200" width="32" description="debug event and control register">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="DPC_LINE_SEL" width="2" begin="13" end="12" resetval="0x0" description="select for which dpc line ram to read on debug interface" range="" rwaccess="RW"/>
+    <bitfield id="PIPE_ADV_EN_EVENT" width="1" begin="11" end="11" resetval="0x0" description="enable for pixal pipe line advanced" range="" rwaccess="RW"/>
+    <bitfield id="DPC_OTF_CORR_EN_EVENT" width="1" begin="10" end="10" resetval="0x0" description="enable for dpc otf corrected a pixel" range="" rwaccess="RW"/>
+    <bitfield id="LSE_INTF_STALL_EN_EVENT" width="1" begin="9" end="9" resetval="0x0" description="enable for lse slave port stalled by rawfe" range="" rwaccess="RW"/>
+    <bitfield id="LSE_MST_STALL_EN_EVENT" width="1" begin="8" end="8" resetval="0x0" description="enable for lse maaster port stalled on H3A out I/F" range="" rwaccess="RW"/>
+    <bitfield id="LSE_SLV_STALL_EN_EVENT" width="1" begin="7" end="7" resetval="0x0" description="enable for lse not sending data in frame on pixel I/F" range="" rwaccess="RW"/>
+    <bitfield id="HE_EN_EVENT" width="1" begin="6" end="6" resetval="0x0" description="enable for horizantal end" range="" rwaccess="RW"/>
+    <bitfield id="HS_EN_EVENT" width="1" begin="5" end="5" resetval="0x0" description="enable for horizantal start" range="" rwaccess="RW"/>
+    <bitfield id="VE_EN_EVENT" width="1" begin="4" end="4" resetval="0x0" description="enable for verticle end" range="" rwaccess="RW"/>
+    <bitfield id="VS_EN_EVENT" width="1" begin="3" end="3" resetval="0x0" description="enable for verticle start" range="" rwaccess="RW"/>
+    <bitfield id="X_Y_EN_EVENT" width="1" begin="2" end="2" resetval="0x0" description="enable for x,y position match event" range="" rwaccess="RW"/>
+    <bitfield id="X_Y_EN_HALT" width="1" begin="1" end="1" resetval="0x0" description="enable for x,y position match halt" range="" rwaccess="RW"/>
+    <bitfield id="DBG_EN" width="1" begin="0" end="0" resetval="0x0" description="Enable debug features, set to '0' to disable all events" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_DBG_HWBP" acronym="VISS_RAWFE_DBG_HWBP" offset="0x204" width="32" description="x,y event for event matching">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="Y_POS" width="13" begin="28" end="16" resetval="0x0" description="pixel y position" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="X_POS" width="13" begin="12" end="0" resetval="0x0" description="pixel x position" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_DBG_STAT1" acronym="VISS_RAWFE_DBG_STAT1" offset="0x208" width="32" description="status/clear register for debug events">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PIPE_ADV_EVENT" width="1" begin="11" end="11" resetval="0x0" description="status/clear for pixal pipe line advanced" range="" rwaccess="RW1C"/>
+    <bitfield id="DPC_OTF_CORR_EVENT" width="1" begin="10" end="10" resetval="0x0" description="status/clear for dpc otf corrected a pixel." range="" rwaccess="RW1C"/>
+    <bitfield id="LSE_INTF_STALL_EVENT" width="1" begin="9" end="9" resetval="0x0" description="status/clear for lse slave port stalled by rawfe." range="" rwaccess="RW1C"/>
+    <bitfield id="LSE_MST_STALL_EVENT" width="1" begin="8" end="8" resetval="0x0" description="status/clear for lse maaster port stalled." range="" rwaccess="RW1C"/>
+    <bitfield id="LSE_SLV_STALL_EVENT" width="1" begin="7" end="7" resetval="0x0" description="status/clear for lse not sending data in frame." range="" rwaccess="RW1C"/>
+    <bitfield id="HE_EVENT" width="1" begin="6" end="6" resetval="0x0" description="status/clear for horizantal end." range="" rwaccess="RW1C"/>
+    <bitfield id="HS_EVENT" width="1" begin="5" end="5" resetval="0x0" description="status/clear for horizantal start." range="" rwaccess="RW1C"/>
+    <bitfield id="VE_EVENT" width="1" begin="4" end="4" resetval="0x0" description="status/clear for verticle end." range="" rwaccess="RW1C"/>
+    <bitfield id="VS_EVENT" width="1" begin="3" end="3" resetval="0x0" description="status/clear for verticle start." range="" rwaccess="RW1C"/>
+    <bitfield id="X_Y_EVENT" width="1" begin="2" end="2" resetval="0x0" description="status/clear for x,y position match event." range="" rwaccess="RW1C"/>
+    <bitfield id="X_Y_HALT" width="1" begin="1" end="1" resetval="0x0" description="status/clear for x,y position match halt." range="" rwaccess="RW1C"/>
+    <bitfield id="RESERVED" width="1" begin="0" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_RAWFE_DBG_STAT2" acronym="VISS_RAWFE_DBG_STAT2" offset="0x20C" width="32" description="current x,y position in frame">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="Y_POS" width="13" begin="28" end="16" resetval="0x0" description="current y position" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="X_POS" width="13" begin="12" end="0" resetval="0x0" description="current x position" range="" rwaccess="R"/>
+  </register>
+  <register id="VISS_RAWFE_DBG_STAT3" acronym="VISS_RAWFE_DBG_STAT3" offset="0x210" width="32" description="internal state status">
+    <bitfield id="DPC_MIRROR_STAT" width="30" begin="31" end="2" resetval="0x24000000" description="dpc mirror status" range="" rwaccess="R"/>
+    <bitfield id="DPC_LINE_RAM_CTL" width="2" begin="1" end="0" resetval="0x0" description="ram control for understanding the phase of DPC line rams circular buffer for debug reads" range="" rwaccess="R"/>
+  </register>
+  <register id="VISS_RAWFE_DBG_STAT4" acronym="VISS_RAWFE_DBG_STAT4" offset="0x214" width="32" description="internal state status">
+    <bitfield id="LSC_DBG_STAT" width="32" begin="31" end="0" resetval="0x0" description="lsc state machine" range="" rwaccess="R"/>
+  </register>
+</module>

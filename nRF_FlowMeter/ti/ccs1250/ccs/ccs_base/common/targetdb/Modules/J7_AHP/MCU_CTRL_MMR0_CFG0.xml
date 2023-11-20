@@ -1,0 +1,880 @@
+<module name="MCU_CTRL_MMR0_CFG0" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="CFG0_PID" acronym="CFG0_PID" offset="0x0" width="32" description="Peripheral release details">
+		<bitfield id="PID_MSB16" width="16" begin="31" end="16" resetval="0x24960" description="" range="31 - 16" rwaccess="R"/> 
+		<bitfield id="PID_MISC" width="5" begin="15" end="11" resetval="0x0" description="" range="15 - 11" rwaccess="R"/> 
+		<bitfield id="PID_MAJOR" width="3" begin="10" end="8" resetval="0x2" description="" range="10 - 8" rwaccess="R"/> 
+		<bitfield id="PID_CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom revision number - actual value determined by RTL" range="7 - 6" rwaccess="R"/> 
+		<bitfield id="PID_MINOR" width="6" begin="5" end="0" resetval="0x20" description="" range="5 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_MMR_CFG1" acronym="CFG0_MMR_CFG1" offset="0x8" width="32" description="Indicates the MMR configuration">
+		<bitfield id="MMR_CFG1_PROXY_EN" width="1" begin="31" end="31" resetval="0x1" description="Proxy addressing enabled" range="31" rwaccess="R"/> 
+		<bitfield id="MMR_CFG1_PARTITIONS" width="8" begin="7" end="0" resetval="0x31" description="Indicates present partitions" range="7 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_IPC_SET0" acronym="CFG0_IPC_SET0" offset="0x100" width="32" description="Generate  interprocessor communication interrupt to MCU R5 core0">
+		<bitfield id="IPC_SET0_IPC_SRC_SET" width="28" begin="31" end="4" resetval="0x0" description="Read returns current valueWrite:  0 - No effect  1 - Sets both SRC_SETx and the SRC_CLRx bit in the corresponding IPC_CLR  register" range="31 - 4" rwaccess="R/W1TS"/> 
+		<bitfield id="IPC_SET0_IPC_SET" width="1" begin="0" end="0" resetval="0x0" description="Read returns 0Write:  0 - No effect  1 - Sets both the IPC_SET and the IPC_CLR bit in the corresponding IPC_CLR register" range="0" rwaccess="R/W1TS"/>
+	</register>
+	<register id="CFG0_IPC_SET1" acronym="CFG0_IPC_SET1" offset="0x104" width="32" description="Generate  interprocessor communication interrupt to MCU R5 core1">
+		<bitfield id="IPC_SET1_IPC_SRC_SET" width="28" begin="31" end="4" resetval="0x0" description="Read returns current valueWrite:  0 - No effect  1 - Sets both SRC_SETx and the SRC_CLRx bit in the corresponding IPC_CLR  register" range="31 - 4" rwaccess="R/W1TS"/> 
+		<bitfield id="IPC_SET1_IPC_SET" width="1" begin="0" end="0" resetval="0x0" description="Read returns 0Write:  0 - No effect  1 - Sets both the IPC_SET and the IPC_CLR bit in the corresponding IPC_CLR register" range="0" rwaccess="R/W1TS"/>
+	</register>
+	<register id="CFG0_IPC_SET8" acronym="CFG0_IPC_SET8" offset="0x120" width="32" description="Generate  interprocessor communication interrupt to DMSC">
+		<bitfield id="IPC_SET8_IPC_SRC_SET" width="28" begin="31" end="4" resetval="0x0" description="Read returns current valueWrite:  0 - No effect  1 - Sets both SRC_SETx and the SRC_CLRx bit in the corresponding IPC_CLR  register" range="31 - 4" rwaccess="R/W1TS"/> 
+		<bitfield id="IPC_SET8_IPC_SET" width="1" begin="0" end="0" resetval="0x0" description="Read returns 0Write:  0 - No effect  1 - Sets both the IPC_SET and the IPC_CLR bit in the corresponding IPC_CLR register" range="0" rwaccess="R/W1TS"/>
+	</register>
+	<register id="CFG0_IPC_CLR0" acronym="CFG0_IPC_CLR0" offset="0x180" width="32" description="Acknowledge  interprocessor communication interrupt to MCU R5 core0">
+		<bitfield id="IPC_CLR0_IPC_SRC_CLR" width="28" begin="31" end="4" resetval="0x0" description="Read returns current valueWrite:  0 - No effect  1 - Clears both SRC_CLRx and the SRC_SETx bit in the corresponding IPC_GEN register" range="31 - 4" rwaccess="R/W1TC"/> 
+		<bitfield id="IPC_CLR0_IPC_CLR" width="1" begin="0" end="0" resetval="0x0" description="Read returns current valueWrite:  0 - No effect  1 - Clears both IPC_CLR and the IPC_SET bit in the corresponding IPC_SET register" range="0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="CFG0_IPC_CLR1" acronym="CFG0_IPC_CLR1" offset="0x184" width="32" description="Acknowledge  interprocessor communication interrupt to MCU R5 core1">
+		<bitfield id="IPC_CLR1_IPC_SRC_CLR" width="28" begin="31" end="4" resetval="0x0" description="Read returns current valueWrite:  0 - No effect  1 - Clears both SRC_CLRx and the SRC_SETx bit in the corresponding IPC_GEN register" range="31 - 4" rwaccess="R/W1TC"/> 
+		<bitfield id="IPC_CLR1_IPC_CLR" width="1" begin="0" end="0" resetval="0x0" description="Read returns current valueWrite:  0 - No effect  1 - Clears both IPC_CLR and the IPC_SET bit in the corresponding IPC_SET register" range="0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="CFG0_IPC_CLR8" acronym="CFG0_IPC_CLR8" offset="0x1A0" width="32" description="Acknowledge  interprocessor communication interrupt to DMSC">
+		<bitfield id="IPC_CLR8_IPC_SRC_CLR" width="28" begin="31" end="4" resetval="0x0" description="Read returns current valueWrite:  0 - No effect  1 - Clears both SRC_CLRx and the SRC_SETx bit in the corresponding IPC_GEN register" range="31 - 4" rwaccess="R/W1TC"/> 
+		<bitfield id="IPC_CLR8_IPC_CLR" width="1" begin="0" end="0" resetval="0x0" description="Read returns current valueWrite:  0 - No effect  1 - Clears both IPC_CLR and the IPC_SET bit in the corresponding IPC_SET register" range="0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="CFG0_MAC_ID0" acronym="CFG0_MAC_ID0" offset="0x200" width="32" description="MCU Ethernet MAC address lower 32-bits">
+		<bitfield id="MAC_ID0_MACID_LO" width="32" begin="31" end="0" resetval="0x0" description="32 lsbs of MAC addressThis bitfield may be written only once after each module reset ." range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MAC_ID1" acronym="CFG0_MAC_ID1" offset="0x204" width="32" description="MCU Ethernet MAC address upper 16-bits">
+		<bitfield id="MAC_ID1_MACID_HI" width="16" begin="15" end="0" resetval="0x0" description="16 msbs of MAC addressThis bitfield may be written only once after each module reset ." range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MAC_ID_COUNT" acronym="CFG0_MAC_ID_COUNT" offset="0x208" width="32" description="Indicates the number of MAC addresses to be assigned">
+		<bitfield id="MAC_ID_COUNT_COUNT" width="4" begin="3" end="0" resetval="0x0" description="Indicates the number of MAC addresses to be assigned" range="3 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_LOCK0_KICK0" acronym="CFG0_LOCK0_KICK0" offset="0x1008" width="32" description="This register must be written with the designated key value followed by a write to LOCK0_KICK1 with its key value before write-protected Partition 0 registers can be written.">
+		<bitfield id="LOCK0_KICK0" width="32" begin="31" end="0" resetval="0x0" description=" - KICK0 component" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_LOCK0_KICK1" acronym="CFG0_LOCK0_KICK1" offset="0x100C" width="32" description="This register must be written with the designated key value after a write to LOCK0_KICK0 with its key value before write-protected Partition 0 registers can be written.">
+		<bitfield id="LOCK0_KICK1" width="32" begin="31" end="0" resetval="0x0" description=" - KICK1 component" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_intr_raw_status" acronym="CFG0_intr_raw_status" offset="0x1010" width="32" description="">
+		<bitfield id="PROXY_ERR" width="1" begin="3" end="3" resetval="0x0" description="Proxy0 access violation error. Raw status is read. Write a 1 to set the status. Writing a 0 has no effect." range="3" rwaccess="R/W1TS"/> 
+		<bitfield id="KICK_ERR" width="1" begin="2" end="2" resetval="0x0" description="Kick access violation error. Raw status is read. Write a 1 to set the status. Writing a 0 has no effect." range="2" rwaccess="R/W1TS"/> 
+		<bitfield id="ADDR_ERR" width="1" begin="1" end="1" resetval="0x0" description="Addressing violation error. Raw status is read. Write a 1 to set the status. Writing a 0 has no effect." range="1" rwaccess="R/W1TS"/> 
+		<bitfield id="PROT_ERR" width="1" begin="0" end="0" resetval="0x0" description="Protection violation error. Raw status is read. Write a 1 to set the status. Writing a 0 has no effect." range="0" rwaccess="R/W1TS"/>
+	</register>
+	<register id="CFG0_intr_enabled_status_clear" acronym="CFG0_intr_enabled_status_clear" offset="0x1014" width="32" description="">
+		<bitfield id="ENABLED_PROXY_ERR" width="1" begin="3" end="3" resetval="0x0" description="Proxy0 access violation error. Enabled status is read. Write a 1 to clear the status. Writing a 0 has no effect." range="3" rwaccess="R/W1TC"/> 
+		<bitfield id="ENABLED_KICK_ERR" width="1" begin="2" end="2" resetval="0x0" description="Kick access violation error. Enabled status is read. Write a 1 to clear the status. Writing a 0 has no effect." range="2" rwaccess="R/W1TC"/> 
+		<bitfield id="ENABLED_ADDR_ERR" width="1" begin="1" end="1" resetval="0x0" description="Addressing violation error. Enabled status is read. Write a 1 to clear the status. Writing a 0 has no effect." range="1" rwaccess="R/W1TC"/> 
+		<bitfield id="ENABLED_PROT_ERR" width="1" begin="0" end="0" resetval="0x0" description="Protection violation error. Enabled status is read. Write a 1 to clear the status. Writing a 0 has no effect." range="0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="CFG0_intr_enable" acronym="CFG0_intr_enable" offset="0x1018" width="32" description="">
+		<bitfield id="PROXY_ERR_EN" width="1" begin="3" end="3" resetval="0x0" description="Proxy0 access violation error enable. Write a 1 to set the enable. Writing a 0 has no effect." range="3" rwaccess="R/W1TS"/> 
+		<bitfield id="KICK_ERR_EN" width="1" begin="2" end="2" resetval="0x0" description="Kick access violation error enable. Write a 1 to set the enable. Writing a 0 has no effect." range="2" rwaccess="R/W1TS"/> 
+		<bitfield id="ADDR_ERR_EN" width="1" begin="1" end="1" resetval="0x0" description="Addressing violation error enable. Write a 1 to set the enable. Writing a 0 has no effect." range="1" rwaccess="R/W1TS"/> 
+		<bitfield id="PROT_ERR_EN" width="1" begin="0" end="0" resetval="0x0" description="Protection violation error enable. Write a 1 to set the enable. Writing a 0 has no effect." range="0" rwaccess="R/W1TS"/>
+	</register>
+	<register id="CFG0_intr_enable_clear" acronym="CFG0_intr_enable_clear" offset="0x101C" width="32" description="">
+		<bitfield id="PROXY_ERR_EN_CLR" width="1" begin="3" end="3" resetval="0x0" description="Proxy0 access violation error enable clear. Write a 1 to clear the enable. Writing a 0 has no effect." range="3" rwaccess="R/W1TC"/> 
+		<bitfield id="KICK_ERR_EN_CLR" width="1" begin="2" end="2" resetval="0x0" description="Kick access violation error enable clear. Write a 1 to clear the enable. Writing a 0 has no effect." range="2" rwaccess="R/W1TC"/> 
+		<bitfield id="ADDR_ERR_EN_CLR" width="1" begin="1" end="1" resetval="0x0" description="Addressing violation error enable clear. Write a 1 to clear the enable. Writing a 0 has no effect." range="1" rwaccess="R/W1TC"/> 
+		<bitfield id="PROT_ERR_EN_CLR" width="1" begin="0" end="0" resetval="0x0" description="Protection violation error enable clear. Write a 1 to clear the enable. Writing a 0 has no effect." range="0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="CFG0_eoi" acronym="CFG0_eoi" offset="0x1020" width="32" description="This register should be written with interrupt distribution value required by the device architecture to indicate service completion of the MMR interrupt.  (See device specification for details)">
+		<bitfield id="EOI_VECTOR" width="8" begin="7" end="0" resetval="0x0" description="EOI vector value. Write this with interrupt distribution value in the chip." range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_fault_address" acronym="CFG0_fault_address" offset="0x1024" width="32" description="">
+		<bitfield id="FAULT_ADDR" width="32" begin="31" end="0" resetval="0x0" description="Fault Address." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_fault_type_status" acronym="CFG0_fault_type_status" offset="0x1028" width="32" description="">
+		<bitfield id="FAULT_NS" width="1" begin="6" end="6" resetval="0x0" description="Non-secure access." range="6" rwaccess="R"/> 
+		<bitfield id="FAULT_TYPE" width="6" begin="5" end="0" resetval="0x0" description="Fault Type   10_0000 = Supervisor read  fault  - priv = 1 dir = 1 dtype != 1    01_0000 = Supervisor write fault  - priv = 1 dir = 0   00_1000 = Supervisor execute fault - priv = 1 dir = 1 dtype = 1   00_0100 = User read  fault - priv = 0 dir = 1 dtype = 1   00_0010 = User write fault - priv = 0 dir = 0   00_0001 = User execute fault - priv = 0 dir = 1 dtype = 1   00_0000 = No fault" range="5 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_fault_attr_status" acronym="CFG0_fault_attr_status" offset="0x102C" width="32" description="">
+		<bitfield id="FAULT_XID" width="12" begin="31" end="20" resetval="0x0" description="XID." range="31 - 20" rwaccess="R"/> 
+		<bitfield id="FAULT_ROUTEID" width="12" begin="19" end="8" resetval="0x0" description="Route ID." range="19 - 8" rwaccess="R"/> 
+		<bitfield id="FAULT_PRIVID" width="8" begin="7" end="0" resetval="0x0" description="Privilege ID." range="7 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_fault_clear" acronym="CFG0_fault_clear" offset="0x1030" width="32" description="">
+		<bitfield id="FAULT_CLR" width="1" begin="0" end="0" resetval="0x0" description="Fault clear. Writing a 1 clears the current fault. Writing a 0 has no effect." range="0" rwaccess="W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P0_R0_READONLY" acronym="CFG0_CLAIMREG_P0_R0_READONLY" offset="0x1100" width="32" description="">
+		<bitfield id="CLAIMREG_P0_R0_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 0" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P0_R1_READONLY" acronym="CFG0_CLAIMREG_P0_R1_READONLY" offset="0x1104" width="32" description="">
+		<bitfield id="CLAIMREG_P0_R1_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 0" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P0_R2_READONLY" acronym="CFG0_CLAIMREG_P0_R2_READONLY" offset="0x1108" width="32" description="">
+		<bitfield id="CLAIMREG_P0_R2_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 0" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P0_R3_READONLY" acronym="CFG0_CLAIMREG_P0_R3_READONLY" offset="0x110C" width="32" description="">
+		<bitfield id="CLAIMREG_P0_R3_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 0" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P0_R4_READONLY" acronym="CFG0_CLAIMREG_P0_R4_READONLY" offset="0x1110" width="32" description="">
+		<bitfield id="CLAIMREG_P0_R4_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 0" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_PID_PROXY" acronym="CFG0_PID_PROXY" offset="0x2000" width="32" description="Peripheral release details">
+		<bitfield id="PID_MSB16_PROXY" width="16" begin="31" end="16" resetval="0x24960" description="" range="31 - 16" rwaccess="R"/> 
+		<bitfield id="PID_MISC_PROXY" width="5" begin="15" end="11" resetval="0x0" description="" range="15 - 11" rwaccess="R"/> 
+		<bitfield id="PID_MAJOR_PROXY" width="3" begin="10" end="8" resetval="0x2" description="" range="10 - 8" rwaccess="R"/> 
+		<bitfield id="PID_CUSTOM_PROXY" width="2" begin="7" end="6" resetval="0x0" description="Custom revision number - actual value determined by RTL" range="7 - 6" rwaccess="R"/> 
+		<bitfield id="PID_MINOR_PROXY" width="6" begin="5" end="0" resetval="0x20" description="" range="5 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_MMR_CFG1_PROXY" acronym="CFG0_MMR_CFG1_PROXY" offset="0x2008" width="32" description="Indicates the MMR configuration">
+		<bitfield id="MMR_CFG1_PROXY_EN_PROXY" width="1" begin="31" end="31" resetval="0x1" description="Proxy addressing enabled" range="31" rwaccess="R"/> 
+		<bitfield id="MMR_CFG1_PARTITIONS_PROXY" width="8" begin="7" end="0" resetval="0x31" description="Indicates present partitions" range="7 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_IPC_SET0_PROXY" acronym="CFG0_IPC_SET0_PROXY" offset="0x2100" width="32" description="Generate  interprocessor communication interrupt to MCU R5 core0">
+		<bitfield id="IPC_SET0_IPC_SRC_SET_PROXY" width="28" begin="31" end="4" resetval="0x0" description="Read returns current valueWrite:  0 - No effect  1 - Sets both SRC_SETx and the SRC_CLRx bit in the corresponding IPC_CLR  register" range="31 - 4" rwaccess="R/W1TS"/> 
+		<bitfield id="IPC_SET0_IPC_SET_PROXY" width="1" begin="0" end="0" resetval="0x0" description="Read returns 0Write:  0 - No effect  1 - Sets both the IPC_SET and the IPC_CLR bit in the corresponding IPC_CLR register" range="0" rwaccess="R/W1TS"/>
+	</register>
+	<register id="CFG0_IPC_SET1_PROXY" acronym="CFG0_IPC_SET1_PROXY" offset="0x2104" width="32" description="Generate  interprocessor communication interrupt to MCU R5 core1">
+		<bitfield id="IPC_SET1_IPC_SRC_SET_PROXY" width="28" begin="31" end="4" resetval="0x0" description="Read returns current valueWrite:  0 - No effect  1 - Sets both SRC_SETx and the SRC_CLRx bit in the corresponding IPC_CLR  register" range="31 - 4" rwaccess="R/W1TS"/> 
+		<bitfield id="IPC_SET1_IPC_SET_PROXY" width="1" begin="0" end="0" resetval="0x0" description="Read returns 0Write:  0 - No effect  1 - Sets both the IPC_SET and the IPC_CLR bit in the corresponding IPC_CLR register" range="0" rwaccess="R/W1TS"/>
+	</register>
+	<register id="CFG0_IPC_SET8_PROXY" acronym="CFG0_IPC_SET8_PROXY" offset="0x2120" width="32" description="Generate  interprocessor communication interrupt to DMSC">
+		<bitfield id="IPC_SET8_IPC_SRC_SET_PROXY" width="28" begin="31" end="4" resetval="0x0" description="Read returns current valueWrite:  0 - No effect  1 - Sets both SRC_SETx and the SRC_CLRx bit in the corresponding IPC_CLR  register" range="31 - 4" rwaccess="R/W1TS"/> 
+		<bitfield id="IPC_SET8_IPC_SET_PROXY" width="1" begin="0" end="0" resetval="0x0" description="Read returns 0Write:  0 - No effect  1 - Sets both the IPC_SET and the IPC_CLR bit in the corresponding IPC_CLR register" range="0" rwaccess="R/W1TS"/>
+	</register>
+	<register id="CFG0_IPC_CLR0_PROXY" acronym="CFG0_IPC_CLR0_PROXY" offset="0x2180" width="32" description="Acknowledge  interprocessor communication interrupt to MCU R5 core0">
+		<bitfield id="IPC_CLR0_IPC_SRC_CLR_PROXY" width="28" begin="31" end="4" resetval="0x0" description="Read returns current valueWrite:  0 - No effect  1 - Clears both SRC_CLRx and the SRC_SETx bit in the corresponding IPC_GEN register" range="31 - 4" rwaccess="R/W1TC"/> 
+		<bitfield id="IPC_CLR0_IPC_CLR_PROXY" width="1" begin="0" end="0" resetval="0x0" description="Read returns current valueWrite:  0 - No effect  1 - Clears both IPC_CLR and the IPC_SET bit in the corresponding IPC_SET register" range="0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="CFG0_IPC_CLR1_PROXY" acronym="CFG0_IPC_CLR1_PROXY" offset="0x2184" width="32" description="Acknowledge  interprocessor communication interrupt to MCU R5 core1">
+		<bitfield id="IPC_CLR1_IPC_SRC_CLR_PROXY" width="28" begin="31" end="4" resetval="0x0" description="Read returns current valueWrite:  0 - No effect  1 - Clears both SRC_CLRx and the SRC_SETx bit in the corresponding IPC_GEN register" range="31 - 4" rwaccess="R/W1TC"/> 
+		<bitfield id="IPC_CLR1_IPC_CLR_PROXY" width="1" begin="0" end="0" resetval="0x0" description="Read returns current valueWrite:  0 - No effect  1 - Clears both IPC_CLR and the IPC_SET bit in the corresponding IPC_SET register" range="0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="CFG0_IPC_CLR8_PROXY" acronym="CFG0_IPC_CLR8_PROXY" offset="0x21A0" width="32" description="Acknowledge  interprocessor communication interrupt to DMSC">
+		<bitfield id="IPC_CLR8_IPC_SRC_CLR_PROXY" width="28" begin="31" end="4" resetval="0x0" description="Read returns current valueWrite:  0 - No effect  1 - Clears both SRC_CLRx and the SRC_SETx bit in the corresponding IPC_GEN register" range="31 - 4" rwaccess="R/W1TC"/> 
+		<bitfield id="IPC_CLR8_IPC_CLR_PROXY" width="1" begin="0" end="0" resetval="0x0" description="Read returns current valueWrite:  0 - No effect  1 - Clears both IPC_CLR and the IPC_SET bit in the corresponding IPC_SET register" range="0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="CFG0_MAC_ID0_PROXY" acronym="CFG0_MAC_ID0_PROXY" offset="0x2200" width="32" description="MCU Ethernet MAC address lower 32-bits">
+		<bitfield id="MAC_ID0_MACID_LO_PROXY" width="32" begin="31" end="0" resetval="0x0" description="32 lsbs of MAC addressThis bitfield may be written only once after each module reset ." range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MAC_ID1_PROXY" acronym="CFG0_MAC_ID1_PROXY" offset="0x2204" width="32" description="MCU Ethernet MAC address upper 16-bits">
+		<bitfield id="MAC_ID1_MACID_HI_PROXY" width="16" begin="15" end="0" resetval="0x0" description="16 msbs of MAC addressThis bitfield may be written only once after each module reset ." range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MAC_ID_COUNT_PROXY" acronym="CFG0_MAC_ID_COUNT_PROXY" offset="0x2208" width="32" description="Indicates the number of MAC addresses to be assigned">
+		<bitfield id="MAC_ID_COUNT_COUNT_PROXY" width="4" begin="3" end="0" resetval="0x0" description="Indicates the number of MAC addresses to be assigned" range="3 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_LOCK0_KICK0_PROXY" acronym="CFG0_LOCK0_KICK0_PROXY" offset="0x3008" width="32" description="This register must be written with the designated key value followed by a write to LOCK0_KICK1 with its key value before write-protected Partition 0 registers can be written.">
+		<bitfield id="LOCK0_KICK0_PROXY" width="32" begin="31" end="0" resetval="0x0" description=" - KICK0 component" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_LOCK0_KICK1_PROXY" acronym="CFG0_LOCK0_KICK1_PROXY" offset="0x300C" width="32" description="This register must be written with the designated key value after a write to LOCK0_KICK0 with its key value before write-protected Partition 0 registers can be written.">
+		<bitfield id="LOCK0_KICK1_PROXY" width="32" begin="31" end="0" resetval="0x0" description=" - KICK1 component" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_intr_raw_status_PROXY" acronym="CFG0_intr_raw_status_PROXY" offset="0x3010" width="32" description="">
+		<bitfield id="PROXY_ERR_PROXY" width="1" begin="3" end="3" resetval="0x0" description="Proxy0 access violation error. Raw status is read. Write a 1 to set the status. Writing a 0 has no effect." range="3" rwaccess="R/W1TS"/> 
+		<bitfield id="KICK_ERR_PROXY" width="1" begin="2" end="2" resetval="0x0" description="Kick access violation error. Raw status is read. Write a 1 to set the status. Writing a 0 has no effect." range="2" rwaccess="R/W1TS"/> 
+		<bitfield id="ADDR_ERR_PROXY" width="1" begin="1" end="1" resetval="0x0" description="Addressing violation error. Raw status is read. Write a 1 to set the status. Writing a 0 has no effect." range="1" rwaccess="R/W1TS"/> 
+		<bitfield id="PROT_ERR_PROXY" width="1" begin="0" end="0" resetval="0x0" description="Protection violation error. Raw status is read. Write a 1 to set the status. Writing a 0 has no effect." range="0" rwaccess="R/W1TS"/>
+	</register>
+	<register id="CFG0_intr_enabled_status_clear_PROXY" acronym="CFG0_intr_enabled_status_clear_PROXY" offset="0x3014" width="32" description="">
+		<bitfield id="ENABLED_PROXY_ERR_PROXY" width="1" begin="3" end="3" resetval="0x0" description="Proxy0 access violation error. Enabled status is read. Write a 1 to clear the status. Writing a 0 has no effect." range="3" rwaccess="R/W1TC"/> 
+		<bitfield id="ENABLED_KICK_ERR_PROXY" width="1" begin="2" end="2" resetval="0x0" description="Kick access violation error. Enabled status is read. Write a 1 to clear the status. Writing a 0 has no effect." range="2" rwaccess="R/W1TC"/> 
+		<bitfield id="ENABLED_ADDR_ERR_PROXY" width="1" begin="1" end="1" resetval="0x0" description="Addressing violation error. Enabled status is read. Write a 1 to clear the status. Writing a 0 has no effect." range="1" rwaccess="R/W1TC"/> 
+		<bitfield id="ENABLED_PROT_ERR_PROXY" width="1" begin="0" end="0" resetval="0x0" description="Protection violation error. Enabled status is read. Write a 1 to clear the status. Writing a 0 has no effect." range="0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="CFG0_intr_enable_PROXY" acronym="CFG0_intr_enable_PROXY" offset="0x3018" width="32" description="">
+		<bitfield id="PROXY_ERR_EN_PROXY" width="1" begin="3" end="3" resetval="0x0" description="Proxy0 access violation error enable. Write a 1 to set the enable. Writing a 0 has no effect." range="3" rwaccess="R/W1TS"/> 
+		<bitfield id="KICK_ERR_EN_PROXY" width="1" begin="2" end="2" resetval="0x0" description="Kick access violation error enable. Write a 1 to set the enable. Writing a 0 has no effect." range="2" rwaccess="R/W1TS"/> 
+		<bitfield id="ADDR_ERR_EN_PROXY" width="1" begin="1" end="1" resetval="0x0" description="Addressing violation error enable. Write a 1 to set the enable. Writing a 0 has no effect." range="1" rwaccess="R/W1TS"/> 
+		<bitfield id="PROT_ERR_EN_PROXY" width="1" begin="0" end="0" resetval="0x0" description="Protection violation error enable. Write a 1 to set the enable. Writing a 0 has no effect." range="0" rwaccess="R/W1TS"/>
+	</register>
+	<register id="CFG0_intr_enable_clear_PROXY" acronym="CFG0_intr_enable_clear_PROXY" offset="0x301C" width="32" description="">
+		<bitfield id="PROXY_ERR_EN_CLR_PROXY" width="1" begin="3" end="3" resetval="0x0" description="Proxy0 access violation error enable clear. Write a 1 to clear the enable. Writing a 0 has no effect." range="3" rwaccess="R/W1TC"/> 
+		<bitfield id="KICK_ERR_EN_CLR_PROXY" width="1" begin="2" end="2" resetval="0x0" description="Kick access violation error enable clear. Write a 1 to clear the enable. Writing a 0 has no effect." range="2" rwaccess="R/W1TC"/> 
+		<bitfield id="ADDR_ERR_EN_CLR_PROXY" width="1" begin="1" end="1" resetval="0x0" description="Addressing violation error enable clear. Write a 1 to clear the enable. Writing a 0 has no effect." range="1" rwaccess="R/W1TC"/> 
+		<bitfield id="PROT_ERR_EN_CLR_PROXY" width="1" begin="0" end="0" resetval="0x0" description="Protection violation error enable clear. Write a 1 to clear the enable. Writing a 0 has no effect." range="0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="CFG0_eoi_PROXY" acronym="CFG0_eoi_PROXY" offset="0x3020" width="32" description="This register should be written with interrupt distribution value required by the device architecture to indicate service completion of the MMR interrupt.  (See device specification for details)">
+		<bitfield id="EOI_VECTOR_PROXY" width="8" begin="7" end="0" resetval="0x0" description="EOI vector value. Write this with interrupt distribution value in the chip." range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_fault_address_PROXY" acronym="CFG0_fault_address_PROXY" offset="0x3024" width="32" description="">
+		<bitfield id="FAULT_ADDR_PROXY" width="32" begin="31" end="0" resetval="0x0" description="Fault Address." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_fault_type_status_PROXY" acronym="CFG0_fault_type_status_PROXY" offset="0x3028" width="32" description="">
+		<bitfield id="FAULT_NS_PROXY" width="1" begin="6" end="6" resetval="0x0" description="Non-secure access." range="6" rwaccess="R"/> 
+		<bitfield id="FAULT_TYPE_PROXY" width="6" begin="5" end="0" resetval="0x0" description="Fault Type   10_0000 = Supervisor read  fault  - priv = 1 dir = 1 dtype != 1    01_0000 = Supervisor write fault  - priv = 1 dir = 0   00_1000 = Supervisor execute fault - priv = 1 dir = 1 dtype = 1   00_0100 = User read  fault - priv = 0 dir = 1 dtype = 1   00_0010 = User write fault - priv = 0 dir = 0   00_0001 = User execute fault - priv = 0 dir = 1 dtype = 1   00_0000 = No fault" range="5 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_fault_attr_status_PROXY" acronym="CFG0_fault_attr_status_PROXY" offset="0x302C" width="32" description="">
+		<bitfield id="FAULT_XID_PROXY" width="12" begin="31" end="20" resetval="0x0" description="XID." range="31 - 20" rwaccess="R"/> 
+		<bitfield id="FAULT_ROUTEID_PROXY" width="12" begin="19" end="8" resetval="0x0" description="Route ID." range="19 - 8" rwaccess="R"/> 
+		<bitfield id="FAULT_PRIVID_PROXY" width="8" begin="7" end="0" resetval="0x0" description="Privilege ID." range="7 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_fault_clear_PROXY" acronym="CFG0_fault_clear_PROXY" offset="0x3030" width="32" description="">
+		<bitfield id="FAULT_CLR_PROXY" width="1" begin="0" end="0" resetval="0x0" description="Fault clear. Writing a 1 clears the current fault. Writing a 0 has no effect." range="0" rwaccess="W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P0_R0" acronym="CFG0_CLAIMREG_P0_R0" offset="0x3100" width="32" description="">
+		<bitfield id="CLAIMREG_P0_R0" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 0" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P0_R1" acronym="CFG0_CLAIMREG_P0_R1" offset="0x3104" width="32" description="">
+		<bitfield id="CLAIMREG_P0_R1" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 0" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P0_R2" acronym="CFG0_CLAIMREG_P0_R2" offset="0x3108" width="32" description="">
+		<bitfield id="CLAIMREG_P0_R2" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 0" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P0_R3" acronym="CFG0_CLAIMREG_P0_R3" offset="0x310C" width="32" description="">
+		<bitfield id="CLAIMREG_P0_R3" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 0" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P0_R4" acronym="CFG0_CLAIMREG_P0_R4" offset="0x3110" width="32" description="">
+		<bitfield id="CLAIMREG_P0_R4" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 0" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MSMC_CFG" acronym="CFG0_MSMC_CFG" offset="0x4030" width="32" description="Used to configure MSMC reset options">
+		<bitfield id="MSMC_CFG_MEM_SIZE" width="4" begin="11" end="8" resetval="0x0" description="Indicates the size of MSMC shared SRAM/Cache  Field values (Others are reserved):   4'b0000  -  0.5 MB   4'b0001  -  1.75 MB   4'b0010  -  3.0 MB   4'b0011  -  4,25 MB   4'b0100  -  5.5 MB   4'b0101  -  6.75 MB   4'b0110  -  8 MB   4'b0111  -  9.25 MB   4'b1000  -  10.5 MB   4'b1001  -  11.75 MB   4'b1010  -  13.0 MB" range="11 - 8" rwaccess="R"/> 
+		<bitfield id="MSMC_CFG_MEM_INIT_DIS" width="1" begin="4" end="4" resetval="0x0" description="Disables MSMC SRAM initialization (Data, Cache Tags, and Snoop Filters).  This is required for proper initial ECC initialization.    1'b0 - Perform memory initialization   1'b1 - Disable memory initialization" range="4" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_ENET_CTRL" acronym="CFG0_MCU_ENET_CTRL" offset="0x4040" width="32" description="Controls MCU Ethernet Port1 operation ">
+		<bitfield id="MCU_ENET_CTRL_RGMII_ID_MODE" width="1" begin="4" end="4" resetval="0x0" description="Port1 RGMII internal transmit delay selection  0 - Internal transmit delay  1 - No internal transmit delay" range="4" rwaccess="R/W"/> 
+		<bitfield id="MCU_ENET_CTRL_MODE_SEL" width="2" begin="1" end="0" resetval="0x1" description="Selects Ethernet switch Port1 interface    Field values (Others are reserved):   2'b00  -  GMII/MII (not supported)   2'b01  -  RMII   2'b10  -  RGMII   2'b11  -  SGMII (not supported)" range="1 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_SPI1_CTRL" acronym="CFG0_MCU_SPI1_CTRL" offset="0x4060" width="32" description="Controls if MCU_SPI1 is directly connected to SPI3 in the MAIN Domain (default) or if MCU_SPI1 and SPI3 are independently pinned out.">
+		<bitfield id="MCU_SPI1_CTRL_SPI1_LINKDIS" width="1" begin="0" end="0" resetval="0x0" description="Disables direct connection of MCU_SPI1 to SPI3  Field values (Others are reserved):   1'b0  -  MCU_SPI1 is tied as a slave to SPI3.  MCU_SPI1 CLK, DATA1 and CS0 are driven from SPI3, DATA OUT  drives SPI3 DATA0   1'b1  -  MCU_SPI1 is NOT tied as a slave to SPI3.  MCU_SPI1 CLK, DATA0, DATA1 and CS[3:0] are controlled through their respective MCU_SPI1 pins and SPI3 CLK, DATA0, DATA1, and CS[3:0] are controlled through their respective SPI3 pins." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_I3C0_CTRL0" acronym="CFG0_MCU_I3C0_CTRL0" offset="0x4070" width="32" description="Controls MCU I3C0 operation">
+		<bitfield id="MCU_I3C0_CTRL0_PID_MFR_ID" width="15" begin="30" end="16" resetval="0x258" description="Manufacturer IDThis input corresponds to bits[47:33] of the Provisional ID to identify the manufacturer.Defaults to TI value." range="30 - 16" rwaccess="R/W"/> 
+		<bitfield id="MCU_I3C0_CTRL0_ROLE" width="1" begin="8" end="8" resetval="0x0" description="Master Role  0 - Main master  1 - Secondary master" range="8" rwaccess="R/W"/> 
+		<bitfield id="MCU_I3C0_CTRL0_PID_INSTANCE" width="4" begin="3" end="0" resetval="0x0" description="Provisional ID Instance.  This input corresponds to bits[15:12] of the Provisional ID.  It is intended to provide a way of differentiating several I3C devices if there would be no other way to have each manufactured device have a unique Provisional ID" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_I3C0_CTRL1" acronym="CFG0_MCU_I3C0_CTRL1" offset="0x4074" width="32" description="Controls MCU I3C0 operation">
+		<bitfield id="MCU_I3C0_CTRL1_BUS_AVAIL_TIME" width="8" begin="31" end="24" resetval="0x0" description="Indicates the number of pclk cycles in the Bus Available condition" range="31 - 24" rwaccess="R/W"/> 
+		<bitfield id="MCU_I3C0_CTRL1_BUS_IDLE_TIME" width="18" begin="17" end="0" resetval="0x0" description="Indicates the number of pclk cycles in the Bus Idle condition" range="17 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_I2C0_CTRL" acronym="CFG0_MCU_I2C0_CTRL" offset="0x4080" width="32" description="Controls MCU I2C0 operation">
+		<bitfield id="MCU_I2C0_CTRL_HS_MCS_EN" width="1" begin="0" end="0" resetval="0x0" description="HS Mode master current source enable.When set, enables the current-source pull-up on the SCL output.  Only one master on the I2C bus should enable SCL current sourcing." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_I2C1_CTRL" acronym="CFG0_MCU_I2C1_CTRL" offset="0x4084" width="32" description="Controls MCU I2C1 operation">
+		<bitfield id="MCU_I2C1_CTRL_HS_MCS_EN" width="1" begin="0" end="0" resetval="0x0" description="HS Mode master current source enable.When set, enables the current-source pull-up on the SCL output.  Only one master on the I2C bus should enable SCL current sourcing." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_FSS_CTRL" acronym="CFG0_MCU_FSS_CTRL" offset="0x40A0" width="32" description="Controls Flash boot region size and placement">
+		<bitfield id="MCU_FSS_CTRL_S1_BOOT_SIZE" width="1" begin="24" end="24" resetval="0x0" description="Selects the size of the boot block to be used for the S1 (OSPI1) flash interface  0 - S1 boot size is 64 MB  1 - S1 boot size is 128 MB" range="24" rwaccess="R/W"/> 
+		<bitfield id="MCU_FSS_CTRL_S1_BOOT_SEG" width="6" begin="21" end="16" resetval="0x0" description="Selects the boot block to be used for the S1 (OSPI1) flash interface.  If the s1_boot_size is 128 MB then only bits [4:0] of this field are used.  Care must be taken to account for the address translation as to not fall off or wrap the address of the flash.  (e.g.  if both ECC and authentication are enabled for 64 MB boot, the highest valid block number is  49, as sector 50 is only .2M Bytes in size.)   6'h00 - Use block 0  6'h01 - Use block 1    :  6'h3F - Use block 63" range="21 - 16" rwaccess="R/W"/> 
+		<bitfield id="MCU_FSS_CTRL_S0_BOOT_SIZE" width="1" begin="8" end="8" resetval="0x0" description="Selects the size of the boot block to be used for the S0 (OSPI0 or Hyperbus) flash interface  0 - S0 boot size is 64 MB  1 - S0 boot size is 128 MB" range="8" rwaccess="R/W"/> 
+		<bitfield id="MCU_FSS_CTRL_S0_BOOT_SEG" width="6" begin="5" end="0" resetval="0x0" description="Selects the boot block to be used for the S0 (OSPI0 or Hyperbus) flash interface.  If the s0_boot_size is 128 MB then only bits [4:0] of this field are used.  Care must be taken to account for the address translation as to not fall off or wrap the address of the flash.  (e.g.  if both ECC and authentication are enabled for 64 MB boot, the highest valid block number is  49, as sector 50 is only .2M Bytes in size.)   6'h00 - Use block 0  6'h01 - Use block 1    :  6'h3F - Use block 63" range="5 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_ADC0_CTRL" acronym="CFG0_MCU_ADC0_CTRL" offset="0x40B0" width="32" description="Controls operation of MCU ADC0 ">
+		<bitfield id="MCU_ADC0_CTRL_GPI_MODE_EN" width="1" begin="16" end="16" resetval="0x0" description="Enables MCU_ADC0 data pins to be used as general purpose inputs when set.  This signal is tied to the en_dig_test input of MCU_ADC0" range="16" rwaccess="R/W"/> 
+		<bitfield id="MCU_ADC0_CTRL_TRIG_SEL" width="5" begin="4" end="0" resetval="0x0" description="Selects the source of the ADC hardware event trigger  Field values (Others are reserved):   5'b00000  -  MCU_ADC_EXT_TRIGGER0 pin   5'b00001  -  MCU_ADC_EXT_TRIGGER1 pin   5'b00010  -  eHRPWM SOCA event   5'b00011  -  eHRPWM SOCB event   5'b00100  -  MCU Timer0 PWM output   5'b00101  -  MCU Timer1 PWM output   5'b00110  -  MCU Timer2 PWM output   5'b00111  -  MCU Timer3 PWM output   5'b01000  -  Timer0 PWM output   5'b01001  -  Timer1 PWM output   5'b01010  -  Timer2 PWM output   5'b01011  -  Timer3 PWM output   5'b01100  -  Timer4 PWM output   5'b01101  -  Timer5 PWM output   5'b01110  -  Timer6 PWM output   5'b01111  -  Timer7 PWM output   5'b10000  -  Timer8 PWM output   5'b10001  -  Timer9 PWM output   5'b10010  -  Timer10 PWM output   5'b10011  -  Timer11 PWM output   5'b10101  -  Reserved (tied 1'b0)   5'b10110  -  Reserved (tied 1'b0)   5'b10111  -  Reserved (tied 1'b0)   5'b11000  -  Reserved (tied 1'b0)   5'b11000  -  MCU Timer4 PWM output   5'b11001  -  MCU Timer5 PWM output   5'b11010  -  MCU Timer6 PWM output   5'b11011  -  MCU Timer7 PWM output   5'b11100  -  MCU Timer8 PWM output   5'b11101  -  MCU Timer9 PWM output   5'b11110  -  Reserved (tied 1'b0)   5'b11111  -  Reserved (tied 1'b0)" range="4 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_ADC1_CTRL" acronym="CFG0_MCU_ADC1_CTRL" offset="0x40B4" width="32" description="Controls operation of MCU ADC1 ">
+		<bitfield id="MCU_ADC1_CTRL_GPI_MODE_EN" width="1" begin="16" end="16" resetval="0x0" description="Enables MCU_ADC1 data pins to be used as general purpose inputs when set.  This signal is tied to the en_dig_test input of MCU_ADC1" range="16" rwaccess="R/W"/> 
+		<bitfield id="MCU_ADC1_CTRL_TRIG_SEL" width="5" begin="4" end="0" resetval="0x1" description="Selects the source of the ADC hardware event trigger  Field values (Others are reserved):   5'b00000  -  MCU_ADC_EXT_TRIGGER0 pin   5'b00001  -  MCU_ADC_EXT_TRIGGER1 pin   5'b00010  -  eHRPWM SOCA event   5'b00011  -  eHRPWM SOCB event   5'b00100  -  MCU Timer0 PWM output   5'b00101  -  MCU Timer1 PWM output   5'b00110  -  MCU Timer2 PWM output   5'b00111  -  MCU Timer3 PWM output   5'b01000  -  Timer0 PWM output   5'b01001  -  Timer1 PWM output   5'b01010  -  Timer2 PWM output   5'b01011  -  Timer3 PWM output   5'b01100  -  Timer4 PWM output   5'b01101  -  Timer5 PWM output   5'b01110  -  Timer6 PWM output   5'b01111  -  Timer7 PWM output   5'b10000  -  Timer8 PWM output   5'b10001  -  Timer9 PWM output   5'b10010  -  Timer10 PWM output   5'b10011  -  Timer11 PWM output   5'b10101  -  Reserved (tied 1'b0)   5'b10110  -  Reserved (tied 1'b0)   5'b11000  -  MCU Timer4 PWM output   5'b11001  -  MCU Timer5 PWM output   5'b11010  -  MCU Timer6 PWM output   5'b11011  -  MCU Timer7 PWM output   5'b11100  -  MCU Timer8 PWM output   5'b11101  -  MCU Timer9 PWM output   5'b11110  -  Reserved (tied 1'b0)   5'b11111  -  Reserved (tied 1'b0)" range="4 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_ADC0_TRIM" acronym="CFG0_MCU_ADC0_TRIM" offset="0x40C0" width="32" description="Trims ADC non-linearities">
+		<bitfield id="MCU_ADC0_TRIM_TRIM5" width="3" begin="26" end="24" resetval="0x0" description="Trim value for C50.37 fF to 3.2fF in ~0.37fF increments" range="26 - 24" rwaccess="R/W"/> 
+		<bitfield id="MCU_ADC0_TRIM_TRIM4" width="3" begin="23" end="21" resetval="0x0" description="Trim value for C40.37 fF to 3.2fF in ~0.37fF increments" range="23 - 21" rwaccess="R/W"/> 
+		<bitfield id="MCU_ADC0_TRIM_TRIM3" width="3" begin="20" end="18" resetval="0x0" description="Trim value for C30.37 fF to 3.2fF in ~0.37fF increments" range="20 - 18" rwaccess="R/W"/> 
+		<bitfield id="MCU_ADC0_TRIM_TRIM2" width="4" begin="17" end="14" resetval="0x0" description="Trim value for C20.37 fF to 6.4fF in ~0.37fF increments" range="17 - 14" rwaccess="R/W"/> 
+		<bitfield id="MCU_ADC0_TRIM_TRIM1" width="4" begin="13" end="10" resetval="0x0" description="Trim value for C10.37 fF to 6.4fF in ~0.37fF increments" range="13 - 10" rwaccess="R/W"/> 
+		<bitfield id="MCU_ADC0_TRIM_ENABLE_CALB" width="5" begin="9" end="5" resetval="0x0" description="Enable negative trim.Decreases Cap value when set.  Bits correspond to C5:C1" range="9 - 5" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_ADC1_TRIM" acronym="CFG0_MCU_ADC1_TRIM" offset="0x40C4" width="32" description="Trims ADC non-linearities">
+		<bitfield id="MCU_ADC1_TRIM_TRIM5" width="3" begin="26" end="24" resetval="0x0" description="Trim value for C50.37 fF to 3.2fF in ~0.37fF increments" range="26 - 24" rwaccess="R/W"/> 
+		<bitfield id="MCU_ADC1_TRIM_TRIM4" width="3" begin="23" end="21" resetval="0x0" description="Trim value for C40.37 fF to 3.2fF in ~0.37fF increments" range="23 - 21" rwaccess="R/W"/> 
+		<bitfield id="MCU_ADC1_TRIM_TRIM3" width="3" begin="20" end="18" resetval="0x0" description="Trim value for C30.37 fF to 3.2fF in ~0.37fF increments" range="20 - 18" rwaccess="R/W"/> 
+		<bitfield id="MCU_ADC1_TRIM_TRIM2" width="4" begin="17" end="14" resetval="0x0" description="Trim value for C20.37 fF to 6.4fF in ~0.37fF increments" range="17 - 14" rwaccess="R/W"/> 
+		<bitfield id="MCU_ADC1_TRIM_TRIM1" width="4" begin="13" end="10" resetval="0x0" description="Trim value for C10.37 fF to 6.4fF in ~0.37fF increments" range="13 - 10" rwaccess="R/W"/> 
+		<bitfield id="MCU_ADC1_TRIM_ENABLE_CALB" width="5" begin="9" end="5" resetval="0x0" description="Enable negative trim.Decreases Cap value when set.  Bits correspond to C5:C1" range="9 - 5" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER0_CTRL" acronym="CFG0_MCU_TIMER0_CTRL" offset="0x4200" width="32" description="Controls MCU Timer0 operation">
+		<bitfield id="MCU_TIMER0_CTRL_CAP_SEL" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal.  This control is only used when TIMER0 is configured for capture operation.  Field values (Others are reserved):   4'b0000  -  Use MCU_TIMER_IO0 pin   4'b0001  -  Use MCU_TIMER_IO1 pin   4'b0010  -  Use MCU_TIMER_IO2 pin   4'b0011  -  Use MCU_TIMER_IO3 pin   4'b0100  -  Use MCU_TIMER_IO4 pin   4'b0101  -  Use MCU_TIMER_IO5 pin   4'b0110  -  Use MCU_TIMER_IO6 pin   4'b0111  -  Use MCU_TIMER_IO7 pin   4'b1000  -  Use MCU_TIMER_IO8 pin   4'b1001  -  Use MCU_TIMER_IO9 pin" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER1_CTRL" acronym="CFG0_MCU_TIMER1_CTRL" offset="0x4204" width="32" description="Controls MCU Timer1 operation">
+		<bitfield id="MCU_TIMER1_CTRL_CASCADE_EN" width="1" begin="8" end="8" resetval="0x0" description="When set, enables cascading of MCU_TIMER1 to MCU_TIMER0" range="8" rwaccess="R/W"/> 
+		<bitfield id="MCU_TIMER1_CTRL_CAP_SEL" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal.  This control is only used when TIMER1 is configured for capture operation.  Field values (Others are reserved):   4'b0000  -  Use MCU_TIMER_IO0 pin   4'b0001  -  Use MCU_TIMER_IO1 pin   4'b0010  -  Use MCU_TIMER_IO2 pin   4'b0011  -  Use MCU_TIMER_IO3 pin   4'b0100  -  Use MCU_TIMER_IO4 pin   4'b0101  -  Use MCU_TIMER_IO5 pin   4'b0110  -  Use MCU_TIMER_IO6 pin   4'b0111  -  Use MCU_TIMER_IO7 pin   4'b1000  -  Use MCU_TIMER_IO8 pin   4'b1001  -  Use MCU_TIMER_IO9 pin" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER2_CTRL" acronym="CFG0_MCU_TIMER2_CTRL" offset="0x4208" width="32" description="Controls MCU Timer2 operation">
+		<bitfield id="MCU_TIMER2_CTRL_CAP_SEL" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal.  This control is only used when TIMER2 is configured for capture operation.  Field values (Others are reserved):   4'b0000  -  Use MCU_TIMER_IO0 pin   4'b0001  -  Use MCU_TIMER_IO1 pin   4'b0010  -  Use MCU_TIMER_IO2 pin   4'b0011  -  Use MCU_TIMER_IO3 pin   4'b0100  -  Use MCU_TIMER_IO4 pin   4'b0101  -  Use MCU_TIMER_IO5 pin   4'b0110  -  Use MCU_TIMER_IO6 pin   4'b0111  -  Use MCU_TIMER_IO7 pin   4'b1000  -  Use MCU_TIMER_IO8 pin   4'b1001  -  Use MCU_TIMER_IO9 pin" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER3_CTRL" acronym="CFG0_MCU_TIMER3_CTRL" offset="0x420C" width="32" description="Controls MCU Timer3 operation">
+		<bitfield id="MCU_TIMER3_CTRL_CASCADE_EN" width="1" begin="8" end="8" resetval="0x0" description="When set, enables cascading of MCU_TIMER3 to MCU_TIMER2" range="8" rwaccess="R/W"/> 
+		<bitfield id="MCU_TIMER3_CTRL_CAP_SEL" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal.  This control is only used when TIMER3 is configured for capture operation.  Field values (Others are reserved):   4'b0000  -  Use MCU_TIMER_IO0 pin   4'b0001  -  Use MCU_TIMER_IO1 pin   4'b0010  -  Use MCU_TIMER_IO2 pin   4'b0011  -  Use MCU_TIMER_IO3 pin   4'b0100  -  Use MCU_TIMER_IO4 pin   4'b0101  -  Use MCU_TIMER_IO5 pin   4'b0110  -  Use MCU_TIMER_IO6 pin   4'b0111  -  Use MCU_TIMER_IO7 pin   4'b1000  -  Use MCU_TIMER_IO8 pin   4'b1001  -  Use MCU_TIMER_IO9 pin" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER4_CTRL" acronym="CFG0_MCU_TIMER4_CTRL" offset="0x4210" width="32" description="Controls MCU Timer4 operation">
+		<bitfield id="MCU_TIMER4_CTRL_CAP_SEL" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal.  This control is only used when TIMER4 is configured for capture operation.  Field values (Others are reserved):   4'b0000  -  Use MCU_TIMER_IO0 pin   4'b0001  -  Use MCU_TIMER_IO1 pin   4'b0010  -  Use MCU_TIMER_IO2 pin   4'b0011  -  Use MCU_TIMER_IO3 pin   4'b0100  -  Use MCU_TIMER_IO4 pin   4'b0101  -  Use MCU_TIMER_IO5 pin   4'b0110  -  Use MCU_TIMER_IO6 pin   4'b0111  -  Use MCU_TIMER_IO7 pin   4'b1000  -  Use MCU_TIMER_IO8 pin   4'b1001  -  Use MCU_TIMER_IO9 pin" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER5_CTRL" acronym="CFG0_MCU_TIMER5_CTRL" offset="0x4214" width="32" description="Controls MCU Timer5 operation">
+		<bitfield id="MCU_TIMER5_CTRL_CASCADE_EN" width="1" begin="8" end="8" resetval="0x0" description="When set, enables cascading of MCU_TIMER5 to MCU_TIMER4" range="8" rwaccess="R/W"/> 
+		<bitfield id="MCU_TIMER5_CTRL_CAP_SEL" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal.  This control is only used when TIMER5 is configured for capture operation.  Field values (Others are reserved):   4'b0000  -  Use MCU_TIMER_IO0 pin   4'b0001  -  Use MCU_TIMER_IO1 pin   4'b0010  -  Use MCU_TIMER_IO2 pin   4'b0011  -  Use MCU_TIMER_IO3 pin   4'b0100  -  Use MCU_TIMER_IO4 pin   4'b0101  -  Use MCU_TIMER_IO5 pin   4'b0110  -  Use MCU_TIMER_IO6 pin   4'b0111  -  Use MCU_TIMER_IO7 pin   4'b1000  -  Use MCU_TIMER_IO8 pin   4'b1001  -  Use MCU_TIMER_IO9 pin" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER6_CTRL" acronym="CFG0_MCU_TIMER6_CTRL" offset="0x4218" width="32" description="Controls MCU Timer6 operation">
+		<bitfield id="MCU_TIMER6_CTRL_CAP_SEL" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal.  This control is only used when TIMER6 is configured for capture operation.  Field values (Others are reserved):   4'b0000  -  Use MCU_TIMER_IO0 pin   4'b0001  -  Use MCU_TIMER_IO1 pin   4'b0010  -  Use MCU_TIMER_IO2 pin   4'b0011  -  Use MCU_TIMER_IO3 pin   4'b0100  -  Use MCU_TIMER_IO4 pin   4'b0101  -  Use MCU_TIMER_IO5 pin   4'b0110  -  Use MCU_TIMER_IO6 pin   4'b0111  -  Use MCU_TIMER_IO7 pin   4'b1000  -  Use MCU_TIMER_IO8 pin   4'b1001  -  Use MCU_TIMER_IO9 pin" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER7_CTRL" acronym="CFG0_MCU_TIMER7_CTRL" offset="0x421C" width="32" description="Controls MCU Timer7 operation">
+		<bitfield id="MCU_TIMER7_CTRL_CASCADE_EN" width="1" begin="8" end="8" resetval="0x0" description="When set, enables cascading of MCU_TIMER7 to MCU_TIMER6" range="8" rwaccess="R/W"/> 
+		<bitfield id="MCU_TIMER7_CTRL_CAP_SEL" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal.  This control is only used when TIMER7 is configured for capture operation.  Field values (Others are reserved):   4'b0000  -  Use MCU_TIMER_IO0 pin   4'b0001  -  Use MCU_TIMER_IO1 pin   4'b0010  -  Use MCU_TIMER_IO2 pin   4'b0011  -  Use MCU_TIMER_IO3 pin   4'b0100  -  Use MCU_TIMER_IO4 pin   4'b0101  -  Use MCU_TIMER_IO5 pin   4'b0110  -  Use MCU_TIMER_IO6 pin   4'b0111  -  Use MCU_TIMER_IO7 pin   4'b1000  -  Use MCU_TIMER_IO8 pin   4'b1001  -  Use MCU_TIMER_IO9 pin" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER8_CTRL" acronym="CFG0_MCU_TIMER8_CTRL" offset="0x4220" width="32" description="Controls MCU Timer8 operation">
+		<bitfield id="MCU_TIMER8_CTRL_CAP_SEL" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal.  This control is only used when TIMER8 is configured for capture operation.  Field values (Others are reserved):   4'b0000  -  Use MCU_TIMER_IO0 pin   4'b0001  -  Use MCU_TIMER_IO1 pin   4'b0010  -  Use MCU_TIMER_IO2 pin   4'b0011  -  Use MCU_TIMER_IO3 pin   4'b0100  -  Use MCU_TIMER_IO4 pin   4'b0101  -  Use MCU_TIMER_IO5 pin   4'b0110  -  Use MCU_TIMER_IO6 pin   4'b0111  -  Use MCU_TIMER_IO7 pin   4'b1000  -  Use MCU_TIMER_IO8 pin   4'b1001  -  Use MCU_TIMER_IO9 pin" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER9_CTRL" acronym="CFG0_MCU_TIMER9_CTRL" offset="0x4224" width="32" description="Controls MCU Timer9 operation">
+		<bitfield id="MCU_TIMER9_CTRL_CASCADE_EN" width="1" begin="8" end="8" resetval="0x0" description="When set, enables cascading of MCU_TIMER9 to MCU_TIMER8" range="8" rwaccess="R/W"/> 
+		<bitfield id="MCU_TIMER9_CTRL_CAP_SEL" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal.  This control is only used when TIMER9 is configured for capture operation.  Field values (Others are reserved):   4'b0000  -  Use MCU_TIMER_IO0 pin   4'b0001  -  Use MCU_TIMER_IO1 pin   4'b0010  -  Use MCU_TIMER_IO2 pin   4'b0011  -  Use MCU_TIMER_IO3 pin   4'b0100  -  Use MCU_TIMER_IO4 pin   4'b0101  -  Use MCU_TIMER_IO5 pin   4'b0110  -  Use MCU_TIMER_IO6 pin   4'b0111  -  Use MCU_TIMER_IO7 pin   4'b1000  -  Use MCU_TIMER_IO8 pin   4'b1001  -  Use MCU_TIMER_IO9 pin" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMERIO0_CTRL" acronym="CFG0_MCU_TIMERIO0_CTRL" offset="0x4280" width="32" description="Controls MCU TimerIO muxing">
+		<bitfield id="MCU_TIMERIO0_CTRL_OUT_SEL" width="4" begin="3" end="0" resetval="0x15" description="Selects the source of the MCU_TIMERIO0 output  Field values (Others are reserved):   4'b0000  -  MCU_TIMERIO0 is driven by MCU_TIMER0 output   4'b0001  -  MCU_TIMERIO0 is driven by MCU_TIMER1 output   4'b0010  -  MCU_TIMERIO0 is driven by MCU_TIMER2 output   4'b0011  -  MCU_TIMERIO0 is driven by MCU_TIMER3 output   4'b0100  -  MCU_TIMERIO0 is driven by MCU_TIMER4 output   4'b0101  -  MCU_TIMERIO0 is driven by MCU_TIMER5 output   4'b0110  -  MCU_TIMERIO0 is driven by MCU_TIMER6 output   4'b0111  -  MCU_TIMERIO0 is driven by MCU_TIMER7 output   4'b1000  -  MCU_TIMERIO0 is driven by MCU_TIMER8 output   4'b1001  -  MCU_TIMERIO0 is driven by MCU_TIMER9 output   4'b1010  -  MCU_TIMERIO0 is driven low   4'b1011  -  MCU_TIMERIO0 is driven high   4'b1100  -  MCU_TIMERIO0 is driven low   4'b1101  -  MCU_TIMERIO0 is driven high   4'b1110  -  MCU_TIMERIO0 is driven low   4'b1111  -  MCU_TIMERIO0 is driven high" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMERIO1_CTRL" acronym="CFG0_MCU_TIMERIO1_CTRL" offset="0x4284" width="32" description="Controls MCU TimerIO muxing">
+		<bitfield id="MCU_TIMERIO1_CTRL_OUT_SEL" width="4" begin="3" end="0" resetval="0x15" description="Selects the source of the MCU_TIMERIO1 output  Field values (Others are reserved):   4'b0000  -  MCU_TIMERIO1 is driven by MCU_TIMER0 output   4'b0001  -  MCU_TIMERIO1 is driven by MCU_TIMER1 output   4'b0010  -  MCU_TIMERIO1 is driven by MCU_TIMER2 output   4'b0011  -  MCU_TIMERIO1 is driven by MCU_TIMER3 output   4'b0100  -  MCU_TIMERIO1 is driven by MCU_TIMER4 output   4'b0101  -  MCU_TIMERIO1 is driven by MCU_TIMER5 output   4'b0110  -  MCU_TIMERIO1 is driven by MCU_TIMER6 output   4'b0111  -  MCU_TIMERIO1 is driven by MCU_TIMER7 output   4'b1000  -  MCU_TIMERIO1 is driven by MCU_TIMER8 output   4'b1001  -  MCU_TIMERIO1 is driven by MCU_TIMER9 output   4'b1010  -  MCU_TIMERIO1 is driven low   4'b1011  -  MCU_TIMERIO1 is driven high   4'b1100  -  MCU_TIMERIO1 is driven low   4'b1101  -  MCU_TIMERIO1 is driven high   4'b1110  -  MCU_TIMERIO1 is driven low   4'b1111  -  MCU_TIMERIO1 is driven high" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMERIO2_CTRL" acronym="CFG0_MCU_TIMERIO2_CTRL" offset="0x4288" width="32" description="Controls MCU TimerIO muxing">
+		<bitfield id="MCU_TIMERIO2_CTRL_OUT_SEL" width="4" begin="3" end="0" resetval="0x15" description="Selects the source of the MCU_TIMERIO2 output  Field values (Others are reserved):   4'b0000  -  MCU_TIMERIO2 is driven by MCU_TIMER0 output   4'b0001  -  MCU_TIMERIO2 is driven by MCU_TIMER1 output   4'b0010  -  MCU_TIMERIO2 is driven by MCU_TIMER2 output   4'b0011  -  MCU_TIMERIO2 is driven by MCU_TIMER3 output   4'b0100  -  MCU_TIMERIO2 is driven by MCU_TIMER4 output   4'b0101  -  MCU_TIMERIO2 is driven by MCU_TIMER5 output   4'b0110  -  MCU_TIMERIO2 is driven by MCU_TIMER6 output   4'b0111  -  MCU_TIMERIO2 is driven by MCU_TIMER7 output   4'b1000  -  MCU_TIMERIO2 is driven by MCU_TIMER8 output   4'b1001  -  MCU_TIMERIO2 is driven by MCU_TIMER9 output   4'b1010  -  MCU_TIMERIO2 is driven low   4'b1011  -  MCU_TIMERIO2 is driven high   4'b1100  -  MCU_TIMERIO2 is driven low   4'b1101  -  MCU_TIMERIO2 is driven high   4'b1110  -  MCU_TIMERIO2 is driven low   4'b1111  -  MCU_TIMERIO2 is driven high" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMERIO3_CTRL" acronym="CFG0_MCU_TIMERIO3_CTRL" offset="0x428C" width="32" description="Controls MCU TimerIO muxing">
+		<bitfield id="MCU_TIMERIO3_CTRL_OUT_SEL" width="4" begin="3" end="0" resetval="0x15" description="Selects the source of the MCU_TIMERIO3 output  Field values (Others are reserved):   4'b0000  -  MCU_TIMERIO3 is driven by MCU_TIMER0 output   4'b0001  -  MCU_TIMERIO3 is driven by MCU_TIMER1 output   4'b0010  -  MCU_TIMERIO3 is driven by MCU_TIMER2 output   4'b0011  -  MCU_TIMERIO3 is driven by MCU_TIMER3 output   4'b0100  -  MCU_TIMERIO3 is driven by MCU_TIMER4 output   4'b0101  -  MCU_TIMERIO3 is driven by MCU_TIMER5 output   4'b0110  -  MCU_TIMERIO3 is driven by MCU_TIMER6 output   4'b0111  -  MCU_TIMERIO3 is driven by MCU_TIMER7 output   4'b1000  -  MCU_TIMERIO3 is driven by MCU_TIMER8 output   4'b1001  -  MCU_TIMERIO3 is driven by MCU_TIMER9 output   4'b1010  -  MCU_TIMERIO3 is driven low   4'b1011  -  MCU_TIMERIO3 is driven high   4'b1100  -  MCU_TIMERIO3 is driven low   4'b1101  -  MCU_TIMERIO3 is driven high   4'b1110  -  MCU_TIMERIO3 is driven low   4'b1111  -  MCU_TIMERIO3 is driven high" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMERIO4_CTRL" acronym="CFG0_MCU_TIMERIO4_CTRL" offset="0x4290" width="32" description="Controls MCU TimerIO muxing">
+		<bitfield id="MCU_TIMERIO4_CTRL_OUT_SEL" width="4" begin="3" end="0" resetval="0x15" description="Selects the source of the MCU_TIMERIO4 output  Field values (Others are reserved):   4'b0000  -  MCU_TIMERIO4 is driven by MCU_TIMER0 output   4'b0001  -  MCU_TIMERIO4 is driven by MCU_TIMER1 output   4'b0010  -  MCU_TIMERIO4 is driven by MCU_TIMER2 output   4'b0011  -  MCU_TIMERIO4 is driven by MCU_TIMER3 output   4'b0100  -  MCU_TIMERIO4 is driven by MCU_TIMER4 output   4'b0101  -  MCU_TIMERIO4 is driven by MCU_TIMER5 output   4'b0110  -  MCU_TIMERIO4 is driven by MCU_TIMER6 output   4'b0111  -  MCU_TIMERIO4 is driven by MCU_TIMER7 output   4'b1000  -  MCU_TIMERIO4 is driven by MCU_TIMER8 output   4'b1001  -  MCU_TIMERIO4 is driven by MCU_TIMER9 output   4'b1010  -  MCU_TIMERIO4 is driven low   4'b1011  -  MCU_TIMERIO4 is driven high   4'b1100  -  MCU_TIMERIO4 is driven low   4'b1101  -  MCU_TIMERIO4 is driven high   4'b1110  -  MCU_TIMERIO4 is driven low   4'b1111  -  MCU_TIMERIO4 is driven high" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMERIO5_CTRL" acronym="CFG0_MCU_TIMERIO5_CTRL" offset="0x4294" width="32" description="Controls MCU TimerIO muxing">
+		<bitfield id="MCU_TIMERIO5_CTRL_OUT_SEL" width="4" begin="3" end="0" resetval="0x15" description="Selects the source of the MCU_TIMERIO5 output  Field values (Others are reserved):   4'b0000  -  MCU_TIMERIO5 is driven by MCU_TIMER0 output   4'b0001  -  MCU_TIMERIO5 is driven by MCU_TIMER1 output   4'b0010  -  MCU_TIMERIO5 is driven by MCU_TIMER2 output   4'b0011  -  MCU_TIMERIO5 is driven by MCU_TIMER3 output   4'b0100  -  MCU_TIMERIO5 is driven by MCU_TIMER4 output   4'b0101  -  MCU_TIMERIO5 is driven by MCU_TIMER5 output   4'b0110  -  MCU_TIMERIO5 is driven by MCU_TIMER6 output   4'b0111  -  MCU_TIMERIO5 is driven by MCU_TIMER7 output   4'b1000  -  MCU_TIMERIO5 is driven by MCU_TIMER8 output   4'b1001  -  MCU_TIMERIO5 is driven by MCU_TIMER9 output   4'b1010  -  MCU_TIMERIO5 is driven low   4'b1011  -  MCU_TIMERIO5 is driven high   4'b1100  -  MCU_TIMERIO5 is driven low   4'b1101  -  MCU_TIMERIO5 is driven high   4'b1110  -  MCU_TIMERIO5 is driven low   4'b1111  -  MCU_TIMERIO5 is driven high" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMERIO6_CTRL" acronym="CFG0_MCU_TIMERIO6_CTRL" offset="0x4298" width="32" description="Controls MCU TimerIO muxing">
+		<bitfield id="MCU_TIMERIO6_CTRL_OUT_SEL" width="4" begin="3" end="0" resetval="0x15" description="Selects the source of the MCU_TIMERIO6 output  Field values (Others are reserved):   4'b0000  -  MCU_TIMERIO6 is driven by MCU_TIMER0 output   4'b0001  -  MCU_TIMERIO6 is driven by MCU_TIMER1 output   4'b0010  -  MCU_TIMERIO6 is driven by MCU_TIMER2 output   4'b0011  -  MCU_TIMERIO6 is driven by MCU_TIMER3 output   4'b0100  -  MCU_TIMERIO6 is driven by MCU_TIMER4 output   4'b0101  -  MCU_TIMERIO6 is driven by MCU_TIMER5 output   4'b0110  -  MCU_TIMERIO6 is driven by MCU_TIMER6 output   4'b0111  -  MCU_TIMERIO6 is driven by MCU_TIMER7 output   4'b1000  -  MCU_TIMERIO6 is driven by MCU_TIMER8 output   4'b1001  -  MCU_TIMERIO6 is driven by MCU_TIMER9 output   4'b1010  -  MCU_TIMERIO6 is driven low   4'b1011  -  MCU_TIMERIO6 is driven high   4'b1100  -  MCU_TIMERIO6 is driven low   4'b1101  -  MCU_TIMERIO6 is driven high   4'b1110  -  MCU_TIMERIO6 is driven low   4'b1111  -  MCU_TIMERIO6 is driven high" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMERIO7_CTRL" acronym="CFG0_MCU_TIMERIO7_CTRL" offset="0x429C" width="32" description="Controls MCU TimerIO muxing">
+		<bitfield id="MCU_TIMERIO7_CTRL_OUT_SEL" width="4" begin="3" end="0" resetval="0x15" description="Selects the source of the MCU_TIMERIO7 output  Field values (Others are reserved):   4'b0000  -  MCU_TIMERIO7 is driven by MCU_TIMER0 output   4'b0001  -  MCU_TIMERIO7 is driven by MCU_TIMER1 output   4'b0010  -  MCU_TIMERIO7 is driven by MCU_TIMER2 output   4'b0011  -  MCU_TIMERIO7 is driven by MCU_TIMER3 output   4'b0100  -  MCU_TIMERIO7 is driven by MCU_TIMER4 output   4'b0101  -  MCU_TIMERIO7 is driven by MCU_TIMER5 output   4'b0110  -  MCU_TIMERIO7 is driven by MCU_TIMER6 output   4'b0111  -  MCU_TIMERIO7 is driven by MCU_TIMER7 output   4'b1000  -  MCU_TIMERIO7 is driven by MCU_TIMER8 output   4'b1001  -  MCU_TIMERIO7 is driven by MCU_TIMER9 output   4'b1010  -  MCU_TIMERIO7 is driven low   4'b1011  -  MCU_TIMERIO7 is driven high   4'b1100  -  MCU_TIMERIO7 is driven low   4'b1101  -  MCU_TIMERIO7 is driven high   4'b1110  -  MCU_TIMERIO7 is driven low   4'b1111  -  MCU_TIMERIO7 is driven high" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMERIO8_CTRL" acronym="CFG0_MCU_TIMERIO8_CTRL" offset="0x42A0" width="32" description="Controls MCU TimerIO muxing">
+		<bitfield id="MCU_TIMERIO8_CTRL_OUT_SEL" width="4" begin="3" end="0" resetval="0x15" description="Selects the source of the MCU_TIMERIO8 output  Field values (Others are reserved):   4'b0000  -  MCU_TIMERIO8 is driven by MCU_TIMER0 output   4'b0001  -  MCU_TIMERIO8 is driven by MCU_TIMER1 output   4'b0010  -  MCU_TIMERIO8 is driven by MCU_TIMER2 output   4'b0011  -  MCU_TIMERIO8 is driven by MCU_TIMER3 output   4'b0100  -  MCU_TIMERIO8 is driven by MCU_TIMER4 output   4'b0101  -  MCU_TIMERIO8 is driven by MCU_TIMER5 output   4'b0110  -  MCU_TIMERIO8 is driven by MCU_TIMER6 output   4'b0111  -  MCU_TIMERIO8 is driven by MCU_TIMER7 output   4'b1000  -  MCU_TIMERIO8 is driven by MCU_TIMER8 output   4'b1001  -  MCU_TIMERIO8 is driven by MCU_TIMER9 output   4'b1010  -  MCU_TIMERIO8 is driven low   4'b1011  -  MCU_TIMERIO8 is driven high   4'b1100  -  MCU_TIMERIO8 is driven low   4'b1101  -  MCU_TIMERIO8 is driven high   4'b1110  -  MCU_TIMERIO8 is driven low   4'b1111  -  MCU_TIMERIO8 is driven high" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMERIO9_CTRL" acronym="CFG0_MCU_TIMERIO9_CTRL" offset="0x42A4" width="32" description="Controls MCU TimerIO muxing">
+		<bitfield id="MCU_TIMERIO9_CTRL_OUT_SEL" width="4" begin="3" end="0" resetval="0x15" description="Selects the source of the MCU_TIMERIO9 output  Field values (Others are reserved):   4'b0000  -  MCU_TIMERIO9 is driven by MCU_TIMER0 output   4'b0001  -  MCU_TIMERIO9 is driven by MCU_TIMER1 output   4'b0010  -  MCU_TIMERIO9 is driven by MCU_TIMER2 output   4'b0011  -  MCU_TIMERIO9 is driven by MCU_TIMER3 output   4'b0100  -  MCU_TIMERIO9 is driven by MCU_TIMER4 output   4'b0101  -  MCU_TIMERIO9 is driven by MCU_TIMER5 output   4'b0110  -  MCU_TIMERIO9 is driven by MCU_TIMER6 output   4'b0111  -  MCU_TIMERIO9 is driven by MCU_TIMER7 output   4'b1000  -  MCU_TIMERIO9 is driven by MCU_TIMER8 output   4'b1001  -  MCU_TIMERIO9 is driven by MCU_TIMER9 output   4'b1010  -  MCU_TIMERIO9 is driven low   4'b1011  -  MCU_TIMERIO9 is driven high   4'b1100  -  MCU_TIMERIO9 is driven low   4'b1101  -  MCU_TIMERIO9 is driven high   4'b1110  -  MCU_TIMERIO9 is driven low   4'b1111  -  MCU_TIMERIO9 is driven high" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_MTOG0_CTRL" acronym="CFG0_MCU_MTOG0_CTRL" offset="0x4300" width="32" description="Controls timeout operation of transaction from MAIN domain to MCU peripheral data bus">
+		<bitfield id="MCU_MTOG0_CTRL_IDLE_STAT" width="1" begin="31" end="31" resetval="0x0" description="Idle statusWhen high, indicates MTOG0 is idle." range="31" rwaccess="R"/> 
+		<bitfield id="MCU_MTOG0_CTRL_FORCE_TIMEOUT" width="8" begin="23" end="16" resetval="0x0" description="Force TimeoutForces a flush of the interface transactions.  This bitfield is only relevant if timeout_en=1.  After forcing a timeout by writing the encoded value, the force_timeout and timeout_en bitfields must be cleared to clear the timeout before re-enabling the gasket. 8'h95 - Force a gasket timeoutAll others - Normal operation" range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="MCU_MTOG0_CTRL_TIMEOUT_EN" width="1" begin="15" end="15" resetval="0x0" description="Timeout Enable 1'b0 - Disable the gasket.  Clear the interrupt and reset the counter 1'b1 - Enable the timeout gasket functions" range="15" rwaccess="R/W"/> 
+		<bitfield id="MCU_MTOG0_CTRL_TIMEOUT_VAL" width="3" begin="2" end="0" resetval="0x0" description="Gasket Timeout ValueSelects the number of clock cycles before the interface is considered to have timed out  Field values (Others are reserved):   3'b000  -  1024 clock cycles   3'b001  -  4096 clock cycles   3'b010  -  16,384 clock cycles   3'b011  -  65,536 clock cycles   3'b100  -  262,144 clock cycles   3'b101  -  1,048,576 clock cycles   3'b110  -  2,097,152 clock cycles   3'b111  -  4,194,303 clock cycles" range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_LOCK1_KICK0" acronym="CFG0_LOCK1_KICK0" offset="0x5008" width="32" description="This register must be written with the designated key value followed by a write to LOCK1_KICK1 with its key value before write-protected Partition 1 registers can be written.">
+		<bitfield id="LOCK1_KICK0" width="32" begin="31" end="0" resetval="0x0" description=" - KICK0 component" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_LOCK1_KICK1" acronym="CFG0_LOCK1_KICK1" offset="0x500C" width="32" description="This register must be written with the designated key value after a write to LOCK1_KICK0 with its key value before write-protected Partition 1 registers can be written.">
+		<bitfield id="LOCK1_KICK1" width="32" begin="31" end="0" resetval="0x0" description=" - KICK1 component" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P1_R0_READONLY" acronym="CFG0_CLAIMREG_P1_R0_READONLY" offset="0x5100" width="32" description="">
+		<bitfield id="CLAIMREG_P1_R0_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 1" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P1_R1_READONLY" acronym="CFG0_CLAIMREG_P1_R1_READONLY" offset="0x5104" width="32" description="">
+		<bitfield id="CLAIMREG_P1_R1_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 1" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P1_R2_READONLY" acronym="CFG0_CLAIMREG_P1_R2_READONLY" offset="0x5108" width="32" description="">
+		<bitfield id="CLAIMREG_P1_R2_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 1" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P1_R3_READONLY" acronym="CFG0_CLAIMREG_P1_R3_READONLY" offset="0x510C" width="32" description="">
+		<bitfield id="CLAIMREG_P1_R3_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 1" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P1_R4_READONLY" acronym="CFG0_CLAIMREG_P1_R4_READONLY" offset="0x5110" width="32" description="">
+		<bitfield id="CLAIMREG_P1_R4_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 1" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P1_R5_READONLY" acronym="CFG0_CLAIMREG_P1_R5_READONLY" offset="0x5114" width="32" description="">
+		<bitfield id="CLAIMREG_P1_R5_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 1" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P1_R6_READONLY" acronym="CFG0_CLAIMREG_P1_R6_READONLY" offset="0x5118" width="32" description="">
+		<bitfield id="CLAIMREG_P1_R6_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 1" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_MSMC_CFG_PROXY" acronym="CFG0_MSMC_CFG_PROXY" offset="0x6030" width="32" description="Used to configure MSMC reset options">
+		<bitfield id="MSMC_CFG_MEM_SIZE_PROXY" width="4" begin="11" end="8" resetval="0x0" description="Indicates the size of MSMC shared SRAM/Cache  Field values (Others are reserved):   4'b0000  -  0.5 MB   4'b0001  -  1.75 MB   4'b0010  -  3.0 MB   4'b0011  -  4,25 MB   4'b0100  -  5.5 MB   4'b0101  -  6.75 MB   4'b0110  -  8 MB   4'b0111  -  9.25 MB   4'b1000  -  10.5 MB   4'b1001  -  11.75 MB   4'b1010  -  13.0 MB" range="11 - 8" rwaccess="R"/> 
+		<bitfield id="MSMC_CFG_MEM_INIT_DIS_PROXY" width="1" begin="4" end="4" resetval="0x0" description="Disables MSMC SRAM initialization (Data, Cache Tags, and Snoop Filters).  This is required for proper initial ECC initialization.    1'b0 - Perform memory initialization   1'b1 - Disable memory initialization" range="4" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_ENET_CTRL_PROXY" acronym="CFG0_MCU_ENET_CTRL_PROXY" offset="0x6040" width="32" description="Controls MCU Ethernet Port1 operation ">
+		<bitfield id="MCU_ENET_CTRL_RGMII_ID_MODE_PROXY" width="1" begin="4" end="4" resetval="0x0" description="Port1 RGMII internal transmit delay selection  0 - Internal transmit delay  1 - No internal transmit delay" range="4" rwaccess="R/W"/> 
+		<bitfield id="MCU_ENET_CTRL_MODE_SEL_PROXY" width="2" begin="1" end="0" resetval="0x1" description="Selects Ethernet switch Port1 interface    Field values (Others are reserved):   2'b00  -  GMII/MII (not supported)   2'b01  -  RMII   2'b10  -  RGMII   2'b11  -  SGMII (not supported)" range="1 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_SPI1_CTRL_PROXY" acronym="CFG0_MCU_SPI1_CTRL_PROXY" offset="0x6060" width="32" description="Controls if MCU_SPI1 is directly connected to SPI3 in the MAIN Domain (default) or if MCU_SPI1 and SPI3 are independently pinned out.">
+		<bitfield id="MCU_SPI1_CTRL_SPI1_LINKDIS_PROXY" width="1" begin="0" end="0" resetval="0x0" description="Disables direct connection of MCU_SPI1 to SPI3  Field values (Others are reserved):   1'b0  -  MCU_SPI1 is tied as a slave to SPI3.  MCU_SPI1 CLK, DATA1 and CS0 are driven from SPI3, DATA OUT  drives SPI3 DATA0   1'b1  -  MCU_SPI1 is NOT tied as a slave to SPI3.  MCU_SPI1 CLK, DATA0, DATA1 and CS[3:0] are controlled through their respective MCU_SPI1 pins and SPI3 CLK, DATA0, DATA1, and CS[3:0] are controlled through their respective SPI3 pins." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_I3C0_CTRL0_PROXY" acronym="CFG0_MCU_I3C0_CTRL0_PROXY" offset="0x6070" width="32" description="Controls MCU I3C0 operation">
+		<bitfield id="MCU_I3C0_CTRL0_PID_MFR_ID_PROXY" width="15" begin="30" end="16" resetval="0x258" description="Manufacturer IDThis input corresponds to bits[47:33] of the Provisional ID to identify the manufacturer.Defaults to TI value." range="30 - 16" rwaccess="R/W"/> 
+		<bitfield id="MCU_I3C0_CTRL0_ROLE_PROXY" width="1" begin="8" end="8" resetval="0x0" description="Master Role  0 - Main master  1 - Secondary master" range="8" rwaccess="R/W"/> 
+		<bitfield id="MCU_I3C0_CTRL0_PID_INSTANCE_PROXY" width="4" begin="3" end="0" resetval="0x0" description="Provisional ID Instance.  This input corresponds to bits[15:12] of the Provisional ID.  It is intended to provide a way of differentiating several I3C devices if there would be no other way to have each manufactured device have a unique Provisional ID" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_I3C0_CTRL1_PROXY" acronym="CFG0_MCU_I3C0_CTRL1_PROXY" offset="0x6074" width="32" description="Controls MCU I3C0 operation">
+		<bitfield id="MCU_I3C0_CTRL1_BUS_AVAIL_TIME_PROXY" width="8" begin="31" end="24" resetval="0x0" description="Indicates the number of pclk cycles in the Bus Available condition" range="31 - 24" rwaccess="R/W"/> 
+		<bitfield id="MCU_I3C0_CTRL1_BUS_IDLE_TIME_PROXY" width="18" begin="17" end="0" resetval="0x0" description="Indicates the number of pclk cycles in the Bus Idle condition" range="17 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_I2C0_CTRL_PROXY" acronym="CFG0_MCU_I2C0_CTRL_PROXY" offset="0x6080" width="32" description="Controls MCU I2C0 operation">
+		<bitfield id="MCU_I2C0_CTRL_HS_MCS_EN_PROXY" width="1" begin="0" end="0" resetval="0x0" description="HS Mode master current source enable.When set, enables the current-source pull-up on the SCL output.  Only one master on the I2C bus should enable SCL current sourcing." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_I2C1_CTRL_PROXY" acronym="CFG0_MCU_I2C1_CTRL_PROXY" offset="0x6084" width="32" description="Controls MCU I2C1 operation">
+		<bitfield id="MCU_I2C1_CTRL_HS_MCS_EN_PROXY" width="1" begin="0" end="0" resetval="0x0" description="HS Mode master current source enable.When set, enables the current-source pull-up on the SCL output.  Only one master on the I2C bus should enable SCL current sourcing." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_FSS_CTRL_PROXY" acronym="CFG0_MCU_FSS_CTRL_PROXY" offset="0x60A0" width="32" description="Controls Flash boot region size and placement">
+		<bitfield id="MCU_FSS_CTRL_S1_BOOT_SIZE_PROXY" width="1" begin="24" end="24" resetval="0x0" description="Selects the size of the boot block to be used for the S1 (OSPI1) flash interface  0 - S1 boot size is 64 MB  1 - S1 boot size is 128 MB" range="24" rwaccess="R/W"/> 
+		<bitfield id="MCU_FSS_CTRL_S1_BOOT_SEG_PROXY" width="6" begin="21" end="16" resetval="0x0" description="Selects the boot block to be used for the S1 (OSPI1) flash interface.  If the s1_boot_size is 128 MB then only bits [4:0] of this field are used.  Care must be taken to account for the address translation as to not fall off or wrap the address of the flash.  (e.g.  if both ECC and authentication are enabled for 64 MB boot, the highest valid block number is  49, as sector 50 is only .2M Bytes in size.)   6'h00 - Use block 0  6'h01 - Use block 1    :  6'h3F - Use block 63" range="21 - 16" rwaccess="R/W"/> 
+		<bitfield id="MCU_FSS_CTRL_S0_BOOT_SIZE_PROXY" width="1" begin="8" end="8" resetval="0x0" description="Selects the size of the boot block to be used for the S0 (OSPI0 or Hyperbus) flash interface  0 - S0 boot size is 64 MB  1 - S0 boot size is 128 MB" range="8" rwaccess="R/W"/> 
+		<bitfield id="MCU_FSS_CTRL_S0_BOOT_SEG_PROXY" width="6" begin="5" end="0" resetval="0x0" description="Selects the boot block to be used for the S0 (OSPI0 or Hyperbus) flash interface.  If the s0_boot_size is 128 MB then only bits [4:0] of this field are used.  Care must be taken to account for the address translation as to not fall off or wrap the address of the flash.  (e.g.  if both ECC and authentication are enabled for 64 MB boot, the highest valid block number is  49, as sector 50 is only .2M Bytes in size.)   6'h00 - Use block 0  6'h01 - Use block 1    :  6'h3F - Use block 63" range="5 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_ADC0_CTRL_PROXY" acronym="CFG0_MCU_ADC0_CTRL_PROXY" offset="0x60B0" width="32" description="Controls operation of MCU ADC0 ">
+		<bitfield id="MCU_ADC0_CTRL_GPI_MODE_EN_PROXY" width="1" begin="16" end="16" resetval="0x0" description="Enables MCU_ADC0 data pins to be used as general purpose inputs when set.  This signal is tied to the en_dig_test input of MCU_ADC0" range="16" rwaccess="R/W"/> 
+		<bitfield id="MCU_ADC0_CTRL_TRIG_SEL_PROXY" width="5" begin="4" end="0" resetval="0x0" description="Selects the source of the ADC hardware event trigger  Field values (Others are reserved):   5'b00000  -  MCU_ADC_EXT_TRIGGER0 pin   5'b00001  -  MCU_ADC_EXT_TRIGGER1 pin   5'b00010  -  eHRPWM SOCA event   5'b00011  -  eHRPWM SOCB event   5'b00100  -  MCU Timer0 PWM output   5'b00101  -  MCU Timer1 PWM output   5'b00110  -  MCU Timer2 PWM output   5'b00111  -  MCU Timer3 PWM output   5'b01000  -  Timer0 PWM output   5'b01001  -  Timer1 PWM output   5'b01010  -  Timer2 PWM output   5'b01011  -  Timer3 PWM output   5'b01100  -  Timer4 PWM output   5'b01101  -  Timer5 PWM output   5'b01110  -  Timer6 PWM output   5'b01111  -  Timer7 PWM output   5'b10000  -  Timer8 PWM output   5'b10001  -  Timer9 PWM output   5'b10010  -  Timer10 PWM output   5'b10011  -  Timer11 PWM output   5'b10101  -  Reserved (tied 1'b0)   5'b10110  -  Reserved (tied 1'b0)   5'b10111  -  Reserved (tied 1'b0)   5'b11000  -  Reserved (tied 1'b0)   5'b11000  -  MCU Timer4 PWM output   5'b11001  -  MCU Timer5 PWM output   5'b11010  -  MCU Timer6 PWM output   5'b11011  -  MCU Timer7 PWM output   5'b11100  -  MCU Timer8 PWM output   5'b11101  -  MCU Timer9 PWM output   5'b11110  -  Reserved (tied 1'b0)   5'b11111  -  Reserved (tied 1'b0)" range="4 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_ADC1_CTRL_PROXY" acronym="CFG0_MCU_ADC1_CTRL_PROXY" offset="0x60B4" width="32" description="Controls operation of MCU ADC1 ">
+		<bitfield id="MCU_ADC1_CTRL_GPI_MODE_EN_PROXY" width="1" begin="16" end="16" resetval="0x0" description="Enables MCU_ADC1 data pins to be used as general purpose inputs when set.  This signal is tied to the en_dig_test input of MCU_ADC1" range="16" rwaccess="R/W"/> 
+		<bitfield id="MCU_ADC1_CTRL_TRIG_SEL_PROXY" width="5" begin="4" end="0" resetval="0x1" description="Selects the source of the ADC hardware event trigger  Field values (Others are reserved):   5'b00000  -  MCU_ADC_EXT_TRIGGER0 pin   5'b00001  -  MCU_ADC_EXT_TRIGGER1 pin   5'b00010  -  eHRPWM SOCA event   5'b00011  -  eHRPWM SOCB event   5'b00100  -  MCU Timer0 PWM output   5'b00101  -  MCU Timer1 PWM output   5'b00110  -  MCU Timer2 PWM output   5'b00111  -  MCU Timer3 PWM output   5'b01000  -  Timer0 PWM output   5'b01001  -  Timer1 PWM output   5'b01010  -  Timer2 PWM output   5'b01011  -  Timer3 PWM output   5'b01100  -  Timer4 PWM output   5'b01101  -  Timer5 PWM output   5'b01110  -  Timer6 PWM output   5'b01111  -  Timer7 PWM output   5'b10000  -  Timer8 PWM output   5'b10001  -  Timer9 PWM output   5'b10010  -  Timer10 PWM output   5'b10011  -  Timer11 PWM output   5'b10101  -  Reserved (tied 1'b0)   5'b10110  -  Reserved (tied 1'b0)   5'b11000  -  MCU Timer4 PWM output   5'b11001  -  MCU Timer5 PWM output   5'b11010  -  MCU Timer6 PWM output   5'b11011  -  MCU Timer7 PWM output   5'b11100  -  MCU Timer8 PWM output   5'b11101  -  MCU Timer9 PWM output   5'b11110  -  Reserved (tied 1'b0)   5'b11111  -  Reserved (tied 1'b0)" range="4 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_ADC0_TRIM_PROXY" acronym="CFG0_MCU_ADC0_TRIM_PROXY" offset="0x60C0" width="32" description="Trims ADC non-linearities">
+		<bitfield id="MCU_ADC0_TRIM_TRIM5_PROXY" width="3" begin="26" end="24" resetval="0x0" description="Trim value for C50.37 fF to 3.2fF in ~0.37fF increments" range="26 - 24" rwaccess="R/W"/> 
+		<bitfield id="MCU_ADC0_TRIM_TRIM4_PROXY" width="3" begin="23" end="21" resetval="0x0" description="Trim value for C40.37 fF to 3.2fF in ~0.37fF increments" range="23 - 21" rwaccess="R/W"/> 
+		<bitfield id="MCU_ADC0_TRIM_TRIM3_PROXY" width="3" begin="20" end="18" resetval="0x0" description="Trim value for C30.37 fF to 3.2fF in ~0.37fF increments" range="20 - 18" rwaccess="R/W"/> 
+		<bitfield id="MCU_ADC0_TRIM_TRIM2_PROXY" width="4" begin="17" end="14" resetval="0x0" description="Trim value for C20.37 fF to 6.4fF in ~0.37fF increments" range="17 - 14" rwaccess="R/W"/> 
+		<bitfield id="MCU_ADC0_TRIM_TRIM1_PROXY" width="4" begin="13" end="10" resetval="0x0" description="Trim value for C10.37 fF to 6.4fF in ~0.37fF increments" range="13 - 10" rwaccess="R/W"/> 
+		<bitfield id="MCU_ADC0_TRIM_ENABLE_CALB_PROXY" width="5" begin="9" end="5" resetval="0x0" description="Enable negative trim.Decreases Cap value when set.  Bits correspond to C5:C1" range="9 - 5" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_ADC1_TRIM_PROXY" acronym="CFG0_MCU_ADC1_TRIM_PROXY" offset="0x60C4" width="32" description="Trims ADC non-linearities">
+		<bitfield id="MCU_ADC1_TRIM_TRIM5_PROXY" width="3" begin="26" end="24" resetval="0x0" description="Trim value for C50.37 fF to 3.2fF in ~0.37fF increments" range="26 - 24" rwaccess="R/W"/> 
+		<bitfield id="MCU_ADC1_TRIM_TRIM4_PROXY" width="3" begin="23" end="21" resetval="0x0" description="Trim value for C40.37 fF to 3.2fF in ~0.37fF increments" range="23 - 21" rwaccess="R/W"/> 
+		<bitfield id="MCU_ADC1_TRIM_TRIM3_PROXY" width="3" begin="20" end="18" resetval="0x0" description="Trim value for C30.37 fF to 3.2fF in ~0.37fF increments" range="20 - 18" rwaccess="R/W"/> 
+		<bitfield id="MCU_ADC1_TRIM_TRIM2_PROXY" width="4" begin="17" end="14" resetval="0x0" description="Trim value for C20.37 fF to 6.4fF in ~0.37fF increments" range="17 - 14" rwaccess="R/W"/> 
+		<bitfield id="MCU_ADC1_TRIM_TRIM1_PROXY" width="4" begin="13" end="10" resetval="0x0" description="Trim value for C10.37 fF to 6.4fF in ~0.37fF increments" range="13 - 10" rwaccess="R/W"/> 
+		<bitfield id="MCU_ADC1_TRIM_ENABLE_CALB_PROXY" width="5" begin="9" end="5" resetval="0x0" description="Enable negative trim.Decreases Cap value when set.  Bits correspond to C5:C1" range="9 - 5" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER0_CTRL_PROXY" acronym="CFG0_MCU_TIMER0_CTRL_PROXY" offset="0x6200" width="32" description="Controls MCU Timer0 operation">
+		<bitfield id="MCU_TIMER0_CTRL_CAP_SEL_PROXY" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal.  This control is only used when TIMER0 is configured for capture operation.  Field values (Others are reserved):   4'b0000  -  Use MCU_TIMER_IO0 pin   4'b0001  -  Use MCU_TIMER_IO1 pin   4'b0010  -  Use MCU_TIMER_IO2 pin   4'b0011  -  Use MCU_TIMER_IO3 pin   4'b0100  -  Use MCU_TIMER_IO4 pin   4'b0101  -  Use MCU_TIMER_IO5 pin   4'b0110  -  Use MCU_TIMER_IO6 pin   4'b0111  -  Use MCU_TIMER_IO7 pin   4'b1000  -  Use MCU_TIMER_IO8 pin   4'b1001  -  Use MCU_TIMER_IO9 pin" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER1_CTRL_PROXY" acronym="CFG0_MCU_TIMER1_CTRL_PROXY" offset="0x6204" width="32" description="Controls MCU Timer1 operation">
+		<bitfield id="MCU_TIMER1_CTRL_CASCADE_EN_PROXY" width="1" begin="8" end="8" resetval="0x0" description="When set, enables cascading of MCU_TIMER1 to MCU_TIMER0" range="8" rwaccess="R/W"/> 
+		<bitfield id="MCU_TIMER1_CTRL_CAP_SEL_PROXY" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal.  This control is only used when TIMER1 is configured for capture operation.  Field values (Others are reserved):   4'b0000  -  Use MCU_TIMER_IO0 pin   4'b0001  -  Use MCU_TIMER_IO1 pin   4'b0010  -  Use MCU_TIMER_IO2 pin   4'b0011  -  Use MCU_TIMER_IO3 pin   4'b0100  -  Use MCU_TIMER_IO4 pin   4'b0101  -  Use MCU_TIMER_IO5 pin   4'b0110  -  Use MCU_TIMER_IO6 pin   4'b0111  -  Use MCU_TIMER_IO7 pin   4'b1000  -  Use MCU_TIMER_IO8 pin   4'b1001  -  Use MCU_TIMER_IO9 pin" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER2_CTRL_PROXY" acronym="CFG0_MCU_TIMER2_CTRL_PROXY" offset="0x6208" width="32" description="Controls MCU Timer2 operation">
+		<bitfield id="MCU_TIMER2_CTRL_CAP_SEL_PROXY" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal.  This control is only used when TIMER2 is configured for capture operation.  Field values (Others are reserved):   4'b0000  -  Use MCU_TIMER_IO0 pin   4'b0001  -  Use MCU_TIMER_IO1 pin   4'b0010  -  Use MCU_TIMER_IO2 pin   4'b0011  -  Use MCU_TIMER_IO3 pin   4'b0100  -  Use MCU_TIMER_IO4 pin   4'b0101  -  Use MCU_TIMER_IO5 pin   4'b0110  -  Use MCU_TIMER_IO6 pin   4'b0111  -  Use MCU_TIMER_IO7 pin   4'b1000  -  Use MCU_TIMER_IO8 pin   4'b1001  -  Use MCU_TIMER_IO9 pin" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER3_CTRL_PROXY" acronym="CFG0_MCU_TIMER3_CTRL_PROXY" offset="0x620C" width="32" description="Controls MCU Timer3 operation">
+		<bitfield id="MCU_TIMER3_CTRL_CASCADE_EN_PROXY" width="1" begin="8" end="8" resetval="0x0" description="When set, enables cascading of MCU_TIMER3 to MCU_TIMER2" range="8" rwaccess="R/W"/> 
+		<bitfield id="MCU_TIMER3_CTRL_CAP_SEL_PROXY" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal.  This control is only used when TIMER3 is configured for capture operation.  Field values (Others are reserved):   4'b0000  -  Use MCU_TIMER_IO0 pin   4'b0001  -  Use MCU_TIMER_IO1 pin   4'b0010  -  Use MCU_TIMER_IO2 pin   4'b0011  -  Use MCU_TIMER_IO3 pin   4'b0100  -  Use MCU_TIMER_IO4 pin   4'b0101  -  Use MCU_TIMER_IO5 pin   4'b0110  -  Use MCU_TIMER_IO6 pin   4'b0111  -  Use MCU_TIMER_IO7 pin   4'b1000  -  Use MCU_TIMER_IO8 pin   4'b1001  -  Use MCU_TIMER_IO9 pin" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER4_CTRL_PROXY" acronym="CFG0_MCU_TIMER4_CTRL_PROXY" offset="0x6210" width="32" description="Controls MCU Timer4 operation">
+		<bitfield id="MCU_TIMER4_CTRL_CAP_SEL_PROXY" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal.  This control is only used when TIMER4 is configured for capture operation.  Field values (Others are reserved):   4'b0000  -  Use MCU_TIMER_IO0 pin   4'b0001  -  Use MCU_TIMER_IO1 pin   4'b0010  -  Use MCU_TIMER_IO2 pin   4'b0011  -  Use MCU_TIMER_IO3 pin   4'b0100  -  Use MCU_TIMER_IO4 pin   4'b0101  -  Use MCU_TIMER_IO5 pin   4'b0110  -  Use MCU_TIMER_IO6 pin   4'b0111  -  Use MCU_TIMER_IO7 pin   4'b1000  -  Use MCU_TIMER_IO8 pin   4'b1001  -  Use MCU_TIMER_IO9 pin" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER5_CTRL_PROXY" acronym="CFG0_MCU_TIMER5_CTRL_PROXY" offset="0x6214" width="32" description="Controls MCU Timer5 operation">
+		<bitfield id="MCU_TIMER5_CTRL_CASCADE_EN_PROXY" width="1" begin="8" end="8" resetval="0x0" description="When set, enables cascading of MCU_TIMER5 to MCU_TIMER4" range="8" rwaccess="R/W"/> 
+		<bitfield id="MCU_TIMER5_CTRL_CAP_SEL_PROXY" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal.  This control is only used when TIMER5 is configured for capture operation.  Field values (Others are reserved):   4'b0000  -  Use MCU_TIMER_IO0 pin   4'b0001  -  Use MCU_TIMER_IO1 pin   4'b0010  -  Use MCU_TIMER_IO2 pin   4'b0011  -  Use MCU_TIMER_IO3 pin   4'b0100  -  Use MCU_TIMER_IO4 pin   4'b0101  -  Use MCU_TIMER_IO5 pin   4'b0110  -  Use MCU_TIMER_IO6 pin   4'b0111  -  Use MCU_TIMER_IO7 pin   4'b1000  -  Use MCU_TIMER_IO8 pin   4'b1001  -  Use MCU_TIMER_IO9 pin" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER6_CTRL_PROXY" acronym="CFG0_MCU_TIMER6_CTRL_PROXY" offset="0x6218" width="32" description="Controls MCU Timer6 operation">
+		<bitfield id="MCU_TIMER6_CTRL_CAP_SEL_PROXY" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal.  This control is only used when TIMER6 is configured for capture operation.  Field values (Others are reserved):   4'b0000  -  Use MCU_TIMER_IO0 pin   4'b0001  -  Use MCU_TIMER_IO1 pin   4'b0010  -  Use MCU_TIMER_IO2 pin   4'b0011  -  Use MCU_TIMER_IO3 pin   4'b0100  -  Use MCU_TIMER_IO4 pin   4'b0101  -  Use MCU_TIMER_IO5 pin   4'b0110  -  Use MCU_TIMER_IO6 pin   4'b0111  -  Use MCU_TIMER_IO7 pin   4'b1000  -  Use MCU_TIMER_IO8 pin   4'b1001  -  Use MCU_TIMER_IO9 pin" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER7_CTRL_PROXY" acronym="CFG0_MCU_TIMER7_CTRL_PROXY" offset="0x621C" width="32" description="Controls MCU Timer7 operation">
+		<bitfield id="MCU_TIMER7_CTRL_CASCADE_EN_PROXY" width="1" begin="8" end="8" resetval="0x0" description="When set, enables cascading of MCU_TIMER7 to MCU_TIMER6" range="8" rwaccess="R/W"/> 
+		<bitfield id="MCU_TIMER7_CTRL_CAP_SEL_PROXY" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal.  This control is only used when TIMER7 is configured for capture operation.  Field values (Others are reserved):   4'b0000  -  Use MCU_TIMER_IO0 pin   4'b0001  -  Use MCU_TIMER_IO1 pin   4'b0010  -  Use MCU_TIMER_IO2 pin   4'b0011  -  Use MCU_TIMER_IO3 pin   4'b0100  -  Use MCU_TIMER_IO4 pin   4'b0101  -  Use MCU_TIMER_IO5 pin   4'b0110  -  Use MCU_TIMER_IO6 pin   4'b0111  -  Use MCU_TIMER_IO7 pin   4'b1000  -  Use MCU_TIMER_IO8 pin   4'b1001  -  Use MCU_TIMER_IO9 pin" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER8_CTRL_PROXY" acronym="CFG0_MCU_TIMER8_CTRL_PROXY" offset="0x6220" width="32" description="Controls MCU Timer8 operation">
+		<bitfield id="MCU_TIMER8_CTRL_CAP_SEL_PROXY" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal.  This control is only used when TIMER8 is configured for capture operation.  Field values (Others are reserved):   4'b0000  -  Use MCU_TIMER_IO0 pin   4'b0001  -  Use MCU_TIMER_IO1 pin   4'b0010  -  Use MCU_TIMER_IO2 pin   4'b0011  -  Use MCU_TIMER_IO3 pin   4'b0100  -  Use MCU_TIMER_IO4 pin   4'b0101  -  Use MCU_TIMER_IO5 pin   4'b0110  -  Use MCU_TIMER_IO6 pin   4'b0111  -  Use MCU_TIMER_IO7 pin   4'b1000  -  Use MCU_TIMER_IO8 pin   4'b1001  -  Use MCU_TIMER_IO9 pin" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER9_CTRL_PROXY" acronym="CFG0_MCU_TIMER9_CTRL_PROXY" offset="0x6224" width="32" description="Controls MCU Timer9 operation">
+		<bitfield id="MCU_TIMER9_CTRL_CASCADE_EN_PROXY" width="1" begin="8" end="8" resetval="0x0" description="When set, enables cascading of MCU_TIMER9 to MCU_TIMER8" range="8" rwaccess="R/W"/> 
+		<bitfield id="MCU_TIMER9_CTRL_CAP_SEL_PROXY" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal.  This control is only used when TIMER9 is configured for capture operation.  Field values (Others are reserved):   4'b0000  -  Use MCU_TIMER_IO0 pin   4'b0001  -  Use MCU_TIMER_IO1 pin   4'b0010  -  Use MCU_TIMER_IO2 pin   4'b0011  -  Use MCU_TIMER_IO3 pin   4'b0100  -  Use MCU_TIMER_IO4 pin   4'b0101  -  Use MCU_TIMER_IO5 pin   4'b0110  -  Use MCU_TIMER_IO6 pin   4'b0111  -  Use MCU_TIMER_IO7 pin   4'b1000  -  Use MCU_TIMER_IO8 pin   4'b1001  -  Use MCU_TIMER_IO9 pin" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMERIO0_CTRL_PROXY" acronym="CFG0_MCU_TIMERIO0_CTRL_PROXY" offset="0x6280" width="32" description="Controls MCU TimerIO muxing">
+		<bitfield id="MCU_TIMERIO0_CTRL_OUT_SEL_PROXY" width="4" begin="3" end="0" resetval="0x15" description="Selects the source of the MCU_TIMERIO0 output  Field values (Others are reserved):   4'b0000  -  MCU_TIMERIO0 is driven by MCU_TIMER0 output   4'b0001  -  MCU_TIMERIO0 is driven by MCU_TIMER1 output   4'b0010  -  MCU_TIMERIO0 is driven by MCU_TIMER2 output   4'b0011  -  MCU_TIMERIO0 is driven by MCU_TIMER3 output   4'b0100  -  MCU_TIMERIO0 is driven by MCU_TIMER4 output   4'b0101  -  MCU_TIMERIO0 is driven by MCU_TIMER5 output   4'b0110  -  MCU_TIMERIO0 is driven by MCU_TIMER6 output   4'b0111  -  MCU_TIMERIO0 is driven by MCU_TIMER7 output   4'b1000  -  MCU_TIMERIO0 is driven by MCU_TIMER8 output   4'b1001  -  MCU_TIMERIO0 is driven by MCU_TIMER9 output   4'b1010  -  MCU_TIMERIO0 is driven low   4'b1011  -  MCU_TIMERIO0 is driven high   4'b1100  -  MCU_TIMERIO0 is driven low   4'b1101  -  MCU_TIMERIO0 is driven high   4'b1110  -  MCU_TIMERIO0 is driven low   4'b1111  -  MCU_TIMERIO0 is driven high" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMERIO1_CTRL_PROXY" acronym="CFG0_MCU_TIMERIO1_CTRL_PROXY" offset="0x6284" width="32" description="Controls MCU TimerIO muxing">
+		<bitfield id="MCU_TIMERIO1_CTRL_OUT_SEL_PROXY" width="4" begin="3" end="0" resetval="0x15" description="Selects the source of the MCU_TIMERIO1 output  Field values (Others are reserved):   4'b0000  -  MCU_TIMERIO1 is driven by MCU_TIMER0 output   4'b0001  -  MCU_TIMERIO1 is driven by MCU_TIMER1 output   4'b0010  -  MCU_TIMERIO1 is driven by MCU_TIMER2 output   4'b0011  -  MCU_TIMERIO1 is driven by MCU_TIMER3 output   4'b0100  -  MCU_TIMERIO1 is driven by MCU_TIMER4 output   4'b0101  -  MCU_TIMERIO1 is driven by MCU_TIMER5 output   4'b0110  -  MCU_TIMERIO1 is driven by MCU_TIMER6 output   4'b0111  -  MCU_TIMERIO1 is driven by MCU_TIMER7 output   4'b1000  -  MCU_TIMERIO1 is driven by MCU_TIMER8 output   4'b1001  -  MCU_TIMERIO1 is driven by MCU_TIMER9 output   4'b1010  -  MCU_TIMERIO1 is driven low   4'b1011  -  MCU_TIMERIO1 is driven high   4'b1100  -  MCU_TIMERIO1 is driven low   4'b1101  -  MCU_TIMERIO1 is driven high   4'b1110  -  MCU_TIMERIO1 is driven low   4'b1111  -  MCU_TIMERIO1 is driven high" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMERIO2_CTRL_PROXY" acronym="CFG0_MCU_TIMERIO2_CTRL_PROXY" offset="0x6288" width="32" description="Controls MCU TimerIO muxing">
+		<bitfield id="MCU_TIMERIO2_CTRL_OUT_SEL_PROXY" width="4" begin="3" end="0" resetval="0x15" description="Selects the source of the MCU_TIMERIO2 output  Field values (Others are reserved):   4'b0000  -  MCU_TIMERIO2 is driven by MCU_TIMER0 output   4'b0001  -  MCU_TIMERIO2 is driven by MCU_TIMER1 output   4'b0010  -  MCU_TIMERIO2 is driven by MCU_TIMER2 output   4'b0011  -  MCU_TIMERIO2 is driven by MCU_TIMER3 output   4'b0100  -  MCU_TIMERIO2 is driven by MCU_TIMER4 output   4'b0101  -  MCU_TIMERIO2 is driven by MCU_TIMER5 output   4'b0110  -  MCU_TIMERIO2 is driven by MCU_TIMER6 output   4'b0111  -  MCU_TIMERIO2 is driven by MCU_TIMER7 output   4'b1000  -  MCU_TIMERIO2 is driven by MCU_TIMER8 output   4'b1001  -  MCU_TIMERIO2 is driven by MCU_TIMER9 output   4'b1010  -  MCU_TIMERIO2 is driven low   4'b1011  -  MCU_TIMERIO2 is driven high   4'b1100  -  MCU_TIMERIO2 is driven low   4'b1101  -  MCU_TIMERIO2 is driven high   4'b1110  -  MCU_TIMERIO2 is driven low   4'b1111  -  MCU_TIMERIO2 is driven high" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMERIO3_CTRL_PROXY" acronym="CFG0_MCU_TIMERIO3_CTRL_PROXY" offset="0x628C" width="32" description="Controls MCU TimerIO muxing">
+		<bitfield id="MCU_TIMERIO3_CTRL_OUT_SEL_PROXY" width="4" begin="3" end="0" resetval="0x15" description="Selects the source of the MCU_TIMERIO3 output  Field values (Others are reserved):   4'b0000  -  MCU_TIMERIO3 is driven by MCU_TIMER0 output   4'b0001  -  MCU_TIMERIO3 is driven by MCU_TIMER1 output   4'b0010  -  MCU_TIMERIO3 is driven by MCU_TIMER2 output   4'b0011  -  MCU_TIMERIO3 is driven by MCU_TIMER3 output   4'b0100  -  MCU_TIMERIO3 is driven by MCU_TIMER4 output   4'b0101  -  MCU_TIMERIO3 is driven by MCU_TIMER5 output   4'b0110  -  MCU_TIMERIO3 is driven by MCU_TIMER6 output   4'b0111  -  MCU_TIMERIO3 is driven by MCU_TIMER7 output   4'b1000  -  MCU_TIMERIO3 is driven by MCU_TIMER8 output   4'b1001  -  MCU_TIMERIO3 is driven by MCU_TIMER9 output   4'b1010  -  MCU_TIMERIO3 is driven low   4'b1011  -  MCU_TIMERIO3 is driven high   4'b1100  -  MCU_TIMERIO3 is driven low   4'b1101  -  MCU_TIMERIO3 is driven high   4'b1110  -  MCU_TIMERIO3 is driven low   4'b1111  -  MCU_TIMERIO3 is driven high" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMERIO4_CTRL_PROXY" acronym="CFG0_MCU_TIMERIO4_CTRL_PROXY" offset="0x6290" width="32" description="Controls MCU TimerIO muxing">
+		<bitfield id="MCU_TIMERIO4_CTRL_OUT_SEL_PROXY" width="4" begin="3" end="0" resetval="0x15" description="Selects the source of the MCU_TIMERIO4 output  Field values (Others are reserved):   4'b0000  -  MCU_TIMERIO4 is driven by MCU_TIMER0 output   4'b0001  -  MCU_TIMERIO4 is driven by MCU_TIMER1 output   4'b0010  -  MCU_TIMERIO4 is driven by MCU_TIMER2 output   4'b0011  -  MCU_TIMERIO4 is driven by MCU_TIMER3 output   4'b0100  -  MCU_TIMERIO4 is driven by MCU_TIMER4 output   4'b0101  -  MCU_TIMERIO4 is driven by MCU_TIMER5 output   4'b0110  -  MCU_TIMERIO4 is driven by MCU_TIMER6 output   4'b0111  -  MCU_TIMERIO4 is driven by MCU_TIMER7 output   4'b1000  -  MCU_TIMERIO4 is driven by MCU_TIMER8 output   4'b1001  -  MCU_TIMERIO4 is driven by MCU_TIMER9 output   4'b1010  -  MCU_TIMERIO4 is driven low   4'b1011  -  MCU_TIMERIO4 is driven high   4'b1100  -  MCU_TIMERIO4 is driven low   4'b1101  -  MCU_TIMERIO4 is driven high   4'b1110  -  MCU_TIMERIO4 is driven low   4'b1111  -  MCU_TIMERIO4 is driven high" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMERIO5_CTRL_PROXY" acronym="CFG0_MCU_TIMERIO5_CTRL_PROXY" offset="0x6294" width="32" description="Controls MCU TimerIO muxing">
+		<bitfield id="MCU_TIMERIO5_CTRL_OUT_SEL_PROXY" width="4" begin="3" end="0" resetval="0x15" description="Selects the source of the MCU_TIMERIO5 output  Field values (Others are reserved):   4'b0000  -  MCU_TIMERIO5 is driven by MCU_TIMER0 output   4'b0001  -  MCU_TIMERIO5 is driven by MCU_TIMER1 output   4'b0010  -  MCU_TIMERIO5 is driven by MCU_TIMER2 output   4'b0011  -  MCU_TIMERIO5 is driven by MCU_TIMER3 output   4'b0100  -  MCU_TIMERIO5 is driven by MCU_TIMER4 output   4'b0101  -  MCU_TIMERIO5 is driven by MCU_TIMER5 output   4'b0110  -  MCU_TIMERIO5 is driven by MCU_TIMER6 output   4'b0111  -  MCU_TIMERIO5 is driven by MCU_TIMER7 output   4'b1000  -  MCU_TIMERIO5 is driven by MCU_TIMER8 output   4'b1001  -  MCU_TIMERIO5 is driven by MCU_TIMER9 output   4'b1010  -  MCU_TIMERIO5 is driven low   4'b1011  -  MCU_TIMERIO5 is driven high   4'b1100  -  MCU_TIMERIO5 is driven low   4'b1101  -  MCU_TIMERIO5 is driven high   4'b1110  -  MCU_TIMERIO5 is driven low   4'b1111  -  MCU_TIMERIO5 is driven high" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMERIO6_CTRL_PROXY" acronym="CFG0_MCU_TIMERIO6_CTRL_PROXY" offset="0x6298" width="32" description="Controls MCU TimerIO muxing">
+		<bitfield id="MCU_TIMERIO6_CTRL_OUT_SEL_PROXY" width="4" begin="3" end="0" resetval="0x15" description="Selects the source of the MCU_TIMERIO6 output  Field values (Others are reserved):   4'b0000  -  MCU_TIMERIO6 is driven by MCU_TIMER0 output   4'b0001  -  MCU_TIMERIO6 is driven by MCU_TIMER1 output   4'b0010  -  MCU_TIMERIO6 is driven by MCU_TIMER2 output   4'b0011  -  MCU_TIMERIO6 is driven by MCU_TIMER3 output   4'b0100  -  MCU_TIMERIO6 is driven by MCU_TIMER4 output   4'b0101  -  MCU_TIMERIO6 is driven by MCU_TIMER5 output   4'b0110  -  MCU_TIMERIO6 is driven by MCU_TIMER6 output   4'b0111  -  MCU_TIMERIO6 is driven by MCU_TIMER7 output   4'b1000  -  MCU_TIMERIO6 is driven by MCU_TIMER8 output   4'b1001  -  MCU_TIMERIO6 is driven by MCU_TIMER9 output   4'b1010  -  MCU_TIMERIO6 is driven low   4'b1011  -  MCU_TIMERIO6 is driven high   4'b1100  -  MCU_TIMERIO6 is driven low   4'b1101  -  MCU_TIMERIO6 is driven high   4'b1110  -  MCU_TIMERIO6 is driven low   4'b1111  -  MCU_TIMERIO6 is driven high" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMERIO7_CTRL_PROXY" acronym="CFG0_MCU_TIMERIO7_CTRL_PROXY" offset="0x629C" width="32" description="Controls MCU TimerIO muxing">
+		<bitfield id="MCU_TIMERIO7_CTRL_OUT_SEL_PROXY" width="4" begin="3" end="0" resetval="0x15" description="Selects the source of the MCU_TIMERIO7 output  Field values (Others are reserved):   4'b0000  -  MCU_TIMERIO7 is driven by MCU_TIMER0 output   4'b0001  -  MCU_TIMERIO7 is driven by MCU_TIMER1 output   4'b0010  -  MCU_TIMERIO7 is driven by MCU_TIMER2 output   4'b0011  -  MCU_TIMERIO7 is driven by MCU_TIMER3 output   4'b0100  -  MCU_TIMERIO7 is driven by MCU_TIMER4 output   4'b0101  -  MCU_TIMERIO7 is driven by MCU_TIMER5 output   4'b0110  -  MCU_TIMERIO7 is driven by MCU_TIMER6 output   4'b0111  -  MCU_TIMERIO7 is driven by MCU_TIMER7 output   4'b1000  -  MCU_TIMERIO7 is driven by MCU_TIMER8 output   4'b1001  -  MCU_TIMERIO7 is driven by MCU_TIMER9 output   4'b1010  -  MCU_TIMERIO7 is driven low   4'b1011  -  MCU_TIMERIO7 is driven high   4'b1100  -  MCU_TIMERIO7 is driven low   4'b1101  -  MCU_TIMERIO7 is driven high   4'b1110  -  MCU_TIMERIO7 is driven low   4'b1111  -  MCU_TIMERIO7 is driven high" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMERIO8_CTRL_PROXY" acronym="CFG0_MCU_TIMERIO8_CTRL_PROXY" offset="0x62A0" width="32" description="Controls MCU TimerIO muxing">
+		<bitfield id="MCU_TIMERIO8_CTRL_OUT_SEL_PROXY" width="4" begin="3" end="0" resetval="0x15" description="Selects the source of the MCU_TIMERIO8 output  Field values (Others are reserved):   4'b0000  -  MCU_TIMERIO8 is driven by MCU_TIMER0 output   4'b0001  -  MCU_TIMERIO8 is driven by MCU_TIMER1 output   4'b0010  -  MCU_TIMERIO8 is driven by MCU_TIMER2 output   4'b0011  -  MCU_TIMERIO8 is driven by MCU_TIMER3 output   4'b0100  -  MCU_TIMERIO8 is driven by MCU_TIMER4 output   4'b0101  -  MCU_TIMERIO8 is driven by MCU_TIMER5 output   4'b0110  -  MCU_TIMERIO8 is driven by MCU_TIMER6 output   4'b0111  -  MCU_TIMERIO8 is driven by MCU_TIMER7 output   4'b1000  -  MCU_TIMERIO8 is driven by MCU_TIMER8 output   4'b1001  -  MCU_TIMERIO8 is driven by MCU_TIMER9 output   4'b1010  -  MCU_TIMERIO8 is driven low   4'b1011  -  MCU_TIMERIO8 is driven high   4'b1100  -  MCU_TIMERIO8 is driven low   4'b1101  -  MCU_TIMERIO8 is driven high   4'b1110  -  MCU_TIMERIO8 is driven low   4'b1111  -  MCU_TIMERIO8 is driven high" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMERIO9_CTRL_PROXY" acronym="CFG0_MCU_TIMERIO9_CTRL_PROXY" offset="0x62A4" width="32" description="Controls MCU TimerIO muxing">
+		<bitfield id="MCU_TIMERIO9_CTRL_OUT_SEL_PROXY" width="4" begin="3" end="0" resetval="0x15" description="Selects the source of the MCU_TIMERIO9 output  Field values (Others are reserved):   4'b0000  -  MCU_TIMERIO9 is driven by MCU_TIMER0 output   4'b0001  -  MCU_TIMERIO9 is driven by MCU_TIMER1 output   4'b0010  -  MCU_TIMERIO9 is driven by MCU_TIMER2 output   4'b0011  -  MCU_TIMERIO9 is driven by MCU_TIMER3 output   4'b0100  -  MCU_TIMERIO9 is driven by MCU_TIMER4 output   4'b0101  -  MCU_TIMERIO9 is driven by MCU_TIMER5 output   4'b0110  -  MCU_TIMERIO9 is driven by MCU_TIMER6 output   4'b0111  -  MCU_TIMERIO9 is driven by MCU_TIMER7 output   4'b1000  -  MCU_TIMERIO9 is driven by MCU_TIMER8 output   4'b1001  -  MCU_TIMERIO9 is driven by MCU_TIMER9 output   4'b1010  -  MCU_TIMERIO9 is driven low   4'b1011  -  MCU_TIMERIO9 is driven high   4'b1100  -  MCU_TIMERIO9 is driven low   4'b1101  -  MCU_TIMERIO9 is driven high   4'b1110  -  MCU_TIMERIO9 is driven low   4'b1111  -  MCU_TIMERIO9 is driven high" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_MTOG0_CTRL_PROXY" acronym="CFG0_MCU_MTOG0_CTRL_PROXY" offset="0x6300" width="32" description="Controls timeout operation of transaction from MAIN domain to MCU peripheral data bus">
+		<bitfield id="MCU_MTOG0_CTRL_IDLE_STAT_PROXY" width="1" begin="31" end="31" resetval="0x0" description="Idle statusWhen high, indicates MTOG0 is idle." range="31" rwaccess="R"/> 
+		<bitfield id="MCU_MTOG0_CTRL_FORCE_TIMEOUT_PROXY" width="8" begin="23" end="16" resetval="0x0" description="Force TimeoutForces a flush of the interface transactions.  This bitfield is only relevant if timeout_en=1.  After forcing a timeout by writing the encoded value, the force_timeout and timeout_en bitfields must be cleared to clear the timeout before re-enabling the gasket. 8'h95 - Force a gasket timeoutAll others - Normal operation" range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="MCU_MTOG0_CTRL_TIMEOUT_EN_PROXY" width="1" begin="15" end="15" resetval="0x0" description="Timeout Enable 1'b0 - Disable the gasket.  Clear the interrupt and reset the counter 1'b1 - Enable the timeout gasket functions" range="15" rwaccess="R/W"/> 
+		<bitfield id="MCU_MTOG0_CTRL_TIMEOUT_VAL_PROXY" width="3" begin="2" end="0" resetval="0x0" description="Gasket Timeout ValueSelects the number of clock cycles before the interface is considered to have timed out  Field values (Others are reserved):   3'b000  -  1024 clock cycles   3'b001  -  4096 clock cycles   3'b010  -  16,384 clock cycles   3'b011  -  65,536 clock cycles   3'b100  -  262,144 clock cycles   3'b101  -  1,048,576 clock cycles   3'b110  -  2,097,152 clock cycles   3'b111  -  4,194,303 clock cycles" range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_LOCK1_KICK0_PROXY" acronym="CFG0_LOCK1_KICK0_PROXY" offset="0x7008" width="32" description="This register must be written with the designated key value followed by a write to LOCK1_KICK1 with its key value before write-protected Partition 1 registers can be written.">
+		<bitfield id="LOCK1_KICK0_PROXY" width="32" begin="31" end="0" resetval="0x0" description=" - KICK0 component" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_LOCK1_KICK1_PROXY" acronym="CFG0_LOCK1_KICK1_PROXY" offset="0x700C" width="32" description="This register must be written with the designated key value after a write to LOCK1_KICK0 with its key value before write-protected Partition 1 registers can be written.">
+		<bitfield id="LOCK1_KICK1_PROXY" width="32" begin="31" end="0" resetval="0x0" description=" - KICK1 component" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P1_R0" acronym="CFG0_CLAIMREG_P1_R0" offset="0x7100" width="32" description="">
+		<bitfield id="CLAIMREG_P1_R0" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 1" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P1_R1" acronym="CFG0_CLAIMREG_P1_R1" offset="0x7104" width="32" description="">
+		<bitfield id="CLAIMREG_P1_R1" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 1" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P1_R2" acronym="CFG0_CLAIMREG_P1_R2" offset="0x7108" width="32" description="">
+		<bitfield id="CLAIMREG_P1_R2" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 1" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P1_R3" acronym="CFG0_CLAIMREG_P1_R3" offset="0x710C" width="32" description="">
+		<bitfield id="CLAIMREG_P1_R3" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 1" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P1_R4" acronym="CFG0_CLAIMREG_P1_R4" offset="0x7110" width="32" description="">
+		<bitfield id="CLAIMREG_P1_R4" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 1" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P1_R5" acronym="CFG0_CLAIMREG_P1_R5" offset="0x7114" width="32" description="">
+		<bitfield id="CLAIMREG_P1_R5" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 1" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P1_R6" acronym="CFG0_CLAIMREG_P1_R6" offset="0x7118" width="32" description="">
+		<bitfield id="CLAIMREG_P1_R6" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 1" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_CLKOUT0_CTRL" acronym="CFG0_MCU_CLKOUT0_CTRL" offset="0x8010" width="32" description="Enables and selects clock source of CPSW MCU_CLKOUT0 pin">
+		<bitfield id="MCU_CLKOUT0_CTRL_CLK_EN" width="1" begin="4" end="4" resetval="0x0" description="When set, enables MCU_CLKOUT0 output" range="4" rwaccess="R/W"/> 
+		<bitfield id="MCU_CLKOUT0_CTRL_CLK_SEL" width="1" begin="0" end="0" resetval="0x0" description="Selects MCU_CLKOUT0 clock source  1'b0 - RGMII_MHZ_50_CLK (50 MHz)  1'b1 -RGMII_MHZ_50_CLK / 2 (25 MHz)" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_EFUSE_CLKSEL" acronym="CFG0_MCU_EFUSE_CLKSEL" offset="0x8018" width="32" description="Selects the functional clock source for the MCU domain eFuse Controller">
+		<bitfield id="MCU_EFUSE_CLKSEL_CLK_SEL" width="1" begin="0" end="0" resetval="0x0" description="Selects the clock source  Field values (Others are reserved):   1'b0  -  EFUSE_CLK  (HFOSC0_CLKOUT or CLK_12M_RC)   1'b1  -  MCU_SYSCLK0 / 8" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_MCAN0_CLKSEL" acronym="CFG0_MCU_MCAN0_CLKSEL" offset="0x8020" width="32" description="Controls the functional clock source for MCU_MCAN0">
+		<bitfield id="MCU_MCAN0_CLKSEL_CLK_SEL" width="2" begin="1" end="0" resetval="0x0" description="MCU_MCAN MCAN_CLK selection  2'b00 - MCU_PLL2_HSDIV3_CLKOUT  2'b01 - MCU_EXT_REFCLK0  2'b10 - MCU_PLL1_HSDIV2_CLKOUT  2'b11 - HFOSC0_CLKOUT" range="1 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_MCAN1_CLKSEL" acronym="CFG0_MCU_MCAN1_CLKSEL" offset="0x8024" width="32" description="Controls the functional clock source for MCU_MCAN1">
+		<bitfield id="MCU_MCAN1_CLKSEL_CLK_SEL" width="2" begin="1" end="0" resetval="0x0" description="MCU_MCAN MCAN_CLK selection  2'b00 - MCU_PLL2_HSDIV3_CLKOUT  2'b01 - MCU_EXT_REFCLK0  2'b10 - MCU_PLL1_HSDIV2_CLKOUT  2'b11 - HFOSC0_CLKOUT" range="1 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_OSPI0_CLKSEL" acronym="CFG0_MCU_OSPI0_CLKSEL" offset="0x8030" width="32" description="Controls the OSPI loopback clock source">
+		<bitfield id="MCU_OSPI0_CLKSEL_LOOPCLK_SEL" width="1" begin="4" end="4" resetval="0x0" description="OBSPI0 Loopback clock source  1'b0 - OSPI_DQS external pin (external)  1'b1 - OSPI_LBCLKO output (internal)" range="4" rwaccess="R/W"/> 
+		<bitfield id="MCU_OSPI0_CLKSEL_CLK_SEL" width="1" begin="0" end="0" resetval="0x0" description="OSPI0 reference clock selection  1'b0 - MCU_PLL1_HSDIV4_CLKOUT  1'b1 - MCU_PLL2_HSDIV4_CLKOUT" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_OSPI1_CLKSEL" acronym="CFG0_MCU_OSPI1_CLKSEL" offset="0x8034" width="32" description="Controls the OSPI loopback clock source">
+		<bitfield id="MCU_OSPI1_CLKSEL_LOOPCLK_SEL" width="1" begin="4" end="4" resetval="0x0" description="OBSPI1 Loopback clock source  1'b0 - OSPI_DQS external pin (external)  1'b1 - OSPI_LBCLKO output (internal)" range="4" rwaccess="R/W"/> 
+		<bitfield id="MCU_OSPI1_CLKSEL_CLK_SEL" width="1" begin="0" end="0" resetval="0x0" description="OSPI1 reference clock selection  1'b0 - MCU_PLL1_HSDIV4_CLKOUT  1'b1 - MCU_PLL2_HSDIV4_CLKOUT" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_ADC0_CLKSEL" acronym="CFG0_MCU_ADC0_CLKSEL" offset="0x8040" width="32" description="Controls the functional clock source for the MCU_ADC0">
+		<bitfield id="MCU_ADC0_CLKSEL_CLK_SEL" width="2" begin="1" end="0" resetval="0x0" description="Selects the sampling clock source for ADC0  Field values (Others are reserved):   2'b00  -  HFOSC0_CLKOUT   2'b01  -  MCU_PLL1_HSDIV1_CLKOUT1   2'b10  -  MCU_PLL0_HSDIV1_CLKOUT1   2'b11  -  MCU_EXT_REFCLK0" range="1 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_ADC1_CLKSEL" acronym="CFG0_MCU_ADC1_CLKSEL" offset="0x8044" width="32" description="Controls the functional clock source for the MCU_ADC1">
+		<bitfield id="MCU_ADC1_CLKSEL_CLK_SEL" width="2" begin="1" end="0" resetval="0x0" description="Selects the sampling clock source for ADC1  Field values (Others are reserved):   2'b00  -  HFOSC0_CLKOUT   2'b01  -  MCU_PLL1_HSDIV1_CLKOUT1   2'b10  -  MCU_PLL0_HSDIV1_CLKOUT1   2'b11  -  MCU_EXT_REFCLK0" range="1 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_ENET_CLKSEL" acronym="CFG0_MCU_ENET_CLKSEL" offset="0x8050" width="32" description="Controls selectable clock sources for the MCU Ethernet Port1">
+		<bitfield id="MCU_ENET_CLKSEL_CPTS_CLKSEL" width="4" begin="11" end="8" resetval="0x15" description="Selects the clock source for the CPSW2x Ethernet switch Common Platform Time Stamp module  Field values (Others are reserved):   4'b0000  -  MAIN_PLL3_HSDIV1_CLKOUT   4'b0001  -  MAIN_PLL0_HSDIV6_CLKOUT   4'b0010  -  MCU_CPTS_REF_CLK (pin)   4'b0011  -  CPTS_RFT_CLK (pin)   4'b0100  -  MCU_EXT_REFCLK0 (pin)   4'b0101  -  EXT_REFCLK1 (pin)   4'b0110  -  SERDES0_IP2_LN0_TXMCLK   4'b0111  -  SERDES0_IP2_LN1_TXMCLK   4'b1000  -  SERDES0_IP2_LN2_TXMCLK   4'b1001  -  SERDES0_IP2_LN3_TXMCLK   4'b1010  -  SERDES1_IP2_LN0_TXMCLK   4'b1011  -  SERDES1_IP2_LN1_TXMCLK   4'b1100  -  SERDES1_IP2_LN2_TXMCLK   4'b1101  -  SERDES1_IP2_LN3_TXMCLK   4'b1110  -  MCU_PLL2_HSDIV1_CLKOUT   4'b1111  -  MCU_SYSCLK0 / 2" range="11 - 8" rwaccess="R/W"/> 
+		<bitfield id="MCU_ENET_CLKSEL_RMII_CLK_SEL" width="1" begin="0" end="0" resetval="0x0" description="Selects the rmii clock (rmii_mhz_50_clk) source.  This defaults to the internal 50 MHz clock source for proper clockstop operation  1'b0 - MCU_PLL2_HSDIV0_CLKOUT / 5  1'b1 - MCU_RMII_REFCLK (pin)" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_R5_CORE0_CLKSEL" acronym="CFG0_MCU_R5_CORE0_CLKSEL" offset="0x8080" width="32" description="MCU Core 0 functional clock selection control">
+		<bitfield id="MCU_R5_CORE0_CLKSEL_CLK_SEL" width="1" begin="0" end="0" resetval="0x0" description="Selects the Core 0 functional clock and mcu/interface clock ratio.Note, this value must only be changed when the MCU R5 is powered off or in WFI  1'b0 - Use MCU_SYSCLK0.  MCU/interface is 3:1 clock ratio  1'b1 - Use MCU_SYSCLK0/3.  MCU/interface is 1:1 clock ratio" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER0_CLKSEL" acronym="CFG0_MCU_TIMER0_CLKSEL" offset="0x8100" width="32" description="MCU Timer0 functional clock selection control">
+		<bitfield id="MCU_TIMER0_CLKSEL_CLK_SEL" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control  Field values (Others are reserved):   3'b000  -  HFOSC0_CLKOUT   3'b001  -  MCU_SYSCLK0 / 4   3'b010  -  CLK_12M_RC   3'b011  -  MCU_PLL2_HSDIV2_CLKOUT   3'b100  -  MCU_EXT_REFCLK0   3'b101  -  LFXOSC_CLKOUT   3'b110  -  CPSW_GENF0   3'b111  -  CLK_32K" range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER1_CLKSEL" acronym="CFG0_MCU_TIMER1_CLKSEL" offset="0x8104" width="32" description="MCU Timer1 functional clock selection control">
+		<bitfield id="MCU_TIMER1_CLKSEL_CLK_SEL" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control  Field values (Others are reserved):   3'b000  -  HFOSC0_CLKOUT   3'b001  -  MCU_SYSCLK0 / 4   3'b010  -  CLK_12M_RC   3'b011  -  MCU_PLL2_HSDIV2_CLKOUT   3'b100  -  MCU_EXT_REFCLK0   3'b101  -  LFXOSC_CLKOUT   3'b110  -  CPSW_GENF0   3'b111  -  CLK_32K" range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER2_CLKSEL" acronym="CFG0_MCU_TIMER2_CLKSEL" offset="0x8108" width="32" description="MCU Timer2 functional clock selection control">
+		<bitfield id="MCU_TIMER2_CLKSEL_CLK_SEL" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control  Field values (Others are reserved):   3'b000  -  HFOSC0_CLKOUT   3'b001  -  MCU_SYSCLK0 / 4   3'b010  -  CLK_12M_RC   3'b011  -  MCU_PLL2_HSDIV2_CLKOUT   3'b100  -  MCU_EXT_REFCLK0   3'b101  -  LFXOSC_CLKOUT   3'b110  -  CPSW_GENF0   3'b111  -  CLK_32K" range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER3_CLKSEL" acronym="CFG0_MCU_TIMER3_CLKSEL" offset="0x810C" width="32" description="MCU Timer3 functional clock selection control">
+		<bitfield id="MCU_TIMER3_CLKSEL_CLK_SEL" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control  Field values (Others are reserved):   3'b000  -  HFOSC0_CLKOUT   3'b001  -  MCU_SYSCLK0 / 4   3'b010  -  CLK_12M_RC   3'b011  -  MCU_PLL2_HSDIV2_CLKOUT   3'b100  -  MCU_EXT_REFCLK0   3'b101  -  LFXOSC_CLKOUT   3'b110  -  CPSW_GENF0   3'b111  -  CLK_32K" range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER4_CLKSEL" acronym="CFG0_MCU_TIMER4_CLKSEL" offset="0x8110" width="32" description="MCU Timer4 functional clock selection control">
+		<bitfield id="MCU_TIMER4_CLKSEL_CLK_SEL" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control  Field values (Others are reserved):   3'b000  -  HFOSC0_CLKOUT   3'b001  -  MCU_SYSCLK0 / 4   3'b010  -  CLK_12M_RC   3'b011  -  MCU_PLL2_HSDIV2_CLKOUT   3'b100  -  MCU_EXT_REFCLK0   3'b101  -  LFXOSC_CLKOUT   3'b110  -  CPSW_GENF0   3'b111  -  CLK_32K" range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER5_CLKSEL" acronym="CFG0_MCU_TIMER5_CLKSEL" offset="0x8114" width="32" description="MCU Timer5 functional clock selection control">
+		<bitfield id="MCU_TIMER5_CLKSEL_CLK_SEL" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control  Field values (Others are reserved):   3'b000  -  HFOSC0_CLKOUT   3'b001  -  MCU_SYSCLK0 / 4   3'b010  -  CLK_12M_RC   3'b011  -  MCU_PLL2_HSDIV2_CLKOUT   3'b100  -  MCU_EXT_REFCLK0   3'b101  -  LFXOSC_CLKOUT   3'b110  -  CPSW_GENF0   3'b111  -  CLK_32K" range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER6_CLKSEL" acronym="CFG0_MCU_TIMER6_CLKSEL" offset="0x8118" width="32" description="MCU Timer6 functional clock selection control">
+		<bitfield id="MCU_TIMER6_CLKSEL_CLK_SEL" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control  Field values (Others are reserved):   3'b000  -  HFOSC0_CLKOUT   3'b001  -  MCU_SYSCLK0 / 4   3'b010  -  CLK_12M_RC   3'b011  -  MCU_PLL2_HSDIV2_CLKOUT   3'b100  -  MCU_EXT_REFCLK0   3'b101  -  LFXOSC_CLKOUT   3'b110  -  CPSW_GENF0   3'b111  -  CLK_32K" range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER7_CLKSEL" acronym="CFG0_MCU_TIMER7_CLKSEL" offset="0x811C" width="32" description="MCU Timer7 functional clock selection control">
+		<bitfield id="MCU_TIMER7_CLKSEL_CLK_SEL" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control  Field values (Others are reserved):   3'b000  -  HFOSC0_CLKOUT   3'b001  -  MCU_SYSCLK0 / 4   3'b010  -  CLK_12M_RC   3'b011  -  MCU_PLL2_HSDIV2_CLKOUT   3'b100  -  MCU_EXT_REFCLK0   3'b101  -  LFXOSC_CLKOUT   3'b110  -  CPSW_GENF0   3'b111  -  CLK_32K" range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER8_CLKSEL" acronym="CFG0_MCU_TIMER8_CLKSEL" offset="0x8120" width="32" description="MCU Timer8 functional clock selection control">
+		<bitfield id="MCU_TIMER8_CLKSEL_CLK_SEL" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control  Field values (Others are reserved):   3'b000  -  HFOSC0_CLKOUT   3'b001  -  MCU_SYSCLK0 / 4   3'b010  -  CLK_12M_RC   3'b011  -  MCU_PLL2_HSDIV2_CLKOUT   3'b100  -  MCU_EXT_REFCLK0   3'b101  -  LFXOSC_CLKOUT   3'b110  -  CPSW_GENF0   3'b111  -  CLK_32K" range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER9_CLKSEL" acronym="CFG0_MCU_TIMER9_CLKSEL" offset="0x8124" width="32" description="MCU Timer9 functional clock selection control">
+		<bitfield id="MCU_TIMER9_CLKSEL_CLK_SEL" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control  Field values (Others are reserved):   3'b000  -  HFOSC0_CLKOUT   3'b001  -  MCU_SYSCLK0 / 4   3'b010  -  CLK_12M_RC   3'b011  -  MCU_PLL2_HSDIV2_CLKOUT   3'b100  -  MCU_EXT_REFCLK0   3'b101  -  LFXOSC_CLKOUT   3'b110  -  CPSW_GENF0   3'b111  -  CLK_32K" range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_RTI0_CLKSEL" acronym="CFG0_MCU_RTI0_CLKSEL" offset="0x8180" width="32" description="MCU RTI0 functional clock selection control">
+		<bitfield id="MCU_RTI0_CLKSEL_WRTLOCK" width="1" begin="31" end="31" resetval="0x0" description="When set, locks further writes to MCU_RTI0_CLKSEL until the next module reset" range="31" rwaccess="R/W"/> 
+		<bitfield id="MCU_RTI0_CLKSEL_CLK_SEL" width="3" begin="2" end="0" resetval="0x0" description="RTI functional clock input select mux control  Field values (Others are reserved):   2'b00  -  HFOSC0_CLKOUT   2'b01  -  LFXOSC_CLKOUT   2'b10  -  CLK_12M_RC   2'b11  -  CLK_32K" range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_RTI1_CLKSEL" acronym="CFG0_MCU_RTI1_CLKSEL" offset="0x8184" width="32" description="MCU RTI1 functional clock selection control">
+		<bitfield id="MCU_RTI1_CLKSEL_WRTLOCK" width="1" begin="31" end="31" resetval="0x0" description="When set, locks further writes to MCU_RTI1_CLKSEL until the next module reset" range="31" rwaccess="R/W"/> 
+		<bitfield id="MCU_RTI1_CLKSEL_CLK_SEL" width="3" begin="2" end="0" resetval="0x0" description="RTI functional clock input select mux control  Field values (Others are reserved):   2'b00  -  HFOSC0_CLKOUT   2'b01  -  LFXOSC_CLKOUT   2'b10  -  CLK_12M_RC   2'b11  -  CLK_32K" range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_USART_CLKSEL" acronym="CFG0_MCU_USART_CLKSEL" offset="0x81C0" width="32" description="Controls the functional clock source for MCU_USART0">
+		<bitfield id="MCU_USART_CLKSEL_CLK_SEL" width="1" begin="0" end="0" resetval="0x0" description="MCU_USART0 FCLK selection  1'b0 - MCU_PLL1_HSDIV3_CLKOUT  1'b1 - MAIN_PLL1_HSDIV5_CLKOUT" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_LOCK2_KICK0" acronym="CFG0_LOCK2_KICK0" offset="0x9008" width="32" description="This register must be written with the designated key value followed by a write to LOCK2_KICK1 with its key value before write-protected Partition 2 registers can be written.">
+		<bitfield id="LOCK2_KICK0" width="32" begin="31" end="0" resetval="0x0" description=" - KICK0 component" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_LOCK2_KICK1" acronym="CFG0_LOCK2_KICK1" offset="0x900C" width="32" description="This register must be written with the designated key value after a write to LOCK2_KICK0 with its key value before write-protected Partition 2 registers can be written.">
+		<bitfield id="LOCK2_KICK1" width="32" begin="31" end="0" resetval="0x0" description=" - KICK1 component" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P2_R0_READONLY" acronym="CFG0_CLAIMREG_P2_R0_READONLY" offset="0x9100" width="32" description="">
+		<bitfield id="CLAIMREG_P2_R0_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 2" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P2_R1_READONLY" acronym="CFG0_CLAIMREG_P2_R1_READONLY" offset="0x9104" width="32" description="">
+		<bitfield id="CLAIMREG_P2_R1_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 2" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P2_R2_READONLY" acronym="CFG0_CLAIMREG_P2_R2_READONLY" offset="0x9108" width="32" description="">
+		<bitfield id="CLAIMREG_P2_R2_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 2" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P2_R3_READONLY" acronym="CFG0_CLAIMREG_P2_R3_READONLY" offset="0x910C" width="32" description="">
+		<bitfield id="CLAIMREG_P2_R3_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 2" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_MCU_CLKOUT0_CTRL_PROXY" acronym="CFG0_MCU_CLKOUT0_CTRL_PROXY" offset="0xA010" width="32" description="Enables and selects clock source of CPSW MCU_CLKOUT0 pin">
+		<bitfield id="MCU_CLKOUT0_CTRL_CLK_EN_PROXY" width="1" begin="4" end="4" resetval="0x0" description="When set, enables MCU_CLKOUT0 output" range="4" rwaccess="R/W"/> 
+		<bitfield id="MCU_CLKOUT0_CTRL_CLK_SEL_PROXY" width="1" begin="0" end="0" resetval="0x0" description="Selects MCU_CLKOUT0 clock source  1'b0 - RGMII_MHZ_50_CLK (50 MHz)  1'b1 -RGMII_MHZ_50_CLK / 2 (25 MHz)" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_EFUSE_CLKSEL_PROXY" acronym="CFG0_MCU_EFUSE_CLKSEL_PROXY" offset="0xA018" width="32" description="Selects the functional clock source for the MCU domain eFuse Controller">
+		<bitfield id="MCU_EFUSE_CLKSEL_CLK_SEL_PROXY" width="1" begin="0" end="0" resetval="0x0" description="Selects the clock source  Field values (Others are reserved):   1'b0  -  EFUSE_CLK  (HFOSC0_CLKOUT or CLK_12M_RC)   1'b1  -  MCU_SYSCLK0 / 8" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_MCAN0_CLKSEL_PROXY" acronym="CFG0_MCU_MCAN0_CLKSEL_PROXY" offset="0xA020" width="32" description="Controls the functional clock source for MCU_MCAN0">
+		<bitfield id="MCU_MCAN0_CLKSEL_CLK_SEL_PROXY" width="2" begin="1" end="0" resetval="0x0" description="MCU_MCAN MCAN_CLK selection  2'b00 - MCU_PLL2_HSDIV3_CLKOUT  2'b01 - MCU_EXT_REFCLK0  2'b10 - MCU_PLL1_HSDIV2_CLKOUT  2'b11 - HFOSC0_CLKOUT" range="1 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_MCAN1_CLKSEL_PROXY" acronym="CFG0_MCU_MCAN1_CLKSEL_PROXY" offset="0xA024" width="32" description="Controls the functional clock source for MCU_MCAN1">
+		<bitfield id="MCU_MCAN1_CLKSEL_CLK_SEL_PROXY" width="2" begin="1" end="0" resetval="0x0" description="MCU_MCAN MCAN_CLK selection  2'b00 - MCU_PLL2_HSDIV3_CLKOUT  2'b01 - MCU_EXT_REFCLK0  2'b10 - MCU_PLL1_HSDIV2_CLKOUT  2'b11 - HFOSC0_CLKOUT" range="1 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_OSPI0_CLKSEL_PROXY" acronym="CFG0_MCU_OSPI0_CLKSEL_PROXY" offset="0xA030" width="32" description="Controls the OSPI loopback clock source">
+		<bitfield id="MCU_OSPI0_CLKSEL_LOOPCLK_SEL_PROXY" width="1" begin="4" end="4" resetval="0x0" description="OBSPI0 Loopback clock source  1'b0 - OSPI_DQS external pin (external)  1'b1 - OSPI_LBCLKO output (internal)" range="4" rwaccess="R/W"/> 
+		<bitfield id="MCU_OSPI0_CLKSEL_CLK_SEL_PROXY" width="1" begin="0" end="0" resetval="0x0" description="OSPI0 reference clock selection  1'b0 - MCU_PLL1_HSDIV4_CLKOUT  1'b1 - MCU_PLL2_HSDIV4_CLKOUT" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_OSPI1_CLKSEL_PROXY" acronym="CFG0_MCU_OSPI1_CLKSEL_PROXY" offset="0xA034" width="32" description="Controls the OSPI loopback clock source">
+		<bitfield id="MCU_OSPI1_CLKSEL_LOOPCLK_SEL_PROXY" width="1" begin="4" end="4" resetval="0x0" description="OBSPI1 Loopback clock source  1'b0 - OSPI_DQS external pin (external)  1'b1 - OSPI_LBCLKO output (internal)" range="4" rwaccess="R/W"/> 
+		<bitfield id="MCU_OSPI1_CLKSEL_CLK_SEL_PROXY" width="1" begin="0" end="0" resetval="0x0" description="OSPI1 reference clock selection  1'b0 - MCU_PLL1_HSDIV4_CLKOUT  1'b1 - MCU_PLL2_HSDIV4_CLKOUT" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_ADC0_CLKSEL_PROXY" acronym="CFG0_MCU_ADC0_CLKSEL_PROXY" offset="0xA040" width="32" description="Controls the functional clock source for the MCU_ADC0">
+		<bitfield id="MCU_ADC0_CLKSEL_CLK_SEL_PROXY" width="2" begin="1" end="0" resetval="0x0" description="Selects the sampling clock source for ADC0  Field values (Others are reserved):   2'b00  -  HFOSC0_CLKOUT   2'b01  -  MCU_PLL1_HSDIV1_CLKOUT1   2'b10  -  MCU_PLL0_HSDIV1_CLKOUT1   2'b11  -  MCU_EXT_REFCLK0" range="1 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_ADC1_CLKSEL_PROXY" acronym="CFG0_MCU_ADC1_CLKSEL_PROXY" offset="0xA044" width="32" description="Controls the functional clock source for the MCU_ADC1">
+		<bitfield id="MCU_ADC1_CLKSEL_CLK_SEL_PROXY" width="2" begin="1" end="0" resetval="0x0" description="Selects the sampling clock source for ADC1  Field values (Others are reserved):   2'b00  -  HFOSC0_CLKOUT   2'b01  -  MCU_PLL1_HSDIV1_CLKOUT1   2'b10  -  MCU_PLL0_HSDIV1_CLKOUT1   2'b11  -  MCU_EXT_REFCLK0" range="1 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_ENET_CLKSEL_PROXY" acronym="CFG0_MCU_ENET_CLKSEL_PROXY" offset="0xA050" width="32" description="Controls selectable clock sources for the MCU Ethernet Port1">
+		<bitfield id="MCU_ENET_CLKSEL_CPTS_CLKSEL_PROXY" width="4" begin="11" end="8" resetval="0x15" description="Selects the clock source for the CPSW2x Ethernet switch Common Platform Time Stamp module  Field values (Others are reserved):   4'b0000  -  MAIN_PLL3_HSDIV1_CLKOUT   4'b0001  -  MAIN_PLL0_HSDIV6_CLKOUT   4'b0010  -  MCU_CPTS_REF_CLK (pin)   4'b0011  -  CPTS_RFT_CLK (pin)   4'b0100  -  MCU_EXT_REFCLK0 (pin)   4'b0101  -  EXT_REFCLK1 (pin)   4'b0110  -  SERDES0_IP2_LN0_TXMCLK   4'b0111  -  SERDES0_IP2_LN1_TXMCLK   4'b1000  -  SERDES0_IP2_LN2_TXMCLK   4'b1001  -  SERDES0_IP2_LN3_TXMCLK   4'b1010  -  SERDES1_IP2_LN0_TXMCLK   4'b1011  -  SERDES1_IP2_LN1_TXMCLK   4'b1100  -  SERDES1_IP2_LN2_TXMCLK   4'b1101  -  SERDES1_IP2_LN3_TXMCLK   4'b1110  -  MCU_PLL2_HSDIV1_CLKOUT   4'b1111  -  MCU_SYSCLK0 / 2" range="11 - 8" rwaccess="R/W"/> 
+		<bitfield id="MCU_ENET_CLKSEL_RMII_CLK_SEL_PROXY" width="1" begin="0" end="0" resetval="0x0" description="Selects the rmii clock (rmii_mhz_50_clk) source.  This defaults to the internal 50 MHz clock source for proper clockstop operation  1'b0 - MCU_PLL2_HSDIV0_CLKOUT / 5  1'b1 - MCU_RMII_REFCLK (pin)" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_R5_CORE0_CLKSEL_PROXY" acronym="CFG0_MCU_R5_CORE0_CLKSEL_PROXY" offset="0xA080" width="32" description="MCU Core 0 functional clock selection control">
+		<bitfield id="MCU_R5_CORE0_CLKSEL_CLK_SEL_PROXY" width="1" begin="0" end="0" resetval="0x0" description="Selects the Core 0 functional clock and mcu/interface clock ratio.Note, this value must only be changed when the MCU R5 is powered off or in WFI  1'b0 - Use MCU_SYSCLK0.  MCU/interface is 3:1 clock ratio  1'b1 - Use MCU_SYSCLK0/3.  MCU/interface is 1:1 clock ratio" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER0_CLKSEL_PROXY" acronym="CFG0_MCU_TIMER0_CLKSEL_PROXY" offset="0xA100" width="32" description="MCU Timer0 functional clock selection control">
+		<bitfield id="MCU_TIMER0_CLKSEL_CLK_SEL_PROXY" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control  Field values (Others are reserved):   3'b000  -  HFOSC0_CLKOUT   3'b001  -  MCU_SYSCLK0 / 4   3'b010  -  CLK_12M_RC   3'b011  -  MCU_PLL2_HSDIV2_CLKOUT   3'b100  -  MCU_EXT_REFCLK0   3'b101  -  LFXOSC_CLKOUT   3'b110  -  CPSW_GENF0   3'b111  -  CLK_32K" range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER1_CLKSEL_PROXY" acronym="CFG0_MCU_TIMER1_CLKSEL_PROXY" offset="0xA104" width="32" description="MCU Timer1 functional clock selection control">
+		<bitfield id="MCU_TIMER1_CLKSEL_CLK_SEL_PROXY" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control  Field values (Others are reserved):   3'b000  -  HFOSC0_CLKOUT   3'b001  -  MCU_SYSCLK0 / 4   3'b010  -  CLK_12M_RC   3'b011  -  MCU_PLL2_HSDIV2_CLKOUT   3'b100  -  MCU_EXT_REFCLK0   3'b101  -  LFXOSC_CLKOUT   3'b110  -  CPSW_GENF0   3'b111  -  CLK_32K" range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER2_CLKSEL_PROXY" acronym="CFG0_MCU_TIMER2_CLKSEL_PROXY" offset="0xA108" width="32" description="MCU Timer2 functional clock selection control">
+		<bitfield id="MCU_TIMER2_CLKSEL_CLK_SEL_PROXY" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control  Field values (Others are reserved):   3'b000  -  HFOSC0_CLKOUT   3'b001  -  MCU_SYSCLK0 / 4   3'b010  -  CLK_12M_RC   3'b011  -  MCU_PLL2_HSDIV2_CLKOUT   3'b100  -  MCU_EXT_REFCLK0   3'b101  -  LFXOSC_CLKOUT   3'b110  -  CPSW_GENF0   3'b111  -  CLK_32K" range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER3_CLKSEL_PROXY" acronym="CFG0_MCU_TIMER3_CLKSEL_PROXY" offset="0xA10C" width="32" description="MCU Timer3 functional clock selection control">
+		<bitfield id="MCU_TIMER3_CLKSEL_CLK_SEL_PROXY" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control  Field values (Others are reserved):   3'b000  -  HFOSC0_CLKOUT   3'b001  -  MCU_SYSCLK0 / 4   3'b010  -  CLK_12M_RC   3'b011  -  MCU_PLL2_HSDIV2_CLKOUT   3'b100  -  MCU_EXT_REFCLK0   3'b101  -  LFXOSC_CLKOUT   3'b110  -  CPSW_GENF0   3'b111  -  CLK_32K" range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER4_CLKSEL_PROXY" acronym="CFG0_MCU_TIMER4_CLKSEL_PROXY" offset="0xA110" width="32" description="MCU Timer4 functional clock selection control">
+		<bitfield id="MCU_TIMER4_CLKSEL_CLK_SEL_PROXY" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control  Field values (Others are reserved):   3'b000  -  HFOSC0_CLKOUT   3'b001  -  MCU_SYSCLK0 / 4   3'b010  -  CLK_12M_RC   3'b011  -  MCU_PLL2_HSDIV2_CLKOUT   3'b100  -  MCU_EXT_REFCLK0   3'b101  -  LFXOSC_CLKOUT   3'b110  -  CPSW_GENF0   3'b111  -  CLK_32K" range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER5_CLKSEL_PROXY" acronym="CFG0_MCU_TIMER5_CLKSEL_PROXY" offset="0xA114" width="32" description="MCU Timer5 functional clock selection control">
+		<bitfield id="MCU_TIMER5_CLKSEL_CLK_SEL_PROXY" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control  Field values (Others are reserved):   3'b000  -  HFOSC0_CLKOUT   3'b001  -  MCU_SYSCLK0 / 4   3'b010  -  CLK_12M_RC   3'b011  -  MCU_PLL2_HSDIV2_CLKOUT   3'b100  -  MCU_EXT_REFCLK0   3'b101  -  LFXOSC_CLKOUT   3'b110  -  CPSW_GENF0   3'b111  -  CLK_32K" range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER6_CLKSEL_PROXY" acronym="CFG0_MCU_TIMER6_CLKSEL_PROXY" offset="0xA118" width="32" description="MCU Timer6 functional clock selection control">
+		<bitfield id="MCU_TIMER6_CLKSEL_CLK_SEL_PROXY" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control  Field values (Others are reserved):   3'b000  -  HFOSC0_CLKOUT   3'b001  -  MCU_SYSCLK0 / 4   3'b010  -  CLK_12M_RC   3'b011  -  MCU_PLL2_HSDIV2_CLKOUT   3'b100  -  MCU_EXT_REFCLK0   3'b101  -  LFXOSC_CLKOUT   3'b110  -  CPSW_GENF0   3'b111  -  CLK_32K" range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER7_CLKSEL_PROXY" acronym="CFG0_MCU_TIMER7_CLKSEL_PROXY" offset="0xA11C" width="32" description="MCU Timer7 functional clock selection control">
+		<bitfield id="MCU_TIMER7_CLKSEL_CLK_SEL_PROXY" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control  Field values (Others are reserved):   3'b000  -  HFOSC0_CLKOUT   3'b001  -  MCU_SYSCLK0 / 4   3'b010  -  CLK_12M_RC   3'b011  -  MCU_PLL2_HSDIV2_CLKOUT   3'b100  -  MCU_EXT_REFCLK0   3'b101  -  LFXOSC_CLKOUT   3'b110  -  CPSW_GENF0   3'b111  -  CLK_32K" range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER8_CLKSEL_PROXY" acronym="CFG0_MCU_TIMER8_CLKSEL_PROXY" offset="0xA120" width="32" description="MCU Timer8 functional clock selection control">
+		<bitfield id="MCU_TIMER8_CLKSEL_CLK_SEL_PROXY" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control  Field values (Others are reserved):   3'b000  -  HFOSC0_CLKOUT   3'b001  -  MCU_SYSCLK0 / 4   3'b010  -  CLK_12M_RC   3'b011  -  MCU_PLL2_HSDIV2_CLKOUT   3'b100  -  MCU_EXT_REFCLK0   3'b101  -  LFXOSC_CLKOUT   3'b110  -  CPSW_GENF0   3'b111  -  CLK_32K" range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_TIMER9_CLKSEL_PROXY" acronym="CFG0_MCU_TIMER9_CLKSEL_PROXY" offset="0xA124" width="32" description="MCU Timer9 functional clock selection control">
+		<bitfield id="MCU_TIMER9_CLKSEL_CLK_SEL_PROXY" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control  Field values (Others are reserved):   3'b000  -  HFOSC0_CLKOUT   3'b001  -  MCU_SYSCLK0 / 4   3'b010  -  CLK_12M_RC   3'b011  -  MCU_PLL2_HSDIV2_CLKOUT   3'b100  -  MCU_EXT_REFCLK0   3'b101  -  LFXOSC_CLKOUT   3'b110  -  CPSW_GENF0   3'b111  -  CLK_32K" range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_RTI0_CLKSEL_PROXY" acronym="CFG0_MCU_RTI0_CLKSEL_PROXY" offset="0xA180" width="32" description="MCU RTI0 functional clock selection control">
+		<bitfield id="MCU_RTI0_CLKSEL_WRTLOCK_PROXY" width="1" begin="31" end="31" resetval="0x0" description="When set, locks further writes to MCU_RTI0_CLKSEL until the next module reset" range="31" rwaccess="R/W"/> 
+		<bitfield id="MCU_RTI0_CLKSEL_CLK_SEL_PROXY" width="3" begin="2" end="0" resetval="0x0" description="RTI functional clock input select mux control  Field values (Others are reserved):   2'b00  -  HFOSC0_CLKOUT   2'b01  -  LFXOSC_CLKOUT   2'b10  -  CLK_12M_RC   2'b11  -  CLK_32K" range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_RTI1_CLKSEL_PROXY" acronym="CFG0_MCU_RTI1_CLKSEL_PROXY" offset="0xA184" width="32" description="MCU RTI1 functional clock selection control">
+		<bitfield id="MCU_RTI1_CLKSEL_WRTLOCK_PROXY" width="1" begin="31" end="31" resetval="0x0" description="When set, locks further writes to MCU_RTI1_CLKSEL until the next module reset" range="31" rwaccess="R/W"/> 
+		<bitfield id="MCU_RTI1_CLKSEL_CLK_SEL_PROXY" width="3" begin="2" end="0" resetval="0x0" description="RTI functional clock input select mux control  Field values (Others are reserved):   2'b00  -  HFOSC0_CLKOUT   2'b01  -  LFXOSC_CLKOUT   2'b10  -  CLK_12M_RC   2'b11  -  CLK_32K" range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_USART_CLKSEL_PROXY" acronym="CFG0_MCU_USART_CLKSEL_PROXY" offset="0xA1C0" width="32" description="Controls the functional clock source for MCU_USART0">
+		<bitfield id="MCU_USART_CLKSEL_CLK_SEL_PROXY" width="1" begin="0" end="0" resetval="0x0" description="MCU_USART0 FCLK selection  1'b0 - MCU_PLL1_HSDIV3_CLKOUT  1'b1 - MAIN_PLL1_HSDIV5_CLKOUT" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_LOCK2_KICK0_PROXY" acronym="CFG0_LOCK2_KICK0_PROXY" offset="0xB008" width="32" description="This register must be written with the designated key value followed by a write to LOCK2_KICK1 with its key value before write-protected Partition 2 registers can be written.">
+		<bitfield id="LOCK2_KICK0_PROXY" width="32" begin="31" end="0" resetval="0x0" description=" - KICK0 component" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_LOCK2_KICK1_PROXY" acronym="CFG0_LOCK2_KICK1_PROXY" offset="0xB00C" width="32" description="This register must be written with the designated key value after a write to LOCK2_KICK0 with its key value before write-protected Partition 2 registers can be written.">
+		<bitfield id="LOCK2_KICK1_PROXY" width="32" begin="31" end="0" resetval="0x0" description=" - KICK1 component" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P2_R0" acronym="CFG0_CLAIMREG_P2_R0" offset="0xB100" width="32" description="">
+		<bitfield id="CLAIMREG_P2_R0" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 2" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P2_R1" acronym="CFG0_CLAIMREG_P2_R1" offset="0xB104" width="32" description="">
+		<bitfield id="CLAIMREG_P2_R1" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 2" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P2_R2" acronym="CFG0_CLAIMREG_P2_R2" offset="0xB108" width="32" description="">
+		<bitfield id="CLAIMREG_P2_R2" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 2" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P2_R3" acronym="CFG0_CLAIMREG_P2_R3" offset="0xB10C" width="32" description="">
+		<bitfield id="CLAIMREG_P2_R3" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 2" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_LBIST_CTRL" acronym="CFG0_MCU_LBIST_CTRL" offset="0xC000" width="32" description="Configures and enables LBIST operation">
+		<bitfield id="MCU_LBIST_CTRL_BIST_RESET" width="1" begin="31" end="31" resetval="0x0" description="Reset LBIST macro (active low)" range="31" rwaccess="R/W"/> 
+		<bitfield id="MCU_LBIST_CTRL_BIST_RUN" width="4" begin="27" end="24" resetval="0x0" description="Starts LBIST if all bits are 1" range="27 - 24" rwaccess="R/W"/> 
+		<bitfield id="MCU_LBIST_CTRL_RUNBIST_MODE" width="4" begin="15" end="12" resetval="0x0" description="Runbist mode enable if all bits are 1" range="15 - 12" rwaccess="R/W"/> 
+		<bitfield id="MCU_LBIST_CTRL_DC_DEF" width="2" begin="9" end="8" resetval="0x0" description="Clock delay after scan_enable switching" range="9 - 8" rwaccess="R/W"/> 
+		<bitfield id="MCU_LBIST_CTRL_LOAD_DIV" width="1" begin="7" end="7" resetval="0x0" description="Loads LBIST clock divide ratio on transition from 0 to 1" range="7" rwaccess="R/W"/> 
+		<bitfield id="MCU_LBIST_CTRL_DIVIDE_RATIO" width="5" begin="4" end="0" resetval="0x0" description="LBIST clock divide ratio" range="4 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_LBIST_PATCOUNT" acronym="CFG0_MCU_LBIST_PATCOUNT" offset="0xC004" width="32" description="Specifies the number of LBIST patterns to run">
+		<bitfield id="MCU_LBIST_PATCOUNT_STATIC_PC_DEF" width="14" begin="29" end="16" resetval="0x0" description="Number of stuck-at patterns to run" range="29 - 16" rwaccess="R/W"/> 
+		<bitfield id="MCU_LBIST_PATCOUNT_SET_PC_DEF" width="4" begin="11" end="8" resetval="0x0" description="Number of set patterns to run" range="11 - 8" rwaccess="R/W"/> 
+		<bitfield id="MCU_LBIST_PATCOUNT_RESET_PC_DEF" width="4" begin="7" end="4" resetval="0x0" description="Number of reset patterns to run" range="7 - 4" rwaccess="R/W"/> 
+		<bitfield id="MCU_LBIST_PATCOUNT_SCAN_PC_DEF" width="4" begin="3" end="0" resetval="0x0" description="Number of chain test patterns to run" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_LBIST_SEED0" acronym="CFG0_MCU_LBIST_SEED0" offset="0xC008" width="32" description="Specifies the 32 LSBs of the PRPG seed">
+		<bitfield id="MCU_LBIST_SEED0_PRPG_DEF" width="32" begin="31" end="0" resetval="0x0" description="Initial seed for PRPG (bits 31:0)" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_LBIST_SEED1" acronym="CFG0_MCU_LBIST_SEED1" offset="0xC00C" width="32" description="Specifies the 21 MSBs of the PRPG seed">
+		<bitfield id="MCU_LBIST_SEED1_PRPG_DEF" width="21" begin="20" end="0" resetval="0x0" description="Initial seed for PRPG (bits 52:32)" range="20 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_LBIST_SPARE0" acronym="CFG0_MCU_LBIST_SPARE0" offset="0xC010" width="32" description="Spare LBIST control bits">
+		<bitfield id="MCU_LBIST_SPARE0_SPARE0" width="30" begin="31" end="2" resetval="0x0" description="LBIST spare bits" range="31 - 2" rwaccess="R/W"/> 
+		<bitfield id="MCU_LBIST_SPARE0_PBIST_SELFTEST_EN" width="1" begin="1" end="1" resetval="0x0" description="PBIST isolation control" range="1" rwaccess="R/W"/> 
+		<bitfield id="MCU_LBIST_SPARE0_LBIST_SELFTEST_EN" width="1" begin="0" end="0" resetval="0x0" description="LBIST isolation control" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_LBIST_SPARE1" acronym="CFG0_MCU_LBIST_SPARE1" offset="0xC014" width="32" description="Spare LBIST control bits">
+		<bitfield id="MCU_LBIST_SPARE1_SPARE1" width="32" begin="31" end="0" resetval="0x0" description="LBIST spare bits" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_LBIST_STAT" acronym="CFG0_MCU_LBIST_STAT" offset="0xC018" width="32" description="Indicates LBIST status and provides MISR selection control">
+		<bitfield id="MCU_LBIST_STAT_BIST_DONE" width="1" begin="31" end="31" resetval="0x0" description="LBIST is done" range="31" rwaccess="R"/> 
+		<bitfield id="MCU_LBIST_STAT_BIST_RUNNING" width="1" begin="15" end="15" resetval="0x0" description="LBIST is running" range="15" rwaccess="R"/> 
+		<bitfield id="MCU_LBIST_STAT_OUT_MUX_CTL" width="2" begin="9" end="8" resetval="0x0" description="Selects source of LBIST output  00 - LBIST IP PID value  01 - LBIST CTRL ID value  1x - MISR value" range="9 - 8" rwaccess="R/W"/> 
+		<bitfield id="MCU_LBIST_STAT_MISR_MUX_CTL" width="8" begin="7" end="0" resetval="0x0" description="Selects block of 32 MISR bits to read.  A value of 0 selects a compacted 32-bit version of the full MISR.  A value of 1-32 select a 32-bit segment of the MISR." range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_LBIST_MISR" acronym="CFG0_MCU_LBIST_MISR" offset="0xC01C" width="32" description="Contains LBIST MISR output value">
+		<bitfield id="MCU_LBIST_MISR_MISR_RESULT" width="32" begin="31" end="0" resetval="0x0" description="32-bits of MISR value selected by misr_mux_ctl" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_MCU_LBIST_SIG" acronym="CFG0_MCU_LBIST_SIG" offset="0xC280" width="32" description="Contains expected MISR output value">
+		<bitfield id="MCU_LBIST_SIG_MISR_SIG" width="32" begin="31" end="0" resetval="0x0" description="MISR signature" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_LOCK3_KICK0" acronym="CFG0_LOCK3_KICK0" offset="0xD008" width="32" description="This register must be written with the designated key value followed by a write to LOCK3_KICK1 with its key value before write-protected Partition 3 registers can be written.">
+		<bitfield id="LOCK3_KICK0" width="32" begin="31" end="0" resetval="0x0" description=" - KICK0 component" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_LOCK3_KICK1" acronym="CFG0_LOCK3_KICK1" offset="0xD00C" width="32" description="This register must be written with the designated key value after a write to LOCK3_KICK0 with its key value before write-protected Partition 3 registers can be written.">
+		<bitfield id="LOCK3_KICK1" width="32" begin="31" end="0" resetval="0x0" description=" - KICK1 component" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P3_R0_READONLY" acronym="CFG0_CLAIMREG_P3_R0_READONLY" offset="0xD100" width="32" description="">
+		<bitfield id="CLAIMREG_P3_R0_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 3" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P3_R1_READONLY" acronym="CFG0_CLAIMREG_P3_R1_READONLY" offset="0xD104" width="32" description="">
+		<bitfield id="CLAIMREG_P3_R1_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 3" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P3_R2_READONLY" acronym="CFG0_CLAIMREG_P3_R2_READONLY" offset="0xD108" width="32" description="">
+		<bitfield id="CLAIMREG_P3_R2_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 3" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P3_R3_READONLY" acronym="CFG0_CLAIMREG_P3_R3_READONLY" offset="0xD10C" width="32" description="">
+		<bitfield id="CLAIMREG_P3_R3_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 3" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P3_R4_READONLY" acronym="CFG0_CLAIMREG_P3_R4_READONLY" offset="0xD110" width="32" description="">
+		<bitfield id="CLAIMREG_P3_R4_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 3" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P3_R5_READONLY" acronym="CFG0_CLAIMREG_P3_R5_READONLY" offset="0xD114" width="32" description="">
+		<bitfield id="CLAIMREG_P3_R5_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 3" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_MCU_LBIST_CTRL_PROXY" acronym="CFG0_MCU_LBIST_CTRL_PROXY" offset="0xE000" width="32" description="Configures and enables LBIST operation">
+		<bitfield id="MCU_LBIST_CTRL_BIST_RESET_PROXY" width="1" begin="31" end="31" resetval="0x0" description="Reset LBIST macro (active low)" range="31" rwaccess="R/W"/> 
+		<bitfield id="MCU_LBIST_CTRL_BIST_RUN_PROXY" width="4" begin="27" end="24" resetval="0x0" description="Starts LBIST if all bits are 1" range="27 - 24" rwaccess="R/W"/> 
+		<bitfield id="MCU_LBIST_CTRL_RUNBIST_MODE_PROXY" width="4" begin="15" end="12" resetval="0x0" description="Runbist mode enable if all bits are 1" range="15 - 12" rwaccess="R/W"/> 
+		<bitfield id="MCU_LBIST_CTRL_DC_DEF_PROXY" width="2" begin="9" end="8" resetval="0x0" description="Clock delay after scan_enable switching" range="9 - 8" rwaccess="R/W"/> 
+		<bitfield id="MCU_LBIST_CTRL_LOAD_DIV_PROXY" width="1" begin="7" end="7" resetval="0x0" description="Loads LBIST clock divide ratio on transition from 0 to 1" range="7" rwaccess="R/W"/> 
+		<bitfield id="MCU_LBIST_CTRL_DIVIDE_RATIO_PROXY" width="5" begin="4" end="0" resetval="0x0" description="LBIST clock divide ratio" range="4 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_LBIST_PATCOUNT_PROXY" acronym="CFG0_MCU_LBIST_PATCOUNT_PROXY" offset="0xE004" width="32" description="Specifies the number of LBIST patterns to run">
+		<bitfield id="MCU_LBIST_PATCOUNT_STATIC_PC_DEF_PROXY" width="14" begin="29" end="16" resetval="0x0" description="Number of stuck-at patterns to run" range="29 - 16" rwaccess="R/W"/> 
+		<bitfield id="MCU_LBIST_PATCOUNT_SET_PC_DEF_PROXY" width="4" begin="11" end="8" resetval="0x0" description="Number of set patterns to run" range="11 - 8" rwaccess="R/W"/> 
+		<bitfield id="MCU_LBIST_PATCOUNT_RESET_PC_DEF_PROXY" width="4" begin="7" end="4" resetval="0x0" description="Number of reset patterns to run" range="7 - 4" rwaccess="R/W"/> 
+		<bitfield id="MCU_LBIST_PATCOUNT_SCAN_PC_DEF_PROXY" width="4" begin="3" end="0" resetval="0x0" description="Number of chain test patterns to run" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_LBIST_SEED0_PROXY" acronym="CFG0_MCU_LBIST_SEED0_PROXY" offset="0xE008" width="32" description="Specifies the 32 LSBs of the PRPG seed">
+		<bitfield id="MCU_LBIST_SEED0_PRPG_DEF_PROXY" width="32" begin="31" end="0" resetval="0x0" description="Initial seed for PRPG (bits 31:0)" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_LBIST_SEED1_PROXY" acronym="CFG0_MCU_LBIST_SEED1_PROXY" offset="0xE00C" width="32" description="Specifies the 21 MSBs of the PRPG seed">
+		<bitfield id="MCU_LBIST_SEED1_PRPG_DEF_PROXY" width="21" begin="20" end="0" resetval="0x0" description="Initial seed for PRPG (bits 52:32)" range="20 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_LBIST_SPARE0_PROXY" acronym="CFG0_MCU_LBIST_SPARE0_PROXY" offset="0xE010" width="32" description="Spare LBIST control bits">
+		<bitfield id="MCU_LBIST_SPARE0_SPARE0_PROXY" width="30" begin="31" end="2" resetval="0x0" description="LBIST spare bits" range="31 - 2" rwaccess="R/W"/> 
+		<bitfield id="MCU_LBIST_SPARE0_PBIST_SELFTEST_EN_PROXY" width="1" begin="1" end="1" resetval="0x0" description="PBIST isolation control" range="1" rwaccess="R/W"/> 
+		<bitfield id="MCU_LBIST_SPARE0_LBIST_SELFTEST_EN_PROXY" width="1" begin="0" end="0" resetval="0x0" description="LBIST isolation control" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_LBIST_SPARE1_PROXY" acronym="CFG0_MCU_LBIST_SPARE1_PROXY" offset="0xE014" width="32" description="Spare LBIST control bits">
+		<bitfield id="MCU_LBIST_SPARE1_SPARE1_PROXY" width="32" begin="31" end="0" resetval="0x0" description="LBIST spare bits" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_LBIST_STAT_PROXY" acronym="CFG0_MCU_LBIST_STAT_PROXY" offset="0xE018" width="32" description="Indicates LBIST status and provides MISR selection control">
+		<bitfield id="MCU_LBIST_STAT_BIST_DONE_PROXY" width="1" begin="31" end="31" resetval="0x0" description="LBIST is done" range="31" rwaccess="R"/> 
+		<bitfield id="MCU_LBIST_STAT_BIST_RUNNING_PROXY" width="1" begin="15" end="15" resetval="0x0" description="LBIST is running" range="15" rwaccess="R"/> 
+		<bitfield id="MCU_LBIST_STAT_OUT_MUX_CTL_PROXY" width="2" begin="9" end="8" resetval="0x0" description="Selects source of LBIST output  00 - LBIST IP PID value  01 - LBIST CTRL ID value  1x - MISR value" range="9 - 8" rwaccess="R/W"/> 
+		<bitfield id="MCU_LBIST_STAT_MISR_MUX_CTL_PROXY" width="8" begin="7" end="0" resetval="0x0" description="Selects block of 32 MISR bits to read.  A value of 0 selects a compacted 32-bit version of the full MISR.  A value of 1-32 select a 32-bit segment of the MISR." range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_MCU_LBIST_MISR_PROXY" acronym="CFG0_MCU_LBIST_MISR_PROXY" offset="0xE01C" width="32" description="Contains LBIST MISR output value">
+		<bitfield id="MCU_LBIST_MISR_MISR_RESULT_PROXY" width="32" begin="31" end="0" resetval="0x0" description="32-bits of MISR value selected by misr_mux_ctl" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_MCU_LBIST_SIG_PROXY" acronym="CFG0_MCU_LBIST_SIG_PROXY" offset="0xE280" width="32" description="Contains expected MISR output value">
+		<bitfield id="MCU_LBIST_SIG_MISR_SIG_PROXY" width="32" begin="31" end="0" resetval="0x0" description="MISR signature" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_LOCK3_KICK0_PROXY" acronym="CFG0_LOCK3_KICK0_PROXY" offset="0xF008" width="32" description="This register must be written with the designated key value followed by a write to LOCK3_KICK1 with its key value before write-protected Partition 3 registers can be written.">
+		<bitfield id="LOCK3_KICK0_PROXY" width="32" begin="31" end="0" resetval="0x0" description=" - KICK0 component" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_LOCK3_KICK1_PROXY" acronym="CFG0_LOCK3_KICK1_PROXY" offset="0xF00C" width="32" description="This register must be written with the designated key value after a write to LOCK3_KICK0 with its key value before write-protected Partition 3 registers can be written.">
+		<bitfield id="LOCK3_KICK1_PROXY" width="32" begin="31" end="0" resetval="0x0" description=" - KICK1 component" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P3_R0" acronym="CFG0_CLAIMREG_P3_R0" offset="0xF100" width="32" description="">
+		<bitfield id="CLAIMREG_P3_R0" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 3" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P3_R1" acronym="CFG0_CLAIMREG_P3_R1" offset="0xF104" width="32" description="">
+		<bitfield id="CLAIMREG_P3_R1" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 3" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P3_R2" acronym="CFG0_CLAIMREG_P3_R2" offset="0xF108" width="32" description="">
+		<bitfield id="CLAIMREG_P3_R2" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 3" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P3_R3" acronym="CFG0_CLAIMREG_P3_R3" offset="0xF10C" width="32" description="">
+		<bitfield id="CLAIMREG_P3_R3" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 3" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P3_R4" acronym="CFG0_CLAIMREG_P3_R4" offset="0xF110" width="32" description="">
+		<bitfield id="CLAIMREG_P3_R4" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 3" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P3_R5" acronym="CFG0_CLAIMREG_P3_R5" offset="0xF114" width="32" description="">
+		<bitfield id="CLAIMREG_P3_R5" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 3" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P4_R0_READONLY" acronym="CFG0_CLAIMREG_P4_R0_READONLY" offset="0x11100" width="32" description="">
+		<bitfield id="CLAIMREG_P4_R0_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 4" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P4_R1_READONLY" acronym="CFG0_CLAIMREG_P4_R1_READONLY" offset="0x11104" width="32" description="">
+		<bitfield id="CLAIMREG_P4_R1_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 4" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P4_R2_READONLY" acronym="CFG0_CLAIMREG_P4_R2_READONLY" offset="0x11108" width="32" description="">
+		<bitfield id="CLAIMREG_P4_R2_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 4" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P4_R3_READONLY" acronym="CFG0_CLAIMREG_P4_R3_READONLY" offset="0x1110C" width="32" description="">
+		<bitfield id="CLAIMREG_P4_R3_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 4" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P4_R4_READONLY" acronym="CFG0_CLAIMREG_P4_R4_READONLY" offset="0x11110" width="32" description="">
+		<bitfield id="CLAIMREG_P4_R4_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 4" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P4_R5_READONLY" acronym="CFG0_CLAIMREG_P4_R5_READONLY" offset="0x11114" width="32" description="">
+		<bitfield id="CLAIMREG_P4_R5_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 4" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P4_R6_READONLY" acronym="CFG0_CLAIMREG_P4_R6_READONLY" offset="0x11118" width="32" description="">
+		<bitfield id="CLAIMREG_P4_R6_READONLY" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 4" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P4_R0" acronym="CFG0_CLAIMREG_P4_R0" offset="0x13100" width="32" description="">
+		<bitfield id="CLAIMREG_P4_R0" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 4" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P4_R1" acronym="CFG0_CLAIMREG_P4_R1" offset="0x13104" width="32" description="">
+		<bitfield id="CLAIMREG_P4_R1" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 4" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P4_R2" acronym="CFG0_CLAIMREG_P4_R2" offset="0x13108" width="32" description="">
+		<bitfield id="CLAIMREG_P4_R2" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 4" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P4_R3" acronym="CFG0_CLAIMREG_P4_R3" offset="0x1310C" width="32" description="">
+		<bitfield id="CLAIMREG_P4_R3" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 4" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P4_R4" acronym="CFG0_CLAIMREG_P4_R4" offset="0x13110" width="32" description="">
+		<bitfield id="CLAIMREG_P4_R4" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 4" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P4_R5" acronym="CFG0_CLAIMREG_P4_R5" offset="0x13114" width="32" description="">
+		<bitfield id="CLAIMREG_P4_R5" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 4" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLAIMREG_P4_R6" acronym="CFG0_CLAIMREG_P4_R6" offset="0x13118" width="32" description="">
+		<bitfield id="CLAIMREG_P4_R6" width="32" begin="31" end="0" resetval="0x0" description="Claim bits for Partition 4" range="31 - 0" rwaccess="R/W"/>
+	</register>
+</module>

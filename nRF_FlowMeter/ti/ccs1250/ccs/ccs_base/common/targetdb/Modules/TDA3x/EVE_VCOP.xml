@@ -1,0 +1,166 @@
+<module name="EVE_VCOP" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="VCOP_PID" acronym="VCOP_PID" offset="0x0" width="32" description="">
+    <bitfield id="PID" width="32" begin="31" end="0" resetval="0x0" description="IP Revision" range="" rwaccess="R"/>
+  </register>
+  <register id="VCOP_CTRL" acronym="VCOP_CTRL" offset="0x4" width="32" description="VCOP Control Register">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="STEP_GO" width="1" begin="1" end="1" resetval="0x0" description="Starts executing a single i4 iteration" range="" rwaccess="RW">
+      <bitenum value="0" id="NOP" token="STEP_GO_0" description="NOP"/>
+      <bitenum value="1" id="START" token="STEP_GO_1" description="START"/>
+    </bitfield>
+    <bitfield id="STEP_EN" width="1" begin="0" end="0" resetval="0x0" description="Enable Single Step mode" range="" rwaccess="RW">
+      <bitenum value="0" id="Disable" token="STEP_EN_0" description="Disable"/>
+      <bitenum value="1" id="Enable" token="STEP_EN_1" description="Enable"/>
+    </bitfield>
+  </register>
+  <register id="VCOP_STATUS" acronym="VCOP_STATUS" offset="0x8" width="32" description="VCOP status register.">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="Reserved. Read returns 0s" range="" rwaccess="R"/>
+    <bitfield id="VEC_RDY" width="1" begin="2" end="2" resetval="0x0" description="Vector core ready to accept next vector instruction" range="" rwaccess="R"/>
+    <bitfield id="VEC_DONE" width="1" begin="1" end="1" resetval="0x0" description="Vector core has completed execution of submitted vector loops." range="" rwaccess="R"/>
+    <bitfield id="STEP_RDY" width="1" begin="0" end="0" resetval="0x0" description="Ready for next step (single step)" range="" rwaccess="R">
+      <bitenum value="0" id="Busy" token="STEP_RDY_0" description="Busy"/>
+      <bitenum value="1" id="Idle_and_ready_for_next_step" token="STEP_RDY_1" description="Idle and ready for next step"/>
+    </bitfield>
+  </register>
+  <register id="VCOP_MAX_ITERS" acronym="VCOP_MAX_ITERS" offset="0xC" width="32" description="">
+    <bitfield id="RESESERVED" width="16" begin="31" end="16" resetval="0x0" description="Reserved. Read returns 0s" range="" rwaccess="R"/>
+    <bitfield id="MAX_ITERS" width="16" begin="15" end="0" resetval="0x0" description="Maximum iteration count. Send interrupt when a loop in execution exceeds the programmed max iteration count. This is to guard against VCOP hangs due to run-away program." range="" rwaccess="RW">
+      <bitenum value="0" id="Disable_(default)" token="MAX_ITERS_0" description="Disable (default)"/>
+      <bitenum value="1" id="Enable" token="MAX_ITERS_1" description="Enable"/>
+    </bitfield>
+  </register>
+  <register id="VCOP_ERROR" acronym="VCOP_ERROR" offset="0x10" width="32" description="Error interrupt enalbe and status register. Writing 1 to the ERR_STi bits clears the interrupt status.">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="Reserved. Read returns 0s" range="" rwaccess="RW"/>
+    <bitfield id="ERR_DIS7" width="1" begin="23" end="23" resetval="0x0" description="Error Interrupt disable." range="" rwaccess="RW">
+      <bitenum value="0" id="Enable" token="ERR_DIS7_0" description="Enable"/>
+      <bitenum value="1" id="Disable_ST_PDDA_bank_conflict" token="ERR_DIS7_1" description="Disable ST_PDDA bank conflict"/>
+    </bitfield>
+    <bitfield id="ERR_DIS6" width="1" begin="22" end="22" resetval="0x0" description="Error Interrupt disable." range="" rwaccess="RW">
+      <bitenum value="0" id="Enable" token="ERR_DIS6_0" description="Enable"/>
+      <bitenum value="1" id="Disable_ST_WBUF_out-of-bound" token="ERR_DIS6_1" description="Disable ST WBUF out-of-bound"/>
+    </bitfield>
+    <bitfield id="ERR_DIS5" width="1" begin="21" end="21" resetval="0x0" description="Error Interrupt disable." range="" rwaccess="RW">
+      <bitenum value="0" id="Enable" token="ERR_DIS5_0" description="Enable"/>
+      <bitenum value="1" id="Disable_ST_IBUF_out-of-bound" token="ERR_DIS5_1" description="Disable ST IBUF out-of-bound"/>
+    </bitfield>
+    <bitfield id="ERR_DIS4" width="1" begin="20" end="20" resetval="0x0" description="Error Interrupt disable." range="" rwaccess="RW">
+      <bitenum value="0" id="Enable" token="ERR_DIS4_0" description="Enable"/>
+      <bitenum value="1" id="Disable_LD_WBUF_out-of-bound" token="ERR_DIS4_1" description="Disable LD WBUF out-of-bound"/>
+    </bitfield>
+    <bitfield id="ERR_DIS3" width="1" begin="19" end="19" resetval="0x0" description="Error Interrupt disable." range="" rwaccess="RW">
+      <bitenum value="0" id="Enable" token="ERR_DIS3_0" description="Enable"/>
+      <bitenum value="1" id="Disable_LD_IBUF_out-of-bound" token="ERR_DIS3_1" description="Disable LD IBUF out-of-bound"/>
+    </bitfield>
+    <bitfield id="ERR_DIS2" width="1" begin="18" end="18" resetval="0x0" description="Error Interrupt disable." range="" rwaccess="RW">
+      <bitenum value="0" id="Enable" token="ERR_DIS2_0" description="Enable"/>
+      <bitenum value="1" id="1" token="ERR_DIS2_1" description="Disable Illegal parameter (pointer not 32-bit aligned, pointer out-of-bound, exceed max repeat count)"/>
+    </bitfield>
+    <bitfield id="ERR_DIS1" width="1" begin="17" end="17" resetval="0x0" description="Error Interrupt disable." range="" rwaccess="RW">
+      <bitenum value="0" id="Enable" token="ERR_DIS1_0" description="Enable"/>
+      <bitenum value="1" id="1" token="ERR_DIS1_1" description="Disable Illegal instruction, all other causes than inside-loop instructions detected outside loop"/>
+    </bitfield>
+    <bitfield id="ERR_DIS0" width="1" begin="16" end="16" resetval="0x0" description="Error Interrupt disable." range="" rwaccess="RW">
+      <bitenum value="0" id="Enable" token="ERR_DIS0_0" description="Enable"/>
+      <bitenum value="1" id="VADD)_VCOP_PC_ARP32_PC_VLOOP_1" token="ERR_DIS0_1" description="Disable Illegal instruction; inside-loop instructions (eg, VADD) detected outside loop.When this occurs, the decode value is indeterminate, since VCOP expects valid PC on vec_paddr bus, and ARP32 only sends PC with valid VLOOP instruction."/>
+    </bitfield>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="Reserved. Read returns 0s" range="" rwaccess="RW"/>
+    <bitfield id="ERR_ST7" width="1" begin="7" end="7" resetval="0x0" description="ST_PDDA bank conflict error status:" range="" rwaccess="RW">
+      <bitenum value="0" id="No_error" token="ERR_ST7_0" description="No error"/>
+      <bitenum value="1" id="Error" token="ERR_ST7_1" description="Error"/>
+    </bitfield>
+    <bitfield id="ERR_ST6" width="1" begin="6" end="6" resetval="0x0" description="ST WBUF out-of-bound error status:" range="" rwaccess="RW">
+      <bitenum value="0" id="No_error" token="ERR_ST6_0" description="No error"/>
+      <bitenum value="1" id="Error" token="ERR_ST6_1" description="Error"/>
+    </bitfield>
+    <bitfield id="ERR_ST5" width="1" begin="5" end="5" resetval="0x0" description="ST IBUF out-of-bound error status:" range="" rwaccess="RW">
+      <bitenum value="0" id="No_error" token="ERR_ST5_0" description="No error"/>
+      <bitenum value="1" id="Error" token="ERR_ST5_1" description="Error"/>
+    </bitfield>
+    <bitfield id="ERR_ST4" width="1" begin="4" end="4" resetval="0x0" description="LD WBUF out-of-bound error status:" range="" rwaccess="RW">
+      <bitenum value="0" id="No_error" token="ERR_ST4_0" description="No error"/>
+      <bitenum value="1" id="Error" token="ERR_ST4_1" description="Error"/>
+    </bitfield>
+    <bitfield id="ERR_ST3" width="1" begin="3" end="3" resetval="0x0" description="LD IBUF out-of-bound error status:" range="" rwaccess="RW">
+      <bitenum value="0" id="No_error" token="ERR_ST3_0" description="No error"/>
+      <bitenum value="1" id="Error" token="ERR_ST3_1" description="Error"/>
+    </bitfield>
+    <bitfield id="ERR_ST2" width="1" begin="2" end="2" resetval="0x0" description="Illegal parameter error status. Effected when pointer is not 32-bit aligned, pointer is outof- bound, or exceed max repeat count." range="" rwaccess="RW">
+      <bitenum value="0" id="No_error" token="ERR_ST2_0" description="No error"/>
+      <bitenum value="1" id="Error" token="ERR_ST2_1" description="Error"/>
+    </bitfield>
+    <bitfield id="ERR_ST1" width="1" begin="1" end="1" resetval="0x0" description="Illegal instruction error status. Effected by all other causes than inside-loop instructions detected outside loop." range="" rwaccess="RW">
+      <bitenum value="0" id="No_error" token="ERR_ST1_0" description="No error"/>
+      <bitenum value="1" id="Error" token="ERR_ST1_1" description="Error"/>
+    </bitfield>
+    <bitfield id="ERR_ST0" width="1" begin="0" end="0" resetval="0x0" description="Illegal instruction error status. Effected by inside-loop instructions (eg, VADD) detected outside loop. When this occurs, VCOP_VLOOP_PTR_DEC value is indeterminate, since VCOP expects valid PC on vec_paddr bus, and ARP32 only sends PC with valid VLOOP instruction." range="" rwaccess="RW">
+      <bitenum value="0" id="No_error" token="ERR_ST0_0" description="No error"/>
+      <bitenum value="1" id="Error" token="ERR_ST0_1" description="Error"/>
+    </bitfield>
+  </register>
+  <register id="VCOP_VLOOP_PTR" acronym="VCOP_VLOOP_PTR" offset="0x20" width="32" description="The VLOOP pointer">
+    <bitfield id="VLOOP_PTR" width="32" begin="31" end="0" resetval="0x0" description="VLOOP pointer." range="" rwaccess="R"/>
+  </register>
+  <register id="VCOP_PARAM_PTR" acronym="VCOP_PARAM_PTR" offset="0x24" width="32" description="">
+    <bitfield id="PARAM_PTR" width="32" begin="31" end="0" resetval="0x0" description="Points to the beginning of parameter block for the loop in execution." range="" rwaccess="R"/>
+  </register>
+  <register id="VCOP_I0_I1" acronym="VCOP_I0_I1" offset="0x30" width="32" description="I0, I1 loop variables register provides a snapshot of i0 and i1">
+    <bitfield id="I1" width="16" begin="31" end="16" resetval="0x0" description="Snapshot of I1 loop variable." range="" rwaccess="R"/>
+    <bitfield id="I0" width="16" begin="15" end="0" resetval="0x0" description="Snapshot of I0 loop variable." range="" rwaccess="R"/>
+  </register>
+  <register id="VCOP_I2_I3" acronym="VCOP_I2_I3" offset="0x34" width="32" description="I2, I3 loop variables register provides a snapshot of i2 and i3">
+    <bitfield id="I3" width="16" begin="31" end="16" resetval="0x0" description="Snapshot of I2 loop variable." range="" rwaccess="R"/>
+    <bitfield id="I2" width="16" begin="15" end="0" resetval="0x0" description="Snapshot of I3 loop variable." range="" rwaccess="R"/>
+  </register>
+  <register id="VCOP_I4" acronym="VCOP_I4" offset="0x38" width="32" description="I4 loop variables register provides a snapshot of i4">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="Reserved Read returns 0s" range="" rwaccess="R"/>
+    <bitfield id="I4" width="16" begin="15" end="0" resetval="0x0" description="Snapshot of I4 loop variable." range="" rwaccess="R"/>
+  </register>
+  <register id="VCOP_LD_PTR_i_0" acronym="VCOP_LD_PTR_i_0" offset="0x40" width="32" description="The LD pointer registers 0 to 7 or (VCOP_LD_PTR(0..7)) is a snapshot of the LD memory address. The LD unit is identified by the destination vector register V0..V7">
+    <bitfield id="LD_PTRi" width="32" begin="31" end="0" resetval="0x0" description="LD pointer i (i = 0 to 7)." range="" rwaccess="R"/>
+  </register>
+  <register id="VCOP_LD_PTR_i_1" acronym="VCOP_LD_PTR_i_1" offset="0x44" width="32" description="The LD pointer registers 0 to 7 or (VCOP_LD_PTR(0..7)) is a snapshot of the LD memory address. The LD unit is identified by the destination vector register V0..V7">
+    <bitfield id="LD_PTRi" width="32" begin="31" end="0" resetval="0x0" description="LD pointer i (i = 0 to 7)." range="" rwaccess="R"/>
+  </register>
+  <register id="VCOP_LD_PTR_i_2" acronym="VCOP_LD_PTR_i_2" offset="0x48" width="32" description="The LD pointer registers 0 to 7 or (VCOP_LD_PTR(0..7)) is a snapshot of the LD memory address. The LD unit is identified by the destination vector register V0..V7">
+    <bitfield id="LD_PTRi" width="32" begin="31" end="0" resetval="0x0" description="LD pointer i (i = 0 to 7)." range="" rwaccess="R"/>
+  </register>
+  <register id="VCOP_LD_PTR_i_3" acronym="VCOP_LD_PTR_i_3" offset="0x4C" width="32" description="The LD pointer registers 0 to 7 or (VCOP_LD_PTR(0..7)) is a snapshot of the LD memory address. The LD unit is identified by the destination vector register V0..V7">
+    <bitfield id="LD_PTRi" width="32" begin="31" end="0" resetval="0x0" description="LD pointer i (i = 0 to 7)." range="" rwaccess="R"/>
+  </register>
+  <register id="VCOP_LD_PTR_i_4" acronym="VCOP_LD_PTR_i_4" offset="0x50" width="32" description="The LD pointer registers 0 to 7 or (VCOP_LD_PTR(0..7)) is a snapshot of the LD memory address. The LD unit is identified by the destination vector register V0..V7">
+    <bitfield id="LD_PTRi" width="32" begin="31" end="0" resetval="0x0" description="LD pointer i (i = 0 to 7)." range="" rwaccess="R"/>
+  </register>
+  <register id="VCOP_LD_PTR_i_5" acronym="VCOP_LD_PTR_i_5" offset="0x54" width="32" description="The LD pointer registers 0 to 7 or (VCOP_LD_PTR(0..7)) is a snapshot of the LD memory address. The LD unit is identified by the destination vector register V0..V7">
+    <bitfield id="LD_PTRi" width="32" begin="31" end="0" resetval="0x0" description="LD pointer i (i = 0 to 7)." range="" rwaccess="R"/>
+  </register>
+  <register id="VCOP_LD_PTR_i_6" acronym="VCOP_LD_PTR_i_6" offset="0x58" width="32" description="The LD pointer registers 0 to 7 or (VCOP_LD_PTR(0..7)) is a snapshot of the LD memory address. The LD unit is identified by the destination vector register V0..V7">
+    <bitfield id="LD_PTRi" width="32" begin="31" end="0" resetval="0x0" description="LD pointer i (i = 0 to 7)." range="" rwaccess="R"/>
+  </register>
+  <register id="VCOP_LD_PTR_i_7" acronym="VCOP_LD_PTR_i_7" offset="0x5C" width="32" description="The LD pointer registers 0 to 7 or (VCOP_LD_PTR(0..7)) is a snapshot of the LD memory address. The LD unit is identified by the destination vector register V0..V7">
+    <bitfield id="LD_PTRi" width="32" begin="31" end="0" resetval="0x0" description="LD pointer i (i = 0 to 7)." range="" rwaccess="R"/>
+  </register>
+  <register id="VCOP_ST_PTR_j_0" acronym="VCOP_ST_PTR_j_0" offset="0x60" width="32" description="The ST pointer registers 0 to 7 (VCOP_VLOOP_ST_PTR(0..7)) is a snapshot of the ST memory address. The ST unit is identified by the order ST appears in program.">
+    <bitfield id="ST_PTR0" width="32" begin="31" end="0" resetval="0x0" description="ST pointer j (j=0 to 7)." range="" rwaccess="R"/>
+  </register>
+  <register id="VCOP_ST_PTR_j_1" acronym="VCOP_ST_PTR_j_1" offset="0x64" width="32" description="The ST pointer registers 0 to 7 (VCOP_VLOOP_ST_PTR(0..7)) is a snapshot of the ST memory address. The ST unit is identified by the order ST appears in program.">
+    <bitfield id="ST_PTR0" width="32" begin="31" end="0" resetval="0x0" description="ST pointer j (j=0 to 7)." range="" rwaccess="R"/>
+  </register>
+  <register id="VCOP_ST_PTR_j_2" acronym="VCOP_ST_PTR_j_2" offset="0x68" width="32" description="The ST pointer registers 0 to 7 (VCOP_VLOOP_ST_PTR(0..7)) is a snapshot of the ST memory address. The ST unit is identified by the order ST appears in program.">
+    <bitfield id="ST_PTR0" width="32" begin="31" end="0" resetval="0x0" description="ST pointer j (j=0 to 7)." range="" rwaccess="R"/>
+  </register>
+  <register id="VCOP_ST_PTR_j_3" acronym="VCOP_ST_PTR_j_3" offset="0x6C" width="32" description="The ST pointer registers 0 to 7 (VCOP_VLOOP_ST_PTR(0..7)) is a snapshot of the ST memory address. The ST unit is identified by the order ST appears in program.">
+    <bitfield id="ST_PTR0" width="32" begin="31" end="0" resetval="0x0" description="ST pointer j (j=0 to 7)." range="" rwaccess="R"/>
+  </register>
+  <register id="VCOP_ST_PTR_j_4" acronym="VCOP_ST_PTR_j_4" offset="0x70" width="32" description="The ST pointer registers 0 to 7 (VCOP_VLOOP_ST_PTR(0..7)) is a snapshot of the ST memory address. The ST unit is identified by the order ST appears in program.">
+    <bitfield id="ST_PTR0" width="32" begin="31" end="0" resetval="0x0" description="ST pointer j (j=0 to 7)." range="" rwaccess="R"/>
+  </register>
+  <register id="VCOP_ST_PTR_j_5" acronym="VCOP_ST_PTR_j_5" offset="0x74" width="32" description="The ST pointer registers 0 to 7 (VCOP_VLOOP_ST_PTR(0..7)) is a snapshot of the ST memory address. The ST unit is identified by the order ST appears in program.">
+    <bitfield id="ST_PTR0" width="32" begin="31" end="0" resetval="0x0" description="ST pointer j (j=0 to 7)." range="" rwaccess="R"/>
+  </register>
+  <register id="VCOP_ST_PTR_j_6" acronym="VCOP_ST_PTR_j_6" offset="0x78" width="32" description="The ST pointer registers 0 to 7 (VCOP_VLOOP_ST_PTR(0..7)) is a snapshot of the ST memory address. The ST unit is identified by the order ST appears in program.">
+    <bitfield id="ST_PTR0" width="32" begin="31" end="0" resetval="0x0" description="ST pointer j (j=0 to 7)." range="" rwaccess="R"/>
+  </register>
+  <register id="VCOP_ST_PTR_j_7" acronym="VCOP_ST_PTR_j_7" offset="0x7C" width="32" description="The ST pointer registers 0 to 7 (VCOP_VLOOP_ST_PTR(0..7)) is a snapshot of the ST memory address. The ST unit is identified by the order ST appears in program.">
+    <bitfield id="ST_PTR0" width="32" begin="31" end="0" resetval="0x0" description="ST pointer j (j=0 to 7)." range="" rwaccess="R"/>
+  </register>
+</module>

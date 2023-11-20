@@ -1,0 +1,39 @@
+<module name="CPSW0_NUSS_CPINT" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="CPSW_INT_REVISION" acronym="CPSW_INT_REVISION" offset="0x1000" width="32" description="Register.">
+    <bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x1" description="Scheme" range="" rwaccess="R"/>
+    <bitfield id="BU" width="2" begin="29" end="28" resetval="0x2" description="BU" range="" rwaccess="R"/>
+    <bitfield id="FUNCTION" width="12" begin="27" end="16" resetval="0x690" description="Module ID" range="" rwaccess="R"/>
+    <bitfield id="RTLVER" width="5" begin="15" end="11" resetval="0x14" description="RTL revisions" range="" rwaccess="R"/>
+    <bitfield id="MAJREV" width="3" begin="10" end="8" resetval="0x2" description="Major revision" range="" rwaccess="R"/>
+    <bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom revision" range="" rwaccess="R"/>
+    <bitfield id="MINREV" width="6" begin="5" end="0" resetval="0x0" description="Minor revision" range="" rwaccess="R"/>
+  </register>
+  <register id="CPSW_INT_EOI_REG" acronym="CPSW_INT_EOI_REG" offset="0x1010" width="32" description="End of Interrupt Register. The EOI register is used to re-trigger the pulse interrupt signal to ensure that any nested interrupt events are serviced. The software interrupt handler must write to the EOI register at the end of the current interrupt processing routine, so that new events can re-trigger the pulse interrupt signal again. For level interrupt signals the EOI register is not functional and must not be used.">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="EOI_VECTOR" width="8" begin="7" end="0" resetval="0x0" description="End of Interrupt Vector." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_INT_INTR_VECTOR_REG" acronym="CPSW_INT_INTR_VECTOR_REG" offset="0x1014" width="32" description="Interrupt Vector Register.">
+    <bitfield id="INTR_VECTOR" width="32" begin="31" end="0" resetval="0x0" description="Interrupt Vector Register" range="" rwaccess="R"/>
+  </register>
+  <register id="CPSW_INT_ENABLE_REG_OUT_PULSE_0" acronym="CPSW_INT_ENABLE_REG_OUT_PULSE_0" offset="0x1100" width="32" description="Enable Register 0.">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE_OUT_PULSE_EN_STAT_PENDA" width="1" begin="2" end="2" resetval="0x0" description="Enable Set for out_pulse_en_stat_penda." range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_OUT_PULSE_EN_MDIO_PENDA" width="1" begin="1" end="1" resetval="0x0" description="Enable Set for out_pulse_en_mdio_penda." range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE_OUT_PULSE_EN_EVNT_PENDA" width="1" begin="0" end="0" resetval="0x0" description="Enable Set for out_pulse_en_evnt_penda." range="" rwaccess="RW1S"/>
+  </register>
+  <register id="CPSW_INT_ENABLE_CLR_REG_OUT_PULSE_0" acronym="CPSW_INT_ENABLE_CLR_REG_OUT_PULSE_0" offset="0x1300" width="32" description="Enable Clear Register 0.">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE_OUT_PULSE_EN_STAT_PENDA_CLR" width="1" begin="2" end="2" resetval="0x0" description="Enable Clear for out_pulse_en_stat_penda." range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_OUT_PULSE_EN_MDIO_PENDA_CLR" width="1" begin="1" end="1" resetval="0x0" description="Enable Clear for out_pulse_en_mdio_penda." range="" rwaccess="RW1C"/>
+    <bitfield id="ENABLE_OUT_PULSE_EN_EVNT_PENDA_CLR" width="1" begin="0" end="0" resetval="0x0" description="Enable Clear for out_pulse_en_evnt_penda." range="" rwaccess="RW1C"/>
+  </register>
+  <register id="CPSW_INT_STATUS_REG_OUT_PULSE_0" acronym="CPSW_INT_STATUS_REG_OUT_PULSE_0" offset="0x1500" width="32" description="Status Register 0.">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="STATUS_OUT_PULSE_STAT_PENDA" width="1" begin="2" end="2" resetval="0x0" description="Status for out_pulse_en_stat_penda." range="" rwaccess="R"/>
+    <bitfield id="STATUS_OUT_PULSE_MDIO_PENDA" width="1" begin="1" end="1" resetval="0x0" description="Status for out_pulse_en_mdio_penda." range="" rwaccess="R"/>
+    <bitfield id="STATUS_OUT_PULSE_EVNT_PENDA" width="1" begin="0" end="0" resetval="0x0" description="Status for out_pulse_en_evnt_penda." range="" rwaccess="R"/>
+  </register>
+  <register id="CPSW_INT_INTR_VECTOR_REG_OUT_PULSE" acronym="CPSW_INT_INTR_VECTOR_REG_OUT_PULSE" offset="0x1A80" width="32" description="Interrupt Vector for out_pulse.">
+    <bitfield id="INTR_VECTOR_OUT_PULSE" width="32" begin="31" end="0" resetval="0x0" description="Interrupt Vector." range="" rwaccess="R"/>
+  </register>
+</module>

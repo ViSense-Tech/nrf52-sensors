@@ -1,0 +1,16 @@
+<module name="NAVSS0_RINGACC_0_VIRT_ALIAS_11_RINGACC0_CFG_MON" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="VIRT_ALIAS_11_RINGACC0__CFG__MON_control" acronym="VIRT_ALIAS_11_RINGACC0__CFG__MON_control" offset="0x0" width="32" description="">
+		<bitfield id="EVT" width="16" begin="31" end="16" resetval="0x65535" description="Event to produce." range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="SOURCE" width="4" begin="11" end="8" resetval="0x0" description="Monitor source selection. 0 = element count. 1 = reserved. 2 = reserved." range="11 - 8" rwaccess="R/W"/> 
+		<bitfield id="MODE" width="3" begin="2" end="0" resetval="0x0" description="Monitor Mode. 0 = disabled. 1 = push/pop statistics capture. 2 = low/high threshold checks. 3 = low/high watermarking. 4 = starvation counting." range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_11_RINGACC0__CFG__MON_queue" acronym="VIRT_ALIAS_11_RINGACC0__CFG__MON_queue" offset="0x4" width="32" description="">
+		<bitfield id="QUEUE" width="16" begin="15" end="0" resetval="0x0" description="Queue to monitor." range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_11_RINGACC0__CFG__MON_data0" acronym="VIRT_ALIAS_11_RINGACC0__CFG__MON_data0" offset="0x8" width="32" description="">
+		<bitfield id="DATA" width="32" begin="31" end="0" resetval="0x0" description="Monitor Data. For mode 1 this is read-only and number of pushes. For mode 2 this is read-write and the low threshold value. For mode 3 this is read only and the low watermark. For mode 4 this is read only and the starvation count." range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_11_RINGACC0__CFG__MON_data1" acronym="VIRT_ALIAS_11_RINGACC0__CFG__MON_data1" offset="0xC" width="32" description="">
+		<bitfield id="DATA" width="32" begin="31" end="0" resetval="0x0" description="Monitor Data. For mode 1 this is read-only and number of pops. For mode 2 this is read-write and the high threshold value. For mode 3 this is read only and the high watermark. For mode 4 this is not used." range="31 - 0" rwaccess="R/W"/>
+	</register>
+</module>

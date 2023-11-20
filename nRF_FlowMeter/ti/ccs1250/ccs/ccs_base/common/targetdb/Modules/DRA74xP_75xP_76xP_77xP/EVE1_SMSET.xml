@@ -1,0 +1,307 @@
+<module name="EVE1_SMSET" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="SMSET_ID" acronym="SMSET_ID" offset="0x0" width="32" description="SMSET identification register">
+    <bitfield id="REVISION" width="32" begin="31" end="0" resetval="" description="Revision" range="" rwaccess="R"/>
+  </register>
+  <register id="SMSET_SCFG" acronym="SMSET_SCFG" offset="0x10" width="32" description="SMSET system configuration register">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLEMODE" width="2" begin="3" end="2" resetval="0x2" description="Configuration of the local target state management mode. 0x0: Force-idle; 0x1No-idle; 0x2 Smart-idle; 0x3 Smart-Idle wakeup-capable" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SOFTRESET" width="1" begin="0" end="0" resetval="0x0" description="Triggers System Event Trace module reset. This bit is automatically cleared by hardware" range="" rwaccess="RW"/>
+  </register>
+  <register id="SMSET_SR" acronym="SMSET_SR" offset="0x14" width="32" description="SMSET Status Register">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SWFIFOEMPTY" width="1" begin="9" end="9" resetval="0x1" description="SW message FIFO empty" range="" rwaccess="R"/>
+    <bitfield id="HWFIFOEMPTY" width="1" begin="8" end="8" resetval="0x1" description="System event trace FIFO empty" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="7" begin="7" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESETDONE" width="1" begin="0" end="0" resetval="0x1" description="Reset completed" range="" rwaccess="R"/>
+  </register>
+  <register id="SMSET_CFG" acronym="SMSET_CFG" offset="0x24" width="32" description="SMSET Configuration register">
+    <bitfield id="OWNERSHIP" width="2" begin="31" end="30" resetval="0x0" description="Read to get current ownership status. The claim status encoding is (0=Available, 1=Claimed, 2=Enabled, 3=Reserved);Send command to modify ownership state: 00= Release ownership, 01 = Claim ownership, 10 = Enable unit, 11 = No operation" range="" rwaccess="RW"/>
+    <bitfield id="DEBUGGEROVERRIDE" width="1" begin="29" end="29" resetval="0x1" description="Reading from the DebuggerOverride bit returns a 1." range="" rwaccess="RW"/>
+    <bitfield id="CURRENTOWNER" width="1" begin="28" end="28" resetval="0x0" description="This value reflects the SMSET ownership when the register is in a non-Available state." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="20" begin="27" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CAPTUREEN" width="1" begin="7" end="7" resetval="0x0" description="When high the sytem event capture is enabled" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="6" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EVENTLEVEL" width="1" begin="4" end="4" resetval="0x1" description="This applies to all selected events: 0x0: low level event detection 0x1: high level evnet detection" range="" rwaccess="RW"/>
+    <bitfield id="EVENTMSG" width="1" begin="3" end="3" resetval="0x0" description="essage generated based on: 0x0: sampling window 0x1: event detection" range="" rwaccess="RW"/>
+    <bitfield id="STOP" width="1" begin="2" end="2" resetval="0x0" description="Stop capturing system events from external trigger detection [EMU1 HIGH to LOW]" range="" rwaccess="RW"/>
+    <bitfield id="START" width="1" begin="1" end="1" resetval="0x0" description="Start capturing system events from external trigger detection [EMU0 HIGH to LOW]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="SMSET_SESW" acronym="SMSET_SESW" offset="0x28" width="32" description="System Event Sampling Window register">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SAMPLINGWINDOWSIZE" width="8" begin="7" end="0" resetval="0x0" description="System events sampling window size expressed as SMSET cycles" range="" rwaccess="RW"/>
+  </register>
+  <register id="SMSET_SEDEN_i_1" acronym="SMSET_SEDEN_i_1" offset="0x30" width="32" description="System Event Detection Enable register 1">
+    <bitfield id="EVENT32EN" width="1" begin="31" end="31" resetval="0x0" description="Event 32 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT31EN" width="1" begin="30" end="30" resetval="0x0" description="Event 31 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT30EN" width="1" begin="29" end="29" resetval="0x0" description="Event 30 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT29EN" width="1" begin="28" end="28" resetval="0x0" description="Event 29 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT28EN" width="1" begin="27" end="27" resetval="0x0" description="Event 28 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT27EN" width="1" begin="26" end="26" resetval="0x0" description="Event 27 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT26EN" width="1" begin="25" end="25" resetval="0x0" description="Event 26 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT25EN" width="1" begin="24" end="24" resetval="0x0" description="Event 25 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT24EN" width="1" begin="23" end="23" resetval="0x0" description="Event 24 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT23EN" width="1" begin="22" end="22" resetval="0x0" description="Event 23 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT22EN" width="1" begin="21" end="21" resetval="0x0" description="Event 22 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT21EN" width="1" begin="20" end="20" resetval="0x0" description="Event 21 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT20EN" width="1" begin="19" end="19" resetval="0x0" description="Event 20 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT19EN" width="1" begin="18" end="18" resetval="0x0" description="Event 19 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT18EN" width="1" begin="17" end="17" resetval="0x0" description="Event 18 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT17EN" width="1" begin="16" end="16" resetval="0x0" description="Event 17 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT16EN" width="1" begin="15" end="15" resetval="0x0" description="Event 16 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT15EN" width="1" begin="14" end="14" resetval="0x0" description="Event 15 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT14EN" width="1" begin="13" end="13" resetval="0x0" description="Event 14 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT13EN" width="1" begin="12" end="12" resetval="0x0" description="Event 13 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT12EN" width="1" begin="11" end="11" resetval="0x0" description="Event 12 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT11EN" width="1" begin="10" end="10" resetval="0x0" description="Event 11 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT10EN" width="1" begin="9" end="9" resetval="0x0" description="Event 10 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT9EN" width="1" begin="8" end="8" resetval="0x0" description="Event 9 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT8EN" width="1" begin="7" end="7" resetval="0x0" description="Event 8 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT7EN" width="1" begin="6" end="6" resetval="0x0" description="Event 7 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT6EN" width="1" begin="5" end="5" resetval="0x0" description="Event 6 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT5EN" width="1" begin="4" end="4" resetval="0x0" description="Event 5 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT4EN" width="1" begin="3" end="3" resetval="0x0" description="Event 4 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT3EN" width="1" begin="2" end="2" resetval="0x0" description="Event 3 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT2EN" width="1" begin="1" end="1" resetval="0x0" description="Event 2 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT1EN" width="1" begin="0" end="0" resetval="0x0" description="Event 1 detection enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="SMSET_SEDEN_i_2" acronym="SMSET_SEDEN_i_2" offset="0x34" width="32" description="System Event Detection Enable register 1">
+    <bitfield id="EVENT32EN" width="1" begin="31" end="31" resetval="0x0" description="Event 32 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT31EN" width="1" begin="30" end="30" resetval="0x0" description="Event 31 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT30EN" width="1" begin="29" end="29" resetval="0x0" description="Event 30 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT29EN" width="1" begin="28" end="28" resetval="0x0" description="Event 29 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT28EN" width="1" begin="27" end="27" resetval="0x0" description="Event 28 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT27EN" width="1" begin="26" end="26" resetval="0x0" description="Event 27 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT26EN" width="1" begin="25" end="25" resetval="0x0" description="Event 26 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT25EN" width="1" begin="24" end="24" resetval="0x0" description="Event 25 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT24EN" width="1" begin="23" end="23" resetval="0x0" description="Event 24 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT23EN" width="1" begin="22" end="22" resetval="0x0" description="Event 23 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT22EN" width="1" begin="21" end="21" resetval="0x0" description="Event 22 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT21EN" width="1" begin="20" end="20" resetval="0x0" description="Event 21 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT20EN" width="1" begin="19" end="19" resetval="0x0" description="Event 20 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT19EN" width="1" begin="18" end="18" resetval="0x0" description="Event 19 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT18EN" width="1" begin="17" end="17" resetval="0x0" description="Event 18 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT17EN" width="1" begin="16" end="16" resetval="0x0" description="Event 17 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT16EN" width="1" begin="15" end="15" resetval="0x0" description="Event 16 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT15EN" width="1" begin="14" end="14" resetval="0x0" description="Event 15 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT14EN" width="1" begin="13" end="13" resetval="0x0" description="Event 14 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT13EN" width="1" begin="12" end="12" resetval="0x0" description="Event 13 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT12EN" width="1" begin="11" end="11" resetval="0x0" description="Event 12 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT11EN" width="1" begin="10" end="10" resetval="0x0" description="Event 11 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT10EN" width="1" begin="9" end="9" resetval="0x0" description="Event 10 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT9EN" width="1" begin="8" end="8" resetval="0x0" description="Event 9 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT8EN" width="1" begin="7" end="7" resetval="0x0" description="Event 8 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT7EN" width="1" begin="6" end="6" resetval="0x0" description="Event 7 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT6EN" width="1" begin="5" end="5" resetval="0x0" description="Event 6 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT5EN" width="1" begin="4" end="4" resetval="0x0" description="Event 5 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT4EN" width="1" begin="3" end="3" resetval="0x0" description="Event 4 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT3EN" width="1" begin="2" end="2" resetval="0x0" description="Event 3 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT2EN" width="1" begin="1" end="1" resetval="0x0" description="Event 2 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT1EN" width="1" begin="0" end="0" resetval="0x0" description="Event 1 detection enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="SMSET_SEDEN_i_3" acronym="SMSET_SEDEN_i_3" offset="0x38" width="32" description="System Event Detection Enable register 1">
+    <bitfield id="EVENT32EN" width="1" begin="31" end="31" resetval="0x0" description="Event 32 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT31EN" width="1" begin="30" end="30" resetval="0x0" description="Event 31 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT30EN" width="1" begin="29" end="29" resetval="0x0" description="Event 30 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT29EN" width="1" begin="28" end="28" resetval="0x0" description="Event 29 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT28EN" width="1" begin="27" end="27" resetval="0x0" description="Event 28 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT27EN" width="1" begin="26" end="26" resetval="0x0" description="Event 27 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT26EN" width="1" begin="25" end="25" resetval="0x0" description="Event 26 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT25EN" width="1" begin="24" end="24" resetval="0x0" description="Event 25 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT24EN" width="1" begin="23" end="23" resetval="0x0" description="Event 24 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT23EN" width="1" begin="22" end="22" resetval="0x0" description="Event 23 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT22EN" width="1" begin="21" end="21" resetval="0x0" description="Event 22 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT21EN" width="1" begin="20" end="20" resetval="0x0" description="Event 21 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT20EN" width="1" begin="19" end="19" resetval="0x0" description="Event 20 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT19EN" width="1" begin="18" end="18" resetval="0x0" description="Event 19 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT18EN" width="1" begin="17" end="17" resetval="0x0" description="Event 18 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT17EN" width="1" begin="16" end="16" resetval="0x0" description="Event 17 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT16EN" width="1" begin="15" end="15" resetval="0x0" description="Event 16 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT15EN" width="1" begin="14" end="14" resetval="0x0" description="Event 15 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT14EN" width="1" begin="13" end="13" resetval="0x0" description="Event 14 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT13EN" width="1" begin="12" end="12" resetval="0x0" description="Event 13 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT12EN" width="1" begin="11" end="11" resetval="0x0" description="Event 12 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT11EN" width="1" begin="10" end="10" resetval="0x0" description="Event 11 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT10EN" width="1" begin="9" end="9" resetval="0x0" description="Event 10 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT9EN" width="1" begin="8" end="8" resetval="0x0" description="Event 9 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT8EN" width="1" begin="7" end="7" resetval="0x0" description="Event 8 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT7EN" width="1" begin="6" end="6" resetval="0x0" description="Event 7 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT6EN" width="1" begin="5" end="5" resetval="0x0" description="Event 6 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT5EN" width="1" begin="4" end="4" resetval="0x0" description="Event 5 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT4EN" width="1" begin="3" end="3" resetval="0x0" description="Event 4 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT3EN" width="1" begin="2" end="2" resetval="0x0" description="Event 3 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT2EN" width="1" begin="1" end="1" resetval="0x0" description="Event 2 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT1EN" width="1" begin="0" end="0" resetval="0x0" description="Event 1 detection enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="SMSET_SEDEN_i_4" acronym="SMSET_SEDEN_i_4" offset="0x3C" width="32" description="System Event Detection Enable register 1">
+    <bitfield id="EVENT32EN" width="1" begin="31" end="31" resetval="0x0" description="Event 32 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT31EN" width="1" begin="30" end="30" resetval="0x0" description="Event 31 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT30EN" width="1" begin="29" end="29" resetval="0x0" description="Event 30 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT29EN" width="1" begin="28" end="28" resetval="0x0" description="Event 29 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT28EN" width="1" begin="27" end="27" resetval="0x0" description="Event 28 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT27EN" width="1" begin="26" end="26" resetval="0x0" description="Event 27 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT26EN" width="1" begin="25" end="25" resetval="0x0" description="Event 26 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT25EN" width="1" begin="24" end="24" resetval="0x0" description="Event 25 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT24EN" width="1" begin="23" end="23" resetval="0x0" description="Event 24 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT23EN" width="1" begin="22" end="22" resetval="0x0" description="Event 23 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT22EN" width="1" begin="21" end="21" resetval="0x0" description="Event 22 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT21EN" width="1" begin="20" end="20" resetval="0x0" description="Event 21 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT20EN" width="1" begin="19" end="19" resetval="0x0" description="Event 20 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT19EN" width="1" begin="18" end="18" resetval="0x0" description="Event 19 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT18EN" width="1" begin="17" end="17" resetval="0x0" description="Event 18 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT17EN" width="1" begin="16" end="16" resetval="0x0" description="Event 17 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT16EN" width="1" begin="15" end="15" resetval="0x0" description="Event 16 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT15EN" width="1" begin="14" end="14" resetval="0x0" description="Event 15 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT14EN" width="1" begin="13" end="13" resetval="0x0" description="Event 14 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT13EN" width="1" begin="12" end="12" resetval="0x0" description="Event 13 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT12EN" width="1" begin="11" end="11" resetval="0x0" description="Event 12 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT11EN" width="1" begin="10" end="10" resetval="0x0" description="Event 11 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT10EN" width="1" begin="9" end="9" resetval="0x0" description="Event 10 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT9EN" width="1" begin="8" end="8" resetval="0x0" description="Event 9 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT8EN" width="1" begin="7" end="7" resetval="0x0" description="Event 8 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT7EN" width="1" begin="6" end="6" resetval="0x0" description="Event 7 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT6EN" width="1" begin="5" end="5" resetval="0x0" description="Event 6 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT5EN" width="1" begin="4" end="4" resetval="0x0" description="Event 5 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT4EN" width="1" begin="3" end="3" resetval="0x0" description="Event 4 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT3EN" width="1" begin="2" end="2" resetval="0x0" description="Event 3 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT2EN" width="1" begin="1" end="1" resetval="0x0" description="Event 2 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT1EN" width="1" begin="0" end="0" resetval="0x0" description="Event 1 detection enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="SMSET_SEDEN_i_5" acronym="SMSET_SEDEN_i_5" offset="0x40" width="32" description="System Event Detection Enable register 1">
+    <bitfield id="EVENT32EN" width="1" begin="31" end="31" resetval="0x0" description="Event 32 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT31EN" width="1" begin="30" end="30" resetval="0x0" description="Event 31 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT30EN" width="1" begin="29" end="29" resetval="0x0" description="Event 30 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT29EN" width="1" begin="28" end="28" resetval="0x0" description="Event 29 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT28EN" width="1" begin="27" end="27" resetval="0x0" description="Event 28 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT27EN" width="1" begin="26" end="26" resetval="0x0" description="Event 27 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT26EN" width="1" begin="25" end="25" resetval="0x0" description="Event 26 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT25EN" width="1" begin="24" end="24" resetval="0x0" description="Event 25 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT24EN" width="1" begin="23" end="23" resetval="0x0" description="Event 24 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT23EN" width="1" begin="22" end="22" resetval="0x0" description="Event 23 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT22EN" width="1" begin="21" end="21" resetval="0x0" description="Event 22 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT21EN" width="1" begin="20" end="20" resetval="0x0" description="Event 21 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT20EN" width="1" begin="19" end="19" resetval="0x0" description="Event 20 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT19EN" width="1" begin="18" end="18" resetval="0x0" description="Event 19 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT18EN" width="1" begin="17" end="17" resetval="0x0" description="Event 18 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT17EN" width="1" begin="16" end="16" resetval="0x0" description="Event 17 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT16EN" width="1" begin="15" end="15" resetval="0x0" description="Event 16 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT15EN" width="1" begin="14" end="14" resetval="0x0" description="Event 15 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT14EN" width="1" begin="13" end="13" resetval="0x0" description="Event 14 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT13EN" width="1" begin="12" end="12" resetval="0x0" description="Event 13 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT12EN" width="1" begin="11" end="11" resetval="0x0" description="Event 12 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT11EN" width="1" begin="10" end="10" resetval="0x0" description="Event 11 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT10EN" width="1" begin="9" end="9" resetval="0x0" description="Event 10 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT9EN" width="1" begin="8" end="8" resetval="0x0" description="Event 9 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT8EN" width="1" begin="7" end="7" resetval="0x0" description="Event 8 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT7EN" width="1" begin="6" end="6" resetval="0x0" description="Event 7 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT6EN" width="1" begin="5" end="5" resetval="0x0" description="Event 6 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT5EN" width="1" begin="4" end="4" resetval="0x0" description="Event 5 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT4EN" width="1" begin="3" end="3" resetval="0x0" description="Event 4 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT3EN" width="1" begin="2" end="2" resetval="0x0" description="Event 3 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT2EN" width="1" begin="1" end="1" resetval="0x0" description="Event 2 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT1EN" width="1" begin="0" end="0" resetval="0x0" description="Event 1 detection enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="SMSET_SEDEN_i_6" acronym="SMSET_SEDEN_i_6" offset="0x44" width="32" description="System Event Detection Enable register 1">
+    <bitfield id="EVENT32EN" width="1" begin="31" end="31" resetval="0x0" description="Event 32 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT31EN" width="1" begin="30" end="30" resetval="0x0" description="Event 31 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT30EN" width="1" begin="29" end="29" resetval="0x0" description="Event 30 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT29EN" width="1" begin="28" end="28" resetval="0x0" description="Event 29 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT28EN" width="1" begin="27" end="27" resetval="0x0" description="Event 28 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT27EN" width="1" begin="26" end="26" resetval="0x0" description="Event 27 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT26EN" width="1" begin="25" end="25" resetval="0x0" description="Event 26 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT25EN" width="1" begin="24" end="24" resetval="0x0" description="Event 25 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT24EN" width="1" begin="23" end="23" resetval="0x0" description="Event 24 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT23EN" width="1" begin="22" end="22" resetval="0x0" description="Event 23 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT22EN" width="1" begin="21" end="21" resetval="0x0" description="Event 22 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT21EN" width="1" begin="20" end="20" resetval="0x0" description="Event 21 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT20EN" width="1" begin="19" end="19" resetval="0x0" description="Event 20 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT19EN" width="1" begin="18" end="18" resetval="0x0" description="Event 19 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT18EN" width="1" begin="17" end="17" resetval="0x0" description="Event 18 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT17EN" width="1" begin="16" end="16" resetval="0x0" description="Event 17 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT16EN" width="1" begin="15" end="15" resetval="0x0" description="Event 16 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT15EN" width="1" begin="14" end="14" resetval="0x0" description="Event 15 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT14EN" width="1" begin="13" end="13" resetval="0x0" description="Event 14 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT13EN" width="1" begin="12" end="12" resetval="0x0" description="Event 13 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT12EN" width="1" begin="11" end="11" resetval="0x0" description="Event 12 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT11EN" width="1" begin="10" end="10" resetval="0x0" description="Event 11 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT10EN" width="1" begin="9" end="9" resetval="0x0" description="Event 10 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT9EN" width="1" begin="8" end="8" resetval="0x0" description="Event 9 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT8EN" width="1" begin="7" end="7" resetval="0x0" description="Event 8 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT7EN" width="1" begin="6" end="6" resetval="0x0" description="Event 7 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT6EN" width="1" begin="5" end="5" resetval="0x0" description="Event 6 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT5EN" width="1" begin="4" end="4" resetval="0x0" description="Event 5 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT4EN" width="1" begin="3" end="3" resetval="0x0" description="Event 4 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT3EN" width="1" begin="2" end="2" resetval="0x0" description="Event 3 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT2EN" width="1" begin="1" end="1" resetval="0x0" description="Event 2 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT1EN" width="1" begin="0" end="0" resetval="0x0" description="Event 1 detection enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="SMSET_SEDEN_i_7" acronym="SMSET_SEDEN_i_7" offset="0x48" width="32" description="System Event Detection Enable register 1">
+    <bitfield id="EVENT32EN" width="1" begin="31" end="31" resetval="0x0" description="Event 32 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT31EN" width="1" begin="30" end="30" resetval="0x0" description="Event 31 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT30EN" width="1" begin="29" end="29" resetval="0x0" description="Event 30 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT29EN" width="1" begin="28" end="28" resetval="0x0" description="Event 29 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT28EN" width="1" begin="27" end="27" resetval="0x0" description="Event 28 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT27EN" width="1" begin="26" end="26" resetval="0x0" description="Event 27 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT26EN" width="1" begin="25" end="25" resetval="0x0" description="Event 26 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT25EN" width="1" begin="24" end="24" resetval="0x0" description="Event 25 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT24EN" width="1" begin="23" end="23" resetval="0x0" description="Event 24 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT23EN" width="1" begin="22" end="22" resetval="0x0" description="Event 23 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT22EN" width="1" begin="21" end="21" resetval="0x0" description="Event 22 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT21EN" width="1" begin="20" end="20" resetval="0x0" description="Event 21 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT20EN" width="1" begin="19" end="19" resetval="0x0" description="Event 20 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT19EN" width="1" begin="18" end="18" resetval="0x0" description="Event 19 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT18EN" width="1" begin="17" end="17" resetval="0x0" description="Event 18 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT17EN" width="1" begin="16" end="16" resetval="0x0" description="Event 17 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT16EN" width="1" begin="15" end="15" resetval="0x0" description="Event 16 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT15EN" width="1" begin="14" end="14" resetval="0x0" description="Event 15 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT14EN" width="1" begin="13" end="13" resetval="0x0" description="Event 14 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT13EN" width="1" begin="12" end="12" resetval="0x0" description="Event 13 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT12EN" width="1" begin="11" end="11" resetval="0x0" description="Event 12 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT11EN" width="1" begin="10" end="10" resetval="0x0" description="Event 11 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT10EN" width="1" begin="9" end="9" resetval="0x0" description="Event 10 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT9EN" width="1" begin="8" end="8" resetval="0x0" description="Event 9 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT8EN" width="1" begin="7" end="7" resetval="0x0" description="Event 8 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT7EN" width="1" begin="6" end="6" resetval="0x0" description="Event 7 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT6EN" width="1" begin="5" end="5" resetval="0x0" description="Event 6 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT5EN" width="1" begin="4" end="4" resetval="0x0" description="Event 5 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT4EN" width="1" begin="3" end="3" resetval="0x0" description="Event 4 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT3EN" width="1" begin="2" end="2" resetval="0x0" description="Event 3 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT2EN" width="1" begin="1" end="1" resetval="0x0" description="Event 2 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT1EN" width="1" begin="0" end="0" resetval="0x0" description="Event 1 detection enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="SMSET_SEDEN_i_8" acronym="SMSET_SEDEN_i_8" offset="0x4C" width="32" description="System Event Detection Enable register 1">
+    <bitfield id="EVENT32EN" width="1" begin="31" end="31" resetval="0x0" description="Event 32 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT31EN" width="1" begin="30" end="30" resetval="0x0" description="Event 31 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT30EN" width="1" begin="29" end="29" resetval="0x0" description="Event 30 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT29EN" width="1" begin="28" end="28" resetval="0x0" description="Event 29 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT28EN" width="1" begin="27" end="27" resetval="0x0" description="Event 28 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT27EN" width="1" begin="26" end="26" resetval="0x0" description="Event 27 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT26EN" width="1" begin="25" end="25" resetval="0x0" description="Event 26 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT25EN" width="1" begin="24" end="24" resetval="0x0" description="Event 25 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT24EN" width="1" begin="23" end="23" resetval="0x0" description="Event 24 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT23EN" width="1" begin="22" end="22" resetval="0x0" description="Event 23 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT22EN" width="1" begin="21" end="21" resetval="0x0" description="Event 22 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT21EN" width="1" begin="20" end="20" resetval="0x0" description="Event 21 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT20EN" width="1" begin="19" end="19" resetval="0x0" description="Event 20 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT19EN" width="1" begin="18" end="18" resetval="0x0" description="Event 19 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT18EN" width="1" begin="17" end="17" resetval="0x0" description="Event 18 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT17EN" width="1" begin="16" end="16" resetval="0x0" description="Event 17 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT16EN" width="1" begin="15" end="15" resetval="0x0" description="Event 16 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT15EN" width="1" begin="14" end="14" resetval="0x0" description="Event 15 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT14EN" width="1" begin="13" end="13" resetval="0x0" description="Event 14 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT13EN" width="1" begin="12" end="12" resetval="0x0" description="Event 13 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT12EN" width="1" begin="11" end="11" resetval="0x0" description="Event 12 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT11EN" width="1" begin="10" end="10" resetval="0x0" description="Event 11 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT10EN" width="1" begin="9" end="9" resetval="0x0" description="Event 10 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT9EN" width="1" begin="8" end="8" resetval="0x0" description="Event 9 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT8EN" width="1" begin="7" end="7" resetval="0x0" description="Event 8 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT7EN" width="1" begin="6" end="6" resetval="0x0" description="Event 7 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT6EN" width="1" begin="5" end="5" resetval="0x0" description="Event 6 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT5EN" width="1" begin="4" end="4" resetval="0x0" description="Event 5 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT4EN" width="1" begin="3" end="3" resetval="0x0" description="Event 4 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT3EN" width="1" begin="2" end="2" resetval="0x0" description="Event 3 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT2EN" width="1" begin="1" end="1" resetval="0x0" description="Event 2 detection enable" range="" rwaccess="RW"/>
+    <bitfield id="EVENT1EN" width="1" begin="0" end="0" resetval="0x0" description="Event 1 detection enable" range="" rwaccess="RW"/>
+  </register>
+</module>

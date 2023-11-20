@@ -1,0 +1,1027 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module id="MEMPROTL1P" HW_revision="" XML_version="1" description="Memory Protection for L1P">
+     <register id="MPFAR" acronym="MPFAR" offset="0x0" width="32" description="L1P Memory Protection Fault Address Reg">
+<bitfield id="ADDR" width="32" begin="31" end="0" resetval="0" description="L1P Fault Address" range="" rwaccess="RW"></bitfield>
+</register>
+     <register id="MPFSR" acronym="MPFSR" offset="0x4" width="32" description="L1P Memory Protection Fault Status Reg">
+<bitfield id="_RESV_1" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="FID" width="7" begin="15" end="9" resetval="0" description="Bit 6:0 of faulting requestor. If ID is narrower than 7 bits, the remaining bits  return 0. If ID is wider than 7 bits, the additional bits get truncated.  FID = 0 if LOCAL = 1." range="" rwaccess="R"></bitfield>
+<bitfield id="LOCAL" width="1" begin="8" end="8" resetval="0" description="0 - Normal operation. 1-  Access was a &quot;LOCAL&quot; access." range="" rwaccess="R"></bitfield>
+<bitfield id="_RESV_4" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="SR" width="1" begin="5" end="5" resetval="0" description="Superviser read access type" range="" rwaccess="R">
+<bitenum id="READ" value="1" token="READ" description="" />
+<bitenum id="NORMAL" value="0" token="NORMAL" description="" />
+</bitfield>
+<bitfield id="SW" width="1" begin="4" end="4" resetval="0" description="Superviser write access type" range="" rwaccess="R">
+<bitenum id="WRITE" value="1" token="WRITE" description="" />
+<bitenum id="NORMAL" value="0" token="NORMAL" description="" />
+</bitfield>
+<bitfield id="SX" width="1" begin="3" end="3" resetval="0" description="Superviser execute access type" range="" rwaccess="R"></bitfield>
+<bitfield id="UR" width="1" begin="2" end="2" resetval="0" description="User  read access type" range="" rwaccess="R">
+<bitenum id="READ" value="1" token="READ" description="" />
+<bitenum id="NORMAL" value="0" token="NORMAL" description="" />
+</bitfield>
+<bitfield id="UW" width="1" begin="1" end="1" resetval="0" description="User write access type" range="" rwaccess="R">
+<bitenum id="WRITE" value="1" token="WRITE" description="" />
+<bitenum id="NORMAL" value="0" token="NORMAL" description="" />
+</bitfield>
+<bitfield id="UX" width="1" begin="0" end="0" resetval="0" description="User execute access type" range="" rwaccess="R"></bitfield>
+</register>
+     <register id="MPFCLR" acronym="MPFCLR" offset="0x08" width="32" description="L1P Memory Fault Clear Register">
+<bitfield id="_RESV_1" width="31" begin="31" end="1" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="MPFCLR" width="1" begin="0" end="0" resetval="0" description="Set to clear fault" range="" rwaccess="W">
+<bitenum id="CLEAR" value="1" token="CLEAR" description="Clears Fault" />
+</bitfield>
+</register>
+     <register id="MPLK0" acronym="MPLK0" offset="0x100" width="32" description="L1P Memory Protection Lock Key bits 31:0">
+<bitfield id="LOCKBIT0TO31" width="32" begin="31" end="0" resetval="0" description="" range="" rwaccess="W"></bitfield>
+</register>
+     <register id="MPLK1" acronym="MPLK1" offset="0x104" width="32" description="L1P Memory Protection Lock Key bits 63:32">
+<bitfield id="LOCKBIT32TO63" width="32" begin="31" end="0" resetval="0" description="" range="" rwaccess="W"></bitfield>
+</register>
+     <register id="MPLK2" acronym="MPLK2" offset="0x108" width="32" description="L1P Memory Protection Lock Key bits 95:64">
+<bitfield id="LOCKBIT64TO95" width="32" begin="31" end="0" resetval="0" description="" range="" rwaccess="W"></bitfield>
+</register>
+     <register id="MPLK3" acronym="MPLK3" offset="0x10C" width="32" description="L1P Memory Protection Lock Key bits 127:96">
+<bitfield id="LOCKBIT96TO127" width="32" begin="31" end="0" resetval="0" description="" range="" rwaccess=""></bitfield>
+</register>
+     <register id="MPLKCMD" acronym="MPLKCMD" offset="0x110" width="32" description="L1P Memory Protection Lock Key Command Register">
+<bitfield id="_RESV_1" width="29" begin="31" end="3" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="KEYR" width="1" begin="2" end="2" resetval="0" description="Interface to initiate a lock/unlock sequence" range="" rwaccess="W">
+<bitenum id="RESET" value="1" token="RESET" description="Indicates the lock\unlock sequence and resets any state associated with the lock\unlock sequence" />
+</bitfield>
+<bitfield id="LOCK" width="1" begin="1" end="1" resetval="0" description="Interface to complete a lock sequence" range="" rwaccess="W">
+<bitenum id="LOCK" value="1" token="LOCK" description="Locks the lock provided that the  software executed the sequence correctly" />
+</bitfield>
+<bitfield id="UNLOCK" width="1" begin="0" end="0" resetval="0" description="Interface to complete a unlock sequence" range="" rwaccess="W">
+<bitenum id="UNLOCK" value="1" token="UNLOCK" description="Unlocks the lock provided that the  software executed the sequence correctly" />
+</bitfield>
+</register>
+     <register id="MPLKSTAT" acronym="MPLKSTAT" offset="0x114" width="32" description="L1P Memory Protection Lock Key Status Register">
+<bitfield id="_RESV_1" width="31" begin="31" end="1" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="LK" width="1" begin="0" end="0" resetval="0" description="Lock Status" range="" rwaccess="R">
+<bitenum id="ENGAGED" value="1" token="ENGAGED" description="Lock is engaged" />
+<bitenum id="DISENGAGED" value="0" token="DISENGAGED" description="Lock is not engaged" />
+</bitfield>
+</register>
+     <register id="MPPA0" acronym="MPPA0" offset="0x240" width="32" description="L1P Memory Protection Page Attribute Register">
+<bitfield id="_RESV_1" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="AID5" width="1" begin="15" end="15" resetval="0" description="Controls access from ID = 5." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID4" width="1" begin="14" end="14" resetval="0" description="Controls access from ID = 4." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID3" width="1" begin="13" end="13" resetval="0" description="Controls access from ID = 3." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID2" width="1" begin="12" end="12" resetval="0" description="Controls access from ID =2." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID1" width="1" begin="11" end="11" resetval="0" description="Controls access from ID = 1." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID0" width="1" begin="10" end="10" resetval="0" description="Controls access from ID = 0." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AIDX" width="1" begin="9" end="9" resetval="0" description="Controls ID &gt;=6." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="LOCAL" width="1" begin="8" end="8" resetval="0" description="Controls access from CPU to local memories (L1/L2)." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="_RESV_10" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="SR" width="1" begin="5" end="5" resetval="0" description="Supervisor read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a Supervisor read request." />
+</bitfield>
+<bitfield id="SW" width="1" begin="4" end="4" resetval="0" description="Supervisor write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a Supervisor write request." />
+</bitfield>
+<bitfield id="SX" width="1" begin="3" end="3" resetval="0" description="Supervisor execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a Supervisor execute request." />
+</bitfield>
+<bitfield id="UR" width="1" begin="2" end="2" resetval="0" description="User read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a user read request." />
+</bitfield>
+<bitfield id="UW" width="1" begin="1" end="1" resetval="0" description="User write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a user write request." />
+</bitfield>
+<bitfield id="UX" width="1" begin="0" end="0" resetval="0" description="User execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a user execute request." />
+</bitfield>
+</register>
+     <register id="MPPA1" acronym="MPPA1" offset="0x244" width="32" description="L1P Memory Protection Page Attribute Register">
+<bitfield id="_RESV_1" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="AID5" width="1" begin="15" end="15" resetval="0" description="Controls access from ID = 5." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID4" width="1" begin="14" end="14" resetval="0" description="Controls access from ID = 4." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID3" width="1" begin="13" end="13" resetval="0" description="Controls access from ID = 3." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID2" width="1" begin="12" end="12" resetval="0" description="Controls access from ID =2." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID1" width="1" begin="11" end="11" resetval="0" description="Controls access from ID = 1." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID0" width="1" begin="10" end="10" resetval="0" description="Controls access from ID = 0." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AIDX" width="1" begin="9" end="9" resetval="0" description="Controls ID &gt;=6." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="LOCAL" width="1" begin="8" end="8" resetval="0" description="Controls access from CPU to local memories (L1/L2)." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="_RESV_10" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="SR" width="1" begin="5" end="5" resetval="0" description="Supervisor read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a Supervisor read request." />
+</bitfield>
+<bitfield id="SW" width="1" begin="4" end="4" resetval="0" description="Supervisor write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a Supervisor write request." />
+</bitfield>
+<bitfield id="SX" width="1" begin="3" end="3" resetval="0" description="Supervisor execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a Supervisor execute request." />
+</bitfield>
+<bitfield id="UR" width="1" begin="2" end="2" resetval="0" description="User read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a user read request." />
+</bitfield>
+<bitfield id="UW" width="1" begin="1" end="1" resetval="0" description="User write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a user write request." />
+</bitfield>
+<bitfield id="UX" width="1" begin="0" end="0" resetval="0" description="User execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a user execute request." />
+</bitfield>
+</register>
+     <register id="MPPA2" acronym="MPPA2" offset="0x248" width="32" description="L1P Memory Protection Page Attribute Register">
+<bitfield id="_RESV_1" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="AID5" width="1" begin="15" end="15" resetval="0" description="Controls access from ID = 5." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID4" width="1" begin="14" end="14" resetval="0" description="Controls access from ID = 4." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID3" width="1" begin="13" end="13" resetval="0" description="Controls access from ID = 3." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID2" width="1" begin="12" end="12" resetval="0" description="Controls access from ID =2." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID1" width="1" begin="11" end="11" resetval="0" description="Controls access from ID = 1." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID0" width="1" begin="10" end="10" resetval="0" description="Controls access from ID = 0." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AIDX" width="1" begin="9" end="9" resetval="0" description="Controls ID &gt;=6." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="LOCAL" width="1" begin="8" end="8" resetval="0" description="Controls access from CPU to local memories (L1/L2)." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="_RESV_10" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="SR" width="1" begin="5" end="5" resetval="0" description="Supervisor read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a Supervisor read request." />
+</bitfield>
+<bitfield id="SW" width="1" begin="4" end="4" resetval="0" description="Supervisor write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a Supervisor write request." />
+</bitfield>
+<bitfield id="SX" width="1" begin="3" end="3" resetval="0" description="Supervisor execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a Supervisor execute request." />
+</bitfield>
+<bitfield id="UR" width="1" begin="2" end="2" resetval="0" description="User read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a user read request." />
+</bitfield>
+<bitfield id="UW" width="1" begin="1" end="1" resetval="0" description="User write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a user write request." />
+</bitfield>
+<bitfield id="UX" width="1" begin="0" end="0" resetval="0" description="User execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a user execute request." />
+</bitfield>
+</register>
+     <register id="MPPA3" acronym="MPPA3" offset="0x24C" width="32" description="L1P Memory Protection Page Attribute Register">
+<bitfield id="_RESV_1" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="AID5" width="1" begin="15" end="15" resetval="0" description="Controls access from ID = 5." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID4" width="1" begin="14" end="14" resetval="0" description="Controls access from ID = 4." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID3" width="1" begin="13" end="13" resetval="0" description="Controls access from ID = 3." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID2" width="1" begin="12" end="12" resetval="0" description="Controls access from ID =2." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID1" width="1" begin="11" end="11" resetval="0" description="Controls access from ID = 1." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID0" width="1" begin="10" end="10" resetval="0" description="Controls access from ID = 0." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AIDX" width="1" begin="9" end="9" resetval="0" description="Controls ID &gt;=6." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="LOCAL" width="1" begin="8" end="8" resetval="0" description="Controls access from CPU to local memories (L1/L2)." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="_RESV_10" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="SR" width="1" begin="5" end="5" resetval="0" description="Supervisor read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a Supervisor read request." />
+</bitfield>
+<bitfield id="SW" width="1" begin="4" end="4" resetval="0" description="Supervisor write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a Supervisor write request." />
+</bitfield>
+<bitfield id="SX" width="1" begin="3" end="3" resetval="0" description="Supervisor execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a Supervisor execute request." />
+</bitfield>
+<bitfield id="UR" width="1" begin="2" end="2" resetval="0" description="User read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a user read request." />
+</bitfield>
+<bitfield id="UW" width="1" begin="1" end="1" resetval="0" description="User write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a user write request." />
+</bitfield>
+<bitfield id="UX" width="1" begin="0" end="0" resetval="0" description="User execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a user execute request." />
+</bitfield>
+</register>
+     <register id="MPPA4" acronym="MPPA4" offset="0x250" width="32" description="L1P Memory Protection Page Attribute Register">
+<bitfield id="_RESV_1" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="AID5" width="1" begin="15" end="15" resetval="0" description="Controls access from ID = 5." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID4" width="1" begin="14" end="14" resetval="0" description="Controls access from ID = 4." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID3" width="1" begin="13" end="13" resetval="0" description="Controls access from ID = 3." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID2" width="1" begin="12" end="12" resetval="0" description="Controls access from ID =2." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID1" width="1" begin="11" end="11" resetval="0" description="Controls access from ID = 1." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID0" width="1" begin="10" end="10" resetval="0" description="Controls access from ID = 0." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AIDX" width="1" begin="9" end="9" resetval="0" description="Controls ID &gt;=6." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="LOCAL" width="1" begin="8" end="8" resetval="0" description="Controls access from CPU to local memories (L1/L2)." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="_RESV_10" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="SR" width="1" begin="5" end="5" resetval="0" description="Supervisor read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a Supervisor read request." />
+</bitfield>
+<bitfield id="SW" width="1" begin="4" end="4" resetval="0" description="Supervisor write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a Supervisor write request." />
+</bitfield>
+<bitfield id="SX" width="1" begin="3" end="3" resetval="0" description="Supervisor execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a Supervisor execute request." />
+</bitfield>
+<bitfield id="UR" width="1" begin="2" end="2" resetval="0" description="User read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a user read request." />
+</bitfield>
+<bitfield id="UW" width="1" begin="1" end="1" resetval="0" description="User write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a user write request." />
+</bitfield>
+<bitfield id="UX" width="1" begin="0" end="0" resetval="0" description="User execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a user execute request." />
+</bitfield>
+</register>
+     <register id="MPPA5" acronym="MPPA5" offset="0x254" width="32" description="L1P Memory Protection Page Attribute Register">
+<bitfield id="_RESV_1" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="AID5" width="1" begin="15" end="15" resetval="0" description="Controls access from ID = 5." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID4" width="1" begin="14" end="14" resetval="0" description="Controls access from ID = 4." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID3" width="1" begin="13" end="13" resetval="0" description="Controls access from ID = 3." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID2" width="1" begin="12" end="12" resetval="0" description="Controls access from ID =2." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID1" width="1" begin="11" end="11" resetval="0" description="Controls access from ID = 1." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID0" width="1" begin="10" end="10" resetval="0" description="Controls access from ID = 0." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AIDX" width="1" begin="9" end="9" resetval="0" description="Controls ID &gt;=6." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="LOCAL" width="1" begin="8" end="8" resetval="0" description="Controls access from CPU to local memories (L1/L2)." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="_RESV_10" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="SR" width="1" begin="5" end="5" resetval="0" description="Supervisor read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a Supervisor read request." />
+</bitfield>
+<bitfield id="SW" width="1" begin="4" end="4" resetval="0" description="Supervisor write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a Supervisor write request." />
+</bitfield>
+<bitfield id="SX" width="1" begin="3" end="3" resetval="0" description="Supervisor execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a Supervisor execute request." />
+</bitfield>
+<bitfield id="UR" width="1" begin="2" end="2" resetval="0" description="User read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a user read request." />
+</bitfield>
+<bitfield id="UW" width="1" begin="1" end="1" resetval="0" description="User write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a user write request." />
+</bitfield>
+<bitfield id="UX" width="1" begin="0" end="0" resetval="0" description="User execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a user execute request." />
+</bitfield>
+</register>
+     <register id="MPPA6" acronym="MPPA6" offset="0x258" width="32" description="L1P Memory Protection Page Attribute Register">
+<bitfield id="_RESV_1" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="AID5" width="1" begin="15" end="15" resetval="0" description="Controls access from ID = 5." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID4" width="1" begin="14" end="14" resetval="0" description="Controls access from ID = 4." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID3" width="1" begin="13" end="13" resetval="0" description="Controls access from ID = 3." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID2" width="1" begin="12" end="12" resetval="0" description="Controls access from ID =2." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID1" width="1" begin="11" end="11" resetval="0" description="Controls access from ID = 1." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID0" width="1" begin="10" end="10" resetval="0" description="Controls access from ID = 0." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AIDX" width="1" begin="9" end="9" resetval="0" description="Controls ID &gt;=6." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="LOCAL" width="1" begin="8" end="8" resetval="0" description="Controls access from CPU to local memories (L1/L2)." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="_RESV_10" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="SR" width="1" begin="5" end="5" resetval="0" description="Supervisor read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a Supervisor read request." />
+</bitfield>
+<bitfield id="SW" width="1" begin="4" end="4" resetval="0" description="Supervisor write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a Supervisor write request." />
+</bitfield>
+<bitfield id="SX" width="1" begin="3" end="3" resetval="0" description="Supervisor execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a Supervisor execute request." />
+</bitfield>
+<bitfield id="UR" width="1" begin="2" end="2" resetval="0" description="User read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a user read request." />
+</bitfield>
+<bitfield id="UW" width="1" begin="1" end="1" resetval="0" description="User write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a user write request." />
+</bitfield>
+<bitfield id="UX" width="1" begin="0" end="0" resetval="0" description="User execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a user execute request." />
+</bitfield>
+</register>
+     <register id="MPPA7" acronym="MPPA7" offset="0x25C" width="32" description="L1P Memory Protection Page Attribute Register">
+<bitfield id="_RESV_1" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="AID5" width="1" begin="15" end="15" resetval="0" description="Controls access from ID = 5." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID4" width="1" begin="14" end="14" resetval="0" description="Controls access from ID = 4." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID3" width="1" begin="13" end="13" resetval="0" description="Controls access from ID = 3." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID2" width="1" begin="12" end="12" resetval="0" description="Controls access from ID =2." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID1" width="1" begin="11" end="11" resetval="0" description="Controls access from ID = 1." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID0" width="1" begin="10" end="10" resetval="0" description="Controls access from ID = 0." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AIDX" width="1" begin="9" end="9" resetval="0" description="Controls ID &gt;=6." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="LOCAL" width="1" begin="8" end="8" resetval="0" description="Controls access from CPU to local memories (L1/L2)." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="_RESV_10" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="SR" width="1" begin="5" end="5" resetval="0" description="Supervisor read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a Supervisor read request." />
+</bitfield>
+<bitfield id="SW" width="1" begin="4" end="4" resetval="0" description="Supervisor write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a Supervisor write request." />
+</bitfield>
+<bitfield id="SX" width="1" begin="3" end="3" resetval="0" description="Supervisor execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a Supervisor execute request." />
+</bitfield>
+<bitfield id="UR" width="1" begin="2" end="2" resetval="0" description="User read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a user read request." />
+</bitfield>
+<bitfield id="UW" width="1" begin="1" end="1" resetval="0" description="User write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a user write request." />
+</bitfield>
+<bitfield id="UX" width="1" begin="0" end="0" resetval="0" description="User execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a user execute request." />
+</bitfield>
+</register>
+     <register id="MPPA8" acronym="MPPA8" offset="0x260" width="32" description="L1P Memory Protection Page Attribute Register">
+<bitfield id="_RESV_1" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="AID5" width="1" begin="15" end="15" resetval="0" description="Controls access from ID = 5." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID4" width="1" begin="14" end="14" resetval="0" description="Controls access from ID = 4." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID3" width="1" begin="13" end="13" resetval="0" description="Controls access from ID = 3." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID2" width="1" begin="12" end="12" resetval="0" description="Controls access from ID =2." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID1" width="1" begin="11" end="11" resetval="0" description="Controls access from ID = 1." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID0" width="1" begin="10" end="10" resetval="0" description="Controls access from ID = 0." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AIDX" width="1" begin="9" end="9" resetval="0" description="Controls ID &gt;=6." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="LOCAL" width="1" begin="8" end="8" resetval="0" description="Controls access from CPU to local memories (L1/L2)." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="_RESV_10" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="SR" width="1" begin="5" end="5" resetval="0" description="Supervisor read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a Supervisor read request." />
+</bitfield>
+<bitfield id="SW" width="1" begin="4" end="4" resetval="0" description="Supervisor write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a Supervisor write request." />
+</bitfield>
+<bitfield id="SX" width="1" begin="3" end="3" resetval="0" description="Supervisor execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a Supervisor execute request." />
+</bitfield>
+<bitfield id="UR" width="1" begin="2" end="2" resetval="0" description="User read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a user read request." />
+</bitfield>
+<bitfield id="UW" width="1" begin="1" end="1" resetval="0" description="User write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a user write request." />
+</bitfield>
+<bitfield id="UX" width="1" begin="0" end="0" resetval="0" description="User execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a user execute request." />
+</bitfield>
+</register>
+     <register id="MPPA9" acronym="MPPA9" offset="0x264" width="32" description="L1P Memory Protection Page Attribute Register">
+<bitfield id="_RESV_1" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="AID5" width="1" begin="15" end="15" resetval="0" description="Controls access from ID = 5." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID4" width="1" begin="14" end="14" resetval="0" description="Controls access from ID = 4." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID3" width="1" begin="13" end="13" resetval="0" description="Controls access from ID = 3." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID2" width="1" begin="12" end="12" resetval="0" description="Controls access from ID =2." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID1" width="1" begin="11" end="11" resetval="0" description="Controls access from ID = 1." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID0" width="1" begin="10" end="10" resetval="0" description="Controls access from ID = 0." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AIDX" width="1" begin="9" end="9" resetval="0" description="Controls ID &gt;=6." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="LOCAL" width="1" begin="8" end="8" resetval="0" description="Controls access from CPU to local memories (L1/L2)." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="_RESV_10" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="SR" width="1" begin="5" end="5" resetval="0" description="Supervisor read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a Supervisor read request." />
+</bitfield>
+<bitfield id="SW" width="1" begin="4" end="4" resetval="0" description="Supervisor write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a Supervisor write request." />
+</bitfield>
+<bitfield id="SX" width="1" begin="3" end="3" resetval="0" description="Supervisor execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a Supervisor execute request." />
+</bitfield>
+<bitfield id="UR" width="1" begin="2" end="2" resetval="0" description="User read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a user read request." />
+</bitfield>
+<bitfield id="UW" width="1" begin="1" end="1" resetval="0" description="User write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a user write request." />
+</bitfield>
+<bitfield id="UX" width="1" begin="0" end="0" resetval="0" description="User execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a user execute request." />
+</bitfield>
+</register>
+     <register id="MPPA10" acronym="MPPA10" offset="0x268" width="32" description="L1P Memory Protection Page Attribute Register">
+<bitfield id="_RESV_1" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="AID5" width="1" begin="15" end="15" resetval="0" description="Controls access from ID = 5." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID4" width="1" begin="14" end="14" resetval="0" description="Controls access from ID = 4." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID3" width="1" begin="13" end="13" resetval="0" description="Controls access from ID = 3." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID2" width="1" begin="12" end="12" resetval="0" description="Controls access from ID =2." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID1" width="1" begin="11" end="11" resetval="0" description="Controls access from ID = 1." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID0" width="1" begin="10" end="10" resetval="0" description="Controls access from ID = 0." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AIDX" width="1" begin="9" end="9" resetval="0" description="Controls ID &gt;=6." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="LOCAL" width="1" begin="8" end="8" resetval="0" description="Controls access from CPU to local memories (L1/L2)." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="_RESV_10" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="SR" width="1" begin="5" end="5" resetval="0" description="Supervisor read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a Supervisor read request." />
+</bitfield>
+<bitfield id="SW" width="1" begin="4" end="4" resetval="0" description="Supervisor write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a Supervisor write request." />
+</bitfield>
+<bitfield id="SX" width="1" begin="3" end="3" resetval="0" description="Supervisor execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a Supervisor execute request." />
+</bitfield>
+<bitfield id="UR" width="1" begin="2" end="2" resetval="0" description="User read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a user read request." />
+</bitfield>
+<bitfield id="UW" width="1" begin="1" end="1" resetval="0" description="User write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a user write request." />
+</bitfield>
+<bitfield id="UX" width="1" begin="0" end="0" resetval="0" description="User execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a user execute request." />
+</bitfield>
+</register>
+     <register id="MPPA11" acronym="MPPA11" offset="0x26C" width="32" description="L1P Memory Protection Page Attribute Register">
+<bitfield id="_RESV_1" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="AID5" width="1" begin="15" end="15" resetval="0" description="Controls access from ID = 5." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID4" width="1" begin="14" end="14" resetval="0" description="Controls access from ID = 4." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID3" width="1" begin="13" end="13" resetval="0" description="Controls access from ID = 3." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID2" width="1" begin="12" end="12" resetval="0" description="Controls access from ID =2." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID1" width="1" begin="11" end="11" resetval="0" description="Controls access from ID = 1." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID0" width="1" begin="10" end="10" resetval="0" description="Controls access from ID = 0." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AIDX" width="1" begin="9" end="9" resetval="0" description="Controls ID &gt;=6." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="LOCAL" width="1" begin="8" end="8" resetval="0" description="Controls access from CPU to local memories (L1/L2)." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="_RESV_10" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="SR" width="1" begin="5" end="5" resetval="0" description="Supervisor read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a Supervisor read request." />
+</bitfield>
+<bitfield id="SW" width="1" begin="4" end="4" resetval="0" description="Supervisor write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a Supervisor write request." />
+</bitfield>
+<bitfield id="SX" width="1" begin="3" end="3" resetval="0" description="Supervisor execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a Supervisor execute request." />
+</bitfield>
+<bitfield id="UR" width="1" begin="2" end="2" resetval="0" description="User read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a user read request." />
+</bitfield>
+<bitfield id="UW" width="1" begin="1" end="1" resetval="0" description="User write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a user write request." />
+</bitfield>
+<bitfield id="UX" width="1" begin="0" end="0" resetval="0" description="User execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a user execute request." />
+</bitfield>
+</register>
+     <register id="MPPA12" acronym="MPPA12" offset="0x270" width="32" description="L1P Memory Protection Page Attribute Register">
+<bitfield id="_RESV_1" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="AID5" width="1" begin="15" end="15" resetval="0" description="Controls access from ID = 5." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID4" width="1" begin="14" end="14" resetval="0" description="Controls access from ID = 4." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID3" width="1" begin="13" end="13" resetval="0" description="Controls access from ID = 3." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID2" width="1" begin="12" end="12" resetval="0" description="Controls access from ID =2." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID1" width="1" begin="11" end="11" resetval="0" description="Controls access from ID = 1." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID0" width="1" begin="10" end="10" resetval="0" description="Controls access from ID = 0." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AIDX" width="1" begin="9" end="9" resetval="0" description="Controls ID &gt;=6." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="LOCAL" width="1" begin="8" end="8" resetval="0" description="Controls access from CPU to local memories (L1/L2)." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="_RESV_10" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="SR" width="1" begin="5" end="5" resetval="0" description="Supervisor read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a Supervisor read request." />
+</bitfield>
+<bitfield id="SW" width="1" begin="4" end="4" resetval="0" description="Supervisor write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a Supervisor write request." />
+</bitfield>
+<bitfield id="SX" width="1" begin="3" end="3" resetval="0" description="Supervisor execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a Supervisor execute request." />
+</bitfield>
+<bitfield id="UR" width="1" begin="2" end="2" resetval="0" description="User read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a user read request." />
+</bitfield>
+<bitfield id="UW" width="1" begin="1" end="1" resetval="0" description="User write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a user write request." />
+</bitfield>
+<bitfield id="UX" width="1" begin="0" end="0" resetval="0" description="User execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a user execute request." />
+</bitfield>
+</register>
+     <register id="MPPA13" acronym="MPPA13" offset="0x274" width="32" description="L1P Memory Protection Page Attribute Register">
+<bitfield id="_RESV_1" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="AID5" width="1" begin="15" end="15" resetval="0" description="Controls access from ID = 5." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID4" width="1" begin="14" end="14" resetval="0" description="Controls access from ID = 4." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID3" width="1" begin="13" end="13" resetval="0" description="Controls access from ID = 3." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID2" width="1" begin="12" end="12" resetval="0" description="Controls access from ID =2." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID1" width="1" begin="11" end="11" resetval="0" description="Controls access from ID = 1." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID0" width="1" begin="10" end="10" resetval="0" description="Controls access from ID = 0." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AIDX" width="1" begin="9" end="9" resetval="0" description="Controls ID &gt;=6." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="LOCAL" width="1" begin="8" end="8" resetval="0" description="Controls access from CPU to local memories (L1/L2)." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="_RESV_10" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="SR" width="1" begin="5" end="5" resetval="0" description="Supervisor read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a Supervisor read request." />
+</bitfield>
+<bitfield id="SW" width="1" begin="4" end="4" resetval="0" description="Supervisor write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a Supervisor write request." />
+</bitfield>
+<bitfield id="SX" width="1" begin="3" end="3" resetval="0" description="Supervisor execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a Supervisor execute request." />
+</bitfield>
+<bitfield id="UR" width="1" begin="2" end="2" resetval="0" description="User read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a user read request." />
+</bitfield>
+<bitfield id="UW" width="1" begin="1" end="1" resetval="0" description="User write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a user write request." />
+</bitfield>
+<bitfield id="UX" width="1" begin="0" end="0" resetval="0" description="User execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a user execute request." />
+</bitfield>
+</register>
+     <register id="MPPA14" acronym="MPPA14" offset="0x278" width="32" description="L1P Memory Protection Page Attribute Register">
+<bitfield id="_RESV_1" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="AID5" width="1" begin="15" end="15" resetval="0" description="Controls access from ID = 5." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID4" width="1" begin="14" end="14" resetval="0" description="Controls access from ID = 4." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID3" width="1" begin="13" end="13" resetval="0" description="Controls access from ID = 3." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID2" width="1" begin="12" end="12" resetval="0" description="Controls access from ID =2." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID1" width="1" begin="11" end="11" resetval="0" description="Controls access from ID = 1." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID0" width="1" begin="10" end="10" resetval="0" description="Controls access from ID = 0." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AIDX" width="1" begin="9" end="9" resetval="0" description="Controls ID &gt;=6." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="LOCAL" width="1" begin="8" end="8" resetval="0" description="Controls access from CPU to local memories (L1/L2)." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="_RESV_10" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="SR" width="1" begin="5" end="5" resetval="0" description="Supervisor read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a Supervisor read request." />
+</bitfield>
+<bitfield id="SW" width="1" begin="4" end="4" resetval="0" description="Supervisor write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a Supervisor write request." />
+</bitfield>
+<bitfield id="SX" width="1" begin="3" end="3" resetval="0" description="Supervisor execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a Supervisor execute request." />
+</bitfield>
+<bitfield id="UR" width="1" begin="2" end="2" resetval="0" description="User read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a user read request." />
+</bitfield>
+<bitfield id="UW" width="1" begin="1" end="1" resetval="0" description="User write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a user write request." />
+</bitfield>
+<bitfield id="UX" width="1" begin="0" end="0" resetval="0" description="User execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a user execute request." />
+</bitfield>
+</register>
+     <register id="MPPA15" acronym="MPPA15" offset="0x27C" width="32" description="L1P Memory Protection Page Attribute Register">
+<bitfield id="_RESV_1" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="AID5" width="1" begin="15" end="15" resetval="0" description="Controls access from ID = 5." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID4" width="1" begin="14" end="14" resetval="0" description="Controls access from ID = 4." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID3" width="1" begin="13" end="13" resetval="0" description="Controls access from ID = 3." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID2" width="1" begin="12" end="12" resetval="0" description="Controls access from ID =2." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID1" width="1" begin="11" end="11" resetval="0" description="Controls access from ID = 1." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AID0" width="1" begin="10" end="10" resetval="0" description="Controls access from ID = 0." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="AIDX" width="1" begin="9" end="9" resetval="0" description="Controls ID &gt;=6." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="LOCAL" width="1" begin="8" end="8" resetval="0" description="Controls access from CPU to local memories (L1/L2)." range="" rwaccess="RW">
+<bitenum id="NO" value="0" token="NO" description="Access denied." />
+<bitenum id="YES" value="1" token="YES" description="Access granted." />
+</bitfield>
+<bitfield id="_RESV_10" width="2" begin="7" end="6" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="SR" width="1" begin="5" end="5" resetval="0" description="Supervisor read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a Supervisor read request." />
+</bitfield>
+<bitfield id="SW" width="1" begin="4" end="4" resetval="0" description="Supervisor write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a Supervisor write request." />
+</bitfield>
+<bitfield id="SX" width="1" begin="3" end="3" resetval="0" description="Supervisor execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a Supervisor execute request." />
+</bitfield>
+<bitfield id="UR" width="1" begin="2" end="2" resetval="0" description="User read access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="READ" value="1" token="READ" description="Indicates a user read request." />
+</bitfield>
+<bitfield id="UW" width="1" begin="1" end="1" resetval="0" description="User write access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="WRITE" value="1" token="WRITE" description="Indicates a user write request." />
+</bitfield>
+<bitfield id="UX" width="1" begin="0" end="0" resetval="0" description="User execute access type." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal operation" />
+<bitenum id="EXECUTE" value="1" token="EXECUTE" description="Indicates a user execute request." />
+</bitfield>
+</register>
+</module>

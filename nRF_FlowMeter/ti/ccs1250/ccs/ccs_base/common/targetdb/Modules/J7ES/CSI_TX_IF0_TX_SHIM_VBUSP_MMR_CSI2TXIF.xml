@@ -1,0 +1,68 @@
+<module name="CSI_TX_IF0_TX_SHIM_VBUSP_MMR_CSI2TXIF" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="CSI_TX_IF_CSITX_ID" acronym="CSI_TX_IF_CSITX_ID" offset="0x0" width="32" description="PID">
+    <bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x1" description="scheme" range="" rwaccess="R"/>
+    <bitfield id="BU" width="2" begin="29" end="28" resetval="0x2" description="bu" range="" rwaccess="R"/>
+    <bitfield id="FUNC" width="12" begin="27" end="16" resetval="0x478" description="function" range="" rwaccess="R"/>
+    <bitfield id="RTLVER" width="5" begin="15" end="11" resetval="0x9" description="rtl version" range="" rwaccess="R"/>
+    <bitfield id="MAJREV" width="3" begin="10" end="8" resetval="0x1" description="major" range="" rwaccess="R"/>
+    <bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="custom" range="" rwaccess="R"/>
+    <bitfield id="MINREV" width="6" begin="5" end="0" resetval="0x0" description="min" range="" rwaccess="R"/>
+  </register>
+  <register id="CSI_TX_IF_COLOR_CNTL" acronym="CSI_TX_IF_COLOR_CNTL" offset="0x4" width="32" description="color bar control register">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VCHNL" width="4" begin="19" end="16" resetval="0x0" description="color bar virtual channel" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="DTYPE" width="3" begin="10" end="8" resetval="0x0" description="color bar data type, data sel" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="7" begin="7" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_COLOR_PARAM" acronym="CSI_TX_IF_COLOR_PARAM" offset="0x8" width="32" description="color bar frame parameters">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="IH_CFG" width="13" begin="28" end="16" resetval="0x0" description="input height in units of pixels minus 1." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="IW_CFG" width="13" begin="12" end="0" resetval="0x0" description="input width in units of pixels minus 1." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_COLOR_START_DELAY" acronym="CSI_TX_IF_COLOR_START_DELAY" offset="0xC" width="32" description="delay from starting first line after enabling">
+    <bitfield id="LINE_DELAY" width="32" begin="31" end="0" resetval="0x0" description="delay in terms of main clock cycles before sending first line after enabling." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_COLOR_LINE_DELAY" acronym="CSI_TX_IF_COLOR_LINE_DELAY" offset="0x20" width="32" description="last line start to next line start delay">
+    <bitfield id="LINE_DELAY" width="32" begin="31" end="0" resetval="0x0" description="delay in terms of main clock cycles from line start to next line start" range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_COLOR_FRAME_DELAY" acronym="CSI_TX_IF_COLOR_FRAME_DELAY" offset="0x24" width="32" description="line start to next frame start delay">
+    <bitfield id="FRAME_DELAY" width="32" begin="31" end="0" resetval="0x0" description="delay in terms of main clock cycles from last line start to start of next frame" range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_RETRANS_CNTL" acronym="CSI_TX_IF_RETRANS_CNTL" offset="0x28" width="32" description="retransmit control register">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC1" width="4" begin="19" end="16" resetval="0x1" description="virtual channel of csi tx to send out stream4 interface" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="15" end="4" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC0" width="4" begin="3" end="0" resetval="0x0" description="virtual channel of csi tx to send out stream3 interface" range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_CONTROL1" acronym="CSI_TX_IF_CONTROL1" offset="0x2C" width="32" description="control register for csi tx wrapper">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="STREAM3_IDLE" width="1" begin="11" end="11" resetval="0x1" description="indicates if stream interface is idle(1) or not(0)" range="" rwaccess="R"/>
+    <bitfield id="STREAM2_IDLE" width="1" begin="10" end="10" resetval="0x1" description="indicates if stream interface is idle(1) or not(0)" range="" rwaccess="R"/>
+    <bitfield id="STREAM1_IDLE" width="1" begin="9" end="9" resetval="0x1" description="indicates if stream interface is idle(1) or not(0)" range="" rwaccess="R"/>
+    <bitfield id="STREAM0_IDLE" width="1" begin="8" end="8" resetval="0x1" description="indicates if stream interface is idle(1) or not(0)" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="7" begin="7" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PIXEL_RESET" width="1" begin="0" end="0" resetval="0x0" description="reset for the pixeal interface." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_F2F_DELAY_y" acronym="CSI_TX_IF_F2F_DELAY_y" offset="0x40" width="32" description="last line start to next frame start. Configuration for each of 16 virtual channels. Offset = 40h + (y * 4h); where y = 0h to Fh">
+    <bitfield id="DELAY" width="32" begin="31" end="0" resetval="0x0" description="counter value delay of last line start of frame to first line of next frame" range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_DMACNTX_j" acronym="CSI_TX_IF_DMACNTX_j" offset="0x100" width="32" description="DMA Channel Context. Configuration for each of 32 possible threads. Illegal to program 2 threads with same virtual channel and data type values Offset = 100h + (j * 20h); where j = 0h to 1Fh">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="YUV420_CFG" width="1" begin="28" end="28" resetval="0x0" description="yuv422 format enable" range="" rwaccess="RW"/>
+    <bitfield id="YUV422_MODE_CFG" width="2" begin="27" end="26" resetval="0x3" description="yuv422 mode" range="" rwaccess="RW"/>
+    <bitfield id="YUV422_CFG" width="1" begin="25" end="25" resetval="0x0" description="yuv422 format enable" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="24" end="24" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PACK12_CFG" width="1" begin="23" end="23" resetval="0x0" description="pack12 format enable 0." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="22" end="22" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SIZE_CFG" width="2" begin="21" end="20" resetval="0x2" description="data size shift when unpacking," range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="19" end="10" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VIRTCH_CFG" width="4" begin="9" end="6" resetval="0x0" description="CSI virtual channel index." range="" rwaccess="RW"/>
+    <bitfield id="DATSEL_CFG" width="6" begin="5" end="0" resetval="0x0" description="CSI data type index." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_L2L_DELAY_j" acronym="CSI_TX_IF_L2L_DELAY_j" offset="0x104" width="32" description="line to line delay. Configuration for each of 32 possible channel contexts. Offset = 104h + (j * 20h); where j = 0h to 1Fh">
+    <bitfield id="DELAY" width="32" begin="31" end="0" resetval="0x0" description="counter value delay line start to next line start within a frame" range="" rwaccess="RW"/>
+  </register>
+</module>

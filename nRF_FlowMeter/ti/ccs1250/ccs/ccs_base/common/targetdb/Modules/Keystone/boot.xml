@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module id="BOOT" HW_revision="" XML_version="1" description="">
+  <!-- csl_bootcfgregs -->
+  <register id="revision_reg" offset="0x00000" width="32" description="">
+    <bitfield id="rev_scheme" width="2" begin="31" end="30" description="" rwaccess="RW" />
+    <bitfield id="rev_module" width="12" begin="27" end="16" description="" rwaccess="RW" />
+    <bitfield id="rev_rtl" width="5" begin="15" end="11" description="" rwaccess="RW" />
+    <bitfield id="rev_major" width="3" begin="10" end="8" description="" rwaccess="RW" />
+    <bitfield id="rev_custom" width="2" begin="7" end="6" description="" rwaccess="RW" />
+    <bitfield id="rev_minor" width="6" begin="5" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="die_id_reg0" offset="0x00008" width="32" description="">
+    <bitfield id="die_id0" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="die_id_reg1" offset="0x0000c" width="32" description="">
+    <bitfield id="die_id1" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="die_id_reg2" offset="0x00010" width="32" description="">
+    <bitfield id="die_id2" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="die_id_reg3" offset="0x00014" width="32" description="">
+    <bitfield id="die_id3" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="device_id_reg0" offset="0x00018" width="32" description="">
+    <bitfield id="device_id0" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="device_id_reg1" offset="0x0001c" width="32" description="">
+    <bitfield id="device_id1" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="boot_reg0" offset="0x00020" width="32" description="">
+    <bitfield id="big_endian" width="1" begin="0" end="0" description="" rwaccess="RW" />
+    <bitfield id="boot_mode" width="13" begin="13" end="1" description="" rwaccess="RW" />
+    <bitfield id="pa_refclk_sel" width="1" begin="17" end="17" description="" rwaccess="RW" />
+    <bitfield id="pciess_mode" width="2" begin="15" end="14" description="" rwaccess="RW" />
+    <bitfield id="pciessen" width="1" begin="16" end="16" description="" rwaccess="RW" />
+  </register>
+  <register id="kick_reg0" offset="0x00038" width="32" description="">
+    <bitfield id="kick0" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="kick_reg1" offset="0x0003c" width="32" description="">
+    <bitfield id="kick1" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="bootaddr_gem_reg" offset="0x00040" width="32" description="(1 of 4, stride 4)">
+  </register>
+  <register id="intr_raw_status_reg" offset="0x000e0" width="32" description="">
+    <bitfield id="addr_err" width="1" begin="1" end="1" description="" rwaccess="RW" />
+    <bitfield id="prot_err" width="1" begin="0" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="intr_enabled_status_reg" offset="0x000e4" width="32" description="">
+    <bitfield id="enabled_addr_err" width="1" begin="1" end="1" description="" rwaccess="RW" />
+    <bitfield id="enabled_prot_err" width="1" begin="0" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="intr_enable_reg" offset="0x000e8" width="32" description="">
+    <bitfield id="addr_err_en" width="1" begin="1" end="1" description="" rwaccess="RW" />
+    <bitfield id="prot_err_en" width="1" begin="0" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="intr_enable_clr_reg" offset="0x000ec" width="32" description="">
+    <bitfield id="addr_err_en_clr" width="1" begin="1" end="1" description="" rwaccess="RW" />
+    <bitfield id="prot_err_en_clr" width="1" begin="0" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="eoi_reg" offset="0x000f0" width="32" description="">
+    <bitfield id="eoi_vector" width="8" begin="7" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="fault_address_reg" offset="0x000f4" width="32" description="">
+    <bitfield id="fault_addr" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="fault_status_reg" offset="0x000f8" width="32" description="">
+    <bitfield id="fault_id" width="4" begin="27" end="24" description="" rwaccess="RW" />
+    <bitfield id="fault_mstid" width="8" begin="23" end="16" description="" rwaccess="RW" />
+    <bitfield id="fault_privid" width="4" begin="12" end="9" description="" rwaccess="RW" />
+    <bitfield id="fault_ns" width="1" begin="7" end="7" description="" rwaccess="RW" />
+    <bitfield id="fault_type" width="6" begin="5" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="fault_clear_reg" offset="0x000fc" width="32" description="">
+    <bitfield id="fault_clear" width="1" begin="0" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="emac_id1" offset="0x00110" width="32" description="">
+    <bitfield id="emac_id1" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="emac_id2" offset="0x00114" width="32" description="">
+    <bitfield id="emac_id2" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="lrstnmistat_clr" offset="0x00130" width="32" description="">
+    <bitfield id="lreset_stat_0_clr" width="1" begin="0" end="0" description="" rwaccess="RW" />
+    <bitfield id="lreset_stat_1_clr" width="1" begin="1" end="1" description="" rwaccess="RW" />
+    <bitfield id="lreset_stat_2_clr" width="1" begin="2" end="2" description="" rwaccess="RW" />
+    <bitfield id="lreset_stat_3_clr" width="1" begin="3" end="3" description="" rwaccess="RW" />
+    <bitfield id="nmi_stat_0_clr" width="1" begin="4" end="4" description="" rwaccess="RW" />
+    <bitfield id="nmi_stat_1_clr" width="1" begin="5" end="5" description="" rwaccess="RW" />
+    <bitfield id="nmi_stat_2_clr" width="1" begin="6" end="6" description="" rwaccess="RW" />
+    <bitfield id="nmi_stat_3_clr" width="1" begin="7" end="7" description="" rwaccess="RW" />
+  </register>
+  <register id="reset_stat_clr" offset="0x00134" width="32" description="">
+    <bitfield id="grst_stat_clr" width="1" begin="31" end="31" description="" rwaccess="RW" />
+    <bitfield id="lrst_stat_0_clr" width="1" begin="0" end="0" description="" rwaccess="RW" />
+    <bitfield id="lrst_stat_1_clr" width="1" begin="1" end="1" description="" rwaccess="RW" />
+    <bitfield id="lrst_stat_2_clr" width="1" begin="2" end="2" description="" rwaccess="RW" />
+    <bitfield id="lrst_stat_3_clr" width="1" begin="3" end="3" description="" rwaccess="RW" />
+  </register>
+  <register id="boot_complete" offset="0x0013c" width="32" description="">
+    <bitfield id="gem0_complete" width="1" begin="0" end="0" description="" rwaccess="RW" />
+    <bitfield id="gem1_complete" width="1" begin="1" end="1" description="" rwaccess="RW" />
+    <bitfield id="gem2_complete" width="1" begin="2" end="2" description="" rwaccess="RW" />
+    <bitfield id="gem3_complete" width="1" begin="3" end="3" description="" rwaccess="RW" />
+  </register>
+  <register id="boot_progress" offset="0x00140" width="32" description="">
+    <bitfield id="boot_progress" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="reset_stat" offset="0x00144" width="32" description="">
+    <bitfield id="clr_grst_stat_clr" width="1" begin="31" end="31" description="" rwaccess="RW" />
+    <bitfield id="clr_lrst_stat_0_clr" width="1" begin="0" end="0" description="" rwaccess="RW" />
+    <bitfield id="clr_lrst_stat_1_clr" width="1" begin="1" end="1" description="" rwaccess="RW" />
+    <bitfield id="clr_lrst_stat_2_clr" width="1" begin="2" end="2" description="" rwaccess="RW" />
+    <bitfield id="clr_lrst_stat_3_clr" width="1" begin="3" end="3" description="" rwaccess="RW" />
+  </register>
+  <register id="lrstnmistat" offset="0x00148" width="32" description="">
+    <bitfield id="clr_lreset_stat_0_clr" width="1" begin="0" end="0" description="" rwaccess="RW" />
+    <bitfield id="clr_lreset_stat_1_clr" width="1" begin="1" end="1" description="" rwaccess="RW" />
+    <bitfield id="clr_lreset_stat_2_clr" width="1" begin="2" end="2" description="" rwaccess="RW" />
+    <bitfield id="clr_lreset_stat_3_clr" width="1" begin="3" end="3" description="" rwaccess="RW" />
+    <bitfield id="clr_nmi_stat_0_clr" width="1" begin="4" end="4" description="" rwaccess="RW" />
+    <bitfield id="clr_nmi_stat_1_clr" width="1" begin="5" end="5" description="" rwaccess="RW" />
+    <bitfield id="clr_nmi_stat_2_clr" width="1" begin="6" end="6" description="" rwaccess="RW" />
+    <bitfield id="clr_nmi_stat_3_clr" width="1" begin="7" end="7" description="" rwaccess="RW" />
+  </register>
+  <register id="devcfg" offset="0x0014c" width="32" description="">
+    <bitfield id="sysclkouten" width="1" begin="0" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="pwr_stat" offset="0x00150" width="32" description="">
+    <bitfield id="hibernation" width="1" begin="1" end="1" description="" rwaccess="RW" />
+    <bitfield id="hibernation_mode" width="1" begin="2" end="2" description="" rwaccess="RW" />
+    <bitfield id="pwr_stat_general" width="29" begin="31" end="3" description="" rwaccess="RW" />
+    <bitfield id="standby" width="1" begin="0" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="sts_srio" offset="0x00154" width="32" description="">
+    <bitfield id="sts_srio" width="29" begin="28" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="sts_sgmii" offset="0x00158" width="32" description="">
+    <bitfield id="sts_sgmii" width="13" begin="12" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="sts_pcie" offset="0x0015c" width="32" description="">
+    <bitfield id="sts_pcie" width="13" begin="12" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="sts_vusr" offset="0x00160" width="32" description="">
+    <bitfield id="sts_vusr" width="29" begin="28" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="sts_aif2_b8" offset="0x00164" width="32" description="">
+    <bitfield id="sts_aif2_b8" width="29" begin="28" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="sts_aif2_b4" offset="0x00168" width="32" description="">
+    <bitfield id="sts_aif2_b4" width="15" begin="14" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="class0_efuse_reg" offset="0x00180" width="32" description="">
+    <bitfield id="class0_efuse_reg" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="efuse_reg0" offset="0x00190" width="32" description="">
+    <bitfield id="efuse_reg0" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="efuse_reg1" offset="0x00194" width="32" description="">
+    <bitfield id="efuse_reg1" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="efuse_reg2" offset="0x00198" width="32" description="">
+    <bitfield id="efuse_reg2" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="efuse_reg3" offset="0x0019c" width="32" description="">
+    <bitfield id="efuse_reg3" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="efuse_reg4" offset="0x001a0" width="32" description="">
+    <bitfield id="efuse_reg4" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="efuse_reg5" offset="0x001a4" width="32" description="">
+    <bitfield id="efuse_reg5" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="efuse_reg6" offset="0x001a8" width="32" description="">
+    <bitfield id="efuse_reg6" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="efuse_reg7" offset="0x001ac" width="32" description="">
+    <bitfield id="efuse_reg7" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="efuse_reg8" offset="0x001b0" width="32" description="">
+    <bitfield id="efuse_reg8" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="efuse_reg9" offset="0x001b4" width="32" description="">
+    <bitfield id="efuse_reg9" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="efuse_reg10" offset="0x001b8" width="32" description="">
+    <bitfield id="efuse_reg10" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="efuse_reg11" offset="0x001bc" width="32" description="">
+    <bitfield id="efuse_reg11" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="efuse_reg12" offset="0x001c0" width="32" description="">
+    <bitfield id="efuse_reg12" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="efuse_reg13" offset="0x001c4" width="32" description="">
+    <bitfield id="efuse_reg13" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="efuse_reg14" offset="0x001c8" width="32" description="">
+    <bitfield id="efuse_reg14" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="efuse_reg15" offset="0x001cc" width="32" description="">
+    <bitfield id="efuse_reg15" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="nmigr" offset="0x00200" width="32" description="(1 of 4, stride 4)">
+    <bitfield id="0_nmigr_0_reg" width="1" begin="0" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="ipcgr" offset="0x00240" width="32" description="(1 of 4, stride 4)">
+    <bitfield id="_ipcgr0_reg" width="1" begin="0" end="0" description="" rwaccess="RW" />
+    <bitfield id="_ipcgr0_src" width="28" begin="31" end="4" description="" rwaccess="RW" />
+  </register>
+  <register id="ipcgrh" offset="0x0027c" width="32" description="">
+    <bitfield id="ipcgrh_reg" width="1" begin="0" end="0" description="" rwaccess="RW" />
+    <bitfield id="ipcgrh_src" width="28" begin="31" end="4" description="" rwaccess="RW" />
+  </register>
+  <register id="ipcar" offset="0x00280" width="32" description="(1 of 4, stride 4)">
+    <bitfield id="_ipcgr0_src_clr" width="28" begin="31" end="4" description="" rwaccess="RW" />
+  </register>
+  <register id="ipcarh" offset="0x002bc" width="32" description="">
+    <bitfield id="ipcgrh_src_clr" width="28" begin="31" end="4" description="" rwaccess="RW" />
+  </register>
+  <register id="tinpsel" offset="0x00300" width="32" description="">
+    <bitfield id="tinpsel" width="16" begin="15" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="toutsel" offset="0x00304" width="32" description="">
+    <bitfield id="toutsel0" width="4" begin="3" end="0" description="" rwaccess="RW" />
+    <bitfield id="toutsel1" width="4" begin="8" end="5" description="" rwaccess="RW" />
+    <bitfield id="toutsel1_rsvd" width="1" begin="4" end="4" description="" rwaccess="RW" />
+  </register>
+  <register id="rstmux" offset="0x00308" width="32" description="(1 of 4, stride 4)">
+    <bitfield id="_rstmux_delay0" width="3" begin="7" end="5" description="" rwaccess="RW" />
+    <bitfield id="_rstmux_evstat0" width="1" begin="4" end="4" description="" rwaccess="RW" />
+    <bitfield id="_rstmux_evstat_clr0" width="1" begin="9" end="9" description="" rwaccess="RW" />
+    <bitfield id="_rstmux_lock0" width="1" begin="0" end="0" description="" rwaccess="RW" />
+    <bitfield id="_rstmux_omode0" width="3" begin="3" end="1" description="" rwaccess="RW" />
+  </register>
+  <register id="core_pll_ctl0" offset="0x00328" width="32" description="">
+    <bitfield id="core_pll_ctl0" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="core_pll_ctl1" offset="0x0032c" width="32" description="">
+    <bitfield id="core_pll_ctl1" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="ddr3_pll_ctl0" offset="0x00330" width="32" description="">
+    <bitfield id="ddr3_pll_ctl0" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="ddr3_pll_ctl1" offset="0x00334" width="32" description="">
+    <bitfield id="ddr3_pll_ctl1" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="pa_pll_ctl0" offset="0x00338" width="32" description="">
+    <bitfield id="pa_pll_ctl0" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="pa_pll_ctl1" offset="0x0033c" width="32" description="">
+    <bitfield id="pa_pll_ctl1" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="sgmii_cfgpll" offset="0x00340" width="32" description="">
+    <bitfield id="sgmii_cfgpll" width="16" begin="15" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="sgmii_cfgrx0" offset="0x00344" width="32" description="">
+    <bitfield id="sgmii_rxcfg0" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="sgmii_cfgtx0" offset="0x00348" width="32" description="">
+    <bitfield id="sgmii_txcfg0" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="sgmii_cfgrx1" offset="0x0034c" width="32" description="">
+    <bitfield id="sgmii_rxcfg1" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="sgmii_cfgtx1" offset="0x00350" width="32" description="">
+    <bitfield id="sgmii_txcfg1" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="sgmii_rsvd" offset="0x00354" width="32" description="">
+    <bitfield id="sgmii_rsvd" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="pcie_cfgpll" offset="0x00358" width="32" description="">
+    <bitfield id="pcie_cfgpll" width="16" begin="15" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="pcie_serdes_rsvd" offset="0x0035c" width="32" description="">
+    <bitfield id="pcie_serdes_rsvd" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="srio_serdes_cfgpll" offset="0x00360" width="32" description="">
+    <bitfield id="srio_serdes_cfgpll" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="srio_serdes_cfgrx0" offset="0x00364" width="32" description="">
+    <bitfield id="srio_serdes_cfgrx0" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="srio_serdes_cfgtx0" offset="0x00368" width="32" description="">
+    <bitfield id="srio_serdes_cfgtx0" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="srio_serdes_cfgrx1" offset="0x0036c" width="32" description="">
+    <bitfield id="srio_serdes_cfgrx1" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="srio_serdes_cfgtx1" offset="0x00370" width="32" description="">
+    <bitfield id="srio_serdes_cfgtx1" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="srio_serdes_cfgrx2" offset="0x00374" width="32" description="">
+    <bitfield id="srio_serdes_cfgrx2" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="srio_serdes_cfgtx2" offset="0x00378" width="32" description="">
+    <bitfield id="srio_serdes_cfgtx2" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="srio_serdes_cfgrx3" offset="0x0037c" width="32" description="">
+    <bitfield id="srio_serdes_cfgrx3" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="srio_serdes_cfgtx3" offset="0x00380" width="32" description="">
+    <bitfield id="srio_serdes_cfgtx3" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="srio_serdes_rsvd" offset="0x00384" width="32" description="">
+    <bitfield id="srio_serdes_rsvd" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="led_gem_passdone" offset="0x00388" width="32" description="">
+    <bitfield id="d0" width="1" begin="1" end="1" description="" rwaccess="RW" />
+    <bitfield id="d1" width="1" begin="5" end="5" description="" rwaccess="RW" />
+    <bitfield id="d2" width="1" begin="9" end="9" description="" rwaccess="RW" />
+    <bitfield id="d3" width="1" begin="13" end="13" description="" rwaccess="RW" />
+    <bitfield id="i0" width="1" begin="2" end="2" description="" rwaccess="RW" />
+    <bitfield id="i1" width="1" begin="6" end="6" description="" rwaccess="RW" />
+    <bitfield id="i2" width="1" begin="10" end="10" description="" rwaccess="RW" />
+    <bitfield id="i3" width="1" begin="14" end="14" description="" rwaccess="RW" />
+    <bitfield id="l0" width="1" begin="3" end="3" description="" rwaccess="RW" />
+    <bitfield id="l1" width="1" begin="7" end="7" description="" rwaccess="RW" />
+    <bitfield id="l2" width="1" begin="11" end="11" description="" rwaccess="RW" />
+    <bitfield id="l3" width="1" begin="15" end="15" description="" rwaccess="RW" />
+    <bitfield id="led_gem_passdone_rsvd" width="16" begin="31" end="16" description="" rwaccess="RW" />
+    <bitfield id="p0" width="1" begin="0" end="0" description="" rwaccess="RW" />
+    <bitfield id="p1" width="1" begin="4" end="4" description="" rwaccess="RW" />
+    <bitfield id="p2" width="1" begin="8" end="8" description="" rwaccess="RW" />
+    <bitfield id="p3" width="1" begin="12" end="12" description="" rwaccess="RW" />
+  </register>
+  <register id="led_plllock" offset="0x0038c" width="32" description="">
+    <bitfield id="gem0_code_loaded" width="1" begin="2" end="2" description="" rwaccess="RW" />
+    <bitfield id="gem0_exe_ok" width="1" begin="3" end="3" description="" rwaccess="RW" />
+    <bitfield id="gem1_code_loaded" width="1" begin="4" end="4" description="" rwaccess="RW" />
+    <bitfield id="gem1_exe_ok" width="1" begin="5" end="5" description="" rwaccess="RW" />
+    <bitfield id="gem2_code_loaded" width="1" begin="6" end="6" description="" rwaccess="RW" />
+    <bitfield id="gem2_exe_ok" width="1" begin="7" end="7" description="" rwaccess="RW" />
+    <bitfield id="gem3_code_loaded" width="1" begin="8" end="8" description="" rwaccess="RW" />
+    <bitfield id="gem3_exe_ok" width="1" begin="9" end="9" description="" rwaccess="RW" />
+    <bitfield id="gem_general" width="13" begin="30" end="18" description="" rwaccess="RW" />
+    <bitfield id="gem_susp_ctl" width="1" begin="31" end="31" description="" rwaccess="RW" />
+    <bitfield id="plllock" width="1" begin="0" end="0" description="" rwaccess="RW" />
+    <bitfield id="sticky_en_lock" width="1" begin="1" end="1" description="" rwaccess="RW" />
+  </register>
+  <register id="led_chip_passdone" offset="0x00390" width="32" description="">
+    <bitfield id="chip_done" width="1" begin="1" end="1" description="" rwaccess="RW" />
+    <bitfield id="chip_pass" width="1" begin="0" end="0" description="" rwaccess="RW" />
+    <bitfield id="led_chip_passdone_rsvd" width="30" begin="31" end="2" description="" rwaccess="RW" />
+  </register>
+  <register id="tdiode" offset="0x00394" width="32" description="">
+    <bitfield id="tdiode" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="margin" offset="0x00398" width="32" description="">
+    <bitfield id="btcfg_margin_en" width="1" begin="31" end="31" description="" rwaccess="RW" />
+    <bitfield id="dftwrite0" width="11" begin="10" end="0" description="" rwaccess="RW" />
+    <bitfield id="dftwrite1" width="11" begin="21" end="11" description="" rwaccess="RW" />
+  </register>
+  <register id="secure_control" offset="0x0039c" width="32" description="">
+    <bitfield id="pbist_secure_en" width="1" begin="0" end="0" description="" rwaccess="RW" />
+    <bitfield id="vusr_sec_en" width="1" begin="1" end="1" description="" rwaccess="RW" />
+  </register>
+  <register id="efuse_secrom_chksum0" offset="0x003a4" width="32" description="">
+    <bitfield id="efuse_secrom_chksum0" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="efuse_secrom_chksum1" offset="0x003a8" width="32" description="">
+    <bitfield id="efuse_secrom_chksum1" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="obsclk_ctl" offset="0x003ac" width="32" description="">
+    <bitfield id="core_pll_obsclk_en" width="1" begin="1" end="1" description="" rwaccess="RW" />
+    <bitfield id="core_pll_obsclk_sel" width="1" begin="0" end="0" description="" rwaccess="RW" />
+    <bitfield id="ddr3_pll_obsclk_en" width="1" begin="3" end="3" description="" rwaccess="RW" />
+    <bitfield id="ddr3_pll_obsclk_sel" width="1" begin="2" end="2" description="" rwaccess="RW" />
+    <bitfield id="pa_pll_obsclk_en" width="1" begin="5" end="5" description="" rwaccess="RW" />
+    <bitfield id="pa_pll_obsclk_sel" width="1" begin="4" end="4" description="" rwaccess="RW" />
+    <bitfield id="psc_emif4f_rst_en" width="1" begin="6" end="6" description="" rwaccess="RW" />
+  </register>
+  <register id="aif_serdes_rsvd" offset="0x003b0" width="32" description="">
+    <bitfield id="aif_serdes_rsvd" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="vusr_cfgpll" offset="0x003b4" width="32" description="">
+    <bitfield id="vusr_cfgpll" width="16" begin="15" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="vusr_cfgrx0" offset="0x003b8" width="32" description="">
+    <bitfield id="vusr_cfgrx0" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="vusr_cfgtx0" offset="0x003bc" width="32" description="">
+    <bitfield id="vusr_cfgtx0" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="vusr_cfgrx1" offset="0x003c0" width="32" description="">
+    <bitfield id="vusr_cfgrx1" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="vusr_cfgtx1" offset="0x003c4" width="32" description="">
+    <bitfield id="vusr_cfgtx1" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="vusr_cfgrx2" offset="0x003c8" width="32" description="">
+    <bitfield id="vusr_cfgrx2" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="vusr_cfgtx2" offset="0x003cc" width="32" description="">
+    <bitfield id="vusr_cfgtx2" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="vusr_cfgrx3" offset="0x003d0" width="32" description="">
+    <bitfield id="vusr_cfgrx3" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="vusr_cfgtx3" offset="0x003d4" width="32" description="">
+    <bitfield id="vusr_cfgtx3" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="vusr_serdes_rsvd" offset="0x003d8" width="32" description="">
+    <bitfield id="vusr_serdes_rsvd" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="led_gpio_clr" offset="0x003dc" width="32" description="">
+    <bitfield id="led_gpio_src_clr" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="led_gpio" offset="0x003e0" width="32" description="">
+    <bitfield id="clr_led_gpio_src_clr" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="efuse_rsvd0" offset="0x003f0" width="32" description="">
+    <bitfield id="efuse_rsvd0" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="efuse_rsvd1" offset="0x003f4" width="32" description="">
+    <bitfield id="efuse_rsvd1" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="efuse_rsvd2" offset="0x003f8" width="32" description="">
+    <bitfield id="efuse_rsvd2" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="efuse_rsvd3" offset="0x003fc" width="32" description="">
+    <bitfield id="efuse_rsvd3" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="chip_misc" offset="0x00400" width="32" description="">
+    <bitfield id="chip_misc_gem_emif4f_psc_lock_n" width="1" begin="11" end="11" description="" rwaccess="RW" />
+    <bitfield id="chip_misc_gem_l2acs_lat" width="4" begin="10" end="7" description="" rwaccess="RW" />
+    <bitfield id="chip_misc_gem_l2rdlat" width="4" begin="6" end="3" description="" rwaccess="RW" />
+    <bitfield id="chip_misc_msmc_block_parity_rst" width="1" begin="12" end="12" description="" rwaccess="RW" />
+    <bitfield id="chip_misc_qm_prior" width="3" begin="2" end="0" description="" rwaccess="RW" />
+    <bitfield id="rst_iso_ip_rst_blk" width="7" begin="19" end="13" description="" rwaccess="RW" />
+  </register>
+  <register id="ddr3_config_reg" offset="0x00404" width="32" description="(1 of 25, stride 4)">
+    <bitfield id="0_cmd0_phy_reg_status_phy_ctrl_dll_lock" width="1" begin="4" end="4" description="" rwaccess="RW" />
+    <bitfield id="0_cmd0_phy_reg_status_phy_ctrl_of_in_lock_state" width="2" begin="8" end="7" description="" rwaccess="RW" />
+    <bitfield id="0_cmd1_phy_reg_status_phy_ctrl_dll_lock" width="1" begin="5" end="5" description="" rwaccess="RW" />
+    <bitfield id="0_cmd1_phy_reg_status_phy_ctrl_of_in_lock_state" width="2" begin="10" end="9" description="" rwaccess="RW" />
+    <bitfield id="0_cmd2_phy_reg_status_phy_ctrl_dll_lock" width="1" begin="6" end="6" description="" rwaccess="RW" />
+    <bitfield id="0_cmd2_phy_reg_status_phy_ctrl_of_in_lock_state" width="2" begin="12" end="11" description="" rwaccess="RW" />
+    <bitfield id="0_cmd_reg_phy_ctrl_slave_ratio" width="10" begin="22" end="13" description="" rwaccess="RW" />
+    <bitfield id="0_cmd_req_phy_dll_lock_diff" width="4" begin="3" end="0" description="" rwaccess="RW" />
+    <bitfield id="0_data0_phy_reg_status_dll_lock" width="1" begin="23" end="23" description="" rwaccess="RW" />
+    <bitfield id="0_data1_phy_reg_status_dll_lock" width="1" begin="24" end="24" description="" rwaccess="RW" />
+    <bitfield id="0_data2_phy_reg_status_dll_lock" width="1" begin="25" end="25" description="" rwaccess="RW" />
+    <bitfield id="0_data3_phy_reg_status_dll_lock" width="1" begin="26" end="26" description="" rwaccess="RW" />
+    <bitfield id="0_data4_phy_reg_status_dll_lock" width="1" begin="27" end="27" description="" rwaccess="RW" />
+    <bitfield id="0_data5_phy_reg_status_dll_lock" width="1" begin="28" end="28" description="" rwaccess="RW" />
+    <bitfield id="0_data6_phy_reg_status_dll_lock" width="1" begin="29" end="29" description="" rwaccess="RW" />
+    <bitfield id="0_data7_phy_reg_status_dll_lock" width="1" begin="30" end="30" description="" rwaccess="RW" />
+    <bitfield id="0_data8_phy_reg_status_dll_lock" width="1" begin="31" end="31" description="" rwaccess="RW" />
+  </register>
+  <register id="margin1" offset="0x00468" width="32" description="">
+    <bitfield id="dftread0" width="11" begin="10" end="0" description="" rwaccess="RW" />
+    <bitfield id="dftread1" width="11" begin="21" end="11" description="" rwaccess="RW" />
+  </register>
+  <register id="end_point" offset="0x01fff" width="32" description="">
+    <bitfield id="end_point" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+</module>

@@ -1,0 +1,34 @@
+<module name="DMPAC0_DRU_UTC_DMPAC0_DRU_MMR_CFG_DRU_DRU" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="DMPAC_UTC_DRU_PID" acronym="DMPAC_UTC_DRU_PID" offset="0x0" width="64" description="Peripheral ID Register">
+    <bitfield id="RSVD" width="32" begin="63" end="32" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="REVISION" width="32" begin="31" end="0" resetval="0x662C0900" description="PID Revision" range="" rwaccess="R"/>
+  </register>
+  <register id="DMPAC_UTC_DRU_CAPABILITIES" acronym="DMPAC_UTC_DRU_CAPABILITIES" offset="0x8" width="64" description="DRU Capabilities: Lists the capabilities of the channel for TR TYPE and formatting functions">
+    <bitfield id="RSVD" width="17" begin="63" end="47" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="SECTR" width="4" begin="46" end="43" resetval="0x0" description="Maximum second TR function that is supported" range="" rwaccess="R"/>
+    <bitfield id="DFMT" width="4" begin="42" end="39" resetval="0x0" description="Maximum data reformatting function that is supported" range="" rwaccess="R"/>
+    <bitfield id="ELTYPE" width="4" begin="38" end="35" resetval="0xB" description="Maximum element type value that is supported" range="" rwaccess="R"/>
+    <bitfield id="AMODE" width="3" begin="34" end="32" resetval="0x1" description="The maximum AMODE that is supported.If AMODE is supported then DIR field must be supported for that AMODE." range="" rwaccess="R"/>
+    <bitfield id="RSVD_CONF_SPEC" width="12" begin="31" end="20" resetval="0x0" description="Reserved for Configuration Specific Features.This implementation has no configuration specific features." range="" rwaccess="R"/>
+    <bitfield id="GLOBAL_TRIG" width="1" begin="19" end="19" resetval="0x1" description="Global Triggers 0 and 1 are supported" range="" rwaccess="R"/>
+    <bitfield id="LOCAL_TRIG" width="1" begin="18" end="18" resetval="0x1" description="Dedicated Local Trigger is supported" range="" rwaccess="R"/>
+    <bitfield id="EOL" width="1" begin="17" end="17" resetval="0x0" description="EOL Field is supported" range="" rwaccess="R"/>
+    <bitfield id="TRSTATIC" width="1" begin="16" end="16" resetval="0x1" description="STATIC Field is supported" range="" rwaccess="R"/>
+    <bitfield id="TYPE15" width="1" begin="15" end="15" resetval="0x0" description="Type 15 TR is supported" range="" rwaccess="R"/>
+    <bitfield id="TYPE14" width="1" begin="14" end="14" resetval="0x0" description="Type 14 TR is supported" range="" rwaccess="R"/>
+    <bitfield id="TYPE13" width="1" begin="13" end="13" resetval="0x0" description="Type 13 TR is supported" range="" rwaccess="R"/>
+    <bitfield id="TYPE12" width="1" begin="12" end="12" resetval="0x0" description="Type 12 TR is supported" range="" rwaccess="R"/>
+    <bitfield id="TYPE11" width="1" begin="11" end="11" resetval="0x1" description="Type 11 TR is supported" range="" rwaccess="R"/>
+    <bitfield id="TYPE10" width="1" begin="10" end="10" resetval="0x1" description="Type 10 TR is supported" range="" rwaccess="R"/>
+    <bitfield id="TYPE9" width="1" begin="9" end="9" resetval="0x1" description="Type 9 TR is supported" range="" rwaccess="R"/>
+    <bitfield id="TYPE8" width="1" begin="8" end="8" resetval="0x1" description="Type 8 TR is supported" range="" rwaccess="R"/>
+    <bitfield id="TYPE7" width="1" begin="7" end="7" resetval="0x0" description="Type 7 TR is supported" range="" rwaccess="R"/>
+    <bitfield id="TYPE6" width="1" begin="6" end="6" resetval="0x0" description="Type 6 TR is supported" range="" rwaccess="R"/>
+    <bitfield id="TYPE5" width="1" begin="5" end="5" resetval="0x0" description="Type 5 TR is supported" range="" rwaccess="R"/>
+    <bitfield id="TYPE4" width="1" begin="4" end="4" resetval="0x0" description="Type 4 TR is supported" range="" rwaccess="R"/>
+    <bitfield id="TYPE3" width="1" begin="3" end="3" resetval="0x0" description="Type 3 TR is supported" range="" rwaccess="R"/>
+    <bitfield id="TYPE2" width="1" begin="2" end="2" resetval="0x0" description="Type 2 TR is supported" range="" rwaccess="R"/>
+    <bitfield id="TYPE1" width="1" begin="1" end="1" resetval="0x0" description="Type 1 TR is supported" range="" rwaccess="R"/>
+    <bitfield id="TYPE0" width="1" begin="0" end="0" resetval="0x0" description="Type 0 TR is supported" range="" rwaccess="R"/>
+  </register>
+</module>

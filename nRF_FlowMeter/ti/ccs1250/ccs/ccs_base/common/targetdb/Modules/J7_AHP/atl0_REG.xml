@@ -1,0 +1,102 @@
+<module name="atl0_REG" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="REG_REVISION" acronym="REG_REVISION" offset="0x0" width="32" description="">
+		<bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x0" description="PID register scheme" range="31 - 30" rwaccess="R"/> 
+		<bitfield id="FUNCTION" width="12" begin="27" end="16" resetval="0x2567" description="Module ID" range="27 - 16" rwaccess="R"/> 
+		<bitfield id="RTL" width="5" begin="15" end="11" resetval="0x4" description="RTL revision. Will vary depending on release." range="15 - 11" rwaccess="R"/> 
+		<bitfield id="MAJOR" width="3" begin="10" end="8" resetval="0x1" description="Major revision" range="10 - 8" rwaccess="R"/> 
+		<bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom" range="7 - 6" rwaccess="R"/> 
+		<bitfield id="MINOR" width="6" begin="5" end="0" resetval="0x0" description="Minor revision" range="5 - 0" rwaccess="R"/>
+	</register>
+	<register id="REG_ATL0_PPMR" acronym="REG_ATL0_PPMR" offset="0x200" width="32" description="">
+		<bitfield id="PPM_SD" width="1" begin="15" end="15" resetval="0x0" description="1 = Slow down 0 = Speed up" range="15" rwaccess="R/W"/> 
+		<bitfield id="PPM_SET" width="9" begin="8" end="0" resetval="0x0" description="This is the 9-bit parts-per-million value in the adjusting circuit. PPM adjustment = PPMSET/2^20" range="8 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="REG_ATL0_BBSR" acronym="REG_ATL0_BBSR" offset="0x204" width="32" description="">
+		<bitfield id="SMP_CNT" width="16" begin="15" end="0" resetval="0x0" description="This is the 16-bit sample count from the measuring circuit" range="15 - 0" rwaccess="R"/>
+	</register>
+	<register id="REG_ATL0_ATLCR" acronym="REG_ATL0_ATLCR" offset="0x208" width="32" description="">
+		<bitfield id="CLK_DIV_SEL" width="1" begin="5" end="5" resetval="0x0" description="0: MODCLK = AWS divided by 2^16  1: MODCLK = AWS divided by 2^12" range="5" rwaccess="R/W"/> 
+		<bitfield id="INT_DIV" width="5" begin="4" end="0" resetval="0x24" description="Sets ratio of ATLPCLK to ATCLK" range="4 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="REG_ATL0_SWEN" acronym="REG_ATL0_SWEN" offset="0x210" width="32" description="">
+		<bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="When disabled the ATL registers are forced to known states for simulation purposes. Runtime startup doesn't require initial values because measurement is relative to an arbitrary initial value. All registers are reset to zero except ATLCR.INT_DIV which is resets to 24 (divide-by-25, because zero is not a legal divide ratio.)" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="REG_ATL0_BWSMUX" acronym="REG_ATL0_BWSMUX" offset="0x214" width="32" description="">
+		<bitfield id="SELECT" width="4" begin="3" end="0" resetval="0x0" description="BWS input select:   0000: atl_io_port_bws[0]   0001: atl_io_port_bws[1]   0010: atl_io_port_bws[2]   0011: atl_io_port_bws[3]   0100: atl_io_port_bws[4]   0101: atl_io_port_bws[5]   0110: atl_io_port_bws[6]   0111: atl_io_port_bws[7]   1000: atl_io_port_bws[8]   1001: atl_io_port_bws[9]   1010: atl_io_port_bws[10]   1011: atl_io_port_bws[11]   1100: atl_io_port_bws[12]   1101: atl_io_port_bws[13]   1110: atl_io_port_bws[14]   1111: atl_io_port_bws[15]" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="REG_ATL0_AWSMUX" acronym="REG_ATL0_AWSMUX" offset="0x218" width="32" description="">
+		<bitfield id="SELECT" width="4" begin="3" end="0" resetval="0x0" description="AWS input select:   0000: atl_io_port_aws[0]   0001: atl_io_port_aws[1]   0010: atl_io_port_aws[2]   0011: atl_io_port_aws[3]   0100: atl_io_port_aws[4]   0101: atl_io_port_aws[5]   0110: atl_io_port_aws[6]   0111: atl_io_port_aws[7]   1000: atl_io_port_aws[8]   1001: atl_io_port_aws[9]   1010: atl_io_port_aws[10]   1011: atl_io_port_aws[11]   1100: atl_io_port_aws[12]   1101: atl_io_port_aws[13]   1110: atl_io_port_aws[14]   1111: atl_io_port_aws[15]" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="REG_ATL0_PCLKMUX" acronym="REG_ATL0_PCLKMUX" offset="0x21C" width="32" description="">
+		<bitfield id="SELECT" width="1" begin="0" end="0" resetval="0x0" description="ATL[0-3] core clock select:   0: vbus_clk  1: atl_clk" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="REG_ATL1_PPMR" acronym="REG_ATL1_PPMR" offset="0x280" width="32" description="">
+		<bitfield id="PPM_SD" width="1" begin="15" end="15" resetval="0x0" description="1 = Slow down 0 = Speed up" range="15" rwaccess="R/W"/> 
+		<bitfield id="PPM_SET" width="9" begin="8" end="0" resetval="0x0" description="This is the 9-bit parts-per-million value in the adjusting circuit. PPM adjustment = PPMSET/2^20" range="8 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="REG_ATL1_BBSR" acronym="REG_ATL1_BBSR" offset="0x284" width="32" description="">
+		<bitfield id="SMP_CNT" width="16" begin="15" end="0" resetval="0x0" description="This is the 16-bit sample count from the measuring circuit" range="15 - 0" rwaccess="R"/>
+	</register>
+	<register id="REG_ATL1_ATLCR" acronym="REG_ATL1_ATLCR" offset="0x288" width="32" description="">
+		<bitfield id="CLK_DIV_SEL" width="1" begin="5" end="5" resetval="0x0" description="0: MODCLK = AWS divided by 2^16  1: MODCLK = AWS divided by 2^12" range="5" rwaccess="R/W"/> 
+		<bitfield id="INT_DIV" width="5" begin="4" end="0" resetval="0x24" description="Sets ratio of ATLPCLK to ATCLK" range="4 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="REG_ATL1_SWEN" acronym="REG_ATL1_SWEN" offset="0x290" width="32" description="">
+		<bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="When disabled the ATL registers are forced to known states for simulation purposes. Runtime startup doesn't require initial values because measurement is relative to an arbitrary initial value. All registers are reset to zero except ATLCR.INT_DIV which is resets to 24 (divide-by-25, because zero is not a legal divide ratio.)" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="REG_ATL1_BWSMUX" acronym="REG_ATL1_BWSMUX" offset="0x294" width="32" description="">
+		<bitfield id="SELECT" width="4" begin="3" end="0" resetval="0x0" description="BWS input select:   0000: atl_io_port_bws[0]   0001: atl_io_port_bws[1]   0010: atl_io_port_bws[2]   0011: atl_io_port_bws[3]   0100: atl_io_port_bws[4]   0101: atl_io_port_bws[5]   0110: atl_io_port_bws[6]   0111: atl_io_port_bws[7]   1000: atl_io_port_bws[8]   1001: atl_io_port_bws[9]   1010: atl_io_port_bws[10]   1011: atl_io_port_bws[11]   1100: atl_io_port_bws[12]   1101: atl_io_port_bws[13]   1110: atl_io_port_bws[14]   1111: atl_io_port_bws[15]" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="REG_ATL1_AWSMUX" acronym="REG_ATL1_AWSMUX" offset="0x298" width="32" description="">
+		<bitfield id="SELECT" width="4" begin="3" end="0" resetval="0x0" description="AWS input select:   0000: atl_io_port_aws[0]   0001: atl_io_port_aws[1]   0010: atl_io_port_aws[2]   0011: atl_io_port_aws[3]   0100: atl_io_port_aws[4]   0101: atl_io_port_aws[5]   0110: atl_io_port_aws[6]   0111: atl_io_port_aws[7]   1000: atl_io_port_aws[8]   1001: atl_io_port_aws[9]   1010: atl_io_port_aws[10]   1011: atl_io_port_aws[11]   1100: atl_io_port_aws[12]   1101: atl_io_port_aws[13]   1110: atl_io_port_aws[14]   1111: atl_io_port_aws[15]" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="REG_ATL1_PCLKMUX" acronym="REG_ATL1_PCLKMUX" offset="0x29C" width="32" description="">
+		<bitfield id="SELECT" width="1" begin="0" end="0" resetval="0x0" description="Non-functional" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="REG_ATL2_PPMR" acronym="REG_ATL2_PPMR" offset="0x300" width="32" description="">
+		<bitfield id="PPM_SD" width="1" begin="15" end="15" resetval="0x0" description="1 = Slow down 0 = Speed up" range="15" rwaccess="R/W"/> 
+		<bitfield id="PPM_SET" width="9" begin="8" end="0" resetval="0x0" description="This is the 9-bit parts-per-million value in the adjusting circuit. PPM adjustment = PPMSET/2^20" range="8 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="REG_ATL2_BBSR" acronym="REG_ATL2_BBSR" offset="0x304" width="32" description="">
+		<bitfield id="SMP_CNT" width="16" begin="15" end="0" resetval="0x0" description="This is the 16-bit sample count from the measuring circuit" range="15 - 0" rwaccess="R"/>
+	</register>
+	<register id="REG_ATL2_ATLCR" acronym="REG_ATL2_ATLCR" offset="0x308" width="32" description="">
+		<bitfield id="CLK_DIV_SEL" width="1" begin="5" end="5" resetval="0x0" description="0: MODCLK = AWS divided by 2^16  1: MODCLK = AWS divided by 2^12" range="5" rwaccess="R/W"/> 
+		<bitfield id="INT_DIV" width="5" begin="4" end="0" resetval="0x24" description="Sets ratio of ATLPCLK to ATCLK" range="4 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="REG_ATL2_SWEN" acronym="REG_ATL2_SWEN" offset="0x310" width="32" description="">
+		<bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="When disabled the ATL registers are forced to known states for simulation purposes. Runtime startup doesn't require initial values because measurement is relative to an arbitrary initial value. All registers are reset to zero except ATLCR.INT_DIV which is resets to 24 (divide-by-25, because zero is not a legal divide ratio.)" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="REG_ATL2_BWSMUX" acronym="REG_ATL2_BWSMUX" offset="0x314" width="32" description="">
+		<bitfield id="SELECT" width="4" begin="3" end="0" resetval="0x0" description="BWS input select:   0000: atl_io_port_bws[0]   0001: atl_io_port_bws[1]   0010: atl_io_port_bws[2]   0011: atl_io_port_bws[3]   0100: atl_io_port_bws[4]   0101: atl_io_port_bws[5]   0110: atl_io_port_bws[6]   0111: atl_io_port_bws[7]   1000: atl_io_port_bws[8]   1001: atl_io_port_bws[9]   1010: atl_io_port_bws[10]   1011: atl_io_port_bws[11]   1100: atl_io_port_bws[12]   1101: atl_io_port_bws[13]   1110: atl_io_port_bws[14]   1111: atl_io_port_bws[15]" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="REG_ATL2_AWSMUX" acronym="REG_ATL2_AWSMUX" offset="0x318" width="32" description="">
+		<bitfield id="SELECT" width="4" begin="3" end="0" resetval="0x0" description="AWS input select:   0000: atl_io_port_aws[0]   0001: atl_io_port_aws[1]   0010: atl_io_port_aws[2]   0011: atl_io_port_aws[3]   0100: atl_io_port_aws[4]   0101: atl_io_port_aws[5]   0110: atl_io_port_aws[6]   0111: atl_io_port_aws[7]   1000: atl_io_port_aws[8]   1001: atl_io_port_aws[9]   1010: atl_io_port_aws[10]   1011: atl_io_port_aws[11]   1100: atl_io_port_aws[12]   1101: atl_io_port_aws[13]   1110: atl_io_port_aws[14]   1111: atl_io_port_aws[15]" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="REG_ATL2_PCLKMUX" acronym="REG_ATL2_PCLKMUX" offset="0x31C" width="32" description="">
+		<bitfield id="SELECT" width="1" begin="0" end="0" resetval="0x0" description="Non-functional" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="REG_ATL3_PPMR" acronym="REG_ATL3_PPMR" offset="0x380" width="32" description="">
+		<bitfield id="PPM_SD" width="1" begin="15" end="15" resetval="0x0" description="1 = Slow down 0 = Speed up" range="15" rwaccess="R/W"/> 
+		<bitfield id="PPM_SET" width="9" begin="8" end="0" resetval="0x0" description="This is the 9-bit parts-per-million value in the adjusting circuit. PPM adjustment = PPMSET/2^20" range="8 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="REG_ATL3_BBSR" acronym="REG_ATL3_BBSR" offset="0x384" width="32" description="">
+		<bitfield id="SMP_CNT" width="16" begin="15" end="0" resetval="0x0" description="This is the 16-bit sample count from the measuring circuit" range="15 - 0" rwaccess="R"/>
+	</register>
+	<register id="REG_ATL3_ATLCR" acronym="REG_ATL3_ATLCR" offset="0x388" width="32" description="">
+		<bitfield id="CLK_DIV_SEL" width="1" begin="5" end="5" resetval="0x0" description="0: MODCLK = AWS divided by 2^16  1: MODCLK = AWS divided by 2^12" range="5" rwaccess="R/W"/> 
+		<bitfield id="INT_DIV" width="5" begin="4" end="0" resetval="0x24" description="Sets ratio of ATLPCLK to ATCLK" range="4 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="REG_ATL3_SWEN" acronym="REG_ATL3_SWEN" offset="0x390" width="32" description="">
+		<bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="When disabled the ATL registers are forced to known states for simulation purposes. Runtime startup doesn't require initial values because measurement is relative to an arbitrary initial value. All registers are reset to zero except ATLCR.INT_DIV which is resets to 24 (divide-by-25, because zero is not a legal divide ratio.)" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="REG_ATL3_BWSMUX" acronym="REG_ATL3_BWSMUX" offset="0x394" width="32" description="">
+		<bitfield id="SELECT" width="4" begin="3" end="0" resetval="0x0" description="BWS input select:   0000: atl_io_port_bws[0]   0001: atl_io_port_bws[1]   0010: atl_io_port_bws[2]   0011: atl_io_port_bws[3]   0100: atl_io_port_bws[4]   0101: atl_io_port_bws[5]   0110: atl_io_port_bws[6]   0111: atl_io_port_bws[7]   1000: atl_io_port_bws[8]   1001: atl_io_port_bws[9]   1010: atl_io_port_bws[10]   1011: atl_io_port_bws[11]   1100: atl_io_port_bws[12]   1101: atl_io_port_bws[13]   1110: atl_io_port_bws[14]   1111: atl_io_port_bws[15]" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="REG_ATL3_AWSMUX" acronym="REG_ATL3_AWSMUX" offset="0x398" width="32" description="">
+		<bitfield id="SELECT" width="4" begin="3" end="0" resetval="0x0" description="AWS input select:   0000: atl_io_port_aws[0]   0001: atl_io_port_aws[1]   0010: atl_io_port_aws[2]   0011: atl_io_port_aws[3]   0100: atl_io_port_aws[4]   0101: atl_io_port_aws[5]   0110: atl_io_port_aws[6]   0111: atl_io_port_aws[7]   1000: atl_io_port_aws[8]   1001: atl_io_port_aws[9]   1010: atl_io_port_aws[10]   1011: atl_io_port_aws[11]   1100: atl_io_port_aws[12]   1101: atl_io_port_aws[13]   1110: atl_io_port_aws[14]   1111: atl_io_port_aws[15]" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="REG_ATL3_PCLKMUX" acronym="REG_ATL3_PCLKMUX" offset="0x39C" width="32" description="">
+		<bitfield id="SELECT" width="1" begin="0" end="0" resetval="0x0" description="Non-functional" range="0" rwaccess="R/W"/>
+	</register>
+</module>

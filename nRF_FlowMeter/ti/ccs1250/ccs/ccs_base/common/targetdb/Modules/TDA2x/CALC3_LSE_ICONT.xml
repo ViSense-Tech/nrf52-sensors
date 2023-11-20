@@ -1,0 +1,44 @@
+<module name="CALC3_LSE_ICONT" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="LSE_CTRL" acronym="LSE_CTRL" offset="0x0" width="32" description="Controller">
+    <bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0x00000" description="" range="" rwaccess="R"/>
+    <bitfield id="INT_EOS_THRU" width="1" begin="12" end="12" resetval="0" description="int_eos through bit 0 : LSE does the process for slice boundary after receiving int_eos. 1: int_eos is passed through to SYNCBOX_CALC3 without the process for slice boundary" range="" rwaccess="RW"/>
+    <bitfield id="OCP_ERR" width="3" begin="11" end="9" resetval="0x0" description="OCP error status bit. Writing 0 is ignored. These bits remain 1 until RESET or until the host sets to 1.[11]: OCP DMA IP_CORE side . [10]: OCP DMA SL2 side . [9]: OCP CFG IP_CORE side ." range="" rwaccess="RW WSpecial">
+      <bitenum value="0" id="When_Sresp_is_not_ERR" token="OCP_ERR_0" description="When Sresp is not ERR"/>
+      <bitenum value="1" id="When_Sresp_is_ERR." token="OCP_ERR_1" description="When Sresp is ERR."/>
+    </bitfield>
+    <bitfield id="ADPTV_VALUE" width="1" begin="8" end="8" resetval="0" description="Status Adaptv_add() value This signal is cleared, if Token_clr=1." range="" rwaccess="R"/>
+    <bitfield id="TOKEN_CLR" width="1" begin="7" end="7" resetval="0" description="LSE internal signals will be initialized to understand prologue(1st MB) as below: . -token status signal -token start/end signal -DMA pointer Writing 0 is ignored. Writing 1 clears some internal signal. This is a self-clearing bit. The host will always read 0. If this is not used for initialization at prolog, some internal signal is kept. Also, synchronization does not function well" range="" rwaccess="W WSpecial"/>
+    <bitfield id="SSM" width="1" begin="6" end="6" resetval="0" description="Single Step Mode" range="" rwaccess="RW">
+      <bitenum value="0" id="Normal_Mode" token="SSM_0" description="Normal Mode"/>
+      <bitenum value="1" id="Enable_Single_Step_Mdde" token="SSM_1" description="Enable Single Step Mdde"/>
+    </bitfield>
+    <bitfield id="BFSW_CHG_DIS" width="1" begin="5" end="5" resetval="0" description="Disabled internal BFSW change" range="" rwaccess="RW">
+      <bitenum value="0" id="LSE_BFSW_LD_0" token="BFSW_CHG_DIS_0" description="Enable internal bfsw change (default) Then, LSE controls BFSW after LD task finished."/>
+      <bitenum value="1" id="BFSW_BFSW_LD_GO,_COMP_GO_ST_GO.)_1" token="BFSW_CHG_DIS_1" description="Disable BFSW change (If host want to control BFSW with each task step by step with LD_GO, COMP_GO and ST_GO.)"/>
+    </bitfield>
+    <bitfield id="CSB" width="1" begin="4" end="4" resetval="0" description="Command Status Bit &#8211; These bits remain 1 until RESET or Token_clr or until the host sets to 1." range="" rwaccess="RW WSpecial">
+      <bitenum value="0" id="LSE_command_is_defined." token="CSB_0" description="LSE command is defined."/>
+      <bitenum value="1" id="LSE_1" token="CSB_1" description="LSE command is undefined Writing 0 is ignored."/>
+    </bitfield>
+    <bitfield id="LD_GO" width="1" begin="3" end="3" resetval="0" description="Execute LOAD task on Byps mode Target ParamAddr_ld_byps must be set before this bit is set. This bit is cleared after LD Task finishes." range="" rwaccess="RW WSpecial">
+      <bitenum value="0" id="Idle_Writing_0_is_ignored." token="LD_GO_0" description="Idle Writing 0 is ignored."/>
+      <bitenum value="1" id="LD_LSE_LOAD_1" token="LD_GO_1" description="Execute LD task. LSE access to ParamAddr_ld_byps and execute the command for LOAD task."/>
+    </bitfield>
+    <bitfield id="COMP_GO" width="1" begin="2" end="2" resetval="0" description="Execute Comp task on Byps mode &#8211; In the single step mode, LSE access to ParamAddr_ld_byps and execute the command for Comp task. In the normal mode, LSE executes COMP commands followed by LD commands. This bit is cleared after Comp Task finishes." range="" rwaccess="RW WSpecial">
+      <bitenum value="0" id="Idle_Writing_0_is_ignored." token="COMP_GO_0" description="Idle Writing 0 is ignored."/>
+      <bitenum value="1" id="Execute_Comp_task" token="COMP_GO_1" description="Execute Comp task"/>
+    </bitfield>
+    <bitfield id="ST_GO" width="1" begin="1" end="1" resetval="0" description="Execute Store task on Byps mode Target ParamAddr_st_byps must be set before this bit is set. This bit is cleared after ST Task finishes." range="" rwaccess="RW WSpecial">
+      <bitenum value="0" id="Idle_Writing_0_is_ignored." token="ST_GO_0" description="Idle Writing 0 is ignored."/>
+      <bitenum value="1" id="LSE_1" token="ST_GO_1" description="Execute Store task. LSE access to ParamAddr_st_byps and execute the command for Store task."/>
+    </bitfield>
+    <bitfield id="SB_BYPS" width="1" begin="0" end="0" resetval="1" description="SyncBox Byps mode" range="" rwaccess="RW">
+      <bitenum value="0" id="LSE_SYNCBOX_CALC3_0" token="SB_BYPS_0" description="LSE function normal SYNCBOX_CALC3 mode and waits NewTaskSignal. This value should not change during execution."/>
+      <bitenum value="1" id="LSE_SYNCBOX_CALC3_GO_BIT._1" token="SB_BYPS_1" description="LSE functions SYNCBOX_CALC3 bypass mode and executes the task of GO_BIT."/>
+    </bitfield>
+  </register>
+  <register id="LSE_PARAM" acronym="LSE_PARAM" offset="0x4" width="32" description="Parameter address for SB Bypass mode">
+    <bitfield id="PARAMADDR_LD_BYPS" width="16" begin="31" end="16" resetval="0x0000" description="Only used in the bypass mode. Address of the first command of LD and COMP sequence (128-bit word unit). This is 128-bit word address, not byte address. The conversion from byte address to 128-bit word address should be done by CPU. IfLSE_CTRL SB_BYPS is set to 1, this value is used. In bypass mode, this address is given via this field, instead via SYNCBOX_CALC3. Also, this field is used on single-step mode." range="" rwaccess="RW"/>
+    <bitfield id="PARAMADDR_ST_BYPS" width="16" begin="15" end="0" resetval="0x0000" description="Only used in the bypass mode. Address of the first command of ST sequence (128-bit word unit). This is 128-bit word address, not byte address. The conversion from byte address to 128-bit word address should be done by CPU. IfLSE_CTRL SB_BYPS is set to 1, this value is used. In bypass mode, this address is given via this field, instead via SYNCBOX_CALC3. Also, this field is used on single-step mode." range="" rwaccess="RW"/>
+  </register>
+</module>

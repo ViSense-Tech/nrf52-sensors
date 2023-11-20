@@ -1,0 +1,38 @@
+<module name="CSI_TX_IF_V2_1_COMMON_0_TX_SHIM_VBUSP_MMR_CSI2TXIF_V2" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="TX_SHIM__VBUSP_MMR__CSI2TXIF_V2_REGS_csitx_id" acronym="TX_SHIM__VBUSP_MMR__CSI2TXIF_V2_REGS_csitx_id" offset="0x0" width="32" description="">
+		<bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x1" description="scheme" range="31 - 30" rwaccess="R"/> 
+		<bitfield id="BU" width="2" begin="29" end="28" resetval="0x2" description="bu" range="29 - 28" rwaccess="R"/> 
+		<bitfield id="FUNC" width="12" begin="27" end="16" resetval="0x1144" description="function" range="27 - 16" rwaccess="R"/> 
+		<bitfield id="RTLVER" width="5" begin="15" end="11" resetval="0x3" description="rtl version" range="15 - 11" rwaccess="R"/> 
+		<bitfield id="MAJREV" width="3" begin="10" end="8" resetval="0x2" description="major revision" range="10 - 8" rwaccess="R"/> 
+		<bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="custom revision" range="7 - 6" rwaccess="R"/> 
+		<bitfield id="MINREV" width="6" begin="5" end="0" resetval="0x0" description="min revision" range="5 - 0" rwaccess="R"/>
+	</register>
+	<register id="TX_SHIM__VBUSP_MMR__CSI2TXIF_V2_REGS_color_cntl" acronym="TX_SHIM__VBUSP_MMR__CSI2TXIF_V2_REGS_color_cntl" offset="0x4" width="32" description="">
+		<bitfield id="VCHNL" width="4" begin="19" end="16" resetval="0x0" description="color bar virtual channel" range="19 - 16" rwaccess="R/W"/> 
+		<bitfield id="DTYPE" width="3" begin="10" end="8" resetval="0x0" description="color bar data type, data sel" range="10 - 8" rwaccess="R/W"/> 
+		<bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="1: enable " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="TX_SHIM__VBUSP_MMR__CSI2TXIF_V2_REGS_color_param" acronym="TX_SHIM__VBUSP_MMR__CSI2TXIF_V2_REGS_color_param" offset="0x8" width="32" description="">
+		<bitfield id="IH_CFG" width="13" begin="28" end="16" resetval="0x0" description=" input height in units of pixels minus 1. " range="28 - 16" rwaccess="R/W"/> 
+		<bitfield id="IW_CFG" width="13" begin="12" end="0" resetval="0x0" description=" input width in units of pixels minus 1." range="12 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="TX_SHIM__VBUSP_MMR__CSI2TXIF_V2_REGS_color_start_delay" acronym="TX_SHIM__VBUSP_MMR__CSI2TXIF_V2_REGS_color_start_delay" offset="0xC" width="32" description="">
+		<bitfield id="LINE_DELAY" width="32" begin="31" end="0" resetval="0x0" description="delay in terms of main clock cycles before sending first line after enabling." range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="TX_SHIM__VBUSP_MMR__CSI2TXIF_V2_REGS_color_line_delay" acronym="TX_SHIM__VBUSP_MMR__CSI2TXIF_V2_REGS_color_line_delay" offset="0x20" width="32" description="">
+		<bitfield id="LINE_DELAY" width="32" begin="31" end="0" resetval="0x0" description="delay in terms of main clock cycles from line start to next line start" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="TX_SHIM__VBUSP_MMR__CSI2TXIF_V2_REGS_color_frame_delay" acronym="TX_SHIM__VBUSP_MMR__CSI2TXIF_V2_REGS_color_frame_delay" offset="0x24" width="32" description="">
+		<bitfield id="FRAME_DELAY" width="32" begin="31" end="0" resetval="0x0" description="delay in terms of main clock cycles from last line start to start of next frame" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="TX_SHIM__VBUSP_MMR__CSI2TXIF_V2_REGS_control1" acronym="TX_SHIM__VBUSP_MMR__CSI2TXIF_V2_REGS_control1" offset="0x2C" width="32" description="">
+		<bitfield id="STRM_SEL" width="1" begin="16" end="16" resetval="0x0" description="select to switch dma versus retransmit interface mux, 0=dma, 1=retransmit" range="16" rwaccess="R/W"/> 
+		<bitfield id="STREAM1_IDLE" width="1" begin="9" end="9" resetval="0x1" description="indicates if stream interface is idle(1) or not(0)" range="9" rwaccess="R"/> 
+		<bitfield id="STREAM0_IDLE" width="1" begin="8" end="8" resetval="0x1" description="indicates if stream interface is idle(1) or not(0)" range="8" rwaccess="R"/> 
+		<bitfield id="PIXEL_RESET" width="1" begin="0" end="0" resetval="0x0" description="reset for the pixeal interface. 0=reset, 1 not in reset. this should be asserted till after you program the csi controller configuration registers" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="TX_SHIM__VBUSP_MMR__CSI2TXIF_V2_REGS_f2f_delay" acronym="TX_SHIM__VBUSP_MMR__CSI2TXIF_V2_REGS_f2f_delay" offset="0x40" width="32" description="">
+		<bitfield id="DELAY" width="32" begin="31" end="0" resetval="0x0" description="counter value delay of last line start of frame to first line of next frame" range="31 - 0" rwaccess="R/W"/>
+	</register>
+</module>

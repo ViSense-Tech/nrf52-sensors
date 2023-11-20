@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module id="TETB" HW_revision="" XML_version="1" description="TI External Trace Buffer">
+     <register id="RDP" acronym="RDP" offset="0x00000004" width="32" description="RAM Depth Register">
+<bitfield id="RDP" width="32" begin="31" end="0" resetval="512" description="RAM Depth " range="" rwaccess="R"></bitfield>
+</register>
+     <register id="STS" acronym="STS" offset="0x0000000c" width="32" description="Status Register">
+<bitfield id="Reserved" width="29" begin="31" end="3" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="ACQCOMP" width="1" begin="2" end="2" resetval="0" description="Acquisition complete " range="" rwaccess="R"></bitfield>
+<bitfield id="TRIGGERED" width="1" begin="1" end="1" resetval="0" description="Trigger bit set when a trigger has been observed" range="" rwaccess="R"></bitfield>
+<bitfield id="FULL" width="1" begin="0" end="0" resetval="0" description="RAM Full (RAM write pointer has wrapped around)" range="" rwaccess="R"></bitfield>
+</register>
+     <register id="RRD" acronym="RRD" offset="0x00000010" width="32" description="RAM Read Data">
+<bitfield id="RRD" width="32" begin="31" end="0" resetval="0" description="RAM read Data" range="" rwaccess="R"></bitfield>
+</register>
+     <register id="RRP" acronym="RRP" offset="0x00000014" width="32" description="RAM Read Pointer register">
+<bitfield id="Reserved" width="23" begin="31" end="9" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="RRP" width="9" begin="8" end="0" resetval="0" description="RAM pointer register" range="" rwaccess="RW"></bitfield>
+</register>
+     <register id="RWP" acronym="RWP" offset="0x00000018" width="32" description="RAM Write Pointer register">
+<bitfield id="Reserved" width="23" begin="31" end="9" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="RWP" width="9" begin="8" end="0" resetval="0" description="RAM write pointer register" range="" rwaccess="RW"></bitfield>
+</register>
+     <register id="TRG" acronym="TRG" offset="0x0000001C" width="32" description="Trigger Counter Register">
+<bitfield id="Reserved" width="23" begin="31" end="9" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="TRG" width="9" begin="8" end="0" resetval="0" description="Trigger counter register" range="" rwaccess="RW"></bitfield>
+</register>
+     <register id="CTL" acronym="CTL" offset="0x00000020" width="32" description="Control Register">
+<bitfield id="Reserved" width="31" begin="31" end="1" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="TRACECAPTEN" width="1" begin="0" end="0" resetval="0" description="TETB Trace Capture Enable/Disable" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="" />
+<bitenum id="ENABLE" value="1" token="ENABLE" description="" />
+</bitfield>
+</register>
+     <register id="RWD" acronym="RWD" offset="0x00000024" width="32" description="RAM write Data Register">
+<bitfield id="RWD" width="32" begin="31" end="0" resetval="0" description="Data written to TETB trace RAM" range="" rwaccess="RW"></bitfield>
+</register>
+     <register id="RBD" acronym="RBD" offset="0x00000A00" width="32" description="RAM write Data Register">
+<bitfield id="RBD" width="32" begin="31" end="0" resetval="0" description="Data read from the TETB Trace RAM " range="" rwaccess="R"></bitfield>
+</register>
+     <register id="ISST" acronym="ISST" offset="0x00000E00" width="32" description="Interrupt Set Shadow Register">
+<bitfield id="Reserved" width="27" begin="31" end="5" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="ACQ_COMP_SET" width="1" begin="4" end="4" resetval="0" description="Acquisition complete " range="" rwaccess="W">
+<bitenum id="SET" value="1" token="SET" description="Set the AcqComp bit in the IRST" />
+</bitfield>
+<bitfield id="UNDERFLOW_SET" width="1" begin="3" end="3" resetval="0" description="It is set when RWP crosses the RRP" range="" rwaccess="W">
+<bitenum id="SET" value="1" token="SET" description="Set the underflow bit in the IRST" />
+</bitfield>
+<bitfield id="OVERFLOW_SET" width="1" begin="2" end="2" resetval="0" description="It is set when RWP crosses the RRP" range="" rwaccess="W">
+<bitenum id="SET" value="1" token="SET" description="Set the overflow bit in the IRST" />
+</bitfield>
+<bitfield id="FULL_SET" width="1" begin="1" end="1" resetval="0" description="It is set when RWP is rolls over from the maximum value back to 0. It is reset when the RRP rolls over from the maximum value back to 0. " range="" rwaccess="W">
+<bitenum id="SET" value="1" token="SET" description="Set the full bit in the IRST" />
+</bitfield>
+<bitfield id="HALFFULL_SET" width="1" begin="0" end="0" resetval="0" description="Indicates that the RAM is half full. It gets reset when the RRP crosses the half way point" range="" rwaccess="W">
+<bitenum id="SET" value="1" token="SET" description="Set the half full bit in the IRST" />
+</bitfield>
+</register>
+     <register id="IRST" acronym="IRST" offset="0x00000E00" width="32" description="Interrupt Raw Status Register">
+<bitfield id="Reserved" width="27" begin="31" end="5" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="ACQ_COMP" width="1" begin="4" end="4" resetval="0" description="Acquisition complete " range="" rwaccess="R"></bitfield>
+<bitfield id="UNDERFLOW" width="1" begin="3" end="3" resetval="0" description="It is set when RWP crosses the RRP" range="" rwaccess="R"></bitfield>
+<bitfield id="OVERFLOW" width="1" begin="2" end="2" resetval="0" description="It is set when RWP crosses the RRP" range="" rwaccess="R"></bitfield>
+<bitfield id="FULL" width="1" begin="1" end="1" resetval="0" description="It is set when RWP is rolls over from the maximum value back to 0. It is reset when the RRP rolls over from the maximum value back to 0. " range="" rwaccess="R"></bitfield>
+<bitfield id="HALF FULL" width="1" begin="0" end="0" resetval="0" description="Indicates that the RAM is half full. It gets reset when the RRP crosses the half way point" range="" rwaccess="R"></bitfield>
+</register>
+     <register id="ICST" acronym="ICST" offset="0x00000E04" width="32" description="Interrupt Set Shadow Register">
+<bitfield id="Reserved" width="27" begin="31" end="5" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="ACQ_COMP_CLEAR" width="1" begin="4" end="4" resetval="0" description="Acquisition complete " range="" rwaccess="W">
+<bitenum id="CLEAR" value="1" token="CLEAR" description="Clear the AcqComp bit in the IRST" />
+</bitfield>
+<bitfield id="UNDERFLOW_CLEAR" width="1" begin="3" end="3" resetval="0" description="It is set when RWP crosses the RRP" range="" rwaccess="W">
+<bitenum id="CLEAR" value="1" token="CLEAR" description="Clear the underflow bit in the IRST" />
+</bitfield>
+<bitfield id="OVERFLOW_CLEAR" width="1" begin="2" end="2" resetval="0" description="It is set when RWP crosses the RRP" range="" rwaccess="W">
+<bitenum id="CLEAR" value="1" token="CLEAR" description="Clear the overflow bit in the IRST" />
+</bitfield>
+<bitfield id="FULL_CLEAR" width="1" begin="1" end="1" resetval="0" description="It is set when RWP is rolls over from the maximum value back to 0. It is reset when the RRP rolls over from the maximum value back to 0. " range="" rwaccess="W">
+<bitenum id="CLEAR" value="1" token="CLEAR" description="Clear the full bit in the IRST" />
+</bitfield>
+<bitfield id="HALFFULL_CLEAR" width="1" begin="0" end="0" resetval="0" description="Indicates that the RAM is half full. It gets reset when the RRP crosses the half way point" range="" rwaccess="W">
+<bitenum id="CLEAR" value="1" token="CLEAR" description="Clear the half full bit in the IRST" />
+</bitfield>
+</register>
+     <register id="IEST" acronym="IEST" offset="0x00000E08" width="32" description="IRST qualified by the Interrupt Enable Register ">
+<bitfield id="Reserved" width="27" begin="31" end="5" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="ACQ_COMP_ENABLED" width="1" begin="4" end="4" resetval="0" description="Qualified Acq_comp bit" range="" rwaccess="R"></bitfield>
+<bitfield id="UNDERFLOW_ENABLED" width="1" begin="3" end="3" resetval="0" description="Qualified Underflow bit" range="" rwaccess="R"></bitfield>
+<bitfield id="OVERFLOW_ENABLED" width="1" begin="2" end="2" resetval="0" description="Qualified Overflow bit" range="" rwaccess="R"></bitfield>
+<bitfield id="FULL_ENABLED" width="1" begin="1" end="1" resetval="0" description="Qualified Full bit" range="" rwaccess="R"></bitfield>
+<bitfield id="HALFFULL_ENABLED" width="1" begin="0" end="0" resetval="0" description="Qualified Half Full bit" range="" rwaccess="R"></bitfield>
+</register>
+     <register id="IESST" acronym="IESST" offset="0x00000E0C" width="32" description="Enable interrupts in the IET register">
+<bitfield id="Reserved" width="27" begin="31" end="5" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="ACQ_COMP_EN_SET" width="1" begin="4" end="4" resetval="0" description="Set the Acquisition Complete bit in the IET" range="" rwaccess="W">
+<bitenum id="SET" value="1" token="SET" description="Set the Acquisition Comp bit in the IET" />
+</bitfield>
+<bitfield id="UNDERFLOW_EN_SET" width="1" begin="3" end="3" resetval="0" description="Set the underflow bit in the IET" range="" rwaccess="W">
+<bitenum id="SET" value="1" token="SET" description="set the underflow bit in the IET" />
+</bitfield>
+<bitfield id="OVERFLOW_EN_SET" width="1" begin="2" end="2" resetval="0" description="Set the overflow bit in the IET" range="" rwaccess="W">
+<bitenum id="SET" value="1" token="SET" description="Set the overflow bit in the IET" />
+</bitfield>
+<bitfield id="FULL_EN_SET" width="1" begin="1" end="1" resetval="0" description="Set the full bit in the IET" range="" rwaccess="W">
+<bitenum id="SET" value="1" token="SET" description="Set the full bit in the IET" />
+</bitfield>
+<bitfield id="HALFFULL_EN_SET" width="1" begin="0" end="0" resetval="0" description="Set the half full bit in the IET" range="" rwaccess="W">
+<bitenum id="SET" value="1" token="SET" description="Set the half full bit in the IET" />
+</bitfield>
+</register>
+     <register id="IET" acronym="IET" offset="0x00000E0C" width="32" description="Interrupt Enable Register ">
+<bitfield id="Reserved" width="27" begin="31" end="5" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="ACQ_COMP_ENABLE" width="1" begin="4" end="4" resetval="0" description="Enable Acq_comp bit" range="" rwaccess="R"></bitfield>
+<bitfield id="UNDERFLOW_ENABLE" width="1" begin="3" end="3" resetval="0" description="Enable Underflow bit" range="" rwaccess="R"></bitfield>
+<bitfield id="OVERFLOW_ENABLE" width="1" begin="2" end="2" resetval="0" description="Enable Overflow bit" range="" rwaccess="R"></bitfield>
+<bitfield id="FULL_ENABLE" width="1" begin="1" end="1" resetval="0" description="Enable Full bit" range="" rwaccess="R"></bitfield>
+<bitfield id="HALFFULL_ENABLE" width="1" begin="0" end="0" resetval="0" description="Enable Half Full bit" range="" rwaccess="R"></bitfield>
+</register>
+     <register id="IECST" acronym="IECST" offset="0x00000E10" width="32" description="Enable interrupts in the IET register">
+<bitfield id="Reserved" width="27" begin="31" end="5" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="ACQ_COMP_EN_CLEAR" width="1" begin="4" end="4" resetval="0" description="Clear the Acquisition Complete bit in the IET" range="" rwaccess="W">
+<bitenum id="CLEAR" value="1" token="CLEAR" description="Clear the Acquisition bit in the IET" />
+</bitfield>
+<bitfield id="UNDERFLOW_EN_CLEAR" width="1" begin="3" end="3" resetval="0" description="Clear the underflow bit in the IET" range="" rwaccess="W">
+<bitenum id="CLEAR" value="1" token="CLEAR" description="Clear the underflow bit in the IET" />
+</bitfield>
+<bitfield id="OVERFLOW_EN_CLEAR" width="1" begin="2" end="2" resetval="0" description="Clear the overflow bit in the IET" range="" rwaccess="W">
+<bitenum id="CLEAR" value="1" token="CLEAR" description="Clear the overflow bit in the IET" />
+</bitfield>
+<bitfield id="FULL_EN_CLEAR" width="1" begin="1" end="1" resetval="0" description="Clear the full bit in the IET" range="" rwaccess="W">
+<bitenum id="CLEAR" value="1" token="CLEAR" description="Clear the full bit in the IET" />
+</bitfield>
+<bitfield id="HALFFULL_EN_CLEAR" width="1" begin="0" end="0" resetval="0" description="Clear the half full bit in the IET" range="" rwaccess="W">
+<bitenum id="CLEAR" value="1" token="CLEAR" description="Clear the half full bit in the IET" />
+</bitfield>
+</register>
+     <register id="TCTL" acronym="TCTL" offset="0x00000E20" width="32" description="TI Specific Control Register">
+<bitfield id="Reserved" width="29" begin="31" end="3" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="RST" width="1" begin="2" end="2" resetval="0" description="Reset TETB" range="" rwaccess="W">
+<bitenum id="RESET_NO" value="0" token="RESET_NO" description="Do not reset the TETB" />
+<bitenum id="RESET_YES" value="1" token="RESET_YES" description="Reset the TETB" />
+</bitfield>
+<bitfield id="STOP_BUF" width="1" begin="1" end="1" resetval="0" description="Buffer Mode" range="" rwaccess="RW">
+<bitenum id="CIRCULAR_MODE" value="0" token="CIRCULAR_MODE" description="Circular Buffer Mode" />
+<bitenum id="STOP_MODE" value="1" token="STOP_MODE" description="Stop Buffer Mode" />
+</bitfield>
+<bitfield id="TI_MODE" width="1" begin="0" end="0" resetval="0" description="The behavior of the RRD and RRP changes depending on this bit" range="" rwaccess="RW"></bitfield>
+</register>
+     <register id="DID" acronym="DID" offset="0x00000FC8" width="32" description="Device ID">
+<bitfield id="Reserved" width="26" begin="31" end="6" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="ATCLK_SYNC" width="1" begin="5" end="5" resetval="1" description="if TETB is syncronous to ATCLK" range=" " rwaccess="R"></bitfield>
+<bitfield id="INPUT_MUXING_LEVEL" width="5" begin="4" end="0" resetval="0" description="Only 0x00 is supported" range="" rwaccess="R"></bitfield>
+</register>
+     <register id="DTIR" acronym="DTIR" offset="0x00000FCC" width="32" description="Device Type Identification Register">
+<bitfield id="Reserved" width="24" begin="31" end="8" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="DTIR" width="8" begin="7" end="0" resetval="33" description="Indicates it is a trace sink" range="" rwaccess="R"></bitfield>
+</register>
+     <register id="PID0" acronym="PID0" offset="0x00000FE0" width="32" description="Peripheral Identification 0 Register">
+<bitfield id="Reserved" width="24" begin="31" end="8" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="PART_NUMBER_0" width="8" begin="7" end="0" resetval="144" description="Part Number 0 (Middle and Lower BCD value of Device Number)" range="" rwaccess="R"></bitfield>
+</register>
+     <register id="PID1" acronym="PID1" offset="0x00000FE4" width="32" description="Peripheral Identification 1 Register">
+<bitfield id="Reserved" width="24" begin="31" end="8" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="JEP106_ID_CODE_3_0" width="4" begin="7" end="4" resetval="7" description="JEP106 identity code [3:0]" range="" rwaccess="R"></bitfield>
+<bitfield id="PART_NUMBER_1" width="4" begin="3" end="0" resetval="1" description="Part Number 1 (Upper BCD value of Device Number)" range="" rwaccess="R"></bitfield>
+</register>
+     <register id="PID2" acronym="PID2" offset="0x00000FE8" width="32" description="Peripheral Identification 2 Register">
+<bitfield id="Reserved" width="24" begin="31" end="8" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="REVISION" width="4" begin="7" end="4" resetval="0" description="Revision Number of Peripheral" range="" rwaccess="R"></bitfield>
+<bitfield id="JEDEC" width="1" begin="3" end="3" resetval="1" description="Indicates that a JEDEC assigned value is used" range="" rwaccess="R"></bitfield>
+<bitfield id="JEP106_ID_CODE_6_4" width="3" begin="2" end="0" resetval="1" description="JEP106 identity code [6:4]" range="" rwaccess="R"></bitfield>
+</register>
+     <register id="PID3" acronym="PID3" offset="0x00000FEC" width="32" description="Peripheral Identification 3 Register">
+<bitfield id="Reserved" width="24" begin="31" end="8" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="REVISION" width="4" begin="7" end="4" resetval="0" description="RevAnd (at top level)" range="" rwaccess="R"></bitfield>
+<bitfield id="CUSTOMER_MODIFIED" width="4" begin="3" end="0" resetval="0" description="Customer Modified" range="" rwaccess="R"></bitfield>
+</register>
+     <register id="PID4" acronym="PID4" offset="0x00000FD0" width="32" description="Peripheral Identification 4 Register">
+<bitfield id="Reserved" width="24" begin="31" end="8" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="NUMBER_BLOCKS" width="4" begin="7" end="4" resetval="0" description="Number of additional 4KB memory blocks expressed in powers of 2" range="" rwaccess="R"></bitfield>
+<bitfield id="JEP106_CC" width="4" begin="3" end="0" resetval="0" description="JEP106 Continuation Code" range="" rwaccess="R"></bitfield>
+</register>
+     <register id="CID0" acronym="CID0" offset="0x00000FF0" width="32" description="Component ID0 Register">
+<bitfield id="Reserved" width="24" begin="31" end="8" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="CID" width="8" begin="7" end="0" resetval="13" description="This register shall return Preamble value 0x0D" range="" rwaccess="R"></bitfield>
+</register>
+     <register id="CID1" acronym="CID1" offset="0x00000FF4" width="32" description="Component ID1 Register">
+<bitfield id="Reserved" width="24" begin="31" end="8" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="CID" width="8" begin="7" end="0" resetval="144" description="This register shall return Preamble value 0x90" range="" rwaccess="R"></bitfield>
+</register>
+     <register id="CID2" acronym="CID2" offset="0x00000FF8" width="32" description="Component ID2 Register">
+<bitfield id="Reserved" width="24" begin="31" end="8" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="CID" width="8" begin="7" end="0" resetval="5" description="This register shall return Preamble value 0x05" range="" rwaccess="R"></bitfield>
+</register>
+     <register id="CID3" acronym="CID3" offset="0x00000FFC" width="32" description="Component ID3 Register">
+<bitfield id="Reserved" width="24" begin="31" end="8" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="CID" width="8" begin="7" end="0" resetval="177" description="This register shall return Preamble value 0xB1" range="" rwaccess="R"></bitfield>
+</register>
+</module>

@@ -1,0 +1,36 @@
+<module name="WKUP_VTM0_MMR_VBUSP_CFG2" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="WKUP_VTM_CLK_CTRL" acronym="WKUP_VTM_CLK_CTRL" offset="0x10008" width="32" description="VTM clock related control MMR. The default reset values will not be necessarily overwritten. The write capability in the MMR is for having the option to debug and have software driven adjustments if necessary. The e-fuse value is sampled from input port efuse_tsens_clk_src_div. The tsens_clks_src_div field is Device specific.">
+    <bitfield id="TSENS_CLK_SEL" width="1" begin="31" end="31" resetval="0x0" description="Temperature sensor clock source selector." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="26" begin="30" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="TSENS_CLK_DIV" width="5" begin="4" end="0" resetval="0x0" description="Temperature sensor clock source divider selector." range="" rwaccess="RW"/>
+  </register>
+  <register id="WKUP_VTM_MISC_CTRL" acronym="WKUP_VTM_MISC_CTRL" offset="0x1000C" width="32" description="VTM miscellaneous control bits.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ANY_MAXT_OUTRG_ALERT_EN" width="1" begin="0" end="0" resetval="0x0" description="This bit when enabled will cause the VTM's output therm_maxtemp_outrange_alert to be driven high, if any of the sources for the maxt_outrg_alert, is set high." range="" rwaccess="RW"/>
+  </register>
+  <register id="WKUP_VTM_MISC_CTRL2" acronym="WKUP_VTM_MISC_CTRL2" offset="0x10010" width="32" description="VTM miscellaneous control bits.">
+    <bitfield id="RESERVED" width="6" begin="31" end="26" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="MAXT_OUTRG_ALERT_THR0" width="10" begin="25" end="16" resetval="0x0" description="This defines the global max temperature out of range safe sample value." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="MAXT_OUTRG_ALERT_THR" width="10" begin="9" end="0" resetval="0x0" description="This defines the global max temperature out of range sample value." range="" rwaccess="RW"/>
+  </register>
+  <register id="WKUP_VTM_SAMPLE_CTRL" acronym="WKUP_VTM_SAMPLE_CTRL" offset="0x10020" width="32" description="VTM sample related control MMR. The default reset values will not be necessarily overwritten. The write capability in the MMR is for having the option to debug and have software driven adjustments if necessary. The e-fuse value is sampled from input port efuse_sample_clk_cnt. The sample_clk_cnt field is Device specific.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SAMPLE_PER_CNT" width="16" begin="15" end="0" resetval="0x0" description="Temperature sensor sample period count selector." range="" rwaccess="RW"/>
+  </register>
+  <register id="WKUP_VTM_TMPSENS_CTRL_j" acronym="WKUP_VTM_TMPSENS_CTRL_j" offset="0x10300" width="32" description="Temperature Sensor Band-gap control register for sensor a. Offset = 300h + (j * 20h); where j = 0h to 7h">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="MAXT_OUTRG_EN" width="1" begin="11" end="11" resetval="0x0" description="Enable out-of-range event." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="10" end="7" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CLRZ" width="1" begin="6" end="6" resetval="0x1" description="Temp-Monitor control:" range="" rwaccess="RW"/>
+    <bitfield id="SOC" width="1" begin="5" end="5" resetval="0x0" description="Temp-Monitor control: ADC Start of Conversion." range="" rwaccess="RW"/>
+    <bitfield id="CONT" width="1" begin="4" end="4" resetval="0x0" description="Temp-Monitor control: ADC Continuous mode." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="3" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="WKUP_VTM_TMPSENS_TRIM_j" acronym="WKUP_VTM_TMPSENS_TRIM_j" offset="0x10304" width="32" description="Temperature Sensor Band-gap trim values register for sensor a. The default reset values will not be necessarily overwritten. The write capability in the MMR is for having the option to debug and have software driven adjustments if necessary. Offset = 304h + (j * 20h); where j = 0h to 7h">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="TRIMO" width="6" begin="13" end="8" resetval="0xX" description="Trim offset bits in the temp sensor." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="TRIMG" width="5" begin="4" end="0" resetval="0xX" description="Trim gain bits in the temp sensor." range="" rwaccess="RW"/>
+  </register>
+</module>

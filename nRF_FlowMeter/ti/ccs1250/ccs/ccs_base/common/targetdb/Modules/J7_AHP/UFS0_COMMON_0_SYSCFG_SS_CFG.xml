@@ -1,0 +1,17 @@
+<module name="UFS0_COMMON_0_SYSCFG_SS_CFG" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="SYSCFG__SS_CFG__REGS_PID" acronym="SYSCFG__SS_CFG__REGS_PID" offset="0x0" width="32" description="">
+		<bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x1" description="PID register scheme" range="31 - 30" rwaccess="R"/> 
+		<bitfield id="BU" width="2" begin="29" end="28" resetval="0x2" description="Business Unit: 10 = Processors" range="29 - 28" rwaccess="R"/> 
+		<bitfield id="MODULE_ID" width="12" begin="27" end="16" resetval="0x2133" description="Module ID" range="27 - 16" rwaccess="R"/> 
+		<bitfield id="RTL" width="5" begin="15" end="11" resetval="0x12" description="RTL revision. Will vary depending on release." range="15 - 11" rwaccess="R"/> 
+		<bitfield id="MAJOR" width="3" begin="10" end="8" resetval="0x1" description="Major revision" range="10 - 8" rwaccess="R"/> 
+		<bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom" range="7 - 6" rwaccess="R"/> 
+		<bitfield id="MINOR" width="6" begin="5" end="0" resetval="0x0" description="Minor revision" range="5 - 0" rwaccess="R"/>
+	</register>
+	<register id="SYSCFG__SS_CFG__REGS_CTRL" acronym="SYSCFG__SS_CFG__REGS_CTRL" offset="0x4" width="32" description="">
+		<bitfield id="MPHY_REFCLK_FREQ_SEL" width="2" begin="5" end="4" resetval="0x0" description="Reference clock frequency selection. 00: 19.2Mhz. 01: 26Mhz. 10: Reserved. 11: Reserved" range="5 - 4" rwaccess="R/W"/> 
+		<bitfield id="MPHY_VCONTROL_DEEMP_SEL" width="2" begin="3" end="2" resetval="0x0" description="MPHY De-Emphasis Select 0 : No Deemphasis 1 : Deemphasis" range="3 - 2" rwaccess="R/W"/> 
+		<bitfield id="MPHY_VCONTROL_LA_SA_SEL" width="1" begin="1" end="1" resetval="0x0" description="MPHY Amplitude Select 0 : Small Amplitude 1 : Large Amplitude" range="1" rwaccess="R/W"/> 
+		<bitfield id="RST_N_PCS" width="1" begin="0" end="0" resetval="0x0" description="Active low reset to UFS Slave device" range="0" rwaccess="R/W"/>
+	</register>
+</module>

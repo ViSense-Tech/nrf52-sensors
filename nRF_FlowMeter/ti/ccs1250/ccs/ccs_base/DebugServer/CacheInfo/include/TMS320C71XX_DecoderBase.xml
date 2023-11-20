@@ -1,0 +1,120 @@
+<!-- Decoders perform the following sequence of operations:
+		1) XOR XorWithRegValue with register valuex
+		2) Mask with BitfieldMask property 
+		3) shift right by BitfieldShift bits 
+		4a) if a <StringTable> field is present with <NumStrings> > 0, use result of step 3 as index into lookup table of strings and 
+			set string result = value from table.  No further processing is done in this case.
+		4b) if a <DecoderTable> field is present with <NumDecoders> > 0, use result of step 3 as index into lookup table of decoders and
+			call the specified decoder and sets result = value and string result = string from the decoder 
+		4c) if a <LookupTable> field is present with <NumIndexValues> > 0, use result of step 3 as index into lookup table and set result = value from table 
+		5) multiply the result from step 4b or 4c by floating point Multiplier value (e.g. set to 0.25 to divide by 4)  
+		6) add AddToProduct value 
+		7) if IsTrueIfResultIsZero, decode_bool returns true if 0, false if non-zero
+		
+		If any of these properties are not defined, they are set to the
+		following default values:
+			XorWithRegValue = 0
+			BitfieldMask = 0xffffffff
+			BitfieldShift = 0
+			Multiplier = 1.0
+			AddToProduct = 0
+			IsTrueIfResultIsZero = false
+		-->
+<Decoder>
+	<!-- returns true if the cache has been configured with a non-zero size -->
+	<DecoderName>IsCacheEnabled</DecoderName>
+	<BitfieldMask>0x07</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+	<LookupTable>
+		<!-- cache size / bytes per cache line -->
+		<NumIndexValues>8</NumIndexValues>
+		<Array index="0">0</Array>
+		<Array index="1">1</Array>
+		<Array index="2">1</Array>
+		<Array index="3">1</Array>
+		<Array index="4">1</Array>
+		<Array index="5">1</Array>
+		<Array index="6">1</Array>
+		<Array index="7">1</Array>
+	</LookupTable>
+</Decoder>
+<Decoder>
+	<DecoderName>GetL1DCacheSize</DecoderName>
+	<BitfieldMask>0x07</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+	<LookupTable>
+		<NumIndexValues>8</NumIndexValues>
+		<!-- cache size in bytes -->
+		<Array index="0">0</Array>
+		<Array index="1">0x2000</Array>
+		<Array index="2">0x2000</Array>
+		<Array index="3">0x4000</Array>
+		<Array index="4">0x8000</Array>
+		<Array index="5">0x8000</Array>
+		<Array index="6">0x8000</Array>
+		<Array index="7">0x8000</Array>
+	</LookupTable>
+</Decoder>
+<Decoder>
+	<DecoderName>GetL1DNumCacheLines</DecoderName>
+	<BitfieldMask>0x07</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+	<LookupTable>
+		<!-- cache size / bytes per cache line + victim cache lines (16 if cache size > 0) 
+		NOTE: Some C71X devices have 8 victim cache lines! Will need custom .xml files to support. -->
+		<NumIndexValues>8</NumIndexValues>
+		<Array index="0">0</Array>
+		<Array index="1">80</Array>
+		<Array index="2">80</Array>
+		<Array index="3">144</Array>
+		<Array index="4">272</Array>
+		<Array index="5">272</Array>
+		<Array index="6">272</Array>
+		<Array index="7">272</Array>
+	</LookupTable>
+</Decoder>
+<Decoder>
+	<DecoderName>GetL2CacheSize</DecoderName>
+	<BitfieldMask>0x07</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+	<LookupTable>
+		<NumIndexValues>8</NumIndexValues>
+		<!-- cache size in bytes -->
+		<Array index="0">0</Array>
+		<Array index="1">0x8000</Array>
+		<Array index="2">0x10000</Array>
+		<Array index="3">0x20000</Array>
+		<Array index="4">0x40000</Array>
+		<Array index="5">0x80000</Array>
+		<Array index="6">0x100000</Array>
+		<Array index="7">0x100000</Array>
+	</LookupTable>
+</Decoder>
+<Decoder>
+	<DecoderName>GetL2NumCacheLines</DecoderName>
+	<BitfieldMask>0x07</BitfieldMask>
+	<BitfieldShift>0</BitfieldShift>
+	<Multiplier>1.0</Multiplier>
+	<AddToProduct>0</AddToProduct>
+	<LookupTable>
+		<!-- cache size / bytes per cache line -->
+		<NumIndexValues>8</NumIndexValues>
+		<Array index="0">256</Array>
+		<Array index="1">256</Array>
+		<Array index="2">512</Array>
+		<Array index="3">1024</Array>
+		<Array index="4">2048</Array>
+		<Array index="5">4096</Array>
+		<Array index="6">8192</Array>
+		<Array index="7">8192</Array>
+	</LookupTable>
+</Decoder>
+

@@ -1,0 +1,19 @@
+<module name="MC3_BFSW_ICONT" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="VIEWMODE" acronym="VIEWMODE" offset="0x0" width="32" description="View mode register. It selects full-view mode or ping-pong view mode.">
+    <bitfield id="RSRV" width="30" begin="31" end="2" resetval="0x0000 0000" description="Reserved. 0 is returned at read, and write is ignored." range="" rwaccess="R"/>
+    <bitfield id="VIEW_YBUF" width="1" begin="1" end="1" resetval="0" description="View mode selection for Y buffer. 0: Full view mode is selected. 1: Ping-pong view mode is selected." range="" rwaccess="RW"/>
+    <bitfield id="VIEW_XBUF" width="1" begin="0" end="0" resetval="0" description="View mode selection for X buffer. 0: Full view mode is selected. 1: Ping-pong view mode is selected." range="" rwaccess="RW"/>
+  </register>
+  <register id="MSTID1" acronym="MSTID1" offset="0x4" width="32" description="Master ID 1 register Select master between HWA and DMA bus. This register is used in full-view and ping-pong view modes. This register is for buffers that have two physical memories. This register is affected by direct_switch_pi input port.">
+    <bitfield id="RSRV" width="28" begin="31" end="4" resetval="0x0000000" description="Reserved. 0 is returned at read, and write is ignored." range="" rwaccess="R"/>
+    <bitfield id="MST_YBUF_B" width="1" begin="3" end="3" resetval="0" description="Master selection for Y buffer B. This bit is used only in ping-pong view mode. 0: Buffer B is assigned to DMA. 1: Buffer B is assigned to HWA. This bit has no effect in full-view mode. If direct_switch_pi is high, the value of this bit is inverted." range="" rwaccess="RW"/>
+    <bitfield id="MST_YBUF_A" width="1" begin="2" end="2" resetval="0" description="Master selection for Y buffer A. This bit is used in full view and ping-pong view modes. In full-view mode: 0: Buffers A and B are assigned to DMA. 1: Buffers A and B are assigned to HWA. In ping-pong view mode: 0: Buffer A is assigned to DMA. 1: Buffer A is assigned to HWA. (Buffer B is not affected in ping-pong view mode.) If direct_switch_pi is high, the value of this bit is inverted." range="" rwaccess="RW"/>
+    <bitfield id="MST_XBUF_B" width="1" begin="1" end="1" resetval="0" description="Master selection for X buffer B. This bit is used only in ping-pong view mode. 0: Buffer B is assigned to DMA. 1: Buffer B is assigned to HWA. This bit has no effect in full-view mode. If direct_switch_pi is high, the value of this bit is inverted." range="" rwaccess="RW"/>
+    <bitfield id="MST_XBUF_A" width="1" begin="0" end="0" resetval="0" description="Master selection for X buffer A. This bit is used in full view and ping-pong view modes. In full-view mode: 0: Buffers A and B are assigned to DMA. 1: Buffers A and B are assigned to HWA. In ping-pong view mode: 0: Buffer A is assigned to DMA. 1: Buffer A is assigned to HWA. (Buffer B is not affected in ping-pong view mode.) If direct_switch_pi is high, the value of this bit is inverted." range="" rwaccess="RW"/>
+  </register>
+  <register id="MSTID2" acronym="MSTID2" offset="0x8" width="32" description="Master ID 1 register Select master between HWA and DMA bus. This register is for buffers that have only one physical memory. This register is not affected by direct_switch_pi input port.">
+    <bitfield id="RSRV" width="30" begin="31" end="2" resetval="0x0000 0000" description="Reserved. 0 is returned at read, and write is ignored." range="" rwaccess="R"/>
+    <bitfield id="MST_JBUF" width="1" begin="1" end="1" resetval="0" description="Master selection for J buffer. 0: Buffer is assigned to DMA. 1: Buffer is assigned to HWA." range="" rwaccess="R"/>
+    <bitfield id="MST_IBUF" width="1" begin="0" end="0" resetval="0" description="Master selection for I buffer. 0: Buffer is assigned to DMA. 1: Buffer is assigned to HWA." range="" rwaccess="R"/>
+  </register>
+</module>

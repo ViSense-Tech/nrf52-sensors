@@ -1,0 +1,167 @@
+<module name="VCP1_L4_PER2Interconnect" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="REVISION" acronym="REVISION" offset="0x0" width="32" description="VCP version 2 - IP Revision Register is used to track the version of the IP.">
+    <bitfield id="SOURCE_IP" width="16" begin="31" end="16" resetval="0x5007" description="Source of VCP IP" range="" rwaccess="R"/>
+    <bitfield id="REV_IP" width="16" begin="15" end="0" resetval="0x1900" description="VCP IP Revision number" range="" rwaccess="R"/>
+  </register>
+  <register id="VCP_SYSCONFIG" acronym="VCP_SYSCONFIG" offset="0x10" width="32" description="System Configuration Register is used to set the idle modes for the VCP modules">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x00000" description="" range="" rwaccess="R"/>
+    <bitfield id="IDLEMODE" width="2" begin="3" end="2" resetval="0x0" description="Idle mode bit" range="" rwaccess="RW">
+      <bitenum value="0" id="0" token="IDLEMODE_0" description="Idle request unconditionally acknowledged (ack = req)"/>
+      <bitenum value="1" id="Acknowledge_always_inactive_(ack=0)" token="IDLEMODE_1" description="Acknowledge always inactive (ack=0)"/>
+      <bitenum value="2" id="2" token="IDLEMODE_2" description="Idle request acknowledge pending internal conditions"/>
+      <bitenum value="3" id="Reserved" token="IDLEMODE_3" description="Reserved"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESET_DONE" width="1" begin="0" end="0" resetval="0x0" description="Reset done is a read only and shows the status of the reset from the idle command." range="" rwaccess="R"/>
+  </register>
+  <register id="VCP_IRQ_EOI" acronym="VCP_IRQ_EOI" offset="0x20" width="32" description="End of interrupt register.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LINE_NUMBER" width="1" begin="0" end="0" resetval="0x0" description="Software End of Interrupt (EOI) control. Write a value of 0x0 to repulse the interrupt output if any interrupts are pending." range="" rwaccess="W"/>
+  </register>
+  <register id="VCP_IRQSTATUS" acronym="VCP_IRQSTATUS" offset="0x28" width="32" description="IRQ status register captures the current active status of the interrupts after the enabling function.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="STATUS" width="1" begin="0" end="0" resetval="0x0" description="VCP IRQ enable status" range="" rwaccess="RW">
+      <bitenum value="0" id="VCP_error_interrupt_is_not_enabled." token="STATUS_0" description="VCP error interrupt is not enabled."/>
+      <bitenum value="1" id="VCP_error_interrupt_is_enabled." token="STATUS_1" description="VCP error interrupt is enabled."/>
+    </bitfield>
+  </register>
+  <register id="VCP_IRQENABLE_SET" acronym="VCP_IRQENABLE_SET" offset="0x2C" width="32" description="The VCP set enable interrupt register allows the user to enable the VCP error interrupt. The software should enable the interrupt on the VCP by writing writing a 1 to bit 0 of the IRQENABLE_SET register.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ENABLE_SET" width="1" begin="0" end="0" resetval="0x0" description="VCP IRQ enable status" range="" rwaccess="RW">
+      <bitenum value="0" id="VCP_error_interrupt_is_disabled." token="ENABLE_SET_0" description="VCP error interrupt is disabled."/>
+      <bitenum value="1" id="VCP_error_interrupt_is_enabled." token="ENABLE_SET_1" description="VCP error interrupt is enabled."/>
+    </bitfield>
+  </register>
+  <register id="VCP_IRQENABLE_CLR" acronym="VCP_IRQENABLE_CLR" offset="0x30" width="32" description="The VCP clear enable interrupt register allows the user to disable the VCP error interrupt.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ENABLE_CLR" width="1" begin="0" end="0" resetval="0x0" description="VCP IRQ enable status" range="" rwaccess="RW">
+      <bitenum value="0" id="No_effect" token="ENABLE_CLR_0" description="No effect"/>
+      <bitenum value="1" id="VCP_error_interrupt_is_disabled." token="ENABLE_CLR_1" description="VCP error interrupt is disabled."/>
+    </bitfield>
+  </register>
+  <register id="VCP_DEBUG" acronym="VCP_DEBUG" offset="0x50" width="32" description="Debug Configuration Register is used to view that status of various events in the VCP1 and VCP2 including emulation suspend mode request and DMA status for read and write requests.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EMUSUSP" width="1" begin="3" end="3" resetval="0x0" description="Status of the emulation suspend mode request" range="" rwaccess="R">
+      <bitenum value="0" id="0" token="EMUSUSP_0" description="Emulation suspend mode request has not been sent"/>
+      <bitenum value="1" id="1" token="EMUSUSP_1" description="Emulation suspend mode requrest has been sent"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DMA_X_REQ" width="1" begin="1" end="1" resetval="0x0" description="Status of the VCP tranmit event (VCPnXEVT)" range="" rwaccess="R">
+      <bitenum value="0" id="DMA_0" token="DMA_X_REQ_0" description="No transmit DMA (write) event is pending"/>
+      <bitenum value="1" id="Transmit_DMA_(write)_event_is_pending" token="DMA_X_REQ_1" description="Transmit DMA (write) event is pending"/>
+    </bitfield>
+    <bitfield id="DMA_R_REQ" width="1" begin="0" end="0" resetval="0x0" description="Status of the VCP receive event (VCPnREVT)" range="" rwaccess="R">
+      <bitenum value="0" id="No_receive_DMA_(read)_event_is_pending" token="DMA_R_REQ_0" description="No receive DMA (read) event is pending"/>
+      <bitenum value="1" id="Receive_DMA_(read)_event_is_pending" token="DMA_R_REQ_1" description="Receive DMA (read) event is pending"/>
+    </bitfield>
+  </register>
+  <register id="VCP_VCPEXE" acronym="VCP_VCPEXE" offset="0x118" width="32" description="VCP version 2 execution register">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0000 000" description="" range="" rwaccess="R"/>
+    <bitfield id="COMMAND" width="4" begin="3" end="0" resetval="0x0" description="VCP command select bits:" range="" rwaccess="W">
+      <bitenum value="0" id="Reserved" token="COMMAND_0" description="Reserved"/>
+      <bitenum value="1" id="Start_VCP_(normal_mode)" token="COMMAND_1" description="Start VCP (normal mode)"/>
+      <bitenum value="2" id="VCP_VCP_2" token="COMMAND_2" description="Halt or Pause VCP (debug mode). The VCP is halted (or paused) after processing the state metric for the current sliding window and before the start of the traceback."/>
+      <bitenum value="3" id="VCP_VCP_VCP_3" token="COMMAND_3" description="Restart VCP and process one sliding window (debug mode). The VCP is restarted from the pause state and begins the traceback operation. The VCP is again paused after processing the state metrics for next sliding window."/>
+      <bitenum value="4" id="VCP_VCP_VCP_4" token="COMMAND_4" description="Restart VCP (debug mode). The VCP is restarted from the paused state and begins the traceback operation. The VCP will run to normal completion."/>
+      <bitenum value="5" id="VCP_VCP_5" token="COMMAND_5" description="Stop. Soft reset all VCP registers to their initial condition. All registers in the VCP are reset in this mode except for the execution register, endian register, emulation register, and other internal registers."/>
+      <bitenum value="6" id="Reserved" token="COMMAND_6" description="Reserved"/>
+    </bitfield>
+  </register>
+  <register id="VCP_VCPEND" acronym="VCP_VCPEND" offset="0x120" width="32" description="VCP Endian Mode Register">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0x0000" description="" range="" rwaccess="R"/>
+    <bitfield id="SLPZVSS_EN" width="1" begin="9" end="9" resetval="0x1" description="Sleep mode for SLPZVSS_EN" range="" rwaccess="RW">
+      <bitenum value="0" id="Programed_for_proper_operation." token="SLPZVSS_EN_0" description="Programed for proper operation."/>
+    </bitfield>
+    <bitfield id="SLPZVDD_EN" width="1" begin="8" end="8" resetval="0x1" description="Sleep mode for SLPZVDD_EN" range="" rwaccess="RW">
+      <bitenum value="0" id="Programed_for_proper_operation." token="SLPZVDD_EN_0" description="Programed for proper operation."/>
+    </bitfield>
+    <bitfield id="RESERVED" width="6" begin="7" end="2" resetval="0x00" description="" range="" rwaccess="R"/>
+    <bitfield id="SD" width="1" begin="1" end="1" resetval="0x0" description="Traceback soft-decision memory format select bit." range="" rwaccess="RW">
+      <bitenum value="0" id="32-bit-word_packed" token="SD_0" description="32-bit-word packed"/>
+      <bitenum value="1" id="Native_format_(8_bits)" token="SD_1" description="Native format (8 bits)"/>
+    </bitfield>
+    <bitfield id="BM" width="1" begin="0" end="0" resetval="0x0" description="Branch metrics memory format select bit." range="" rwaccess="RW">
+      <bitenum value="0" id="32-bit-word_packed" token="BM_0" description="32-bit-word packed"/>
+      <bitenum value="1" id="Native_format_(8_bits)" token="BM_1" description="Native format (8 bits)"/>
+    </bitfield>
+  </register>
+  <register id="VCP_VCPSTAT0" acronym="VCP_VCPSTAT0" offset="0x140" width="32" description="VCP Status Register 0">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0000" description="" range="" rwaccess="R"/>
+    <bitfield id="NSYMPROC" width="17" begin="28" end="12" resetval="0x0000" description="Number of symbols processed bits. The NSYMPROC bits indicate how many symbols have been processed in the state metric unit with respect to time. The maximum number of processed stages is equal to F + (k-1) in tailed or mixed mode. The maximum number of processed stages is equal toF + C in convergent mode." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="11" end="7" resetval="0x00" description="" range="" rwaccess="R"/>
+    <bitfield id="EMUHALT" width="1" begin="6" end="6" resetval="0x0" description="Emulation halt status bit" range="" rwaccess="R">
+      <bitenum value="0" id="No_halt_due_to_emulation" token="EMUHALT_0" description="No halt due to emulation"/>
+      <bitenum value="1" id="Halt_due_to_emulation" token="EMUHALT_1" description="Halt due to emulation"/>
+    </bitfield>
+    <bitfield id="OFFUL" width="1" begin="5" end="5" resetval="0x0" description="Output FIFO buffer full status bit" range="" rwaccess="R">
+      <bitenum value="0" id="Output_FIFO_buffer_is_not_full" token="OFFUL_0" description="Output FIFO buffer is not full"/>
+      <bitenum value="1" id="Output_FIFO_buffer_is_full" token="OFFUL_1" description="Output FIFO buffer is full"/>
+    </bitfield>
+    <bitfield id="IFEMP" width="1" begin="4" end="4" resetval="0x0" description="Input FIFO buffer empty status bit" range="" rwaccess="R">
+      <bitenum value="0" id="Input_FIFO_buffer_is_not_empty" token="IFEMP_0" description="Input FIFO buffer is not empty"/>
+      <bitenum value="1" id="Input_FIFO_buffer_is_empty" token="IFEMP_1" description="Input FIFO buffer is empty"/>
+    </bitfield>
+    <bitfield id="WIC" width="1" begin="3" end="3" resetval="0x0" description="Waiting for input configuration bit. The WIC bit indicates that the VCP is waiting for new input control parameters to be written. This bit is always set after decoding of a user channel." range="" rwaccess="R">
+      <bitenum value="0" id="0" token="WIC_0" description="Not waiting for input configuration words"/>
+      <bitenum value="1" id="Waiting_for_input_configuration_words" token="WIC_1" description="Waiting for input configuration words"/>
+    </bitfield>
+    <bitfield id="ERR" width="1" begin="2" end="2" resetval="0x0" description="VCP error status bit. The ERR bit is cleared as soon as the DSP reads the VCP error register (VCPERR)." range="" rwaccess="R">
+      <bitenum value="0" id="No_error" token="ERR_0" description="No error"/>
+      <bitenum value="1" id="VCP_paused_due_to_error" token="ERR_1" description="VCP paused due to error"/>
+    </bitfield>
+    <bitfield id="RUN" width="1" begin="1" end="1" resetval="0x0" description="VCP running status bit" range="" rwaccess="R">
+      <bitenum value="0" id="VCP_is_not_running" token="RUN_0" description="VCP is not running"/>
+      <bitenum value="1" id="VCP_is_running" token="RUN_1" description="VCP is running"/>
+    </bitfield>
+    <bitfield id="PAUSE" width="1" begin="0" end="0" resetval="0x0" description="VCP pause status bit" range="" rwaccess="R">
+      <bitenum value="0" id="VCP_UNPAUSE_PAUSE_0" token="PAUSE_0" description="VCP is not paused. The UNPAUSE command is acknowledged by clearing the PAUSE bit."/>
+      <bitenum value="1" id="VCP_PAUSE_PAUSE_PAUSE_FIFO_FIFO_1" token="PAUSE_1" description="VCP is paused. The PAUSE command is acknowledged by setting the PAUSE bit. The PAUSE bit can also be set, if the input FIFO buffer is becoming empty or if the output FIFO buffer is full."/>
+    </bitfield>
+  </register>
+  <register id="VCP_VCPSTAT1" acronym="VCP_VCPSTAT1" offset="0x144" width="32" description="VCP Status Register 1">
+    <bitfield id="NSYMOF" width="16" begin="31" end="16" resetval="0xFFFF" description="Number of symbols in the output FIFO buffer." range="" rwaccess="R"/>
+    <bitfield id="NSYMIF" width="16" begin="15" end="0" resetval="0xFFFF" description="Number of symbols in the input FIFO buffer." range="" rwaccess="R"/>
+  </register>
+  <register id="VCP_VCPERR" acronym="VCP_VCPERR" offset="0x150" width="32" description="VCP Error Register">
+    <bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x000000" description="" range="" rwaccess="R"/>
+    <bitfield id="E_SYMR" width="1" begin="6" end="6" resetval="0x0" description="SMAR error" range="" rwaccess="R">
+      <bitenum value="0" id="No_error_for_SMAR." token="E_SYMR_0" description="No error for SMAR."/>
+      <bitenum value="1" id="Error" token="E_SYMR_1" description="Error"/>
+    </bitfield>
+    <bitfield id="E_SYMX" width="1" begin="5" end="5" resetval="0x0" description="SMAX Error" range="" rwaccess="R">
+      <bitenum value="0" id="No_error_for_SMAX." token="E_SYMX_0" description="No error for SMAX."/>
+      <bitenum value="1" id="Error" token="E_SYMX_1" description="Error"/>
+    </bitfield>
+    <bitfield id="MAXIMINERR" width="1" begin="4" end="4" resetval="0x0" description="MAXIMIN ERROR" range="" rwaccess="R">
+      <bitenum value="0" id="No_error." token="MAXIMINERR_0" description="No error."/>
+      <bitenum value="1" id="Error" token="MAXIMINERR_1" description="Error"/>
+    </bitfield>
+    <bitfield id="FCTLERR" width="1" begin="3" end="3" resetval="0x0" description="FCTL error" range="" rwaccess="R">
+      <bitenum value="0" id="No_error" token="FCTLERR_0" description="No error"/>
+      <bitenum value="1" id="R_C)_(R_1" token="FCTLERR_1" description="1 = r + c too large (( R + C) &amp;gt; (R + C)max) for mixed or convergent traceback modes"/>
+    </bitfield>
+    <bitfield id="FTLERR" width="1" begin="2" end="2" resetval="0x0" description="FTL Error" range="" rwaccess="R">
+      <bitenum value="0" id="No_error" token="FTLERR_0" description="No error"/>
+      <bitenum value="1" id="F_(F_1" token="FTLERR_1" description="F too large (F &amp;gt; Fmax) for tailed traceback mode"/>
+    </bitfield>
+    <bitfield id="TBNAERR" width="1" begin="1" end="1" resetval="0x0" description="TBNA Error" range="" rwaccess="R">
+      <bitenum value="0" id="No_error" token="TBNAERR_0" description="No error"/>
+      <bitenum value="1" id="Traceback_mode_is_not_allowed." token="TBNAERR_1" description="Traceback mode is not allowed."/>
+    </bitfield>
+    <bitfield id="ERROR" width="1" begin="0" end="0" resetval="0x0" description="Error" range="" rwaccess="R">
+      <bitenum value="0" id="No_error_is_detected." token="ERROR_0" description="No error is detected."/>
+      <bitenum value="1" id="An_error_has_occurred" token="ERROR_1" description="An error has occurred"/>
+    </bitfield>
+  </register>
+  <register id="VCP_VCPEMU" acronym="VCP_VCPEMU" offset="0x160" width="32" description="VCP Emulation Control Register">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x000000" description="" range="" rwaccess="R"/>
+    <bitfield id="SOFT" width="1" begin="1" end="1" resetval="0x0" description="Soft bit" range="" rwaccess="RW">
+      <bitenum value="0" id="VCP_0" token="SOFT_0" description="Default mode - VCP completes the current window of state metric processing and halts before starting traceback or at the end of a frame"/>
+      <bitenum value="1" id="VCP_1" token="SOFT_1" description="VCP completes a frame of data before halting"/>
+    </bitfield>
+    <bitfield id="FREE" width="1" begin="0" end="0" resetval="0x0" description="Free bit" range="" rwaccess="RW">
+      <bitenum value="0" id="SOFT_bit_takes_effect" token="FREE_0" description="SOFT bit takes effect"/>
+      <bitenum value="1" id="1" token="FREE_1" description="Free run mode - peripheral ignores the vcp_emususp signal and functions normally."/>
+    </bitfield>
+  </register>
+</module>

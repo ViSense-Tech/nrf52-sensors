@@ -1,0 +1,737 @@
+<module name="DECODER0_PVDEC_VEC_BE_HEVC" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="DECODER0_CR_HEVC_SPS_PARAM_0" acronym="DECODER0_CR_HEVC_SPS_PARAM_0" offset="0x0" width="32" description="">
+    <bitfield id="SCALING_LIST_ENABLE_FLAG" width="1" begin="31" end="31" resetval="0x0" description="When set to 1, the parameters set in PVDEC IQ RAM define the scaling parameters [software should program default scaling factors if explict values aren't defined in the bit stream]." range="" rwaccess="RW"/>
+    <bitfield id="MAX_TRANSFORM_HIERARCHY_DEPTH_INTRA" width="3" begin="30" end="28" resetval="0x0" description="Defines the maximum hierarchy depth an Intra Coded block can be split into smaller transforms [cannot be gretaer than Log2CtbSizeY [maximum is" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="27" end="27" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MAX_TRANSFORM_HIERARCHY_DEPTH_INTER" width="3" begin="26" end="24" resetval="0x0" description="Defines the maximum hierarchy depth an Inter Coded block can be split into smaller transforms [cannot be gretaer than Log2CtbSizeY [maximum is" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="23" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LOG2_DIFF_MAX_MIN_TRANSFORM_BLOCK_SIZE" width="2" begin="21" end="20" resetval="0x0" description="Defines the difference between minimum and maximum transform block size [where LOG2_MIN_TRANSFORM_BLOCK_SIZE_MINUS2 + LOG2_DIFF_MAX_MIN_TRANSFORM_BLOCK_SIZE must be &amp;amp;lt;= 3, and must also be less than or equal to the maximum coded block size]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="19" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LOG2_MIN_TRANSFORM_BLOCK_SIZE_MINUS2" width="2" begin="17" end="16" resetval="0x0" description="Defines the minimum transform block size [where the minimum transform block size can not be greater than the minimum luma coded block size]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LOG2_DIFF_MAX_MIN_LUMA_CODING_BLOCK_SIZE" width="2" begin="13" end="12" resetval="0x0" description="Defines the difference between minimum and maximum luma coded block size, where the resulting size is sometimes refered to as the Coded Tree Unit size or CTU_SIZE [where for Main Profile, LOG2_MIN_LUMA_CODING_BLOCK_SIZE_MINUS3 + LOG2_DIFF_MAX_MIN_LUMA_CODING_BLOCK_SIZE will be in the range 1 to 3]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="11" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LOG2_MIN_LUMA_CODING_BLOCK_SIZE_MINUS3" width="2" begin="9" end="8" resetval="0x0" description="Defines the minimum luma coded block size" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BIT_DEPTH_CHROMA_MINUS8" width="3" begin="6" end="4" resetval="0x0" description="8 less than the bit depth of chroma samples" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BIT_DEPTH_LUMA_MINUS8" width="3" begin="2" end="0" resetval="0x0" description="8 less than the bit depth of luma samples" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SPS_PARAM_1" acronym="DECODER0_CR_HEVC_SPS_PARAM_1" offset="0x4" width="32" description="">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TRANSFORM_SKIP_ROTATION_ENABLED_FLAG" width="1" begin="23" end="23" resetval="0x0" description="Indicates that the residual coefficients for a 4x4 Intra transform skip block should be rotated 180 degrees" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="22" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="IMPLICIT_RDPCM_ENABLED_FLAG" width="1" begin="19" end="19" resetval="0x0" description="Indicates that the residual modification process for blocks using a transform bypass may be used for intra blocks" range="" rwaccess="RW"/>
+    <bitfield id="EXPLICIT_RDPCM_ENABLED_FLAG" width="1" begin="18" end="18" resetval="0x0" description="Indicates that the residual modification process for blocks using a transform bypass may be used for inter blocks" range="" rwaccess="RW"/>
+    <bitfield id="EXTENDED_PRECISION_PROCESSING_FLAG" width="1" begin="17" end="17" resetval="0x0" description="Indicates that an extended dynamic range is used for inter prediction interpolation and inverse transform processing" range="" rwaccess="RW"/>
+    <bitfield id="SPS_TEMPORAL_MVP_ENABLED_FLAG" width="1" begin="16" end="16" resetval="0x0" description="If this field is set, temporal motion vector prediction may be used, so on P and B slices temporal motion vector parameters should be output in case they are required in future frames." range="" rwaccess="RW"/>
+    <bitfield id="PCM_BIT_DEPTH_CHROMA" width="4" begin="15" end="12" resetval="0x0" description="This field is 1 greater than the 'psm_sample_bit_depth_chroma_minus1' field in the bitstream, where this field can be in the range 1 to 14, but must be less than or equal to chroma sample depth" range="" rwaccess="RW"/>
+    <bitfield id="PCM_BIT_DEPTH_LUMA" width="4" begin="11" end="8" resetval="0x0" description="This field is 1 greater than the 'psm_sample_bit_depth_luma_minus1' field in the bitstream, where this field can be in the range 1 to 14, but must be less than or equal to luma sample depth" range="" rwaccess="RW"/>
+    <bitfield id="LOG2_DIFF_MAX_MIN_PCM_LUMA_CODING_BLOCK_SIZE" width="2" begin="7" end="6" resetval="0x0" description="If PCM is enabled, defines the difference between minimum and maximum coded block size at which PCM coding may be used [where LOG2_MIN_PCM_LUMA_CODING_BLOCK_SIZE_MINUS3 + LOG2_DIFF_MAX_MIN_PCM_LUMA_CODING_BLOCK_SIZE must be &amp;amp;lt;= 2]" range="" rwaccess="RW"/>
+    <bitfield id="LOG2_MIN_PCM_LUMA_CODING_BLOCK_SIZE_MINUS3" width="2" begin="5" end="4" resetval="0x0" description="If PCM is enabled, defines the minimum coded block size at which PCM coding may be used" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="PCM_LOOP_FILTER_DISABLE_FLAG" width="1" begin="2" end="2" resetval="0x0" description="If PCM is enabled, this flag controls if in-loop filtering is disabled for PCM samples" range="" rwaccess="RW"/>
+    <bitfield id="PCM_ENABLED_FLAG" width="1" begin="1" end="1" resetval="0x0" description="When set it indicates PCM coded blocks may be included in the bitstream" range="" rwaccess="RW"/>
+    <bitfield id="AMP_ENABLED_FLAG" width="1" begin="0" end="0" resetval="0x0" description="When set it indicates PartMode of Inter prediction blocks can use asymmetric motion partitions" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_PPS_PARAM_0" acronym="DECODER0_CR_HEVC_PPS_PARAM_0" offset="0x8" width="32" description="">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="NUM_TILE_ROWS_MINUS1" width="5" begin="28" end="24" resetval="0x0" description="If tiles are enabled, this field is one less than the number of tile rows the picture has been split into [where a value of zero means a tile spans the whole picture height]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="23" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="NUM_TILE_COLUMNS_MINUS1" width="5" begin="20" end="16" resetval="0x0" description="If tiles are enabled, this field is one less than the number of tile columns the picture has been split into [where a value of zero means a tile spans the whole picture width]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DIFF_CU_CHROMA_QP_OFFSET_DEPTH" width="2" begin="13" end="12" resetval="0x0" description="Indicates the difference between the luma coding tree block size and the minimum luma coding block size of coding units that convey cu_chroma_qp_offset_flag and cu_chroma_qp_offset_idx" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ENTROPY_CODING_SYNC_ENABLE_FLAG" width="1" begin="10" end="10" resetval="0x0" description="When set indicates CABAC state is stored after 2 CTUs in a tile row, which is then used to initialise the CABAC at the start of the next tile row" range="" rwaccess="RW"/>
+    <bitfield id="TILES_ENABLED_FLAG" width="1" begin="9" end="9" resetval="0x0" description="When set indicates the picture is divided into tiles" range="" rwaccess="RW"/>
+    <bitfield id="TRANSQUANT_BYPASS_ENABLE_FLAG" width="1" begin="8" end="8" resetval="0x0" description="When set indicates the cu_transquant_bypass_flag is present in the coded unit" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="7" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TRANSFORM_SKIP_ENABLED_FLAG" width="1" begin="2" end="2" resetval="0x0" description="When set indicates transform_skip_flag may be present in the residual coding syntax" range="" rwaccess="RW"/>
+    <bitfield id="CROSS_COMPONENT_PREDICTION_FLAG" width="1" begin="1" end="1" resetval="0x0" description="Indicates that log2_res_scale_abs_plus1 and res_scale_sign_flag may be present in the transform unit syntax" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_PPS_PARAM_1" acronym="DECODER0_CR_HEVC_PPS_PARAM_1" offset="0xC" width="32" description="">
+    <bitfield id="RESERVED" width="6" begin="31" end="26" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LOG2_MAX_TRANSFORM_SKIP_BLOCK_SIZE_MINUS2" width="2" begin="25" end="24" resetval="0x0" description="Indicates the maximum transform block size for which transform_skip_flag may be present [will not be larger than the largest transform block size]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHROMA_QP_OFFSET_LIST_LEN_MINUS1" width="3" begin="22" end="20" resetval="0x0" description="Specifies 1 less than the number of cb_qp_offset_list and cr_qp_offset_list syntax elements that are present" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="19" end="19" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LOG2_PARALLEL_MERGE_LEVEL_MINUS2" width="3" begin="18" end="16" resetval="0x0" description="Specifies the level at which merge/skip mode uses a single merge candidate." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="PIC_CR_QP_OFFSET" width="5" begin="12" end="8" resetval="0x0" description="Signed offset for QPCr relative to QPy in the range -12 to +12" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="PIC_CB_QP_OFFSET" width="5" begin="4" end="0" resetval="0x0" description="Signed offset for QPCb relative to QPy in the range -12 to +12" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_CB_QP_OFFSET_LIST" acronym="DECODER0_CR_HEVC_CB_QP_OFFSET_LIST" offset="0x10" width="32" description="">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="PPS_CB_QP_OFFSET_LIST" width="5" begin="29" end="25" resetval="0x0" description="List of up-to 6 sets of signed offsets for QPCb relative to QPy in the range -12 to +12 [If chroma_qp_offset_list_enabled_flag is 0, these fields should be set to 0]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="25" begin="24" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_CR_QP_OFFSET_LIST" acronym="DECODER0_CR_HEVC_CR_QP_OFFSET_LIST" offset="0x14" width="32" description="">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="PPS_CR_QP_OFFSET_LIST" width="5" begin="29" end="25" resetval="0x0" description="List of up-to 6 sets of signed offsets for QPCr relative to QPy in the range -12 to +12 [If chroma_qp_offset_list_enabled_flag is 0, these fields should be set to 0]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="25" begin="24" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TEMPORAL_IN_BASE_ADDRESS" acronym="DECODER0_CR_HEVC_TEMPORAL_IN_BASE_ADDRESS" offset="0x30" width="32" description="">
+    <bitfield id="TEMPORAL_PARAM_IN_BASE_ADDRESS" width="26" begin="31" end="6" resetval="0x0" description="The base address of a host memory buffer which contains colocated prediction type and motion vector parameters." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="5" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TEMPORAL_OUT_BASE_ADDRESS" acronym="DECODER0_CR_HEVC_TEMPORAL_OUT_BASE_ADDRESS" offset="0x34" width="32" description="">
+    <bitfield id="TEMPORAL_PARAM_OUT_BASE_ADDRESS" width="26" begin="31" end="6" resetval="0x0" description="The base address of a host memory buffer to which prediction type and motion vector parameters are written if SPS_TEMPORAL_MVP_ENABLED_FLAG is set" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="5" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_DPB_LONGTERM" acronym="DECODER0_CR_HEVC_DPB_LONGTERM" offset="0x38" width="32" description="">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="PIC_TYPE" width="2" begin="17" end="16" resetval="0x0" description="This field is from an access unit delimiter [if present]." range="" rwaccess="RW"/>
+    <bitfield id="DPB_LONGTERM" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_COL_DPB_LONGTERM" acronym="DECODER0_CR_HEVC_COL_DPB_LONGTERM" offset="0x3C" width="32" description="">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COL_PIC_TYPE" width="2" begin="17" end="16" resetval="0x0" description="This field must be set to the same value that PIC_TYPE was set to when the collocated picture was being decoded [and must be set before the Pixel pipe decoding of a picture can start]." range="" rwaccess="RW"/>
+    <bitfield id="COL_DPB_LONGTERM" width="16" begin="15" end="0" resetval="0x0" description="Essentially the same as the 'DPB_LONGTERM' field which was used when the collocated picture was the current picture," range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_DPB_PIC_ORDER_DIFF_00" acronym="DECODER0_CR_HEVC_DPB_PIC_ORDER_DIFF_00" offset="0x40" width="32" description="">
+    <bitfield id="DPB_PIC_ORDER_DIFF_3" width="8" begin="31" end="24" resetval="0x0" description="The result of PicOrderCntVal - PicOrderCnt[DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+3] [equivalent to td or tb calculation in equation" range="" rwaccess="RW"/>
+    <bitfield id="DPB_PIC_ORDER_DIFF_2" width="8" begin="23" end="16" resetval="0x0" description="The result of PicOrderCntVal - PicOrderCnt[DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+2] [equivalent to td or tb calculation in equation" range="" rwaccess="RW"/>
+    <bitfield id="DPB_PIC_ORDER_DIFF_1" width="8" begin="15" end="8" resetval="0x0" description="The result of PicOrderCntVal - PicOrderCnt[DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+1] [equivalent to td or tb calculation in equation" range="" rwaccess="RW"/>
+    <bitfield id="DPB_PIC_ORDER_DIFF_0" width="8" begin="7" end="0" resetval="0x0" description="The result of PicOrderCntVal - PicOrderCnt[DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+0] [equivalent to td or tb calculation in equation" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_DPB_PIC_ORDER_DIFF_01" acronym="DECODER0_CR_HEVC_DPB_PIC_ORDER_DIFF_01" offset="0x44" width="32" description="">
+    <bitfield id="DPB_PIC_ORDER_DIFF_3" width="8" begin="31" end="24" resetval="0x0" description="The result of PicOrderCntVal - PicOrderCnt[DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+3] [equivalent to td or tb calculation in equation" range="" rwaccess="RW"/>
+    <bitfield id="DPB_PIC_ORDER_DIFF_2" width="8" begin="23" end="16" resetval="0x0" description="The result of PicOrderCntVal - PicOrderCnt[DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+2] [equivalent to td or tb calculation in equation" range="" rwaccess="RW"/>
+    <bitfield id="DPB_PIC_ORDER_DIFF_1" width="8" begin="15" end="8" resetval="0x0" description="The result of PicOrderCntVal - PicOrderCnt[DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+1] [equivalent to td or tb calculation in equation" range="" rwaccess="RW"/>
+    <bitfield id="DPB_PIC_ORDER_DIFF_0" width="8" begin="7" end="0" resetval="0x0" description="The result of PicOrderCntVal - PicOrderCnt[DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+0] [equivalent to td or tb calculation in equation" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_DPB_PIC_ORDER_DIFF_02" acronym="DECODER0_CR_HEVC_DPB_PIC_ORDER_DIFF_02" offset="0x48" width="32" description="">
+    <bitfield id="DPB_PIC_ORDER_DIFF_3" width="8" begin="31" end="24" resetval="0x0" description="The result of PicOrderCntVal - PicOrderCnt[DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+3] [equivalent to td or tb calculation in equation" range="" rwaccess="RW"/>
+    <bitfield id="DPB_PIC_ORDER_DIFF_2" width="8" begin="23" end="16" resetval="0x0" description="The result of PicOrderCntVal - PicOrderCnt[DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+2] [equivalent to td or tb calculation in equation" range="" rwaccess="RW"/>
+    <bitfield id="DPB_PIC_ORDER_DIFF_1" width="8" begin="15" end="8" resetval="0x0" description="The result of PicOrderCntVal - PicOrderCnt[DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+1] [equivalent to td or tb calculation in equation" range="" rwaccess="RW"/>
+    <bitfield id="DPB_PIC_ORDER_DIFF_0" width="8" begin="7" end="0" resetval="0x0" description="The result of PicOrderCntVal - PicOrderCnt[DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+0] [equivalent to td or tb calculation in equation" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_DPB_PIC_ORDER_DIFF_03" acronym="DECODER0_CR_HEVC_DPB_PIC_ORDER_DIFF_03" offset="0x4C" width="32" description="">
+    <bitfield id="DPB_PIC_ORDER_DIFF_3" width="8" begin="31" end="24" resetval="0x0" description="The result of PicOrderCntVal - PicOrderCnt[DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+3] [equivalent to td or tb calculation in equation" range="" rwaccess="RW"/>
+    <bitfield id="DPB_PIC_ORDER_DIFF_2" width="8" begin="23" end="16" resetval="0x0" description="The result of PicOrderCntVal - PicOrderCnt[DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+2] [equivalent to td or tb calculation in equation" range="" rwaccess="RW"/>
+    <bitfield id="DPB_PIC_ORDER_DIFF_1" width="8" begin="15" end="8" resetval="0x0" description="The result of PicOrderCntVal - PicOrderCnt[DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+1] [equivalent to td or tb calculation in equation" range="" rwaccess="RW"/>
+    <bitfield id="DPB_PIC_ORDER_DIFF_0" width="8" begin="7" end="0" resetval="0x0" description="The result of PicOrderCntVal - PicOrderCnt[DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+0] [equivalent to td or tb calculation in equation" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_COL_DPB_PIC_ORDER_DIFF_00" acronym="DECODER0_CR_HEVC_COL_DPB_PIC_ORDER_DIFF_00" offset="0x50" width="32" description="">
+    <bitfield id="COL_DPB_PIC_ORDER_DIFF_3" width="8" begin="31" end="24" resetval="0x0" description="The result of PicOrderCnt[colPic] - RefPicOrderCnt[colPic, DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+3] [equivalent to td calculation in equation" range="" rwaccess="RW"/>
+    <bitfield id="COL_DPB_PIC_ORDER_DIFF_2" width="8" begin="23" end="16" resetval="0x0" description="The result of PicOrderCnt[colPic] - RefPicOrderCnt[colPic, DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+2] [equivalent to td calculation in equation" range="" rwaccess="RW"/>
+    <bitfield id="COL_DPB_PIC_ORDER_DIFF_1" width="8" begin="15" end="8" resetval="0x0" description="The result of PicOrderCnt[colPic] - RefPicOrderCnt[colPic, DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+1] [equivalent to td calculation in equation" range="" rwaccess="RW"/>
+    <bitfield id="COL_DPB_PIC_ORDER_DIFF_0" width="8" begin="7" end="0" resetval="0x0" description="The result of PicOrderCnt[colPic] - RefPicOrderCnt[colPic, DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+0] [equivalent to td calculation in equation" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_COL_DPB_PIC_ORDER_DIFF_01" acronym="DECODER0_CR_HEVC_COL_DPB_PIC_ORDER_DIFF_01" offset="0x54" width="32" description="">
+    <bitfield id="COL_DPB_PIC_ORDER_DIFF_3" width="8" begin="31" end="24" resetval="0x0" description="The result of PicOrderCnt[colPic] - RefPicOrderCnt[colPic, DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+3] [equivalent to td calculation in equation" range="" rwaccess="RW"/>
+    <bitfield id="COL_DPB_PIC_ORDER_DIFF_2" width="8" begin="23" end="16" resetval="0x0" description="The result of PicOrderCnt[colPic] - RefPicOrderCnt[colPic, DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+2] [equivalent to td calculation in equation" range="" rwaccess="RW"/>
+    <bitfield id="COL_DPB_PIC_ORDER_DIFF_1" width="8" begin="15" end="8" resetval="0x0" description="The result of PicOrderCnt[colPic] - RefPicOrderCnt[colPic, DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+1] [equivalent to td calculation in equation" range="" rwaccess="RW"/>
+    <bitfield id="COL_DPB_PIC_ORDER_DIFF_0" width="8" begin="7" end="0" resetval="0x0" description="The result of PicOrderCnt[colPic] - RefPicOrderCnt[colPic, DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+0] [equivalent to td calculation in equation" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_COL_DPB_PIC_ORDER_DIFF_02" acronym="DECODER0_CR_HEVC_COL_DPB_PIC_ORDER_DIFF_02" offset="0x58" width="32" description="">
+    <bitfield id="COL_DPB_PIC_ORDER_DIFF_3" width="8" begin="31" end="24" resetval="0x0" description="The result of PicOrderCnt[colPic] - RefPicOrderCnt[colPic, DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+3] [equivalent to td calculation in equation" range="" rwaccess="RW"/>
+    <bitfield id="COL_DPB_PIC_ORDER_DIFF_2" width="8" begin="23" end="16" resetval="0x0" description="The result of PicOrderCnt[colPic] - RefPicOrderCnt[colPic, DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+2] [equivalent to td calculation in equation" range="" rwaccess="RW"/>
+    <bitfield id="COL_DPB_PIC_ORDER_DIFF_1" width="8" begin="15" end="8" resetval="0x0" description="The result of PicOrderCnt[colPic] - RefPicOrderCnt[colPic, DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+1] [equivalent to td calculation in equation" range="" rwaccess="RW"/>
+    <bitfield id="COL_DPB_PIC_ORDER_DIFF_0" width="8" begin="7" end="0" resetval="0x0" description="The result of PicOrderCnt[colPic] - RefPicOrderCnt[colPic, DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+0] [equivalent to td calculation in equation" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_COL_DPB_PIC_ORDER_DIFF_03" acronym="DECODER0_CR_HEVC_COL_DPB_PIC_ORDER_DIFF_03" offset="0x5C" width="32" description="">
+    <bitfield id="COL_DPB_PIC_ORDER_DIFF_3" width="8" begin="31" end="24" resetval="0x0" description="The result of PicOrderCnt[colPic] - RefPicOrderCnt[colPic, DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+3] [equivalent to td calculation in equation" range="" rwaccess="RW"/>
+    <bitfield id="COL_DPB_PIC_ORDER_DIFF_2" width="8" begin="23" end="16" resetval="0x0" description="The result of PicOrderCnt[colPic] - RefPicOrderCnt[colPic, DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+2] [equivalent to td calculation in equation" range="" rwaccess="RW"/>
+    <bitfield id="COL_DPB_PIC_ORDER_DIFF_1" width="8" begin="15" end="8" resetval="0x0" description="The result of PicOrderCnt[colPic] - RefPicOrderCnt[colPic, DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+1] [equivalent to td calculation in equation" range="" rwaccess="RW"/>
+    <bitfield id="COL_DPB_PIC_ORDER_DIFF_0" width="8" begin="7" end="0" resetval="0x0" description="The result of PicOrderCnt[colPic] - RefPicOrderCnt[colPic, DPB_Index], clipped to the range -128 to 127 [for DPB_index n*4+0] [equivalent to td calculation in equation" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_00" acronym="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_00" offset="0x80" width="32" description="If tiles are enabled and NUM_TILE_COLUMNS_MINUS1 is greater than 0, these fields define the horizontal offset in multiples of 16x16 luma blocks to the start of each tile column (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_COLUMNS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the right edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_01" acronym="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_01" offset="0x84" width="32" description="If tiles are enabled and NUM_TILE_COLUMNS_MINUS1 is greater than 0, these fields define the horizontal offset in multiples of 16x16 luma blocks to the start of each tile column (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_COLUMNS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the right edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_02" acronym="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_02" offset="0x88" width="32" description="If tiles are enabled and NUM_TILE_COLUMNS_MINUS1 is greater than 0, these fields define the horizontal offset in multiples of 16x16 luma blocks to the start of each tile column (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_COLUMNS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the right edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_03" acronym="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_03" offset="0x8C" width="32" description="If tiles are enabled and NUM_TILE_COLUMNS_MINUS1 is greater than 0, these fields define the horizontal offset in multiples of 16x16 luma blocks to the start of each tile column (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_COLUMNS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the right edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_04" acronym="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_04" offset="0x90" width="32" description="If tiles are enabled and NUM_TILE_COLUMNS_MINUS1 is greater than 0, these fields define the horizontal offset in multiples of 16x16 luma blocks to the start of each tile column (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_COLUMNS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the right edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_05" acronym="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_05" offset="0x94" width="32" description="If tiles are enabled and NUM_TILE_COLUMNS_MINUS1 is greater than 0, these fields define the horizontal offset in multiples of 16x16 luma blocks to the start of each tile column (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_COLUMNS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the right edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_06" acronym="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_06" offset="0x98" width="32" description="If tiles are enabled and NUM_TILE_COLUMNS_MINUS1 is greater than 0, these fields define the horizontal offset in multiples of 16x16 luma blocks to the start of each tile column (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_COLUMNS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the right edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_07" acronym="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_07" offset="0x9C" width="32" description="If tiles are enabled and NUM_TILE_COLUMNS_MINUS1 is greater than 0, these fields define the horizontal offset in multiples of 16x16 luma blocks to the start of each tile column (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_COLUMNS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the right edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_08" acronym="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_08" offset="0xA0" width="32" description="If tiles are enabled and NUM_TILE_COLUMNS_MINUS1 is greater than 0, these fields define the horizontal offset in multiples of 16x16 luma blocks to the start of each tile column (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_COLUMNS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the right edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_09" acronym="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_09" offset="0xA4" width="32" description="If tiles are enabled and NUM_TILE_COLUMNS_MINUS1 is greater than 0, these fields define the horizontal offset in multiples of 16x16 luma blocks to the start of each tile column (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_COLUMNS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the right edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_10" acronym="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_10" offset="0xA8" width="32" description="If tiles are enabled and NUM_TILE_COLUMNS_MINUS1 is greater than 0, these fields define the horizontal offset in multiples of 16x16 luma blocks to the start of each tile column (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_COLUMNS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the right edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_11" acronym="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_11" offset="0xAC" width="32" description="If tiles are enabled and NUM_TILE_COLUMNS_MINUS1 is greater than 0, these fields define the horizontal offset in multiples of 16x16 luma blocks to the start of each tile column (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_COLUMNS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the right edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_00" acronym="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_00" offset="0xC0" width="32" description="If tiles are enabled and NUM_TILE_ROWS_MINUS1 is greater than 0, these fields define the vertical offset in multiples of 16x16 luma blocks to the start of each tile row (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_ROWS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the bottom edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_01" acronym="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_01" offset="0xC4" width="32" description="If tiles are enabled and NUM_TILE_ROWS_MINUS1 is greater than 0, these fields define the vertical offset in multiples of 16x16 luma blocks to the start of each tile row (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_ROWS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the bottom edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_02" acronym="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_02" offset="0xC8" width="32" description="If tiles are enabled and NUM_TILE_ROWS_MINUS1 is greater than 0, these fields define the vertical offset in multiples of 16x16 luma blocks to the start of each tile row (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_ROWS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the bottom edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_03" acronym="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_03" offset="0xCC" width="32" description="If tiles are enabled and NUM_TILE_ROWS_MINUS1 is greater than 0, these fields define the vertical offset in multiples of 16x16 luma blocks to the start of each tile row (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_ROWS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the bottom edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_04" acronym="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_04" offset="0xD0" width="32" description="If tiles are enabled and NUM_TILE_ROWS_MINUS1 is greater than 0, these fields define the vertical offset in multiples of 16x16 luma blocks to the start of each tile row (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_ROWS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the bottom edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_05" acronym="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_05" offset="0xD4" width="32" description="If tiles are enabled and NUM_TILE_ROWS_MINUS1 is greater than 0, these fields define the vertical offset in multiples of 16x16 luma blocks to the start of each tile row (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_ROWS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the bottom edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_06" acronym="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_06" offset="0xD8" width="32" description="If tiles are enabled and NUM_TILE_ROWS_MINUS1 is greater than 0, these fields define the vertical offset in multiples of 16x16 luma blocks to the start of each tile row (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_ROWS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the bottom edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_07" acronym="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_07" offset="0xDC" width="32" description="If tiles are enabled and NUM_TILE_ROWS_MINUS1 is greater than 0, these fields define the vertical offset in multiples of 16x16 luma blocks to the start of each tile row (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_ROWS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the bottom edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_08" acronym="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_08" offset="0xE0" width="32" description="If tiles are enabled and NUM_TILE_ROWS_MINUS1 is greater than 0, these fields define the vertical offset in multiples of 16x16 luma blocks to the start of each tile row (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_ROWS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the bottom edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_09" acronym="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_09" offset="0xE4" width="32" description="If tiles are enabled and NUM_TILE_ROWS_MINUS1 is greater than 0, these fields define the vertical offset in multiples of 16x16 luma blocks to the start of each tile row (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_ROWS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the bottom edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_10" acronym="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_10" offset="0xE8" width="32" description="If tiles are enabled and NUM_TILE_ROWS_MINUS1 is greater than 0, these fields define the vertical offset in multiples of 16x16 luma blocks to the start of each tile row (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_ROWS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the bottom edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_11" acronym="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_11" offset="0xEC" width="32" description="If tiles are enabled and NUM_TILE_ROWS_MINUS1 is greater than 0, these fields define the vertical offset in multiples of 16x16 luma blocks to the start of each tile row (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_ROWS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the bottom edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_PARAM_0_00" acronym="DECODER0_CR_HEVC_SLICE_PARAM_0_00" offset="0x100" width="32" description="The registers in the address range 0x100 to 0x13C contain slice level parameters for a macroblock row, where four sets of slice parameter registers are supported. If the CTU size is 16x16, slice level parameters in the range 0x100 to 0x13C only apply to the top macroblock row (registers in the range 0x140 to 0x17C apply to the second macroblock row, registers in the range 0x180 to 0x1BC apply to the third macroblock row, and registers in the range 0x1C0 to 0x1FC apply to the last macroblock row). If the CTU size is 32x32, slice level parameters in the range 0x100 to 0x13C apply to the top 32 luma rows processed, and the registers in the range 0x180 to 0x1BC apply to the bottom 32 luma rows processed. If the CTU size is 64x64, slice level parameters in the range 0x100 to 0x13C apply to all 64 luma rows which are processed (and the registers in the range 0x140 to 0x1FC are not used).">
+    <bitfield id="RESERVED" width="9" begin="31" end="23" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MAX_NUM_MERGE_CAND" width="3" begin="22" end="20" resetval="0x5" description="Calcaulated from" range="" rwaccess="RW"/>
+    <bitfield id="CU_CHROMA_QP_OFFSET_ENABLED_FLAG" width="1" begin="19" end="19" resetval="0x0" description="Indicates that the cu_chroma_qp_offset_flag may be present in the transform unit syntax" range="" rwaccess="RW"/>
+    <bitfield id="COLLOCATED_FROM_L0_FLAG" width="1" begin="18" end="18" resetval="0x0" description="In a B-slice, if temporal motion vector prediction is enabled, defines if collocated index is from list 0 [if set] or list 1 [if low]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="17" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MVD_L1_ZERO_FLAG" width="1" begin="16" end="16" resetval="0x0" description="In a B slice, when set indicates the mvd_coding syntax for list 1 is not parsed, but instead is set to 0" range="" rwaccess="RW"/>
+    <bitfield id="NUM_REF_IDX_L1_ACTIVE_MINUS1" width="4" begin="15" end="12" resetval="0x0" description="In a B slice, the field is either directly from num_ref_idx_l1_active_minus1, or inferred from num_ref_idx_l1_default_active_minus1, in the range 0 to 15" range="" rwaccess="RW"/>
+    <bitfield id="NUM_REF_IDX_L0_ACTIVE_MINUS1" width="4" begin="11" end="8" resetval="0x0" description="Field is either directly from num_ref_idx_l0_active_minus1, or inferred from num_ref_idx_l0_default_active_minus1, in the range 0 to 15" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_TEMPORAL_MVP_ENABLE_FLAG" width="1" begin="4" end="4" resetval="0x0" description="When set, temporal motion vector prediction is enabled in the slice" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_SAO_CHROMA_FLAG" width="1" begin="3" end="3" resetval="0x0" description="When set, indicates SAO is enabled for the chroma component in the current slice" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_SAO_LUMA_FLAG" width="1" begin="2" end="2" resetval="0x0" description="When set, indicates SAO is enabled for the luma component in the current slice" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_TYPE" width="2" begin="1" end="0" resetval="0x0" description="Slice type [N.B." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_PARAM_1_00" acronym="DECODER0_CR_HEVC_SLICE_PARAM_1_00" offset="0x104" width="32" description="">
+    <bitfield id="EXT_INDEPENDENT_SLICE_MB_NO_Y" width="3" begin="31" end="29" resetval="0x0" description="If picture width or height is larger than 8192 pixels, this field multiplied by 512 is added to INDEPENDENT_SLICE_MB_NO_Y to define the vertical offset of the first 16x16 block in the current independent slice, or from the start of the previous independent slice if this is a dependent slice [where this field counts from 0]" range="" rwaccess="RW"/>
+    <bitfield id="EXT_INDEPENDENT_SLICE_MB_NO_X" width="3" begin="28" end="26" resetval="0x0" description="If picture width or height is larger than 8192 pixels, this field multiplied by 512 is added to INDEPENDENT_SLICE_MB_NO_Y to define the horizontal offset of the first 16x16 block in the current independent slice, or from the start of the previous independent slice if this is a dependent slice [where this field counts from 0]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="25" end="25" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_LOOP_FILTER_ACROSS_SLICES_ENABLED_FLAG" width="1" begin="24" end="24" resetval="0x0" description="When set to 1, indicates deblocking and SAO filters may be performed across a slice boundary [when this flag is not present in the bitstream it should be set to the same value as pps_loop_filter_across_slices_enabled_flag" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="23" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_CR_QP_OFFSET" width="5" begin="20" end="16" resetval="0x0" description="Signed offset for QPCr relative to QPy in the range -12 to +12 [If pic_slice_chroma_qp_offsets_present_flag is 0, this field should be set to 0]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_CB_QP_OFFSET" width="5" begin="12" end="8" resetval="0x0" description="Signed offset for QPCb relative to QPy in the range -12 to +12 [If pic_slice_chroma_qp_offsets_present_flag is 0, this field should be set to 0]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_QPY" width="7" begin="6" end="0" resetval="0x0" description="This field stores the 'SliceQPy + QpBdOffsety' from the HEVC spec and is in the range 0 to [51+QpBdOffsety]." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_PARAM_2_00" acronym="DECODER0_CR_HEVC_SLICE_PARAM_2_00" offset="0x108" width="32" description="">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INDEPENDENT_SLICE_MB_NO_Y" width="9" begin="18" end="10" resetval="0x0" description="The vertical offset of the first 16x16 block in the current independent slice, or from the start of the previous independent slice if this is a dependent slice [where this field counts from 0] [For HEVC CTU sizes larger than 16x16 this is the co-ordinate of the top left 16x16 block within the CTU] [For pictures larger than 8192 pixels high, EXT_INDEPENDENT_SLICE_MB_NO_Y is also used]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INDEPENDENT_SLICE_MB_NO_X" width="9" begin="8" end="0" resetval="0x0" description="The horizontal offset of the first 16x16 block in the current independent slice, or from the start of the previous independent slice if this is a dependent slice [where this field counts from 0] [For HEVC CTU sizes larger than 16x16 this is the co-ordinate of the top left 16x16 block within the CTU]] [For pictures larger than 8192 pixels wide, EXT_INDEPENDENT_SLICE_MB_NO_X is also used]" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST0_0_3_00" acronym="DECODER0_CR_HEVC_SLICE_LIST0_0_3_00" offset="0x120" width="32" description="Reference picture list 0, maps reference index to Decoded Picture Buffer (DPB) index. Can change per-slice, but the combination of both list 0 and list 1 for all slices within a picture will use a maximum of 8 Decoded Picture Buffers (multiple reference index can point to the same Decoded Picture Buffer, but may use different weighted prediction parameters).">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_3" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 0, index 3" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_2" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 0, index 2" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_1" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 0, index 1" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_0" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 0, index 0" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST0_4_7_00" acronym="DECODER0_CR_HEVC_SLICE_LIST0_4_7_00" offset="0x124" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_7" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 0, index 7" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_6" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 0, index 6" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_5" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 0, index 5" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_4" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 0, index 4" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST0_8_11_00" acronym="DECODER0_CR_HEVC_SLICE_LIST0_8_11_00" offset="0x128" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_11" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 0, index 11" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_10" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 0, index 10" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_9" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 0, index 9" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_8" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 0, index 8" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST0_12_15_00" acronym="DECODER0_CR_HEVC_SLICE_LIST0_12_15_00" offset="0x12C" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_15" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 0, index 15" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_14" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 0, index 14" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_13" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 0, index 13" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_12" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 0, index 12" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST1_0_3_00" acronym="DECODER0_CR_HEVC_SLICE_LIST1_0_3_00" offset="0x130" width="32" description="Reference picture list 1, maps reference index to Decoded Picture Buffer (DPB) index. Can change per-slice, but the combination of all slices within a picture will use a maximum of 8 Decoded Picture Buffers (multiple reference index can point to the same Decoded Picture Buffer but use a different weighted prediction parameter).">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_3" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 1, index 3" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_2" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 1, index 2" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_1" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 1, index 1" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_0" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 1, index 0" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST1_4_7_00" acronym="DECODER0_CR_HEVC_SLICE_LIST1_4_7_00" offset="0x134" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_7" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 1, index 7" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_6" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 1, index 6" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_5" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 1, index 5" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_4" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 1, index 4" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST1_8_11_00" acronym="DECODER0_CR_HEVC_SLICE_LIST1_8_11_00" offset="0x138" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_11" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 1, index 11" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_10" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 1, index 10" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_9" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 1, index 9" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_8" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 1, index 8" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST1_12_15_00" acronym="DECODER0_CR_HEVC_SLICE_LIST1_12_15_00" offset="0x13C" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_15" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 1, index 15" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_14" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 1, index 14" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_13" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 1, index 13" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_12" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 1, index 12" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_PARAM_0_01" acronym="DECODER0_CR_HEVC_SLICE_PARAM_0_01" offset="0x140" width="32" description="The registers in the address range 0x100 to 0x13C contain slice level parameters for a macroblock row, where four sets of slice parameter registers are supported. If the CTU size is 16x16, slice level parameters in the range 0x100 to 0x13C only apply to the top macroblock row (registers in the range 0x140 to 0x17C apply to the second macroblock row, registers in the range 0x180 to 0x1BC apply to the third macroblock row, and registers in the range 0x1C0 to 0x1FC apply to the last macroblock row). If the CTU size is 32x32, slice level parameters in the range 0x100 to 0x13C apply to the top 32 luma rows processed, and the registers in the range 0x180 to 0x1BC apply to the bottom 32 luma rows processed. If the CTU size is 64x64, slice level parameters in the range 0x100 to 0x13C apply to all 64 luma rows which are processed (and the registers in the range 0x140 to 0x1FC are not used).">
+    <bitfield id="RESERVED" width="9" begin="31" end="23" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MAX_NUM_MERGE_CAND" width="3" begin="22" end="20" resetval="0x5" description="Calcaulated from" range="" rwaccess="RW"/>
+    <bitfield id="CU_CHROMA_QP_OFFSET_ENABLED_FLAG" width="1" begin="19" end="19" resetval="0x0" description="Indicates that the cu_chroma_qp_offset_flag may be present in the transform unit syntax" range="" rwaccess="RW"/>
+    <bitfield id="COLLOCATED_FROM_L0_FLAG" width="1" begin="18" end="18" resetval="0x0" description="In a B-slice, if temporal motion vector prediction is enabled, defines if collocated index is from list 0 [if set] or list 1 [if low]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="17" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MVD_L1_ZERO_FLAG" width="1" begin="16" end="16" resetval="0x0" description="In a B slice, when set indicates the mvd_coding syntax for list 1 is not parsed, but instead is set to 0" range="" rwaccess="RW"/>
+    <bitfield id="NUM_REF_IDX_L1_ACTIVE_MINUS1" width="4" begin="15" end="12" resetval="0x0" description="In a B slice, the field is either directly from num_ref_idx_l1_active_minus1, or inferred from num_ref_idx_l1_default_active_minus1, in the range 0 to 15" range="" rwaccess="RW"/>
+    <bitfield id="NUM_REF_IDX_L0_ACTIVE_MINUS1" width="4" begin="11" end="8" resetval="0x0" description="Field is either directly from num_ref_idx_l0_active_minus1, or inferred from num_ref_idx_l0_default_active_minus1, in the range 0 to 15" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_TEMPORAL_MVP_ENABLE_FLAG" width="1" begin="4" end="4" resetval="0x0" description="When set, temporal motion vector prediction is enabled in the slice" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_SAO_CHROMA_FLAG" width="1" begin="3" end="3" resetval="0x0" description="When set, indicates SAO is enabled for the chroma component in the current slice" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_SAO_LUMA_FLAG" width="1" begin="2" end="2" resetval="0x0" description="When set, indicates SAO is enabled for the luma component in the current slice" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_TYPE" width="2" begin="1" end="0" resetval="0x0" description="Slice type [N.B." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_PARAM_1_01" acronym="DECODER0_CR_HEVC_SLICE_PARAM_1_01" offset="0x144" width="32" description="">
+    <bitfield id="EXT_INDEPENDENT_SLICE_MB_NO_Y" width="3" begin="31" end="29" resetval="0x0" description="If picture width or height is larger than 8192 pixels, this field multiplied by 512 is added to INDEPENDENT_SLICE_MB_NO_Y to define the vertical offset of the first 16x16 block in the current independent slice, or from the start of the previous independent slice if this is a dependent slice [where this field counts from 0]" range="" rwaccess="RW"/>
+    <bitfield id="EXT_INDEPENDENT_SLICE_MB_NO_X" width="3" begin="28" end="26" resetval="0x0" description="If picture width or height is larger than 8192 pixels, this field multiplied by 512 is added to INDEPENDENT_SLICE_MB_NO_Y to define the horizontal offset of the first 16x16 block in the current independent slice, or from the start of the previous independent slice if this is a dependent slice [where this field counts from 0]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="25" end="25" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_LOOP_FILTER_ACROSS_SLICES_ENABLED_FLAG" width="1" begin="24" end="24" resetval="0x0" description="When set to 1, indicates deblocking and SAO filters may be performed across a slice boundary [when this flag is not present in the bitstream it should be set to the same value as pps_loop_filter_across_slices_enabled_flag" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="23" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_CR_QP_OFFSET" width="5" begin="20" end="16" resetval="0x0" description="Signed offset for QPCr relative to QPy in the range -12 to +12 [If pic_slice_chroma_qp_offsets_present_flag is 0, this field should be set to 0]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_CB_QP_OFFSET" width="5" begin="12" end="8" resetval="0x0" description="Signed offset for QPCb relative to QPy in the range -12 to +12 [If pic_slice_chroma_qp_offsets_present_flag is 0, this field should be set to 0]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_QPY" width="7" begin="6" end="0" resetval="0x0" description="This field stores the 'SliceQPy + QpBdOffsety' from the HEVC spec and is in the range 0 to [51+QpBdOffsety]." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_PARAM_2_01" acronym="DECODER0_CR_HEVC_SLICE_PARAM_2_01" offset="0x148" width="32" description="">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INDEPENDENT_SLICE_MB_NO_Y" width="9" begin="18" end="10" resetval="0x0" description="The vertical offset of the first 16x16 block in the current independent slice, or from the start of the previous independent slice if this is a dependent slice [where this field counts from 0] [For HEVC CTU sizes larger than 16x16 this is the co-ordinate of the top left 16x16 block within the CTU] [For pictures larger than 8192 pixels high, EXT_INDEPENDENT_SLICE_MB_NO_Y is also used]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INDEPENDENT_SLICE_MB_NO_X" width="9" begin="8" end="0" resetval="0x0" description="The horizontal offset of the first 16x16 block in the current independent slice, or from the start of the previous independent slice if this is a dependent slice [where this field counts from 0] [For HEVC CTU sizes larger than 16x16 this is the co-ordinate of the top left 16x16 block within the CTU]] [For pictures larger than 8192 pixels wide, EXT_INDEPENDENT_SLICE_MB_NO_X is also used]" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST0_0_3_01" acronym="DECODER0_CR_HEVC_SLICE_LIST0_0_3_01" offset="0x160" width="32" description="Reference picture list 0, maps reference index to Decoded Picture Buffer (DPB) index. Can change per-slice, but the combination of both list 0 and list 1 for all slices within a picture will use a maximum of 8 Decoded Picture Buffers (multiple reference index can point to the same Decoded Picture Buffer, but may use different weighted prediction parameters).">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_3" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 0, index 3" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_2" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 0, index 2" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_1" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 0, index 1" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_0" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 0, index 0" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST0_4_7_01" acronym="DECODER0_CR_HEVC_SLICE_LIST0_4_7_01" offset="0x164" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_7" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 0, index 7" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_6" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 0, index 6" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_5" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 0, index 5" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_4" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 0, index 4" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST0_8_11_01" acronym="DECODER0_CR_HEVC_SLICE_LIST0_8_11_01" offset="0x168" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_11" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 0, index 11" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_10" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 0, index 10" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_9" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 0, index 9" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_8" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 0, index 8" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST0_12_15_01" acronym="DECODER0_CR_HEVC_SLICE_LIST0_12_15_01" offset="0x16C" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_15" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 0, index 15" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_14" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 0, index 14" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_13" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 0, index 13" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_12" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 0, index 12" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST1_0_3_01" acronym="DECODER0_CR_HEVC_SLICE_LIST1_0_3_01" offset="0x170" width="32" description="Reference picture list 1, maps reference index to Decoded Picture Buffer (DPB) index. Can change per-slice, but the combination of all slices within a picture will use a maximum of 8 Decoded Picture Buffers (multiple reference index can point to the same Decoded Picture Buffer but use a different weighted prediction parameter).">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_3" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 1, index 3" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_2" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 1, index 2" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_1" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 1, index 1" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_0" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 1, index 0" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST1_4_7_01" acronym="DECODER0_CR_HEVC_SLICE_LIST1_4_7_01" offset="0x174" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_7" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 1, index 7" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_6" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 1, index 6" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_5" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 1, index 5" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_4" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 1, index 4" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST1_8_11_01" acronym="DECODER0_CR_HEVC_SLICE_LIST1_8_11_01" offset="0x178" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_11" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 1, index 11" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_10" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 1, index 10" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_9" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 1, index 9" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_8" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 1, index 8" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST1_12_15_01" acronym="DECODER0_CR_HEVC_SLICE_LIST1_12_15_01" offset="0x17C" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_15" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 1, index 15" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_14" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 1, index 14" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_13" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 1, index 13" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_12" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 1, index 12" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_PARAM_0_02" acronym="DECODER0_CR_HEVC_SLICE_PARAM_0_02" offset="0x180" width="32" description="The registers in the address range 0x100 to 0x13C contain slice level parameters for a macroblock row, where four sets of slice parameter registers are supported. If the CTU size is 16x16, slice level parameters in the range 0x100 to 0x13C only apply to the top macroblock row (registers in the range 0x140 to 0x17C apply to the second macroblock row, registers in the range 0x180 to 0x1BC apply to the third macroblock row, and registers in the range 0x1C0 to 0x1FC apply to the last macroblock row). If the CTU size is 32x32, slice level parameters in the range 0x100 to 0x13C apply to the top 32 luma rows processed, and the registers in the range 0x180 to 0x1BC apply to the bottom 32 luma rows processed. If the CTU size is 64x64, slice level parameters in the range 0x100 to 0x13C apply to all 64 luma rows which are processed (and the registers in the range 0x140 to 0x1FC are not used).">
+    <bitfield id="RESERVED" width="9" begin="31" end="23" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MAX_NUM_MERGE_CAND" width="3" begin="22" end="20" resetval="0x5" description="Calcaulated from" range="" rwaccess="RW"/>
+    <bitfield id="CU_CHROMA_QP_OFFSET_ENABLED_FLAG" width="1" begin="19" end="19" resetval="0x0" description="Indicates that the cu_chroma_qp_offset_flag may be present in the transform unit syntax" range="" rwaccess="RW"/>
+    <bitfield id="COLLOCATED_FROM_L0_FLAG" width="1" begin="18" end="18" resetval="0x0" description="In a B-slice, if temporal motion vector prediction is enabled, defines if collocated index is from list 0 [if set] or list 1 [if low]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="17" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MVD_L1_ZERO_FLAG" width="1" begin="16" end="16" resetval="0x0" description="In a B slice, when set indicates the mvd_coding syntax for list 1 is not parsed, but instead is set to 0" range="" rwaccess="RW"/>
+    <bitfield id="NUM_REF_IDX_L1_ACTIVE_MINUS1" width="4" begin="15" end="12" resetval="0x0" description="In a B slice, the field is either directly from num_ref_idx_l1_active_minus1, or inferred from num_ref_idx_l1_default_active_minus1, in the range 0 to 15" range="" rwaccess="RW"/>
+    <bitfield id="NUM_REF_IDX_L0_ACTIVE_MINUS1" width="4" begin="11" end="8" resetval="0x0" description="Field is either directly from num_ref_idx_l0_active_minus1, or inferred from num_ref_idx_l0_default_active_minus1, in the range 0 to 15" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_TEMPORAL_MVP_ENABLE_FLAG" width="1" begin="4" end="4" resetval="0x0" description="When set, temporal motion vector prediction is enabled in the slice" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_SAO_CHROMA_FLAG" width="1" begin="3" end="3" resetval="0x0" description="When set, indicates SAO is enabled for the chroma component in the current slice" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_SAO_LUMA_FLAG" width="1" begin="2" end="2" resetval="0x0" description="When set, indicates SAO is enabled for the luma component in the current slice" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_TYPE" width="2" begin="1" end="0" resetval="0x0" description="Slice type [N.B." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_PARAM_1_02" acronym="DECODER0_CR_HEVC_SLICE_PARAM_1_02" offset="0x184" width="32" description="">
+    <bitfield id="EXT_INDEPENDENT_SLICE_MB_NO_Y" width="3" begin="31" end="29" resetval="0x0" description="If picture width or height is larger than 8192 pixels, this field multiplied by 512 is added to INDEPENDENT_SLICE_MB_NO_Y to define the vertical offset of the first 16x16 block in the current independent slice, or from the start of the previous independent slice if this is a dependent slice [where this field counts from 0]" range="" rwaccess="RW"/>
+    <bitfield id="EXT_INDEPENDENT_SLICE_MB_NO_X" width="3" begin="28" end="26" resetval="0x0" description="If picture width or height is larger than 8192 pixels, this field multiplied by 512 is added to INDEPENDENT_SLICE_MB_NO_Y to define the horizontal offset of the first 16x16 block in the current independent slice, or from the start of the previous independent slice if this is a dependent slice [where this field counts from 0]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="25" end="25" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_LOOP_FILTER_ACROSS_SLICES_ENABLED_FLAG" width="1" begin="24" end="24" resetval="0x0" description="When set to 1, indicates deblocking and SAO filters may be performed across a slice boundary [when this flag is not present in the bitstream it should be set to the same value as pps_loop_filter_across_slices_enabled_flag" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="23" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_CR_QP_OFFSET" width="5" begin="20" end="16" resetval="0x0" description="Signed offset for QPCr relative to QPy in the range -12 to +12 [If pic_slice_chroma_qp_offsets_present_flag is 0, this field should be set to 0]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_CB_QP_OFFSET" width="5" begin="12" end="8" resetval="0x0" description="Signed offset for QPCb relative to QPy in the range -12 to +12 [If pic_slice_chroma_qp_offsets_present_flag is 0, this field should be set to 0]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_QPY" width="7" begin="6" end="0" resetval="0x0" description="This field stores the 'SliceQPy + QpBdOffsety' from the HEVC spec and is in the range 0 to [51+QpBdOffsety]." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_PARAM_2_02" acronym="DECODER0_CR_HEVC_SLICE_PARAM_2_02" offset="0x188" width="32" description="">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INDEPENDENT_SLICE_MB_NO_Y" width="9" begin="18" end="10" resetval="0x0" description="The vertical offset of the first 16x16 block in the current independent slice, or from the start of the previous independent slice if this is a dependent slice [where this field counts from 0] [For HEVC CTU sizes larger than 16x16 this is the co-ordinate of the top left 16x16 block within the CTU] [For pictures larger than 8192 pixels high, EXT_INDEPENDENT_SLICE_MB_NO_Y is also used]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INDEPENDENT_SLICE_MB_NO_X" width="9" begin="8" end="0" resetval="0x0" description="The horizontal offset of the first 16x16 block in the current independent slice, or from the start of the previous independent slice if this is a dependent slice [where this field counts from 0] [For HEVC CTU sizes larger than 16x16 this is the co-ordinate of the top left 16x16 block within the CTU]] [For pictures larger than 8192 pixels wide, EXT_INDEPENDENT_SLICE_MB_NO_X is also used]" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST0_0_3_02" acronym="DECODER0_CR_HEVC_SLICE_LIST0_0_3_02" offset="0x1A0" width="32" description="Reference picture list 0, maps reference index to Decoded Picture Buffer (DPB) index. Can change per-slice, but the combination of both list 0 and list 1 for all slices within a picture will use a maximum of 8 Decoded Picture Buffers (multiple reference index can point to the same Decoded Picture Buffer, but may use different weighted prediction parameters).">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_3" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 0, index 3" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_2" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 0, index 2" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_1" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 0, index 1" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_0" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 0, index 0" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST0_4_7_02" acronym="DECODER0_CR_HEVC_SLICE_LIST0_4_7_02" offset="0x1A4" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_7" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 0, index 7" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_6" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 0, index 6" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_5" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 0, index 5" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_4" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 0, index 4" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST0_8_11_02" acronym="DECODER0_CR_HEVC_SLICE_LIST0_8_11_02" offset="0x1A8" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_11" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 0, index 11" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_10" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 0, index 10" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_9" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 0, index 9" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_8" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 0, index 8" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST0_12_15_02" acronym="DECODER0_CR_HEVC_SLICE_LIST0_12_15_02" offset="0x1AC" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_15" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 0, index 15" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_14" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 0, index 14" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_13" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 0, index 13" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_12" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 0, index 12" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST1_0_3_02" acronym="DECODER0_CR_HEVC_SLICE_LIST1_0_3_02" offset="0x1B0" width="32" description="Reference picture list 1, maps reference index to Decoded Picture Buffer (DPB) index. Can change per-slice, but the combination of all slices within a picture will use a maximum of 8 Decoded Picture Buffers (multiple reference index can point to the same Decoded Picture Buffer but use a different weighted prediction parameter).">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_3" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 1, index 3" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_2" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 1, index 2" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_1" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 1, index 1" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_0" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 1, index 0" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST1_4_7_02" acronym="DECODER0_CR_HEVC_SLICE_LIST1_4_7_02" offset="0x1B4" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_7" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 1, index 7" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_6" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 1, index 6" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_5" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 1, index 5" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_4" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 1, index 4" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST1_8_11_02" acronym="DECODER0_CR_HEVC_SLICE_LIST1_8_11_02" offset="0x1B8" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_11" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 1, index 11" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_10" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 1, index 10" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_9" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 1, index 9" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_8" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 1, index 8" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST1_12_15_02" acronym="DECODER0_CR_HEVC_SLICE_LIST1_12_15_02" offset="0x1BC" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_15" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 1, index 15" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_14" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 1, index 14" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_13" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 1, index 13" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_12" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 1, index 12" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_PARAM_0_03" acronym="DECODER0_CR_HEVC_SLICE_PARAM_0_03" offset="0x1C0" width="32" description="The registers in the address range 0x100 to 0x13C contain slice level parameters for a macroblock row, where four sets of slice parameter registers are supported. If the CTU size is 16x16, slice level parameters in the range 0x100 to 0x13C only apply to the top macroblock row (registers in the range 0x140 to 0x17C apply to the second macroblock row, registers in the range 0x180 to 0x1BC apply to the third macroblock row, and registers in the range 0x1C0 to 0x1FC apply to the last macroblock row). If the CTU size is 32x32, slice level parameters in the range 0x100 to 0x13C apply to the top 32 luma rows processed, and the registers in the range 0x180 to 0x1BC apply to the bottom 32 luma rows processed. If the CTU size is 64x64, slice level parameters in the range 0x100 to 0x13C apply to all 64 luma rows which are processed (and the registers in the range 0x140 to 0x1FC are not used).">
+    <bitfield id="RESERVED" width="9" begin="31" end="23" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MAX_NUM_MERGE_CAND" width="3" begin="22" end="20" resetval="0x5" description="Calcaulated from" range="" rwaccess="RW"/>
+    <bitfield id="CU_CHROMA_QP_OFFSET_ENABLED_FLAG" width="1" begin="19" end="19" resetval="0x0" description="Indicates that the cu_chroma_qp_offset_flag may be present in the transform unit syntax" range="" rwaccess="RW"/>
+    <bitfield id="COLLOCATED_FROM_L0_FLAG" width="1" begin="18" end="18" resetval="0x0" description="In a B-slice, if temporal motion vector prediction is enabled, defines if collocated index is from list 0 [if set] or list 1 [if low]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="17" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MVD_L1_ZERO_FLAG" width="1" begin="16" end="16" resetval="0x0" description="In a B slice, when set indicates the mvd_coding syntax for list 1 is not parsed, but instead is set to 0" range="" rwaccess="RW"/>
+    <bitfield id="NUM_REF_IDX_L1_ACTIVE_MINUS1" width="4" begin="15" end="12" resetval="0x0" description="In a B slice, the field is either directly from num_ref_idx_l1_active_minus1, or inferred from num_ref_idx_l1_default_active_minus1, in the range 0 to 15" range="" rwaccess="RW"/>
+    <bitfield id="NUM_REF_IDX_L0_ACTIVE_MINUS1" width="4" begin="11" end="8" resetval="0x0" description="Field is either directly from num_ref_idx_l0_active_minus1, or inferred from num_ref_idx_l0_default_active_minus1, in the range 0 to 15" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_TEMPORAL_MVP_ENABLE_FLAG" width="1" begin="4" end="4" resetval="0x0" description="When set, temporal motion vector prediction is enabled in the slice" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_SAO_CHROMA_FLAG" width="1" begin="3" end="3" resetval="0x0" description="When set, indicates SAO is enabled for the chroma component in the current slice" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_SAO_LUMA_FLAG" width="1" begin="2" end="2" resetval="0x0" description="When set, indicates SAO is enabled for the luma component in the current slice" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_TYPE" width="2" begin="1" end="0" resetval="0x0" description="Slice type [N.B." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_PARAM_1_03" acronym="DECODER0_CR_HEVC_SLICE_PARAM_1_03" offset="0x1C4" width="32" description="">
+    <bitfield id="EXT_INDEPENDENT_SLICE_MB_NO_Y" width="3" begin="31" end="29" resetval="0x0" description="If picture width or height is larger than 8192 pixels, this field multiplied by 512 is added to INDEPENDENT_SLICE_MB_NO_Y to define the vertical offset of the first 16x16 block in the current independent slice, or from the start of the previous independent slice if this is a dependent slice [where this field counts from 0]" range="" rwaccess="RW"/>
+    <bitfield id="EXT_INDEPENDENT_SLICE_MB_NO_X" width="3" begin="28" end="26" resetval="0x0" description="If picture width or height is larger than 8192 pixels, this field multiplied by 512 is added to INDEPENDENT_SLICE_MB_NO_Y to define the horizontal offset of the first 16x16 block in the current independent slice, or from the start of the previous independent slice if this is a dependent slice [where this field counts from 0]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="25" end="25" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_LOOP_FILTER_ACROSS_SLICES_ENABLED_FLAG" width="1" begin="24" end="24" resetval="0x0" description="When set to 1, indicates deblocking and SAO filters may be performed across a slice boundary [when this flag is not present in the bitstream it should be set to the same value as pps_loop_filter_across_slices_enabled_flag" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="23" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_CR_QP_OFFSET" width="5" begin="20" end="16" resetval="0x0" description="Signed offset for QPCr relative to QPy in the range -12 to +12 [If pic_slice_chroma_qp_offsets_present_flag is 0, this field should be set to 0]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_CB_QP_OFFSET" width="5" begin="12" end="8" resetval="0x0" description="Signed offset for QPCb relative to QPy in the range -12 to +12 [If pic_slice_chroma_qp_offsets_present_flag is 0, this field should be set to 0]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_QPY" width="7" begin="6" end="0" resetval="0x0" description="This field stores the 'SliceQPy + QpBdOffsety' from the HEVC spec and is in the range 0 to [51+QpBdOffsety]." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_PARAM_2_03" acronym="DECODER0_CR_HEVC_SLICE_PARAM_2_03" offset="0x1C8" width="32" description="">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INDEPENDENT_SLICE_MB_NO_Y" width="9" begin="18" end="10" resetval="0x0" description="The vertical offset of the first 16x16 block in the current independent slice, or from the start of the previous independent slice if this is a dependent slice [where this field counts from 0] [For HEVC CTU sizes larger than 16x16 this is the co-ordinate of the top left 16x16 block within the CTU] [For pictures larger than 8192 pixels high, EXT_INDEPENDENT_SLICE_MB_NO_Y is also used]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INDEPENDENT_SLICE_MB_NO_X" width="9" begin="8" end="0" resetval="0x0" description="The horizontal offset of the first 16x16 block in the current independent slice, or from the start of the previous independent slice if this is a dependent slice [where this field counts from 0] [For HEVC CTU sizes larger than 16x16 this is the co-ordinate of the top left 16x16 block within the CTU]] [For pictures larger than 8192 pixels wide, EXT_INDEPENDENT_SLICE_MB_NO_X is also used]" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST0_0_3_03" acronym="DECODER0_CR_HEVC_SLICE_LIST0_0_3_03" offset="0x1E0" width="32" description="Reference picture list 0, maps reference index to Decoded Picture Buffer (DPB) index. Can change per-slice, but the combination of both list 0 and list 1 for all slices within a picture will use a maximum of 8 Decoded Picture Buffers (multiple reference index can point to the same Decoded Picture Buffer, but may use different weighted prediction parameters).">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_3" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 0, index 3" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_2" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 0, index 2" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_1" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 0, index 1" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_0" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 0, index 0" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST0_4_7_03" acronym="DECODER0_CR_HEVC_SLICE_LIST0_4_7_03" offset="0x1E4" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_7" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 0, index 7" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_6" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 0, index 6" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_5" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 0, index 5" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_4" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 0, index 4" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST0_8_11_03" acronym="DECODER0_CR_HEVC_SLICE_LIST0_8_11_03" offset="0x1E8" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_11" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 0, index 11" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_10" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 0, index 10" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_9" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 0, index 9" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_8" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 0, index 8" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST0_12_15_03" acronym="DECODER0_CR_HEVC_SLICE_LIST0_12_15_03" offset="0x1EC" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_15" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 0, index 15" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_14" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 0, index 14" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_13" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 0, index 13" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_12" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 0, index 12" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST1_0_3_03" acronym="DECODER0_CR_HEVC_SLICE_LIST1_0_3_03" offset="0x1F0" width="32" description="Reference picture list 1, maps reference index to Decoded Picture Buffer (DPB) index. Can change per-slice, but the combination of all slices within a picture will use a maximum of 8 Decoded Picture Buffers (multiple reference index can point to the same Decoded Picture Buffer but use a different weighted prediction parameter).">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_3" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 1, index 3" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_2" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 1, index 2" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_1" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 1, index 1" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_0" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 1, index 0" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST1_4_7_03" acronym="DECODER0_CR_HEVC_SLICE_LIST1_4_7_03" offset="0x1F4" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_7" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 1, index 7" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_6" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 1, index 6" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_5" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 1, index 5" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_4" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 1, index 4" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST1_8_11_03" acronym="DECODER0_CR_HEVC_SLICE_LIST1_8_11_03" offset="0x1F8" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_11" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 1, index 11" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_10" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 1, index 10" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_9" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 1, index 9" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_8" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 1, index 8" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_LIST1_12_15_03" acronym="DECODER0_CR_HEVC_SLICE_LIST1_12_15_03" offset="0x1FC" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_15" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture list 1, index 15" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_14" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture list 1, index 14" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_13" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture list 1, index 13" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_12" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture list 1, index 12" range="" rwaccess="RW"/>
+  </register>
+</module>

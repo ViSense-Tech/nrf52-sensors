@@ -1,0 +1,11 @@
+<module name="PCIE3_CORE_VMAP_MMRS" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="CORE__VMAP__MMRS_defmap" acronym="CORE__VMAP__MMRS_defmap" offset="0x200" width="32" description="">
+		<bitfield id="ATS_DIS" width="1" begin="20" end="20" resetval="0x1" description="ATS mode. 1-ATS is disabled, 0-ATS is enabled" range="20" rwaccess="R/W"/> 
+		<bitfield id="BDF_MODE" width="1" begin="19" end="19" resetval="0x0" description="Bus default mode. 0-Use default bus numbers, 1-Use offset bus numbers" range="19" rwaccess="R/W"/> 
+		<bitfield id="DEF_ATYPE" width="2" begin="17" end="16" resetval="0x0" description="Default address type attribute. 0-Physical Address, 1-Intermediate Address, 2-Virtual Address, 3-Translated Address" range="17 - 16" rwaccess="R/W"/> 
+		<bitfield id="DEF_VID" width="12" begin="11" end="0" resetval="0x4095" description="Default match ID" range="11 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CORE__VMAP__MMRS_ob_virtid_match" acronym="CORE__VMAP__MMRS_ob_virtid_match" offset="0x400" width="32" description="">
+		<bitfield id="VAL" width="7" begin="11" end="5" resetval="0x0" description="Outbound virtid[11:5] match value. When outbound VBUSM slave interface virtid[11:5] matches the value in this register and the ASEL value is non-zero, the PCIe controller address translation unit (ATU) is bypassed. The PCIe TLP descriptor values are taken from the ext_desc registers." range="11 - 5" rwaccess="R/W"/>
+	</register>
+</module>

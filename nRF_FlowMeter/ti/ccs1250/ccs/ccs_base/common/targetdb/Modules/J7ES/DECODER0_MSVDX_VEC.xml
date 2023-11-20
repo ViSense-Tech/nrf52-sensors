@@ -1,0 +1,738 @@
+<module name="DECODER0_MSVDX_VEC" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="DECODER0_CR_VEC_CONTROL" acronym="DECODER0_CR_VEC_CONTROL" offset="0x0" width="32" description="">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BITPLANE_FETCH_ENABLE" width="1" begin="16" end="16" resetval="0x0" description="Setting this bit will cause the h/w to fetch the bit plane data from the address specified at VEC_VC1_FE_BITPLANES_BASE_ADDR0 [0x418]." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="7" begin="15" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ENTDEC_ENABLE_BE" width="1" begin="8" end="8" resetval="0x0" description="Setting this bit to '1' instructs the back-end EntDec parser to start parsing the Rendec stream." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="7" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ENTDEC_BITPLANE_DECODE_COMPLETE" width="1" begin="2" end="2" resetval="0x0" description="This is a status bit to indicate if parsing of the Bit Plane data has completed or not." range="" rwaccess="RW"/>
+    <bitfield id="ENTDEC_BITPLANE_DECODE_ENABLE" width="1" begin="1" end="1" resetval="0x0" description="Setting this bit to '1' instructs the VC-1 Bit Plane decoder to start parsing the stream." range="" rwaccess="RW"/>
+    <bitfield id="ENTDEC_ENABLE_FE" width="1" begin="0" end="0" resetval="0x0" description="Setting this bit to '1' instructs the front-end EntDec parser to start parsing the bit stream." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MULTICORE_OPERATION_MODE" acronym="DECODER0_CR_VEC_MULTICORE_OPERATION_MODE" offset="0x4" width="32" description="">
+    <bitfield id="STALL_ON_ROW_COUNT" width="1" begin="31" end="31" resetval="0x0" description="Enable the multicore support" range="" rwaccess="RW"/>
+    <bitfield id="FENCE_AT_END_OF_ROW" width="1" begin="30" end="30" resetval="0x0" description="Insert a fence operation into the memory interface for the last write of the macroblock row before updating the macroblock row count" range="" rwaccess="RW"/>
+    <bitfield id="MULTICORE_BYPASS_ENABLE" width="1" begin="29" end="29" resetval="0x0" description="Instead of providing the vdeb macroblock_row_count from the current core, bypass the vdeb macroblock_row_count from the upper core to the lower core in the chain" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="28" end="26" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SYNC_ORDINAL" width="2" begin="25" end="24" resetval="0x0" description="Sync core ordinal allows the dependent upstream core [and associated sync value] to be selected." range="" rwaccess="RW"/>
+    <bitfield id="PICTURE_NUMBER_SYNC" width="4" begin="23" end="20" resetval="0x0" description="Picture number value to be compared to the sync value passed from the upstream decode core." range="" rwaccess="RW"/>
+    <bitfield id="PICTURE_NUMBER_CURR" width="4" begin="19" end="16" resetval="0x0" description="Picture number value of the current decode to be passed to the downstream decode core." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MBLK_ROW_OFFSET" width="8" begin="7" end="0" resetval="0x0" description="Macroblock row offset to be subtracted from the external macroblock row count." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_COPRO_TARGET" acronym="DECODER0_CR_VEC_COPRO_TARGET" offset="0x8" width="32" description="Controls the target module that is accessed by the MTX co-pro port.">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COPRO_TARGET" width="3" begin="2" end="0" resetval="0x0" description="Controls the target module that is accessed by the MTX co-pro port." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_ENTDEC_FE_CONTROL" acronym="DECODER0_CR_VEC_ENTDEC_FE_CONTROL" offset="0xC" width="32" description="">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_SKIP_MACROBLOCK_ADDRESS_INC" width="1" begin="13" end="13" resetval="0x0" description="Indicates that the SW has already extracted the macroblock_inc value and placed it in cr_macroblock_address_inc." range="" rwaccess="RW"/>
+    <bitfield id="ENTDEC_BITPLANE_INTERRUPT_ENABLE" width="1" begin="12" end="12" resetval="0x0" description="When this bit is set to '1', the completion of VC-1 Bit Plane decoding is notified via VEC_END_OF_SLICE bit of interrupt status register of MSVDX." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="11" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VLRIF_DMAC_BURST_LENGTH" width="1" begin="8" end="8" resetval="0x0" description="DMAC-CH1 burst length control set up by VLRIF when fetching the bitplane data or slice group map data from memory." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="7" end="6" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ENTDEC_FE_EXTENDED_MODE" width="1" begin="5" end="5" resetval="0x0" description="Provides an extension to the ENTDEC_FE_MODE field to allow additional codecs." range="" rwaccess="RW"/>
+    <bitfield id="ENTDEC_FE_PROFILE" width="2" begin="4" end="3" resetval="0x0" description="Defines profile for the front-end of Entdec [definition based on ENTDEC_FE_MODE]" range="" rwaccess="RW"/>
+    <bitfield id="ENTDEC_FE_MODE" width="3" begin="2" end="0" resetval="0x1" description="Define which standard the stream [being processed by the front-end] belongs to" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_ENTDEC_BE_CONTROL" acronym="DECODER0_CR_VEC_ENTDEC_BE_CONTROL" offset="0x10" width="32" description="">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ENTDEC_BE_EXTENDED_MODE" width="1" begin="5" end="5" resetval="0x0" description="Provies an extension to the ENTDEC_BE_MODE field" range="" rwaccess="RW"/>
+    <bitfield id="ENTDEC_BE_PROFILE" width="2" begin="4" end="3" resetval="0x0" description="Defines profile for the back-end of Entdec [definition based on ENTDEC_BE_MODE]" range="" rwaccess="RW"/>
+    <bitfield id="ENTDEC_BE_MODE" width="3" begin="2" end="0" resetval="0x0" description="Define which standard the stream [being processed by the back-end] belongs to" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_SHIFTREG_SELECT" acronym="DECODER0_CR_VEC_SHIFTREG_SELECT" offset="0x14" width="32" description="">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_ENTDEC_SELECTOR" width="3" begin="18" end="16" resetval="0x0" description="Used to select the instance of the Shift Register that can be accessed by the Entropy Decoder" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_COPRO_SELECTOR" width="3" begin="10" end="8" resetval="0x0" description="Used to select the instance of the Shift Register that can be accessed via the MTX Co-processor Port" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_RESET_METRICS" width="1" begin="4" end="4" resetval="0x1" description="Reset all the metric values in all instances of the Shift Register" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_REGIF_SELECTOR" width="3" begin="2" end="0" resetval="0x0" description="Used to select the instance of the Shift Register that can be accessed via the register interface" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_SHIFTREG_CONTROL_00" acronym="DECODER0_CR_VEC_SHIFTREG_CONTROL_00" offset="0x18" width="32" description="">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_CODEC_MODE" width="4" begin="19" end="16" resetval="0x0" description="Codec mode which the shift register works in [affects emulation prevention detection and other operations fro JPEG]." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_BYTE_COUNT_EBDU" width="1" begin="12" end="12" resetval="0x0" description="If SR_RBDU_EXTRACT is set, then this field affects how byte count works" range="" rwaccess="RW"/>
+    <bitfield id="SR_FILL_IN_ZEROES" width="1" begin="11" end="11" resetval="0x0" description="If SR_READ_MODE = 0 and byte count is set, then fifo will be filled in zeroes when byte count becomes zero" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_MASTER_SELECT" width="2" begin="9" end="8" resetval="0x0" description="Specifies which requestor is the master of this Shift Register channel" range="" rwaccess="RW"/>
+    <bitfield id="SR_DISABLE_DMA" width="1" begin="7" end="7" resetval="0x0" description="Controls the assertion of DREQ from ShiftReg to DMAC" range="" rwaccess="RW"/>
+    <bitfield id="SR_FIFO_BYTE_SWAP" width="1" begin="6" end="6" resetval="0x0" description="Controls whether the" range="" rwaccess="RW"/>
+    <bitfield id="SR_FIFO_MODE" width="1" begin="5" end="5" resetval="0x0" description="Controls whether ShiftReg FIFO is used as a" range="" rwaccess="RW"/>
+    <bitfield id="SR_RBDU_JPEG" width="1" begin="4" end="4" resetval="0x0" description="When set, indicates that the RBDU should be based on JPEG stuffed bytes rather than the emualtion bytes of other standards" range="" rwaccess="RW"/>
+    <bitfield id="SR_RBDU_EXTRACT" width="1" begin="3" end="3" resetval="0x0" description="Controls 'raw bit stream data unit' extraction" range="" rwaccess="RW"/>
+    <bitfield id="SR_READ_MODE" width="1" begin="2" end="2" resetval="0x0" description="Controls whether Start Code Prefixes are detected or whether byte_count is used to control the amount of data read through the ShiftReg" range="" rwaccess="RW"/>
+    <bitfield id="SR_PREEMPT" width="1" begin="1" end="1" resetval="0x0" description="Allows pre-emption of any pending MTX ShiftReg Co-processor read" range="" rwaccess="RW"/>
+    <bitfield id="SR_SW_RESET" width="1" begin="0" end="0" resetval="0x0" description="Shift Register software reset" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_SHIFTREG_BYTE_COUNT_00" acronym="DECODER0_CR_VEC_SHIFTREG_BYTE_COUNT_00" offset="0x1C" width="32" description="Used to control the amount of bit stream data that can be read through the Shift RegisterNOTE: Writing to this register clears the End-of-Data flag and allows more bit stream data to be read through the Shift Register">
+    <bitfield id="SR_BYTE_COUNT" width="32" begin="31" end="0" resetval="0x00FFFFFF" description="Count of bytes that should be processed before returning control to MTX." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_SHIFTREG_STREAMIN_00" acronym="DECODER0_CR_VEC_SHIFTREG_STREAMIN_00" offset="0x20" width="32" description="">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_STREAMIN" width="8" begin="7" end="0" resetval="0x0" description="Input for the compressed bit stream" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_SHIFTREG_EMULATION_COUNT_00" acronym="DECODER0_CR_VEC_SHIFTREG_EMULATION_COUNT_00" offset="0x24" width="32" description="">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SR_BIT_OFFSET" width="3" begin="26" end="24" resetval="0x0" description="In byte count mode, SR_BYTE_COUNT*8 + SR_BIT_OFFSET indicates the number of bits left [this is mainly for firmware to know the bit offset at the end of a slice header]." range="" rwaccess="R"/>
+    <bitfield id="SR_EMULATION_COUNT" width="24" begin="23" end="0" resetval="0x0" description="If SR_RBDU_EXTRACT is set, this field indicates the number of emulation prevention bytes which have been removed [where the count is aligned to the actual bits consumed from the shift register]" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VEC_SHIFTREG_CONTROL_01" acronym="DECODER0_CR_VEC_SHIFTREG_CONTROL_01" offset="0x28" width="32" description="">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_CODEC_MODE" width="4" begin="19" end="16" resetval="0x0" description="Codec mode which the shift register works in [affects emulation prevention detection and other operations fro JPEG]." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_BYTE_COUNT_EBDU" width="1" begin="12" end="12" resetval="0x0" description="If SR_RBDU_EXTRACT is set, then this field affects how byte count works" range="" rwaccess="RW"/>
+    <bitfield id="SR_FILL_IN_ZEROES" width="1" begin="11" end="11" resetval="0x0" description="If SR_READ_MODE = 0 and byte count is set, then fifo will be filled in zeroes when byte count becomes zero" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_MASTER_SELECT" width="2" begin="9" end="8" resetval="0x0" description="Specifies which requestor is the master of this Shift Register channel" range="" rwaccess="RW"/>
+    <bitfield id="SR_DISABLE_DMA" width="1" begin="7" end="7" resetval="0x0" description="Controls the assertion of DREQ from ShiftReg to DMAC" range="" rwaccess="RW"/>
+    <bitfield id="SR_FIFO_BYTE_SWAP" width="1" begin="6" end="6" resetval="0x0" description="Controls whether the" range="" rwaccess="RW"/>
+    <bitfield id="SR_FIFO_MODE" width="1" begin="5" end="5" resetval="0x0" description="Controls whether ShiftReg FIFO is used as a" range="" rwaccess="RW"/>
+    <bitfield id="SR_RBDU_JPEG" width="1" begin="4" end="4" resetval="0x0" description="When set, indicates that the RBDU should be based on JPEG stuffed bytes rather than the emualtion bytes of other standards" range="" rwaccess="RW"/>
+    <bitfield id="SR_RBDU_EXTRACT" width="1" begin="3" end="3" resetval="0x0" description="Controls 'raw bit stream data unit' extraction" range="" rwaccess="RW"/>
+    <bitfield id="SR_READ_MODE" width="1" begin="2" end="2" resetval="0x0" description="Controls whether Start Code Prefixes are detected or whether byte_count is used to control the amount of data read through the ShiftReg" range="" rwaccess="RW"/>
+    <bitfield id="SR_PREEMPT" width="1" begin="1" end="1" resetval="0x0" description="Allows pre-emption of any pending MTX ShiftReg Co-processor read" range="" rwaccess="RW"/>
+    <bitfield id="SR_SW_RESET" width="1" begin="0" end="0" resetval="0x0" description="Shift Register software reset" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_SHIFTREG_BYTE_COUNT_01" acronym="DECODER0_CR_VEC_SHIFTREG_BYTE_COUNT_01" offset="0x2C" width="32" description="Used to control the amount of bit stream data that can be read through the Shift RegisterNOTE: Writing to this register clears the End-of-Data flag and allows more bit stream data to be read through the Shift Register">
+    <bitfield id="SR_BYTE_COUNT" width="32" begin="31" end="0" resetval="0x00FFFFFF" description="Count of bytes that should be processed before returning control to MTX." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_SHIFTREG_STREAMIN_01" acronym="DECODER0_CR_VEC_SHIFTREG_STREAMIN_01" offset="0x30" width="32" description="">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_STREAMIN" width="8" begin="7" end="0" resetval="0x0" description="Input for the compressed bit stream" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_SHIFTREG_EMULATION_COUNT_01" acronym="DECODER0_CR_VEC_SHIFTREG_EMULATION_COUNT_01" offset="0x34" width="32" description="">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SR_BIT_OFFSET" width="3" begin="26" end="24" resetval="0x0" description="In byte count mode, SR_BYTE_COUNT*8 + SR_BIT_OFFSET indicates the number of bits left [this is mainly for firmware to know the bit offset at the end of a slice header]." range="" rwaccess="R"/>
+    <bitfield id="SR_EMULATION_COUNT" width="24" begin="23" end="0" resetval="0x0" description="If SR_RBDU_EXTRACT is set, this field indicates the number of emulation prevention bytes which have been removed [where the count is aligned to the actual bits consumed from the shift register]" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VEC_SHIFTREG_CONTROL_02" acronym="DECODER0_CR_VEC_SHIFTREG_CONTROL_02" offset="0x38" width="32" description="">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_CODEC_MODE" width="4" begin="19" end="16" resetval="0x0" description="Codec mode which the shift register works in [affects emulation prevention detection and other operations fro JPEG]." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_BYTE_COUNT_EBDU" width="1" begin="12" end="12" resetval="0x0" description="If SR_RBDU_EXTRACT is set, then this field affects how byte count works" range="" rwaccess="RW"/>
+    <bitfield id="SR_FILL_IN_ZEROES" width="1" begin="11" end="11" resetval="0x0" description="If SR_READ_MODE = 0 and byte count is set, then fifo will be filled in zeroes when byte count becomes zero" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_MASTER_SELECT" width="2" begin="9" end="8" resetval="0x0" description="Specifies which requestor is the master of this Shift Register channel" range="" rwaccess="RW"/>
+    <bitfield id="SR_DISABLE_DMA" width="1" begin="7" end="7" resetval="0x0" description="Controls the assertion of DREQ from ShiftReg to DMAC" range="" rwaccess="RW"/>
+    <bitfield id="SR_FIFO_BYTE_SWAP" width="1" begin="6" end="6" resetval="0x0" description="Controls whether the" range="" rwaccess="RW"/>
+    <bitfield id="SR_FIFO_MODE" width="1" begin="5" end="5" resetval="0x0" description="Controls whether ShiftReg FIFO is used as a" range="" rwaccess="RW"/>
+    <bitfield id="SR_RBDU_JPEG" width="1" begin="4" end="4" resetval="0x0" description="When set, indicates that the RBDU should be based on JPEG stuffed bytes rather than the emualtion bytes of other standards" range="" rwaccess="RW"/>
+    <bitfield id="SR_RBDU_EXTRACT" width="1" begin="3" end="3" resetval="0x0" description="Controls 'raw bit stream data unit' extraction" range="" rwaccess="RW"/>
+    <bitfield id="SR_READ_MODE" width="1" begin="2" end="2" resetval="0x0" description="Controls whether Start Code Prefixes are detected or whether byte_count is used to control the amount of data read through the ShiftReg" range="" rwaccess="RW"/>
+    <bitfield id="SR_PREEMPT" width="1" begin="1" end="1" resetval="0x0" description="Allows pre-emption of any pending MTX ShiftReg Co-processor read" range="" rwaccess="RW"/>
+    <bitfield id="SR_SW_RESET" width="1" begin="0" end="0" resetval="0x0" description="Shift Register software reset" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_SHIFTREG_BYTE_COUNT_02" acronym="DECODER0_CR_VEC_SHIFTREG_BYTE_COUNT_02" offset="0x3C" width="32" description="Used to control the amount of bit stream data that can be read through the Shift RegisterNOTE: Writing to this register clears the End-of-Data flag and allows more bit stream data to be read through the Shift Register">
+    <bitfield id="SR_BYTE_COUNT" width="32" begin="31" end="0" resetval="0x00FFFFFF" description="Count of bytes that should be processed before returning control to MTX." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_SHIFTREG_STREAMIN_02" acronym="DECODER0_CR_VEC_SHIFTREG_STREAMIN_02" offset="0x40" width="32" description="">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_STREAMIN" width="8" begin="7" end="0" resetval="0x0" description="Input for the compressed bit stream" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_SHIFTREG_EMULATION_COUNT_02" acronym="DECODER0_CR_VEC_SHIFTREG_EMULATION_COUNT_02" offset="0x44" width="32" description="">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SR_BIT_OFFSET" width="3" begin="26" end="24" resetval="0x0" description="In byte count mode, SR_BYTE_COUNT*8 + SR_BIT_OFFSET indicates the number of bits left [this is mainly for firmware to know the bit offset at the end of a slice header]." range="" rwaccess="R"/>
+    <bitfield id="SR_EMULATION_COUNT" width="24" begin="23" end="0" resetval="0x0" description="If SR_RBDU_EXTRACT is set, this field indicates the number of emulation prevention bytes which have been removed [where the count is aligned to the actual bits consumed from the shift register]" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VEC_SHIFTREG_CONTROL_03" acronym="DECODER0_CR_VEC_SHIFTREG_CONTROL_03" offset="0x48" width="32" description="">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_CODEC_MODE" width="4" begin="19" end="16" resetval="0x0" description="Codec mode which the shift register works in [affects emulation prevention detection and other operations fro JPEG]." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_BYTE_COUNT_EBDU" width="1" begin="12" end="12" resetval="0x0" description="If SR_RBDU_EXTRACT is set, then this field affects how byte count works" range="" rwaccess="RW"/>
+    <bitfield id="SR_FILL_IN_ZEROES" width="1" begin="11" end="11" resetval="0x0" description="If SR_READ_MODE = 0 and byte count is set, then fifo will be filled in zeroes when byte count becomes zero" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_MASTER_SELECT" width="2" begin="9" end="8" resetval="0x0" description="Specifies which requestor is the master of this Shift Register channel" range="" rwaccess="RW"/>
+    <bitfield id="SR_DISABLE_DMA" width="1" begin="7" end="7" resetval="0x0" description="Controls the assertion of DREQ from ShiftReg to DMAC" range="" rwaccess="RW"/>
+    <bitfield id="SR_FIFO_BYTE_SWAP" width="1" begin="6" end="6" resetval="0x0" description="Controls whether the" range="" rwaccess="RW"/>
+    <bitfield id="SR_FIFO_MODE" width="1" begin="5" end="5" resetval="0x0" description="Controls whether ShiftReg FIFO is used as a" range="" rwaccess="RW"/>
+    <bitfield id="SR_RBDU_JPEG" width="1" begin="4" end="4" resetval="0x0" description="When set, indicates that the RBDU should be based on JPEG stuffed bytes rather than the emualtion bytes of other standards" range="" rwaccess="RW"/>
+    <bitfield id="SR_RBDU_EXTRACT" width="1" begin="3" end="3" resetval="0x0" description="Controls 'raw bit stream data unit' extraction" range="" rwaccess="RW"/>
+    <bitfield id="SR_READ_MODE" width="1" begin="2" end="2" resetval="0x0" description="Controls whether Start Code Prefixes are detected or whether byte_count is used to control the amount of data read through the ShiftReg" range="" rwaccess="RW"/>
+    <bitfield id="SR_PREEMPT" width="1" begin="1" end="1" resetval="0x0" description="Allows pre-emption of any pending MTX ShiftReg Co-processor read" range="" rwaccess="RW"/>
+    <bitfield id="SR_SW_RESET" width="1" begin="0" end="0" resetval="0x0" description="Shift Register software reset" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_SHIFTREG_BYTE_COUNT_03" acronym="DECODER0_CR_VEC_SHIFTREG_BYTE_COUNT_03" offset="0x4C" width="32" description="Used to control the amount of bit stream data that can be read through the Shift RegisterNOTE: Writing to this register clears the End-of-Data flag and allows more bit stream data to be read through the Shift Register">
+    <bitfield id="SR_BYTE_COUNT" width="32" begin="31" end="0" resetval="0x00FFFFFF" description="Count of bytes that should be processed before returning control to MTX." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_SHIFTREG_STREAMIN_03" acronym="DECODER0_CR_VEC_SHIFTREG_STREAMIN_03" offset="0x50" width="32" description="">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_STREAMIN" width="8" begin="7" end="0" resetval="0x0" description="Input for the compressed bit stream" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_SHIFTREG_EMULATION_COUNT_03" acronym="DECODER0_CR_VEC_SHIFTREG_EMULATION_COUNT_03" offset="0x54" width="32" description="">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SR_BIT_OFFSET" width="3" begin="26" end="24" resetval="0x0" description="In byte count mode, SR_BYTE_COUNT*8 + SR_BIT_OFFSET indicates the number of bits left [this is mainly for firmware to know the bit offset at the end of a slice header]." range="" rwaccess="R"/>
+    <bitfield id="SR_EMULATION_COUNT" width="24" begin="23" end="0" resetval="0x0" description="If SR_RBDU_EXTRACT is set, this field indicates the number of emulation prevention bytes which have been removed [where the count is aligned to the actual bits consumed from the shift register]" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VEC_SHIFTREG_COPRO_RESP_MSWRD" acronym="DECODER0_CR_VEC_SHIFTREG_COPRO_RESP_MSWRD" offset="0x5C" width="32" description="Provides direct access to the most significant 32-bits of the Shift Register co-processor response port">
+    <bitfield id="SR_RESP_VALID" width="1" begin="31" end="31" resetval="0x0" description="Indicates the Shift Register response contains valid data." range="" rwaccess="RW"/>
+    <bitfield id="SR_SW_RESET_ACTIVE" width="1" begin="30" end="30" resetval="0x0" description="Indicates whether the Shift Register is being reset" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="25" begin="29" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_BYTE_ALIGNED" width="1" begin="4" end="4" resetval="0x1" description="Indicates whether the next bit in the Shift Register is byte aligned" range="" rwaccess="RW"/>
+    <bitfield id="SR_MORE_RBSP" width="1" begin="3" end="3" resetval="0x1" description="Use to signal more raw bit stream data" range="" rwaccess="RW"/>
+    <bitfield id="SR_RESP_EXPG_ERROR" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_RESP_SCP_OR_EOD" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_RESP_PREEMPTED" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_SHIFTREG_COPRO_RESP_LSWRD" acronym="DECODER0_CR_VEC_SHIFTREG_COPRO_RESP_LSWRD" offset="0x60" width="32" description="Provides direct access to the least significant 32-bits of the Shift Register co-processor response port">
+    <bitfield id="SR_RESP_VALUE" width="32" begin="31" end="0" resetval="0x0" description="Requested bits or signed/unsigned Exp-Goulomb value" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_SHIFTREG_COPRO_CMD_MSWRD" acronym="DECODER0_CR_VEC_SHIFTREG_COPRO_CMD_MSWRD" offset="0x64" width="32" description="Provides direct access to the most significant 32-bits of the Shift Register co-processor command port">
+    <bitfield id="RESERVED" width="17" begin="31" end="15" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_READ_PEEK_EXT" width="1" begin="14" end="14" resetval="0x0" description="Read Peek Extended." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="13" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_PRE_FLUSH" width="5" begin="12" end="8" resetval="0x0" description="Discard or flush bits from the bit stream before read/peek/skip - 0 to 31" range="" rwaccess="RW"/>
+    <bitfield id="SR_READ_PEEK" width="5" begin="7" end="3" resetval="0x0" description="The number of bits to read/peek - 0 to" range="" rwaccess="RW"/>
+    <bitfield id="SR_ACCESS_MODE" width="3" begin="2" end="0" resetval="0x0" description="The access mode:" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_CONTROL0" acronym="DECODER0_CR_VEC_RENDEC_CONTROL0" offset="0x68" width="32" description="">
+    <bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_DEC_INITIALISE" width="1" begin="6" end="6" resetval="0x0" description="Writing 1 to this bit initialises the Rendec decoder contexts to the default value." range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_ENC_INITIALISE" width="1" begin="5" end="5" resetval="0x0" description="Writing 1 to this bit initialises the Rendec encoder contexts to the default value." range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_ENC_ERROR_RECOVERY" width="1" begin="4" end="4" resetval="0x0" description="When a lock-up is detected at the front-end, s/w must write 1 to this bit before resetting the front-end modules." range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_MTX_BLOCK_SEARCH" width="1" begin="3" end="3" resetval="0x0" description="Writing '1' to this bit instructs the back-end of entdec to search for the MTX_to_MTX header." range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_SLICE_SKIP" width="1" begin="2" end="2" resetval="0x0" description="Writing '1' to this bit instructs the Rendec/decoder to skip to the next slice." range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_FLUSH" width="1" begin="1" end="1" resetval="0x0" description="Writing '1' to this bit flushes the Rendec/encoder remaining bit stream with [if necessary] some extra bits so that the encoded bit stream is aligned to the programmed memory burst size." range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_INITIALISE" width="1" begin="0" end="0" resetval="0x0" description="Writing 1 to this bit initialises the Rendec encoder/decoder contexts to the default value." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_CONTROL1" acronym="DECODER0_CR_VEC_RENDEC_CONTROL1" offset="0x6C" width="32" description="">
+    <bitfield id="RENDEC_ERROR_PROPAGATE" width="1" begin="31" end="31" resetval="0x0" description="Error flag control for rendec." range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_BE_STREAM_SELECT" width="1" begin="30" end="30" resetval="0x0" description="Rendec stream select for back-end." range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_FE_AUTO_FLUSH_ENABLE" width="1" begin="29" end="29" resetval="0x0" description="Rendec is flushed upon the front-end parser and vec_fe_end_of_slice interrupt is set when the rendec flush is completed" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_FE_STREAM_SELECT" width="1" begin="28" end="28" resetval="0x0" description="Rendec stream select for front-end." range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_DEC_DISABLE" width="1" begin="27" end="27" resetval="0x0" description="Rendec Decoder Disable mode." range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_DEC_SLICE_MODE" width="1" begin="26" end="26" resetval="0x0" description="Rendec Decoder operates in slice mode" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_STREAM_END" width="1" begin="25" end="25" resetval="0x0" description="The s/w must set this bit when the front-end parser has completed the decoding of the stream." range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_EXTERNAL_MEMORY" width="1" begin="24" end="24" resetval="0x0" description="Used to enable/disable the use of external memory:" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_BURST_SIZE_W" width="2" begin="19" end="18" resetval="0x1" description="Burst size of the Rendec write in memory-words [1 word = 16 bytes]" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_BURST_SIZE_R" width="2" begin="17" end="16" resetval="0x1" description="Burst size of the Rendec read in memory-words [1 word = 16 bytes]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_DECODE_START_SIZE" width="8" begin="7" end="0" resetval="0x1" description="The Rendec decode start control, specified in" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_BUFFER_SIZE" acronym="DECODER0_CR_VEC_RENDEC_BUFFER_SIZE" offset="0x70" width="32" description="">
+    <bitfield id="RENDEC_BUFFER_SIZE1" width="16" begin="31" end="16" resetval="0x0" description="The size of the Rendec buffer 1 in external memory in units of 4kB." range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_BUFFER_SIZE0" width="16" begin="15" end="0" resetval="0x0" description="The size of the Rendec buffer 0 in external memory in 4kB." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_BASE_ADDR0" acronym="DECODER0_CR_VEC_RENDEC_BASE_ADDR0" offset="0x74" width="32" description="">
+    <bitfield id="RENDEC_BASE_ADDR0" width="20" begin="31" end="12" resetval="0x0" description="Base address 0 of the Rendec external memory buffer, the buffer must be aligned to a 4kB boundary" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_BASE_ADDR1" acronym="DECODER0_CR_VEC_RENDEC_BASE_ADDR1" offset="0x78" width="32" description="">
+    <bitfield id="RENDEC_BASE_ADDR1" width="20" begin="31" end="12" resetval="0x0" description="Base address 1 of the Rendec external memory buffer, the buffer must be aligned to a 4kB boundary" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_WRITE_ADDR0" acronym="DECODER0_CR_VEC_RENDEC_WRITE_ADDR0" offset="0x7C" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_WRITE_ADDR0" width="24" begin="27" end="4" resetval="0x0" description="Write address pointer 0." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="3" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_WRITE_ADDR1" acronym="DECODER0_CR_VEC_RENDEC_WRITE_ADDR1" offset="0x80" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_WRITE_ADDR1" width="24" begin="27" end="4" resetval="0x0" description="Write address pointer 1." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="3" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_READ_ADDR0" acronym="DECODER0_CR_VEC_RENDEC_READ_ADDR0" offset="0x84" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_READ_ADDR0" width="24" begin="27" end="4" resetval="0x0" description="External buffer read address" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="3" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_READ_ADDR1" acronym="DECODER0_CR_VEC_RENDEC_READ_ADDR1" offset="0x88" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_READ_ADDR1" width="24" begin="27" end="4" resetval="0x0" description="External buffer read address" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="3" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_DATA_SIZE0" acronym="DECODER0_CR_VEC_RENDEC_DATA_SIZE0" offset="0x8C" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RENDEC_DATA_SIZE0" width="28" begin="27" end="0" resetval="0x0" description="The size of the Rendec stream data 0 currently stored in the external memory buffer [in bytes]" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_DATA_SIZE1" acronym="DECODER0_CR_VEC_RENDEC_DATA_SIZE1" offset="0x90" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RENDEC_DATA_SIZE1" width="28" begin="27" end="0" resetval="0x0" description="The size of the Rendec stream data 1 currently stored in the external memory buffer [in bytes]" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_WRITE_DATA" acronym="DECODER0_CR_VEC_RENDEC_WRITE_DATA" offset="0x94" width="32" description="">
+    <bitfield id="RENDEC_WRITE_DATA" width="32" begin="31" end="0" resetval="0x0" description="The value to be written to Rendec for MTX/Host messages" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_READ_DATA" acronym="DECODER0_CR_VEC_RENDEC_READ_DATA" offset="0x98" width="32" description="">
+    <bitfield id="RENDEC_READ_DATA" width="32" begin="31" end="0" resetval="0x0" description="The value provided from Rendec to extract MTX/Host messages" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_STATUS" acronym="DECODER0_CR_VEC_RENDEC_STATUS" offset="0x9C" width="32" description="">
+    <bitfield id="RENDEC_DECODED_DATA" width="16" begin="31" end="16" resetval="0x0" description="This is a real-time monitor of the currently decoded Rendec data." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RENDEC_ENC_BUFF_STATUS" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RENDEC_ENC_CTRL_STATUS" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RENDEC_ERROR_FLAG" width="1" begin="9" end="9" resetval="0x0" description="This bit is set when the currently decoded Rendec data contains an error" range="" rwaccess="R"/>
+    <bitfield id="RENDEC_HEADER_FLAG" width="1" begin="8" end="8" resetval="0x0" description="Indicates whether the currently decoded Rendec data is the header after EndOfSlice or not." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RENDEC_DFIFO1_STATUS" width="1" begin="3" end="3" resetval="0x0" description="Empty_flag status of the Rendec decoder FIFO1" range="" rwaccess="R"/>
+    <bitfield id="RENDEC_DFIFO0_STATUS" width="1" begin="2" end="2" resetval="0x0" description="Empty_flag status of the Rendec decoder FIFO0" range="" rwaccess="R"/>
+    <bitfield id="RENDEC_EFIFO1_STATUS" width="1" begin="1" end="1" resetval="0x0" description="Full_flag status of the Rendec encoder FIFO1" range="" rwaccess="R"/>
+    <bitfield id="RENDEC_EFIFO0_STATUS" width="1" begin="0" end="0" resetval="0x0" description="Full_flag status of the Rendec encoder FIFO0" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_SLICE_COUNT" acronym="DECODER0_CR_VEC_RENDEC_SLICE_COUNT" offset="0xA0" width="32" description="">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_SLICE_COUNT" width="20" begin="19" end="0" resetval="0x0" description="Rendec Differential Slice Counter for the primary rendec stream." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_BOOL_INIT" acronym="DECODER0_CR_VEC_BOOL_INIT" offset="0xA4" width="32" description="Initialises the context of the Bool-Coder internal state.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BOOL_INIT_RANGE" width="8" begin="15" end="8" resetval="0x0" description="The initial range for the Bool-Coder." range="" rwaccess="RW"/>
+    <bitfield id="BOOL_INIT_VALUE" width="8" begin="7" end="0" resetval="0x0" description="The initial value of the Bool-Coder." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_BOOL_CTRL" acronym="DECODER0_CR_VEC_BOOL_CTRL" offset="0xA8" width="32" description="Controls the master access to the Bool-Coder.">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BOOL_MASTER_SELECT" width="2" begin="1" end="0" resetval="0x0" description="Selects the master controller for the Bool-Coder." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_ENTDEC_INFORMATION" acronym="DECODER0_CR_VEC_ENTDEC_INFORMATION" offset="0xAC" width="32" description="">
+    <bitfield id="FE_ENTDEC_LATEST_MB_ADDR_Y" width="8" begin="31" end="24" resetval="0x0" description="Provides the latest macroblock vertical address that has been successfully decoded by Entdec" range="" rwaccess="R"/>
+    <bitfield id="FE_ENTDEC_LATEST_MB_ADDR_X" width="8" begin="23" end="16" resetval="0x0" description="Provides the latest macroblock horizontal address that has been successfully decoded by Entdec" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="10" begin="15" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FE_ENTDEC_STATUS" width="6" begin="5" end="0" resetval="0x0" description="Indicates the real-time status of Entdec front-end parser." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VEC_BOOL_COMMAND" acronym="DECODER0_CR_VEC_BOOL_COMMAND" offset="0xB0" width="32" description="A write to this register triggers a Bool decode operation. It also causes the Bool-Coder Result Register to be cleared to 0.">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BOOL_BITS_MIN1" width="4" begin="11" end="8" resetval="0x0" description="Indicates the number of Bools - 1 that should be decoded." range="" rwaccess="RW"/>
+    <bitfield id="BOOL_PROB" width="8" begin="7" end="0" resetval="0x0" description="The probability to be used for all Bools to be decoded." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_BOOL_RESULT" acronym="DECODER0_CR_VEC_BOOL_RESULT" offset="0xB4" width="32" description="Register contains the result of a bool-decode operation. It is cleared to 0, when a write to the Bool-Coder Command Register occurs, and updated with the result when it has been calculated.">
+    <bitfield id="BOOL_RESULT_VALID" width="1" begin="31" end="31" resetval="0x0" description="Indicates that the BOOL_RESULT field contains the result from the previously executed command." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="15" begin="30" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="BOOL_RESULT" width="16" begin="15" end="0" resetval="0x0" description="The result from the previously executed command, with Bools left-shifted into the result field in the order they are decoded." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VEC_DIRECT_MODE_CONTROL" acronym="DECODER0_CR_VEC_DIRECT_MODE_CONTROL" offset="0xB8" width="32" description="">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DIRECT_MODE" width="3" begin="2" end="0" resetval="0x0" description="Direct mode setting." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_DIRECT_MODE_DATA0" acronym="DECODER0_CR_VEC_DIRECT_MODE_DATA0" offset="0xBC" width="32" description="">
+    <bitfield id="DIRECT_DATA0" width="32" begin="31" end="0" resetval="0x0" description="Direct mode data register 0." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_COMMAND_SIGNATURE" acronym="DECODER0_CR_VEC_COMMAND_SIGNATURE" offset="0xC0" width="32" description="">
+    <bitfield id="COMMAND_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature data for the commands [address &amp;amp;amp; data]." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_IXFORM_SIGNATURE" acronym="DECODER0_CR_VEC_IXFORM_SIGNATURE" offset="0xC4" width="32" description="">
+    <bitfield id="IXFORM_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature data for the output of iXform module." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_ISCAN_MBPARAMS0" acronym="DECODER0_CR_VEC_ISCAN_MBPARAMS0" offset="0xC8" width="32" description="">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="IS_H264_MB_FIELD_DECODING_FLAG" width="1" begin="1" end="1" resetval="0x0" description="H.264 mb_field_decoding_flag" range="" rwaccess="RW"/>
+    <bitfield id="IS_AC_PRED_FLAG" width="1" begin="0" end="0" resetval="0x0" description="AC_PRED_FLAG used in MPEG4 / VC-1 / WMV9" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_IQ_MBPARAMS0" acronym="DECODER0_CR_VEC_IQ_MBPARAMS0" offset="0xCC" width="32" description="">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="IQ_EMPTY_MB_ABOVE_FLAG" width="1" begin="30" end="30" resetval="0x0" description="Empty flag for the top macroblock" range="" rwaccess="RW"/>
+    <bitfield id="IQ_EMPTY_MB_LEFT_FLAG" width="1" begin="29" end="29" resetval="0x0" description="Empty flag for the left macroblock" range="" rwaccess="RW"/>
+    <bitfield id="IQ_EMPTY_MB_ABOVELEFT_FLAG" width="1" begin="28" end="28" resetval="0x0" description="Empty flag for the left macroblock" range="" rwaccess="RW"/>
+    <bitfield id="IQ_H264_LOSSLESS_DPCM_MODE_1" width="1" begin="27" end="27" resetval="0x0" description="Bit 0 of Luma Block 1 DPCM mode for H264 Lossless codec." range="" rwaccess="RW"/>
+    <bitfield id="IQ_H264_LOSSLESS_DPCM_MODE_0" width="2" begin="26" end="25" resetval="0x0" description="Luma Block 0 DPCM mode for H264 Lossless codec." range="" rwaccess="RW"/>
+    <bitfield id="IQ_AC_PRED_FLAG" width="1" begin="24" end="24" resetval="0x0" description="AC_PRED_FLAG for iQ" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="23" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="IQ_H264_QPCR" width="6" begin="21" end="16" resetval="0x0" description="QPCr value in H.264" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="IQ_H264_QPCB" width="6" begin="13" end="8" resetval="0x0" description="QPCb value in H.264" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="IQ_QUANTISER_SCALE" width="7" begin="6" end="0" resetval="0x0" description="The quantisation parameters shared between different standards" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_IQ_MBPARAMS1" acronym="DECODER0_CR_VEC_IQ_MBPARAMS1" offset="0xD0" width="32" description="">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="IQ_VR_ABOVELEFTMB_BASEADDR" width="10" begin="29" end="20" resetval="0x0" description="Base address of the above-left macroblock in VEC Local RAM" range="" rwaccess="RW"/>
+    <bitfield id="IQ_VR_CURRMB_BASEADDR" width="10" begin="19" end="10" resetval="0x0" description="Base address of the current macroblock in VEC Local RAM" range="" rwaccess="RW"/>
+    <bitfield id="IQ_VR_ABOVEMB_BASEADDR" width="10" begin="9" end="0" resetval="0x0" description="Base address of the above macroblock in VEC Local RAM" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLR_COMMANDS_BUF_POINTER" acronym="DECODER0_CR_VEC_VLR_COMMANDS_BUF_POINTER" offset="0xD8" width="32" description="Register set by hardware and read by software. It indicates the address of the first command of the macroblock cmd sequence of the second macroblock before current">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VLR_COMMANDS_BUF_POINTER1" width="10" begin="21" end="12" resetval="0x0" description="Field set by hardware and read by software." range="" rwaccess="R"/>
+    <bitfield id="VLR_COMMANDS_BUF_POINTER2" width="10" begin="11" end="2" resetval="0x0" description="Field set by hardware and read by software." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="2" begin="1" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VEC_CIRC_BUFF_BASE_ADDR" acronym="DECODER0_CR_VEC_CIRC_BUFF_BASE_ADDR" offset="0xDC" width="32" description="">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CIRC_BUFF_BASE_ADDR" width="10" begin="11" end="2" resetval="0x0" description="Base address in the VEC Local RAM of the circular buffers" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="1" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_SGM_BITPLANE_BASE_ADDR" acronym="DECODER0_CR_VEC_SGM_BITPLANE_BASE_ADDR" offset="0xE0" width="32" description="Base address within VEC Local RAM for Slice Group Map / Bit-Plane Data that are fetched from main memory into this circulate buffer">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SGM_BITPLANE_BASE_ADDR" width="10" begin="11" end="2" resetval="0x0" description="Base address in VEC Local RAM of:" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="1" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLR_COMMANDS_STORE" acronym="DECODER0_CR_VEC_VLR_COMMANDS_STORE" offset="0xE4" width="32" description="Register defining the base address of commands to store into VEC local ram. Storing of commands is requied for slice switching">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VLR_COMMANDS_STORE_BASE_ADDRESS" width="10" begin="11" end="2" resetval="0x0" description="The commands for the latest 2 macroblocks generated by ENTDEC are stored into the VEC Local RAM at the address specified by this register, if the processing stream at the back-end is either H.264 or AVS" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="1" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLR_COMMANDS_NUM" acronym="DECODER0_CR_VEC_VLR_COMMANDS_NUM" offset="0xE8" width="32" description="">
+    <bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VLR_COMMANDS_STORE_NUMBER_OF_CMDS" width="7" begin="6" end="0" resetval="0x0" description="Field defining the actual number of commands stored in the VEC local ram Range" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLC_TABLE_ADDR0" acronym="DECODER0_CR_VEC_VLC_TABLE_ADDR0" offset="0xEC" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR1" width="11" begin="21" end="11" resetval="0x0" description="Base address of VLC Table 1" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR0" width="11" begin="10" end="0" resetval="0x0" description="Base address of VLC Table 0" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLC_TABLE_ADDR1" acronym="DECODER0_CR_VEC_VLC_TABLE_ADDR1" offset="0xF0" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR3" width="11" begin="21" end="11" resetval="0x0" description="Base address of VLC Table 3" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR2" width="11" begin="10" end="0" resetval="0x0" description="Base address of VLC Table 2" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLC_TABLE_ADDR2" acronym="DECODER0_CR_VEC_VLC_TABLE_ADDR2" offset="0xF4" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR5" width="11" begin="21" end="11" resetval="0x0" description="Base address of VLC Table 5" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR4" width="11" begin="10" end="0" resetval="0x0" description="Base address of VLC Table 4" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLC_TABLE_ADDR3" acronym="DECODER0_CR_VEC_VLC_TABLE_ADDR3" offset="0xF8" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR7" width="11" begin="21" end="11" resetval="0x0" description="Base address of VLC Table 7" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR6" width="11" begin="10" end="0" resetval="0x0" description="Base address of VLC Table 6" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLC_TABLE_ADDR4" acronym="DECODER0_CR_VEC_VLC_TABLE_ADDR4" offset="0xFC" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR9" width="11" begin="21" end="11" resetval="0x0" description="Base address of VLC Table 9" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR8" width="11" begin="10" end="0" resetval="0x0" description="Base address of VLC Table 8" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLC_TABLE_ADDR5" acronym="DECODER0_CR_VEC_VLC_TABLE_ADDR5" offset="0x100" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR11" width="11" begin="21" end="11" resetval="0x0" description="Base address of VLC Table 11" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR10" width="11" begin="10" end="0" resetval="0x0" description="Base address of VLC Table 10" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLC_TABLE_ADDR6" acronym="DECODER0_CR_VEC_VLC_TABLE_ADDR6" offset="0x104" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR13" width="11" begin="21" end="11" resetval="0x0" description="Base address of VLC Table 13" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR12" width="11" begin="10" end="0" resetval="0x0" description="Base address of VLC Table 12" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLC_TABLE_ADDR7" acronym="DECODER0_CR_VEC_VLC_TABLE_ADDR7" offset="0x108" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR15" width="11" begin="21" end="11" resetval="0x0" description="Base address of VLC Table 15" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR14" width="11" begin="10" end="0" resetval="0x0" description="Base address of VLC Table 14" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLC_TABLE_ADDR8" acronym="DECODER0_CR_VEC_VLC_TABLE_ADDR8" offset="0x10C" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR17" width="11" begin="21" end="11" resetval="0x0" description="Base address of VLC Table 17" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR16" width="11" begin="10" end="0" resetval="0x0" description="Base address of VLC Table 16" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLC_TABLE_ADDR9" acronym="DECODER0_CR_VEC_VLC_TABLE_ADDR9" offset="0x110" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR19" width="11" begin="21" end="11" resetval="0x0" description="Base address of VLC Table 19" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR18" width="11" begin="10" end="0" resetval="0x0" description="Base address of VLC Table 18" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLC_TABLE_ADDR10" acronym="DECODER0_CR_VEC_VLC_TABLE_ADDR10" offset="0x114" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR21" width="11" begin="21" end="11" resetval="0x0" description="Base address of VLC Table 21" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR20" width="11" begin="10" end="0" resetval="0x0" description="Base address of VLC Table 20" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLC_TABLE_ADDR11" acronym="DECODER0_CR_VEC_VLC_TABLE_ADDR11" offset="0x118" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR23" width="11" begin="21" end="11" resetval="0x0" description="Base address of VLC Table 23" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR22" width="11" begin="10" end="0" resetval="0x0" description="Base address of VLC Table 22" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLC_TABLE_ADDR12" acronym="DECODER0_CR_VEC_VLC_TABLE_ADDR12" offset="0x11C" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR25" width="11" begin="21" end="11" resetval="0x0" description="Base address of VLC Table 25" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR24" width="11" begin="10" end="0" resetval="0x0" description="Base address of VLC Table 24" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLC_TABLE_ADDR13" acronym="DECODER0_CR_VEC_VLC_TABLE_ADDR13" offset="0x120" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR27" width="11" begin="21" end="11" resetval="0x0" description="Base address of VLC Table 27" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR26" width="11" begin="10" end="0" resetval="0x0" description="Base address of VLC Table 26" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLC_TABLE_ADDR14" acronym="DECODER0_CR_VEC_VLC_TABLE_ADDR14" offset="0x124" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR29" width="11" begin="21" end="11" resetval="0x0" description="Base address of VLC Table 29" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR28" width="11" begin="10" end="0" resetval="0x0" description="Base address of VLC Table 28" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLC_TABLE_ADDR15" acronym="DECODER0_CR_VEC_VLC_TABLE_ADDR15" offset="0x128" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR31" width="11" begin="21" end="11" resetval="0x0" description="Base address of VLC Table 31" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR30" width="11" begin="10" end="0" resetval="0x0" description="Base address of VLC Table 30" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLC_TABLE_INITIAL_WIDTH0" acronym="DECODER0_CR_VEC_VLC_TABLE_INITIAL_WIDTH0" offset="0x12C" width="32" description="">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH9" width="3" begin="29" end="27" resetval="0x0" description="Initial width of VLC Table 9" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH8" width="3" begin="26" end="24" resetval="0x0" description="Initial width of VLC Table 8" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH7" width="3" begin="23" end="21" resetval="0x0" description="Initial width of VLC Table 7" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH6" width="3" begin="20" end="18" resetval="0x0" description="Initial width of VLC Table 6" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH5" width="3" begin="17" end="15" resetval="0x0" description="Initial width of VLC Table 5" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH4" width="3" begin="14" end="12" resetval="0x0" description="Initial width of VLC Table 4" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH3" width="3" begin="11" end="9" resetval="0x0" description="Initial width of VLC Table 3" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH2" width="3" begin="8" end="6" resetval="0x0" description="Initial width of VLC Table 2" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH1" width="3" begin="5" end="3" resetval="0x0" description="Initial width of VLC Table 1" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH0" width="3" begin="2" end="0" resetval="0x0" description="Initial width of VLC Table 0" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLC_TABLE_INITIAL_WIDTH1" acronym="DECODER0_CR_VEC_VLC_TABLE_INITIAL_WIDTH1" offset="0x130" width="32" description="">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH19" width="3" begin="29" end="27" resetval="0x0" description="Initial width of VLC Table 19" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH18" width="3" begin="26" end="24" resetval="0x0" description="Initial width of VLC Table 18" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH17" width="3" begin="23" end="21" resetval="0x0" description="Initial width of VLC Table 17" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH16" width="3" begin="20" end="18" resetval="0x0" description="Initial width of VLC Table 16" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH15" width="3" begin="17" end="15" resetval="0x0" description="Initial width of VLC Table 15" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH14" width="3" begin="14" end="12" resetval="0x0" description="Initial width of VLC Table 14" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH13" width="3" begin="11" end="9" resetval="0x0" description="Initial width of VLC Table 13" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH12" width="3" begin="8" end="6" resetval="0x0" description="Initial width of VLC Table 12" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH11" width="3" begin="5" end="3" resetval="0x0" description="Initial width of VLC Table 11" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH10" width="3" begin="2" end="0" resetval="0x0" description="Initial width of VLC Table 10" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLC_TABLE_INITIAL_WIDTH2" acronym="DECODER0_CR_VEC_VLC_TABLE_INITIAL_WIDTH2" offset="0x134" width="32" description="">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH29" width="3" begin="29" end="27" resetval="0x0" description="Initial width of VLC Table 29" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH28" width="3" begin="26" end="24" resetval="0x0" description="Initial width of VLC Table 28" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH27" width="3" begin="23" end="21" resetval="0x0" description="Initial width of VLC Table 27" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH26" width="3" begin="20" end="18" resetval="0x0" description="Initial width of VLC Table 26" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH25" width="3" begin="17" end="15" resetval="0x0" description="Initial width of VLC Table 25" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH24" width="3" begin="14" end="12" resetval="0x0" description="Initial width of VLC Table 24" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH23" width="3" begin="11" end="9" resetval="0x0" description="Initial width of VLC Table 23" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH22" width="3" begin="8" end="6" resetval="0x0" description="Initial width of VLC Table 22" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH21" width="3" begin="5" end="3" resetval="0x0" description="Initial width of VLC Table 21" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH20" width="3" begin="2" end="0" resetval="0x0" description="Initial width of VLC Table 20" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLC_TABLE_INITIAL_WIDTH3" acronym="DECODER0_CR_VEC_VLC_TABLE_INITIAL_WIDTH3" offset="0x138" width="32" description="">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH37" width="3" begin="23" end="21" resetval="0x0" description="Initial width of VLC Table 37" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH36" width="3" begin="20" end="18" resetval="0x0" description="Initial width of VLC Table 36" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH35" width="3" begin="17" end="15" resetval="0x0" description="Initial width of VLC Table 35" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH34" width="3" begin="14" end="12" resetval="0x0" description="Initial width of VLC Table 34" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH33" width="3" begin="11" end="9" resetval="0x0" description="Initial width of VLC Table 33" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH32" width="3" begin="8" end="6" resetval="0x0" description="Initial width of VLC Table 32" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH31" width="3" begin="5" end="3" resetval="0x0" description="Initial width of VLC Table 31" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_WIDTH30" width="3" begin="2" end="0" resetval="0x0" description="Initial width of VLC Table 30" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLC_TABLE_INITIAL_OPCODE0" acronym="DECODER0_CR_VEC_VLC_TABLE_INITIAL_OPCODE0" offset="0x13C" width="32" description="">
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE15" width="2" begin="31" end="30" resetval="0x0" description="Initial opcode of VLC Table 15" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE14" width="2" begin="29" end="28" resetval="0x0" description="Initial opcode of VLC Table 14" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE13" width="2" begin="27" end="26" resetval="0x0" description="Initial opcode of VLC Table 13" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE12" width="2" begin="25" end="24" resetval="0x0" description="Initial opcode of VLC Table 12" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE11" width="2" begin="23" end="22" resetval="0x0" description="Initial opcode of VLC Table 11" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE10" width="2" begin="21" end="20" resetval="0x0" description="Initial opcode of VLC Table 10" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE9" width="2" begin="19" end="18" resetval="0x0" description="Initial opcode of VLC Table 9" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE8" width="2" begin="17" end="16" resetval="0x0" description="Initial opcode of VLC Table 8" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE7" width="2" begin="15" end="14" resetval="0x0" description="Initial opcode of VLC Table 7" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE6" width="2" begin="13" end="12" resetval="0x0" description="Initial opcode of VLC Table 6" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE5" width="2" begin="11" end="10" resetval="0x0" description="Initial opcode of VLC Table 5" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE4" width="2" begin="9" end="8" resetval="0x0" description="Initial opcode of VLC Table 4" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE3" width="2" begin="7" end="6" resetval="0x0" description="Initial opcode of VLC Table 3" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE2" width="2" begin="5" end="4" resetval="0x0" description="Initial opcode of VLC Table 2" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE1" width="2" begin="3" end="2" resetval="0x0" description="Initial opcode of VLC Table 1" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE0" width="2" begin="1" end="0" resetval="0x0" description="Initial opcode of VLC Table 0" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLC_TABLE_INITIAL_OPCODE1" acronym="DECODER0_CR_VEC_VLC_TABLE_INITIAL_OPCODE1" offset="0x140" width="32" description="">
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE31" width="2" begin="31" end="30" resetval="0x0" description="Initial opcode of VLC Table 31" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE30" width="2" begin="29" end="28" resetval="0x0" description="Initial opcode of VLC Table 30" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE29" width="2" begin="27" end="26" resetval="0x0" description="Initial opcode of VLC Table 29" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE28" width="2" begin="25" end="24" resetval="0x0" description="Initial opcode of VLC Table 28" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE27" width="2" begin="23" end="22" resetval="0x0" description="Initial opcode of VLC Table 27" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE26" width="2" begin="21" end="20" resetval="0x0" description="Initial opcode of VLC Table 26" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE25" width="2" begin="19" end="18" resetval="0x0" description="Initial opcode of VLC Table 25" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE24" width="2" begin="17" end="16" resetval="0x0" description="Initial opcode of VLC Table 24" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE23" width="2" begin="15" end="14" resetval="0x0" description="Initial opcode of VLC Table 23" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE22" width="2" begin="13" end="12" resetval="0x0" description="Initial opcode of VLC Table 22" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE21" width="2" begin="11" end="10" resetval="0x0" description="Initial opcode of VLC Table 21" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE20" width="2" begin="9" end="8" resetval="0x0" description="Initial opcode of VLC Table 20" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE19" width="2" begin="7" end="6" resetval="0x0" description="Initial opcode of VLC Table 19" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE18" width="2" begin="5" end="4" resetval="0x0" description="Initial opcode of VLC Table 18" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE17" width="2" begin="3" end="2" resetval="0x0" description="Initial opcode of VLC Table 17" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE16" width="2" begin="1" end="0" resetval="0x0" description="Initial opcode of VLC Table 16" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLC_TABLE_INITIAL_OPCODE2" acronym="DECODER0_CR_VEC_VLC_TABLE_INITIAL_OPCODE2" offset="0x144" width="32" description="">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE37" width="2" begin="11" end="10" resetval="0x0" description="Initial opcode of VLC Table 37" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE36" width="2" begin="9" end="8" resetval="0x0" description="Initial opcode of VLC Table 36" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE35" width="2" begin="7" end="6" resetval="0x0" description="Initial opcode of VLC Table 35" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE34" width="2" begin="5" end="4" resetval="0x0" description="Initial opcode of VLC Table 34" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE33" width="2" begin="3" end="2" resetval="0x0" description="Initial opcode of VLC Table 33" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_INITIAL_OPCODE32" width="2" begin="1" end="0" resetval="0x0" description="Initial opcode of VLC Table 32" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_CONTEXT0" acronym="DECODER0_CR_VEC_RENDEC_CONTEXT0" offset="0x150" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_CONTEXT0_2" width="6" begin="21" end="16" resetval="0x10" description="Rendec initial context value for signed data" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_CONTEXT0_1" width="6" begin="13" end="8" resetval="0x10" description="Rendec initial context value for signed data" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="7" end="6" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_CONTEXT0_0" width="6" begin="5" end="0" resetval="0x10" description="Rendec initial context value for signed data" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_CONTEXT1" acronym="DECODER0_CR_VEC_RENDEC_CONTEXT1" offset="0x154" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_CONTEXT1_2" width="6" begin="21" end="16" resetval="0x10" description="Rendec initial context value for unsigned data" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_CONTEXT1_1" width="6" begin="13" end="8" resetval="0x10" description="Rendec initial context value for unsigned data" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="7" end="6" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_CONTEXT1_0" width="6" begin="5" end="0" resetval="0x10" description="Rendec initial context value for unsigned data" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_CONTEXT2" acronym="DECODER0_CR_VEC_RENDEC_CONTEXT2" offset="0x158" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_CONTEXT2_2" width="6" begin="21" end="16" resetval="0x10" description="Rendec initial context value for significance map data" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_CONTEXT2_1" width="6" begin="13" end="8" resetval="0x10" description="Rendec initial context value for significance map data" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="7" end="6" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_CONTEXT2_0" width="6" begin="5" end="0" resetval="0x10" description="Rendec initial context value for significance map data" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_CONTEXT3" acronym="DECODER0_CR_VEC_RENDEC_CONTEXT3" offset="0x15C" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_CONTEXT3_2" width="6" begin="21" end="16" resetval="0x10" description="Rendec initial context value for residual coefficients" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_CONTEXT3_1" width="6" begin="13" end="8" resetval="0x10" description="Rendec initial context value for residual coefficients" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="7" end="6" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_CONTEXT3_0" width="6" begin="5" end="0" resetval="0x10" description="Rendec initial context value for residual coefficients" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_CONTEXT4" acronym="DECODER0_CR_VEC_RENDEC_CONTEXT4" offset="0x160" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_CONTEXT4_2" width="6" begin="21" end="16" resetval="0x10" description="Rendec initial context value for NumSymbolsLess1" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_CONTEXT4_1" width="6" begin="13" end="8" resetval="0x10" description="Rendec initial context value for NumSymbolsLess1" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="7" end="6" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_CONTEXT4_0" width="6" begin="5" end="0" resetval="0x10" description="Rendec initial context value for NumSymbolsLess1" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_CONTEXT5" acronym="DECODER0_CR_VEC_RENDEC_CONTEXT5" offset="0x164" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_CONTEXT5_2" width="6" begin="21" end="16" resetval="0x10" description="Rendec initial context value for header data" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_CONTEXT5_1" width="6" begin="13" end="8" resetval="0x10" description="Rendec initial context value for header data" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="7" end="6" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_CONTEXT5_0" width="6" begin="5" end="0" resetval="0x10" description="Rendec initial context value for header data" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_STREAM_ID" acronym="DECODER0_CR_STREAM_ID" offset="0x168" width="32" description="">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="STREAM_ID" width="8" begin="7" end="0" resetval="0x0" description="stream id set up by host or mtx, of which value is reflected onto the output port of MSVDX." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_STREAM_COUNTER" acronym="DECODER0_CR_STREAM_COUNTER" offset="0x16C" width="32" description="">
+    <bitfield id="STREAM_COUNTER" width="32" begin="31" end="0" resetval="0x0" description="counter set up by host or mtx, of which value is reflected onto the output port of MSVDX." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_SR_ACTIVE_CYCLES" acronym="DECODER0_CR_SR_ACTIVE_CYCLES" offset="0x170" width="32" description="">
+    <bitfield id="RESERVED" width="6" begin="31" end="26" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SR_ACTIVE_CYCLES" width="26" begin="25" end="0" resetval="0x0" description="Records the number of cycles when the hardware is parsing the bitstream" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_SR_INACTIVE_CYCLES" acronym="DECODER0_CR_SR_INACTIVE_CYCLES" offset="0x174" width="32" description="">
+    <bitfield id="RESERVED" width="6" begin="31" end="26" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SR_INACTIVE_CYCLES" width="26" begin="25" end="0" resetval="0x0" description="Records the number of cycles that the parsers are inactive" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_SR_BITS_CONSUMED" acronym="DECODER0_CR_SR_BITS_CONSUMED" offset="0x178" width="32" description="">
+    <bitfield id="RESERVED" width="6" begin="31" end="26" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SR_BITS_CONSUMED" width="26" begin="25" end="0" resetval="0x0" description="Records the number of bits that have been consumed from the bitstream" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VEC_CONTROL_2" acronym="DECODER0_CR_VEC_CONTROL_2" offset="0x17C" width="32" description="">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_BURST_SIZE" width="2" begin="1" end="0" resetval="0x0" description="Specifies the DMA burst size in number of memory words for shift-reg." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_BE_ENTDEC_SYNC" acronym="DECODER0_CR_VEC_BE_ENTDEC_SYNC" offset="0x180" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_ENTDEC_SYNC_FLAG" width="1" begin="0" end="0" resetval="0x0" description="Used for the back-end h/w parser's synchronisation" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_INPUT_SIGNATURE" acronym="DECODER0_CR_VEC_RENDEC_INPUT_SIGNATURE" offset="0x188" width="32" description="">
+    <bitfield id="RENDEC_INPUT_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="The signature value captured upon every end of slice at the input of the rendec encoder" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_OUTPUT_SIGNATURE" acronym="DECODER0_CR_VEC_RENDEC_OUTPUT_SIGNATURE" offset="0x18C" width="32" description="">
+    <bitfield id="RENDEC_OUTPUT_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="The signature value captured upon every end of slice at the output of the rendec decoder" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_BUFFER_SIZE_2" acronym="DECODER0_CR_VEC_RENDEC_BUFFER_SIZE_2" offset="0x190" width="32" description="">
+    <bitfield id="RENDEC_BUFFER_SIZE1_2" width="16" begin="31" end="16" resetval="0x0" description="The size of the Rendec buffer 1 in external memory in units of 4kB for secondary rendec port." range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_BUFFER_SIZE0_2" width="16" begin="15" end="0" resetval="0x0" description="The size of the Rendec buffer 0 in external memory in 4kB for secondary rendec port." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_BASE_ADDR0_2" acronym="DECODER0_CR_VEC_RENDEC_BASE_ADDR0_2" offset="0x194" width="32" description="">
+    <bitfield id="RENDEC_BASE_ADDR0_2" width="20" begin="31" end="12" resetval="0x0" description="Base address 0 of the Rendec external memory buffer for secondary rendec port, the buffer must be aligned to a 4kB boundary" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_BASE_ADDR1_2" acronym="DECODER0_CR_VEC_RENDEC_BASE_ADDR1_2" offset="0x198" width="32" description="">
+    <bitfield id="RENDEC_BASE_ADDR1_2" width="20" begin="31" end="12" resetval="0x0" description="Base address 1 of the Rendec external memory buffer for secondary rendec port, the buffer must be aligned to a 4kB boundary" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_WRITE_ADDR0_2" acronym="DECODER0_CR_VEC_RENDEC_WRITE_ADDR0_2" offset="0x19C" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_WRITE_ADDR0_2" width="24" begin="27" end="4" resetval="0x0" description="Write address pointer 0 for secondary rendec port." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="3" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_WRITE_ADDR1_2" acronym="DECODER0_CR_VEC_RENDEC_WRITE_ADDR1_2" offset="0x1A0" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_WRITE_ADDR1_2" width="24" begin="27" end="4" resetval="0x0" description="Write address pointer 1 for secondary rendec port." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="3" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_READ_ADDR0_2" acronym="DECODER0_CR_VEC_RENDEC_READ_ADDR0_2" offset="0x1A4" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_READ_ADDR0_2" width="24" begin="27" end="4" resetval="0x0" description="External buffer read address 0 for secondary rendec port - can only be updated when the MTX has control of the read part of the Rendec" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="3" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_READ_ADDR1_2" acronym="DECODER0_CR_VEC_RENDEC_READ_ADDR1_2" offset="0x1A8" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_READ_ADDR1_2" width="24" begin="27" end="4" resetval="0x0" description="External buffer read address 1 for secondary rendec port - can only be updated when the MTX has control of the read part of the Rendec" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="3" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_DATA_SIZE0_2" acronym="DECODER0_CR_VEC_RENDEC_DATA_SIZE0_2" offset="0x1AC" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RENDEC_DATA_SIZE0_2" width="28" begin="27" end="0" resetval="0x0" description="The size of the Rendec stream data 0 currently stored in the external memory buffer for secondary rendec port [in bytes]" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_DATA_SIZE1_2" acronym="DECODER0_CR_VEC_RENDEC_DATA_SIZE1_2" offset="0x1B0" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RENDEC_DATA_SIZE1_2" width="28" begin="27" end="0" resetval="0x0" description="The size of the Rendec stream data 1 currently stored in the external memory buffer for secondary rendec port [in bytes]" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VEC_RENDEC_SLICE_COUNT_2" acronym="DECODER0_CR_VEC_RENDEC_SLICE_COUNT_2" offset="0x1B4" width="32" description="">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RENDEC_SLICE_COUNT_2" width="20" begin="19" end="0" resetval="0x0" description="Rendec Differential Slice Counter for the secondary rendec stream." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_ENTDEC_INFROMATION_2" acronym="DECODER0_CR_VEC_ENTDEC_INFROMATION_2" offset="0x1BC" width="32" description="">
+    <bitfield id="BE_ENTDEC_LATEST_MB_ADDR_Y" width="8" begin="31" end="24" resetval="0x0" description="Latest good decoded mb address y" range="" rwaccess="R"/>
+    <bitfield id="BE_ENTDEC_LATEST_MB_ADDR_X" width="8" begin="23" end="16" resetval="0x0" description="Latest good mb address x" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLC_TABLE_ADDR16" acronym="DECODER0_CR_VEC_VLC_TABLE_ADDR16" offset="0x1C0" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR33" width="11" begin="21" end="11" resetval="0x0" description="Base address of VLC Table 33" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR32" width="11" begin="10" end="0" resetval="0x0" description="Base address of VLC Table 32" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLC_TABLE_ADDR17" acronym="DECODER0_CR_VEC_VLC_TABLE_ADDR17" offset="0x1C4" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR35" width="11" begin="21" end="11" resetval="0x0" description="Base address of VLC Table 35" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR34" width="11" begin="10" end="0" resetval="0x0" description="Base address of VLC Table 34" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VLC_TABLE_ADDR18" acronym="DECODER0_CR_VEC_VLC_TABLE_ADDR18" offset="0x1C8" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR37" width="11" begin="21" end="11" resetval="0x0" description="Base address of VLC Table 37" range="" rwaccess="RW"/>
+    <bitfield id="VLC_TABLE_ADDR36" width="11" begin="10" end="0" resetval="0x0" description="Base address of VLC Table 36" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_PATTERN_00" acronym="DECODER0_CR_VEC_MPEG4_PATTERN_00" offset="0x1D0" width="32" description="is used for detecting header patterns in MPEG4">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_MPEG4_PATTERN_LENGTH" width="5" begin="28" end="24" resetval="0x0" description="Length of pattern to be matched counting from the msb down." range="" rwaccess="RW"/>
+    <bitfield id="SR_MPEG4_PATTERN" width="24" begin="23" end="0" resetval="0x0" description="Pattern to be used for detecting the end of data for MPEG4." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_PATTERN_01" acronym="DECODER0_CR_VEC_MPEG4_PATTERN_01" offset="0x1D4" width="32" description="is used for detecting header patterns in MPEG4">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_MPEG4_PATTERN_LENGTH" width="5" begin="28" end="24" resetval="0x0" description="Length of pattern to be matched counting from the msb down." range="" rwaccess="RW"/>
+    <bitfield id="SR_MPEG4_PATTERN" width="24" begin="23" end="0" resetval="0x0" description="Pattern to be used for detecting the end of data for MPEG4." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_PATTERN_02" acronym="DECODER0_CR_VEC_MPEG4_PATTERN_02" offset="0x1D8" width="32" description="is used for detecting header patterns in MPEG4">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_MPEG4_PATTERN_LENGTH" width="5" begin="28" end="24" resetval="0x0" description="Length of pattern to be matched counting from the msb down." range="" rwaccess="RW"/>
+    <bitfield id="SR_MPEG4_PATTERN" width="24" begin="23" end="0" resetval="0x0" description="Pattern to be used for detecting the end of data for MPEG4." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_PATTERN_03" acronym="DECODER0_CR_VEC_MPEG4_PATTERN_03" offset="0x1DC" width="32" description="is used for detecting header patterns in MPEG4">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SR_MPEG4_PATTERN_LENGTH" width="5" begin="28" end="24" resetval="0x0" description="Length of pattern to be matched counting from the msb down." range="" rwaccess="RW"/>
+    <bitfield id="SR_MPEG4_PATTERN" width="24" begin="23" end="0" resetval="0x0" description="Pattern to be used for detecting the end of data for MPEG4." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_FRAME_ID" acronym="DECODER0_CR_VEC_FRAME_ID" offset="0x1E0" width="32" description="">
+    <bitfield id="VEC_FRAME_ID" width="32" begin="31" end="0" resetval="0x0" description="When bit-stream status parameters are output via a hardware interface, the contents of this register are also output to identify the stream and frame the parameters are from [which may be used to align the parameters to the corresponding commands from the back-end]" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_MSVDX_PARAMS_SIGNATURE" acronym="DECODER0_CR_MSVDX_PARAMS_SIGNATURE" offset="0x1E4" width="32" description="MSVDX Bitstream Params Signature from the Parsers (For H264 and MPEG2)">
+    <bitfield id="MSVDX_PARAMS_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature data for the params count interface from the H264 and MPEG2 parsers." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_SR_CRC_00" acronym="DECODER0_CR_SR_CRC_00" offset="0x360" width="32" description="Contains the CRC signature for write data into the shift register FIFO">
+    <bitfield id="SR_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature CRC for shift register input data to FIFO" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_SR_CRC_01" acronym="DECODER0_CR_SR_CRC_01" offset="0x364" width="32" description="Contains the CRC signature for write data into the shift register FIFO">
+    <bitfield id="SR_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature CRC for shift register input data to FIFO" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_SR_CRC_02" acronym="DECODER0_CR_SR_CRC_02" offset="0x368" width="32" description="Contains the CRC signature for write data into the shift register FIFO">
+    <bitfield id="SR_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature CRC for shift register input data to FIFO" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_SR_CRC_03" acronym="DECODER0_CR_SR_CRC_03" offset="0x36C" width="32" description="Contains the CRC signature for write data into the shift register FIFO">
+    <bitfield id="SR_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature CRC for shift register input data to FIFO" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_SR_CRC_04" acronym="DECODER0_CR_SR_CRC_04" offset="0x370" width="32" description="Contains the CRC signature for write data into the shift register FIFO">
+    <bitfield id="SR_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature CRC for shift register input data to FIFO" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_SR_CRC_05" acronym="DECODER0_CR_SR_CRC_05" offset="0x374" width="32" description="Contains the CRC signature for write data into the shift register FIFO">
+    <bitfield id="SR_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature CRC for shift register input data to FIFO" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_SR_CRC_06" acronym="DECODER0_CR_SR_CRC_06" offset="0x378" width="32" description="Contains the CRC signature for write data into the shift register FIFO">
+    <bitfield id="SR_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature CRC for shift register input data to FIFO" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_SR_CRC_07" acronym="DECODER0_CR_SR_CRC_07" offset="0x37C" width="32" description="Contains the CRC signature for write data into the shift register FIFO">
+    <bitfield id="SR_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature CRC for shift register input data to FIFO" range="" rwaccess="RW"/>
+  </register>
+</module>

@@ -1,0 +1,25 @@
+<module name="PCIE0_CORE_VMAP_LP_MMRS" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="PCIE_VMAP_LP_CTRL_j" acronym="PCIE_VMAP_LP_CTRL_j" offset="0x0" width="32" description="Control register Offset = 0h + (j * Ch); where j = 0h to 1Fh">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="ID enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_VMAP_LP_REQID_j" acronym="PCIE_VMAP_LP_REQID_j" offset="0x4" width="32" description="Requester ID mask and value register Offset = 4h + (j * Ch); where j = 0h to 1Fh">
+    <bitfield id="MASK" width="16" begin="31" end="16" resetval="0x0" description="RequesterID mask" range="" rwaccess="RW"/>
+    <bitfield id="RID" width="16" begin="15" end="0" resetval="0x0" description="RequesterID" range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_VMAP_LP_VIRTID_j" acronym="PCIE_VMAP_LP_VIRTID_j" offset="0x8" width="32" description="Virt ID and Atype register Offset = 8h + (j * Ch); where j = 0h to 1Fh">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ATYPE" width="2" begin="17" end="16" resetval="0x0" description="Address type attribute." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VID" width="12" begin="11" end="0" resetval="0xFFF" description="Match ID" range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_VMAP_LP_DEFMAP" acronym="PCIE_VMAP_LP_DEFMAP" offset="0x200" width="32" description="virtID default value register">
+    <bitfield id="RESERVED" width="11" begin="31" end="21" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ATS_DIS" width="1" begin="20" end="20" resetval="0x0" description="ATS mode." range="" rwaccess="RW"/>
+    <bitfield id="BDF_MODE" width="1" begin="19" end="19" resetval="0x0" description="Bus default mode." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="18" end="18" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="DEF_ATYPE" width="2" begin="17" end="16" resetval="0x0" description="Default address type attribute." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="DEF_VID" width="12" begin="11" end="0" resetval="0xFFF" description="Default match ID" range="" rwaccess="RW"/>
+  </register>
+</module>

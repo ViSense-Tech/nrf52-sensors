@@ -1,0 +1,37 @@
+<module name="NAVSS0_PVU_0_VIRT_ALIAS_10_IO_PVU0_CFG_TLBIF_TLB" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="VIRT_ALIAS_10_IO_PVU0_CFG_TLBIF_TLB_glb" acronym="VIRT_ALIAS_10_IO_PVU0_CFG_TLBIF_TLB_glb" offset="0x0" width="32" description="">
+		<bitfield id="EN" width="1" begin="31" end="31" resetval="0x0" description="Enable for the TLB. 0 = disable TLB. 1 = enable TLB." range="31" rwaccess="R/W"/> 
+		<bitfield id="LOG_DIS" width="1" begin="30" end="30" resetval="0x0" description="Disable Fault Logging for the TLB. 0 = enable fault logging. 1 = disable fault logging." range="30" rwaccess="R/W"/> 
+		<bitfield id="FAULT" width="1" begin="29" end="29" resetval="0x0" description="A fault has been detected from this TLB that could not be logged. Will be set by hardware, and can be cleared by software." range="29" rwaccess="R/W"/> 
+		<bitfield id="CHAIN" width="12" begin="11" end="0" resetval="0x0" description="Chain to another TLB. 0 = no chain. 1+ = chain to that TLB number." range="11 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_10_IO_PVU0_CFG_TLBIF_TLB_ENTRY_REG0" acronym="VIRT_ALIAS_10_IO_PVU0_CFG_TLBIF_TLB_ENTRY_REG0" offset="0x0" width="32" description="">
+		<bitfield id="VBASE_L" width="32" begin="31" end="0" resetval="0x0" description="Virtual Base Address bits 31 to 0. The address must be aligned to the page size." range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_10_IO_PVU0_CFG_TLBIF_TLB_ENTRY_REG1" acronym="VIRT_ALIAS_10_IO_PVU0_CFG_TLBIF_TLB_ENTRY_REG1" offset="0x4" width="32" description="">
+		<bitfield id="VBASE_H" width="16" begin="15" end="0" resetval="0x0" description="Virtual Base Address bits 47 to 32. The address must be aligned to the page size." range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_10_IO_PVU0_CFG_TLBIF_TLB_ENTRY_REG2" acronym="VIRT_ALIAS_10_IO_PVU0_CFG_TLBIF_TLB_ENTRY_REG2" offset="0x8" width="32" description="">
+		<bitfield id="MODE" width="2" begin="31" end="30" resetval="0x0" description="Entry mode. 0 = invalid. 1 = reserved - do not use. 2 = valid. 3 = reserved - do not use." range="31 - 30" rwaccess="R/W"/> 
+		<bitfield id="SEC_DEM" width="1" begin="29" end="29" resetval="0x0" description="Enable Secure Transaction Demotion for the entry if the PVU is in secure mode. 0 = Secure Transactions are not affected. 1 = Secure Transactions that match the entry is demoted to non-secure out of the PVU." range="29" rwaccess="R/W"/> 
+		<bitfield id="PSECURE" width="1" begin="21" end="21" resetval="0x0" description="LPAE Field for Secure Page" range="21" rwaccess="R/W"/> 
+		<bitfield id="PSIZE" width="4" begin="19" end="16" resetval="0x0" description="LPAE Field for Page Size. 0 = 4K. 1 = 16K. 2 = 64K. 3 = 2M. 4 = 32M. 5 = 512M. 6 = 1G. 7 = 16G." range="19 - 16" rwaccess="R/W"/> 
+		<bitfield id="PPERM" width="6" begin="15" end="10" resetval="0x0" description="LPAE Field for Page Permissions. Bit0 = enable user read access UR. Bit1 = enable user write access UW. Bit2 = enable user execute access UX. Bit3 = enable supervisor read access SR. Bit4 = enable supervisor write access SW. Bit5 = enable supervisor execute access SX. " range="15 - 10" rwaccess="R/W"/> 
+		<bitfield id="PMEMTYPE" width="2" begin="9" end="8" resetval="0x0" description="LPAE Field for Page Memory Type. 0 = device. 1 = write back. 2 = write through." range="9 - 8" rwaccess="R/W"/> 
+		<bitfield id="PPREFETCH" width="1" begin="6" end="6" resetval="0x0" description="LPAE Field for Page Prefetch allowed" range="6" rwaccess="R/W"/> 
+		<bitfield id="PISABLE" width="1" begin="5" end="5" resetval="0x0" description="LPAE Field for Page Inner Shareable allowed" range="5" rwaccess="R/W"/> 
+		<bitfield id="POSABLE" width="1" begin="4" end="4" resetval="0x0" description="LPAE Field for Page Outer Shareable allowed" range="4" rwaccess="R/W"/> 
+		<bitfield id="PIALLOCPOL" width="2" begin="3" end="2" resetval="0x0" description="LPAE Field for Page Inner Allocation Policy. 0 = no allocate. 1 = write allocate. 2 = read allocate. 3 = read and write allocate." range="3 - 2" rwaccess="R/W"/> 
+		<bitfield id="POALLOCPOL" width="2" begin="1" end="0" resetval="0x0" description="LPAE Field for Page Outer Allocation Policy. 0 = no allocate. 1 = write allocate. 2 = read allocate. 3 = read and write allocate." range="1 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_10_IO_PVU0_CFG_TLBIF_TLB_ENTRY_REG4" acronym="VIRT_ALIAS_10_IO_PVU0_CFG_TLBIF_TLB_ENTRY_REG4" offset="0x10" width="32" description="">
+		<bitfield id="PBASE_L" width="32" begin="31" end="0" resetval="0x0" description="Physical Base Address bits 31 to 0. The address must be aligned to the page size." range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_10_IO_PVU0_CFG_TLBIF_TLB_ENTRY_REG5" acronym="VIRT_ALIAS_10_IO_PVU0_CFG_TLBIF_TLB_ENTRY_REG5" offset="0x14" width="32" description="">
+		<bitfield id="PBASE_H" width="16" begin="15" end="0" resetval="0x0" description="Physical Base Address bits 47 to 32. The address must be aligned to the page size." range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_10_IO_PVU0_CFG_TLBIF_TLB_ENTRY_REG6" acronym="VIRT_ALIAS_10_IO_PVU0_CFG_TLBIF_TLB_ENTRY_REG6" offset="0x18" width="32" description="">
+		<bitfield id="REPLACE" width="1" begin="4" end="4" resetval="0x0" description="Indicates to replace the bus orderid value when matching this entry with the orderid MMR field. This allows control over the orderid value when it must be restricted due to the topology for QoS reasons. 0 = bypass and use the orderid from the source transaction for the destination transaction. 1 = use the orderid MMR field value for the destination transaction." range="4" rwaccess="R"/> 
+		<bitfield id="ORDERID" width="4" begin="3" end="0" resetval="0x0" description="Defines the bus orderid value for this entry if hit." range="3 - 0" rwaccess="R"/>
+	</register>
+</module>

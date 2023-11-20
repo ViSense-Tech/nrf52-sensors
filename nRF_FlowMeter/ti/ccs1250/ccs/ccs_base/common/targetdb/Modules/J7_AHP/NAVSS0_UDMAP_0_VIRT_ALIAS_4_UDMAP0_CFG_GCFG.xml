@@ -1,0 +1,97 @@
+<module name="NAVSS0_UDMAP_0_VIRT_ALIAS_4_UDMAP0_CFG_GCFG" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_REVISION" acronym="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_REVISION" offset="0x0" width="32" description="">
+		<bitfield id="MODID" width="16" begin="31" end="16" resetval="0x20058" description="Module ID field" range="31 - 16" rwaccess="R"/> 
+		<bitfield id="REVRTL" width="5" begin="15" end="11" resetval="0x11" description="RTL revision. Will vary depending on release." range="15 - 11" rwaccess="R"/> 
+		<bitfield id="REVMAJ" width="3" begin="10" end="8" resetval="0x2" description="Major revision" range="10 - 8" rwaccess="R"/> 
+		<bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom" range="7 - 6" rwaccess="R"/> 
+		<bitfield id="REVMIN" width="6" begin="5" end="0" resetval="0x2" description="Minor revision" range="5 - 0" rwaccess="R"/>
+	</register>
+	<register id="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_PERF_CTRL" acronym="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_PERF_CTRL" offset="0x4" width="32" description="">
+		<bitfield id="TIMEOUT_CNT" width="16" begin="15" end="0" resetval="0x64" description="This field sets the timeout duration in clock cycles.  This field controls the minimum amount of time that an Rx channel will be required to wait when it encounters a buffer starvation condition and the Rx error handling bit is set to 1 (packet is to be preserved - no discard).  If the Rx error handling bit in the flow table is cleared, this field will have no effect on the Rx operation.  When this field is set to 0, the Rx engine will not force an Rx channel to wait after encountering a starvation event (the feature is disabled).  When this field is set to a value other than 0, the Rx engine will force any channel whose associated flow had the Rx error handling bit asserted and which encounters starvation to wait for at least the specified # of clock cycles before coming into context again to check if entries have been added to the Free Queue. This is intended to control potentially debilitating effects on the Rx engine in the UDMAP-P caused by scheduling channels which cannot perform work due to a lack of free descriptor/buffer resources. The exact # of clock cycles between scheduling attempts is not important and will not be exact.  The only guarantee is that the # of cycles waited will be at least as large as the timeout_cnt." range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_EMU_CTRL" acronym="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_EMU_CTRL" offset="0x8" width="32" description="">
+		<bitfield id="SOFT" width="1" begin="1" end="1" resetval="0x0" description="Soft" range="1" rwaccess="R/W"/> 
+		<bitfield id="FREE" width="1" begin="0" end="0" resetval="0x0" description="Free" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_PSIL_TO" acronym="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_PSIL_TO" offset="0x10" width="32" description="">
+		<bitfield id="TOUT" width="1" begin="31" end="31" resetval="0x0" description="Timeout occurred.  When set indicates that a timeout has occurred on a config access" range="31" rwaccess="R/W"/> 
+		<bitfield id="TOUT_CNT" width="16" begin="15" end="0" resetval="0x1024" description="Timeout period.  Specifies how many cycles to wait before closing up a conifiguration read or write transaction and asserting the tout bit" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_UTC_CTRL" acronym="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_UTC_CTRL" offset="0x1C" width="32" description="">
+		<bitfield id="UTC_CHAN_START" width="16" begin="15" end="0" resetval="0x0" description="This field specifies the starting PSI-L thread number for the external UTC " range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_CAP0" acronym="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_CAP0" offset="0x20" width="32" description="">
+		<bitfield id="GLOBAL_TRIG" width="1" begin="19" end="19" resetval="0x1" description="Global triggers 0 and 1 are supported" range="19" rwaccess="R"/> 
+		<bitfield id="LOCAL_TRIG" width="1" begin="18" end="18" resetval="0x0" description="Dedicated local trigger is supported" range="18" rwaccess="R"/> 
+		<bitfield id="EOL" width="1" begin="17" end="17" resetval="0x1" description="EOL field is supported" range="17" rwaccess="R"/> 
+		<bitfield id="STATIC" width="1" begin="16" end="16" resetval="0x1" description="STATIC field is supported" range="16" rwaccess="R"/> 
+		<bitfield id="TYPE15" width="1" begin="15" end="15" resetval="0x1" description="Type 15 TR is supported" range="15" rwaccess="R"/> 
+		<bitfield id="TYPE14" width="1" begin="14" end="14" resetval="0x0" description="Type 14 TR is supported" range="14" rwaccess="R"/> 
+		<bitfield id="TYPE13" width="1" begin="13" end="13" resetval="0x0" description="Type 13 TR is supported" range="13" rwaccess="R"/> 
+		<bitfield id="TYPE12" width="1" begin="12" end="12" resetval="0x0" description="Type 12 TR is supported" range="12" rwaccess="R"/> 
+		<bitfield id="TYPE11" width="1" begin="11" end="11" resetval="0x0" description="Type 11 TR is supported" range="11" rwaccess="R"/> 
+		<bitfield id="TYPE10" width="1" begin="10" end="10" resetval="0x0" description="Type 10 TR is supported" range="10" rwaccess="R"/> 
+		<bitfield id="TYPE9" width="1" begin="9" end="9" resetval="0x0" description="Type 9 TR is supported" range="9" rwaccess="R"/> 
+		<bitfield id="TYPE8" width="1" begin="8" end="8" resetval="0x0" description="Type 8 TR is supported" range="8" rwaccess="R"/> 
+		<bitfield id="TYPE7" width="1" begin="7" end="7" resetval="0x0" description="Type 7 TR is supported" range="7" rwaccess="R"/> 
+		<bitfield id="TYPE6" width="1" begin="6" end="6" resetval="0x0" description="Type 6 TR is supported" range="6" rwaccess="R"/> 
+		<bitfield id="TYPE5" width="1" begin="5" end="5" resetval="0x0" description="Type 5 TR is supported" range="5" rwaccess="R"/> 
+		<bitfield id="TYPE4" width="1" begin="4" end="4" resetval="0x0" description="Type 4 TR is supported" range="4" rwaccess="R"/> 
+		<bitfield id="TYPE3" width="1" begin="3" end="3" resetval="0x1" description="Type 3 TR is supported" range="3" rwaccess="R"/> 
+		<bitfield id="TYPE2" width="1" begin="2" end="2" resetval="0x1" description="Type 2 TR is supported" range="2" rwaccess="R"/> 
+		<bitfield id="TYPE1" width="1" begin="1" end="1" resetval="0x1" description="Type 1 TR is supported" range="1" rwaccess="R"/> 
+		<bitfield id="TYPE0" width="1" begin="0" end="0" resetval="0x1" description="Type 0 TR is supported" range="0" rwaccess="R"/>
+	</register>
+	<register id="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_CAP1" acronym="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_CAP1" offset="0x24" width="32" description="">
+		<bitfield id="SECTR" width="1" begin="3" end="3" resetval="0x0" description="Maximum second TR function that is supported" range="3" rwaccess="R"/> 
+		<bitfield id="DFMT" width="1" begin="2" end="2" resetval="0x0" description="Maximum data reformatting function that is supported" range="2" rwaccess="R"/> 
+		<bitfield id="ELTYPE" width="1" begin="1" end="1" resetval="0x0" description="Maximum element type value that is supported." range="1" rwaccess="R"/> 
+		<bitfield id="AMODE" width="1" begin="0" end="0" resetval="0x0" description="The maximum AMODE that is supported. If AMODE is supported then DIR field must be supported for that AMODE." range="0" rwaccess="R"/>
+	</register>
+	<register id="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_CAP2" acronym="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_CAP2" offset="0x28" width="32" description="">
+		<bitfield id="RCHAN_CNT" width="9" begin="26" end="18" resetval="0x82" description="Rx internal channel count" range="26 - 18" rwaccess="R"/> 
+		<bitfield id="ECHAN_CNT" width="9" begin="17" end="9" resetval="0x256" description="Tx external channel count" range="17 - 9" rwaccess="R"/> 
+		<bitfield id="TCHAN_CNT" width="9" begin="8" end="0" resetval="0x85" description="Tx internal channel count" range="8 - 0" rwaccess="R"/>
+	</register>
+	<register id="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_CAP3" acronym="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_CAP3" offset="0x2C" width="32" description="">
+		<bitfield id="UCHAN_CNT" width="9" begin="31" end="23" resetval="0x2" description="Tx ultra high capacity internal channel count" range="31 - 23" rwaccess="R"/> 
+		<bitfield id="HCHAN_CNT" width="9" begin="22" end="14" resetval="0x4" description="Tx high capacity internal channel count" range="22 - 14" rwaccess="R"/> 
+		<bitfield id="RFLOW_CNT" width="14" begin="13" end="0" resetval="0x224" description="Rx flow table entry count" range="13 - 0" rwaccess="R"/>
+	</register>
+	<register id="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_PERF0" acronym="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_PERF0" offset="0x40" width="32" description="">
+		<bitfield id="VRD_THRESH0" width="8" begin="23" end="16" resetval="0x8" description="Virt read command throttling threshold for mem0. Dispatching will be disabled for virtualized channels whenver the current virtualized read count from this interface meets or exceeds this value." range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="VWR_THRESH0" width="8" begin="7" end="0" resetval="0x8" description="Virt write command throttling threshold for mem0. Dispatching will be disabled for virtualized channels whenver the current virtualized write count from this interface meets or exceeds this value." range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_PERF1" acronym="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_PERF1" offset="0x44" width="32" description="">
+		<bitfield id="VRD_THRESH1" width="8" begin="23" end="16" resetval="0x8" description="Virt read command throttling threshold for mem1.  Dispatching will be disabled for virtualized channels whenver the current virtualized read count from this interface meets or exceeds this value." range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="VWR_THRESH1" width="8" begin="7" end="0" resetval="0x8" description="Virt write command throttling threshold for mem1. Dispatching will be disabled for virtualized channels whenver the current virtualized write count from this interface meets or exceeds this value." range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_PERF2" acronym="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_PERF2" offset="0x48" width="32" description="">
+		<bitfield id="VRD_THRESH2" width="8" begin="23" end="16" resetval="0x16" description="Virt read command throttling threshold for memr.  Dispatching will be disabled for virtualized channels whenver the current virtualized read count from this interface meets or exceeds this value." range="23 - 16" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_PERF3" acronym="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_PERF3" offset="0x4C" width="32" description="">
+		<bitfield id="VWR_THRESH3" width="8" begin="7" end="0" resetval="0x16" description="Virt write command throttling threshold for memw. Dispatching will be disabled for virtualized channels whenver the current virtualized write count from this interface meets or exceeds this value." range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_PM0" acronym="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_PM0" offset="0x60" width="32" description="">
+		<bitfield id="NOGATE_LO" width="32" begin="31" end="0" resetval="0x0" description="When set inhibits automatic gating of clock." range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_PM1" acronym="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_PM1" offset="0x64" width="32" description="">
+		<bitfield id="NOGATE_HI" width="32" begin="31" end="0" resetval="0x0" description="When set inhibits automatic gating of clock." range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_DBGA" acronym="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_DBGA" offset="0x78" width="32" description="">
+		<bitfield id="DBG_EN" width="1" begin="31" end="31" resetval="0x0" description="Debug enable" range="31" rwaccess="R/W"/> 
+		<bitfield id="DBG_UNIT" width="8" begin="15" end="8" resetval="0x0" description="Selects which unit to read debug information from" range="15 - 8" rwaccess="R/W"/> 
+		<bitfield id="DBG_ADDR" width="8" begin="7" end="0" resetval="0x0" description="Selects offset within unit to access seperate debug registers" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_DBGD" acronym="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_DBGD" offset="0x7C" width="32" description="">
+		<bitfield id="DBG_DATA" width="32" begin="31" end="0" resetval="0x0" description="Provides debug information from various internal units.  The value which is read back depends on which unit and register are selected in the Debug Address Register" range="31 - 0" rwaccess="R/NA"/>
+	</register>
+	<register id="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_RFLOWFWOES" acronym="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_RFLOWFWOES" offset="0x80" width="32" description="">
+		<bitfield id="EVT_NUM" width="16" begin="15" end="0" resetval="0x65535" description="This is the global event number to be generated" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_RFLOWFWSTAT" acronym="VIRT_ALIAS_4_UDMAP0__CFG__GCFG_RFLOWFWSTAT" offset="0x88" width="32" description="">
+		<bitfield id="PEND" width="1" begin="31" end="31" resetval="0x0" description="This bit is set whenever the Flow ID firewall detects a Flow ID is out of range for an incoming packet.  Once this bit is set, the remaining fields in this register will not be modified.  SW is required to write this bit to 0 to allow another exception to be captured." range="31" rwaccess="R/W"/> 
+		<bitfield id="FLOWID" width="14" begin="29" end="16" resetval="0x0" description="This is the flow ID that was received on the trapped packet" range="29 - 16" rwaccess="R/W"/> 
+		<bitfield id="CHANNEL" width="9" begin="8" end="0" resetval="0x0" description="This is the channel number on which the trapped packet was received" range="8 - 0" rwaccess="R/W"/>
+	</register>
+</module>

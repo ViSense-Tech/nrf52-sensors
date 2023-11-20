@@ -1,0 +1,78 @@
+<module name="DCC0" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="DCC_GCTRL" acronym="DCC_GCTRL" offset="0x0" width="32" description="Starts / stops the counters. Clears the error signal.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="DONEENA" width="4" begin="15" end="12" resetval="0x5" description="The DONEENA bit enables/disables the done interrupt signal, but has no effect on the done status flag in DCC_STAT register." range="" rwaccess="RW"/>
+    <bitfield id="SINGLESHOT" width="4" begin="11" end="8" resetval="0x5" description="The SINGLESHOT bit enables/disables repetitive operation of the DCC." range="" rwaccess="RW"/>
+    <bitfield id="ERRENA" width="4" begin="7" end="4" resetval="0x5" description="The ERRENA bit enables/disables the error signal." range="" rwaccess="RW"/>
+    <bitfield id="DCCENA" width="4" begin="3" end="0" resetval="0x5" description="The DCCENA bit starts and stops the operation of the dcc." range="" rwaccess="RW"/>
+  </register>
+  <register id="DCC_REV" acronym="DCC_REV" offset="0x4" width="32" description="Specifies the module version.">
+    <bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x1" description="User, privilege, and debug mode (read): Returns 01." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="2" begin="29" end="28" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="FUNC" width="12" begin="27" end="16" resetval="0x1" description="Reflects software-compatability." range="" rwaccess="R"/>
+    <bitfield id="RTL" width="5" begin="15" end="11" resetval="0x0" description="Incremented for releases due to spec changes or post-release design changes." range="" rwaccess="R"/>
+    <bitfield id="MAJOR" width="3" begin="10" end="8" resetval="0x3" description="Represents major changes to the module (e.g." range="" rwaccess="R"/>
+    <bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Indicates a special version of the module." range="" rwaccess="R"/>
+    <bitfield id="MINOR" width="6" begin="5" end="0" resetval="0x0" description="Represents minor changes to the module (e.g." range="" rwaccess="R"/>
+  </register>
+  <register id="DCC_CNTSEED0" acronym="DCC_CNTSEED0" offset="0x8" width="32" description="Seed value for the counter attached to clock source 0">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="COUNTSEED0" width="20" begin="19" end="0" resetval="0x0" description="This field contains the seed value that gets loaded into counter 0 (clock source 0)." range="" rwaccess="RW"/>
+  </register>
+  <register id="DCC_VALIDSEED0" acronym="DCC_VALIDSEED0" offset="0xC" width="32" description="Seed value for the timeout counter attached to clock source 0.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VALIDSEED0" width="16" begin="15" end="0" resetval="0x0" description="This field contains the seed value that gets loaded into the valid duration counter for clock source 0." range="" rwaccess="RW"/>
+  </register>
+  <register id="DCC_CNTSEED1" acronym="DCC_CNTSEED1" offset="0x10" width="32" description="Seed value for the counter attached to clock source 1.">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="COUNTSEED1" width="20" begin="19" end="0" resetval="0x0" description="This field contains the seed value that gets loaded into counter 1 (clock source 1)." range="" rwaccess="RW"/>
+  </register>
+  <register id="DCC_STATUS" acronym="DCC_STATUS" offset="0x14" width="32" description="Specifies the status of the DCC Module.">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="DONE" width="1" begin="1" end="1" resetval="0x0" description="Indicates when single-shot mode is complete without error." range="" rwaccess="RW1C"/>
+    <bitfield id="ERR" width="1" begin="0" end="0" resetval="0x0" description="Indicates whether or not an error has occured." range="" rwaccess="RW1C"/>
+  </register>
+  <register id="DCC_CNT0" acronym="DCC_CNT0" offset="0x18" width="32" description="Value of the counter attached to clock source 0.">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="COUNT0" width="20" begin="19" end="0" resetval="0x0" description="This field contains the current value of counter 0." range="" rwaccess="R"/>
+  </register>
+  <register id="DCC_VALID0" acronym="DCC_VALID0" offset="0x1C" width="32" description="Value of the valid counter attached to clock source 0.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="VALID0" width="16" begin="15" end="0" resetval="0x0" description="This field contains the current value of valid counter 0." range="" rwaccess="R"/>
+  </register>
+  <register id="DCC_CNT1" acronym="DCC_CNT1" offset="0x20" width="32" description="Value of the counter attached to clock source 1.">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="COUNT1" width="20" begin="19" end="0" resetval="0x0" description="This field contains the current value of counter 1." range="" rwaccess="R"/>
+  </register>
+  <register id="DCC_CLKSRC1" acronym="DCC_CLKSRC1" offset="0x24" width="32" description="Selects the clock source for counter 1.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="KEY" width="4" begin="15" end="12" resetval="0x0" description="This field enables or disables clock source selection for counter 1." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="7" begin="11" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CLKSRC1" width="5" begin="4" end="0" resetval="0x0" description="This field specifies the clock source for counter 1, when the KEY field enables this feature." range="" rwaccess="RW"/>
+  </register>
+  <register id="DCC_CLKSRC0" acronym="DCC_CLKSRC0" offset="0x28" width="32" description="Selects the clock source for counter 0.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="KEY" width="4" begin="15" end="12" resetval="0x0" description="This field enables or disables clock source selection for counter 0." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="11" end="4" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CLKSRC0" width="4" begin="3" end="0" resetval="0x0" description="This field specifies the clock source for counter 0." range="" rwaccess="RW"/>
+  </register>
+  <register id="DCC_GCTRL2" acronym="DCC_GCTRL2" offset="0x2C" width="32" description="Allows configuring different modes of operation for DCC.">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="FIFO_NONERR" width="4" begin="11" end="8" resetval="0x5" description="Enables/disables FIFO writes without the error event on completion of comparison window." range="" rwaccess="RW"/>
+    <bitfield id="FIFO_READ" width="4" begin="7" end="4" resetval="0x5" description="Enables the counter read registers reflect FIFO output instead of the live counter value." range="" rwaccess="RW"/>
+    <bitfield id="CONT_ON_ERR" width="4" begin="3" end="0" resetval="0x5" description="Continues to next window of comparison despite the error condition." range="" rwaccess="RW"/>
+  </register>
+  <register id="DCC_STATUS2" acronym="DCC_STATUS2" offset="0x30" width="32" description="Specifies the status of the DCC FIFOs.">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="COUNT1_FIFO_FULL" width="1" begin="5" end="5" resetval="0x0" description="Count1 FIFO Full." range="" rwaccess="R"/>
+    <bitfield id="VALID0_FIFO_FULL" width="1" begin="4" end="4" resetval="0x0" description="Valid0 FIFO Full." range="" rwaccess="R"/>
+    <bitfield id="COUNT0_FIFO_FULL" width="1" begin="3" end="3" resetval="0x0" description="Count0 FIFO Full." range="" rwaccess="R"/>
+    <bitfield id="COUNT1_FIFO_EMPTY" width="1" begin="2" end="2" resetval="0x1" description="Count1 FIFO Empty." range="" rwaccess="R"/>
+    <bitfield id="VALID0_FIFO_EMPTY" width="1" begin="1" end="1" resetval="0x1" description="Valid0 FIFO Empty." range="" rwaccess="R"/>
+    <bitfield id="COUNT0_FIFO_EMPTY" width="1" begin="0" end="0" resetval="0x1" description="Count0 FIFO Empty." range="" rwaccess="R"/>
+  </register>
+  <register id="DCC_ERRCNT" acronym="DCC_ERRCNT" offset="0x34" width="32" description="Counts number of errors since last clear.">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ERRCNT" width="10" begin="9" end="0" resetval="0x0" description="Counts the number of errors after the last write to this register or reset." range="" rwaccess="RW"/>
+  </register>
+</module>

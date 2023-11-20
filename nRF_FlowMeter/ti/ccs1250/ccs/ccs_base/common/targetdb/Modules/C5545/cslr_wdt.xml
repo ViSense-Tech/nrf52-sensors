@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><module id="WDT" HW_revision="" XML_version="1" description="The WDT controller is used to setup the internal timers.  Each timer can be configured as a Watchdog or a General purpose timer.">
+     <register id="WDKCKLK" acronym="WDKCKLK" page="2" offset="0X0000" width="16" description="unlocks the WD Kick Register">
+<bitfield id="KICKLOK" width="16" begin="15" end="0" resetval="0" description="Used to unlock the Watchdog Kick Register.  A 2 word key sequence must be written to this register.  The following keys must be written this order Key 1 = 0x5555 and Key 2 = 0xAAAA.  When this is written the Kick register can now be started.  When reading back the KICKLOK register, the value that is returned in bits [1:0] give the current state of the lock state machine where 00 = Waiting for Key 1; 01 = Waiting for key 2; 11 = unlocked. " range="0000h-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="WDKICK" acronym="WDKICK" page="2" offset="0X0002" width="16" description="resets the counter to the start value">
+<bitfield id="KICK" width="16" begin="15" end="0" resetval="0" description="A write to the kick register when it is unlocked causes the the watchdown counter to be reloaded with the value in the WD Start Value register and start counting down again.  It does not matter what value is written.  Reading the register returns the current value of the counter. " range="0000h-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="WDSVLR" acronym="WDSVLR" page="2" offset="0X0004" width="16" description="unlocks the WD Start value register">
+<bitfield id="STVALLOK" width="16" begin="15" end="0" resetval="0" description="Used to unlock the Watchdog Start Value Register.  A 2 word key sequence must be written to this register.  The following keys must be written this order Key 1 = 0x6666 and Key 2 = 0xBBBB.  When this is written the WD Start Value register can now be input.  When reading back the STVALLOK register, the value that is returned in bits [1:0] give the current state of the lock state machine where 00 = Waiting for Key 1; 01 = Waiting for key 2; 11 = unlocked. " range="0000h-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="WDSVR" acronym="WDSVR" page="2" offset="0X0006" width="16" description="defines the start value for the WD counter">
+<bitfield id="STRTVAL" width="16" begin="15" end="0" resetval="0" description="The value written to this register is what is loaded into the WD counter when the kick register is written to.  A read of this register will return the the Start Value for the counter." range="0000h-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="WDENLOK" acronym="WDENLOK" page="2" offset="0X0008" width="16" description="unlocks the WD enable register">
+<bitfield id="ENLOK" width="16" begin="15" end="0" resetval="0" description="Used to unlock the Watchdog Enable Register.  A 3 word key sequence must be written to this register.  The following keys must be written this order Key 1 = 0x7777, Key 2 = 0xCCCC, and Key 3 = 0xDDDD.  When this is written the WD Enable register can now be input.  When reading back the ENLOK register, the value that is returned in bits [1:0] give the current state of the lock state machine where 00 = Waiting for Key 1; 01 = Waiting for key 2; 10 = Waiting for Key 3; 11 = unlocked. " range="0000h-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="WDEN" acronym="WDEN" page="2" offset="0X000A" width="16" description="WD Enable/disable bit">
+<bitfield id="RSV" width="15" begin="15" end="1" resetval="0" description="Reserved" range="" rwaccess="RW"/>
+<bitfield id="EN" width="1" begin="0" end="0" resetval="0" description="used to enable/disable the WD timer.  When enabled the counter begins counting down if the counter is allowed to reach 0 the chip will be reset. " range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Watchdog Timer is disabled"/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Watchdog Timer is enabled and begins counting down. "/>
+</bitfield>
+</register>
+     <register id="WDPSLR" acronym="WDPSLR" page="2" offset="0X000C" width="16" description="WD Enable/disable bit">
+<bitfield id="PSLOK" width="16" begin="15" end="0" resetval="0" description="Used to unlock the Watchdog Prescaler Register.  A 2 word key sequence must be written to this register.  The following keys must be written this order Key 1 = 0x5A5A and Key 2 = 0xA5A5.  When this is written the WD Prescaler register can now be loaded.  When reading back the PSLOK register, the value that is returned in bits [1:0] give the current state of the lock state machine where 00 = Waiting for Key 1; 01 = Waiting for key 2; 11 = unlocked. " range="0000h-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="WDPS" acronym="WDPS" page="2" offset="0X000E" width="16" description="WD Enable/disable bit">
+<bitfield id="PS" width="16" begin="15" end="0" resetval="0" description="The WD Prescaler register stores the start value for the WD Prescaler.  Each time the PS register counts down to 0 the WD counter is decremented by 1.  A read will return the last value written to this register (the Prescaler start value)" range="0000h-FFFFh" rwaccess="RW"/>
+</register>
+</module>

@@ -1,0 +1,26 @@
+<module name="ICONT1_CFG_ICONT" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="ICONT_REVISION" acronym="ICONT_REVISION" offset="0x0" width="32" description="ICONT Revision Identifier (X.Y.R) Used by software to track features, bugs, and compatibility">
+    <bitfield id="VERSION" width="32" begin="31" end="0" resetval="- TI Internal Data" description="Module Version" range="" rwaccess="R"/>
+  </register>
+  <register id="ICONT_HWINFO" acronym="ICONT_HWINFO" offset="0x4" width="32" description="Information about the IP module's hardware configuration.">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x00" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="NB_LCH" width="4" begin="23" end="20" resetval="0x4" description="Number of Data Mover Logical channel" range="" rwaccess="R"/>
+    <bitfield id="NB_TASK" width="4" begin="19" end="16" resetval="0x6" description="Number of SYNCBOX tasks" range="" rwaccess="R"/>
+    <bitfield id="DTCM_SIZE" width="8" begin="15" end="8" resetval="0x10" description="Size of DTCM (in kBytes)" range="" rwaccess="R"/>
+    <bitfield id="ICTM_SIZE" width="8" begin="7" end="0" resetval="0x20" description="Size of ITCM (in kBytes)" range="" rwaccess="R"/>
+  </register>
+  <register id="ICONT_SYSCONFIG" acronym="ICONT_SYSCONFIG" offset="0x10" width="32" description="Clock management configuration">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0x0000000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="STANDBYMODE" width="2" begin="5" end="4" resetval="0x2" description="Configuration of the local initiator state management mode. By definition, initiator may generate read/write transaction as long as it is out of STANDBY state." range="" rwaccess="RW">
+      <bitenum value="0" id="0" token="STANDBYMODE_0" description="Force-standby mode: local initiator is unconditionally placed in standby state. Backup mode, for debug only."/>
+      <bitenum value="1" id="1" token="STANDBYMODE_1" description="No-standby mode: local initiator is unconditionally placed out of standby state. Backup mode, for debug only."/>
+      <bitenum value="2" id="IP_2" token="STANDBYMODE_2" description="Smart-standby mode: local initiator standby status depends on local conditions, that is, the module's functional requirement from the initiator. IP module shall not generate (initiator-related) wakeup events."/>
+    </bitfield>
+    <bitfield id="IDLEMODE" width="2" begin="3" end="2" resetval="0x2" description="Configuration of the local target state management mode. By definition, target can handle read/write transaction as long as it is out of IDLE state." range="" rwaccess="RW">
+      <bitenum value="0" id="IP_0" token="IDLEMODE_0" description="Force-idle mode: local target's idle state follows (acknowledges) the system's idle requests unconditionally, that is, regardless of the IP module's internal requirements. Backup mode, for debug only."/>
+      <bitenum value="1" id="1" token="IDLEMODE_1" description="No-idle mode: local target never enters idle state. Backup mode, for debug only."/>
+      <bitenum value="2" id="IP_IP_(IRQ-_2" token="IDLEMODE_2" description="Smart-idle mode: local target's idle state eventually follows (acknowledges) the system's idle requests, depending on the IP module's internal requirements. IP module shall not generate (IRQ- or DMA-request-related) wakeup events."/>
+    </bitfield>
+    <bitfield id="RESERVED" width="2" begin="1" end="0" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+  </register>
+</module>

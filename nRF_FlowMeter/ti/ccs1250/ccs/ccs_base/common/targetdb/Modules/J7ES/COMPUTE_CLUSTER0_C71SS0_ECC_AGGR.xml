@@ -1,0 +1,177 @@
+<module name="COMPUTE_CLUSTER0_C71SS0_ECC_AGGR" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="C71SS_ECC_REV" acronym="C71SS_ECC_REV" offset="0x0" width="32" description="IP revision register.">
+    <bitfield id="REV" width="32" begin="31" end="0" resetval="0x66A0EA00" description="TI internal data. Identifies revision of peripheral." range="" rwaccess="R"/>
+  </register>
+  <register id="C71SS_ECC_VECTOR" acronym="C71SS_ECC_VECTOR" offset="0x8" width="32" description="ECC vector register.">
+    <bitfield id="RESERVED" width="7" begin="31" end="25" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="RD_SVBUS_DONE" width="1" begin="24" end="24" resetval="0x0" description="Status to indicate if read on serial VBUS is complete, write of any value will clear this bit." range="" rwaccess="RW1C"/>
+    <bitfield id="RD_SVBUS_ADDRESS" width="8" begin="23" end="16" resetval="0x0" description="Read address" range="" rwaccess="RW"/>
+    <bitfield id="RD_SVBUS" width="1" begin="15" end="15" resetval="0x0" description="Write 1 to trigger a read on the serial VBUS" range="" rwaccess="RW1S"/>
+    <bitfield id="RESERVED" width="4" begin="14" end="11" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ECC_VECTOR" width="11" begin="10" end="0" resetval="0x0" description="Value written to select the corresponding ECC RAM for control or status" range="" rwaccess="RW"/>
+  </register>
+  <register id="C71SS_ECC_STAT" acronym="C71SS_ECC_STAT" offset="0xC" width="32" description="Misc status register.">
+    <bitfield id="RESERVED" width="21" begin="31" end="11" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="NUM_RAMS" width="11" begin="10" end="0" resetval="0x13" description="Indicates the number of RAMs serviced by the ECC aggregator" range="" rwaccess="R"/>
+  </register>
+  <register id="C71SS_ECC_SEC_EOI_REG" acronym="C71SS_ECC_SEC_EOI_REG" offset="0x3C" width="32" description="SEC EOI register. The EOI register is used to re-trigger the pulse interrupt signal to ensure that any nested interrupt events are serviced. The software interrupt handler must write to the EOI register at the end of the current interrupt processing routine, so that new events can re-trigger the pulse interrupt signal again. For level interrupt signals the EOI register is not functional and must not be used.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="EOI_WR" width="1" begin="0" end="0" resetval="0x0" description="EOI value" range="" rwaccess="RW1S"/>
+  </register>
+  <register id="C71SS_ECC_SEC_STATUS_REG0" acronym="C71SS_ECC_SEC_STATUS_REG0" offset="0x40" width="32" description="SEC interrupt status register 0.">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="PMC_BUSECC_PEND" width="1" begin="18" end="18" resetval="0x0" description="Interrupt pending status for PMC_BUSECC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="SE_1_BUSECC_PEND" width="1" begin="17" end="17" resetval="0x0" description="Interrupt pending status for SE_1_BUSECC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="SE_0_BUSECC_PEND" width="1" begin="16" end="16" resetval="0x0" description="Interrupt pending status for SE_0_BUSECC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_TAGRAM_DMC_PEND" width="1" begin="15" end="15" resetval="0x0" description="Interrupt pending status for BUSECC_TAGRAM_DMC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_DMC_PEND" width="1" begin="14" end="14" resetval="0x0" description="Interrupt pending status for BUSECC_DMC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE3_P2_PEND" width="1" begin="13" end="13" resetval="0x0" description="Interrupt pending status for BUSECC_PIPE3_P2_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE3_DP_PEND" width="1" begin="12" end="12" resetval="0x0" description="Interrupt pending status for BUSECC_PIPE3_DP_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE2_P2_PEND" width="1" begin="11" end="11" resetval="0x0" description="Interrupt pending status for BUSECC_PIPE2_P2_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE2_DP_PEND" width="1" begin="10" end="10" resetval="0x0" description="Interrupt pending status for BUSECC_PIPE2_DP_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE1_P2_PEND" width="1" begin="9" end="9" resetval="0x0" description="Interrupt pending status for BUSECC_PIPE1_P2_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE1_DP_PEND" width="1" begin="8" end="8" resetval="0x0" description="Interrupt pending status for BUSECC_PIPE1_DP_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE0_P2_PEND" width="1" begin="7" end="7" resetval="0x0" description="Interrupt pending status for BUSECC_PIPE0_P2_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE0_DP_PEND" width="1" begin="6" end="6" resetval="0x0" description="Interrupt pending status for BUSECC_PIPE0_DP_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="DMSC_FW_CBASS_BUSECC_DUMMY1_PEND" width="1" begin="5" end="5" resetval="0x0" description="Interrupt pending status for DMSC_FW_CBASS_BUSECC_DUMMY1_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="DMSC_FW_CBASS_BUSECC_DUMMY0_PEND" width="1" begin="4" end="4" resetval="0x0" description="Interrupt pending status for DMSC_FW_CBASS_BUSECC_DUMMY0_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_CLK1_CLK_CLK_EDC_CTRL_CBASS_INT_CLK1_CLK_BUSECC_PEND" width="1" begin="3" end="3" resetval="0x0" description="Interrupt pending status for C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_CLK1_CLK_CLK_EDC_CTRL_CBASS_INT_CLK1_CLK_BUSECC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_SCR_SCR_C711_COREPAC_CFG_CBASS_CFG_CBASS_SCR_SCR_EDC_CTRL_BUSECC_PEND" width="1" begin="2" end="2" resetval="0x0" description="Interrupt pending status for C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_SCR_SCR_C711_COREPAC_CFG_CBASS_CFG_CBASS_SCR_SCR_EDC_CTRL_BUSECC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_VBUSP_ECCAGGR_CFG_P2P_BRIDGE_VBUSP_ECCAGGR_CFG_BRIDGE_BUSECC_PEND" width="1" begin="1" end="1" resetval="0x0" description="Interrupt pending status for C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_VBUSP_ECCAGGR_CFG_P2P_BRIDGE_VBUSP_ECCAGGR_CFG_BRIDGE_BUSECC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="EDC_CTRL_ECCAGGR_COREPAC_PEND" width="1" begin="0" end="0" resetval="0x0" description="Interrupt pending status for EDC_CTRL_ECCAGGR_COREPAC_PEND" range="" rwaccess="RW1S"/>
+  </register>
+  <register id="C71SS_ECC_SEC_ENABLE_SET_REG0" acronym="C71SS_ECC_SEC_ENABLE_SET_REG0" offset="0x80" width="32" description="SEC interrupt enable set register 0.">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="PMC_BUSECC_ENABLE_SET" width="1" begin="18" end="18" resetval="0x0" description="Interrupt enable set for PMC_BUSECC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="SE_1_BUSECC_ENABLE_SET" width="1" begin="17" end="17" resetval="0x0" description="Interrupt enable set for SE_1_BUSECC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="SE_0_BUSECC_ENABLE_SET" width="1" begin="16" end="16" resetval="0x0" description="Interrupt enable set for SE_0_BUSECC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_TAGRAM_DMC_ENABLE_SET" width="1" begin="15" end="15" resetval="0x0" description="Interrupt enable set for BUSECC_TAGRAM_DMC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_DMC_ENABLE_SET" width="1" begin="14" end="14" resetval="0x0" description="Interrupt enable set for BUSECC_DMC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE3_P2_ENABLE_SET" width="1" begin="13" end="13" resetval="0x0" description="Interrupt enable set for BUSECC_PIPE3_P2_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE3_DP_ENABLE_SET" width="1" begin="12" end="12" resetval="0x0" description="Interrupt enable set for BUSECC_PIPE3_DP_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE2_P2_ENABLE_SET" width="1" begin="11" end="11" resetval="0x0" description="Interrupt enable set for BUSECC_PIPE2_P2_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE2_DP_ENABLE_SET" width="1" begin="10" end="10" resetval="0x0" description="Interrupt enable set for BUSECC_PIPE2_DP_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE1_P2_ENABLE_SET" width="1" begin="9" end="9" resetval="0x0" description="Interrupt enable set for BUSECC_PIPE1_P2_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE1_DP_ENABLE_SET" width="1" begin="8" end="8" resetval="0x0" description="Interrupt enable set for BUSECC_PIPE1_DP_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE0_P2_ENABLE_SET" width="1" begin="7" end="7" resetval="0x0" description="Interrupt enable set for BUSECC_PIPE0_P2_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE0_DP_ENABLE_SET" width="1" begin="6" end="6" resetval="0x0" description="Interrupt enable set for BUSECC_PIPE0_DP_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="DMSC_FW_CBASS_BUSECC_DUMMY1_ENABLE_SET" width="1" begin="5" end="5" resetval="0x0" description="Interrupt enable set for DMSC_FW_CBASS_BUSECC_DUMMY1_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="DMSC_FW_CBASS_BUSECC_DUMMY0_ENABLE_SET" width="1" begin="4" end="4" resetval="0x0" description="Interrupt enable set for DMSC_FW_CBASS_BUSECC_DUMMY0_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_CLK1_CLK_CLK_EDC_CTRL_CBASS_INT_CLK1_CLK_BUSECC_ENABLE_SET" width="1" begin="3" end="3" resetval="0x0" description="Interrupt enable set for C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_CLK1_CLK_CLK_EDC_CTRL_CBASS_INT_CLK1_CLK_BUSECC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_SCR_SCR_C711_COREPAC_CFG_CBASS_CFG_CBASS_SCR_SCR_EDC_CTRL_BUSECC_ENABLE_SET" width="1" begin="2" end="2" resetval="0x0" description="Interrupt enable set for C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_SCR_SCR_C711_COREPAC_CFG_CBASS_CFG_CBASS_SCR_SCR_EDC_CTRL_BUSECC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_VBUSP_ECCAGGR_CFG_P2P_BRIDGE_VBUSP_ECCAGGR_CFG_BRIDGE_BUSECC_ENABLE_SET" width="1" begin="1" end="1" resetval="0x0" description="Interrupt enable set for C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_VBUSP_ECCAGGR_CFG_P2P_BRIDGE_VBUSP_ECCAGGR_CFG_BRIDGE_BUSECC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="EDC_CTRL_ECCAGGR_COREPAC_ENABLE_SET" width="1" begin="0" end="0" resetval="0x0" description="Interrupt enable set for EDC_CTRL_ECCAGGR_COREPAC_PEND" range="" rwaccess="RW1S"/>
+  </register>
+  <register id="C71SS_ECC_SEC_ENABLE_CLR_REG0" acronym="C71SS_ECC_SEC_ENABLE_CLR_REG0" offset="0xC0" width="32" description="SEC interrupt enable clear register 0.">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="PMC_BUSECC_ENABLE_CLR" width="1" begin="18" end="18" resetval="0x0" description="Interrupt enable clear for PMC_BUSECC_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="SE_1_BUSECC_ENABLE_CLR" width="1" begin="17" end="17" resetval="0x0" description="Interrupt enable clear for SE_1_BUSECC_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="SE_0_BUSECC_ENABLE_CLR" width="1" begin="16" end="16" resetval="0x0" description="Interrupt enable clear for SE_0_BUSECC_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="BUSECC_TAGRAM_DMC_ENABLE_CLR" width="1" begin="15" end="15" resetval="0x0" description="Interrupt enable clear for BUSECC_TAGRAM_DMC_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="BUSECC_DMC_ENABLE_CLR" width="1" begin="14" end="14" resetval="0x0" description="Interrupt enable clear for BUSECC_DMC_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="BUSECC_PIPE3_P2_ENABLE_CLR" width="1" begin="13" end="13" resetval="0x0" description="Interrupt enable clear for BUSECC_PIPE3_P2_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="BUSECC_PIPE3_DP_ENABLE_CLR" width="1" begin="12" end="12" resetval="0x0" description="Interrupt enable clear for BUSECC_PIPE3_DP_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="BUSECC_PIPE2_P2_ENABLE_CLR" width="1" begin="11" end="11" resetval="0x0" description="Interrupt enable clear for BUSECC_PIPE2_P2_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="BUSECC_PIPE2_DP_ENABLE_CLR" width="1" begin="10" end="10" resetval="0x0" description="Interrupt enable clear for BUSECC_PIPE2_DP_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="BUSECC_PIPE1_P2_ENABLE_CLR" width="1" begin="9" end="9" resetval="0x0" description="Interrupt enable clear for BUSECC_PIPE1_P2_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="BUSECC_PIPE1_DP_ENABLE_CLR" width="1" begin="8" end="8" resetval="0x0" description="Interrupt enable clear for BUSECC_PIPE1_DP_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="BUSECC_PIPE0_P2_ENABLE_CLR" width="1" begin="7" end="7" resetval="0x0" description="Interrupt enable clear for BUSECC_PIPE0_P2_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="BUSECC_PIPE0_DP_ENABLE_CLR" width="1" begin="6" end="6" resetval="0x0" description="Interrupt enable clear for BUSECC_PIPE0_DP_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="DMSC_FW_CBASS_BUSECC_DUMMY1_ENABLE_CLR" width="1" begin="5" end="5" resetval="0x0" description="Interrupt enable clear for DMSC_FW_CBASS_BUSECC_DUMMY1_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="DMSC_FW_CBASS_BUSECC_DUMMY0_ENABLE_CLR" width="1" begin="4" end="4" resetval="0x0" description="Interrupt enable clear for DMSC_FW_CBASS_BUSECC_DUMMY0_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_CLK1_CLK_CLK_EDC_CTRL_CBASS_INT_CLK1_CLK_BUSECC_ENABLE_CLR" width="1" begin="3" end="3" resetval="0x0" description="Interrupt enable clear for C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_CLK1_CLK_CLK_EDC_CTRL_CBASS_INT_CLK1_CLK_BUSECC_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_SCR_SCR_C711_COREPAC_CFG_CBASS_CFG_CBASS_SCR_SCR_EDC_CTRL_BUSECC_ENABLE_CLR" width="1" begin="2" end="2" resetval="0x0" description="Interrupt enable clear for C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_SCR_SCR_C711_COREPAC_CFG_CBASS_CFG_CBASS_SCR_SCR_EDC_CTRL_BUSECC_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_VBUSP_ECCAGGR_CFG_P2P_BRIDGE_VBUSP_ECCAGGR_CFG_BRIDGE_BUSECC_ENABLE_CLR" width="1" begin="1" end="1" resetval="0x0" description="Interrupt enable clear for C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_VBUSP_ECCAGGR_CFG_P2P_BRIDGE_VBUSP_ECCAGGR_CFG_BRIDGE_BUSECC_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="EDC_CTRL_ECCAGGR_COREPAC_ENABLE_CLR" width="1" begin="0" end="0" resetval="0x0" description="Interrupt enable clear for EDC_CTRL_ECCAGGR_COREPAC_PEND" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="C71SS_ECC_DED_EOI_REG" acronym="C71SS_ECC_DED_EOI_REG" offset="0x13C" width="32" description="DED EOI register. The EOI register is used to re-trigger the pulse interrupt signal to ensure that any nested interrupt events are serviced. The software interrupt handler must write to the EOI register at the end of the current interrupt processing routine, so that new events can re-trigger the pulse interrupt signal again. For level interrupt signals the EOI register is not functional and must not be used.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="EOI_WR" width="1" begin="0" end="0" resetval="0x0" description="EOI value" range="" rwaccess="RW1S"/>
+  </register>
+  <register id="C71SS_ECC_DED_STATUS_REG0" acronym="C71SS_ECC_DED_STATUS_REG0" offset="0x140" width="32" description="DED interrupt status register 0.">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="PMC_BUSECC_PEND" width="1" begin="18" end="18" resetval="0x0" description="Interrupt pending status for PMC_BUSECC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="SE_1_BUSECC_PEND" width="1" begin="17" end="17" resetval="0x0" description="Interrupt pending status for SE_1_BUSECC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="SE_0_BUSECC_PEND" width="1" begin="16" end="16" resetval="0x0" description="Interrupt pending status for SE_0_BUSECC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_TAGRAM_DMC_PEND" width="1" begin="15" end="15" resetval="0x0" description="Interrupt pending status for BUSECC_TAGRAM_DMC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_DMC_PEND" width="1" begin="14" end="14" resetval="0x0" description="Interrupt pending status for BUSECC_DMC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE3_P2_PEND" width="1" begin="13" end="13" resetval="0x0" description="Interrupt pending status for BUSECC_PIPE3_P2_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE3_DP_PEND" width="1" begin="12" end="12" resetval="0x0" description="Interrupt pending status for BUSECC_PIPE3_DP_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE2_P2_PEND" width="1" begin="11" end="11" resetval="0x0" description="Interrupt pending status for BUSECC_PIPE2_P2_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE2_DP_PEND" width="1" begin="10" end="10" resetval="0x0" description="Interrupt pending status for BUSECC_PIPE2_DP_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE1_P2_PEND" width="1" begin="9" end="9" resetval="0x0" description="Interrupt pending status for BUSECC_PIPE1_P2_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE1_DP_PEND" width="1" begin="8" end="8" resetval="0x0" description="Interrupt pending status for BUSECC_PIPE1_DP_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE0_P2_PEND" width="1" begin="7" end="7" resetval="0x0" description="Interrupt pending status for BUSECC_PIPE0_P2_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE0_DP_PEND" width="1" begin="6" end="6" resetval="0x0" description="Interrupt pending status for BUSECC_PIPE0_DP_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="DMSC_FW_CBASS_BUSECC_DUMMY1_PEND" width="1" begin="5" end="5" resetval="0x0" description="Interrupt pending status for DMSC_FW_CBASS_BUSECC_DUMMY1_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="DMSC_FW_CBASS_BUSECC_DUMMY0_PEND" width="1" begin="4" end="4" resetval="0x0" description="Interrupt pending status for DMSC_FW_CBASS_BUSECC_DUMMY0_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_CLK1_CLK_CLK_EDC_CTRL_CBASS_INT_CLK1_CLK_BUSECC_PEND" width="1" begin="3" end="3" resetval="0x0" description="Interrupt pending status for C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_CLK1_CLK_CLK_EDC_CTRL_CBASS_INT_CLK1_CLK_BUSECC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_SCR_SCR_C711_COREPAC_CFG_CBASS_CFG_CBASS_SCR_SCR_EDC_CTRL_BUSECC_PEND" width="1" begin="2" end="2" resetval="0x0" description="Interrupt pending status for C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_SCR_SCR_C711_COREPAC_CFG_CBASS_CFG_CBASS_SCR_SCR_EDC_CTRL_BUSECC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_VBUSP_ECCAGGR_CFG_P2P_BRIDGE_VBUSP_ECCAGGR_CFG_BRIDGE_BUSECC_PEND" width="1" begin="1" end="1" resetval="0x0" description="Interrupt pending status for C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_VBUSP_ECCAGGR_CFG_P2P_BRIDGE_VBUSP_ECCAGGR_CFG_BRIDGE_BUSECC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="EDC_CTRL_ECCAGGR_COREPAC_PEND" width="1" begin="0" end="0" resetval="0x0" description="Interrupt pending status for EDC_CTRL_ECCAGGR_COREPAC_PEND" range="" rwaccess="RW1S"/>
+  </register>
+  <register id="C71SS_ECC_DED_ENABLE_SET_REG0" acronym="C71SS_ECC_DED_ENABLE_SET_REG0" offset="0x180" width="32" description="DED interrupt enable set register 0.">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="PMC_BUSECC_ENABLE_SET" width="1" begin="18" end="18" resetval="0x0" description="Interrupt enable set for PMC_BUSECC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="SE_1_BUSECC_ENABLE_SET" width="1" begin="17" end="17" resetval="0x0" description="Interrupt enable set for SE_1_BUSECC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="SE_0_BUSECC_ENABLE_SET" width="1" begin="16" end="16" resetval="0x0" description="Interrupt enable set for SE_0_BUSECC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_TAGRAM_DMC_ENABLE_SET" width="1" begin="15" end="15" resetval="0x0" description="Interrupt enable set for BUSECC_TAGRAM_DMC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_DMC_ENABLE_SET" width="1" begin="14" end="14" resetval="0x0" description="Interrupt enable set for BUSECC_DMC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE3_P2_ENABLE_SET" width="1" begin="13" end="13" resetval="0x0" description="Interrupt enable set for BUSECC_PIPE3_P2_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE3_DP_ENABLE_SET" width="1" begin="12" end="12" resetval="0x0" description="Interrupt enable set for BUSECC_PIPE3_DP_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE2_P2_ENABLE_SET" width="1" begin="11" end="11" resetval="0x0" description="Interrupt enable set for BUSECC_PIPE2_P2_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE2_DP_ENABLE_SET" width="1" begin="10" end="10" resetval="0x0" description="Interrupt enable set for BUSECC_PIPE2_DP_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE1_P2_ENABLE_SET" width="1" begin="9" end="9" resetval="0x0" description="Interrupt enable set for BUSECC_PIPE1_P2_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE1_DP_ENABLE_SET" width="1" begin="8" end="8" resetval="0x0" description="Interrupt enable set for BUSECC_PIPE1_DP_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE0_P2_ENABLE_SET" width="1" begin="7" end="7" resetval="0x0" description="Interrupt enable set for BUSECC_PIPE0_P2_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="BUSECC_PIPE0_DP_ENABLE_SET" width="1" begin="6" end="6" resetval="0x0" description="Interrupt enable set for BUSECC_PIPE0_DP_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="DMSC_FW_CBASS_BUSECC_DUMMY1_ENABLE_SET" width="1" begin="5" end="5" resetval="0x0" description="Interrupt enable set for DMSC_FW_CBASS_BUSECC_DUMMY1_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="DMSC_FW_CBASS_BUSECC_DUMMY0_ENABLE_SET" width="1" begin="4" end="4" resetval="0x0" description="Interrupt enable set for DMSC_FW_CBASS_BUSECC_DUMMY0_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_CLK1_CLK_CLK_EDC_CTRL_CBASS_INT_CLK1_CLK_BUSECC_ENABLE_SET" width="1" begin="3" end="3" resetval="0x0" description="Interrupt enable set for C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_CLK1_CLK_CLK_EDC_CTRL_CBASS_INT_CLK1_CLK_BUSECC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_SCR_SCR_C711_COREPAC_CFG_CBASS_CFG_CBASS_SCR_SCR_EDC_CTRL_BUSECC_ENABLE_SET" width="1" begin="2" end="2" resetval="0x0" description="Interrupt enable set for C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_SCR_SCR_C711_COREPAC_CFG_CBASS_CFG_CBASS_SCR_SCR_EDC_CTRL_BUSECC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_VBUSP_ECCAGGR_CFG_P2P_BRIDGE_VBUSP_ECCAGGR_CFG_BRIDGE_BUSECC_ENABLE_SET" width="1" begin="1" end="1" resetval="0x0" description="Interrupt enable set for C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_VBUSP_ECCAGGR_CFG_P2P_BRIDGE_VBUSP_ECCAGGR_CFG_BRIDGE_BUSECC_PEND" range="" rwaccess="RW1S"/>
+    <bitfield id="EDC_CTRL_ECCAGGR_COREPAC_ENABLE_SET" width="1" begin="0" end="0" resetval="0x0" description="Interrupt enable set for EDC_CTRL_ECCAGGR_COREPAC_PEND" range="" rwaccess="RW1S"/>
+  </register>
+  <register id="C71SS_ECC_DED_ENABLE_CLR_REG0" acronym="C71SS_ECC_DED_ENABLE_CLR_REG0" offset="0x1C0" width="32" description="DED interrupt enable clear register 0.">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="PMC_BUSECC_ENABLE_CLR" width="1" begin="18" end="18" resetval="0x0" description="Interrupt enable clear for PMC_BUSECC_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="SE_1_BUSECC_ENABLE_CLR" width="1" begin="17" end="17" resetval="0x0" description="Interrupt enable clear for SE_1_BUSECC_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="SE_0_BUSECC_ENABLE_CLR" width="1" begin="16" end="16" resetval="0x0" description="Interrupt enable clear for SE_0_BUSECC_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="BUSECC_TAGRAM_DMC_ENABLE_CLR" width="1" begin="15" end="15" resetval="0x0" description="Interrupt enable clear for BUSECC_TAGRAM_DMC_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="BUSECC_DMC_ENABLE_CLR" width="1" begin="14" end="14" resetval="0x0" description="Interrupt enable clear for BUSECC_DMC_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="BUSECC_PIPE3_P2_ENABLE_CLR" width="1" begin="13" end="13" resetval="0x0" description="Interrupt enable clear for BUSECC_PIPE3_P2_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="BUSECC_PIPE3_DP_ENABLE_CLR" width="1" begin="12" end="12" resetval="0x0" description="Interrupt enable clear for BUSECC_PIPE3_DP_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="BUSECC_PIPE2_P2_ENABLE_CLR" width="1" begin="11" end="11" resetval="0x0" description="Interrupt enable clear for BUSECC_PIPE2_P2_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="BUSECC_PIPE2_DP_ENABLE_CLR" width="1" begin="10" end="10" resetval="0x0" description="Interrupt enable clear for BUSECC_PIPE2_DP_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="BUSECC_PIPE1_P2_ENABLE_CLR" width="1" begin="9" end="9" resetval="0x0" description="Interrupt enable clear for BUSECC_PIPE1_P2_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="BUSECC_PIPE1_DP_ENABLE_CLR" width="1" begin="8" end="8" resetval="0x0" description="Interrupt enable clear for BUSECC_PIPE1_DP_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="BUSECC_PIPE0_P2_ENABLE_CLR" width="1" begin="7" end="7" resetval="0x0" description="Interrupt enable clear for BUSECC_PIPE0_P2_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="BUSECC_PIPE0_DP_ENABLE_CLR" width="1" begin="6" end="6" resetval="0x0" description="Interrupt enable clear for BUSECC_PIPE0_DP_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="DMSC_FW_CBASS_BUSECC_DUMMY1_ENABLE_CLR" width="1" begin="5" end="5" resetval="0x0" description="Interrupt enable clear for DMSC_FW_CBASS_BUSECC_DUMMY1_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="DMSC_FW_CBASS_BUSECC_DUMMY0_ENABLE_CLR" width="1" begin="4" end="4" resetval="0x0" description="Interrupt enable clear for DMSC_FW_CBASS_BUSECC_DUMMY0_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_CLK1_CLK_CLK_EDC_CTRL_CBASS_INT_CLK1_CLK_BUSECC_ENABLE_CLR" width="1" begin="3" end="3" resetval="0x0" description="Interrupt enable clear for C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_CLK1_CLK_CLK_EDC_CTRL_CBASS_INT_CLK1_CLK_BUSECC_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_SCR_SCR_C711_COREPAC_CFG_CBASS_CFG_CBASS_SCR_SCR_EDC_CTRL_BUSECC_ENABLE_CLR" width="1" begin="2" end="2" resetval="0x0" description="Interrupt enable clear for C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_SCR_SCR_C711_COREPAC_CFG_CBASS_CFG_CBASS_SCR_SCR_EDC_CTRL_BUSECC_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_VBUSP_ECCAGGR_CFG_P2P_BRIDGE_VBUSP_ECCAGGR_CFG_BRIDGE_BUSECC_ENABLE_CLR" width="1" begin="1" end="1" resetval="0x0" description="Interrupt enable clear for C711_COREPAC_CFG_CBASS_CFG_CBASS_C711_COREPAC_CFG_CBASS_CFG_CBASS_VBUSP_ECCAGGR_CFG_P2P_BRIDGE_VBUSP_ECCAGGR_CFG_BRIDGE_BUSECC_PEND" range="" rwaccess="RW1C"/>
+    <bitfield id="EDC_CTRL_ECCAGGR_COREPAC_ENABLE_CLR" width="1" begin="0" end="0" resetval="0x0" description="Interrupt enable clear for EDC_CTRL_ECCAGGR_COREPAC_PEND" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="C71SS_ECC_AGGR_ENABLE_SET" acronym="C71SS_ECC_AGGR_ENABLE_SET" offset="0x200" width="32" description="AGGR interrupt enable set register.">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="TIMEOUT" width="1" begin="1" end="1" resetval="0x0" description="Interrupt enable set for svbus timeout errors" range="" rwaccess="RW1S"/>
+    <bitfield id="PARITY" width="1" begin="0" end="0" resetval="0x0" description="Interrupt enable set for parity errors" range="" rwaccess="RW1S"/>
+  </register>
+  <register id="C71SS_ECC_AGGR_ENABLE_CLR" acronym="C71SS_ECC_AGGR_ENABLE_CLR" offset="0x204" width="32" description="AGGR interrupt enable clear register.">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="TIMEOUT" width="1" begin="1" end="1" resetval="0x0" description="Interrupt enable clear for svbus timeout errors" range="" rwaccess="RW1C"/>
+    <bitfield id="PARITY" width="1" begin="0" end="0" resetval="0x0" description="Interrupt enable clear for parity errors" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="C71SS_ECC_AGGR_STATUS_SET" acronym="C71SS_ECC_AGGR_STATUS_SET" offset="0x208" width="32" description="AGGR interrupt status set register.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="TIMEOUT" width="2" begin="3" end="2" resetval="0x0" description="Interrupt status set for svbus timeout errors" range="" rwaccess="RWincr"/>
+    <bitfield id="PARITY" width="2" begin="1" end="0" resetval="0x0" description="Interrupt status set for parity errors" range="" rwaccess="RWincr"/>
+  </register>
+  <register id="C71SS_ECC_AGGR_STATUS_CLR" acronym="C71SS_ECC_AGGR_STATUS_CLR" offset="0x20C" width="32" description="AGGR interrupt status clear register.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="TIMEOUT" width="2" begin="3" end="2" resetval="0x0" description="Interrupt status clear for svbus timeout errors" range="" rwaccess="RWdecr"/>
+    <bitfield id="PARITY" width="2" begin="1" end="0" resetval="0x0" description="Interrupt status clear for parity errors" range="" rwaccess="RWdecr"/>
+  </register>
+</module>

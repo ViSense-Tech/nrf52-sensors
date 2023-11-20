@@ -1,0 +1,67 @@
+<module name="DSS" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="DSS_REVISION" acronym="DSS_REVISION" offset="0x0" width="32" description="This register contains the DSS revision number.">
+    <bitfield id="REVISION" width="32" begin="31" end="0" resetval="See" description="IP revision" range="" rwaccess="R"/>
+  </register>
+  <register id="DSS_SYSCONFIG" acronym="DSS_SYSCONFIG" offset="0x10" width="32" description="This register controls the various parameters of the OCP interface">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="16" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="2" begin="3" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SIDLEMODE" width="2" begin="1" end="0" resetval="0x2" description="" range="" rwaccess="RW">
+      <bitenum value="0" id="FIDLE" token="SIDLEMODE_0" description="Force-idle.An idle request is acknowledged unconditionally"/>
+      <bitenum value="1" id="NIDLE" token="SIDLEMODE_1" description="No-idle. An idle request is never acknowledged"/>
+      <bitenum value="3" id="RES" token="SIDLEMODE_3" description="Reserved"/>
+      <bitenum value="2" id="SIDLE" token="SIDLEMODE_2" description="Smart-idle. Acknowledgement to an idle request is given based on the internal activity of the module."/>
+    </bitfield>
+  </register>
+  <register id="DSS_SYSSTATUS" acronym="DSS_SYSSTATUS" offset="0x14" width="32" description="This register provides status information about the module.">
+    <bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VENC_RESETDONE" width="1" begin="6" end="6" resetval="0x0" description="Reset status of VENC module" range="" rwaccess="R">
+      <bitenum value="0" id="Internal_module_reset_is_on-going" token="VENC_RESETDONE_0" description="Internal module reset is on-going"/>
+      <bitenum value="1" id="Reset_completed" token="VENC_RESETDONE_1" description="Reset completed"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DSS_RESETDONE" width="1" begin="0" end="0" resetval="0x0" description="Reset status of DISPC/DSS" range="" rwaccess="R">
+      <bitenum value="0" id="RSTACT" token="DSS_RESETDONE_0" description="Internal module reset is on-going"/>
+      <bitenum value="1" id="RSTCOMP" token="DSS_RESETDONE_1" description="Reset completed"/>
+    </bitfield>
+  </register>
+  <register id="DSS_VENC_CTRL" acronym="DSS_VENC_CTRL" offset="0x18" width="32" description="This register contains control bits corresponding to the VENC instance in DSS">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DAC_POWERDN_BGZ" width="1" begin="2" end="2" resetval="0x0" description="DAC power down band gap control" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="DAC_POWERDN_BGZ_0" description="DAC power down band gap disabled"/>
+      <bitenum value="1" id="ENABLE" token="DAC_POWERDN_BGZ_1" description="DAC power down band gap enabled"/>
+    </bitfield>
+    <bitfield id="DAC_DEMEN" width="1" begin="1" end="1" resetval="0x0" description="DAC Dynamic Element Matching Enable" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="DAC_DEMEN_0" description="DAC Dynamic Element Matching disabled"/>
+      <bitenum value="1" id="ENABLE" token="DAC_DEMEN_1" description="DAC Dynamic Element Matching enabled"/>
+    </bitfield>
+    <bitfield id="VENC_CLOCK_4X_ENABLE" width="1" begin="0" end="0" resetval="0x0" description="VENC Clock CLK4X Enable. This bit is used to control the CLK4X clock gating." range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="VENC_CLOCK_4X_ENABLE_0" description="Disable"/>
+      <bitenum value="1" id="ENABLE" token="VENC_CLOCK_4X_ENABLE_1" description="Enable"/>
+    </bitfield>
+  </register>
+  <register id="DSS_DPI_CTRL" acronym="DSS_DPI_CTRL" offset="0x1C" width="32" description="This register contains control bits corresponding to the DPI interface in DSS">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DPI_ENABLE" width="1" begin="0" end="0" resetval="0x1" description="Enable DPI interface. This bit is used to enable the DPI interface." range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="DPI_ENABLE_0" description="Disable - PCLK is gated"/>
+      <bitenum value="1" id="ENABLE" token="DPI_ENABLE_1" description="Enable"/>
+    </bitfield>
+  </register>
+  <register id="DSS_DEBUG_CFG" acronym="DSS_DEBUG_CFG" offset="0x40" width="32" description="Debug configuration">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CFG" width="3" begin="2" end="0" resetval="0x0" description="Defines which debug bus to provide on the DSS debug bus connected at the top. Only values 0, 1, 2, 3, 4, and 5 can be used.The following values are not supported on device level, as the features listed are not supported in this family of devices. enum=DSI1_A ." range="" rwaccess="RW">
+      <bitenum value="0" id="DISPC" token="CFG_0" description="select DISPC Debug bus"/>
+      <bitenum value="1" id="DSI1_A" token="CFG_1" description="select DSI1_A Debug bus"/>
+      <bitenum value="2" id="DSI1_B" token="CFG_2" description="select DSI1_B Debug bus"/>
+      <bitenum value="3" id="DP_A" token="CFG_3" description="select DP_A Debug bus"/>
+      <bitenum value="4" id="DP_B" token="CFG_4" description="select DP_B Debug bus"/>
+      <bitenum value="5" id="HDMI" token="CFG_5" description="select HDMI Debug bus"/>
+    </bitfield>
+  </register>
+</module>

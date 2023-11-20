@@ -1,0 +1,19 @@
+<module name="NAVSS0_UDMASS_INTA_0_VIRT_ALIAS_2_UDMASS_INTA0_CFG" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="VIRT_ALIAS_2_UDMASS_INTA0__CFG__CFG_REVISION" acronym="VIRT_ALIAS_2_UDMASS_INTA0__CFG__CFG_REVISION" offset="0x0" width="64" description="">
+		<bitfield id="MODID" width="16" begin="31" end="16" resetval="0x26262" description="Module ID field" range="31 - 16" rwaccess="R"/> 
+		<bitfield id="REVRTL" width="5" begin="15" end="11" resetval="0x2" description="RTL revision. Will vary depending on release." range="15 - 11" rwaccess="R"/> 
+		<bitfield id="REVMAJ" width="3" begin="10" end="8" resetval="0x1" description="Major revision" range="10 - 8" rwaccess="R"/> 
+		<bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom" range="7 - 6" rwaccess="R"/> 
+		<bitfield id="REVMIN" width="6" begin="5" end="0" resetval="0x1" description="Minor revision" range="5 - 0" rwaccess="R"/>
+	</register>
+	<register id="VIRT_ALIAS_2_UDMASS_INTA0__CFG__CFG_INTCAP" acronym="VIRT_ALIAS_2_UDMASS_INTA0__CFG__CFG_INTCAP" offset="0x8" width="64" description="">
+		<bitfield id="VINTR_CNT" width="16" begin="31" end="16" resetval="0x256" description="Virtual interrupt register/pin count" range="31 - 16" rwaccess="R"/> 
+		<bitfield id="SEVT_CNT" width="16" begin="15" end="0" resetval="0x4608" description="Number of 'event to virt int' mapping registers" range="15 - 0" rwaccess="R"/>
+	</register>
+	<register id="VIRT_ALIAS_2_UDMASS_INTA0__CFG__CFG_AUXCAP" acronym="VIRT_ALIAS_2_UDMASS_INTA0__CFG__CFG_AUXCAP" offset="0x10" width="64" description="">
+		<bitfield id="UNMAP_CNT" width="16" begin="63" end="48" resetval="0x4128" description="Number of multicast event registers. Not all registers in the range are necessarily valid." range="63 - 48" rwaccess="R"/> 
+		<bitfield id="MEVI_CNT" width="16" begin="47" end="32" resetval="0x512" description="Number of multicast event registers" range="47 - 32" rwaccess="R"/> 
+		<bitfield id="LEVI_CNT" width="16" begin="31" end="16" resetval="0x132" description="Local input events for local to global translation" range="31 - 16" rwaccess="R"/> 
+		<bitfield id="GEVI_CNT" width="16" begin="15" end="0" resetval="0x512" description="Number of event counting registers" range="15 - 0" rwaccess="R"/>
+	</register>
+</module>

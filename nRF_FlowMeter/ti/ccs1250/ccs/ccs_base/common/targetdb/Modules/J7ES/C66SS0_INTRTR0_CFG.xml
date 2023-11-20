@@ -1,0 +1,11 @@
+<module name="C66SS0_INTRTR0_CFG" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="C66SS0_INTRTR0_PID" acronym="C66SS0_INTRTR0_PID" offset="0x0" width="32" description="Identification register.">
+    <bitfield id="REV" width="32" begin="31" end="0" resetval="0x66948100" description="TI internal data. Identifies revision of peripheral." range="" rwaccess="R"/>
+  </register>
+  <register id="C66SS0_INTRTR0_MUXCNTL_y" acronym="C66SS0_INTRTR0_MUXCNTL_y" offset="0x4" width="32" description="Interrupt mux control register. Offset = 4h + (y * 4h); where y = 0h to 60h.">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="INT_ENABLE" width="1" begin="16" end="16" resetval="0x0" description="Interrupt output enable for interrupt N" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="7" begin="15" end="9" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ENABLE" width="9" begin="8" end="0" resetval="0x0" description="Mux control for interrupt N" range="" rwaccess="RW"/>
+  </register>
+</module>

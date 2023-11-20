@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?><module id="DMA" HW_revision="" XML_version="1" description="The DMA controller is used to move data among internal memory, external memory, and peripherals without intervention from the CPU and in the background of CPU operation. The DMA controller has four channels with identical registers. ">
+     <register id="DMACH0SSAL" acronym="DMACH0SSAL" page="2" offset="0X0000" width="16" description="Specifies the least-significant 16-bits of the 32-bit byte source address used by the DMA channel.">
+<bitfield id="SSAL" width="16" begin="15" end="0" resetval="0" description="Lower part of source start address (byte address)." range="0000h-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="DMACH0SSAU" acronym="DMACH0SSAU" page="2" offset="0X0001" width="16" description="Specifies the most-significant 16-bits of the 32-bit byte source address used by the DMA channel.">
+<bitfield id="SSAU" width="16" begin="15" end="0" resetval="0" description="Upper part of source start address (byte address)." range="0000h-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="DMACH0DSAL" acronym="DMACH0DSAL" page="2" offset="0X0002" width="16" description="Specifies the least-significant 16-bits of the 32-bit byte destination address used by the DMA channel.">
+<bitfield id="DSAL" width="16" begin="15" end="0" resetval="0" description="Lower part of destination start address (byte address)." range="0000h-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="DMACH0DSAU" acronym="DMACH0DSAU" page="2" offset="0X0003" width="16" description="Specifies the most-significant 16-bits of the 32-bit byte destination address used by the DMA channel.">
+<bitfield id="DSAU" width="16" begin="15" end="0" resetval="0" description="Upper part of destination start address (byte address)." range="0000h-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="DMACH0TCR1" acronym="DMACH0TCR1" page="2" offset="0X0004" width="16" description="Specifies the size of the DMA transfer (in bytes).">
+<bitfield id="LENGTH" width="16" begin="15" end="0" resetval="0" description="Total size of data transfer in bytes. When Ping Pong mode is enabled, this is the size of the ping and pong transfer combined 0,1,2,3 = Reserved 4   65532 in increments of 4 * 2Burst Mode bytes" range="" rwaccess="RW"/>
+</register>
+     <register id="DMACH0TCR2" acronym="DMACH0TCR2" page="2" offset="0X0005" width="16" description="Controls the transfer context for the DMA channel.">
+<bitfield id="EN" width="1" begin="15" end="15" resetval="0" description="Channel enable bit. Use EN to enable or disable transfers in the channel. The DMA controller clears EN once a block transfer in the channel is complete." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="The channel is disabled. The channel cannot be serviced by the DMA controller. If DMA burst transfer is ongoing in the channel, the DMA controller allows the burst transfer to complete.   Note: When you write a 0 to this bit, you must also write a 0 to the SYNCMODE bit."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="The channel is enabled. The channel can be serviced by the DMA in the next available time slot."/>
+</bitfield>
+<bitfield id="STATUS" width="1" begin="14" end="14" resetval="0" description="Channel status bit. This bit indicates the status of the DMA channel transfer.  The DMA controller sets the channel STATUS bit to 1 if: - A nonzero value is written on LENGTH in DMACH0TR1. - A write access is performed to DMATCR2 and LENGTH has a nonzero value. The DMA controller clears the STATUS bit to 0 if: - The all the bytes specified by LENGTH in DMACH0TR1 have been transferred. - A value of 0 is written to LENGTH in DMACH0TR1." range="" rwaccess="RW">
+<bitenum id="DONE" value="0" token="DONE" description="Corresponding DMA channel has transferred all the bytes specified by LENGTH in DMACH0TR1."/>
+<bitenum id="ACTIVE" value="1" token="ACTIVE" description="Corresponding DMA channel has not finished transferring all the bytes specified by LENGTH in DMACH0TR1."/>
+</bitfield>
+<bitfield id="INTEN" width="1" begin="13" end="13" resetval="0" description="CPU interrupt enable bit. The DMA channel is capable of generating a CPU interrupt when a block transfer is finished. In order for the CPU to receive the interrupt, the corresponding channel interrupt mask bit in the interrupt mask register (DMAIMR) must be set to 1." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable channel interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable channel interrupt."/>
+</bitfield>
+<bitfield id="AUTORLD" width="1" begin="12" end="12" resetval="0" description="Automatic reload bit. Once a transfer is finished, the DMA automatically reloads the transfer control register and the source and destination start address registers and restarts the transfer.  Note: Automatic reload can only be used when SYNCMODE = 1." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="DMA transfer does not automatically reload."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Upon completion of a full transfer, the registers are reloaded and the transfer is restarted."/>
+</bitfield>
+<bitfield id="_RESV_5" width="2" begin="11" end="10" resetval="0" description="Reserved, always write zeroes to these bits." range="" rwaccess="N"/>
+<bitfield id="DSTAMODE" width="2" begin="9" end="8" resetval="0" description="Destination addressing mode bits. DSTAMODE determines the addressing mode used by the DMA controller when it writes to the destination address." range="" rwaccess="RW">
+<bitenum id="INCR" value="0" token="INCR" description="Automatic post increment. The destination byte address is incremented by four after each transfer."/>
+<bitenum id="RSV1" value="1" token="RSV1" description="Reserved, do not use."/>
+<bitenum id="CONST" value="2" token="CONST" description="Constant address."/>
+<bitenum id="RSV3" value="3" token="RSV3" description="Reserved, do not use."/>
+</bitfield>
+<bitfield id="SRCAMODE" width="2" begin="7" end="6" resetval="0" description="Source addressing mode bits. SRCAMODE determines the addressing mode used by the DMA controller when it reads from the source address." range="" rwaccess="RW">
+<bitenum id="INCR" value="0" token="INCR" description="Automatic post increment. The source byte address is incremented by four after each transfer."/>
+<bitenum id="RSV1" value="1" token="RSV1" description="Reserved, do not use."/>
+<bitenum id="CONST" value="2" token="CONST" description="Constant address."/>
+<bitenum id="RSV3" value="3" token="RSV3" description="Reserved, do not use."/>
+</bitfield>
+<bitfield id="BURSTMODE" width="3" begin="5" end="3" resetval="0" description="Burst mode bits. These bits specify the number of double word transfers that each channel performs at once before the DMA controller moves on to the next active channel.  Note: The burst mode selected must always be less than or equal to the number of bytes specified in DMACH0TR1." range="" rwaccess="RW"/>
+<bitfield id="SYNCMODE" width="1" begin="2" end="2" resetval="0" description="Synchronization mode bit. SYNCEVT bits in DMACESRn determine which event in the DSP (for example, a timer countdown) initiates a DMA transfer in the channel. Multiple channels can have the same SYNCEVT value; in other words, one synchronization event can initiate activity in multiple channels. On each sync event, the DMA transfers the number of words specified by the by the BURSTMODE bits. For example, BURSTMODE = 010b, the DMA will transfer a total of 16 bytes per sync event. A DSP reset selects SYNCMODE = 0 (no synchronization). When SYNCMODE = 0, the DMA controller does not wait for a synchronization event before beginning a DMA transfer in the channel; channel activity begins as soon as the channel is enabled (EN = 1)." range="" rwaccess="RW">
+<bitenum id="NOSYNC" value="0" token="NOSYNC" description="Synchronization is disabled, the DMA controller does not wait for a synchronization event before beginning a DMA transfer.  Note: When you write a 0 to the EN bit, you must also write a 0 to this bit."/>
+<bitenum id="SYNC" value="1" token="SYNC" description="Activity in the DMA controller is synchronized to the event specified in the SYNCEVT bits of DMACESRn.  Note: When you set this bit to 1, you must also write a 1 to the EN bit."/>
+</bitfield>
+<bitfield id="LTSTATUS" width="1" begin="1" end="1" resetval="0" description="Indicates the most recent completed transfer set. This status bit is valid when the Enable Ping Pong Mode bit is set. 0 = The last completed transfer was to/from the Ping buffer 1 = The last completed transfer was to/from the Pong buffer" range="" rwaccess="RW">
+<bitenum id="PING" value="0" token="PING" description=""/>
+<bitenum id="PONG" value="1" token="PONG" description=""/>
+</bitfield>
+<bitfield id="EPPMODE" width="1" begin="0" end="0" resetval="0" description="Enable ping pong mode. 0 = Ping Pong Mode is disabled 1 = Ping Pong Mode is enabled" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description=""/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description=""/>
+</bitfield>
+</register>
+     <register id="DMACH1SSAL" acronym="DMACH1SSAL" page="2" offset="0X0020" width="16" description="Specifies the least-significant 16-bits of the 32-bit byte source address used by the DMA channel.">
+<bitfield id="SSAL" width="16" begin="15" end="0" resetval="0" description="Lower part of source start address (byte address)." range="0000h-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="DMACH1SSAU" acronym="DMACH1SSAU" page="2" offset="0X0021" width="16" description="Specifies the most-significant 16-bits of the 32-bit byte source address used by the DMA channel.">
+<bitfield id="SSAU" width="16" begin="15" end="0" resetval="0" description="Upper part of source start address (byte address)." range="0000h-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="DMACH1DSAL" acronym="DMACH1DSAL" page="2" offset="0X0022" width="16" description="Specifies the least-significant 16-bits of the 32-bit byte destination address used by the DMA channel.">
+<bitfield id="DSAL" width="16" begin="15" end="0" resetval="0" description="Lower part of destination start address (byte address)." range="0000h-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="DMACH1DSAU" acronym="DMACH1DSAU" page="2" offset="0X0023" width="16" description="Specifies the most-significant 16-bits of the 32-bit byte destination address used by the DMA channel.">
+<bitfield id="DSAU" width="16" begin="15" end="0" resetval="0" description="Upper part of destination start address (byte address)." range="0000h-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="DMACH1TCR1" acronym="DMACH1TCR1" page="2" offset="0X0024" width="16" description="Specifies the size of the DMA transfer (in bytes).">
+<bitfield id="LENGTH" width="16" begin="15" end="0" resetval="0" description="Total size of data transfer in bytes. When Ping Pong mode is enabled, this is the size of the ping and pong transfer combined 0,1,2,3 = Reserved 4   65532 in increments of 4 * 2Burst Mode bytes" range="" rwaccess="RW"/>
+</register>
+     <register id="DMACH1TCR2" acronym="DMACH1TCR2" page="2" offset="0X0025" width="16" description="Controls the transfer context for the DMA channel.">
+<bitfield id="EN" width="1" begin="15" end="15" resetval="0" description="Channel enable bit. Use EN to enable or disable transfers in the channel. The DMA controller clears EN once a block transfer in the channel is complete." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="The channel is disabled. The channel cannot be serviced by the DMA controller. If DMA burst transfer is ongoing in the channel, the DMA controller allows the burst transfer to complete.   Note: When you write a 0 to this bit, you must also write a 0 to the SYNCMODE bit."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="The channel is enabled. The channel can be serviced by the DMA in the next available time slot."/>
+</bitfield>
+<bitfield id="STATUS" width="1" begin="14" end="14" resetval="0" description="Channel status bit. This bit indicates the status of the DMA channel transfer.  The DMA controller sets the channel STATUS bit to 1 if: - A nonzero value is written on LENGTH in DMACH1TR1. - A write access is performed to DMATCR2 and LENGTH has a nonzero value. The DMA controller clears the STATUS bit to 0 if: - The all the bytes specified by LENGTH in DMACH1TR1 have been transferred. - A value of 0 is written to LENGTH in DMACH1TR1." range="" rwaccess="RW">
+<bitenum id="DONE" value="0" token="DONE" description="Corresponding DMA channel has transferred all the bytes specified by LENGTH in DMACH1TR1."/>
+<bitenum id="ACTIVE" value="1" token="ACTIVE" description="Corresponding DMA channel has not finished transferring all the bytes specified by LENGTH in DMACH1TR1."/>
+</bitfield>
+<bitfield id="INTEN" width="1" begin="13" end="13" resetval="0" description="CPU interrupt enable bit. The DMA channel is capable of generating a CPU interrupt when a block transfer is finished. In order for the CPU to receive the interrupt, the corresponding channel interrupt mask bit in the interrupt mask register (DMAIMR) must be set to 1." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable channel interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable channel interrupt."/>
+</bitfield>
+<bitfield id="AUTORLD" width="1" begin="12" end="12" resetval="0" description="Automatic reload bit. Once a transfer is finished, the DMA automatically reloads the transfer control register and the source and destination start address registers and restarts the transfer.  Note: Automatic reload can only be used when SYNCMODE = 1." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="DMA transfer does not automatically reload."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Upon completion of a full transfer, the registers are reloaded and the transfer is restarted."/>
+</bitfield>
+<bitfield id="_RESV_5" width="2" begin="11" end="10" resetval="0" description="Reserved, always write zeroes to these bits." range="" rwaccess="N"/>
+<bitfield id="DSTAMODE" width="2" begin="9" end="8" resetval="0" description="Destination addressing mode bits. DSTAMODE determines the addressing mode used by the DMA controller when it writes to the destination address." range="" rwaccess="RW">
+<bitenum id="INCR" value="0" token="INCR" description="Automatic post increment. The destination byte address is incremented by four after each transfer."/>
+<bitenum id="RSV1" value="1" token="RSV1" description="Reserved, do not use."/>
+<bitenum id="CONST" value="2" token="CONST" description="Constant address."/>
+<bitenum id="RSV3" value="3" token="RSV3" description="Reserved, do not use."/>
+</bitfield>
+<bitfield id="SRCAMODE" width="2" begin="7" end="6" resetval="0" description="Source addressing mode bits. SRCAMODE determines the addressing mode used by the DMA controller when it reads from the source address." range="" rwaccess="RW">
+<bitenum id="INCR" value="0" token="INCR" description="Automatic post increment. The source byte address is incremented by four after each transfer."/>
+<bitenum id="RSV1" value="1" token="RSV1" description="Reserved, do not use."/>
+<bitenum id="CONST" value="2" token="CONST" description="Constant address."/>
+<bitenum id="RSV3" value="3" token="RSV3" description="Reserved, do not use."/>
+</bitfield>
+<bitfield id="BURSTMODE" width="3" begin="5" end="3" resetval="0" description="Burst mode bits. These bits specify the number of byte transfers that each channel performs at once before the DMA controller moves on to the next active channel.  Note: The burst mode selected must always be less than or equal to the number of bytes specified in DMACH1TR1." range="" rwaccess="RW">
+<bitenum id="1DWORD" value="0" token="1DWORD" description="1 double word (4 bytes)."/>
+<bitenum id="2DWORDS" value="1" token="2DWORDS" description="2 double words (8 bytes)."/>
+<bitenum id="4DWORDS" value="2" token="4DWORDS" description="4 double words (16 bytes)."/>
+<bitenum id="8DWORDS" value="3" token="8DWORDS" description="8 double words (32 bytes)."/>
+<bitenum id="16DWORDS" value="4" token="16DWORDS" description="16 double words (64 bytes)."/>
+<bitenum id="RSV5" value="5" token="RSV5" description="Reserved, do not use."/>
+<bitenum id="RSV6" value="6" token="RSV6" description="Reserved, do not use."/>
+<bitenum id="RSV7" value="7" token="RSV7" description="Reserved, do not use."/>
+</bitfield>
+<bitfield id="SYNCMODE" width="1" begin="2" end="2" resetval="0" description="Synchronization mode bit. SYNCEVT bits in DMACESRn determine which event in the DSP (for example, a timer countdown) initiates a DMA transfer in the channel. Multiple channels can have the same SYNCEVT value; in other words, one synchronization event can initiate activity in multiple channels. On each sync event, the DMA transfers the number of words specified by the by the BURSTMODE bits. For example, BURSTMODE = 010b, the DMA will transfer a total of 16 bytes per sync event. A DSP reset selects SYNCMODE = 0 (no synchronization). When SYNCMODE = 0, the DMA controller does not wait for a synchronization event before beginning a DMA transfer in the channel; channel activity begins as soon as the channel is enabled (EN = 1)." range="" rwaccess="RW">
+<bitenum id="NOSYNC" value="0" token="NOSYNC" description="Synchronization is disabled, the DMA controller does not wait for a synchronization event before beginning a DMA transfer.  Note: When you write a 0 to the EN bit, you must also write a 0 to this bit."/>
+<bitenum id="SYNC" value="1" token="SYNC" description="Activity in the DMA controller is synchronized to the event specified in the SYNCEVT bits of DMACESRn.  Note: When you set this bit to 1, you must also write a 1 to the EN bit."/>
+</bitfield>
+<bitfield id="LTSTATUS" width="1" begin="1" end="1" resetval="0" description="Indicates the most recent completed transfer set. This status bit is valid when the Enable Ping Pong Mode bit is set. 0 = The last completed transfer was to/from the Ping buffer 1 = The last completed transfer was to/from the Pong buffer" range="" rwaccess="RW">
+<bitenum id="PING" value="0" token="PING" description=""/>
+<bitenum id="PONG" value="1" token="PONG" description=""/>
+</bitfield>
+<bitfield id="EPPMODE" width="1" begin="0" end="0" resetval="0" description="Enable ping pong mode. 0 = Ping Pong Mode is disabled 1 = Ping Pong Mode is enabled" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description=""/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description=""/>
+</bitfield>
+</register>
+     <register id="DMACH2SSAL" acronym="DMACH2SSAL" page="2" offset="0X0040" width="16" description="Specifies the least-significant 16-bits of the 32-bit byte source address used by the DMA channel.">
+<bitfield id="SSAL" width="16" begin="15" end="0" resetval="0" description="Lower part of source start address (byte address)." range="0000h-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="DMACH2SSAU" acronym="DMACH2SSAU" page="2" offset="0X0041" width="16" description="Specifies the most-significant 16-bits of the 32-bit byte source address used by the DMA channel.">
+<bitfield id="SSAU" width="16" begin="15" end="0" resetval="0" description="Upper part of source start address (byte address)." range="0000h-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="DMACH2DSAL" acronym="DMACH2DSAL" page="2" offset="0X0042" width="16" description="Specifies the least-significant 16-bits of the 32-bit byte destination address used by the DMA channel.">
+<bitfield id="DSAL" width="16" begin="15" end="0" resetval="0" description="Lower part of destination start address (byte address)." range="0000h-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="DMACH2DSAU" acronym="DMACH2DSAU" page="2" offset="0X0043" width="16" description="Specifies the most-significant 16-bits of the 32-bit byte destination address used by the DMA channel.">
+<bitfield id="DSAU" width="16" begin="15" end="0" resetval="0" description="Upper part of destination start address (byte address)." range="0000h-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="DMACH2TCR1" acronym="DMACH2TCR1" page="2" offset="0X0044" width="16" description="Specifies the size of the DMA transfer (in bytes).">
+<bitfield id="LENGTH" width="16" begin="15" end="0" resetval="0" description="Total size of data transfer in bytes. When Ping Pong mode is enabled, this is the size of the ping and pong transfer combined 0,1,2,3 = Reserved 4   65532 in increments of 4 * 2Burst Mode bytes." range="" rwaccess="RW"/>
+</register>
+     <register id="DMACH2TCR2" acronym="DMACH2TCR2" page="2" offset="0X0045" width="16" description="Controls the transfer context for the DMA channel.">
+<bitfield id="EN" width="1" begin="15" end="15" resetval="0" description="Channel enable bit. Use EN to enable or disable transfers in the channel. The DMA controller clears EN once a block transfer in the channel is complete." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="The channel is disabled. The channel cannot be serviced by the DMA controller. If DMA burst transfer is ongoing in the channel, the DMA controller allows the burst transfer to complete.   Note: When you write a 0 to this bit, you must also write a 0 to the SYNCMODE bit."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="The channel is enabled. The channel can be serviced by the DMA in the next available time slot."/>
+</bitfield>
+<bitfield id="STATUS" width="1" begin="14" end="14" resetval="0" description="Channel status bit. This bit indicates the status of the DMA channel transfer.  The DMA controller sets the channel STATUS bit to 1 if: - A nonzero value is written on LENGTH in DMACH2TR1. - A write access is performed to DMATCR2 and LENGTH has a nonzero value. The DMA controller clears the STATUS bit to 0 if: - The all the bytes specified by LENGTH in DMACH2TR1 have been transferred. - A value of 0 is written to LENGTH in DMACH2TR1." range="" rwaccess="RW">
+<bitenum id="DONE" value="0" token="DONE" description="Corresponding DMA channel has transferred all the bytes specified by LENGTH in DMACH2TR1."/>
+<bitenum id="ACTIVE" value="1" token="ACTIVE" description="Corresponding DMA channel has not finished transferring all the bytes specified by LENGTH in DMACH2TR1."/>
+</bitfield>
+<bitfield id="INTEN" width="1" begin="13" end="13" resetval="0" description="CPU interrupt enable bit. The DMA channel is capable of generating a CPU interrupt when a block transfer is finished. In order for the CPU to receive the interrupt, the corresponding channel interrupt mask bit in the interrupt mask register (DMAIMR) must be set to 1." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable channel interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable channel interrupt."/>
+</bitfield>
+<bitfield id="AUTORLD" width="1" begin="12" end="12" resetval="0" description="Automatic reload bit. Once a transfer is finished, the DMA automatically reloads the transfer control register and the source and destination start address registers and restarts the transfer.  Note: Automatic reload can only be used when SYNCMODE = 1." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="DMA transfer does not automatically reload."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Upon completion of a full transfer, the registers are reloaded and the transfer is restarted."/>
+</bitfield>
+<bitfield id="_RESV_5" width="2" begin="11" end="10" resetval="0" description="Reserved, always write zeroes to these bits." range="" rwaccess="N"/>
+<bitfield id="DSTAMODE" width="2" begin="9" end="8" resetval="0" description="Destination addressing mode bits. DSTAMODE determines the addressing mode used by the DMA controller when it writes to the destination address." range="" rwaccess="RW">
+<bitenum id="INCR" value="0" token="INCR" description="Automatic post increment. The destination byte address is incremented by four after each transfer."/>
+<bitenum id="RSV1" value="1" token="RSV1" description="Reserved, do not use."/>
+<bitenum id="CONST" value="2" token="CONST" description="Constant address."/>
+<bitenum id="RSV3" value="3" token="RSV3" description="Reserved, do not use."/>
+</bitfield>
+<bitfield id="SRCAMODE" width="2" begin="7" end="6" resetval="0" description="Source addressing mode bits. SRCAMODE determines the addressing mode used by the DMA controller when it reads from the source address." range="" rwaccess="RW">
+<bitenum id="INCR" value="0" token="INCR" description="Automatic post increment. The source byte address is incremented by four after each transfer."/>
+<bitenum id="RSV1" value="1" token="RSV1" description="Reserved, do not use."/>
+<bitenum id="CONST" value="2" token="CONST" description="Constant address."/>
+<bitenum id="RSV3" value="3" token="RSV3" description="Reserved, do not use."/>
+</bitfield>
+<bitfield id="BURSTMODE" width="3" begin="5" end="3" resetval="0" description="Burst mode bits. These bits specify the number of byte transfers that each channel performs at once before the DMA controller moves on to the next active channel.  Note: The burst mode selected must always be less than or equal to the number of bytes specified in DMACH2TR1." range="" rwaccess="RW">
+<bitenum id="1DWORD" value="0" token="1DWORD" description="1 double word (4 bytes)."/>
+<bitenum id="2DWORDS" value="1" token="2DWORDS" description="2 double words (8 bytes)."/>
+<bitenum id="4DWORDS" value="2" token="4DWORDS" description="4 double words (16 bytes)."/>
+<bitenum id="8DWORDS" value="3" token="8DWORDS" description="8 double words (32 bytes)."/>
+<bitenum id="16DWORDS" value="4" token="16DWORDS" description="16 double words (64 bytes)."/>
+<bitenum id="RSV5" value="5" token="RSV5" description="Reserved, do not use."/>
+<bitenum id="RSV6" value="6" token="RSV6" description="Reserved, do not use."/>
+<bitenum id="RSV7" value="7" token="RSV7" description="Reserved, do not use."/>
+</bitfield>
+<bitfield id="SYNCMODE" width="1" begin="2" end="2" resetval="0" description="Synchronization mode bit. SYNCEVT bits in DMACESRn determine which event in the DSP (for example, a timer countdown) initiates a DMA transfer in the channel. Multiple channels can have the same SYNCEVT value; in other words, one synchronization event can initiate activity in multiple channels. On each sync event, the DMA transfers the number of words specified by the by the BURSTMODE bits. For example, BURSTMODE = 010b, the DMA will transfer a total of 16 bytes per sync event. A DSP reset selects SYNCMODE = 0 (no synchronization). When SYNCMODE = 0, the DMA controller does not wait for a synchronization event before beginning a DMA transfer in the channel; channel activity begins as soon as the channel is enabled (EN = 1)." range="" rwaccess="RW">
+<bitenum id="NOSYNC" value="0" token="NOSYNC" description="Synchronization is disabled, the DMA controller does not wait for a synchronization event before beginning a DMA transfer.  Note: When you write a 0 to the EN bit, you must also write a 0 to this bit."/>
+<bitenum id="SYNC" value="1" token="SYNC" description="Activity in the DMA controller is synchronized to the event specified in the SYNCEVT bits of DMACESRn.  Note: When you set this bit to 1, you must also write a 1 to the EN bit."/>
+</bitfield>
+<bitfield id="LTSTATUS" width="1" begin="1" end="1" resetval="0" description="Indicates the most recent completed transfer set. This status bit is valid when the Enable Ping Pong Mode bit is set. 0 = The last completed transfer was to/from the Ping buffer 1 = The last completed transfer was to/from the Pong buffer" range="" rwaccess="RW">
+<bitenum id="PING" value="0" token="PING" description=""/>
+<bitenum id="PONG" value="1" token="PONG" description=""/>
+</bitfield>
+<bitfield id="EPPMODE" width="1" begin="0" end="0" resetval="0" description="Enable ping pong mode. 0 = Ping Pong Mode is disabled 1 = Ping Pong Mode is enabled" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description=""/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description=""/>
+</bitfield>
+</register>
+     <register id="DMACH3SSAL" acronym="DMACH3SSAL" page="2" offset="0X0060" width="16" description="Specifies the least-significant 16-bits of the 32-bit byte source address used by the DMA channel.">
+<bitfield id="SSAL" width="16" begin="15" end="0" resetval="0" description="Lower part of source start address (byte address)." range="0000h-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="DMACH3SSAU" acronym="DMACH3SSAU" page="2" offset="0X0061" width="16" description="Specifies the most-significant 16-bits of the 32-bit byte source address used by the DMA channel.">
+<bitfield id="SSAU" width="16" begin="15" end="0" resetval="0" description="Upper part of source start address (byte address)." range="0000h-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="DMACH3DSAL" acronym="DMACH3DSAL" page="2" offset="0X0062" width="16" description="Specifies the least-significant 16-bits of the 32-bit byte destination address used by the DMA channel.">
+<bitfield id="DSAL" width="16" begin="15" end="0" resetval="0" description="Lower part of destination start address (byte address)." range="0000h-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="DMACH3DSAU" acronym="DMACH3DSAU" page="2" offset="0X0063" width="16" description="Specifies the most-significant 16-bits of the 32-bit byte destination address used by the DMA channel.">
+<bitfield id="DSAU" width="16" begin="15" end="0" resetval="0" description="Upper part of destination start address (byte address)." range="0000h-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="DMACH3TCR1" acronym="DMACH3TCR1" page="2" offset="0X0064" width="16" description="Specifies the size of the DMA transfer (in bytes).">
+<bitfield id="LENGTH" width="16" begin="15" end="0" resetval="0" description="Total size of data transfer in bytes. When Ping Pong mode is enabled, this is the size of the ping and pong transfer combined 0,1,2,3 = Reserved 4   65532 in increments of 4 * 2Burst Mode bytes" range="" rwaccess="RW"/>
+</register>
+     <register id="DMACH3TCR2" acronym="DMACH3TCR2" page="2" offset="0X0065" width="16" description="Controls the transfer context for the DMA channel.">
+<bitfield id="EN" width="1" begin="15" end="15" resetval="0" description="Channel enable bit. Use EN to enable or disable transfers in the channel. The DMA controller clears EN once a block transfer in the channel is complete." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="The channel is disabled. The channel cannot be serviced by the DMA controller. If DMA burst transfer is ongoing in the channel, the DMA controller allows the burst transfer to complete.   Note: When you write a 0 to this bit, you must also write a 0 to the SYNCMODE bit."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="The channel is enabled. The channel can be serviced by the DMA in the next available time slot."/>
+</bitfield>
+<bitfield id="STATUS" width="1" begin="14" end="14" resetval="0" description="Channel status bit. This bit indicates the status of the DMA channel transfer.  The DMA controller sets the channel STATUS bit to 1 if: - A nonzero value is written on LENGTH in DMACH3TR1. - A write access is performed to DMATCR2 and LENGTH has a nonzero value. The DMA controller clears the STATUS bit to 0 if: - The all the bytes specified by LENGTH in DMACH3TR1 have been transferred. - A value of 0 is written to LENGTH in DMACH3TR1." range="" rwaccess="RW">
+<bitenum id="DONE" value="0" token="DONE" description="Corresponding DMA channel has transferred all the bytes specified by LENGTH in DMACH3TR1."/>
+<bitenum id="ACTIVE" value="1" token="ACTIVE" description="Corresponding DMA channel has not finished transferring all the bytes specified by LENGTH in DMACH3TR1."/>
+</bitfield>
+<bitfield id="INTEN" width="1" begin="13" end="13" resetval="0" description="CPU interrupt enable bit. The DMA channel is capable of generating a CPU interrupt when a block transfer is finished. In order for the CPU to receive the interrupt, the corresponding channel interrupt mask bit in the interrupt mask register (DMAIMR) must be set to 1." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable channel interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable channel interrupt."/>
+</bitfield>
+<bitfield id="AUTORLD" width="1" begin="12" end="12" resetval="0" description="Automatic reload bit. Once a transfer is finished, the DMA automatically reloads the transfer control register and the source and destination start address registers and restarts the transfer.  Note: Automatic reload can only be used when SYNCMODE = 1." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="DMA transfer does not automatically reload."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Upon completion of a full transfer, the registers are reloaded and the transfer is restarted."/>
+</bitfield>
+<bitfield id="_RESV_5" width="2" begin="11" end="10" resetval="0" description="Reserved, always write zeroes to these bits." range="" rwaccess="N"/>
+<bitfield id="DSTAMODE" width="2" begin="9" end="8" resetval="0" description="Destination addressing mode bits. DSTAMODE determines the addressing mode used by the DMA controller when it writes to the destination address." range="" rwaccess="RW">
+<bitenum id="INCR" value="0" token="INCR" description="Automatic post increment. The destination byte address is incremented by four after each transfer."/>
+<bitenum id="RSV1" value="1" token="RSV1" description="Reserved, do not use."/>
+<bitenum id="CONST" value="2" token="CONST" description="Constant address."/>
+<bitenum id="RSV3" value="3" token="RSV3" description="Reserved, do not use."/>
+</bitfield>
+<bitfield id="SRCAMODE" width="2" begin="7" end="6" resetval="0" description="Source addressing mode bits. SRCAMODE determines the addressing mode used by the DMA controller when it reads from the source address." range="" rwaccess="RW">
+<bitenum id="INCR" value="0" token="INCR" description="Automatic post increment. The source byte address is incremented by four after each transfer."/>
+<bitenum id="RSV1" value="1" token="RSV1" description="Reserved, do not use."/>
+<bitenum id="CONST" value="2" token="CONST" description="Constant address."/>
+<bitenum id="RSV3" value="3" token="RSV3" description="Reserved, do not use."/>
+</bitfield>
+<bitfield id="BURSTMODE" width="3" begin="5" end="3" resetval="0" description="Burst mode bits. These bits specify the number of byte transfers that each channel performs at once before the DMA controller moves on to the next active channel.  Note: The burst mode selected must always be less than or equal to the number of bytes specified in DMACH3TR1." range="" rwaccess="RW">
+<bitenum id="1DWORD" value="0" token="1DWORD" description="1 double word (4 bytes)."/>
+<bitenum id="2DWORDS" value="1" token="2DWORDS" description="2 double words (8 bytes)."/>
+<bitenum id="4DWORDS" value="2" token="4DWORDS" description="4 double words (16 bytes)."/>
+<bitenum id="8DWORDS" value="3" token="8DWORDS" description="8 double words (32 bytes)."/>
+<bitenum id="16DWORDS" value="4" token="16DWORDS" description="16 double words (64 bytes)."/>
+<bitenum id="RSV5" value="5" token="RSV5" description="Reserved, do not use."/>
+<bitenum id="RSV6" value="6" token="RSV6" description="Reserved, do not use."/>
+<bitenum id="RSV7" value="7" token="RSV7" description="Reserved, do not use."/>
+</bitfield>
+<bitfield id="SYNCMODE" width="1" begin="2" end="2" resetval="0" description="Synchronization mode bit. SYNCEVT bits in DMACESRn determine which event in the DSP (for example, a timer countdown) initiates a DMA transfer in the channel. Multiple channels can have the same SYNCEVT value; in other words, one synchronization event can initiate activity in multiple channels. On each sync event, the DMA transfers the number of words specified by the by the BURSTMODE bits. For example, BURSTMODE = 010b, the DMA will transfer a total of 16 bytes per sync event. A DSP reset selects SYNCMODE = 0 (no synchronization). When SYNCMODE = 0, the DMA controller does not wait for a synchronization event before beginning a DMA transfer in the channel; channel activity begins as soon as the channel is enabled (EN = 1)." range="" rwaccess="RW">
+<bitenum id="NOSYNC" value="0" token="NOSYNC" description="Synchronization is disabled, the DMA controller does not wait for a synchronization event before beginning a DMA transfer.  Note: When you write a 0 to the EN bit, you must also write a 0 to this bit."/>
+<bitenum id="SYNC" value="1" token="SYNC" description="Activity in the DMA controller is synchronized to the event specified in the SYNCEVT bits of DMACESRn.  Note: When you set this bit to 1, you must also write a 1 to the EN bit."/>
+</bitfield>
+<bitfield id="LTSTATUS" width="1" begin="1" end="1" resetval="0" description="Indicates the most recent completed transfer set. This status bit is valid when the Enable Ping Pong Mode bit is set. 0 = The last completed transfer was to/from the Ping buffer 1 = The last completed transfer was to/from the Pong buffer" range="" rwaccess="RW">
+<bitenum id="PING" value="0" token="PING" description=""/>
+<bitenum id="PONG" value="1" token="PONG" description=""/>
+</bitfield>
+<bitfield id="EPPMODE" width="1" begin="0" end="0" resetval="0" description="Enable ping pong mode. 0 = Ping Pong Mode is disabled 1 = Ping Pong Mode is enabled" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description=""/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description=""/>
+</bitfield>
+</register>
+</module>

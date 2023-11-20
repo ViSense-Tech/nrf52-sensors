@@ -1,0 +1,616 @@
+<module name="TESOC" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="TESOC_IP_REVISION" acronym="TESOC_IP_REVISION" offset="0x0" width="32" description="IP Revision Information">
+    <bitfield id="IP_REVISION" width="32" begin="31" end="0" resetval="See" description="IP Revision" range="" rwaccess="R"/>
+  </register>
+  <register id="TESOC_IP_HWINFO" acronym="TESOC_IP_HWINFO" offset="0x10" width="32" description="IP Hardware Information">
+    <bitfield id="IP_HWINFO" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="TESOC_IP_SYSCONFIG" acronym="TESOC_IP_SYSCONFIG" offset="0x20" width="32" description="">
+    <bitfield id="IP_SYSCONFIG" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_INTR_EOI" acronym="TESOC_INTR_EOI" offset="0x80" width="32" description="End Of Interrupt register - Interrupt handler">
+    <bitfield id="INTR_EOI" width="32" begin="31" end="0" resetval="0x0" description="Write the number of the interrupt line to apply a SW EOI to it. Note that there is only a single line (i.e. number 0). Read : Read always returns 0 Write 0 : SW EOI on interrupt line Write 1 : No action" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_INTR_STATUS_RAW_SET" acronym="TESOC_INTR_STATUS_RAW_SET" offset="0x90" width="32" description="Set Interrupt Status Raw register">
+    <bitfield id="INTR_STATUS_RAW_SET" width="32" begin="31" end="0" resetval="0x0" description="Settable raw status for interrupt event. For each bit of the bit field: Read 0: No event pending Read 1: Event is pending Write 0: No action Write 1: Set event (debug)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_INTR_STATUS_ENABLED_CLEAR" acronym="TESOC_INTR_STATUS_ENABLED_CLEAR" offset="0xA0" width="32" description="This register contains status flags of the enabled interrupts.">
+    <bitfield id="INTR_STATUS_ENABLED_CLEAR" width="32" begin="31" end="0" resetval="0x0" description="Interrupt Enabled Status. Read indicates enabled status. Read 0x0: No interrupt Read 0x1: Interrupt pending Write 0: No action Write 1: Clears the interrupt status flag. The corresponding raw status flag is also cleared." range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_INTR_ENABLE_SET" acronym="TESOC_INTR_ENABLE_SET" offset="0xB0" width="32" description="Interrupt enable register">
+    <bitfield id="INTR_ENABLE_SET" width="32" begin="31" end="0" resetval="0x0" description="Read 0x0: Interrupt is disabled Read 0x1: Interrupt is enabled Write: 0x0: No action Write 0x1: Enables the interrupt" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_INTR_ENABLE_CLEAR" acronym="TESOC_INTR_ENABLE_CLEAR" offset="0xC0" width="32" description="Interrupt clear register">
+    <bitfield id="INTR_ENABLE_CLEAR" width="32" begin="31" end="0" resetval="0x0" description="Read 0x0: Interrupt is disabled Read 0x1: Interrupt is enabled Write: 0x0: No action Write 0x1: Clears the interrupt" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_LOCK" acronym="TESOC_LOCK" offset="0xD0" width="32" description="LOCK Register.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LOCK" width="4" begin="3" end="0" resetval="0x5" description="Lock feature prevents unintentional updates to TESOC registers. Writes to TESOC registers are be possible only when TESOC registers are unlocked by writing 0xA to LOCK key bits ofTESOC_LOCK register. On reset, these bits are be set to 0x5 and hence the TESOC registers are be in the locked state. There is no built in protection based on master ID. It is the responsibility of the user to ensure that only a single valid master updates the TESOC registers. A value of 4'b0101 indicates that TESOC Configuration Registers are locked for write access. Default value is locked. To unlock, a value 4'b1010 must be written. 0x5: Locked 0xA: Unlocked" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_ABORT" acronym="TESOC_ABORT" offset="0xE0" width="32" description="ABORT Register.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ABORT" width="4" begin="3" end="0" resetval="0x0" description="This has to be written into by the software to abort field-test immediately and transfer control on test module to application. General usage cases are, if an interrupt is registered that needs the module being tested, software can write into this bitfield to stop field-test. A write with value of 4'b0101 creates an ABORT condition for TESOC. On seeing this, HW stops execution the slice sequence and raises the interrupt. This register is cleared by HW. 0x5: Abort" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_BUSY" acronym="TESOC_BUSY" offset="0xF0" width="32" description="BUSY Register.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="BUSY" width="4" begin="3" end="0" resetval="0x0" description="During BUSY state: . Software has to poll the register before sending any configuration command OR data to TESOC. It can do so only when TESOC is not busy. 0x5: Busy 0x0: Not busy Other values: Not busy" range="" rwaccess="R"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_0_i_0" acronym="TESOC_DIAG_INFO_0_i_0" offset="0x110" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_0" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_0_i_1" acronym="TESOC_DIAG_INFO_0_i_1" offset="0x114" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_0" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_0_i_2" acronym="TESOC_DIAG_INFO_0_i_2" offset="0x118" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_0" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_0_i_3" acronym="TESOC_DIAG_INFO_0_i_3" offset="0x11C" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_0" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_1_i_0" acronym="TESOC_DIAG_INFO_1_i_0" offset="0x120" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_1" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_1_i_1" acronym="TESOC_DIAG_INFO_1_i_1" offset="0x124" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_1" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_1_i_2" acronym="TESOC_DIAG_INFO_1_i_2" offset="0x128" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_1" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_1_i_3" acronym="TESOC_DIAG_INFO_1_i_3" offset="0x12C" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_1" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_2_i_0" acronym="TESOC_DIAG_INFO_2_i_0" offset="0x130" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_2" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_2_i_1" acronym="TESOC_DIAG_INFO_2_i_1" offset="0x134" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_2" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_2_i_2" acronym="TESOC_DIAG_INFO_2_i_2" offset="0x138" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_2" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_2_i_3" acronym="TESOC_DIAG_INFO_2_i_3" offset="0x13C" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_2" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_3_i_0" acronym="TESOC_DIAG_INFO_3_i_0" offset="0x140" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_3" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_3_i_1" acronym="TESOC_DIAG_INFO_3_i_1" offset="0x144" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_3" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_3_i_2" acronym="TESOC_DIAG_INFO_3_i_2" offset="0x148" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_3" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_3_i_3" acronym="TESOC_DIAG_INFO_3_i_3" offset="0x14C" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_3" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_4_i_0" acronym="TESOC_DIAG_INFO_4_i_0" offset="0x150" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_4" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_4_i_1" acronym="TESOC_DIAG_INFO_4_i_1" offset="0x154" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_4" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_4_i_2" acronym="TESOC_DIAG_INFO_4_i_2" offset="0x158" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_4" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_4_i_3" acronym="TESOC_DIAG_INFO_4_i_3" offset="0x15C" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_4" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_5_i_0" acronym="TESOC_DIAG_INFO_5_i_0" offset="0x160" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_5" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_5_i_1" acronym="TESOC_DIAG_INFO_5_i_1" offset="0x164" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_5" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_5_i_2" acronym="TESOC_DIAG_INFO_5_i_2" offset="0x168" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_5" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_5_i_3" acronym="TESOC_DIAG_INFO_5_i_3" offset="0x16C" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_5" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_6_i_0" acronym="TESOC_DIAG_INFO_6_i_0" offset="0x170" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_6" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_6_i_1" acronym="TESOC_DIAG_INFO_6_i_1" offset="0x174" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_6" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_6_i_2" acronym="TESOC_DIAG_INFO_6_i_2" offset="0x178" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_6" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_6_i_3" acronym="TESOC_DIAG_INFO_6_i_3" offset="0x17C" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_6" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_7_i_0" acronym="TESOC_DIAG_INFO_7_i_0" offset="0x180" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_7" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_7_i_1" acronym="TESOC_DIAG_INFO_7_i_1" offset="0x184" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_7" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_7_i_2" acronym="TESOC_DIAG_INFO_7_i_2" offset="0x188" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_7" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_7_i_3" acronym="TESOC_DIAG_INFO_7_i_3" offset="0x18C" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_7" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_8_i_0" acronym="TESOC_DIAG_INFO_8_i_0" offset="0x190" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_8" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_8_i_1" acronym="TESOC_DIAG_INFO_8_i_1" offset="0x194" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_8" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_8_i_2" acronym="TESOC_DIAG_INFO_8_i_2" offset="0x198" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_8" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_8_i_3" acronym="TESOC_DIAG_INFO_8_i_3" offset="0x19C" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_8" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_9_i_0" acronym="TESOC_DIAG_INFO_9_i_0" offset="0x1A0" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_9" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_9_i_1" acronym="TESOC_DIAG_INFO_9_i_1" offset="0x1A4" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_9" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_9_i_2" acronym="TESOC_DIAG_INFO_9_i_2" offset="0x1A8" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_9" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_9_i_3" acronym="TESOC_DIAG_INFO_9_i_3" offset="0x1AC" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_9" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_10_i_0" acronym="TESOC_DIAG_INFO_10_i_0" offset="0x1B0" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_10" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_10_i_1" acronym="TESOC_DIAG_INFO_10_i_1" offset="0x1B4" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_10" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_10_i_2" acronym="TESOC_DIAG_INFO_10_i_2" offset="0x1B8" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_10" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_10_i_3" acronym="TESOC_DIAG_INFO_10_i_3" offset="0x1BC" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_10" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_11_i_0" acronym="TESOC_DIAG_INFO_11_i_0" offset="0x1C0" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_11" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_11_i_1" acronym="TESOC_DIAG_INFO_11_i_1" offset="0x1C4" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_11" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_11_i_2" acronym="TESOC_DIAG_INFO_11_i_2" offset="0x1C8" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_11" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_11_i_3" acronym="TESOC_DIAG_INFO_11_i_3" offset="0x1CC" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_11" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_12_i_0" acronym="TESOC_DIAG_INFO_12_i_0" offset="0x1D0" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_12" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_12_i_1" acronym="TESOC_DIAG_INFO_12_i_1" offset="0x1D4" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_12" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_12_i_2" acronym="TESOC_DIAG_INFO_12_i_2" offset="0x1D8" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_12" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_12_i_3" acronym="TESOC_DIAG_INFO_12_i_3" offset="0x1DC" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_12" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_13_i_0" acronym="TESOC_DIAG_INFO_13_i_0" offset="0x1E0" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_13" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_13_i_1" acronym="TESOC_DIAG_INFO_13_i_1" offset="0x1E4" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_13" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_13_i_2" acronym="TESOC_DIAG_INFO_13_i_2" offset="0x1E8" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_13" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_13_i_3" acronym="TESOC_DIAG_INFO_13_i_3" offset="0x1EC" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_13" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_14_i_0" acronym="TESOC_DIAG_INFO_14_i_0" offset="0x1F0" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_14" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_14_i_1" acronym="TESOC_DIAG_INFO_14_i_1" offset="0x1F4" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_14" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_14_i_2" acronym="TESOC_DIAG_INFO_14_i_2" offset="0x1F8" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_14" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_14_i_3" acronym="TESOC_DIAG_INFO_14_i_3" offset="0x1FC" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_14" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_15_i_0" acronym="TESOC_DIAG_INFO_15_i_0" offset="0x200" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_15" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_15_i_1" acronym="TESOC_DIAG_INFO_15_i_1" offset="0x204" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_15" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_15_i_2" acronym="TESOC_DIAG_INFO_15_i_2" offset="0x208" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_15" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DIAG_INFO_15_i_3" acronym="TESOC_DIAG_INFO_15_i_3" offset="0x20C" width="32" description="Error Diagnostics Information Register bank">
+    <bitfield id="DIAG_INFO_15" width="32" begin="31" end="0" resetval="0x0" description="See" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DOMAIN_EN_DOM0" acronym="TESOC_DOMAIN_EN_DOM0" offset="0x210" width="32" description="Start Domain Register for domain PD_IPU.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="START_DOMAIN" width="1" begin="0" end="0" resetval="0x0" description="This bitfield indicates that a particular processor can be moved into field-test mode. This is needed more from a safety purpose and to have multiple levels of checks to avoid any false trigger of field-test on the processor. A field-test can be triggered on a processor by writing both TESOC_SLICE_CONFIG_DOM0 andTESOC_DOMAIN_EN_DOM0 registers. 0x0: Field test for domain PD_IPU is disabled 0x1: Field test for domain PD_IPU is enabled This bitfield is HW cleared once the field test is started." range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DOMAIN_EN_DOM1" acronym="TESOC_DOMAIN_EN_DOM1" offset="0x220" width="32" description="Start Domain Register for domain PD_EVE1.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="START_DOMAIN" width="1" begin="0" end="0" resetval="0x0" description="This bitfield indicates that a particular processor can be moved into field-test mode. This is needed more from a safety purpose and to have multiple levels of checks to avoid any false trigger of field-test on the processor. A field-test can be triggered on a processor by writing both TESOC_SLICE_CONFIG_DOM1 andTESOC_DOMAIN_EN_DOM1 registers. 0x0: Field test for domain PD_EVE1 is disabled 0x1: Field test for domain PD_EVE1 is enabled This bitfield is HW cleared once the field test is started." range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DOMAIN_EN_DOM2" acronym="TESOC_DOMAIN_EN_DOM2" offset="0x230" width="32" description="Start Domain Register for domain PD_DSP1.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="START_DOMAIN" width="1" begin="0" end="0" resetval="0x0" description="This bitfield indicates that a particular processor can be moved into field-test mode. This is needed more from a safety purpose and to have multiple levels of checks to avoid any false trigger of field-test on the processor. A field-test can be triggered on a processor by writing both TESOC_SLICE_CONFIG_DOM2 andTESOC_DOMAIN_EN_DOM2 registers. 0x0: Field test for domain PD_DSP1 is disabled 0x1: Field test for domain PD_DSP1 is enabled This bitfield is HW cleared once the field test is started." range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DOMAIN_EN_DOM3" acronym="TESOC_DOMAIN_EN_DOM3" offset="0x240" width="32" description="Start Domain Register for domain PD_DSP2.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="START_DOMAIN" width="1" begin="0" end="0" resetval="0x0" description="This bitfield indicates that a particular processor can be moved into field-test mode. This is needed more from a safety purpose and to have multiple levels of checks to avoid any false trigger of field-test on the processor. A field-test can be triggered on a processor by writing both TESOC_SLICE_CONFIG_DOM3 andTESOC_DOMAIN_EN_DOM3 registers. 0x0: Field test for domain PD_DSP2 is disabled 0x1: Field test for domain PD_DSP2 is enabled This bitfield is HW cleared once the field test is started." range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_DOMAIN_EN_DOM4" acronym="TESOC_DOMAIN_EN_DOM4" offset="0x250" width="32" description="Start Domain Register for domains PD_ISS and PD_DSS.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="START_DOMAIN" width="1" begin="0" end="0" resetval="0x0" description="This bitfield indicates that a particular processor can be moved into field-test mode. This is needed more from a safety purpose and to have multiple levels of checks to avoid any false trigger of field-test on the processor. A field-test can be triggered on a processor by writing both TESOC_SLICE_CONFIG_DOM4 andTESOC_DOMAIN_EN_DOM4 registers. 0x0: Field test for domains PD_ISS and PD_DSS is disabled 0x1: Field test for domains PD_ISS and PD_DSS is enabled This bitfield is HW cleared once the field test is started." range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM0_n_0" acronym="TESOC_SLICE_CONFIG_DOM0_n_0" offset="0x260" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM0" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM0_n_1" acronym="TESOC_SLICE_CONFIG_DOM0_n_1" offset="0x264" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM0" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM0_n_2" acronym="TESOC_SLICE_CONFIG_DOM0_n_2" offset="0x268" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM0" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM0_n_3" acronym="TESOC_SLICE_CONFIG_DOM0_n_3" offset="0x26C" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM0" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM0_n_4" acronym="TESOC_SLICE_CONFIG_DOM0_n_4" offset="0x270" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM0" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM0_n_5" acronym="TESOC_SLICE_CONFIG_DOM0_n_5" offset="0x274" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM0" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM0_n_6" acronym="TESOC_SLICE_CONFIG_DOM0_n_6" offset="0x278" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM0" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM0_n_7" acronym="TESOC_SLICE_CONFIG_DOM0_n_7" offset="0x27C" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM0" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM1_n_0" acronym="TESOC_SLICE_CONFIG_DOM1_n_0" offset="0x280" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM1" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM1_n_1" acronym="TESOC_SLICE_CONFIG_DOM1_n_1" offset="0x284" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM1" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM1_n_2" acronym="TESOC_SLICE_CONFIG_DOM1_n_2" offset="0x288" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM1" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM1_n_3" acronym="TESOC_SLICE_CONFIG_DOM1_n_3" offset="0x28C" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM1" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM1_n_4" acronym="TESOC_SLICE_CONFIG_DOM1_n_4" offset="0x290" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM1" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM1_n_5" acronym="TESOC_SLICE_CONFIG_DOM1_n_5" offset="0x294" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM1" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM1_n_6" acronym="TESOC_SLICE_CONFIG_DOM1_n_6" offset="0x298" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM1" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM1_n_7" acronym="TESOC_SLICE_CONFIG_DOM1_n_7" offset="0x29C" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM1" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM2_n_0" acronym="TESOC_SLICE_CONFIG_DOM2_n_0" offset="0x2A0" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM2" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM2_n_1" acronym="TESOC_SLICE_CONFIG_DOM2_n_1" offset="0x2A4" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM2" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM2_n_2" acronym="TESOC_SLICE_CONFIG_DOM2_n_2" offset="0x2A8" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM2" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM2_n_3" acronym="TESOC_SLICE_CONFIG_DOM2_n_3" offset="0x2AC" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM2" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM2_n_4" acronym="TESOC_SLICE_CONFIG_DOM2_n_4" offset="0x2B0" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM2" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM2_n_5" acronym="TESOC_SLICE_CONFIG_DOM2_n_5" offset="0x2B4" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM2" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM2_n_6" acronym="TESOC_SLICE_CONFIG_DOM2_n_6" offset="0x2B8" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM2" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM2_n_7" acronym="TESOC_SLICE_CONFIG_DOM2_n_7" offset="0x2BC" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM2" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM3_n_0" acronym="TESOC_SLICE_CONFIG_DOM3_n_0" offset="0x2C0" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM3" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. ( 256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM3_n_1" acronym="TESOC_SLICE_CONFIG_DOM3_n_1" offset="0x2C4" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM3" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. ( 256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM3_n_2" acronym="TESOC_SLICE_CONFIG_DOM3_n_2" offset="0x2C8" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM3" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. ( 256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM3_n_3" acronym="TESOC_SLICE_CONFIG_DOM3_n_3" offset="0x2CC" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM3" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. ( 256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM3_n_4" acronym="TESOC_SLICE_CONFIG_DOM3_n_4" offset="0x2D0" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM3" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. ( 256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM3_n_5" acronym="TESOC_SLICE_CONFIG_DOM3_n_5" offset="0x2D4" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM3" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. ( 256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM3_n_6" acronym="TESOC_SLICE_CONFIG_DOM3_n_6" offset="0x2D8" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM3" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. ( 256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM3_n_7" acronym="TESOC_SLICE_CONFIG_DOM3_n_7" offset="0x2DC" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM3" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. ( 256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM4_n_0" acronym="TESOC_SLICE_CONFIG_DOM4_n_0" offset="0x2E0" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM4" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM4_n_1" acronym="TESOC_SLICE_CONFIG_DOM4_n_1" offset="0x2E4" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM4" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM4_n_2" acronym="TESOC_SLICE_CONFIG_DOM4_n_2" offset="0x2E8" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM4" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM4_n_3" acronym="TESOC_SLICE_CONFIG_DOM4_n_3" offset="0x2EC" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM4" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM4_n_4" acronym="TESOC_SLICE_CONFIG_DOM4_n_4" offset="0x2F0" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM4" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM4_n_5" acronym="TESOC_SLICE_CONFIG_DOM4_n_5" offset="0x2F4" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM4" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM4_n_6" acronym="TESOC_SLICE_CONFIG_DOM4_n_6" offset="0x2F8" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM4" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_CONFIG_DOM4_n_7" acronym="TESOC_SLICE_CONFIG_DOM4_n_7" offset="0x2FC" width="32" description="Slice Configuration Register 1: Slice at bit position enabled 0: Slice at bit position disabled">
+    <bitfield id="CONFIG_REG_21_DOM4" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. Software has to write into this register to run the slices required. Multiple bits can be written to indicate the slices that need to be run in one go back to back. TESOC starts running slices from LSB to MSB. There is no flexibility to run higher slice first. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM0_n_0" acronym="TESOC_SLICE_STATUS_DOM0_n_0" offset="0x300" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM0" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM0_n_1" acronym="TESOC_SLICE_STATUS_DOM0_n_1" offset="0x304" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM0" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM0_n_2" acronym="TESOC_SLICE_STATUS_DOM0_n_2" offset="0x308" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM0" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM0_n_3" acronym="TESOC_SLICE_STATUS_DOM0_n_3" offset="0x30C" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM0" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM0_n_4" acronym="TESOC_SLICE_STATUS_DOM0_n_4" offset="0x310" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM0" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM0_n_5" acronym="TESOC_SLICE_STATUS_DOM0_n_5" offset="0x314" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM0" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM0_n_6" acronym="TESOC_SLICE_STATUS_DOM0_n_6" offset="0x318" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM0" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM0_n_7" acronym="TESOC_SLICE_STATUS_DOM0_n_7" offset="0x31C" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM0" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM1_n_0" acronym="TESOC_SLICE_STATUS_DOM1_n_0" offset="0x320" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM1" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM1_n_1" acronym="TESOC_SLICE_STATUS_DOM1_n_1" offset="0x324" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM1" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM1_n_2" acronym="TESOC_SLICE_STATUS_DOM1_n_2" offset="0x328" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM1" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM1_n_3" acronym="TESOC_SLICE_STATUS_DOM1_n_3" offset="0x32C" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM1" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM1_n_4" acronym="TESOC_SLICE_STATUS_DOM1_n_4" offset="0x330" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM1" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM1_n_5" acronym="TESOC_SLICE_STATUS_DOM1_n_5" offset="0x334" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM1" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM1_n_6" acronym="TESOC_SLICE_STATUS_DOM1_n_6" offset="0x338" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM1" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM1_n_7" acronym="TESOC_SLICE_STATUS_DOM1_n_7" offset="0x33C" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM1" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM2_n_0" acronym="TESOC_SLICE_STATUS_DOM2_n_0" offset="0x340" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM2" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM2_n_1" acronym="TESOC_SLICE_STATUS_DOM2_n_1" offset="0x344" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM2" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM2_n_2" acronym="TESOC_SLICE_STATUS_DOM2_n_2" offset="0x348" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM2" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM2_n_3" acronym="TESOC_SLICE_STATUS_DOM2_n_3" offset="0x34C" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM2" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM2_n_4" acronym="TESOC_SLICE_STATUS_DOM2_n_4" offset="0x350" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM2" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM2_n_5" acronym="TESOC_SLICE_STATUS_DOM2_n_5" offset="0x354" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM2" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM2_n_6" acronym="TESOC_SLICE_STATUS_DOM2_n_6" offset="0x358" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM2" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM2_n_7" acronym="TESOC_SLICE_STATUS_DOM2_n_7" offset="0x35C" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM2" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM3_n_0" acronym="TESOC_SLICE_STATUS_DOM3_n_0" offset="0x360" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM3" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM3_n_1" acronym="TESOC_SLICE_STATUS_DOM3_n_1" offset="0x364" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM3" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM3_n_2" acronym="TESOC_SLICE_STATUS_DOM3_n_2" offset="0x368" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM3" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM3_n_3" acronym="TESOC_SLICE_STATUS_DOM3_n_3" offset="0x36C" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM3" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM3_n_4" acronym="TESOC_SLICE_STATUS_DOM3_n_4" offset="0x370" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM3" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM3_n_5" acronym="TESOC_SLICE_STATUS_DOM3_n_5" offset="0x374" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM3" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM3_n_6" acronym="TESOC_SLICE_STATUS_DOM3_n_6" offset="0x378" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM3" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM3_n_7" acronym="TESOC_SLICE_STATUS_DOM3_n_7" offset="0x37C" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM3" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM4_n_0" acronym="TESOC_SLICE_STATUS_DOM4_n_0" offset="0x380" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM4" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM4_n_1" acronym="TESOC_SLICE_STATUS_DOM4_n_1" offset="0x384" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM4" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM4_n_2" acronym="TESOC_SLICE_STATUS_DOM4_n_2" offset="0x388" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM4" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM4_n_3" acronym="TESOC_SLICE_STATUS_DOM4_n_3" offset="0x38C" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM4" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM4_n_4" acronym="TESOC_SLICE_STATUS_DOM4_n_4" offset="0x390" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM4" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM4_n_5" acronym="TESOC_SLICE_STATUS_DOM4_n_5" offset="0x394" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM4" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM4_n_6" acronym="TESOC_SLICE_STATUS_DOM4_n_6" offset="0x398" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM4" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_STATUS_DOM4_n_7" acronym="TESOC_SLICE_STATUS_DOM4_n_7" offset="0x39C" width="32" description="Slice Completion Status Register 1: Slice at bit position completed execution 0: Slice at bit position not completed execution">
+    <bitfield id="CONFIG_REG_22_DOM4" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status bitfield written by TESOC module. This indicates if the slices configured by software have been successfully completed. This only indicates if the slice was completely run, without being stopped due to Abort OR any other reasons. This does not indicate if the slice has passed OR failed. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM0_n_0" acronym="TESOC_SLICE_RESULT_DOM0_n_0" offset="0x3A0" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM0" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM0_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM0_n_1" acronym="TESOC_SLICE_RESULT_DOM0_n_1" offset="0x3A4" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM0" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM0_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM0_n_2" acronym="TESOC_SLICE_RESULT_DOM0_n_2" offset="0x3A8" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM0" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM0_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM0_n_3" acronym="TESOC_SLICE_RESULT_DOM0_n_3" offset="0x3AC" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM0" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM0_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM0_n_4" acronym="TESOC_SLICE_RESULT_DOM0_n_4" offset="0x3B0" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM0" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM0_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM0_n_5" acronym="TESOC_SLICE_RESULT_DOM0_n_5" offset="0x3B4" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM0" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM0_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM0_n_6" acronym="TESOC_SLICE_RESULT_DOM0_n_6" offset="0x3B8" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM0" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM0_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM0_n_7" acronym="TESOC_SLICE_RESULT_DOM0_n_7" offset="0x3BC" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM0" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM0_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM1_n_0" acronym="TESOC_SLICE_RESULT_DOM1_n_0" offset="0x3C0" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM1" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM1_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM1_n_1" acronym="TESOC_SLICE_RESULT_DOM1_n_1" offset="0x3C4" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM1" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM1_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM1_n_2" acronym="TESOC_SLICE_RESULT_DOM1_n_2" offset="0x3C8" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM1" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM1_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM1_n_3" acronym="TESOC_SLICE_RESULT_DOM1_n_3" offset="0x3CC" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM1" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM1_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM1_n_4" acronym="TESOC_SLICE_RESULT_DOM1_n_4" offset="0x3D0" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM1" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM1_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM1_n_5" acronym="TESOC_SLICE_RESULT_DOM1_n_5" offset="0x3D4" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM1" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM1_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM1_n_6" acronym="TESOC_SLICE_RESULT_DOM1_n_6" offset="0x3D8" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM1" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM1_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM1_n_7" acronym="TESOC_SLICE_RESULT_DOM1_n_7" offset="0x3DC" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM1" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM1_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM2_n_0" acronym="TESOC_SLICE_RESULT_DOM2_n_0" offset="0x3E0" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM2" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM2_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM2_n_1" acronym="TESOC_SLICE_RESULT_DOM2_n_1" offset="0x3E4" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM2" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM2_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM2_n_2" acronym="TESOC_SLICE_RESULT_DOM2_n_2" offset="0x3E8" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM2" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM2_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM2_n_3" acronym="TESOC_SLICE_RESULT_DOM2_n_3" offset="0x3EC" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM2" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM2_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM2_n_4" acronym="TESOC_SLICE_RESULT_DOM2_n_4" offset="0x3F0" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM2" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM2_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM2_n_5" acronym="TESOC_SLICE_RESULT_DOM2_n_5" offset="0x3F4" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM2" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM2_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM2_n_6" acronym="TESOC_SLICE_RESULT_DOM2_n_6" offset="0x3F8" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM2" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM2_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM2_n_7" acronym="TESOC_SLICE_RESULT_DOM2_n_7" offset="0x3FC" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM2" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM2_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM3_n_0" acronym="TESOC_SLICE_RESULT_DOM3_n_0" offset="0x400" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM3" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM3_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM3_n_1" acronym="TESOC_SLICE_RESULT_DOM3_n_1" offset="0x404" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM3" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM3_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM3_n_2" acronym="TESOC_SLICE_RESULT_DOM3_n_2" offset="0x408" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM3" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM3_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM3_n_3" acronym="TESOC_SLICE_RESULT_DOM3_n_3" offset="0x40C" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM3" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM3_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM3_n_4" acronym="TESOC_SLICE_RESULT_DOM3_n_4" offset="0x410" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM3" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM3_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM3_n_5" acronym="TESOC_SLICE_RESULT_DOM3_n_5" offset="0x414" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM3" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM3_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM3_n_6" acronym="TESOC_SLICE_RESULT_DOM3_n_6" offset="0x418" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM3" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM3_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM3_n_7" acronym="TESOC_SLICE_RESULT_DOM3_n_7" offset="0x41C" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM3" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM3_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM4_n_0" acronym="TESOC_SLICE_RESULT_DOM4_n_0" offset="0x420" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM4" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM4_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM4_n_1" acronym="TESOC_SLICE_RESULT_DOM4_n_1" offset="0x424" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM4" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM4_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM4_n_2" acronym="TESOC_SLICE_RESULT_DOM4_n_2" offset="0x428" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM4" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM4_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM4_n_3" acronym="TESOC_SLICE_RESULT_DOM4_n_3" offset="0x42C" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM4" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM4_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM4_n_4" acronym="TESOC_SLICE_RESULT_DOM4_n_4" offset="0x430" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM4" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM4_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM4_n_5" acronym="TESOC_SLICE_RESULT_DOM4_n_5" offset="0x434" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM4" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM4_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM4_n_6" acronym="TESOC_SLICE_RESULT_DOM4_n_6" offset="0x438" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM4" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM4_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_SLICE_RESULT_DOM4_n_7" acronym="TESOC_SLICE_RESULT_DOM4_n_7" offset="0x43C" width="32" description="Slice Result Register 1: Slice at bit position PASSED 0: Slice at bit position FAILED">
+    <bitfield id="CONFIG_REG_23_DOM4" width="32" begin="31" end="0" resetval="0x0" description="One bit per slice. This is the status register written by TESOC module. This register indicates if the slices configured by software have passed OR failed. '1' indicates pass and '0' indicates fail. Software has to first readTESOC_SLICE_STATUS_DOM4_n to check if slice was completely run and then read this register to check pass/fail status. Default value of this register is '1'. (256 bits per domain)" range="" rwaccess="RW"/>
+  </register>
+  <register id="TESOC_TESOC_ROM_k_0" acronym="TESOC_TESOC_ROM_k_0" offset="0x10500" width="32" description="This MMR space maps to TESOC ROM TESOC ROM is logically 64 bit wide. Each OCP read returns 64 bit data only on lower 64 bits of the OCP data bus. Upper 64 bits are zero.">
+    <bitfield id="TESOC_ROM" width="32" begin="31" end="0" resetval="0x0" description="ROM holds the basic/default test vectors. Within the device, this covers 90% of stuck-at coverage and 100% MBIST on the 3 core processors (IPU, EVE and DSP). It also includes 100% MBIST for ISS, DSS and VIP. The ROM image is the encoded version of the test vectors and is already divided into slices. It consists of multiple control word and data words, which when decoded result into actual test vectors. The ROM image will vary from design to design and from customer requirements." range="" rwaccess="R"/>
+  </register>
+  <register id="TESOC_TESOC_ROM_k_1" acronym="TESOC_TESOC_ROM_k_1" offset="0x10504" width="32" description="This MMR space maps to TESOC ROM TESOC ROM is logically 64 bit wide. Each OCP read returns 64 bit data only on lower 64 bits of the OCP data bus. Upper 64 bits are zero.">
+    <bitfield id="TESOC_ROM" width="32" begin="31" end="0" resetval="0x0" description="ROM holds the basic/default test vectors. Within the device, this covers 90% of stuck-at coverage and 100% MBIST on the 3 core processors (IPU, EVE and DSP). It also includes 100% MBIST for ISS, DSS and VIP. The ROM image is the encoded version of the test vectors and is already divided into slices. It consists of multiple control word and data words, which when decoded result into actual test vectors. The ROM image will vary from design to design and from customer requirements." range="" rwaccess="R"/>
+  </register>
+</module>

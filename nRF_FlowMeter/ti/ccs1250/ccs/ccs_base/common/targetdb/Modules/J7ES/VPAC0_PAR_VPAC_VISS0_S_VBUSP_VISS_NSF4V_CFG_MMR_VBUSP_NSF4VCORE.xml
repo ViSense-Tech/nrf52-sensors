@@ -1,0 +1,73 @@
+<module name="VPAC0_PAR_VPAC_VISS0_S_VBUSP_VISS_NSF4V_CFG_MMR_VBUSP_NSF4VCORE" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="VISS_NSF4V_DBG" acronym="VISS_NSF4V_DBG" offset="0x4" width="32" description="Diagnostic Register Control">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="RAM_MUX_CFG" width="6" begin="5" end="0" resetval="0x0" description="Diagnostic Rd Wr access to Embedded RAM Selector Mux." range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_NSF4V_CTRL" acronym="VISS_NSF4V_CTRL" offset="0x8" width="32" description="All modes are set here">
+    <bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LSCC_EN_CFG" width="1" begin="12" end="12" resetval="0x0" description="enable Lens Shading Correction Compensation." range="" rwaccess="RW"/>
+    <bitfield id="LSCC_SETSEL_CFG" width="4" begin="11" end="8" resetval="0x0" description="bit per BAYER color component indicating which of two sets of 16 segment PWL Curve to use for" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="TN_MODE_CFG" width="1" begin="4" end="4" resetval="0x0" description="single bit controlling T_n calculation" range="" rwaccess="RW"/>
+    <bitfield id="U_MODE_CFG" width="4" begin="3" end="0" resetval="0x0" description="bit per BAYER color component indicating Decomp sub component" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_NSF4V_DIM" acronym="VISS_NSF4V_DIM" offset="0xC" width="32" description="Input Output Frame dimensions in units of pixels. Same value for input and output">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="IH_CFG" width="13" begin="28" end="16" resetval="0x0" description="(U13) input height in units of pixels minus 1." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="IW_CFG" width="13" begin="12" end="0" resetval="0x0" description="(U13) input width in units of pixels minus 1." range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_NSF4V_LSCC" acronym="VISS_NSF4V_LSCC" offset="0x10" width="32" description="Lens Shading Correction Compensation. First control register">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="GMAX_CFG" width="9" begin="28" end="20" resetval="0x0" description="(U4.5)" range="" rwaccess="RW"/>
+    <bitfield id="T_CFG" width="4" begin="19" end="16" resetval="0x0" description="(U4)" range="" rwaccess="RW"/>
+    <bitfield id="KV_CFG" width="8" begin="15" end="8" resetval="0x0" description="(U2.6)" range="" rwaccess="RW"/>
+    <bitfield id="KH_CFG" width="8" begin="7" end="0" resetval="0x0" description="(U2.6)" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_NSF4V_LSCC_CENT" acronym="VISS_NSF4V_LSCC_CENT" offset="0x14" width="32" description="Lens Shading Correction Compensation. Programmable Center of frame">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="Y_CFG" width="14" begin="29" end="16" resetval="0x0" description="(S14) Vertical (Y) position of lens center" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="X_CFG" width="14" begin="13" end="0" resetval="0x0" description="(S14) Horizontal (X) position of lens center" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_NSF4V_TN_SCALE" acronym="VISS_NSF4V_TN_SCALE" offset="0x1C" width="32" description="Tn scaling factor multiplied by all 4 color components Tn after 12 segment PWL. Different scaling factor per level">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="TN3_CFG" width="8" begin="23" end="16" resetval="0x0" description="(U3.5) Level3." range="" rwaccess="RW"/>
+    <bitfield id="TN2_CFG" width="8" begin="15" end="8" resetval="0x0" description="(U3.5) Level2." range="" rwaccess="RW"/>
+    <bitfield id="TN1_CFG" width="8" begin="7" end="0" resetval="0x0" description="(U3.5) Level1." range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_NSF4V_U_KNEE" acronym="VISS_NSF4V_U_KNEE" offset="0x20" width="32" description="U suppression curve knee. Same knee value for all 9 levels x 4 color components.">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="U_KNEE_CFG" width="6" begin="5" end="0" resetval="0x0" description="(U0.6) U Suppress curve knee." range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_NSF4V_WHITEBAL0" acronym="VISS_NSF4V_WHITEBAL0" offset="0x24" width="32" description="White Balance Gain (Part0). Separate Gain for each of 4 colors">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="GAIN1_CFG" width="13" begin="28" end="16" resetval="0x0" description="(U4.9) Gain for color 1" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="GAIN0_CFG" width="13" begin="12" end="0" resetval="0x0" description="(U4.9) Gain for color 0" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_NSF4V_WHITEBAL1" acronym="VISS_NSF4V_WHITEBAL1" offset="0x28" width="32" description="White Balance Gain (Part1). Separate Gain for each of 4 colors">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="GAIN3_CFG" width="13" begin="28" end="16" resetval="0x0" description="(U4.9) Gain for color 3" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="GAIN2_CFG" width="13" begin="12" end="0" resetval="0x0" description="(U4.9) Gain for color 2" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_NSF4V_TN0_j_k" acronym="VISS_NSF4V_TN0_j_k" offset="0x60" width="32" description="T_n 12 segment piecewise linear curve Part0 (4 color x 12 segment) Offset = 000C0060h + (j * 60h) + (k * 8h); where j = 0h to 3h, k = 0h to Bh">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="Y_CFG" width="15" begin="30" end="16" resetval="0x0" description="(U15) Y (U) value." range="" rwaccess="RW"/>
+    <bitfield id="X_CFG" width="16" begin="15" end="0" resetval="0x0" description="(U16) X (LL2) value." range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_NSF4V_TN1_j_k" acronym="VISS_NSF4V_TN1_j_k" offset="0x64" width="32" description="T_n 12 segment piecewise linear curve Part1 (4 color x 12 segment) Offset = 000C0064h + (j * 60h) + (k * 8h); where j = 0h to 3h, k = 0h to Bh">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="S_CFG" width="16" begin="15" end="0" resetval="0x0" description="(S5.11) S value." range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_NSF4V_LSCCCURVE0_j_k" acronym="VISS_NSF4V_LSCCCURVE0_j_k" offset="0x200" width="32" description="16 segment piecewise linear curve Part0 (2 set x 16 segment) Offset = 000C0200h + (j * 80h) + (k * 8h); where j = 0h to 1h, k = 0h to Fh">
+    <bitfield id="RESERVED" width="7" begin="31" end="25" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="Y_CFG" width="9" begin="24" end="16" resetval="0x0" description="(U15.0) Y (U) value." range="" rwaccess="RW"/>
+    <bitfield id="X_CFG" width="16" begin="15" end="0" resetval="0x0" description="(U16) X (normalized radius from center) value." range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_NSF4V_LSCCCURVE1_j_k" acronym="VISS_NSF4V_LSCCCURVE1_j_k" offset="0x204" width="32" description="16 segment piecewise linear curve Part1 (2 set x 16 segment) Offset = 000C0204h + (j * 80h) + (k * 8h); where j = 0h to 1h, k = 0h to Fh">
+    <bitfield id="RSVD" width="16" begin="31" end="16" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="S_CFG" width="16" begin="15" end="0" resetval="0x0" description="(S5.11) S value." range="" rwaccess="RW"/>
+  </register>
+</module>

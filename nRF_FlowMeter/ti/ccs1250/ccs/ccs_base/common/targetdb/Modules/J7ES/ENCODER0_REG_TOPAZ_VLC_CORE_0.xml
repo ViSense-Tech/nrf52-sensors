@@ -1,0 +1,183 @@
+<module name="ENCODER0_REG_TOPAZ_VLC_CORE_0" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="ENCODER0_CR_VLC_CONTROL" acronym="ENCODER0_CR_VLC_CONTROL" offset="0x1400" width="32" description="The action of writing to this register with the START bit set to '1' causes VLC to begin processing. This is typically used to trigger header/stuffing insertion or a VLC flush.VLC can also be triggered directly by the H/W sequencer. This is typically used to trigger MB processing.">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CODEC_EXTEND" width="1" begin="28" end="28" resetval="0x0" description="Extension to the CODEC field" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="27" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_FIELD_SELECT" width="1" begin="15" end="15" resetval="0x0" description="Selects the reference field" range="" rwaccess="RW"/>
+    <bitfield id="CR_DISCARD_CODED_DATA" width="1" begin="14" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_VLC_P_REF_IDX" width="1" begin="13" end="13" resetval="0x0" description="0 : Does not generate the ref_idx_l0 symbol on P slices" range="" rwaccess="RW"/>
+    <bitfield id="CR_VLC_SPATIAL_DIRECT" width="1" begin="12" end="12" resetval="0x0" description="0: Direct motion vectors are calculated as Tempoal Direct" range="" rwaccess="RW"/>
+    <bitfield id="CR_VLC_CONSTRAINED_INTRA" width="1" begin="11" end="11" resetval="0x0" description="0: Intra prediction can use boundary pixels from Inter MBs" range="" rwaccess="RW"/>
+    <bitfield id="CR_VLC_8X8_TRANSFORM" width="1" begin="10" end="10" resetval="0x0" description="0: Use 4x4 transform for Inter MB, disable Luma Intra 8x8 prediction" range="" rwaccess="RW"/>
+    <bitfield id="CR_VLC_FIELD_CODED" width="1" begin="9" end="9" resetval="0x0" description="0 : Encoding frame picture" range="" rwaccess="RW"/>
+    <bitfield id="CR_CABAC_ENABLE" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_DISABLE_SKIP" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_FORCE_SKIP" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_FLUSH" width="1" begin="5" end="5" resetval="0x0" description="0 : A flush operation is NOT performed" range="" rwaccess="RW"/>
+    <bitfield id="CR_START" width="1" begin="4" end="4" resetval="0x0" description="0: The VLC module is NOT triggered." range="" rwaccess="RW"/>
+    <bitfield id="CR_SLICE_CODING_TYPE" width="2" begin="3" end="2" resetval="0x0" description="0x0: I slice" range="" rwaccess="RW"/>
+    <bitfield id="CR_CODEC" width="2" begin="1" end="0" resetval="0x0" description="if CR_CODEC_EXTEND = '0' if CR_CODEC_EXTEND = '1'" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_STATUS" acronym="ENCODER0_CR_VLC_STATUS" offset="0x1404" width="32" description="">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_RECODE_AS_IPCM" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_BUSY" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_INFO_0" acronym="ENCODER0_CR_VLC_INFO_0" offset="0x1408" width="32" description="">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_FLUSH_STUFFING_BYTES" width="5" begin="17" end="13" resetval="0x0" description="The number of stuffing bytes that were inserted into the bitstream during the last flush operation" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="13" begin="12" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_INFO_1" acronym="ENCODER0_CR_VLC_INFO_1" offset="0x140C" width="32" description="">
+    <bitfield id="CR_CODED_MBS_IN_FRAME" width="16" begin="31" end="16" resetval="0x0" description="The total number of coded MBs in the current inter frame." range="" rwaccess="RW"/>
+    <bitfield id="CR_SKIPPED_MBS_IN_FRAME" width="16" begin="15" end="0" resetval="0x0" description="Total number of skipped MBs in the current inter frame." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_INFO_2" acronym="ENCODER0_CR_VLC_INFO_2" offset="0x1410" width="32" description="">
+    <bitfield id="CR_INTER_MBS_IN_FRAME" width="16" begin="31" end="16" resetval="0x0" description="The number of inter MBs in the current frame." range="" rwaccess="RW"/>
+    <bitfield id="CR_INTRA_MBS_IN_FRAME" width="16" begin="15" end="0" resetval="0x0" description="The total number of intra MBs in the current inter frame." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_STUFF_HEAD_CTRL" acronym="ENCODER0_CR_VLC_STUFF_HEAD_CTRL" offset="0x1414" width="32" description="">
+    <bitfield id="CR_CLEAR_HEADER_FIFO" width="1" begin="31" end="31" resetval="0x0" description="1: Causes the header fifo to be emptied" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="17" begin="30" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_STUFFING_WORDS" width="9" begin="13" end="5" resetval="0x0" description="The number of stuffing bytes to be inserted DIV 4." range="" rwaccess="RW"/>
+    <bitfield id="CR_HEADER_ELEMENTS" width="5" begin="4" end="0" resetval="0x0" description="The number of header elements to be inserted." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_HEADER_FIFO" acronym="ENCODER0_CR_VLC_HEADER_FIFO" offset="0x1418" width="32" description="">
+    <bitfield id="CR_HEADER_DATA" width="32" begin="31" end="0" resetval="0x0" description="Header data to be inserted by VLC, written as encoded bitstream in a particular format." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_HEADER_CTRL" acronym="ENCODER0_CR_VLC_HEADER_CTRL" offset="0x141C" width="32" description="">
+    <bitfield id="CR_DISABLE_PREFIX_DETECTION" width="1" begin="31" end="31" resetval="0x0" description="0 : Prefix detection is enabled." range="" rwaccess="RW"/>
+    <bitfield id="CR_HEADER_PREFIX" width="31" begin="30" end="0" resetval="0x0" description="Each bit in this field indicates that the corresponding header element contains a start code prefix in the first 3 bytes." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_HEADER_STATUS" acronym="ENCODER0_CR_VLC_HEADER_STATUS" offset="0x1420" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_HEADER_FIFO_FULL" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_RATE_CTRL_MB_TYPE" acronym="ENCODER0_CR_VLC_RATE_CTRL_MB_TYPE" offset="0x1424" width="32" description="All of the rate control registers are double buffered, and accumulated over a basic unit. The hardware contains internal registers which increment as macroblocks are processed. At the start of the next basic unit, the internal registers are copied into the rate control registers which can be read by software. This is used by the rate control.">
+    <bitfield id="CR_MB_CODING_TYPE_SKIP" width="8" begin="31" end="24" resetval="0x0" description="Count of the number of macroblocks in basic unit with MB_type of Skip" range="" rwaccess="R"/>
+    <bitfield id="CR_MB_CODING_TYPE_B" width="8" begin="23" end="16" resetval="0x0" description="Count of the number of macroblocks in basic unit with MB_type of B" range="" rwaccess="R"/>
+    <bitfield id="CR_MB_CODING_TYPE_I" width="8" begin="15" end="8" resetval="0x0" description="Count of the number of macroblocks in basic unit with MB_type of I" range="" rwaccess="R"/>
+    <bitfield id="CR_MB_CODING_TYPE_P" width="8" begin="7" end="0" resetval="0x0" description="Count of the number of macroblocks in basic unit with MB_type of P" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_RATE_CTRL_DCBITS" acronym="ENCODER0_CR_VLC_RATE_CTRL_DCBITS" offset="0x1428" width="32" description="">
+    <bitfield id="CR_MB_CODING_IPCM" width="8" begin="31" end="24" resetval="0x0" description="Count of the number of macroblocks in basic unit which were coded as Intra PCM" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_DC_BITS" width="16" begin="15" end="0" resetval="0x0" description="Number of bits used to code all 6 DC coefficients in the current MB, accumulated for all macroblocks in a basic unit." range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_RATE_CTRL_MVBITS" acronym="ENCODER0_CR_VLC_RATE_CTRL_MVBITS" offset="0x142C" width="32" description="">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_MV_BITS" width="24" begin="23" end="0" resetval="0x0" description="Number of bits used to code all the MVs in the current MB, accumulated for all macroblocks in a basic unit." range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_RATE_CTRL_MBSYM" acronym="ENCODER0_CR_VLC_RATE_CTRL_MBSYM" offset="0x1430" width="32" description="">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_MB_SYMBOLS_BITS" width="24" begin="23" end="0" resetval="0x0" description="The number of bits used to code all the MB level symbols in the current MB, accumulated for all macroblocks in a basic unit." range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_RATE_CTRL_MBRES" acronym="ENCODER0_CR_VLC_RATE_CTRL_MBRES" offset="0x1434" width="32" description="">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_MB_RESIDUAL_BITS" width="24" begin="23" end="0" resetval="0x0" description="The number of bits used to code all the residual coefficients in the current MB, accumulated for all macroblocks in a basic unit." range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_SIGNATURE_0" acronym="ENCODER0_CR_VLC_SIGNATURE_0" offset="0x1438" width="32" description="">
+    <bitfield id="CR_MB_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="LFSR Signature of the output from the MB level Index Generator" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_SIGNATURE_1" acronym="ENCODER0_CR_VLC_SIGNATURE_1" offset="0x143C" width="32" description="">
+    <bitfield id="CR_BLK_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="LFSR Signature of the output from the Block level Index Generators" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_SIGNATURE_2" acronym="ENCODER0_CR_VLC_SIGNATURE_2" offset="0x1440" width="32" description="">
+    <bitfield id="CR_LOOKUP_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="LFSR Signature of the output of the Code Lookup and Golomb Coding sub-module." range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_SIGNATURE_3" acronym="ENCODER0_CR_VLC_SIGNATURE_3" offset="0x1444" width="32" description="">
+    <bitfield id="CR_BITSTREAM_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="LFSR Signature of the bitstream generated by the VLC module, at the output of the Output Buffer." range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_SIGNATURE_4" acronym="ENCODER0_CR_VLC_SIGNATURE_4" offset="0x1448" width="32" description="">
+    <bitfield id="CR_HEADER_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="LFSR Signature of the output of the Stuffing and Header Insertion sub-module." range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_PERFORMANCE_0" acronym="ENCODER0_CR_VLC_PERFORMANCE_0" offset="0x1450" width="32" description="">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_WORST_MB_IPCM" width="1" begin="18" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_WORST_MB_TYPE" width="2" begin="17" end="16" resetval="0x0" description="The MB type of the worst MB." range="" rwaccess="RW"/>
+    <bitfield id="CR_WORST_MB_CYCLES" width="16" begin="15" end="0" resetval="0x0" description="The number of cycles taken to process the worst MB." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_PERFORMANCE_1" acronym="ENCODER0_CR_VLC_PERFORMANCE_1" offset="0x1454" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_WORST_MB_NUM" width="22" begin="21" end="0" resetval="0x0" description="The linear MB number of the worst MB." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_PERFORMANCE_2" acronym="ENCODER0_CR_VLC_PERFORMANCE_2" offset="0x1458" width="32" description="">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_DISABLE_COUNTERS" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_WORST_MB_RESET" width="1" begin="0" end="0" resetval="0x0" description="Writing this single bit with the value '1' clears both performance registers and resets the worst MB Num counter" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_IPCM_0" acronym="ENCODER0_CR_VLC_IPCM_0" offset="0x145C" width="32" description="">
+    <bitfield id="RESERVED" width="6" begin="31" end="26" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CABAC_DB_MARGIN" width="10" begin="25" end="16" resetval="0x190" description="This field is only used in H264 CABAC mode when CR_CABAC_BIN_FLEX is not equal to 0, i.e." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CABAC_BIN_FLEX" width="13" begin="12" end="0" resetval="0x0" description="This field is only used in H264 CABAC mode, and indicates how much the bin limit is allowed to vary." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_IPCM_1" acronym="ENCODER0_CR_VLC_IPCM_1" offset="0x1460" width="32" description="">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CABAC_BIN_LIMIT" width="13" begin="28" end="16" resetval="0x0" description="In H264 CABAC mode only, this field indicates the number of bins per macroblock which can be coded before the macroblock is recoded as I_PCM [Setting this field to zero will mean that the number of bins used is unlimited, so no macroblocks are recoded as I_PCM due to this bin limit.] This field in not used in other modes." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_IPCM_THRESHOLD" width="12" begin="11" end="0" resetval="0x0" description="The threshold number of bits generated for a single H264 macroblock above which the macroblock should be recoded as I_PCM." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_MPEG4_CFG" acronym="ENCODER0_CR_VLC_MPEG4_CFG" offset="0x1464" width="32" description="">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_RSIZE" width="3" begin="2" end="0" resetval="0x0" description="This is the r_size parameter used in MPEG4 and H263 for encoding Motion Vectors." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_MB_PARAMS" acronym="ENCODER0_CR_VLC_MB_PARAMS" offset="0x1468" width="32" description="">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_QP_CR" width="6" begin="29" end="24" resetval="0x0" description="The QP value used for Cr data on the last MB of the previous BU." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="2" begin="23" end="22" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_QP_CB" width="6" begin="21" end="16" resetval="0x0" description="The QP value used for Cb data on the last MB of the previous BU." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="10" begin="15" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_QP" width="6" begin="5" end="0" resetval="0x0" description="QP in H264 [luma]" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_RESET" acronym="ENCODER0_CR_VLC_RESET" offset="0x146C" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_RESET" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_WRITE_ADDR" acronym="ENCODER0_CR_VLC_WRITE_ADDR" offset="0x1470" width="32" description="">
+    <bitfield id="CR_NEXT_WRITE_ADDR" width="28" begin="31" end="4" resetval="0x0" description="The next address that the VLC module will write stream data out to." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="3" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_CHROMA_QP_OFFSET" acronym="ENCODER0_CR_VLC_CHROMA_QP_OFFSET" offset="0x1474" width="32" description="">
+    <bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_QPCR_OFFSET" width="5" begin="12" end="8" resetval="0x0" description="Signed offset added to QPy [and then clipped to range 0 to 51] which is used to look-up QPCr from the QPC lookup table." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_QPCB_OFFSET" width="5" begin="4" end="0" resetval="0x0" description="Signed offset added to QPy [and then clipped to range 0 to 51] which is used to look-up QPCb from the QPC lookup table." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_RATE_CTRL_QP" acronym="ENCODER0_CR_VLC_RATE_CTRL_QP" offset="0x1478" width="32" description="All of the rate control registers are double buffered, and accumulated over a basic unit. The hardware contains internal registers which increment as macroblocks are processed. At the start of the next basic unit, the internal registers are copied into the rate control registers which can be read by software. This is used by the rate control.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_BU_QPY_INTER" width="14" begin="29" end="16" resetval="0x0" description="Sum of QPy/Qscale for all macroblocks in a basic unit which are inter [add 0 if macroblock is Intra]" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_BU_QPY_INTRA" width="14" begin="13" end="0" resetval="0x0" description="Sum of QPy/Qscale for all macroblocks in a basic unit which are intra [add 0 if macroblock is Inter]" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_BU_STAT_UPDATE" acronym="ENCODER0_CR_VLC_BU_STAT_UPDATE" offset="0x147C" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_FORCE_BU_STAT_UPDATE" width="1" begin="0" end="0" resetval="0x0" description="Normally the rate control registers in 0x024 to 0x034 plus 0x078 are updated at the start of the next basic unit." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_SLICE_HEADER_CTRL" acronym="ENCODER0_CR_VLC_SLICE_HEADER_CTRL" offset="0x1480" width="32" description="">
+    <bitfield id="CR_SLICE_MB_NUM" width="16" begin="31" end="16" resetval="0x0" description="At the start of a slice, should be set to the address of the first macroblock in that slice." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_SLICE_PREFIX_ELEMENTS" width="5" begin="12" end="8" resetval="0x0" description="The count of elements in the slice header buffer, starting from the first element in the buffer, that should be output before the first_mb_in_slice symbol when generating a slice header" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_SLICE_HEADER_ELEMENTS" width="5" begin="4" end="0" resetval="0x0" description="The count of elements in the slice header buffer, starting after cr_slice_prefix_elements in the buffer, that should be output after the first_mb_in_slice symbol when generating a slice header." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_SLICE_CTRL_0" acronym="ENCODER0_CR_VLC_SLICE_CTRL_0" offset="0x1484" width="32" description="">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_SLICE_SIZE_LIMIT" width="24" begin="23" end="0" resetval="0x0" description="Requested limit on the number of bytes in a slice" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_SLICE_CTRL_1" acronym="ENCODER0_CR_VLC_SLICE_CTRL_1" offset="0x148C" width="32" description="">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_SLICE_MBS_LIMIT" width="14" begin="13" end="0" resetval="0x0" description="Requested limit on the number of macroblocks in a slice" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_RATE_CTRL_HEADERS" acronym="ENCODER0_CR_VLC_RATE_CTRL_HEADERS" offset="0x1490" width="32" description="">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_SLICE_HEADER_BITS" width="24" begin="23" end="0" resetval="0x0" description="The number of bits used to code all the dynamic slice headers in the basic unit." range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_SIGNATURE_5" acronym="ENCODER0_CR_VLC_SIGNATURE_5" offset="0x1494" width="32" description="">
+    <bitfield id="CR_CABAC_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="LFSR Signature of the output from the CABAC Encoder" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_VLC_SIGNATURE_6" acronym="ENCODER0_CR_VLC_SIGNATURE_6" offset="0x1498" width="32" description="">
+    <bitfield id="CR_IPCM_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="LFSR Signature of the output from the I_PCM sub-module" range="" rwaccess="R"/>
+  </register>
+</module>

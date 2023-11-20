@@ -1,0 +1,233 @@
+<module name="DECODER0_PVDEC_VEC_BE" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="DECODER0_CR_VEC_BE_CONTROL" acronym="DECODER0_CR_VEC_BE_CONTROL" offset="0x0" width="32" description="">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_CHROMA_FORMAT" width="3" begin="30" end="28" resetval="0x1" description="Defines the chroma format-" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="27" end="27" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_PROFILE" width="3" begin="26" end="24" resetval="0x1" description="Defines profile for the back-end for the selected codec mode [definition based on BE_CODEC_MODE]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_CODEC_MODE" width="4" begin="19" end="16" resetval="0xC" description="0xC : HEVC" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_FRAGMENT_ROW_EXT" width="2" begin="13" end="12" resetval="0x0" description="If frame height is greater than 16k, BE_FRAGMENT_ROW_EXT*256 + BE_FRAGMENT_ROW indicates the last complete set of four macroblock rows written to the Fragment Pointer table" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="11" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_GENC_ENABLE" width="1" begin="8" end="8" resetval="0x0" description="Setting this bit to '1' instructs the GENC decoder to start parsing the GENC stream." range="" rwaccess="RW"/>
+    <bitfield id="BE_FRAGMENT_ROW" width="8" begin="7" end="0" resetval="0x0" description="This field indicates the last complete set of four macroblock rows written to the Fragment Pointer table." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_BE_MULTIPIPE_OPERATION" acronym="DECODER0_CR_VEC_BE_MULTIPIPE_OPERATION" offset="0x4" width="32" description="">
+    <bitfield id="RESERVED" width="21" begin="31" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="PIPE_NUMBER" width="3" begin="10" end="8" resetval="0x0" description="Offset of the current pipe in the pipeline [where this field should be less than NUM_PIXEL_PIPES, where 0 is the first pipe in the pipeline, and NUM_PIXEL_PIPES-1 is the last pipe in the pipeline" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="7" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="NUM_PIXEL_PIPES" width="3" begin="2" end="0" resetval="0x1" description="Number of pixel processing pipes used to decode the picture" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_BE_CODED_PICTURE_SIZE" acronym="DECODER0_CR_VEC_BE_CODED_PICTURE_SIZE" offset="0x10" width="32" description="">
+    <bitfield id="PIC_HEIGHT_MIN1" width="16" begin="31" end="16" resetval="0x0" description="Defines 1 less than picture height in luma samples" range="" rwaccess="RW"/>
+    <bitfield id="PIC_WIDTH_MIN1" width="16" begin="15" end="0" resetval="0x0" description="Defines 1 less than picture width in luma samples" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_BE_STATUS" acronym="DECODER0_CR_VEC_BE_STATUS" offset="0x18" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="COMMAND_MB_ADDR_Y" width="12" begin="27" end="16" resetval="0x0" description="Provides the vertical offset of the macroblock the command generation pipeline is processing" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="COMMAND_MB_ADDR_X" width="12" begin="11" end="0" resetval="0x0" description="Provides the horizontal offset of the macroblock the command generation pipeline is processing" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_MEM_TO_REG_BASE_ADDRESS" acronym="DECODER0_CR_MEM_TO_REG_BASE_ADDRESS" offset="0x20" width="32" description="">
+    <bitfield id="MEM_TO_REG_BASE_ADDRESS" width="26" begin="31" end="6" resetval="0x0" description="The base address of the MEM_TO_REG structure used to setup registers, where the structure contains pairs of" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="5" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_MEM_TO_REG_CONTROL" acronym="DECODER0_CR_MEM_TO_REG_CONTROL" offset="0x24" width="32" description="This register may be used to read a memory structure consisting of pairs of register address and data, which could be used to setup registers between pictures. The logic used to read the memory structure is shared with the 'slice structure' read logic, where hardware will arbitrate between structure reads.">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MEM_TO_REG_ENABLE" width="1" begin="16" end="16" resetval="0x0" description="Writing 1 to this field starts the MEM_TO_REG operation." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MEM_TO_REG_NUM_PAIRS" width="10" begin="9" end="0" resetval="0x0" description="The number of registers to write." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_GENC_FRAGMENT_BASE_ADDRESS" acronym="DECODER0_CR_GENC_FRAGMENT_BASE_ADDRESS" offset="0x30" width="32" description="">
+    <bitfield id="FRAGMENT_BASE_ADDRESS" width="26" begin="31" end="6" resetval="0x0" description="The base address of the GENC fragment pointer table" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="5" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_GENC_BUFFER_SIZE_00" acronym="DECODER0_CR_GENC_BUFFER_SIZE_00" offset="0x40" width="32" description="GENC Buffer Size, in multiple of 4kbytes, for each of the four GENC buffers">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="GENC_BUFFER_SIZE" width="16" begin="27" end="12" resetval="0x0" description="GENC buffer size, in multiple of 4kbyte, where a value of zero is illegal [maximum buffer size is 256Mbyte-4kbyte]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_GENC_BUFFER_SIZE_01" acronym="DECODER0_CR_GENC_BUFFER_SIZE_01" offset="0x44" width="32" description="GENC Buffer Size, in multiple of 4kbytes, for each of the four GENC buffers">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="GENC_BUFFER_SIZE" width="16" begin="27" end="12" resetval="0x0" description="GENC buffer size, in multiple of 4kbyte, where a value of zero is illegal [maximum buffer size is 256Mbyte-4kbyte]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_GENC_BUFFER_SIZE_02" acronym="DECODER0_CR_GENC_BUFFER_SIZE_02" offset="0x48" width="32" description="GENC Buffer Size, in multiple of 4kbytes, for each of the four GENC buffers">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="GENC_BUFFER_SIZE" width="16" begin="27" end="12" resetval="0x0" description="GENC buffer size, in multiple of 4kbyte, where a value of zero is illegal [maximum buffer size is 256Mbyte-4kbyte]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_GENC_BUFFER_SIZE_03" acronym="DECODER0_CR_GENC_BUFFER_SIZE_03" offset="0x4C" width="32" description="GENC Buffer Size, in multiple of 4kbytes, for each of the four GENC buffers">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="GENC_BUFFER_SIZE" width="16" begin="27" end="12" resetval="0x0" description="GENC buffer size, in multiple of 4kbyte, where a value of zero is illegal [maximum buffer size is 256Mbyte-4kbyte]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_GENC_BUFFER_BASE_ADDRESS_00" acronym="DECODER0_CR_GENC_BUFFER_BASE_ADDRESS_00" offset="0x50" width="32" description="GENC Buffer Base Address, must be aligned to a multiple of 4kbytes, for each of the four GENC buffers">
+    <bitfield id="GENC_BASE_ADDRESS" width="20" begin="31" end="12" resetval="0x0" description="GENC buffer base address, must be aligned to a multiple of 4kbyte" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_GENC_BUFFER_BASE_ADDRESS_01" acronym="DECODER0_CR_GENC_BUFFER_BASE_ADDRESS_01" offset="0x54" width="32" description="GENC Buffer Base Address, must be aligned to a multiple of 4kbytes, for each of the four GENC buffers">
+    <bitfield id="GENC_BASE_ADDRESS" width="20" begin="31" end="12" resetval="0x0" description="GENC buffer base address, must be aligned to a multiple of 4kbyte" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_GENC_BUFFER_BASE_ADDRESS_02" acronym="DECODER0_CR_GENC_BUFFER_BASE_ADDRESS_02" offset="0x58" width="32" description="GENC Buffer Base Address, must be aligned to a multiple of 4kbytes, for each of the four GENC buffers">
+    <bitfield id="GENC_BASE_ADDRESS" width="20" begin="31" end="12" resetval="0x0" description="GENC buffer base address, must be aligned to a multiple of 4kbyte" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_GENC_BUFFER_BASE_ADDRESS_03" acronym="DECODER0_CR_GENC_BUFFER_BASE_ADDRESS_03" offset="0x5C" width="32" description="GENC Buffer Base Address, must be aligned to a multiple of 4kbytes, for each of the four GENC buffers">
+    <bitfield id="GENC_BASE_ADDRESS" width="20" begin="31" end="12" resetval="0x0" description="GENC buffer base address, must be aligned to a multiple of 4kbyte" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_GENC_BUFFER_READ_POINTER_00" acronym="DECODER0_CR_GENC_BUFFER_READ_POINTER_00" offset="0x60" width="32" description="GENC Buffer Read Pointer for each of the four GENC buffers">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="GENC_READ_POINTER" width="24" begin="27" end="4" resetval="0x0" description="GENC read pointer, offset relative to the base address which points to the next" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="3" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_GENC_BUFFER_READ_POINTER_01" acronym="DECODER0_CR_GENC_BUFFER_READ_POINTER_01" offset="0x64" width="32" description="GENC Buffer Read Pointer for each of the four GENC buffers">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="GENC_READ_POINTER" width="24" begin="27" end="4" resetval="0x0" description="GENC read pointer, offset relative to the base address which points to the next" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="3" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_GENC_BUFFER_READ_POINTER_02" acronym="DECODER0_CR_GENC_BUFFER_READ_POINTER_02" offset="0x68" width="32" description="GENC Buffer Read Pointer for each of the four GENC buffers">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="GENC_READ_POINTER" width="24" begin="27" end="4" resetval="0x0" description="GENC read pointer, offset relative to the base address which points to the next" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="3" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_GENC_BUFFER_READ_POINTER_03" acronym="DECODER0_CR_GENC_BUFFER_READ_POINTER_03" offset="0x6C" width="32" description="GENC Buffer Read Pointer for each of the four GENC buffers">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="GENC_READ_POINTER" width="24" begin="27" end="4" resetval="0x0" description="GENC read pointer, offset relative to the base address which points to the next" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="3" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_GENC_CONTEXT0" acronym="DECODER0_CR_GENC_CONTEXT0" offset="0x80" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="GENC_CONTEXT0_3" width="6" begin="21" end="16" resetval="0x10" description="GENC initial context value for CU context with a value of 3" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="GENC_CONTEXT0_2" width="6" begin="13" end="8" resetval="0x10" description="GENC initial context value for CU context with a value of 2" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="7" end="6" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="GENC_CONTEXT0_1" width="6" begin="5" end="0" resetval="0x10" description="GENC initial context value for CU context with a value of 1" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_GENC_CONTEXT1" acronym="DECODER0_CR_GENC_CONTEXT1" offset="0x84" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="GENC_CONTEXT1_3" width="6" begin="21" end="16" resetval="0x10" description="GENC initial context value for significance map context with a value of 3" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="GENC_CONTEXT1_2" width="6" begin="13" end="8" resetval="0x10" description="GENC initial context value for significance map context with a value of 2" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="7" end="6" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="GENC_CONTEXT1_1" width="6" begin="5" end="0" resetval="0x10" description="GENC initial context value for significance map context with a value of 1" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_ABOVE_PARAM_BASE_ADDRESS" acronym="DECODER0_CR_ABOVE_PARAM_BASE_ADDRESS" offset="0xC0" width="32" description="">
+    <bitfield id="ABOVE_PARAM_BASE_ADDRESS" width="26" begin="31" end="6" resetval="0x0" description="The base address of a host memory buffer used to temporarily store parameters from the current picture row, to be re-read on the next picture row." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="5" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_SLICE_STRUCTURE_OVER1K_SIGNATURE" acronym="DECODER0_CR_SLICE_STRUCTURE_OVER1K_SIGNATURE" offset="0x178" width="32" description="This is a signature of the 128-data words read from a slice structure.">
+    <bitfield id="SLICE_STRUCTURE_OVER1K_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature of the 128-bit data words read from a slice structure with a size over 1K bytes." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_GENC_DEC_SYS_WR_CONTROL" acronym="DECODER0_CR_GENC_DEC_SYS_WR_CONTROL" offset="0x17C" width="32" description="This register is used for controling the system bus writes of GENC_DEC.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="GENC_DEC_SYS_WR_DONE" width="1" begin="0" end="0" resetval="0x0" description="This field is used as the write fence for GENC_DEC system register writes." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_GDEC_BUFFER_SIGNATURE_00" acronym="DECODER0_CR_GDEC_BUFFER_SIGNATURE_00" offset="0x180" width="32" description="For each of the four GENC buffers, this is a signature of the data read from the buffer.">
+    <bitfield id="GDEC_BUFFER_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="GENC buffer signature, of the 128-bit data words read from the GENC buffer." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_GDEC_BUFFER_SIGNATURE_01" acronym="DECODER0_CR_GDEC_BUFFER_SIGNATURE_01" offset="0x184" width="32" description="For each of the four GENC buffers, this is a signature of the data read from the buffer.">
+    <bitfield id="GDEC_BUFFER_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="GENC buffer signature, of the 128-bit data words read from the GENC buffer." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_GDEC_BUFFER_SIGNATURE_02" acronym="DECODER0_CR_GDEC_BUFFER_SIGNATURE_02" offset="0x188" width="32" description="For each of the four GENC buffers, this is a signature of the data read from the buffer.">
+    <bitfield id="GDEC_BUFFER_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="GENC buffer signature, of the 128-bit data words read from the GENC buffer." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_GDEC_BUFFER_SIGNATURE_03" acronym="DECODER0_CR_GDEC_BUFFER_SIGNATURE_03" offset="0x18C" width="32" description="For each of the four GENC buffers, this is a signature of the data read from the buffer.">
+    <bitfield id="GDEC_BUFFER_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="GENC buffer signature, of the 128-bit data words read from the GENC buffer." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_GDEC_FRAGMENT_SIGNATURE" acronym="DECODER0_CR_GDEC_FRAGMENT_SIGNATURE" offset="0x190" width="32" description="This is a signature of the 128-data words read from the GENC fragment pointer table.">
+    <bitfield id="GDEC_FRAGMENT_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="GENC fragment signature, of the 128-bit data words read from the GENC fragment pointer table." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_SLICE_STRUCTURE_SIGNATURE" acronym="DECODER0_CR_SLICE_STRUCTURE_SIGNATURE" offset="0x194" width="32" description="This is a signature of the 128-data words read from a slice structure.">
+    <bitfield id="SLICE_STRUCTURE_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature of the 128-bit data words read from a slice structure." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_MEM_STRUCTURE_SIGNATURE" acronym="DECODER0_CR_MEM_STRUCTURE_SIGNATURE" offset="0x198" width="32" description="This is a signature of the 128-data words read from a Memory to Register structure.">
+    <bitfield id="MEM_STRUCTURE_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature of the 128-bit data words read from a Memory to Register structure." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_DECODE_TO_COMMAND_PRIME_SIGNATURE" acronym="DECODER0_CR_DECODE_TO_COMMAND_PRIME_SIGNATURE" offset="0x1A0" width="32" description="This is a signature of the interface from Primary GENC decode to command generation.">
+    <bitfield id="DECODE_COMMAND_PRIME_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Decode to command signature, of the interface from Primary GENC decode to the command generation pipeline." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_DECODE_TO_COMMAND_SECOND_SIGNATURE" acronym="DECODER0_CR_DECODE_TO_COMMAND_SECOND_SIGNATURE" offset="0x1A4" width="32" description="This is a signature of the interface from Secondary GENC decode to command generation.">
+    <bitfield id="DECODE_COMMAND_SECOND_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Decode to command signature, of the interface from Secondary GENC decode to the command generation pipeline." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_DECODE_TO_RESIDUAL_PRIME_SIGNATURE" acronym="DECODER0_CR_DECODE_TO_RESIDUAL_PRIME_SIGNATURE" offset="0x1A8" width="32" description="This is a signature of the interface from Primary GENC decode to residual pipeline.">
+    <bitfield id="DECODE_RESIDUAL_PRIME_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Decode to residual signature, of the interface from Primary GENC decode to the residual pipeline." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_DECODE_TO_RESIDUAL_SECOND_SIGNATURE" acronym="DECODER0_CR_DECODE_TO_RESIDUAL_SECOND_SIGNATURE" offset="0x1AC" width="32" description="This is a signature of the interface from Secondary GENC decode to command generation.">
+    <bitfield id="DECODE_RESIDUAL_SECOND_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Decode to residual signature, of the interface from Secondary GENC decode to the residual pipeline." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_COMMAND_ABOVE_READ_SIGNATURE" acronym="DECODER0_CR_COMMAND_ABOVE_READ_SIGNATURE" offset="0x1B0" width="32" description="This is a signature of either above parameter structure from memory, or passed via hardware interface.">
+    <bitfield id="COMMAND_ABOVE_READ_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature of the above parameters from either above parameter structure in memory, or passed via hardware interface." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_COMMAND_ABOVE_WRITE_SIGNATURE" acronym="DECODER0_CR_COMMAND_ABOVE_WRITE_SIGNATURE" offset="0x1B4" width="32" description="This is a signature of either above parameter structure written to memory, or output via hardware interface.">
+    <bitfield id="COMMAND_ABOVE_WRITE_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature of the above parameters either written to above parameter structure in memory, or output via hardware interface." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_TEMPORAL_READ_SIGNATURE" acronym="DECODER0_CR_TEMPORAL_READ_SIGNATURE" offset="0x1B8" width="32" description="This is a signature of 128-bit words read from Temporal MV structure in memory.">
+    <bitfield id="TEMPORAL_READ_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature of the 128-bit words read from Temporal MV structure in memory." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_TEMPORAL_WRITE_SIGNATURE" acronym="DECODER0_CR_TEMPORAL_WRITE_SIGNATURE" offset="0x1BC" width="32" description="This is a signature of 128-bit words written to Temporal MV structure in memory.">
+    <bitfield id="TEMPORAL_WRITE_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature of the 128-bit words written to Temporal MV structure in memory." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_COMMAND_OUTPUT_SIGNATURE" acronym="DECODER0_CR_COMMAND_OUTPUT_SIGNATURE" offset="0x1C0" width="32" description="This is a signature of address and data of commands output by the command generation module.">
+    <bitfield id="COMMAND_OUTPUT_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature of the address and data of macroblock level commands output by the command generation module." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_RESIDUAL_OUTPUT_SIGNATURE" acronym="DECODER0_CR_RESIDUAL_OUTPUT_SIGNATURE" offset="0x1C4" width="32" description="This is a signature of residual data and sideband flags at the output of the residual pipeline.">
+    <bitfield id="RESIDUAL_OUTPUT_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature of the residual data and sideband at the output of the residual pipeline." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_GDEC_DATA_REQ_SIGNATURE_00" acronym="DECODER0_CR_GDEC_DATA_REQ_SIGNATURE_00" offset="0x1D0" width="32" description="">
+    <bitfield id="GDEC_DATA_REQ_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature of GENC data requests [separate signature for each macroblock row]." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_GDEC_DATA_REQ_SIGNATURE_01" acronym="DECODER0_CR_GDEC_DATA_REQ_SIGNATURE_01" offset="0x1D4" width="32" description="">
+    <bitfield id="GDEC_DATA_REQ_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature of GENC data requests [separate signature for each macroblock row]." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_GDEC_DATA_REQ_SIGNATURE_02" acronym="DECODER0_CR_GDEC_DATA_REQ_SIGNATURE_02" offset="0x1D8" width="32" description="">
+    <bitfield id="GDEC_DATA_REQ_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature of GENC data requests [separate signature for each macroblock row]." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_GDEC_DATA_REQ_SIGNATURE_03" acronym="DECODER0_CR_GDEC_DATA_REQ_SIGNATURE_03" offset="0x1DC" width="32" description="">
+    <bitfield id="GDEC_DATA_REQ_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature of GENC data requests [separate signature for each macroblock row]." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_GDEC_FRAGMENT_REQ_SIGNATURE" acronym="DECODER0_CR_GDEC_FRAGMENT_REQ_SIGNATURE" offset="0x1E0" width="32" description="">
+    <bitfield id="GDEC_FRAGMENT_REQ_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature of GENC fragment requests." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_SLICE_STRUCTURE_REQ_SIGNATURE" acronym="DECODER0_CR_SLICE_STRUCTURE_REQ_SIGNATURE" offset="0x1E4" width="32" description="">
+    <bitfield id="SLICE_STRUCTURE_REQ_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature of Slice structure requests." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_MEM_STRUCTURE_REQ_SIGNATURE" acronym="DECODER0_CR_MEM_STRUCTURE_REQ_SIGNATURE" offset="0x1E8" width="32" description="">
+    <bitfield id="MEM_STRUCTURE_REQ_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature of Memory to Register structure requests." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_GDEC_SYS_WR_SIGNATURE" acronym="DECODER0_CR_GDEC_SYS_WR_SIGNATURE" offset="0x1EC" width="32" description="">
+    <bitfield id="GDEC_SYS_WR_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature of mem/slice structure writes to system bus." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_GDEC_MEM2REG_SYS_WR_SIGNATURE" acronym="DECODER0_CR_GDEC_MEM2REG_SYS_WR_SIGNATURE" offset="0x1F0" width="32" description="">
+    <bitfield id="GDEC_MEM2REG_SYS_WR_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature of software requested memory to register writes to system bus." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_SLICE_STRUCTURE_OVER1K_REQ_SIGNATURE" acronym="DECODER0_CR_SLICE_STRUCTURE_OVER1K_REQ_SIGNATURE" offset="0x1F4" width="32" description="">
+    <bitfield id="SLICE_STRUCTURE_OVER1K_REQ_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature of slice structure requests when size is over 1K bytes." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_SIGNATURE_INIT" acronym="DECODER0_CR_SIGNATURE_INIT" offset="0x1FC" width="32" description="">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_STRUCTURE_OVER1K_REQ_SIGNATURE_INIT" width="1" begin="26" end="26" resetval="0x0" description="Writing a '1' to this field initialises the SLICE_STRUCTURE_OVER1K_REQ_SIGNATURE [writing '0' has no affect]" range="" rwaccess="RW"/>
+    <bitfield id="GDEC_MEM2REG_SYS_WR_SIGNATURE_INIT" width="1" begin="25" end="25" resetval="0x0" description="Writing a '1' to this field initialises the GDEC_MEM2REG_SYS_WR_SIGNATURE [writing '0' has no affect]" range="" rwaccess="RW"/>
+    <bitfield id="GDEC_SYS_WR_SIGNATURE_INIT" width="1" begin="24" end="24" resetval="0x0" description="Writing a '1' to this field initialises the GDEC_SYS_WR_SIGNATURE [writing '0' has no affect]" range="" rwaccess="RW"/>
+    <bitfield id="MEM_STRUCTURE_REQ_SIGNATURE_INIT" width="1" begin="23" end="23" resetval="0x0" description="Writing a '1' to this field initialises the MEM_STRUCTURE_REQ_SIGNATURE [writing '0' has no affect]" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_STRUCTURE_REQ_SIGNATURE_INIT" width="1" begin="22" end="22" resetval="0x0" description="Writing a '1' to this field initialises the SLICE_STRUCTURE_REQ_SIGNATURE [writing '0' has no affect]" range="" rwaccess="RW"/>
+    <bitfield id="GDEC_DATA_REQ_SIGNATURE_INIT" width="4" begin="21" end="18" resetval="0x0" description="For each of the four GDEC_DATA_REQ_SIGNATURE registers, writing a '1' to this field initialises the signature [writing '0' has no affect]" range="" rwaccess="RW"/>
+    <bitfield id="RESIDUAL_OUTPUT_SIGNATURE_INIT" width="1" begin="17" end="17" resetval="0x0" description="Writing a '1' to this field initialises the RESIDUAL_OUTPUT_SIGNATURE [writing '0' has no affect]" range="" rwaccess="RW"/>
+    <bitfield id="COMMAND_OUTPUT_SIGNATURE_INIT" width="1" begin="16" end="16" resetval="0x0" description="Writing a '1' to this field initialises the COMMAND_OUTPUT_SIGNATURE [writing '0' has no affect]" range="" rwaccess="RW"/>
+    <bitfield id="TEMPORAL_WRITE_SIGNATURE_INIT" width="1" begin="15" end="15" resetval="0x0" description="Writing a '1' to this field initialises the TEMPORAL_WRITE_SIGNATURE [writing '0' has no affect]" range="" rwaccess="RW"/>
+    <bitfield id="TEMPORAL_READ_SIGNATURE_INIT" width="1" begin="14" end="14" resetval="0x0" description="Writing a '1' to this field initialises the TEMPORAL_READ_SIGNATURE [writing '0' has no affect]" range="" rwaccess="RW"/>
+    <bitfield id="COMMAND_ABOVE_WRITE_SIGNATURE_INIT" width="1" begin="13" end="13" resetval="0x0" description="Writing a '1' to this field initialises the COMMAND_ABOVE_WRITE_SIGNATURE [writing '0' has no affect]" range="" rwaccess="RW"/>
+    <bitfield id="COMMAND_ABOVE_READ_SIGNATURE_INIT" width="1" begin="12" end="12" resetval="0x0" description="Writing a '1' to this field initialises the COMMAND_ABOVE_READ_SIGNATURE [writing '0' has no affect]" range="" rwaccess="RW"/>
+    <bitfield id="DECODE_RESIDUAL_SECOND_SIGNATURE_INIT" width="1" begin="11" end="11" resetval="0x0" description="Writing a '1' to this field initialises the DECODE_RESIDUAL_SECOND_SIGNATURE [writing '0' has no affect]" range="" rwaccess="RW"/>
+    <bitfield id="DECODE_RESIDUAL_PRIME_SIGNATURE_INIT" width="1" begin="10" end="10" resetval="0x0" description="Writing a '1' to this field initialises the DECODE_RESIDUAL_PRIME_SIGNATURE [writing '0' has no affect]" range="" rwaccess="RW"/>
+    <bitfield id="DECODE_COMMAND_SECOND_SIGNATURE_INIT" width="1" begin="9" end="9" resetval="0x0" description="Writing a '1' to this field initialises the DECODE_COMMAND_SECOND_SIGNATURE [writing '0' has no affect]" range="" rwaccess="RW"/>
+    <bitfield id="DECODE_COMMAND_PRIME_SIGNATURE_INIT" width="1" begin="8" end="8" resetval="0x0" description="Writing a '1' to this field initialises the DECODE_COMMAND_PRIME_SIGNATURE [writing '0' has no affect]" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_STRUCTURE_OVER1K_SIGNATURE_INIT" width="1" begin="7" end="7" resetval="0x0" description="Writing a '1' to this field initialises the SLICE_STRUCTURE_OVER1K_SIGNATURE [writing '0' has no affect]" range="" rwaccess="RW"/>
+    <bitfield id="MEM_STRUCTURE_SIGNATURE_INIT" width="1" begin="6" end="6" resetval="0x0" description="Writing a '1' to this field initialises the MEM_STRUCTURE_SIGNATURE [writing '0' has no affect]" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_STRUCTURE_SIGNATURE_INIT" width="1" begin="5" end="5" resetval="0x0" description="Writing a '1' to this field initialises the SLICE_STRUCTURE_SIGNATURE [writing '0' has no affect]" range="" rwaccess="RW"/>
+    <bitfield id="GDEC_FRAGMENT_SIGNATURE_INIT" width="1" begin="4" end="4" resetval="0x0" description="Writing a '1' to this field initialises the GDEC_FRAGMENT_SIGNATURE [writing '0' has no affect]" range="" rwaccess="RW"/>
+    <bitfield id="GDEC_BUFFER_SIGNATURE_INIT" width="4" begin="3" end="0" resetval="0x0" description="For each of the four GDEC_BUFFER_SIGNATURE registers, writing a '1' to this field initialises the signature [writing '0' has no affect]" range="" rwaccess="RW"/>
+  </register>
+</module>

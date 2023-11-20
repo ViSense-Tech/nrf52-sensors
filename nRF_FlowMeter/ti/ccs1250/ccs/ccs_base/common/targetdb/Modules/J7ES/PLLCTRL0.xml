@@ -1,0 +1,59 @@
+<module name="PLLCTRL0" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="PID" acronym="PID" offset="0x0" width="32" description="register">
+    <bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x1" description="" range="" rwaccess="R"/>
+    <bitfield id="BU" width="2" begin="29" end="28" resetval="0x0" description="Business Unit" range="" rwaccess="R"/>
+    <bitfield id="FUNC" width="12" begin="27" end="16" resetval="0x481" description="Module ID" range="" rwaccess="R"/>
+    <bitfield id="RTL" width="5" begin="15" end="11" resetval="0xB" description="RTL revision." range="" rwaccess="R"/>
+    <bitfield id="MAJOR" width="3" begin="10" end="8" resetval="0x4" description="Major revision" range="" rwaccess="R"/>
+    <bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom" range="" rwaccess="R"/>
+    <bitfield id="MINOR" width="6" begin="5" end="0" resetval="0x0" description="Minor revision" range="" rwaccess="R"/>
+  </register>
+  <register id="PLLCTL" acronym="PLLCTL" offset="0x100" width="32" description="PLL control register">
+    <bitfield id="RSVD2" width="22" begin="31" end="10" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="EXCLKSRC" width="1" begin="9" end="9" resetval="0x0" description="Selects between using bypass clock or an external clock source." range="" rwaccess="RW"/>
+    <bitfield id="CLKMODE" width="1" begin="8" end="8" resetval="0xX" description="Reference Clock Selection." range="" rwaccess="RW"/>
+    <bitfield id="PLLSELB" width="1" begin="7" end="7" resetval="0x0" description="Selects PLL A versus PLL B." range="" rwaccess="RW"/>
+    <bitfield id="RSVD1" width="1" begin="6" end="6" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="PLLENSRC" width="1" begin="5" end="5" resetval="0x1" description="PLLEN Mux Control Source" range="" rwaccess="RW"/>
+    <bitfield id="PLLDIS" width="1" begin="4" end="4" resetval="0xX" description="Asserts DISABLE to PLL if Supported" range="" rwaccess="RW"/>
+    <bitfield id="PLLRST" width="1" begin="3" end="3" resetval="0xX" description="Asserts RESET to PLL if Supported." range="" rwaccess="RW"/>
+    <bitfield id="RSVD" width="1" begin="2" end="2" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="PLLPWRDN" width="1" begin="1" end="1" resetval="0x1" description="Selects PLL Power Down for the PLL selected by PLLSELB." range="" rwaccess="RW"/>
+    <bitfield id="PLLEN" width="1" begin="0" end="0" resetval="0x0" description="PLL Mode Enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="PLLDIV1" acronym="PLLDIV1" offset="0x118" width="32" description="PLL controller divider1 control register">
+    <bitfield id="RSVD1" width="16" begin="31" end="16" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="DN" width="1" begin="15" end="15" resetval="0x1" description="Divider Dn Enable" range="" rwaccess="R"/>
+    <bitfield id="HALF_RATIO" width="1" begin="14" end="14" resetval="0x0" description="Ratio is in half steps." range="" rwaccess="RW"/>
+    <bitfield id="RSVD" width="6" begin="13" end="8" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="RATIO" width="8" begin="7" end="0" resetval="0xX" description="Divider Dn Ratio (SYSCLKn divider)" range="" rwaccess="RW"/>
+  </register>
+  <register id="PLLDIV2" acronym="PLLDIV2" offset="0x11C" width="32" description="PLL controller divider2 control register">
+    <bitfield id="RSVD1" width="16" begin="31" end="16" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="DN" width="1" begin="15" end="15" resetval="0x1" description="Divider Dn Enable" range="" rwaccess="R"/>
+    <bitfield id="HALF_RATIO" width="1" begin="14" end="14" resetval="0x0" description="Ratio is in half steps." range="" rwaccess="RW"/>
+    <bitfield id="RSVD" width="6" begin="13" end="8" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="RATIO" width="8" begin="7" end="0" resetval="0xX" description="Divider Dn Ratio (SYSCLKn divider)" range="" rwaccess="RW"/>
+  </register>
+  <register id="PLLCMD" acronym="PLLCMD" offset="0x138" width="32" description="PLL Controller command register">
+    <bitfield id="RSVD" width="30" begin="31" end="2" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="OSCPWRDN" width="1" begin="1" end="1" resetval="0x0" description="iOscillator Power Down Command" range="" rwaccess="RW"/>
+    <bitfield id="GOSET" width="1" begin="0" end="0" resetval="0x0" description="GO bit for SYSCLKx phase alignment." range="" rwaccess="RW"/>
+  </register>
+  <register id="PLLSTAT" acronym="PLLSTAT" offset="0x13C" width="32" description="PLL Controller status register">
+    <bitfield id="RSVD" width="29" begin="31" end="3" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="STABLE" width="1" begin="2" end="2" resetval="0xX" description="OSCIN Stable" range="" rwaccess="R"/>
+    <bitfield id="LOCK" width="1" begin="1" end="1" resetval="0x0" description="PLL Core STATUS" range="" rwaccess="R"/>
+    <bitfield id="GOSTAT" width="1" begin="0" end="0" resetval="0x0" description="Reflects the status of GO transition." range="" rwaccess="R"/>
+  </register>
+  <register id="ALNCTL" acronym="ALNCTL" offset="0x140" width="32" description="PLL Controller clock align control register">
+    <bitfield id="RSVD" width="16" begin="31" end="16" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="ALN" width="15" begin="15" end="1" resetval="0x1" description="SYSCLKx needs to be aligned with other clocks selected in this register." range="" rwaccess="RW"/>
+    <bitfield id="ALN1" width="1" begin="0" end="0" resetval="0x1" description="SYSCLK1 needs to be aligned with other clocks selected in this register." range="" rwaccess="RW"/>
+  </register>
+  <register id="DCHANGE" acronym="DCHANGE" offset="0x144" width="32" description="PLLDIV ratio change register">
+    <bitfield id="RSVD" width="16" begin="31" end="16" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="SYS" width="15" begin="15" end="1" resetval="0x0" description="SYSCLKx divide ratio has been modified." range="" rwaccess="R"/>
+    <bitfield id="SYS1" width="1" begin="0" end="0" resetval="0x0" description="SYSCLK1 divide ratio has been modified." range="" rwaccess="R"/>
+  </register>
+</module>

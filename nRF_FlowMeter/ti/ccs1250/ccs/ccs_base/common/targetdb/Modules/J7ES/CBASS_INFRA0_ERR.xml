@@ -1,0 +1,62 @@
+<module name="CBASS_INFRA0_ERR" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="CBASS_PID" acronym="CBASS_PID" offset="0x0" width="32" description="The Revision Register contains the major and minor revisions for the module.">
+    <bitfield id="REV" width="32" begin="31" end="0" resetval="0xX" description="TI internal data." range="" rwaccess="R"/>
+  </register>
+  <register id="CBASS_DESTINATION_ID" acronym="CBASS_DESTINATION_ID" offset="0x4" width="32" description="The Destination ID Register defines the destination ID value for error messages.">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="DEST_ID" width="8" begin="7" end="0" resetval="0x0" description="The destination ID." range="" rwaccess="RW"/>
+  </register>
+  <register id="CBASS_EXCEPTION_LOGGING_HEADER0" acronym="CBASS_EXCEPTION_LOGGING_HEADER0" offset="0x24" width="32" description="The Exception Logging Header 0 Register contains the first word of the header.">
+    <bitfield id="TYPE_F" width="8" begin="31" end="24" resetval="0x0" description="Type." range="" rwaccess="R"/>
+    <bitfield id="SRC_ID" width="16" begin="23" end="8" resetval="0x0" description="Source ID." range="" rwaccess="R"/>
+    <bitfield id="DEST_ID" width="8" begin="7" end="0" resetval="0x0" description="Destination ID." range="" rwaccess="R"/>
+  </register>
+  <register id="CBASS_EXCEPTION_LOGGING_HEADER1" acronym="CBASS_EXCEPTION_LOGGING_HEADER1" offset="0x28" width="32" description="The Exception Logging Header 1 Register contains the second word of the header.">
+    <bitfield id="GROUP" width="8" begin="31" end="24" resetval="0x0" description="Group." range="" rwaccess="R"/>
+    <bitfield id="CODE" width="8" begin="23" end="16" resetval="0x0" description="Code." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="16" begin="15" end="0" resetval="0xX" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CBASS_EXCEPTION_LOGGING_DATA0" acronym="CBASS_EXCEPTION_LOGGING_DATA0" offset="0x2C" width="32" description="The Exception Logging Data 0 Register contains the first word of the data.">
+    <bitfield id="ADDR_L" width="32" begin="31" end="0" resetval="0x0" description="Address lower 32 bits." range="" rwaccess="R"/>
+  </register>
+  <register id="CBASS_EXCEPTION_LOGGING_DATA1" acronym="CBASS_EXCEPTION_LOGGING_DATA1" offset="0x30" width="32" description="The Exception Logging Data 1 Register contains the second word of the data.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="ADDR_H" width="16" begin="15" end="0" resetval="0x0" description="Address upper 16 bits." range="" rwaccess="R"/>
+  </register>
+  <register id="CBASS_EXCEPTION_LOGGING_DATA2" acronym="CBASS_EXCEPTION_LOGGING_DATA2" offset="0x34" width="32" description="The Exception Logging Data 2 Register contains the third word of the data.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="ROUTEID" width="12" begin="27" end="16" resetval="0x0" description="Route ID." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="WRITE" width="1" begin="13" end="13" resetval="0x0" description="Write." range="" rwaccess="R"/>
+    <bitfield id="READ" width="1" begin="12" end="12" resetval="0x0" description="Read." range="" rwaccess="R"/>
+    <bitfield id="DEBUG" width="1" begin="11" end="11" resetval="0x0" description="Debug." range="" rwaccess="R"/>
+    <bitfield id="CACHEABLE" width="1" begin="10" end="10" resetval="0x0" description="Cacheable." range="" rwaccess="R"/>
+    <bitfield id="PRIV" width="1" begin="9" end="9" resetval="0x0" description="Priv." range="" rwaccess="R"/>
+    <bitfield id="SECURE" width="1" begin="8" end="8" resetval="0x0" description="Secure." range="" rwaccess="R"/>
+    <bitfield id="PRIV_ID" width="8" begin="7" end="0" resetval="0x0" description="Priv ID." range="" rwaccess="R"/>
+  </register>
+  <register id="CBASS_EXCEPTION_LOGGING_DATA3" acronym="CBASS_EXCEPTION_LOGGING_DATA3" offset="0x38" width="32" description="The Exception Logging Data 3 Register contains the fourth word of the data.">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="BYTECNT" width="10" begin="9" end="0" resetval="0x0" description="Byte count." range="" rwaccess="R"/>
+  </register>
+  <register id="CBASS_ERR_INTR_RAW_STAT" acronym="CBASS_ERR_INTR_RAW_STAT" offset="0x50" width="32" description="Global Interrupt Raw Status Register">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="INTR" width="1" begin="0" end="0" resetval="0x0" description="Level Interrupt status" range="" rwaccess="RW1S"/>
+  </register>
+  <register id="CBASS_ERR_INTR_ENABLED_STAT" acronym="CBASS_ERR_INTR_ENABLED_STAT" offset="0x54" width="32" description="Global Interrupt Enabled Status Register">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ENABLED_INTR" width="1" begin="0" end="0" resetval="0x0" description="Level Enabled Interrupt status" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="CBASS_ERR_INTR_ENABLE_SET" acronym="CBASS_ERR_INTR_ENABLE_SET" offset="0x58" width="32" description="Interrupt Enable Set Register">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="INTR_ENABLE_SET" width="1" begin="0" end="0" resetval="0x0" description="Interrupt Enable Set Register" range="" rwaccess="RW1S"/>
+  </register>
+  <register id="CBASS_ERR_INTR_ENABLE_CLR" acronym="CBASS_ERR_INTR_ENABLE_CLR" offset="0x5C" width="32" description="Interrupt Enable Clear Register">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="INTR_ENABLE_CLR" width="1" begin="0" end="0" resetval="0x0" description="Interrupt Enable Clear Register" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="CBASS_EOI" acronym="CBASS_EOI" offset="0x60" width="32" description="End of Interrupt Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="WR" width="16" begin="15" end="0" resetval="0x0" description="End of Interrupt Register" range="" rwaccess="RW"/>
+  </register>
+</module>

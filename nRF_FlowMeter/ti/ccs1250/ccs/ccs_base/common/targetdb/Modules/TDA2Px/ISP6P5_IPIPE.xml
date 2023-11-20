@@ -1,0 +1,1694 @@
+<module name="ISP6P5_IPIPE" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="IPIPE_SRC_EN" acronym="IPIPE_SRC_EN" offset="0x0" width="32" description="This register is not shadowed">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="The start flag of the IPIPE module. When EN is 1, the IPIPE module starts a processing from the next rising edge of the VD. If the processing mode of the IPIPE module is ?one shot?, the EN is cleared to 0 immediately after the processing has started." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="EN_0" description="waiting"/>
+      <bitenum value="1" id="NEWENUM2" token="EN_1" description="start/busy"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_SRC_MODE" acronym="IPIPE_SRC_MODE" offset="0x4" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="14" begin="15" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="WRT" width="1" begin="1" end="1" resetval="0x0" description="The mode selection of the ipipeif_wrt which is an input port of the IPIPE module. If WRT is 0, the IPIPE module doesn?t use the ipipeif_wrt. Else the IPIPE module uses it." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="WRT_0" description="Disable"/>
+      <bitenum value="1" id="NEWENUM2" token="WRT_1" description="Enable"/>
+    </bitfield>
+    <bitfield id="OST" width="1" begin="0" end="0" resetval="0x0" description="The processing mode selection of the IPIPE module. Value 0 indicates the mode of ?free run?, value 1 indicates the mode of ?one shot?." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="OST_0" description="Free run"/>
+      <bitenum value="1" id="NEWENUM2" token="OST_1" description="One shot"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_SRC_FMT" acronym="IPIPE_SRC_FMT" offset="0x8" width="32" description="">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FMT3" width="1" begin="4" end="4" resetval="0x0" description="Chroma sumpling postion in YUV422 to 444 This field is only valide if FMT=3 and FT2=2" range="" rwaccess="RW">
+      <bitenum value="0" id="COSITED" token="FMT3_0" description="422 to 444 upsampling is processed assuming, chroma pixels are sampled at the same position as Y signals."/>
+      <bitenum value="1" id="CENTERED" token="FMT3_1" description="422 to 444 upsampling is performed assuming chroma pixels are sampled at the center of two Y signals."/>
+    </bitfield>
+    <bitfield id="FMT2" width="2" begin="3" end="2" resetval="0x0" description="YUV processing mode This field is valid only when FMT=3 (YUV input YUV output)" range="" rwaccess="RW">
+      <bitenum value="0" id="YUV_PROCESS" token="FMT2_0" description="Enhanced YUV mode is off. Only EdgeEnhancer, CAR, and CGS are enabled in YUV input"/>
+      <bitenum value="1" id="YUV444_MODE" token="FMT2_1" description="YUV422 input is upconverted to YUV444 422to444 is always used. GBCE, EdgeEnhancer, CAR, CGS, Histogram on YUV, BCS can be enabled."/>
+      <bitenum value="3" id="RESERVED" token="FMT2_3" description="Reserved"/>
+      <bitenum value="2" id="RGB_MODE" token="FMT2_2" description="YUV422 input is converted to full color RGB YUVtoRGB (RGBtoRGB1 is used), Gamma (as non linear table), RGB2RGB2, 3DLUT, GBCE are used. EdgeEnhancer, CAR, CGS, Histogram on YUV, BSC can be enabled."/>
+    </bitfield>
+    <bitfield id="FMT" width="2" begin="1" end="0" resetval="0x0" description="IPIPE module datapath selection" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="FMT_0" description="IN: RAW BAYER OUT: YUV422 Note that the IPIPE YUV422 output goes to the RESIZER module where it can be further be converted in YUV420 or RGB format."/>
+      <bitenum value="1" id="NEWENUM2" token="FMT_1" description="IN: RAW BAYER OUT: RAW BAYER The data are output after the White Balance module. It enables to bypass a large part of the IPIPE module."/>
+      <bitenum value="3" id="NEWENUM4" token="FMT_3" description="IN: YUV422 OUT: YUV422 Note that the IPIPE YUV422 output goes to the RESIZER module where it can be further be converted in YUV420 or RGB format."/>
+      <bitenum value="2" id="NEWENUM3" token="FMT_2" description="IN: RAW BAYER OUT: DISABLED The data are only going to BOXCAR and HISTOGRAM modules."/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_SRC_COL" acronym="IPIPE_SRC_COL" offset="0xC" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OO" width="2" begin="7" end="6" resetval="0x3" description="The color pattern of the odd line and odd pixel. This parameter is valid when IPIPE_SRC[FMT] is 0,1,2." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="OO_0" description="R"/>
+      <bitenum value="1" id="NEWENUM2" token="OO_1" description="Gr"/>
+      <bitenum value="3" id="NEWENUM4" token="OO_3" description="B"/>
+      <bitenum value="2" id="NEWENUM3" token="OO_2" description="Gb"/>
+    </bitfield>
+    <bitfield id="OE" width="2" begin="5" end="4" resetval="0x2" description="The color pattern of the odd line and even pixel. This parameter is valid when IPIPE_SRC[FMT] is 0,1,2." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="OE_0" description="R"/>
+      <bitenum value="1" id="NEWENUM2" token="OE_1" description="Gr"/>
+      <bitenum value="3" id="NEWENUM4" token="OE_3" description="B"/>
+      <bitenum value="2" id="NEWENUM3" token="OE_2" description="Gb"/>
+    </bitfield>
+    <bitfield id="EO" width="2" begin="3" end="2" resetval="0x1" description="The color pattern of the even line and odd pixel. This parameter is valid when IPIPE_SRC[FMT] is 0,1,2." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="EO_0" description="R"/>
+      <bitenum value="1" id="NEWENUM2" token="EO_1" description="Gr"/>
+      <bitenum value="3" id="NEWENUM4" token="EO_3" description="B"/>
+      <bitenum value="2" id="NEWENUM3" token="EO_2" description="Gb"/>
+    </bitfield>
+    <bitfield id="EE" width="2" begin="1" end="0" resetval="0x0" description="The color pattern of the even line and even pixel. This parameter is valid when IPIPE_SRC[FMT] is 0,1,2." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="EE_0" description="R"/>
+      <bitenum value="1" id="NEWENUM2" token="EE_1" description="Gr"/>
+      <bitenum value="3" id="NEWENUM4" token="EE_3" description="B"/>
+      <bitenum value="2" id="NEWENUM3" token="EE_2" description="Gb"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_SRC_VPS" acronym="IPIPE_SRC_VPS" offset="0x10" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x0" description="The vertical position of the global frame from the rising edge of the VD. The IPIPE module will start an image processing from VAL line." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_SRC_VSZ" acronym="IPIPE_SRC_VSZ" offset="0x14" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="13" begin="12" end="0" resetval="0x0" description="The vertical size of the processing area. The VAL0 can not be written. The IPIPE module will process (VAL+1) lines." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_SRC_HPS" acronym="IPIPE_SRC_HPS" offset="0x18" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x0" description="The horizontal position of the global frame from the rising edge of the HD. The IPIPE module will start an image processing from VAL clock." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_SRC_HSZ" acronym="IPIPE_SRC_HSZ" offset="0x1C" width="32" description="">
+    <bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="12" end="1" resetval="0x0" description="The horizontal size of the processing area. The VAL0 is fixed. The IPIPE module processes (VAL+1) clocks." range="" rwaccess="RW"/>
+    <bitfield id="VAL_0" width="1" begin="0" end="0" resetval="0x1" description="This is the LSB of the VAL[12:0]. This bit is read only." range="" rwaccess="R"/>
+  </register>
+  <register id="IPIPE_SEL_SBU" acronym="IPIPE_SEL_SBU" offset="0x20" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EDOF" width="1" begin="0" end="0" resetval="0x0" description="EDOF port selection" range="" rwaccess="RW">
+      <bitenum value="0" id="INT" token="EDOF_0" description="Not used This value must be selected for OMAP4/5/6"/>
+      <bitenum value="1" id="EXT" token="EDOF_1" description="Used Can not be selected for OMAP4/5/6"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_SRC_STA" acronym="IPIPE_SRC_STA" offset="0x24" width="32" description="IPIPE STATUS REGISTER">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL4" width="1" begin="4" end="4" resetval="0x0" description="Status of Histogram Process (busy status)." range="" rwaccess="R"/>
+    <bitfield id="VAL3" width="1" begin="3" end="3" resetval="0x0" description="Status of Histogram bank select." range="" rwaccess="R"/>
+    <bitfield id="VAL2" width="1" begin="2" end="2" resetval="0x0" description="Status of BSC process (busy status)." range="" rwaccess="R"/>
+    <bitfield id="VAL1" width="1" begin="1" end="1" resetval="0x0" description="Status of Boxcar process (busy status)." range="" rwaccess="R"/>
+    <bitfield id="VAL0" width="1" begin="0" end="0" resetval="0x0" description="Status of Boxcar process (error status). This bit will be triggered when an overflow happens while transferring the boxcar data to memory. Instead of polling for this register, it is preferable to use the IPIPE_BOXCAR_OVF interrupt. Overflow errors are non receoverable at ISP5 level and require a software reset at ISS level." range="" rwaccess="R"/>
+  </register>
+  <register id="IPIPE_GCK_MMR" acronym="IPIPE_GCK_MMR" offset="0x28" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="REG" width="1" begin="0" end="0" resetval="0x0" description="The on/off selection of the clk_arm_g0 which is used for some ARM register access." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="REG_0" description="Off"/>
+      <bitenum value="1" id="NEWENUM2" token="REG_1" description="On"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_GCK_PIX" acronym="IPIPE_GCK_PIX" offset="0x2C" width="32" description="This register is not shadowed">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="12" begin="15" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="G3" width="1" begin="3" end="3" resetval="0x0" description="The on/off selection of the clk_pix_g3 which is use for the IPIPE processes of ?EE? and 'CAR'." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="G3_0" description="Disable"/>
+      <bitenum value="1" id="NEWENUM2" token="G3_1" description="Enable"/>
+    </bitfield>
+    <bitfield id="G2" width="1" begin="2" end="2" resetval="0x0" description="The on/off selection of the clk_pix_g2 which is use for the IPIPE processes of ?CFA? to '422', 'Histogram(YCbCr input)', and 'Boundary Signal Calculator'." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="G2_0" description="Disable"/>
+      <bitenum value="1" id="NEWENUM2" token="G2_1" description="Enable"/>
+    </bitfield>
+    <bitfield id="G1" width="1" begin="1" end="1" resetval="0x0" description="The on/off selection of the clk_pix_g1 which is used for the IPIPE processes of 'DefectCorrection' to 'WhiteBalance', and 'Histogram(RAW input)'." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="G1_0" description="Disable"/>
+      <bitenum value="1" id="NEWENUM2" token="G1_1" description="Enable"/>
+    </bitfield>
+    <bitfield id="G0" width="1" begin="0" end="0" resetval="0x0" description="The on/off selection of the clk_pix_g0 which is used for the IPIPE processing of 'Boxcar'." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="G0_0" description="Disable"/>
+      <bitenum value="1" id="NEWENUM2" token="G0_1" description="Enable"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_DPC_LUT_EN" acronym="IPIPE_DPC_LUT_EN" offset="0x34" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="Enable of LUT defect pixel correction." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="EN_0" description="Off"/>
+      <bitenum value="1" id="NEWENUM2" token="EN_1" description="On"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_DPC_LUT_SEL" acronym="IPIPE_DPC_LUT_SEL" offset="0x38" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="14" begin="15" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="TBL" width="1" begin="1" end="1" resetval="0x0" description="LUT table type selection." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="TBL_0" description="Up to 1024 entries. (use)"/>
+      <bitenum value="1" id="NEWENUM2" token="TBL_1" description="infinity number of entries. (not use)"/>
+    </bitfield>
+    <bitfield id="DOT" width="1" begin="0" end="0" resetval="0x0" description="Replace dot selection on processing method 0." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="DOT_0" description="Replace with black dot"/>
+      <bitenum value="1" id="NEWENUM2" token="DOT_1" description="Replace with white dot"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_DPC_LUT_ADR" acronym="IPIPE_DPC_LUT_ADR" offset="0x3C" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ADR" width="10" begin="9" end="0" resetval="0x0" description="The address of the first valid data in look-up-table" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_DPC_LUT_SIZ" acronym="IPIPE_DPC_LUT_SIZ" offset="0x40" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SIZ" width="10" begin="9" end="0" resetval="0x0" description="The number of valid data in look-up-table. (SIZ+1)" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_DPC_OTF_EN" acronym="IPIPE_DPC_OTF_EN" offset="0x44" width="32" description="Enable of adaptive defect pixel correction module.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="EN_0" description="Off"/>
+      <bitenum value="1" id="NEWENUM2" token="EN_1" description="On"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_DPC_OTF_TYP" acronym="IPIPE_DPC_OTF_TYP" offset="0x48" width="32" description="To select MinMax Algorithm following values are set ALG: 0 TYP: 0 IPIPE_DPC_OTF_2_D_THR_x: 0 IPIPE_DPC_OTF_2_C_THR_x: maximum value">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="14" begin="15" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="TYP" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="TYP_0" description="with MAX1/MIN1."/>
+      <bitenum value="1" id="NEWENUM2" token="TYP_1" description="with MAX2/MIN2."/>
+    </bitfield>
+    <bitfield id="ALG" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="ALG_0" description="MinMax2 (DPC2.0)"/>
+      <bitenum value="1" id="NEWENUM2" token="ALG_1" description="MinMax3 (DPC3.0)"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_DPC_OTF_2_D_THR_R" acronym="IPIPE_DPC_OTF_2_D_THR_R" offset="0x4C" width="32" description="D_THR for R">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x0" description="Defect detection threshold value for each color (DPC2.0)" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_DPC_OTF_2_D_THR_GR" acronym="IPIPE_DPC_OTF_2_D_THR_GR" offset="0x50" width="32" description="D_THR for Gr">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x0" description="Defect detection threshold value for each color (DPC2.0)" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_DPC_OTF_2_D_THR_GB" acronym="IPIPE_DPC_OTF_2_D_THR_GB" offset="0x54" width="32" description="D_THR for Gb">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x0" description="Defect detection threshold value for each color (DPC2.0)" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_DPC_OTF_2_D_THR_B" acronym="IPIPE_DPC_OTF_2_D_THR_B" offset="0x58" width="32" description="D_THR for B">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x0" description="Defect detection threshold value for each color (DPC2.0)" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_DPC_OTF_2_C_THR_R" acronym="IPIPE_DPC_OTF_2_C_THR_R" offset="0x5C" width="32" description="C_THR for R">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x0" description="Defect correction threshold value for each color (DPC2.0)" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_DPC_OTF_2_C_THR_GR" acronym="IPIPE_DPC_OTF_2_C_THR_GR" offset="0x60" width="32" description="C_THR for Gr">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x0" description="Defect correction threshold value for each color (DPC2.0)" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_DPC_OTF_2_C_THR_GB" acronym="IPIPE_DPC_OTF_2_C_THR_GB" offset="0x64" width="32" description="C_THR for Gb">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x0" description="Defect correction threshold value for each color (DPC2.0)" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_DPC_OTF_2_C_THR_B" acronym="IPIPE_DPC_OTF_2_C_THR_B" offset="0x68" width="32" description="C_THR for B">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x0" description="Defect correction threshold value for each color (DPC2.0)" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_DPC_OTF_3_SHF" acronym="IPIPE_DPC_OTF_3_SHF" offset="0x6C" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="14" begin="15" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SHF" width="2" begin="1" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_DPC_OTF_3_D_THR" acronym="IPIPE_DPC_OTF_3_D_THR" offset="0x70" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="6" begin="11" end="6" resetval="0x0" description="DPC3 Defect detection threshold 12-bit value. Bits [5:0] cannot be written." range="" rwaccess="RW"/>
+    <bitfield id="VAL_RESERVED" width="6" begin="5" end="0" resetval="0x0" description="DPC3 Defect detection threshold 12-bit value. Bits [5:0] cannot be written." range="" rwaccess="R"/>
+  </register>
+  <register id="IPIPE_DPC_OTF_3_D_SPL" acronym="IPIPE_DPC_OTF_3_D_SPL" offset="0x74" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="10" begin="15" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="6" begin="5" end="0" resetval="0x0" description="Defect detection threshold slope for DPC3.0" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_DPC_OTF_3_D_MIN" acronym="IPIPE_DPC_OTF_3_D_MIN" offset="0x78" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_DPC_OTF_3_D_MAX" acronym="IPIPE_DPC_OTF_3_D_MAX" offset="0x7C" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x0" description="Defect detection threshold MAX for DPC3.0" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_DPC_OTF_3_C_THR" acronym="IPIPE_DPC_OTF_3_C_THR" offset="0x80" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="6" begin="11" end="6" resetval="0x0" description="Defect correction threshold for DPC3.0" range="" rwaccess="RW"/>
+    <bitfield id="VAL_RESERVED" width="6" begin="5" end="0" resetval="0x0" description="Defect correction threshold for DPC3.0 Bits VAL[5-0] cannot be written." range="" rwaccess="R"/>
+  </register>
+  <register id="IPIPE_DPC_OTF_3_C_SLP" acronym="IPIPE_DPC_OTF_3_C_SLP" offset="0x84" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL_RESERVED" width="6" begin="11" end="6" resetval="0x0" description="Defect correction threshold slope for DPC3.0 VAL[11-6] cannot be written." range="" rwaccess="R"/>
+    <bitfield id="VAL" width="6" begin="5" end="0" resetval="0x0" description="Defect correction threshold slope for DPC3.0" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_DPC_OTF_3_C_MIN" acronym="IPIPE_DPC_OTF_3_C_MIN" offset="0x88" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x0" description="Defect correction threshold MIN for DPC3.0" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_DPC_OTF_3_C_MAX" acronym="IPIPE_DPC_OTF_3_C_MAX" offset="0x8C" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x0" description="Defect correction threshold MAX for DPC3.0" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_LSC_VOFT" acronym="IPIPE_LSC_VOFT" offset="0x90" width="32" description="LSC VOFT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LSC_VOFT" width="13" begin="12" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_LSC_VA2" acronym="IPIPE_LSC_VA2" offset="0x94" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="13" begin="12" end="0" resetval="0x0" description="LSC VA2" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_LSC_VA1" acronym="IPIPE_LSC_VA1" offset="0x98" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="13" begin="12" end="0" resetval="0x0" description="LSC VA1" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_LSC_VS" acronym="IPIPE_LSC_VS" offset="0x9C" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VS2" width="4" begin="7" end="4" resetval="0x0" description="LSC VS1" range="" rwaccess="RW"/>
+    <bitfield id="VS1" width="4" begin="3" end="0" resetval="0x0" description="LSC VS1" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_LSC_HOFT" acronym="IPIPE_LSC_HOFT" offset="0xA0" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="13" begin="12" end="0" resetval="0x0" description="LSC HOFT" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_LSC_HA2" acronym="IPIPE_LSC_HA2" offset="0xA4" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="13" begin="12" end="0" resetval="0x0" description="LSC HA2" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_LSC_HA1" acronym="IPIPE_LSC_HA1" offset="0xA8" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="13" begin="12" end="0" resetval="0x0" description="LSC HA1" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_LSC_HS" acronym="IPIPE_LSC_HS" offset="0xAC" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="HS2" width="4" begin="7" end="4" resetval="0x0" description="LSC HS1" range="" rwaccess="RW"/>
+    <bitfield id="HS1" width="4" begin="3" end="0" resetval="0x0" description="LSC HS1" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_LSC_GAN_R" acronym="IPIPE_LSC_GAN_R" offset="0xB0" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="8" begin="7" end="0" resetval="0x0" description="GAN R" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_LSC_GAN_GR" acronym="IPIPE_LSC_GAN_GR" offset="0xB4" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="8" begin="7" end="0" resetval="0x0" description="GAN GR" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_LSC_GAN_GB" acronym="IPIPE_LSC_GAN_GB" offset="0xB8" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="8" begin="7" end="0" resetval="0x0" description="GAN GB" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_LSC_GAN_B" acronym="IPIPE_LSC_GAN_B" offset="0xBC" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="8" begin="7" end="0" resetval="0x0" description="GAN B" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_LSC_OFT_R" acronym="IPIPE_LSC_OFT_R" offset="0xC0" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="8" begin="7" end="0" resetval="0x0" description="LSC OFT R" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_LSC_OFT_GR" acronym="IPIPE_LSC_OFT_GR" offset="0xC4" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="8" begin="7" end="0" resetval="0x0" description="LSC OFT GR" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_LSC_OFT_GB" acronym="IPIPE_LSC_OFT_GB" offset="0xC8" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="8" begin="7" end="0" resetval="0x0" description="LSC OFT GB" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_LSC_OFT_B" acronym="IPIPE_LSC_OFT_B" offset="0xCC" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="8" begin="7" end="0" resetval="0x0" description="LSC OFT B" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_LSC_SHF" acronym="IPIPE_LSC_SHF" offset="0xD0" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="12" begin="15" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="4" begin="3" end="0" resetval="0x0" description="LSC SHV" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_LSC_MAX" acronym="IPIPE_LSC_MAX" offset="0xD4" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="7" begin="15" end="9" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="9" begin="8" end="0" resetval="0x0" description="LSC MAX" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_1ST_EN" acronym="IPIPE_D2F_1ST_EN" offset="0xD8" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="Enable of noise filter-1 module." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="EN_0" description="off"/>
+      <bitenum value="1" id="NEWENUM2" token="EN_1" description="on"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_D2F_1ST_TYP" acronym="IPIPE_D2F_1ST_TYP" offset="0xDC" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SEL" width="1" begin="9" end="9" resetval="0x0" description="Select SPR value source" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="SEL_0" description="use single SPR value"/>
+      <bitenum value="1" id="NEWENUM2" token="SEL_1" description="use LUT SPR values"/>
+    </bitfield>
+    <bitfield id="LSC" width="1" begin="8" end="8" resetval="0x0" description="Apply LSC gain to threshold values" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="LSC_0" description="off"/>
+      <bitenum value="1" id="NEWENUM2" token="LSC_1" description="on"/>
+    </bitfield>
+    <bitfield id="TYP" width="1" begin="7" end="7" resetval="0x0" description="The sampling method of green pixels." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="TYP_0" description="Box (same as R or B)"/>
+      <bitenum value="1" id="NEWENUM2" token="TYP_1" description="Diamond mode"/>
+    </bitfield>
+    <bitfield id="SHF" width="2" begin="6" end="5" resetval="0x0" description="The d value (down shift value) in look-up-table reference address." range="" rwaccess="RW"/>
+    <bitfield id="SPR" width="5" begin="4" end="0" resetval="0x0" description="The SP value ('spread' value) in noise filter-1 algorithm." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_1ST_THR_00" acronym="IPIPE_D2F_1ST_THR_00" offset="0xE0" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="Threshold values in noise filter-1 algorithm." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_1ST_THR_01" acronym="IPIPE_D2F_1ST_THR_01" offset="0xE4" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="Threshold values in noise filter-1 algorithm." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_1ST_THR_02" acronym="IPIPE_D2F_1ST_THR_02" offset="0xE8" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="Threshold values in noise filter-1 algorithm." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_1ST_THR_03" acronym="IPIPE_D2F_1ST_THR_03" offset="0xEC" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="Threshold values in noise filter-1 algorithm." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_1ST_THR_04" acronym="IPIPE_D2F_1ST_THR_04" offset="0xF0" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="Threshold values in noise filter-1 algorithm." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_1ST_THR_05" acronym="IPIPE_D2F_1ST_THR_05" offset="0xF4" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="Threshold values in noise filter-1 algorithm." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_1ST_THR_06" acronym="IPIPE_D2F_1ST_THR_06" offset="0xF8" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="Threshold values in noise filter-1 algorithm." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_1ST_THR_07" acronym="IPIPE_D2F_1ST_THR_07" offset="0xFC" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="Threshold values in noise filter-1 algorithm." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_1ST_STR_00" acronym="IPIPE_D2F_1ST_STR_00" offset="0x100" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-1 intensity values (STR)." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_1ST_STR_01" acronym="IPIPE_D2F_1ST_STR_01" offset="0x104" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-1 intensity values (STR)." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_1ST_STR_02" acronym="IPIPE_D2F_1ST_STR_02" offset="0x108" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-1 intensity values (STR)." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_1ST_STR_03" acronym="IPIPE_D2F_1ST_STR_03" offset="0x10C" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-1 intensity values (STR)." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_1ST_STR_04" acronym="IPIPE_D2F_1ST_STR_04" offset="0x110" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-1 intensity values (STR)." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_1ST_STR_05" acronym="IPIPE_D2F_1ST_STR_05" offset="0x114" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-1 intensity values (STR)." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_1ST_STR_06" acronym="IPIPE_D2F_1ST_STR_06" offset="0x118" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-1 intensity values (STR)." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_1ST_STR_07" acronym="IPIPE_D2F_1ST_STR_07" offset="0x11C" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-1 intensity values (STR)." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_1ST_SPR_00" acronym="IPIPE_D2F_1ST_SPR_00" offset="0x120" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-1 intensity values (SP). The value is in U3.5 format." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_1ST_SPR_01" acronym="IPIPE_D2F_1ST_SPR_01" offset="0x124" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-1 intensity values (SP). The value is in U3.5 format." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_1ST_SPR_02" acronym="IPIPE_D2F_1ST_SPR_02" offset="0x128" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-1 intensity values (SP). The value is in U3.5 format." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_1ST_SPR_03" acronym="IPIPE_D2F_1ST_SPR_03" offset="0x12C" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-1 intensity values (SP). The value is in U3.5 format." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_1ST_SPR_04" acronym="IPIPE_D2F_1ST_SPR_04" offset="0x130" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-1 intensity values (SP). The value is in U3.5 format." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_1ST_SPR_05" acronym="IPIPE_D2F_1ST_SPR_05" offset="0x134" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-1 intensity values (SP). The value is in U3.5 format." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_1ST_SPR_06" acronym="IPIPE_D2F_1ST_SPR_06" offset="0x138" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-1 intensity values (SP). The value is in U3.5 format." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_1ST_SPR_07" acronym="IPIPE_D2F_1ST_SPR_07" offset="0x13C" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-1 intensity values (SP). The value is in U3.5 format." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_1ST_EDG_MIN" acronym="IPIPE_D2F_1ST_EDG_MIN" offset="0x140" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="11" begin="10" end="0" resetval="0x0" description="Noise filter-1 edge detection MIN" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_1ST_EDG_MAX" acronym="IPIPE_D2F_1ST_EDG_MAX" offset="0x144" width="32" description="Noise Filter 1 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="11" begin="10" end="0" resetval="0x0" description="Noise filter-1 edge detection MAX" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_2ND_EN" acronym="IPIPE_D2F_2ND_EN" offset="0x148" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="Enable of noise filter-2 module." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="EN_0" description="off"/>
+      <bitenum value="1" id="NEWENUM2" token="EN_1" description="on"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_D2F_2ND_TYP" acronym="IPIPE_D2F_2ND_TYP" offset="0x14C" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SEL" width="1" begin="9" end="9" resetval="0x0" description="Select SPR value source" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="SEL_0" description="use single SPR value"/>
+      <bitenum value="1" id="NEWENUM2" token="SEL_1" description="use LUT SPR values"/>
+    </bitfield>
+    <bitfield id="LSC" width="1" begin="8" end="8" resetval="0x0" description="Apply LSC gain to threshold values" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="LSC_0" description="off"/>
+      <bitenum value="1" id="NEWENUM2" token="LSC_1" description="on"/>
+    </bitfield>
+    <bitfield id="TYP" width="1" begin="7" end="7" resetval="0x0" description="The sampling method of green pixels." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="TYP_0" description="Box (Same as R or B)"/>
+      <bitenum value="1" id="NEWENUM2" token="TYP_1" description="Diamond mode"/>
+    </bitfield>
+    <bitfield id="SHF" width="2" begin="6" end="5" resetval="0x0" description="The d value (down shift value) in look-up-table reference address." range="" rwaccess="RW"/>
+    <bitfield id="SPR" width="5" begin="4" end="0" resetval="0x0" description="The SP value ('spread' value) in noise filter-2 algorithm." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_2ND_THR00" acronym="IPIPE_D2F_2ND_THR00" offset="0x150" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="Threshold values in noise filter-2 algorithm." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_2ND_THR01" acronym="IPIPE_D2F_2ND_THR01" offset="0x154" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="Threshold values in noise filter-2 algorithm." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_2ND_THR02" acronym="IPIPE_D2F_2ND_THR02" offset="0x158" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="Threshold values in noise filter-2 algorithm." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_2ND_THR03" acronym="IPIPE_D2F_2ND_THR03" offset="0x15C" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="Threshold values in noise filter-2 algorithm." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_2ND_THR04" acronym="IPIPE_D2F_2ND_THR04" offset="0x160" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="Threshold values in noise filter-2 algorithm." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_2ND_THR05" acronym="IPIPE_D2F_2ND_THR05" offset="0x164" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="Threshold values in noise filter-2 algorithm." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_2ND_THR06" acronym="IPIPE_D2F_2ND_THR06" offset="0x168" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="Threshold values in noise filter-2 algorithm." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_2ND_THR07" acronym="IPIPE_D2F_2ND_THR07" offset="0x16C" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="Threshold values in noise filter-2 algorithm." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_2ND_STR_00" acronym="IPIPE_D2F_2ND_STR_00" offset="0x170" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-2 intensity values (STR)." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_2ND_STR_01" acronym="IPIPE_D2F_2ND_STR_01" offset="0x174" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-2 intensity values (STR)." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_2ND_STR_02" acronym="IPIPE_D2F_2ND_STR_02" offset="0x178" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-2 intensity values (STR)." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_2ND_STR_03" acronym="IPIPE_D2F_2ND_STR_03" offset="0x17C" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-2 intensity values (STR)." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_2ND_STR_04" acronym="IPIPE_D2F_2ND_STR_04" offset="0x180" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-2 intensity values (STR)." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_2ND_STR_05" acronym="IPIPE_D2F_2ND_STR_05" offset="0x184" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-2 intensity values (STR)." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_2ND_STR_06" acronym="IPIPE_D2F_2ND_STR_06" offset="0x188" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-2 intensity values (STR)." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_2ND_STR_07" acronym="IPIPE_D2F_2ND_STR_07" offset="0x18C" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-2 intensity values (STR)." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_2ND_SPR_00" acronym="IPIPE_D2F_2ND_SPR_00" offset="0x190" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-2 intensity values (SP). The value is in U3.5 format." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_2ND_SPR_01" acronym="IPIPE_D2F_2ND_SPR_01" offset="0x194" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-2 intensity values (SP). The value is in U3.5 format." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_2ND_SPR_02" acronym="IPIPE_D2F_2ND_SPR_02" offset="0x198" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-2 intensity values (SP). The value is in U3.5 format." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_2ND_SPR_03" acronym="IPIPE_D2F_2ND_SPR_03" offset="0x19C" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-2 intensity values (SP). The value is in U3.5 format." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_2ND_SPR_04" acronym="IPIPE_D2F_2ND_SPR_04" offset="0x1A0" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-2 intensity values (SP). The value is in U3.5 format." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_2ND_SPR_05" acronym="IPIPE_D2F_2ND_SPR_05" offset="0x1A4" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-2 intensity values (SP). The value is in U3.5 format." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_2ND_SPR_06" acronym="IPIPE_D2F_2ND_SPR_06" offset="0x1A8" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-2 intensity values (SP). The value is in U3.5 format." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_2ND_SPR_07" acronym="IPIPE_D2F_2ND_SPR_07" offset="0x1AC" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="Noise filter-2 intensity values (SP). The value is in U3.5 format." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_2ND_EDG_MIN" acronym="IPIPE_D2F_2ND_EDG_MIN" offset="0x1B0" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="11" begin="10" end="0" resetval="0x0" description="Noise filter-2 edge detection MIN" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_D2F_2ND_EDG_MAX" acronym="IPIPE_D2F_2ND_EDG_MAX" offset="0x1B4" width="32" description="Noise Filter 2 Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="11" begin="10" end="0" resetval="0x0" description="Noise filter-2 edge detection MAX" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_GIC_EN" acronym="IPIPE_GIC_EN" offset="0x1B8" width="32" description="Green Imbalance Correction Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="Enable signal of PreFilter module" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="EN_0" description="off"/>
+      <bitenum value="1" id="NEWENUM2" token="EN_1" description="on"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_GIC_TYP" acronym="IPIPE_GIC_TYP" offset="0x1BC" width="32" description="Green Imbalance Correction Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="13" begin="15" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LSC" width="1" begin="2" end="2" resetval="0x0" description="Applies LSC gain to threshold value" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="LSC_0" description="Disable"/>
+      <bitenum value="1" id="NEWENUM2" token="LSC_1" description="Enable"/>
+    </bitfield>
+    <bitfield id="SEL" width="1" begin="1" end="1" resetval="0x0" description="Threshold Selection This bit selects the threshold either from the register value (GIC_THR) or threshold table of NF-2" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="SEL_0" description="use GIC register value"/>
+      <bitenum value="1" id="NEWENUM2" token="SEL_1" description="use NF2 threshold"/>
+    </bitfield>
+    <bitfield id="TYP" width="1" begin="0" end="0" resetval="0x0" description="Algorithm select" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="TYP_0" description="Use differencce as index"/>
+      <bitenum value="1" id="NEWENUM2" token="TYP_1" description="Use 1D high-pass value as index"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_GIC_GAN" acronym="IPIPE_GIC_GAN" offset="0x1C0" width="32" description="Green Imbalance Correction Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="8" begin="7" end="0" resetval="0x0" description="VAL specifies the PreFilter gain." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_GIC_NFGAIN" acronym="IPIPE_GIC_NFGAIN" offset="0x1C4" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_GIC_THR" acronym="IPIPE_GIC_THR" offset="0x1C8" width="32" description="Green Imbalance Correction Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x0" description="Threshold-1 in the adaptive GIC algorithm. For constant gain mode, setIPIPE_GIC_THR=maximum value." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_GIC_SLP" acronym="IPIPE_GIC_SLP" offset="0x1CC" width="32" description="Green Imbalance Correction Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x0" description="Slope (THR2-THR1) of GIC algorithm." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_WB2_OFT_R" acronym="IPIPE_WB2_OFT_R" offset="0x1D0" width="32" description="White Balance Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x0" description="Offset before white balance (S12) -2048 to +2047" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_WB2_OFT_GR" acronym="IPIPE_WB2_OFT_GR" offset="0x1D4" width="32" description="White Balance Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x0" description="Offset before white balance (S12) -2048 to +2047" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_WB2_OFT_GB" acronym="IPIPE_WB2_OFT_GB" offset="0x1D8" width="32" description="White Balance Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x0" description="Offset before white balance (S12) -2048 to +2047" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_WB2_OFT_B" acronym="IPIPE_WB2_OFT_B" offset="0x1DC" width="32" description="White Balance Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x0" description="Offset before white balance (S12) -2048 to +2047" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_WB2_WGN_R" acronym="IPIPE_WB2_WGN_R" offset="0x1E0" width="32" description="White Balance Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="13" begin="12" end="0" resetval="0x200" description="White balance gain for R in U4.9 format 0 to +15.998" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_WB2_WGN_GR" acronym="IPIPE_WB2_WGN_GR" offset="0x1E4" width="32" description="White Balance Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="13" begin="12" end="0" resetval="0x200" description="White balance gain for Gr in U4.9 format 0 to +15.998" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_WB2_WGN_GB" acronym="IPIPE_WB2_WGN_GB" offset="0x1E8" width="32" description="White Balance Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="13" begin="12" end="0" resetval="0x200" description="White balance gain for Gb in U4.9 format 0 to +15.998" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_WB2_WGN_B" acronym="IPIPE_WB2_WGN_B" offset="0x1EC" width="32" description="White Balance Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="13" begin="12" end="0" resetval="0x200" description="White balance gain for B in U4.9 format 0 to +15.998" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CFA_MODE" acronym="IPIPE_CFA_MODE" offset="0x1F0" width="32" description="CFA Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="14" begin="15" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="2" begin="1" end="0" resetval="0x0" description="Algorithm selection" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="MODE_0" description="2DirAC"/>
+      <bitenum value="1" id="NEWENUM2" token="MODE_1" description="2DirAC + DigitalAntialiasing (DAA)"/>
+      <bitenum value="3" id="NEWENUM4" token="MODE_3" description="Co-sited Bayer format Sets the CFA in co-sited Bayer format: the sampling points of R/Gr/Gb/B in each 2x2 block is at the same position. In this mode, the CFA interpolator simply copies R, G, and B to all points in the 2x2 block. (G is an average of Gb and Gr.)"/>
+      <bitenum value="2" id="NEWENUM3" token="MODE_2" description="DigitalAntialiasing (DAA)"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_CFA_2DIR_HPF_THR" acronym="IPIPE_CFA_2DIR_HPF_THR" offset="0x1F4" width="32" description="CFA: HP Value Low Threshold">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="13" begin="12" end="0" resetval="0x0" description="HPF_THR 2DirCFA HP Value Low Threshold" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CFA_2DIR_HPF_SLP" acronym="IPIPE_CFA_2DIR_HPF_SLP" offset="0x1F8" width="32" description="CFA: HP Value Slope">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="HPF_SLP 2DirCFA HP Value Slope" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CFA_2DIR_MIX_THR" acronym="IPIPE_CFA_2DIR_MIX_THR" offset="0x1FC" width="32" description="CFA: HP Mix Threshold">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="13" begin="12" end="0" resetval="0x0" description="MIX_THR 2DirCFA HP Mix Threshold" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CFA_2DIR_MIX_SLP" acronym="IPIPE_CFA_2DIR_MIX_SLP" offset="0x200" width="32" description="CFA Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="MIX_SLP 2DirCFA HP Mix Slope" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CFA_2DIR_DIR_TRH" acronym="IPIPE_CFA_2DIR_DIR_TRH" offset="0x204" width="32" description="CFA: Direction Threshold">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="DIR_THR 2DirCFA Direction Threshold" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CFA_2DIR_DIR_SLP" acronym="IPIPE_CFA_2DIR_DIR_SLP" offset="0x208" width="32" description="CFA: Direction Slope">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="9" begin="15" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="7" begin="6" end="0" resetval="0x0" description="DIR_SLP 2DirCFA Direction Slope" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CFA_2DIR_NDWT" acronym="IPIPE_CFA_2DIR_NDWT" offset="0x20C" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="10" begin="15" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="6" begin="5" end="0" resetval="0x0" description="ND Weight 2DirCFA NonDirectional Weight" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CFA_MONO_HUE_FRA" acronym="IPIPE_CFA_MONO_HUE_FRA" offset="0x210" width="32" description="Mono CFA Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="10" begin="15" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="6" begin="5" end="0" resetval="0x0" description="HUE_FRA DAA Hue Fraction" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CFA_MONO_EDG_THR" acronym="IPIPE_CFA_MONO_EDG_THR" offset="0x214" width="32" description="monoCFA THR SLP">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="8" begin="7" end="0" resetval="0x0" description="EDGE_THR DAA Edge Threshold" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CFA_MONO_THR_MIN" acronym="IPIPE_CFA_MONO_THR_MIN" offset="0x218" width="32" description="Mono CFA Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="THR_MIN DAA Threshold Minimum" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CFA_MONO_THR_SLP" acronym="IPIPE_CFA_MONO_THR_SLP" offset="0x21C" width="32" description="CFA: Threshold Slope">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="THR_SLP DAA Threshold Slope" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CFA_MONO_SLP_MIN" acronym="IPIPE_CFA_MONO_SLP_MIN" offset="0x220" width="32" description="CFA: Threshold Minimum">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="SLP_MIN DAA Slope Minimum" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CFA_MONO_SLP_SLP" acronym="IPIPE_CFA_MONO_SLP_SLP" offset="0x224" width="32" description="CFA: Threshold Slope">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="SLP_SLP DAA Slope Slope" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CFA_MONO_LPWT" acronym="IPIPE_CFA_MONO_LPWT" offset="0x228" width="32" description="CFA: LP Weight">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="10" begin="15" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="6" begin="5" end="0" resetval="0x0" description="LPWT DAA LP Weight" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_RGB1_MUL_RR" acronym="IPIPE_RGB1_MUL_RR" offset="0x22C" width="32" description="RGB to RGB Conversion Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x100" description="The matrix coefficient. 011111111111 = 2047/256 = 7.99609375 011111111110 = 2046/256 [...] 000011111111 = 255/256 000100000000 = 256/256 = 1 000100000001 = 257/256 [...] 000000000001 = 1/256 000000000000 = 0/256 = 0 111111111111 = -1/256 = -0.00390625 111111111110 = -2/256 [...] 100000000001 = -2047/256 100000000000 = -2048/256 = -8." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_RGB1_MUL_GR" acronym="IPIPE_RGB1_MUL_GR" offset="0x230" width="32" description="RGB to RGB Conversion Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x0" description="The matrix coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_RGB1_MUL_BR" acronym="IPIPE_RGB1_MUL_BR" offset="0x234" width="32" description="RGB to RGB Conversion Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x0" description="The matrix coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_RGB1_MUL_RG" acronym="IPIPE_RGB1_MUL_RG" offset="0x238" width="32" description="RGB to RGB Conversion Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x0" description="The matrix coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_RGB1_MUL_GG" acronym="IPIPE_RGB1_MUL_GG" offset="0x23C" width="32" description="RGB to RGB Conversion Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x100" description="The matrix coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_RGB1_MUL_BG" acronym="IPIPE_RGB1_MUL_BG" offset="0x240" width="32" description="RGB to RGB Conversion Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x0" description="The matrix coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_RGB1_MUL_RB" acronym="IPIPE_RGB1_MUL_RB" offset="0x244" width="32" description="RGB to RGB Conversion Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x0" description="The matrix coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_RGB1_MUL_GB" acronym="IPIPE_RGB1_MUL_GB" offset="0x248" width="32" description="RGB to RGB Conversion Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x0" description="The matrix coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_RGB1_MUL_BB" acronym="IPIPE_RGB1_MUL_BB" offset="0x24C" width="32" description="RGB to RGB Conversion Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x100" description="The matrix coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_RGB1_OFT_OR" acronym="IPIPE_RGB1_OFT_OR" offset="0x250" width="32" description="RGB to RGB Conversion Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="13" begin="12" end="0" resetval="0x0" description="The output offset value for R. (s13) -4096 to +4095" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_RGB1_OFT_OG" acronym="IPIPE_RGB1_OFT_OG" offset="0x254" width="32" description="RGB to RGB Conversion Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="13" begin="12" end="0" resetval="0x0" description="The output offset value for G. (s13) -4096 to +4095" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_RGB1_OFT_OB" acronym="IPIPE_RGB1_OFT_OB" offset="0x258" width="32" description="RGB to RGB Conversion Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="13" begin="12" end="0" resetval="0x0" description="The output offset value for B. (s13) -4096 to +4095" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_GMM_CFG" acronym="IPIPE_GMM_CFG" offset="0x25C" width="32" description="RGB to RGB Conversion Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="9" begin="15" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SIZ" width="2" begin="6" end="5" resetval="0x3" description="The size of the gamma table." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="SIZ_0" description="64 words"/>
+      <bitenum value="1" id="NEWENUM2" token="SIZ_1" description="128 words"/>
+      <bitenum value="3" id="NEWENUM4" token="SIZ_3" description="512 words"/>
+      <bitenum value="2" id="NEWENUM3" token="SIZ_2" description="256 words"/>
+    </bitfield>
+    <bitfield id="TBL" width="1" begin="4" end="4" resetval="0x0" description="Selection of Gamma table." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="TBL_0" description="RAM"/>
+      <bitenum value="1" id="NEWENUM2" token="TBL_1" description="ROM"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BYPB" width="1" begin="2" end="2" resetval="0x1" description="Gamma correction mode for B" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="BYPB_0" description="Not bypassed"/>
+      <bitenum value="1" id="NEWENUM2" token="BYPB_1" description="Bypassed"/>
+    </bitfield>
+    <bitfield id="BYPG" width="1" begin="1" end="1" resetval="0x1" description="Gamma correction mode for G" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="BYPG_0" description="Not bypassed"/>
+      <bitenum value="1" id="NEWENUM2" token="BYPG_1" description="Bypassed"/>
+    </bitfield>
+    <bitfield id="BYPR" width="1" begin="0" end="0" resetval="0x1" description="Gamma correction mode for R" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="BYPR_0" description="Not bypassed"/>
+      <bitenum value="1" id="NEWENUM2" token="BYPR_1" description="Bypassed"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_RGB2_MUL_RR" acronym="IPIPE_RGB2_MUL_RR" offset="0x260" width="32" description="RGB to RGB conversion after gamma">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="11" begin="10" end="0" resetval="0x100" description="The matrix coefficient. 011111111111 = 2047/256 = 7.99609375 011111111110 = 2046/256 000011111111 = 255/256 000100000000 = 256/256 = 1 000100000001 = 257/256 000000000001 = 1/256 000000000000 = 0/256 = 0 111111111111 = -1/256 = -0.00390625 111111111110 = -2/256 100000000001 = -2047/256 100000000000 = -2048/256 = -8." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_RGB2_MUL_GR" acronym="IPIPE_RGB2_MUL_GR" offset="0x264" width="32" description="RGB to RGB conversion after gamma">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="11" begin="10" end="0" resetval="0x0" description="The matrix coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_RGB2_MUL_BR" acronym="IPIPE_RGB2_MUL_BR" offset="0x268" width="32" description="RGB to RGB conversion after gamma">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="11" begin="10" end="0" resetval="0x0" description="The matrix coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_RGB2_MUL_RG" acronym="IPIPE_RGB2_MUL_RG" offset="0x26C" width="32" description="RGB to RGB conversion after gamma">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="11" begin="10" end="0" resetval="0x0" description="The matrix coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_RGB2_MUL_GG" acronym="IPIPE_RGB2_MUL_GG" offset="0x270" width="32" description="RGB to RGB conversion after gamma">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="11" begin="10" end="0" resetval="0x100" description="The matrix coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_RGB2_MUL_BG" acronym="IPIPE_RGB2_MUL_BG" offset="0x274" width="32" description="RGB to RGB conversion after gamma">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="11" begin="10" end="0" resetval="0x0" description="The matrix coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_RGB2_MUL_RB" acronym="IPIPE_RGB2_MUL_RB" offset="0x278" width="32" description="RGB to RGB conversion after gamma">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="11" begin="10" end="0" resetval="0x0" description="The matrix coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_RGB2_MUL_GB" acronym="IPIPE_RGB2_MUL_GB" offset="0x27C" width="32" description="RGB to RGB conversion after gamma">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="11" begin="10" end="0" resetval="0x0" description="The matrix coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_RGB2_MUL_BB" acronym="IPIPE_RGB2_MUL_BB" offset="0x280" width="32" description="RGB to RGB conversion after gamma">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="11" begin="10" end="0" resetval="0x100" description="The matrix coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_RGB2_OFT_OR" acronym="IPIPE_RGB2_OFT_OR" offset="0x284" width="32" description="RGB to RGB conversion after gamma">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="11" begin="10" end="0" resetval="0x0" description="The output offset value for R S10 number: -1024 to + 1023" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_RGB2_OFT_OG" acronym="IPIPE_RGB2_OFT_OG" offset="0x288" width="32" description="RGB to RGB conversion after gamma">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="11" begin="10" end="0" resetval="0x0" description="The output offset value for G S10 number: -1024 to + 1023" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_RGB2_OFT_OB" acronym="IPIPE_RGB2_OFT_OB" offset="0x28C" width="32" description="RGB to RGB conversion after gamma">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="11" begin="10" end="0" resetval="0x0" description="The output offset value for B S10 number: -1024 to + 1023" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_3DLUT_EN" acronym="IPIPE_3DLUT_EN" offset="0x290" width="32" description="3D-LUT">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="Enables or disable the 3D-LUT function. The table entries are store in internal memory." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="EN_0" description="Disable"/>
+      <bitenum value="1" id="NEWENUM2" token="EN_1" description="Enable"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_YUV_ADJ" acronym="IPIPE_YUV_ADJ" offset="0x294" width="32" description="RGB to YUV Conversion Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="BRT" width="8" begin="15" end="8" resetval="0x0" description="The offset value for brightness control." range="" rwaccess="RW"/>
+    <bitfield id="CRT" width="8" begin="7" end="0" resetval="0x10" description="The multiplier coefficient value for contrast control. 00000000 = 0/16 = 0 00000001 = 1/16 00001111 = 15/16 00010000 = 16/16 = 1 00010001 = 17/16 11111110 = 254/16 11111111 = 255/16 = 15.9375" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YUV_MUL_RY" acronym="IPIPE_YUV_MUL_RY" offset="0x298" width="32" description="RGB to YUV Conversion Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x4d" description="Matrix Coefficient for RY (S4.8 = -8 - +7.996)" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YUV_MUL_GY" acronym="IPIPE_YUV_MUL_GY" offset="0x29C" width="32" description="RGB to YUV Conversion Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x96" description="Matrix Coefficient for GY (S4.8 = -8 - +7.996)" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YUV_MUL_BY" acronym="IPIPE_YUV_MUL_BY" offset="0x2A0" width="32" description="RGB to YUV Conversion Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x1d" description="Matrix Coefficient for BY (S4.8 = -8 - +7.996)" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YUV_MUL_RCB" acronym="IPIPE_YUV_MUL_RCB" offset="0x2A4" width="32" description="RGB to YUV Conversion Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0xfd5" description="The matrix coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YUV_MUL_GCB" acronym="IPIPE_YUV_MUL_GCB" offset="0x2A8" width="32" description="RGB to YUV Conversion Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0xfab" description="The matrix coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YUV_MUL_BCB" acronym="IPIPE_YUV_MUL_BCB" offset="0x2AC" width="32" description="RGB to YUV Conversion Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x80" description="The matrix coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YUV_MUL_RCR" acronym="IPIPE_YUV_MUL_RCR" offset="0x2B0" width="32" description="RGB to YUV Conversion Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x80" description="The matrix coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YUV_MUL_GCR" acronym="IPIPE_YUV_MUL_GCR" offset="0x2B4" width="32" description="RGB to YUV Conversion Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0xf95" description="The matrix coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YUV_MUL_BCR" acronym="IPIPE_YUV_MUL_BCR" offset="0x2B8" width="32" description="RGB to YUV Conversion Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0xfeb" description="The matrix coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YUV_OFT_Y" acronym="IPIPE_YUV_OFT_Y" offset="0x2BC" width="32" description="RGB to YUV Conversion Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="11" begin="10" end="0" resetval="0x0" description="The output offset value for Y" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YUV_OFT_CB" acronym="IPIPE_YUV_OFT_CB" offset="0x2C0" width="32" description="RGB to YUV Conversion Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="11" begin="10" end="0" resetval="0x80" description="The output offset value for Cb For Cb/Cr, set (0x80 + offset value) here. (0x80 for zero offset.)" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YUV_OFT_CR" acronym="IPIPE_YUV_OFT_CR" offset="0x2C4" width="32" description="RGB to YUV Conversion Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="11" begin="10" end="0" resetval="0x80" description="The output offset value for Cr For Cb/Cr, set (0x80 + offset value) here. (0x80 for zero offset.)" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YUV_PHS" acronym="IPIPE_YUV_PHS" offset="0x2C8" width="32" description="YUV422 down sampling register. This register controls the YUV444 to YUV422 chroma downsampling. This register is valid if.FMT = 0 (RAW input and YUV output). = 0 leads to pure subsampling, no filtering, cosited chroma output. = 1 leads to (1, 1) 1 filtering, centered chroma output. = 2 leads to (1, 2, 1) 1 filtering, cosited chroma output. = 3 leads to (1, 3, 3, 1) 3 filtering, centered chroma output. When the chroma output is cosited, and that downsampling is enabled in the RESIZER module, one need to take care that the averager disrupts the relative phase for luma and chroma color components. The and registers need to be used to fix the disruption.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="14" begin="15" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LPF" width="1" begin="1" end="1" resetval="0x0" description="121-LPF enable for chrominance samples. This register is valid ifIPIPE_SRC_FMT.FMT = 0 (RAW input and YUV output)." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="LPF_0" description="off"/>
+      <bitenum value="1" id="NEWENUM2" token="LPF_1" description="on"/>
+    </bitfield>
+    <bitfield id="POS" width="1" begin="0" end="0" resetval="0x0" description="This bit sets the output position of the chrominance sample with regards to the luma sample positions. One can choose between centered and cosited. This register is valid ifIPIPE_SRC_FMT.FMT = 0 (RAW input and YUV output). The RESIZER module does not change the relative position of the chroma samples vs. the luma samples between the input and output and the chroma position at the output of the IPIPE module and at the output of the RESIZER module shall be identical. In other words, we shall have RSZ_YUV_PHS.POS = IPIPE_YUV_PHS.POS." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="POS_0" description="Cosited = same position with luminance"/>
+      <bitenum value="1" id="NEWENUM2" token="POS_1" description="Centered = middle of the luminance"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_GBCE_EN" acronym="IPIPE_GBCE_EN" offset="0x2CC" width="32" description="Global brightness contrast enhancement">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="Enable of GBCE module." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="EN_0" description="Off"/>
+      <bitenum value="1" id="NEWENUM2" token="EN_1" description="On"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_GBCE_TYP" acronym="IPIPE_GBCE_TYP" offset="0x2D0" width="32" description="Global brightness contrast enhancement">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="TYP" width="1" begin="0" end="0" resetval="0x0" description="GBCE method selection" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="TYP_0" description="Y value table Y out= LUT[Y in] Cb out = Cb in Cr out = Cr in"/>
+      <bitenum value="1" id="NEWENUM2" token="TYP_1" description="Gain table Y out= LUT[Y in] * Y in Cb out = LUT[Y in] * Cb in Cr out = LUT[Y in] * Cr in"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_YEE_EN" acronym="IPIPE_YEE_EN" offset="0x2D4" width="32" description="Edge Enhancer Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="The on/off selection of the ?Edge enhancer?." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="EN_0" description="Disable"/>
+      <bitenum value="1" id="NEWENUM2" token="EN_1" description="Enable"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_YEE_TYP" acronym="IPIPE_YEE_TYP" offset="0x2D8" width="32" description="Edge Enhancer Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="14" begin="15" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="HAL" width="1" begin="1" end="1" resetval="0x0" description="Halo reduction in Edge Sharpener module" range="" rwaccess="RW"/>
+    <bitfield id="SEL" width="1" begin="0" end="0" resetval="0x0" description="Merging method between Edge Enhancer and Edge Sharpener" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM2" token="SEL_0" description="EE + ES"/>
+      <bitenum value="1" id="NEWENUM1" token="SEL_1" description="Max (EE, ES)"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_YEE_SHF" acronym="IPIPE_YEE_SHF" offset="0x2DC" width="32" description="Edge Enhancer Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="12" begin="15" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SHF" width="4" begin="3" end="0" resetval="0x0" description="Down shift length of high pass filter (HPF) in edge enhancer." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YEE_MUL_00" acronym="IPIPE_YEE_MUL_00" offset="0x2E0" width="32" description="Edge Enhancer Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="Multiplier coefficient in HPF. 0111111111 = 511 0111111110 = 510 0000000001 = 1 0000000000 = 0 1111111111 = -1 1000000001 = -511 1000000000 = -512" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YEE_MUL_01" acronym="IPIPE_YEE_MUL_01" offset="0x2E4" width="32" description="Edge Enhancer Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="Multiplier coefficient in HPF." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YEE_MUL_02" acronym="IPIPE_YEE_MUL_02" offset="0x2E8" width="32" description="Edge Enhancer Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="Multiplier coefficient in HPF." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YEE_MUL_10" acronym="IPIPE_YEE_MUL_10" offset="0x2EC" width="32" description="Edge Enhancer Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="Multiplier coefficient in HPF." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YEE_MUL_11" acronym="IPIPE_YEE_MUL_11" offset="0x2F0" width="32" description="Edge Enhancer Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="Multiplier coefficient in HPF." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YEE_MUL_12" acronym="IPIPE_YEE_MUL_12" offset="0x2F4" width="32" description="Edge Enhancer Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="Multiplier coefficient in HPF." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YEE_MUL_20" acronym="IPIPE_YEE_MUL_20" offset="0x2F8" width="32" description="Edge Enhancer Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="Multiplier coefficient in HPF." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YEE_MUL_21" acronym="IPIPE_YEE_MUL_21" offset="0x2FC" width="32" description="Edge Enhancer Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="Multiplier coefficient in HPF." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YEE_MUL_22" acronym="IPIPE_YEE_MUL_22" offset="0x300" width="32" description="Edge Enhancer Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="10" begin="9" end="0" resetval="0x0" description="Multiplier coefficient in HPF." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YEE_THR" acronym="IPIPE_YEE_THR" offset="0x304" width="32" description="Edge Enhancer Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="10" begin="15" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="6" begin="5" end="0" resetval="0x0" description="Edge Enhancer lower threshold before referring to LUT. If HPF -IPIPE_YEE_THR - output is HPF + IPIPE_YEE_THR If HPF IPIPE_YEE_THR - output is HPF - IPIPE_YEE_THR Otherwise, output is zero." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YEE_E_GAN" acronym="IPIPE_YEE_E_GAN" offset="0x308" width="32" description="Edge Enhancer Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x0" description="Edge sharpener gain" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YEE_E_THR_1" acronym="IPIPE_YEE_E_THR_1" offset="0x30C" width="32" description="Edge Enhancer Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="11" end="0" resetval="0x0" description="Edge sharpener HPF value lower limit" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YEE_E_THR_2" acronym="IPIPE_YEE_E_THR_2" offset="0x310" width="32" description="Edge Enhancer Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="10" begin="15" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="6" begin="5" end="0" resetval="0x0" description="Edge sharpener HPF value upper limit (after 6 bit right shift)" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YEE_G_GAN" acronym="IPIPE_YEE_G_GAN" offset="0x314" width="32" description="Edge Enhancer Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="8" begin="7" end="0" resetval="0x0" description="Edge sharpener, gain value on gradient" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YEE_G_OFT" acronym="IPIPE_YEE_G_OFT" offset="0x318" width="32" description="Edge Enhancer Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="10" begin="15" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="6" begin="5" end="0" resetval="0x0" description="Edge sharpener, offset value on gradient" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CAR_EN" acronym="IPIPE_CAR_EN" offset="0x31C" width="32" description="Chroma Artifact Reduction Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="The on/off selection of the ?fault color suppression?. When the RSZ_SRC_FMT.FMT0='1' (Bayer input, Bayer output), this bit must be 0." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="EN_0" description="Disable"/>
+      <bitenum value="1" id="NEWENUM2" token="EN_1" description="Enable"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_CAR_TYP" acronym="IPIPE_CAR_TYP" offset="0x320" width="32" description="Chroma Artifact Reduction Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="14" begin="15" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CHR" width="1" begin="1" end="1" resetval="0x0" description="Note: This bit is added to OMAP5430 release and after. To specify the order of chroma in dynamic switching. This value should be zero unless Cb and Cr is flipped at RGBtoYCbCr/ 0: Normal Cb/Cr order (default) 1: Flipped order (Cr/Cb)" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="CHR_0" description="Default Chroma order (Cb/Cr)."/>
+      <bitenum value="1" id="NEWENUM2" token="CHR_1" description="Flipped chroma order (Cr/Cb). This value is used only when Cb and Cr are flipped in RGBtoYUV module."/>
+    </bitfield>
+    <bitfield id="TYP" width="1" begin="0" end="0" resetval="0x1" description="The mode selection of the ?fault color suppression?. To select median filter, set TYP=1 and IPIPE_CAR_SWT.SW0=255 (default values)" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="TYP_0" description="Gain control"/>
+      <bitenum value="1" id="NEWENUM2" token="TYP_1" description="Dynamic switching"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_CAR_SW" acronym="IPIPE_CAR_SW" offset="0x324" width="32" description="Chroma Artifact Reduction Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SW1" width="8" begin="15" end="8" resetval="0x0" description="Threshold-2 for switching function (Select gain control)" range="" rwaccess="RW"/>
+    <bitfield id="SW0" width="8" begin="7" end="0" resetval="0xff" description="Threshold-1 for switching function (Select median filter)" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CAR_HPF_TYP" acronym="IPIPE_CAR_HPF_TYP" offset="0x328" width="32" description="Chroma Artifact Reduction Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="13" begin="15" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="TYP" width="3" begin="2" end="0" resetval="0x0" description="" range="" rwaccess="RW">
+      <bitenum value="6" id="NEWENUM7" token="TYP_6" description="Reserved"/>
+      <bitenum value="1" id="NEWENUM2" token="TYP_1" description="Horiz HPF"/>
+      <bitenum value="7" id="NEWENUM8" token="TYP_7" description="Reserved"/>
+      <bitenum value="0" id="NEWENUM1" token="TYP_0" description="Y"/>
+      <bitenum value="2" id="NEWENUM3" token="TYP_2" description="Vert HPF"/>
+      <bitenum value="4" id="NEWENUM5" token="TYP_4" description="2D HPF from edge enhancer"/>
+      <bitenum value="5" id="NEWENUM6" token="TYP_5" description="Reserved"/>
+      <bitenum value="3" id="NEWENUM4" token="TYP_3" description="2D HPF"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_CAR_HPF_SHF" acronym="IPIPE_CAR_HPF_SHF" offset="0x32C" width="32" description="Chroma Artifact Reduction Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="14" begin="15" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="2" begin="1" end="0" resetval="0x0" description="Down shift value for HPF." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CAR_HPF_THR" acronym="IPIPE_CAR_HPF_THR" offset="0x330" width="32" description="Chroma Artifact Reduction Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="8" begin="7" end="0" resetval="0x0" description="The threshold of the gain function for HPF value" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CAR_GN1_GAN" acronym="IPIPE_CAR_GN1_GAN" offset="0x334" width="32" description="Chroma Artifact Reduction Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="8" begin="7" end="0" resetval="0x0" description="The intensity of the gain function for HPF value" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CAR_GN1_SHF" acronym="IPIPE_CAR_GN1_SHF" offset="0x338" width="32" description="Chroma Artifact Reduction Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="13" begin="15" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="3" begin="2" end="0" resetval="0x0" description="The down shift value of the gain function on HPF value" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CAR_GN1_MIN" acronym="IPIPE_CAR_GN1_MIN" offset="0x33C" width="32" description="Chroma Artifact Reduction Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="7" begin="15" end="9" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="9" begin="8" end="0" resetval="0x0" description="The lower limit of the gain function on HPF value" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CAR_GN2_GAN" acronym="IPIPE_CAR_GN2_GAN" offset="0x340" width="32" description="Chroma Artifact Reduction Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="8" begin="7" end="0" resetval="0x0" description="The intensity of the gain function for chroma value" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CAR_GN2_SHF" acronym="IPIPE_CAR_GN2_SHF" offset="0x344" width="32" description="Chroma Artifact Reduction Register">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="4" begin="3" end="0" resetval="0x0" description="The down shift value of the gain function on chroma value" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CAR_GN2_MIN" acronym="IPIPE_CAR_GN2_MIN" offset="0x348" width="32" description="Chroma Artifact Reduction Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="7" begin="15" end="9" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="9" begin="8" end="0" resetval="0x0" description="The lower limit of the gain function on chroma value" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CGS_EN" acronym="IPIPE_CGS_EN" offset="0x34C" width="32" description="Chroma Gain Suppression">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="Enables or disables chroma gain suppression" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="EN_0" description="Disable"/>
+      <bitenum value="1" id="NEWENUM2" token="EN_1" description="Enable"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_CGS_GN1_L_THR" acronym="IPIPE_CGS_GN1_L_THR" offset="0x350" width="32" description="Chroma Gain Suppression">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CGS_GN1_L_GAIN" acronym="IPIPE_CGS_GN1_L_GAIN" offset="0x354" width="32" description="Chroma Gain Suppression">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CGS_GN1_L_SHF" acronym="IPIPE_CGS_GN1_L_SHF" offset="0x358" width="32" description="Chroma Gain Suppression">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="13" begin="15" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="3" begin="2" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CGS_GN1_L_MIN" acronym="IPIPE_CGS_GN1_L_MIN" offset="0x35C" width="32" description="Chroma Gain Suppression">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="8" begin="7" end="0" resetval="0x0" description="The lower limit 1 of the gain function 1" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CGS_GN1_H_THR" acronym="IPIPE_CGS_GN1_H_THR" offset="0x360" width="32" description="Chroma Gain Suppression">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="8" begin="7" end="0" resetval="0x0" description="The threshold 2 of the gain function for Y value" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CGS_GN1_H_GAIN" acronym="IPIPE_CGS_GN1_H_GAIN" offset="0x364" width="32" description="Chroma Gain Suppression">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="8" begin="7" end="0" resetval="0x0" description="The slope 2 of the gain function for Y value" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CGS_GN1_H_SHF" acronym="IPIPE_CGS_GN1_H_SHF" offset="0x368" width="32" description="Chroma Gain Suppression">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="13" begin="15" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="3" begin="2" end="0" resetval="0x0" description="The down shift value of the gain function on Y" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CGS_GN1_H_MIN" acronym="IPIPE_CGS_GN1_H_MIN" offset="0x36C" width="32" description="Chroma Gain Suppression">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="8" begin="7" end="0" resetval="0x0" description="The lower limit 2 of the gain function" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CGS_GN2_L_THR" acronym="IPIPE_CGS_GN2_L_THR" offset="0x370" width="32" description="Chroma Gain Suppression">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="8" begin="7" end="0" resetval="0x0" description="The slope 2 of the gain function for Y value" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CGS_GN2_L_GAIN" acronym="IPIPE_CGS_GN2_L_GAIN" offset="0x374" width="32" description="Chroma Gain Suppression">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="8" begin="7" end="0" resetval="0x0" description="The down shift value 3 of the gain function on Y" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CGS_GN2_L_SHF" acronym="IPIPE_CGS_GN2_L_SHF" offset="0x378" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="13" begin="15" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="3" begin="2" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_CGS_GN2_L_MIN" acronym="IPIPE_CGS_GN2_L_MIN" offset="0x37C" width="32" description="Chroma Gain Suppression">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="8" begin="7" end="0" resetval="0x0" description="The lower limit 3 of the gain function" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_BOX_EN" acronym="IPIPE_BOX_EN" offset="0x380" width="32" description="Boxcar Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="This bit enables ordisables the BOXCAR functionality. The BOXCAR output is written to SDRAM. One need to set theIPIPE_BOX_SDR_SAD_H and IPIPE_BOX_SDR_SAD_L registers with the appropriate address." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="EN_0" description="Disable"/>
+      <bitenum value="1" id="NEWENUM2" token="EN_1" description="Enable"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_BOX_MODE" acronym="IPIPE_BOX_MODE" offset="0x384" width="32" description="Boxcar Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OST" width="1" begin="0" end="0" resetval="0x0" description="The processing mode selection of the Boxcar function. A 0 indicates the mode of the ?free run?, a 1 indicates the mode of the ?one shot'." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="OST_0" description="Free run"/>
+      <bitenum value="1" id="NEWENUM2" token="OST_1" description="One shot"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_BOX_TYP" acronym="IPIPE_BOX_TYP" offset="0x388" width="32" description="Boxcar Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SEL" width="1" begin="0" end="0" resetval="0x0" description="Block size in boxcar sampling" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="SEL_0" description="8x8"/>
+      <bitenum value="1" id="NEWENUM2" token="SEL_1" description="16x16"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_BOX_SHF" acronym="IPIPE_BOX_SHF" offset="0x38C" width="32" description="Boxcar Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="13" begin="15" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="3" begin="2" end="0" resetval="0x0" description="The down shift value applied to the boxcar compuation result. R out = SUM (Rij) SHF G out = (SUM (Gr ij)/2 + SUM (Gr ij)/2) SHF B out = SUM (Gij) SHF" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_BOX_SDR_SAD_H" acronym="IPIPE_BOX_SDR_SAD_H" offset="0x390" width="32" description="Boxcar Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="16" begin="15" end="0" resetval="0x0" description="The higher 11 bits of the first address of output in memory." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_BOX_SDR_SAD_L" acronym="IPIPE_BOX_SDR_SAD_L" offset="0x394" width="32" description="Boxcar Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="11" begin="15" end="5" resetval="0x0" description="The lower 16 bits of the first address of output in memory." range="" rwaccess="RW"/>
+    <bitfield id="VAL_RESERVED" width="5" begin="4" end="0" resetval="0x0" description="Ensures 32-byte alignment." range="" rwaccess="R"/>
+  </register>
+  <register id="IPIPE_HST_EN" acronym="IPIPE_HST_EN" offset="0x39C" width="32" description="Histogram">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="This bit enables or disables the HISTOGRAM functionality. When enabled, the HISTOGRAM computation will start the processing from the next rising edge of the VD pulse. If the processing mode of the HISTOGRAM is ?one shot?, the enable bit will be cleared to 0 immediately after the processing has started." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="EN_0" description="disable"/>
+      <bitenum value="1" id="NEWENUM2" token="EN_1" description="start/busy"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_HST_MODE" acronym="IPIPE_HST_MODE" offset="0x3A0" width="32" description="Histogram">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OST" width="1" begin="0" end="0" resetval="0x0" description="The processing mode selection of the Histogram module. A 0 indicates the mode of the ?free run?, a 1 indicates the mode of the ?one shot'." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="OST_0" description="Free run"/>
+      <bitenum value="1" id="NEWENUM2" token="OST_1" description="One shot"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_HST_SEL" acronym="IPIPE_HST_SEL" offset="0x3A4" width="32" description="Histogram">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="13" begin="15" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SEL" width="1" begin="2" end="2" resetval="0x0" description="Input selection. When SEL0=0, RGBY are sampled from the output of the line buffer in noise filter-2. When SEL0=1, YCbCr are sampled at the output of RGB2YCbCr module. Y is sampled twice." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="SEL_0" description="From noise filter input"/>
+      <bitenum value="1" id="NEWENUM2" token="SEL_1" description="From RGBtoYUV"/>
+    </bitfield>
+    <bitfield id="TYP" width="2" begin="1" end="0" resetval="0x0" description="G selection in Bayer mode (SEL0=0)" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="TYP_0" description="Gb"/>
+      <bitenum value="1" id="NEWENUM2" token="TYP_1" description="Gr"/>
+      <bitenum value="3" id="NEWENUM4" token="TYP_3" description="Reserved"/>
+      <bitenum value="2" id="NEWENUM3" token="TYP_2" description="(Gb+Gr)/2"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_HST_PARA" acronym="IPIPE_HST_PARA" offset="0x3A8" width="32" description="Histogram COL0, COL1, COL2, and COL3 should be set to ?1?.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="BIN" width="2" begin="13" end="12" resetval="0x0" description="The number of the bins." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="BIN_0" description="32"/>
+      <bitenum value="1" id="NEWENUM2" token="BIN_1" description="64"/>
+      <bitenum value="3" id="NEWENUM4" token="BIN_3" description="256"/>
+      <bitenum value="2" id="NEWENUM3" token="BIN_2" description="128"/>
+    </bitfield>
+    <bitfield id="SHF" width="4" begin="11" end="8" resetval="0x0" description="The shift length of the input data. data = (INPUT SHF)" range="" rwaccess="RW"/>
+    <bitfield id="COL3" width="1" begin="7" end="7" resetval="0x0" description="The on/off selection of the color pattern 3 (Y)." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="COL3_0" description="Disable"/>
+      <bitenum value="1" id="NEWENUM2" token="COL3_1" description="Enable"/>
+    </bitfield>
+    <bitfield id="COL2" width="1" begin="6" end="6" resetval="0x0" description="The on/off selection of the color pattern 2 (B)." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="COL2_0" description="Disable"/>
+      <bitenum value="1" id="NEWENUM2" token="COL2_1" description="Enable"/>
+    </bitfield>
+    <bitfield id="COL1" width="1" begin="5" end="5" resetval="0x0" description="The on/off selection of the color pattern 1 (G)." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="COL1_0" description="Disable"/>
+      <bitenum value="1" id="NEWENUM2" token="COL1_1" description="Enable"/>
+    </bitfield>
+    <bitfield id="COL0" width="1" begin="4" end="4" resetval="0x0" description="The on/off selection of the color pattern 0 (R)." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="COL0_0" description="Disable"/>
+      <bitenum value="1" id="NEWENUM2" token="COL0_1" description="Enable"/>
+    </bitfield>
+    <bitfield id="RGN3" width="1" begin="3" end="3" resetval="0x0" description="The on/off selection of the region 3." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="RGN3_0" description="Disable"/>
+      <bitenum value="1" id="NEWENUM2" token="RGN3_1" description="Enable"/>
+    </bitfield>
+    <bitfield id="RGN2" width="1" begin="2" end="2" resetval="0x0" description="The on/off selection of the region 2." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="RGN2_0" description="Disable"/>
+      <bitenum value="1" id="NEWENUM2" token="RGN2_1" description="Enable"/>
+    </bitfield>
+    <bitfield id="RGN1" width="1" begin="1" end="1" resetval="0x0" description="The on/off selection of the region 1." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="RGN1_0" description="Disable"/>
+      <bitenum value="1" id="NEWENUM2" token="RGN1_1" description="Enable"/>
+    </bitfield>
+    <bitfield id="RGN0" width="1" begin="0" end="0" resetval="0x0" description="The on/off selection of the region 0." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="RGN0_0" description="Disable"/>
+      <bitenum value="1" id="NEWENUM2" token="RGN0_1" description="Enable"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_HST_0_VPS" acronym="IPIPE_HST_0_VPS" offset="0x3AC" width="32" description="Histogram">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="12" end="1" resetval="0x0" description="The vertical position of the region 0 from theIPIPE_SRC_VPS. The region 0 will start the ?Histogram? processing from VAL line. VAL[0] can not be written." range="" rwaccess="RW"/>
+    <bitfield id="VAL_RESERVED" width="1" begin="0" end="0" resetval="0x0" description="The vertical position of the region 0 from theIPIPE_SRC_VPS. The region 0 will start the ?Histogram? processing from VAL line. VAL[0] can not be written." range="" rwaccess="R"/>
+  </register>
+  <register id="IPIPE_HST_0_VSZ" acronym="IPIPE_HST_0_VSZ" offset="0x3B0" width="32" description="Histogram">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="12" end="1" resetval="0x0" description="The vertical size of the region 0. The ?Histogram? processing of the region 0 will process (VAL+1) lines." range="" rwaccess="RW"/>
+    <bitfield id="VAL_RESERVED" width="1" begin="0" end="0" resetval="0x1" description="The vertical size of the region 0. The ?Histogram? processing of the region 0 will process (VAL+1) lines. VAL[0] cannot be written." range="" rwaccess="R"/>
+  </register>
+  <register id="IPIPE_HST_0_HPS" acronym="IPIPE_HST_0_HPS" offset="0x3B4" width="32" description="Histogram">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="12" end="1" resetval="0x0" description="The horizontal position of the region 0 from theIPIPE_SRC_HPS. The region 0 will start the ?Histogram? processing from VAL clocks. VAL[0] can not be written." range="" rwaccess="RW"/>
+    <bitfield id="VAL_RESERVED" width="1" begin="0" end="0" resetval="0x0" description="The horizontal position of the region 0 from theIPIPE_SRC_HPS. The region 0 will start the ?Histogram? processing from VAL clocks. VAL[0] can not be written." range="" rwaccess="R"/>
+  </register>
+  <register id="IPIPE_HST_0_HSZ" acronym="IPIPE_HST_0_HSZ" offset="0x3B8" width="32" description="Histogram">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="12" end="1" resetval="0x0" description="The horizontal size of the region 0. The ?Histogram? processing of the region 0 will process (VAL+1) clocks. VAL[0] cannot be written." range="" rwaccess="RW"/>
+    <bitfield id="VAL_RESERVED" width="1" begin="0" end="0" resetval="0x1" description="The horizontal size of the region 0. The ?Histogram? processing of the region 0 will process (VAL+1) clocks. VAL[0] cannot be written." range="" rwaccess="R"/>
+  </register>
+  <register id="IPIPE_HST_1_VPS" acronym="IPIPE_HST_1_VPS" offset="0x3BC" width="32" description="Histogram">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="12" end="1" resetval="0x0" description="The vertical position of the region 0 from theIPIPE_SRC_VPS. The region 1 will start the ?Histogram? processing from VAL line. VAL[0] can not be written." range="" rwaccess="RW"/>
+    <bitfield id="VAL_RESERVED" width="1" begin="0" end="0" resetval="0x0" description="The vertical position of the region 0 from theIPIPE_SRC_VPS. The region 1 will start the ?Histogram? processing from VAL line. VAL[0] can not be written." range="" rwaccess="R"/>
+  </register>
+  <register id="IPIPE_HST_1_VSZ" acronym="IPIPE_HST_1_VSZ" offset="0x3C0" width="32" description="Histogram">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="12" end="1" resetval="0x0" description="The vertical size of the region 1. The ?Histogram? processing of the region 1 will process (VAL+1) lines. VAL[0] cannot be written." range="" rwaccess="RW"/>
+    <bitfield id="VAL_RESERVED" width="1" begin="0" end="0" resetval="0x1" description="The vertical size of the region 1. The ?Histogram? processing of the region 1 will process (VAL+1) lines. VAL[0] cannot be written." range="" rwaccess="R"/>
+  </register>
+  <register id="IPIPE_HST_1_HPS" acronym="IPIPE_HST_1_HPS" offset="0x3C4" width="32" description="Histogram">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="12" end="1" resetval="0x0" description="The horizontal position of the region 0 from theIPIPE_SRC_HPS. The region 1 will start the ?Histogram? processing from VAL clocks. VAL[0] can not be written." range="" rwaccess="RW"/>
+    <bitfield id="VAL_RESERVED" width="1" begin="0" end="0" resetval="0x0" description="The horizontal position of the region 0 from theIPIPE_SRC_HPS. The region 1 will start the ?Histogram? processing from VAL clocks. VAL[0] can not be written." range="" rwaccess="R"/>
+  </register>
+  <register id="IPIPE_HST_1_HSZ" acronym="IPIPE_HST_1_HSZ" offset="0x3C8" width="32" description="Histogram">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="12" end="1" resetval="0x0" description="The horizontal size of the region 1. The ?Histogram? processing of the region 1 will process (VAL+1) clocks. VAL[0] cannot be written." range="" rwaccess="RW"/>
+    <bitfield id="VAL_RESERVED" width="1" begin="0" end="0" resetval="0x1" description="The horizontal size of the region 1. The ?Histogram? processing of the region 1 will process (VAL+1) clocks. VAL[0] cannot be written." range="" rwaccess="R"/>
+  </register>
+  <register id="IPIPE_HST_2_VPS" acronym="IPIPE_HST_2_VPS" offset="0x3CC" width="32" description="Histogram">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="12" end="1" resetval="0x0" description="The vertical position of the region 0 from theIPIPE_SRC_VPS. The region 2 will start the ?Histogram? processing from VAL line. VAL[0] can not be written." range="" rwaccess="RW"/>
+    <bitfield id="VAL_RESERVED" width="1" begin="0" end="0" resetval="0x0" description="The vertical position of the region 0 from theIPIPE_SRC_VPS. The region 2 will start the ?Histogram? processing from VAL line. VAL[0] can not be written." range="" rwaccess="R"/>
+  </register>
+  <register id="IPIPE_HST_2_VSZ" acronym="IPIPE_HST_2_VSZ" offset="0x3D0" width="32" description="Histogram">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="12" end="1" resetval="0x0" description="The vertical size of the region 2. The ?Histogram? processing of the region 2 will process (VAL+1) lines. VAL[0] cannot be written." range="" rwaccess="RW"/>
+    <bitfield id="VAL_RESERVED" width="1" begin="0" end="0" resetval="0x1" description="The vertical size of the region 2. The ?Histogram? processing of the region 2 will process (VAL+1) lines. VAL[0] cannot be written." range="" rwaccess="R"/>
+  </register>
+  <register id="IPIPE_HST_2_HPS" acronym="IPIPE_HST_2_HPS" offset="0x3D4" width="32" description="Histogram">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="12" end="1" resetval="0x0" description="The horizontal position of the region 0 from theIPIPE_SRC_HPS. The region 2 will start the ?Histogram? processing from VAL clocks. VAL[0] can not be written." range="" rwaccess="RW"/>
+    <bitfield id="VAL_RESERVED" width="1" begin="0" end="0" resetval="0x0" description="The horizontal position of the region 0 from theIPIPE_SRC_HPS. The region 2 will start the ?Histogram? processing from VAL clocks. VAL[0] can not be written." range="" rwaccess="R"/>
+  </register>
+  <register id="IPIPE_HST_2_HSZ" acronym="IPIPE_HST_2_HSZ" offset="0x3D8" width="32" description="Histogram">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="12" end="1" resetval="0x0" description="The horizontal size of the region 2. The ?Histogram? processing of the region 2 will process (VAL+1) clocks. VAL[0] cannot be written." range="" rwaccess="RW"/>
+    <bitfield id="VAL_RESERVED" width="1" begin="0" end="0" resetval="0x1" description="The horizontal size of the region 2. The ?Histogram? processing of the region 2 will process (VAL+1) clocks. VAL[0] cannot be written." range="" rwaccess="R"/>
+  </register>
+  <register id="IPIPE_HST_3_VPS" acronym="IPIPE_HST_3_VPS" offset="0x3DC" width="32" description="Histogram">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="12" end="1" resetval="0x0" description="The vertical position of the region 0 from theIPIPE_SRC_VPS. The region 3 will start the ?Histogram? processing from VAL line. VAL[0] can not be written." range="" rwaccess="RW"/>
+    <bitfield id="VAL_RESERVED" width="1" begin="0" end="0" resetval="0x0" description="The vertical position of the region 0 from theIPIPE_SRC_VPS. The region 3 will start the ?Histogram? processing from VAL line. VAL[0] can not be written." range="" rwaccess="R"/>
+  </register>
+  <register id="IPIPE_HST_3_VSZ" acronym="IPIPE_HST_3_VSZ" offset="0x3E0" width="32" description="Histogram">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="12" end="1" resetval="0x0" description="The vertical size of the region 3. The ?Histogram? processing of the region 3 will process (VAL+1) lines. VAL[0] cannot be written." range="" rwaccess="RW"/>
+    <bitfield id="VAL_RESERVED" width="1" begin="0" end="0" resetval="0x1" description="The vertical size of the region 3. The ?Histogram? processing of the region 3 will process (VAL+1) lines. VAL[0] cannot be written." range="" rwaccess="R"/>
+  </register>
+  <register id="IPIPE_HST_3_HPS" acronym="IPIPE_HST_3_HPS" offset="0x3E4" width="32" description="Histogram">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="12" end="1" resetval="0x0" description="The horizontal position of the region 0 from theIPIPE_SRC_HPS. The region 3 will start the ?Histogram? processing from VAL clocks. VAL[0] can not be written." range="" rwaccess="RW"/>
+    <bitfield id="VAL_RESERVED" width="1" begin="0" end="0" resetval="0x0" description="The horizontal position of the region 0 from theIPIPE_SRC_HPS. The region 3 will start the ?Histogram? processing from VAL clocks. VAL[0] can not be written." range="" rwaccess="R"/>
+  </register>
+  <register id="IPIPE_HST_3_HSZ" acronym="IPIPE_HST_3_HSZ" offset="0x3E8" width="32" description="Histogram">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="12" end="1" resetval="0x0" description="The horizontal size of the region 3. The ?Histogram? processing of the region 3 will process (VAL+1) clocks. VAL[0] cannot be written." range="" rwaccess="RW"/>
+    <bitfield id="VAL_RESERVED" width="1" begin="0" end="0" resetval="0x1" description="The horizontal size of the region 3. The ?Histogram? processing of the region 3 will process (VAL+1) clocks. VAL[0] cannot be written." range="" rwaccess="R"/>
+  </register>
+  <register id="IPIPE_HST_TBL" acronym="IPIPE_HST_TBL" offset="0x3EC" width="32" description="Histogram">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="14" begin="15" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CLR" width="1" begin="1" end="1" resetval="0x0" description="Histogram memory clear. The histogram can be cleared before the start of operations. However, the clear takes 512 cycles and therfore: + if line size 512, the first line shall not be used for histogram computation. + if line size 512, ceil (512/line size) lines shall not be used for histogram computation. It's the programmer's responsibility to set the histogram computation area outside the 'clear' area." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="CLR_0" description="Disable"/>
+      <bitenum value="1" id="NEWENUM2" token="CLR_1" description="Enable"/>
+    </bitfield>
+    <bitfield id="SEL" width="1" begin="0" end="0" resetval="0x0" description="This bit shall be used to select which memory is used to store the histogram data. By selecting alternatively one or the other bit, one can double buffer the histogram output buffer. The 4 KB memory can either be read by the CPU or a DMA request." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="SEL_0" description="Use Table 0 and 1 = 4 KBytes in the memory ISP5 map."/>
+      <bitenum value="1" id="NEWENUM2" token="SEL_1" description="Use Table 2 and 3 = 4 KBytes in the memory ISP5 map."/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_HST_MUL_R" acronym="IPIPE_HST_MUL_R" offset="0x3F0" width="32" description="Histogram">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="GAIN" width="8" begin="7" end="0" resetval="0x0" description="Gain" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_HST_MUL_GR" acronym="IPIPE_HST_MUL_GR" offset="0x3F4" width="32" description="Histogram">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="GAIN" width="8" begin="7" end="0" resetval="0x0" description="Gain" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_HST_MUL_GB" acronym="IPIPE_HST_MUL_GB" offset="0x3F8" width="32" description="Histogram">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="GAIN" width="8" begin="7" end="0" resetval="0x0" description="Gain" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_HST_MUL_B" acronym="IPIPE_HST_MUL_B" offset="0x3FC" width="32" description="Histogram">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="GAIN" width="8" begin="7" end="0" resetval="0x0" description="Gain" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_BSC_EN" acronym="IPIPE_BSC_EN" offset="0x400" width="32" description="Boundary Signal Calculator">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="The start flag of the ?Boundary Signal Calculator?." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="EN_0" description="Disable"/>
+      <bitenum value="1" id="NEWENUM2" token="EN_1" description="Enable"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_BSC_MODE" acronym="IPIPE_BSC_MODE" offset="0x404" width="32" description="Boundary Signal Calculator">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OST" width="1" begin="0" end="0" resetval="0x0" description="The processing mode selection of the BSC module." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="OST_0" description="Free run"/>
+      <bitenum value="1" id="NEWENUM2" token="OST_1" description="One shot"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_BSC_TYP" acronym="IPIPE_BSC_TYP" offset="0x408" width="32" description="Boundary Signal Calculator">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="12" begin="15" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CEN" width="1" begin="3" end="3" resetval="0x0" description="Enable of column sampling." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="CEN_0" description="Off"/>
+      <bitenum value="1" id="NEWENUM2" token="CEN_1" description="On"/>
+    </bitfield>
+    <bitfield id="REN" width="1" begin="2" end="2" resetval="0x0" description="Enable of row sampling" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="REN_0" description="Off"/>
+      <bitenum value="1" id="NEWENUM2" token="REN_1" description="On"/>
+    </bitfield>
+    <bitfield id="COL" width="2" begin="1" end="0" resetval="0x0" description="Selects the element to be summed. (Y, Cb or Cr )" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="COL_0" description="Y"/>
+      <bitenum value="1" id="NEWENUM2" token="COL_1" description="Cb"/>
+      <bitenum value="3" id="NEWENUM4" token="COL_3" description="Reserved"/>
+      <bitenum value="2" id="NEWENUM3" token="COL_2" description="Cr"/>
+    </bitfield>
+  </register>
+  <register id="IPIPE_BSC_ROW_VCT" acronym="IPIPE_BSC_ROW_VCT" offset="0x40C" width="32" description="Boundary Signal Calculator">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="14" begin="15" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="2" begin="1" end="0" resetval="0x0" description="The number of row sum vectors. value = ROWNUM + 1 Range: 1-4" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_BSC_ROW_SHF" acronym="IPIPE_BSC_ROW_SHF" offset="0x410" width="32" description="Boundary Signal Calculator">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="13" begin="15" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="3" begin="2" end="0" resetval="0x0" description="The down shift value for row sum vectors. Range: 0-7" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_BSC_ROW_VPOS" acronym="IPIPE_BSC_ROW_VPOS" offset="0x414" width="32" description="Boundary Signal Calculator">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="13" begin="12" end="0" resetval="0x0" description="The vertical position of the first sampling pixel; the first row to be summed." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_BSC_ROW_VNUM" acronym="IPIPE_BSC_ROW_VNUM" offset="0x418" width="32" description="Boundary Signal Calculator">
+    <bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="12" end="1" resetval="0x0" description="The height of the area covered by a row sum vector. Height of the region = (ROW_VNUM + 1)*(ROW_VSKIP+1).IPIPE_BSC_ROW_VNUM must be odd, LSB = 1." range="" rwaccess="RW"/>
+    <bitfield id="VAL_0" width="1" begin="0" end="0" resetval="0x1" description="The LSB must be odd." range="" rwaccess="R"/>
+  </register>
+  <register id="IPIPE_BSC_ROW_VSKIP" acronym="IPIPE_BSC_ROW_VSKIP" offset="0x41C" width="32" description="Boundary Signal Calculator">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="The interval of the rows. Interval = ROWSKIPV + 1 Range: 1-32" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_BSC_ROW_HPOS" acronym="IPIPE_BSC_ROW_HPOS" offset="0x420" width="32" description="Boundary Signal Calculator">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="13" begin="12" end="0" resetval="0x0" description="The horizontal position of the first sampling pixel; the first pixel in a row to be summed." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_BSC_ROW_HNUM" acronym="IPIPE_BSC_ROW_HNUM" offset="0x424" width="32" description="Boundary Signal Calculator">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="13" begin="12" end="0" resetval="0x0" description="The horizontal number of samples in the area covered by a row sum vector. Width of the region = (ROW_HNUM + 1)*(ROW_HSKIP+1)." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_BSC_ROW_HSKIP" acronym="IPIPE_BSC_ROW_HSKIP" offset="0x428" width="32" description="Boundary Signal Calculator">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="The interval of the pixels in a row to be summed. Interval = ROWSKIPH + 1 Range: 1-32" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_BSC_COL_VCT" acronym="IPIPE_BSC_COL_VCT" offset="0x42C" width="32" description="Boundary Signal Calculator">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="14" begin="15" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="2" begin="1" end="0" resetval="0x0" description="The number of column sum vectors. number = COLNUM + 1 Range: 1-4" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_BSC_COL_SHF" acronym="IPIPE_BSC_COL_SHF" offset="0x430" width="32" description="Boundary Signal Calculator">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="13" begin="15" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="3" begin="2" end="0" resetval="0x0" description="The down shift value for column sum vectors. Range: 0-7" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_BSC_COL_VPOS" acronym="IPIPE_BSC_COL_VPOS" offset="0x434" width="32" description="Boundary Signal Calculator">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="13" begin="12" end="0" resetval="0x0" description="The vertical position of the first sampling pixel; the first pixel in a column to be summed." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_BSC_COL_VNUM" acronym="IPIPE_BSC_COL_VNUM" offset="0x438" width="32" description="Boundary Signal Calculator">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="13" begin="12" end="0" resetval="0x0" description="The vertical number of samples in the area covered by a column sum vector. Height of the region = (COL_VNUM + 1)*(COL_VSKIP+1)." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_BSC_COL_VSKIP" acronym="IPIPE_BSC_COL_VSKIP" offset="0x43C" width="32" description="Boundary Signal Calculator">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="The interval of the pixels in a column to be summed. Interval = COLSKIPV + 1 Range: 1-32" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_BSC_COL_HPOS" acronym="IPIPE_BSC_COL_HPOS" offset="0x440" width="32" description="Boundary Signal Calculator">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="13" begin="12" end="0" resetval="0x0" description="The horizontal position of the first sampling pixel; the first column to be summed." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_BSC_COL_HNUM" acronym="IPIPE_BSC_COL_HNUM" offset="0x444" width="32" description="Boundary Signal Calculator">
+    <bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="12" begin="12" end="1" resetval="0x0" description="The width of the area covered by a column sum vector. Width of the region = (COL_HNUM + 1)*(COL_HSKIP+1).IPIPE_BSC_COL_HNUM must be odd, LSB = 1." range="" rwaccess="RW"/>
+    <bitfield id="VAL_0" width="1" begin="0" end="0" resetval="0x1" description="The LSB must be odd" range="" rwaccess="R"/>
+  </register>
+  <register id="IPIPE_BSC_COL_HSKIP" acronym="IPIPE_BSC_COL_HSKIP" offset="0x448" width="32" description="Boundary Signal Calculator">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="5" begin="4" end="0" resetval="0x0" description="The interval of the columns. Interval = COL_HSKIP + 1 Range: 1-32" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YUV_INP_OFST_Y" acronym="IPIPE_YUV_INP_OFST_Y" offset="0x44C" width="32" description="Offset value applied to Y input becore YUVtoRGB matrix. These values are only valid if IPIPE_FMT[FMT]=3 (YUV422 input) IPIPE_FMT[FMT2]=2 (RGB processing after YUVtoRGB conversion)">
+    <bitfield id="RESERVED" width="23" begin="31" end="9" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="Y_OFST" width="9" begin="8" end="0" resetval="0x0" description="Y offset value (s9) Usually zero." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YUV_INP_OFST_CB" acronym="IPIPE_YUV_INP_OFST_CB" offset="0x450" width="32" description="Offset value applied to CB input becore YUVtoRGB matrix. These values are only valid if IPIPE_FMT[FMT]=3 (YUV422 input) IPIPE_FMT[FMT2]=2 (RGB processing after YUVtoRGB conversion)">
+    <bitfield id="RESERVED" width="23" begin="31" end="9" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CB_OFST" width="9" begin="8" end="0" resetval="0x180" description="Cb offset value (s9) Usually -128" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPE_YUV_INP_OFST_CR" acronym="IPIPE_YUV_INP_OFST_CR" offset="0x454" width="32" description="Offset value applied to CR input becore YUVtoRGB matrix. These values are only valid if IPIPE_FMT[FMT]=3 (YUV422 input) IPIPE_FMT[FMT2]=2 (RGB processing after YUVtoRGB conversion)">
+    <bitfield id="RESERVED" width="23" begin="31" end="9" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_OFST" width="9" begin="8" end="0" resetval="0x180" description="Cr offset value (s9) Usually -128" range="" rwaccess="RW"/>
+  </register>
+</module>

@@ -1,0 +1,1128 @@
+<module name="ENCODER0_REG_TOPAZHP_CORE_0" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="ENCODER0_CR_TOPAZHP_SRST" acronym="ENCODER0_CR_TOPAZHP_SRST" offset="0x0" width="32" description="">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_SCALER_SOFT_RESET" width="1" begin="9" end="9" resetval="0x0" description="Input Scaler Software reset:" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_LTRITC_SOFT_RESET" width="1" begin="8" end="8" resetval="0x0" description="LRITC Software reset:" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_DB_SOFT_RESET" width="1" begin="7" end="7" resetval="0x0" description="De-blocker Software reset:" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_VLC_SOFT_RESET" width="1" begin="6" end="6" resetval="0x0" description="VLC Software reset:" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_PREFETCH_SOFT_RESET" width="1" begin="5" end="5" resetval="0x0" description="Prefetch sequencer Software reset:" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_JMCOMP_SOFT_RESET" width="1" begin="4" end="4" resetval="0x0" description="JPEG/MPEG Compress Software reset:" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_H264COMP_SOFT_RESET" width="1" begin="3" end="3" resetval="0x0" description="H264 Compress Software reset:" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_PC_SOFT_RESET" width="1" begin="2" end="2" resetval="0x0" description="Direct mode/Predictor combiner Software reset:" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_SPE_SOFT_RESET" width="1" begin="1" end="1" resetval="0x0" description="SPE Software reset [resets both SPE blocks]:" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_IPE_SOFT_RESET" width="1" begin="0" end="0" resetval="0x0" description="IPE Software reset [resets both IPE blocks]:" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_TOPAZHP_INTSTAT" acronym="ENCODER0_CR_TOPAZHP_INTSTAT" offset="0x4" width="32" description="">
+    <bitfield id="CR_TOPAZHP_INTS_MASTER_HOST" width="1" begin="31" end="31" resetval="0x0" description="Indicates that the TopazHP core is activating its host interrupt pin" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTS_MASTER_MTX" width="1" begin="30" end="30" resetval="0x0" description="Indicates that the TopazHP core is activating its mtx interrupt pin" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTS_COMBINED" width="1" begin="29" end="29" resetval="0x0" description="Indicates that Combined interrupt has occurred" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="28" end="17" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_INTS_DMA_DONE" width="1" begin="16" end="16" resetval="0x0" description="DMA operation complete" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="15" end="15" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_INTS_RATE_CTRL_DONE" width="1" begin="14" end="14" resetval="0x0" description="Indicates the VLC has updated the rate control registers for a basic unit [at start of new basic unit]" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTS_PREFETCH_DONE" width="1" begin="13" end="13" resetval="0x0" description="Indicates the Prefetch Sequencer has completed prefetch stage of current kick [later stages of pipeline may still be processing macroblocks, but new kick could be accepted]" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTS_SLICE_DONE" width="1" begin="12" end="12" resetval="0x0" description="Indicates the Prefetch Sequencer has completed last kick of slice [final stage of pipeline has finished last macroblock in slice, excluding VLC/De-blocker flush]" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTS_SEQ_START" width="1" begin="11" end="11" resetval="0x0" description="Indicates the Prefetch Sequencer has started processing new sequencer kick" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTS_SOFTWARE1" width="1" begin="10" end="10" resetval="0x0" description="Software interrupt status" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTS_SOFTWARE0" width="1" begin="9" end="9" resetval="0x0" description="Software interrupt status" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTS_DEB_DONE" width="1" begin="8" end="8" resetval="0x0" description="Indicates that the DEBLOCKER has completed its operation" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTS_VLC_DONE" width="1" begin="7" end="7" resetval="0x0" description="Indicates that VLC has completed its operation" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTS_JMCOMP_DONE" width="1" begin="6" end="6" resetval="0x0" description="Indicates that JMCOMP has completed its operation" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTS_H264COMP_DONE" width="1" begin="5" end="5" resetval="0x0" description="Indicates that H264COMP has completed its operation" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTS_PC_DONE" width="1" begin="4" end="4" resetval="0x0" description="Indicates that Direct mode/Predictor combiner has completed its operation" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTS_SPE1_DONE" width="1" begin="3" end="3" resetval="0x0" description="Indicates that SPE 1 has completed its operation" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTS_SPE0_DONE" width="1" begin="2" end="2" resetval="0x0" description="Indicates that SPE 0 has completed its operation" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTS_IPE1_DONE" width="1" begin="1" end="1" resetval="0x0" description="Indicates that IPE 1 has completed its operation" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTS_IPE0_DONE" width="1" begin="0" end="0" resetval="0x0" description="Indicates that IPE 0 has completed its operation" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_TOPAZHP_MTX_INTENAB" acronym="ENCODER0_CR_TOPAZHP_MTX_INTENAB" offset="0x8" width="32" description="Two interrupt signals are generated by each core. The same interrupt sources are used, but different interrupt masks can be applied. This is mainly intended so that one interrupt is used by MTX, and the other interrupt is used by the Host.">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_MTX_INTEN_MASTER" width="1" begin="30" end="30" resetval="0x0" description="0 : Disables all interrupts" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_MTX_INTEN_COMBINED" width="1" begin="29" end="29" resetval="0x0" description="0 : Disables the combined interrupt" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="28" end="17" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_MTX_INTEN_DMA_DONE" width="1" begin="16" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="15" end="15" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_MTX_INTEN_RATE_CTRL_DONE" width="1" begin="14" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_MTX_INTEN_PREFETCH_DONE" width="1" begin="13" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_MTX_INTEN_SLICE_DONE" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_MTX_INTEN_SEQ_START" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_MTX_INTEN_SOFTWARE1" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_MTX_INTEN_SOFTWARE0" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_MTX_INTEN_DEB_DONE" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_MTX_INTEN_VLC_DONE" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_MTX_INTEN_JMCOMP_DONE" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_MTX_INTEN_H264COMP_DONE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_MTX_INTEN_PC_DONE" width="1" begin="4" end="4" resetval="0x0" description="0 : Disables Direct mode/Predictor combiner interrupt" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_MTX_INTEN_SPE1_DONE" width="1" begin="3" end="3" resetval="0x0" description="0 : Disables SPE 1 interrupt" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_MTX_INTEN_SPE0_DONE" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_MTX_INTEN_IPE1_DONE" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_MTX_INTEN_IPE0_DONE" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_TOPAZHP_HOST_INTENAB" acronym="ENCODER0_CR_TOPAZHP_HOST_INTENAB" offset="0xC" width="32" description="">
+    <bitfield id="CR_TOPAZHP_HOST_INTEN_MASTER" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_HOST_INTEN_COMBINED" width="1" begin="29" end="29" resetval="0x0" description="0 : Disables the combined interrupt" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="28" end="17" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_HOST_INTEN_DMA_DONE" width="1" begin="16" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="15" end="15" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_HOST_INTEN_RATE_CTRL_DONE" width="1" begin="14" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_HOST_INTEN_PREFETCH_DONE" width="1" begin="13" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_HOST_INTEN_SLICE_DONE" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_HOST_INTEN_SEQ_START" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_HOST_INTEN_SOFTWARE1" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_HOST_INTEN_SOFTWARE0" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_HOST_INTEN_DEB_DONE" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_HOST_INTEN_VLC_DONE" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_HOST_INTEN_JMCOMP_DONE" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_HOST_INTEN_H264COMP_DONE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_HOST_INTEN_PC_DONE" width="1" begin="4" end="4" resetval="0x0" description="0 : Disables Direct mode/Predictor combiner interrupt" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_HOST_INTEN_SPE1_DONE" width="1" begin="3" end="3" resetval="0x0" description="0 : Disables SPE 1 interrupt" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_HOST_INTEN_SPE0_DONE" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_HOST_INTEN_IPE1_DONE" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_HOST_INTEN_IPE0_DONE" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_TOPAZHP_INTCLEAR" acronym="ENCODER0_CR_TOPAZHP_INTCLEAR" offset="0x10" width="32" description="">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_INTCLR_DMA_DONE" width="1" begin="16" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="15" end="15" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_INTCLR_RATE_CTRL_DONE" width="1" begin="14" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCLR_PREFETCH_DONE" width="1" begin="13" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCLR_SLICE_DONE" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCLR_SEQ_START" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCLR_SOFTWARE1" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCLR_SOFTWARE0" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCLR_DEB_DONE" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCLR_VLC_DONE" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCLR_JMCOMP_DONE" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCLR_H264COMP_DONE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCLR_PC_DONE" width="1" begin="4" end="4" resetval="0x0" description="0 : No effect" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCLR_SPE1_DONE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCLR_SPE0_DONE" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCLR_IPE1_DONE" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCLR_IPE0_DONE" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_TOPAZHP_INT_COMB_SEL" acronym="ENCODER0_CR_TOPAZHP_INT_COMB_SEL" offset="0x14" width="32" description="">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_INTCSEL_DMA_DONE" width="1" begin="16" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="15" end="15" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_INTCSEL_RATE_CTRL_DONE" width="1" begin="14" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCSEL_PREFETCH_DONE" width="1" begin="13" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCSEL_SLICE_DONE" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCSEL_SEQ_START" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCSEL_SOFTWARE1" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCSEL_SOFTWARE0" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCSEL_DEB_DONE" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCSEL_VLC_DONE" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCSEL_JMCOMP_DONE" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCSEL_H264COMP_DONE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCSEL_PC_DONE" width="1" begin="4" end="4" resetval="0x0" description="0 : Do not select" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCSEL_SPE1_DONE" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCSEL_SPE0_DONE" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCSEL_IPE1_DONE" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_INTCSEL_IPE0_DONE" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_TOPAZHP_BUSY" acronym="ENCODER0_CR_TOPAZHP_BUSY" offset="0x18" width="32" description="">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_INPUT_SCALER_BUSY" width="1" begin="16" end="16" resetval="0x0" description="0 : Input scaler is not busy" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_CABAC_BUSY" width="1" begin="15" end="15" resetval="0x0" description="0 : CABAC is not busy" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_H264COMP_BUSY" width="1" begin="14" end="14" resetval="0x0" description="0 : H264COMP is not busy" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_H264COMP16X16_BUSY" width="1" begin="13" end="13" resetval="0x0" description="0 : H264COMP 16x16 is not busy" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_H264COMP8X8_BUSY" width="1" begin="12" end="12" resetval="0x0" description="0 : H264COMP 8x8 is not busy" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_H264COMP4X4_BUSY" width="1" begin="11" end="11" resetval="0x0" description="0 : H264COMP 4x4 is not busy" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_PREFETCH_BUSY" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_MOTION_CALC_BUSY" width="1" begin="9" end="9" resetval="0x1" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_DEB_BUSY" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_VLC_BUSY" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_JMCOMP_BUSY" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_PC_BUSY" width="1" begin="5" end="5" resetval="0x0" description="0 : Predictor combiner is not busy" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_DIRECT_BUSY" width="1" begin="4" end="4" resetval="0x0" description="0 : Direct mode is not busy" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_SPE1_BUSY" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_SPE0_BUSY" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_IPE1_BUSY" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_IPE0_BUSY" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_TOPAZHP_AUTO_CLOCK_GATING" acronym="ENCODER0_CR_TOPAZHP_AUTO_CLOCK_GATING" offset="0x24" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_INPUT_SCALER_AUTO_CLK_GATE" width="1" begin="15" end="15" resetval="0x0" description="0 : Input scaler manual clock gate" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="14" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_CABAC_AUTO_CLK_GATE" width="1" begin="13" end="13" resetval="0x0" description="0 : CABAC manual clock gate" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_PC_DMS_AUTO_CLK_GATE" width="1" begin="12" end="12" resetval="0x0" description="0 : Predictor combiner direct mode manual clock gate" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_PC_DM_AUTO_CLK_GATE" width="1" begin="11" end="11" resetval="0x0" description="0 : Predictor combiner decision module manual clock gate" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_DEB_AUTO_CLK_GATE" width="1" begin="10" end="10" resetval="0x0" description="0 : De-blocker manual clock gate" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_VLC_AUTO_CLK_GATE" width="1" begin="9" end="9" resetval="0x0" description="0 : VLC manual clock gate" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_JMCOMP_AUTO_CLK_GATE" width="1" begin="7" end="7" resetval="0x0" description="0 : JMCOMP manual clock gate" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_H264COMP16X16_AUTO_CLK_GATE" width="1" begin="6" end="6" resetval="0x0" description="0 : H264COMP 16x16 manual clock gate" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_H264COMP8X8_AUTO_CLK_GATE" width="1" begin="5" end="5" resetval="0x0" description="0 : H264COMP 8x8 manual clock gate" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_H264COMP4X4_AUTO_CLK_GATE" width="1" begin="4" end="4" resetval="0x0" description="0 : H264COMP 4x4 manual clock gate" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_SPE1_AUTO_CLK_GATE" width="1" begin="3" end="3" resetval="0x0" description="0 : SPE 1 manual clock gate" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_SPE0_AUTO_CLK_GATE" width="1" begin="2" end="2" resetval="0x0" description="0 : SPE 0 manual clock gate" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_IPE1_AUTO_CLK_GATE" width="1" begin="1" end="1" resetval="0x0" description="0 : IPE 1 manual clock gate" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_IPE0_AUTO_CLK_GATE" width="1" begin="0" end="0" resetval="0x0" description="0 : IPE 0 manual clock gate" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_TOPAZHP_MAN_CLOCK_GATING" acronym="ENCODER0_CR_TOPAZHP_MAN_CLOCK_GATING" offset="0x28" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZHP_INPUT_SCALER_MAN_CLK_GATE" width="1" begin="15" end="15" resetval="0x0" description="0 : Input scaler clock on" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_LRITC_MAN_CLK_GATE" width="1" begin="14" end="14" resetval="0x0" description="0 : LRITC clock on" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_CABAC_MAN_CLK_GATE" width="1" begin="13" end="13" resetval="0x0" description="0 : CABAC clock on" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_PC_DMS_MAN_CLK_GATE" width="1" begin="12" end="12" resetval="0x0" description="0 : Predictor combiner direct mode clock on" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_PC_DM_MAN_CLK_GATE" width="1" begin="11" end="11" resetval="0x0" description="0 : Predictor combiner decision module clock on" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_DEB_MAN_CLK_GATE" width="1" begin="10" end="10" resetval="0x0" description="0 : De-blocker clock on" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_VLC_MAN_CLK_GATE" width="1" begin="9" end="9" resetval="0x0" description="0 : VLC clock on" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_PREFETCH_MAN_CLK_GATE" width="1" begin="8" end="8" resetval="0x0" description="0 : Prefetch sequencer clock on" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_JMCOMP_MAN_CLK_GATE" width="1" begin="7" end="7" resetval="0x0" description="0 : JMCOMP clock on" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_H264COMP16X16_MAN_CLK_GATE" width="1" begin="6" end="6" resetval="0x0" description="0 : H264COMP 16x16 clock on" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_H264COMP8X8_MAN_CLK_GATE" width="1" begin="5" end="5" resetval="0x0" description="0 : H264COMP 8x8 clock on" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_H264COMP4X4_MAN_CLK_GATE" width="1" begin="4" end="4" resetval="0x0" description="0 : H264COMP 4x4 clock on" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_SPE1_MAN_CLK_GATE" width="1" begin="3" end="3" resetval="0x0" description="0 : SPE 1 clock on" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_SPE0_MAN_CLK_GATE" width="1" begin="2" end="2" resetval="0x0" description="0 : SPE 0 clock on" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_IPE1_MAN_CLK_GATE" width="1" begin="1" end="1" resetval="0x0" description="0 : IPE 1 clock on" range="" rwaccess="RW"/>
+    <bitfield id="CR_TOPAZHP_IPE0_MAN_CLK_GATE" width="1" begin="0" end="0" resetval="0x0" description="0 : IPE 0 clock on" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_TOPAZHP_REQ_PRIORITY" acronym="ENCODER0_CR_TOPAZHP_REQ_PRIORITY" offset="0x2C" width="32" description="This register controls the setting of the mem_req_priority output. The request priority output is not aligned to any individual memory transaction but indicates to the bus fabric that the master is not being supplied with enough memory bandwidth to operate at the required performance. A performance counter is incremented every clock cycle that the TopazHP pipeline is active. For every macroblock that is completed (at the VLC stage) the performance counter is decremented by a configurable value (REQ_PRIORITY_DECR). The performance counter is cleared at the end of each slice. The performance counter value is compared to a configurable threshold (REQ_PRIORITY_THRESH) and when the threshold is exceeded the mem_req_priority output for this TopazHP pipe is set. The mem_req_priority output is cleared when the performance counter value falls below the threshold. The external mem_req_priority output to the bus fabric is set when any of the TopazHP pipelines has its individual mem_req_priority output set. The performance counter is clipped to the range {0,1048560} to prevent the counter value from overflowing or underflowing. When the threshold is set to the maximum value (default) the performance counter is disabled (set to zero) and the mem_req_priority output is cleared.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_REQ_PRIORITY_DECR" width="12" begin="27" end="16" resetval="0x640" description="Programmable decrement value for performance counter in the range {0,4095}" range="" rwaccess="RW"/>
+    <bitfield id="CR_REQ_PRIORITY_THRESH" width="16" begin="15" end="0" resetval="0xFFFF" description="Programmable theshold with step size 16 giving range {0,1048560}" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_TOPAZHP_RTM" acronym="ENCODER0_CR_TOPAZHP_RTM" offset="0x30" width="32" description="Defines the output of ports used for real time monitoring.">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_RTM_SELECT_B_MODULE" width="4" begin="13" end="10" resetval="0xD" description="Selects the module driving the RTM bus B" range="" rwaccess="RW"/>
+    <bitfield id="CR_RTM_SELECT_B" width="3" begin="9" end="7" resetval="0x0" description="Selects the signals to be monitored from each module" range="" rwaccess="RW"/>
+    <bitfield id="CR_RTM_SELECT_A_MODULE" width="4" begin="6" end="3" resetval="0xD" description="Selects the module driving the RTM bus A" range="" rwaccess="RW"/>
+    <bitfield id="CR_RTM_SELECT_A" width="3" begin="2" end="0" resetval="0x0" description="Selects the signals to be monitored from each module" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_TOPAZHP_RTM_VALUE" acronym="ENCODER0_CR_TOPAZHP_RTM_VALUE" offset="0x34" width="32" description="Provides register read access to the values on the RTM ports.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_RTM_B" width="8" begin="15" end="8" resetval="0x0" description="Value on RTM port B" range="" rwaccess="R"/>
+    <bitfield id="CR_RTM_A" width="8" begin="7" end="0" resetval="0x0" description="Value on RTM port A" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_TOPAZHP_MB_PERFORMANCE_RESULT" acronym="ENCODER0_CR_TOPAZHP_MB_PERFORMANCE_RESULT" offset="0x38" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZ_MB_PERFORMANCE_RESULT" width="16" begin="15" end="0" resetval="0x0" description="Maximum TopazHP cycle count [cycle counted from VLC start to next VLC start]" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_TOPAZHP_MB_PERFORMANCE_MB_NUMBER" acronym="ENCODER0_CR_TOPAZHP_MB_PERFORMANCE_MB_NUMBER" offset="0x3C" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_TOPAZ_MB_PERFORMANCE_MB_NUM" width="16" begin="15" end="0" resetval="0x0" description="Macroblock number on which worst case cycle occurred" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_LRITC_TILE_USE_CONFIG" acronym="ENCODER0_CR_LRITC_TILE_USE_CONFIG" offset="0x40" width="32" description="These fields can be used to stop a disproportionate number of tiles being allocated to one plane, which would then starve other planes of tiles. The default configuration for the core is to have 32 tiles available. On an I-frame, the integer motion search can read luma from a reference frame to update the motion search vector field, and therefore all the tiles can be allocated to PIC0_LUMA. In a P-picture with 1 reference frame, more tiles should be allocated to luma, but some tiles should be kept available for chroma, so therefore MAX_PIC0_LUMA may be set to 28, and MAX_PIC0_CHROMA may be set to 8 (where the sum of the thresholds may be greater than the total number of tiles available). For a B-picture, or a P-picture with 2 reference frames, typically PIC0 and PIC1 should be balanced (although more tiles may be alocated to the frame which is further away because the MVs will tend to be larger). It may be desirable to set MAX_PIC0_LUMA and MAX_PIC1_LUMA to 16, and set MAX_PIC0_CHROMA and MAX_PIC1_CHROMA to 8.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_MAX_PIC1_CHROMA_TILES" width="6" begin="29" end="24" resetval="0x0" description="Maximum number of tiles allowed to be allocated to reference picture 1 chroma" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="23" end="22" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_MAX_PIC0_CHROMA_TILES" width="6" begin="21" end="16" resetval="0x0" description="Maximum number of tiles allowed to be allocated to reference picture 0 chroma" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_MAX_PIC1_LUMA_TILES" width="6" begin="13" end="8" resetval="0x0" description="Maximum number of tiles allowed to be allocated to reference picture 1 luma" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="7" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_MAX_PIC0_LUMA_TILES" width="6" begin="5" end="0" resetval="0x0" description="Maximum number of tiles allowed to be allocated to reference picture 0 luma" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_LRITC_TILE_USE_STATUS" acronym="ENCODER0_CR_LRITC_TILE_USE_STATUS" offset="0x48" width="32" description="">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_PIC1_CHROMA_TILES" width="6" begin="29" end="24" resetval="0x0" description="Number of tiles currently allocated to reference picture 1 chroma" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="2" begin="23" end="22" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_PIC0_CHROMA_TILES" width="6" begin="21" end="16" resetval="0x0" description="Number of tiles currently allocated to reference picture 0 chroma" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_PIC1_LUMA_TILES" width="6" begin="13" end="8" resetval="0x0" description="Number of tiles currently allocated to reference picture 1 luma" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="2" begin="7" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_PIC0_LUMA_TILES" width="6" begin="5" end="0" resetval="0x0" description="Number of tiles currently allocated to reference picture 0 luma" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_LRITC_TILE_FREE_STATUS" acronym="ENCODER0_CR_LRITC_TILE_FREE_STATUS" offset="0x4C" width="32" description="">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_REALLOCATABLE_TILES" width="6" begin="13" end="8" resetval="0x0" description="Number of tiles currently allocated, but which are available for re-allocation" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="2" begin="7" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_FREE_TILES" width="6" begin="5" end="0" resetval="0x20" description="Number of tiles currently not allocated" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_LRITC_CACHE_CHUNK_CONFIG" acronym="ENCODER0_CR_LRITC_CACHE_CHUNK_CONFIG" offset="0x50" width="32" description="">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CACHE_CHUNKS_PER_MB" width="8" begin="23" end="16" resetval="0x40" description="Average number of cache requests allowed per macroblock" range="" rwaccess="RW"/>
+    <bitfield id="CR_CACHE_CHUNKS_MAX" width="8" begin="15" end="8" resetval="0xA0" description="Threshold above which some IPE 16x16 requests are not allowed to request data from host memory" range="" rwaccess="RW"/>
+    <bitfield id="CR_CACHE_CHUNKS_PRIORITY" width="8" begin="7" end="0" resetval="0x60" description="Threshold above which low priority IPE 8x8 requests are not allowed to request data from host memory" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_LRITC_CACHE_CHUNK_STATUS" acronym="ENCODER0_CR_LRITC_CACHE_CHUNK_STATUS" offset="0x54" width="32" description="">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CACHE_REQUEST_COUNT" width="8" begin="7" end="0" resetval="0x0" description="Count of cache requests issued [increments each time a cache chunk is requested, decremented by CACHE_CHUNKS_PER_MB at the end of each macroblock]" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_LRITC_SIGNATURE_ADDR" acronym="ENCODER0_CR_LRITC_SIGNATURE_ADDR" offset="0x58" width="32" description="">
+    <bitfield id="CR_LRITC_SIGNATURE_ADDR" width="32" begin="31" end="0" resetval="0x0" description="Signature analysis for address used in read form external host memory" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_LRITC_SIGNATURE_RDATA" acronym="ENCODER0_CR_LRITC_SIGNATURE_RDATA" offset="0x5C" width="32" description="">
+    <bitfield id="CR_LRITC_SIGNATURE_RDATA" width="32" begin="31" end="0" resetval="0x0" description="Signature analysis for data read form external host memory" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_MEM_SIGNATURE_CONTROL" acronym="ENCODER0_CR_MEM_SIGNATURE_CONTROL" offset="0x60" width="32" description="Control register which selects which tag Signature analysis should be applied to. Used for test only.">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_SIGNATURE_ADDR_INIT" width="1" begin="21" end="21" resetval="0x0" description="1 : Clear MEM_SIGNATURE_ENC_ADDR CRC" range="" rwaccess="RW"/>
+    <bitfield id="CR_SIGNATURE_ADDR_SEL" width="5" begin="20" end="16" resetval="0x0" description="Selects tag of signature analysis module to read from, signature analysis modules divided memory reads based on tag [the sequence of accesses for different tags is not fixed, so cannot generate single signature for all accesses reliably." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_SIGNATURE_RDATA_INIT" width="1" begin="12" end="12" resetval="0x0" description="1 : Clear MEM_SIGNATURE_ENC_RDATA CRC" range="" rwaccess="RW"/>
+    <bitfield id="CR_SIGNATURE_RDATA_SEL" width="4" begin="11" end="8" resetval="0x0" description="Selects tag to which signature analysis of data read from external host memory is applied [the sequence of reads for different tags is not fixed, so cannot generate single signature for all reads reliably]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_SIGNATURE_WDATA_INIT" width="1" begin="4" end="4" resetval="0x0" description="1 : Clear MEM_SIGNATURE_ENC_WDATA CRC" range="" rwaccess="RW"/>
+    <bitfield id="CR_SIGNATURE_WDATA_SEL" width="4" begin="3" end="0" resetval="0x0" description="Selects tag of signature analysis of data written to external host memory to read crc value from [the sequence of writes for different tags is not fixed, so cannot generate single signature for all writes reliably]" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_MEM_SIGNATURE_ENC_WDATA" acronym="ENCODER0_CR_MEM_SIGNATURE_ENC_WDATA" offset="0x64" width="32" description="Signature analysis on data written to external memory (for selected tag). Used for test only.">
+    <bitfield id="CR_MEM_SIGNATURE_ENC_WDATA" width="32" begin="31" end="0" resetval="0x0" description="Signature analysis for data written to external host memory for tag selected by SIGNATURE_WDATA_SEL" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_MEM_SIGNATURE_ENC_RDATA" acronym="ENCODER0_CR_MEM_SIGNATURE_ENC_RDATA" offset="0x68" width="32" description="Signature analysis on data read from external memory (for selected tag). Used for test only.">
+    <bitfield id="CR_MEM_SIGNATURE_ENC_RDATA" width="32" begin="31" end="0" resetval="0x0" description="Signature analysis for data read from external host memory for tag selected by SIGNATURE_RDATA_SEL" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_MEM_SIGNATURE_ENC_ADDR" acronym="ENCODER0_CR_MEM_SIGNATURE_ENC_ADDR" offset="0x6C" width="32" description="Signature analysis on address read/written from/to external memory (for selected tag). Used for test only.">
+    <bitfield id="CR_MEM_SIGNATURE_ENC_ADDR" width="32" begin="31" end="0" resetval="0x0" description="Signature analysis for addresses transmitted to external host memory for tag selected by SIGNATURE_ADDR_SEL" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_PREFETCH_LRITC_SIGNATURE" acronym="ENCODER0_CR_PREFETCH_LRITC_SIGNATURE" offset="0x70" width="32" description="Signature analysis on MV candidates sent to LRITC. Used for test only.">
+    <bitfield id="CR_PREFETCH_LRITC_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature analysis for MV candidates sent to LRITC." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_PROC_DMA_CONTROL" acronym="ENCODER0_CR_PROC_DMA_CONTROL" offset="0xE0" width="32" description="If the DMA engine is currently idle, a write to DMA control register (with DMA_SIZE &amp;gt; 0) will initiate a DMA transfer. If the DMA engine is currently active (DMA_SIZE_STATUS &amp;gt; 0), the write will trigger a new transfer as soon as current transfer completes. At the start of a DMA transfer, the fields from PROC_DMA_CONTROL are transferred into PROC_DMA_STATUS, and DMA_SIZE field is cleared to 0. When a transfer completes, DMA_SIZE_STATUS is cleared to 0.">
+    <bitfield id="RESERVED" width="6" begin="31" end="26" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_DMA_SYS_ADDR_SEL" width="1" begin="25" end="25" resetval="0x0" description="0 : Use SEQ_CUR_PIC_LUMA_BASE_ADDR and CUR_PIC_LUMA_STRIDE to define address of access in host memory" range="" rwaccess="RW"/>
+    <bitfield id="CR_DMA_READ_NWRITE" width="1" begin="24" end="24" resetval="0x0" description="0 : Read from ESB RAM and write to host memory" range="" rwaccess="RW"/>
+    <bitfield id="CR_DMA_ESB_ADDR" width="8" begin="23" end="16" resetval="0x0" description="Address data transferred to/from ESB RAM" range="" rwaccess="RW"/>
+    <bitfield id="CR_DMA_SIZE" width="8" begin="15" end="8" resetval="0x0" description="Number of transfers to make" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="7" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_DMA_FORMAT" width="3" begin="2" end="0" resetval="0x0" description="Format of data in host memory" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_PROC_DMA_STATUS" acronym="ENCODER0_CR_PROC_DMA_STATUS" offset="0xE4" width="32" description="">
+    <bitfield id="RESERVED" width="6" begin="31" end="26" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_DMA_SYS_ADDR_SEL_STATUS" width="1" begin="25" end="25" resetval="0x0" description="0 : Use SEQ_CUR_PIC_LUMA_BASE_ADDR and CUR_PIC_LUMA_STRIDE to define address of access in host memory" range="" rwaccess="R"/>
+    <bitfield id="CR_DMA_READ_NWRITE_STATUS" width="1" begin="24" end="24" resetval="0x0" description="0 : Read from ESB RAM and write to host memory" range="" rwaccess="R"/>
+    <bitfield id="CR_DMA_ESB_ADDR_STATUS" width="8" begin="23" end="16" resetval="0x0" description="Address data transferred to/from ESB RAM" range="" rwaccess="R"/>
+    <bitfield id="CR_DMA_SIZE_STATUS" width="8" begin="15" end="8" resetval="0x0" description="Number of transfers to make" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="7" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_DMA_FORMAT_STATUS" width="3" begin="2" end="0" resetval="0x0" description="Format of data in host memory" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_PROC_ESB_ACCESS_CONTROL" acronym="ENCODER0_CR_PROC_ESB_ACCESS_CONTROL" offset="0xEC" width="32" description="The processor/host can use this register to read/write a 128-bit word of ESB memory to/from the ESB_ACCESS_WORD registers. A write to this register can trigger a read or write of ESB RAM (where hardware should stall the write to this register until the corresponding read/write from/to ESB RAM occurs). When using this register to read from the ESB, the firmware must wait for the DMA_SIZE_STATUS field of the PROC_DMA_STATUS register to become zero before the data in the PROC_ESB_ACCESS_WORD registers becomes valid.">
+    <bitfield id="RESERVED" width="6" begin="31" end="26" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_PROC_ACCESS_FLAG" width="2" begin="25" end="24" resetval="0x0" description="Software only flags which could be used to control how/what uses ESB_ACCESS registers" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="23" end="18" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_PROC_ESB_OP_VALID" width="1" begin="17" end="17" resetval="0x0" description="Writing 1 triggers read/write operation from/to ESB RAM." range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC_ESB_READ_N_WRITE" width="1" begin="16" end="16" resetval="0x0" description="Writing 1 to both PROC_ESB_OP_VALID and PROC_ESB_READ_N_WRITE triggers a read from ESB RAM, where the" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_PROC_ESB_ADDR" width="10" begin="13" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="3" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_PROC_ESB_ACCESS_WORD0" acronym="ENCODER0_CR_PROC_ESB_ACCESS_WORD0" offset="0xF0" width="32" description="">
+    <bitfield id="CR_PROC_ESB_WORD0" width="32" begin="31" end="0" resetval="0x0" description="The 32 LSBits of 128-bit word read/written to ESB RAM." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_PROC_ESB_ACCESS_WORD1" acronym="ENCODER0_CR_PROC_ESB_ACCESS_WORD1" offset="0xF4" width="32" description="">
+    <bitfield id="CR_PROC_ESB_WORD1" width="32" begin="31" end="0" resetval="0x0" description="Bits 63:32 of 128-bit word read/written to ESB RAM." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_PROC_ESB_ACCESS_WORD2" acronym="ENCODER0_CR_PROC_ESB_ACCESS_WORD2" offset="0xF8" width="32" description="">
+    <bitfield id="CR_PROC_ESB_WORD2" width="32" begin="31" end="0" resetval="0x0" description="Bits 95:64 of 128-bit word read/written to ESB RAM." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_PROC_ESB_ACCESS_WORD3" acronym="ENCODER0_CR_PROC_ESB_ACCESS_WORD3" offset="0xFC" width="32" description="">
+    <bitfield id="CR_PROC_ESB_WORD3" width="32" begin="31" end="0" resetval="0x0" description="The 32 MSBits of 128-bit word read/written to ESB RAM." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SEQ_CUR_PIC_LUMA_BASE_ADDR" acronym="ENCODER0_CR_SEQ_CUR_PIC_LUMA_BASE_ADDR" offset="0x100" width="32" description="">
+    <bitfield id="CR_CUR_PIC_LUMA_BASE_ADDR" width="28" begin="31" end="4" resetval="0x0" description="Base address for the Luma plane of the picture to be encoded [always aligned to" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="3" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_SEQ_CUR_PIC_CB_BASE_ADDR" acronym="ENCODER0_CR_SEQ_CUR_PIC_CB_BASE_ADDR" offset="0x104" width="32" description="">
+    <bitfield id="CR_CUR_PIC_CB_BASE_ADDR" width="28" begin="31" end="4" resetval="0x0" description="Base address for the Cb plane of the picture to be encoded, or base address of Chroma plane if Chroma is interleaved [always aligned to" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="3" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_SEQ_CUR_PIC_CR_BASE_ADDR" acronym="ENCODER0_CR_SEQ_CUR_PIC_CR_BASE_ADDR" offset="0x108" width="32" description="">
+    <bitfield id="CR_CUR_PIC_CR_BASE_ADDR" width="28" begin="31" end="4" resetval="0x0" description="Base address for the Cr plane of the picture to be encoded [not used if Chroma is interleaved] [always aligned to" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="3" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_SEQ_CUR_PIC_ROW_STRIDE" acronym="ENCODER0_CR_SEQ_CUR_PIC_ROW_STRIDE" offset="0x10C" width="32" description="">
+    <bitfield id="CR_CUR_PIC_CHROMA_STRIDE" width="10" begin="31" end="22" resetval="0x0" description="Chroma row stride of picture to be encoded [in" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="21" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CUR_PIC_LUMA_STRIDE" width="10" begin="15" end="6" resetval="0x0" description="Luma row stride of picture to be encoded [in" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="5" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_SEQ_REF_PIC0_LUMA_BASE_ADDR" acronym="ENCODER0_CR_SEQ_REF_PIC0_LUMA_BASE_ADDR" offset="0x110" width="32" description="">
+    <bitfield id="CR_REF_PIC0_LUMA_BASE_ADDR" width="24" begin="31" end="8" resetval="0x0" description="Base address for the Luma plane of reference picture 0 [base address defined in multiple of 256 bytes]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_SEQ_REF_PIC0_CHROMA_BASE_ADDR" acronym="ENCODER0_CR_SEQ_REF_PIC0_CHROMA_BASE_ADDR" offset="0x114" width="32" description="">
+    <bitfield id="CR_REF_PIC0_CHROMA_BASE_ADDR" width="24" begin="31" end="8" resetval="0x0" description="Base address for the Chroma plane of reference picture 0 [base address defined in multiple of 256 bytes]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_SEQ_REF_PIC1_LUMA_BASE_ADDR" acronym="ENCODER0_CR_SEQ_REF_PIC1_LUMA_BASE_ADDR" offset="0x118" width="32" description="">
+    <bitfield id="CR_REF_PIC1_LUMA_BASE_ADDR" width="24" begin="31" end="8" resetval="0x0" description="Base address for the Luma plane of reference picture 1 [base address defined in multiple of 256 bytes]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_SEQ_REF_PIC1_CHROMA_BASE_ADDR" acronym="ENCODER0_CR_SEQ_REF_PIC1_CHROMA_BASE_ADDR" offset="0x11C" width="32" description="">
+    <bitfield id="CR_REF_PIC1_CHROMA_BASE_ADDR" width="24" begin="31" end="8" resetval="0x0" description="Base address for the Chroma plane of reference picture 1 [base address defined in multiple of 256 bytes]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_SEQ_CUR_PIC_CONFIG" acronym="ENCODER0_CR_SEQ_CUR_PIC_CONFIG" offset="0x120" width="32" description="">
+    <bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CUR_VERTICAL_MIRROR" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_CUR_HORIZONTAL_MIRROR" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_CUR_TRANSPOSE" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="3" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_SEQ_CUR_PIC_EXT_FETCH" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SEQ_CUR_PIC_SIZE" acronym="ENCODER0_CR_SEQ_CUR_PIC_SIZE" offset="0x124" width="32" description="">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CUR_PIC_HEIGHT_MBS_MIN1" width="8" begin="23" end="16" resetval="0x0" description="1 less than height of picture to be encoded in macroblocks [i.e." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CUR_PIC_WIDTH_MBS_MIN1" width="8" begin="7" end="0" resetval="0x0" description="1 less than width of picture to be encoded in macroblocks [i.e." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SEQ_RECON_LUMA_BASE_ADDR" acronym="ENCODER0_CR_SEQ_RECON_LUMA_BASE_ADDR" offset="0x128" width="32" description="">
+    <bitfield id="CR_RECON_LUMA_BASE_ADDR" width="24" begin="31" end="8" resetval="0x0" description="Base address for the Luma plane of the reconstructed picture generated by the encoding process [where the reconstructed picture could be used as a reference picture when encoding future frames] [base address defined in multiple of 256 bytes]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_SEQ_RECON_CHROMA_BASE_ADDR" acronym="ENCODER0_CR_SEQ_RECON_CHROMA_BASE_ADDR" offset="0x12C" width="32" description="">
+    <bitfield id="CR_RECON_CHROMA_BASE_ADDR" width="24" begin="31" end="8" resetval="0x0" description="Base address for the Chroma plane of the reconstructed picture generated by the encoding process [where the reconstructed picture could be used as a reference picture when encoding future frames] [base address defined in multiple of 256 bytes]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_SEQ_ABOVE_PARAM_BASE_ADDR" acronym="ENCODER0_CR_SEQ_ABOVE_PARAM_BASE_ADDR" offset="0x130" width="32" description="">
+    <bitfield id="CR_ABOVE_PARAM_BASE_ADDR" width="26" begin="31" end="6" resetval="0x0" description="Base address for the Above parameters [where parameters for a row of macroblocks are stored to be used in the encoding of the next row] [base address defined in multiple of 64 bytes]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="5" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_SEQ_TEMPORAL_COLOCATED_IN_ADDR" acronym="ENCODER0_CR_SEQ_TEMPORAL_COLOCATED_IN_ADDR" offset="0x134" width="32" description="">
+    <bitfield id="CR_TEMPORAL_COLOC_IN_ADDR" width="26" begin="31" end="6" resetval="0x0" description="Base address for the Temporal co-located motion vector parameters to be used in encode [base address defined in multiple of 64 bytes]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="5" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_SEQ_TEMPORAL_PIC0_MV_IN_ADDR" acronym="ENCODER0_CR_SEQ_TEMPORAL_PIC0_MV_IN_ADDR" offset="0x138" width="32" description="">
+    <bitfield id="CR_TEMPORAL_PIC0_IN_ADDR" width="26" begin="31" end="6" resetval="0x0" description="Base address for Temporal motion vectors relative to picture 0 to be used in encode [base address defined in multiple of 64 bytes]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="5" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_SEQ_TEMPORAL_PIC1_MV_IN_ADDR" acronym="ENCODER0_CR_SEQ_TEMPORAL_PIC1_MV_IN_ADDR" offset="0x13C" width="32" description="">
+    <bitfield id="CR_TEMPORAL_PIC1_IN_ADDR" width="26" begin="31" end="6" resetval="0x0" description="Base address for Temporal motion vectors relative to picture 1 to be used in encode [base address defined in multiple of 64 bytes]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="5" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_SEQ_TEMPORAL_COLOCATED_OUT_ADDR" acronym="ENCODER0_CR_SEQ_TEMPORAL_COLOCATED_OUT_ADDR" offset="0x140" width="32" description="">
+    <bitfield id="CR_TEMPORAL_COLOC_OUT_ADDR" width="26" begin="31" end="6" resetval="0x0" description="Base address for the Temporal co-located motion vector parameters written out for use in future frames [base address defined in multiple of 64 bytes]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="5" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_SEQ_TEMPORAL_PIC0_MV_OUT_ADDR" acronym="ENCODER0_CR_SEQ_TEMPORAL_PIC0_MV_OUT_ADDR" offset="0x144" width="32" description="">
+    <bitfield id="CR_TEMPORAL_PIC0_OUT_ADDR" width="26" begin="31" end="6" resetval="0x0" description="Base address for Temporal motion vectors relative to picture 0 written out for use in future frames [base address defined in multiple of 64 bytes]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="5" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_SEQ_TEMPORAL_PIC1_MV_OUT_ADDR" acronym="ENCODER0_CR_SEQ_TEMPORAL_PIC1_MV_OUT_ADDR" offset="0x148" width="32" description="">
+    <bitfield id="CR_TEMPORAL_PIC1_OUT_ADDR" width="26" begin="31" end="6" resetval="0x0" description="Base address for Temporal motion vectors relative to picture 1 written out for use in future frames [base address defined in multiple of 64 bytes]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="5" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_SEQ_MB_FIRST_STAGE_OUT_ADDR" acronym="ENCODER0_CR_SEQ_MB_FIRST_STAGE_OUT_ADDR" offset="0x14C" width="32" description="">
+    <bitfield id="CR_MB_FIRST_STAGE_OUT_ADDR" width="26" begin="31" end="6" resetval="0x0" description="Base address to write first stage macroblock data to [base address defined in multiple of 64 bytes]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="5" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_SEQ_MB_CONTROL_IN_ADDR" acronym="ENCODER0_CR_SEQ_MB_CONTROL_IN_ADDR" offset="0x150" width="32" description="">
+    <bitfield id="CR_MB_CONTROL_IN_ADDR" width="26" begin="31" end="6" resetval="0x0" description="Base address to read macroblock control data from [base address defined in multiple of 64 bytes]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="5" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_SEQUENCER_CONFIG" acronym="ENCODER0_CR_SEQUENCER_CONFIG" offset="0x154" width="32" description="">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_BEST_MVS_OUT_DISABLE" width="1" begin="30" end="30" resetval="0x0" description="Writing '1' to this bit will disable the best MV output of the multipass structure that is enabled by CR_BEST_MULTIPASS_OUT_VALID" range="" rwaccess="RW"/>
+    <bitfield id="CR_LIMIT_VLC_LATENCY" width="1" begin="29" end="29" resetval="0x0" description="0: VLC is up to 2 MBs behind h264comp" range="" rwaccess="RW"/>
+    <bitfield id="CR_BEST_MULTIPASS_OUT_VALID" width="1" begin="28" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_LRITC_REF_PIC1_EQUAL_PIC0" width="1" begin="27" end="27" resetval="0x0" description="This field is ORed with the 'REF_PIC1_EQUAL_PIC0' field, to determine if the LRITC should read two seperate pictures [if both bits are low], or read one reference picture [if either bit is set]." range="" rwaccess="RW"/>
+    <bitfield id="CR_REF_PIC1_LONG_TERM_REF" width="1" begin="26" end="26" resetval="0x0" description="0 - Reference Pic 1 is marked as a 'short-term reference' picture" range="" rwaccess="RW"/>
+    <bitfield id="CR_REF_PIC0_LONG_TERM_REF" width="1" begin="25" end="25" resetval="0x0" description="0 - Reference Pic 0 is marked as a 'short-term reference' picture" range="" rwaccess="RW"/>
+    <bitfield id="CR_SPATIAL_DIRECT" width="1" begin="24" end="24" resetval="0x0" description="0 - Direct vectors are calculated as temporal direct vectors" range="" rwaccess="RW"/>
+    <bitfield id="CR_MB_CONTROL_IN_VALID" width="1" begin="23" end="23" resetval="0x0" description="0 - Don't read in per mb control data from host" range="" rwaccess="RW"/>
+    <bitfield id="CR_FIRST_STAGE_ONLY" width="1" begin="22" end="22" resetval="0x0" description="0 - Do a full encode" range="" rwaccess="RW"/>
+    <bitfield id="CR_WRITE_MB_FIRST_STAGE_VALID" width="1" begin="21" end="21" resetval="0x0" description="0 - Don't write out any macroblock details after IPE stage" range="" rwaccess="RW"/>
+    <bitfield id="CR_CARC_ENABLE" width="1" begin="20" end="20" resetval="0x0" description="Enables content adaptive rate control - qp is modified on a macroblock by macroblock basis depending on the complexity of the input data." range="" rwaccess="RW"/>
+    <bitfield id="CR_WRITE_RECON_PIC" width="1" begin="19" end="19" resetval="0x0" description="0 : Reconstructed picture not saved [typically only for a B-picture which is not used as reference]" range="" rwaccess="RW"/>
+    <bitfield id="CR_WRITE_TEMPORAL_PIC1_BELOW_VALID" width="1" begin="18" end="18" resetval="0x0" description="0 : Don't write temporal below motion vectors for picture 1" range="" rwaccess="RW"/>
+    <bitfield id="CR_WRITE_TEMPORAL_PIC0_BELOW_VALID" width="1" begin="17" end="17" resetval="0x0" description="0 : Don't write temporal below motion vectors for picture 0" range="" rwaccess="RW"/>
+    <bitfield id="CR_WRITE_TEMPORAL_COL_VALID" width="1" begin="16" end="16" resetval="0x0" description="0 : Don't write temporal colocated motion vectors" range="" rwaccess="RW"/>
+    <bitfield id="CR_DEBLOCK_ENABLE" width="1" begin="15" end="15" resetval="0x0" description="0 : Deblocker disabled, pipeline finishes after VLC" range="" rwaccess="RW"/>
+    <bitfield id="CR_TEMPORAL_PIC1_BELOW_IN_VALID" width="1" begin="14" end="14" resetval="0x0" description="0 : Don't read temporal below motion vectors for picture 1" range="" rwaccess="RW"/>
+    <bitfield id="CR_TEMPORAL_PIC0_BELOW_IN_VALID" width="1" begin="13" end="13" resetval="0x0" description="0 : Don't read temporal below motion vectors for picture 0" range="" rwaccess="RW"/>
+    <bitfield id="CR_TEMPORAL_COL_IN_VALID" width="1" begin="12" end="12" resetval="0x0" description="0: Don't read temporal colocated motion vectors" range="" rwaccess="RW"/>
+    <bitfield id="CR_ABOVE_OUT_OF_SLICE_VALID" width="1" begin="11" end="11" resetval="0x0" description="0 : Above params from different slice not valid [e.g." range="" rwaccess="RW"/>
+    <bitfield id="CR_REF_PIC1_EQUAL_PIC0" width="1" begin="10" end="10" resetval="0x0" description="0 : IPE 1 and SPE 1 calculate MV relative to Reference picture 1" range="" rwaccess="RW"/>
+    <bitfield id="CR_REF_PIC1_VALID" width="1" begin="9" end="9" resetval="0x0" description="If REF_PIC1_EQUAL_PIC" range="" rwaccess="RW"/>
+    <bitfield id="CR_REF_PIC0_VALID" width="1" begin="8" end="8" resetval="0x0" description="0 : Reference picture 0 is not valid [typically only on first picture of encode]" range="" rwaccess="RW"/>
+    <bitfield id="CR_FIELD_MODE" width="1" begin="7" end="7" resetval="0x0" description="0 : Frame stores point to progressive frame pictures" range="" rwaccess="RW"/>
+    <bitfield id="CR_FRAME_STORE_CHROMA_SWAP" width="1" begin="6" end="6" resetval="0x0" description="Swap Cb and Cr when reading frame to be encoded" range="" rwaccess="RW"/>
+    <bitfield id="CR_FRAME_STORE_FORMAT" width="2" begin="5" end="4" resetval="0x0" description="Frame store format of frame to be encoded" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_ENCODER_STANDARD" width="3" begin="2" end="0" resetval="0x0" description="Selects standard to be used for encoding" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SLICE_CONFIG" acronym="ENCODER0_CR_SLICE_CONFIG" offset="0x158" width="32" description="">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_SLICE_TYPE" width="2" begin="17" end="16" resetval="0x0" description="Slice type" range="" rwaccess="RW"/>
+    <bitfield id="CR_SLICE_START_MB_Y" width="8" begin="15" end="8" resetval="0x0" description="Vertical offset of 1st macroblock of slice [counting from 0]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_SLICE_QP_CONFIG" acronym="ENCODER0_CR_SLICE_QP_CONFIG" offset="0x15C" width="32" description="">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_INTRA_DC_PRECISION" width="2" begin="9" end="8" resetval="0x0" description="It gives the number of Intra DC precision bits, as shown below:" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="7" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_SLICE_QPY" width="6" begin="5" end="0" resetval="0x0" description="QPy at start of slice, used by VLC to encode current QPy" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SEQUENCER_KICK" acronym="ENCODER0_CR_SEQUENCER_KICK" offset="0x160" width="32" description="Firmware writes to this register to start processing a number of macroblocks. The register is essentially double buffered, so that when the sequencer is idle, it copies SEQUENCER_KICK register into SEQUENCER_STATUS. While hardware is still active processing macroblocks defined by SEQUENCER_STATUS, firmware can write new value into SEQUENCER_KICK. For JPEG, this register defines number of 8x8 blocks to process, but firmware is responsible for using DMA engine to transfer blocks into ESB RAM before giving kick to this register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_FORCE_INTRA" width="1" begin="29" end="29" resetval="0x0" description="1 : Encode all macroblocks in kick as Intra macroblocks" range="" rwaccess="RW"/>
+    <bitfield id="CR_FORCE_SKIP" width="1" begin="28" end="28" resetval="0x0" description="1 : Encode all macroblocks in kick as skipped macroblocks" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="27" end="27" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_KICK_END_OF_PICTURE" width="1" begin="26" end="26" resetval="0x0" description="Should only be set to 1 when END_OF_SLICE is also set." range="" rwaccess="RW"/>
+    <bitfield id="CR_KICK_END_OF_SLICE" width="1" begin="25" end="25" resetval="0x0" description="1 : Last macroblock of kick is also last macroblock of a slice" range="" rwaccess="RW"/>
+    <bitfield id="CR_KICK_START_OF_SLICE" width="1" begin="24" end="24" resetval="0x0" description="1 : First macroblock of kick is also first macroblock of a slice" range="" rwaccess="RW"/>
+    <bitfield id="CR_KICK_COUNT" width="8" begin="23" end="16" resetval="0x0" description="Number of macroblocks to process in kick [should be greater than 4 to improve memory efficiency, a kick can span more than one row, a value of 0 will do nothing]." range="" rwaccess="RW"/>
+    <bitfield id="CR_START_MB_Y" width="8" begin="15" end="8" resetval="0x0" description="Vertical offset of 1st macroblock in kick to process [ignored for JPEG]" range="" rwaccess="RW"/>
+    <bitfield id="CR_START_MB_X" width="8" begin="7" end="0" resetval="0x0" description="Horizontal offset of 1st macroblock in kick to process." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SEQUENCER_STATUS" acronym="ENCODER0_CR_SEQUENCER_STATUS" offset="0x164" width="32" description="If LRITC_CACHE_FLUSH == 0, when KICK_COUNT_STATUS is 0, and KICK_COUNT in SEQUENCER_KICK register is non-zero, the contents of SEQUENCER_KICK are copied into SEQUENCER_STATUS, and KICK_COUNT is cleared to 0. If LRITC_CACHE_FLUSH == 1, hardware waits for previous kick to completely finish, since LRITC_CACHE_FLUSH also resets region pointers, which would corrupt anything currently being processed.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_FORCE_INTRA_STATUS" width="1" begin="29" end="29" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_FORCE_SKIP_STATUS" width="1" begin="28" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_LRITC_CACHE_FLUSH_STATUS" width="1" begin="27" end="27" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_KICK_END_OF_PICTURE_STATUS" width="1" begin="26" end="26" resetval="0x0" description="Last macroblock of kick is also last macroblock of a picture" range="" rwaccess="R"/>
+    <bitfield id="CR_KICK_END_OF_SLICE_STATUS" width="1" begin="25" end="25" resetval="0x0" description="Last macroblock of kick is also last macroblock of a slice" range="" rwaccess="R"/>
+    <bitfield id="CR_KICK_START_OF_SLICE_STATUS" width="1" begin="24" end="24" resetval="0x0" description="First macroblock of kick is also first macroblock of a slice" range="" rwaccess="R"/>
+    <bitfield id="CR_KICK_COUNT_STATUS" width="8" begin="23" end="16" resetval="0x0" description="Number of macroblocks left to process in current kick [will automatically decrement each time motion vector calculation state machine finishes calculating vectors for a macroblock]." range="" rwaccess="R"/>
+    <bitfield id="CR_CUR_MB_Y_STATUS" width="8" begin="15" end="8" resetval="0x0" description="Vertical offset of current macroblock being processed at prefetch stage [updates at same time KICK_COUNT_STATUS decrements]." range="" rwaccess="R"/>
+    <bitfield id="CR_CUR_MB_X_STATUS" width="8" begin="7" end="0" resetval="0x0" description="Horizontal offset of current macroblock being processed at prefetch stage [updates at same time KICK_COUNT_STATUS decrements]." range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_SEQ_BEST_MULTIPASS_OUT_ADDR" acronym="ENCODER0_CR_SEQ_BEST_MULTIPASS_OUT_ADDR" offset="0x168" width="32" description="">
+    <bitfield id="CR_BEST_MULTIPASS_OUT_ADDR" width="26" begin="31" end="6" resetval="0x0" description="Base address to write best multipass structure to [base address defined in multiple of 64 bytes]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="5" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_MVCLIP_CONFIG" acronym="ENCODER0_CR_MVCLIP_CONFIG" offset="0x16C" width="32" description="">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_MVCALC_RESTRICT_SLICE" width="1" begin="17" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_MVCALC_RESTRICT_PICTURE" width="1" begin="16" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_SLICE_END_MB_Y" width="8" begin="15" end="8" resetval="0x0" description="Vertical offset of last row of macroblocks in slice, used in constraining motion vectors to current slice area" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_MVCALC_CONFIG" acronym="ENCODER0_CR_MVCALC_CONFIG" offset="0x170" width="32" description="">
+    <bitfield id="CR_MVCALC_DUP_VEC_MARGIN" width="2" begin="31" end="30" resetval="0x0" description="Extra margin around IPE candidate vectors used to detect duplicate vector." range="" rwaccess="RW"/>
+    <bitfield id="CR_MVCALC_NO_PSEUDO_DUPLICATES" width="1" begin="29" end="29" resetval="0x0" description="Writing '1' to this bit will prevent pseudo MVs being sent to LRITC when both the candidate MV and its jittered value are duplicates" range="" rwaccess="RW"/>
+    <bitfield id="CR_MVCALC_JITTER_POINTER_RST" width="1" begin="28" end="28" resetval="0x0" description="Writing '1' to this bit resets the jitter table pointers" range="" rwaccess="RW"/>
+    <bitfield id="CR_MVCALC_IPE1_JITTER_FACTOR" width="2" begin="27" end="26" resetval="0x0" description="Jitter factor for IPE1, add one and multiply fixed jitter table, unsigned" range="" rwaccess="RW"/>
+    <bitfield id="CR_MVCALC_IPE0_JITTER_FACTOR" width="2" begin="25" end="24" resetval="0x0" description="Jitter factor for IPE0, add one and multiply fixed jitter table, unsigned" range="" rwaccess="RW"/>
+    <bitfield id="CR_MVCALC_GRID_DISABLE" width="1" begin="23" end="23" resetval="0x0" description="When set, the grid search candidates are not used" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="22" end="20" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_MVCALC_GRID_SUB_STEP" width="4" begin="19" end="16" resetval="0x4" description="Step size used if there are multiple pseudo-grid search candidates per macroblock" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_MVCALC_GRID_MB_Y_STEP" width="4" begin="11" end="8" resetval="0x3" description="Vertical step size used in pseudo-grid search algorithm" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_MVCALC_GRID_MB_X_STEP" width="4" begin="3" end="0" resetval="0x3" description="Horizontal step size used in pseudo-grid search algorithm" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_MVCALC_COLOCATED" acronym="ENCODER0_CR_MVCALC_COLOCATED" offset="0x174" width="32" description="">
+    <bitfield id="RESERVED" width="21" begin="31" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_COL_DIST_SCALE_FACT" width="11" begin="10" end="0" resetval="0x100" description="Singed scaling value in range -1024 to +1023 used to calculate direct mode motion vectors from co-located motion vector [a value of 256 uses co-located motion vector without scaling]" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_MVCALC_BELOW" acronym="ENCODER0_CR_MVCALC_BELOW" offset="0x178" width="32" description="">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_PIC1_DIST_SCALE_FACTOR" width="11" begin="26" end="16" resetval="0x100" description="Signed scaling factor in range -1024 to +1023 applied to below motion vector when calculating motion vector relative to reference picture 1" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_PIC0_DIST_SCALE_FACTOR" width="11" begin="10" end="0" resetval="0x100" description="Signed scaling factor in range -1024 to +1023 applied to below motion vector when calculating motion vector relative to reference picture 0 [intended for use when distance between frames when below motion vector was calculated is different from current distance between frames]" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_PREFETCH_QP" acronym="ENCODER0_CR_PREFETCH_QP" offset="0x17C" width="32" description="This register is used to set the requested QPy value at the start of the pipeline. Hardware keeps an internal version of requested QPy, which will propagate done the pipeline. Changes to this register will take effect at the start of the next kick.">
+    <bitfield id="RESERVED" width="17" begin="31" end="15" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_SKIPPED_CODED_SCALE_IDX" width="3" begin="14" end="12" resetval="0x0" description="Index into skipped/coded scaling table" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_INTER_INTRA_SCALE_IDX" width="3" begin="10" end="8" resetval="0x0" description="Index into Inter/Intra scaling Table" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="7" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_REQ_QPY" width="6" begin="5" end="0" resetval="0x0" description="H" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_MB_HOST_CONTROL" acronym="ENCODER0_CR_MB_HOST_CONTROL" offset="0x180" width="32" description="Specify which macroblock parameters are valid in control structure read in from host">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_MB_HOST_INTER_INTRA_SCALE" width="1" begin="2" end="2" resetval="0x0" description="0 - Inter/Intra scale table index for macroblock is specified by control registers" range="" rwaccess="RW"/>
+    <bitfield id="CR_MB_HOST_SKIPPED_CODED_SCALE" width="1" begin="1" end="1" resetval="0x0" description="0 - Skipped/Coded cost scaling for macroblock is specified by control registers" range="" rwaccess="RW"/>
+    <bitfield id="CR_MB_HOST_QP" width="1" begin="0" end="0" resetval="0x0" description="0 - Requested QP for macroblock [before CARC] is specified by control register [CR_REQ_QPY]" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_H264COMP_REJECT_THRESHOLD" acronym="ENCODER0_CR_H264COMP_REJECT_THRESHOLD" offset="0x184" width="32" description="">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_8X8_REJECT_THRSHLD" width="6" begin="13" end="8" resetval="0x0" description="Threshold used to decide whether a 8x8 sub-block residual should be coded" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_4X4_REJECT_THRSHLD" width="5" begin="4" end="0" resetval="0x0" description="Threshold used to decide whether a 4x4 sub-block residual should be coded" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_FIELD_PARITY" acronym="ENCODER0_CR_FIELD_PARITY" offset="0x188" width="32" description="">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_REF_PIC1_PARITY" width="1" begin="2" end="2" resetval="0x0" description="0 - Top Field" range="" rwaccess="RW"/>
+    <bitfield id="CR_REF_PIC0_PARITY" width="1" begin="1" end="1" resetval="0x0" description="0 - Top Field" range="" rwaccess="RW"/>
+    <bitfield id="CR_CUR_PIC_PARITY" width="1" begin="0" end="0" resetval="0x0" description="0 - Top field" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_H264COMP_CUSTOM_QUANT_SP" acronym="ENCODER0_CR_H264COMP_CUSTOM_QUANT_SP" offset="0x1A0" width="32" description="This register is written repeatedly to store the Sp values for the Custom Quantisation Matrix. Two Sp values at a time are stored. The Sp values should be provided in raster order, with the 16 values for the 4x4 intra luma matrix provided first, followed by the 16 values for the 4x4 inter luma matrix, followed by the 16 values for the 4x4 intra Cb matrix, followed by the 16 values for the 4x4 inter Cb matrix, followed by the 16 values for the 4x4 intra Cr matrix, followed by the 16 values for the 4x4 inter Cr matrix, followed by the 64 values for the 8x8 intra luma matrix, followed by the 64 values for the 8x8 inter luma matrix. The 8x8 values do not need to be stored if use of the 8x8 transform is disabled. To store the full set of Sp values takes 112 register write accesses. To store only the 4x4 values takes 48 register write accesses. The format of this register is arranged such that Sp values packed 1 per 2 bytes in memory may be directly copied into the register.When read this register always returns 0x00000000.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_CUSTOM_QUANT_SP_1" width="14" begin="29" end="16" resetval="0x0" description="Sp value for Custom Quantisation Matrix." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_CUSTOM_QUANT_SP_0" width="14" begin="13" end="0" resetval="0x0" description="Sp value for Custom Quantisation Matrix." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_H264COMP_CUSTOM_QUANT_Q" acronym="ENCODER0_CR_H264COMP_CUSTOM_QUANT_Q" offset="0x1A4" width="32" description="This register is written repeatedly to store the Q values for the Custom Quantisation Matrix. Four Q values at a time are stored. The Q values should be provided in raster order, with the 16 values for the 4x4 intra luma matrix provided first, followed by the 16 values for the 4x4 inter luma matrix, followed by the 16 values for the 4x4 intra Cb matrix, followed by the 16 values for the 4x4 inter Cb matrix, followed by the 16 values for the 4x4 intra Cr matrix, followed by the 16 values for the 4x4 inter Cr matrix, followed by the 64 values for the 8x8 intra luma matrix, followed by the 64 values for the 8x8 inter luma matrix. The 8x8 values do not need to be stored if use of the 8x8 transform is disabled. To store the full set of Q values takes 56 register write accesses. To store only the 4x4 values takes 24 register write accesses. The format of this register is arranged such that Q values packed 1 per byte in memory may be directly copied into the register.When read this register always returns 0x00000000.">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_CUSTOM_QUANT_Q_3" width="7" begin="30" end="24" resetval="0x0" description="Q value for Custom Quantisation Matrix." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_CUSTOM_QUANT_Q_2" width="7" begin="22" end="16" resetval="0x0" description="Q value for Custom Quantisation Matrix." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="15" end="15" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_CUSTOM_QUANT_Q_1" width="7" begin="14" end="8" resetval="0x0" description="Q value for Custom Quantisation Matrix." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_CUSTOM_QUANT_Q_0" width="7" begin="6" end="0" resetval="0x0" description="Q value for Custom Quantisation Matrix." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_H264COMP_CONTROL" acronym="ENCODER0_CR_H264COMP_CONTROL" offset="0x1A8" width="32" description="">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_LOSSLESS_8X8_PREFILTER" width="1" begin="17" end="17" resetval="0x0" description="Controls whether the pre-filter operation should be performed as part of the Intra8x8 prediction in Lossless Mode." range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_LOSSLESS" width="1" begin="16" end="16" resetval="0x0" description="Controls support of lossless encoding in H.264." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="15" end="15" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_CUSTOM_QUANT_4X4_INTRA_LUMA_ENABLE" width="1" begin="14" end="14" resetval="0x0" description="Controls the use of Custom Quantisation Tables for the following block types:" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_CUSTOM_QUANT_4X4_INTRA_CB_ENABLE" width="1" begin="13" end="13" resetval="0x0" description="Controls the use of Custom Quantisation Tables for the following block types:" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_CUSTOM_QUANT_4X4_INTRA_CR_ENABLE" width="1" begin="12" end="12" resetval="0x0" description="Controls the use of Custom Quantisation Tables for the following block types:" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_CUSTOM_QUANT_8X8_INTRA_LUMA_ENABLE" width="1" begin="11" end="11" resetval="0x0" description="Controls the use of Custom Quantisation Tables for the following block types:" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_CUSTOM_QUANT_4X4_INTER_LUMA_ENABLE" width="1" begin="10" end="10" resetval="0x0" description="Controls the use of Custom Quantisation Tables for the following block types:" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_CUSTOM_QUANT_4X4_INTER_CB_ENABLE" width="1" begin="9" end="9" resetval="0x0" description="Controls the use of Custom Quantisation Tables for the following block types:" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_CUSTOM_QUANT_4X4_INTER_CR_ENABLE" width="1" begin="8" end="8" resetval="0x0" description="Controls the use of Custom Quantisation Tables for the following block types:" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_CUSTOM_QUANT_8X8_INTER_LUMA_ENABLE" width="1" begin="7" end="7" resetval="0x0" description="Controls the use of Custom Quantisation Tables for the following block types:" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_VIDEO_CONF_ENABLE" width="1" begin="5" end="5" resetval="0x0" description="0: Video conference support is disabled" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_ADAPT_ROUND_ENABLE" width="1" begin="4" end="4" resetval="0x0" description="0: Use Fixed Rounding" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_DEFAULT_SCALING_LIST" width="1" begin="3" end="3" resetval="0x0" description="Controls the choice between FLAT and DEFAULT scaling lists." range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_8X8_CAVLC" width="1" begin="2" end="2" resetval="0x0" description="0: If transform size is 8x8, CABAC mode is used, so don't need to re-order block coefficients into 4x4 blocks." range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_CONSTRAINED_INTRA" width="1" begin="1" end="1" resetval="0x0" description="0: Intra prediction can use boundary pixels from Inter MBs" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_8X8_TRANSFORM" width="1" begin="0" end="0" resetval="0x0" description="0: Use 4x4 transform for Inter MB, disable Luma Intra 8x8 prediction" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_H264COMP_INTRA_PRED_MODES" acronym="ENCODER0_CR_H264COMP_INTRA_PRED_MODES" offset="0x1AC" width="32" description="">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_CHROMA_PLANE_ENABLE" width="1" begin="17" end="17" resetval="0x1" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_16X16_PLANE_ENABLE" width="1" begin="16" end="16" resetval="0x1" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_8X8_HUP_ENABLE" width="1" begin="15" end="15" resetval="0x1" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_8X8_VLEFT_ENABLE" width="1" begin="14" end="14" resetval="0x1" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_8X8_HDOWN_ENABLE" width="1" begin="13" end="13" resetval="0x1" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_8X8_VRIGHT_ENABLE" width="1" begin="12" end="12" resetval="0x1" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_8X8_DDR_ENABLE" width="1" begin="11" end="11" resetval="0x1" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_8X8_DDL_ENABLE" width="1" begin="10" end="10" resetval="0x1" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_8X8_HORIZONTAL_ENABLE" width="1" begin="9" end="9" resetval="0x1" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_8X8_VERTICAL_ENABLE" width="1" begin="8" end="8" resetval="0x1" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_4X4_HUP_ENABLE" width="1" begin="7" end="7" resetval="0x1" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_4X4_VLEFT_ENABLE" width="1" begin="6" end="6" resetval="0x1" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_4X4_HDOWN_ENABLE" width="1" begin="5" end="5" resetval="0x1" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_4X4_VRIGHT_ENABLE" width="1" begin="4" end="4" resetval="0x1" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_4X4_DDR_ENABLE" width="1" begin="3" end="3" resetval="0x1" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_4X4_DDL_ENABLE" width="1" begin="2" end="2" resetval="0x1" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_4X4_HORIZONTAL_ENABLE" width="1" begin="1" end="1" resetval="0x1" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_4X4_VERTICAL_ENABLE" width="1" begin="0" end="0" resetval="0x1" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_H264COMP_MAX_CYCLE_COUNT" acronym="ENCODER0_CR_H264COMP_MAX_CYCLE_COUNT" offset="0x1B0" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_MAX_CYCLE_COUNT" width="16" begin="15" end="0" resetval="0x0" description="The worst case cycle count of the MB processing for the cmprs module" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_H264COMP_MAX_CYCLE_MB" acronym="ENCODER0_CR_H264COMP_MAX_CYCLE_MB" offset="0x1B4" width="32" description="">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_MAX_CYCLE_MB_TYPE" width="2" begin="29" end="28" resetval="0x0" description="It indicates the MB type: I, P or B of the worst MB processing cycle number" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="27" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_MAX_CYCLE_MB_NUM" width="16" begin="15" end="0" resetval="0x0" description="Number of the macroblock with the worst MB cycle count" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_H264COMP_MAX_CYCLE_RESET" acronym="ENCODER0_CR_H264COMP_MAX_CYCLE_RESET" offset="0x1B8" width="32" description="">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_DISABLE_COUNTERS" width="1" begin="1" end="1" resetval="0x0" description="When this bit is set to a 1, the max cycle counters should not be clocked" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_MAX_CYCLE_RESET" width="1" begin="0" end="0" resetval="0x0" description="To be used by MTX to reset the max cycle registers [0x01b0 and 0x01b4]" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_H264COMP4X4_PRED_CRC" acronym="ENCODER0_CR_H264COMP4X4_PRED_CRC" offset="0x1BC" width="32" description="">
+    <bitfield id="CR_H264COMP4X4_PRED_CRC" width="32" begin="31" end="0" resetval="0x0" description="CRC value of the 4x4 prediction blocks" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_H264COMP4X4_COEFFS_CRC" acronym="ENCODER0_CR_H264COMP4X4_COEFFS_CRC" offset="0x1C0" width="32" description="">
+    <bitfield id="CR_H264COMP4X4_COEFFS_CRC" width="32" begin="31" end="0" resetval="0x0" description="CRC value of the 4x4 quantised coefficients" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_H264COMP4X4_RECON_CRC" acronym="ENCODER0_CR_H264COMP4X4_RECON_CRC" offset="0x1C4" width="32" description="">
+    <bitfield id="CR_H264COMP4X4_RECON_CRC" width="32" begin="31" end="0" resetval="0x0" description="CRC value of the 4x4 reconstructed blocks" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_H264COMP8X8_PRED_CRC" acronym="ENCODER0_CR_H264COMP8X8_PRED_CRC" offset="0x1C8" width="32" description="">
+    <bitfield id="CR_H264COMP8X8_PRED_CRC" width="32" begin="31" end="0" resetval="0x0" description="CRC value of the 8x8 prediction blocks" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_H264COMP8X8_COEFFS_CRC" acronym="ENCODER0_CR_H264COMP8X8_COEFFS_CRC" offset="0x1CC" width="32" description="">
+    <bitfield id="CR_H264COMP8X8_COEFFS_CRC" width="32" begin="31" end="0" resetval="0x0" description="CRC value of the 8x8 quantised coefficients" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_H264COMP8X8_RECON_CRC" acronym="ENCODER0_CR_H264COMP8X8_RECON_CRC" offset="0x1D0" width="32" description="">
+    <bitfield id="CR_H264COMP8X8_RECON_CRC" width="32" begin="31" end="0" resetval="0x0" description="CRC value of the 8x8 reconstructed blocks" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_H264COMP16X16_PRED_CRC" acronym="ENCODER0_CR_H264COMP16X16_PRED_CRC" offset="0x1D4" width="32" description="">
+    <bitfield id="CR_H264COMP16X16_PRED_CRC" width="32" begin="31" end="0" resetval="0x0" description="CRC value of the 16x16 prediction blocks" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_H264COMP16X16_COEFFS_CRC" acronym="ENCODER0_CR_H264COMP16X16_COEFFS_CRC" offset="0x1D8" width="32" description="">
+    <bitfield id="CR_H264COMP16X16_COEFFS_CRC" width="32" begin="31" end="0" resetval="0x0" description="CRC value of the 16x16 quantised coefficients" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_H264COMP16X16_RECON_CRC" acronym="ENCODER0_CR_H264COMP16X16_RECON_CRC" offset="0x1DC" width="32" description="">
+    <bitfield id="CR_H264COMP16X16_RECON_CRC" width="32" begin="31" end="0" resetval="0x0" description="CRC value of the 16x16 reconstructed blocks" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_H264COMP_ROUND_0" acronym="ENCODER0_CR_H264COMP_ROUND_0" offset="0x1E0" width="32" description="The rounding offset values should be written to / read from these registers between slices when the slice type is changed.A sequence of 3 reads or writes to this register should be performed in the following order: offset_1 -&amp;gt; offset_2 -&amp;gt; offset_3. Provided that a full sequence of 3 reads is performed the data stored will be left unchanged. The intra values all reset to 0x2AB (=1/3) and the inter values all reset to 0x155 (=1/6). They can also all be initialised to these values using a single write to ROUNDOFFSET_INITIALISE.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_16X16_INTER_CHROMA_ROUNDOFFSET" width="10" begin="29" end="20" resetval="0x155" description="Adaptive rounding offset values for 16x16 inter chroma." range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_16X16_INTRA_CHROMA_ROUNDOFFSET" width="10" begin="19" end="10" resetval="0x2AB" description="Adaptive rounding offset values for 16x16 intra chroma." range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_16X16_INTRA_LUMA_ROUNDOFFSET" width="10" begin="9" end="0" resetval="0x2AB" description="Adaptive rounding offset values for 16x16 intra luma." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_H264COMP_ROUND_1" acronym="ENCODER0_CR_H264COMP_ROUND_1" offset="0x1E4" width="32" description="A sequence of 4 reads or writes to this register should be performed in the following order: offset_0 -&amp;gt; offset_1 -&amp;gt; offset_2 -&amp;gt; offset_3. Provided that a full sequence of 4 reads is performed the data stored will be left unchanged. The intra values all reset to 0x2AB (=1/3). They can also all be initialised to these values using a single write to ROUNDOFFSET_INITIALISE.">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_8X8_INTRA_LUMA_ROUNDOFFSET" width="10" begin="19" end="10" resetval="0x2AB" description="Adaptive rounding offset values for 8x8 intra luma." range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_4X4_INTRA_LUMA_ROUNDOFFSET" width="10" begin="9" end="0" resetval="0x2AB" description="Adaptive rounding offset values for 4x4 intra luma." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_H264COMP_ROUND_2" acronym="ENCODER0_CR_H264COMP_ROUND_2" offset="0x1E8" width="32" description="A sequence of 4 reads or writes to this register should be performed in the following order: offset_0 -&amp;gt; offset_1 -&amp;gt; offset_2 -&amp;gt; offset_3. Provided that a full sequence of 4 reads is performed the data stored will be left unchanged. The intra values all reset to 0x155 (=1/6). They can also all be initialised to these values using a single write to ROUNDOFFSET_INITIALISE.">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_16X16_INTER_LUMA_ROUNDOFFSET" width="10" begin="19" end="10" resetval="0x155" description="Adaptive rounding offset values for 16x16 inter luma." range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_8X8_INTER_LUMA_ROUNDOFFSET" width="10" begin="9" end="0" resetval="0x155" description="Adaptive rounding offset values for 8x8 inter luma." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_H264COMP_ROUND_INIT" acronym="ENCODER0_CR_H264COMP_ROUND_INIT" offset="0x1EC" width="32" description="Writing 0x1 to this register causes all of the rounding offsets to be initialised to their default values, which are 0x2AB (=1/3) for intra, and 0x155 (=1/6) for inter.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_ROUNDOFFSET_INITIALISE" width="1" begin="0" end="0" resetval="0x0" description="0: No effect" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_H264COMP_VIDEO_CONF_CONTROL_0" acronym="ENCODER0_CR_H264COMP_VIDEO_CONF_CONTROL_0" offset="0x1F0" width="32" description="Double buffered register for configuring the macroblock size control for video conference support. The feature is disabled when H264COMP_CONTROL/H264COMP_VIDEO_CONF_ENABLE = 0. 0">
+    <bitfield id="CR_H264COMP_TARGET_HYST" width="10" begin="31" end="22" resetval="0x0" description="The number of bits below the target the used count has to be before the limit_level is decremented, see description for TARGET_MB_SIZE." range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_TARGET_MB_SIZE" width="10" begin="21" end="12" resetval="0x0" description="The target macroblock size to be achieved in bits cross a frame." range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_START_LIMIT_LEVEL" width="3" begin="11" end="9" resetval="0x0" description="Limit level to be used for the first macroblock in the BU." range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_MAX_LIMIT_LEVEL" width="3" begin="8" end="6" resetval="0x0" description="Maximum limit level to be used during the BU." range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_MIN_LIMIT_LEVEL" width="3" begin="5" end="3" resetval="0x0" description="Minimum limit level to be used during the BU." range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_FLUSH_BITCOUNTS" width="1" begin="2" end="2" resetval="0x0" description="0: The FIFO which buffers the bitcounts between the VLC and the H264comp is NOT flushed." range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_SET_START_LEVEL" width="1" begin="1" end="1" resetval="0x0" description="0: The limit level is allowed to increment or decrement depending on the bitcount target on all macroblocks in the BU, continuing on from the previous BU." range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_SET_LEVEL_RANGE" width="1" begin="0" end="0" resetval="0x0" description="0: The maximum and minimum limit level are left unchanged." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_H264COMP_VIDEO_CONF_CONTROL_1" acronym="ENCODER0_CR_H264COMP_VIDEO_CONF_CONTROL_1" offset="0x1F4" width="32" description="Double buffered register for configuring the macroblock size control for video conference support.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_TARGET_CONSTANT" width="24" begin="27" end="4" resetval="0x0" description="Constant used in the calculation of the bitrate target, see TARGET_MB_SIZE." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="3" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_INIT_USED" width="1" begin="1" end="1" resetval="0x0" description="0: The count of bits used increases as usual on every macroblock." range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_INIT_TARGET" width="1" begin="0" end="0" resetval="0x0" description="0: The bitcount target is incremented by TARGET_MB_SIZE on every macroblock." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_H264COMP_VIDEO_CONF_STATUS_0" acronym="ENCODER0_CR_H264COMP_VIDEO_CONF_STATUS_0" offset="0x1F8" width="32" description="Double buffered register providing status on how many macroblocks in the last BU were encoded at each limit level when video conference support is in use. This register will only update if video conference support is enabled.">
+    <bitfield id="CR_H264COMP_MBS_LIMIT_LEVEL_3" width="8" begin="31" end="24" resetval="0x0" description="The number of macroblocks in the last BU that were coded using LIMIT_LEVEL_3." range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_MBS_LIMIT_LEVEL_2" width="8" begin="23" end="16" resetval="0x0" description="The number of macroblocks in the last BU that were coded using LIMIT_LEVEL_2." range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_MBS_LIMIT_LEVEL_1" width="8" begin="15" end="8" resetval="0x0" description="The number of macroblocks in the last BU that were coded using LIMIT_LEVEL_1." range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_MBS_LIMIT_LEVEL_0" width="8" begin="7" end="0" resetval="0x0" description="The number of macroblocks in the last BU that were coded using LIMIT_LEVEL_0." range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_H264COMP_VIDEO_CONF_STATUS_1" acronym="ENCODER0_CR_H264COMP_VIDEO_CONF_STATUS_1" offset="0x1FC" width="32" description="Double buffered register providing status on how many macroblocks in the last BU were encoded at each limit level when video conference support is in use. This register will only update if video conference support is enabled.">
+    <bitfield id="CR_H264COMP_MBS_LIMIT_LEVEL_7" width="8" begin="31" end="24" resetval="0x0" description="The number of macroblocks in the last BU that were coded using LIMIT_LEVEL_7." range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_MBS_LIMIT_LEVEL_6" width="8" begin="23" end="16" resetval="0x0" description="The number of macroblocks in the last BU that were coded using LIMIT_LEVEL_6." range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_MBS_LIMIT_LEVEL_5" width="8" begin="15" end="8" resetval="0x0" description="The number of macroblocks in the last BU that were coded using LIMIT_LEVEL_5." range="" rwaccess="R"/>
+    <bitfield id="CR_H264COMP_MBS_LIMIT_LEVEL_4" width="8" begin="7" end="0" resetval="0x0" description="The number of macroblocks in the last BU that were coded using LIMIT_LEVEL_4." range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_IPE_CONTROL" acronym="ENCODER0_CR_IPE_CONTROL" offset="0x200" width="32" description="">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_IPE1_COSTS_CRC_SEL" width="2" begin="18" end="17" resetval="0x0" description="selects between the different crcs, can be switched wile running, all crcs exist just share register space" range="" rwaccess="RW"/>
+    <bitfield id="CR_IPE0_COSTS_CRC_SEL" width="2" begin="16" end="15" resetval="0x0" description="selects between the different crcs, can be switched wile running, all crcs exist just share register space" range="" rwaccess="RW"/>
+    <bitfield id="CR_IPE_MV_NUMBER_RESTRICTION" width="1" begin="14" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="13" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_IPE_HIGH_LATENCY" width="1" begin="12" end="12" resetval="0x0" description="0 : IPE 8x8 spatial candidates include previous 8x8 block" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="11" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_IPE_LRITC_BOUNDARY" width="2" begin="9" end="8" resetval="0x0" description="This field +1 defines number of boundary pixels LRITC needs to fetch for each block request." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_IPE_4X4_SEARCH" width="1" begin="6" end="6" resetval="0x0" description="If IPE_BLOCKSIZE enables 4x4 search" range="" rwaccess="RW"/>
+    <bitfield id="CR_IPE_Y_FINE_SEARCH" width="2" begin="5" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_IPE_8X16_ENABLE" width="1" begin="3" end="3" resetval="0x0" description="0 : Disable 8x16 motion vector block size detection" range="" rwaccess="RW"/>
+    <bitfield id="CR_IPE_16X8_ENABLE" width="1" begin="2" end="2" resetval="0x0" description="0 : Disable 16x8 motion vector block size detection" range="" rwaccess="RW"/>
+    <bitfield id="CR_IPE_BLOCKSIZE" width="2" begin="1" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_IPE_SEARCH_STATUS" acronym="ENCODER0_CR_IPE_SEARCH_STATUS" offset="0x204" width="32" description="">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_IPE1_SEARCH_STATUS" width="3" begin="18" end="16" resetval="0x0" description="000: Finished recieving candidates/Idle between MB's" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="13" begin="15" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_IPE0_SEARCH_STATUS" width="3" begin="2" end="0" resetval="0x0" description="000: Finished recieving candidates/Idle between MB's" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_IPE0_MB_COST" acronym="ENCODER0_CR_IPE0_MB_COST" offset="0x208" width="32" description="">
+    <bitfield id="CR_IPE0_INT_MVCOST" width="16" begin="31" end="16" resetval="0x0" description="Total motion vector cost for IPE 0" range="" rwaccess="RW"/>
+    <bitfield id="CR_IPE0_MB_SAD" width="16" begin="15" end="0" resetval="0x0" description="Total Sum of Absolute Differences value for IPE 0" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_IPE1_MB_COST" acronym="ENCODER0_CR_IPE1_MB_COST" offset="0x20C" width="32" description="">
+    <bitfield id="CR_IPE1_INT_MVCOST" width="16" begin="31" end="16" resetval="0x0" description="Total motion vector cost for IPE 1" range="" rwaccess="RW"/>
+    <bitfield id="CR_IPE1_MB_SAD" width="16" begin="15" end="0" resetval="0x0" description="Total Sum of Absolute Differences value for IPE 1" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_IPE0_BESTMV_CRC" acronym="ENCODER0_CR_IPE0_BESTMV_CRC" offset="0x240" width="32" description="">
+    <bitfield id="CR_IPE0_BESTMV_CRC" width="32" begin="31" end="0" resetval="0x0" description="IPE 0 CRC best mv data output." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_IPE1_BESTMV_CRC" acronym="ENCODER0_CR_IPE1_BESTMV_CRC" offset="0x244" width="32" description="">
+    <bitfield id="CR_IPE1_BESTMV_CRC" width="32" begin="31" end="0" resetval="0x0" description="IPE 1 CRC best mv data output." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_IPE0_COSTS_CRC" acronym="ENCODER0_CR_IPE0_COSTS_CRC" offset="0x248" width="32" description="">
+    <bitfield id="CR_IPE0_COSTS_CRC" width="32" begin="31" end="0" resetval="0x0" description="IPE costs crc, crc for ipe costs, there is a select register to select between 4x4, 8x8 or 16x16 costs." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_IPE1_COSTS_CRC" acronym="ENCODER0_CR_IPE1_COSTS_CRC" offset="0x24C" width="32" description="">
+    <bitfield id="CR_IPE1_COSTS_CRC" width="32" begin="31" end="0" resetval="0x0" description="IPE costs crc, for the second ipe, there is a select register to select between 4x4, 8x8 or 16x16 costs." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_IPE_MB_PERFORMANCE_CLEAR" acronym="ENCODER0_CR_IPE_MB_PERFORMANCE_CLEAR" offset="0x250" width="32" description="IPE macro block performance clear register">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_IPE_MB_PERFORMANCE_CLEAR" width="1" begin="0" end="0" resetval="0x0" description="Clear the ipe mb performance registers" range="" rwaccess="W"/>
+  </register>
+  <register id="ENCODER0_CR_IPE_MB_PERFORMANCE_RESULT" acronym="ENCODER0_CR_IPE_MB_PERFORMANCE_RESULT" offset="0x254" width="32" description="IPE macro block performance maximum cycle count (based on last done from either IPE 0 or IPE 1)">
+    <bitfield id="CR_IPE_1_MB_PERFORMANCE_RESULT" width="16" begin="31" end="16" resetval="0x0" description="Maximum IPE 1 cycle count" range="" rwaccess="R"/>
+    <bitfield id="CR_IPE_0_MB_PERFORMANCE_RESULT" width="16" begin="15" end="0" resetval="0x0" description="Maximum IPE 0 cycle count" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_IPE_MB_PERFORMANCE_MB_NUMBER" acronym="ENCODER0_CR_IPE_MB_PERFORMANCE_MB_NUMBER" offset="0x258" width="32" description="IPE macro block performance macro block number">
+    <bitfield id="CR_IPE_1_MAX_CYCLE_MB_NUM" width="16" begin="31" end="16" resetval="0x0" description="Number of macroblock with the worst case cycle count" range="" rwaccess="R"/>
+    <bitfield id="CR_IPE_0_MAX_CYCLE_MB_NUM" width="16" begin="15" end="0" resetval="0x0" description="Number of macroblock with the worst case cycle count" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_IPE_VECTOR_CLIPPING" acronym="ENCODER0_CR_IPE_VECTOR_CLIPPING" offset="0x260" width="32" description="This register contains the maximum X &amp;amp; Y vectors (normally used for MPEG4 and H263 encoding). The IPE module needs to take these values into account when searching for the best vector. This register is used by both the Prefetch Sequencer (to ensure initial candidates are within the clipping range) and by IPE (to ensure fine search and 4x4 search doesn't extend outside the clipping area), and by SPE (to ensure sub-pixel search doesn't extend outside the clipping area).">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_IPE_VECTOR_CLIPPING_ENABLED" width="1" begin="16" end="16" resetval="0x0" description="0 : Ignore IPE vector clipping registers [only clip to maximum search range supported by hardware]" range="" rwaccess="RW"/>
+    <bitfield id="CR_IPE_VECTOR_CLIPPING_Y" width="8" begin="15" end="8" resetval="0x0" description="Maximum Y vector [integer resolution]" range="" rwaccess="RW"/>
+    <bitfield id="CR_IPE_VECTOR_CLIPPING_X" width="8" begin="7" end="0" resetval="0x0" description="Maximum X vector [integer resolution]" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_CONTROL" acronym="ENCODER0_CR_JMCOMP_CONTROL" offset="0x270" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_JMCOMP_AC_ENABLE" width="1" begin="15" end="15" resetval="0x1" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="15" begin="14" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_JPEG_LUMA_PRED" acronym="ENCODER0_CR_JMCOMP_JPEG_LUMA_PRED" offset="0x278" width="32" description="">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_JMCOMP_JPEG_DC_LUMA_PRED" width="12" begin="11" end="0" resetval="0x0" description="Current Luma DC prediction" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_JPEG_CHROMA_PREDS" acronym="ENCODER0_CR_JMCOMP_JPEG_CHROMA_PREDS" offset="0x27C" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_JMCOMP_JPEG_DC_CHROMA_CR_PRED" width="12" begin="27" end="16" resetval="0x0" description="Current Cr DC prediction" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_JMCOMP_JPEG_DC_CHROMA_CB_PRED" width="12" begin="11" end="0" resetval="0x0" description="Current Cb DC prediction" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_00" acronym="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_00" offset="0x280" width="32" description="">
+    <bitfield id="CR_JMCOMP_LUMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Luma quantisation coefficients" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_01" acronym="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_01" offset="0x284" width="32" description="">
+    <bitfield id="CR_JMCOMP_LUMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Luma quantisation coefficients" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_02" acronym="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_02" offset="0x288" width="32" description="">
+    <bitfield id="CR_JMCOMP_LUMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Luma quantisation coefficients" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_03" acronym="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_03" offset="0x28C" width="32" description="">
+    <bitfield id="CR_JMCOMP_LUMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Luma quantisation coefficients" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_04" acronym="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_04" offset="0x290" width="32" description="">
+    <bitfield id="CR_JMCOMP_LUMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Luma quantisation coefficients" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_05" acronym="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_05" offset="0x294" width="32" description="">
+    <bitfield id="CR_JMCOMP_LUMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Luma quantisation coefficients" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_06" acronym="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_06" offset="0x298" width="32" description="">
+    <bitfield id="CR_JMCOMP_LUMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Luma quantisation coefficients" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_07" acronym="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_07" offset="0x29C" width="32" description="">
+    <bitfield id="CR_JMCOMP_LUMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Luma quantisation coefficients" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_08" acronym="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_08" offset="0x2A0" width="32" description="">
+    <bitfield id="CR_JMCOMP_LUMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Luma quantisation coefficients" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_09" acronym="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_09" offset="0x2A4" width="32" description="">
+    <bitfield id="CR_JMCOMP_LUMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Luma quantisation coefficients" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_10" acronym="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_10" offset="0x2A8" width="32" description="">
+    <bitfield id="CR_JMCOMP_LUMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Luma quantisation coefficients" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_11" acronym="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_11" offset="0x2AC" width="32" description="">
+    <bitfield id="CR_JMCOMP_LUMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Luma quantisation coefficients" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_12" acronym="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_12" offset="0x2B0" width="32" description="">
+    <bitfield id="CR_JMCOMP_LUMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Luma quantisation coefficients" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_13" acronym="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_13" offset="0x2B4" width="32" description="">
+    <bitfield id="CR_JMCOMP_LUMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Luma quantisation coefficients" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_14" acronym="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_14" offset="0x2B8" width="32" description="">
+    <bitfield id="CR_JMCOMP_LUMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Luma quantisation coefficients" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_15" acronym="ENCODER0_CR_JMCOMP_LUMA_QUANTISER_15" offset="0x2BC" width="32" description="">
+    <bitfield id="CR_JMCOMP_LUMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Luma quantisation coefficients" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_00" acronym="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_00" offset="0x2C0" width="32" description="">
+    <bitfield id="CR_JMCOMP_CHROMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Chroma quantisation coefficients [same coefficients used for Cb and Cr]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_01" acronym="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_01" offset="0x2C4" width="32" description="">
+    <bitfield id="CR_JMCOMP_CHROMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Chroma quantisation coefficients [same coefficients used for Cb and Cr]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_02" acronym="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_02" offset="0x2C8" width="32" description="">
+    <bitfield id="CR_JMCOMP_CHROMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Chroma quantisation coefficients [same coefficients used for Cb and Cr]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_03" acronym="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_03" offset="0x2CC" width="32" description="">
+    <bitfield id="CR_JMCOMP_CHROMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Chroma quantisation coefficients [same coefficients used for Cb and Cr]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_04" acronym="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_04" offset="0x2D0" width="32" description="">
+    <bitfield id="CR_JMCOMP_CHROMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Chroma quantisation coefficients [same coefficients used for Cb and Cr]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_05" acronym="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_05" offset="0x2D4" width="32" description="">
+    <bitfield id="CR_JMCOMP_CHROMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Chroma quantisation coefficients [same coefficients used for Cb and Cr]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_06" acronym="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_06" offset="0x2D8" width="32" description="">
+    <bitfield id="CR_JMCOMP_CHROMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Chroma quantisation coefficients [same coefficients used for Cb and Cr]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_07" acronym="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_07" offset="0x2DC" width="32" description="">
+    <bitfield id="CR_JMCOMP_CHROMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Chroma quantisation coefficients [same coefficients used for Cb and Cr]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_08" acronym="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_08" offset="0x2E0" width="32" description="">
+    <bitfield id="CR_JMCOMP_CHROMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Chroma quantisation coefficients [same coefficients used for Cb and Cr]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_09" acronym="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_09" offset="0x2E4" width="32" description="">
+    <bitfield id="CR_JMCOMP_CHROMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Chroma quantisation coefficients [same coefficients used for Cb and Cr]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_10" acronym="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_10" offset="0x2E8" width="32" description="">
+    <bitfield id="CR_JMCOMP_CHROMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Chroma quantisation coefficients [same coefficients used for Cb and Cr]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_11" acronym="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_11" offset="0x2EC" width="32" description="">
+    <bitfield id="CR_JMCOMP_CHROMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Chroma quantisation coefficients [same coefficients used for Cb and Cr]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_12" acronym="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_12" offset="0x2F0" width="32" description="">
+    <bitfield id="CR_JMCOMP_CHROMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Chroma quantisation coefficients [same coefficients used for Cb and Cr]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_13" acronym="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_13" offset="0x2F4" width="32" description="">
+    <bitfield id="CR_JMCOMP_CHROMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Chroma quantisation coefficients [same coefficients used for Cb and Cr]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_14" acronym="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_14" offset="0x2F8" width="32" description="">
+    <bitfield id="CR_JMCOMP_CHROMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Chroma quantisation coefficients [same coefficients used for Cb and Cr]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_15" acronym="ENCODER0_CR_JMCOMP_CHROMA_QUANTISER_15" offset="0x2FC" width="32" description="">
+    <bitfield id="CR_JMCOMP_CHROMA_QUANT" width="8" begin="31" end="24" resetval="0x0" description="64 JPEG Chroma quantisation coefficients [same coefficients used for Cb and Cr]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_CRC" acronym="ENCODER0_CR_JMCOMP_CRC" offset="0x300" width="32" description="">
+    <bitfield id="CR_JMCOMP_CRC_OUT" width="32" begin="31" end="0" resetval="0x0" description="CRC value of the current data that is written to the ESB" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_VLC_CRC" acronym="ENCODER0_CR_JMCOMP_VLC_CRC" offset="0x304" width="32" description="CRC for data outputted to VLC">
+    <bitfield id="CR_JMCOMP_VLC_IF_CRC" width="32" begin="31" end="0" resetval="0x0" description="CRC value of the coded data that is sent to the VLC" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_PERFORMANCE_0" acronym="ENCODER0_CR_JMCOMP_PERFORMANCE_0" offset="0x308" width="32" description="">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_JMCOMP_WORST_MB_TYPE" width="2" begin="17" end="16" resetval="0x0" description="The MB type of the worst MB." range="" rwaccess="R"/>
+    <bitfield id="CR_JMCOMP_WORST_MB_CYCLES" width="16" begin="15" end="0" resetval="0x0" description="The number of cycles taken to process the worst MB." range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_CRC_RDATA" acronym="ENCODER0_CR_JMCOMP_CRC_RDATA" offset="0x30C" width="32" description="CRCs for the current data read from the ESB">
+    <bitfield id="CR_JMCOMP_CRC_RDATA_OUT" width="32" begin="31" end="0" resetval="0x0" description="CRCs for the current data read from the ESB" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_CRC_CARC" acronym="ENCODER0_CR_JMCOMP_CRC_CARC" offset="0x310" width="32" description="CRCs for the CARC data generated by the JMCOMP (H264 only)">
+    <bitfield id="CR_JMCOMP_CRC_CARC_OUT" width="32" begin="31" end="0" resetval="0x0" description="CRCs for the CARC data" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_PERFORMANCE_1" acronym="ENCODER0_CR_JMCOMP_PERFORMANCE_1" offset="0x320" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_JMCOMP_WORST_MB_NUM" width="16" begin="15" end="0" resetval="0x0" description="The linear MB number of the worst MB." range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_PERFORMANCE_2" acronym="ENCODER0_CR_JMCOMP_PERFORMANCE_2" offset="0x324" width="32" description="">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_JMCOMP_DISABLE_COUNTERS" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_JMCOMP_WORST_MB_CLEAR" width="1" begin="0" end="0" resetval="0x0" description="Writing this single bit with the value '1' clears both performance registers and resets the worst MB Num counter" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_QP_VALUE" acronym="ENCODER0_CR_JMCOMP_QP_VALUE" offset="0x330" width="32" description="Register with the encoded QP value, software reads it to check if next QP change is possible">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_QSCALE_CHANGE_DELAY" width="4" begin="27" end="24" resetval="0x0" description="Number of macroblocks in which requested QScale is different from current QScale, but delta value hasn't been changed due to macroblock type [count is reset to zero if requested QScale is same as current QScale, or if force qscale signal sent to frontend of pipeline]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="23" end="22" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_JMCOMP_REQ_QP" width="6" begin="21" end="16" resetval="0x0" description="QP value requested from prefetch sequencer interface" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="15" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_JMCOMP_REAL_QP_LUMA" width="6" begin="5" end="0" resetval="0x0" description="QP value with which MB was encoded" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_QSCALE_CHANGE" acronym="ENCODER0_CR_JMCOMP_QSCALE_CHANGE" offset="0x334" width="32" description="">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_QSCALE_CHANGE_THRESHOLD" width="4" begin="3" end="0" resetval="0xF" description="If QSCALE_CHANGE_DELAY increments above this threshold, a signal is sent to front end of pipeline to force QSCALE change" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_CARC_CONTROL_0" acronym="ENCODER0_CR_JMCOMP_CARC_CONTROL_0" offset="0x338" width="32" description="">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CARC_NEG_SCALE" width="6" begin="29" end="24" resetval="0x0" description="Unsigned scale factor for H264 content adaptive rate control when complexity is less than CARC_BASELINE." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="23" end="21" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CARC_NEG_RANGE" width="5" begin="20" end="16" resetval="0x0" description="Unsigned integer being the maximum amount that the H264 content adaptive rate control will decrease the qp by." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CARC_POS_SCALE" width="6" begin="13" end="8" resetval="0x0" description="Unsigned scale factor for H264 content adaptive rate control when complexity is greater than CARC_BASELINE." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CARC_POS_RANGE" width="5" begin="4" end="0" resetval="0x0" description="Unsigned integer being the maximum amount that the H264 content adaptive rate control will increase the qp by." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_CARC_CONTROL_1" acronym="ENCODER0_CR_JMCOMP_CARC_CONTROL_1" offset="0x33C" width="32" description="">
+    <bitfield id="RESERVED" width="6" begin="31" end="26" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CARC_SHIFT" width="2" begin="25" end="24" resetval="0x0" description="When calculating the change in qp as a result of CARC, this controls the size of the right shift of the applied." range="" rwaccess="RW"/>
+    <bitfield id="CR_CARC_CUTOFF" width="4" begin="23" end="20" resetval="0x0" description="Specifies the subset of coefficients in an 8x8 block that count towards the CARC complexity metric." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="19" end="19" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CARC_THRESHOLD" width="11" begin="18" end="8" resetval="0x0" description="Threshold applied to the DCT coefficients before they count towards the CARC complexity." range="" rwaccess="RW"/>
+    <bitfield id="CR_CARC_BASELINE" width="8" begin="7" end="0" resetval="0x0" description="Unsigned value which is the point at which the CARC qp modification switches from negative to positive scales." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_JMCOMP_CARC_COEFF_TOTAL" acronym="ENCODER0_CR_JMCOMP_CARC_COEFF_TOTAL" offset="0x340" width="32" description="">
+    <bitfield id="CR_CARC_COEFF_TOTAL" width="32" begin="31" end="0" resetval="0x0" description="Running total count of the CARC coefficient counts." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SPE_ZERO_THRESH" acronym="ENCODER0_CR_SPE_ZERO_THRESH" offset="0x344" width="32" description="">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_SPE_ZERO_THRESH" width="5" begin="4" end="0" resetval="0x0" description="Value multiplied by QPy to form ZERO_THRESHOLD" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SPE0_BEST_SAD_SIGNATURE" acronym="ENCODER0_CR_SPE0_BEST_SAD_SIGNATURE" offset="0x348" width="32" description="">
+    <bitfield id="CR_SPE0_BEST_SAD_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="This is a 96 bit input crc , input is 4 best_8x8_cost_tile0/1/2/3 values &amp;amp;amp; best_cb_sad &amp;amp;amp; best_cr_sad concatednated on spe_done." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SPE1_BEST_SAD_SIGNATURE" acronym="ENCODER0_CR_SPE1_BEST_SAD_SIGNATURE" offset="0x34C" width="32" description="">
+    <bitfield id="CR_SPE1_BEST_SAD_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="This is a 96 bit input crc , input is 4 best_8x8_cost_tile0/1/2/3 values &amp;amp;amp; best_cb_sad &amp;amp;amp; best_cr_sad concatednated on spe_done." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SPE0_BEST_INDEX_SIGNATURE" acronym="ENCODER0_CR_SPE0_BEST_INDEX_SIGNATURE" offset="0x350" width="32" description="">
+    <bitfield id="CR_SPE0_BEST_INDEX_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="This is a CRC for best index of every 4x4 block" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SPE1_BEST_INDEX_SIGNATURE" acronym="ENCODER0_CR_SPE1_BEST_INDEX_SIGNATURE" offset="0x354" width="32" description="">
+    <bitfield id="CR_SPE1_BEST_INDEX_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="This is a CRC for best index of every 4x4 block" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SPE_INTRA_COST_SIGNATURE" acronym="ENCODER0_CR_SPE_INTRA_COST_SIGNATURE" offset="0x358" width="32" description="">
+    <bitfield id="CR_SPE_INTRA_COST_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="This is a 32 bit input crc , input is intra_cost value calculated in MPEG4/H263 modes on spe_done , in H264 mode input will be 0." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SPE_MVD_CLIP_RANGE" acronym="ENCODER0_CR_SPE_MVD_CLIP_RANGE" offset="0x360" width="32" description="Specifies the range for MV differential clipping in H263 profile 0.">
+    <bitfield id="CR_SPE_MVD_CLIP_ENABLE" width="1" begin="31" end="31" resetval="0x0" description="0 : Don't use SPE_MVD_CLIP registers" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="7" begin="30" end="24" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_SPE_MVD_POS_CLIP" width="12" begin="23" end="12" resetval="0x3C" description="Signed largest positive difference between calculated MV and predicted MV in 1/4 pel resolution [mainly used for H263 profile 0]" range="" rwaccess="RW"/>
+    <bitfield id="CR_SPE_MVD_NEG_CLIP" width="12" begin="11" end="0" resetval="0xFC2" description="Signed largest negative difference between calculated MV and predicted MV in 1/4 pel resolution [mainly used for H263 profile 0]" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SPE_SUBPEL_RESOLUTION" acronym="ENCODER0_CR_SPE_SUBPEL_RESOLUTION" offset="0x364" width="32" description="">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_SPE_SUBPEL_RESOLUTION" width="2" begin="1" end="0" resetval="0x0" description="0 : 1/4 pixel resolution in H264 [1/2 pixel resolution for MPEG4]" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SPE0_MV_SIZE_SIGNATURE" acronym="ENCODER0_CR_SPE0_MV_SIZE_SIGNATURE" offset="0x368" width="32" description="">
+    <bitfield id="CR_SPE0_MV_SIZE_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="This is a 32 bit input crc , input is spe_mv_size_16x16 &amp;amp;amp; spe_mv_size_16x8 &amp;amp;amp; spe_mv_size_8x16 &amp;amp;amp; spe_mv_size_8x8_t0 &amp;amp;amp; spe_mv_size_8x8_t1 &amp;amp;amp; spe_mv_size_8x8_t2 &amp;amp;amp; spe_mv_size_8x8_t3 concatednated on spe_done." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SPE1_MV_SIZE_SIGNATURE" acronym="ENCODER0_CR_SPE1_MV_SIZE_SIGNATURE" offset="0x36C" width="32" description="">
+    <bitfield id="CR_SPE1_MV_SIZE_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="This is a 32 bit input crc , input is spe_mv_size_16x16 &amp;amp;amp; spe_mv_size_16x8 &amp;amp;amp; spe_mv_size_8x16 &amp;amp;amp; spe_mv_size_8x8_t0 &amp;amp;amp; spe_mv_size_8x8_t1 &amp;amp;amp; spe_mv_size_8x8_t2 &amp;amp;amp; spe_mv_size_8x8_t3 concatednated on spe_done." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SPE_MB_PERFORMANCE_RESULT" acronym="ENCODER0_CR_SPE_MB_PERFORMANCE_RESULT" offset="0x370" width="32" description="">
+    <bitfield id="CR_SPE_1_MB_PERFORMANCE_RESULT" width="16" begin="31" end="16" resetval="0x0" description="The worst case cycle count of the MB processing for both SPE module [based on last SPE module to set done]" range="" rwaccess="R"/>
+    <bitfield id="CR_SPE_0_MB_PERFORMANCE_RESULT" width="16" begin="15" end="0" resetval="0x0" description="The worst case cycle count of the MB processing for both SPE module [based on last SPE module to set done]" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_SPE_MB_PERFORMANCE_MB_NUMBER" acronym="ENCODER0_CR_SPE_MB_PERFORMANCE_MB_NUMBER" offset="0x374" width="32" description="">
+    <bitfield id="CR_SPE_1_MB_PERFORMANCE_MB_NUMBER" width="16" begin="31" end="16" resetval="0x0" description="Number of the macroblock with the worst case cycle count" range="" rwaccess="R"/>
+    <bitfield id="CR_SPE_0_MB_PERFORMANCE_MB_NUMBER" width="16" begin="15" end="0" resetval="0x0" description="Number of the macroblock with the worst case cycle count" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_SPE_MB_PERFORMANCE_CLEAR" acronym="ENCODER0_CR_SPE_MB_PERFORMANCE_CLEAR" offset="0x378" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_SPE_MB_PERFORMANCE_CLEAR" width="1" begin="0" end="0" resetval="0x0" description="To be used by software to reset the SPE max cycle registers" range="" rwaccess="W"/>
+  </register>
+  <register id="ENCODER0_CR_PC_TOTAL_COSTS_SIGNATURE" acronym="ENCODER0_CR_PC_TOTAL_COSTS_SIGNATURE" offset="0x37C" width="32" description="">
+    <bitfield id="CR_PC_TOTAL_COSTS_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="This is a 128 bit input crc , input is sub_mb_type_cost_0[12 bits ] &amp;amp;amp; sub_mb_type_cost_1[12 bits ] &amp;amp;amp; sub_mb_type_cost_2[12 bits ] &amp;amp;amp; sub_mb_type_cost_3[12 bits ] &amp;amp;amp;" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_PC_INTER_REGS_SIGNATURE" acronym="ENCODER0_CR_PC_INTER_REGS_SIGNATURE" offset="0x380" width="32" description="">
+    <bitfield id="CR_PC_INTER_REGS_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="This is a 96 bit input crc , input is" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_PC_INTRA_REGS_SIGNATURE" acronym="ENCODER0_CR_PC_INTRA_REGS_SIGNATURE" offset="0x384" width="32" description="">
+    <bitfield id="CR_PC_INTRA_REGS_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="This is a 96 bit input crc , input is" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_PC_HW_OUTPUT_SIGNATURE" acronym="ENCODER0_CR_PC_HW_OUTPUT_SIGNATURE" offset="0x388" width="32" description="">
+    <bitfield id="CR_PC_HW_OUTPUT_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="This is a 32 bit input crc , input is pc_mb_type[2 bits] &amp;amp;amp; pc_intra_size[2 bits] &amp;amp;amp; pc_inter_direction0[2 bits] &amp;amp;amp; pc_inter_direction1[2 bits] &amp;amp;amp; pc_inter_direction2[2 bits] &amp;amp;amp; pc_inter_direction3[2 bits] &amp;amp;amp; pc_inter_direct[4 bits] &amp;amp;amp; pc_inter_size_16x16 [1 bit] &amp;amp;amp; pc_inter_size_16x8[1 bit] &amp;amp;amp; pc_inter_size_8x16[1 bit] &amp;amp;amp; pc_inter_size8x8[4 bits] &amp;amp;amp; pc_zero_bit_reg[6 bits] concatednated on pc_done." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_PC_COSTS_16X8_SIGNATURE" acronym="ENCODER0_CR_PC_COSTS_16X8_SIGNATURE" offset="0x38C" width="32" description="">
+    <bitfield id="CR_PC_COSTS_16X8_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_PRED_COMB_CONTROL" acronym="ENCODER0_CR_PRED_COMB_CONTROL" offset="0x390" width="32" description="">
+    <bitfield id="CR_INTER_INTRA_HYSTERESIS" width="16" begin="31" end="16" resetval="0x0" description="Unsigned hysteresis bias used to minimise the number of occasions MB coding mode switches between Inter prediction and Intra prediction." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_SKIPPED_CODED_SCALE_ENABLE" width="1" begin="13" end="13" resetval="0x0" description="1 : Coded cost [i.e." range="" rwaccess="RW"/>
+    <bitfield id="CR_INTER_INTRA_SCALE_ENABLE" width="1" begin="12" end="12" resetval="0x0" description="1 : The inter and intra costs will be scaled by the appropriate values from the INTER_INTRA_SCALE_TABLE, before deciding making the inter/intra decision" range="" rwaccess="RW"/>
+    <bitfield id="CR_CUMULATIVE_BIASES_ENABLE" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_B_PIC1_DISABLE" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_B_PIC0_DISABLE" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_INTER8X8_DISABLE" width="1" begin="4" end="4" resetval="0x0" description="0 : Allow an SPE tile which is bigger than 8x8 to be split into 8x8 prediction tiles" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_INTRA16X16_DISABLE" width="1" begin="2" end="2" resetval="0x0" description="0 : Allow Intra 16x16 to be selected" range="" rwaccess="RW"/>
+    <bitfield id="CR_INTRA8X8_DISABLE" width="1" begin="1" end="1" resetval="0x0" description="0 : Allow Intra 8x8 to be selected" range="" rwaccess="RW"/>
+    <bitfield id="CR_INTRA4X4_DISABLE" width="1" begin="0" end="0" resetval="0x0" description="0 : Allow Intra 4x4 to be selected" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_PC_COSTS_8X16_SIGNATURE" acronym="ENCODER0_CR_PC_COSTS_8X16_SIGNATURE" offset="0x394" width="32" description="">
+    <bitfield id="CR_PC_COSTS_8X16_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_PC_COSTS_8X8_SIGNATURE" acronym="ENCODER0_CR_PC_COSTS_8X8_SIGNATURE" offset="0x398" width="32" description="">
+    <bitfield id="CR_PC_COSTS_8X8_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_PRED_BU_STAT_UPDATE" acronym="ENCODER0_CR_PRED_BU_STAT_UPDATE" offset="0x39C" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_FORCE_BU_STAT_UPDATE" width="1" begin="0" end="0" resetval="0x0" description="Normally the rate control registers in 0x3A0 to 0x3AC are updated at the start of the next basic unit." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_BEST_INTER_BU_SAD" acronym="ENCODER0_CR_BEST_INTER_BU_SAD" offset="0x3A0" width="32" description="">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_BEST_INTER_BU_SAD" width="31" begin="30" end="0" resetval="0x0" description="Sum of the best inter mode SAD or SATD per macroblock [if Inter is selected as the MB type, else add 0], accumulated for a basic unit [the register is double buffered so that the value read is the sum from the previous BU, whilst an internal register accumulates the sum for the current BU]." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_BEST_INTER_BU_COST" acronym="ENCODER0_CR_BEST_INTER_BU_COST" offset="0x3A4" width="32" description="">
+    <bitfield id="CR_BEST_INTER_BU_COST" width="32" begin="31" end="0" resetval="0x0" description="Signed sum of the best inter mode cost [including SAD, MV cost and Inter bias] per macroblock [if Inter is selected as the MB type, else add 0], accumulated for a basic unit [the register is double buffered so that the value read is the sum from the previous BU, whilst an internal register accumulates the sum for the current BU]." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_BEST_INTRA_BU_SAD" acronym="ENCODER0_CR_BEST_INTRA_BU_SAD" offset="0x3A8" width="32" description="">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_BEST_INTRA_BU_SAD" width="31" begin="30" end="0" resetval="0x0" description="Sum of the best intra mode SAD or SATD per macroblock [if Intra is selected as the MB type, else add 0], accumulated for a basic unit [the register is double buffered so that the value read is the sum from the previous BU, whilst an internal register accumulates the sum for the current BU]." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_BEST_INTRA_BU_COST" acronym="ENCODER0_CR_BEST_INTRA_BU_COST" offset="0x3AC" width="32" description="">
+    <bitfield id="CR_BEST_INTRA_BU_COST" width="32" begin="31" end="0" resetval="0x0" description="Signed sum of the best intra mode cost [including SAD, Intra cost and Intra bias] per macroblock [if Intra is selected as the MB type, else add 0], accumulated for a basic unit [the register is double buffered so that the value read is the sum from the previous BU, whilst an internal register accumulates the sum for the current BU]." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_PRED_COMB_DMS_SIGNATURE" acronym="ENCODER0_CR_PRED_COMB_DMS_SIGNATURE" offset="0x3B0" width="32" description="">
+    <bitfield id="CR_PRED_COMB_DMS_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="CRC value of the DMS predictor block" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_PC_DMS_PERFORMANCE_CYCLES" acronym="ENCODER0_CR_PC_DMS_PERFORMANCE_CYCLES" offset="0x3B4" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_PC_DMS_WORST_MB_CYCLES" width="16" begin="15" end="0" resetval="0x0" description="The number of cycles taken to process the worst MB by predictor combiner." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_PC_DMS_PERFORMANCE_MB_NUM" acronym="ENCODER0_CR_PC_DMS_PERFORMANCE_MB_NUM" offset="0x3B8" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_PC_DMS_WORST_MB_NUM" width="16" begin="15" end="0" resetval="0x0" description="The linear MB number of the worst MB." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_PC_DMS_PERFORMANCE_CTRL" acronym="ENCODER0_CR_PC_DMS_PERFORMANCE_CTRL" offset="0x3BC" width="32" description="">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_PC_DMS_DISABLE_COUNTERS" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_PC_DMS_WORST_MB_CLEAR" width="1" begin="0" end="0" resetval="0x0" description="Writing this single bit with the value '1' clears performance registers" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_PC_DM_PERFORMANCE_CYCLES" acronym="ENCODER0_CR_PC_DM_PERFORMANCE_CYCLES" offset="0x3C0" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_PC_DM_WORST_MB_CYCLES" width="16" begin="15" end="0" resetval="0x0" description="The number of cycles taken to process the worst MB by predictor combiner." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_PC_DM_PERFORMANCE_MB_NUM" acronym="ENCODER0_CR_PC_DM_PERFORMANCE_MB_NUM" offset="0x3C4" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_PC_DM_WORST_MB_NUM" width="16" begin="15" end="0" resetval="0x0" description="The linear MB number of the worst MB." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_PC_DM_PERFORMANCE_CTRL" acronym="ENCODER0_CR_PC_DM_PERFORMANCE_CTRL" offset="0x3C8" width="32" description="">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_PC_DM_DISABLE_COUNTERS" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_PC_DM_WORST_MB_CLEAR" width="1" begin="0" end="0" resetval="0x0" description="Writing this single bit with the value '1' clears performance registers" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_BEST_INTER_INTRA_COUNTS" acronym="ENCODER0_CR_BEST_INTER_INTRA_COUNTS" offset="0x3CC" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_BEST_INTER_BU_COUNT" width="8" begin="15" end="8" resetval="0x0" description="Number of macroblocks in a basic unit where Inter is selected as MB type [the register is double buffered, so that the value read is the count from the previous BU, whilst an internal register accumulates count for the current BU]." range="" rwaccess="RW"/>
+    <bitfield id="CR_BEST_INTRA_BU_COUNT" width="8" begin="7" end="0" resetval="0x0" description="Number of macroblocks in a basic unit where Intra is selected as MB type [the register is double buffered, so that the value read is the count from the previous BU, whilst an internal register accumulates count for the current BU]." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_WEIGHTED_PRED_CONTROL" acronym="ENCODER0_CR_WEIGHTED_PRED_CONTROL" offset="0x3D0" width="32" description="">
+    <bitfield id="CR_WEIGHTED_PRED_ENABLE" width="1" begin="31" end="31" resetval="0x0" description="Enables or disables weighted prediction" range="" rwaccess="RW"/>
+    <bitfield id="CR_IMPLICIT_BIPRED" width="1" begin="30" end="30" resetval="0x0" description="H264 only, when WEIGHTED_PRED_ENABLE is set." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="23" begin="29" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_LOG_WD_CHROMA" width="3" begin="6" end="4" resetval="0x0" description="H264 only." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_LOG_WD_LUMA" width="3" begin="2" end="0" resetval="0x0" description="H264 only." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_WEIGHTED_PRED_COEFFS_00" acronym="ENCODER0_CR_WEIGHTED_PRED_COEFFS_00" offset="0x3D4" width="32" description="0 - Luma1 - Cbpard 2 - Cr">
+    <bitfield id="CR_WEIGHTED_PRED_OFFSET" width="8" begin="31" end="24" resetval="0x0" description="H264 only." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="23" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_WEIGHTED_PRED_WEIGHT" width="8" begin="15" end="8" resetval="0x0" description="H264 only." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="7" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_WEIGHTED_PRED_COEFFS_01" acronym="ENCODER0_CR_WEIGHTED_PRED_COEFFS_01" offset="0x3D8" width="32" description="0 - Luma1 - Cbpard 2 - Cr">
+    <bitfield id="CR_WEIGHTED_PRED_OFFSET" width="8" begin="31" end="24" resetval="0x0" description="H264 only." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="23" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_WEIGHTED_PRED_WEIGHT" width="8" begin="15" end="8" resetval="0x0" description="H264 only." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="7" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_WEIGHTED_PRED_COEFFS_02" acronym="ENCODER0_CR_WEIGHTED_PRED_COEFFS_02" offset="0x3DC" width="32" description="0 - Luma1 - Cbpard 2 - Cr">
+    <bitfield id="CR_WEIGHTED_PRED_OFFSET" width="8" begin="31" end="24" resetval="0x0" description="H264 only." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="23" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_WEIGHTED_PRED_WEIGHT" width="8" begin="15" end="8" resetval="0x0" description="H264 only." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="7" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_WEIGHTED_PRED_INV_WEIGHT" acronym="ENCODER0_CR_WEIGHTED_PRED_INV_WEIGHT" offset="0x3E0" width="32" description="The inverse of the luma weight is used by SPE to weight the current picture rather than reference. For each picture, software can calculate the value to put in the register as follows;-scaled_weight = weight &amp;lt;&amp;lt; (7-log_wd)scaled_inv_weight = ((1 &amp;lt;&amp;lt; 14) + (scaled_weight&amp;gt;&amp;gt;1)) / scaled_weighttmp_inv_log = 7while ((abs(scaled_inv_weight) &amp;gt;= 128) &amp;amp;&amp;amp; (tmp_inv_log &amp;gt; 0))( tmp_inv_log = tmp_inv_log-1 scaled_inv_weight = (scaled_inv_weight&amp;gt;&amp;gt;1))if ((tmp_inv_log == 0) &amp;amp;&amp;amp; (scaled_inv_weight &amp;gt;= 128)) scaled_inv_weight = 127end ifinv_weight = scaled_inv_weightinv_log_wd = tmp_inv_log">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_INV_LOG_WD" width="3" begin="21" end="19" resetval="0x0" description="H264 only." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="18" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_INV_WEIGHT" width="8" begin="15" end="8" resetval="0x0" description="H264 only." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="7" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_TOPAZHP_RSVD0" acronym="ENCODER0_CR_TOPAZHP_RSVD0" offset="0x3F0" width="32" description="">
+    <bitfield id="RESERVED" width="32" begin="31" end="0" resetval="0x0" description="Reserved 32-bit register" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_TOPAZHP_CRC_CLEAR" acronym="ENCODER0_CR_TOPAZHP_CRC_CLEAR" offset="0x3F4" width="32" description="Active high resets for the CRCs.CRCs are cleared on writing the relevant bit of this register to '1'.The register bit will then self-clear.When read, this register will alway return zero.">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_INPUT_SCALER_CRC_CLEAR" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_LRITC_CRC_CLEAR" width="1" begin="8" end="8" resetval="0x0" description="0 : Has no effect" range="" rwaccess="RW"/>
+    <bitfield id="CR_PC_CRC_CLEAR" width="1" begin="7" end="7" resetval="0x0" description="0 : Has no effect" range="" rwaccess="RW"/>
+    <bitfield id="CR_VLC_CRC_CLEAR" width="1" begin="6" end="6" resetval="0x0" description="0 : Has no effect" range="" rwaccess="RW"/>
+    <bitfield id="CR_DB_CRC_CLEAR" width="1" begin="5" end="5" resetval="0x0" description="0 : Has no effect" range="" rwaccess="RW"/>
+    <bitfield id="CR_H264COMP_CRC_CLEAR" width="1" begin="4" end="4" resetval="0x0" description="0 : Has no effect" range="" rwaccess="RW"/>
+    <bitfield id="CR_JMCOMP_CRC_CLEAR" width="1" begin="3" end="3" resetval="0x0" description="0 : Has no effect" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_SPE_CRC_CLEAR" width="1" begin="1" end="1" resetval="0x0" description="0 : Has no effect" range="" rwaccess="RW"/>
+    <bitfield id="CR_IPE_CRC_CLEAR" width="1" begin="0" end="0" resetval="0x0" description="0 : Has no effect" range="" rwaccess="RW"/>
+  </register>
+</module>

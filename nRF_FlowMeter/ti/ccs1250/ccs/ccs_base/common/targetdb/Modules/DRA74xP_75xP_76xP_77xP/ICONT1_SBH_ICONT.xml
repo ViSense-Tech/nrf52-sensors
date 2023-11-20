@@ -1,0 +1,307 @@
+<module name="ICONT1_SBH_ICONT" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="ICONT_SBH_CTRL" acronym="ICONT_SBH_CTRL" offset="0x0" width="32" description="SYNCBOX Handler control register">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="BYPASS" width="1" begin="0" end="0" resetval="1" description="Control SYNCBOX bypass mode. This bit defines if SYNCBOX is used to synchronize Task between the different HWAs." range="" rwaccess="RW">
+      <bitenum value="0" id="SB_(SYNCBOX_0" token="BYPASS_0" description="SB Bypass mode disabled. (SYNCBOX are used)"/>
+      <bitenum value="1" id="SB_(SYNCBOX_1" token="BYPASS_1" description="SB Bypass mode enabled. (SYNCBOX are not used)."/>
+    </bitfield>
+  </register>
+  <register id="ICONT_SBH_ATLR" acronym="ICONT_SBH_ATLR" offset="0x4" width="32" description="Activation Task List register. It logs reference of the task interrupting CPU. When bit field x of TX_0 field is 1, Task x has generated an interrupt to the CPU. Bit field n of this register is cleared when writing 1 in bitfiled x of register.">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0x0000000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="TX_0" width="6" begin="5" end="0" resetval="0x00" description="Task x to 0 (x=SYNCBOX_NB_TASK-1)" range="" rwaccess="R"/>
+  </register>
+  <register id="ICONT_SBH_ACK" acronym="ICONT_SBH_ACK" offset="0x8" width="32" description="Acknowledge Task register. Task x is automatically acknowledged on writing 1 into bit field x of this register. Register is automatically cleared.">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0x0000000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="TX_0" width="6" begin="5" end="0" resetval="0x00" description="Task x to 0 (x=SYNCBOX_NB_TASK-1)" range="" rwaccess="W W1toClr"/>
+  </register>
+  <register id="ICONT_SBH_EOT" acronym="ICONT_SBH_EOT" offset="0xC" width="32" description="End Of Task register. SBH notify to the SB that Task x is ended on writing 1 to this register. Register is automatically cleared.">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0x0000000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="TX_0" width="6" begin="5" end="0" resetval="0x00" description="Task x to 0 (x=SYNCBOX_NB_TASK-1)" range="" rwaccess="W W1toClr"/>
+  </register>
+  <register id="ICONT_SBH_IRQ_EOI" acronym="ICONT_SBH_IRQ_EOI" offset="0x20" width="32" description="End Of Interrupt number specification">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="LINE_NUMBER" width="1" begin="0" end="0" resetval="0x0" description="Software End Of Interrupt (EOI) control. Write number of interrupt output." range="" rwaccess="RW">
+      <bitenum value="0" id="EOI0" token="LINE_NUMBER_0_w" description="EOI for interrupt output line #0 (end of transfer interrupt for SBH bypass mode)"/>
+      <bitenum value="0" id="EOI1" token="LINE_NUMBER_0_r" description="Reads always 0 (no EOI memory)"/>
+      <bitenum value="1" id="EOI1" token="LINE_NUMBER_1_w" description="EOI for interrupt output line #1 (error interrupt)"/>
+    </bitfield>
+  </register>
+  <register id="ICONT_SBH_IRQSTATUS_RAW_0" acronym="ICONT_SBH_IRQSTATUS_RAW_0" offset="0x24" width="32" description="Per-event raw interrupt status vector, line #0 (end of transfer). Raw status is set even if event is not enabled. Write 1 to set the (raw) status, mostly for debug.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="VDMAG_END" width="1" begin="0" end="0" resetval="0" description="settable raw status for end of transfer interrupt event" range="" rwaccess="RW W1toSet">
+      <bitenum value="0" id="No_action" token="VDMAG_END_0_w" description="No action"/>
+      <bitenum value="0" id="No_event_pending" token="VDMAG_END_0_r" description="No event pending"/>
+      <bitenum value="1" id="Event_pending" token="VDMAG_END_1_r" description="Event pending"/>
+      <bitenum value="1" id="Set_event_(debug)" token="VDMAG_END_1_w" description="Set event (debug)"/>
+    </bitfield>
+  </register>
+  <register id="ICONT_SBH_IRQSTATUS_0" acronym="ICONT_SBH_IRQSTATUS_0" offset="0x28" width="32" description="Per-event 'enabled' interrupt status vector, line #0 (end of transfer). Enabled status is not set unless event is enabled. Write 1 to clear the status after interrupt has been serviced (raw status gets cleared, that is, even if not enabled).">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="VDMAG_END" width="1" begin="0" end="0" resetval="0" description="clearable, enabled status for end of transfer interrupt event" range="" rwaccess="RW W1toClr">
+      <bitenum value="0" id="No_action" token="VDMAG_END_0_w" description="No action"/>
+      <bitenum value="0" id="No_(enabled)_event_pending" token="VDMAG_END_0_r" description="No (enabled) event pending"/>
+      <bitenum value="1" id="Event_pending" token="VDMAG_END_1_r" description="Event pending"/>
+      <bitenum value="1" id="Clear_(raw)_event" token="VDMAG_END_1_w" description="Clear (raw) event"/>
+    </bitfield>
+  </register>
+  <register id="ICONT_SBH_IRQENABLE_SET_0" acronym="ICONT_SBH_IRQENABLE_SET_0" offset="0x2C" width="32" description="Per-event interrupt enable bit vector, line #0 (end of transfer). Write 1 to set (enable interrupt). Readout equal to corresponding _CLR register.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="VDMAG_END" width="1" begin="0" end="0" resetval="0" description="enable for end of transfer interrupt event" range="" rwaccess="RW W1toSet">
+      <bitenum value="0" id="No_action" token="VDMAG_END_0_w" description="No action"/>
+      <bitenum value="0" id="Interrupt_disabled_(masked)" token="VDMAG_END_0_r" description="Interrupt disabled (masked)"/>
+      <bitenum value="1" id="Interrupt_enabled" token="VDMAG_END_1_r" description="Interrupt enabled"/>
+      <bitenum value="1" id="Enable_interrupt" token="VDMAG_END_1_w" description="Enable interrupt"/>
+    </bitfield>
+  </register>
+  <register id="ICONT_SBH_IRQENABLE_CLR_0" acronym="ICONT_SBH_IRQENABLE_CLR_0" offset="0x30" width="32" description="Per-event interrupt enable bit vector, line #0 (end of transfer). Write 1 to clear (disable interrupt). Readout equal to corresponding _SET register.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="VDMAG_END" width="1" begin="0" end="0" resetval="0" description="enable for end of transfer interrupt event" range="" rwaccess="RW W1toClr">
+      <bitenum value="0" id="No_action" token="VDMAG_END_0_w" description="No action"/>
+      <bitenum value="0" id="Interrupt_disabled_(masked)" token="VDMAG_END_0_r" description="Interrupt disabled (masked)"/>
+      <bitenum value="1" id="Interrupt_enabled" token="VDMAG_END_1_r" description="Interrupt enabled"/>
+      <bitenum value="1" id="Disable_interrupt" token="VDMAG_END_1_w" description="Disable interrupt"/>
+    </bitfield>
+  </register>
+  <register id="ICONT_SBH_IRQSTATUS_RAW_1" acronym="ICONT_SBH_IRQSTATUS_RAW_1" offset="0x34" width="32" description="Per-event raw interrupt status vector, line #0 (error). Raw status is set even if event is not enabled. Write 1 to set the (raw) status, mostly for debug.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="SBH_ERR" width="1" begin="0" end="0" resetval="0" description="settable raw status for SBH error event" range="" rwaccess="RW W1toSet">
+      <bitenum value="0" id="No_action" token="SBH_ERR_0_w" description="No action"/>
+      <bitenum value="0" id="No_event_pending" token="SBH_ERR_0_r" description="No event pending"/>
+      <bitenum value="1" id="Event_pending" token="SBH_ERR_1_r" description="Event pending"/>
+      <bitenum value="1" id="Set_event_(debug)" token="SBH_ERR_1_w" description="Set event (debug)"/>
+    </bitfield>
+  </register>
+  <register id="ICONT_SBH_IRQSTATUS_1" acronym="ICONT_SBH_IRQSTATUS_1" offset="0x38" width="32" description="Per-event 'enabled' interrupt status vector, line #1 (error). Enabled status is not set unless event is enabled. Write 1 to clear the status after interrupt has been serviced (raw status gets cleared, that is, even if not enabled).">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="SBH_ERR" width="1" begin="0" end="0" resetval="0" description="clearable, enabled status for SBH error event" range="" rwaccess="RW W1toClr">
+      <bitenum value="0" id="No_action" token="SBH_ERR_0_w" description="No action"/>
+      <bitenum value="0" id="No_(enabled)_event_pending" token="SBH_ERR_0_r" description="No (enabled) event pending"/>
+      <bitenum value="1" id="Event_pending" token="SBH_ERR_1_r" description="Event pending"/>
+      <bitenum value="1" id="Clear_(raw)_event" token="SBH_ERR_1_w" description="Clear (raw) event"/>
+    </bitfield>
+  </register>
+  <register id="ICONT_SBH_IRQENABLE_SET_1" acronym="ICONT_SBH_IRQENABLE_SET_1" offset="0x3C" width="32" description="Per-event interrupt enable bit vector, line #1 (error). Write 1 to set (enable interrupt). Readout equal to corresponding _CLR register.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="SBH_ERR" width="1" begin="0" end="0" resetval="0" description="enable for SBH error event" range="" rwaccess="RW W1toSet">
+      <bitenum value="0" id="No_action" token="SBH_ERR_0_w" description="No action"/>
+      <bitenum value="0" id="Interrupt_disabled_(masked)" token="SBH_ERR_0_r" description="Interrupt disabled (masked)"/>
+      <bitenum value="1" id="Interrupt_enabled" token="SBH_ERR_1_r" description="Interrupt enabled"/>
+      <bitenum value="1" id="Enable_interrupt" token="SBH_ERR_1_w" description="Enable interrupt"/>
+    </bitfield>
+  </register>
+  <register id="ICONT_SBH_IRQENABLE_CLR_1" acronym="ICONT_SBH_IRQENABLE_CLR_1" offset="0x40" width="32" description="Per-event interrupt enable bit vector, line #1 (error). Write 1 to clear (disable interrupt). Readout equal to corresponding _SET register.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="SBH_ERR" width="1" begin="0" end="0" resetval="0" description="enable for SBH error event" range="" rwaccess="RW W1toClr">
+      <bitenum value="0" id="No_action" token="SBH_ERR_0_w" description="No action"/>
+      <bitenum value="0" id="Interrupt_disabled_(masked)" token="SBH_ERR_0_r" description="Interrupt disabled (masked)"/>
+      <bitenum value="1" id="Interrupt_enabled" token="SBH_ERR_1_r" description="Interrupt enabled"/>
+      <bitenum value="1" id="Disable_interrupt" token="SBH_ERR_1_w" description="Disable interrupt"/>
+    </bitfield>
+  </register>
+  <register id="ICONT_SBH_TCCR_i_0" acronym="ICONT_SBH_TCCR_i_0" offset="0x50" width="32" description="Task n Configuration Control Register">
+    <bitfield id="RESERVED" width="6" begin="31" end="26" resetval="0x00" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="COUNTER_ID" width="2" begin="25" end="24" resetval="0x0" description="Counter Identifier" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="COUNTER_EN" width="1" begin="22" end="22" resetval="0" description="Counter Enable Bit" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="21" end="21" resetval="0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="VDMA_G_SELECT" width="8" begin="20" end="13" resetval="0x00" description="DMA_IVA Group Selector" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="12" end="12" resetval="0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="VDMA_SG_SELECT" width="2" begin="11" end="10" resetval="0x0" description="DMA_IVA Super Group Enable" range="" rwaccess="RW">
+      <bitenum value="0" id="DMA_IVA_0" token="VDMA_SG_SELECT_0" description="Enabled DMA_IVA Groups are in the range of 0 to 7"/>
+      <bitenum value="1" id="DMA_IVA_1" token="VDMA_SG_SELECT_1" description="Enabled DMA_IVA Groups are in the range of 8 to 15"/>
+      <bitenum value="2" id="DMA_IVA_2" token="VDMA_SG_SELECT_2" description="Enabled DMA_IVA Groups are in the range of 16 to 23"/>
+      <bitenum value="3" id="DMA_IVA_3" token="VDMA_SG_SELECT_3" description="Enabled DMA_IVA Groups are in the range of 24 to 31"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="2" begin="9" end="8" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="DM_LCHN_0_EN" width="4" begin="7" end="4" resetval="0x0" description="Enable Data Mover Logical channel n to 0 (n=NB_DM_LCH-1)" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="TASK_TYPE" width="3" begin="2" end="0" resetval="0x1" description="Task Type" range="" rwaccess="RW">
+      <bitenum value="0" id="Immediate_Task_End" token="TASK_TYPE_0" description="Immediate Task End"/>
+      <bitenum value="1" id="CPU_only_activated" token="TASK_TYPE_1" description="CPU only activated"/>
+      <bitenum value="2" id="DMA_IVA_only_activated" token="TASK_TYPE_2" description="DMA_IVA only activated"/>
+      <bitenum value="3" id="DM_then_CPU_activated" token="TASK_TYPE_3" description="DM then CPU activated"/>
+      <bitenum value="4" id="DM_then_DMA_IVA_only_activated" token="TASK_TYPE_4" description="DM then DMA_IVA only activated"/>
+      <bitenum value="5" id="CPU_then_DMA_IVA_only_activated" token="TASK_TYPE_5" description="CPU then DMA_IVA only activated"/>
+      <bitenum value="6" id="CPU_then_DM_activated" token="TASK_TYPE_6" description="CPU then DM activated"/>
+      <bitenum value="7" id="CPU_then_DM_then_DMA_IVA_activated" token="TASK_TYPE_7" description="CPU then DM then DMA_IVA activated"/>
+    </bitfield>
+  </register>
+  <register id="ICONT_SBH_TCCR_i_1" acronym="ICONT_SBH_TCCR_i_1" offset="0x54" width="32" description="Task n Configuration Control Register">
+    <bitfield id="RESERVED" width="6" begin="31" end="26" resetval="0x00" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="COUNTER_ID" width="2" begin="25" end="24" resetval="0x0" description="Counter Identifier" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="COUNTER_EN" width="1" begin="22" end="22" resetval="0" description="Counter Enable Bit" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="21" end="21" resetval="0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="VDMA_G_SELECT" width="8" begin="20" end="13" resetval="0x00" description="DMA_IVA Group Selector" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="12" end="12" resetval="0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="VDMA_SG_SELECT" width="2" begin="11" end="10" resetval="0x0" description="DMA_IVA Super Group Enable" range="" rwaccess="RW">
+      <bitenum value="0" id="DMA_IVA_0" token="VDMA_SG_SELECT_0" description="Enabled DMA_IVA Groups are in the range of 0 to 7"/>
+      <bitenum value="1" id="DMA_IVA_1" token="VDMA_SG_SELECT_1" description="Enabled DMA_IVA Groups are in the range of 8 to 15"/>
+      <bitenum value="2" id="DMA_IVA_2" token="VDMA_SG_SELECT_2" description="Enabled DMA_IVA Groups are in the range of 16 to 23"/>
+      <bitenum value="3" id="DMA_IVA_3" token="VDMA_SG_SELECT_3" description="Enabled DMA_IVA Groups are in the range of 24 to 31"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="2" begin="9" end="8" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="DM_LCHN_0_EN" width="4" begin="7" end="4" resetval="0x0" description="Enable Data Mover Logical channel n to 0 (n=NB_DM_LCH-1)" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="TASK_TYPE" width="3" begin="2" end="0" resetval="0x1" description="Task Type" range="" rwaccess="RW">
+      <bitenum value="0" id="Immediate_Task_End" token="TASK_TYPE_0" description="Immediate Task End"/>
+      <bitenum value="1" id="CPU_only_activated" token="TASK_TYPE_1" description="CPU only activated"/>
+      <bitenum value="2" id="DMA_IVA_only_activated" token="TASK_TYPE_2" description="DMA_IVA only activated"/>
+      <bitenum value="3" id="DM_then_CPU_activated" token="TASK_TYPE_3" description="DM then CPU activated"/>
+      <bitenum value="4" id="DM_then_DMA_IVA_only_activated" token="TASK_TYPE_4" description="DM then DMA_IVA only activated"/>
+      <bitenum value="5" id="CPU_then_DMA_IVA_only_activated" token="TASK_TYPE_5" description="CPU then DMA_IVA only activated"/>
+      <bitenum value="6" id="CPU_then_DM_activated" token="TASK_TYPE_6" description="CPU then DM activated"/>
+      <bitenum value="7" id="CPU_then_DM_then_DMA_IVA_activated" token="TASK_TYPE_7" description="CPU then DM then DMA_IVA activated"/>
+    </bitfield>
+  </register>
+  <register id="ICONT_SBH_TCCR_i_2" acronym="ICONT_SBH_TCCR_i_2" offset="0x58" width="32" description="Task n Configuration Control Register">
+    <bitfield id="RESERVED" width="6" begin="31" end="26" resetval="0x00" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="COUNTER_ID" width="2" begin="25" end="24" resetval="0x0" description="Counter Identifier" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="COUNTER_EN" width="1" begin="22" end="22" resetval="0" description="Counter Enable Bit" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="21" end="21" resetval="0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="VDMA_G_SELECT" width="8" begin="20" end="13" resetval="0x00" description="DMA_IVA Group Selector" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="12" end="12" resetval="0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="VDMA_SG_SELECT" width="2" begin="11" end="10" resetval="0x0" description="DMA_IVA Super Group Enable" range="" rwaccess="RW">
+      <bitenum value="0" id="DMA_IVA_0" token="VDMA_SG_SELECT_0" description="Enabled DMA_IVA Groups are in the range of 0 to 7"/>
+      <bitenum value="1" id="DMA_IVA_1" token="VDMA_SG_SELECT_1" description="Enabled DMA_IVA Groups are in the range of 8 to 15"/>
+      <bitenum value="2" id="DMA_IVA_2" token="VDMA_SG_SELECT_2" description="Enabled DMA_IVA Groups are in the range of 16 to 23"/>
+      <bitenum value="3" id="DMA_IVA_3" token="VDMA_SG_SELECT_3" description="Enabled DMA_IVA Groups are in the range of 24 to 31"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="2" begin="9" end="8" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="DM_LCHN_0_EN" width="4" begin="7" end="4" resetval="0x0" description="Enable Data Mover Logical channel n to 0 (n=NB_DM_LCH-1)" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="TASK_TYPE" width="3" begin="2" end="0" resetval="0x1" description="Task Type" range="" rwaccess="RW">
+      <bitenum value="0" id="Immediate_Task_End" token="TASK_TYPE_0" description="Immediate Task End"/>
+      <bitenum value="1" id="CPU_only_activated" token="TASK_TYPE_1" description="CPU only activated"/>
+      <bitenum value="2" id="DMA_IVA_only_activated" token="TASK_TYPE_2" description="DMA_IVA only activated"/>
+      <bitenum value="3" id="DM_then_CPU_activated" token="TASK_TYPE_3" description="DM then CPU activated"/>
+      <bitenum value="4" id="DM_then_DMA_IVA_only_activated" token="TASK_TYPE_4" description="DM then DMA_IVA only activated"/>
+      <bitenum value="5" id="CPU_then_DMA_IVA_only_activated" token="TASK_TYPE_5" description="CPU then DMA_IVA only activated"/>
+      <bitenum value="6" id="CPU_then_DM_activated" token="TASK_TYPE_6" description="CPU then DM activated"/>
+      <bitenum value="7" id="CPU_then_DM_then_DMA_IVA_activated" token="TASK_TYPE_7" description="CPU then DM then DMA_IVA activated"/>
+    </bitfield>
+  </register>
+  <register id="ICONT_SBH_TCCR_i_3" acronym="ICONT_SBH_TCCR_i_3" offset="0x5C" width="32" description="Task n Configuration Control Register">
+    <bitfield id="RESERVED" width="6" begin="31" end="26" resetval="0x00" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="COUNTER_ID" width="2" begin="25" end="24" resetval="0x0" description="Counter Identifier" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="COUNTER_EN" width="1" begin="22" end="22" resetval="0" description="Counter Enable Bit" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="21" end="21" resetval="0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="VDMA_G_SELECT" width="8" begin="20" end="13" resetval="0x00" description="DMA_IVA Group Selector" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="12" end="12" resetval="0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="VDMA_SG_SELECT" width="2" begin="11" end="10" resetval="0x0" description="DMA_IVA Super Group Enable" range="" rwaccess="RW">
+      <bitenum value="0" id="DMA_IVA_0" token="VDMA_SG_SELECT_0" description="Enabled DMA_IVA Groups are in the range of 0 to 7"/>
+      <bitenum value="1" id="DMA_IVA_1" token="VDMA_SG_SELECT_1" description="Enabled DMA_IVA Groups are in the range of 8 to 15"/>
+      <bitenum value="2" id="DMA_IVA_2" token="VDMA_SG_SELECT_2" description="Enabled DMA_IVA Groups are in the range of 16 to 23"/>
+      <bitenum value="3" id="DMA_IVA_3" token="VDMA_SG_SELECT_3" description="Enabled DMA_IVA Groups are in the range of 24 to 31"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="2" begin="9" end="8" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="DM_LCHN_0_EN" width="4" begin="7" end="4" resetval="0x0" description="Enable Data Mover Logical channel n to 0 (n=NB_DM_LCH-1)" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="TASK_TYPE" width="3" begin="2" end="0" resetval="0x1" description="Task Type" range="" rwaccess="RW">
+      <bitenum value="0" id="Immediate_Task_End" token="TASK_TYPE_0" description="Immediate Task End"/>
+      <bitenum value="1" id="CPU_only_activated" token="TASK_TYPE_1" description="CPU only activated"/>
+      <bitenum value="2" id="DMA_IVA_only_activated" token="TASK_TYPE_2" description="DMA_IVA only activated"/>
+      <bitenum value="3" id="DM_then_CPU_activated" token="TASK_TYPE_3" description="DM then CPU activated"/>
+      <bitenum value="4" id="DM_then_DMA_IVA_only_activated" token="TASK_TYPE_4" description="DM then DMA_IVA only activated"/>
+      <bitenum value="5" id="CPU_then_DMA_IVA_only_activated" token="TASK_TYPE_5" description="CPU then DMA_IVA only activated"/>
+      <bitenum value="6" id="CPU_then_DM_activated" token="TASK_TYPE_6" description="CPU then DM activated"/>
+      <bitenum value="7" id="CPU_then_DM_then_DMA_IVA_activated" token="TASK_TYPE_7" description="CPU then DM then DMA_IVA activated"/>
+    </bitfield>
+  </register>
+  <register id="ICONT_SBH_TCCR_i_4" acronym="ICONT_SBH_TCCR_i_4" offset="0x60" width="32" description="Task n Configuration Control Register">
+    <bitfield id="RESERVED" width="6" begin="31" end="26" resetval="0x00" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="COUNTER_ID" width="2" begin="25" end="24" resetval="0x0" description="Counter Identifier" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="COUNTER_EN" width="1" begin="22" end="22" resetval="0" description="Counter Enable Bit" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="21" end="21" resetval="0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="VDMA_G_SELECT" width="8" begin="20" end="13" resetval="0x00" description="DMA_IVA Group Selector" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="12" end="12" resetval="0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="VDMA_SG_SELECT" width="2" begin="11" end="10" resetval="0x0" description="DMA_IVA Super Group Enable" range="" rwaccess="RW">
+      <bitenum value="0" id="DMA_IVA_0" token="VDMA_SG_SELECT_0" description="Enabled DMA_IVA Groups are in the range of 0 to 7"/>
+      <bitenum value="1" id="DMA_IVA_1" token="VDMA_SG_SELECT_1" description="Enabled DMA_IVA Groups are in the range of 8 to 15"/>
+      <bitenum value="2" id="DMA_IVA_2" token="VDMA_SG_SELECT_2" description="Enabled DMA_IVA Groups are in the range of 16 to 23"/>
+      <bitenum value="3" id="DMA_IVA_3" token="VDMA_SG_SELECT_3" description="Enabled DMA_IVA Groups are in the range of 24 to 31"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="2" begin="9" end="8" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="DM_LCHN_0_EN" width="4" begin="7" end="4" resetval="0x0" description="Enable Data Mover Logical channel n to 0 (n=NB_DM_LCH-1)" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="TASK_TYPE" width="3" begin="2" end="0" resetval="0x1" description="Task Type" range="" rwaccess="RW">
+      <bitenum value="0" id="Immediate_Task_End" token="TASK_TYPE_0" description="Immediate Task End"/>
+      <bitenum value="1" id="CPU_only_activated" token="TASK_TYPE_1" description="CPU only activated"/>
+      <bitenum value="2" id="DMA_IVA_only_activated" token="TASK_TYPE_2" description="DMA_IVA only activated"/>
+      <bitenum value="3" id="DM_then_CPU_activated" token="TASK_TYPE_3" description="DM then CPU activated"/>
+      <bitenum value="4" id="DM_then_DMA_IVA_only_activated" token="TASK_TYPE_4" description="DM then DMA_IVA only activated"/>
+      <bitenum value="5" id="CPU_then_DMA_IVA_only_activated" token="TASK_TYPE_5" description="CPU then DMA_IVA only activated"/>
+      <bitenum value="6" id="CPU_then_DM_activated" token="TASK_TYPE_6" description="CPU then DM activated"/>
+      <bitenum value="7" id="CPU_then_DM_then_DMA_IVA_activated" token="TASK_TYPE_7" description="CPU then DM then DMA_IVA activated"/>
+    </bitfield>
+  </register>
+  <register id="ICONT_SBH_TCCR_i_5" acronym="ICONT_SBH_TCCR_i_5" offset="0x64" width="32" description="Task n Configuration Control Register">
+    <bitfield id="RESERVED" width="6" begin="31" end="26" resetval="0x00" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="COUNTER_ID" width="2" begin="25" end="24" resetval="0x0" description="Counter Identifier" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="COUNTER_EN" width="1" begin="22" end="22" resetval="0" description="Counter Enable Bit" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="21" end="21" resetval="0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="VDMA_G_SELECT" width="8" begin="20" end="13" resetval="0x00" description="DMA_IVA Group Selector" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="12" end="12" resetval="0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="VDMA_SG_SELECT" width="2" begin="11" end="10" resetval="0x0" description="DMA_IVA Super Group Enable" range="" rwaccess="RW">
+      <bitenum value="0" id="DMA_IVA_0" token="VDMA_SG_SELECT_0" description="Enabled DMA_IVA Groups are in the range of 0 to 7"/>
+      <bitenum value="1" id="DMA_IVA_1" token="VDMA_SG_SELECT_1" description="Enabled DMA_IVA Groups are in the range of 8 to 15"/>
+      <bitenum value="2" id="DMA_IVA_2" token="VDMA_SG_SELECT_2" description="Enabled DMA_IVA Groups are in the range of 16 to 23"/>
+      <bitenum value="3" id="DMA_IVA_3" token="VDMA_SG_SELECT_3" description="Enabled DMA_IVA Groups are in the range of 24 to 31"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="2" begin="9" end="8" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="DM_LCHN_0_EN" width="4" begin="7" end="4" resetval="0x0" description="Enable Data Mover Logical channel n to 0 (n=NB_DM_LCH-1)" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="TASK_TYPE" width="3" begin="2" end="0" resetval="0x1" description="Task Type" range="" rwaccess="RW">
+      <bitenum value="0" id="Immediate_Task_End" token="TASK_TYPE_0" description="Immediate Task End"/>
+      <bitenum value="1" id="CPU_only_activated" token="TASK_TYPE_1" description="CPU only activated"/>
+      <bitenum value="2" id="DMA_IVA_only_activated" token="TASK_TYPE_2" description="DMA_IVA only activated"/>
+      <bitenum value="3" id="DM_then_CPU_activated" token="TASK_TYPE_3" description="DM then CPU activated"/>
+      <bitenum value="4" id="DM_then_DMA_IVA_only_activated" token="TASK_TYPE_4" description="DM then DMA_IVA only activated"/>
+      <bitenum value="5" id="CPU_then_DMA_IVA_only_activated" token="TASK_TYPE_5" description="CPU then DMA_IVA only activated"/>
+      <bitenum value="6" id="CPU_then_DM_activated" token="TASK_TYPE_6" description="CPU then DM activated"/>
+      <bitenum value="7" id="CPU_then_DM_then_DMA_IVA_activated" token="TASK_TYPE_7" description="CPU then DM then DMA_IVA activated"/>
+    </bitfield>
+  </register>
+  <register id="ICONT_SBH_COUNTER_j_0" acronym="ICONT_SBH_COUNTER_j_0" offset="0x90" width="32" description="Initialization value of SYNCBOX Handler Counter n">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x000000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="COUNT" width="8" begin="7" end="0" resetval="0x00" description="Value to preload on counter" range="" rwaccess="RW"/>
+  </register>
+  <register id="ICONT_SBH_COUNTER_j_1" acronym="ICONT_SBH_COUNTER_j_1" offset="0x94" width="32" description="Initialization value of SYNCBOX Handler Counter n">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x000000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="COUNT" width="8" begin="7" end="0" resetval="0x00" description="Value to preload on counter" range="" rwaccess="RW"/>
+  </register>
+  <register id="ICONT_SBH_COUNTER_j_2" acronym="ICONT_SBH_COUNTER_j_2" offset="0x98" width="32" description="Initialization value of SYNCBOX Handler Counter n">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x000000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="COUNT" width="8" begin="7" end="0" resetval="0x00" description="Value to preload on counter" range="" rwaccess="RW"/>
+  </register>
+  <register id="ICONT_SBH_COUNTER_j_3" acronym="ICONT_SBH_COUNTER_j_3" offset="0x9C" width="32" description="Initialization value of SYNCBOX Handler Counter n">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x000000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="COUNT" width="8" begin="7" end="0" resetval="0x00" description="Value to preload on counter" range="" rwaccess="RW"/>
+  </register>
+  <register id="ICONT_SBH_DMLCH_CFG_j_0" acronym="ICONT_SBH_DMLCH_CFG_j_0" offset="0xB0" width="32" description="This register defines which DMA_IVA group is associated to the Data Mover Logical Chanel n.">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0000000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="VDMA_GROUP_ID" width="5" begin="4" end="0" resetval="0x00" description="DMA_IVA group identifier." range="" rwaccess="RW"/>
+  </register>
+  <register id="ICONT_SBH_DMLCH_CFG_j_1" acronym="ICONT_SBH_DMLCH_CFG_j_1" offset="0xB4" width="32" description="This register defines which DMA_IVA group is associated to the Data Mover Logical Chanel n.">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0000000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="VDMA_GROUP_ID" width="5" begin="4" end="0" resetval="0x00" description="DMA_IVA group identifier." range="" rwaccess="RW"/>
+  </register>
+  <register id="ICONT_SBH_DMLCH_CFG_j_2" acronym="ICONT_SBH_DMLCH_CFG_j_2" offset="0xB8" width="32" description="This register defines which DMA_IVA group is associated to the Data Mover Logical Chanel n.">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0000000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="VDMA_GROUP_ID" width="5" begin="4" end="0" resetval="0x00" description="DMA_IVA group identifier." range="" rwaccess="RW"/>
+  </register>
+  <register id="ICONT_SBH_DMLCH_CFG_j_3" acronym="ICONT_SBH_DMLCH_CFG_j_3" offset="0xBC" width="32" description="This register defines which DMA_IVA group is associated to the Data Mover Logical Chanel n.">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0000000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="VDMA_GROUP_ID" width="5" begin="4" end="0" resetval="0x00" description="DMA_IVA group identifier." range="" rwaccess="RW"/>
+  </register>
+  <register id="ICONT_SBH_BYP_VDMAG_START" acronym="ICONT_SBH_BYP_VDMAG_START" offset="0xD0" width="32" description="SYNCBOX Bypass mode DMA_IVA group Start register. Register is cleared when ICONT_SBHCTRL.BYPASS bit is writen to 1. Writing to this register is allowed only when ICONT_SBHCTRL.BYPASS bit is 1. Writing 1 into bitfiel n will START DMA_IVA group n. This register is cleared when ICONT_SBHCTRL.BYPASS bit is writen to 1.">
+    <bitfield id="VDMAG31_0" width="32" begin="31" end="0" resetval="0x0000 0000" description="Start DMA_IVA Group" range="" rwaccess="W"/>
+  </register>
+  <register id="ICONT_SBH_BYP_VDMAG_END" acronym="ICONT_SBH_BYP_VDMAG_END" offset="0xD4" width="32" description="SYNCBOX Bypass mode DMA_IVA group End register status. This register is cleared when ICONT_SBHCTRL.BYPASS bit is writen to 1. It is updated every time a DMA_IVA group is completed, that is, on DMA_IVA End of Group detection, only if ICONT_SBHCTRL.BYPASS bit is 1.">
+    <bitfield id="VDMAG31_0" width="32" begin="31" end="0" resetval="0x0000 0000" description="DMA_IVA Group is ended" range="" rwaccess="R"/>
+  </register>
+</module>

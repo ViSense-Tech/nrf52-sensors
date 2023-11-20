@@ -1,0 +1,19 @@
+<module name="VPAC0_VPAC_REGS_VPAC_REGS_CFG_IP_MMRS" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="VPAC_PID" acronym="VPAC_PID" offset="0x0" width="32" description="VPAC PID">
+    <bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x1" description="Used to distinguish between old scheme and new scheme." range="" rwaccess="R"/>
+    <bitfield id="BU" width="2" begin="29" end="28" resetval="0x2" description="BU indicator" range="" rwaccess="R"/>
+    <bitfield id="FUNC" width="12" begin="27" end="16" resetval="0x4C0" description="Function indicates a software compatible module family." range="" rwaccess="R"/>
+    <bitfield id="RTL" width="5" begin="15" end="11" resetval="0x2" description="RTL Version." range="" rwaccess="R"/>
+    <bitfield id="MAJOR" width="3" begin="10" end="8" resetval="0x1" description="Major Revision." range="" rwaccess="R"/>
+    <bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Indicates a special version for a particular device." range="" rwaccess="R"/>
+    <bitfield id="MINOR" width="6" begin="5" end="0" resetval="0x0" description="Minor Revision." range="" rwaccess="R"/>
+  </register>
+  <register id="VPAC_CTRL" acronym="VPAC_CTRL" offset="0xC" width="32" description="Register to control and do event selection for VPAC module">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CTSET_DMA_SOC_DBG" width="1" begin="4" end="4" resetval="0x0" description="select config for CTSET" range="" rwaccess="RW"/>
+    <bitfield id="CTSET_UTC_SL2_DBG" width="1" begin="3" end="3" resetval="0x0" description="select config for CTSET" range="" rwaccess="RW"/>
+    <bitfield id="CTSET_HWA_SL2_DBG" width="1" begin="2" end="2" resetval="0x0" description="select config for CTSET" range="" rwaccess="RW"/>
+    <bitfield id="CTSET_RT_UTC_OUT" width="1" begin="1" end="1" resetval="0x0" description="select config for CTSET" range="" rwaccess="RW"/>
+    <bitfield id="CTSET_RT_UTC_IN" width="1" begin="0" end="0" resetval="0x0" description="select config for CTSET" range="" rwaccess="RW"/>
+  </register>
+</module>

@@ -1,0 +1,27 @@
+<module name="VPAC0_DRU_UTC_VPAC1_DRU_MMR_CFG_DRU_DRU_CHRT" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="VPAC_UTC1_DRU_CHRT_CTL_j" acronym="VPAC_UTC1_DRU_CHRT_CTL_j" offset="0x0" width="64" description="The channel realtime control register contains real-time cotrol and status information for the DMA Channel. The fields in this regsiter can be changed while the channel is in operation. Offset = 00360000h + (j * 100h); where j = 0h to 3Fh">
+    <bitfield id="RSVD" width="32" begin="63" end="32" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ENABLE" width="1" begin="31" end="31" resetval="0x0" description="This field enables or disables the channel." range="" rwaccess="RW"/>
+    <bitfield id="TEARDOWN" width="1" begin="30" end="30" resetval="0x0" description="Channel teardown: Setting this bit will request the channel to be torn down." range="" rwaccess="RW"/>
+    <bitfield id="PAUSE" width="1" begin="29" end="29" resetval="0x0" description="Channel pause: Setting this bit will request the channel to pause processing at the next packet boundary." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="29" begin="28" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_UTC1_DRU_CHRT_SWTRIG_j" acronym="VPAC_UTC1_DRU_CHRT_SWTRIG_j" offset="0x8" width="64" description="The Software Trigger Register provides a mechanism by which software can directly trigger the channel in a secure way. Offset = 00360008h + (j * 100h); where j = 0h to 3Fh">
+    <bitfield id="RSVD" width="61" begin="63" end="3" resetval="0xX" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="LOCAL_TRIGGER0" width="1" begin="2" end="2" resetval="0x0" description="Trigger: writing this bit with a value of 1 will cause the trigger event to be sent to this channel." range="" rwaccess="RW"/>
+    <bitfield id="GLOBAL_TRIGGER1" width="1" begin="1" end="1" resetval="0x0" description="Trigger: writing this bit with a value of 1 will cause the trigger event to be sent to this channel." range="" rwaccess="RW"/>
+    <bitfield id="GLOBAL_TRIGGER0" width="1" begin="0" end="0" resetval="0x0" description="Trigger: writing this bit with a value of 1 will cause the trigger event to be sent to this channel." range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_UTC1_DRU_CHRT_STATUS_DET_j" acronym="VPAC_UTC1_DRU_CHRT_STATUS_DET_j" offset="0x10" width="64" description="The channel status details Offset = 00360010h + (j * 100h); where j = 0h to 3Fh">
+    <bitfield id="RSVD" width="48" begin="63" end="16" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CMD_ID" width="8" begin="15" end="8" resetval="0x0" description="The last cmd_id given to the write queue" range="" rwaccess="R"/>
+    <bitfield id="INFO" width="4" begin="7" end="4" resetval="0x0" description="The info of the error that was received" range="" rwaccess="R"/>
+    <bitfield id="STATUS_TYPE" width="4" begin="3" end="0" resetval="0x0" description="The type of error that was received" range="" rwaccess="R"/>
+  </register>
+  <register id="VPAC_UTC1_DRU_CHRT_STATUS_CNT_j" acronym="VPAC_UTC1_DRU_CHRT_STATUS_CNT_j" offset="0x18" width="64" description="The channel count details Offset = 00360018h + (j * 100h); where j = 0h to 3Fh">
+    <bitfield id="ICNT3" width="16" begin="63" end="48" resetval="0x0" description="The last icnt3 given to the write queue" range="" rwaccess="R"/>
+    <bitfield id="ICNT2" width="16" begin="47" end="32" resetval="0x0" description="The last icnt2 given to the write queue" range="" rwaccess="R"/>
+    <bitfield id="ICNT1" width="16" begin="31" end="16" resetval="0x0" description="The last icnt1 given to the write queue" range="" rwaccess="R"/>
+    <bitfield id="ICNT0" width="16" begin="15" end="0" resetval="0x0" description="The last icnt0 given to the write queue" range="" rwaccess="R"/>
+  </register>
+</module>

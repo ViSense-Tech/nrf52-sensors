@@ -1,0 +1,596 @@
+<module name="CSI_TX_IF0_VBUS2APB_WRAP_VBUSP_APB_CSI2TX" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="CSI_TX_IF_DEVICE_CONFIG" acronym="CSI_TX_IF_DEVICE_CONFIG" offset="0x0" width="32" description="CSI2 Transmitter Device Configuration Register">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="ASF_PRESENT" width="1" begin="19" end="19" resetval="0x1" description="Active Internal Diagnostic Features:" range="" rwaccess="R"/>
+    <bitfield id="NUM_DTS" width="5" begin="18" end="14" resetval="0x8" description="Number of Datatypes DT_NUMBER=8" range="" rwaccess="R"/>
+    <bitfield id="NUM_VCS" width="5" begin="13" end="9" resetval="0x10" description="Number of Virtual Channels VC_NUMBER=16" range="" rwaccess="R"/>
+    <bitfield id="DATAPATH_SIZE" width="2" begin="8" end="7" resetval="0x0" description="Internal Datapath width" range="" rwaccess="R"/>
+    <bitfield id="NUM_STREAMS" width="3" begin="6" end="4" resetval="0x4" description="Number of Stream interfaces" range="" rwaccess="R"/>
+    <bitfield id="CDNS_PHY_PRESENT" width="1" begin="3" end="3" resetval="0x1" description="DPHY present" range="" rwaccess="R"/>
+    <bitfield id="MAX_LANE_NB" width="3" begin="2" end="0" resetval="0x4" description="Max Number of Lanes" range="" rwaccess="R"/>
+  </register>
+  <register id="CSI_TX_IF_STATUS" acronym="CSI_TX_IF_STATUS" offset="0x4" width="32" description="CSI2 Transmitter Status Register">
+    <bitfield id="UNUSED" width="25" begin="31" end="7" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ULP_MODE_ACTIVE" width="1" begin="6" end="6" resetval="0x0" description="Ultra Low Power Mode Active Flag When HIGH this bit indicates that ultra low power mode is active." range="" rwaccess="R"/>
+    <bitfield id="HS_MODE_ACTIVE" width="1" begin="5" end="5" resetval="0x0" description="High Speed Mode Active Flag When HIGH this bit indicates that high speed mode is active." range="" rwaccess="R"/>
+    <bitfield id="FRAME_TRANSMISSION_ACTIVE" width="1" begin="4" end="4" resetval="0x0" description="Frame Transmission Active Flag When HIGH this bit indicates that frame transmission is active." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="Unused bits" range="" rwaccess="R"/>
+    <bitfield id="CONFIGURATION_ACTIVE" width="1" begin="2" end="2" resetval="0x1" description="Configuration Mode Active Flag When HIGH this bit indicates that the CSI2TX module is in the configuration mode." range="" rwaccess="R"/>
+    <bitfield id="SOFT_RESET_ACTIVE" width="1" begin="1" end="1" resetval="0x0" description="Soft Reset Active Flag When HIGH this bit indicates that soft reset is active." range="" rwaccess="R"/>
+    <bitfield id="BYPASS_MODE_ACTIVE" width="1" begin="0" end="0" resetval="0x0" description="Bypass Mode Active Flag When HIGH this bit indicates that bypass mode is active." range="" rwaccess="R"/>
+  </register>
+  <register id="CSI_TX_IF_IRQ" acronym="CSI_TX_IF_IRQ" offset="0x8" width="32" description="CSI2 Transmitter Interrupt Register. Write '1' to clear">
+    <bitfield id="LINE_NUMBER_ERROR3" width="1" begin="31" end="31" resetval="0x0" description="Pixel IF 3 Line Number Error Flag - When HIGH this bit indicates that a line number error occurred." range="" rwaccess="RW1C"/>
+    <bitfield id="BYTE_COUNT_MISMATCH_IRQ3" width="1" begin="30" end="30" resetval="0x0" description="Pixel IF 3 Byte Count Mismatch Flag - When HIGH this bit indicates that a byte count mismatch occurred." range="" rwaccess="RW1C"/>
+    <bitfield id="DATA_FLOW_ERR_IRQ3" width="1" begin="29" end="29" resetval="0x0" description="Pixel IF 3 Data Flow Error Flag - When HIGH this bit indicates that data flow error has occurred, caused by the Frame/Line valid being asserted when the DPhy is not ready." range="" rwaccess="RW1C"/>
+    <bitfield id="FIFO_UNDERFLOW_IRQ3" width="1" begin="28" end="28" resetval="0x0" description="Pixel IF 3 FIFO Underflow Flag - When HIGH this bit indicates that at least one internal FIFO underflow occurred." range="" rwaccess="RW1C"/>
+    <bitfield id="LINE_END_IRQ3" width="1" begin="27" end="27" resetval="0x0" description="Pixel IF 3 Line End Flag - When HIGH this bit indicates that a line end occurred." range="" rwaccess="RW1C"/>
+    <bitfield id="LINE_START_IRQ3" width="1" begin="26" end="26" resetval="0x0" description="Pixel IF 3 Line Start Flag - When HIGH this bit indicates that a line start occurred." range="" rwaccess="RW1C"/>
+    <bitfield id="FRAME_END_IRQ3" width="1" begin="25" end="25" resetval="0x0" description="Pixel IF 3 Frame End Flag - When HIGH this bit indicates that a frame end occurred." range="" rwaccess="RW1C"/>
+    <bitfield id="FRAME_START_IRQ3" width="1" begin="24" end="24" resetval="0x0" description="Pixel IF 3 Frame Start Flag - When HIGH this bit indicates that a frame start occurred." range="" rwaccess="RW1C"/>
+    <bitfield id="LINE_NUMBER_ERROR2" width="1" begin="23" end="23" resetval="0x0" description="Pixel IF 2 Line Number Error Flag - When HIGH this bit indicates that a line number error occurred." range="" rwaccess="RW1C"/>
+    <bitfield id="BYTE_COUNT_MISMATCH_IRQ2" width="1" begin="22" end="22" resetval="0x0" description="Pixel IF 2 Byte Count Mismatch Flag - When HIGH this bit indicates that a byte count mismatch occurred." range="" rwaccess="RW1C"/>
+    <bitfield id="DATA_FLOW_ERR_IRQ2" width="1" begin="21" end="21" resetval="0x0" description="Pixel IF 2 Data Flow Error Flag - When HIGH this bit indicates that data flow error has occurred, caused by the Frame/Line valid being asserted when the DPhy is not ready." range="" rwaccess="RW1C"/>
+    <bitfield id="FIFO_UNDERFLOW_IRQ2" width="1" begin="20" end="20" resetval="0x0" description="Pixel IF 2 FIFO Underflow Flag - When HIGH this bit indicates that at least one internal FIFO underflow occurred." range="" rwaccess="RW1C"/>
+    <bitfield id="LINE_END_IRQ2" width="1" begin="19" end="19" resetval="0x0" description="Pixel IF 2 Line End Flag - When HIGH this bit indicates that a line end occurred." range="" rwaccess="RW1C"/>
+    <bitfield id="LINE_START_IRQ2" width="1" begin="18" end="18" resetval="0x0" description="Pixel IF 2 Line Start Flag - When HIGH this bit indicates that a line start occurred." range="" rwaccess="RW1C"/>
+    <bitfield id="FRAME_END_IRQ2" width="1" begin="17" end="17" resetval="0x0" description="Pixel IF 2 Frame End Flag - When HIGH this bit indicates that a frame end occurred." range="" rwaccess="RW1C"/>
+    <bitfield id="FRAME_START_IRQ2" width="1" begin="16" end="16" resetval="0x0" description="Pixel IF 2 Frame Start Flag - When HIGH this bit indicates that a frame start occurred." range="" rwaccess="RW1C"/>
+    <bitfield id="LINE_NUMBER_ERROR1" width="1" begin="15" end="15" resetval="0x0" description="Pixel IF 1 Line Number Error Flag - When HIGH this bit indicates that a line number error occurred." range="" rwaccess="RW1C"/>
+    <bitfield id="BYTE_COUNT_MISMATCH_IRQ1" width="1" begin="14" end="14" resetval="0x0" description="Pixel IF 1 Byte Count Mismatch Flag - When HIGH this bit indicates that a byte count mismatch occurred." range="" rwaccess="RW1C"/>
+    <bitfield id="DATA_FLOW_ERR_IRQ1" width="1" begin="13" end="13" resetval="0x0" description="Pixel IF 1 Data Flow Error Flag - When HIGH this bit indicates that data flow error has occurred, caused by the Frame/Line valid being asserted when the DPhy is not ready." range="" rwaccess="RW1C"/>
+    <bitfield id="FIFO_UNDERFLOW_IRQ1" width="1" begin="12" end="12" resetval="0x0" description="Pixel IF 1 FIFO Underflow Flag - When HIGH this bit indicates that at least one internal FIFO underflow occurred." range="" rwaccess="RW1C"/>
+    <bitfield id="LINE_END_IRQ1" width="1" begin="11" end="11" resetval="0x0" description="Pixel IF 1 Line End Flag - When HIGH this bit indicates that a line end occurred." range="" rwaccess="RW1C"/>
+    <bitfield id="LINE_START_IRQ1" width="1" begin="10" end="10" resetval="0x0" description="Pixel IF 1 Line Start Flag - When HIGH this bit indicates that a line start occurred." range="" rwaccess="RW1C"/>
+    <bitfield id="FRAME_END_IRQ1" width="1" begin="9" end="9" resetval="0x0" description="Pixel IF 1 Frame End Flag - When HIGH this bit indicates that a frame end occurred." range="" rwaccess="RW1C"/>
+    <bitfield id="FRAME_START_IRQ1" width="1" begin="8" end="8" resetval="0x0" description="Pixel IF 1 Frame Start Flag - When HIGH this bit indicates that a frame start occurred." range="" rwaccess="RW1C"/>
+    <bitfield id="LINE_NUMBER_ERROR0" width="1" begin="7" end="7" resetval="0x0" description="Pixel IF 0 Line Number Error Flag - When HIGH this bit indicates that a line number error occurred." range="" rwaccess="RW1C"/>
+    <bitfield id="BYTE_COUNT_MISMATCH_IRQ0" width="1" begin="6" end="6" resetval="0x0" description="Pixel IF 0 Byte Count Mismatch Flag - When HIGH this bit indicates that a byte count mismatch occurred." range="" rwaccess="RW1C"/>
+    <bitfield id="DATA_FLOW_ERR_IRQ0" width="1" begin="5" end="5" resetval="0x0" description="Pixel IF 0 Data Flow Error Flag - When HIGH this bit indicates that data flow error has occurred, caused by the Frame/Line valid being asserted when the DPhy is not ready." range="" rwaccess="RW1C"/>
+    <bitfield id="FIFO_UNDERFLOW_IRQ0" width="1" begin="4" end="4" resetval="0x0" description="Pixel IF 0 FIFO Underflow Flag - When HIGH this bit indicates that at least one internal FIFO underflow occurred." range="" rwaccess="RW1C"/>
+    <bitfield id="LINE_END_IRQ0" width="1" begin="3" end="3" resetval="0x0" description="Pixel IF 0 Line End Flag - When HIGH this bit indicates that a line end occurred." range="" rwaccess="RW1C"/>
+    <bitfield id="LINE_START_IRQ0" width="1" begin="2" end="2" resetval="0x0" description="Pixel IF 0 Line Start Flag - When HIGH this bit indicates that a line start occurred." range="" rwaccess="RW1C"/>
+    <bitfield id="FRAME_END_IRQ0" width="1" begin="1" end="1" resetval="0x0" description="Pixel IF 0 Frame End Flag - When HIGH this bit indicates that a frame end occurred." range="" rwaccess="RW1C"/>
+    <bitfield id="FRAME_START_IRQ0" width="1" begin="0" end="0" resetval="0x0" description="Pixel IF 0 Frame Start Flag - When HIGH this bit indicates that a frame start occurred." range="" rwaccess="RW1C"/>
+  </register>
+  <register id="CSI_TX_IF_IRQ_MASK" acronym="CSI_TX_IF_IRQ_MASK" offset="0xC" width="32" description="CSI2 Transmitter Interrupt Mask Set Register">
+    <bitfield id="MASK_LINE_NUMBER_ERROR3" width="1" begin="31" end="31" resetval="0x0" description="Pixel IF 3 Line Number Error Mask - Writing 1 to this bit enables interrupt generation from the line_number_error_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_BYTE_COUNT_MISMATCH_IRQ3" width="1" begin="30" end="30" resetval="0x0" description="Pixel IF 3 Byte Count Mismatch Mask - Writing 1 to this bit enables interrupt generation from the byte_count_mismatch_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_DATA_FLOW_ERR_IRQ3" width="1" begin="29" end="29" resetval="0x0" description="Pixel IF 3 FIFO Overflow Mask - Writing 1 to this bit enables interrupt generation from the data_flow_err_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_FIFO_UNDERFLOW_IRQ3" width="1" begin="28" end="28" resetval="0x0" description="Pixel IF 3 FIFO Underflow Mask - Writing 1 to this bit enables interrupt generation from the fifo_underflow_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_LINE_END_IRQ3" width="1" begin="27" end="27" resetval="0x0" description="Pixel IF 3 Line End Mask - Writing 1 to this bit enables interrupt generation from the line_en_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_LINE_START_IRQ3" width="1" begin="26" end="26" resetval="0x0" description="Pixel IF 3 Line Start Mask - Writing 1 to this bit enables interrupt generation from the line_start_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_FRAME_END_IRQ3" width="1" begin="25" end="25" resetval="0x0" description="Pixel IF 3 Frame End Mask - Writing 1 to this bit enables interrupt generation from the frame_end_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_FRAME_START_IRQ3" width="1" begin="24" end="24" resetval="0x0" description="Pixel IF 3 Frame Start Mask - Writing 1 to this bit enables interrupt generation from the frame_start_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_LINE_NUMBER_ERROR2" width="1" begin="23" end="23" resetval="0x0" description="Pixel IF 2 Line Number Error Mask - Writing 1 to this bit enables interrupt generation from the line_number_error_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_BYTE_COUNT_MISMATCH_IRQ2" width="1" begin="22" end="22" resetval="0x0" description="Pixel IF 2 Byte Count Mismatch Mask - Writing 1 to this bit enables interrupt generation from the byte_count_mismatch_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_DATA_FLOW_ERR_IRQ2" width="1" begin="21" end="21" resetval="0x0" description="Pixel IF 2 FIFO Overflow Mask - Writing 1 to this bit enables interrupt generation from the data_flow_err_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_FIFO_UNDERFLOW_IRQ2" width="1" begin="20" end="20" resetval="0x0" description="Pixel IF 2 FIFO Underflow Mask - Writing 1 to this bit enables interrupt generation from the fifo_underflow_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_LINE_END_IRQ2" width="1" begin="19" end="19" resetval="0x0" description="Pixel IF 2 Line End Mask - Writing 1 to this bit enables interrupt generation from the line_en_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_LINE_START_IRQ2" width="1" begin="18" end="18" resetval="0x0" description="Pixel IF 2 Line Start Mask - Writing 1 to this bit enables interrupt generation from the line_start_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_FRAME_END_IRQ2" width="1" begin="17" end="17" resetval="0x0" description="Pixel IF 2 Frame End Mask - Writing 1 to this bit enables interrupt generation from the frame_end_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_FRAME_START_IRQ2" width="1" begin="16" end="16" resetval="0x0" description="Pixel IF 2 Frame Start Mask - Writing 1 to this bit enables interrupt generation from the frame_start_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_LINE_NUMBER_ERROR1" width="1" begin="15" end="15" resetval="0x0" description="Pixel IF 1 Line Number Error Mask - Writing 1 to this bit enables interrupt generation from the line_number_error_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_BYTE_COUNT_MISMATCH_IRQ1" width="1" begin="14" end="14" resetval="0x0" description="Pixel IF 1 Byte Count Mismatch Mask - Writing 1 to this bit enables interrupt generation from the byte_count_mismatch_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_DATA_FLOW_ERR_IRQ1" width="1" begin="13" end="13" resetval="0x0" description="Pixel IF 1 FIFO Overflow Mask - Writing 1 to this bit enables interrupt generation from the data_flow_err_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_FIFO_UNDERFLOW_IRQ1" width="1" begin="12" end="12" resetval="0x0" description="Pixel IF 1 FIFO Underflow Mask - Writing 1 to this bit enables interrupt generation from the fifo_underflow_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_LINE_END_IRQ1" width="1" begin="11" end="11" resetval="0x0" description="Pixel IF 1 Line End Mask - Writing 1 to this bit enables interrupt generation from the line_en_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_LINE_START_IRQ1" width="1" begin="10" end="10" resetval="0x0" description="Pixel IF 1 Line Start Mask - Writing 1 to this bit enables interrupt generation from the line_start_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_FRAME_END_IRQ1" width="1" begin="9" end="9" resetval="0x0" description="Pixel IF 1 Frame End Mask - Writing 1 to this bit enables interrupt generation from the frame_end_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_FRAME_START_IRQ1" width="1" begin="8" end="8" resetval="0x0" description="Pixel IF 1 Frame Start Mask - Writing 1 to this bit enables interrupt generation from the frame_start_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_LINE_NUMBER_ERROR0" width="1" begin="7" end="7" resetval="0x0" description="Pixel IF 0 Line Number Error Mask - Writing 1 to this bit enables interrupt generation from the line_number_error_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_BYTE_COUNT_MISMATCH_IRQ0" width="1" begin="6" end="6" resetval="0x0" description="Pixel IF 0 Byte Count Mismatch Mask - Writing 1 to this bit enables interrupt generation from the byte_count_mismatch_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_DATA_FLOW_ERR_IRQ0" width="1" begin="5" end="5" resetval="0x0" description="Pixel IF 0 FIFO Overflow Mask - Writing 1 to this bit enables interrupt generation from the data_flow_err_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_FIFO_UNDERFLOW_IRQ0" width="1" begin="4" end="4" resetval="0x0" description="Pixel IF 0 FIFO Underflow Mask - Writing 1 to this bit enables interrupt generation from the fifo_underflow_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_LINE_END_IRQ0" width="1" begin="3" end="3" resetval="0x0" description="Pixel IF 0 Line End Mask - Writing 1 to this bit enables interrupt generation from the line_en_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_LINE_START_IRQ0" width="1" begin="2" end="2" resetval="0x0" description="Pixel IF 0 Line Start Mask - Writing 1 to this bit enables interrupt generation from the line_start_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_FRAME_END_IRQ0" width="1" begin="1" end="1" resetval="0x0" description="Pixel IF 0 Frame End Mask - Writing 1 to this bit enables interrupt generation from the frame_end_irq bit." range="" rwaccess="RW"/>
+    <bitfield id="MASK_FRAME_START_IRQ0" width="1" begin="0" end="0" resetval="0x0" description="Pixel IF 0 Frame Start Mask - Writing 1 to this bit enables interrupt generation from the frame_start_irq bit." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_DPHY_IRQ" acronym="CSI_TX_IF_DPHY_IRQ" offset="0x10" width="32" description="DPHY Transmitter Interrupt Status. Level sensitive interrupt bits driven by DPHY signal pins. Write 1 to clear">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ERR_CTRL_TX3_IRQ" width="1" begin="15" end="15" resetval="0x0" description="DPHY Transmitter Lane 3 ERR_CONTROL_IRQ" range="" rwaccess="RW1C"/>
+    <bitfield id="ERR_CTRL_TX2_IRQ" width="1" begin="14" end="14" resetval="0x0" description="DPHY Transmitter Lane 2 ERR_CONTROL_IRQ" range="" rwaccess="RW1C"/>
+    <bitfield id="ERR_CTRL_TX1_IRQ" width="1" begin="13" end="13" resetval="0x0" description="DPHY Transmitter Lane 1 ERR_CONTROL_IRQ" range="" rwaccess="RW1C"/>
+    <bitfield id="ERR_CTRL_TX0_IRQ" width="1" begin="12" end="12" resetval="0x0" description="DPHY Transmitter Lane 0 ERR_CONTROL_IRQ" range="" rwaccess="RW1C"/>
+    <bitfield id="ERR_ESC_TX3_IRQ" width="1" begin="11" end="11" resetval="0x0" description="DPHY Transmitter Lane 3 ERR_ESC_IRQ" range="" rwaccess="RW1C"/>
+    <bitfield id="ERR_ESC_TX2_IRQ" width="1" begin="10" end="10" resetval="0x0" description="DPHY Transmitter Lane 2 ERR_ESC_IRQ" range="" rwaccess="RW1C"/>
+    <bitfield id="ERR_ESC_TX1_IRQ" width="1" begin="9" end="9" resetval="0x0" description="DPHY Transmitter Lane 1 ERR_ESC_IRQ" range="" rwaccess="RW1C"/>
+    <bitfield id="ERR_ESC_TX0_IRQ" width="1" begin="8" end="8" resetval="0x0" description="DPHY Transmitter Lane 0 ERR_ESC_IRQ" range="" rwaccess="RW1C"/>
+    <bitfield id="ERR_SYNC_TX3_IRQ" width="1" begin="7" end="7" resetval="0x0" description="DPHY Transmitter Lane 3 ERR_SYNC_ESC_IRQ" range="" rwaccess="RW1C"/>
+    <bitfield id="ERR_SYNC_TX2_IRQ" width="1" begin="6" end="6" resetval="0x0" description="DPHY Transmitter Lane 2 ERR_SYNC_ESC_IRQ" range="" rwaccess="RW1C"/>
+    <bitfield id="ERR_SYNC_TX1_IRQ" width="1" begin="5" end="5" resetval="0x0" description="DPHY Transmitter Lane 1 ERR_SYNC_ESC_IRQ" range="" rwaccess="RW1C"/>
+    <bitfield id="ERR_SYNC_TX0_IRQ" width="1" begin="4" end="4" resetval="0x0" description="DPHY Transmitter Lane 0 ERR_SYNC_ESC_IRQ" range="" rwaccess="RW1C"/>
+    <bitfield id="RESERVED" width="4" begin="3" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_DPHY_IRQ_MASK" acronym="CSI_TX_IF_DPHY_IRQ_MASK" offset="0x14" width="32" description="DPHY Transmitter Interrupt Mask. Writing '1' to any bit enables interrupt generation when signal is set and interrupts are enabled.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="MASK_ERR_CTRL_TX3_IRQ" width="1" begin="15" end="15" resetval="0x0" description="DPHY Transmitter Mask Lane 3 ERR_CONTROL_IRQ" range="" rwaccess="RW"/>
+    <bitfield id="MASK_ERR_CTRL_TX2_IRQ" width="1" begin="14" end="14" resetval="0x0" description="DPHY Transmitter Mask Lane 2 ERR_CONTROL_IRQ" range="" rwaccess="RW"/>
+    <bitfield id="MASK_ERR_CTRL_TX1_IRQ" width="1" begin="13" end="13" resetval="0x0" description="DPHY Transmitter Mask Lane 1 ERR_CONTROL_IRQ" range="" rwaccess="RW"/>
+    <bitfield id="MASK_ERR_CTRL_TX0_IRQ" width="1" begin="12" end="12" resetval="0x0" description="DPHY Transmitter Mask Lane 0 ERR_CONTROL_IRQ" range="" rwaccess="RW"/>
+    <bitfield id="MASK_ERR_ESC_TX3_IRQ" width="1" begin="11" end="11" resetval="0x0" description="DPHY Transmitter Mask Lane 3 ERR_ESC_IRQ" range="" rwaccess="RW"/>
+    <bitfield id="MASK_ERR_ESC_TX2_IRQ" width="1" begin="10" end="10" resetval="0x0" description="DPHY Transmitter Mask Lane 2 ERR_ESC_IRQ" range="" rwaccess="RW"/>
+    <bitfield id="MASK_ERR_ESC_TX1_IRQ" width="1" begin="9" end="9" resetval="0x0" description="DPHY Transmitter Mask Lane 1 ERR_ESC_IRQ" range="" rwaccess="RW"/>
+    <bitfield id="MASK_ERR_ESC_TX0_IRQ" width="1" begin="8" end="8" resetval="0x0" description="DPHY Transmitter Mask Lane 0 ERR_ESC_IRQ" range="" rwaccess="RW"/>
+    <bitfield id="MASK_ERR_SYNC_TX3_IRQ" width="1" begin="7" end="7" resetval="0x0" description="DPHY Transmitter Mask Lane 3 ERR_SYNC_ESC_IRQ" range="" rwaccess="RW"/>
+    <bitfield id="MASK_ERR_SYNC_TX2_IRQ" width="1" begin="6" end="6" resetval="0x0" description="DPHY Transmitter Mask Lane 2 ERR_SYNC_ESC_IRQ" range="" rwaccess="RW"/>
+    <bitfield id="MASK_ERR_SYNC_TX1_IRQ" width="1" begin="5" end="5" resetval="0x0" description="DPHY Transmitter Mask Lane 1 ERR_SYNC_ESC_IRQ" range="" rwaccess="RW"/>
+    <bitfield id="MASK_ERR_SYNC_TX0_IRQ" width="1" begin="4" end="4" resetval="0x0" description="DPHY Transmitter Mask Lane 0 ERR_SYNC_ESC_IRQ" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="3" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_TX_CONF" acronym="CSI_TX_IF_TX_CONF" offset="0x20" width="32" description="CSI2 Transmitter Configuration Register">
+    <bitfield id="IRQ_ENABLE" width="1" begin="31" end="31" resetval="0x0" description="Interrupt Enable - Writing 1 to this bit enables interrupts." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="28" begin="30" end="3" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CONFIGURATION_REQUEST" width="1" begin="2" end="2" resetval="0x1" description="Configuration Request - Writing 1 to this bit enables configuration mode." range="" rwaccess="RW"/>
+    <bitfield id="SOFT_RESET_REQUEST" width="1" begin="1" end="1" resetval="0x0" description="Soft Reset Request - Writing 1 to this bit enables soft reset." range="" rwaccess="RW"/>
+    <bitfield id="BYPASS_MODE_ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Bypass Mode - Enable Writing 1 to this bit enables bypass mode." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_WAIT_BURST_TIME" acronym="CSI_TX_IF_WAIT_BURST_TIME" offset="0x24" width="32" description="CSI2 Transmitter DPHY Wait Time configuration Register">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="TX_CLOCK_EXIT_TIME" width="8" begin="23" end="16" resetval="0x5" description="Tx clock exit time - Number of tx_byte_clk cycles corresponding to the HS clock exit time." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="WAIT_BURST_TIME_CNT" width="8" begin="7" end="0" resetval="0x5" description="Wait Burst Time - Number of tx_byte_clk cycles corresponding to the inter HS burst gap." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_DPHY_CFG" acronym="CSI_TX_IF_DPHY_CFG" offset="0x28" width="32" description="CSI2 Transmitter DPHY Lane Enable configuration Register">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="DPHY_CLK_RESET" width="1" begin="16" end="16" resetval="0x0" description="DPHY Clock Lane Reset - Active low reset for DPHY clock lane." range="" rwaccess="RW"/>
+    <bitfield id="DPHY_LN_3_RESET" width="1" begin="15" end="15" resetval="0x0" description="DPHY Line 0 Reset - Active low reset for DPHY data lane 3." range="" rwaccess="RW"/>
+    <bitfield id="DPHY_LN_2_RESET" width="1" begin="14" end="14" resetval="0x0" description="DPHY Line 0 Reset - Active low reset for DPHY data lane 2." range="" rwaccess="RW"/>
+    <bitfield id="DPHY_LN_1_RESET" width="1" begin="13" end="13" resetval="0x0" description="DPHY Line 0 Reset - Active low reset for DPHY data lane 1." range="" rwaccess="RW"/>
+    <bitfield id="DPHY_LN_0_RESET" width="1" begin="12" end="12" resetval="0x0" description="DPHY Line 0 Reset - Active low reset for DPHY data lane 0." range="" rwaccess="RW"/>
+    <bitfield id="DPHY_CAL_ENABLE" width="1" begin="11" end="11" resetval="0x0" description="DPHY Calibration Enable." range="" rwaccess="RW"/>
+    <bitfield id="DPHY_CLOCK_MODE" width="1" begin="10" end="10" resetval="0x0" description="DPHY Clock Mode." range="" rwaccess="RW"/>
+    <bitfield id="DPHY_MODE" width="2" begin="9" end="8" resetval="0x2" description="DPHY Mode." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="DPHY_CLK_ENABLE" width="1" begin="4" end="4" resetval="0x0" description="DPHY Clock Lane - Active high enable for DPHY clock lane." range="" rwaccess="RW"/>
+    <bitfield id="DPHY_LN_3_ENABLE" width="1" begin="3" end="3" resetval="0x0" description="DPHY Lane 3 Enable - Active high enable for DPHY data lane 0." range="" rwaccess="RW"/>
+    <bitfield id="DPHY_LN_2_ENABLE" width="1" begin="2" end="2" resetval="0x0" description="DPHY Lane 2 Enable - Active high enable for DPHY data lane 0." range="" rwaccess="RW"/>
+    <bitfield id="DPHY_LN_1_ENABLE" width="1" begin="1" end="1" resetval="0x0" description="DPHY Lane 1 Enable - Active high enable for DPHY data lane 0." range="" rwaccess="RW"/>
+    <bitfield id="DPHY_LN_0_ENABLE" width="1" begin="0" end="0" resetval="0x0" description="DPHY Lane 0 Enable - Active high enable for DPHY data lane 0." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_DPHY_CLK_WAKEUP" acronym="CSI_TX_IF_DPHY_CLK_WAKEUP" offset="0x2C" width="32" description="CSI2 Transmitter DPHY Clock Lane wakeup time configuration Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ULPS_CLK_LANE_WAKEUP" width="16" begin="15" end="0" resetval="0x4E20" description="DPHY clock lane wakeup time in esc_clk cycles." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_DPHY_ULPS_WAKEUP" acronym="CSI_TX_IF_DPHY_ULPS_WAKEUP" offset="0x30" width="32" description="CSI2 Transmitter DPHY Data Lane wakeup time configuration Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ULPS_DATA_LANE_WAKEUP" width="16" begin="15" end="0" resetval="0x4E20" description="DPHY data lane wakeup time in in esc_clk cycles." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_VC0_CFG" acronym="CSI_TX_IF_VC0_CFG" offset="0x40" width="32" description="CSI2 Transmitter Virtual Channel 0 Configuration Register">
+    <bitfield id="VC_0_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 0." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC_0_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 0." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_VC1_CFG" acronym="CSI_TX_IF_VC1_CFG" offset="0x44" width="32" description="CSI2 Transmitter Virtual Channel 1 Configuration Register">
+    <bitfield id="VC_1_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 1." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC_1_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 1." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_VC2_CFG" acronym="CSI_TX_IF_VC2_CFG" offset="0x48" width="32" description="CSI2 Transmitter Virtual Channel 2 Configuration Register">
+    <bitfield id="VC_2_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 2." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC_2_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 2." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_VC3_CFG" acronym="CSI_TX_IF_VC3_CFG" offset="0x4C" width="32" description="CSI2 Transmitter Virtual Channel 3 Configuration Register">
+    <bitfield id="VC_3_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 3." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC_3_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 3." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_VC4_CFG" acronym="CSI_TX_IF_VC4_CFG" offset="0x50" width="32" description="CSI2 Transmitter Virtual Channel 4 Configuration Register">
+    <bitfield id="VC_4_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 4." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC_4_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 4." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_VC5_CFG" acronym="CSI_TX_IF_VC5_CFG" offset="0x54" width="32" description="CSI2 Transmitter Virtual Channel 5 Configuration Register">
+    <bitfield id="VC_5_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 5." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC_5_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 5." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_VC6_CFG" acronym="CSI_TX_IF_VC6_CFG" offset="0x58" width="32" description="CSI2 Transmitter Virtual Channel 6 Configuration Register">
+    <bitfield id="VC_6_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 6." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC_6_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 6." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_VC7_CFG" acronym="CSI_TX_IF_VC7_CFG" offset="0x5C" width="32" description="CSI2 Transmitter Virtual Channel 7 Configuration Register">
+    <bitfield id="VC_7_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 7." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC_7_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 7." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_VC8_CFG" acronym="CSI_TX_IF_VC8_CFG" offset="0x60" width="32" description="CSI2 Transmitter Virtual Channel 8 Configuration Register">
+    <bitfield id="VC_8_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 8." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC_8_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 8." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_VC9_CFG" acronym="CSI_TX_IF_VC9_CFG" offset="0x64" width="32" description="CSI2 Transmitter Virtual Channel 9 Configuration Register">
+    <bitfield id="VC_9_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 9." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC_9_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 9." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_VC10_CFG" acronym="CSI_TX_IF_VC10_CFG" offset="0x68" width="32" description="CSI2 Transmitter Virtual Channel 10 Configuration Register">
+    <bitfield id="VC_10_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 10." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC_10_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 10." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_VC11_CFG" acronym="CSI_TX_IF_VC11_CFG" offset="0x6C" width="32" description="CSI2 Transmitter Virtual Channel 11 Configuration Register">
+    <bitfield id="VC_11_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 11." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC_11_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 11." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_VC12_CFG" acronym="CSI_TX_IF_VC12_CFG" offset="0x70" width="32" description="CSI2 Transmitter Virtual Channel 12 Configuration Register">
+    <bitfield id="VC_12_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 12." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC_12_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 12." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_VC13_CFG" acronym="CSI_TX_IF_VC13_CFG" offset="0x74" width="32" description="CSI2 Transmitter Virtual Channel 13 Configuration Register">
+    <bitfield id="VC_13_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 13." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC_13_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 13." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_VC14_CFG" acronym="CSI_TX_IF_VC14_CFG" offset="0x78" width="32" description="CSI2 Transmitter Virtual Channel 14 Configuration Register">
+    <bitfield id="VC_14_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 14." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC_14_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 14." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_VC15_CFG" acronym="CSI_TX_IF_VC15_CFG" offset="0x7C" width="32" description="CSI2 Transmitter Virtual Channel 15 Configuration Register">
+    <bitfield id="VC_15_MAX_FRAME_NUMBER" width="16" begin="31" end="16" resetval="0x1" description="Max Frame Number - Maximum number of frames on Virtual Channel 15." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="15" begin="15" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC_15_FRAME_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Frame Count Enable - Writing 1 to this bit enables frame count on Virtual Channel 15." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_DT0_CFG" acronym="CSI_TX_IF_DT0_CFG" offset="0x80" width="32" description="CSI2 Transmitter Data Type 0 Configuration Register with pixel_dt_sel[:] = 0">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="DT_0_PACKED_ENABLE" width="1" begin="9" end="9" resetval="0x0" description="Packed Enable - data stream is prepacked in to 32bit words on the pixel interface, the data is sent with the defined Data Type 0 with pixel_dt_sel[:] = 0." range="" rwaccess="RW"/>
+    <bitfield id="DT_0_EXTD_DATA_TYPE" width="1" begin="8" end="8" resetval="0x0" description="Extended Data Type - Type of data on Data Type 0 with pixel_dt_sel[:] = 0." range="" rwaccess="RW"/>
+    <bitfield id="DT_0_DATA_TYPE" width="6" begin="7" end="2" resetval="0x12" description="Data Type - Type of data on Data Type 0 with pixel_dt_sel[:] = 0." range="" rwaccess="RW"/>
+    <bitfield id="DT_0_LSLE_GENERATION_EN" width="1" begin="1" end="1" resetval="0x0" description="Line Start And Line End Short Packet Generation Enable - Writing 1 to this bit enables Line Start and Line End generation on Data Type 0." range="" rwaccess="RW"/>
+    <bitfield id="DT_0_LINE_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Line Count Enable - Writing 1 to this bit enables line count on Data Type 0." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_DT0_FORMAT" acronym="CSI_TX_IF_DT0_FORMAT" offset="0x84" width="32" description="CSI2 Transmitter Data Type 0 Format Register">
+    <bitfield id="DT_0_BYTES_LINE_NUMBER" width="16" begin="31" end="16" resetval="0x64" description="Bytes Per Line - Bytes per line on Data Type 0 with pixel_dt_sel[:] = 0." range="" rwaccess="RW"/>
+    <bitfield id="DT_0_MAX_LINE_NUMBER" width="16" begin="15" end="0" resetval="0x1" description="Max Line Number - Maximum number of lines on Data Type 0 with pixel_dt_sel[:] = 0." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_DT1_CFG" acronym="CSI_TX_IF_DT1_CFG" offset="0x88" width="32" description="CSI2 Transmitter Data Type 1 Configuration Register with pixel_dt_sel[:] = 1">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="DT_1_PACKED_ENABLE" width="1" begin="9" end="9" resetval="0x0" description="Packed Enable - data stream is prepacked in to 32bit words on the pixel interface, the data is sent with the defined Data Type 1 with pixel_dt_sel[:] = 1." range="" rwaccess="RW"/>
+    <bitfield id="DT_1_EXTD_DATA_TYPE" width="1" begin="8" end="8" resetval="0x0" description="Extended Data Type - Type of data on Data Type 1 with pixel_dt_sel[:] = 1." range="" rwaccess="RW"/>
+    <bitfield id="DT_1_DATA_TYPE" width="6" begin="7" end="2" resetval="0x1E" description="Data Type - Type of data on Data Type 1 with pixel_dt_sel[:] = 1." range="" rwaccess="RW"/>
+    <bitfield id="DT_1_LSLE_GENERATION_EN" width="1" begin="1" end="1" resetval="0x0" description="Line Start And Line End Short Packet Generation Enable - Writing 1 to this bit enables Line Start and Line End generation on Data Type 1." range="" rwaccess="RW"/>
+    <bitfield id="DT_1_LINE_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Line Count Enable - Writing 1 to this bit enables line count on Data Type 1." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_DT1_FORMAT" acronym="CSI_TX_IF_DT1_FORMAT" offset="0x8C" width="32" description="CSI2 Transmitter Data Type 1 Format Register">
+    <bitfield id="DT_1_BYTES_LINE_NUMBER" width="16" begin="31" end="16" resetval="0x64" description="Bytes Per Line - Bytes per line on Data Type 1 with pixel_dt_sel[:] = 1." range="" rwaccess="RW"/>
+    <bitfield id="DT_1_MAX_LINE_NUMBER" width="16" begin="15" end="0" resetval="0x0" description="Max Line Number - Maximum number of lines on Data Type 1 with pixel_dt_sel[:] = 1." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_DT2_CFG" acronym="CSI_TX_IF_DT2_CFG" offset="0x90" width="32" description="CSI2 Transmitter Data Type 2 Configuration Register with pixel_dt_sel[:] = 2">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="DT_2_PACKED_ENABLE" width="1" begin="9" end="9" resetval="0x0" description="Packed Enable - data stream is prepacked in to 32bit words on the pixel interface, the data is sent with the defined Data Type 2 with pixel_dt_sel[:] = 2." range="" rwaccess="RW"/>
+    <bitfield id="DT_2_EXTD_DATA_TYPE" width="1" begin="8" end="8" resetval="0x0" description="Extended Data Type - Type of data on Data Type 2 with pixel_dt_sel[:] = 2." range="" rwaccess="RW"/>
+    <bitfield id="DT_2_DATA_TYPE" width="6" begin="7" end="2" resetval="0x2A" description="Data Type - Type of data on Data Type 2 with pixel_dt_sel[:] = 2." range="" rwaccess="RW"/>
+    <bitfield id="DT_2_LSLE_GENERATION_EN" width="1" begin="1" end="1" resetval="0x0" description="Line Start And Line End Short Packet Generation Enable - Writing 1 to this bit enables Line Start and Line End generation on Data Type 2." range="" rwaccess="RW"/>
+    <bitfield id="DT_2_LINE_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Line Count Enable - Writing 1 to this bit enables line count on Data Type 2." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_DT2_FORMAT" acronym="CSI_TX_IF_DT2_FORMAT" offset="0x94" width="32" description="CSI2 Transmitter Data Type 2 Format Register">
+    <bitfield id="DT_2_BYTES_LINE_NUMBER" width="16" begin="31" end="16" resetval="0x64" description="Bytes Per Line - Bytes per line on Data Type 2 with pixel_dt_sel[:] = 2." range="" rwaccess="RW"/>
+    <bitfield id="DT_2_MAX_LINE_NUMBER" width="16" begin="15" end="0" resetval="0x0" description="Max Line Number - Maximum number of lines on Data Type 2 with pixel_dt_sel[:] = 2." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_DT3_CFG" acronym="CSI_TX_IF_DT3_CFG" offset="0x98" width="32" description="CSI2 Transmitter Data Type 3 Configuration Register with pixel_dt_sel[:] = 3">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="DT_3_PACKED_ENABLE" width="1" begin="9" end="9" resetval="0x0" description="Packed Enable - data stream is prepacked in to 32bit words on the pixel interface, the data is sent with the defined Data Type 3 with pixel_dt_sel[:] = 3." range="" rwaccess="RW"/>
+    <bitfield id="DT_3_EXTD_DATA_TYPE" width="1" begin="8" end="8" resetval="0x0" description="Extended Data Type - Type of data on Data Type 3 with pixel_dt_sel[:] = 3." range="" rwaccess="RW"/>
+    <bitfield id="DT_3_DATA_TYPE" width="6" begin="7" end="2" resetval="0x24" description="Data Type - Type of data on Data Type 3 with pixel_dt_sel[:] = 3." range="" rwaccess="RW"/>
+    <bitfield id="DT_3_LSLE_GENERATION_EN" width="1" begin="1" end="1" resetval="0x0" description="Line Start And Line End Short Packet Generation Enable - Writing 1 to this bit enables Line Start and Line End generation on Data Type 3." range="" rwaccess="RW"/>
+    <bitfield id="DT_3_LINE_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Line Count Enable - Writing 1 to this bit enables line count on Data Type 3." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_DT3_FORMAT" acronym="CSI_TX_IF_DT3_FORMAT" offset="0x9C" width="32" description="CSI2 Transmitter Data Type 3 Format Register">
+    <bitfield id="DT_3_BYTES_LINE_NUMBER" width="16" begin="31" end="16" resetval="0x64" description="Bytes Per Line - Bytes per line on Data Type 3 with pixel_dt_sel[:] = 3." range="" rwaccess="RW"/>
+    <bitfield id="DT_3_MAX_LINE_NUMBER" width="16" begin="15" end="0" resetval="0x0" description="Max Line Number - Maximum number of lines on Data Type 3 with pixel_dt_sel[:] = 3." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_DT4_CFG" acronym="CSI_TX_IF_DT4_CFG" offset="0xA0" width="32" description="CSI2 Transmitter Data Type 4 Configuration Register with pixel_dt_sel[:] = 4">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="DT_4_PACKED_ENABLE" width="1" begin="9" end="9" resetval="0x0" description="Packed Enable - data stream is prepacked in to 32bit words on the pixel interface, the data is sent with the defined Data Type 4 with pixel_dt_sel[:] = 4." range="" rwaccess="RW"/>
+    <bitfield id="DT_4_EXTD_DATA_TYPE" width="1" begin="8" end="8" resetval="0x0" description="Extended Data Type - Type of data on Data Type 4 with pixel_dt_sel[:] = 4." range="" rwaccess="RW"/>
+    <bitfield id="DT_4_DATA_TYPE" width="6" begin="7" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DT_4_LSLE_GENERATION_EN" width="1" begin="1" end="1" resetval="0x0" description="Line Start And Line End Short Packet Generation Enable - Writing 1 to this bit enables Line Start and Line End generation on Data Type 4." range="" rwaccess="RW"/>
+    <bitfield id="DT_4_LINE_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Line Count Enable - Writing 1 to this bit enables line count on Data Type 4." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_DT4_FORMAT" acronym="CSI_TX_IF_DT4_FORMAT" offset="0xA4" width="32" description="CSI2 Transmitter Data Type 4 Format Register">
+    <bitfield id="DT_4_BYTES_LINE_NUMBER" width="16" begin="31" end="16" resetval="0x64" description="Bytes Per Line - Bytes per line on Data Type 4 with pixel_dt_sel[:] = 4." range="" rwaccess="RW"/>
+    <bitfield id="DT_4_MAX_LINE_NUMBER" width="16" begin="15" end="0" resetval="0x0" description="Max Line Number - Maximum number of lines on Data Type 4 with pixel_dt_sel[:] = 4." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_DT5_CFG" acronym="CSI_TX_IF_DT5_CFG" offset="0xA8" width="32" description="CSI2 Transmitter Data Type 5 Configuration Register with pixel_dt_sel[:] = 5">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="DT_5_PACKED_ENABLE" width="1" begin="9" end="9" resetval="0x0" description="Packed Enable - data stream is prepacked in to 32bit words on the pixel interface, the data is sent with the defined Data Type 5 with pixel_dt_sel[:] = 5." range="" rwaccess="RW"/>
+    <bitfield id="DT_5_EXTD_DATA_TYPE" width="1" begin="8" end="8" resetval="0x0" description="Extended Data Type - Type of data on Data Type 5 with pixel_dt_sel[:] = 5." range="" rwaccess="RW"/>
+    <bitfield id="DT_5_DATA_TYPE" width="6" begin="7" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DT_5_LSLE_GENERATION_EN" width="1" begin="1" end="1" resetval="0x0" description="Line Start And Line End Short Packet Generation Enable - Writing 1 to this bit enables Line Start and Line End generation on Data Type 5." range="" rwaccess="RW"/>
+    <bitfield id="DT_5_LINE_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Line Count Enable - Writing 1 to this bit enables line count on Data Type 5." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_DT5_FORMAT" acronym="CSI_TX_IF_DT5_FORMAT" offset="0xAC" width="32" description="CSI2 Transmitter Data Type 5 Format Register">
+    <bitfield id="DT_5_BYTES_LINE_NUMBER" width="16" begin="31" end="16" resetval="0x64" description="Bytes Per Line - Bytes per line on Data Type 5 with pixel_dt_sel[:] = 5." range="" rwaccess="RW"/>
+    <bitfield id="DT_5_MAX_LINE_NUMBER" width="16" begin="15" end="0" resetval="0x0" description="Max Line Number - Maximum number of lines on Data Type 5 with pixel_dt_sel[:] = 5." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_DT6_CFG" acronym="CSI_TX_IF_DT6_CFG" offset="0xB0" width="32" description="CSI2 Transmitter Data Type 6 Configuration Register with pixel_dt_sel[:] = 6">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="DT_6_PACKED_ENABLE" width="1" begin="9" end="9" resetval="0x0" description="Packed Enable - data stream is prepacked in to 32bit words on the pixel interface, the data is sent with the defined Data Type 6 with pixel_dt_sel[:] = 6." range="" rwaccess="RW"/>
+    <bitfield id="DT_6_EXTD_DATA_TYPE" width="1" begin="8" end="8" resetval="0x0" description="Extended Data Type - Type of data on Data Type 6 with pixel_dt_sel[:] = 6." range="" rwaccess="RW"/>
+    <bitfield id="DT_6_DATA_TYPE" width="6" begin="7" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DT_6_LSLE_GENERATION_EN" width="1" begin="1" end="1" resetval="0x0" description="Line Start And Line End Short Packet Generation Enable - Writing 1 to this bit enables Line Start and Line End generation on Data Type 6." range="" rwaccess="RW"/>
+    <bitfield id="DT_6_LINE_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Line Count Enable - Writing 1 to this bit enables line count on Data Type 6." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_DT6_FORMAT" acronym="CSI_TX_IF_DT6_FORMAT" offset="0xB4" width="32" description="CSI2 Transmitter Data Type 6 Format Register">
+    <bitfield id="DT_6_BYTES_LINE_NUMBER" width="16" begin="31" end="16" resetval="0x64" description="Bytes Per Line - Bytes per line on Data Type 6 with pixel_dt_sel[:] = 6." range="" rwaccess="RW"/>
+    <bitfield id="DT_6_MAX_LINE_NUMBER" width="16" begin="15" end="0" resetval="0x0" description="Max Line Number - Maximum number of lines on Data Type 6 with pixel_dt_sel[:] = 6." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_DT7_CFG" acronym="CSI_TX_IF_DT7_CFG" offset="0xB8" width="32" description="CSI2 Transmitter Data Type 7 Configuration Register with pixel_dt_sel[:] = 7">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="DT_7_PACKED_ENABLE" width="1" begin="9" end="9" resetval="0x0" description="Packed Enable - data stream is prepacked in to 32bit words on the pixel interface, the data is sent with the defined Data Type 7 with pixel_dt_sel[:] = 7." range="" rwaccess="RW"/>
+    <bitfield id="DT_7_EXTD_DATA_TYPE" width="1" begin="8" end="8" resetval="0x0" description="Extended Data Type - Type of data on Data Type 7 with pixel_dt_sel[:] = 7." range="" rwaccess="RW"/>
+    <bitfield id="DT_7_DATA_TYPE" width="6" begin="7" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DT_7_LSLE_GENERATION_EN" width="1" begin="1" end="1" resetval="0x0" description="Line Start And Line End Short Packet Generation Enable - Writing 1 to this bit enables Line Start and Line End generation on Data Type 7." range="" rwaccess="RW"/>
+    <bitfield id="DT_7_LINE_COUNT_EN" width="1" begin="0" end="0" resetval="0x0" description="Line Count Enable - Writing 1 to this bit enables line count on Data Type 7." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_DT7_FORMAT" acronym="CSI_TX_IF_DT7_FORMAT" offset="0xBC" width="32" description="CSI2 Transmitter Data Type 7 Format Register">
+    <bitfield id="DT_7_BYTES_LINE_NUMBER" width="16" begin="31" end="16" resetval="0x64" description="Bytes Per Line - Bytes per line on Data Type 7 with pixel_dt_sel[:] = 7." range="" rwaccess="RW"/>
+    <bitfield id="DT_7_MAX_LINE_NUMBER" width="16" begin="15" end="0" resetval="0x0" description="Max Line Number - Maximum number of lines on Data Type 7 with pixel_dt_sel[:] = 7." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_STREAM_IF_0_CFG" acronym="CSI_TX_IF_STREAM_IF_0_CFG" offset="0x100" width="32" description="CSI2 Stream 0 Configuration Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="STREAM_IF_0_FILL_LEVEL" width="16" begin="15" end="0" resetval="0x0" description="Fill Level - Minimum number of packed 32 words loaded into the stream fifo before Tx will start for Stream if 0." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_STREAM_IF_1_CFG" acronym="CSI_TX_IF_STREAM_IF_1_CFG" offset="0x104" width="32" description="CSI2 Stream 1 Configuration Register">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="STREAM_IF_1_SLAVE_MODE" width="1" begin="23" end="23" resetval="0x0" description="Stream Slave Mode suppresses frame start/end packets in stream 1." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="7" begin="22" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="STREAM_IF_1_FILL_LEVEL" width="16" begin="15" end="0" resetval="0x0" description="Fill Level - Minimum number of packed 32 words loaded into the stream fifo before Tx will start for Stream if 1." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_STREAM_IF_2_CFG" acronym="CSI_TX_IF_STREAM_IF_2_CFG" offset="0x108" width="32" description="CSI2 Stream 2 Configuration Register">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="STREAM_IF_2_SLAVE_MODE" width="1" begin="23" end="23" resetval="0x0" description="Stream Slave Mode suppresses frame start/end packets in stream 2." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="7" begin="22" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="STREAM_IF_2_FILL_LEVEL" width="16" begin="15" end="0" resetval="0x0" description="Fill Level - Minimum number of packed 32 words loaded into the stream fifo before Tx will start for Stream if 2." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_STREAM_IF_3_CFG" acronym="CSI_TX_IF_STREAM_IF_3_CFG" offset="0x10C" width="32" description="CSI2 Stream 3 Configuration Register">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="STREAM_IF_3_SLAVE_MODE" width="1" begin="23" end="23" resetval="0x0" description="Stream Slave Mode suppresses frame start/end packets in stream 3." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="7" begin="22" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="STREAM_IF_3_FILL_LEVEL" width="16" begin="15" end="0" resetval="0x0" description="Fill Level - Minimum number of packed 32 words loaded into the stream fifo before Tx will start for Stream if 3." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_DEBUG_CFG" acronym="CSI_TX_IF_DEBUG_CFG" offset="0x110" width="32" description="CSI2 Transmitter Debug Enable Register">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG_EN" width="1" begin="0" end="0" resetval="0x0" description="Debug Enable." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_DEBUG_LN_FSM" acronym="CSI_TX_IF_DEBUG_LN_FSM" offset="0x114" width="32" description="Debug Register for Lane FSM.">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="NEW_BURST_ALLOWED" width="1" begin="9" end="9" resetval="0x0" description="Lane Mangement FSM." range="" rwaccess="R"/>
+    <bitfield id="PACKET_VALID_R" width="1" begin="8" end="8" resetval="0x0" description="Lane Mangement FSM." range="" rwaccess="R"/>
+    <bitfield id="PACKET_VALID_IN" width="1" begin="7" end="7" resetval="0x0" description="Lane Mangement FSM." range="" rwaccess="R"/>
+    <bitfield id="END_OF_BURST" width="1" begin="6" end="6" resetval="0x0" description="Lane Mangement FSM." range="" rwaccess="R"/>
+    <bitfield id="TRANS_ACTIVE" width="1" begin="5" end="5" resetval="0x0" description="Lane Mangement FSM." range="" rwaccess="R"/>
+    <bitfield id="START_HS_TRANS" width="1" begin="4" end="4" resetval="0x0" description="Lane Mangement FSM." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="LANE_MGR_FSM_ST" width="3" begin="2" end="0" resetval="0x0" description="Lane Mangement FSM." range="" rwaccess="R"/>
+  </register>
+  <register id="CSI_TX_IF_DEBUG_CLK_LN_FSM" acronym="CSI_TX_IF_DEBUG_CLK_LN_FSM" offset="0x118" width="32" description="Debug Register for Clock Lane FSM">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="ULPS_ACTIVE_CLK" width="1" begin="13" end="13" resetval="0x0" description="Clock Lane FSM." range="" rwaccess="R"/>
+    <bitfield id="ULPS_MODE_ACTIVE" width="1" begin="12" end="12" resetval="0x0" description="Clock Lane FSM." range="" rwaccess="R"/>
+    <bitfield id="ULPS_EXIT_CLK_PPI" width="1" begin="11" end="11" resetval="0x0" description="Clock Lane FSM." range="" rwaccess="R"/>
+    <bitfield id="ULPS_REQUEST_CLK_PPI" width="1" begin="10" end="10" resetval="0x0" description="Clock Lane FSM." range="" rwaccess="R"/>
+    <bitfield id="HS_MODE_ACTIVE_CLK" width="1" begin="9" end="9" resetval="0x0" description="Clock Lane FSM." range="" rwaccess="R"/>
+    <bitfield id="REQUEST_HS_CLK_PPI" width="1" begin="8" end="8" resetval="0x0" description="Clock Lane FSM." range="" rwaccess="R"/>
+    <bitfield id="READY_HS_CLK" width="1" begin="7" end="7" resetval="0x0" description="Clock Lane FSM." range="" rwaccess="R"/>
+    <bitfield id="ULPS_WAKEUP_COUNT_DONE_CL" width="1" begin="6" end="6" resetval="0x0" description="Clock Lane FSM." range="" rwaccess="R"/>
+    <bitfield id="ULPS_REQUEST_CLK" width="1" begin="5" end="5" resetval="0x0" description="Clock Lane FSM." range="" rwaccess="R"/>
+    <bitfield id="HS_MODE_REQ" width="1" begin="4" end="4" resetval="0x0" description="Clock Lane FSM." range="" rwaccess="R"/>
+    <bitfield id="ULPS_CLK_FSM" width="2" begin="3" end="2" resetval="0x0" description="Clock Lane FSM." range="" rwaccess="R"/>
+    <bitfield id="HS_CLK_FSM" width="2" begin="1" end="0" resetval="0x0" description="Clock Lane FSM." range="" rwaccess="R"/>
+  </register>
+  <register id="CSI_TX_IF_DEBUG_DATA_LN_FSM" acronym="CSI_TX_IF_DEBUG_DATA_LN_FSM" offset="0x11C" width="32" description="Debug Register for Data Lane FSM.">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="ULPS_ACTIVE" width="1" begin="16" end="16" resetval="0x0" description="Data Lane FSM." range="" rwaccess="R"/>
+    <bitfield id="DATA_ULPS_ACTIVE" width="1" begin="15" end="15" resetval="0x0" description="Debug Register for Data Lane FSM." range="" rwaccess="R"/>
+    <bitfield id="TX_ULPS_EXIT_ESC" width="1" begin="14" end="14" resetval="0x0" description="Data Lane FSM." range="" rwaccess="R"/>
+    <bitfield id="TX_ULPS_ESC" width="1" begin="13" end="13" resetval="0x0" description="Data Lane FSM." range="" rwaccess="R"/>
+    <bitfield id="TX_REQUEST_ESC" width="1" begin="12" end="12" resetval="0x0" description="Data Lane FSM." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="11" end="11" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="ULPS_WAKEUP_COUNT_DONE_DL" width="1" begin="10" end="10" resetval="0x0" description="Data Lane FSM." range="" rwaccess="R"/>
+    <bitfield id="ULPS_ACTIVE_N" width="4" begin="9" end="6" resetval="0x0" description="Data Lane FSM." range="" rwaccess="R"/>
+    <bitfield id="HS_MODE_REQ_SYNC" width="1" begin="5" end="5" resetval="0x0" description="Data Lane FSM." range="" rwaccess="R"/>
+    <bitfield id="ULPS_REQ_SYNC" width="1" begin="4" end="4" resetval="0x0" description="Data Lane FSM." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="2" begin="3" end="2" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="ULPS_DATA_LANE_FSM" width="2" begin="1" end="0" resetval="0x0" description="Data Lane FSM." range="" rwaccess="R"/>
+  </register>
+  <register id="CSI_TX_IF_DEBUG_PROT0_FSM" acronym="CSI_TX_IF_DEBUG_PROT0_FSM" offset="0x120" width="32" description="Debug Register for Pixel IF0 Protocol FSM.">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="VIRTUAL_CHANNEL_IF0" width="4" begin="18" end="15" resetval="0x0" description="Pixel IF0 Protocol FSM." range="" rwaccess="R"/>
+    <bitfield id="DATA_TYPE_IF0" width="3" begin="14" end="12" resetval="0x0" description="Pixel IF0 Protocol FSM." range="" rwaccess="R"/>
+    <bitfield id="FRAME_VALID_IF0" width="1" begin="11" end="11" resetval="0x0" description="Pixel IF0 Protocol FSM." range="" rwaccess="R"/>
+    <bitfield id="LINE_VALID_IF0" width="1" begin="10" end="10" resetval="0x0" description="Pixel IF0 Protocol FSM." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="9" end="9" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="LAST_PAYLOAD_DATA_IF0" width="1" begin="8" end="8" resetval="0x0" description="Pixel IF0 Protocol FSM." range="" rwaccess="R"/>
+    <bitfield id="PAYLOAD_FIFO_EMPTY_IF0" width="1" begin="7" end="7" resetval="0x0" description="Pixel IF0 Protocol FSM." range="" rwaccess="R"/>
+    <bitfield id="PROT_FSM_IF0" width="7" begin="6" end="0" resetval="0x0" description="Pixel IF0 Protocol FSM." range="" rwaccess="R"/>
+  </register>
+  <register id="CSI_TX_IF_DEBUG_PROT1_FSM" acronym="CSI_TX_IF_DEBUG_PROT1_FSM" offset="0x124" width="32" description="Debug Register for Pixel IF1 Protocol FSM. (Optional: Available when PIXEL_IF2 or 4)">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="VIRTUAL_CHANNEL_IF1" width="4" begin="18" end="15" resetval="0x0" description="Pixel IF1 Protocol FSM." range="" rwaccess="R"/>
+    <bitfield id="DATA_TYPE_IF1" width="3" begin="14" end="12" resetval="0x0" description="Pixel IF1 Protocol FSM." range="" rwaccess="R"/>
+    <bitfield id="FRAME_VALID_IF1" width="1" begin="11" end="11" resetval="0x0" description="Pixel IF1 Protocol FSM." range="" rwaccess="R"/>
+    <bitfield id="LINE_VALID_IF1" width="1" begin="10" end="10" resetval="0x0" description="Pixel IF1 Protocol FSM." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="9" end="9" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="LAST_PAYLOAD_DATA_IF1" width="1" begin="8" end="8" resetval="0x0" description="Pixel IF1 Protocol FSM." range="" rwaccess="R"/>
+    <bitfield id="PAYLOAD_FIFO_EMPTY_IF1" width="1" begin="7" end="7" resetval="0x0" description="Pixel IF1 Protocol FSM." range="" rwaccess="R"/>
+    <bitfield id="PROT_FSM_IF1" width="7" begin="6" end="0" resetval="0x0" description="Pixel IF1 Protocol FSM." range="" rwaccess="R"/>
+  </register>
+  <register id="CSI_TX_IF_DEBUG_PROT2_FSM" acronym="CSI_TX_IF_DEBUG_PROT2_FSM" offset="0x128" width="32" description="Debug Register for Pixel IF2 Protocol FSM. (Optional: Available when PIXEL_IF4)">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="VIRTUAL_CHANNEL_IF2" width="4" begin="18" end="15" resetval="0x0" description="Pixel IF2 Protocol FSM." range="" rwaccess="R"/>
+    <bitfield id="DATA_TYPE_IF2" width="3" begin="14" end="12" resetval="0x0" description="Pixel IF2 Protocol FSM." range="" rwaccess="R"/>
+    <bitfield id="FRAME_VALID_IF2" width="1" begin="11" end="11" resetval="0x0" description="Pixel IF2 Protocol FSM." range="" rwaccess="R"/>
+    <bitfield id="LINE_VALID_IF2" width="1" begin="10" end="10" resetval="0x0" description="Pixel IF2 Protocol FSM." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="9" end="9" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="LAST_PAYLOAD_DATA_IF2" width="1" begin="8" end="8" resetval="0x0" description="Pixel IF2 Protocol FSM." range="" rwaccess="R"/>
+    <bitfield id="PAYLOAD_FIFO_EMPTY_IF2" width="1" begin="7" end="7" resetval="0x0" description="Pixel IF2 Protocol FSM." range="" rwaccess="R"/>
+    <bitfield id="PROT_FSM_IF2" width="7" begin="6" end="0" resetval="0x0" description="Pixel IF2 Protocol FSM." range="" rwaccess="R"/>
+  </register>
+  <register id="CSI_TX_IF_DEBUG_PROT3_FSM" acronym="CSI_TX_IF_DEBUG_PROT3_FSM" offset="0x12C" width="32" description="Debug Register for Pixel IF3 Protocol FSM. (Optional: Available when PIXEL_IF4)">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="VIRTUAL_CHANNEL_IF3" width="4" begin="18" end="15" resetval="0x0" description="Pixel IF3 Protocol FSM." range="" rwaccess="R"/>
+    <bitfield id="DATA_TYPE_IF3" width="3" begin="14" end="12" resetval="0x0" description="Pixel IF3 Protocol FSM." range="" rwaccess="R"/>
+    <bitfield id="FRAME_VALID_IF3" width="1" begin="11" end="11" resetval="0x0" description="Pixel IF3 Protocol FSM." range="" rwaccess="R"/>
+    <bitfield id="LINE_VALID_IF3" width="1" begin="10" end="10" resetval="0x0" description="Pixel IF3 Protocol FSM." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="9" end="9" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="LAST_PAYLOAD_DATA_IF3" width="1" begin="8" end="8" resetval="0x0" description="Pixel IF3 Protocol FSM." range="" rwaccess="R"/>
+    <bitfield id="PAYLOAD_FIFO_EMPTY_IF3" width="1" begin="7" end="7" resetval="0x0" description="Pixel IF3 Protocol FSM." range="" rwaccess="R"/>
+    <bitfield id="PROT_FSM_IF3" width="7" begin="6" end="0" resetval="0x0" description="Pixel IF3 Protocol FSM." range="" rwaccess="R"/>
+  </register>
+  <register id="CSI_TX_IF_DPHY_STATUS" acronym="CSI_TX_IF_DPHY_STATUS" offset="0x130" width="32" description="DPHY Transmitter Status.">
+    <bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="DPHY_ULPS_ACTIVE_N_CLK" width="1" begin="12" end="12" resetval="0x1" description="DPHY Transmitter ULPS_ACTIVE_N Clock Lane Status." range="" rwaccess="R"/>
+    <bitfield id="DPHY_ULPS_ACTIVE_N_DL" width="4" begin="11" end="8" resetval="0xF" description="DPHY Transmitter ULPS_ACTIVE_N Data Lane" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="DPHY_STOPSTATE_CLK" width="1" begin="4" end="4" resetval="0x1" description="DPHY Transmitter STOP_STATE Clock Lane Status." range="" rwaccess="R"/>
+    <bitfield id="DPHY_STOPSTATE_DL" width="4" begin="3" end="0" resetval="0xF" description="DPHY Transmitter STOP_STATE Data Lane" range="" rwaccess="R"/>
+  </register>
+  <register id="CSI_TX_IF_DPHY_CFG1" acronym="CSI_TX_IF_DPHY_CFG1" offset="0x134" width="32" description="DPHY Transmitter Configuration.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="GEN_POWERDOWN" width="3" begin="27" end="25" resetval="0x0" description="DPHY Transmitter Power Down Common Module" range="" rwaccess="RW"/>
+    <bitfield id="C_POWERDOWN" width="1" begin="24" end="24" resetval="0x0" description="DPHY Transmitter Power Down TX Clock" range="" rwaccess="RW"/>
+    <bitfield id="D_POWERDOWN" width="4" begin="23" end="20" resetval="0x0" description="DPHY Transmitter Power Down TX Data Lanes" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="11" begin="19" end="9" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SWAP_DP_DN_CTX" width="1" begin="8" end="8" resetval="0x0" description="DPHY Transmitter Swap DP_DN on Clock Lane" range="" rwaccess="RW"/>
+    <bitfield id="SWAP_DP_DN_TX0" width="4" begin="7" end="4" resetval="0x0" description="DPHY Transmitter Swap DP_DN on TX Data Lanes" range="" rwaccess="RW"/>
+    <bitfield id="FORCE_STOP_MODE_TX0" width="4" begin="3" end="0" resetval="0x0" description="DPHY Transmitter FORCE_STOP_MODE TX Data Lanes" range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_GENERIC" acronym="CSI_TX_IF_GENERIC" offset="0x13C" width="32" description="CSI2 Transmitter Test Register.">
+    <bitfield id="TEST_GENERIC_STATUS" width="16" begin="31" end="16" resetval="0x0" description="CSI2 Transmitter Test Generic Status signals." range="" rwaccess="R"/>
+    <bitfield id="TEST_GENERIC_CTRL" width="16" begin="15" end="0" resetval="0x0" description="CSI2 Transmitter Test Generic Control signals." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_ASF_INT_STATUS" acronym="CSI_TX_IF_ASF_INT_STATUS" offset="0x200" width="32" description="ASF Interrupt Status Register. This register indicates the source of ASF interrupts. The corresponding bit in the mask register must be clear for a bit to be set. If any bit is set in this register the asf_int_fatal or asf_int_nonfatal signal will be asserted. Writing to either raw or masked registers, clear both registers. For test purposes, trigger signal interrupt event by writing to the ASF interrupt test register.">
+    <bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="Reserved, read as 0, ignored on write." range="" rwaccess="R"/>
+    <bitfield id="ASF_INTEGRITY_ERR" width="1" begin="6" end="6" resetval="0x0" description="Integrity error interrupt" range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_PROTOCOL_ERR" width="1" begin="5" end="5" resetval="0x0" description="Protocol error interrupt" range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_TRANS_TO_ERR" width="1" begin="4" end="4" resetval="0x0" description="Transaction timeouts error interrupt" range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_CSR_ERR" width="1" begin="3" end="3" resetval="0x0" description="Configuration and" range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_DAP_ERR" width="1" begin="2" end="2" resetval="0x0" description="Data and address paths parity error interrupt" range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_SRAM_UNCORR_ERR" width="1" begin="1" end="1" resetval="0x0" description="SRAM uncorrectable error interrupt" range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_SRAM_CORR_ERR" width="1" begin="0" end="0" resetval="0x0" description="SRAM correctable error interrupt" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="CSI_TX_IF_ASF_INT_RAW_STATUS" acronym="CSI_TX_IF_ASF_INT_RAW_STATUS" offset="0x204" width="32" description="ASF Interrupt Raw Status Register. A bit set in this raw register indicates a source of ASF fault in the corresponding feature. Writing to either raw or masked registers, clear both registers. For test purposes, trigger signal interrupt event by writing to the ASF interrupt test register.">
+    <bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="Reserved, read as 0, ignored on write." range="" rwaccess="R"/>
+    <bitfield id="ASF_INTEGRITY_ERR" width="1" begin="6" end="6" resetval="0x0" description="Integrity error interrupt" range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_PROTOCOL_ERR" width="1" begin="5" end="5" resetval="0x0" description="Protocol error interrupt" range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_TRANS_TO_ERR" width="1" begin="4" end="4" resetval="0x0" description="Transaction timeouts error interrupt" range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_CSR_ERR" width="1" begin="3" end="3" resetval="0x0" description="Configuration and" range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_DAP_ERR" width="1" begin="2" end="2" resetval="0x0" description="Data and address paths parity error interrupt" range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_SRAM_UNCORR_ERR" width="1" begin="1" end="1" resetval="0x0" description="SRAM uncorrectable error interrupt" range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_SRAM_CORR_ERR" width="1" begin="0" end="0" resetval="0x0" description="SRAM correctable error interrupt" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="CSI_TX_IF_ASF_INT_MASK" acronym="CSI_TX_IF_ASF_INT_MASK" offset="0x208" width="32" description="The ASF interrupt mask register indicating which interrupt bits in the ASF interrupt register are masked. All bits are set at reset. Clear the individual bit to enable the corresponding interrupt.">
+    <bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="Reserved, read as 0, ignored on write." range="" rwaccess="R"/>
+    <bitfield id="ASF_INTEGRITY_ERR_MASK" width="1" begin="6" end="6" resetval="0x1" description="Mask bit for integrity error interrupt" range="" rwaccess="RW"/>
+    <bitfield id="ASF_PROTOCOL_ERR_MASK" width="1" begin="5" end="5" resetval="0x1" description="Mask bit for protocol error interrupt." range="" rwaccess="RW"/>
+    <bitfield id="ASF_TRANS_TO_ERR_MASK" width="1" begin="4" end="4" resetval="0x1" description="Mask bit for transaction timeouts error interrupt." range="" rwaccess="RW"/>
+    <bitfield id="ASF_CSR_ERR_MASK" width="1" begin="3" end="3" resetval="0x1" description="Mask bit for configuration and" range="" rwaccess="RW"/>
+    <bitfield id="ASF_DAP_ERR_MASK" width="1" begin="2" end="2" resetval="0x1" description="Mask bit for data and address paths parity error interrupt." range="" rwaccess="RW"/>
+    <bitfield id="ASF_SRAM_UNCORR_ERR_MASK" width="1" begin="1" end="1" resetval="0x1" description="Mask bit for SRAM uncorrectable error interrupt." range="" rwaccess="RW"/>
+    <bitfield id="ASF_SRAM_CORR_ERR_MASK" width="1" begin="0" end="0" resetval="0x1" description="Mask bit for SRAM correctable error interrupt." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_ASF_INT_TEST" acronym="CSI_TX_IF_ASF_INT_TEST" offset="0x20C" width="32" description="The ASF interrupt test register emulate hardware even. Write one to individual bit to trigger single event in (masked and raw) registers according to mask and will generate interrupt accordingly.">
+    <bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="Reserved, read as 0, ignored on write." range="" rwaccess="R"/>
+    <bitfield id="ASF_INTEGRITY_ERR_TEST" width="1" begin="6" end="6" resetval="0x0" description="Test bit for integrity error interrupt" range="" rwaccess="W"/>
+    <bitfield id="ASF_PROTOCOL_ERR_TEST" width="1" begin="5" end="5" resetval="0x0" description="Test bit for protocol error interrupt." range="" rwaccess="W"/>
+    <bitfield id="ASF_TRANS_TO_ERR_TEST" width="1" begin="4" end="4" resetval="0x0" description="Test bit for transaction timeouts error interrupt." range="" rwaccess="W"/>
+    <bitfield id="ASF_CSR_ERR_TEST" width="1" begin="3" end="3" resetval="0x0" description="Test bit for configuration and" range="" rwaccess="W"/>
+    <bitfield id="ASF_DAP_ERR_TEST" width="1" begin="2" end="2" resetval="0x0" description="Test bit for data and address paths parity error interrupt." range="" rwaccess="W"/>
+    <bitfield id="ASF_SRAM_UNCORR_ERR_TEST" width="1" begin="1" end="1" resetval="0x0" description="Test bit for SRAM uncorrectable error interrupt." range="" rwaccess="W"/>
+    <bitfield id="ASF_SRAM_CORR_ERR_TEST" width="1" begin="0" end="0" resetval="0x0" description="Test bit for SRAM correctable error interrupt." range="" rwaccess="W"/>
+  </register>
+  <register id="CSI_TX_IF_ASF_FATAL_NONFATAL_SELECT" acronym="CSI_TX_IF_ASF_FATAL_NONFATAL_SELECT" offset="0x210" width="32" description="The fatal or non-fatal interrupt register selects whether a fatal (asf_int_fatal) or non-fatal (asf_int_nonfatal) interrupt is triggered. If the bit of the event will be set to one then fatal interrupt (asf_int_fatal) will be triggered. Otherwise the non-fatal interrupt (asf_int_nonfatal) will be triggered.">
+    <bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="Reserved, read as 0, ignored on write." range="" rwaccess="R"/>
+    <bitfield id="ASF_INTEGRITY_ERR" width="1" begin="6" end="6" resetval="0x1" description="Enable integrity error interrupt as fatal" range="" rwaccess="RW"/>
+    <bitfield id="ASF_PROTOCOL_ERR" width="1" begin="5" end="5" resetval="0x1" description="Enable protocol error interrupt as fatal." range="" rwaccess="RW"/>
+    <bitfield id="ASF_TRANS_TO_ERR" width="1" begin="4" end="4" resetval="0x1" description="Enable transaction timeouts error interrupt as fatal." range="" rwaccess="RW"/>
+    <bitfield id="ASF_CSR_ERR" width="1" begin="3" end="3" resetval="0x1" description="Enable configuration and" range="" rwaccess="RW"/>
+    <bitfield id="ASF_DAP_ERR" width="1" begin="2" end="2" resetval="0x1" description="Enable data and address paths parity error interrupt as fatal." range="" rwaccess="RW"/>
+    <bitfield id="ASF_SRAM_UNCORR_ERR" width="1" begin="1" end="1" resetval="0x1" description="Enable SRAM uncorrectable error interrupt as fatal." range="" rwaccess="RW"/>
+    <bitfield id="ASF_SRAM_CORR_ERR" width="1" begin="0" end="0" resetval="0x1" description="Enable SRAM correctable error interrupt as fatal." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_ASF_SRAM_CORR_FAULT_STATUS" acronym="CSI_TX_IF_ASF_SRAM_CORR_FAULT_STATUS" offset="0x220" width="32" description="Status register for SRAM correctable fault. These fields are updated whenever asf_sram_corr_fault input is active.">
+    <bitfield id="ASF_SRAM_CORR_FAULT_INST" width="8" begin="31" end="24" resetval="0x0" description="Last SRAM instance that generated fault." range="" rwaccess="R"/>
+    <bitfield id="ASF_SRAM_CORR_FAULT_ADDR" width="24" begin="23" end="0" resetval="0x0" description="Last SRAM address that generated fault." range="" rwaccess="R"/>
+  </register>
+  <register id="CSI_TX_IF_ASF_SRAM_UNCORR_FAULT_STATUS" acronym="CSI_TX_IF_ASF_SRAM_UNCORR_FAULT_STATUS" offset="0x224" width="32" description="Status register for SRAM uncorrectable fault. These fields are updated whenever asf_sram_uncorr_fault input is active.">
+    <bitfield id="ASF_SRAM_UNCORR_FAULT_INST" width="8" begin="31" end="24" resetval="0x0" description="Last SRAM instance that generated fault." range="" rwaccess="R"/>
+    <bitfield id="ASF_SRAM_UNCORR_FAULT_ADDR" width="24" begin="23" end="0" resetval="0x0" description="Last SRAM address that generated fault." range="" rwaccess="R"/>
+  </register>
+  <register id="CSI_TX_IF_ASF_SRAM_FAULT_STATS" acronym="CSI_TX_IF_ASF_SRAM_FAULT_STATS" offset="0x228" width="32" description="Statistics register for SRAM faults. Note that this register clears when software writes to any field.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="Reserved, read as 0, ignored on write." range="" rwaccess="R"/>
+    <bitfield id="ASF_SRAM_FAULT_CORR_STATS" width="16" begin="15" end="0" resetval="0x0" description="Count of number of correctable errors if implemented." range="" rwaccess="RW1C"/>
+  </register>
+  <register id="CSI_TX_IF_ASF_TRANS_TO_CTRL" acronym="CSI_TX_IF_ASF_TRANS_TO_CTRL" offset="0x230" width="32" description="Control register to configure the ASF transaction timeout monitors.">
+    <bitfield id="ASF_TRANS_TO_EN" width="1" begin="31" end="31" resetval="0x0" description="Enable transaction timeout monitoring." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="15" begin="30" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ASF_TRANS_TO_CTRL" width="16" begin="15" end="0" resetval="0x0" description="Timer value to use for transaction timeout monitor." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_ASF_TRANS_TO_FAULT_MASK" acronym="CSI_TX_IF_ASF_TRANS_TO_FAULT_MASK" offset="0x234" width="32" description="Control register to mask out ASF transaction timeout faults from triggering interrupts. On reset, all bits are set to mask out all sources. Clear the corresponding bit to enable the interrupt source. The width of this field is parameterisable and the bit definitions are implementation specific.">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ASF_TRANS_TO_FAULT_4_MASK" width="1" begin="4" end="4" resetval="0x1" description="Mask register for each ASF transaction timeout fault source." range="" rwaccess="RW"/>
+    <bitfield id="ASF_TRANS_TO_FAULT_3_MASK" width="1" begin="3" end="3" resetval="0x1" description="Mask register for each ASF transaction timeout fault source." range="" rwaccess="RW"/>
+    <bitfield id="ASF_TRANS_TO_FAULT_2_MASK" width="1" begin="2" end="2" resetval="0x1" description="Mask register for each ASF transaction timeout fault source." range="" rwaccess="RW"/>
+    <bitfield id="ASF_TRANS_TO_FAULT_1_MASK" width="1" begin="1" end="1" resetval="0x1" description="Mask register for each ASF transaction timeout fault source." range="" rwaccess="RW"/>
+    <bitfield id="ASF_TRANS_TO_FAULT_0_MASK" width="1" begin="0" end="0" resetval="0x1" description="Mask register for each ASF transaction timeout fault source." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_ASF_TRANS_TO_FAULT_STATUS" acronym="CSI_TX_IF_ASF_TRANS_TO_FAULT_STATUS" offset="0x238" width="32" description="Status register for transaction timeouts fault. If a fault occurs the revelant bit will be set to 1. Each bit can be cleared by software writing 1 to each bit.">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ASF_TRANS_TO_FAULT_4_STATUS" width="1" begin="4" end="4" resetval="0x0" description="Status bits for transaction timeouts faults." range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_TRANS_TO_FAULT_3_STATUS" width="1" begin="3" end="3" resetval="0x0" description="Status bits for transaction timeouts faults." range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_TRANS_TO_FAULT_2_STATUS" width="1" begin="2" end="2" resetval="0x0" description="Status bits for transaction timeouts faults." range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_TRANS_TO_FAULT_1_STATUS" width="1" begin="1" end="1" resetval="0x0" description="Status bits for transaction timeouts faults." range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_TRANS_TO_FAULT_0_STATUS" width="1" begin="0" end="0" resetval="0x0" description="Status bits for transaction timeouts faults." range="" rwaccess="RW1C"/>
+  </register>
+  <register id="CSI_TX_IF_ASF_PROTOCOL_FAULT_MASK" acronym="CSI_TX_IF_ASF_PROTOCOL_FAULT_MASK" offset="0x240" width="32" description="Control register to mask out ASF Protocol faults from triggering interrupts. On reset, all bits are set to mask out all sources. Clear the corresponding bit to enable the interrupt source. The width of this field is parameterisable and the bit definitions are implementation specific.">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_16_MASK" width="1" begin="16" end="16" resetval="0x1" description="Mask register for each ASF protocol fault source." range="" rwaccess="RW"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_15_MASK" width="1" begin="15" end="15" resetval="0x1" description="Mask register for each ASF protocol fault source." range="" rwaccess="RW"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_14_MASK" width="1" begin="14" end="14" resetval="0x1" description="Mask register for each ASF protocol fault source." range="" rwaccess="RW"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_13_MASK" width="1" begin="13" end="13" resetval="0x1" description="Mask register for each ASF protocol fault source." range="" rwaccess="RW"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_12_MASK" width="1" begin="12" end="12" resetval="0x1" description="Mask register for each ASF protocol fault source." range="" rwaccess="RW"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_11_MASK" width="1" begin="11" end="11" resetval="0x1" description="Mask register for each ASF protocol fault source." range="" rwaccess="RW"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_10_MASK" width="1" begin="10" end="10" resetval="0x1" description="Mask register for each ASF protocol fault source." range="" rwaccess="RW"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_9_MASK" width="1" begin="9" end="9" resetval="0x1" description="Mask register for each ASF protocol fault source." range="" rwaccess="RW"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_8_MASK" width="1" begin="8" end="8" resetval="0x1" description="Mask register for each ASF protocol fault source." range="" rwaccess="RW"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_7_MASK" width="1" begin="7" end="7" resetval="0x1" description="Mask register for each ASF protocol fault source." range="" rwaccess="RW"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_6_MASK" width="1" begin="6" end="6" resetval="0x1" description="Mask register for each ASF protocol fault source." range="" rwaccess="RW"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_5_MASK" width="1" begin="5" end="5" resetval="0x1" description="Mask register for each ASF protocol fault source." range="" rwaccess="RW"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_4_MASK" width="1" begin="4" end="4" resetval="0x1" description="Mask register for each ASF protocol fault source." range="" rwaccess="RW"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_3_MASK" width="1" begin="3" end="3" resetval="0x1" description="Mask register for each ASF protocol fault source." range="" rwaccess="RW"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_2_MASK" width="1" begin="2" end="2" resetval="0x1" description="Mask register for each ASF protocol fault source." range="" rwaccess="RW"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_1_MASK" width="1" begin="1" end="1" resetval="0x1" description="Mask register for each ASF protocol fault source." range="" rwaccess="RW"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_0_MASK" width="1" begin="0" end="0" resetval="0x1" description="Mask register for each ASF protocol fault source." range="" rwaccess="RW"/>
+  </register>
+  <register id="CSI_TX_IF_ASF_PROTOCOL_FAULT_STATUS" acronym="CSI_TX_IF_ASF_PROTOCOL_FAULT_STATUS" offset="0x244" width="32" description="Status register for protocol faults. If a fault occurs the revelant bit will be set to 1. Each bit can be cleared by software writing 1 to each bit">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_16_STATUS" width="1" begin="16" end="16" resetval="0x0" description="Status bits for protocol faults." range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_15_STATUS" width="1" begin="15" end="15" resetval="0x0" description="Status bits for protocol faults." range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_14_STATUS" width="1" begin="14" end="14" resetval="0x0" description="Status bits for protocol faults." range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_13_STATUS" width="1" begin="13" end="13" resetval="0x0" description="Status bits for protocol faults." range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_12_STATUS" width="1" begin="12" end="12" resetval="0x0" description="Status bits for protocol faults." range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_11_STATUS" width="1" begin="11" end="11" resetval="0x0" description="Status bits for protocol faults." range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_10_STATUS" width="1" begin="10" end="10" resetval="0x0" description="Status bits for protocol faults." range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_9_STATUS" width="1" begin="9" end="9" resetval="0x0" description="Status bits for protocol faults." range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_8_STATUS" width="1" begin="8" end="8" resetval="0x0" description="Status bits for protocol faults." range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_7_STATUS" width="1" begin="7" end="7" resetval="0x0" description="Status bits for protocol faults." range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_6_STATUS" width="1" begin="6" end="6" resetval="0x0" description="Status bits for protocol faults." range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_5_STATUS" width="1" begin="5" end="5" resetval="0x0" description="Status bits for protocol faults." range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_4_STATUS" width="1" begin="4" end="4" resetval="0x0" description="Status bits for protocol faults." range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_3_STATUS" width="1" begin="3" end="3" resetval="0x0" description="Status bits for protocol faults." range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_2_STATUS" width="1" begin="2" end="2" resetval="0x0" description="Status bits for protocol faults." range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_1_STATUS" width="1" begin="1" end="1" resetval="0x0" description="Status bits for protocol faults." range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_PROTOCOL_FAULT_0_STATUS" width="1" begin="0" end="0" resetval="0x0" description="Status bits for protocol faults." range="" rwaccess="RW1C"/>
+  </register>
+  <register id="CSI_TX_IF_ID_PROD_VER" acronym="CSI_TX_IF_ID_PROD_VER" offset="0xFFC" width="32" description="CSI2 Transmitter Product ID and Version Register. This register is hard-coded in order to allow software to identify the product and its release version. The product ID will be fixed for all versions, while the version will be updated as new releases for the same product are made.">
+    <bitfield id="PRODUCT_ID" width="16" begin="31" end="16" resetval="0x5023" description="CSI2 Transmitter Product Identification Number." range="" rwaccess="R"/>
+    <bitfield id="VERSION_ID" width="16" begin="15" end="0" resetval="0x200" description="CSI2 Transmitter Product Version Number." range="" rwaccess="R"/>
+  </register>
+</module>

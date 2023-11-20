@@ -1,0 +1,363 @@
+<module name="DDRSS0_SS_CFG" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="DDRSS_SS_ID_REV_REG" acronym="DDRSS_SS_ID_REV_REG" offset="0x0" width="32" description="The Subsystem ID and Revision Register contains the module ID, major, and minor revisions for the subsystem.">
+    <bitfield id="MOD_ID" width="16" begin="31" end="16" resetval="0x6804" description="Module ID" range="" rwaccess="R"/>
+    <bitfield id="RTL_VER" width="5" begin="15" end="11" resetval="0xD" description="RTL version" range="" rwaccess="R"/>
+    <bitfield id="MAJ_REV" width="3" begin="10" end="8" resetval="0x1" description="Major revision" range="" rwaccess="R"/>
+    <bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom" range="" rwaccess="R"/>
+    <bitfield id="MIN_REV" width="6" begin="5" end="0" resetval="0x0" description="Minor revision" range="" rwaccess="R"/>
+  </register>
+  <register id="DDRSS_SS_CTL_REG" acronym="DDRSS_SS_CTL_REG" offset="0x4" width="32" description="The Subsystem Control Register contains fields for control functions required for submodules in the subsystem.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PHY_PLL_BYPASS" width="1" begin="0" end="0" resetval="0x0" description="PHY De-Skew PLL bypass." range="" rwaccess="RW"/>
+  </register>
+  <register id="DDRSS_V2A_CTL_REG" acronym="DDRSS_V2A_CTL_REG" offset="0x20" width="32" description="The MSMC2DDR Bridge Control register contains control functions required for the MSMC2DDR bridge submodule.">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="WR_LO_BLK_THR" width="5" begin="21" end="17" resetval="0x18" description="Write data threshold in 64 byte quantas." range="" rwaccess="RW"/>
+    <bitfield id="CRIT_THRESH" width="5" begin="16" end="12" resetval="0x18" description="Critical threshold." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="11" end="11" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SDRAM_3QT" width="1" begin="10" end="10" resetval="0x0" description="Setting this field to a 1 will modify SDRAM Index to be 3/4 its programmed value to support 3, 6, 12 and 24 GB sizes." range="" rwaccess="RW"/>
+    <bitfield id="SDRAM_IDX" width="5" begin="9" end="5" resetval="0x13" description="SDRAM Index = log2(connected SDRAM size) - 16." range="" rwaccess="RW"/>
+    <bitfield id="REGION_IDX" width="5" begin="4" end="0" resetval="0x13" description="Region Index = log2(CBA region size) - 16." range="" rwaccess="RW"/>
+  </register>
+  <register id="DDRSS_V2A_R1_MAT_REG" acronym="DDRSS_V2A_R1_MAT_REG" offset="0x24" width="32" description="The Range 1 Match Register allows a single master to a range of masters to change their priority mapping. This allows selective masters to be increased or decreased in effective priority. Range 1 Match Register uses the associated Range 1 Priority Map Register. The highest Range Match Register will take priority and will be used in case of multiple range matches.">
+    <bitfield id="RANGE1_RANGEEN_A" width="1" begin="31" end="31" resetval="0x0" description="The range1_rangeen_a enables the RouteID AND'd with range1_mask_a to match the range1_routeid_a" range="" rwaccess="RW"/>
+    <bitfield id="RANGE1_MASK_A" width="3" begin="30" end="28" resetval="0x0" description="The range1_mask_a allows a number of least significant bits to be ignored prior to the match of the routeid_a" range="" rwaccess="RW"/>
+    <bitfield id="RANGE1_ROUTEID_A" width="12" begin="27" end="16" resetval="0x0" description="The range1_routeid_a is the value that is compared to the RouteID arriving on the command interface" range="" rwaccess="RW"/>
+    <bitfield id="RANGE1_RANGEEN_B" width="1" begin="15" end="15" resetval="0x0" description="The range1_rangeen_b enables the RouteID AND'd with range1_mask_b to match the range1_routeid_b" range="" rwaccess="RW"/>
+    <bitfield id="RANGE1_MASK_B" width="3" begin="14" end="12" resetval="0x0" description="The range1_mask_b allows a number of least significant bits to be ignored prior to the match of the routeid_b" range="" rwaccess="RW"/>
+    <bitfield id="RANGE1_ROUTEID_B" width="12" begin="11" end="0" resetval="0x0" description="The range1_routeid_b is the value that is compared to the RouteID arriving on the command interface" range="" rwaccess="RW"/>
+  </register>
+  <register id="DDRSS_V2A_R2_MAT_REG" acronym="DDRSS_V2A_R2_MAT_REG" offset="0x28" width="32" description="The Range 2 Match Register allows a single master to a range of masters to change their priority mapping. This allows selective masters to be increased or decreased in effective priority. Range 2 Match Register uses the associated Range 2 Priority Map Register. The highest Range Match Register will take priority and will be used in case of multiple range matches.">
+    <bitfield id="RANGE2_RANGEEN_A" width="1" begin="31" end="31" resetval="0x0" description="The range2_rangeen_a enables the RouteID AND'd with range2_mask_a to match the range2_routeid_a" range="" rwaccess="RW"/>
+    <bitfield id="RANGE2_MASK_A" width="3" begin="30" end="28" resetval="0x0" description="The range2_mask_a allows a number of least significant bits to be ignored prior to the match of the routeid_a" range="" rwaccess="RW"/>
+    <bitfield id="RANGE2_ROUTEID_A" width="12" begin="27" end="16" resetval="0x0" description="The range2_routeid_a is the value that is compared to the RouteID arriving on the command interface" range="" rwaccess="RW"/>
+    <bitfield id="RANGE2_RANGEEN_B" width="1" begin="15" end="15" resetval="0x0" description="The range2_rangeen_b enables the RouteID AND'd with range2_mask_b to match the range2_routeid_b" range="" rwaccess="RW"/>
+    <bitfield id="RANGE2_MASK_B" width="3" begin="14" end="12" resetval="0x0" description="The range2_mask_b allows a number of least significant bits to be ignored prior to the match of the routeid_b" range="" rwaccess="RW"/>
+    <bitfield id="RANGE2_ROUTEID_B" width="12" begin="11" end="0" resetval="0x0" description="The range2_routeid_b is the value that is compared to the RouteID arriving on the command interface" range="" rwaccess="RW"/>
+  </register>
+  <register id="DDRSS_V2A_R3_MAT_REG" acronym="DDRSS_V2A_R3_MAT_REG" offset="0x2C" width="32" description="The Range 3 Match Register allows a single master to a range of masters to change their priority mapping. This allows selective masters to be increased or decreased in effective priority. Range 3 Match Register uses the associated Range 3 Priority Map Register. The highest Range Match Register will take priority and will be used in case of multiple range matches.">
+    <bitfield id="RANGE3_RANGEEN_A" width="1" begin="31" end="31" resetval="0x0" description="The range3_rangeen_a enables the RouteID AND'd with range3_mask_a to match the range3_routeid_a" range="" rwaccess="RW"/>
+    <bitfield id="RANGE3_MASK_A" width="3" begin="30" end="28" resetval="0x0" description="The range3_mask_a allows a number of least significant bits to be ignored prior to the match of the routeid_a" range="" rwaccess="RW"/>
+    <bitfield id="RANGE3_ROUTEID_A" width="12" begin="27" end="16" resetval="0x0" description="The range3_routeid_a is the value that is compared to the RouteID arriving on the command interface" range="" rwaccess="RW"/>
+    <bitfield id="RANGE3_RANGEEN_B" width="1" begin="15" end="15" resetval="0x0" description="The range3_rangeen_b enables the RouteID AND'd with range3_mask_b to match the range3_routeid_b" range="" rwaccess="RW"/>
+    <bitfield id="RANGE3_MASK_B" width="3" begin="14" end="12" resetval="0x0" description="The range3_mask_b allows a number of least significant bits to be ignored prior to the match of the routeid_b" range="" rwaccess="RW"/>
+    <bitfield id="RANGE3_ROUTEID_B" width="12" begin="11" end="0" resetval="0x0" description="The range3_routeid_b is the value that is compared to the RouteID arriving on the command interface" range="" rwaccess="RW"/>
+  </register>
+  <register id="DDRSS_V2A_LPT_DEF_PRI_MAP_REG" acronym="DDRSS_V2A_LPT_DEF_PRI_MAP_REG" offset="0x30" width="32" description="The LPT Default Priority Mapping Register is the default map for the inbound VBUSM.C priority on the Low Priority Thread to AXI priority.">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_PRIMAP0" width="3" begin="30" end="28" resetval="0x2" description="The field contains AXI priority value for VBUSM.C priority 0." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="27" end="27" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_PRIMAP1" width="3" begin="26" end="24" resetval="0x3" description="The field contains AXI priority value for VBUSM.C priority 1." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_PRIMAP2" width="3" begin="22" end="20" resetval="0x4" description="The field contains AXI priority value for VBUSM.C priority 2." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="19" end="19" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_PRIMAP3" width="3" begin="18" end="16" resetval="0x5" description="The field contains AXI priority value for VBUSM.C priority 3." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="15" end="15" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_PRIMAP4" width="3" begin="14" end="12" resetval="0x6" description="The field contains AXI priority value for VBUSM.C priority 4." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="11" end="11" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_PRIMAP5" width="3" begin="10" end="8" resetval="0x6" description="The field contains AXI priority value for VBUSM.C priority 5." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="7" end="7" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_PRIMAP6" width="3" begin="6" end="4" resetval="0x7" description="The field contains AXI priority value for VBUSM.C priority 6." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_PRIMAP7" width="3" begin="2" end="0" resetval="0x7" description="The field contains AXI priority value for VBUSM.C priority 7." range="" rwaccess="RW"/>
+  </register>
+  <register id="DDRSS_V2A_LPT_R1_PRI_MAP_REG" acronym="DDRSS_V2A_LPT_R1_PRI_MAP_REG" offset="0x34" width="32" description="The LPT Range 1 Priority Mapping Register is used to map the inbound VBUSM.C priority on the Low Priority Thread to AXI priority when a RouteID match 1 occurs. This allows the priority level to be changed from the LPT Default Priority Mapping value.">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_RANGE1_PRIMAP0" width="3" begin="30" end="28" resetval="0x2" description="The field contains AXI priority value for VBUSM.C priority 0 for range match 1." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="27" end="27" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_RANGE1_PRIMAP1" width="3" begin="26" end="24" resetval="0x3" description="The field contains AXI priority value for VBUSM.C priority 1 for range match 1." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_RANGE1_PRIMAP2" width="3" begin="22" end="20" resetval="0x4" description="The field contains AXI priority value for VBUSM.C priority 2 for range match 1." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="19" end="19" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_RANGE1_PRIMAP3" width="3" begin="18" end="16" resetval="0x5" description="The field contains AXI priority value for VBUSM.C priority 3 for range match 1." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="15" end="15" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_RANGE1_PRIMAP4" width="3" begin="14" end="12" resetval="0x6" description="The field contains AXI priority value for VBUSM.C priority 4 for range match 1." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="11" end="11" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_RANGE1_PRIMAP5" width="3" begin="10" end="8" resetval="0x6" description="The field contains AXI priority value for VBUSM.C priority 5 for range match 1." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="7" end="7" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_RANGE1_PRIMAP6" width="3" begin="6" end="4" resetval="0x7" description="The field contains AXI priority value for VBUSM.C priority 6 for range match 1." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_RANGE1_PRIMAP7" width="3" begin="2" end="0" resetval="0x7" description="The field contains AXI priority value for VBUSM.C priority 7 for range match 1." range="" rwaccess="RW"/>
+  </register>
+  <register id="DDRSS_V2A_LPT_R2_PRI_MAP_REG" acronym="DDRSS_V2A_LPT_R2_PRI_MAP_REG" offset="0x38" width="32" description="The LPT Range 2 Priority Mapping Register is used to map the inbound VBUSM.C priority on the Low Priority Thread to AXI priority when a RouteID match 2 occurs. This allows the priority level to be changed from the LPT Default Priority Mapping value.">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_RANGE2_PRIMAP0" width="3" begin="30" end="28" resetval="0x2" description="The field contains AXI priority value for VBUSM.C priority 0 for range match 2." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="27" end="27" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_RANGE2_PRIMAP1" width="3" begin="26" end="24" resetval="0x3" description="The field contains AXI priority value for VBUSM.C priority 1 for range match 2." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_RANGE2_PRIMAP2" width="3" begin="22" end="20" resetval="0x4" description="The field contains AXI priority value for VBUSM.C priority 2 for range match 2." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="19" end="19" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_RANGE2_PRIMAP3" width="3" begin="18" end="16" resetval="0x5" description="The field contains AXI priority value for VBUSM.C priority 3 for range match 2." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="15" end="15" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_RANGE2_PRIMAP4" width="3" begin="14" end="12" resetval="0x6" description="The field contains AXI priority value for VBUSM.C priority 4 for range match 2." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="11" end="11" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_RANGE2_PRIMAP5" width="3" begin="10" end="8" resetval="0x6" description="The field contains AXI priority value for VBUSM.C priority 5 for range match 2." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="7" end="7" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_RANGE2_PRIMAP6" width="3" begin="6" end="4" resetval="0x7" description="The field contains AXI priority value for VBUSM.C priority 6 for range match 2." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_RANGE2_PRIMAP7" width="3" begin="2" end="0" resetval="0x7" description="The field contains AXI priority value for VBUSM.C priority 7 for range match 2." range="" rwaccess="RW"/>
+  </register>
+  <register id="DDRSS_V2A_LPT_R3_PRI_MAP_REG" acronym="DDRSS_V2A_LPT_R3_PRI_MAP_REG" offset="0x3C" width="32" description="The LPT Range 3 Priority Mapping Register is used to map the inbound VBUSM.C priority on the Low Priority Thread to AXI priority when a RouteID match 3 occurs. This allows the priority level to be changed from the LPT Default Priority Mapping value.">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_RANGE3_PRIMAP0" width="3" begin="30" end="28" resetval="0x2" description="The field contains AXI priority value for VBUSM.C priority 0 for range match 3." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="27" end="27" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_RANGE3_PRIMAP1" width="3" begin="26" end="24" resetval="0x3" description="The field contains AXI priority value for VBUSM.C priority 1 for range match 3." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_RANGE3_PRIMAP2" width="3" begin="22" end="20" resetval="0x4" description="The field contains AXI priority value for VBUSM.C priority 2 for range match 3." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="19" end="19" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_RANGE3_PRIMAP3" width="3" begin="18" end="16" resetval="0x5" description="The field contains AXI priority value for VBUSM.C priority 3 for range match 3." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="15" end="15" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_RANGE3_PRIMAP4" width="3" begin="14" end="12" resetval="0x6" description="The field contains AXI priority value for VBUSM.C priority 4 for range match 3." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="11" end="11" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_RANGE3_PRIMAP5" width="3" begin="10" end="8" resetval="0x6" description="The field contains AXI priority value for VBUSM.C priority 5 for range match 3." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="7" end="7" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_RANGE3_PRIMAP6" width="3" begin="6" end="4" resetval="0x7" description="The field contains AXI priority value for VBUSM.C priority 6 for range match 3." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPT_RANGE3_PRIMAP7" width="3" begin="2" end="0" resetval="0x7" description="The field contains AXI priority value for VBUSM.C priority 7 for range match 3." range="" rwaccess="RW"/>
+  </register>
+  <register id="DDRSS_V2A_HPT_DEF_PRI_MAP_REG" acronym="DDRSS_V2A_HPT_DEF_PRI_MAP_REG" offset="0x4C" width="32" description="The HPT Default Priority Mapping Register is the default map for the inbound VBUSM.C priority on the High Priority Thread to the AXI priority.">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_PRIMAP0" width="3" begin="30" end="28" resetval="0x0" description="The field contains AXI priority value for VBUSM.C priority 0." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="27" end="27" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_PRIMAP1" width="3" begin="26" end="24" resetval="0x0" description="The field contains AXI priority value for VBUSM.C priority 1." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_PRIMAP2" width="3" begin="22" end="20" resetval="0x1" description="The field contains AXI priority value for VBUSM.C priority 2." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="19" end="19" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_PRIMAP3" width="3" begin="18" end="16" resetval="0x1" description="The field contains AXI priority value for VBUSM.C priority 3." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="15" end="15" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_PRIMAP4" width="3" begin="14" end="12" resetval="0x2" description="The field contains AXI priority value for VBUSM.C priority 4." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="11" end="11" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_PRIMAP5" width="3" begin="10" end="8" resetval="0x3" description="The field contains AXI priority value for VBUSM.C priority 5." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="7" end="7" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_PRIMAP6" width="3" begin="6" end="4" resetval="0x4" description="The field contains AXI priority value for VBUSM.C priority 6." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_PRIMAP7" width="3" begin="2" end="0" resetval="0x5" description="The field contains AXI priority value for VBUSM.C priority 7." range="" rwaccess="RW"/>
+  </register>
+  <register id="DDRSS_V2A_HPT_R1_PRI_MAP_REG" acronym="DDRSS_V2A_HPT_R1_PRI_MAP_REG" offset="0x50" width="32" description="The HPT Range 1 Priority Mapping Register is used to map the inbound VBUSM.C priority on the High Priority Thread to AXI priority when a RouteID match 1 occurs. This allows the priority level to be changed from the HPT Default Priority Mapping value.">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_RANGE1_PRIMAP0" width="3" begin="30" end="28" resetval="0x0" description="The field contains AXI priority value for VBUSM.C priority 0 for range match 1." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="27" end="27" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_RANGE1_PRIMAP1" width="3" begin="26" end="24" resetval="0x0" description="The field contains AXI priority value for VBUSM.C priority 1 for range match 1." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_RANGE1_PRIMAP2" width="3" begin="22" end="20" resetval="0x1" description="The field contains AXI priority value for VBUSM.C priority 2 for range match 1." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="19" end="19" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_RANGE1_PRIMAP3" width="3" begin="18" end="16" resetval="0x1" description="The field contains AXI priority value for VBUSM.C priority 3 for range match 1." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="15" end="15" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_RANGE1_PRIMAP4" width="3" begin="14" end="12" resetval="0x2" description="The field contains AXI priority value for VBUSM.C priority 4 for range match 1." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="11" end="11" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_RANGE1_PRIMAP5" width="3" begin="10" end="8" resetval="0x3" description="The field contains AXI priority value for VBUSM.C priority 5 for range match 1." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="7" end="7" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_RANGE1_PRIMAP6" width="3" begin="6" end="4" resetval="0x4" description="The field contains AXI priority value for VBUSM.C priority 6 for range match 1." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_RANGE1_PRIMAP7" width="3" begin="2" end="0" resetval="0x5" description="The field contains AXI priority value for VBUSM.C priority 7 for range match 1." range="" rwaccess="RW"/>
+  </register>
+  <register id="DDRSS_V2A_HPT_R2_PRI_MAP_REG" acronym="DDRSS_V2A_HPT_R2_PRI_MAP_REG" offset="0x54" width="32" description="The HPT Range 2 Priority Mapping Register is used to map the inbound VBUSM.C priority on the High Priority Thread to AXI priority when a RouteID match 2 occurs. This allows the priority level to be changed from the HPT Default Priority Mapping value.">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_RANGE2_PRIMAP0" width="3" begin="30" end="28" resetval="0x0" description="The field contains AXI priority value for VBUSM.C priority 0 for range match 2." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="27" end="27" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_RANGE2_PRIMAP1" width="3" begin="26" end="24" resetval="0x0" description="The field contains AXI priority value for VBUSM.C priority 1 for range match 2." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_RANGE2_PRIMAP2" width="3" begin="22" end="20" resetval="0x1" description="The field contains AXI priority value for VBUSM.C priority 2 for range match 2." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="19" end="19" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_RANGE2_PRIMAP3" width="3" begin="18" end="16" resetval="0x1" description="The field contains AXI priority value for VBUSM.C priority 3 for range match 2." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="15" end="15" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_RANGE2_PRIMAP4" width="3" begin="14" end="12" resetval="0x2" description="The field contains AXI priority value for VBUSM.C priority 4 for range match 2." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="11" end="11" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_RANGE2_PRIMAP5" width="3" begin="10" end="8" resetval="0x3" description="The field contains AXI priority value for VBUSM.C priority 5 for range match 2." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="7" end="7" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_RANGE2_PRIMAP6" width="3" begin="6" end="4" resetval="0x4" description="The field contains AXI priority value for VBUSM.C priority 6 for range match 2." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_RANGE2_PRIMAP7" width="3" begin="2" end="0" resetval="0x5" description="The field contains AXI priority value for VBUSM.C priority 7 for range match 2." range="" rwaccess="RW"/>
+  </register>
+  <register id="DDRSS_V2A_HPT_R3_PRI_MAP_REG" acronym="DDRSS_V2A_HPT_R3_PRI_MAP_REG" offset="0x58" width="32" description="The HPT Range 3 Priority Mapping Register is used to map the inbound VBUSM.C priority on the High Priority Thread to AXI priority when a RouteID match 3 occurs. This allows the priority level to be changed from the HPT Default Priority Mapping value.">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_RANGE3_PRIMAP0" width="3" begin="30" end="28" resetval="0x0" description="The field contains AXI priority value for VBUSM.C priority 0 for range match 3." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="27" end="27" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_RANGE3_PRIMAP1" width="3" begin="26" end="24" resetval="0x0" description="The field contains AXI priority value for VBUSM.C priority 1 for range match 3." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_RANGE3_PRIMAP2" width="3" begin="22" end="20" resetval="0x1" description="The field contains AXI priority value for VBUSM.C priority 2 for range match 3." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="19" end="19" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_RANGE3_PRIMAP3" width="3" begin="18" end="16" resetval="0x1" description="The field contains AXI priority value for VBUSM.C priority 3 for range match 3." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="15" end="15" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_RANGE3_PRIMAP4" width="3" begin="14" end="12" resetval="0x2" description="The field contains AXI priority value for VBUSM.C priority 4 for range match 3." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="11" end="11" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_RANGE3_PRIMAP5" width="3" begin="10" end="8" resetval="0x3" description="The field contains AXI priority value for VBUSM.C priority 5 for range match 3." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="7" end="7" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_RANGE3_PRIMAP6" width="3" begin="6" end="4" resetval="0x4" description="The field contains AXI priority value for VBUSM.C priority 6 for range match 3." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HPT_RANGE3_PRIMAP7" width="3" begin="2" end="0" resetval="0x5" description="The field contains AXI priority value for VBUSM.C priority 7 for range match 3." range="" rwaccess="RW"/>
+  </register>
+  <register id="DDRSS_V2A_AERR_LOG1_REG" acronym="DDRSS_V2A_AERR_LOG1_REG" offset="0x70" width="32" description="The Address Error Log 1 register displays the RouteID and lsb of the address for the first VBUSM.C command that was outside the programmed addressing range. Writing a 0x1 will clear all fields. Writing any other value has no effect. The Address Error Log 2 register will also be cleared upon writing this register.">
+    <bitfield id="AERR_ADDR_LSB" width="16" begin="31" end="16" resetval="0x0" description="Address" range="" rwaccess="RW1C"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="AERR_ROUTE_ID" width="12" begin="11" end="0" resetval="0x0" description="RouteID of the VBUSM.C write command" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="DDRSS_V2A_AERR_LOG2_REG" acronym="DDRSS_V2A_AERR_LOG2_REG" offset="0x74" width="32" description="The Address Error Log 2 registers displays the msb of the address for the first VBUSM.C command that was outside the programmed addressing range. This register will be cleared upon writing the Address Error Log 1 register.">
+    <bitfield id="AERR_ADDR_MSB" width="32" begin="31" end="0" resetval="0x0" description="Address[47:16] of the VBUSM.C command" range="" rwaccess="R"/>
+  </register>
+  <register id="DDRSS_V2A_OERR_LOG_REG" acronym="DDRSS_V2A_OERR_LOG_REG" offset="0x78" width="32" description="The Opcode Error Log register displays the RouteID and opcode for the first VBUSM.C command that had an unsupported opcode. Writing a 0x1 will clear all fields. Writing any other value has no effect.">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="OERR_OP_CODE" width="6" begin="17" end="12" resetval="0x0" description="Opcode of the VBUSM.C command" range="" rwaccess="RW1C"/>
+    <bitfield id="OERR_ROUTE_ID" width="12" begin="11" end="0" resetval="0x0" description="RouteID of the VBUSM.C command" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="DDRSS_V2A_1B_ERR_CNT_REG" acronym="DDRSS_V2A_1B_ERR_CNT_REG" offset="0x80" width="32" description="MSMC2DDR Bridge 1-Bit EDC Error Count Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="EDC_1B_ERR_CNT" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="DDRSS_V2A_1B_ERR_LOG1_REG" acronym="DDRSS_V2A_1B_ERR_LOG1_REG" offset="0x84" width="32" description="The 1-Bit EDC Error Log 1 register displays the RouteID and error position of the first VBUSM.C write that incurred 1-bit EDC error. Writing a 0x1 will clear all fields. Writing any other value has no effect. The 1-Bit EDC Error Log 2 register will also be cleared upon writing this register.">
+    <bitfield id="RESERVED" width="7" begin="31" end="25" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ERR_POS_1B" width="9" begin="24" end="16" resetval="0x0" description="Bit error position" range="" rwaccess="RW1C"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROUTE_ID_1B" width="12" begin="11" end="0" resetval="0x0" description="RouteID of the VBUSM.C write command" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="DDRSS_V2A_1B_ERR_LOG2_REG" acronym="DDRSS_V2A_1B_ERR_LOG2_REG" offset="0x88" width="32" description="The 1-Bit EDC Error Log 2 registers displays the address of the first VBUSM.C write that incurred 1-bit EDC error. This register will be cleared upon writing the 1-Bit EDC Error Log 1 register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="ADDR_MSB_1B" width="30" begin="29" end="0" resetval="0x0" description="Address" range="" rwaccess="R"/>
+  </register>
+  <register id="DDRSS_V2A_2B_ERR_LOG1_REG" acronym="DDRSS_V2A_2B_ERR_LOG1_REG" offset="0x8C" width="32" description="The 2-Bit EDC Error Log 1 register displays the RouteID of the first VBUSM.C write that incurred 2-bit EDC error. Writing a 0x1 clear all fields. Writing any other value has no effect. The 2-Bit EDC Error Log 2 register will also be cleared upon writing this register.">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROUTE_ID_2B" width="12" begin="11" end="0" resetval="0x0" description="RouteID of the VBUSM.C write command" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="DDRSS_V2A_2B_ERR_LOG2_REG" acronym="DDRSS_V2A_2B_ERR_LOG2_REG" offset="0x90" width="32" description="The 2-Bit EDC Error Log 1 register displays the address of the first VBUSM.C write that incurred 2-bit EDC error. This register will be cleared upon writing the 2-Bit EDC Error Log 1 register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="ADR_MSB_2B" width="30" begin="29" end="0" resetval="0x0" description="Address" range="" rwaccess="R"/>
+  </register>
+  <register id="DDRSS_V2A_BUS_TO" acronym="DDRSS_V2A_BUS_TO" offset="0x9C" width="32" description="MSMC2DDR Bridge Bus Timeout Register">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="BUS_TIMER" width="24" begin="23" end="0" resetval="0x00FFFFFF" description="AXI bus timeout value." range="" rwaccess="RW"/>
+  </register>
+  <register id="DDRSS_V2A_INT_RAW_REG" acronym="DDRSS_V2A_INT_RAW_REG" offset="0xA0" width="32" description="MSMC2DDR Bridge Interrupt Raw Status Register">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ECCM1BERR" width="1" begin="5" end="5" resetval="0x0" description="Raw status of SDRAM ECC multi 1-bit errors in same SDRAM burst." range="" rwaccess="RW1S"/>
+    <bitfield id="ECC2BERR" width="1" begin="4" end="4" resetval="0x0" description="Raw status of SDRAM ECC 2-bit error." range="" rwaccess="RW1S"/>
+    <bitfield id="ECC1BERR" width="1" begin="3" end="3" resetval="0x0" description="Raw status of SDRAM ECC 1-bit error." range="" rwaccess="RW1S"/>
+    <bitfield id="TOERR" width="1" begin="2" end="2" resetval="0x0" description="Raw status of MSMC2DDR bridge interrupt for controller AXI interface timeout." range="" rwaccess="RW1S"/>
+    <bitfield id="AERR" width="1" begin="1" end="1" resetval="0x0" description="Raw status of MSMC2DDR bridge interrupt for VBUSM.C address outside the programmed range." range="" rwaccess="RW1S"/>
+    <bitfield id="OERR" width="1" begin="0" end="0" resetval="0x0" description="Raw status of MSMC2DDR bridge interrupt for VBUSM.C unsupported opcode." range="" rwaccess="RW1S"/>
+  </register>
+  <register id="DDRSS_V2A_INT_STAT_REG" acronym="DDRSS_V2A_INT_STAT_REG" offset="0xA4" width="32" description="MSMC2DDR Bridge Interrupt Status Register">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ECCM1BERR" width="1" begin="5" end="5" resetval="0x0" description="Enabled status of SDRAM ECC multi 1-bit errors in same SDRAM burst." range="" rwaccess="RW1C"/>
+    <bitfield id="ECC2BERR" width="1" begin="4" end="4" resetval="0x0" description="Enabled status of SDRAM ECC 2-bit error." range="" rwaccess="RW1C"/>
+    <bitfield id="ECC1BERR" width="1" begin="3" end="3" resetval="0x0" description="Enabled status of SDRAM ECC 1-bit error." range="" rwaccess="RW1C"/>
+    <bitfield id="TOERR" width="1" begin="2" end="2" resetval="0x0" description="Enabled status of MSMC2DDR bridge interrupt for controller AXI interface timeout." range="" rwaccess="RW1C"/>
+    <bitfield id="AERR" width="1" begin="1" end="1" resetval="0x0" description="Enabled status of MSMC2DDR bridge interrupt for VBUSM.C address outside the programmed range." range="" rwaccess="RW1C"/>
+    <bitfield id="OERR" width="1" begin="0" end="0" resetval="0x0" description="Enabled status of MSMC2DDR bridge interrupt for VBUSM.C unsupported opcode." range="" rwaccess="RW1C"/>
+  </register>
+  <register id="DDRSS_V2A_INT_SET_REG" acronym="DDRSS_V2A_INT_SET_REG" offset="0xA8" width="32" description="MSMC2DDR Bridge Interrupt Enable Set Register">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ECCM1BERR_EN" width="1" begin="5" end="5" resetval="0x0" description="Enable set for SDRAM ECC multi" range="" rwaccess="RW1S"/>
+    <bitfield id="ECC2BERR_EN" width="1" begin="4" end="4" resetval="0x0" description="Enable set for SDRAM ECC" range="" rwaccess="RW1S"/>
+    <bitfield id="ECC1BERR_EN" width="1" begin="3" end="3" resetval="0x0" description="Enable set for SDRAM ECC" range="" rwaccess="RW1S"/>
+    <bitfield id="TOERR_EN" width="1" begin="2" end="2" resetval="0x0" description="Enable set for MSMC2DDR bridge interrupt for controller AXI interface timeout." range="" rwaccess="RW1S"/>
+    <bitfield id="AERR_EN" width="1" begin="1" end="1" resetval="0x0" description="Enable set for MSMC2DDR bridge interrupt for VBUSM.C address outside the programmed range." range="" rwaccess="RW1S"/>
+    <bitfield id="OERR_EN" width="1" begin="0" end="0" resetval="0x0" description="Enable set for MSMC2DDR bridge interrupt for VBUSM.C unsupported opcode." range="" rwaccess="RW1S"/>
+  </register>
+  <register id="DDRSS_V2A_INT_CLR_REG" acronym="DDRSS_V2A_INT_CLR_REG" offset="0xAC" width="32" description="MSMC2DDR Bridge Interrupt Enable Clear Register">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ECCM1BERR_EN" width="1" begin="5" end="5" resetval="0x0" description="Enable clear for SDRAM ECC multi" range="" rwaccess="RW1C"/>
+    <bitfield id="ECC2BERR_EN" width="1" begin="4" end="4" resetval="0x0" description="Enable clear for SDRAM ECC" range="" rwaccess="RW1C"/>
+    <bitfield id="ECC1BERR_EN" width="1" begin="3" end="3" resetval="0x0" description="Enable clear for SDRAM ECC" range="" rwaccess="RW1C"/>
+    <bitfield id="TOERR_EN" width="1" begin="2" end="2" resetval="0x0" description="Enable clear for MSMC2DDR bridge interrupt for controller AXI interface timeout." range="" rwaccess="RW1C"/>
+    <bitfield id="AERR_EN" width="1" begin="1" end="1" resetval="0x0" description="Enable clear for MSMC2DDR bridge interrupt for VBUSM.C address outside the programmed range." range="" rwaccess="RW1C"/>
+    <bitfield id="OERR_EN" width="1" begin="0" end="0" resetval="0x0" description="Enable clear for MSMC2DDR bridge interrupt for VBUSM.C unsupported opcode." range="" rwaccess="RW1C"/>
+  </register>
+  <register id="DDRSS_V2A_EOI_REG" acronym="DDRSS_V2A_EOI_REG" offset="0xB0" width="32" description="MSMC2DDR Bridge End of Interrupt Register The EOI register is used to re-trigger the pulse interrupt signal to ensure that any nested interrupt events are serviced. The software interrupt handler must write to the EOI register at the end of the current interrupt processing routine, so that new events can re-trigger the pulse interrupt signal again. For level interrupt signals the EOI register is not functional and must not be used.">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="EOI" width="2" begin="1" end="0" resetval="0x0" description="Software End Of Interrupt (EOI) control." range="" rwaccess="W"/>
+  </register>
+  <register id="DDRSS_PERF_CNT_SEL_REG" acronym="DDRSS_PERF_CNT_SEL_REG" offset="0x100" width="32" description="The Performance Counter Select register is used to select the statistic type to be counted in the corresponding Performance Counter register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CNT4_SEL" width="6" begin="29" end="24" resetval="0x3" description="Statistic select for Performance Counter 4 register." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="23" end="22" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CNT3_SEL" width="6" begin="21" end="16" resetval="0x2" description="Statistic select for Performance Counter 3 register." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CNT2_SEL" width="6" begin="13" end="8" resetval="0x1" description="Statistic select for Performance Counter 2 register." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="7" end="6" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CNT1_SEL" width="6" begin="5" end="0" resetval="0x0" description="Statistic select for Performance Counter 1 register." range="" rwaccess="RW"/>
+  </register>
+  <register id="DDRSS_PERF_CNT1_REG" acronym="DDRSS_PERF_CNT1_REG" offset="0x104" width="32" description="Performance Counter 1 Register">
+    <bitfield id="CNT1" width="32" begin="31" end="0" resetval="0x0" description="Soft 32-bit counter that can be configured as specified in the Performance Counter Select Register." range="" rwaccess="R"/>
+  </register>
+  <register id="DDRSS_PERF_CNT2_REG" acronym="DDRSS_PERF_CNT2_REG" offset="0x108" width="32" description="Performance Counter 2 Register">
+    <bitfield id="CNT2" width="32" begin="31" end="0" resetval="0x0" description="Soft 32-bit counter that can be configured as specified in the Performance Counter Select Register." range="" rwaccess="R"/>
+  </register>
+  <register id="DDRSS_PERF_CNT3_REG" acronym="DDRSS_PERF_CNT3_REG" offset="0x10C" width="32" description="Performance Counter 3 Register">
+    <bitfield id="CNT3" width="32" begin="31" end="0" resetval="0x0" description="Soft 32-bit counter that can be configured as specified in the Performance Counter Select Register." range="" rwaccess="R"/>
+  </register>
+  <register id="DDRSS_PERF_CNT4_REG" acronym="DDRSS_PERF_CNT4_REG" offset="0x110" width="32" description="Performance Counter 4 Register">
+    <bitfield id="CNT4" width="32" begin="31" end="0" resetval="0x0" description="Soft 32-bit counter that can be configured as specified in the Performance Counter Select Register." range="" rwaccess="R"/>
+  </register>
+  <register id="DDRSS_ECC_CTRL_REG" acronym="DDRSS_ECC_CTRL_REG" offset="0x120" width="32" description="ECC Control Register">
+    <bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="COR_ECC_THRESH" width="5" begin="12" end="8" resetval="0x0" description="Threshold for" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="WR_ALLOC" width="1" begin="4" end="4" resetval="0x0" description="When set to 1, an unassigned ECC cache-line will be allocated for a write with routeID that do not match any of the mapped routeID's." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ECC_CK" width="1" begin="2" end="2" resetval="0x0" description="Set 1 to enable ECC verification for read accesses when ecc_en=1." range="" rwaccess="RW"/>
+    <bitfield id="RMW_EN" width="1" begin="1" end="1" resetval="0x0" description="Read modify write enable." range="" rwaccess="RW"/>
+    <bitfield id="ECC_EN" width="1" begin="0" end="0" resetval="0x0" description="DRAM ECC enable." range="" rwaccess="RW"/>
+  </register>
+  <register id="DDRSS_ECC_RID_INDX_REG" acronym="DDRSS_ECC_RID_INDX_REG" offset="0x124" width="32" description="ECC Cache RouteID Index Register">
+    <bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ECCRID_ADR" width="7" begin="6" end="0" resetval="0x0" description="This index specifies the ECC cache entry number that the eccrid_val is mapped to." range="" rwaccess="RW"/>
+  </register>
+  <register id="DDRSS_ECC_RID_VAL_REG" acronym="DDRSS_ECC_RID_VAL_REG" offset="0x128" width="32" description="ECC Cache RouteID Write Value Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ECCRID_VAL_VLD" width="1" begin="15" end="15" resetval="0x0" description="A 1 in this field indicates that value in eccrid_val is valid." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="14" end="12" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ECCRID_VAL" width="12" begin="11" end="0" resetval="0x0" description="RouteID value written or read." range="" rwaccess="RW"/>
+  </register>
+  <register id="DDRSS_ECC_R0_STR_ADDR_REG" acronym="DDRSS_ECC_R0_STR_ADDR_REG" offset="0x130" width="32" description="ECC Range 0 Start Address Register">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ECC_STR_ADR_0" width="19" begin="18" end="0" resetval="0x0007FFFF" description="Start caddress" range="" rwaccess="RW"/>
+  </register>
+  <register id="DDRSS_ECC_R0_END_ADDR_REG" acronym="DDRSS_ECC_R0_END_ADDR_REG" offset="0x134" width="32" description="ECC Range 0 End Address Register">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ECC_END_ADR_0" width="19" begin="18" end="0" resetval="0x0" description="End caddress" range="" rwaccess="RW"/>
+  </register>
+  <register id="DDRSS_ECC_R1_STR_ADDR_REG" acronym="DDRSS_ECC_R1_STR_ADDR_REG" offset="0x138" width="32" description="ECC Range 1 Start Address Register">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ECC_STR_ADR_1" width="19" begin="18" end="0" resetval="0x0007FFFF" description="Start caddress" range="" rwaccess="RW"/>
+  </register>
+  <register id="DDRSS_ECC_R1_END_ADDR_REG" acronym="DDRSS_ECC_R1_END_ADDR_REG" offset="0x13C" width="32" description="ECC Range 1 End Address Register">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ECC_END_ADR_1" width="19" begin="18" end="0" resetval="0x0" description="End caddress" range="" rwaccess="RW"/>
+  </register>
+  <register id="DDRSS_ECC_R2_STR_ADDR_REG" acronym="DDRSS_ECC_R2_STR_ADDR_REG" offset="0x140" width="32" description="ECC Range 2 Start Address Register">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ECC_STR_ADR_2" width="19" begin="18" end="0" resetval="0x0007FFFF" description="Start caddress" range="" rwaccess="RW"/>
+  </register>
+  <register id="DDRSS_ECC_R2_END_ADDR_REG" acronym="DDRSS_ECC_R2_END_ADDR_REG" offset="0x144" width="32" description="ECC Range 2 End Address Register">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ECC_END_ADR_2" width="19" begin="18" end="0" resetval="0x0" description="End caddress" range="" rwaccess="RW"/>
+  </register>
+  <register id="DDRSS_ECC_1B_ERR_CNT_REG" acronym="DDRSS_ECC_1B_ERR_CNT_REG" offset="0x150" width="32" description="ECC 1-Bit Error Count Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ECC_1B_ERR_CNT" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="DDRSS_ECC_1B_ERR_THRSH_REG" acronym="DDRSS_ECC_1B_ERR_THRSH_REG" offset="0x154" width="32" description="ECC 1-Bit Error Threshold Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ECC_1B_ERR_THRSH" width="16" begin="15" end="0" resetval="0x0" description="ECC" range="" rwaccess="RW"/>
+  </register>
+  <register id="DDRSS_ECC_1B_ERR_ADR_LOG_REG" acronym="DDRSS_ECC_1B_ERR_ADR_LOG_REG" offset="0x158" width="32" description="ECC 1-Bit Error Address Log Register">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ECC_1B_ERR_ADR" width="29" begin="28" end="0" resetval="0x0" description="ECC" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="DDRSS_ECC_1B_ERR_MSK_LOG_REG" acronym="DDRSS_ECC_1B_ERR_MSK_LOG_REG" offset="0x15C" width="32" description="ECC 1-Bit Error Mask Log Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="ECC_1B_ERR_MSK" width="16" begin="15" end="0" resetval="0x0" description="ECC" range="" rwaccess="R"/>
+  </register>
+  <register id="DDRSS_ECC_2B_ERR_ADR_LOG_REG" acronym="DDRSS_ECC_2B_ERR_ADR_LOG_REG" offset="0x160" width="32" description="ECC 2-Bit Error Address Log Register">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ECC_2B_ERR_ADR" width="29" begin="28" end="0" resetval="0x0" description="ECC" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="DDRSS_ECC_2B_ERR_MSK_LOG_REG" acronym="DDRSS_ECC_2B_ERR_MSK_LOG_REG" offset="0x164" width="32" description="ECC 2-Bit Error Mask Log Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="ECC_2B_ERR_MSK" width="16" begin="15" end="0" resetval="0x0" description="ECC" range="" rwaccess="R"/>
+  </register>
+  <register id="DDRSS_PHY_BIST_CTRL_REG" acronym="DDRSS_PHY_BIST_CTRL_REG" offset="0x180" width="32" description="PHY BIST Control Register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="BIST_TSEL_SELECT" width="16" begin="15" end="0" resetval="0x0" description="This field controls the bist_tsel_select input of the PHY." range="" rwaccess="RW"/>
+  </register>
+</module>

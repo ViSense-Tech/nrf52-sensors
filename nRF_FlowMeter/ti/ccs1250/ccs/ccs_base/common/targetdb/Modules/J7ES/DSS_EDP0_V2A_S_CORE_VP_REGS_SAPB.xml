@@ -1,0 +1,110 @@
+<module name="DSS_EDP0_V2A_S_CORE_VP_REGS_SAPB" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="EDP_CORE_APB_CTRL_S" acronym="EDP_CORE_APB_CTRL_S" offset="0x0" width="32" description="APB control register (SAPB)">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved field." range="" rwaccess="R"/>
+    <bitfield id="APB_XT_RUNSTALL" width="1" begin="3" end="3" resetval="0x1" description="Not used" range="" rwaccess="RW"/>
+    <bitfield id="APB_IRAM_PATH" width="1" begin="2" end="2" resetval="0x1" description="Not used" range="" rwaccess="RW"/>
+    <bitfield id="APB_DRAM_PATH" width="1" begin="1" end="1" resetval="0x1" description="Not used" range="" rwaccess="RW"/>
+    <bitfield id="APB_XT_RESET" width="1" begin="0" end="0" resetval="0x1" description="Not used" range="" rwaccess="RW"/>
+  </register>
+  <register id="EDP_CORE_XT_INT_CTRL_S" acronym="EDP_CORE_XT_INT_CTRL_S" offset="0x4" width="32" description="Internal CPU Interrupt Polarity Control Register.">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="Reserved field." range="" rwaccess="R"/>
+    <bitfield id="XT_INT_POLARITY" width="2" begin="1" end="0" resetval="0x0" description="Not used" range="" rwaccess="RW"/>
+  </register>
+  <register id="EDP_CORE_MAILBOX_FULL_ADDR_S" acronym="EDP_CORE_MAILBOX_FULL_ADDR_S" offset="0x8" width="32" description="Mailbox full indication status register. This register provides a status of the mailbox that is used to send messages from the Host processor to internal uCPU. Mailbox full flag can be a source of mailbox interrupt.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved field." range="" rwaccess="R"/>
+    <bitfield id="MAILBOX_FULL" width="1" begin="0" end="0" resetval="0x0" description="Mailbox full indication." range="" rwaccess="R"/>
+  </register>
+  <register id="EDP_CORE_MAILBOX_EMPTY_ADDR_S" acronym="EDP_CORE_MAILBOX_EMPTY_ADDR_S" offset="0xC" width="32" description="Mailbox empty indication status register. This register provides a status of the mailbox that is used to send responses from the internal uCPU to host processor as a result of previously sent message. Mailbox empty flag can be a source of not-empty mailbox interrupt.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved field." range="" rwaccess="R"/>
+    <bitfield id="MAILBOX_EMPTY" width="1" begin="0" end="0" resetval="0x1" description="Mailbox Empty indication" range="" rwaccess="R"/>
+  </register>
+  <register id="EDP_CORE_MAILBOX0_WR_DATA_S" acronym="EDP_CORE_MAILBOX0_WR_DATA_S" offset="0x10" width="32" description="Mailbox write data register">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="Reserved field." range="" rwaccess="R"/>
+    <bitfield id="MAILBOX0_WR_DATA" width="8" begin="7" end="0" resetval="0x0" description="Mailbox write Data." range="" rwaccess="RW"/>
+  </register>
+  <register id="EDP_CORE_MAILBOX0_RD_DATA_S" acronym="EDP_CORE_MAILBOX0_RD_DATA_S" offset="0x14" width="32" description="Mailbox Read data register">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="Reserved field." range="" rwaccess="R"/>
+    <bitfield id="MAILBOX0_RD_DATA" width="8" begin="7" end="0" resetval="0x0" description="Mailbox Read data" range="" rwaccess="R"/>
+  </register>
+  <register id="EDP_CORE_KEEP_ALIVE_S" acronym="EDP_CORE_KEEP_ALIVE_S" offset="0x18" width="32" description="Software keep alive counter">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="Reserved field." range="" rwaccess="R"/>
+    <bitfield id="KEEP_ALIVE_CNT" width="8" begin="7" end="0" resetval="0x0" description="Software keep alive counter." range="" rwaccess="R"/>
+  </register>
+  <register id="EDP_CORE_VER_l_S" acronym="EDP_CORE_VER_l_S" offset="0x1C" width="32" description="Software Version Register.">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="Reserved field." range="" rwaccess="R"/>
+    <bitfield id="VER_LSB" width="8" begin="7" end="0" resetval="0x0" description="Software Version lower byte." range="" rwaccess="R"/>
+  </register>
+  <register id="EDP_CORE_VER_H_S" acronym="EDP_CORE_VER_H_S" offset="0x20" width="32" description="Software Version Register.">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="Reserved field." range="" rwaccess="R"/>
+    <bitfield id="VER_MSB" width="8" begin="7" end="0" resetval="0x0" description="Software Version higher byte." range="" rwaccess="R"/>
+  </register>
+  <register id="EDP_CORE_VER_LIB_L_ADDR_S" acronym="EDP_CORE_VER_LIB_L_ADDR_S" offset="0x24" width="32" description="Software Library Version Register.">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="Reserved field." range="" rwaccess="R"/>
+    <bitfield id="SW_LIB_VER_L" width="8" begin="7" end="0" resetval="0x0" description="Software Library Version lower byte." range="" rwaccess="R"/>
+  </register>
+  <register id="EDP_CORE_VER_LIB_H_ADDR_S" acronym="EDP_CORE_VER_LIB_H_ADDR_S" offset="0x28" width="32" description="Software Library Version Register.">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="Reserved field." range="" rwaccess="R"/>
+    <bitfield id="SW_LIB_VER_H" width="8" begin="7" end="0" resetval="0x0" description="Software Library Version higher byte." range="" rwaccess="R"/>
+  </register>
+  <register id="EDP_CORE_SW_DEBUG_l_S" acronym="EDP_CORE_SW_DEBUG_l_S" offset="0x2C" width="32" description="Software/Firmware Debug Register.">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="Reserved field." range="" rwaccess="R"/>
+    <bitfield id="SW_DEBUG_7_0" width="8" begin="7" end="0" resetval="0x0" description="Register used for debug purposes [lower byte]." range="" rwaccess="R"/>
+  </register>
+  <register id="EDP_CORE_SW_DEBUG_H_S" acronym="EDP_CORE_SW_DEBUG_H_S" offset="0x30" width="32" description="Software/Firmware Debug Register.">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="Reserved field." range="" rwaccess="R"/>
+    <bitfield id="SW_DEBUG_15_8" width="8" begin="7" end="0" resetval="0x0" description="Register used for debug purposes [higher byte]." range="" rwaccess="R"/>
+  </register>
+  <register id="EDP_CORE_MAILBOX_INT_MASK_S" acronym="EDP_CORE_MAILBOX_INT_MASK_S" offset="0x34" width="32" description="Mailbox Interrupt mask register">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="Reserved field." range="" rwaccess="R"/>
+    <bitfield id="MAILBOX_FULL_INT_MASK" width="1" begin="1" end="1" resetval="0x0" description="Mailbox Full Interrupt mask" range="" rwaccess="RW"/>
+    <bitfield id="MAILBOX_EMPTY_INT_MASK" width="1" begin="0" end="0" resetval="0x0" description="Mailbox Not-empty Interrupt mask" range="" rwaccess="RW"/>
+  </register>
+  <register id="EDP_CORE_MAILBOX_INT_STATUS_S" acronym="EDP_CORE_MAILBOX_INT_STATUS_S" offset="0x38" width="32" description="Mailbox Interrupt Status register">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="Reserved field." range="" rwaccess="R"/>
+    <bitfield id="MAILBOX_FULL_INT_STATUS" width="1" begin="1" end="1" resetval="0x0" description="Mailbox full interrupt." range="" rwaccess="R"/>
+    <bitfield id="MAILBOX_EMPTY_INT_STATUS" width="1" begin="0" end="0" resetval="0x0" description="Mailbox not-empty interrupt." range="" rwaccess="R"/>
+  </register>
+  <register id="EDP_CORE_SW_CLK_l_S" acronym="EDP_CORE_SW_CLK_l_S" offset="0x3C" width="32" description="Core Clock frequency">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="Reserved field." range="" rwaccess="R"/>
+    <bitfield id="SW_CLOCK_VAL_L" width="8" begin="7" end="0" resetval="0x0" description="Not used." range="" rwaccess="RW"/>
+  </register>
+  <register id="EDP_CORE_SW_CLK_H_S" acronym="EDP_CORE_SW_CLK_H_S" offset="0x40" width="32" description="Core Clock frequency">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="Reserved field." range="" rwaccess="R"/>
+    <bitfield id="SW_CLOCK_VAL_H" width="8" begin="7" end="0" resetval="0x64" description="Not used." range="" rwaccess="RW"/>
+  </register>
+  <register id="EDP_CORE_SW_EVENTS0_S" acronym="EDP_CORE_SW_EVENTS0_S" offset="0x44" width="32" description="Not used. 0x0 when read.">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="Reserved field." range="" rwaccess="R"/>
+    <bitfield id="SW_EVENTS7_0" width="8" begin="7" end="0" resetval="0x0" description="Not used." range="" rwaccess="R"/>
+  </register>
+  <register id="EDP_CORE_SW_EVENTS1_S" acronym="EDP_CORE_SW_EVENTS1_S" offset="0x48" width="32" description="Not used. 0x0 when read.">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="Reserved field." range="" rwaccess="R"/>
+    <bitfield id="SW_EVENTS15_8" width="8" begin="7" end="0" resetval="0x0" description="Not used." range="" rwaccess="R"/>
+  </register>
+  <register id="EDP_CORE_SW_EVENTS2_S" acronym="EDP_CORE_SW_EVENTS2_S" offset="0x4C" width="32" description="Not used. 0x0 when read.">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="Reserved field." range="" rwaccess="R"/>
+    <bitfield id="SW_EVENTS23_16" width="8" begin="7" end="0" resetval="0x0" description="Not used." range="" rwaccess="R"/>
+  </register>
+  <register id="EDP_CORE_SW_EVENTS3_S" acronym="EDP_CORE_SW_EVENTS3_S" offset="0x50" width="32" description="Not used. 0x0 when read.">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="Reserved field." range="" rwaccess="R"/>
+    <bitfield id="SW_EVENTS31_24" width="8" begin="7" end="0" resetval="0x0" description="Not used." range="" rwaccess="R"/>
+  </register>
+  <register id="EDP_CORE_XT_OCD_CTRL_S" acronym="EDP_CORE_XT_OCD_CTRL_S" offset="0x60" width="32" description="Internal CPU - On Chip Debug (OCD) Ctrl Register">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="Reserved field." range="" rwaccess="R"/>
+    <bitfield id="XT_OCDHALTONRESET" width="1" begin="1" end="1" resetval="0x1" description="Not used" range="" rwaccess="RW"/>
+    <bitfield id="XT_DRESET" width="1" begin="0" end="0" resetval="0x1" description="Not used" range="" rwaccess="RW"/>
+  </register>
+  <register id="EDP_CORE_XT_OCD_CTRL_RO_S" acronym="EDP_CORE_XT_OCD_CTRL_RO_S" offset="0x64" width="32" description="Internal CPU - OCD R0 mode configuration">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved field." range="" rwaccess="R"/>
+    <bitfield id="XT_XOCDMODE" width="1" begin="0" end="0" resetval="0x0" description="Internal CPU - OCD mode configuration" range="" rwaccess="R"/>
+  </register>
+  <register id="EDP_CORE_APB_INT_MASK_S" acronym="EDP_CORE_APB_INT_MASK_S" offset="0x6C" width="32" description="APB Interrupt Mask Register">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="Reserved field." range="" rwaccess="R"/>
+    <bitfield id="APB_SW_INTR_MASK" width="1" begin="1" end="1" resetval="0x1" description="Not used." range="" rwaccess="RW"/>
+    <bitfield id="APB_MAILBOX_INTR_MASK" width="1" begin="0" end="0" resetval="0x1" description="Mailbox Interrupt mask" range="" rwaccess="RW"/>
+  </register>
+  <register id="EDP_CORE_APB_STATUS_S" acronym="EDP_CORE_APB_STATUS_S" offset="0x70" width="32" description="APB interrupt status register">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="Reserved field." range="" rwaccess="R"/>
+    <bitfield id="APB_SW_INTR_STATUS" width="1" begin="1" end="1" resetval="0x0" description="Not used." range="" rwaccess="R"/>
+    <bitfield id="APB_MAILBOX_INTR_STATUS" width="1" begin="0" end="0" resetval="0x0" description="Mailbox Interrupt status." range="" rwaccess="R"/>
+  </register>
+</module>

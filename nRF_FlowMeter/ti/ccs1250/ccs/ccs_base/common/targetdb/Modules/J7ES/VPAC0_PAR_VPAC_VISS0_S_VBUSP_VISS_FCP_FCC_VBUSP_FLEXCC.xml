@@ -1,0 +1,223 @@
+<module name="VPAC0_PAR_VPAC_VISS0_S_VBUSP_VISS_FCP_FCC_VBUSP_FLEXCC" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="VISS_FCP_FCC_CFG_0" acronym="VISS_FCP_FCC_CFG_0" offset="0x0" width="32" description="The Control Register controls the input width and height of the module.">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HEIGHT" width="13" begin="28" end="16" resetval="0x0" description="Height of the input image" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="3" begin="15" end="13" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="WIDTH" width="13" begin="12" end="0" resetval="0x0" description="Width of the input image" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_FCC_CFG_1" acronym="VISS_FCP_FCC_CFG_1" offset="0x4" width="32" description="Configuration Register for top level data flow">
+    <bitfield id="RSVD_3" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="CHROMA_MODE" width="1" begin="27" end="27" resetval="0x0" description="Mux for 422/420 (" range="" rwaccess="RW"/>
+    <bitfield id="MUXRGBHSV_MUX_V" width="1" begin="26" end="26" resetval="0x0" description="Mux for V calculation (" range="" rwaccess="RW"/>
+    <bitfield id="MUXRGBHSV_H2" width="1" begin="25" end="25" resetval="0x0" description="Mux for S/V calculation (" range="" rwaccess="RW"/>
+    <bitfield id="MUXRGBHSV_H1" width="1" begin="24" end="24" resetval="0x0" description="Mux for S/V calculation (" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_2" width="4" begin="23" end="20" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="S8B8OUTEN" width="2" begin="19" end="18" resetval="0x0" description="'0': Disable All , '1': S8 enable," range="" rwaccess="RW"/>
+    <bitfield id="C8G8OUTEN" width="2" begin="17" end="16" resetval="0x0" description="'0': Disable All , '1': C8 enable," range="" rwaccess="RW"/>
+    <bitfield id="Y8R8OUTEN" width="2" begin="15" end="14" resetval="0x0" description="'0': Disable all , '1': Y8 enable," range="" rwaccess="RW"/>
+    <bitfield id="C12OUTEN" width="2" begin="13" end="12" resetval="0x0" description="'0': Disable all , '1': C12 enable, '2': C1 enable" range="" rwaccess="RW"/>
+    <bitfield id="Y12OUTEN" width="1" begin="11" end="11" resetval="0x0" description="'0': Disable Y12 output, '1': Enable Y12 output" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="4" begin="10" end="7" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="MUXRGBHSV" width="1" begin="6" end="6" resetval="0x0" description="Input Select for RGBHSV (" range="" rwaccess="RW"/>
+    <bitfield id="MUXY8_OUT" width="2" begin="5" end="4" resetval="0x0" description="Mux for Y-8 Output (" range="" rwaccess="RW"/>
+    <bitfield id="MUXY12_OUT" width="2" begin="3" end="2" resetval="0x0" description="Mux for Y-12 Output (" range="" rwaccess="RW"/>
+    <bitfield id="MUXC1_4" width="2" begin="1" end="0" resetval="0x0" description="Mux for selecting C input (" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_FCC_CFG_2" acronym="VISS_FCP_FCC_CFG_2" offset="0x8" width="32" description="Configuration Register-2">
+    <bitfield id="RSVD_1" width="15" begin="31" end="17" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="Y8INBITWIDTH" width="4" begin="16" end="13" resetval="0x0" description="Bitwidth of input to 12to8 module (Y8) for shift(Program as 12 or lower)" range="" rwaccess="RW"/>
+    <bitfield id="CONTRASTBITCLIP" width="4" begin="12" end="9" resetval="0x0" description="Clip Value set as 2" range="" rwaccess="RW"/>
+    <bitfield id="CONTRASTEN" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="1" begin="7" end="7" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="HSVSATMODE" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="HSVSATDIVMODE" width="2" begin="5" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SATLUTEN" width="1" begin="3" end="3" resetval="0x0" description="'1':Use LUT, '0':Use shift" range="" rwaccess="RW"/>
+    <bitfield id="RGB8LUTEN" width="1" begin="2" end="2" resetval="0x0" description="'1':Use LUT, '0':Use shift" range="" rwaccess="RW"/>
+    <bitfield id="Y8LUTEN" width="1" begin="1" end="1" resetval="0x0" description="'1':Use LUT, '0':Use shift" range="" rwaccess="RW"/>
+    <bitfield id="C8LUTEN" width="1" begin="0" end="0" resetval="0x0" description="'1':Use LUT, '0':Use shift" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_FCC_CFG_HIST_1" acronym="VISS_FCP_FCC_CFG_HIST_1" offset="0xC" width="32" description="Configuration-1 Register for histogram">
+    <bitfield id="RSVD_1" width="3" begin="31" end="29" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="HISTSTARTY" width="13" begin="28" end="16" resetval="0x0" description="Y Start for Histogram ROI, should be &amp;amp;gt;= 1" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="1" begin="15" end="15" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="BANK" width="1" begin="14" end="14" resetval="0x0" description="bank select for Histogram" range="" rwaccess="RW"/>
+    <bitfield id="HISTSTARTX" width="13" begin="13" end="1" resetval="0x0" description="X Start for Histogram ROI, should be even" range="" rwaccess="RW"/>
+    <bitfield id="HISTEN" width="1" begin="0" end="0" resetval="0x0" description="Enable bit for histogram" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_FCC_CFG_HIST_2" acronym="VISS_FCP_FCC_CFG_HIST_2" offset="0x10" width="32" description="Configuration-2 Register for histogram">
+    <bitfield id="RSVD_0" width="3" begin="31" end="29" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="HISTSIZEY" width="13" begin="28" end="16" resetval="0x0" description="Y Size (Height) for Histogram ROI" range="" rwaccess="RW"/>
+    <bitfield id="HISTMODE" width="3" begin="15" end="13" resetval="0x0" description="Histogram Mode(0:Col-0(R),1:Col-1(G),2:Col-2(B),3:MuxC1_4,4:R+2G+B/4 )" range="" rwaccess="RW"/>
+    <bitfield id="HISTSIZEX" width="13" begin="12" end="0" resetval="0x0" description="X Size (Width) for Histogram ROI, should be &amp;amp;gt; 256 &amp;amp;amp; even" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_FCC_CCM_W0_0_1" acronym="VISS_FCP_FCC_CCM_W0_0_1" offset="0x14" width="32" description="CCM Weights for Row0">
+    <bitfield id="RSVD_1" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="W_1" width="12" begin="27" end="16" resetval="0x0" description="Weight W_" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="4" begin="15" end="12" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="W_0" width="12" begin="11" end="0" resetval="0x0" description="Weight W_" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_FCC_CCM_W0_2_3" acronym="VISS_FCP_FCC_CCM_W0_2_3" offset="0x18" width="32" description="CCM Weights for Row0">
+    <bitfield id="RSVD_1" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="W_3" width="12" begin="27" end="16" resetval="0x0" description="Weight W_" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="4" begin="15" end="12" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="W_2" width="12" begin="11" end="0" resetval="0x0" description="Weight W_" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_FCC_CCM_OFFSET_0" acronym="VISS_FCP_FCC_CCM_OFFSET_0" offset="0x1C" width="32" description="CCM OFFSET for Row0">
+    <bitfield id="RSVD_0" width="19" begin="31" end="13" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="OFFSET_0" width="13" begin="12" end="0" resetval="0x0" description="OFFSET_" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_FCC_CCM_W1_0_1" acronym="VISS_FCP_FCC_CCM_W1_0_1" offset="0x20" width="32" description="CCM Weights for Row1">
+    <bitfield id="RSVD_1" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="W_1" width="12" begin="27" end="16" resetval="0x0" description="Weight W_" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="4" begin="15" end="12" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="W_0" width="12" begin="11" end="0" resetval="0x0" description="Weight W_" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_FCC_CCM_W1_2_3" acronym="VISS_FCP_FCC_CCM_W1_2_3" offset="0x24" width="32" description="CCM Weights for Row1">
+    <bitfield id="RSVD_1" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="W_3" width="12" begin="27" end="16" resetval="0x0" description="Weight W_" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="4" begin="15" end="12" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="W_2" width="12" begin="11" end="0" resetval="0x0" description="Weight W_" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_FCC_CCM_OFFSET_1" acronym="VISS_FCP_FCC_CCM_OFFSET_1" offset="0x28" width="32" description="CCM OFFSET for Row1">
+    <bitfield id="RSVD_0" width="19" begin="31" end="13" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="OFFSET_1" width="13" begin="12" end="0" resetval="0x0" description="OFFSET_" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_FCC_CCM_W2_0_1" acronym="VISS_FCP_FCC_CCM_W2_0_1" offset="0x2C" width="32" description="CCM Weights for Row2">
+    <bitfield id="RSVD_1" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="W_1" width="12" begin="27" end="16" resetval="0x0" description="Weight W_" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="4" begin="15" end="12" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="W_0" width="12" begin="11" end="0" resetval="0x0" description="Weight W_" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_FCC_CCM_W2_2_3" acronym="VISS_FCP_FCC_CCM_W2_2_3" offset="0x30" width="32" description="CCM Weights for Row2">
+    <bitfield id="RSVD_1" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="W_3" width="12" begin="27" end="16" resetval="0x0" description="Weight W_" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="4" begin="15" end="12" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="W_2" width="12" begin="11" end="0" resetval="0x0" description="Weight W_" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_FCC_CCM_OFFSET_2" acronym="VISS_FCP_FCC_CCM_OFFSET_2" offset="0x34" width="32" description="CCM OFFSET for Row2">
+    <bitfield id="RSVD_0" width="19" begin="31" end="13" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="OFFSET_2" width="13" begin="12" end="0" resetval="0x0" description="OFFSET_" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_FCC_RGBYUV_W01" acronym="VISS_FCP_FCC_RGBYUV_W01" offset="0x38" width="32" description="Weight/Offset for Row0">
+    <bitfield id="RSVD_1" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="W_02" width="12" begin="27" end="16" resetval="0x0" description="Weight W_" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="4" begin="15" end="12" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="W_01" width="12" begin="11" end="0" resetval="0x0" description="Weight W_" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_FCC_RGBYUV_W02" acronym="VISS_FCP_FCC_RGBYUV_W02" offset="0x3C" width="32" description="Weight/Offset for Row0">
+    <bitfield id="RSVD_1" width="3" begin="31" end="29" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="OFFSET_0" width="13" begin="28" end="16" resetval="0x0" description="Offset_" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="4" begin="15" end="12" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="W_03" width="12" begin="11" end="0" resetval="0x0" description="Weight W_" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_FCC_RGBYUV_W11" acronym="VISS_FCP_FCC_RGBYUV_W11" offset="0x40" width="32" description="Weight/Offset for Row1">
+    <bitfield id="RSVD_1" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="W_12" width="12" begin="27" end="16" resetval="0x0" description="Weight W_" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="4" begin="15" end="12" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="W_11" width="12" begin="11" end="0" resetval="0x0" description="Weight W_" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_FCC_RGBYUV_W12" acronym="VISS_FCP_FCC_RGBYUV_W12" offset="0x44" width="32" description="Weight/Offset for Row1">
+    <bitfield id="RSVD_1" width="3" begin="31" end="29" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="OFFSET_1" width="13" begin="28" end="16" resetval="0x0" description="Offset_" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="4" begin="15" end="12" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="W_13" width="12" begin="11" end="0" resetval="0x0" description="Weight W_" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_FCC_RGBYUV_W21" acronym="VISS_FCP_FCC_RGBYUV_W21" offset="0x48" width="32" description="Weight/Offset for Row2">
+    <bitfield id="RSVD_1" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="W_22" width="12" begin="27" end="16" resetval="0x0" description="Weight W_" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="4" begin="15" end="12" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="W_21" width="12" begin="11" end="0" resetval="0x0" description="Weight W_" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_FCC_RGBYUV_W22" acronym="VISS_FCP_FCC_RGBYUV_W22" offset="0x4C" width="32" description="Weight/Offset for Row2">
+    <bitfield id="RSVD_1" width="3" begin="31" end="29" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="OFFSET_2" width="13" begin="28" end="16" resetval="0x0" description="Offset_" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="4" begin="15" end="12" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="W_23" width="12" begin="11" end="0" resetval="0x0" description="Weight W_" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_FCC_RGBHSV_W0" acronym="VISS_FCP_FCC_RGBHSV_W0" offset="0x50" width="32" description="Weights 11/12 for V calculation">
+    <bitfield id="RSVD_1" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="W12" width="12" begin="27" end="16" resetval="0x0" description="Weight W12 (Signed 12b)" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="4" begin="15" end="12" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="W11" width="12" begin="11" end="0" resetval="0x0" description="Weight W11 (Signed 12b)" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_FCC_RGBHSV_W1" acronym="VISS_FCP_FCC_RGBHSV_W1" offset="0x54" width="32" description="Weights13 and Offset_1 for V Calculation">
+    <bitfield id="RSVD_1" width="3" begin="31" end="29" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="OFFSET_1" width="13" begin="28" end="16" resetval="0x0" description="Offset_1 (Signed 13b)" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="4" begin="15" end="12" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="W13" width="12" begin="11" end="0" resetval="0x0" description="Weight W13 (Signed 12b)" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_FCC_RGBHSV_WB_LINLOGTHR_1" acronym="VISS_FCP_FCC_RGBHSV_WB_LINLOGTHR_1" offset="0x58" width="32" description="Dynamic WB Thr limit">
+    <bitfield id="RSVD_1" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="THR_1" width="12" begin="27" end="16" resetval="0x0" description="THR_1 / G-Channel Thr (U 12b)" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="4" begin="15" end="12" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="THR_0" width="12" begin="11" end="0" resetval="0x0" description="THR_0 / R-Channel Thr (U 12b)" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_FCC_RGBHSV_WB_LINLOGTHR_2" acronym="VISS_FCP_FCC_RGBHSV_WB_LINLOGTHR_2" offset="0x5C" width="32" description="Dynamic WB Thr limit and SatMinThr">
+    <bitfield id="RSVD_1" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="SATMINTHR" width="12" begin="27" end="16" resetval="0x0" description="Thr for comparing Min(RGB) limit" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="4" begin="15" end="12" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="THR_2" width="12" begin="11" end="0" resetval="0x0" description="THR_2 / B-Channel Thr (U 12b)" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_FCC_RGBHSV_OFF1" acronym="VISS_FCP_FCC_RGBHSV_OFF1" offset="0x60" width="32" description="WB Offset for Saturation">
+    <bitfield id="RSVD_1" width="4" begin="31" end="28" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="OFFSET_2" width="12" begin="27" end="16" resetval="0x0" description="Offset_2 (U 12b)" range="" rwaccess="RW"/>
+    <bitfield id="RSVD_0" width="4" begin="15" end="12" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="OFFSET_1" width="12" begin="11" end="0" resetval="0x0" description="Offset-1 (U 12b)" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_FCC_RGBHSV_OFF2" acronym="VISS_FCP_FCC_RGBHSV_OFF2" offset="0x64" width="32" description="WB Offsets for Saturation">
+    <bitfield id="RSVD_0" width="19" begin="31" end="13" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="12" end="12" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="OFFSET_3" width="12" begin="11" end="0" resetval="0x0" description="Offset-3 (U 12b)" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_FCC_FLEXCC_INT_STATUS" acronym="VISS_FCP_FCC_FLEXCC_INT_STATUS" offset="0x68" width="32" description="Status/clear register for flexcc interrupts">
+    <bitfield id="RSVD_0" width="20" begin="31" end="12" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="HIST_READ_ERR" width="1" begin="11" end="11" resetval="0x0" description="status/clear for histogram memory, set when mem access has occurred to the first location but not to the last location during active frame implying that full histogram was not read ." range="" rwaccess="RW1C"/>
+    <bitfield id="LUT_12TO82_CFG_ERR" width="1" begin="10" end="10" resetval="0x0" description="status/clear for 12to8_2_lut cfg err, set when mem access occurs during active line when the LUT is enabled causing frame corruption." range="" rwaccess="RW1C"/>
+    <bitfield id="LUT_12TO81_CFG_ERR" width="1" begin="9" end="9" resetval="0x0" description="status/clear for 12to8_1_lut cfg err, set when mem access occurs during active line when the LUT is enabled causing frame corruption." range="" rwaccess="RW1C"/>
+    <bitfield id="LUT_12TO80_CFG_ERR" width="1" begin="8" end="8" resetval="0x0" description="status/clear for 12to8_0_lut cfg err, set when mem access occurs during active line when the LUT is enabled causing frame corruption." range="" rwaccess="RW1C"/>
+    <bitfield id="CONTRAST2_CFG_ERR" width="1" begin="7" end="7" resetval="0x0" description="status/clear for contrast2_lut cfg err, set when mem access occurs during active line when the LUT is enabled causing frame corruption." range="" rwaccess="RW1C"/>
+    <bitfield id="CONTRAST1_CFG_ERR" width="1" begin="6" end="6" resetval="0x0" description="status/clear for contrast1_lut cfg err, set when mem access occurs during active line when the LUT is enabled causing frame corruption." range="" rwaccess="RW1C"/>
+    <bitfield id="CONTRAST0_CFG_ERR" width="1" begin="5" end="5" resetval="0x0" description="status/clear for contrast0_lut cfg err, set when mem access occurs during active line when the LUT is enabled causing frame corruption." range="" rwaccess="RW1C"/>
+    <bitfield id="OVERFLOW_IF_S8B8" width="1" begin="4" end="4" resetval="0x0" description="status/clear for overflow on s8b8 i/f, set when fifo overflows causing frame corruption." range="" rwaccess="RW1C"/>
+    <bitfield id="OVERFLOW_IF_C8G8" width="1" begin="3" end="3" resetval="0x0" description="status/clear for overflow on c8g8 i/f, set when fifo overflows causing frame corruption." range="" rwaccess="RW1C"/>
+    <bitfield id="OVERFLOW_IF_Y8R8" width="1" begin="2" end="2" resetval="0x0" description="status/clear for overflow on y8r8 i/f, set when fifo overflows causing frame corruption." range="" rwaccess="RW1C"/>
+    <bitfield id="OVERFLOW_IF_UV12" width="1" begin="1" end="1" resetval="0x0" description="status/clear for overflow on uv12 i/f, set when fifo overflows causing frame corruption." range="" rwaccess="RW1C"/>
+    <bitfield id="OVERFLOW_IF_Y12" width="1" begin="0" end="0" resetval="0x0" description="status/clear for overflow on y12 i/f, set when fifo overflows causing frame corruption." range="" rwaccess="RW1C"/>
+  </register>
+  <register id="VISS_FCP_FCC_DEBUG_CTL" acronym="VISS_FCP_FCC_DEBUG_CTL" offset="0x100" width="32" description="Enable for different debug events">
+    <bitfield id="RSVD_0" width="19" begin="31" end="13" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="FLEXCC_EOP_EN" width="1" begin="12" end="12" resetval="0x0" description="Enable for flexcc eop" range="" rwaccess="RW"/>
+    <bitfield id="EOF_IF_S8B8_EN" width="1" begin="11" end="11" resetval="0x0" description="Enable for eof on s8b8" range="" rwaccess="RW"/>
+    <bitfield id="EOL_IF_S8B8_EN" width="1" begin="10" end="10" resetval="0x0" description="Enable for eol on s8b8" range="" rwaccess="RW"/>
+    <bitfield id="EOF_IF_C8G8_EN" width="1" begin="9" end="9" resetval="0x0" description="Enable for eof on c8g8" range="" rwaccess="RW"/>
+    <bitfield id="EOL_IF_C8G8_EN" width="1" begin="8" end="8" resetval="0x0" description="Enable for eol on c8g8" range="" rwaccess="RW"/>
+    <bitfield id="EOF_IF_Y8R8_EN" width="1" begin="7" end="7" resetval="0x0" description="Enable for eof on y8r8" range="" rwaccess="RW"/>
+    <bitfield id="EOL_IF_Y8R8_EN" width="1" begin="6" end="6" resetval="0x0" description="Enable for eol on y8r8" range="" rwaccess="RW"/>
+    <bitfield id="EOF_IF_UV12_EN" width="1" begin="5" end="5" resetval="0x0" description="Enable for eof on uv12" range="" rwaccess="RW"/>
+    <bitfield id="EOL_IF_UV12_EN" width="1" begin="4" end="4" resetval="0x0" description="Enable for eol on uv12" range="" rwaccess="RW"/>
+    <bitfield id="EOF_IF_Y12_EN" width="1" begin="3" end="3" resetval="0x0" description="Enable for eof on y12" range="" rwaccess="RW"/>
+    <bitfield id="EOL_IF_Y12_EN" width="1" begin="2" end="2" resetval="0x0" description="Enable for eol on y12" range="" rwaccess="RW"/>
+    <bitfield id="STALL_EN" width="1" begin="1" end="1" resetval="0x0" description="Enable for stall event" range="" rwaccess="RW"/>
+    <bitfield id="DBG_EN" width="1" begin="0" end="0" resetval="0x0" description="Enable debug features, set to '0' to disable all debug events" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_FCC_DEBUG_STATUS" acronym="VISS_FCP_FCC_DEBUG_STATUS" offset="0x104" width="32" description="Set/Clear for debug events">
+    <bitfield id="RSVD_0" width="19" begin="31" end="13" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+    <bitfield id="FLEXCC_EOP_EVENT" width="1" begin="12" end="12" resetval="0x0" description="Status/Clear for flexcc eop, write '1' to clear" range="" rwaccess="RW1C"/>
+    <bitfield id="EOF_IF_S8B8_EVENT" width="1" begin="11" end="11" resetval="0x0" description="Status/Clear for eof on s8b8, write '1' to clear" range="" rwaccess="RW1C"/>
+    <bitfield id="EOL_IF_S8B8_EVENT" width="1" begin="10" end="10" resetval="0x0" description="Status/Clear for eol on s8b8, write '1' to clear" range="" rwaccess="RW1C"/>
+    <bitfield id="EOF_IF_C8G8_EVENT" width="1" begin="9" end="9" resetval="0x0" description="Status/Clear for eof on c8g8, write '1' to clear" range="" rwaccess="RW1C"/>
+    <bitfield id="EOL_IF_C8G8_EVENT" width="1" begin="8" end="8" resetval="0x0" description="Status/Clear for eol on c8g8, write '1' to clear" range="" rwaccess="RW1C"/>
+    <bitfield id="EOF_IF_Y8R8_EVENT" width="1" begin="7" end="7" resetval="0x0" description="Status/Clear for eof on y8r8, write '1' to clear" range="" rwaccess="RW1C"/>
+    <bitfield id="EOL_IF_Y8R8_EVENT" width="1" begin="6" end="6" resetval="0x0" description="Status/Clear for eol on y8r8, write '1' to clear" range="" rwaccess="RW1C"/>
+    <bitfield id="EOF_IF_UV12_EVENT" width="1" begin="5" end="5" resetval="0x0" description="Status/Clear for eof on uv12, write '1' to clear" range="" rwaccess="RW1C"/>
+    <bitfield id="EOL_IF_UV12_EVENT" width="1" begin="4" end="4" resetval="0x0" description="Status/Clear for eol on uv12, write '1' to clear" range="" rwaccess="RW1C"/>
+    <bitfield id="EOF_IF_Y12_EVENT" width="1" begin="3" end="3" resetval="0x0" description="Status/Clear for eof on y12, write '1' to clear" range="" rwaccess="RW1C"/>
+    <bitfield id="EOL_IF_Y12_EVENT" width="1" begin="2" end="2" resetval="0x0" description="Status/Clear for eol on y12, write '1' to clear" range="" rwaccess="RW1C"/>
+    <bitfield id="STALL_EVENT" width="1" begin="1" end="1" resetval="0x0" description="Status/Clear for stall event, write '1' to clear" range="" rwaccess="RW1C"/>
+    <bitfield id="RSVD" width="1" begin="0" end="0" resetval="0x0" description="reserved" range="" rwaccess="R"/>
+  </register>
+  <register id="VISS_FCP_FCC_DEBUG_RAW" acronym="VISS_FCP_FCC_DEBUG_RAW" offset="0x108" width="32" description="Set/Clear for debug RAW mode">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="DBG_RAW_MODE" width="1" begin="0" end="0" resetval="0x0" description="Enable debug RAW mode, takes input from RAWFE and delivers to FlexCC as C" range="" rwaccess="RW"/>
+  </register>
+</module>

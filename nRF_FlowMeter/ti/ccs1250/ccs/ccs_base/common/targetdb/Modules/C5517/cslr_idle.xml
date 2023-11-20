@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><module id="IDLE" HW_revision="" XML_version="1" description="The DSP idle module controls the DSP and Ports idle.">
+     <register id="ICR" acronym="ICR" page="2" offset="0X0001" width="16" description="IDLE Configuration Register">
+<bitfield id="_RESV_1" width="6" begin="15" end="10" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="HWAI" width="1" begin="9" end="9" resetval="0" description="UMA Hardware Accelerators Idle Control: 0 = Hardware Accelerators remain active after execution of an IDLE instruction. 1 = Hardware Accelerators are disabled after execution of an IDLE instruction." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Port is active"/>
+<bitenum id="IDLE" value="1" token="IDLE" description="Port is idle"/>
+</bitfield>
+<bitfield id="IPORTI" width="1" begin="8" end="8" resetval="0" description="UMA Instruction Port Idle Control: 0 = Instruction Port remains active after execution of an IDLE instruction. 1 = Instruction Port is disabled after execution of an IDLE instruction." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Port is active"/>
+<bitenum id="IDLE" value="1" token="IDLE" description="Port is idle"/>
+</bitfield>
+<bitfield id="MPORTI" width="1" begin="7" end="7" resetval="0" description="UMA Memory Port Idle Control: 0 = Memory Port remains active after execution of an IDLE instruction. 1 = Memory Port is disabled after execution of an IDLE instruction." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Port is active"/>
+<bitenum id="IDLE" value="1" token="IDLE" description="Port is idle"/>
+</bitfield>
+<bitfield id="XPORTI" width="1" begin="6" end="6" resetval="0" description="UMA I/O Port Idle Control: 0 = I/O Port remains active after execution of an IDLE instruction. 1 = I/O Port is disabled after execution of an IDLE instruction." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Port is active"/>
+<bitenum id="IDLE" value="1" token="IDLE" description="Port is idle"/>
+</bitfield>
+<bitfield id="DPORTI" width="1" begin="5" end="5" resetval="0" description="UMA Data Port Idle Control: 0 = Data Port remains active after execution of an IDLE instruction. 1 = Data Port is disabled after execution of an IDLE instruction." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Port is active"/>
+<bitenum id="IDLE" value="1" token="IDLE" description="Port is idle"/>
+</bitfield>
+<bitfield id="IDLECFG" width="4" begin="4" end="1" resetval="0" description="set bit 1, 2 and 3 to 1 and bit 4 to 0 before executing the idle instruction" range="" rwaccess="RW"/>
+<bitfield id="CPUI" width="1" begin="0" end="0" resetval="0" description="CPU Idle Control: 0 = CPU module remains active after execution of an IDLE instruction. 1 = CPU module is disabled after execution of an IDLE instruction." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Port is active"/>
+<bitenum id="IDLE" value="1" token="IDLE" description="Port is idle"/>
+</bitfield>
+</register>
+     <register id="ISTR" acronym="ISR" page="2" offset="0X0002" width="16" description="IDLE Status Register">
+<bitfield id="_RESV_1" width="6" begin="15" end="10" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="HWAIS" width="1" begin="9" end="9" resetval="0" description="UMA Hardware Accelerators Idle Status: 0 = Hardware Accelerators are active. 1 = Hardware Accelerators are disabled." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Port is active"/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Port is disable"/>
+</bitfield>
+<bitfield id="IPORTIS" width="1" begin="8" end="8" resetval="0" description="UMA Instruction Port Idle Status: 0 = Instruction Port is active. 1 = Instruction Port is disabled." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Port is active"/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Port is disable"/>
+</bitfield>
+<bitfield id="MPORTIS" width="1" begin="7" end="7" resetval="0" description="UMA Memory Port Idle Status: 0 = Memory Port is active. 1 = Memory Port is disabled." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Port is active"/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Port is disable"/>
+</bitfield>
+<bitfield id="XPORTIS" width="1" begin="6" end="6" resetval="0" description="UMA I/O Port Idle Status: 0 = I/O Port is active. 1 = I/O Port is disabled." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Port is active"/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Port is disable"/>
+</bitfield>
+<bitfield id="DPORTIS" width="1" begin="5" end="5" resetval="0" description="UMA Data Port Idle Status: 0 = Data Port is active 1 = Data Port is disabled." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Port is active"/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Port is disable"/>
+</bitfield>
+<bitfield id="_RESV_7" width="4" begin="4" end="1" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="CPUIS" width="1" begin="0" end="0" resetval="0" description="CPU Idle Status: 0 = CPU module is active. 1 = CPU module is disabled." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Port is active"/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Port is disable"/>
+</bitfield>
+</register>
+</module>

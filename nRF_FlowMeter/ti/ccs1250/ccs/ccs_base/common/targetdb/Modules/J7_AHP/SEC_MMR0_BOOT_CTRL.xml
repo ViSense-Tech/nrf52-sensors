@@ -1,0 +1,186 @@
+<module name="SEC_MMR0_BOOT_CTRL" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="CFG0_PID" acronym="CFG0_PID" offset="0x0" width="32" description="">
+		<bitfield id="PID_MSB16" width="16" begin="31" end="16" resetval="0x24960" description="" range="31 - 16" rwaccess="R"/> 
+		<bitfield id="PID_MISC" width="5" begin="15" end="11" resetval="0x0" description="" range="15 - 11" rwaccess="R"/> 
+		<bitfield id="PID_MAJOR" width="3" begin="10" end="8" resetval="0x2" description="" range="10 - 8" rwaccess="R"/> 
+		<bitfield id="PID_CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="" range="7 - 6" rwaccess="R"/> 
+		<bitfield id="PID_MINOR" width="6" begin="5" end="0" resetval="0x20" description="" range="5 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLSTR0_DEF" acronym="CFG0_CLSTR0_DEF" offset="0x20" width="32" description="Defines the type of the processor cluster">
+		<bitfield id="CLSTR0_DEF_CORE_NUM" width="3" begin="18" end="16" resetval="0x2" description="Number of cores in cluster  001 - Single Core  010 - Dual Core  100 - Quad Core" range="18 - 16" rwaccess="R"/> 
+		<bitfield id="CLSTR0_DEF_DSP_CORE_TYPE" width="8" begin="15" end="8" resetval="0x255" description="DSP core type configuration  Field values (Others are reserved):   8'h00  -  C7x   8'h01  -  C6x   8'hFF  -  Not DSP" range="15 - 8" rwaccess="R"/> 
+		<bitfield id="CLSTR0_DEF_ARM_CORE_TYPE" width="8" begin="7" end="0" resetval="0x16" description="ARM core type configuration  Field values (Others are reserved):   8'h00  -  A53   8'h01  -  A57   8'h10  -  R5   8'hFF  -  Not ARM" range="7 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLSTR0_CFG" acronym="CFG0_CLSTR0_CFG" offset="0x40" width="32" description="Configures cluster level characteristics">
+		<bitfield id="CLSTR0_CFG_CLSTR_CFG_RSVD" width="27" begin="31" end="5" resetval="0x0" description="Reserved for future use.  Write '0' to ensure compatibility with future devices." range="31 - 5" rwaccess="R/W"/> 
+		<bitfield id="CLSTR0_CFG_MEM_INIT_DIS" width="1" begin="4" end="4" resetval="0x0" description="Disables  SRAM initialization (TCM, Cache Tags, etc) at resetInitialization must be performed for proper initial ECC initialization.  The mem_init_dis value must be selected prior to R5 reset assertion.  1'b0 - Perform memory initialization   1'b1 - Disable memory initialization" range="4" rwaccess="R/W"/> 
+		<bitfield id="CLSTR0_CFG_LOCKSTEP_EN" width="1" begin="3" end="3" resetval="0x0" description="Lockstep enable.  Indicates if R5 lockstep operation is supported on the device" range="3" rwaccess="R"/> 
+		<bitfield id="CLSTR0_CFG_DBG_NO_CLKSTOP" width="1" begin="2" end="2" resetval="0x0" description="CPU clockstop behavior  0 - CPU clocks stopped and nCLOCKSTOPPED asserted in standby mode  1 - CPU clocks not stopped in standby mode" range="2" rwaccess="R/W"/> 
+		<bitfield id="CLSTR0_CFG_TEINIT" width="1" begin="1" end="1" resetval="0x0" description="Exception handling state at reset:0 - ARM mode1 - Thumb mode" range="1" rwaccess="R/W"/> 
+		<bitfield id="CLSTR0_CFG_LOCKSTEP" width="1" begin="0" end="0" resetval="0x0" description="When set,  Core0 and Core1 operate in lockstep mode.  Can only be changed if lockstep operation is supported as indicated by CLSTR0_CFG_lockstep_en = 1.  If CLSTR0_CFG_lockstep_en = 0, lockstep is not supported, this bit will be read only with a value of 0." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLSTR0_PMCTRL" acronym="CFG0_CLSTR0_PMCTRL" offset="0x80" width="32" description="Configures Cluster  overall power state">
+		<bitfield id="RESERVED" width="32" begin="31" end="0" resetval="0x0" description="Not used for Pulsar / C66" range="31 - 0" rwaccess="N/A"/>
+	</register>
+	<register id="CFG0_CLSTR0_PMSTAT" acronym="CFG0_CLSTR0_PMSTAT" offset="0x90" width="32" description="Shows Cluster overall power status">
+		<bitfield id="RESERVED" width="32" begin="31" end="0" resetval="0x0" description="Not used for Pulsar / C66" range="31 - 0" rwaccess="N/A"/>
+	</register>
+	<register id="CFG0_CLSTR0_CORE0_CFG" acronym="CFG0_CLSTR0_CORE0_CFG" offset="0x100" width="32" description="Configures the TCM and interrupt operation of R5 Core0">
+		<bitfield id="CLSTR0_CORE0_CFG_NMFI_EN" width="1" begin="15" end="15" resetval="0x0" description="Enable Core0 Non-Maskable Fast Interrupts" range="15" rwaccess="R/W"/> 
+		<bitfield id="CLSTR0_CORE0_CFG_TCM_RSTBASE" width="1" begin="11" end="11" resetval="0x1" description="Core0 A/BTCM Reset Base Address Indicator  0 - BTCM located at address 0x0  1 - ATCM located at address 0x0" range="11" rwaccess="R/W"/> 
+		<bitfield id="CLSTR0_CORE0_CFG_BTCM_EN" width="1" begin="7" end="7" resetval="0x1" description="Enable Core0 BTCM RAM at reset" range="7" rwaccess="R/W"/> 
+		<bitfield id="CLSTR0_CORE0_CFG_ATCM_EN" width="1" begin="3" end="3" resetval="0x0" description="Enable Core0 ATCM RAM at reset" range="3" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLSTR0_CORE0_BOOTVECT_LO" acronym="CFG0_CLSTR0_CORE0_BOOTVECT_LO" offset="0x110" width="32" description="Contains the lower 32 bits of the boot vector location for R5 Core0.  Bits 4:0 are not used and are always 0.">
+		<bitfield id="CLSTR0_CORE0_BOOTVECT_LO_VECT_ADDR" width="25" begin="31" end="7" resetval="0x4" description="Specifies the lower 25 bits of the 41-bit  vector address  corresponding to Vector Table address bits[31:7].  Note bits 6:0 of the Vector Table address are always 0." range="31 - 7" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLSTR0_CORE0_BOOTVECT_HI" acronym="CFG0_CLSTR0_CORE0_BOOTVECT_HI" offset="0x114" width="32" description="Contains the lower 16 bits of the boot vector location for R5 Core0">
+		<bitfield id="CLSTR0_CORE0_BOOTVECT_HI_VECT_ADDR" width="16" begin="15" end="0" resetval="0x0" description="Specifies the upper 16 bits of the 41-bit vector address  corresponding to Vector Table address bits[47:32]." range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLSTR0_CORE0_PMCTRL" acronym="CFG0_CLSTR0_CORE0_PMCTRL" offset="0x120" width="32" description="Configures Cluster Core0 power state">
+		<bitfield id="CLSTR0_CORE0_PMCTRL_CORE_HALT" width="1" begin="0" end="0" resetval="0x0" description="Halt Core0" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLSTR0_CORE0_PMSTAT" acronym="CFG0_CLSTR0_CORE0_PMSTAT" offset="0x130" width="32" description="Shows Cluster Core0 power status">
+		<bitfield id="CLSTR0_CORE0_PMSTAT_CLK_GATE" width="1" begin="3" end="3" resetval="0x0" description="Core0 Clocked stopped due to WFI or WFE state" range="3" rwaccess="R"/> 
+		<bitfield id="CLSTR0_CORE0_PMSTAT_WFE" width="1" begin="1" end="1" resetval="0x0" description="Core0 WFEWhen 0, indicates that Core0 is in the WFE state" range="1" rwaccess="R"/> 
+		<bitfield id="CLSTR0_CORE0_PMSTAT_WFI" width="1" begin="0" end="0" resetval="0x0" description="Core0 WFIWhen 0, indicates that Core0 is in the WFI state" range="0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLSTR0_CORE1_CFG" acronym="CFG0_CLSTR0_CORE1_CFG" offset="0x180" width="32" description="Configures the TCM and interrupt operation of R5 Core1">
+		<bitfield id="CLSTR0_CORE1_CFG_NMFI_EN" width="1" begin="15" end="15" resetval="0x0" description="Enable Core1 Non-Maskable Fast Interrupts" range="15" rwaccess="R/W"/> 
+		<bitfield id="CLSTR0_CORE1_CFG_TCM_RSTBASE" width="1" begin="11" end="11" resetval="0x1" description="Core1 A/BTCM Reset Base Address Indicator  0 - BTCM located at address 0x0  1 - ATCM located at address 0x0" range="11" rwaccess="R/W"/> 
+		<bitfield id="CLSTR0_CORE1_CFG_BTCM_EN" width="1" begin="7" end="7" resetval="0x1" description="Enable Core1 BTCM RAM at reset" range="7" rwaccess="R/W"/> 
+		<bitfield id="CLSTR0_CORE1_CFG_ATCM_EN" width="1" begin="3" end="3" resetval="0x0" description="Enable Core1 ATCM RAM at reset" range="3" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLSTR0_CORE1_BOOTVECT_LO" acronym="CFG0_CLSTR0_CORE1_BOOTVECT_LO" offset="0x190" width="32" description="Contains the lower 32 bits of the boot vector location for R5 Core1.  Bits 4:0 are not used and are always 0.">
+		<bitfield id="CLSTR0_CORE1_BOOTVECT_LO_VECT_ADDR" width="25" begin="31" end="7" resetval="0x4" description="Specifies the lower 25 bits of the 41-bit  vector address  corresponding to Vector Table address bits[31:7].  Note bits 6:0 of the Vector Table address are always 0." range="31 - 7" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLSTR0_CORE1_BOOTVECT_HI" acronym="CFG0_CLSTR0_CORE1_BOOTVECT_HI" offset="0x194" width="32" description="Contains the lower 16 bits of the boot vector location for R5 Core1">
+		<bitfield id="CLSTR0_CORE1_BOOTVECT_HI_VECT_ADDR" width="16" begin="15" end="0" resetval="0x0" description="Specifies the upper 16 bits of the 41-bit vector address  corresponding to Vector Table address bits[47:32]." range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLSTR0_CORE1_PMCTRL" acronym="CFG0_CLSTR0_CORE1_PMCTRL" offset="0x1A0" width="32" description="Configures Cluster Core1 power state">
+		<bitfield id="CLSTR0_CORE1_PMCTRL_CORE_HALT" width="1" begin="0" end="0" resetval="0x0" description="Halt Core1" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLSTR0_CORE1_PMSTAT" acronym="CFG0_CLSTR0_CORE1_PMSTAT" offset="0x1B0" width="32" description="Shows Cluster Core1 power status">
+		<bitfield id="CLSTR0_CORE1_PMSTAT_CLK_GATE" width="1" begin="3" end="3" resetval="0x0" description="Core1 Clocked stopped due to WFI or WFE state" range="3" rwaccess="R"/> 
+		<bitfield id="CLSTR0_CORE1_PMSTAT_WFE" width="1" begin="1" end="1" resetval="0x0" description="Core1 WFEWhen 0, indicates that Core1 is in the WFE state" range="1" rwaccess="R"/> 
+		<bitfield id="CLSTR0_CORE1_PMSTAT_WFI" width="1" begin="0" end="0" resetval="0x0" description="Core1 WFIWhen 0, indicates that Core1 is in the WFI state" range="0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLSTR1_DEF" acronym="CFG0_CLSTR1_DEF" offset="0x1020" width="32" description="Defines the type of the processor cluster">
+		<bitfield id="CLSTR1_DEF_CORE_NUM" width="3" begin="18" end="16" resetval="0x2" description="Number of cores in cluster  001 - Single Core  010 - Dual Core  100 - Quad Core" range="18 - 16" rwaccess="R"/> 
+		<bitfield id="CLSTR1_DEF_DSP_CORE_TYPE" width="8" begin="15" end="8" resetval="0x255" description="DSP core type configuration  Field values (Others are reserved):   8'h00  -  C7x   8'h01  -  C6x   8'hFF  -  Not DSP" range="15 - 8" rwaccess="R"/> 
+		<bitfield id="CLSTR1_DEF_ARM_CORE_TYPE" width="8" begin="7" end="0" resetval="0x16" description="ARM core type configuration  Field values (Others are reserved):   8'h00  -  A53   8'h01  -  A57   8'h10  -  R5   8'hFF  -  Not ARM" range="7 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLSTR1_CFG" acronym="CFG0_CLSTR1_CFG" offset="0x1040" width="32" description="Configures cluster level characteristics">
+		<bitfield id="CLSTR1_CFG_CLSTR_CFG_RSVD" width="27" begin="31" end="5" resetval="0x0" description="Reserved for future use.  Write '0' to ensure compatibility with future devices." range="31 - 5" rwaccess="R/W"/> 
+		<bitfield id="CLSTR1_CFG_MEM_INIT_DIS" width="1" begin="4" end="4" resetval="0x0" description="Disables  SRAM initialization (TCM, Cache Tags, etc) at resetInitialization must be performed for proper initial ECC initialization.  The mem_init_dis value must be selected prior to R5 reset assertion.  1'b0 - Perform memory initialization   1'b1 - Disable memory initialization" range="4" rwaccess="R/W"/> 
+		<bitfield id="CLSTR1_CFG_LOCKSTEP_EN" width="1" begin="3" end="3" resetval="0x0" description="Lockstep enable.  Indicates if R5 lockstep operation is supported on the device" range="3" rwaccess="R"/> 
+		<bitfield id="CLSTR1_CFG_DBG_NO_CLKSTOP" width="1" begin="2" end="2" resetval="0x0" description="CPU clockstop behavior  0 - CPU clocks stopped and nCLOCKSTOPPED asserted in standby mode  1 - CPU clocks not stopped in standby mode" range="2" rwaccess="R/W"/> 
+		<bitfield id="CLSTR1_CFG_TEINIT" width="1" begin="1" end="1" resetval="0x0" description="Exception handling state at reset:0 - ARM mode1 - Thumb mode" range="1" rwaccess="R/W"/> 
+		<bitfield id="CLSTR1_CFG_LOCKSTEP" width="1" begin="0" end="0" resetval="0x0" description="When set,  Core0 and Core1 operate in lockstep mode.  Can only be changed if lockstep operation is supported as indicated by CLSTR1_CFG_lockstep_en = 1.  If CLSTR1_CFG_lockstep_en = 0, lockstep is not supported, this bit will be read only with a value of 0." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLSTR1_PMCTRL" acronym="CFG0_CLSTR1_PMCTRL" offset="0x1080" width="32" description="Configures Cluster  overall power state">
+		<bitfield id="RESERVED" width="32" begin="31" end="0" resetval="0x0" description="Not used for Pulsar / C66" range="31 - 0" rwaccess="N/A"/>
+	</register>
+	<register id="CFG0_CLSTR1_PMSTAT" acronym="CFG0_CLSTR1_PMSTAT" offset="0x1090" width="32" description="Shows Cluster overall power status">
+		<bitfield id="RESERVED" width="32" begin="31" end="0" resetval="0x0" description="Not used for Pulsar / C66" range="31 - 0" rwaccess="N/A"/>
+	</register>
+	<register id="CFG0_CLSTR1_CORE0_CFG" acronym="CFG0_CLSTR1_CORE0_CFG" offset="0x1100" width="32" description="Configures the TCM and interrupt operation of R5 Core0">
+		<bitfield id="CLSTR1_CORE0_CFG_NMFI_EN" width="1" begin="15" end="15" resetval="0x0" description="Enable Core0 Non-Maskable Fast Interrupts" range="15" rwaccess="R/W"/> 
+		<bitfield id="CLSTR1_CORE0_CFG_TCM_RSTBASE" width="1" begin="11" end="11" resetval="0x1" description="Core0 A/BTCM Reset Base Address Indicator  0 - BTCM located at address 0x0  1 - ATCM located at address 0x0" range="11" rwaccess="R/W"/> 
+		<bitfield id="CLSTR1_CORE0_CFG_BTCM_EN" width="1" begin="7" end="7" resetval="0x1" description="Enable Core0 BTCM RAM at reset" range="7" rwaccess="R/W"/> 
+		<bitfield id="CLSTR1_CORE0_CFG_ATCM_EN" width="1" begin="3" end="3" resetval="0x0" description="Enable Core0 ATCM RAM at reset" range="3" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLSTR1_CORE0_BOOTVECT_LO" acronym="CFG0_CLSTR1_CORE0_BOOTVECT_LO" offset="0x1110" width="32" description="Contains the lower 32 bits of the boot vector location for R5 Core0.  Bits 4:0 are not used and are always 0.">
+		<bitfield id="CLSTR1_CORE0_BOOTVECT_LO_VECT_ADDR" width="25" begin="31" end="7" resetval="0x4" description="Specifies the lower 25 bits of the 41-bit  vector address  corresponding to Vector Table address bits[31:7].  Note bits 6:0 of the Vector Table address are always 0." range="31 - 7" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLSTR1_CORE0_BOOTVECT_HI" acronym="CFG0_CLSTR1_CORE0_BOOTVECT_HI" offset="0x1114" width="32" description="Contains the lower 16 bits of the boot vector location for R5 Core0">
+		<bitfield id="CLSTR1_CORE0_BOOTVECT_HI_VECT_ADDR" width="16" begin="15" end="0" resetval="0x0" description="Specifies the upper 16 bits of the 41-bit vector address  corresponding to Vector Table address bits[47:32]." range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLSTR1_CORE0_PMCTRL" acronym="CFG0_CLSTR1_CORE0_PMCTRL" offset="0x1120" width="32" description="Configures Cluster Core0 power state">
+		<bitfield id="CLSTR1_CORE0_PMCTRL_CORE_HALT" width="1" begin="0" end="0" resetval="0x0" description="Halt Core0" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLSTR1_CORE0_PMSTAT" acronym="CFG0_CLSTR1_CORE0_PMSTAT" offset="0x1130" width="32" description="Shows Cluster Core0 power status">
+		<bitfield id="CLSTR1_CORE0_PMSTAT_CLK_GATE" width="1" begin="3" end="3" resetval="0x0" description="Core0 Clocked stopped due to WFI or WFE state" range="3" rwaccess="R"/> 
+		<bitfield id="CLSTR1_CORE0_PMSTAT_WFE" width="1" begin="1" end="1" resetval="0x0" description="Core0 WFEWhen 0, indicates that Core0 is in the WFE state" range="1" rwaccess="R"/> 
+		<bitfield id="CLSTR1_CORE0_PMSTAT_WFI" width="1" begin="0" end="0" resetval="0x0" description="Core0 WFIWhen 0, indicates that Core0 is in the WFI state" range="0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLSTR1_CORE1_CFG" acronym="CFG0_CLSTR1_CORE1_CFG" offset="0x1180" width="32" description="Configures the TCM and interrupt operation of R5 Core1">
+		<bitfield id="CLSTR1_CORE1_CFG_NMFI_EN" width="1" begin="15" end="15" resetval="0x0" description="Enable Core1 Non-Maskable Fast Interrupts" range="15" rwaccess="R/W"/> 
+		<bitfield id="CLSTR1_CORE1_CFG_TCM_RSTBASE" width="1" begin="11" end="11" resetval="0x1" description="Core1 A/BTCM Reset Base Address Indicator  0 - BTCM located at address 0x0  1 - ATCM located at address 0x0" range="11" rwaccess="R/W"/> 
+		<bitfield id="CLSTR1_CORE1_CFG_BTCM_EN" width="1" begin="7" end="7" resetval="0x1" description="Enable Core1 BTCM RAM at reset" range="7" rwaccess="R/W"/> 
+		<bitfield id="CLSTR1_CORE1_CFG_ATCM_EN" width="1" begin="3" end="3" resetval="0x0" description="Enable Core1 ATCM RAM at reset" range="3" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLSTR1_CORE1_BOOTVECT_LO" acronym="CFG0_CLSTR1_CORE1_BOOTVECT_LO" offset="0x1190" width="32" description="Contains the lower 32 bits of the boot vector location for R5 Core1.  Bits 4:0 are not used and are always 0.">
+		<bitfield id="CLSTR1_CORE1_BOOTVECT_LO_VECT_ADDR" width="25" begin="31" end="7" resetval="0x4" description="Specifies the lower 25 bits of the 41-bit  vector address  corresponding to Vector Table address bits[31:7].  Note bits 6:0 of the Vector Table address are always 0." range="31 - 7" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLSTR1_CORE1_BOOTVECT_HI" acronym="CFG0_CLSTR1_CORE1_BOOTVECT_HI" offset="0x1194" width="32" description="Contains the lower 16 bits of the boot vector location for R5 Core1">
+		<bitfield id="CLSTR1_CORE1_BOOTVECT_HI_VECT_ADDR" width="16" begin="15" end="0" resetval="0x0" description="Specifies the upper 16 bits of the 41-bit vector address  corresponding to Vector Table address bits[47:32]." range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLSTR1_CORE1_PMCTRL" acronym="CFG0_CLSTR1_CORE1_PMCTRL" offset="0x11A0" width="32" description="Configures Cluster Core1 power state">
+		<bitfield id="CLSTR1_CORE1_PMCTRL_CORE_HALT" width="1" begin="0" end="0" resetval="0x0" description="Halt Core1" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLSTR1_CORE1_PMSTAT" acronym="CFG0_CLSTR1_CORE1_PMSTAT" offset="0x11B0" width="32" description="Shows Cluster Core1 power status">
+		<bitfield id="CLSTR1_CORE1_PMSTAT_CLK_GATE" width="1" begin="3" end="3" resetval="0x0" description="Core1 Clocked stopped due to WFI or WFE state" range="3" rwaccess="R"/> 
+		<bitfield id="CLSTR1_CORE1_PMSTAT_WFE" width="1" begin="1" end="1" resetval="0x0" description="Core1 WFEWhen 0, indicates that Core1 is in the WFE state" range="1" rwaccess="R"/> 
+		<bitfield id="CLSTR1_CORE1_PMSTAT_WFI" width="1" begin="0" end="0" resetval="0x0" description="Core1 WFIWhen 0, indicates that Core1 is in the WFI state" range="0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLSTR2_DEF" acronym="CFG0_CLSTR2_DEF" offset="0x2020" width="32" description="Defines the type of the processor cluster">
+		<bitfield id="CLSTR2_DEF_CORE_NUM" width="3" begin="18" end="16" resetval="0x2" description="Number of cores in cluster  001 - Single Core  010 - Dual Core  100 - Quad Core" range="18 - 16" rwaccess="R"/> 
+		<bitfield id="CLSTR2_DEF_DSP_CORE_TYPE" width="8" begin="15" end="8" resetval="0x255" description="DSP core type configuration  Field values (Others are reserved):   8'h00  -  C7x   8'h01  -  C6x   8'hFF  -  Not DSP" range="15 - 8" rwaccess="R"/> 
+		<bitfield id="CLSTR2_DEF_ARM_CORE_TYPE" width="8" begin="7" end="0" resetval="0x16" description="ARM core type configuration  Field values (Others are reserved):   8'h00  -  A53   8'h01  -  A57   8'h10  -  R5   8'hFF  -  Not ARM" range="7 - 0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLSTR2_CFG" acronym="CFG0_CLSTR2_CFG" offset="0x2040" width="32" description="Configures cluster level characteristics">
+		<bitfield id="CLSTR2_CFG_CLSTR_CFG_RSVD" width="27" begin="31" end="5" resetval="0x0" description="Reserved for future use.  Write '0' to ensure compatibility with future devices." range="31 - 5" rwaccess="R/W"/> 
+		<bitfield id="CLSTR2_CFG_MEM_INIT_DIS" width="1" begin="4" end="4" resetval="0x0" description="Disables  SRAM initialization (TCM, Cache Tags, etc) at resetInitialization must be performed for proper initial ECC initialization.  The mem_init_dis value must be selected prior to R5 reset assertion.  1'b0 - Perform memory initialization   1'b1 - Disable memory initialization" range="4" rwaccess="R/W"/> 
+		<bitfield id="CLSTR2_CFG_LOCKSTEP_EN" width="1" begin="3" end="3" resetval="0x0" description="Lockstep enable.  Indicates if R5 lockstep operation is supported on the device" range="3" rwaccess="R"/> 
+		<bitfield id="CLSTR2_CFG_DBG_NO_CLKSTOP" width="1" begin="2" end="2" resetval="0x0" description="CPU clockstop behavior  0 - CPU clocks stopped and nCLOCKSTOPPED asserted in standby mode  1 - CPU clocks not stopped in standby mode" range="2" rwaccess="R/W"/> 
+		<bitfield id="CLSTR2_CFG_TEINIT" width="1" begin="1" end="1" resetval="0x0" description="Exception handling state at reset:0 - ARM mode1 - Thumb mode" range="1" rwaccess="R/W"/> 
+		<bitfield id="CLSTR2_CFG_LOCKSTEP" width="1" begin="0" end="0" resetval="0x0" description="When set,  Core0 and Core1 operate in lockstep mode.  Can only be changed if lockstep operation is supported as indicated by CLSTR2_CFG_lockstep_en = 1.  If CLSTR2_CFG_lockstep_en = 0, lockstep is not supported, this bit will be read only with a value of 0." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLSTR2_PMCTRL" acronym="CFG0_CLSTR2_PMCTRL" offset="0x2080" width="32" description="Configures Cluster  overall power state">
+		<bitfield id="RESERVED" width="32" begin="31" end="0" resetval="0x0" description="Not used for Pulsar / C66" range="31 - 0" rwaccess="N/A"/>
+	</register>
+	<register id="CFG0_CLSTR2_PMSTAT" acronym="CFG0_CLSTR2_PMSTAT" offset="0x2090" width="32" description="Shows Cluster overall power status">
+		<bitfield id="RESERVED" width="32" begin="31" end="0" resetval="0x0" description="Not used for Pulsar / C66" range="31 - 0" rwaccess="N/A"/>
+	</register>
+	<register id="CFG0_CLSTR2_CORE0_CFG" acronym="CFG0_CLSTR2_CORE0_CFG" offset="0x2100" width="32" description="Configures the TCM and interrupt operation of R5 Core0">
+		<bitfield id="CLSTR2_CORE0_CFG_NMFI_EN" width="1" begin="15" end="15" resetval="0x0" description="Enable Core0 Non-Maskable Fast Interrupts" range="15" rwaccess="R/W"/> 
+		<bitfield id="CLSTR2_CORE0_CFG_TCM_RSTBASE" width="1" begin="11" end="11" resetval="0x1" description="Core0 A/BTCM Reset Base Address Indicator  0 - BTCM located at address 0x0  1 - ATCM located at address 0x0" range="11" rwaccess="R/W"/> 
+		<bitfield id="CLSTR2_CORE0_CFG_BTCM_EN" width="1" begin="7" end="7" resetval="0x1" description="Enable Core0 BTCM RAM at reset" range="7" rwaccess="R/W"/> 
+		<bitfield id="CLSTR2_CORE0_CFG_ATCM_EN" width="1" begin="3" end="3" resetval="0x0" description="Enable Core0 ATCM RAM at reset" range="3" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLSTR2_CORE0_BOOTVECT_LO" acronym="CFG0_CLSTR2_CORE0_BOOTVECT_LO" offset="0x2110" width="32" description="Contains the lower 32 bits of the boot vector location for R5 Core0.  Bits 4:0 are not used and are always 0.">
+		<bitfield id="CLSTR2_CORE0_BOOTVECT_LO_VECT_ADDR" width="25" begin="31" end="7" resetval="0x4" description="Specifies the lower 25 bits of the 41-bit  vector address  corresponding to Vector Table address bits[31:7].  Note bits 6:0 of the Vector Table address are always 0." range="31 - 7" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLSTR2_CORE0_BOOTVECT_HI" acronym="CFG0_CLSTR2_CORE0_BOOTVECT_HI" offset="0x2114" width="32" description="Contains the lower 16 bits of the boot vector location for R5 Core0">
+		<bitfield id="CLSTR2_CORE0_BOOTVECT_HI_VECT_ADDR" width="16" begin="15" end="0" resetval="0x0" description="Specifies the upper 16 bits of the 41-bit vector address  corresponding to Vector Table address bits[47:32]." range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLSTR2_CORE0_PMCTRL" acronym="CFG0_CLSTR2_CORE0_PMCTRL" offset="0x2120" width="32" description="Configures Cluster Core0 power state">
+		<bitfield id="CLSTR2_CORE0_PMCTRL_CORE_HALT" width="1" begin="0" end="0" resetval="0x0" description="Halt Core0" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLSTR2_CORE0_PMSTAT" acronym="CFG0_CLSTR2_CORE0_PMSTAT" offset="0x2130" width="32" description="Shows Cluster Core0 power status">
+		<bitfield id="CLSTR2_CORE0_PMSTAT_CLK_GATE" width="1" begin="3" end="3" resetval="0x0" description="Core0 Clocked stopped due to WFI or WFE state" range="3" rwaccess="R"/> 
+		<bitfield id="CLSTR2_CORE0_PMSTAT_WFE" width="1" begin="1" end="1" resetval="0x0" description="Core0 WFEWhen 0, indicates that Core0 is in the WFE state" range="1" rwaccess="R"/> 
+		<bitfield id="CLSTR2_CORE0_PMSTAT_WFI" width="1" begin="0" end="0" resetval="0x0" description="Core0 WFIWhen 0, indicates that Core0 is in the WFI state" range="0" rwaccess="R"/>
+	</register>
+	<register id="CFG0_CLSTR2_CORE1_CFG" acronym="CFG0_CLSTR2_CORE1_CFG" offset="0x2180" width="32" description="Configures the TCM and interrupt operation of R5 Core1">
+		<bitfield id="CLSTR2_CORE1_CFG_NMFI_EN" width="1" begin="15" end="15" resetval="0x0" description="Enable Core1 Non-Maskable Fast Interrupts" range="15" rwaccess="R/W"/> 
+		<bitfield id="CLSTR2_CORE1_CFG_TCM_RSTBASE" width="1" begin="11" end="11" resetval="0x1" description="Core1 A/BTCM Reset Base Address Indicator  0 - BTCM located at address 0x0  1 - ATCM located at address 0x0" range="11" rwaccess="R/W"/> 
+		<bitfield id="CLSTR2_CORE1_CFG_BTCM_EN" width="1" begin="7" end="7" resetval="0x1" description="Enable Core1 BTCM RAM at reset" range="7" rwaccess="R/W"/> 
+		<bitfield id="CLSTR2_CORE1_CFG_ATCM_EN" width="1" begin="3" end="3" resetval="0x0" description="Enable Core1 ATCM RAM at reset" range="3" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLSTR2_CORE1_BOOTVECT_LO" acronym="CFG0_CLSTR2_CORE1_BOOTVECT_LO" offset="0x2190" width="32" description="Contains the lower 32 bits of the boot vector location for R5 Core1.  Bits 4:0 are not used and are always 0.">
+		<bitfield id="CLSTR2_CORE1_BOOTVECT_LO_VECT_ADDR" width="25" begin="31" end="7" resetval="0x4" description="Specifies the lower 25 bits of the 41-bit  vector address  corresponding to Vector Table address bits[31:7].  Note bits 6:0 of the Vector Table address are always 0." range="31 - 7" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLSTR2_CORE1_BOOTVECT_HI" acronym="CFG0_CLSTR2_CORE1_BOOTVECT_HI" offset="0x2194" width="32" description="Contains the lower 16 bits of the boot vector location for R5 Core1">
+		<bitfield id="CLSTR2_CORE1_BOOTVECT_HI_VECT_ADDR" width="16" begin="15" end="0" resetval="0x0" description="Specifies the upper 16 bits of the 41-bit vector address  corresponding to Vector Table address bits[47:32]." range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLSTR2_CORE1_PMCTRL" acronym="CFG0_CLSTR2_CORE1_PMCTRL" offset="0x21A0" width="32" description="Configures Cluster Core1 power state">
+		<bitfield id="CLSTR2_CORE1_PMCTRL_CORE_HALT" width="1" begin="0" end="0" resetval="0x0" description="Halt Core1" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CFG0_CLSTR2_CORE1_PMSTAT" acronym="CFG0_CLSTR2_CORE1_PMSTAT" offset="0x21B0" width="32" description="Shows Cluster Core1 power status">
+		<bitfield id="CLSTR2_CORE1_PMSTAT_CLK_GATE" width="1" begin="3" end="3" resetval="0x0" description="Core1 Clocked stopped due to WFI or WFE state" range="3" rwaccess="R"/> 
+		<bitfield id="CLSTR2_CORE1_PMSTAT_WFE" width="1" begin="1" end="1" resetval="0x0" description="Core1 WFEWhen 0, indicates that Core1 is in the WFE state" range="1" rwaccess="R"/> 
+		<bitfield id="CLSTR2_CORE1_PMSTAT_WFI" width="1" begin="0" end="0" resetval="0x0" description="Core1 WFIWhen 0, indicates that Core1 is in the WFI state" range="0" rwaccess="R"/>
+	</register>
+</module>

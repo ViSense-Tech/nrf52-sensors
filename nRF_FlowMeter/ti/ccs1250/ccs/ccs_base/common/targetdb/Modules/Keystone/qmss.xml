@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module id="QMSS" HW_revision="" XML_version="1" description="">
+  <!-- csl_pscregs -->
+  <register id="REVISION_REG" offset="0x68000" width="32" description="">
+    <bitfield id="scheme" width="2" begin="31" end="30" description="Scheme that this register is compliant with" rwaccess="R" />
+    <bitfield id="function" width="12" begin="27" end="16" description="Function" rwaccess="R" />
+    <bitfield id="revrtl" width="5" begin="15" end="11" description="Major revision" rwaccess="R" />
+    <bitfield id="revmaj" width="3" begin="10" end="8" description="Major revision" rwaccess="R" />
+    <bitfield id="revcustom" width="2" begin="7" end="6" description="Custom revision" rwaccess="R" />
+    <bitfield id="revmin" width="6" begin="5" end="0" description="Minor revision" rwaccess="R" />
+  </register>
+  <register id="QUEUE_DIVERSION_REG" offset="0x68008" width="32" description="">
+    <bitfield id="head_tail" width="1" begin="31" end="31" description="Indicates whether queue contents should be merged on to head or tail of destination queue. Clear this field for head and set for tail." rwaccess="W" />
+    <bitfield id="dest_qnum" width="14" begin="29" end="16" description="Destination queue number" rwaccess="W" />
+    <bitfield id="source_qnum" width="14" begin="13" end="0" description="Source queue number" rwaccess="W" />
+  </register>
+  <register id="LINKING_RAM_REGION_0_BASE_ADDRESS_REG" offset="0x6800c" width="32" description="">
+    <bitfield id="region0_base" width="32" begin="31" end="0" description="This field stores the base address for the first region of the linking RAM. This may be anywhere in 32-bit address space but would be typically located in on-chip memory." rwaccess="RW" />
+  </register>
+  <register id="LINKING_RAM_REGION_0_SIZE_REG" offset="0x68010" width="32" description="">
+    <bitfield id="region0_size" width="19" begin="18" end="0" description="This field indicates the number of entries that are contained in the linking RAM region 0" rwaccess="RW" />
+  </register>
+  <register id="LINKING_RAM_REGION_1_BASE_ADDRESS_REG" offset="0x68014" width="32" description="">
+    <bitfield id="region1_base" width="32" begin="31" end="0" description="This field stores the base address for the first region of the linking RAM. This may be anywhere in 32-bit address space but would be typically located in on-chip memory." rwaccess="RW" />
+  </register>
+  <register id="FREE_DESCRIPTOR_STARVE_COUNT_REG" offset="0x68020" width="32" description="(1 of 16, stride 4)">
+    <bitfield id="fdbq3_starve_cnt" width="8" begin="31" end="24" description="This field increments each time the Free Descriptor/Buffer Queue \[N mod 4\]==3 is read while it is empty. This field is cleared when read." rwaccess="R" />
+    <bitfield id="fdbq2_starve_cnt" width="8" begin="23" end="16" description="This field increments each time the Free Descriptor/Buffer Queue \[N mod 4\]==2 is read while it is empty. This field is cleared when read." rwaccess="R" />
+    <bitfield id="fdbq1_starve_cnt" width="8" begin="15" end="8" description="This field increments each time the Free Descriptor/Buffer Queue \[N mod 4\]==1 is read while it is empty. This field is cleared when read." rwaccess="R" />
+    <bitfield id="fdbq0_starve_cnt" width="8" begin="7" end="0" description="This field increments each time the Free Descriptor/Buffer Queue \[N mod 4\]==0 is read while it is empty. This field is cleared when read." rwaccess="R" />
+  </register>
+  <register id="MEMORY_REGION_BASE_ADDRESS_REG" offset="0x6a000" width="32" description="(1 of 20, stride 16)">
+    <bitfield id="regR_base" width="32" begin="31" end="0" description="This field contains the base address of the memory region R." rwaccess="RW" />
+  </register>
+  <register id="MEMORY_REGION_START_INDEX_REG" offset="0x6a004" width="32" description="(1 of 20, stride 16)">
+    <bitfield id="start_index" width="19" begin="18" end="0" description="This field indicates where in linking RAM does the descriptor linking information corresponding to memory region R starts." rwaccess="RW" />
+  </register>
+  <register id="MEMORY_REGION_DESCRIPTOR_SETUP_REG" offset="0x6a008" width="32" description="(1 of 20, stride 16)">
+    <bitfield id="desc_size" width="13" begin="28" end="16" description="This field indicates the size of each descriptor in this memory region. The value programmed is the multipler minus one that needs to be applied to 16 to get the actual descriptor size." rwaccess="RW" />
+    <bitfield id="reg_size" width="4" begin="3" end="0" description="This field indicates the size of the memory region (in terms of number of descriptors). It is an encoded value that specifies region size as 2^\[5+reg_size\] number of descriptors." rwaccess="RW" />
+  </register>
+  <register id="QUEUE_STATUS_CONFIG_REG_A" offset="0x00000" width="32" description="(1 of 8192, stride 16)">
+    <bitfield id="queue_entry_count" width="19" begin="18" end="0" description="This field indicates how many packets are currently queued on the queue." rwaccess="R" />
+  </register>
+  <register id="QUEUE_STATUS_CONFIG_REG_B" offset="0x00004" width="32" description="(1 of 8192, stride 16)">
+    <bitfield id="queue_byte_count" width="32" begin="31" end="0" description="This field indicates how many bytes total are contained in all of the packets which are currently queued on this queue." rwaccess="R" />
+  </register>
+  <register id="QUEUE_STATUS_CONFIG_REG_C" offset="0x00008" width="32" description="(1 of 8192, stride 16)">
+    <bitfield id="packet_size" width="17" begin="16" end="0" description="This field indicates the packet size of the head element of a queue." rwaccess="R" />
+  </register>
+  <register id="QUEUE_STATUS_CONFIG_REG_D" offset="0x0000c" width="32" description="(1 of 8192, stride 16)">
+    <bitfield id="threshold" width="4" begin="3" end="0" description="This field indicates the threshold at which the queue threshold pin is asserted." rwaccess="RW" />
+    <bitfield id="threshold_hilo" width="1" begin="7" end="7" description="This field indicates whether the number of items in a queue should be greater than equal to or less than the threshold before the queue_ecnt_status\[queue\] bit is asserted." rwaccess="RW" />
+  </register>
+  <register id="INTD_REVISION" offset="0xa0000" width="32" description="(1 of 1, stride 0)">
+    <bitfield id="rev_minor" width="6" begin="5" end="0" description="Minor revision" rwaccess="R" />
+    <bitfield id="rev_custom" width="2" begin="7" end="6" description="Custom revision" rwaccess="R" />
+    <bitfield id="rev_major" width="3" begin="10" end="8" description="Major revision" rwaccess="R" />
+    <bitfield id="rev_rtl" width="5" begin="15" end="11" description="RTL revisions" rwaccess="R" />
+    <bitfield id="rev_module" width="12" begin="27" end="16" description="Module ID" rwaccess="R" />
+    <bitfield id="rev_scheme" width="2" begin="31" end="30" description="Scheme" rwaccess="R" />
+  </register>
+  <register id="INTD_EOI" offset="0xa0010" width="32" description="(1 of 1, stride 0)">
+    <bitfield id="eoi_vector" width="8" begin="7" end="0" description="End of Interrupt Vector" rwaccess="RW" />
+  </register>
+  <register id="INTD_STATUS0" offset="0xa0200" width="32" description="(1 of 1, stride 0)">
+    <bitfield id="hi_pri_int31" width="1" begin="31" end="31" description="Int 31 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int30" width="1" begin="30" end="30" description="Int 30 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int29" width="1" begin="29" end="29" description="Int 29 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int28" width="1" begin="28" end="28" description="Int 28 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int27" width="1" begin="27" end="27" description="Int 27 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int26" width="1" begin="26" end="26" description="Int 26 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int25" width="1" begin="25" end="25" description="Int 25 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int24" width="1" begin="24" end="24" description="Int 24 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int23" width="1" begin="23" end="23" description="Int 23 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int22" width="1" begin="22" end="22" description="Int 22 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int21" width="1" begin="21" end="21" description="Int 21 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int20" width="1" begin="20" end="20" description="Int 20 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int19" width="1" begin="19" end="19" description="Int 19 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int18" width="1" begin="18" end="18" description="Int 18 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int17" width="1" begin="17" end="17" description="Int 17 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int16" width="1" begin="16" end="16" description="Int 16 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int15" width="1" begin="15" end="15" description="Int 15 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int14" width="1" begin="14" end="14" description="Int 14 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int13" width="1" begin="13" end="13" description="Int 13 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int12" width="1" begin="12" end="12" description="Int 12 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int11" width="1" begin="11" end="11" description="Int 11 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int10" width="1" begin="10" end="10" description="Int 10 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int9" width="1" begin="9" end="9" description="Int 9 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int8" width="1" begin="8" end="8" description="Int 8 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int7" width="1" begin="7" end="7" description="Int 7 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int6" width="1" begin="6" end="6" description="Int 6 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int5" width="1" begin="5" end="5" description="Int 5 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int4" width="1" begin="4" end="4" description="Int 4 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int3" width="1" begin="3" end="3" description="Int 3 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int2" width="1" begin="2" end="2" description="Int 2 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int1" width="1" begin="1" end="1" description="Int 1 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int0" width="1" begin="0" end="0" description="Int 0 status" rwaccess="RW" />
+  </register>
+  <register id="INTD_STATUS1" offset="0xa0204" width="32" description="(1 of 1, stride 0)">
+    <bitfield id="lo_pri_int15" width="1" begin="15" end="15" description="Int 15 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int14" width="1" begin="14" end="14" description="Int 14 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int13" width="1" begin="13" end="13" description="Int 13 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int12" width="1" begin="12" end="12" description="Int 12 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int11" width="1" begin="11" end="11" description="Int 11 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int10" width="1" begin="10" end="10" description="Int 10 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int9" width="1" begin="9" end="9" description="Int 9 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int8" width="1" begin="8" end="8" description="Int 8 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int7" width="1" begin="7" end="7" description="Int 7 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int6" width="1" begin="6" end="6" description="Int 6 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int5" width="1" begin="5" end="5" description="Int 5 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int4" width="1" begin="4" end="4" description="Int 4 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int3" width="1" begin="3" end="3" description="Int 3 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int2" width="1" begin="2" end="2" description="Int 2 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int1" width="1" begin="1" end="1" description="Int 1 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int0" width="1" begin="0" end="0" description="Int 0 status" rwaccess="RW" />
+  </register>
+  <register id="INTD_STATUS4" offset="0xa0210" width="32" description="(1 of 1, stride 0)">
+    <bitfield id="pktdma_int1" width="1" begin="1" end="1" description="Int 1 status" rwaccess="RW" />
+    <bitfield id="pktdma_int0" width="1" begin="0" end="0" description="Int 0 status" rwaccess="RW" />
+  </register>
+  <register id="INTD_STATUS_CLR0" offset="0xa0280" width="32" description="(1 of 1, stride 0)">
+    <bitfield id="hi_pri_int31" width="1" begin="31" end="31" description="Int 31 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int30" width="1" begin="30" end="30" description="Int 30 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int29" width="1" begin="29" end="29" description="Int 29 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int28" width="1" begin="28" end="28" description="Int 28 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int27" width="1" begin="27" end="27" description="Int 27 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int26" width="1" begin="26" end="26" description="Int 26 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int25" width="1" begin="25" end="25" description="Int 25 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int24" width="1" begin="24" end="24" description="Int 24 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int23" width="1" begin="23" end="23" description="Int 23 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int22" width="1" begin="22" end="22" description="Int 22 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int21" width="1" begin="21" end="21" description="Int 21 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int20" width="1" begin="20" end="20" description="Int 20 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int19" width="1" begin="19" end="19" description="Int 19 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int18" width="1" begin="18" end="18" description="Int 18 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int17" width="1" begin="17" end="17" description="Int 17 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int16" width="1" begin="16" end="16" description="Int 16 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int15" width="1" begin="15" end="15" description="Int 15 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int14" width="1" begin="14" end="14" description="Int 14 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int13" width="1" begin="13" end="13" description="Int 13 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int12" width="1" begin="12" end="12" description="Int 12 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int11" width="1" begin="11" end="11" description="Int 11 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int10" width="1" begin="10" end="10" description="Int 10 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int9" width="1" begin="9" end="9" description="Int 9 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int8" width="1" begin="8" end="8" description="Int 8 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int7" width="1" begin="7" end="7" description="Int 7 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int6" width="1" begin="6" end="6" description="Int 6 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int5" width="1" begin="5" end="5" description="Int 5 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int4" width="1" begin="4" end="4" description="Int 4 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int3" width="1" begin="3" end="3" description="Int 3 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int2" width="1" begin="2" end="2" description="Int 2 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int1" width="1" begin="1" end="1" description="Int 1 status" rwaccess="RW" />
+    <bitfield id="hi_pri_int0" width="1" begin="0" end="0" description="Int 0 status" rwaccess="RW" />
+  </register>
+  <register id="INTD_STATUS_CLR1" offset="0xa0284" width="32" description="(1 of 1, stride 0)">
+    <bitfield id="lo_pri_int15" width="1" begin="15" end="15" description="Int 15 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int14" width="1" begin="14" end="14" description="Int 14 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int13" width="1" begin="13" end="13" description="Int 13 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int12" width="1" begin="12" end="12" description="Int 12 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int11" width="1" begin="11" end="11" description="Int 11 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int10" width="1" begin="10" end="10" description="Int 10 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int9" width="1" begin="9" end="9" description="Int 9 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int8" width="1" begin="8" end="8" description="Int 8 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int7" width="1" begin="7" end="7" description="Int 7 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int6" width="1" begin="6" end="6" description="Int 6 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int5" width="1" begin="5" end="5" description="Int 5 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int4" width="1" begin="4" end="4" description="Int 4 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int3" width="1" begin="3" end="3" description="Int 3 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int2" width="1" begin="2" end="2" description="Int 2 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int1" width="1" begin="1" end="1" description="Int 1 status" rwaccess="RW" />
+    <bitfield id="lo_pri_int0" width="1" begin="0" end="0" description="Int 0 status" rwaccess="RW" />
+  </register>
+  <register id="INTD_STATUS_CLR4" offset="0xa0290" width="32" description="(1 of 1, stride 0)">
+    <bitfield id="pktdma_int1" width="1" begin="1" end="1" description="Int 1 status" rwaccess="RW" />
+    <bitfield id="pktdma_int0" width="1" begin="0" end="0" description="Int 0 status" rwaccess="RW" />
+  </register>
+  <register id="INTD_INTCNT" offset="0xa0300" width="32" description="(1 of 1, stride 0)">
+    <bitfield id="intcnt_host_cnt_in_intr" width="2" begin="1" end="0" description="Interrupt Count for host_cnt_in_intr (write to decrement)" rwaccess="R" />
+  </register>
+</module>

@@ -1,0 +1,647 @@
+<module name="DECODER0_MSVDX_VEC_H264" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="DECODER0_CR_VEC_H264_FE_SPS0" acronym="DECODER0_CR_VEC_H264_FE_SPS0" offset="0x0" width="32" description="Front End H.264 sequence-level parameters (from a Sequence Parameter Set). This contains similar parameters to the register BE_SPS0">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHROMA_FORMAT_IDC_EXT" width="1" begin="28" end="28" resetval="0x0" description="Sequence parameter set RBSP syntax - chroma_format_idc, for MSVDX Core &amp;amp;gt;= 6" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="27" end="27" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BIT_DEPTH_CHROMA_MINUS_8" width="2" begin="26" end="25" resetval="0x0" description="Specifies the bit depth of the samples of the chroma arrays for Core Revisions &amp;amp;gt; 6.0.0" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="24" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BIT_DEPTH_LUMA_MINUS_8" width="2" begin="23" end="22" resetval="0x0" description="Specifies the bit depth of the samples of the luma arrays for Core Revisions &amp;amp;gt; 6.0.0" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="7" begin="21" end="15" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_FE_SPS0_4BIT_SGM_FLAG" width="1" begin="14" end="14" resetval="0x0" description="Indicates that the slice group map in VEC_H264_FE_BASE_ADDR_SGM is packed every 4 bits, rather than 8 bits" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="13" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MIN_LUMA_BIPRED_SIZE_8X8" width="1" begin="11" end="11" resetval="0x0" description="When H.264 profile is 3.1 or greater, this bit shall be set to 1" range="" rwaccess="RW"/>
+    <bitfield id="DIRECT_8X8_INFERENCE_FLAG" width="1" begin="10" end="10" resetval="0x0" description="Sequence parameter set RBSP syntax - direct_8x8_inference_flag" range="" rwaccess="RW"/>
+    <bitfield id="CHROMA_FORMAT_IDC" width="1" begin="9" end="9" resetval="0x0" description="Sequence parameter set RBSP syntax - chroma_format_idc" range="" rwaccess="RW"/>
+    <bitfield id="FRAME_MBS_ONLY_FLAG" width="1" begin="8" end="8" resetval="0x0" description="Sequence parameter set RBSP syntax - frame_mbs_only_flag" range="" rwaccess="RW"/>
+    <bitfield id="PICWIDTHINMBSLESS1" width="8" begin="7" end="0" resetval="0x0" description="Picture Width in [macroblocks - 1]" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_FE_PPS0" acronym="DECODER0_CR_VEC_H264_FE_PPS0" offset="0x4" width="32" description="Front End H.264 picture-level parameters (from a Picture Parameter Set). This contains similar parameters to the register BE_PPS0">
+    <bitfield id="H264_FE_PPS0_SPARE31DOWNTO7" width="25" begin="31" end="7" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="NUM_SLICE_GROUPS_MINUS1" width="3" begin="6" end="4" resetval="0x0" description="Picture parameter set RBSP syntax - num_slice_groups_minus1" range="" rwaccess="RW"/>
+    <bitfield id="H264_FE_PPS0_SPARE3" width="1" begin="3" end="3" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="ENTROPY_CODING_MODE_FLAG" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CONSTRAINED_INTRA_PRED_FLAG" width="1" begin="1" end="1" resetval="0x0" description="Picture parameter set RBSP syntax - constrained_intra_pred_flag" range="" rwaccess="RW"/>
+    <bitfield id="TRANSFORM_8X8_MODE_FLAG" width="1" begin="0" end="0" resetval="0x0" description="Picture parameter set RBSP syntax - transform_8x8_mode_flag" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_FE_CUR_PIC0" acronym="DECODER0_CR_VEC_H264_FE_CUR_PIC0" offset="0x8" width="32" description="Front End H.264 picture-level parameters (from a Slice Header) describing the current picture. This contains similar parameters to the register BE_CUR_PIC0">
+    <bitfield id="PICSIZEINMBSLESS1" width="16" begin="31" end="16" resetval="0x0" description="Picture size in [macroblocks - 1]" range="" rwaccess="RW"/>
+    <bitfield id="PICHEIGHTINMBSLESS1" width="8" begin="15" end="8" resetval="0x0" description="Picture Height in [macroblocks - 1]" range="" rwaccess="RW"/>
+    <bitfield id="H264_FE_CUR_PIC0_SPARE7DOWNTO5" width="3" begin="7" end="5" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="H264_FE_CUR_PIC0_SPARE4" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_FE_CUR_PIC0_SPARE3" width="1" begin="3" end="3" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="MBAFFFRAMEFLAG" width="1" begin="2" end="2" resetval="0x0" description="MbaffFrameFlag" range="" rwaccess="RW"/>
+    <bitfield id="FIELD_PIC_FLAG" width="1" begin="1" end="1" resetval="0x0" description="Slice header syntax - field_pic_flag" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOM_FIELD_FLAG" width="1" begin="0" end="0" resetval="0x0" description="Slice header syntax - bottom_field_flag" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_FE_SLICE0" acronym="DECODER0_CR_VEC_H264_FE_SLICE0" offset="0xC" width="32" description="Front End H.264 slice-level parameters (from a Slice Header). This contains similar parameters to the register BE_SLICE0">
+    <bitfield id="RESERVED" width="6" begin="31" end="26" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_FE_SLICE0_SPARE25DOWNTO18" width="8" begin="25" end="18" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="SLICETYPE" width="2" begin="17" end="16" resetval="0x0" description="MSVDX slice type:" range="" rwaccess="RW"/>
+    <bitfield id="CABAC_INIT_IDC" width="2" begin="15" end="14" resetval="0x0" description="Slice header syntax - cabac_init_idc" range="" rwaccess="RW"/>
+    <bitfield id="SLICECOUNT" width="14" begin="13" end="0" resetval="0x0" description="Slice count." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_FE_SLICE1" acronym="DECODER0_CR_VEC_H264_FE_SLICE1" offset="0x10" width="32" description="Front End H.264 slice-level parameters (from a Slice Header). This contains similar parameters to the register BE_SLICE1">
+    <bitfield id="FIRST_MB_IN_SLICE_Y" width="8" begin="31" end="24" resetval="0x0" description="The macroblock address of the first macroblock in the slice in Y axis" range="" rwaccess="RW"/>
+    <bitfield id="FIRST_MB_IN_SLICE_X" width="8" begin="23" end="16" resetval="0x0" description="The macroblock address of the first macroblock in the slice in X axis" range="" rwaccess="RW"/>
+    <bitfield id="SLICEQPY" width="6" begin="15" end="10" resetval="0x0" description="SliceQPY" range="" rwaccess="RW"/>
+    <bitfield id="NUM_REF_IDX_L1_ACTIVE_MINUS1" width="5" begin="9" end="5" resetval="0x0" description="Slice header syntax - num_ref_idx_l1_active_minus1" range="" rwaccess="RW"/>
+    <bitfield id="NUM_REF_IDX_L0_ACTIVE_MINUS1" width="5" begin="4" end="0" resetval="0x0" description="Slice header syntax - num_ref_idx_l0_active_minus1" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_FE_BASE_ADDR_SGM" acronym="DECODER0_CR_VEC_H264_FE_BASE_ADDR_SGM" offset="0x14" width="32" description="Front End H.264 base address for the 'map unit to slice group map' for the current picture. This base address will only be valid if the value of 'num_slice_groups_minus1' in the register FE_PPS0 is greater than 0">
+    <bitfield id="MAPUNITTOSLICEGROUPMAP" width="20" begin="31" end="12" resetval="0x0" description="mapUnitToSliceGroupMap data structure base address" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_FE_SLICE2" acronym="DECODER0_CR_VEC_H264_FE_SLICE2" offset="0x18" width="32" description="">
+    <bitfield id="FIRST_MB_IN_SLICE" width="16" begin="31" end="16" resetval="0x0" description="Slice header syntax - first_mb_in_slice" range="" rwaccess="RW"/>
+    <bitfield id="H264_FE_SLICE2_SPARE15DOWNTO12" width="4" begin="15" end="12" resetval="0x0" description="Spare bits for other codec registers" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_FE_SPARE0" acronym="DECODER0_CR_VEC_H264_FE_SPARE0" offset="0x1C" width="32" description="">
+    <bitfield id="H264_FE_SPARE0_SPARE31DOWNTO12" width="20" begin="31" end="12" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="11" begin="11" end="1" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_VEC_H264_CABAC444_4X4TRANSFORMMB_AS_NOT_AVAILABLE" width="1" begin="0" end="0" resetval="0x0" description="Activate specific logic to cope with x264 divergence from the h.264 specification:" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_FE_SPARE1" acronym="DECODER0_CR_VEC_H264_FE_SPARE1" offset="0x20" width="32" description="">
+    <bitfield id="H264_FE_SPARE1_SPARE31DOWNTO0" width="32" begin="31" end="0" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_FE_SPARE2" acronym="DECODER0_CR_VEC_H264_FE_SPARE2" offset="0x24" width="32" description="">
+    <bitfield id="H264_FE_SPARE2_SPARE31DOWNTO0" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_ERROR_DETECTION" acronym="DECODER0_CR_VEC_H264_ERROR_DETECTION" offset="0x2C" width="32" description="Enable/disable different points in Entropy parse to detect potential errors during decode. Some of these error detection procedures may cause different issues with some no fully compliant streams.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_VEC_H264_IMPLICIT_EOS" width="1" begin="0" end="0" resetval="0x0" description="Enable/disable error detection when the last slice overrun the picture size." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_FE_SPARE_N_00" acronym="DECODER0_CR_VEC_H264_FE_SPARE_N_00" offset="0x30" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_FE_SPARE27DOWNTO0" width="28" begin="27" end="0" resetval="0x0" description="Spare bits" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_FE_SPARE_N_01" acronym="DECODER0_CR_VEC_H264_FE_SPARE_N_01" offset="0x34" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_FE_SPARE27DOWNTO0" width="28" begin="27" end="0" resetval="0x0" description="Spare bits" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_FE_SPARE_N_02" acronym="DECODER0_CR_VEC_H264_FE_SPARE_N_02" offset="0x38" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_FE_SPARE27DOWNTO0" width="28" begin="27" end="0" resetval="0x0" description="Spare bits" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_FE_SPARE_N_03" acronym="DECODER0_CR_VEC_H264_FE_SPARE_N_03" offset="0x3C" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_FE_SPARE27DOWNTO0" width="28" begin="27" end="0" resetval="0x0" description="Spare bits" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_FE_SPARE_N_04" acronym="DECODER0_CR_VEC_H264_FE_SPARE_N_04" offset="0x40" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_FE_SPARE27DOWNTO0" width="28" begin="27" end="0" resetval="0x0" description="Spare bits" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_FE_SPARE_N_05" acronym="DECODER0_CR_VEC_H264_FE_SPARE_N_05" offset="0x44" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_FE_SPARE27DOWNTO0" width="28" begin="27" end="0" resetval="0x0" description="Spare bits" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_FE_SPARE_N_06" acronym="DECODER0_CR_VEC_H264_FE_SPARE_N_06" offset="0x48" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_FE_SPARE27DOWNTO0" width="28" begin="27" end="0" resetval="0x0" description="Spare bits" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_FE_SPARE_N_07" acronym="DECODER0_CR_VEC_H264_FE_SPARE_N_07" offset="0x4C" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_FE_SPARE27DOWNTO0" width="28" begin="27" end="0" resetval="0x0" description="Spare bits" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_FOC0" acronym="DECODER0_CR_VEC_H264_BE_FOC0" offset="0x50" width="32" description="Back End H.264 Top Field Order Count for the current picture">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TOPFIELDORDERCNT_CURR" width="17" begin="16" end="0" resetval="0x0" description="Top field order count for current picture" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_FOC1" acronym="DECODER0_CR_VEC_H264_BE_FOC1" offset="0x54" width="32" description="Back End H.264 Bottom Field Order Count for the current picture">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDORDERCNT_CURR" width="17" begin="16" end="0" resetval="0x0" description="Bottom field order count for current picture" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_TOP_FOC_00" acronym="DECODER0_CR_VEC_H264_BE_TOP_FOC_00" offset="0x58" width="32" description="Top field picture order counts (POC) for pictures in Decoded Picture Buffer">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TOPFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Top field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_BOT_FOC_00" acronym="DECODER0_CR_VEC_H264_BE_BOT_FOC_00" offset="0x5C" width="32" description="Bottom field picture order counts (POC) for pictures in the decoded picture buffer (DPB)">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_BE_SPARE0_SPARE17" width="1" begin="17" end="17" resetval="0x0" description="Spare bit for use in other codec registers" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Bottom field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_TOP_FOC_01" acronym="DECODER0_CR_VEC_H264_BE_TOP_FOC_01" offset="0x60" width="32" description="Top field picture order counts (POC) for pictures in Decoded Picture Buffer">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TOPFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Top field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_BOT_FOC_01" acronym="DECODER0_CR_VEC_H264_BE_BOT_FOC_01" offset="0x64" width="32" description="Bottom field picture order counts (POC) for pictures in the decoded picture buffer (DPB)">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_BE_SPARE0_SPARE17" width="1" begin="17" end="17" resetval="0x0" description="Spare bit for use in other codec registers" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Bottom field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_TOP_FOC_02" acronym="DECODER0_CR_VEC_H264_BE_TOP_FOC_02" offset="0x68" width="32" description="Top field picture order counts (POC) for pictures in Decoded Picture Buffer">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TOPFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Top field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_BOT_FOC_02" acronym="DECODER0_CR_VEC_H264_BE_BOT_FOC_02" offset="0x6C" width="32" description="Bottom field picture order counts (POC) for pictures in the decoded picture buffer (DPB)">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_BE_SPARE0_SPARE17" width="1" begin="17" end="17" resetval="0x0" description="Spare bit for use in other codec registers" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Bottom field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_TOP_FOC_03" acronym="DECODER0_CR_VEC_H264_BE_TOP_FOC_03" offset="0x70" width="32" description="Top field picture order counts (POC) for pictures in Decoded Picture Buffer">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TOPFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Top field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_BOT_FOC_03" acronym="DECODER0_CR_VEC_H264_BE_BOT_FOC_03" offset="0x74" width="32" description="Bottom field picture order counts (POC) for pictures in the decoded picture buffer (DPB)">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_BE_SPARE0_SPARE17" width="1" begin="17" end="17" resetval="0x0" description="Spare bit for use in other codec registers" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Bottom field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_TOP_FOC_04" acronym="DECODER0_CR_VEC_H264_BE_TOP_FOC_04" offset="0x78" width="32" description="Top field picture order counts (POC) for pictures in Decoded Picture Buffer">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TOPFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Top field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_BOT_FOC_04" acronym="DECODER0_CR_VEC_H264_BE_BOT_FOC_04" offset="0x7C" width="32" description="Bottom field picture order counts (POC) for pictures in the decoded picture buffer (DPB)">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_BE_SPARE0_SPARE17" width="1" begin="17" end="17" resetval="0x0" description="Spare bit for use in other codec registers" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Bottom field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_TOP_FOC_05" acronym="DECODER0_CR_VEC_H264_BE_TOP_FOC_05" offset="0x80" width="32" description="Top field picture order counts (POC) for pictures in Decoded Picture Buffer">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TOPFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Top field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_BOT_FOC_05" acronym="DECODER0_CR_VEC_H264_BE_BOT_FOC_05" offset="0x84" width="32" description="Bottom field picture order counts (POC) for pictures in the decoded picture buffer (DPB)">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_BE_SPARE0_SPARE17" width="1" begin="17" end="17" resetval="0x0" description="Spare bit for use in other codec registers" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Bottom field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_TOP_FOC_06" acronym="DECODER0_CR_VEC_H264_BE_TOP_FOC_06" offset="0x88" width="32" description="Top field picture order counts (POC) for pictures in Decoded Picture Buffer">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TOPFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Top field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_BOT_FOC_06" acronym="DECODER0_CR_VEC_H264_BE_BOT_FOC_06" offset="0x8C" width="32" description="Bottom field picture order counts (POC) for pictures in the decoded picture buffer (DPB)">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_BE_SPARE0_SPARE17" width="1" begin="17" end="17" resetval="0x0" description="Spare bit for use in other codec registers" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Bottom field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_TOP_FOC_07" acronym="DECODER0_CR_VEC_H264_BE_TOP_FOC_07" offset="0x90" width="32" description="Top field picture order counts (POC) for pictures in Decoded Picture Buffer">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TOPFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Top field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_BOT_FOC_07" acronym="DECODER0_CR_VEC_H264_BE_BOT_FOC_07" offset="0x94" width="32" description="Bottom field picture order counts (POC) for pictures in the decoded picture buffer (DPB)">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_BE_SPARE0_SPARE17" width="1" begin="17" end="17" resetval="0x0" description="Spare bit for use in other codec registers" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Bottom field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_TOP_FOC_08" acronym="DECODER0_CR_VEC_H264_BE_TOP_FOC_08" offset="0x98" width="32" description="Top field picture order counts (POC) for pictures in Decoded Picture Buffer">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TOPFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Top field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_BOT_FOC_08" acronym="DECODER0_CR_VEC_H264_BE_BOT_FOC_08" offset="0x9C" width="32" description="Bottom field picture order counts (POC) for pictures in the decoded picture buffer (DPB)">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_BE_SPARE0_SPARE17" width="1" begin="17" end="17" resetval="0x0" description="Spare bit for use in other codec registers" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Bottom field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_TOP_FOC_09" acronym="DECODER0_CR_VEC_H264_BE_TOP_FOC_09" offset="0xA0" width="32" description="Top field picture order counts (POC) for pictures in Decoded Picture Buffer">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TOPFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Top field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_BOT_FOC_09" acronym="DECODER0_CR_VEC_H264_BE_BOT_FOC_09" offset="0xA4" width="32" description="Bottom field picture order counts (POC) for pictures in the decoded picture buffer (DPB)">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_BE_SPARE0_SPARE17" width="1" begin="17" end="17" resetval="0x0" description="Spare bit for use in other codec registers" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Bottom field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_TOP_FOC_10" acronym="DECODER0_CR_VEC_H264_BE_TOP_FOC_10" offset="0xA8" width="32" description="Top field picture order counts (POC) for pictures in Decoded Picture Buffer">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TOPFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Top field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_BOT_FOC_10" acronym="DECODER0_CR_VEC_H264_BE_BOT_FOC_10" offset="0xAC" width="32" description="Bottom field picture order counts (POC) for pictures in the decoded picture buffer (DPB)">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_BE_SPARE0_SPARE17" width="1" begin="17" end="17" resetval="0x0" description="Spare bit for use in other codec registers" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Bottom field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_TOP_FOC_11" acronym="DECODER0_CR_VEC_H264_BE_TOP_FOC_11" offset="0xB0" width="32" description="Top field picture order counts (POC) for pictures in Decoded Picture Buffer">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TOPFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Top field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_BOT_FOC_11" acronym="DECODER0_CR_VEC_H264_BE_BOT_FOC_11" offset="0xB4" width="32" description="Bottom field picture order counts (POC) for pictures in the decoded picture buffer (DPB)">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_BE_SPARE0_SPARE17" width="1" begin="17" end="17" resetval="0x0" description="Spare bit for use in other codec registers" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Bottom field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_TOP_FOC_12" acronym="DECODER0_CR_VEC_H264_BE_TOP_FOC_12" offset="0xB8" width="32" description="Top field picture order counts (POC) for pictures in Decoded Picture Buffer">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TOPFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Top field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_BOT_FOC_12" acronym="DECODER0_CR_VEC_H264_BE_BOT_FOC_12" offset="0xBC" width="32" description="Bottom field picture order counts (POC) for pictures in the decoded picture buffer (DPB)">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_BE_SPARE0_SPARE17" width="1" begin="17" end="17" resetval="0x0" description="Spare bit for use in other codec registers" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Bottom field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_TOP_FOC_13" acronym="DECODER0_CR_VEC_H264_BE_TOP_FOC_13" offset="0xC0" width="32" description="Top field picture order counts (POC) for pictures in Decoded Picture Buffer">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TOPFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Top field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_BOT_FOC_13" acronym="DECODER0_CR_VEC_H264_BE_BOT_FOC_13" offset="0xC4" width="32" description="Bottom field picture order counts (POC) for pictures in the decoded picture buffer (DPB)">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_BE_SPARE0_SPARE17" width="1" begin="17" end="17" resetval="0x0" description="Spare bit for use in other codec registers" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Bottom field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_TOP_FOC_14" acronym="DECODER0_CR_VEC_H264_BE_TOP_FOC_14" offset="0xC8" width="32" description="Top field picture order counts (POC) for pictures in Decoded Picture Buffer">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TOPFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Top field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_BOT_FOC_14" acronym="DECODER0_CR_VEC_H264_BE_BOT_FOC_14" offset="0xCC" width="32" description="Bottom field picture order counts (POC) for pictures in the decoded picture buffer (DPB)">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_BE_SPARE0_SPARE17" width="1" begin="17" end="17" resetval="0x0" description="Spare bit for use in other codec registers" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Bottom field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_TOP_FOC_15" acronym="DECODER0_CR_VEC_H264_BE_TOP_FOC_15" offset="0xD0" width="32" description="Top field picture order counts (POC) for pictures in Decoded Picture Buffer">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TOPFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Top field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_BOT_FOC_15" acronym="DECODER0_CR_VEC_H264_BE_BOT_FOC_15" offset="0xD4" width="32" description="Bottom field picture order counts (POC) for pictures in the decoded picture buffer (DPB)">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_BE_SPARE0_SPARE17" width="1" begin="17" end="17" resetval="0x0" description="Spare bit for use in other codec registers" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDORDERCNT" width="17" begin="16" end="0" resetval="0x0" description="Bottom field order count for each picture in the DPB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_SPS0" acronym="DECODER0_CR_VEC_H264_BE_SPS0" offset="0xD8" width="32" description="Back End H.264 sequence-level parameters (from a Sequence Parameter Set) stored after passing through Rendec. This register contains similar parameters to the register FE_SPS0">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_CHROMA_FORMAT_IDC_EXT" width="1" begin="28" end="28" resetval="0x0" description="Sequence parameter set RBSP syntax - chroma_format_idc, for MSVDX Core &amp;amp;gt;= 6" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="27" end="27" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_BIT_DEPTH_CHROMA_MINUS_8" width="2" begin="26" end="25" resetval="0x0" description="Specifies the bit depth of the samples of the chroma arrays for Core Revisions &amp;amp;gt; 6.0.0" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="24" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_BIT_DEPTH_LUMA_MINUS_8" width="2" begin="23" end="22" resetval="0x0" description="Specifies the bit depth of the samples of the luma arrays for Core Revisions &amp;amp;gt; 6.0.0" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="21" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_ZERO_TRANSFORM" width="1" begin="20" end="20" resetval="0x0" description="Indicates the stream supports Lossless Macroblocks." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="19" end="19" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_BE_SPS0_DEFAULT_MATRIX_FLAG" width="1" begin="18" end="18" resetval="0x0" description="Indicates that IQ should use it's default scaling matricies" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="17" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_BE_SPS0_2PASS_FLAG" width="1" begin="16" end="16" resetval="0x0" description="Indicates that the current sequence may contain non-consecutive MBs" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_PROFILEIDC" width="2" begin="13" end="12" resetval="0x0" description="ProfileIdc [for IQ]:" range="" rwaccess="RW"/>
+    <bitfield id="BE_MIN_LUMA_BIPRED_SIZE_8X8" width="1" begin="11" end="11" resetval="0x0" description="When H.264 profile is 3.1 or greater, this bit shall be set to 1" range="" rwaccess="RW"/>
+    <bitfield id="BE_DIRECT_8X8_INFERENCE_FLAG" width="1" begin="10" end="10" resetval="0x0" description="Direct 8x8 inference flag" range="" rwaccess="RW"/>
+    <bitfield id="BE_CHROMA_FORMAT_IDC" width="1" begin="9" end="9" resetval="0x0" description="Sequence parameter set RBSP syntax - chroma_format_idc" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_PICWIDTHINMBSLESS1" width="8" begin="7" end="0" resetval="0x0" description="Picture width in [macroblocks - 1]" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_PPS0" acronym="DECODER0_CR_VEC_H264_BE_PPS0" offset="0xDC" width="32" description="Back End H.264 picture-level parameters (from a Picture Parameter Set) stored after passing through Rendec. This register contains similar parameters to the register FE_PPS0">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_SECOND_CHROMA_QP_INDEX_OFFSET" width="5" begin="28" end="24" resetval="0x0" description="Second_chroma_qp_index_offset" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="23" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_CHROMA_QP_INDEX_OFFSET" width="5" begin="20" end="16" resetval="0x0" description="Chroma Qp index offset" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_WEIGHTED_BIPRED_IDC" width="2" begin="9" end="8" resetval="0x0" description="Weighted_bipred_idc for the current picture" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="7" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_CONSTRAINED_INTRA_PREDICTION_FLAG" width="1" begin="1" end="1" resetval="0x0" description="Constrained intra prediction flag for the current picture" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_CUR_PIC0" acronym="DECODER0_CR_VEC_H264_BE_CUR_PIC0" offset="0xE0" width="32" description="Back End H.264 picture-level parameters (from a Slice Header) describing the current picture, stored after passing through Rendec. This contains similar parameters to the register FE_CUR_PIC0">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_PICHEIGHTINMBSLESS1" width="8" begin="15" end="8" resetval="0x0" description="Picture height in [macroblocks - 1]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_REFERENCE_FLAG" width="1" begin="3" end="3" resetval="0x0" description="Reference flag for the current picture" range="" rwaccess="RW"/>
+    <bitfield id="BE_MBAFFFRAMEFLAG" width="1" begin="2" end="2" resetval="0x0" description="MbaffFrameFlag" range="" rwaccess="RW"/>
+    <bitfield id="BE_FIELD_PIC_FLAG" width="1" begin="1" end="1" resetval="0x0" description="Field pic flag for the current picture" range="" rwaccess="RW"/>
+    <bitfield id="BE_BOTTOM_FIELD_FLAG" width="1" begin="0" end="0" resetval="0x0" description="Bottom field flag for the current picture" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_SLICE0" acronym="DECODER0_CR_VEC_H264_BE_SLICE0" offset="0xE4" width="32" description="Back End H.264 slice-level parameters (from Slice Header) stored after passing through Rendec. This register contains similar parameters to the register FE_SLICE0">
+    <bitfield id="BE_DIRECT_SPATIAL_MV_PRED_FLAG" width="1" begin="31" end="31" resetval="0x0" description="Direct_spatial_mv_pred_flag for the current picture" range="" rwaccess="RW"/>
+    <bitfield id="H264_BE_SLICE0_SPARE30" width="1" begin="30" end="30" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="H264_BE_SLICE0_DISABLE_DEBLOCK_FILTER_IDC" width="2" begin="29" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="H264_BE_SLICE0_ALPHA_CO_OFFSET_DIV2" width="4" begin="27" end="24" resetval="0x0" description="Specifies the offset used in accessing the alpha and tco deblocking filter tables for filtering operations controlled by the macroblocks within the slice." range="" rwaccess="RW"/>
+    <bitfield id="H264_BE_SLICE0_BETA_OFFSET_DIV2" width="4" begin="23" end="20" resetval="0x0" description="Specifies the offset used in accessing the beta deblocking filter tables for filtering operations controlled by the macroblocks within the slice." range="" rwaccess="RW"/>
+    <bitfield id="H264_BE_SLICE0_FIELD_TYPE" width="2" begin="19" end="18" resetval="0x0" description="SLICE_FIELD_TYPE of the Operating Mode Command" range="" rwaccess="RW"/>
+    <bitfield id="BE_SLICETYPE" width="2" begin="17" end="16" resetval="0x0" description="MSVDX slice type:" range="" rwaccess="RW"/>
+    <bitfield id="H264_BE_SLICE0_SPARE15DOWNTO14" width="2" begin="15" end="14" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="BE_SLICECOUNT" width="14" begin="13" end="0" resetval="0x0" description="SliceCount - increments from 0 for each slice in currPic" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_SLICE1" acronym="DECODER0_CR_VEC_H264_BE_SLICE1" offset="0xE8" width="32" description="Back End H.264 slice-level parameters (from Slice Header) stored after passing through Rendec. This contains similar parameters to the register FE_SLICE1">
+    <bitfield id="BE_FIRST_MB_IN_SLICE_Y" width="8" begin="31" end="24" resetval="0x0" description="The macroblock address of the first macroblock in the slice in Y coordinate" range="" rwaccess="RW"/>
+    <bitfield id="BE_FIRST_MB_IN_SLICE_X" width="8" begin="23" end="16" resetval="0x0" description="The macroblock address of the first macroblock in the slice in X coordinate" range="" rwaccess="RW"/>
+    <bitfield id="BE_SLICEQPY" width="6" begin="15" end="10" resetval="0x0" description="Slice QPY for the current picture" range="" rwaccess="RW"/>
+    <bitfield id="BE_NUM_REF_IDX_L1_ACTIVE_MINUS1" width="5" begin="9" end="5" resetval="0x0" description="num_ref_idx_l1_active_minus1" range="" rwaccess="RW"/>
+    <bitfield id="BE_NUM_REF_IDX_L0_ACTIVE_MINUS1" width="5" begin="4" end="0" resetval="0x0" description="num_ref_idx_l0_active_minus1" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_BASE_ADDR_CUR_PIC" acronym="DECODER0_CR_VEC_H264_BE_BASE_ADDR_CUR_PIC" offset="0xEC" width="32" description="Back End H.264 base address for the macroblock parameters to be stored for the current picture">
+    <bitfield id="CURRPIC_PARAMS_BASE_ADDRESS" width="20" begin="31" end="12" resetval="0x0" description="currPic parameters base address" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_REF0" acronym="DECODER0_CR_VEC_H264_BE_REF0" offset="0xF0" width="32" description="Back End H.264 long term reference picture status flags for each picture in the Decoded Picture Buffer. Stored after passing through Rendec">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_LONGTERMFRAMEFLAG" width="16" begin="15" end="0" resetval="0x0" description="Long term frame flag for each reference frame in the Decoded Picture Buffer" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_COL_PIC0" acronym="DECODER0_CR_VEC_H264_BE_COL_PIC0" offset="0xF4" width="32" description="Back End H.264 colocated picture parameters. This register contains similar parameters to the registers FE_CUR_PIC0 and BE_CUR_PIC0. However, the parameters for the colocated picture can change per slice">
+    <bitfield id="RESERVED" width="23" begin="31" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COL_INTERVIEWPRED" width="1" begin="8" end="8" resetval="0x0" description="Should be set when RefPicList1{0} is an inter view prediction reference." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COL_NOTFRAMEFLAG" width="1" begin="4" end="4" resetval="0x0" description="Flag set if colocated picture is a field pair not a frame" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COL_MBAFFFRAMEFLAG" width="1" begin="2" end="2" resetval="0x0" description="Mbaff frame flag for colocated picture" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COL_BOTTOM_FIELD_FLAG" width="1" begin="0" end="0" resetval="0x0" description="When VEC_H264_BE_CUR_PIC0 BE_FIELD_PIC_FLAG =" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_BASE_ADDR_COL_PIC" acronym="DECODER0_CR_VEC_H264_BE_BASE_ADDR_COL_PIC" offset="0xF8" width="32" description="Back End H.264 base address to read the macroblock parameters for the colocated picture. This address can change per slice">
+    <bitfield id="COL_PIC_PARAMS_BASE_ADDRESS" width="20" begin="31" end="12" resetval="0x0" description="Parameters base address for colocated picture" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_LIST0_INVERSE_00" acronym="DECODER0_CR_VEC_H264_BE_LIST0_INVERSE_00" offset="0xFC" width="32" description="Reference picture list 0 inverse maps dpbIdx and bottom field flag to refIdx. This is used to determine refIdx_l0 in B temporal direct prediction. In frame mode, only the first 16 entries are used (ignoring bottom field flag). In field mode, the first 16 entires cover top fields and the second 16 entries cover bottom fields">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_3" width="5" begin="28" end="24" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="23" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_2" width="5" begin="20" end="16" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_1" width="5" begin="12" end="8" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_0" width="5" begin="4" end="0" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_LIST0_INVERSE_01" acronym="DECODER0_CR_VEC_H264_BE_LIST0_INVERSE_01" offset="0x100" width="32" description="Reference picture list 0 inverse maps dpbIdx and bottom field flag to refIdx. This is used to determine refIdx_l0 in B temporal direct prediction. In frame mode, only the first 16 entries are used (ignoring bottom field flag). In field mode, the first 16 entires cover top fields and the second 16 entries cover bottom fields">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_3" width="5" begin="28" end="24" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="23" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_2" width="5" begin="20" end="16" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_1" width="5" begin="12" end="8" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_0" width="5" begin="4" end="0" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_LIST0_INVERSE_02" acronym="DECODER0_CR_VEC_H264_BE_LIST0_INVERSE_02" offset="0x104" width="32" description="Reference picture list 0 inverse maps dpbIdx and bottom field flag to refIdx. This is used to determine refIdx_l0 in B temporal direct prediction. In frame mode, only the first 16 entries are used (ignoring bottom field flag). In field mode, the first 16 entires cover top fields and the second 16 entries cover bottom fields">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_3" width="5" begin="28" end="24" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="23" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_2" width="5" begin="20" end="16" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_1" width="5" begin="12" end="8" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_0" width="5" begin="4" end="0" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_LIST0_INVERSE_03" acronym="DECODER0_CR_VEC_H264_BE_LIST0_INVERSE_03" offset="0x108" width="32" description="Reference picture list 0 inverse maps dpbIdx and bottom field flag to refIdx. This is used to determine refIdx_l0 in B temporal direct prediction. In frame mode, only the first 16 entries are used (ignoring bottom field flag). In field mode, the first 16 entires cover top fields and the second 16 entries cover bottom fields">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_3" width="5" begin="28" end="24" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="23" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_2" width="5" begin="20" end="16" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_1" width="5" begin="12" end="8" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_0" width="5" begin="4" end="0" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_LIST0_INVERSE_04" acronym="DECODER0_CR_VEC_H264_BE_LIST0_INVERSE_04" offset="0x10C" width="32" description="Reference picture list 0 inverse maps dpbIdx and bottom field flag to refIdx. This is used to determine refIdx_l0 in B temporal direct prediction. In frame mode, only the first 16 entries are used (ignoring bottom field flag). In field mode, the first 16 entires cover top fields and the second 16 entries cover bottom fields">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_3" width="5" begin="28" end="24" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="23" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_2" width="5" begin="20" end="16" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_1" width="5" begin="12" end="8" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_0" width="5" begin="4" end="0" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_LIST0_INVERSE_05" acronym="DECODER0_CR_VEC_H264_BE_LIST0_INVERSE_05" offset="0x110" width="32" description="Reference picture list 0 inverse maps dpbIdx and bottom field flag to refIdx. This is used to determine refIdx_l0 in B temporal direct prediction. In frame mode, only the first 16 entries are used (ignoring bottom field flag). In field mode, the first 16 entires cover top fields and the second 16 entries cover bottom fields">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_3" width="5" begin="28" end="24" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="23" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_2" width="5" begin="20" end="16" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_1" width="5" begin="12" end="8" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_0" width="5" begin="4" end="0" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_LIST0_INVERSE_06" acronym="DECODER0_CR_VEC_H264_BE_LIST0_INVERSE_06" offset="0x114" width="32" description="Reference picture list 0 inverse maps dpbIdx and bottom field flag to refIdx. This is used to determine refIdx_l0 in B temporal direct prediction. In frame mode, only the first 16 entries are used (ignoring bottom field flag). In field mode, the first 16 entires cover top fields and the second 16 entries cover bottom fields">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_3" width="5" begin="28" end="24" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="23" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_2" width="5" begin="20" end="16" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_1" width="5" begin="12" end="8" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_0" width="5" begin="4" end="0" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_LIST0_INVERSE_07" acronym="DECODER0_CR_VEC_H264_BE_LIST0_INVERSE_07" offset="0x118" width="32" description="Reference picture list 0 inverse maps dpbIdx and bottom field flag to refIdx. This is used to determine refIdx_l0 in B temporal direct prediction. In frame mode, only the first 16 entries are used (ignoring bottom field flag). In field mode, the first 16 entires cover top fields and the second 16 entries cover bottom fields">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_3" width="5" begin="28" end="24" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="23" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_2" width="5" begin="20" end="16" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_1" width="5" begin="12" end="8" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLISTINVERSE0_0" width="5" begin="4" end="0" resetval="0x0" description="Lowest index in refPicList0 of the picture stored in the given DPB slot" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_LIST1_00" acronym="DECODER0_CR_VEC_H264_BE_LIST1_00" offset="0x11C" width="32" description="Reference picture list 1, maps reference index to DPB index (including top/bottom field in interlaced mode). Can change per-slice">
+    <bitfield id="BOTTOMFIELDFLAG1_3" width="1" begin="31" end="31" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="30" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_3" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG1_2" width="1" begin="23" end="23" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="22" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_2" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG1_1" width="1" begin="15" end="15" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="14" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_1" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG1_0" width="1" begin="7" end="7" resetval="0x0" description="Bottom field flag indicating that the reference refers to the bottom field stored in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="6" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_0" width="4" begin="3" end="0" resetval="0x0" description="DPB index of reference picture" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_LIST1_01" acronym="DECODER0_CR_VEC_H264_BE_LIST1_01" offset="0x120" width="32" description="Reference picture list 1, maps reference index to DPB index (including top/bottom field in interlaced mode). Can change per-slice">
+    <bitfield id="BOTTOMFIELDFLAG1_3" width="1" begin="31" end="31" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="30" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_3" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG1_2" width="1" begin="23" end="23" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="22" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_2" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG1_1" width="1" begin="15" end="15" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="14" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_1" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG1_0" width="1" begin="7" end="7" resetval="0x0" description="Bottom field flag indicating that the reference refers to the bottom field stored in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="6" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_0" width="4" begin="3" end="0" resetval="0x0" description="DPB index of reference picture" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_LIST1_02" acronym="DECODER0_CR_VEC_H264_BE_LIST1_02" offset="0x124" width="32" description="Reference picture list 1, maps reference index to DPB index (including top/bottom field in interlaced mode). Can change per-slice">
+    <bitfield id="BOTTOMFIELDFLAG1_3" width="1" begin="31" end="31" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="30" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_3" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG1_2" width="1" begin="23" end="23" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="22" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_2" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG1_1" width="1" begin="15" end="15" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="14" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_1" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG1_0" width="1" begin="7" end="7" resetval="0x0" description="Bottom field flag indicating that the reference refers to the bottom field stored in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="6" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_0" width="4" begin="3" end="0" resetval="0x0" description="DPB index of reference picture" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_LIST1_03" acronym="DECODER0_CR_VEC_H264_BE_LIST1_03" offset="0x128" width="32" description="Reference picture list 1, maps reference index to DPB index (including top/bottom field in interlaced mode). Can change per-slice">
+    <bitfield id="BOTTOMFIELDFLAG1_3" width="1" begin="31" end="31" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="30" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_3" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG1_2" width="1" begin="23" end="23" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="22" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_2" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG1_1" width="1" begin="15" end="15" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="14" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_1" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG1_0" width="1" begin="7" end="7" resetval="0x0" description="Bottom field flag indicating that the reference refers to the bottom field stored in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="6" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_0" width="4" begin="3" end="0" resetval="0x0" description="DPB index of reference picture" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_LIST1_04" acronym="DECODER0_CR_VEC_H264_BE_LIST1_04" offset="0x12C" width="32" description="Reference picture list 1, maps reference index to DPB index (including top/bottom field in interlaced mode). Can change per-slice">
+    <bitfield id="BOTTOMFIELDFLAG1_3" width="1" begin="31" end="31" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="30" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_3" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG1_2" width="1" begin="23" end="23" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="22" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_2" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG1_1" width="1" begin="15" end="15" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="14" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_1" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG1_0" width="1" begin="7" end="7" resetval="0x0" description="Bottom field flag indicating that the reference refers to the bottom field stored in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="6" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_0" width="4" begin="3" end="0" resetval="0x0" description="DPB index of reference picture" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_LIST1_05" acronym="DECODER0_CR_VEC_H264_BE_LIST1_05" offset="0x130" width="32" description="Reference picture list 1, maps reference index to DPB index (including top/bottom field in interlaced mode). Can change per-slice">
+    <bitfield id="BOTTOMFIELDFLAG1_3" width="1" begin="31" end="31" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="30" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_3" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG1_2" width="1" begin="23" end="23" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="22" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_2" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG1_1" width="1" begin="15" end="15" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="14" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_1" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG1_0" width="1" begin="7" end="7" resetval="0x0" description="Bottom field flag indicating that the reference refers to the bottom field stored in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="6" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_0" width="4" begin="3" end="0" resetval="0x0" description="DPB index of reference picture" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_LIST1_06" acronym="DECODER0_CR_VEC_H264_BE_LIST1_06" offset="0x134" width="32" description="Reference picture list 1, maps reference index to DPB index (including top/bottom field in interlaced mode). Can change per-slice">
+    <bitfield id="BOTTOMFIELDFLAG1_3" width="1" begin="31" end="31" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="30" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_3" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG1_2" width="1" begin="23" end="23" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="22" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_2" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG1_1" width="1" begin="15" end="15" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="14" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_1" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG1_0" width="1" begin="7" end="7" resetval="0x0" description="Bottom field flag indicating that the reference refers to the bottom field stored in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="6" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_0" width="4" begin="3" end="0" resetval="0x0" description="DPB index of reference picture" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_LIST1_07" acronym="DECODER0_CR_VEC_H264_BE_LIST1_07" offset="0x138" width="32" description="Reference picture list 1, maps reference index to DPB index (including top/bottom field in interlaced mode). Can change per-slice">
+    <bitfield id="BOTTOMFIELDFLAG1_3" width="1" begin="31" end="31" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="30" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_3" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG1_2" width="1" begin="23" end="23" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="22" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_2" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG1_1" width="1" begin="15" end="15" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="14" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_1" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG1_0" width="1" begin="7" end="7" resetval="0x0" description="Bottom field flag indicating that the reference refers to the bottom field stored in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="6" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST1_0" width="4" begin="3" end="0" resetval="0x0" description="DPB index of reference picture" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_LIST0_00" acronym="DECODER0_CR_VEC_H264_BE_LIST0_00" offset="0x13C" width="32" description="Reference picture list 0, maps reference index to Decoded Picture Buffer (DPB) index (including top/bottom field in interlaced mode). Can change per-slice">
+    <bitfield id="BOTTOMFIELDFLAG0_3" width="1" begin="31" end="31" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="30" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_3" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG0_2" width="1" begin="23" end="23" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="22" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_2" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG0_1" width="1" begin="15" end="15" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="14" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_1" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG0_0" width="1" begin="7" end="7" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="6" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_0" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_LIST0_01" acronym="DECODER0_CR_VEC_H264_BE_LIST0_01" offset="0x140" width="32" description="Reference picture list 0, maps reference index to Decoded Picture Buffer (DPB) index (including top/bottom field in interlaced mode). Can change per-slice">
+    <bitfield id="BOTTOMFIELDFLAG0_3" width="1" begin="31" end="31" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="30" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_3" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG0_2" width="1" begin="23" end="23" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="22" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_2" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG0_1" width="1" begin="15" end="15" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="14" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_1" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG0_0" width="1" begin="7" end="7" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="6" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_0" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_LIST0_02" acronym="DECODER0_CR_VEC_H264_BE_LIST0_02" offset="0x144" width="32" description="Reference picture list 0, maps reference index to Decoded Picture Buffer (DPB) index (including top/bottom field in interlaced mode). Can change per-slice">
+    <bitfield id="BOTTOMFIELDFLAG0_3" width="1" begin="31" end="31" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="30" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_3" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG0_2" width="1" begin="23" end="23" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="22" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_2" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG0_1" width="1" begin="15" end="15" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="14" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_1" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG0_0" width="1" begin="7" end="7" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="6" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_0" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_LIST0_03" acronym="DECODER0_CR_VEC_H264_BE_LIST0_03" offset="0x148" width="32" description="Reference picture list 0, maps reference index to Decoded Picture Buffer (DPB) index (including top/bottom field in interlaced mode). Can change per-slice">
+    <bitfield id="BOTTOMFIELDFLAG0_3" width="1" begin="31" end="31" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="30" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_3" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG0_2" width="1" begin="23" end="23" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="22" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_2" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG0_1" width="1" begin="15" end="15" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="14" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_1" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG0_0" width="1" begin="7" end="7" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="6" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_0" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_LIST0_04" acronym="DECODER0_CR_VEC_H264_BE_LIST0_04" offset="0x14C" width="32" description="Reference picture list 0, maps reference index to Decoded Picture Buffer (DPB) index (including top/bottom field in interlaced mode). Can change per-slice">
+    <bitfield id="BOTTOMFIELDFLAG0_3" width="1" begin="31" end="31" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="30" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_3" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG0_2" width="1" begin="23" end="23" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="22" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_2" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG0_1" width="1" begin="15" end="15" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="14" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_1" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG0_0" width="1" begin="7" end="7" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="6" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_0" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_LIST0_05" acronym="DECODER0_CR_VEC_H264_BE_LIST0_05" offset="0x150" width="32" description="Reference picture list 0, maps reference index to Decoded Picture Buffer (DPB) index (including top/bottom field in interlaced mode). Can change per-slice">
+    <bitfield id="BOTTOMFIELDFLAG0_3" width="1" begin="31" end="31" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="30" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_3" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG0_2" width="1" begin="23" end="23" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="22" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_2" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG0_1" width="1" begin="15" end="15" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="14" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_1" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG0_0" width="1" begin="7" end="7" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="6" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_0" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_LIST0_06" acronym="DECODER0_CR_VEC_H264_BE_LIST0_06" offset="0x154" width="32" description="Reference picture list 0, maps reference index to Decoded Picture Buffer (DPB) index (including top/bottom field in interlaced mode). Can change per-slice">
+    <bitfield id="BOTTOMFIELDFLAG0_3" width="1" begin="31" end="31" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="30" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_3" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG0_2" width="1" begin="23" end="23" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="22" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_2" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG0_1" width="1" begin="15" end="15" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="14" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_1" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG0_0" width="1" begin="7" end="7" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="6" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_0" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_LIST0_07" acronym="DECODER0_CR_VEC_H264_BE_LIST0_07" offset="0x158" width="32" description="Reference picture list 0, maps reference index to Decoded Picture Buffer (DPB) index (including top/bottom field in interlaced mode). Can change per-slice">
+    <bitfield id="BOTTOMFIELDFLAG0_3" width="1" begin="31" end="31" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="30" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_3" width="4" begin="27" end="24" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG0_2" width="1" begin="23" end="23" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="22" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_2" width="4" begin="19" end="16" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG0_1" width="1" begin="15" end="15" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="14" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_1" width="4" begin="11" end="8" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+    <bitfield id="BOTTOMFIELDFLAG0_0" width="1" begin="7" end="7" resetval="0x0" description="Bottom field flag indicating that this reference refers to the bottom field of the picture in the associated DPB slot" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="6" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REFPICLIST0_0" width="4" begin="3" end="0" resetval="0x0" description="DPB index of the reference picture" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_H264_BE_INTRA_8X8" acronym="DECODER0_CR_VEC_H264_BE_INTRA_8X8" offset="0x15C" width="32" description="Disable filter for X264 encoded lossless streams as needed.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_VEC_H264_BE_INTRA_8X8_DISABLE_FILTER_FLAG" width="1" begin="0" end="0" resetval="0x0" description="Disable the VDMC filter for 8x8 blocks on X264 encoded lossless streams." range="" rwaccess="RW"/>
+  </register>
+</module>

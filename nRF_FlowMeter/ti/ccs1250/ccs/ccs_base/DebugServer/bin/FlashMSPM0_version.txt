@@ -1,0 +1,124 @@
+MSPM0 Flash loader
+Version History
+===============
+
+Version:
+1.5.3.0
+Author:
+Henry Nguyen
+Date:
+- 9/20/2023
+Changes implemented:
+- MSPSWSP-236: Flash loader error when writing to all of flash memory
+
+
+Version:
+1.5.2.0
+Author:
+Henry Nguyen
+Date:
+- 9/18/2023
+Changes implemented:
+- MSPSWSP-234: Updated CommonFlashLoader.cpp by constantly having variable mRamLoaderPresent set as false so it constantly rewrites the flash loader
+- MSPSWSP-234: Updated DeviceFamily.h to have N1 configuration use N1 sysctl files rather than A2_LCD
+- MSPSWSP-212: Loading RAM in CCS corrupts Flash Loader and possibly NONMAIN 
+- MSPSWSP-235: Updated crc check logic on ccs for all device configuration to timeout
+
+
+Version:
+1.5.1.0
+Author:
+Henry Nguyen
+Date:
+- 9/5/2023
+Changes implemented:
+- MSPSWSP-209: Implementation of crc verification for N1
+
+
+Version:
+1.5.0.0
+Author:
+Henry Nguyen
+Date:
+- 9/1/2023
+Changes implemented:
+- MSPSWSP-210: Implementation of A2_512 flashloader
+
+
+Version:
+1.4.1.0
+Author:
+Luis Reynoso
+Date:
+- 06/02/2023
+Changes implemented:
+- MSPSWSP-183: Flash Loader gets stuck if CRC fails
+- MSPSWSP-189: Error when programming more than 32kB 
+
+Version:
+1.4.0.8
+Author:
+a0272600
+Date:
+- 04/30/2023
+Changes implemented:
+- MSPSWSP-144: Add Flash Loader support for A2_LCD
+- MSPSWSP-141: Limit Flash Loader to program device based on actual OPN memory size
+- MSPSWSP-149: Add Flash loader support for N1
+- MSPSWSP-174: Disable Flash cache in Flash Loader
+- MSPSWSP-175: Use address 0x2020_0000 for A3 flash Loader
+
+Version:
+1.3.0.x
+Author:
+a0272600
+Date:
+- 03/29/2023
+Changes implemented:
+- MSPSWSP-117: Flash Loader crashing CCS for Linux and Windows
+- MSPSWSP-123: Fix hard-reset issue with Flash Loader in CCS
+- MSPSWSP-82: Add support for 2kB RAM devices
+- MSPSWSP-100: Add option to erase by address
+- MSPSWSP-103: Validate NONMAIN for M0G PG2
+- MSPSWSP-129: Add option to erase only necessary sectors
+- MSPSWSP-140: Allow using Flash Loader with Rev>1
+- MSPSWSP-142: Flash Loader is not programming A3_CAN Rev1
+
+Version:
+1.2.0.4
+Author:
+a0272600
+Date:
+- 11/18/2022
+Changes implemented:
+- MSPM0SP-83: Add option to skip Device ID checking
+- MSPSWSP-86: Change error description when NON-MAIN is written without being 
+              erased
+  MSPSWSP-87: Avoid writes to xPSR in Flash Loader
+  MSPSWSP-88: Disable interrupts in Flash Loader
+  MSPSWSP-94: Validate rev in Flash loader
+  MSPSWSP-90: Validate DriverLib in Flash Loader
+  MSPSWSP-88: Disable Interrupts in Flash Loader
+
+Version:
+1.1.0.x
+Author:
+a0272600
+Date:
+- 02/25/2022
+Changes implemented:
+- MSPM0FL-11: Fix Linux build
+- MSPM0FL-12: Validate Device ID before programming
+- MSPM0FL-13: Throw error if memory is not aligned to 64-bits
+- MSPM0FL-10: Fix device not resetting properly before/after Flashing
+- MSPM0FL-8:  Prevent write access to non-Main unless it's erased
+- Cleanup of messages
+
+Version:
+1.0.0.x
+Author:
+a0272600
+Date:
+- 12/17/2021
+Changes implemented:
+- First implementation released in Support package

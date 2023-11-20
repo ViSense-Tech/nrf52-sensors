@@ -1,0 +1,37 @@
+<module name="PCIE1_CORE_VMAP_MMRS" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="PCIE_VMAP_CTRL_j" acronym="PCIE_VMAP_CTRL_j" offset="0x0" width="32" description="Control register Offset = 0h + (j * Ch); where j = 0h to 1Fh">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="ID enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_VMAP_REQID_j" acronym="PCIE_VMAP_REQID_j" offset="0x4" width="32" description="Requester ID mask and value register Offset = 4h + (j * Ch); where j = 0h to 1Fh">
+    <bitfield id="MASK" width="16" begin="31" end="16" resetval="0x0" description="RequesterID mask" range="" rwaccess="RW"/>
+    <bitfield id="RID" width="16" begin="15" end="0" resetval="0x0" description="RequesterID" range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_VMAP_VIRTID_j" acronym="PCIE_VMAP_VIRTID_j" offset="0x8" width="32" description="Virt ID and Atype register Offset = 8h + (j * Ch); where j = 0h to 1Fh">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ATYPE" width="2" begin="17" end="16" resetval="0x0" description="Address type attribute." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VID" width="12" begin="11" end="0" resetval="0xFFF" description="Match ID" range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_VMAP_DEFMAP" acronym="PCIE_VMAP_DEFMAP" offset="0x200" width="32" description="virtID default value register">
+    <bitfield id="RESERVED" width="11" begin="31" end="21" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ATS_DIS" width="1" begin="20" end="20" resetval="0x0" description="ATS mode." range="" rwaccess="RW"/>
+    <bitfield id="BDF_MODE" width="1" begin="19" end="19" resetval="0x0" description="Bus default mode." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="18" end="18" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="DEF_ATYPE" width="2" begin="17" end="16" resetval="0x0" description="Default address type attribute." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="DEF_VID" width="12" begin="11" end="0" resetval="0xFFF" description="Default match ID" range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_VMAP_DESC_j" acronym="PCIE_VMAP_DESC_j" offset="0x300" width="32" description="Return to the . Outbound ASEL non-zero descriptor register Offset = 300h + (j * 4h); where j = 0h to 1Fh">
+    <bitfield id="TRAFFIC_CLASS" width="3" begin="31" end="29" resetval="0x0" description="PCIe Traffic Class (TC) associated with the non-zero ASEL request." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="28" end="17" resetval="0xX" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="BD_EN" width="1" begin="16" end="16" resetval="0x0" description="External bus and device number enable.This bit enables the client to supply the bus and device numbers to be used in the requester ID. If this bit is 0, the core uses the captured values of the bus and device numbers to form the Requester ID. If this bit is 1, the core uses the bus and device numbers supplied by the client on dev_func_num[7:4] and bus_num[15:8] to form the Requester ID. This bit must always be set while originating requests in the RP mode, and the corresponding Requester ID must be placed on dev_func_num[7:4] and bus_num[15:8]." range="" rwaccess="RW"/>
+    <bitfield id="BUS_NUM" width="8" begin="15" end="8" resetval="0x0" description="PCI Bus Number associated with the request.When descriptor bit[16] is set, this field must specify the bus number to be used for the Requester ID. Otherwise, this field is ignored by the core." range="" rwaccess="RW"/>
+    <bitfield id="DEV_FUNC_NUM" width="8" begin="7" end="0" resetval="0x0" description="PCI Function and Device Number associated with the request.In ARI mode, all 8 bits are used to indicate the requesting function number. In legacy mode, only bits[3:0] are used to specify function number and bits[7:4] are used to specify the device number to be used within the Requester ID, if the descriptor bit[16] is set. If the descriptor bit[16] is not set, then bits[7:4] are ignored." range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_VMAP_OB_VIRTID_MATCH" acronym="PCIE_VMAP_OB_VIRTID_MATCH" offset="0x400" width="32" description="Return to the . Outbound virtid match register">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0xX" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="VAL" width="7" begin="11" end="5" resetval="0x0" description="Outbound virtid [11:5] match value.When outbound VBUSM slave interface virtid [11:5] matches the value in this register and the ASEL value is non-zero, the PCIe controller address translation unit (ATU) is bypassed. The PCIe TLP descriptor values are taken from the ext_desc registers." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="4" end="0" resetval="0xX" description="Reserved" range="" rwaccess="R"/>
+  </register>
+</module>

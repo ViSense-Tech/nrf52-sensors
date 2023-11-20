@@ -1,0 +1,520 @@
+<module name="DSS0_WB" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="DISPC_0_WB_ACCUH_0" acronym="DISPC_0_WB_ACCUH_0" offset="0x0" width="32" description="">
+		<bitfield id="HORIZONTALACCU" width="24" begin="23" end="0" resetval="0x0" description="Horizontal initialization accu signed value" range="23 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_ACCUH_1" acronym="DISPC_0_WB_ACCUH_1" offset="0x4" width="32" description="">
+		<bitfield id="HORIZONTALACCU" width="24" begin="23" end="0" resetval="0x0" description="Horizontal initialization accu signed value" range="23 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_ACCUH2_0" acronym="DISPC_0_WB_ACCUH2_0" offset="0x8" width="32" description="">
+		<bitfield id="HORIZONTALACCU" width="24" begin="23" end="0" resetval="0x0" description="Horizontal initialization accu signed value" range="23 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_ACCUH2_1" acronym="DISPC_0_WB_ACCUH2_1" offset="0xC" width="32" description="">
+		<bitfield id="HORIZONTALACCU" width="24" begin="23" end="0" resetval="0x0" description="Horizontal initialization accu signed value" range="23 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_ACCUV_0" acronym="DISPC_0_WB_ACCUV_0" offset="0x10" width="32" description="">
+		<bitfield id="VERTICALACCU" width="24" begin="23" end="0" resetval="0x0" description="Vertical initialization accu signed value" range="23 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_ACCUV_1" acronym="DISPC_0_WB_ACCUV_1" offset="0x14" width="32" description="">
+		<bitfield id="VERTICALACCU" width="24" begin="23" end="0" resetval="0x0" description="Vertical initialization accu signed value" range="23 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_ACCUV2_0" acronym="DISPC_0_WB_ACCUV2_0" offset="0x18" width="32" description="">
+		<bitfield id="VERTICALACCU" width="24" begin="23" end="0" resetval="0x0" description="Vertical initialization accu signed value" range="23 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_ACCUV2_1" acronym="DISPC_0_WB_ACCUV2_1" offset="0x1C" width="32" description="">
+		<bitfield id="VERTICALACCU" width="24" begin="23" end="0" resetval="0x0" description="Vertical initialization accu signed value" range="23 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_ATTRIBUTES" acronym="DISPC_0_WB_ATTRIBUTES" offset="0x20" width="32" description="">
+		<bitfield id="IDLENUMBER" width="4" begin="31" end="28" resetval="0x0" description="Determines the number of idles between requests on the L3 interconnect. It is only used when the write-back pipeline does data transfer from memory to memory. When the output of an overlay is stored in memory through the write-back pipeline in capture mode, the bit-field IDLENUMBER is ignored since a timing generator is used to time the transfer The number of IDLE cycles is IDLENUMBER [from 0 to 15] if IDLESIZE=0 The number of IDLE cycles is IDLENUMBERx8 [from 0 to 120] if IDLESIZE=1" range="31 - 28" rwaccess="R/W"/> 
+		<bitfield id="IDLESIZE" width="1" begin="27" end="27" resetval="0x0" description="Determines if the IDLENUMBER corresponds to a number of bursts or singles" range="27" rwaccess="R/W"/> 
+		<bitfield id="CAPTUREMODE" width="3" begin="26" end="24" resetval="0x0" description="Defines the frame rate capture" range="26 - 24" rwaccess="R/W"/> 
+		<bitfield id="ARBITRATION" width="1" begin="23" end="23" resetval="0x0" description="Determines the priority of the write-back pipeline. The write-back pipeline is one of the high priority pipelines. The arbitration gives always the priority first to the high priority pipelines using round-robin between them When there are only normal priority pipelines sending requests, the round-robin applies between them" range="23" rwaccess="R/W"/> 
+		<bitfield id="VERTICALTAPS" width="1" begin="21" end="21" resetval="0x0" description="Video Vertical Resize Tap Number" range="21" rwaccess="R/W"/> 
+		<bitfield id="GOBIT" width="1" begin="20" end="20" resetval="0x0" description="GO Command for the WB output. It is used to synchronize the pipelines associated with the WB output wr:immediate" range="20" rwaccess="R/W"/> 
+		<bitfield id="WRITEBACKMODE" width="1" begin="19" end="19" resetval="0x0" description="When connected to the overlay output of a channel the write back can operate as a simple transfer from memory to memory [composition engine] or as a capture channel" range="19" rwaccess="R/W"/> 
+		<bitfield id="FULLRANGE" width="1" begin="12" end="12" resetval="0x0" description="Color Space Conversion full range setting" range="12" rwaccess="R/W"/> 
+		<bitfield id="COLORCONVENABLE" width="1" begin="11" end="11" resetval="0x0" description="Enable the color space conversion. The HW does not enable/disable the conversion based on the pixel format. The bit-field shall be reset when the format is not YUV" range="11" rwaccess="R/W"/> 
+		<bitfield id="ALPHAENABLE" width="1" begin="9" end="9" resetval="0x0" description="Alpha enable on WB output" range="9" rwaccess="R/W"/> 
+		<bitfield id="RESIZEENABLE" width="2" begin="8" end="7" resetval="0x0" description="Resize Enable" range="8 - 7" rwaccess="R/W"/> 
+		<bitfield id="FORMAT" width="6" begin="6" end="1" resetval="0x0" description="Write-back Format. It defines the pixel format when storing the write-back picture into memory" range="6 - 1" rwaccess="R/W"/> 
+		<bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Write-back Enable wr: immediate" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_ATTRIBUTES2" acronym="DISPC_0_WB_ATTRIBUTES2" offset="0x24" width="32" description="">
+		<bitfield id="TAGS" width="5" begin="30" end="26" resetval="0x15" description="Number of OCP TAGS to be used for the pipeline [0x0 to 0xF]. A value of '0' means a single tag will be used. A value of 'F' means all 16 tags can be used" range="30 - 26" rwaccess="R/W"/> 
+		<bitfield id="YUV_ALIGN" width="1" begin="10" end="10" resetval="0x0" description="Alignment [MSB or LSB align] for unpacked 10b/12b YUV data" range="10" rwaccess="R/W"/> 
+		<bitfield id="YUV_MODE" width="1" begin="9" end="9" resetval="0x0" description="Mode of packing for YUV data [only for 10b/12b formats]" range="9" rwaccess="R/W"/> 
+		<bitfield id="YUV_SIZE" width="2" begin="8" end="7" resetval="0x0" description="Size of YUV data 8b/10b/12b" range="8 - 7" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_BA_0" acronym="DISPC_0_WB_BA_0" offset="0x28" width="32" description="">
+		<bitfield id="BA" width="32" begin="31" end="0" resetval="0x0" description="Write-back base address Base address of the WB buffer [aligned on pixel size boundary except in case of RGB24 packed format, where 4-pixel alignment is required. In case of YUV422, 2-pixel alignment is required, and YUV420, byte alignment is supported]] In case of YUV 4:2:0 format, it indicates the base address of the Y buffer" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_BA_1" acronym="DISPC_0_WB_BA_1" offset="0x2C" width="32" description="">
+		<bitfield id="BA" width="32" begin="31" end="0" resetval="0x0" description="Write-back base address Base address of the WB buffer [aligned on pixel size boundary except in case of RGB24 packed format, where 4-pixel alignment is required. In case of YUV422, 2-pixel alignment is required, and YUV420, byte alignment is supported]] In case of YUV 4:2:0 format, it indicates the base address of the Y buffer" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_BA_UV_0" acronym="DISPC_0_WB_BA_UV_0" offset="0x30" width="32" description="">
+		<bitfield id="BA" width="32" begin="31" end="0" resetval="0x0" description="WB base address aligned on 16-bit boundary. Base address of the UV WB buffer" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_BA_UV_1" acronym="DISPC_0_WB_BA_UV_1" offset="0x34" width="32" description="">
+		<bitfield id="BA" width="32" begin="31" end="0" resetval="0x0" description="WB base address aligned on 16-bit boundary. Base address of the UV WB buffer" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_BUF_SIZE_STATUS" acronym="DISPC_0_WB_BUF_SIZE_STATUS" offset="0x38" width="32" description="">
+		<bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="Write 0's for future compatibility. Reads return 0" range="31 - 16" rwaccess="R"/> 
+		<bitfield id="BUFSIZE" width="16" begin="15" end="0" resetval="0x4096" description="DMA buffer Size in number of 128-bits" range="15 - 0" rwaccess="R"/>
+	</register>
+	<register id="DISPC_0_WB_BUF_THRESHOLD" acronym="DISPC_0_WB_BUF_THRESHOLD" offset="0x3C" width="32" description="">
+		<bitfield id="BUFHIGHTHRESHOLD" width="16" begin="31" end="16" resetval="0x4095" description="DMA buffer High Threshold Number of 128-bits defining the threshold value" range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="BUFLOWTHRESHOLD" width="16" begin="15" end="0" resetval="0x4088" description="DMA buffer High Threshold Number of 128-bits defining the threshold value" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_CSC_COEF0" acronym="DISPC_0_WB_CSC_COEF0" offset="0x40" width="32" description="">
+		<bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="31 - 27" rwaccess="R"/> 
+		<bitfield id="C01" width="11" begin="26" end="16" resetval="0x0" description="C01 Coefficient. Encoded signed value [from -1024 to 1023]" range="26 - 16" rwaccess="R/W"/> 
+		<bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="15 - 11" rwaccess="R"/> 
+		<bitfield id="C00" width="11" begin="10" end="0" resetval="0x0" description="C00 Coefficient. Encoded signed value [from -1024 to 1023]" range="10 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_CSC_COEF1" acronym="DISPC_0_WB_CSC_COEF1" offset="0x44" width="32" description="">
+		<bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="31 - 27" rwaccess="R"/> 
+		<bitfield id="C10" width="11" begin="26" end="16" resetval="0x0" description="C10 Coefficient. Encoded signed value [from -1024 to 1023]" range="26 - 16" rwaccess="R/W"/> 
+		<bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="15 - 11" rwaccess="R"/> 
+		<bitfield id="C02" width="11" begin="10" end="0" resetval="0x0" description="C02 Coefficient. Encoded signed value [from -1024 to 1023]" range="10 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_CSC_COEF2" acronym="DISPC_0_WB_CSC_COEF2" offset="0x48" width="32" description="">
+		<bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="31 - 27" rwaccess="R"/> 
+		<bitfield id="C12" width="11" begin="26" end="16" resetval="0x0" description="C12 Coefficient. Encoded signed value [from -1024 to 1023]" range="26 - 16" rwaccess="R/W"/> 
+		<bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="15 - 11" rwaccess="R"/> 
+		<bitfield id="C11" width="11" begin="10" end="0" resetval="0x0" description="C11 Coefficient. Encoded signed value [from -1024 to 1023]" range="10 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_CSC_COEF3" acronym="DISPC_0_WB_CSC_COEF3" offset="0x4C" width="32" description="">
+		<bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="31 - 27" rwaccess="R"/> 
+		<bitfield id="C21" width="11" begin="26" end="16" resetval="0x0" description="C21 coefficient. Encoded signed value [from -1024 to 1023]" range="26 - 16" rwaccess="R/W"/> 
+		<bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="15 - 11" rwaccess="R"/> 
+		<bitfield id="C20" width="11" begin="10" end="0" resetval="0x0" description="C20 coefficient. Encoded signed value [from -1024 to 1023]" range="10 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_CSC_COEF4" acronym="DISPC_0_WB_CSC_COEF4" offset="0x50" width="32" description="">
+		<bitfield id="RESERVED" width="21" begin="31" end="11" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="31 - 11" rwaccess="R"/> 
+		<bitfield id="C22" width="11" begin="10" end="0" resetval="0x0" description="C22 Coefficient. Encoded signed value [from -1024 to 1023]" range="10 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_CSC_COEF5" acronym="DISPC_0_WB_CSC_COEF5" offset="0x54" width="32" description="">
+		<bitfield id="PREOFFSET2" width="13" begin="31" end="19" resetval="0x0" description="Row-2 pre-offset. Encoded signed value [from -4096 to 4095]" range="31 - 19" rwaccess="R/W"/> 
+		<bitfield id="PREOFFSET1" width="13" begin="15" end="3" resetval="0x0" description="Row1 pre-offset. Encoded signed value [from -4096 to 4095]" range="15 - 3" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_CSC_COEF6" acronym="DISPC_0_WB_CSC_COEF6" offset="0x58" width="32" description="">
+		<bitfield id="POSTOFFSET1" width="13" begin="31" end="19" resetval="0x0" description="Row-1 post-offset. Encoded signed value [from -4096 to 4095]" range="31 - 19" rwaccess="R/W"/> 
+		<bitfield id="PREOFFSET3" width="13" begin="15" end="3" resetval="0x0" description="Row-3 pre-offset. Encoded signed value [from -4096 to 4095]" range="15 - 3" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIRH" acronym="DISPC_0_WB_FIRH" offset="0x5C" width="32" description="">
+		<bitfield id="FIRHINC" width="24" begin="23" end="0" resetval="0x2097152" description="Horizontal increment of the up/down-sampling filter. The value 0 is invalid" range="23 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIRH2" acronym="DISPC_0_WB_FIRH2" offset="0x60" width="32" description="">
+		<bitfield id="FIRHINC" width="24" begin="23" end="0" resetval="0x2097152" description="Horizontal increment of the up/down-sampling filter for Cb and Cr. The value 0 is invalid" range="23 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIRV" acronym="DISPC_0_WB_FIRV" offset="0x64" width="32" description="">
+		<bitfield id="FIRVINC" width="24" begin="23" end="0" resetval="0x2097152" description="Vertical increment of the up/down-sampling filter. The value 0 is invalid" range="23 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIRV2" acronym="DISPC_0_WB_FIRV2" offset="0x68" width="32" description="">
+		<bitfield id="FIRVINC" width="24" begin="23" end="0" resetval="0x2097152" description="Vertical increment of the up/down-sampling filter for Cb and Cr. The value 0 is invalid" range="23 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H0_0" acronym="DISPC_0_WB_FIR_COEF_H0_0" offset="0x6C" width="32" description="">
+		<bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H0_1" acronym="DISPC_0_WB_FIR_COEF_H0_1" offset="0x70" width="32" description="">
+		<bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H0_2" acronym="DISPC_0_WB_FIR_COEF_H0_2" offset="0x74" width="32" description="">
+		<bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H0_3" acronym="DISPC_0_WB_FIR_COEF_H0_3" offset="0x78" width="32" description="">
+		<bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H0_4" acronym="DISPC_0_WB_FIR_COEF_H0_4" offset="0x7C" width="32" description="">
+		<bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H0_5" acronym="DISPC_0_WB_FIR_COEF_H0_5" offset="0x80" width="32" description="">
+		<bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H0_6" acronym="DISPC_0_WB_FIR_COEF_H0_6" offset="0x84" width="32" description="">
+		<bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H0_7" acronym="DISPC_0_WB_FIR_COEF_H0_7" offset="0x88" width="32" description="">
+		<bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H0_8" acronym="DISPC_0_WB_FIR_COEF_H0_8" offset="0x8C" width="32" description="">
+		<bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H0_C_0" acronym="DISPC_0_WB_FIR_COEF_H0_C_0" offset="0x90" width="32" description="">
+		<bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H0_C_1" acronym="DISPC_0_WB_FIR_COEF_H0_C_1" offset="0x94" width="32" description="">
+		<bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H0_C_2" acronym="DISPC_0_WB_FIR_COEF_H0_C_2" offset="0x98" width="32" description="">
+		<bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H0_C_3" acronym="DISPC_0_WB_FIR_COEF_H0_C_3" offset="0x9C" width="32" description="">
+		<bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H0_C_4" acronym="DISPC_0_WB_FIR_COEF_H0_C_4" offset="0xA0" width="32" description="">
+		<bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H0_C_5" acronym="DISPC_0_WB_FIR_COEF_H0_C_5" offset="0xA4" width="32" description="">
+		<bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H0_C_6" acronym="DISPC_0_WB_FIR_COEF_H0_C_6" offset="0xA8" width="32" description="">
+		<bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H0_C_7" acronym="DISPC_0_WB_FIR_COEF_H0_C_7" offset="0xAC" width="32" description="">
+		<bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H0_C_8" acronym="DISPC_0_WB_FIR_COEF_H0_C_8" offset="0xB0" width="32" description="">
+		<bitfield id="FIRHC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the horizontal up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_0" acronym="DISPC_0_WB_FIR_COEF_H12_0" offset="0xB4" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_1" acronym="DISPC_0_WB_FIR_COEF_H12_1" offset="0xB8" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_2" acronym="DISPC_0_WB_FIR_COEF_H12_2" offset="0xBC" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_3" acronym="DISPC_0_WB_FIR_COEF_H12_3" offset="0xC0" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_4" acronym="DISPC_0_WB_FIR_COEF_H12_4" offset="0xC4" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_5" acronym="DISPC_0_WB_FIR_COEF_H12_5" offset="0xC8" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_6" acronym="DISPC_0_WB_FIR_COEF_H12_6" offset="0xCC" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_7" acronym="DISPC_0_WB_FIR_COEF_H12_7" offset="0xD0" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_8" acronym="DISPC_0_WB_FIR_COEF_H12_8" offset="0xD4" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_9" acronym="DISPC_0_WB_FIR_COEF_H12_9" offset="0xD8" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_10" acronym="DISPC_0_WB_FIR_COEF_H12_10" offset="0xDC" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_11" acronym="DISPC_0_WB_FIR_COEF_H12_11" offset="0xE0" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_12" acronym="DISPC_0_WB_FIR_COEF_H12_12" offset="0xE4" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_13" acronym="DISPC_0_WB_FIR_COEF_H12_13" offset="0xE8" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_14" acronym="DISPC_0_WB_FIR_COEF_H12_14" offset="0xEC" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_15" acronym="DISPC_0_WB_FIR_COEF_H12_15" offset="0xF0" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_C_0" acronym="DISPC_0_WB_FIR_COEF_H12_C_0" offset="0xF4" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_C_1" acronym="DISPC_0_WB_FIR_COEF_H12_C_1" offset="0xF8" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_C_2" acronym="DISPC_0_WB_FIR_COEF_H12_C_2" offset="0xFC" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_C_3" acronym="DISPC_0_WB_FIR_COEF_H12_C_3" offset="0x100" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_C_4" acronym="DISPC_0_WB_FIR_COEF_H12_C_4" offset="0x104" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_C_5" acronym="DISPC_0_WB_FIR_COEF_H12_C_5" offset="0x108" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_C_6" acronym="DISPC_0_WB_FIR_COEF_H12_C_6" offset="0x10C" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_C_7" acronym="DISPC_0_WB_FIR_COEF_H12_C_7" offset="0x110" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_C_8" acronym="DISPC_0_WB_FIR_COEF_H12_C_8" offset="0x114" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_C_9" acronym="DISPC_0_WB_FIR_COEF_H12_C_9" offset="0x118" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_C_10" acronym="DISPC_0_WB_FIR_COEF_H12_C_10" offset="0x11C" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_C_11" acronym="DISPC_0_WB_FIR_COEF_H12_C_11" offset="0x120" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_C_12" acronym="DISPC_0_WB_FIR_COEF_H12_C_12" offset="0x124" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_C_13" acronym="DISPC_0_WB_FIR_COEF_H12_C_13" offset="0x128" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_C_14" acronym="DISPC_0_WB_FIR_COEF_H12_C_14" offset="0x12C" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_H12_C_15" acronym="DISPC_0_WB_FIR_COEF_H12_C_15" offset="0x130" width="32" description="">
+		<bitfield id="FIRHC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the horizontal up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRHC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the horizontal up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V0_0" acronym="DISPC_0_WB_FIR_COEF_V0_0" offset="0x134" width="32" description="">
+		<bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V0_1" acronym="DISPC_0_WB_FIR_COEF_V0_1" offset="0x138" width="32" description="">
+		<bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V0_2" acronym="DISPC_0_WB_FIR_COEF_V0_2" offset="0x13C" width="32" description="">
+		<bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V0_3" acronym="DISPC_0_WB_FIR_COEF_V0_3" offset="0x140" width="32" description="">
+		<bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V0_4" acronym="DISPC_0_WB_FIR_COEF_V0_4" offset="0x144" width="32" description="">
+		<bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V0_5" acronym="DISPC_0_WB_FIR_COEF_V0_5" offset="0x148" width="32" description="">
+		<bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V0_6" acronym="DISPC_0_WB_FIR_COEF_V0_6" offset="0x14C" width="32" description="">
+		<bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V0_7" acronym="DISPC_0_WB_FIR_COEF_V0_7" offset="0x150" width="32" description="">
+		<bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V0_8" acronym="DISPC_0_WB_FIR_COEF_V0_8" offset="0x154" width="32" description="">
+		<bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V0_C_0" acronym="DISPC_0_WB_FIR_COEF_V0_C_0" offset="0x158" width="32" description="">
+		<bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V0_C_1" acronym="DISPC_0_WB_FIR_COEF_V0_C_1" offset="0x15C" width="32" description="">
+		<bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V0_C_2" acronym="DISPC_0_WB_FIR_COEF_V0_C_2" offset="0x160" width="32" description="">
+		<bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V0_C_3" acronym="DISPC_0_WB_FIR_COEF_V0_C_3" offset="0x164" width="32" description="">
+		<bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V0_C_4" acronym="DISPC_0_WB_FIR_COEF_V0_C_4" offset="0x168" width="32" description="">
+		<bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V0_C_5" acronym="DISPC_0_WB_FIR_COEF_V0_C_5" offset="0x16C" width="32" description="">
+		<bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V0_C_6" acronym="DISPC_0_WB_FIR_COEF_V0_C_6" offset="0x170" width="32" description="">
+		<bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V0_C_7" acronym="DISPC_0_WB_FIR_COEF_V0_C_7" offset="0x174" width="32" description="">
+		<bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V0_C_8" acronym="DISPC_0_WB_FIR_COEF_V0_C_8" offset="0x178" width="32" description="">
+		<bitfield id="FIRVC0" width="10" begin="9" end="0" resetval="0x0" description="Unsigned coefficient C0 for the vertical up/down-scaling with the phase n" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_0" acronym="DISPC_0_WB_FIR_COEF_V12_0" offset="0x17C" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_1" acronym="DISPC_0_WB_FIR_COEF_V12_1" offset="0x180" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_2" acronym="DISPC_0_WB_FIR_COEF_V12_2" offset="0x184" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_3" acronym="DISPC_0_WB_FIR_COEF_V12_3" offset="0x188" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_4" acronym="DISPC_0_WB_FIR_COEF_V12_4" offset="0x18C" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_5" acronym="DISPC_0_WB_FIR_COEF_V12_5" offset="0x190" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_6" acronym="DISPC_0_WB_FIR_COEF_V12_6" offset="0x194" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_7" acronym="DISPC_0_WB_FIR_COEF_V12_7" offset="0x198" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_8" acronym="DISPC_0_WB_FIR_COEF_V12_8" offset="0x19C" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_9" acronym="DISPC_0_WB_FIR_COEF_V12_9" offset="0x1A0" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_10" acronym="DISPC_0_WB_FIR_COEF_V12_10" offset="0x1A4" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_11" acronym="DISPC_0_WB_FIR_COEF_V12_11" offset="0x1A8" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_12" acronym="DISPC_0_WB_FIR_COEF_V12_12" offset="0x1AC" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_13" acronym="DISPC_0_WB_FIR_COEF_V12_13" offset="0x1B0" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_14" acronym="DISPC_0_WB_FIR_COEF_V12_14" offset="0x1B4" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_15" acronym="DISPC_0_WB_FIR_COEF_V12_15" offset="0x1B8" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_C_0" acronym="DISPC_0_WB_FIR_COEF_V12_C_0" offset="0x1BC" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_C_1" acronym="DISPC_0_WB_FIR_COEF_V12_C_1" offset="0x1C0" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_C_2" acronym="DISPC_0_WB_FIR_COEF_V12_C_2" offset="0x1C4" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_C_3" acronym="DISPC_0_WB_FIR_COEF_V12_C_3" offset="0x1C8" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_C_4" acronym="DISPC_0_WB_FIR_COEF_V12_C_4" offset="0x1CC" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_C_5" acronym="DISPC_0_WB_FIR_COEF_V12_C_5" offset="0x1D0" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_C_6" acronym="DISPC_0_WB_FIR_COEF_V12_C_6" offset="0x1D4" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_C_7" acronym="DISPC_0_WB_FIR_COEF_V12_C_7" offset="0x1D8" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_C_8" acronym="DISPC_0_WB_FIR_COEF_V12_C_8" offset="0x1DC" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_C_9" acronym="DISPC_0_WB_FIR_COEF_V12_C_9" offset="0x1E0" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_C_10" acronym="DISPC_0_WB_FIR_COEF_V12_C_10" offset="0x1E4" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_C_11" acronym="DISPC_0_WB_FIR_COEF_V12_C_11" offset="0x1E8" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_C_12" acronym="DISPC_0_WB_FIR_COEF_V12_C_12" offset="0x1EC" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_C_13" acronym="DISPC_0_WB_FIR_COEF_V12_C_13" offset="0x1F0" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_C_14" acronym="DISPC_0_WB_FIR_COEF_V12_C_14" offset="0x1F4" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_FIR_COEF_V12_C_15" acronym="DISPC_0_WB_FIR_COEF_V12_C_15" offset="0x1F8" width="32" description="">
+		<bitfield id="FIRVC2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2 for the vertical up/down-scaling with the phase n" range="29 - 20" rwaccess="R/W"/> 
+		<bitfield id="FIRVC1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1 for the vertical up/down-scaling with the phase n" range="19 - 10" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_MFLAG_THRESHOLD" acronym="DISPC_0_WB_MFLAG_THRESHOLD" offset="0x204" width="32" description="">
+		<bitfield id="HT_MFLAG" width="16" begin="31" end="16" resetval="0x0" description="MFlag High Threshold" range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="LT_MFLAG" width="16" begin="15" end="0" resetval="0x0" description="MFlag Low Threshold" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_PICTURE_SIZE" acronym="DISPC_0_WB_PICTURE_SIZE" offset="0x208" width="32" description="">
+		<bitfield id="MEMSIZEY" width="14" begin="29" end="16" resetval="0x0" description="Number of lines of the wb picture in memory Encoded value [from 1 to 16384] to specify the number of lines of the picture store in memory [program to value minus one]" range="29 - 16" rwaccess="R/W"/> 
+		<bitfield id="MEMSIZEX" width="14" begin="13" end="0" resetval="0x0" description="Number of pixels of the wb picture in memory Encoded value [from 1 to 16384] to specify the number of pixels of the picture stored in memory [program to value minus one]" range="13 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_SIZE" acronym="DISPC_0_WB_SIZE" offset="0x210" width="32" description="">
+		<bitfield id="SIZEY" width="14" begin="29" end="16" resetval="0x0" description="Number of lines of the Write-back picture Encoded value [from 1 to 16384] to specify the number of lines of the write-back picture from overlay or pipeline" range="29 - 16" rwaccess="R/W"/> 
+		<bitfield id="SIZEX" width="14" begin="13" end="0" resetval="0x0" description="Number of pixels of the Write-back picture Encoded value [from 1 to 16384] to specify the number of pixels of the write-back picture from overlay or pipeline" range="13 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_POSITION" acronym="DISPC_0_WB_POSITION" offset="0x214" width="32" description="">
+		<bitfield id="POSY" width="14" begin="29" end="16" resetval="0x0" description="Y position of the video window Encoded value [from 0 to 16384] to specify the Y position of the video window  1 The line at the top has the Y-position 0" range="29 - 16" rwaccess="R/W"/> 
+		<bitfield id="POSX" width="14" begin="13" end="0" resetval="0x0" description="X position of the video window Encoded value [from 0 to 16384] to specify the X position of the video window  1 The first pixel on the left of the display screen has the X-position 0" range="13 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_CSC_COEF7" acronym="DISPC_0_WB_CSC_COEF7" offset="0x21C" width="32" description="">
+		<bitfield id="POSTOFFSET3" width="13" begin="31" end="19" resetval="0x0" description="Row-3 post-offset. Encoded signed value [from -4096 to 4095]" range="31 - 19" rwaccess="R/W"/> 
+		<bitfield id="POSTOFFSET2" width="13" begin="15" end="3" resetval="0x0" description="Row-2 post-offset. Encoded signed value [from -4096 to 4095]" range="15 - 3" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_ROW_INC" acronym="DISPC_0_WB_ROW_INC" offset="0x224" width="32" description="">
+		<bitfield id="ROWINC" width="32" begin="31" end="0" resetval="0x1" description="Number of bytes to increment at the end of the row Encoded signed value [from -2^31-1 to 2^31] to specify the number of bytes to increment at the end of the row in the video buffer The value 0 is invalid The value 1 means next pixel The value 1+n*bpp means increment of n pixels The value 1- [n+1]*bpp means decrement of n pixels" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_ROW_INC_UV" acronym="DISPC_0_WB_ROW_INC_UV" offset="0x228" width="32" description="">
+		<bitfield id="ROWINC" width="32" begin="31" end="0" resetval="0x1" description="Number of bytes to increment at the end of the row Encoded signed value [from -2^31-1 to 2^31] to specify the number of bytes to increment at the end of the row in the video buffer The value 0 is invalid The value 1 means next pixel The value 1+n*bpp means increment of n pixels The value 1- [n+1]*bpp means decrement of n pixels" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_BA_EXT_0" acronym="DISPC_0_WB_BA_EXT_0" offset="0x22C" width="32" description="">
+		<bitfield id="BA_EXT" width="16" begin="15" end="0" resetval="0x0" description="Video base address extension [16 bits]. Addr extension to make the address space 48b wide" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_BA_EXT_1" acronym="DISPC_0_WB_BA_EXT_1" offset="0x230" width="32" description="">
+		<bitfield id="BA_EXT" width="16" begin="15" end="0" resetval="0x0" description="Video base address extension [16 bits]. Addr extension to make the address space 48b wide" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_BA_UV_EXT_0" acronym="DISPC_0_WB_BA_UV_EXT_0" offset="0x234" width="32" description="">
+		<bitfield id="BA_UV_EXT" width="16" begin="15" end="0" resetval="0x0" description="Video base address extension [16 bits]. Addr extension to make the address space 48b wide" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_BA_UV_EXT_1" acronym="DISPC_0_WB_BA_UV_EXT_1" offset="0x238" width="32" description="">
+		<bitfield id="BA_UV_EXT" width="16" begin="15" end="0" resetval="0x0" description="Video base address extension [16 bits]. Addr extension to make the address space 48b wide" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_WB_SECURE" acronym="DISPC_0_WB_SECURE" offset="0x248" width="32" description="">
+		<bitfield id="SECURE" width="1" begin="0" end="0" resetval="0x0" description="Secure bit" range="0" rwaccess="R/W"/>
+	</register>
+</module>

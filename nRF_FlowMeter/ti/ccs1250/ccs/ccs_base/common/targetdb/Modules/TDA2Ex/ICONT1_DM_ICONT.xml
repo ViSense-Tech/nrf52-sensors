@@ -1,0 +1,137 @@
+<module name="ICONT1_DM_ICONT" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="ICONT_DM_IRQ_EOI" acronym="ICONT_DM_IRQ_EOI" offset="0x20" width="32" description="End Of Interrupt number specification">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="LINE_NUMBER" width="1" begin="0" end="0" resetval="0x0" description="Software End Of Interrupt (EOI) control. Write number of interrupt output." range="" rwaccess="RW">
+      <bitenum value="0" id="EOI0" token="LINE_NUMBER_0_w" description="EOI for DM interrupt output"/>
+      <bitenum value="0" id="READ0" token="LINE_NUMBER_0_r" description="Reads always 0 (no EOI memory)"/>
+    </bitfield>
+  </register>
+  <register id="ICONT_DM_IRQSTATUS_RAW" acronym="ICONT_DM_IRQSTATUS_RAW" offset="0x24" width="32" description="Per-event raw interrupt status vector (DM interrupt). Raw status is set even if event is not enabled. Write 1 to set the (raw) status, mostly for debug.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0000000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="LCHN_0" width="4" begin="3" end="0" resetval="0x0" description="Settable raw status for Logical Channel n to 0 (n=NB_DM_LCH-1) For each bit of the bit field: Read 0: No event pending Read 1: Event pending Write 0: No action Write 1: Set event (debug)" range="" rwaccess="RW W1toSet"/>
+  </register>
+  <register id="ICONT_DM_IRQSTATUS" acronym="ICONT_DM_IRQSTATUS" offset="0x28" width="32" description="Per-event 'enabled' interrupt status vector (DM interrupt). Enabled status is not set unless event is enabled. Write 1 to clear the status after interrupt has been serviced (raw status gets cleared, that is, even if not enabled).">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0000000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="LCHN_0" width="4" begin="3" end="0" resetval="0x0" description="Clearable, enabled status for Logical Channel n to 0 (n=NB_DM_LCH-1) For each bit of the bit field: Read 0: No (enabled) event pending Read 1: Event pending Write 0: No action Write 1: Clear (raw) event" range="" rwaccess="RW W1toClr"/>
+  </register>
+  <register id="ICONT_DM_IRQENABLE_SET" acronym="ICONT_DM_IRQENABLE_SET" offset="0x2C" width="32" description="Per-event interrupt enable bit vector (DM interrupt). Write 1 to set (enable interrupt). Readout equal to corresponding _CLR register.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0000000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="LCHN_0" width="4" begin="3" end="0" resetval="0x0" description="Enable for Logical Channel n to 0 (n=NB_DM_LCH-1) For each bit of the bit field: Read 0: Interrupt disabled (masked) Read 1: Interrupt enabled Write 0: No action Write 1: Enable interrupt" range="" rwaccess="RW W1toSet"/>
+  </register>
+  <register id="ICONT_DM_IRQENABLE_CLR" acronym="ICONT_DM_IRQENABLE_CLR" offset="0x30" width="32" description="Per-event interrupt enable bit vector (DM interrupt). Write 1 to clear (disable interrupt). Readout equal to corresponding _SET register.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0000000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="LCHN_0" width="4" begin="3" end="0" resetval="0x0" description="Enable for Logical Channel n to 0 (n=NB_DM_LCH-1) For each bit of the bitfiled: Read 0: Interrupt disabled (masked) Read 1: Interrupt enabled Write 0: No action Write 1: Disable interrupt" range="" rwaccess="RW W1toClr"/>
+  </register>
+  <register id="ICONT_DMSOURCEADD_i_0" acronym="ICONT_DMSOURCEADD_i_0" offset="0x40" width="32" description="Data mover source address for context n (Byte address, must be aligned on 128-bit boundary)">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="SOURCEADDR" width="18" begin="17" end="0" resetval="0x00000" description="Source address of transfer" range="" rwaccess="RW"/>
+  </register>
+  <register id="ICONT_DMSOURCEADD_i_1" acronym="ICONT_DMSOURCEADD_i_1" offset="0x60" width="32" description="Data mover source address for context n (Byte address, must be aligned on 128-bit boundary)">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="SOURCEADDR" width="18" begin="17" end="0" resetval="0x00000" description="Source address of transfer" range="" rwaccess="RW"/>
+  </register>
+  <register id="ICONT_DMSOURCEADD_i_2" acronym="ICONT_DMSOURCEADD_i_2" offset="0x80" width="32" description="Data mover source address for context n (Byte address, must be aligned on 128-bit boundary)">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="SOURCEADDR" width="18" begin="17" end="0" resetval="0x00000" description="Source address of transfer" range="" rwaccess="RW"/>
+  </register>
+  <register id="ICONT_DMSOURCEADD_i_3" acronym="ICONT_DMSOURCEADD_i_3" offset="0xA0" width="32" description="Data mover source address for context n (Byte address, must be aligned on 128-bit boundary)">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="SOURCEADDR" width="18" begin="17" end="0" resetval="0x00000" description="Source address of transfer" range="" rwaccess="RW"/>
+  </register>
+  <register id="ICONT_DMDESTADD_i_0" acronym="ICONT_DMDESTADD_i_0" offset="0x44" width="32" description="Data mover destination address for context n (byte address, must be aligned on 128-bit boundary)">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="DESTADDR" width="18" begin="17" end="0" resetval="0x00000" description="Destination address of transfer" range="" rwaccess="RW"/>
+  </register>
+  <register id="ICONT_DMDESTADD_i_1" acronym="ICONT_DMDESTADD_i_1" offset="0x64" width="32" description="Data mover destination address for context n (byte address, must be aligned on 128-bit boundary)">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="DESTADDR" width="18" begin="17" end="0" resetval="0x00000" description="Destination address of transfer" range="" rwaccess="RW"/>
+  </register>
+  <register id="ICONT_DMDESTADD_i_2" acronym="ICONT_DMDESTADD_i_2" offset="0x84" width="32" description="Data mover destination address for context n (byte address, must be aligned on 128-bit boundary)">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="DESTADDR" width="18" begin="17" end="0" resetval="0x00000" description="Destination address of transfer" range="" rwaccess="RW"/>
+  </register>
+  <register id="ICONT_DMDESTADD_i_3" acronym="ICONT_DMDESTADD_i_3" offset="0xA4" width="32" description="Data mover destination address for context n (byte address, must be aligned on 128-bit boundary)">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="DESTADDR" width="18" begin="17" end="0" resetval="0x00000" description="Destination address of transfer" range="" rwaccess="RW"/>
+  </register>
+  <register id="ICONT_DMCONTEXT_i_0" acronym="ICONT_DMCONTEXT_i_0" offset="0x48" width="32" description="Data Mover Context n. A new DM transfer can be scheduled only if this register has been writen by SW.">
+    <bitfield id="RESERVED" width="11" begin="31" end="21" resetval="0x000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="END_TYPE" width="1" begin="20" end="20" resetval="0" description="1: Send End Of Logical channel notification on transfer completion 0: Do not send End Of Task notification on transfer completion" range="" rwaccess="RW"/>
+    <bitfield id="START_TYPE" width="1" begin="19" end="19" resetval="0" description="1: Transfer is scheduled on logical channel start notification 0: Transfer is scheduled on write to ICONT_DMCONTEXT register" range="" rwaccess="RW"/>
+    <bitfield id="CMD_TYPE" width="3" begin="18" end="16" resetval="0x0" description="Type of transfer" range="" rwaccess="RW">
+      <bitenum value="0" id="Transfer_from_SL2_to_DTCM" token="CMD_TYPE_0" description="Transfer from SL2 to DTCM"/>
+      <bitenum value="1" id="Transfer_from_SL2_to_ITCM" token="CMD_TYPE_1" description="Transfer from SL2 to ITCM"/>
+      <bitenum value="2" id="DTCM_DMA_IVA_2" token="CMD_TYPE_2" description="Transfer from DTCM to transversal port of DMA_IVA"/>
+      <bitenum value="3" id="SL2_DMA_IVA_3" token="CMD_TYPE_3" description="Transfer from SL2 to Transversal port of DMA_IVA"/>
+      <bitenum value="4" id="Transfer_from_DTCM_to_SL2" token="CMD_TYPE_4" description="Transfer from DTCM to SL2"/>
+      <bitenum value="5" id="reserved" token="CMD_TYPE_5" description="reserved"/>
+      <bitenum value="6" id="reserved" token="CMD_TYPE_6" description="reserved"/>
+      <bitenum value="7" id="reserved" token="CMD_TYPE_7" description="reserved"/>
+    </bitfield>
+    <bitfield id="NB_BYTE" width="16" begin="15" end="0" resetval="0x0000" description="Number of bytes to transfer (must be a multiple of 128b)" range="" rwaccess="RW"/>
+  </register>
+  <register id="ICONT_DMCONTEXT_i_1" acronym="ICONT_DMCONTEXT_i_1" offset="0x68" width="32" description="Data Mover Context n. A new DM transfer can be scheduled only if this register has been writen by SW.">
+    <bitfield id="RESERVED" width="11" begin="31" end="21" resetval="0x000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="END_TYPE" width="1" begin="20" end="20" resetval="0" description="1: Send End Of Logical channel notification on transfer completion 0: Do not send End Of Task notification on transfer completion" range="" rwaccess="RW"/>
+    <bitfield id="START_TYPE" width="1" begin="19" end="19" resetval="0" description="1: Transfer is scheduled on logical channel start notification 0: Transfer is scheduled on write to ICONT_DMCONTEXT register" range="" rwaccess="RW"/>
+    <bitfield id="CMD_TYPE" width="3" begin="18" end="16" resetval="0x0" description="Type of transfer" range="" rwaccess="RW">
+      <bitenum value="0" id="Transfer_from_SL2_to_DTCM" token="CMD_TYPE_0" description="Transfer from SL2 to DTCM"/>
+      <bitenum value="1" id="Transfer_from_SL2_to_ITCM" token="CMD_TYPE_1" description="Transfer from SL2 to ITCM"/>
+      <bitenum value="2" id="DTCM_DMA_IVA_2" token="CMD_TYPE_2" description="Transfer from DTCM to transversal port of DMA_IVA"/>
+      <bitenum value="3" id="SL2_DMA_IVA_3" token="CMD_TYPE_3" description="Transfer from SL2 to Transversal port of DMA_IVA"/>
+      <bitenum value="4" id="Transfer_from_DTCM_to_SL2" token="CMD_TYPE_4" description="Transfer from DTCM to SL2"/>
+      <bitenum value="5" id="reserved" token="CMD_TYPE_5" description="reserved"/>
+      <bitenum value="6" id="reserved" token="CMD_TYPE_6" description="reserved"/>
+      <bitenum value="7" id="reserved" token="CMD_TYPE_7" description="reserved"/>
+    </bitfield>
+    <bitfield id="NB_BYTE" width="16" begin="15" end="0" resetval="0x0000" description="Number of bytes to transfer (must be a multiple of 128b)" range="" rwaccess="RW"/>
+  </register>
+  <register id="ICONT_DMCONTEXT_i_2" acronym="ICONT_DMCONTEXT_i_2" offset="0x88" width="32" description="Data Mover Context n. A new DM transfer can be scheduled only if this register has been writen by SW.">
+    <bitfield id="RESERVED" width="11" begin="31" end="21" resetval="0x000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="END_TYPE" width="1" begin="20" end="20" resetval="0" description="1: Send End Of Logical channel notification on transfer completion 0: Do not send End Of Task notification on transfer completion" range="" rwaccess="RW"/>
+    <bitfield id="START_TYPE" width="1" begin="19" end="19" resetval="0" description="1: Transfer is scheduled on logical channel start notification 0: Transfer is scheduled on write to ICONT_DMCONTEXT register" range="" rwaccess="RW"/>
+    <bitfield id="CMD_TYPE" width="3" begin="18" end="16" resetval="0x0" description="Type of transfer" range="" rwaccess="RW">
+      <bitenum value="0" id="Transfer_from_SL2_to_DTCM" token="CMD_TYPE_0" description="Transfer from SL2 to DTCM"/>
+      <bitenum value="1" id="Transfer_from_SL2_to_ITCM" token="CMD_TYPE_1" description="Transfer from SL2 to ITCM"/>
+      <bitenum value="2" id="DTCM_DMA_IVA_2" token="CMD_TYPE_2" description="Transfer from DTCM to transversal port of DMA_IVA"/>
+      <bitenum value="3" id="SL2_DMA_IVA_3" token="CMD_TYPE_3" description="Transfer from SL2 to Transversal port of DMA_IVA"/>
+      <bitenum value="4" id="Transfer_from_DTCM_to_SL2" token="CMD_TYPE_4" description="Transfer from DTCM to SL2"/>
+      <bitenum value="5" id="reserved" token="CMD_TYPE_5" description="reserved"/>
+      <bitenum value="6" id="reserved" token="CMD_TYPE_6" description="reserved"/>
+      <bitenum value="7" id="reserved" token="CMD_TYPE_7" description="reserved"/>
+    </bitfield>
+    <bitfield id="NB_BYTE" width="16" begin="15" end="0" resetval="0x0000" description="Number of bytes to transfer (must be a multiple of 128b)" range="" rwaccess="RW"/>
+  </register>
+  <register id="ICONT_DMCONTEXT_i_3" acronym="ICONT_DMCONTEXT_i_3" offset="0xA8" width="32" description="Data Mover Context n. A new DM transfer can be scheduled only if this register has been writen by SW.">
+    <bitfield id="RESERVED" width="11" begin="31" end="21" resetval="0x000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="END_TYPE" width="1" begin="20" end="20" resetval="0" description="1: Send End Of Logical channel notification on transfer completion 0: Do not send End Of Task notification on transfer completion" range="" rwaccess="RW"/>
+    <bitfield id="START_TYPE" width="1" begin="19" end="19" resetval="0" description="1: Transfer is scheduled on logical channel start notification 0: Transfer is scheduled on write to ICONT_DMCONTEXT register" range="" rwaccess="RW"/>
+    <bitfield id="CMD_TYPE" width="3" begin="18" end="16" resetval="0x0" description="Type of transfer" range="" rwaccess="RW">
+      <bitenum value="0" id="Transfer_from_SL2_to_DTCM" token="CMD_TYPE_0" description="Transfer from SL2 to DTCM"/>
+      <bitenum value="1" id="Transfer_from_SL2_to_ITCM" token="CMD_TYPE_1" description="Transfer from SL2 to ITCM"/>
+      <bitenum value="2" id="DTCM_DMA_IVA_2" token="CMD_TYPE_2" description="Transfer from DTCM to transversal port of DMA_IVA"/>
+      <bitenum value="3" id="SL2_DMA_IVA_3" token="CMD_TYPE_3" description="Transfer from SL2 to Transversal port of DMA_IVA"/>
+      <bitenum value="4" id="Transfer_from_DTCM_to_SL2" token="CMD_TYPE_4" description="Transfer from DTCM to SL2"/>
+      <bitenum value="5" id="reserved" token="CMD_TYPE_5" description="reserved"/>
+      <bitenum value="6" id="reserved" token="CMD_TYPE_6" description="reserved"/>
+      <bitenum value="7" id="reserved" token="CMD_TYPE_7" description="reserved"/>
+    </bitfield>
+    <bitfield id="NB_BYTE" width="16" begin="15" end="0" resetval="0x0000" description="Number of bytes to transfer (must be a multiple of 128b)" range="" rwaccess="RW"/>
+  </register>
+  <register id="ICONT_DMSTATUS_i_0" acronym="ICONT_DMSTATUS_i_0" offset="0x4C" width="32" description="Data Mover status register for context n.">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0000 0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="STATUS" width="2" begin="1" end="0" resetval="0x0" description="00: LCHn is in IDLE state. Descriptor is free to be programmed (or transfer completed). 01: LCHn is in WAIT FOR HW EVENT state. Descriptor is programmed and is waiting for a hardware event in order to be queued. 10 : LCHn is in either QUEUED state, in ON GOING state, or in COMPLETED state. 11 : Reserved." range="" rwaccess="R"/>
+  </register>
+  <register id="ICONT_DMSTATUS_i_1" acronym="ICONT_DMSTATUS_i_1" offset="0x6C" width="32" description="Data Mover status register for context n.">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0000 0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="STATUS" width="2" begin="1" end="0" resetval="0x0" description="00: LCHn is in IDLE state. Descriptor is free to be programmed (or transfer completed). 01: LCHn is in WAIT FOR HW EVENT state. Descriptor is programmed and is waiting for a hardware event in order to be queued. 10 : LCHn is in either QUEUED state, in ON GOING state, or in COMPLETED state. 11 : Reserved." range="" rwaccess="R"/>
+  </register>
+  <register id="ICONT_DMSTATUS_i_2" acronym="ICONT_DMSTATUS_i_2" offset="0x8C" width="32" description="Data Mover status register for context n.">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0000 0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="STATUS" width="2" begin="1" end="0" resetval="0x0" description="00: LCHn is in IDLE state. Descriptor is free to be programmed (or transfer completed). 01: LCHn is in WAIT FOR HW EVENT state. Descriptor is programmed and is waiting for a hardware event in order to be queued. 10 : LCHn is in either QUEUED state, in ON GOING state, or in COMPLETED state. 11 : Reserved." range="" rwaccess="R"/>
+  </register>
+  <register id="ICONT_DMSTATUS_i_3" acronym="ICONT_DMSTATUS_i_3" offset="0xAC" width="32" description="Data Mover status register for context n.">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0000 0000" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="STATUS" width="2" begin="1" end="0" resetval="0x0" description="00: LCHn is in IDLE state. Descriptor is free to be programmed (or transfer completed). 01: LCHn is in WAIT FOR HW EVENT state. Descriptor is programmed and is waiting for a hardware event in order to be queued. 10 : LCHn is in either QUEUED state, in ON GOING state, or in COMPLETED state. 11 : Reserved." range="" rwaccess="R"/>
+  </register>
+</module>

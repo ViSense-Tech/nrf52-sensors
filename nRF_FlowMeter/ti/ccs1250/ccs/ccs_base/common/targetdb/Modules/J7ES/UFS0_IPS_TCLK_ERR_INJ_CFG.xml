@@ -1,0 +1,44 @@
+<module name="UFS0_IPS_TCLK_ERR_INJ_CFG" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="UFS_PID" acronym="UFS_PID" offset="0x0" width="32" description="The Revision Register contains the major and minor revisions for the module.">
+    <bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x1" description="Scheme" range="" rwaccess="R"/>
+    <bitfield id="BU" width="2" begin="29" end="28" resetval="0x2" description="Business Unit: 2h = Processors" range="" rwaccess="R"/>
+    <bitfield id="FUNC" width="12" begin="27" end="16" resetval="0x0" description="Module ID" range="" rwaccess="R"/>
+    <bitfield id="RTL" width="5" begin="15" end="11" resetval="0x0" description="RTL Revision" range="" rwaccess="R"/>
+    <bitfield id="MAJOR" width="3" begin="10" end="8" resetval="0x0" description="Major Revision" range="" rwaccess="R"/>
+    <bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom" range="" rwaccess="R"/>
+    <bitfield id="MINOR" width="6" begin="5" end="0" resetval="0x1" description="Minor Revision" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_INFO" acronym="UFS_INFO" offset="0x4" width="32" description="The Info Register gives the configuration information of the module.">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ENDPOINTS" width="2" begin="1" end="0" resetval="0x1" description="Total number of Targets supported by this configuration." range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_SFT_RST" acronym="UFS_SFT_RST" offset="0x8" width="32" description="The Global Soft Reset Register clears all programmable registers and returns the injector to idle state.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="KEY" width="4" begin="3" end="0" resetval="0x0" description="Write Ah to issue a soft reset. All other written values are ignored. Always read as 0h." range="" rwaccess="W"/>
+  </register>
+  <register id="UFS_BIT1" acronym="UFS_BIT1" offset="0x10" width="32" description="The Bit 1 Mask Register defines the first bit to be flipped when injection is enabled.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="BIT1" width="16" begin="15" end="0" resetval="0x0" description="First bit to be flipped on an error injection." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_BIT2" acronym="UFS_BIT2" offset="0x14" width="32" description="The Bit 2 Mask Register defines the second bit to be flipped if 2-bit injection is enabled.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="BIT2" width="16" begin="15" end="0" resetval="0x0" description="Second bit to be flipped on an error injection if 2-bit injection is chosen." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_TRGT" acronym="UFS_TRGT" offset="0x18" width="32" description="The Target Select Register selects which target to interact with.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="TRGT" width="1" begin="0" end="0" resetval="0x0" description="Select which target to interact with. Writes of a value higher than the number of targets supported by this configuration will have no effect." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_CTRL" acronym="UFS_CTRL" offset="0x1C" width="32" description="The Control Register controls the injection.">
+    <bitfield id="RESERVED" width="23" begin="31" end="9" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="TRGT" width="1" begin="8" end="8" resetval="0x0" description="Indicates which target is selected by theUFS_TRGT register." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="7" end="3" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="DONE" width="1" begin="2" end="2" resetval="0x0" description="Indicates that the target selected by theUFS_TRGT register has completed error injection. Th&#1077; UFS_STATUS register supersedes the armed bit." range="" rwaccess="R"/>
+    <bitfield id="TWOBIT" width="1" begin="1" end="1" resetval="0x0" description="Write 1h to trigger a 2-bit error in target selected by theUFS_TRGT register. Write 0h to finish or cancel 2-bit injection. If both 1 and 2-bit injection are set, 2-bit injection will be performed." range="" rwaccess="RW"/>
+    <bitfield id="ONEBIT" width="1" begin="0" end="0" resetval="0x0" description="Write 1h to trigger a 1-bit error in target selected by theUFS_TRGT register. Write 0h to finish or cancel 1-bit injection." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_STATUS" acronym="UFS_STATUS" offset="0x20" width="32" description="The Status Register controls the injection.">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0xR" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ARMED" width="1" begin="2" end="2" resetval="0x0" description="Indicates that the target selected by theUFS_TRGT register is ARMED for error injection." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="2" begin="1" end="0" resetval="0xR" description="Reserved" range="" rwaccess="R"/>
+  </register>
+</module>

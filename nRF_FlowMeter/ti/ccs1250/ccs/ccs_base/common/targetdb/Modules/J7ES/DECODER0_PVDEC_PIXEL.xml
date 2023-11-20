@@ -1,0 +1,270 @@
+<module name="DECODER0_PVDEC_PIXEL" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="DECODER0_CR_PIXEL_SOFT_RESET" acronym="DECODER0_CR_PIXEL_SOFT_RESET" offset="0x0" width="32" description="">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_VEC_RENDEC_DEC_SOFT_RESET" width="1" begin="28" end="28" resetval="0x0" description="Writing '1' to this bit resets the rendec/decoder of MSVDX_VEC." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="27" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_VDMC_VDEB_SOFT_RESET" width="1" begin="21" end="21" resetval="0x0" description="Performs a soft reset on the VDMC and VDEB modules." range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_VEC_BE_SOFT_RESET" width="1" begin="20" end="20" resetval="0x0" description="Writing '1' to this bit resets the back-end processing VEC modules that are:" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="19" end="19" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_PVDEC_VEC_SOFT_RESET" width="1" begin="18" end="18" resetval="0x0" description="Writing '1' to this bit resets the PVDEC_VEC, which includes" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="17" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_VEC_FE_SOFT_RESET" width="1" begin="16" end="16" resetval="0x0" description="Writing '1' to this bit resets the front-end logic of MSVDX_VEC, which includes:" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PIXEL_CONTROL_0" acronym="DECODER0_CR_PIXEL_CONTROL_0" offset="0x4" width="32" description="">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_DMAC_CH_SEL_FOR_MTX" width="3" begin="3" end="1" resetval="0x0" description="Specifies which channel is used for Embedded processor RAM read/write." range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC_DMAC_CH0_SEL" width="1" begin="0" end="0" resetval="0x0" description="This field controls how channel 0 of the DMA Controller in the 'Pixel Processing Pipe' selected by DMAC_PIPE_SELECT is used." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PIXEL_INTERRUPT_STATUS" acronym="DECODER0_CR_PIXEL_INTERRUPT_STATUS" offset="0x8" width="32" description="">
+    <bitfield id="CR_MSVDX_VEC_RENDEC_SLICE_SKIPPED" width="1" begin="31" end="31" resetval="0x0" description="Slice skip completed by vec/rendec/decoder." range="" rwaccess="RW"/>
+    <bitfield id="CR_CMD_SPACE_AVAILABLE" width="1" begin="30" end="30" resetval="0x0" description="Command buffer space available interrupt." range="" rwaccess="RW"/>
+    <bitfield id="CR_BE_WDT_CM0" width="1" begin="29" end="29" resetval="0x0" description="CompareMatch0 condition encountered by back-end Watch Dog Timer." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="28" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_FAULT_IRQ" width="1" begin="23" end="23" resetval="0x0" description="VDEB detected a potential fault condition [Pulse generated at event, held by edge detection logic]" range="" rwaccess="RW"/>
+    <bitfield id="CR_PIXEL_DMAC_IRQ" width="3" begin="22" end="20" resetval="0x0" description="The first two bits are directly correspond to DMA channels 0 and 1." range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_FLUSH_DONE_IRQ" width="1" begin="19" end="19" resetval="0x0" description="Internal VDEB buffers have been flushed [Pulse generated at event, held by edge detection logic]" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_SLICE_DONE_IRQ" width="1" begin="18" end="18" resetval="0x0" description="Deblock processing for slice is done [Pulse generated at event, held by edge detection logic]" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_PICTURE_DONE_IRQ" width="1" begin="17" end="17" resetval="0x0" description="Deblock {VDMC for JPEG} processing for picture is done." range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC_IRQ" width="1" begin="16" end="16" resetval="0x0" description="Interrupt generated from VDMC [Level, OR of status bits in VDMC status register ANDed with corresponding enables]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_FE_WDT_CM1" width="1" begin="13" end="13" resetval="0x0" description="CompareMatch1 condition encountered by front-end Watch Dog Timer." range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_FE_WDT_CM0" width="1" begin="12" end="12" resetval="0x0" description="CompareMatch0 condition encountered by front-end Watch Dog Timer." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_PVDEC_VEC_MEM_TO_REG_DONE" width="1" begin="10" end="10" resetval="0x0" description="Indicates memory to register transfer is complete." range="" rwaccess="RW"/>
+    <bitfield id="CR_PVDEC_VEC_END_OF_PICTURE" width="1" begin="9" end="9" resetval="0x0" description="Indicates PVDEC VEC BE has finished decoding the current picture from the GENC buffer [VDMC/VDEB may still be processing the picture]." range="" rwaccess="RW"/>
+    <bitfield id="CR_PVDEC_VEC_GENC_FREE" width="1" begin="8" end="8" resetval="0x0" description="Indicates GENC read buffer pointers have been updated to indicate the oldest data in the GENC buffer is no longer required." range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_VEC_RENDEC_END_OF_SLICE" width="1" begin="7" end="7" resetval="0x0" description="Notification of End Of Slice on the rendec stream." range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_VEC_RENDEC_MTXBLOCK" width="1" begin="6" end="6" resetval="0x0" description="Notification of MTX block data on the rendec stream." range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_VEC_RENDEC_UNDERFLOW" width="1" begin="5" end="5" resetval="0x0" description="The rendec stream in the allocated rendec buffer has become empty." range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_VEC_RENDEC_OVERFLOW" width="1" begin="4" end="4" resetval="0x0" description="The allocated rendec buffer has become full." range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_VEC_RENDEC_ERROR" width="1" begin="3" end="3" resetval="0x0" description="Error detected by vec/rendec block." range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_VEC_ERROR_DETECTED_ENTDEC" width="1" begin="2" end="2" resetval="0x0" description="Error detected by vec/entdec bit stream parser." range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_VEC_ERROR_DETECTED_SR" width="1" begin="1" end="1" resetval="0x0" description="Error detected on the bit stream by shift register." range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_VEC_END_OF_SLICE" width="1" begin="0" end="0" resetval="0x0" description="End of slice status bit for the VEC front-end parser." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PIXEL_INTERRUPT_CLEAR" acronym="DECODER0_CR_PIXEL_INTERRUPT_CLEAR" offset="0xC" width="32" description="">
+    <bitfield id="CR_PIXEL_IRQ_CLEAR" width="32" begin="31" end="0" resetval="0x0" description="The value read from PIXEL_INTERRUPT_STATUS register is based on 'input source' ORed with 'rising edge detection' logic." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PIXEL_HOST_INTERRUPT_ENABLE" acronym="DECODER0_CR_PIXEL_HOST_INTERRUPT_ENABLE" offset="0x10" width="32" description="">
+    <bitfield id="CR_HOST_IRQ_ENABLE" width="32" begin="31" end="0" resetval="0x0" description="Enables interrupts which will become a HOST_PIXEL_PIPE_IRQ in the PVDEC_CORE registers." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PIXEL_PROC1_INTERRUPT_ENABLE" acronym="DECODER0_CR_PIXEL_PROC1_INTERRUPT_ENABLE" offset="0x14" width="32" description="">
+    <bitfield id="CR_PROC1_IRQ_ENABLE" width="32" begin="31" end="0" resetval="0x0" description="Enables interrupts which will become a PROC1_PIXEL_PIPE_IRQ in the PVDEC_CORE registers." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PIXEL_PROC2_INTERRUPT_ENABLE" acronym="DECODER0_CR_PIXEL_PROC2_INTERRUPT_ENABLE" offset="0x18" width="32" description="">
+    <bitfield id="CR_PROC2_IRQ_ENABLE" width="32" begin="31" end="0" resetval="0x0" description="Enables interrupts which will become a PROC2_PIXEL_PIPE_IRQ in the PVDEC_CORE registers." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PIXEL_MAN_CLK_ENABLE" acronym="DECODER0_CR_PIXEL_MAN_CLK_ENABLE" offset="0x20" width="32" description="">
+    <bitfield id="CR_VDEB_ACCESS_SHARED_HLP_MAN_CLK_ENABLE" width="1" begin="31" end="31" resetval="0x0" description="Controls the clock for the shared high level parameter store of the deblocker[if this bit is set, clock is active, and AUTO_CLK_ENABLE is ignored]" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_ACCESS_SHARED_BM_MAN_CLK_ENABLE" width="1" begin="30" end="30" resetval="0x0" description="Controls the clock for the shared block memory of the deblocker[if this bit is set, clock is active, and AUTO_CLK_ENABLE is ignored]" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_SCALE_BE_MAN_CLK_ENABLE" width="1" begin="29" end="29" resetval="0x0" description="Controls the clock for the back-end logic of the deblocker scaler processing [if this bit is set, clock is active, and AUTO_CLK_ENABLE is ignored]" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_SCALE_FE_MAN_CLK_ENABLE" width="1" begin="28" end="28" resetval="0x0" description="Controls the clock for the front-end logic of the deblocker scaler processing [if this bit is set, clock is active, and AUTO_CLK_ENABLE is ignored]" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_PROCESS_PVDEC_MAN_CLK_ENABLE" width="1" begin="27" end="27" resetval="0x0" description="Controls the clock for PVDEC path of the deblocker processing [if this bit is set, clock is active, and AUTO_CLK_ENABLE is ignored]" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_PROCESS_MSVDX_2_MAN_CLK_ENABLE" width="1" begin="26" end="26" resetval="0x0" description="Controls the clock for MSVDX path domain 2 of the deblocker processing [if this bit is set, clock is active, and AUTO_CLK_ENABLE is ignored]" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_PROCESS_MSVDX_MAN_CLK_ENABLE" width="1" begin="25" end="25" resetval="0x0" description="Controls the clock for MSVDX path domain1 of the deblocker processing [if this bit is set, clock is active, and AUTO_CLK_ENABLE is ignored]" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_ACCESS_PVDEC_MAN_CLK_ENABLE" width="1" begin="24" end="24" resetval="0x0" description="Controls the clock for PVDEC path of the deblocker access [if this bit is set, clock is active, and AUTO_CLK_ENABLE is ignored]" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_ACCESS_MSVDX_MAN_CLK_ENABLE" width="1" begin="23" end="23" resetval="0x0" description="Controls the clock for MSVDX path of the deblocker access [if this bit is set, clock is active, and AUTO_CLK_ENABLE is ignored]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="22" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC4_MAN_CLK_ENABLE" width="1" begin="21" end="21" resetval="0x0" description="Controls the clock for the domain 4 in the motion compensation block [if this bit is set, clock is active, and AUTO_CLK_ENABLE is ignored]" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC3_MAN_CLK_ENABLE" width="1" begin="20" end="20" resetval="0x0" description="Controls the clock for the domain 3 in the motion compensation block [if this bit is set, clock is active, and AUTO_CLK_ENABLE is ignored]" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC2_MAN_CLK_ENABLE" width="1" begin="19" end="19" resetval="0x0" description="Controls the clock for the domain 2 in the motion compensation block [if this bit is set, clock is active, and AUTO_CLK_ENABLE is ignored]" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC1_MAN_CLK_ENABLE" width="1" begin="18" end="18" resetval="0x0" description="Controls the clock for the domain 1 in the motion compensation block [if this bit is set, clock is active, and AUTO_CLK_ENABLE is ignored]" range="" rwaccess="RW"/>
+    <bitfield id="CR_PIXEL_REG_MAN_CLK_ENABLE" width="1" begin="17" end="17" resetval="0x1" description="Controls the clock for the Pixel pipe registers [if this bit is set, clock is active, and AUTO_CLK_ENABLE is ignored]" range="" rwaccess="RW"/>
+    <bitfield id="CR_PIXEL_DMAC_MAN_CLK_ENABLE" width="1" begin="16" end="16" resetval="0x1" description="Controls the clock for the Pixel processing DMA Controller [if this bit is set, clock is active, and AUTO_CLK_ENABLE is ignored]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_PVDEC_VEC_REG_MAN_CLK_ENABLE" width="1" begin="11" end="11" resetval="0x1" description="Controls the clock for the register bankis of PVDEC_VEC_BE [if this bit is set, clock is active, and AUTO_CLK_ENABLE is ignored]" range="" rwaccess="RW"/>
+    <bitfield id="CR_PVDEC_VEC_COMMAND_MAN_CLK_ENABLE" width="1" begin="10" end="10" resetval="0x0" description="Controls the clock for the command generation logic of PVDEC_VEC_BE [if this bit is set, clock is active, and AUTO_CLK_ENABLE is ignored]" range="" rwaccess="RW"/>
+    <bitfield id="CR_PVDEC_VEC_RESIDUAL_MAN_CLK_ENABLE" width="1" begin="9" end="9" resetval="0x0" description="Controls the clock for the residual decode logic of PVDEC_VEC_BE [if this bit is set, clock is active, and AUTO_CLK_ENABLE is ignored]" range="" rwaccess="RW"/>
+    <bitfield id="CR_PVDEC_VEC_GDEC_STRUC_MAN_CLK_ENABLE" width="1" begin="8" end="8" resetval="0x0" description="Controls the clock for the GENC decoder structure read logic of PVDEC_VEC_BE [if this bit is set, clock is active, and AUTO_CLK_ENABLE is ignored]" range="" rwaccess="RW"/>
+    <bitfield id="CR_PVDEC_VEC_GDEC_FRGMT_MAN_CLK_ENABLE" width="1" begin="7" end="7" resetval="0x0" description="Controls the clock for the GENC decoder fragment read logic of PVDEC_VEC_BE [if this bit is set, clock is active, and AUTO_CLK_ENABLE is ignored]" range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_VEC_REGS_MAN_CLK_ENABLE" width="1" begin="6" end="6" resetval="0x1" description="Controls the clock for VEC's register logic [if this bit is set, clock is active, and AUTO_CLK_ENABLE is ignored]" range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_VEC_ITRANS_MAN_CLK_ENABLE" width="1" begin="5" end="5" resetval="0x0" description="Controls the clock for the MSVDX inverse transform block [if this bit is set, clock is active, and AUTO_CLK_ENABLE is ignored]" range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_VEC_BE_MAN_CLK_ENABLE" width="1" begin="4" end="4" resetval="0x0" description="Controls the clock for the back-end logic of MSVDX_VEC/ENTDEC [if this bit is set, clock is active, and AUTO_CLK_ENABLE is ignored]." range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_VEC_DEC_MAN_CLK_ENABLE" width="1" begin="3" end="3" resetval="0x0" description="Controls the clock for the rendec decoder logic of MSVDX_VEC/ENTDEC [if this bit is set, clock is active, and AUTO_CLK_ENABLE is ignored]." range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_VEC_FE_GRP2_MAN_CLK_ENABLE" width="1" begin="2" end="2" resetval="0x0" description="Controls the clock for the front-end logic for codec group 2 in MSVDX_VEC/ENTDEC [if this bit is set, clock is active, and AUTO_CLK_ENABLE is ignored]" range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_VEC_FE_GRP1_MAN_CLK_ENABLE" width="1" begin="1" end="1" resetval="0x0" description="Controls the clock for the front-end logic for codec group 1 in MSVDX_VEC/ENTDEC [if this bit is set, clock is active, and AUTO_CLK_ENABLE is ignored]" range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_VEC_FE_MAN_CLK_ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Controls the clock for the front-end common logic MSVDX_VEC/ENTDEC [if this bit is set, clock is active, and AUTO_CLK_ENABLE is ignored]" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PIXEL_AUTO_CLK_ENABLE" acronym="DECODER0_CR_PIXEL_AUTO_CLK_ENABLE" offset="0x28" width="32" description="">
+    <bitfield id="CR_VDEB_ACCESS_SHARED_HLP_AUTO_CLK_ENABLE" width="1" begin="31" end="31" resetval="0x0" description="Controls automatic clock gating for the shared high level parameter store of the deblocker[if MAN_CLK_ENABLE is clear and AUTO_CLK_ENABLE is set, clock will stop if VDEB shared HLP is idle]" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_ACCESS_SHARED_BM_AUTO_CLK_ENABLE" width="1" begin="30" end="30" resetval="0x0" description="Controls automatic clock gating for the shared block memory of the deblocker[if MAN_CLK_ENABLE is clear and AUTO_CLK_ENABLE is set, clock will stop if VDEB shared BM is idle]" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_SCALE_BE_AUTO_CLK_ENABLE" width="1" begin="29" end="29" resetval="0x0" description="Controls automatic clock gating for the back-end logic of the deblocker scaler processing [if MAN_CLK_ENABLE is clear and AUTO_CLK_ENABLE is set, clock will stop if VDEB scale BE is idle]" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_SCALE_FE_AUTO_CLK_ENABLE" width="1" begin="28" end="28" resetval="0x0" description="Controls automatic clock gating for the front-end logic of the deblocker scaler processing [if MAN_CLK_ENABLE is clear and AUTO_CLK_ENABLE is set, clock will stop if VDEB scale FE is idle]" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_PROCESS_PVDEC_AUTO_CLK_ENABLE" width="1" begin="27" end="27" resetval="0x0" description="Controls automatic clock gating for PVDEC path of the deblocker processing [if MAN_CLK_ENABLE is clear and AUTO_CLK_ENABLE is set, clock will stop if PVDEC domain process is idle]" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_PROCESS_MSVDX_2_AUTO_CLK_ENABLE" width="1" begin="26" end="26" resetval="0x0" description="Controls automatic clock gating for MSVDX path domain 2 of the deblocker processing [if MAN_CLK_ENABLE is clear and AUTO_CLK_ENABLE is set, clock will stop if MSVDX domain 2 processing is idle]" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_PROCESS_MSVDX_AUTO_CLK_ENABLE" width="1" begin="25" end="25" resetval="0x0" description="Controls automatic clock gating for MSVDX path domain1 of the deblocker processing [if MAN_CLK_ENABLE is clear and AUTO_CLK_ENABLE is set, clock will stop if MSVDX domain processing is idle]" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_ACCESS_PVDEC_AUTO_CLK_ENABLE" width="1" begin="24" end="24" resetval="0x0" description="Controls automatic clock gating for PVDEC path of the deblocker access [if MAN_CLK_ENABLE is clear and AUTO_CLK_ENABLE is set, clock will stop if PVDEC domain access is idle]" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDEB_ACCESS_MSVDX_AUTO_CLK_ENABLE" width="1" begin="23" end="23" resetval="0x0" description="Controls automatic clock gating for MSVDX path of the deblocker access [if MAN_CLK_ENABLE is clear and AUTO_CLK_ENABLE is set, clock will stop if MSVDX domain access is idle]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="22" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC4_AUTO_CLK_ENABLE" width="1" begin="21" end="21" resetval="0x0" description="Controls automatic clock gating for the domain 4 in the motion compensation block [if MAN_CLK_ENABLE is clear and AUTO_CLK_ENABLE is set, clock will stop if VDMC domain 2 is idle]" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC3_AUTO_CLK_ENABLE" width="1" begin="20" end="20" resetval="0x0" description="Controls automatic clock gating for the domain 3 in the motion compensation block [if MAN_CLK_ENABLE is clear and AUTO_CLK_ENABLE is set, clock will stop if VDMC domain 1 is idle]" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC2_AUTO_CLK_ENABLE" width="1" begin="19" end="19" resetval="0x0" description="Controls automatic clock gating for the domain 2 in the motion compensation block [if MAN_CLK_ENABLE is clear and AUTO_CLK_ENABLE is set, clock will stop if VDMC domain 1 is idle]" range="" rwaccess="RW"/>
+    <bitfield id="CR_VDMC1_AUTO_CLK_ENABLE" width="1" begin="18" end="18" resetval="0x0" description="Controls automatic clock gating for the domain 1 in the motion compensation block [if MAN_CLK_ENABLE is clear and AUTO_CLK_ENABLE is set, clock will stop if VDMC domain 1 is idle]" range="" rwaccess="RW"/>
+    <bitfield id="CR_PIXEL_REG_AUTO_CLK_ENABLE" width="1" begin="17" end="17" resetval="0x0" description="Controls automatic clock gating for the Pixel Processing registers [if MAN_CLK_ENABLE is clear and AUTO_CLK_ENABLE is set, clock will stop if Pixel Processing register access is idle]" range="" rwaccess="RW"/>
+    <bitfield id="CR_PIXEL_DMAC_AUTO_CLK_ENABLE" width="1" begin="16" end="16" resetval="0x0" description="Controls automatic clock gating for the Pixel processing DMA Controller [if MAN_CLK_ENABLE is clear and AUTO_CLK_ENABLE is set, clock will stop if DMA controller is idle]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_PVDEC_VEC_REG_AUTO_CLK_ENABLE" width="1" begin="11" end="11" resetval="0x0" description="Controls automatic clock gating for the register banks of PVDEC_VEC_BE [if MAN_CLK_ENABLE is clear and AUTO_CLK_ENABLE is set, clock will stop if Pixel Processing register access is idle]" range="" rwaccess="RW"/>
+    <bitfield id="CR_PVDEC_VEC_COMMAND_AUTO_CLK_ENABLE" width="1" begin="10" end="10" resetval="0x0" description="Controls automatic clock gating for the command generation logic of PVDEC_VEC_BE [if MAN_CLK_ENABLE is clear and AUTO_CLK_ENABLE is set, clock will stop if command generation is idle]" range="" rwaccess="RW"/>
+    <bitfield id="CR_PVDEC_VEC_RESIDUAL_AUTO_CLK_ENABLE" width="1" begin="9" end="9" resetval="0x0" description="Controls automatic clock gating for the residual decode logic of PVDEC_VEC_BE [if MAN_CLK_ENABLE is clear and AUTO_CLK_ENABLE is set, clock will stop if residual decode is idle]" range="" rwaccess="RW"/>
+    <bitfield id="CR_PVDEC_VEC_GDEC_STRUC_AUTO_CLK_ENABLE" width="1" begin="8" end="8" resetval="0x0" description="Controls automatic clock gating for the GENC decoder structure read logic of PVDEC_VEC_BE [if MAN_CLK_ENABLE is clear and AUTO_CLK_ENABLE is set, clock will stop if GENC decoder is idle]" range="" rwaccess="RW"/>
+    <bitfield id="CR_PVDEC_VEC_GDEC_FRGMT_AUTO_CLK_ENABLE" width="1" begin="7" end="7" resetval="0x0" description="Controls automatic clock gating for the GENC decoder fragment read logic of PVDEC_VEC_BE [if MAN_CLK_ENABLE is clear and AUTO_CLK_ENABLE is set, clock will stop if GENC decoder is idle]" range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_VEC_REGS_AUTO_CLK_ENABLE" width="1" begin="6" end="6" resetval="0x0" description="Controls automatic clock gating for VEC's register logic [if MAN_CLK_ENABLE is clear and AUTO_CLK_ENABLE is set, clock will stop if VEC register access is idle]" range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_VEC_ITRANS_AUTO_CLK_ENABLE" width="1" begin="5" end="5" resetval="0x0" description="Controls automatic clock gating for the MSVDX inverse transform block [if MAN_CLK_ENABLE is clear and AUTO_CLK_ENABLE is set, clock will stop if MSVDX inverse transform is idle]" range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_VEC_BE_AUTO_CLK_ENABLE" width="1" begin="4" end="4" resetval="0x0" description="Controls automatic clock gating for the back-end logic of MSVDX_VEC/ENTDEC [if MAN_CLK_ENABLE is clear and AUTO_CLK_ENABLE is set, clock will stop if MSVDX_VEC back-end is idle]" range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_VEC_DEC_AUTO_CLK_ENABLE" width="1" begin="3" end="3" resetval="0x0" description="Controls automatic clock gating for the rendec decoder logic of MSVDX_VEC/ENTDEC [if MAN_CLK_ENABLE is clear and AUTO_CLK_ENABLE is set, clock will stop if MSVDX rendec decode is idle]" range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_VEC_FE_GRP2_AUTO_CLK_ENABLE" width="1" begin="2" end="2" resetval="0x0" description="Controls automatic clock gating for the front-end logic for codec group 2 in MSVDX_VEC/ENTDEC [if MAN_CLK_ENABLE is clear and AUTO_CLK_ENABLE is set, clock will stop if MSVDX_VEC front-end group 2 is idle]" range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_VEC_FE_GRP1_AUTO_CLK_ENABLE" width="1" begin="1" end="1" resetval="0x0" description="Controls automatic clock gating for the front-end logic for codec group 1 in MSVDX_VEC/ENTDEC [if MAN_CLK_ENABLE is clear and AUTO_CLK_ENABLE is set, clock will stop if MSVDX_VEC front-end group 1 is idle]" range="" rwaccess="RW"/>
+    <bitfield id="CR_MSVDX_VEC_FE_AUTO_CLK_ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Controls automatic clock gating for the front-end common logic in MSVDX_VEC/ENTDEC [if MAN_CLK_ENABLE is clear and AUTO_CLK_ENABLE is set, clock will stop if MSVDX_VEC front-end group 1 is idle]" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PIXEL_CLK_STATUS" acronym="DECODER0_CR_PIXEL_CLK_STATUS" offset="0x30" width="32" description="">
+    <bitfield id="CR_VDEB_ACCESS_SHARED_HLP_CLK_STATUS" width="1" begin="31" end="31" resetval="0x0" description="Indicates if the clock is enabled to the shared high level parameter store of the deblocker" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_ACCESS_SHARED_BM_CLK_STATUS" width="1" begin="30" end="30" resetval="0x0" description="Indicates if the clock is enabled to the shared block memory of the deblocker" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_SCALE_BE_CLK_STATUS" width="1" begin="29" end="29" resetval="0x0" description="Indicates if the clock is enabled to the back-end logic of the deblocker scaler processing" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_SCALE_FE_CLK_STATUS" width="1" begin="28" end="28" resetval="0x0" description="Indicates if the clock is enabled to the front-end logic of the deblocker scaler processing" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_PROCESS_PVDEC_CLK_STATUS" width="1" begin="27" end="27" resetval="0x0" description="Indicates if the clock is enabled to the PVDEC path of the deblocker processing" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_PROCESS_MSVDX_2_CLK_STATUS" width="1" begin="26" end="26" resetval="0x0" description="Indicates if the clock is enabled to the MSVDX path domain 2 of the deblocker processing" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_PROCESS_MSVDX_CLK_STATUS" width="1" begin="25" end="25" resetval="0x0" description="Indicates if the clock is enabled to the MSVDX path domain1 of the deblocker processing" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_ACCESS_PVDEC_CLK_STATUS" width="1" begin="24" end="24" resetval="0x0" description="Indicates if the clock is enabled to the PVDEC path of the deblocker access" range="" rwaccess="R"/>
+    <bitfield id="CR_VDEB_ACCESS_MSVDX_CLK_STATUS" width="1" begin="23" end="23" resetval="0x0" description="Indicates if the clock is enabled to the MSVDX path of the deblocker access" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="22" end="22" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_VDMC4_CLK_STATUS" width="1" begin="21" end="21" resetval="0x0" description="Indicates if the clock is enabled to the domain 4 in the motion compensation block" range="" rwaccess="R"/>
+    <bitfield id="CR_VDMC3_CLK_STATUS" width="1" begin="20" end="20" resetval="0x0" description="Indicates if the clock is enabled to the domain 3 in the motion compensation block" range="" rwaccess="R"/>
+    <bitfield id="CR_VDMC2_CLK_STATUS" width="1" begin="19" end="19" resetval="0x0" description="Indicates if the clock is enabled to the domain 2 in the motion compensation block" range="" rwaccess="R"/>
+    <bitfield id="CR_VDMC1_CLK_STATUS" width="1" begin="18" end="18" resetval="0x0" description="Indicates if the clock is enabled to the domain 1 in the motion compensation block" range="" rwaccess="R"/>
+    <bitfield id="CR_PIXEL_REG_CLK_STATUS" width="1" begin="17" end="17" resetval="0x1" description="Indicates if the clock is enabled to the Pixel Processing registers" range="" rwaccess="R"/>
+    <bitfield id="CR_PIXEL_DMAC_CLK_STATUS" width="1" begin="16" end="16" resetval="0x1" description="Indicates if the clock is enabled to the Pixel processing DMA Controller" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_PVDEC_VEC_REG_CLK_STATUS" width="1" begin="11" end="11" resetval="0x1" description="Indicates if the clock is enabled to the register banks of PVDEC_VEC_BE" range="" rwaccess="R"/>
+    <bitfield id="CR_PVDEC_VEC_COMMAND_CLK_STATUS" width="1" begin="10" end="10" resetval="0x0" description="Indicates if the clock is enabled to the command generation logic of PVDEC_VEC_BE" range="" rwaccess="R"/>
+    <bitfield id="CR_PVDEC_VEC_RESIDUAL_CLK_STATUS" width="1" begin="9" end="9" resetval="0x0" description="Indicates if the clock is enabled to the residual decode logic of PVDEC_VEC_BE" range="" rwaccess="R"/>
+    <bitfield id="CR_PVDEC_VEC_GDEC_STRUC_CLK_STATUS" width="1" begin="8" end="8" resetval="0x0" description="Indicates if the clock is enabled to the vec genc_dec structure read logic of PVDEC_VEC_BE" range="" rwaccess="R"/>
+    <bitfield id="CR_PVDEC_VEC_GDEC_FRGMT_CLK_STATUS" width="1" begin="7" end="7" resetval="0x0" description="Indicates if the clock is enabled to the vec genc_dec fragment read logic of PVDEC_VEC_BE" range="" rwaccess="R"/>
+    <bitfield id="CR_MSVDX_VEC_REGS_CLK_STATUS" width="1" begin="6" end="6" resetval="0x1" description="Indicates if the clock is enabled to VEC's register logic" range="" rwaccess="R"/>
+    <bitfield id="CR_MSVDX_VEC_ITRANS_CLK_STATUS" width="1" begin="5" end="5" resetval="0x0" description="Indicates if the clock is enabled to the MSVDX inverse transform block" range="" rwaccess="R"/>
+    <bitfield id="CR_MSVDX_VEC_BE_CLK_STATUS" width="1" begin="4" end="4" resetval="0x0" description="Indicates if the clock is enabled to the back-end logic of MSVDX_VEC/ENTDEC" range="" rwaccess="R"/>
+    <bitfield id="CR_MSVDX_VEC_DEC_CLK_STATUS" width="1" begin="3" end="3" resetval="0x0" description="Indicates if the clock is enabled to the rendec decoder logic of MSVDX_VEC/ENTDEC" range="" rwaccess="R"/>
+    <bitfield id="CR_MSVDX_VEC_FE_GRP2_CLK_STATUS" width="1" begin="2" end="2" resetval="0x0" description="Indicates if the clock is enabled to the front-end logic for codec group 2 in MSVDX_VEC/ENTDEC" range="" rwaccess="R"/>
+    <bitfield id="CR_MSVDX_VEC_FE_GRP1_CLK_STATUS" width="1" begin="1" end="1" resetval="0x0" description="Indicates if the clock is enabled to the front-end logic for codec group 1 in MSVDX_VEC/ENTDEC" range="" rwaccess="R"/>
+    <bitfield id="CR_MSVDX_VEC_FE_CLK_STATUS" width="1" begin="0" end="0" resetval="0x0" description="Indicates if the clock is enabled to the front-end common logic in MSVDX_VEC/ENTDEC" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_MSVDX_VEC_RENDEC_SPACE" acronym="DECODER0_CR_MSVDX_VEC_RENDEC_SPACE" offset="0x40" width="32" description="">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_MSVDX_VEC_RENDEC_READ_AVAILABLE" width="1" begin="4" end="4" resetval="0x0" description="Indicates if master can read 1 word from rendec without stalling" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="3" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_MSVDX_VEC_RENDEC_WRITE_SPACE" width="1" begin="0" end="0" resetval="0x1" description="Indicates if master can write 1 word to rendec without stalling" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_PIXEL_DMAC_STREAM_INTERRUPT_ENABLE" acronym="DECODER0_CR_PIXEL_DMAC_STREAM_INTERRUPT_ENABLE" offset="0x50" width="32" description="">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_DMAC_STREAM_INTERRUPT_ENABLE" width="4" begin="3" end="0" resetval="0x1" description="The value in this register is ANDed with the value in DMAC_STREAM_STATUS, and the resulting" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PIXEL_DMAC_STREAM_STATUS" acronym="DECODER0_CR_PIXEL_DMAC_STREAM_STATUS" offset="0x54" width="32" description="">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_PIXEL_DMAC_STREAM_STATUS" width="4" begin="3" end="0" resetval="0x0" description="Bit 0 of this register corresponds to DMAC channel 2 interrupt, which is associated with stream 0." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_MSVDX_FE_WDT_CONTROL" acronym="DECODER0_CR_MSVDX_FE_WDT_CONTROL" offset="0x60" width="32" description="">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FE_WDT_CNT_CTRL" width="2" begin="18" end="17" resetval="0x0" description="The increment of FE_WDT counter can be controlled depending on the settings below." range="" rwaccess="RW"/>
+    <bitfield id="FE_WDT_ENABLE" width="1" begin="16" end="16" resetval="0x0" description="Front-end Watch Dog Timer enable" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FE_WDT_ACTION1" width="2" begin="13" end="12" resetval="0x0" description="Watch Dog Timer action upon WDT_COMPAREMATCH1" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="11" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FE_WDT_ACTION0" width="1" begin="8" end="8" resetval="0x0" description="Watch Dog Timer action upon WDT_COMPAREMATCH0." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="7" end="6" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FE_WDT_CLEAR_SELECT" width="2" begin="5" end="4" resetval="0x0" description="Watch Dog Timer clear select" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FE_WDT_CLKDIV_SELECT" width="3" begin="2" end="0" resetval="0x0" description="Watch Dog Timer clock select" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_MSVDX_FE_WDTIMER" acronym="DECODER0_CR_MSVDX_FE_WDTIMER" offset="0x64" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FE_WDT_COUNTER" width="16" begin="15" end="0" resetval="0x0" description="Watch Dog Timer counter value." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_MSVDX_FE_WDT_COMPAREMATCH" acronym="DECODER0_CR_MSVDX_FE_WDT_COMPAREMATCH" offset="0x68" width="32" description="">
+    <bitfield id="FE_WDT_CM1" width="16" begin="31" end="16" resetval="0xFFFF" description="Watch Dog Timer compare-match register." range="" rwaccess="RW"/>
+    <bitfield id="FE_WDT_CM0" width="16" begin="15" end="0" resetval="0xFFFF" description="Watch Dog Timer compare-match register." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_BE_WDT_CONTROL" acronym="DECODER0_CR_BE_WDT_CONTROL" offset="0x70" width="32" description="">
+    <bitfield id="RESERVED" width="7" begin="31" end="25" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_WDT_ENABLE" width="1" begin="24" end="24" resetval="0x0" description="Back-end Watch Dog Timer enable" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="23" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_WDT_CNT_CTRL" width="5" begin="20" end="16" resetval="0x0" description="The increment of BE_WDT counter can be controlled depending on the settings below." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="7" begin="15" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_WDT_ACTION0" width="1" begin="8" end="8" resetval="0x0" description="Watch Dog Timer action upon WDT_COMPAREMATCH0" range="" rwaccess="RW"/>
+    <bitfield id="BE_WDT_CLEAR_SELECT" width="4" begin="7" end="4" resetval="0x0" description="Watch Dog Timer clear select" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_WDT_CLKDIV_SELECT" width="3" begin="2" end="0" resetval="0x0" description="Watch Dog Timer clock select" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_BE_WDTIMER" acronym="DECODER0_CR_BE_WDTIMER" offset="0x74" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_WDT_COUNTER" width="16" begin="15" end="0" resetval="0x0" description="Watch Dog Timer counter value." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_BE_WDT_COMPAREMATCH" acronym="DECODER0_CR_BE_WDT_COMPAREMATCH" offset="0x78" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_WDT_CM0" width="16" begin="15" end="0" resetval="0xFFFF" description="Watch Dog Timer compare-match register." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PVDEC_COMMAND_SPACE" acronym="DECODER0_CR_PVDEC_COMMAND_SPACE" offset="0x80" width="32" description="">
+    <bitfield id="CR_PVDEC_CMD_BUFFER_SPACE" width="32" begin="31" end="0" resetval="0x80" description="Indicates the number of commands which can be sent to command bus without stalling master" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_PVDEC_COMMAND_BUFFER_CTRL" acronym="DECODER0_CR_PVDEC_COMMAND_BUFFER_CTRL" offset="0x84" width="32" description="">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_PVDEC_CMD_BUFFER_THRESHOLD" width="8" begin="7" end="0" resetval="0x80" description="When there is more space available in the command buffer than the value specified by this register, the transient is notified to COMMAND_SPACE_AVAILABLE bit of the interrupt status register." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_MEM_SECURITY_DMAC" acronym="DECODER0_CR_MEM_SECURITY_DMAC" offset="0x90" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_MEM_SECURITY_DMAC_CTRL" width="16" begin="15" end="0" resetval="0x0" description="MEM_TAG_ID is compared to the corresponding bit position of this field to determine whether to flag the Security or not" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_MEM_SECURITY_VEC_0" acronym="DECODER0_CR_MEM_SECURITY_VEC_0" offset="0x94" width="32" description="">
+    <bitfield id="CR_MEM_SECURITY_VEC_CTRL_0" width="32" begin="31" end="0" resetval="0x0" description="MEM_TAG_ID is compared to the corresponding bit position of the concatenated field [MEM_SECURITY_VEC_CTRL_1 &amp;amp;amp; MEM_SECURITY_VEC_CTRL_0] to determine whether to flag the Security or not" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_MEM_SECURITY_VEC_1" acronym="DECODER0_CR_MEM_SECURITY_VEC_1" offset="0x98" width="32" description="">
+    <bitfield id="CR_MEM_SECURITY_VEC_CTRL_1" width="32" begin="31" end="0" resetval="0x0" description="Refer to MEM_SECURITY_VEC_0 register description" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_MEM_SECURITY_VDMC_0" acronym="DECODER0_CR_MEM_SECURITY_VDMC_0" offset="0x9C" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_MEM_SECURITY_VDMC_CTRL_0" width="16" begin="15" end="0" resetval="0x0" description="MEM_TAG_ID is compared to the corresponding bit position of this field to determine whether to flag the Security or not" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_MEM_SECURITY_VDEB_0" acronym="DECODER0_CR_MEM_SECURITY_VDEB_0" offset="0xA4" width="32" description="">
+    <bitfield id="CR_MEM_SECURITY_VDEB_CTRL_0" width="32" begin="31" end="0" resetval="0x0" description="MEM_TAG_ID is compared to the corresponding bit position of this field to determine whether to flag the Security or not" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_MEM_SECURITY_SCALE_0" acronym="DECODER0_CR_MEM_SECURITY_SCALE_0" offset="0xAC" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_MEM_SECURITY_SCALE_CTRL_0" width="1" begin="0" end="0" resetval="0x0" description="MEM_TAG_ID is compared to the corresponding bit position of this field to determine whether to flag the Security or not" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PIXEL_PIPE_CONFIG" acronym="DECODER0_CR_PIXEL_PIPE_CONFIG" offset="0xC0" width="32" description="">
+    <bitfield id="CR_PIXEL_PIPE_CONFIG" width="32" begin="31" end="0" resetval="0x0" description="This field indicates which CODECs are supported in a Pixel Processing Pipe [where different pipes can be configured to support a different range of codecs]." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_PIXEL_MISC_CONFIG" acronym="DECODER0_CR_PIXEL_MISC_CONFIG" offset="0xC4" width="32" description="">
+    <bitfield id="RESERVED" width="7" begin="31" end="25" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_HEVC_64K_STILL_PICTURE_SUPPORTED" width="1" begin="24" end="24" resetval="0x0" description="This field indicates if the maximum picture size supported for HEVC still picture profile is 64k wide and/or 64k high" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="23" end="19" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_PIXEL_PIPE_INDEX" width="3" begin="18" end="16" resetval="0x0" description="This field indicates pixel processing pipe index [starting at 1]" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_NUM_STREAMS" width="2" begin="13" end="12" resetval="0x0" description="This field indicates 'Number streams-1' supported by Pixel pipe DMAC and shift register [where the number of DMAC channels = 3+NUM_STREAMS]" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="2" begin="11" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_SCALING_SUPPORTED" width="1" begin="9" end="9" resetval="0x0" description="This field indicates if scaling of decoded frames is supported" range="" rwaccess="R"/>
+    <bitfield id="CR_ROTATION_SUPPORTED" width="1" begin="8" end="8" resetval="0x0" description="This field indicates if rotation of decoded frames is supported" range="" rwaccess="R"/>
+    <bitfield id="CR_HEVC_REXT_SUPPORTED" width="1" begin="7" end="7" resetval="0x0" description="This field indicates if HEVC RExt is fully supported" range="" rwaccess="R"/>
+    <bitfield id="CR_MAX_BIT_DEPTH_MINUS8" width="3" begin="6" end="4" resetval="0x0" description="This field +8 indicates the maximum bit depth supported by the pipe [where 0 corresponds to" range="" rwaccess="R"/>
+    <bitfield id="CR_HEVC_MAX_CHROMA_FORMAT" width="2" begin="3" end="2" resetval="0x1" description="This field indicates the maximum chroma format supported by the pipe in HEVC mode" range="" rwaccess="R"/>
+    <bitfield id="CR_H264_MAX_CHROMA_FORMAT" width="2" begin="1" end="0" resetval="0x1" description="This field indicates the maximum chroma format supported by the pipe in H264 mode" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_MAX_FRAME_CONFIG" acronym="DECODER0_CR_MAX_FRAME_CONFIG" offset="0xC8" width="32" description="">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_PVDEC_VER_MSB" width="5" begin="28" end="24" resetval="0xF" description="This field indicates the maximum frame height supported in the PVDEC pipeline, where the maximum frame height is '2 shifted left by PVDEC_VER_MSB'" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="23" end="21" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_PVDEC_HOR_MSB" width="5" begin="20" end="16" resetval="0xF" description="This field indicates the maximum frame width supported in the PVDEC pipeline, where the maximum frame width is '2 shifted left by PVDEC_HOR_MSB'" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_MSVDX_VER_MSB" width="5" begin="12" end="8" resetval="0xB" description="This field indicates the maximum frame height supported in the MSVDX pipeline, where the maximum frame height is '2 shifted left by MSVDX_VER_MSB'" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_MSVDX_HOR_MSB" width="5" begin="4" end="0" resetval="0xB" description="This field indicates the maximum frame width supported in the MSVDX pipeline, where the maximum frame width is '2 shifted left by MSVDX_HOR_MSB'" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_VDMC_VDEB_COMMAND_SIGNATURE" acronym="DECODER0_CR_VDMC_VDEB_COMMAND_SIGNATURE" offset="0xE0" width="32" description="This is a signature of address and data of commands sent to VDMC/VDEB, which is the combination of macroblock level commands, slice level commands, and any other high level commands.">
+    <bitfield id="CR_VDMC_VDEB_COMMAND_SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="Signature of the address and data of all commands sent to VDMC and VDEB [at the output stage of the Pixel pipeline cross-bar], except any commands specifying a base address have the data value into the signature forced to 0." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PIXEL_MEMORY_DEBUG2" acronym="DECODER0_CR_PIXEL_MEMORY_DEBUG2" offset="0xFC" width="32" description="">
+    <bitfield id="CR_VDEB_OUTSTANDING_READ_REQS" width="8" begin="31" end="24" resetval="0x0" description="Indicates the number of outstanding read requests for VDEB." range="" rwaccess="R"/>
+    <bitfield id="CR_VDMC_OUTSTANDING_READ_REQS" width="8" begin="23" end="16" resetval="0x0" description="Indicates the number of outstanding read requests for VDMC." range="" rwaccess="R"/>
+    <bitfield id="CR_VEC_OUTSTANDING_READ_REQS" width="8" begin="15" end="8" resetval="0x0" description="Indicates the number of outstanding read requests for VEC." range="" rwaccess="R"/>
+    <bitfield id="CR_DMAC_OUTSTANDING_READ_REQS" width="8" begin="7" end="0" resetval="0x0" description="Indicates the number of outstanding read requests for DMAC." range="" rwaccess="R"/>
+  </register>
+</module>

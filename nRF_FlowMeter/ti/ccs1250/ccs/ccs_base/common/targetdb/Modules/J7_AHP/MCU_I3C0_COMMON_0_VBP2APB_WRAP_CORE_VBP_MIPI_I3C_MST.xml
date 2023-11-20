@@ -1,0 +1,800 @@
+<module name="MCU_I3C0_COMMON_0_VBP2APB_WRAP_CORE_VBP_MIPI_I3C_MST" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID" offset="0x0" width="32" description="">
+		<bitfield id="RSVD0" width="16" begin="31" end="16" resetval="0x0" description="Reserved." range="31 - 16" rwaccess="R"/> 
+		<bitfield id="DEV_ID" width="16" begin="15" end="0" resetval="0x20532" description="Device ID: Unique IP identifier within Cadence IP portfolio [reset = 0x5034]." range="15 - 0" rwaccess="R"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_CONF_STATUS0" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_CONF_STATUS0" offset="0x4" width="32" description="">
+		<bitfield id="CMDR_MEM_DEPTH" width="3" begin="31" end="29" resetval="0x3" description="Indicates depth of Command Response Queue:               000 - Memory has depth of 4               001 - Memory has depth of 8               010 - Memory has depth of 16               011 - Memory has depth of 32               100 - Memory has depth of 64               101 - 111 - N/A               Note: 2^[2 + cmdr_mem_depth] = actual depth of CMD Response memory." range="31 - 29" rwaccess="R"/> 
+		<bitfield id="ASF" width="5" begin="28" end="24" resetval="0x31" description="Indicates supported ASF checks:               asf[4] - ECC Check enabled               asf[3] - Integrity Check enabled               asf[2] - CSR/DAP Check enabled               asf[1] - Trans. Timeout Check enabled               asf[0] - Protocol Faults Check enabled" range="28 - 24" rwaccess="R"/> 
+		<bitfield id="GPO_NUM" width="8" begin="23" end="16" resetval="0x1" description="Returns the value of User GPO [1-126]." range="23 - 16" rwaccess="R"/> 
+		<bitfield id="GPI_NUM" width="8" begin="15" end="8" resetval="0x1" description="Returns the value of User GPI [1-126]." range="15 - 8" rwaccess="R"/> 
+		<bitfield id="IBIR_MEM_DEPTH" width="2" begin="7" end="6" resetval="0x1" description="Indicates depth of IBI Response Queue:               00 - Memory has depth of 4               01 - Memory has depth of 8               10 - Memory has depth of 16               11 - Memory has depth of 32               Note: 2^[2 + ibir_mem_depth] = actual depth of IBI Response memory." range="7 - 6" rwaccess="R"/> 
+		<bitfield id="DDR" width="1" begin="5" end="5" resetval="0x1" description="Indicates if DDR is supported." range="5" rwaccess="R"/> 
+		<bitfield id="DEV_ROLE" width="1" begin="4" end="4" resetval="0x0" description="Returns status of Device Role [MM/SM]:               0 - Main Master               1 - Secondary Master" range="4" rwaccess="R"/> 
+		<bitfield id="DEVS_NUM" width="4" begin="3" end="0" resetval="0x11" description="Returns the number of retaining registers for I3C Slave devices [Addresses and Characteristics], the max value is 11." range="3 - 0" rwaccess="R"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_CONF_STATUS1" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_CONF_STATUS1" offset="0x8" width="32" description="">
+		<bitfield id="IBI_HW_RES" width="4" begin="31" end="28" resetval="0x10" description="Indicates HW resources for IBI capable devices:               0000 - SIR map for 1 Slave device               0001 - SIR map for 2 Slave devices               ...               1010 - SIR map for 11 Slave devices               1101 - 1111 - N/A               Note: ibi_rw_res + 1 = actual number of SIR map locations for IBI capable slave devices." range="31 - 28" rwaccess="R"/> 
+		<bitfield id="CMD_MEM_DEPTH" width="2" begin="27" end="26" resetval="0x3" description="Indicates depth of Command Memories [0 and 1]:               00 - Memory has depth of 4               01 - Memory has depth of 8               10 - Memory has depth of 16               11 - Memory has depth of 32               Note: 2^[2 + cmd_mem_depth] = actual depth of CMD0 and CMD1 memories." range="27 - 26" rwaccess="R"/> 
+		<bitfield id="SLV_DDR_RX_MEM_DEPTH" width="5" begin="25" end="21" resetval="0x6" description="Indicates depth of Slave DDR Rx Memory:               00000 - Memory has depth of 8               00001 - Memory has depth of 16               ...               01101 - Memory has depth of 65536               01110 - 11111 - N/A               Note: 2^[3 + slv_ddr_rx_mem_depth] = actual depth of Slave DDR Rx Data memory.               When DDR is not supported field returns 5'b00000." range="25 - 21" rwaccess="R"/> 
+		<bitfield id="SLV_DDR_TX_MEM_DEPTH" width="5" begin="20" end="16" resetval="0x6" description="Indicates depth of Slave DDR Tx Memory:               00000 - Memory has depth of 8               00001 - Memory has depth of 16               ...               01101 - Memory has depth of 65536               01110 - 11111 - N/A               Note: 2^[3 + slv_ddr_tx_mem_depth] = actual depth of Slave DDR Tx Data memory.               When DDR is not supported field returns 5'b00000." range="20 - 16" rwaccess="R"/> 
+		<bitfield id="RSVD0" width="3" begin="15" end="13" resetval="0x0" description="Reserved." range="15 - 13" rwaccess="R"/> 
+		<bitfield id="IBI_MEM_DEPTH" width="3" begin="12" end="10" resetval="0x4" description="Indicates depth of In-Band Interrupt Memory:               000 - Memory has depth of 2               001 - Memory has depth of 4               ...               101 - Memory has depth of 64               110 - 111 - N/A               Note: 2^[1 + ibi_mem_depth] = actual depth of IBI Data memory." range="12 - 10" rwaccess="R"/> 
+		<bitfield id="RX_MEM_DEPTH" width="5" begin="9" end="5" resetval="0x9" description="Indicates depth of Rx Data Memory:               00000 - Memory has depth of 8               00001 - Memory has depth of 16               ...               01101 - Memory has depth of 65536               01110 - 11111 - N/A               Note: 2^[3 + rx_mem_depth] = actual depth of Rx Data memory." range="9 - 5" rwaccess="R"/> 
+		<bitfield id="TX_MEM_DEPTH" width="5" begin="4" end="0" resetval="0x7" description="Indicates depth of Tx Data Memory:               00000 - Memory has depth of 8               00001 - Memory has depth of 16               ...               01101 - Memory has depth of 65536               01110 - 11111 - N/A               Note: 2^[3 + tx_mem_depth] = actual depth of Tx Data memory." range="4 - 0" rwaccess="R"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_REV_ID" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_REV_ID" offset="0xC" width="32" description="">
+		<bitfield id="VID" width="12" begin="31" end="20" resetval="0x3245" description="VENDOR_ID: IP vendor ID affected to Cadence I3C Master controller [reset = 0xCAD]." range="31 - 20" rwaccess="R"/> 
+		<bitfield id="PID" width="12" begin="19" end="8" resetval="0x316" description="PRODUCT_ID: unique IP identifier within CDNS IP portfolio [reset = 0x13C]." range="19 - 8" rwaccess="R"/> 
+		<bitfield id="REV_MAJOR" width="3" begin="7" end="5" resetval="0x1" description="X: Major revision value [1].                rXYYv1p0 - current version r105v1p0" range="7 - 5" rwaccess="R"/> 
+		<bitfield id="REV_MINOR" width="5" begin="4" end="0" resetval="0x5" description="Y: Minor revision value [05].                rXYYv1p0 - current version r105v1p0" range="4 - 0" rwaccess="R"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_CTRL" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_CTRL" offset="0x10" width="32" description="">
+		<bitfield id="DEV_EN" width="1" begin="31" end="31" resetval="0x0" description="When set HIGH the I3C-Master is enabled and it can initiates the I3C/I2C transactions.               Also write access to the following fields of various registers is forbidden :               CTRL.bus_mode               CTRL.ahdr_opt               CTRL.halt_en               PRESCL_CTRL0.i3c               PRESCL_CTRL0.i2c               PRESCL_CTRL1.od_low               PRESCL_CTRL1.pp_low                When set LOW the I3C-Master is disabled and access to the key control fields that listed above               is available. If this bit is being set to 0 during ongoing transfer then it will wait until the               transfer completion and then the controller will be disabled. The actual status of the Cadence               I3C Master IP is returned by MST_STATUS0.idle bit of Status Register and this field               should be checked before accessing key control fields." range="31" rwaccess="R/W"/> 
+		<bitfield id="HALT_EN" width="1" begin="30" end="30" resetval="0x0" description="Enable[1]/Disable[0] Halt on Abort function." range="30" rwaccess="R/W"/> 
+		<bitfield id="MCS" width="1" begin="29" end="29" resetval="0x0" description="Manual Command Start writing 1 starts execution of the commands currently in CMD Memories. Self-cleared bit. Relevant only if               MCS_EN bit [CTRL.mcs_en] set to 1, disregarded otherwise." range="29" rwaccess="W"/> 
+		<bitfield id="MCS_EN" width="1" begin="28" end="28" resetval="0x0" description="Manual Command Start Enable if set 1 the IP will wait with starting of command execution until MCS but [CTRL.mcs] would be set 1.               If set to 0, the IP will start execute commands automatically as soon as at lease one is present in the CMD MEM and the MCS               [CTRL.mcs] bit is disregarded." range="28" rwaccess="R/W"/> 
+		<bitfield id="RSVD2" width="1" begin="27" end="27" resetval="0x0" description="Reserved." range="27" rwaccess="R"/> 
+		<bitfield id="I3C_11_SUPP" width="1" begin="26" end="26" resetval="0x0" description="Enables support for timing parameter that has been changed in v1.1, i.e. tCASr_min. If:               - 1'b0 - then tCASr_min = tCAS_min [as per MIPI spec v1.0]               - 1'b1 - then tCASr_min = tCAS_min/2 [as per draft version of MIPI spec v1.1]" range="26" rwaccess="R/W"/> 
+		<bitfield id="THD_DEL" width="2" begin="25" end="24" resetval="0x0" description="Data Hold Time Delay, field that provides option to add data hold delay with respect to the SCL clock on which data on SDA is launched [applied               only during actual Data transfer]:               00 - adds delay of 3x sys_clk clock cycles               01 - adds delay of 2x sys_clk clock cycles               10 - adds delay of 1x sys_clk clock cycles               11 - no delay [data is launched simultaneously with SCL clock edge]" range="25 - 24" rwaccess="R/W"/> 
+		<bitfield id="RSVD1" width="15" begin="23" end="9" resetval="0x0" description="Reserved." range="23 - 9" rwaccess="R"/> 
+		<bitfield id="HJ_DISEC" width="1" begin="8" end="8" resetval="0x0" description="This bit controls the HW response for ACK'ed HJ request. When set HIGH, then the DISEC CCC is used. Otherwise, if set LOW the ENTDAA CCC is used.               This control bit is meaningful if hj_ack=1 and controller operates in Main Master configuration." range="8" rwaccess="R/W"/> 
+		<bitfield id="MST_ACK" width="1" begin="7" end="7" resetval="0x1" description="Specifies ACK response type for GETACCMST CCC, it can be either ACK response type [mst_ack = 1] or NACK response type [mst_ack = 0].               This control bit is meaningful in Slave Mode only." range="7" rwaccess="R/W"/> 
+		<bitfield id="HJ_ACK" width="1" begin="6" end="6" resetval="0x1" description="Specifies ACK response type for HJ request, it can be either ACK response type [hj_ack = 1] or NACK response type [hj_ack = 0].               For Secondary Master configuration, this bit tied off to 0." range="6" rwaccess="R/W"/> 
+		<bitfield id="HJ_INIT" width="1" begin="5" end="5" resetval="0x0" description="Initiate HJ request - applicable only for Secondary master in slave mode. Self-cleared bit." range="5" rwaccess="W"/> 
+		<bitfield id="MST_INIT" width="1" begin="4" end="4" resetval="0x0" description="Initiate Mastership request - applicable only in slave mode. When set in master mode this bit has no effect. Self-cleared bit." range="4" rwaccess="W"/> 
+		<bitfield id="AHDR_OPT" width="1" begin="3" end="3" resetval="0x0" description="Enable[1]/Disable[0] the Address Header optimization. If enabled, FW needs to restrict DAs to 0x03 - 0x3F range." range="3" rwaccess="R/W"/> 
+		<bitfield id="BUS_MODE" width="2" begin="1" end="0" resetval="0x0" description="Bus Mode               00 : Pure Bus Mode               01 : Invalid Config               10 : Mixed Fast Bus Mode               11 : Mixed Slow/Limited Bus Mode" range="1 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_PRESCL_CTRL0" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_PRESCL_CTRL0" offset="0x14" width="32" description="">
+		<bitfield id="I2C" width="16" begin="31" end="16" resetval="0x124" description="Prescaler value for I2C SCL clock generation. It should be generated based on sys clock freq and should be 5x w.r.t.               to the slowest I2C device's SCL speed:               presc_ctl_i2c[15:0] = sys_clk_freq / [i2c_freq * 5] - 1'b1               if presc_ctl_i2c[15:0]==0 - no sys_clk division" range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="I3C" width="10" begin="9" end="0" resetval="0x4" description="Prescaler value for I3C Push-Pull SDR Mode SCL clock generation.               When the bus is configured in mixed fast mode, the resulting SCL frequency must be faster than 11MHz.               It should be generated based on sys clock freq and should be 4x w.r.t. to the SDR SCL speed:               presc_ctl_i3c[9:0] = [sys_clk_freq / sdr_freq * 4] - 1'b1               If sys_clk == 4*sdr_freq, presc_ctl_i3c[9:0] should be 0" range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_PRESCL_CTRL1" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_PRESCL_CTRL1" offset="0x18" width="32" description="">
+		<bitfield id="PP_LOW" width="8" begin="15" end="8" resetval="0x0" description="Counter for low period of SCL clock for Push Pull in I3C.               When particular I3C device does not support Max SCL speed, low period stretching is required for PP as well.               Controller will determine that by inspecting BCR[0] bit. When BCR[0] is 0, SCL waveform will have               constant asymmetric ratio in Push-Pull mode as it will be calculated by 1/4 SCL * [pp_low + 2].               The resolution used is 1/4 SDR SCL clock. FW need to ensure 1/4 SCL * [pp_low + 2] >= minimum low period duration for the particular device.               When BCR[0] is 1, PP timings will have 50/50 DC." range="15 - 8" rwaccess="R/W"/> 
+		<bitfield id="OD_LOW" width="8" begin="7" end="0" resetval="0x9" description="Counter for low period of SCL clock for Open Drain in I3C. SCL waveform will have               constant asymmetric ratio in OD as it will be calculated by 1/4 SCL * [od_low + 2].               The resolution used is 1/4 SDR SCL clock. FW need to ensure 1/4 SCL * [od_low + 2] >= 160ns." range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_MST_IER" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_MST_IER" offset="0x20" width="32" description="">
+		<bitfield id="RSVD1" width="13" begin="31" end="19" resetval="0x0" description="Reserved." range="31 - 19" rwaccess="R"/> 
+		<bitfield id="HALTED" width="1" begin="18" end="18" resetval="0x0" description="Controller in halted state." range="18" rwaccess="W"/> 
+		<bitfield id="MR_DONE" width="1" begin="17" end="17" resetval="0x0" description="Mastership handoff done Enable." range="17" rwaccess="W"/> 
+		<bitfield id="IMM_COMP" width="1" begin="16" end="16" resetval="0x0" description="Immediate Commmand Completed Enable" range="16" rwaccess="W"/> 
+		<bitfield id="TX_THR" width="1" begin="15" end="15" resetval="0x0" description="Tx Data Threshold Enable." range="15" rwaccess="W"/> 
+		<bitfield id="TX_OVF" width="1" begin="14" end="14" resetval="0x0" description="Tx Data MEM Underflow Enable" range="14" rwaccess="W"/> 
+		<bitfield id="RSVD0" width="1" begin="13" end="13" resetval="0x0" description="Reserved." range="13" rwaccess="W"/> 
+		<bitfield id="IBID_THR" width="1" begin="12" end="12" resetval="0x0" description="IBI Data MEM threshold Enable." range="12" rwaccess="W"/> 
+		<bitfield id="IBID_UNF" width="1" begin="11" end="11" resetval="0x0" description="IBI Data MEM underflow Enable." range="11" rwaccess="W"/> 
+		<bitfield id="IBIR_THR" width="1" begin="10" end="10" resetval="0x0" description="IBI Response Queue threshold Enable" range="10" rwaccess="W"/> 
+		<bitfield id="IBIR_UNF" width="1" begin="9" end="9" resetval="0x0" description="IBI Response Queue underflow Enable" range="9" rwaccess="W"/> 
+		<bitfield id="IBIR_OVF" width="1" begin="8" end="8" resetval="0x0" description="IBI Response Queue onverflow Enable." range="8" rwaccess="W"/> 
+		<bitfield id="RX_THR" width="1" begin="7" end="7" resetval="0x0" description="Rx Data MEM threshold Enable." range="7" rwaccess="W"/> 
+		<bitfield id="RX_UNF" width="1" begin="6" end="6" resetval="0x0" description="Rx Data MEM underflow Enable." range="6" rwaccess="W"/> 
+		<bitfield id="CMDD_EMP" width="1" begin="5" end="5" resetval="0x0" description="Command Request Queue Empty Enable." range="5" rwaccess="W"/> 
+		<bitfield id="CMDD_THR" width="1" begin="4" end="4" resetval="0x0" description="Command Request Queue Threshold Enable." range="4" rwaccess="W"/> 
+		<bitfield id="CMDD_OVF" width="1" begin="3" end="3" resetval="0x0" description="Command Request Queue Overflow Enable." range="3" rwaccess="W"/> 
+		<bitfield id="CMDR_THR" width="1" begin="2" end="2" resetval="0x0" description="Command Response Queue Threshold Enable." range="2" rwaccess="W"/> 
+		<bitfield id="CMDR_UNF" width="1" begin="1" end="1" resetval="0x0" description="Command Response Queue Underflow Enable." range="1" rwaccess="W"/> 
+		<bitfield id="CMDR_OVF" width="1" begin="0" end="0" resetval="0x0" description="Command Response Queue Overflow Enable." range="0" rwaccess="W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_MST_IDR" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_MST_IDR" offset="0x24" width="32" description="">
+		<bitfield id="RSVD1" width="13" begin="31" end="19" resetval="0x0" description="Reserved." range="31 - 19" rwaccess="R"/> 
+		<bitfield id="HALTED" width="1" begin="18" end="18" resetval="0x0" description="Controller in halted state." range="18" rwaccess="W"/> 
+		<bitfield id="MR_DONE" width="1" begin="17" end="17" resetval="0x0" description="Mastership handoff done Disable." range="17" rwaccess="W"/> 
+		<bitfield id="IMM_COMP" width="1" begin="16" end="16" resetval="0x0" description="Immediate Commmand Completed Disable" range="16" rwaccess="W"/> 
+		<bitfield id="TX_THR" width="1" begin="15" end="15" resetval="0x0" description="Tx Data Threshold Disable." range="15" rwaccess="W"/> 
+		<bitfield id="TX_OVF" width="1" begin="14" end="14" resetval="0x0" description="Tx Data MEM Underflow Disable" range="14" rwaccess="W"/> 
+		<bitfield id="RSVD0" width="1" begin="13" end="13" resetval="0x0" description="Reserved." range="13" rwaccess="W"/> 
+		<bitfield id="IBID_THR" width="1" begin="12" end="12" resetval="0x0" description="IBI Data MEM threshold Disable." range="12" rwaccess="W"/> 
+		<bitfield id="IBID_UNF" width="1" begin="11" end="11" resetval="0x0" description="IBI Data MEM underflow Disable." range="11" rwaccess="W"/> 
+		<bitfield id="IBIR_THR" width="1" begin="10" end="10" resetval="0x0" description="IBI Response Queue threshold Disable" range="10" rwaccess="W"/> 
+		<bitfield id="IBIR_UNF" width="1" begin="9" end="9" resetval="0x0" description="IBI Response Queue underflow Disable" range="9" rwaccess="W"/> 
+		<bitfield id="IBIR_OVF" width="1" begin="8" end="8" resetval="0x0" description="IBI Response Queue onverflow Disable." range="8" rwaccess="W"/> 
+		<bitfield id="RX_THR" width="1" begin="7" end="7" resetval="0x0" description="Rx Data MEM threshold Disable." range="7" rwaccess="W"/> 
+		<bitfield id="RX_UNF" width="1" begin="6" end="6" resetval="0x0" description="Rx Data MEM underflow Disable." range="6" rwaccess="W"/> 
+		<bitfield id="CMDD_EMP" width="1" begin="5" end="5" resetval="0x0" description="Command Request Queue Empty Disable." range="5" rwaccess="W"/> 
+		<bitfield id="CMDD_THR" width="1" begin="4" end="4" resetval="0x0" description="Command Request Queue Threshold Disable." range="4" rwaccess="W"/> 
+		<bitfield id="CMDD_OVF" width="1" begin="3" end="3" resetval="0x0" description="Command Request Queue Overflow Disable." range="3" rwaccess="W"/> 
+		<bitfield id="CMDR_THR" width="1" begin="2" end="2" resetval="0x0" description="Command Response Queue Threshold Disable." range="2" rwaccess="W"/> 
+		<bitfield id="CMDR_UNF" width="1" begin="1" end="1" resetval="0x0" description="Command Response Queue Underflow Disable." range="1" rwaccess="W"/> 
+		<bitfield id="CMDR_OVF" width="1" begin="0" end="0" resetval="0x0" description="Command Response Queue Overflow Disable." range="0" rwaccess="W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_MST_IMR" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_MST_IMR" offset="0x28" width="32" description="">
+		<bitfield id="RSVD1" width="13" begin="31" end="19" resetval="0x0" description="Reserved." range="31 - 19" rwaccess="R"/> 
+		<bitfield id="HALTED" width="1" begin="18" end="18" resetval="0x0" description="Controller in halted state." range="18" rwaccess="R"/> 
+		<bitfield id="MR_DONE" width="1" begin="17" end="17" resetval="0x0" description="Mastership handoff done Mask." range="17" rwaccess="R"/> 
+		<bitfield id="IMM_COMP" width="1" begin="16" end="16" resetval="0x0" description="Immediate Commmand Completed Mask" range="16" rwaccess="R"/> 
+		<bitfield id="TX_THR" width="1" begin="15" end="15" resetval="0x0" description="Tx Data Threshold Mask." range="15" rwaccess="R"/> 
+		<bitfield id="TX_OVF" width="1" begin="14" end="14" resetval="0x0" description="Tx Data MEM Underflow Mask" range="14" rwaccess="R"/> 
+		<bitfield id="RSVD0" width="1" begin="13" end="13" resetval="0x0" description="Reserved." range="13" rwaccess="R"/> 
+		<bitfield id="IBID_THR" width="1" begin="12" end="12" resetval="0x0" description="IBI Data MEM threshold Mask." range="12" rwaccess="R"/> 
+		<bitfield id="IBID_UNF" width="1" begin="11" end="11" resetval="0x0" description="IBI Data MEM underflow Mask." range="11" rwaccess="R"/> 
+		<bitfield id="IBIR_THR" width="1" begin="10" end="10" resetval="0x0" description="IBI Response Queue threshold Mask" range="10" rwaccess="R"/> 
+		<bitfield id="IBIR_UNF" width="1" begin="9" end="9" resetval="0x0" description="IBI Response Queue underflow Mask" range="9" rwaccess="R"/> 
+		<bitfield id="IBIR_OVF" width="1" begin="8" end="8" resetval="0x0" description="IBI Response Queue onverflow Mask." range="8" rwaccess="R"/> 
+		<bitfield id="RX_THR" width="1" begin="7" end="7" resetval="0x0" description="Rx Data MEM threshold Mask." range="7" rwaccess="R"/> 
+		<bitfield id="RX_UNF" width="1" begin="6" end="6" resetval="0x0" description="Rx Data MEM underflow Mask." range="6" rwaccess="R"/> 
+		<bitfield id="CMDD_EMP" width="1" begin="5" end="5" resetval="0x0" description="Command Request Queue Empty Mask." range="5" rwaccess="R"/> 
+		<bitfield id="CMDD_THR" width="1" begin="4" end="4" resetval="0x0" description="Command Request Queue Threshold Mask." range="4" rwaccess="R"/> 
+		<bitfield id="CMDD_OVF" width="1" begin="3" end="3" resetval="0x0" description="Command Request Queue Overflow Mask." range="3" rwaccess="R"/> 
+		<bitfield id="CMDR_THR" width="1" begin="2" end="2" resetval="0x0" description="Command Response Queue Threshold Mask." range="2" rwaccess="R"/> 
+		<bitfield id="CMDR_UNF" width="1" begin="1" end="1" resetval="0x0" description="Command Response Queue Underflow Mask." range="1" rwaccess="R"/> 
+		<bitfield id="CMDR_OVF" width="1" begin="0" end="0" resetval="0x0" description="Command Response Queue Overflow Mask." range="0" rwaccess="R"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_MST_ICR" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_MST_ICR" offset="0x2C" width="32" description="">
+		<bitfield id="RSVD1" width="13" begin="31" end="19" resetval="0x0" description="Reserved." range="31 - 19" rwaccess="R"/> 
+		<bitfield id="HALTED" width="1" begin="18" end="18" resetval="0x0" description="Controller is in halted state." range="18" rwaccess="W"/> 
+		<bitfield id="MR_DONE" width="1" begin="17" end="17" resetval="0x0" description="Mastership handoff done Mask." range="17" rwaccess="W"/> 
+		<bitfield id="IMM_COMP" width="1" begin="16" end="16" resetval="0x0" description="Immediate Commmand Completed Mask" range="16" rwaccess="W"/> 
+		<bitfield id="TX_THR" width="1" begin="15" end="15" resetval="0x0" description="Tx Data Threshold Mask." range="15" rwaccess="W"/> 
+		<bitfield id="TX_OVF" width="1" begin="14" end="14" resetval="0x0" description="Tx Data MEM Underflow Mask" range="14" rwaccess="W"/> 
+		<bitfield id="RSVD0" width="1" begin="13" end="13" resetval="0x0" description="Reserved." range="13" rwaccess="W"/> 
+		<bitfield id="IBID_THR" width="1" begin="12" end="12" resetval="0x0" description="IBI Data MEM threshold Mask." range="12" rwaccess="W"/> 
+		<bitfield id="IBID_UNF" width="1" begin="11" end="11" resetval="0x0" description="IBI Data MEM underflow Mask." range="11" rwaccess="W"/> 
+		<bitfield id="IBIR_THR" width="1" begin="10" end="10" resetval="0x0" description="IBI Response Queue threshold Mask" range="10" rwaccess="W"/> 
+		<bitfield id="IBIR_UNF" width="1" begin="9" end="9" resetval="0x0" description="IBI Response Queue underflow Mask" range="9" rwaccess="W"/> 
+		<bitfield id="IBIR_OVF" width="1" begin="8" end="8" resetval="0x0" description="IBI Response Queue onverflow Mask." range="8" rwaccess="W"/> 
+		<bitfield id="RX_THR" width="1" begin="7" end="7" resetval="0x0" description="Rx Data MEM threshold Mask." range="7" rwaccess="W"/> 
+		<bitfield id="RX_UNF" width="1" begin="6" end="6" resetval="0x0" description="Rx Data MEM underflow Mask." range="6" rwaccess="W"/> 
+		<bitfield id="CMDD_EMP" width="1" begin="5" end="5" resetval="0x0" description="Command Request Queue Empty Mask." range="5" rwaccess="W"/> 
+		<bitfield id="CMDD_THR" width="1" begin="4" end="4" resetval="0x0" description="Command Request Queue Threshold Mask." range="4" rwaccess="W"/> 
+		<bitfield id="CMDD_OVF" width="1" begin="3" end="3" resetval="0x0" description="Command Request Queue Overflow Mask." range="3" rwaccess="W"/> 
+		<bitfield id="CMDR_THR" width="1" begin="2" end="2" resetval="0x0" description="Command Response Queue Threshold Mask." range="2" rwaccess="W"/> 
+		<bitfield id="CMDR_UNF" width="1" begin="1" end="1" resetval="0x0" description="Command Response Queue Underflow Mask." range="1" rwaccess="W"/> 
+		<bitfield id="CMDR_OVF" width="1" begin="0" end="0" resetval="0x0" description="Command Response Queue Overflow Mask." range="0" rwaccess="W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_MST_ISR" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_MST_ISR" offset="0x30" width="32" description="">
+		<bitfield id="RSVD1" width="13" begin="31" end="19" resetval="0x0" description="Reserved." range="31 - 19" rwaccess="R"/> 
+		<bitfield id="HALTED" width="1" begin="18" end="18" resetval="0x0" description="Controller in Halted state. This event is asserted on the second abort has occured during Read operation [if CTRL.halt_en=1] or in case of Rx DATA Buffer is full [regardless of CTRL.halt_en state]." range="18" rwaccess="R"/> 
+		<bitfield id="MR_DONE" width="1" begin="17" end="17" resetval="0x0" description="Mastership handoff Done. This event is triggered whenever Mastership Request procedure is completed." range="17" rwaccess="R"/> 
+		<bitfield id="IMM_COMP" width="1" begin="16" end="16" resetval="0x0" description="Immediate Commmand Completed. Is asserted when immediate command is completed." range="16" rwaccess="R"/> 
+		<bitfield id="TX_THR" width="1" begin="15" end="15" resetval="0x0" description="Tx DATA Buffer Threshold. It is set when number of bytes in the Tx DATA Buffer reaches value programmed in the TX_RX_THR_CTRL.tx_thr field." range="15" rwaccess="R"/> 
+		<bitfield id="TX_OVF" width="1" begin="14" end="14" resetval="0x0" description="Tx DATA Buffer Overflow. Set if host attempts to write to Tx DATA Buffer which is already full" range="14" rwaccess="R"/> 
+		<bitfield id="RSVD0" width="1" begin="13" end="13" resetval="0x0" description="Reserved." range="13" rwaccess="R"/> 
+		<bitfield id="IBID_THR" width="1" begin="12" end="12" resetval="0x0" description="IBI DATA Buffer Threshold. It is set when number of butes in the IBI DATA Buffer reaches value programmed in the CMD_IBI_THR_CTRL.ibid_thr field." range="12" rwaccess="R"/> 
+		<bitfield id="IBID_UNF" width="1" begin="11" end="11" resetval="0x0" description="IBI DATA Buffer Underflow. It is set when FW attempts to read from empty IBI DATA Buffer." range="11" rwaccess="R"/> 
+		<bitfield id="IBIR_THR" width="1" begin="10" end="10" resetval="0x0" description="IBI Response Buffer Threshold. It is set when number of butes in the IBI Response Buffer reaches value programmed in the CMD_IBI_THR_CTRL.ibir_thr field." range="10" rwaccess="R"/> 
+		<bitfield id="IBIR_UNF" width="1" begin="9" end="9" resetval="0x0" description="IBI Response Buffer Underflow. It is set when FW attempts to read from empty IBI Response Buffer." range="9" rwaccess="R"/> 
+		<bitfield id="IBIR_OVF" width="1" begin="8" end="8" resetval="0x0" description="IBI Response Buffer Overflow. Set if the new slave-initiated request is received while IBI Response Buffer is already full." range="8" rwaccess="R"/> 
+		<bitfield id="RX_THR" width="1" begin="7" end="7" resetval="0x0" description="Rx Data Buffer Threshold. It is set when number of bytes in the Rx DATA Buffer reaches value programmed in the TX_RX_THR_CTRL.rx_thr field." range="7" rwaccess="R"/> 
+		<bitfield id="RX_UNF" width="1" begin="6" end="6" resetval="0x0" description="Rx Data Buffer Underflow. Set if the host attempts to read from the empty Rx DATA Buffer." range="6" rwaccess="R"/> 
+		<bitfield id="CMDD_EMP" width="1" begin="5" end="5" resetval="0x0" description="Command Request Queue Empty. It is set as soon as the last command in the Command Queue is completed [simultaneously with comp flag]." range="5" rwaccess="R"/> 
+		<bitfield id="CMDD_THR" width="1" begin="4" end="4" resetval="0x0" description="Command Request Queue Threshold. It is set when number of bytes in the Command Buffer reaches value programmed in the CMD_IBI_THR_CTRL.cmdd_thr field." range="4" rwaccess="R"/> 
+		<bitfield id="CMDD_OVF" width="1" begin="3" end="3" resetval="0x0" description="Command Request Queue Overflow. It is set whenever Command Buffer is full and a new command is received from the host. In this case contents of the Command Buffer remains unchanged." range="3" rwaccess="R"/> 
+		<bitfield id="CMDR_THR" width="1" begin="2" end="2" resetval="0x0" description="Command Response Queue Threshold. It is set when number of bytes in the Command Response Buffer reaches value programmed in the CMD_IBI_THR_CTRL.cmdr_thr field." range="2" rwaccess="R"/> 
+		<bitfield id="CMDR_UNF" width="1" begin="1" end="1" resetval="0x0" description="Command Response Queue Underflow. It is set when FW attempts to read from empty Command Response Buffer." range="1" rwaccess="R"/> 
+		<bitfield id="CMDR_OVF" width="1" begin="0" end="0" resetval="0x0" description="Command Response Queue Overflow. It is set whenever Command Response Buffer is full and a new response is received. In this case contents of the Command Response Buffer remains unchanged." range="0" rwaccess="R"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_MST_STATUS0" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_MST_STATUS0" offset="0x34" width="32" description="">
+		<bitfield id="IDLE" width="1" begin="18" end="18" resetval="0x1" description="Indicates when the core is IDLE and ready to accept new commands. When CTRL.dev_en is deasserted, FW should poll this reg in order to ensure that core completed its last command. It is advisable to use this bit in order to ensure that currently the core is IDLE and CTRL register can be changed." range="18" rwaccess="R"/> 
+		<bitfield id="HALTED" width="1" begin="17" end="17" resetval="0x0" description="Core Halted. This status bit will be asserted on the second abort has occurred during Read operation [if CTRL.halt_en=1] or in case of Rx DATA FIFO is full [regardless of CTRL.halt_en state]. Writing 1 will unhalt the controllers operation." range="17" rwaccess="R/W1TC"/> 
+		<bitfield id="OP_MODE" width="1" begin="16" end="16" resetval="0x1" description="Indicates current mode of the controller:               0 - Slave mode;               1 - Master mode.               For Main Master configuration the reset value is 1               For Secondary Master configuration the reset value is 0               Set by HW." range="16" rwaccess="R"/> 
+		<bitfield id="RSVD1" width="2" begin="15" end="14" resetval="0x0" description="Reserved." range="15 - 14" rwaccess="R"/> 
+		<bitfield id="TX_FULL" width="1" begin="13" end="13" resetval="0x0" description="Tx DATA Memory is Full." range="13" rwaccess="R"/> 
+		<bitfield id="IBID_FULL" width="1" begin="12" end="12" resetval="0x0" description="IBI DATA Memory is Full." range="12" rwaccess="R"/> 
+		<bitfield id="IBIR_FULL" width="1" begin="11" end="11" resetval="0x0" description="IBI Response Queue is Full." range="11" rwaccess="R"/> 
+		<bitfield id="RX_FULL" width="1" begin="10" end="10" resetval="0x0" description="Rx DATA Memory is Full." range="10" rwaccess="R"/> 
+		<bitfield id="CMDD_FULL" width="1" begin="9" end="9" resetval="0x0" description="CMD DATA Queue is Full." range="9" rwaccess="R"/> 
+		<bitfield id="CMDR_FULL" width="1" begin="8" end="8" resetval="0x0" description="CMD Response Queue is Full." range="8" rwaccess="R"/> 
+		<bitfield id="RSVD0" width="2" begin="7" end="6" resetval="0x0" description="Reserved." range="7 - 6" rwaccess="R"/> 
+		<bitfield id="TX_EMP" width="1" begin="5" end="5" resetval="0x1" description="TX DATA Memory is Empty." range="5" rwaccess="R"/> 
+		<bitfield id="IBID_EMP" width="1" begin="4" end="4" resetval="0x1" description="IBI DATA Memory is Empty." range="4" rwaccess="R"/> 
+		<bitfield id="IBIR_EMP" width="1" begin="3" end="3" resetval="0x1" description="IBI Response Queue is Empty." range="3" rwaccess="R"/> 
+		<bitfield id="RX_EMP" width="1" begin="2" end="2" resetval="0x1" description="RX DATA Memory is Empty." range="2" rwaccess="R"/> 
+		<bitfield id="CMDD_EMP" width="1" begin="1" end="1" resetval="0x1" description="CMD Descriptor Queue is Empty." range="1" rwaccess="R"/> 
+		<bitfield id="CMDR_EMP" width="1" begin="0" end="0" resetval="0x1" description="CMD Response Queue is Empty." range="0" rwaccess="R"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_CMDR" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_CMDR" offset="0x38" width="32" description="">
+		<bitfield id="RSVD1" width="4" begin="31" end="28" resetval="0x0" description="Reserved." range="31 - 28" rwaccess="R"/> 
+		<bitfield id="ERROR" width="4" begin="27" end="24" resetval="0x0" description="Error Code - contains the code of an error that has occured during command execution:              - 4'h0: No Error,              - 4'h1: DDR Preamble Error,              - 4'h2: DDR Parity Error,              - 4'h3: DDR Rx FIFO Overflow,              - 4'h4: DDR Tx FIFO Underflow,              - 4'h5: M0 Error,              - 4'h6: M1 Error,              - 4'h7: M2 Error,              - 4'h8: MST Abort,              - 4'h9: NACK Response,              - 4'hA: Invalid DA,              - 4'hB: DDR Dropped." range="27 - 24" rwaccess="R"/> 
+		<bitfield id="RSVD0" width="4" begin="23" end="20" resetval="0x0" description="Reserved." range="23 - 20" rwaccess="R"/> 
+		<bitfield id="XFER_BYTES" width="12" begin="19" end="8" resetval="0x0" description="The number of transferred bytes [SDR] or transferred words [DDR] during command execution. Will be set correctly for CCC commands as well even for those without payload [to zero value]." range="19 - 8" rwaccess="R"/> 
+		<bitfield id="CMD_ID" width="8" begin="7" end="0" resetval="0x0" description="Command Identifier - equals to the value of CMD_ID field of Command Descriptor for given command. There are following exceptions in a form of HW-initiated commands:               - DAA after HJ-ACK response - ID field is returned as 8'hFF               - DISEC after HJ-ACK response - ID field is returned as 8'hFE               - Auto-Repeated Command after M0 Error - ID field equals to the CMD_ID of command that has been repeated" range="7 - 0" rwaccess="R"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_IBIR" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_IBIR" offset="0x3C" width="32" description="">
+		<bitfield id="RESP" width="1" begin="12" end="12" resetval="0x0" description="Master response. If set HIGH then IBI has been ACKed, NACK response otherwise." range="12" rwaccess="R"/> 
+		<bitfield id="SLV_ID" width="4" begin="11" end="8" resetval="0x0" description="ID of slave that issued the request, as stored in retaining registers." range="11 - 8" rwaccess="R"/> 
+		<bitfield id="ERROR" width="1" begin="7" end="7" resetval="0x0" description="Error. Set HIGH if IBI DATA Buffer overflow has occured during the transaction." range="7" rwaccess="R"/> 
+		<bitfield id="XFER_BYTES" width="5" begin="6" end="2" resetval="0x0" description="Number of received DATA bytes." range="6 - 2" rwaccess="R"/> 
+		<bitfield id="IBI_TYPE" width="2" begin="1" end="0" resetval="0x0" description="Type of IBI Request. This field contains the type of serviced IBI message. Type codes:               - 2'h0: In-Band Interrupt,               - 2'h1: Hot-Join Request,               - 2'h2: Masterhip Takeover Request." range="1 - 0" rwaccess="R"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SLV_IER" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SLV_IER" offset="0x40" width="32" description="">
+		<bitfield id="DEFSLVS" width="1" begin="21" end="21" resetval="0x0" description="DEFSLVS interrupt Enable." range="21" rwaccess="W"/> 
+		<bitfield id="TM" width="1" begin="20" end="20" resetval="0x0" description="TM interrupt Enable." range="20" rwaccess="W"/> 
+		<bitfield id="ERROR" width="1" begin="19" end="19" resetval="0x0" description="ERROR interrupt Enable." range="19" rwaccess="W"/> 
+		<bitfield id="EVENT_UP" width="1" begin="18" end="18" resetval="0x0" description="EVENT_UP interrupt Enable." range="18" rwaccess="W"/> 
+		<bitfield id="HJ_DONE" width="1" begin="17" end="17" resetval="0x0" description="HJ_DONE interrupt Enable." range="17" rwaccess="W"/> 
+		<bitfield id="MR_DONE" width="1" begin="16" end="16" resetval="0x0" description="MR_DONE interrupt Enable." range="16" rwaccess="W"/> 
+		<bitfield id="DA_UPDATE" width="1" begin="15" end="15" resetval="0x0" description="DA_UPDATE interrupt Enable" range="15" rwaccess="W"/> 
+		<bitfield id="SDR_FAIL" width="1" begin="14" end="14" resetval="0x0" description="SDR_FAIL interrupt Enable" range="14" rwaccess="W"/> 
+		<bitfield id="DDR_FAIL" width="1" begin="13" end="13" resetval="0x0" description="DDR_FAIL interrupt Enable" range="13" rwaccess="W"/> 
+		<bitfield id="M_RD_ABORT" width="1" begin="12" end="12" resetval="0x0" description="M_RD_ABORT interrupt Enable." range="12" rwaccess="W"/> 
+		<bitfield id="DDR_RX_THR" width="1" begin="11" end="11" resetval="0x0" description="DDR_RX_THR interrupt Enable." range="11" rwaccess="W"/> 
+		<bitfield id="DDR_TX_THR" width="1" begin="10" end="10" resetval="0x0" description="DDR_TX_THR interrupt Enable." range="10" rwaccess="W"/> 
+		<bitfield id="SDR_RX_THR" width="1" begin="9" end="9" resetval="0x0" description="SDR_RX_THR interrupt Enable." range="9" rwaccess="W"/> 
+		<bitfield id="SDR_TX_THR" width="1" begin="8" end="8" resetval="0x0" description="SLV_SDR_TX_THR interrupt Enable." range="8" rwaccess="W"/> 
+		<bitfield id="DDR_RX_UNF" width="1" begin="7" end="7" resetval="0x0" description="DDR_RX_UNF interrupt Enable." range="7" rwaccess="W"/> 
+		<bitfield id="DDR_TX_OVF" width="1" begin="6" end="6" resetval="0x0" description="DDR_TX_OVF interrupt Enable." range="6" rwaccess="W"/> 
+		<bitfield id="SDR_RX_UNF" width="1" begin="5" end="5" resetval="0x0" description="SDR_RX_UNF interrupt Enable." range="5" rwaccess="W"/> 
+		<bitfield id="SDR_TX_OVF" width="1" begin="4" end="4" resetval="0x0" description="SDR_TX_OVF interrupt Enable." range="4" rwaccess="W"/> 
+		<bitfield id="DDR_RD_COMP" width="1" begin="3" end="3" resetval="0x0" description="DDR_RD_COMP interrupt Enable." range="3" rwaccess="W"/> 
+		<bitfield id="DDR_WR_COMP" width="1" begin="2" end="2" resetval="0x0" description="DDR_WR_COMP interrupt Enable." range="2" rwaccess="W"/> 
+		<bitfield id="SDR_RD_COMP" width="1" begin="1" end="1" resetval="0x0" description="SDR_RD_COMP interrupt Enable." range="1" rwaccess="W"/> 
+		<bitfield id="SDR_WR_COMP" width="1" begin="0" end="0" resetval="0x0" description="SDR_WR_COMP interrupt Enable." range="0" rwaccess="W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SLV_IDR" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SLV_IDR" offset="0x44" width="32" description="">
+		<bitfield id="DEFSLVS" width="1" begin="21" end="21" resetval="0x0" description="DEFSLVS interrupt Disable." range="21" rwaccess="W"/> 
+		<bitfield id="TM" width="1" begin="20" end="20" resetval="0x0" description="TM interrupt Disable." range="20" rwaccess="W"/> 
+		<bitfield id="ERROR" width="1" begin="19" end="19" resetval="0x0" description="ERROR interrupt Disable." range="19" rwaccess="W"/> 
+		<bitfield id="EVENT_UP" width="1" begin="18" end="18" resetval="0x0" description="EVENT_UP interrupt Disable." range="18" rwaccess="W"/> 
+		<bitfield id="HJ_DONE" width="1" begin="17" end="17" resetval="0x0" description="HJ_DONE interrupt Disable." range="17" rwaccess="W"/> 
+		<bitfield id="MR_DONE" width="1" begin="16" end="16" resetval="0x0" description="MR_DONE interrupt Disable." range="16" rwaccess="W"/> 
+		<bitfield id="DA_UPDATE" width="1" begin="15" end="15" resetval="0x0" description="DA_UPDATE interrupt Disable." range="15" rwaccess="W"/> 
+		<bitfield id="SDR_FAIL" width="1" begin="14" end="14" resetval="0x0" description="SDR_FAIL interrupt Disable" range="14" rwaccess="W"/> 
+		<bitfield id="DDR_FAIL" width="1" begin="13" end="13" resetval="0x0" description="DDR_FAIL interrupt Disable" range="13" rwaccess="W"/> 
+		<bitfield id="M_RD_ABORT" width="1" begin="12" end="12" resetval="0x0" description="M_RD_ABORT interrupt Disable." range="12" rwaccess="W"/> 
+		<bitfield id="DDR_RX_THR" width="1" begin="11" end="11" resetval="0x0" description="DDR_RX_THR interrupt Disable." range="11" rwaccess="W"/> 
+		<bitfield id="DDR_TX_THR" width="1" begin="10" end="10" resetval="0x0" description="DDR_TX_THR interrupt Disable." range="10" rwaccess="W"/> 
+		<bitfield id="SDR_RX_THR" width="1" begin="9" end="9" resetval="0x0" description="SDR_RX_THR interrupt Disable." range="9" rwaccess="W"/> 
+		<bitfield id="SDR_TX_THR" width="1" begin="8" end="8" resetval="0x0" description="SDR_TX_THR interrupt Disable." range="8" rwaccess="W"/> 
+		<bitfield id="DDR_RX_UNF" width="1" begin="7" end="7" resetval="0x0" description="DDR_RX_UNF interrupt Disable." range="7" rwaccess="W"/> 
+		<bitfield id="DDR_TX_OVF" width="1" begin="6" end="6" resetval="0x0" description="DDR_TX_OVF interrupt Disable." range="6" rwaccess="W"/> 
+		<bitfield id="SDR_RX_UNF" width="1" begin="5" end="5" resetval="0x0" description="SDR_RX_UNF interrupt Disable." range="5" rwaccess="W"/> 
+		<bitfield id="SDR_TX_OVF" width="1" begin="4" end="4" resetval="0x0" description="SDR_TX_OVF interrupt Disable." range="4" rwaccess="W"/> 
+		<bitfield id="DDR_RD_COMP" width="1" begin="3" end="3" resetval="0x0" description="DDR_RD_COMP interrupt Disable." range="3" rwaccess="W"/> 
+		<bitfield id="DDR_WR_COMP" width="1" begin="2" end="2" resetval="0x0" description="DDR_WR_COMP interrupt Disable." range="2" rwaccess="W"/> 
+		<bitfield id="SDR_RD_COMP" width="1" begin="1" end="1" resetval="0x0" description="SDR_RD_COMP interrupt Disable." range="1" rwaccess="W"/> 
+		<bitfield id="SDR_WR_COMP" width="1" begin="0" end="0" resetval="0x0" description="SDR_WR_COMP interrupt Disable." range="0" rwaccess="W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SLV_IMR" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SLV_IMR" offset="0x48" width="32" description="">
+		<bitfield id="DEFSLVS" width="1" begin="21" end="21" resetval="0x0" description="DEFSLVS interrupt Mask." range="21" rwaccess="R"/> 
+		<bitfield id="TM" width="1" begin="20" end="20" resetval="0x0" description="TM interrupt Mask." range="20" rwaccess="R"/> 
+		<bitfield id="ERROR" width="1" begin="19" end="19" resetval="0x0" description="ERROR interrupt Mask." range="19" rwaccess="R"/> 
+		<bitfield id="EVENT_UP" width="1" begin="18" end="18" resetval="0x0" description="EVENT_UP interrupt Mask." range="18" rwaccess="R"/> 
+		<bitfield id="HJ_DONE" width="1" begin="17" end="17" resetval="0x0" description="HJ_DONE interrupt Mask." range="17" rwaccess="R"/> 
+		<bitfield id="MR_DONE" width="1" begin="16" end="16" resetval="0x0" description="MR_DONE interrupt Mask." range="16" rwaccess="R"/> 
+		<bitfield id="DA_UPDATE" width="1" begin="15" end="15" resetval="0x0" description="DA_UPDATE interrupt Mask." range="15" rwaccess="R"/> 
+		<bitfield id="SDR_FAIL" width="1" begin="14" end="14" resetval="0x0" description="SDR_FAIL interrupt Mask" range="14" rwaccess="R"/> 
+		<bitfield id="DDR_FAIL" width="1" begin="13" end="13" resetval="0x0" description="DDR_FAIL interrupt Mask" range="13" rwaccess="R"/> 
+		<bitfield id="M_RD_ABORT" width="1" begin="12" end="12" resetval="0x0" description="M_RD_ABORT interrupt Mask." range="12" rwaccess="R"/> 
+		<bitfield id="DDR_RX_THR" width="1" begin="11" end="11" resetval="0x0" description="DDR_RX_THR interrupt Mask." range="11" rwaccess="R"/> 
+		<bitfield id="DDR_TX_THR" width="1" begin="10" end="10" resetval="0x0" description="DDR_TX_THR interrupt Mask." range="10" rwaccess="R"/> 
+		<bitfield id="SDR_RX_THR" width="1" begin="9" end="9" resetval="0x0" description="SDR_RX_THR interrupt Mask." range="9" rwaccess="R"/> 
+		<bitfield id="SDR_TX_THR" width="1" begin="8" end="8" resetval="0x0" description="SDR_TX_THR interrupt Mask." range="8" rwaccess="R"/> 
+		<bitfield id="DDR_RX_UNF" width="1" begin="7" end="7" resetval="0x0" description="DDR_RX_UNF interrupt Mask." range="7" rwaccess="R"/> 
+		<bitfield id="DDR_TX_OVF" width="1" begin="6" end="6" resetval="0x0" description="DDR_TX_OVF interrupt Mask." range="6" rwaccess="R"/> 
+		<bitfield id="SDR_RX_UNF" width="1" begin="5" end="5" resetval="0x0" description="SDR_RX_UNF interrupt Mask." range="5" rwaccess="R"/> 
+		<bitfield id="SDR_TX_OVF" width="1" begin="4" end="4" resetval="0x0" description="SDR_TX_OVF interrupt Mask." range="4" rwaccess="R"/> 
+		<bitfield id="DDR_RD_COMP" width="1" begin="3" end="3" resetval="0x0" description="DDR_RD_COMP interrupt Mask." range="3" rwaccess="R"/> 
+		<bitfield id="DDR_WR_COMP" width="1" begin="2" end="2" resetval="0x0" description="DDR_WR_COMP interrupt Mask." range="2" rwaccess="R"/> 
+		<bitfield id="SDR_RD_COMP" width="1" begin="1" end="1" resetval="0x0" description="SDR_RD_COMP interrupt Mask." range="1" rwaccess="R"/> 
+		<bitfield id="SDR_WR_COMP" width="1" begin="0" end="0" resetval="0x0" description="SDR_WR_COMP interrupt Mask." range="0" rwaccess="R"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SLV_ICR" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SLV_ICR" offset="0x4C" width="32" description="">
+		<bitfield id="DEFSLVS" width="1" begin="21" end="21" resetval="0x0" description="DEFSLVS interrupt Clear." range="21" rwaccess="W"/> 
+		<bitfield id="TM" width="1" begin="20" end="20" resetval="0x0" description="TM interrupt Clear." range="20" rwaccess="W"/> 
+		<bitfield id="ERROR" width="1" begin="19" end="19" resetval="0x0" description="ERROR interrupt Clear." range="19" rwaccess="W"/> 
+		<bitfield id="EVENT_UP" width="1" begin="18" end="18" resetval="0x0" description="EVENT_UP interrupt Clear." range="18" rwaccess="W"/> 
+		<bitfield id="HJ_DONE" width="1" begin="17" end="17" resetval="0x0" description="HJ_DONE interrupt Clear." range="17" rwaccess="W"/> 
+		<bitfield id="MR_DONE" width="1" begin="16" end="16" resetval="0x0" description="MR_DONE interrupt Clear." range="16" rwaccess="W"/> 
+		<bitfield id="DA_UPDATE" width="1" begin="15" end="15" resetval="0x0" description="DA_UPDATE interrupt Clear." range="15" rwaccess="W"/> 
+		<bitfield id="SDR_FAIL" width="1" begin="14" end="14" resetval="0x0" description="SDR_FAIL interrupt Clear." range="14" rwaccess="W"/> 
+		<bitfield id="DDR_FAIL" width="1" begin="13" end="13" resetval="0x0" description="DDR_FAIL interrupt Clear." range="13" rwaccess="W"/> 
+		<bitfield id="M_RD_ABORT" width="1" begin="12" end="12" resetval="0x0" description="M_RD_ABORT interrupt Clear." range="12" rwaccess="W"/> 
+		<bitfield id="DDR_RX_THR" width="1" begin="11" end="11" resetval="0x0" description="DDR_RX_THR interrupt Clear." range="11" rwaccess="W"/> 
+		<bitfield id="DDR_TX_THR" width="1" begin="10" end="10" resetval="0x0" description="DDR_TX_THR interrupt Clear." range="10" rwaccess="W"/> 
+		<bitfield id="SDR_RX_THR" width="1" begin="9" end="9" resetval="0x0" description="SDR_RX_THR interrupt Clear." range="9" rwaccess="W"/> 
+		<bitfield id="SDR_TX_THR" width="1" begin="8" end="8" resetval="0x0" description="SDR_TX_THR interrupt Clear." range="8" rwaccess="W"/> 
+		<bitfield id="DDR_RX_UNF" width="1" begin="7" end="7" resetval="0x0" description="DDR_RX_UNF interrupt Clear." range="7" rwaccess="W"/> 
+		<bitfield id="DDR_TX_OVF" width="1" begin="6" end="6" resetval="0x0" description="DDR_TX_OVF interrupt Clear." range="6" rwaccess="W"/> 
+		<bitfield id="SDR_RX_UNF" width="1" begin="5" end="5" resetval="0x0" description="SDR_RX_UNF interrupt Clear." range="5" rwaccess="W"/> 
+		<bitfield id="SDR_TX_OVF" width="1" begin="4" end="4" resetval="0x0" description="SDR_TX_OVF interrupt Clear." range="4" rwaccess="W"/> 
+		<bitfield id="DDR_RD_COMP" width="1" begin="3" end="3" resetval="0x0" description="DDR_RD_COMP interrupt Clear." range="3" rwaccess="W"/> 
+		<bitfield id="DDR_WR_COMP" width="1" begin="2" end="2" resetval="0x0" description="DDR_WR_COMP interrupt Clear." range="2" rwaccess="W"/> 
+		<bitfield id="SDR_RD_COMP" width="1" begin="1" end="1" resetval="0x0" description="SDR_RD_COMP interrupt Clear." range="1" rwaccess="W"/> 
+		<bitfield id="SDR_WR_COMP" width="1" begin="0" end="0" resetval="0x0" description="SDR_WR_COMP interrupt Clear." range="0" rwaccess="W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SLV_ISR" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SLV_ISR" offset="0x50" width="32" description="">
+		<bitfield id="DEFSLVS" width="1" begin="21" end="21" resetval="0x0" description="This interrupt is triggered whenever I3C-Slave DEFSLVS CCC command is received." range="21" rwaccess="R"/> 
+		<bitfield id="TM" width="1" begin="20" end="20" resetval="0x0" description="This interrupt is triggered whenever I3C-Slave is not in Test Mode and ENTTM CCC requests to enter general Test Mode." range="20" rwaccess="R"/> 
+		<bitfield id="ERROR" width="1" begin="19" end="19" resetval="0x0" description="This event is triggered whenever SDR Error is detected - applicable for S0, S1, S2, S4 and S5 Errors from MIPI spec." range="19" rwaccess="R"/> 
+		<bitfield id="EVENT_UP" width="1" begin="18" end="18" resetval="0x0" description="This event is triggered whenever DISEC CCC or ENEC CCC is received." range="18" rwaccess="R"/> 
+		<bitfield id="HJ_DONE" width="1" begin="17" end="17" resetval="0x0" description="This event is triggered whenever Hot-Join request is completed." range="17" rwaccess="R"/> 
+		<bitfield id="MR_DONE" width="1" begin="16" end="16" resetval="0x0" description="This event is triggered whenever Mastership Request is completed." range="16" rwaccess="R"/> 
+		<bitfield id="DA_UPDATE" width="1" begin="15" end="15" resetval="0x0" description="This event is triggered whenever Dynamic Address of the device has been updated." range="15" rwaccess="R"/> 
+		<bitfield id="SDR_FAIL" width="1" begin="14" end="14" resetval="0x0" description="This event is triggered whenever fail event during SDR transfer is detected [applicable for Private Write transfers only]." range="14" rwaccess="R"/> 
+		<bitfield id="DDR_FAIL" width="1" begin="13" end="13" resetval="0x0" description="This event is triggered whenever fail event during DDR transfer is detected." range="13" rwaccess="R"/> 
+		<bitfield id="M_RD_ABORT" width="1" begin="12" end="12" resetval="0x0" description="Read Transfer Aborted by Master." range="12" rwaccess="R"/> 
+		<bitfield id="DDR_RX_THR" width="1" begin="11" end="11" resetval="0x0" description="Slave DDR Rx DATA Buffer Threshold.               It is set when the number of words in the Slave DDR Rx DATA Buffer reaches value programmed in SLV_DDR_TX_RX_THR_CTRL.slv_ddr_rx_thr field." range="11" rwaccess="R"/> 
+		<bitfield id="DDR_TX_THR" width="1" begin="10" end="10" resetval="0x0" description="Slave DDR Tx DATA Buffer Threshold.               It is set when the number of words in the Slave DDR Tx DATA Buffer reaches value programmed in SLV_DDR_TX_RX_THR_CTRL.slv_ddr_tx_thr field." range="10" rwaccess="R"/> 
+		<bitfield id="SDR_RX_THR" width="1" begin="9" end="9" resetval="0x0" description="Rx DATA Buffer Threshold.               It is set when the number of bytes in the Rx DATA Buffer reaches value programmed in TX_RX_THR_CTRL.rx_thr field." range="9" rwaccess="R"/> 
+		<bitfield id="SDR_TX_THR" width="1" begin="8" end="8" resetval="0x0" description="Tx DATA Buffer Threshold.               It is set when the number of bytes in the Tx DATA Buffer reaches value programmed in TX_RX_THR_CTRL.tx_thr field." range="8" rwaccess="R"/> 
+		<bitfield id="DDR_RX_UNF" width="1" begin="7" end="7" resetval="0x0" description="Slave DDR Rx DATA Buffer Underflow. Set if host attempts to read from the empty Slave Rx DATA Buffer." range="7" rwaccess="R"/> 
+		<bitfield id="DDR_TX_OVF" width="1" begin="6" end="6" resetval="0x0" description="Slave DDR Tx DATA Buffer Overflow. Set if host attepmts to write to Slvave DDR Tx DATA Buffer which is already full." range="6" rwaccess="R"/> 
+		<bitfield id="SDR_RX_UNF" width="1" begin="5" end="5" resetval="0x0" description="Rx DATA Buffer Underflow. Set if host attempts to read from the empty Rx DATA Buffer." range="5" rwaccess="R"/> 
+		<bitfield id="SDR_TX_OVF" width="1" begin="4" end="4" resetval="0x0" description="Tx DATA Buffer Overflow. Set if host attempts to write to Tx DATA Buffer which is already full." range="4" rwaccess="R"/> 
+		<bitfield id="DDR_RD_COMP" width="1" begin="3" end="3" resetval="0x0" description="This bit is set whenever the Slave terminates the DDR Read transfer." range="3" rwaccess="R"/> 
+		<bitfield id="DDR_WR_COMP" width="1" begin="2" end="2" resetval="0x0" description="This bit is set whenever the Master terminates the DDR Write transfer." range="2" rwaccess="R"/> 
+		<bitfield id="SDR_RD_COMP" width="1" begin="1" end="1" resetval="0x0" description="This bit is set whenever the Slave terminates the SDR Private Read transfer." range="1" rwaccess="R"/> 
+		<bitfield id="SDR_WR_COMP" width="1" begin="0" end="0" resetval="0x0" description="This bit is set whenever the Master terminates the SDR Private Write transfer." range="0" rwaccess="R"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SLV_STATUS0" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SLV_STATUS0" offset="0x54" width="32" description="">
+		<bitfield id="REG_ADDR" width="8" begin="23" end="16" resetval="0x0" description="Private Read/Write Address." range="23 - 16" rwaccess="R"/> 
+		<bitfield id="XFERRED_BYTES" width="16" begin="15" end="0" resetval="0x0" description="Number of transferred bytes in SDR transactions." range="15 - 0" rwaccess="R"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SLV_STATUS1" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SLV_STATUS1" offset="0x58" width="32" description="">
+		<bitfield id="ENTAS" width="2" begin="21" end="20" resetval="0x0" description="Bits that indicate current Activity State. It is updated based on ENTASx CCC       [broadcast or direct], by default is set to 2'b00." range="21 - 20" rwaccess="R"/> 
+		<bitfield id="VEN_TM" width="1" begin="19" end="19" resetval="0x0" description="Vendor Test Mode. This bit is set whenever ENTTM CCC requests to enter general Test Mode. It remains HIGH until reception of another ENTTM CCC with different value." range="19" rwaccess="R"/> 
+		<bitfield id="HJ_DIS" width="1" begin="18" end="18" resetval="0x1" description="Hot-Join Request is Disabled. This bit is set whenever HJ request is disabled by Current I3C-Master using DISEC CCC." range="18" rwaccess="R"/> 
+		<bitfield id="MR_DIS" width="1" begin="17" end="17" resetval="0x1" description="Mastership Request is Disabled. This bit is set whenever MR request is disabled by Current I3C-Master using DISEC CCC." range="17" rwaccess="R"/> 
+		<bitfield id="PROT_ERROR" width="1" begin="16" end="16" resetval="0x0" description="Protocol Error Condition Indicator. This bit is set whenever SDR error condition is detected by I3C-Master operating in Slave mode.                It remains High until detection of recovery pattern." range="16" rwaccess="R"/> 
+		<bitfield id="DA" width="7" begin="15" end="9" resetval="0x8" description="Current Slave Dynamic Address. Irrelevant if SLV_STATUS1.has_da bit is Low." range="15 - 9" rwaccess="R"/> 
+		<bitfield id="HAS_DA" width="1" begin="8" end="8" resetval="0x1" description="This bit is set whenever Slave has Dynamic Address assigned. Tied HIGH when controller operates as Main Master device class." range="8" rwaccess="R"/> 
+		<bitfield id="DDRRX_FULL" width="1" begin="7" end="7" resetval="0x0" description="This bit is set whenever Slave DDR Rx DATA Buffer is full." range="7" rwaccess="R"/> 
+		<bitfield id="DDRTX_FULL" width="1" begin="6" end="6" resetval="0x0" description="This bit is set whenever Slave DDR Tx DATA Buffer is full." range="6" rwaccess="R"/> 
+		<bitfield id="DDRRX_EMPTY" width="1" begin="5" end="5" resetval="0x1" description="This bit is set whenever Slave DDR Rx DATA Buffer is empty." range="5" rwaccess="R"/> 
+		<bitfield id="DDRTX_EMPTY" width="1" begin="4" end="4" resetval="0x1" description="This bit is set whenever Slave DDR Tx DATA Buffer is empty." range="4" rwaccess="R"/> 
+		<bitfield id="SDRRX_FULL" width="1" begin="3" end="3" resetval="0x0" description="This bit is set whenever Rx DATA Buffer is full." range="3" rwaccess="R"/> 
+		<bitfield id="SDRTX_FULL" width="1" begin="2" end="2" resetval="0x0" description="This bit is set whenever Tx DATA Buffer is full." range="2" rwaccess="R"/> 
+		<bitfield id="SDRRX_EMPTY" width="1" begin="1" end="1" resetval="0x1" description="This bit is set whenever Rx DATA Buffer is empty." range="1" rwaccess="R"/> 
+		<bitfield id="SDRTX_EMPTY" width="1" begin="0" end="0" resetval="0x1" description="This bit is set whenever Tx DATA Buffer is empty." range="0" rwaccess="R"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_CMD0_FIFO" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_CMD0_FIFO" offset="0x60" width="32" description="">
+		<bitfield id="IS_DDR" width="1" begin="31" end="31" resetval="0x0" description="IS_DDR - DDR command. Enables DDR mode of transfer.                          0 - SDR mode                          1 - DDR mode, note that ENTHDR-DDR CCC should precede any commands with DDR mode enabled." range="31" rwaccess="W"/> 
+		<bitfield id="IS_CCC" width="1" begin="30" end="30" resetval="0x0" description="IsCCC. Denotes whether it is a CCC or generic command.                          0 - generic command                          1 - CCC command" range="30" rwaccess="W"/> 
+		<bitfield id="BCH" width="1" begin="29" end="29" resetval="0x0" description="BCH - Broadcast Header. Defines whether command will includes broadcast address header [0x7E] or not. Implicitly set for CCC commands.                          0 - broadcast header disabled                          1 - broadcast header enabled" range="29" rwaccess="W"/> 
+		<bitfield id="XMIT_MODE" width="2" begin="28" end="27" resetval="0x0" description="Defines transfer modes for I3C SDR private read/write commands [not CCC], the following options are available:                          00 - burst [byte-by-byte] transfer with static register sub-address. Send static sub-address followed by data bytes only.                          01 - single data byte transfers with auto incremented register sub-addressing. Each data byte is followed by repeated start condition and slave's sub-address is inremented explicitly.                          10 - single data byte transfers without auto incremented register sub-addressing. Each data byte is followed by repeated start condition, register sub-address as in CMD descriptor for all transactions.                           11 - burst [byte-by-byte] transfer without register sub-addressing, i.e. first data byte after the DA/SA is payload byte acquired from Tx DATA buffer." range="28 - 27" rwaccess="W"/> 
+		<bitfield id="SBCA" width="1" begin="26" end="26" resetval="0x0" description="SBCA - Sixteen Bits CSR Addressing. Defines the CSR addressing mode for I3C private commands only.                 0 - normal CSR addressing mode [8-bit] - ADDR0_7 - ADDR0_0                 1 - extended CSR addressing mode [16-bit] - ADDR0_7 - ADDR0_0 and ADDR1_7 - ADDR1_0" range="26" rwaccess="W"/> 
+		<bitfield id="RSBC" width="1" begin="25" end="25" resetval="0x0" description="RSBC - Repeated Start Between Commands. When this bit is set then between commands he repeated start condition is issued instead stop condition. It is only applicable when there is more than one command is in the command queue and next command is for Slave device of same type. The stop condition will be generated regardless of RSCB bit value for the following scenarios:             - current command is the last command in the command queue             - next command has invalid DA/SA             - immediate command comes through" range="25" rwaccess="W"/> 
+		<bitfield id="IS10B" width="1" begin="24" end="24" resetval="0x0" description="Is10B - Normal/Extended Address. Defines the addressing mode, applicable only for legacy I2C messaging.                 0 - normal addressing mode [7-bit] - ID6-ID0                 1 - extended addressing mode [10-bit] - ID10B2-ID10B0 and ID6-ID0" range="24" rwaccess="W"/> 
+		<bitfield id="PL_LEN" width="12" begin="23" end="12" resetval="0x0" description="PL_LEN - Payload Length, defines number of bytes to be sent for particular CCC or generic R/Q command. Supports up to 4095 bytes." range="23 - 12" rwaccess="W"/> 
+		<bitfield id="DEV_ADDR_MSB" width="3" begin="10" end="8" resetval="0x0" description="DEV_ADDR_MSB - legacy I2C Extended Address. The 3 MSB bits of legacy I2C 10-bit address. Applicable only if Is_10B is set for I2C legacy transfers." range="10 - 8" rwaccess="W"/> 
+		<bitfield id="DEV_ADDR" width="7" begin="7" end="1" resetval="0x0" description="DEV_ADDR - Static/Dynamic slave Address. Correspond to a given slave Dynamic Address and Static Address. For CCC is applicable only when it is direct CCC command. For broadcast CCC this field is ignored." range="7 - 1" rwaccess="W"/> 
+		<bitfield id="RNW" width="1" begin="0" end="0" resetval="0x0" description="RnW - Read no Write. Defines the direction of transfer, for broadcast CCC this field is ignored.                 0 - Write Transfer                 1 - Read Transfer" range="0" rwaccess="W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_CMD1_FIFO" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_CMD1_FIFO" offset="0x64" width="32" description="">
+		<bitfield id="CMD_ID" width="8" begin="31" end="24" resetval="0x0" description="CMD_ID - command identifier." range="31 - 24" rwaccess="W"/> 
+		<bitfield id="CSRADDR1" width="8" begin="15" end="8" resetval="0x0" description="CSR ADDR1 - second byte of the CSR address in 16-bit addressing mode. Applicable only when 16-bit addressing mode is used and for private commands [non CCC commands]." range="15 - 8" rwaccess="W"/> 
+		<bitfield id="CCC_CSRADDR0" width="8" begin="7" end="0" resetval="0x0" description="CCC/CSR ADDR0 - CCC or CSR Address. Meaning of this field depends on bit 30 [IsCCC] of Command Word0.                - When is_ccc is set to '0' then this field holds address of slave CSR. When 16-bit addressing is used, then it is the first byte of the CSR address.                - When is ccc is set to '1' then this field holds code of CCC." range="7 - 0" rwaccess="W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_TX_FIFO" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_TX_FIFO" offset="0x68" width="32" description="">
+		<bitfield id="DATA" width="32" begin="31" end="0" resetval="0x0" description="Tx DATA payload." range="31 - 0" rwaccess="W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_IMD_CMD0" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_IMD_CMD0" offset="0x70" width="32" description="">
+		<bitfield id="PL_LEN" width="3" begin="14" end="12" resetval="0x0" description="PL_LEN - Payload Length, defines number of bytes to be send for particular CCC or generic R/W command. Supports up to 4 bytes." range="14 - 12" rwaccess="W"/> 
+		<bitfield id="DEV_ADDR" width="7" begin="7" end="1" resetval="0x0" description="DEV_ADDR - Static/Dynamic slave Address. Correspond to a given slave Dynamic Address and Static Address. For CCC is applicable only when it is direct CCC command. For broadcast CCC this field is ignored." range="7 - 1" rwaccess="W"/> 
+		<bitfield id="RNW" width="1" begin="0" end="0" resetval="0x0" description="RnW - Read not Write. Defines the direction of transfer, for broadcast CCC this field is ignored.                 0 - Write Transfer                 1 - Read Transfer" range="0" rwaccess="W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_IMD_CMD1" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_IMD_CMD1" offset="0x74" width="32" description="">
+		<bitfield id="CMD_ID" width="8" begin="31" end="24" resetval="0x0" description="CMD_ID - command identifier." range="31 - 24" rwaccess="W"/> 
+		<bitfield id="CCC" width="8" begin="7" end="0" resetval="0x0" description="CCC Code - field holds code of CCC message." range="7 - 0" rwaccess="W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_IMD_DATA" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_IMD_DATA" offset="0x78" width="32" description="">
+		<bitfield id="DATA" width="32" begin="31" end="0" resetval="0x0" description="Tx DATA payload [it's not a FIFO, supports up to 4 bytes only]." range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_RX_FIFO" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_RX_FIFO" offset="0x80" width="32" description="">
+		<bitfield id="DATA" width="32" begin="31" end="0" resetval="0x0" description="Rx DATA payload." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_IBI_DATA_FIFO" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_IBI_DATA_FIFO" offset="0x84" width="32" description="">
+		<bitfield id="DATA" width="32" begin="31" end="0" resetval="0x0" description="IBI DATA payload." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SLV_DDR_TX_FIFO" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SLV_DDR_TX_FIFO" offset="0x88" width="32" description="">
+		<bitfield id="DDR_SLAVE_TX_DATA_FIFO" width="20" begin="19" end="0" resetval="0x0" description="DDR Tx DATA payload [with meta-data, e.g. preamble/parity]." range="19 - 0" rwaccess="W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SLV_DDR_RX_FIFO" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SLV_DDR_RX_FIFO" offset="0x8C" width="32" description="">
+		<bitfield id="DDR_SLAVE_RX_DATA_FIFO" width="20" begin="19" end="0" resetval="0x0" description="DDR Rx DATA payload [with meta-data, e.g. preamble/parity]." range="19 - 0" rwaccess="R"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_CMD_IBI_THR_CTRL" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_CMD_IBI_THR_CTRL" offset="0x90" width="32" description="">
+		<bitfield id="IBIR_THR" width="6" begin="29" end="24" resetval="0x1" description="Threshold configuration value for IBI Response Queue." range="29 - 24" rwaccess="R/W"/> 
+		<bitfield id="CMDR_THR" width="5" begin="20" end="16" resetval="0x1" description="Threshold configuration value for Command Response Queue." range="20 - 16" rwaccess="R/W"/> 
+		<bitfield id="IBID_THR" width="6" begin="13" end="8" resetval="0x1" description="Threshold configuration value for IBI DATA Buffer." range="13 - 8" rwaccess="R/W"/> 
+		<bitfield id="CMDD_THR" width="5" begin="4" end="0" resetval="0x1" description="Threshold configuration value for Command Queue." range="4 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_TX_RX_THR_CTRL" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_TX_RX_THR_CTRL" offset="0x94" width="32" description="">
+		<bitfield id="RX_THR" width="16" begin="31" end="16" resetval="0x1" description="Threshold configuration value for Rx Data memory block" range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="TX_THR" width="16" begin="15" end="0" resetval="0x1" description="Threshold configuration value for Tx Data memory block" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SLV_DDR_TX_RX_THR_CTRL" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SLV_DDR_TX_RX_THR_CTRL" offset="0x98" width="32" description="">
+		<bitfield id="SLV_DDR_RX_THR" width="16" begin="31" end="16" resetval="0x1" description="Threshold configuration value for Slave DDR Rx DATA buffer." range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="SLV_DDR_TX_THR" width="16" begin="15" end="0" resetval="0x1" description="Threshold configuration value for Slave DDR Tx DATA buffer." range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_FLUSH_CTRL" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_FLUSH_CTRL" offset="0x9C" width="32" description="">
+		<bitfield id="IBI_RESP_FLUSH" width="1" begin="24" end="24" resetval="0x0" description="When asserted while controller is disabled, the IBI Response Queue read/write pointers will be set to 0, effectively makes the buffer empty. Self-cleared control bit." range="24" rwaccess="W"/> 
+		<bitfield id="CMD_RESP_FLUSH" width="1" begin="23" end="23" resetval="0x0" description="When asserted while controller is disabled, the Command Response Queue read/write pointers will be set to 0, effectively makes the buffer empty. Self-cleared control bit." range="23" rwaccess="W"/> 
+		<bitfield id="SLV_DDR_RX_FLUSH" width="1" begin="22" end="22" resetval="0x0" description="When asserted while controller is disabled, the Slave DDR Rx DATA Buffer read/write pointers will be set to 0, effectively makes the buffer empty. Self-cleared control bit." range="22" rwaccess="W"/> 
+		<bitfield id="SLV_DDR_TX_FLUSH" width="1" begin="21" end="21" resetval="0x0" description="When asserted while controller is disabled, the Slave DDR Tx DATA Buffer read/write pointers will be set to 0, effectively makes the buffer empty. Self-cleared control bit." range="21" rwaccess="W"/> 
+		<bitfield id="IMM_CMD_FLUSH" width="1" begin="20" end="20" resetval="0x0" description="When asserted while controller is disabled, the Immediate Commadn/DATA registers will be cleared and their empty flag will be asserted. Self-cleared control bit." range="20" rwaccess="W"/> 
+		<bitfield id="IBI_FLUSH" width="1" begin="19" end="19" resetval="0x0" description="When asserted while controller is disabled, the IBI DATA Buffer read/write pointers will be set to 0, effectively makes the buffer empty. Self-cleared control bit." range="19" rwaccess="W"/> 
+		<bitfield id="RX_FLUSH" width="1" begin="18" end="18" resetval="0x0" description="When asserted while controller is disabled, the Rx DATA Buffer read/write pointers will be set to 0, effectively makes the buffer empty. Self-cleared control bit..               Self-cleared control bit." range="18" rwaccess="W"/> 
+		<bitfield id="TX_FLUSH" width="1" begin="17" end="17" resetval="0x0" description="When asserted while controller is disabled, the Tx DATA Buffer read/write pointers will be set to 0, effectively makes the buffer empty. Self-cleared control bit." range="17" rwaccess="W"/> 
+		<bitfield id="CMD_FLUSH" width="1" begin="16" end="16" resetval="0x0" description="When asserted while controller is disabled, the Command Buffer read/write pointers will be set to 0, effectively makes the buffer empty. Self-cleared control bit." range="16" rwaccess="W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_TTO_PRESCL_CTRL0" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_TTO_PRESCL_CTRL0" offset="0xB0" width="32" description="">
+		<bitfield id="DIV_B" width="10" begin="25" end="16" resetval="0x1023" description="Divider B" range="25 - 16" rwaccess="R/W"/> 
+		<bitfield id="DIV_A" width="11" begin="10" end="0" resetval="0x2047" description="Divider A" range="10 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_TTO_PRESCL_CTRL1" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_TTO_PRESCL_CTRL1" offset="0xB4" width="32" description="">
+		<bitfield id="DIV_B" width="10" begin="25" end="16" resetval="0x1023" description="Divider B" range="25 - 16" rwaccess="R/W"/> 
+		<bitfield id="DIV_A" width="8" begin="7" end="0" resetval="0x255" description="Divider A" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEVS_CTRL" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEVS_CTRL" offset="0xB8" width="32" description="">
+		<bitfield id="RSVD1" width="4" begin="31" end="28" resetval="0x0" description="Reserved." range="31 - 28" rwaccess="R"/> 
+		<bitfield id="DEV11_CLR" width="1" begin="27" end="27" resetval="0x0" description="Clear contents of DevID11 retaining registers. Self-cleared bit." range="27" rwaccess="W"/> 
+		<bitfield id="DEV10_CLR" width="1" begin="26" end="26" resetval="0x0" description="Clear contents of DevID10 retaining registers. Self-cleared bit." range="26" rwaccess="W"/> 
+		<bitfield id="DEV9_CLR" width="1" begin="25" end="25" resetval="0x0" description="Clear contents of DevID9 retaining registers. Self-cleared bit." range="25" rwaccess="W"/> 
+		<bitfield id="DEV8_CLR" width="1" begin="24" end="24" resetval="0x0" description="Clear contents of DevID8 retaining registers. Self-cleared bit." range="24" rwaccess="W"/> 
+		<bitfield id="DEV7_CLR" width="1" begin="23" end="23" resetval="0x0" description="Clear contents of DevID7 retaining registers. Self-cleared bit." range="23" rwaccess="W"/> 
+		<bitfield id="DEV6_CLR" width="1" begin="22" end="22" resetval="0x0" description="Clear contents of DevID6 retaining registers. Self-cleared bit." range="22" rwaccess="W"/> 
+		<bitfield id="DEV5_CLR" width="1" begin="21" end="21" resetval="0x0" description="Clear contents of DevID5 retaining registers. Self-cleared bit." range="21" rwaccess="W"/> 
+		<bitfield id="DEV4_CLR" width="1" begin="20" end="20" resetval="0x0" description="Clear contents of DevID4 retaining registers. Self-cleared bit." range="20" rwaccess="W"/> 
+		<bitfield id="DEV3_CLR" width="1" begin="19" end="19" resetval="0x0" description="Clear contents of DevID3 retaining registers. Self-cleared bit." range="19" rwaccess="W"/> 
+		<bitfield id="DEV2_CLR" width="1" begin="18" end="18" resetval="0x0" description="Clear contents of DevID2 retaining registers. Self-cleared bit." range="18" rwaccess="W"/> 
+		<bitfield id="DEV1_CLR" width="1" begin="17" end="17" resetval="0x0" description="Clear contents of DevID1 retaining registers. Self-cleared bit." range="17" rwaccess="W"/> 
+		<bitfield id="RSVD0" width="5" begin="16" end="12" resetval="0x0" description="Reserved." range="16 - 12" rwaccess="R"/> 
+		<bitfield id="DEV11_ACTIVE" width="1" begin="11" end="11" resetval="0x0" description="DevID11 is active - has either valid DA or SA." range="11" rwaccess="R/W"/> 
+		<bitfield id="DEV10_ACTIVE" width="1" begin="10" end="10" resetval="0x0" description="DevID10 is active - has either valid DA or SA." range="10" rwaccess="R/W"/> 
+		<bitfield id="DEV9_ACTIVE" width="1" begin="9" end="9" resetval="0x0" description="DevID9 is active - has either valid DA or SA." range="9" rwaccess="R/W"/> 
+		<bitfield id="DEV8_ACTIVE" width="1" begin="8" end="8" resetval="0x0" description="DevID8 is active - has either valid DA or SA." range="8" rwaccess="R/W"/> 
+		<bitfield id="DEV7_ACTIVE" width="1" begin="7" end="7" resetval="0x0" description="DevID7 is active - has either valid DA or SA." range="7" rwaccess="R/W"/> 
+		<bitfield id="DEV6_ACTIVE" width="1" begin="6" end="6" resetval="0x0" description="DevID6 is active - has either valid DA or SA." range="6" rwaccess="R/W"/> 
+		<bitfield id="DEV5_ACTIVE" width="1" begin="5" end="5" resetval="0x0" description="DevID5 is active - has either valid DA or SA." range="5" rwaccess="R/W"/> 
+		<bitfield id="DEV4_ACTIVE" width="1" begin="4" end="4" resetval="0x0" description="DevID4 is active - has either valid DA or SA." range="4" rwaccess="R/W"/> 
+		<bitfield id="DEV3_ACTIVE" width="1" begin="3" end="3" resetval="0x0" description="DevID3 is active - has either valid DA or SA." range="3" rwaccess="R/W"/> 
+		<bitfield id="DEV2_ACTIVE" width="1" begin="2" end="2" resetval="0x0" description="DevID2 is active - has either valid DA or SA." range="2" rwaccess="R/W"/> 
+		<bitfield id="DEV1_ACTIVE" width="1" begin="1" end="1" resetval="0x0" description="DevID1 is active - has either valid DA or SA." range="1" rwaccess="R/W"/> 
+		<bitfield id="DEV0_ACTIVE" width="1" begin="0" end="0" resetval="0x1" description="DevID0 is active - has either valid DA or SA." range="0" rwaccess="R"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID0_RR0" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID0_RR0" offset="0xC0" width="32" description="">
+		<bitfield id="LVR_SA_MSB" width="3" begin="15" end="13" resetval="0x0" description="MSB bits of Legacy I2C Device with 10-bit addressing." range="15 - 13" rwaccess="R/W"/> 
+		<bitfield id="LVR_EXT_ADDR" width="1" begin="11" end="11" resetval="0x0" description="Device 0 Address mode used:                0 - 7-bit addressing - applicable for I3C and I2C devices.                1 - 10-bit addressing - applicable only for I2C devices with 10-bit extended address. NOTE: Invalid setting when Device0_RR0.is_i3c=1" range="11" rwaccess="R/W"/> 
+		<bitfield id="IS_I3C" width="1" begin="9" end="9" resetval="0x1" description="Device 0 I3C mode Operation                1 Yes                0 No" range="9" rwaccess="R"/> 
+		<bitfield id="DEV_ADDR" width="8" begin="7" end="0" resetval="0x16" description="Device 0 Slave Dynamic [Static/Legacy] Address bits 7:1                bit 0 - parity XOR check -> ~XOR[dev_addr[7:1]]." range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID0_RR1" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID0_RR1" offset="0xC4" width="32" description="">
+		<bitfield id="PID_MSB" width="32" begin="31" end="0" resetval="0x33816576" description="Device 0 48 to 16 Dev ID bits" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID0_RR2" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID0_RR2" offset="0xC8" width="32" description="">
+		<bitfield id="PID_LSB" width="16" begin="31" end="16" resetval="0x0" description="Device 0 15 to 0 Dev ID bits" range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="BCR" width="8" begin="15" end="8" resetval="0x98" description="Device 0 BCR register" range="15 - 8" rwaccess="R/W"/> 
+		<bitfield id="DCR_LVR" width="8" begin="7" end="0" resetval="0x0" description="Device 0 DCR [if I3C device] or LVR [if I2C device] register                 Decoding if used as DCR:                 Bits[7:0]: 255 available codes for describing the type of sensor, or Device;                 Decoding if used as LVR:                 Bits [7:4]: Device 0 LVR Code: 15 available codes for describing the Device capabilities and function on the sensors' system                 Bits [3:3]: Device 0 LVR Slave operation mode:                 1'b0   FM mode                 1'b1   FM+ mode                 Bits [2:0]: Device 0 LVR Index:                 3'b000 Index 0                 3'b001 Index 1                 3'b010 Index 2                 3'b011 Index 3 [Reserved]                 3'b100 Index 4 [Reserved]                 3'b101 Index 5 [Reserved]                 3'b110 Index 6 [Reserved]                 3'b111 Index 7 [Reserved]" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID1_RR0" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID1_RR0" offset="0xD0" width="32" description="">
+		<bitfield id="LVR_SA_MSB" width="3" begin="15" end="13" resetval="0x0" description="MSB bits of Legacy I2C Device with 10-bit addressing." range="15 - 13" rwaccess="R/W"/> 
+		<bitfield id="LVR_EXT_ADDR" width="1" begin="11" end="11" resetval="0x0" description="Device 1 Address mode used:                0 - 7-bit addressing - applicable for I3C and I2C devices.                1 - 10-bit addressing - applicable only for I2C devices with 10-bit extended address. NOTE: Invalid setting when Device1_RR0.is_i3c=1" range="11" rwaccess="R/W"/> 
+		<bitfield id="IS_I3C" width="1" begin="9" end="9" resetval="0x1" description="Device 1 I3C mode Operation                1 Yes                0 No" range="9" rwaccess="R/W"/> 
+		<bitfield id="DEV_ADDR" width="8" begin="7" end="0" resetval="0x19" description="Device 1 Slave Dynamic [Static/Legacy] Address bits 7:1                bit 0 - parity XOR check -> ~XOR[dev_addr[7:1]]." range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID1_RR1" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID1_RR1" offset="0xD4" width="32" description="">
+		<bitfield id="PID_MSB" width="32" begin="31" end="0" resetval="0x0" description="Device 1 48 to 16 Dev ID bits" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID1_RR2" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID1_RR2" offset="0xD8" width="32" description="">
+		<bitfield id="PID_LSB" width="16" begin="31" end="16" resetval="0x0" description="Device 1 15 to 0 Dev ID bits" range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="BCR" width="8" begin="15" end="8" resetval="0x0" description="Device 1 BCR register" range="15 - 8" rwaccess="R/W"/> 
+		<bitfield id="DCR_LVR" width="8" begin="7" end="0" resetval="0x0" description="Device 1 DCR [if I3C device] or LVR [if I2C device] register                 Decoding if used as DCR:                 Bits[7:0]: 255 available codes for describing the type of sensor, or Device;                 Decoding if used as LVR:                 Bits [7:4]: Device 1 LVR Code: 15 available codes for describing the Device capabilities and function on the sensors' system                 Bits [3:3]: Device 1 LVR Slave operation mode:                 1'b0   FM mode                 1'b1   FM+ mode                 Bits [2:0]: Device 1 LVR Index:                 3'b000 Index 0                 3'b001 Index 1                 3'b010 Index 2                 3'b011 Index 3 [Reserved]                 3'b100 Index 4 [Reserved]                 3'b101 Index 5 [Reserved]                 3'b110 Index 6 [Reserved]                 3'b111 Index 7 [Reserved]" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID2_RR0" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID2_RR0" offset="0xE0" width="32" description="">
+		<bitfield id="LVR_SA_MSB" width="3" begin="15" end="13" resetval="0x0" description="MSB bits of Legacy I2C Device with 10-bit addressing." range="15 - 13" rwaccess="R/W"/> 
+		<bitfield id="LVR_EXT_ADDR" width="1" begin="11" end="11" resetval="0x0" description="Device 2 Address mode used:                0 - 7-bit addressing - applicable for I3C and I2C devices.                1 - 10-bit addressing - applicable only for I2C devices with 10-bit extended address. NOTE: Invalid setting when Device2_RR0.is_i3c=1" range="11" rwaccess="R/W"/> 
+		<bitfield id="IS_I3C" width="1" begin="9" end="9" resetval="0x1" description="Device 2 I3C mode Operation                1 Yes                0 No" range="9" rwaccess="R/W"/> 
+		<bitfield id="DEV_ADDR" width="8" begin="7" end="0" resetval="0x21" description="Device 2 Slave Dynamic [Static/Legacy] Address bits 7:1                bit 0 - parity XOR check -> ~XOR[dev_addr[7:1]]." range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID2_RR1" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID2_RR1" offset="0xE4" width="32" description="">
+		<bitfield id="PID_MSB" width="32" begin="31" end="0" resetval="0x0" description="Device 2 48 to 16 Dev ID bits" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID2_RR2" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID2_RR2" offset="0xE8" width="32" description="">
+		<bitfield id="PID_LSB" width="16" begin="31" end="16" resetval="0x0" description="Device 2 15 to 0 Dev ID bits" range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="BCR" width="8" begin="15" end="8" resetval="0x0" description="Device 2 BCR register" range="15 - 8" rwaccess="R/W"/> 
+		<bitfield id="DCR_LVR" width="8" begin="7" end="0" resetval="0x0" description="Device 2 DCR [if I3C device] or LVR [if I2C device] register                 Decoding if used as DCR:                 Bits[7:0]: 255 available codes for describing the type of sensor, or Device;                 Decoding if used as LVR:                 Bits [7:4]: Device 2 LVR Code: 15 available codes for describing the Device capabilities and function on the sensors' system                 Bits [3:3]: Device 2 LVR Slave operation mode:                 1'b0   FM mode                 1'b1   FM+ mode                 Bits [2:0]: Device 2 LVR Index:                 3'b000 Index 0                 3'b001 Index 1                 3'b010 Index 2                 3'b011 Index 3 [Reserved]                 3'b100 Index 4 [Reserved]                 3'b101 Index 5 [Reserved]                 3'b110 Index 6 [Reserved]                 3'b111 Index 7 [Reserved]" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID3_RR0" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID3_RR0" offset="0xF0" width="32" description="">
+		<bitfield id="LVR_SA_MSB" width="3" begin="15" end="13" resetval="0x0" description="MSB bits of Legacy I2C Device with 10-bit addressing." range="15 - 13" rwaccess="R/W"/> 
+		<bitfield id="LVR_EXT_ADDR" width="1" begin="11" end="11" resetval="0x0" description="Device 3 Address mode used:                0 - 7-bit addressing - applicable for I3C and I2C devices.                1 - 10-bit addressing - applicable only for I2C devices with 10-bit extended address. NOTE: Invalid setting when Device3_RR0.is_i3c=1" range="11" rwaccess="R/W"/> 
+		<bitfield id="IS_I3C" width="1" begin="9" end="9" resetval="0x1" description="Device 3 I3C mode Operation                1 Yes                0 No" range="9" rwaccess="R/W"/> 
+		<bitfield id="DEV_ADDR" width="8" begin="7" end="0" resetval="0x22" description="Device 3 Slave Dynamic [Static/Legacy] Address bits 7:1                bit 0 - parity XOR check -> ~XOR[dev_addr[7:1]]." range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID3_RR1" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID3_RR1" offset="0xF4" width="32" description="">
+		<bitfield id="PID_MSB" width="32" begin="31" end="0" resetval="0x0" description="Device 3 48 to 16 Dev ID bits" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID3_RR2" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID3_RR2" offset="0xF8" width="32" description="">
+		<bitfield id="PID_LSB" width="16" begin="31" end="16" resetval="0x0" description="Device 3 15 to 0 Dev ID bits" range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="BCR" width="8" begin="15" end="8" resetval="0x0" description="Device 3 BCR register" range="15 - 8" rwaccess="R/W"/> 
+		<bitfield id="DCR_LVR" width="8" begin="7" end="0" resetval="0x0" description="Device 3 DCR [if I3C device] or LVR [if I2C device] register                 Decoding if used as DCR:                 Bits[7:0]: 255 available codes for describing the type of sensor, or Device;                 Decoding if used as LVR:                 Bits [7:4]: Device 3 LVR Code: 15 available codes for describing the Device capabilities and function on the sensors' system                 Bits [3:3]: Device 3 LVR Slave operation mode:                 1'b0   FM mode                 1'b1   FM+ mode                 Bits [2:0]: Device 3 LVR Index:                 3'b000 Index 0                 3'b001 Index 1                 3'b010 Index 2                 3'b011 Index 3 [Reserved]                 3'b100 Index 4 [Reserved]                 3'b101 Index 5 [Reserved]                 3'b110 Index 6 [Reserved]                 3'b111 Index 7 [Reserved]" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID4_RR0" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID4_RR0" offset="0x100" width="32" description="">
+		<bitfield id="LVR_SA_MSB" width="3" begin="15" end="13" resetval="0x0" description="MSB bits of Legacy I2C Device with 10-bit addressing." range="15 - 13" rwaccess="R/W"/> 
+		<bitfield id="LVR_EXT_ADDR" width="1" begin="11" end="11" resetval="0x0" description="Device 4 Address mode used:                0 - 7-bit addressing - applicable for I3C and I2C devices.                1 - 10-bit addressing - applicable only for I2C devices with 10-bit extended address. NOTE: Invalid setting when Device4_RR0.is_i3c=1" range="11" rwaccess="R/W"/> 
+		<bitfield id="IS_I3C" width="1" begin="9" end="9" resetval="0x1" description="Device 4 I3C mode Operation                1 Yes                0 No" range="9" rwaccess="R/W"/> 
+		<bitfield id="DEV_ADDR" width="8" begin="7" end="0" resetval="0x25" description="Device 4 Slave Dynamic [Static/Legacy] Address bits 7:1                bit 0 - parity XOR check -> ~XOR[dev_addr[7:1]]." range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID4_RR1" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID4_RR1" offset="0x104" width="32" description="">
+		<bitfield id="PID_MSB" width="32" begin="31" end="0" resetval="0x0" description="Device 4 48 to 16 Dev ID bits" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID4_RR2" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID4_RR2" offset="0x108" width="32" description="">
+		<bitfield id="PID_LSB" width="16" begin="31" end="16" resetval="0x0" description="Device 4 15 to 0 Dev ID bits" range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="BCR" width="8" begin="15" end="8" resetval="0x0" description="Device 4 BCR register" range="15 - 8" rwaccess="R/W"/> 
+		<bitfield id="DCR_LVR" width="8" begin="7" end="0" resetval="0x0" description="Device 4 DCR [if I3C device] or LVR [if I2C device] register                 Decoding if used as DCR:                 Bits[7:0]: 255 available codes for describing the type of sensor, or Device;                 Decoding if used as LVR:                 Bits [7:4]: Device 4 LVR Code: 15 available codes for describing the Device capabilities and function on the sensors' system                 Bits [3:3]: Device 4 LVR Slave operation mode:                 1'b0   FM mode                 1'b1   FM+ mode                 Bits [2:0]: Device 4 LVR Index:                 3'b000 Index 0                 3'b001 Index 1                 3'b010 Index 2                 3'b011 Index 3 [Reserved]                 3'b100 Index 4 [Reserved]                 3'b101 Index 5 [Reserved]                 3'b110 Index 6 [Reserved]                 3'b111 Index 7 [Reserved]" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID5_RR0" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID5_RR0" offset="0x110" width="32" description="">
+		<bitfield id="LVR_SA_MSB" width="3" begin="15" end="13" resetval="0x0" description="MSB bits of Legacy I2C Device with 10-bit addressing." range="15 - 13" rwaccess="R/W"/> 
+		<bitfield id="LVR_EXT_ADDR" width="1" begin="11" end="11" resetval="0x0" description="Device 5 Address mode used:                0 - 7-bit addressing - applicable for I3C and I2C devices.                1 - 10-bit addressing - applicable only for I2C devices with 10-bit extended address. NOTE: Invalid setting when Device5_RR0.is_i3c=1" range="11" rwaccess="R/W"/> 
+		<bitfield id="IS_I3C" width="1" begin="9" end="9" resetval="0x1" description="Device 5 I3C mode Operation                1 Yes                0 No" range="9" rwaccess="R/W"/> 
+		<bitfield id="DEV_ADDR" width="8" begin="7" end="0" resetval="0x26" description="Device 5 Slave Dynamic [Static/Legacy] Address bits 7:1                bit 0 - parity XOR check -> ~XOR[dev_addr[7:1]]." range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID5_RR1" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID5_RR1" offset="0x114" width="32" description="">
+		<bitfield id="PID_MSB" width="32" begin="31" end="0" resetval="0x0" description="Device 5 48 to 16 Dev ID bits" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID5_RR2" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID5_RR2" offset="0x118" width="32" description="">
+		<bitfield id="PID_LSB" width="16" begin="31" end="16" resetval="0x0" description="Device 5 15 to 0 Dev ID bits" range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="BCR" width="8" begin="15" end="8" resetval="0x0" description="Device 5 BCR register" range="15 - 8" rwaccess="R/W"/> 
+		<bitfield id="DCR_LVR" width="8" begin="7" end="0" resetval="0x0" description="Device 5 DCR [if I3C device] or LVR [if I2C device] register                 Decoding if used as DCR:                 Bits[7:0]: 255 available codes for describing the type of sensor, or Device;                 Decoding if used as LVR:                 Bits [7:4]: Device 5 LVR Code: 15 available codes for describing the Device capabilities and function on the sensors' system                 Bits [3:3]: Device 5 LVR Slave operation mode:                 1'b0   FM mode                 1'b1   FM+ mode                 Bits [2:0]: Device 5 LVR Index:                 3'b000 Index 0                 3'b001 Index 1                 3'b010 Index 2                 3'b011 Index 3 [Reserved]                 3'b100 Index 4 [Reserved]                 3'b101 Index 5 [Reserved]                 3'b110 Index 6 [Reserved]                 3'b111 Index 7 [Reserved]" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID6_RR0" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID6_RR0" offset="0x120" width="32" description="">
+		<bitfield id="LVR_SA_MSB" width="3" begin="15" end="13" resetval="0x0" description="MSB bits of Legacy I2C Device with 10-bit addressing." range="15 - 13" rwaccess="R/W"/> 
+		<bitfield id="LVR_EXT_ADDR" width="1" begin="11" end="11" resetval="0x0" description="Device 6 Address mode used:                0 - 7-bit addressing - applicable for I3C and I2C devices.                1 - 10-bit addressing - applicable only for I2C devices with 10-bit extended address. NOTE: Invalid setting when Device6_RR0.is_i3c=1" range="11" rwaccess="R/W"/> 
+		<bitfield id="IS_I3C" width="1" begin="9" end="9" resetval="0x1" description="Device 6 I3C mode Operation                1 Yes                0 No" range="9" rwaccess="R/W"/> 
+		<bitfield id="DEV_ADDR" width="8" begin="7" end="0" resetval="0x28" description="Device 6 Slave Dynamic [Static/Legacy] Address bits 7:1                bit 0 - parity XOR check -> ~XOR[dev_addr[7:1]]." range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID6_RR1" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID6_RR1" offset="0x124" width="32" description="">
+		<bitfield id="PID_MSB" width="32" begin="31" end="0" resetval="0x0" description="Device 6 48 to 16 Dev ID bits" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID6_RR2" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID6_RR2" offset="0x128" width="32" description="">
+		<bitfield id="PID_LSB" width="16" begin="31" end="16" resetval="0x0" description="Device 6 15 to 0 Dev ID bits" range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="BCR" width="8" begin="15" end="8" resetval="0x0" description="Device 6 BCR register" range="15 - 8" rwaccess="R/W"/> 
+		<bitfield id="DCR_LVR" width="8" begin="7" end="0" resetval="0x0" description="Device 6 DCR [if I3C device] or LVR [if I2C device] register                 Decoding if used as DCR:                 Bits[7:0]: 255 available codes for describing the type of sensor, or Device;                 Decoding if used as LVR:                 Bits [7:4]: Device 6 LVR Code: 15 available codes for describing the Device capabilities and function on the sensors' system                 Bits [3:3]: Device 6 LVR Slave operation mode:                 1'b0   FM mode                 1'b1   FM+ mode                 Bits [2:0]: Device 6 LVR Index:                 3'b000 Index 0                 3'b001 Index 1                 3'b010 Index 2                 3'b011 Index 3 [Reserved]                 3'b100 Index 4 [Reserved]                 3'b101 Index 5 [Reserved]                 3'b110 Index 6 [Reserved]                 3'b111 Index 7 [Reserved]" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID7_RR0" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID7_RR0" offset="0x130" width="32" description="">
+		<bitfield id="LVR_SA_MSB" width="3" begin="15" end="13" resetval="0x0" description="MSB bits of Legacy I2C Device with 10-bit addressing." range="15 - 13" rwaccess="R/W"/> 
+		<bitfield id="LVR_EXT_ADDR" width="1" begin="11" end="11" resetval="0x0" description="Device 7 Address mode used:                0 - 7-bit addressing - applicable for I3C and I2C devices.                1 - 10-bit addressing - applicable only for I2C devices with 10-bit extended address. NOTE: Invalid setting when Device7_RR0.is_i3c=1" range="11" rwaccess="R/W"/> 
+		<bitfield id="IS_I3C" width="1" begin="9" end="9" resetval="0x1" description="Device 7 I3C mode Operation                1 Yes                0 No" range="9" rwaccess="R/W"/> 
+		<bitfield id="DEV_ADDR" width="8" begin="7" end="0" resetval="0x31" description="Device 7 Slave Dynamic [Static/Legacy] Address bits 7:1                bit 0 - parity XOR check -> ~XOR[dev_addr[7:1]]." range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID7_RR1" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID7_RR1" offset="0x134" width="32" description="">
+		<bitfield id="PID_MSB" width="32" begin="31" end="0" resetval="0x0" description="Device 7 48 to 16 Dev ID bits" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID7_RR2" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID7_RR2" offset="0x138" width="32" description="">
+		<bitfield id="PID_LSB" width="16" begin="31" end="16" resetval="0x0" description="Device 7 15 to 0 Dev ID bits" range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="BCR" width="8" begin="15" end="8" resetval="0x0" description="Device 7 BCR register" range="15 - 8" rwaccess="R/W"/> 
+		<bitfield id="DCR_LVR" width="8" begin="7" end="0" resetval="0x0" description="Device 7 DCR [if I3C device] or LVR [if I2C device] register                 Decoding if used as DCR:                 Bits[7:0]: 255 available codes for describing the type of sensor, or Device;                 Decoding if used as LVR:                 Bits [7:4]: Device 7 LVR Code: 15 available codes for describing the Device capabilities and function on the sensors' system                 Bits [3:3]: Device 7 LVR Slave operation mode:                 1'b0   FM mode                 1'b1   FM+ mode                 Bits [2:0]: Device 7 LVR Index:                 3'b000 Index 0                 3'b001 Index 1                 3'b010 Index 2                 3'b011 Index 3 [Reserved]                 3'b100 Index 4 [Reserved]                 3'b101 Index 5 [Reserved]                 3'b110 Index 6 [Reserved]                 3'b111 Index 7 [Reserved]" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID8_RR0" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID8_RR0" offset="0x140" width="32" description="">
+		<bitfield id="LVR_SA_MSB" width="3" begin="15" end="13" resetval="0x0" description="MSB bits of Legacy I2C Device with 10-bit addressing." range="15 - 13" rwaccess="R/W"/> 
+		<bitfield id="LVR_EXT_ADDR" width="1" begin="11" end="11" resetval="0x0" description="Device 8 Address mode used:                0 - 7-bit addressing - applicable for I3C and I2C devices.                1 - 10-bit addressing - applicable only for I2C devices with 10-bit extended address. NOTE: Invalid setting when Device8_RR0.is_i3c=1" range="11" rwaccess="R/W"/> 
+		<bitfield id="IS_I3C" width="1" begin="9" end="9" resetval="0x1" description="Device 8 I3C mode Operation                1 Yes                0 No" range="9" rwaccess="R/W"/> 
+		<bitfield id="DEV_ADDR" width="8" begin="7" end="0" resetval="0x32" description="Device 8 Slave Dynamic [Static/Legacy] Address bits 7:1                bit 0 - parity XOR check -> ~XOR[dev_addr[7:1]]." range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID8_RR1" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID8_RR1" offset="0x144" width="32" description="">
+		<bitfield id="PID_MSB" width="32" begin="31" end="0" resetval="0x0" description="Device 8 48 to 16 Dev ID bits" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID8_RR2" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID8_RR2" offset="0x148" width="32" description="">
+		<bitfield id="PID_LSB" width="16" begin="31" end="16" resetval="0x0" description="Device 8 15 to 0 Dev ID bits" range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="BCR" width="8" begin="15" end="8" resetval="0x0" description="Device 8 BCR register" range="15 - 8" rwaccess="R/W"/> 
+		<bitfield id="DCR_LVR" width="8" begin="7" end="0" resetval="0x0" description="Device 8 DCR [if I3C device] or LVR [if I2C device] register                 Decoding if used as DCR:                 Bits[7:0]: 255 available codes for describing the type of sensor, or Device;                 Decoding if used as LVR:                 Bits [7:4]: Device 8 LVR Code: 15 available codes for describing the Device capabilities and function on the sensors' system                 Bits [3:3]: Device 8 LVR Slave operation mode:                 1'b0   FM mode                 1'b1   FM+ mode                 Bits [2:0]: Device 8 LVR Index:                 3'b000 Index 0                 3'b001 Index 1                 3'b010 Index 2                 3'b011 Index 3 [Reserved]                 3'b100 Index 4 [Reserved]                 3'b101 Index 5 [Reserved]                 3'b110 Index 6 [Reserved]                 3'b111 Index 7 [Reserved]" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID9_RR0" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID9_RR0" offset="0x150" width="32" description="">
+		<bitfield id="LVR_SA_MSB" width="3" begin="15" end="13" resetval="0x0" description="MSB bits of Legacy I2C Device with 10-bit addressing." range="15 - 13" rwaccess="R/W"/> 
+		<bitfield id="LVR_EXT_ADDR" width="1" begin="11" end="11" resetval="0x0" description="Device 9 Address mode used:                0 - 7-bit addressing - applicable for I3C and I2C devices.                1 - 10-bit addressing - applicable only for I2C devices with 10-bit extended address. NOTE: Invalid setting when Device9_RR0.is_i3c=1" range="11" rwaccess="R/W"/> 
+		<bitfield id="IS_I3C" width="1" begin="9" end="9" resetval="0x1" description="Device 9 I3C mode Operation                1 Yes                0 No" range="9" rwaccess="R/W"/> 
+		<bitfield id="DEV_ADDR" width="8" begin="7" end="0" resetval="0x35" description="Device 9 Slave Dynamic [Static/Legacy] Address bits 7:1                bit 0 - parity XOR check -> ~XOR[dev_addr[7:1]]." range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID9_RR1" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID9_RR1" offset="0x154" width="32" description="">
+		<bitfield id="PID_MSB" width="32" begin="31" end="0" resetval="0x0" description="Device 9 48 to 16 Dev ID bits" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID9_RR2" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID9_RR2" offset="0x158" width="32" description="">
+		<bitfield id="PID_LSB" width="16" begin="31" end="16" resetval="0x0" description="Device 9 15 to 0 Dev ID bits" range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="BCR" width="8" begin="15" end="8" resetval="0x0" description="Device 9 BCR register" range="15 - 8" rwaccess="R/W"/> 
+		<bitfield id="DCR_LVR" width="8" begin="7" end="0" resetval="0x0" description="Device 9 DCR [if I3C device] or LVR [if I2C device] register                 Decoding if used as DCR:                 Bits[7:0]: 255 available codes for describing the type of sensor, or Device;                 Decoding if used as LVR:                 Bits [7:4]: Device 9 LVR Code: 15 available codes for describing the Device capabilities and function on the sensors' system                 Bits [3:3]: Device 9 LVR Slave operation mode:                 1'b0   FM mode                 1'b1   FM+ mode                 Bits [2:0]: Device 9 LVR Index:                 3'b000 Index 0                 3'b001 Index 1                 3'b010 Index 2                 3'b011 Index 3 [Reserved]                 3'b100 Index 4 [Reserved]                 3'b101 Index 5 [Reserved]                 3'b110 Index 6 [Reserved]                 3'b111 Index 7 [Reserved]" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID10_RR0" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID10_RR0" offset="0x160" width="32" description="">
+		<bitfield id="LVR_SA_MSB" width="3" begin="15" end="13" resetval="0x0" description="MSB bits of Legacy I2C Device with 10-bit addressing." range="15 - 13" rwaccess="R/W"/> 
+		<bitfield id="LVR_EXT_ADDR" width="1" begin="11" end="11" resetval="0x0" description="Device 10 Address mode used:                0 - 7-bit addressing - applicable for I3C and I2C devices.                1 - 10-bit addressing - applicable only for I2C devices with 10-bit extended address. NOTE: Invalid setting when Device10_RR0.is_i3c=1" range="11" rwaccess="R/W"/> 
+		<bitfield id="IS_I3C" width="1" begin="9" end="9" resetval="0x1" description="Device 10 I3C mode Operation                1 Yes                0 No" range="9" rwaccess="R/W"/> 
+		<bitfield id="DEV_ADDR" width="8" begin="7" end="0" resetval="0x37" description="Device 10 Slave Dynamic [Static/Legacy] Address bits 7:1                bit 0 - parity XOR check -> ~XOR[dev_addr[7:1]]." range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID10_RR1" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID10_RR1" offset="0x164" width="32" description="">
+		<bitfield id="PID_MSB" width="32" begin="31" end="0" resetval="0x0" description="Device 10 48 to 16 Dev ID bits" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID10_RR2" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID10_RR2" offset="0x168" width="32" description="">
+		<bitfield id="PID_LSB" width="16" begin="31" end="16" resetval="0x0" description="Device 10 15 to 0 Dev ID bits" range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="BCR" width="8" begin="15" end="8" resetval="0x0" description="Device 10 BCR register" range="15 - 8" rwaccess="R/W"/> 
+		<bitfield id="DCR_LVR" width="8" begin="7" end="0" resetval="0x0" description="Device 10 DCR [if I3C device] or LVR [if I2C device] register                 Decoding if used as DCR:                 Bits[7:0]: 255 available codes for describing the type of sensor, or Device;                 Decoding if used as LVR:                 Bits [7:4]: Device 10 LVR Code: 15 available codes for describing the Device capabilities and function on the sensors' system                 Bits [3:3]: Device 10 LVR Slave operation mode:                 1'b0   FM mode                 1'b1   FM+ mode                 Bits [2:0]: Device 10 LVR Index:                 3'b000 Index 0                 3'b001 Index 1                 3'b010 Index 2                 3'b011 Index 3 [Reserved]                 3'b100 Index 4 [Reserved]                 3'b101 Index 5 [Reserved]                 3'b110 Index 6 [Reserved]                 3'b111 Index 7 [Reserved]" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID11_RR0" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID11_RR0" offset="0x170" width="32" description="">
+		<bitfield id="LVR_SA_MSB" width="3" begin="15" end="13" resetval="0x0" description="MSB bits of Legacy I2C Device with 10-bit addressing." range="15 - 13" rwaccess="R/W"/> 
+		<bitfield id="LVR_EXT_ADDR" width="1" begin="11" end="11" resetval="0x0" description="Device 11 Address mode used:                0 - 7-bit addressing - applicable for I3C and I2C devices.                1 - 10-bit addressing - applicable only for I2C devices with 10-bit extended address. NOTE: Invalid setting when Device11_RR0.is_i3c=1" range="11" rwaccess="R/W"/> 
+		<bitfield id="IS_I3C" width="1" begin="9" end="9" resetval="0x1" description="Device 11 I3C mode Operation                1 Yes                0 No" range="9" rwaccess="R/W"/> 
+		<bitfield id="DEV_ADDR" width="8" begin="7" end="0" resetval="0x38" description="Device 11 Slave Dynamic [Static/Legacy] Address bits 7:1                bit 0 - parity XOR check -> ~XOR[dev_addr[7:1]]." range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID11_RR1" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID11_RR1" offset="0x174" width="32" description="">
+		<bitfield id="PID_MSB" width="32" begin="31" end="0" resetval="0x0" description="Device 11 48 to 16 Dev ID bits" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID11_RR2" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_DEV_ID11_RR2" offset="0x178" width="32" description="">
+		<bitfield id="PID_LSB" width="16" begin="31" end="16" resetval="0x0" description="Device 11 15 to 0 Dev ID bits" range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="BCR" width="8" begin="15" end="8" resetval="0x0" description="Device 11 BCR register" range="15 - 8" rwaccess="R/W"/> 
+		<bitfield id="DCR_LVR" width="8" begin="7" end="0" resetval="0x0" description="Device 11 DCR [if I3C device] or LVR [if I2C device] register                 Decoding if used as DCR:                 Bits[7:0]: 255 available codes for describing the type of sensor, or Device;                 Decoding if used as LVR:                 Bits [7:4]: Device 11 LVR Code: 15 available codes for describing the Device capabilities and function on the sensors' system                 Bits [3:3]: Device 11 LVR Slave operation mode:                 1'b0   FM mode                 1'b1   FM+ mode                 Bits [2:0]: Device 11 LVR Index:                 3'b000 Index 0                 3'b001 Index 1                 3'b010 Index 2                 3'b011 Index 3 [Reserved]                 3'b100 Index 4 [Reserved]                 3'b101 Index 5 [Reserved]                 3'b110 Index 6 [Reserved]                 3'b111 Index 7 [Reserved]" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SIR_MAP0" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SIR_MAP0" offset="0x180" width="32" description="">
+		<bitfield id="DEVID1_ROLE" width="2" begin="31" end="30" resetval="0x0" description="Slave-initiated request Device ID0 BCR role                2'b00 - Slave                2'b01 - Master/Secondary Master                2'b10 - Reserved                2'b11 - Reserved" range="31 - 30" rwaccess="R/W"/> 
+		<bitfield id="DEVID1_SLOW" width="1" begin="29" end="29" resetval="0x0" description="Slave-initiated request Device ID0 Max Data Speed Limitation                0 - No limitation                1 - Limitation" range="29" rwaccess="R/W"/> 
+		<bitfield id="DEVID1_PL" width="5" begin="28" end="24" resetval="0x0" description="Slave-initiated request Device ID0 payload length" range="28 - 24" rwaccess="R/W"/> 
+		<bitfield id="DEVID1_DA" width="7" begin="23" end="17" resetval="0x127" description="Slave-initiated request Device ID0 DA" range="23 - 17" rwaccess="R/W"/> 
+		<bitfield id="DEVID1_RESP" width="1" begin="16" end="16" resetval="0x0" description="Slave-initiated request Device ID0 Ack/Nack response                0 - NACK each request from this device.                1 - ACK each request from this device." range="16" rwaccess="R/W"/> 
+		<bitfield id="DEVID0_ROLE" width="2" begin="15" end="14" resetval="0x0" description="Slave-initiated request Device ID0 BCR role                2'b00 - Slave                2'b01 - Master/Secondary Master                2'b10 - Reserved                2'b11 - Reserved" range="15 - 14" rwaccess="R/W"/> 
+		<bitfield id="DEVID0_SLOW" width="1" begin="13" end="13" resetval="0x0" description="Slave-initiated request Device ID0 Max Data Speed Limitation                0 - No limitation                1 - Limitation" range="13" rwaccess="R/W"/> 
+		<bitfield id="DEVID0_PL" width="5" begin="12" end="8" resetval="0x0" description="Slave-initiated request Device ID0 payload length" range="12 - 8" rwaccess="R/W"/> 
+		<bitfield id="DEVID0_DA" width="7" begin="7" end="1" resetval="0x127" description="Slave-initiated request Device ID0 DA" range="7 - 1" rwaccess="R/W"/> 
+		<bitfield id="DEVID0_RESP" width="1" begin="0" end="0" resetval="0x0" description="Slave-initiated request Device ID0 Ack/Nack response                0 - NACK each request from this device.                1 - ACK each request from this device." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SIR_MAP1" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SIR_MAP1" offset="0x184" width="32" description="">
+		<bitfield id="DEVID3_ROLE" width="2" begin="31" end="30" resetval="0x0" description="Slave-initiated request Device ID2 BCR role                2'b00 - Slave                2'b01 - Master/Secondary Master                2'b10 - Reserved                2'b11 - Reserved" range="31 - 30" rwaccess="R/W"/> 
+		<bitfield id="DEVID3_SLOW" width="1" begin="29" end="29" resetval="0x0" description="Slave-initiated request Device ID2 Max Data Speed Limitation                0 - No limitation                1 - Limitation" range="29" rwaccess="R/W"/> 
+		<bitfield id="DEVID3_PL" width="5" begin="28" end="24" resetval="0x0" description="Slave-initiated request Device ID2 payload length" range="28 - 24" rwaccess="R/W"/> 
+		<bitfield id="DEVID3_DA" width="7" begin="23" end="17" resetval="0x127" description="Slave-initiated request Device ID2 DA" range="23 - 17" rwaccess="R/W"/> 
+		<bitfield id="DEVID3_RESP" width="1" begin="16" end="16" resetval="0x0" description="Slave-initiated request Device ID2 Ack/Nack response                0 - NACK each request from this device.                1 - ACK each request from this device." range="16" rwaccess="R/W"/> 
+		<bitfield id="DEVID2_ROLE" width="2" begin="15" end="14" resetval="0x0" description="Slave-initiated request Device ID2 BCR role                2'b00 - Slave                2'b01 - Master/Secondary Master                2'b10 - Reserved                2'b11 - Reserved" range="15 - 14" rwaccess="R/W"/> 
+		<bitfield id="DEVID2_SLOW" width="1" begin="13" end="13" resetval="0x0" description="Slave-initiated request Device ID2 Max Data Speed Limitation                0 - No limitation                1 - Limitation" range="13" rwaccess="R/W"/> 
+		<bitfield id="DEVID2_PL" width="5" begin="12" end="8" resetval="0x0" description="Slave-initiated request Device ID2 payload length" range="12 - 8" rwaccess="R/W"/> 
+		<bitfield id="DEVID2_DA" width="7" begin="7" end="1" resetval="0x127" description="Slave-initiated request Device ID2 DA" range="7 - 1" rwaccess="R/W"/> 
+		<bitfield id="DEVID2_RESP" width="1" begin="0" end="0" resetval="0x0" description="Slave-initiated request Device ID2 Ack/Nack response                0 - NACK each request from this device.                1 - ACK each request from this device." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SIR_MAP2" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SIR_MAP2" offset="0x188" width="32" description="">
+		<bitfield id="DEVID5_ROLE" width="2" begin="31" end="30" resetval="0x0" description="Slave-initiated request Device ID4 BCR role                2'b00 - Slave                2'b01 - Master/Secondary Master                2'b10 - Reserved                2'b11 - Reserved" range="31 - 30" rwaccess="R/W"/> 
+		<bitfield id="DEVID5_SLOW" width="1" begin="29" end="29" resetval="0x0" description="Slave-initiated request Device ID4 Max Data Speed Limitation                0 - No limitation                1 - Limitation" range="29" rwaccess="R/W"/> 
+		<bitfield id="DEVID5_PL" width="5" begin="28" end="24" resetval="0x0" description="Slave-initiated request Device ID4 payload length" range="28 - 24" rwaccess="R/W"/> 
+		<bitfield id="DEVID5_DA" width="7" begin="23" end="17" resetval="0x127" description="Slave-initiated request Device ID4 DA" range="23 - 17" rwaccess="R/W"/> 
+		<bitfield id="DEVID5_RESP" width="1" begin="16" end="16" resetval="0x0" description="Slave-initiated request Device ID4 Ack/Nack response                0 - NACK each request from this device.                1 - ACK each request from this device." range="16" rwaccess="R/W"/> 
+		<bitfield id="DEVID4_ROLE" width="2" begin="15" end="14" resetval="0x0" description="Slave-initiated request Device ID4 BCR role                2'b00 - Slave                2'b01 - Master/Secondary Master                2'b10 - Reserved                2'b11 - Reserved" range="15 - 14" rwaccess="R/W"/> 
+		<bitfield id="DEVID4_SLOW" width="1" begin="13" end="13" resetval="0x0" description="Slave-initiated request Device ID4 Max Data Speed Limitation                0 - No limitation                1 - Limitation" range="13" rwaccess="R/W"/> 
+		<bitfield id="DEVID4_PL" width="5" begin="12" end="8" resetval="0x0" description="Slave-initiated request Device ID4 payload length" range="12 - 8" rwaccess="R/W"/> 
+		<bitfield id="DEVID4_DA" width="7" begin="7" end="1" resetval="0x127" description="Slave-initiated request Device ID4 DA" range="7 - 1" rwaccess="R/W"/> 
+		<bitfield id="DEVID4_RESP" width="1" begin="0" end="0" resetval="0x0" description="Slave-initiated request Device ID4 Ack/Nack response                0 - NACK each request from this device.                1 - ACK each request from this device." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SIR_MAP3" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SIR_MAP3" offset="0x18C" width="32" description="">
+		<bitfield id="DEVID7_ROLE" width="2" begin="31" end="30" resetval="0x0" description="Slave-initiated request Device ID6 BCR role                2'b00 - Slave                2'b01 - Master/Secondary Master                2'b10 - Reserved                2'b11 - Reserved" range="31 - 30" rwaccess="R/W"/> 
+		<bitfield id="DEVID7_SLOW" width="1" begin="29" end="29" resetval="0x0" description="Slave-initiated request Device ID6 Max Data Speed Limitation                0 - No limitation                1 - Limitation" range="29" rwaccess="R/W"/> 
+		<bitfield id="DEVID7_PL" width="5" begin="28" end="24" resetval="0x0" description="Slave-initiated request Device ID6 payload length" range="28 - 24" rwaccess="R/W"/> 
+		<bitfield id="DEVID7_DA" width="7" begin="23" end="17" resetval="0x127" description="Slave-initiated request Device ID6 DA" range="23 - 17" rwaccess="R/W"/> 
+		<bitfield id="DEVID7_RESP" width="1" begin="16" end="16" resetval="0x0" description="Slave-initiated request Device ID6 Ack/Nack response                0 - NACK each request from this device.                1 - ACK each request from this device." range="16" rwaccess="R/W"/> 
+		<bitfield id="DEVID6_ROLE" width="2" begin="15" end="14" resetval="0x0" description="Slave-initiated request Device ID6 BCR role                2'b00 - Slave                2'b01 - Master/Secondary Master                2'b10 - Reserved                2'b11 - Reserved" range="15 - 14" rwaccess="R/W"/> 
+		<bitfield id="DEVID6_SLOW" width="1" begin="13" end="13" resetval="0x0" description="Slave-initiated request Device ID6 Max Data Speed Limitation                0 - No limitation                1 - Limitation" range="13" rwaccess="R/W"/> 
+		<bitfield id="DEVID6_PL" width="5" begin="12" end="8" resetval="0x0" description="Slave-initiated request Device ID6 payload length" range="12 - 8" rwaccess="R/W"/> 
+		<bitfield id="DEVID6_DA" width="7" begin="7" end="1" resetval="0x127" description="Slave-initiated request Device ID6 DA" range="7 - 1" rwaccess="R/W"/> 
+		<bitfield id="DEVID6_RESP" width="1" begin="0" end="0" resetval="0x0" description="Slave-initiated request Device ID6 Ack/Nack response                0 - NACK each request from this device.                1 - ACK each request from this device." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SIR_MAP4" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SIR_MAP4" offset="0x190" width="32" description="">
+		<bitfield id="DEVID9_ROLE" width="2" begin="31" end="30" resetval="0x0" description="Slave-initiated request Device ID8 BCR role                2'b00 - Slave                2'b01 - Master/Secondary Master                2'b10 - Reserved                2'b11 - Reserved" range="31 - 30" rwaccess="R/W"/> 
+		<bitfield id="DEVID9_SLOW" width="1" begin="29" end="29" resetval="0x0" description="Slave-initiated request Device ID8 Max Data Speed Limitation                0 - No limitation                1 - Limitation" range="29" rwaccess="R/W"/> 
+		<bitfield id="DEVID9_PL" width="5" begin="28" end="24" resetval="0x0" description="Slave-initiated request Device ID8 payload length" range="28 - 24" rwaccess="R/W"/> 
+		<bitfield id="DEVID9_DA" width="7" begin="23" end="17" resetval="0x127" description="Slave-initiated request Device ID8 DA" range="23 - 17" rwaccess="R/W"/> 
+		<bitfield id="DEVID9_RESP" width="1" begin="16" end="16" resetval="0x0" description="Slave-initiated request Device ID8 Ack/Nack response                0 - NACK each request from this device.                1 - ACK each request from this device." range="16" rwaccess="R/W"/> 
+		<bitfield id="DEVID8_ROLE" width="2" begin="15" end="14" resetval="0x0" description="Slave-initiated request Device ID8 BCR role                2'b00 - Slave                2'b01 - Master/Secondary Master                2'b10 - Reserved                2'b11 - Reserved" range="15 - 14" rwaccess="R/W"/> 
+		<bitfield id="DEVID8_SLOW" width="1" begin="13" end="13" resetval="0x0" description="Slave-initiated request Device ID8 Max Data Speed Limitation                0 - No limitation                1 - Limitation" range="13" rwaccess="R/W"/> 
+		<bitfield id="DEVID8_PL" width="5" begin="12" end="8" resetval="0x0" description="Slave-initiated request Device ID8 payload length" range="12 - 8" rwaccess="R/W"/> 
+		<bitfield id="DEVID8_DA" width="7" begin="7" end="1" resetval="0x127" description="Slave-initiated request Device ID8 DA" range="7 - 1" rwaccess="R/W"/> 
+		<bitfield id="DEVID8_RESP" width="1" begin="0" end="0" resetval="0x0" description="Slave-initiated request Device ID8 Ack/Nack response                0 - NACK each request from this device.                1 - ACK each request from this device." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SIR_MAP5" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_SIR_MAP5" offset="0x194" width="32" description="">
+		<bitfield id="DEVID10_ROLE" width="2" begin="15" end="14" resetval="0x0" description="Slave-initiated request Device ID10 BCR role                2'b00 - Slave                2'b01 - Master/Secondary Master                2'b10 - Reserved                2'b11 - Reserved" range="15 - 14" rwaccess="R/W"/> 
+		<bitfield id="DEVID10_SLOW" width="1" begin="13" end="13" resetval="0x0" description="Slave-initiated request Device ID10 Max Data Speed Limitation                0 - No limitation                1 - Limitation" range="13" rwaccess="R/W"/> 
+		<bitfield id="DEVID10_PL" width="5" begin="12" end="8" resetval="0x0" description="Slave-initiated request Device ID10 payload length" range="12 - 8" rwaccess="R/W"/> 
+		<bitfield id="DEVID10_DA" width="7" begin="7" end="1" resetval="0x127" description="Slave-initiated request Device ID10 DA" range="7 - 1" rwaccess="R/W"/> 
+		<bitfield id="DEVID10_RESP" width="1" begin="0" end="0" resetval="0x0" description="Slave-initiated request Device ID10 Ack/Nack response                0 - NACK each request from this device.                1 - ACK each request from this device." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_GPIR_WORD0" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_GPIR_WORD0" offset="0x1A0" width="32" description="">
+		<bitfield id="GPI0" width="8" begin="7" end="0" resetval="0x0" description="User Defined GPI Register 0" range="7 - 0" rwaccess="R"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_GPOR_WORD0" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_GPOR_WORD0" offset="0x220" width="32" description="">
+		<bitfield id="GPO0" width="8" begin="7" end="0" resetval="0x0" description="User Defined GPO Register 0" range="7 - 0" rwaccess="R"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_asf_int_status" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_asf_int_status" offset="0x0" width="32" description="">
+		<bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="Reserved, read as 0, ignored on write." range="31 - 7" rwaccess="N/A"/> 
+		<bitfield id="ASF_INTEGRITY_ERR" width="1" begin="6" end="6" resetval="0x0" description="Integrity error interrupt" range="6" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_ERR" width="1" begin="5" end="5" resetval="0x0" description="Protocol error interrupt" range="5" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_TRANS_TO_ERR" width="1" begin="4" end="4" resetval="0x0" description="Transaction timeouts error interrupt" range="4" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_CSR_ERR" width="1" begin="3" end="3" resetval="0x0" description="Configuration and status registers error interrupt" range="3" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_DAP_ERR" width="1" begin="2" end="2" resetval="0x0" description="Data and address paths parity error interrupt" range="2" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_SRAM_UNCORR_ERR" width="1" begin="1" end="1" resetval="0x0" description="SRAM uncorrectable error interrupt" range="1" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_SRAM_CORR_ERR" width="1" begin="0" end="0" resetval="0x0" description="SRAM correctable error interrupt" range="0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_asf_int_raw_status" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_asf_int_raw_status" offset="0x4" width="32" description="">
+		<bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="Reserved, read as 0, ignored on write." range="31 - 7" rwaccess="N/A"/> 
+		<bitfield id="ASF_INTEGRITY_ERR" width="1" begin="6" end="6" resetval="0x0" description="Integrity error interrupt" range="6" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_ERR" width="1" begin="5" end="5" resetval="0x0" description="Protocol error interrupt" range="5" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_TRANS_TO_ERR" width="1" begin="4" end="4" resetval="0x0" description="Transaction timeouts error interrupt" range="4" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_CSR_ERR" width="1" begin="3" end="3" resetval="0x0" description="Configuration and status registers error interrupt" range="3" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_DAP_ERR" width="1" begin="2" end="2" resetval="0x0" description="Data and address paths parity error interrupt" range="2" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_SRAM_UNCORR_ERR" width="1" begin="1" end="1" resetval="0x0" description="SRAM uncorrectable error interrupt" range="1" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_SRAM_CORR_ERR" width="1" begin="0" end="0" resetval="0x0" description="SRAM correctable error interrupt" range="0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_asf_int_mask" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_asf_int_mask" offset="0x8" width="32" description="">
+		<bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="Reserved, read as 0, ignored on write." range="31 - 7" rwaccess="N/A"/> 
+		<bitfield id="ASF_INTEGRITY_ERR_MASK" width="1" begin="6" end="6" resetval="0x1" description="Mask bit for integrity error interrupt" range="6" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_ERR_MASK" width="1" begin="5" end="5" resetval="0x1" description="Mask bit for protocol error interrupt." range="5" rwaccess="R/W"/> 
+		<bitfield id="ASF_TRANS_TO_ERR_MASK" width="1" begin="4" end="4" resetval="0x1" description="Mask bit for transaction timeouts error interrupt." range="4" rwaccess="R/W"/> 
+		<bitfield id="ASF_CSR_ERR_MASK" width="1" begin="3" end="3" resetval="0x1" description="Mask bit for configuration and status registers error interrupt." range="3" rwaccess="R/W"/> 
+		<bitfield id="ASF_DAP_ERR_MASK" width="1" begin="2" end="2" resetval="0x1" description="Mask bit for data and address paths parity error interrupt." range="2" rwaccess="R/W"/> 
+		<bitfield id="ASF_SRAM_UNCORR_ERR_MASK" width="1" begin="1" end="1" resetval="0x1" description="Mask bit for SRAM uncorrectable error interrupt." range="1" rwaccess="R/W"/> 
+		<bitfield id="ASF_SRAM_CORR_ERR_MASK" width="1" begin="0" end="0" resetval="0x1" description="Mask bit for SRAM correctable error interrupt." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_asf_int_test" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_asf_int_test" offset="0xC" width="32" description="">
+		<bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="Reserved, read as 0, ignored on write." range="31 - 7" rwaccess="N/A"/> 
+		<bitfield id="ASF_INTEGRITY_ERR_TEST" width="1" begin="6" end="6" resetval="0x0" description="Test bit for integrity error interrupt" range="6" rwaccess="W"/> 
+		<bitfield id="ASF_PROTOCOL_ERR_TEST" width="1" begin="5" end="5" resetval="0x0" description="Test bit for protocol error interrupt." range="5" rwaccess="W"/> 
+		<bitfield id="ASF_TRANS_TO_ERR_TEST" width="1" begin="4" end="4" resetval="0x0" description="Test bit for transaction timeouts error interrupt." range="4" rwaccess="W"/> 
+		<bitfield id="ASF_CSR_ERR_TEST" width="1" begin="3" end="3" resetval="0x0" description="Test bit for configuration and status registers error interrupt." range="3" rwaccess="W"/> 
+		<bitfield id="ASF_DAP_ERR_TEST" width="1" begin="2" end="2" resetval="0x0" description="Test bit for data and address paths parity error interrupt." range="2" rwaccess="W"/> 
+		<bitfield id="ASF_SRAM_UNCORR_ERR_TEST" width="1" begin="1" end="1" resetval="0x0" description="Test bit for SRAM uncorrectable error interrupt." range="1" rwaccess="W"/> 
+		<bitfield id="ASF_SRAM_CORR_ERR_TEST" width="1" begin="0" end="0" resetval="0x0" description="Test bit for SRAM correctable error interrupt." range="0" rwaccess="W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_asf_fatal_nonfatal_select" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_asf_fatal_nonfatal_select" offset="0x10" width="32" description="">
+		<bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="Reserved, read as 0, ignored on write." range="31 - 7" rwaccess="N/A"/> 
+		<bitfield id="ASF_INTEGRITY_ERR" width="1" begin="6" end="6" resetval="0x1" description="Enable integrity error interrupt as fatal" range="6" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_ERR" width="1" begin="5" end="5" resetval="0x1" description="Enable protocol error interrupt as fatal." range="5" rwaccess="R/W"/> 
+		<bitfield id="ASF_TRANS_TO_ERR" width="1" begin="4" end="4" resetval="0x1" description="Enable transaction timeouts error interrupt as fatal." range="4" rwaccess="R/W"/> 
+		<bitfield id="ASF_CSR_ERR" width="1" begin="3" end="3" resetval="0x1" description="Enable configuration and status registers error interrupt as fatal." range="3" rwaccess="R/W"/> 
+		<bitfield id="ASF_DAP_ERR" width="1" begin="2" end="2" resetval="0x1" description="Enable data and address paths parity error interrupt as fatal." range="2" rwaccess="R/W"/> 
+		<bitfield id="ASF_SRAM_UNCORR_ERR" width="1" begin="1" end="1" resetval="0x1" description="Enable SRAM uncorrectable error interrupt as fatal." range="1" rwaccess="R/W"/> 
+		<bitfield id="ASF_SRAM_CORR_ERR" width="1" begin="0" end="0" resetval="0x1" description="Enable SRAM correctable error interrupt as fatal." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_asf_sram_corr_fault_status" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_asf_sram_corr_fault_status" offset="0x20" width="32" description="">
+		<bitfield id="ASF_SRAM_CORR_FAULT_INST" width="8" begin="31" end="24" resetval="0x0" description="Last SRAM instance that generated fault." range="31 - 24" rwaccess="R"/> 
+		<bitfield id="ASF_SRAM_CORR_FAULT_ADDR" width="24" begin="23" end="0" resetval="0x0" description="Last SRAM address that generated fault." range="23 - 0" rwaccess="R"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_asf_sram_uncorr_fault_status" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_asf_sram_uncorr_fault_status" offset="0x24" width="32" description="">
+		<bitfield id="ASF_SRAM_UNCORR_FAULT_INST" width="8" begin="31" end="24" resetval="0x0" description="Last SRAM instance that generated fault." range="31 - 24" rwaccess="R"/> 
+		<bitfield id="ASF_SRAM_UNCORR_FAULT_ADDR" width="24" begin="23" end="0" resetval="0x0" description="Last SRAM address that generated fault." range="23 - 0" rwaccess="R"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_asf_sram_fault_stats" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_asf_sram_fault_stats" offset="0x28" width="32" description="">
+		<bitfield id="ASF_SRAM_FAULT_UNCORR_STATS" width="16" begin="31" end="16" resetval="0x0" description="Count of number of uncorrectable errors if implemented. Count value will saturate at 0xffff." range="31 - 16" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_SRAM_FAULT_CORR_STATS" width="16" begin="15" end="0" resetval="0x0" description="Count of number of correctable errors if implemented. Count value will saturate at 0xffff." range="15 - 0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_asf_trans_to_ctrl" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_asf_trans_to_ctrl" offset="0x30" width="32" description="">
+		<bitfield id="ASF_TRANS_TO_EN" width="1" begin="31" end="31" resetval="0x0" description="Enable transaction timeout monitoring." range="31" rwaccess="R/W"/> 
+		<bitfield id="RESERVED" width="15" begin="30" end="16" resetval="0x0" description="Reserved, read as 0, ignored on write." range="30 - 16" rwaccess="N/A"/> 
+		<bitfield id="ASF_TRANS_TO_CTRL" width="16" begin="15" end="0" resetval="0x0" description="Timer value to use for transaction timeout monitor." range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_asf_trans_to_fault_mask" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_asf_trans_to_fault_mask" offset="0x34" width="32" description="">
+		<bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved, read as 0, ignored on write." range="31 - 4" rwaccess="N/A"/> 
+		<bitfield id="ASF_TRANS_TO_FAULT_3_MASK" width="1" begin="3" end="3" resetval="0x1" description="Mask bit for apb transaction timeout fault." range="3" rwaccess="R/W"/> 
+		<bitfield id="ASF_TRANS_TO_FAULT_2_MASK" width="1" begin="2" end="2" resetval="0x1" description="Mask bit for I3C transaction SCL low timeout fault." range="2" rwaccess="R/W"/> 
+		<bitfield id="ASF_TRANS_TO_FAULT_1_MASK" width="1" begin="1" end="1" resetval="0x1" description="Mask bit for I3C transaction SCL high timeout fault." range="1" rwaccess="R/W"/> 
+		<bitfield id="ASF_TRANS_TO_FAULT_0_MASK" width="1" begin="0" end="0" resetval="0x1" description="Mask bit for I3C transaction first SCL high timeout fault." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_asf_trans_to_fault_status" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_asf_trans_to_fault_status" offset="0x38" width="32" description="">
+		<bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved, read as 0, ignored on write." range="31 - 4" rwaccess="N/A"/> 
+		<bitfield id="ASF_TRANS_TO_FAULT_3_STATUS" width="1" begin="3" end="3" resetval="0x0" description="Status bits for apb transaction timeout fault." range="3" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_TRANS_TO_FAULT_2_STATUS" width="1" begin="2" end="2" resetval="0x0" description="Status bits for I3C transaction SCL low timeout fault." range="2" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_TRANS_TO_FAULT_1_STATUS" width="1" begin="1" end="1" resetval="0x0" description="Status bits for I3C transaction SCL high timeout fault." range="1" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_TRANS_TO_FAULT_0_STATUS" width="1" begin="0" end="0" resetval="0x0" description="Status bits for I3C transaction first SCL high timeout fault." range="0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_asf_protocol_fault_mask" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_asf_protocol_fault_mask" offset="0x40" width="32" description="">
+		<bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0x0" description="Reserved, read as 0, ignored on write." range="31 - 13" rwaccess="N/A"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_SLV_SDR_RD_ABORT_MASK" width="1" begin="12" end="12" resetval="0x1" description="Mask bit for slv_sdr_rd_abort protocol fault source." range="12" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_SLV_DDR_FAIL_MASK" width="1" begin="11" end="11" resetval="0x1" description="Mask bit for slv_ddr_fail protocol fault source." range="11" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_S5_MASK" width="1" begin="10" end="10" resetval="0x1" description="Mask bit for s5 protocol fault source." range="10" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_S4_MASK" width="1" begin="9" end="9" resetval="0x1" description="Mask bit for s4 protocol fault source." range="9" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_S3_MASK" width="1" begin="8" end="8" resetval="0x1" description="Mask bit for s3 protocol fault source." range="8" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_S2_MASK" width="1" begin="7" end="7" resetval="0x1" description="Mask bit for s2 protocol fault source." range="7" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_S1_MASK" width="1" begin="6" end="6" resetval="0x1" description="Mask bit for s1 protocol fault source." range="6" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_S0_MASK" width="1" begin="5" end="5" resetval="0x1" description="Mask bit for s0 protocol fault source." range="5" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_MST_SDR_RD_ABORT_MASK" width="1" begin="4" end="4" resetval="0x1" description="Mask bit for mst_sdr_rd_abort protocol fault source." range="4" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_MST_DDR_FAIL_MASK" width="1" begin="3" end="3" resetval="0x1" description="Mask bit for mst_ddr_fail protocol fault source." range="3" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_M2_MASK" width="1" begin="2" end="2" resetval="0x1" description="Mask bit for m2 protocol fault source." range="2" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_M1_MASK" width="1" begin="1" end="1" resetval="0x1" description="Mask bit for m1 protocol fault source." range="1" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_M0_MASK" width="1" begin="0" end="0" resetval="0x1" description="Mask bit for m0 protocol fault source." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_asf_protocol_fault_status" acronym="VBP2APB_WRAP__CORE_VBP__MIPI_I3C_MST_REGS_asf_protocol_fault_status" offset="0x44" width="32" description="">
+		<bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0x0" description="Reserved, read as 0, ignored on write." range="31 - 13" rwaccess="N/A"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_SLV_SDR_RD_ABORT_STATUS" width="1" begin="12" end="12" resetval="0x0" description="Status bit for slv_sdr_rd_abort protocol fault." range="12" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_SLV_DDR_FAIL_STATUS" width="1" begin="11" end="11" resetval="0x0" description="Status bit for slv_ddr_fail protocol fault." range="11" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_S5_STATUS" width="1" begin="10" end="10" resetval="0x0" description="Status bit for s5 protocol fault." range="10" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_S4_STATUS" width="1" begin="9" end="9" resetval="0x0" description="Status bit for s4 protocol fault." range="9" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_S3_STATUS" width="1" begin="8" end="8" resetval="0x0" description="Status bit for s3 protocol fault." range="8" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_S2_STATUS" width="1" begin="7" end="7" resetval="0x0" description="Status bit for s2 protocol fault." range="7" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_S1_STATUS" width="1" begin="6" end="6" resetval="0x0" description="Status bit for s1 protocol fault." range="6" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_S0_STATUS" width="1" begin="5" end="5" resetval="0x0" description="Status bit for s0 protocol fault." range="5" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_MST_SDR_RD_ABORT_STATUS" width="1" begin="4" end="4" resetval="0x0" description="Status bit for mst_sdr_rd_abort protocol fault." range="4" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_MST_DDR_FAIL_STATUS" width="1" begin="3" end="3" resetval="0x0" description="Status bit for mst_ddr_fail protocol fault." range="3" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_M2_STATUS" width="1" begin="2" end="2" resetval="0x0" description="Status bit for m2 protocol fault." range="2" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_M1_STATUS" width="1" begin="1" end="1" resetval="0x0" description="Status bit for m1 protocol fault." range="1" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_M0_STATUS" width="1" begin="0" end="0" resetval="0x0" description="Status bit for m0 protocol fault." range="0" rwaccess="R/W1TC"/>
+	</register>
+</module>

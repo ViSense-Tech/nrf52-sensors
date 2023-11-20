@@ -1,0 +1,11 @@
+<module name="IPE3_BFSW_ICONT" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="IPE3_BFSW_VIEWMODE" acronym="IPE3_BFSW_VIEWMODE" offset="0x0" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="Reserved. Read returns 0 and Write is ignored." range="" rwaccess="R"/>
+    <bitfield id="VIEW_IPORGBUF" width="1" begin="0" end="0" resetval="0" description="View mode selection for iporgbuf 0: Full view mode is selected. 1: Ping-pong view mode is selected." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPE3_BFSW_MSTID" acronym="IPE3_BFSW_MSTID" offset="0x4" width="32" description="Master ID 1 register. Selects master (HWA or DMA bus). This register is used in both full view and ping-pong view mode. This register is for buffers that have two physical memories. This register is affected by direct_switch_pi input port.">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0000 0000" description="Reserved. Read returns 0 and Write is ignored." range="" rwaccess="R"/>
+    <bitfield id="MST_IPORGBUF_B" width="1" begin="1" end="1" resetval="0" description="Master selection for iporgbuf B. This bit is used only in ping-pong view mode. 0: Buffer B is assigned to DMA. 1: Buffer B is assigned to HWA This bit has no effect in full-view mode. If direct_switch_pi is high, the value of this bit is inverted." range="" rwaccess="RW"/>
+    <bitfield id="MST_IPORGBUF_A" width="1" begin="0" end="0" resetval="0" description="Master selection for iporgbuf A. This bit is used in full-view mode and ping-pong view mode. In full-view mode: 0: Buffers A and B are assigned to DMA. 1: Buffers A and B are assigned to HWA. In ping-pong view mode: 0: Buffer A is assigned to DMA. 1: Buffer A is assigned to HWA. (Buffer B is not affected in ping-pong view mode.) If direct_switch_pi is high, the value of this bit is inverted." range="" rwaccess="RW"/>
+  </register>
+</module>

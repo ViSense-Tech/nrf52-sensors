@@ -1,0 +1,70 @@
+<module name="CPSW0_NUSS_PCSR" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="CPSW_PCSR_TX_CTL_REG" acronym="CPSW_PCSR_TX_CTL_REG" offset="0x2100" width="32" description="PCSR Transmit Control Register.">
+    <bitfield id="RESERVED" width="23" begin="31" end="9" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="TX_DATAPATH_EN" width="1" begin="8" end="8" resetval="0x1" description="PCSR Transmit Datapath Enable." range="" rwaccess="RW"/>
+    <bitfield id="TX_SCR_BPYASS" width="1" begin="7" end="7" resetval="0x0" description="PCSR Transmit SCR Bypass." range="" rwaccess="RW"/>
+    <bitfield id="TX_TEST_EN" width="1" begin="6" end="6" resetval="0x0" description="PCSR Transmit Test Enable." range="" rwaccess="RW"/>
+    <bitfield id="TX_TEST_SEL" width="1" begin="5" end="5" resetval="0x0" description="PCSR Transmit Test Select." range="" rwaccess="RW"/>
+    <bitfield id="TX_TEST_DAT_SEL" width="1" begin="4" end="4" resetval="0x0" description="PCSR Transmit Test Data Select." range="" rwaccess="RW"/>
+    <bitfield id="TX_PRBS31_EN" width="1" begin="3" end="3" resetval="0x0" description="PCSR Transmit PRBS31 Enable." range="" rwaccess="RW"/>
+    <bitfield id="TX_PRBS9_EN" width="1" begin="2" end="2" resetval="0x0" description="PCSR Transmit PRBS9 Enable." range="" rwaccess="RW"/>
+    <bitfield id="TX_LOOPBACK_EN" width="1" begin="1" end="1" resetval="0x0" description="PCSR Transmit Loopback Enable." range="" rwaccess="RW"/>
+    <bitfield id="TX_SCR_LOOPBK_EN" width="1" begin="0" end="0" resetval="0x0" description="PCSR Transmit SCR Loopback Enable." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_PCSR_TX_STATUS_REG" acronym="CPSW_PCSR_TX_STATUS_REG" offset="0x2104" width="32" description="PCSR Transmit Status Register.">
+    <bitfield id="RESERVED" width="23" begin="31" end="9" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="TX_FAULT" width="1" begin="8" end="8" resetval="0x0" description="PCSR Transmit Fault Hold Register - write 1 to clear." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="7" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_PCSR_RX_CTL_REG" acronym="CPSW_PCSR_RX_CTL_REG" offset="0x2108" width="32" description="PCSR Receive Control Register.">
+    <bitfield id="RESERVED" width="23" begin="31" end="9" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="RX_PRBS9_EN" width="1" begin="8" end="8" resetval="0x0" description="PCSR Receive PRBS9 Enable." range="" rwaccess="RW"/>
+    <bitfield id="RX_TEST_EN" width="1" begin="7" end="7" resetval="0x0" description="PCSR Receive Test Enable." range="" rwaccess="RW"/>
+    <bitfield id="RX_TEST_DAT_SEL" width="1" begin="6" end="6" resetval="0x0" description="PCSR Receive Test Data Select." range="" rwaccess="RW"/>
+    <bitfield id="RX_PRBS31_EN" width="1" begin="5" end="5" resetval="0x0" description="PCSR Receive PRBS31 Enable." range="" rwaccess="RW"/>
+    <bitfield id="RX_ERR_BLK_CNT_RST" width="1" begin="4" end="4" resetval="0x0" description="PCSR Receive Error Block Count Reset." range="" rwaccess="RW"/>
+    <bitfield id="RX_BER_CNT_RST" width="1" begin="3" end="3" resetval="0x0" description="PCSR Receive BER Count Reset." range="" rwaccess="RW"/>
+    <bitfield id="RX_TEST_CNT_PRE" width="1" begin="2" end="2" resetval="0x0" description="PCSR Receive Test Count Pre." range="" rwaccess="RW"/>
+    <bitfield id="RX_TEST_CNT_125US" width="1" begin="1" end="1" resetval="0x0" description="PCSR Receive Test Count 125us." range="" rwaccess="RW"/>
+    <bitfield id="RX_TPTER_CNT_RST" width="1" begin="0" end="0" resetval="0x0" description="PCSR Receive TPTER Count Reset" range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_PCSR_RX_STATUS_REG" acronym="CPSW_PCSR_RX_STATUS_REG" offset="0x210C" width="32" description="PCSR Receive Status Register.">
+    <bitfield id="RX_HI_BER" width="1" begin="31" end="31" resetval="0x0" description="PCSR Receive High BER." range="" rwaccess="R"/>
+    <bitfield id="RX_BLOCK_LOCK" width="1" begin="30" end="30" resetval="0x0" description="PCSR Receive Block Lock." range="" rwaccess="R"/>
+    <bitfield id="RX_BER_COUNT" width="6" begin="29" end="24" resetval="0x0" description="PCSR Receive BER Count." range="" rwaccess="R"/>
+    <bitfield id="RX_ERR_BLK_CNT" width="8" begin="23" end="16" resetval="0x0" description="PCSR Error Block Count." range="" rwaccess="R"/>
+    <bitfield id="RX_TPT_ERR_CNT" width="16" begin="15" end="0" resetval="0x0" description="PCSR TPT Error Count." range="" rwaccess="R"/>
+  </register>
+  <register id="CPSW_PCSR_SEED_A_LO_REG" acronym="CPSW_PCSR_SEED_A_LO_REG" offset="0x2110" width="32" description="PCSR Seed A Low Register.">
+    <bitfield id="SEED_A_LO" width="32" begin="31" end="0" resetval="0x0" description="PCSR Seed A Low." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_PCSR_SEED_A_HI_REG" acronym="CPSW_PCSR_SEED_A_HI_REG" offset="0x2114" width="32" description="PCSR Seed A High Register.">
+    <bitfield id="RESERVED" width="6" begin="31" end="26" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SEED_A_HI" width="26" begin="25" end="0" resetval="0x0" description="PCSR Seed A High." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_PCSR_SEED_B_LO_REG" acronym="CPSW_PCSR_SEED_B_LO_REG" offset="0x2118" width="32" description="PCSR Seed B Low Register.">
+    <bitfield id="SEED_B_LO" width="32" begin="31" end="0" resetval="0x0" description="PCSR Seed B Low." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_PCSR_SEED_B_HI_REG" acronym="CPSW_PCSR_SEED_B_HI_REG" offset="0x211C" width="32" description="PCSR Seed B High Register.">
+    <bitfield id="RESERVED" width="6" begin="31" end="26" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SEED_B_HI" width="26" begin="25" end="0" resetval="0x0" description="PCSR Seed B High." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_PCSR_FEC_REG" acronym="CPSW_PCSR_FEC_REG" offset="0x2120" width="32" description="PCSR FEC Register.">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="FEC_ENA_ERR_IND" width="1" begin="1" end="1" resetval="0x0" description="PCSR FEC ENA Error Ind." range="" rwaccess="RW"/>
+    <bitfield id="FEC_ENABLE" width="1" begin="0" end="0" resetval="0x0" description="PCSR FEC Enable." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_PCSR_CTL_REG" acronym="CPSW_PCSR_CTL_REG" offset="0x2124" width="32" description="PCSR Control Register.">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SIGNAL_OK_EN" width="1" begin="1" end="1" resetval="0x0" description="PCSR Signal OK Enable." range="" rwaccess="RW"/>
+    <bitfield id="SIGNAL_OK" width="1" begin="0" end="0" resetval="0x0" description="PCSR Signal OK." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_PCSR_FEC_CNT_REG" acronym="CPSW_PCSR_FEC_CNT_REG" offset="0x2128" width="32" description="PCSR FEC Count Register.">
+    <bitfield id="FEC_CORR_CNT" width="16" begin="31" end="16" resetval="0x0" description="PCSR FEC Corrected Error Count." range="" rwaccess="RW"/>
+    <bitfield id="FEC_UNCORRCNT" width="16" begin="15" end="0" resetval="0x0" description="PCSR FEC Uncorrected Error Count." range="" rwaccess="RW"/>
+  </register>
+  <register id="CPSW_PCSR_ERROR_FIFO_REG" acronym="CPSW_PCSR_ERROR_FIFO_REG" offset="0x212C" width="32" description="PCSR Error FIFO Register.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ERROR_FIFO_CTC" width="1" begin="0" end="0" resetval="0x0" description="PCSR Error FIFO CTC." range="" rwaccess="RW"/>
+  </register>
+</module>

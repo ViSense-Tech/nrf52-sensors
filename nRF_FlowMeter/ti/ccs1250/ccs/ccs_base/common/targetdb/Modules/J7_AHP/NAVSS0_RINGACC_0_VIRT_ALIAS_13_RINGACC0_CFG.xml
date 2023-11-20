@@ -1,0 +1,20 @@
+<module name="NAVSS0_RINGACC_0_VIRT_ALIAS_13_RINGACC0_CFG" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="VIRT_ALIAS_13_RINGACC0__CFG__CFG_BA_LO" acronym="VIRT_ALIAS_13_RINGACC0__CFG__CFG_BA_LO" offset="0x40" width="32" description="">
+		<bitfield id="ADDR_LO" width="32" begin="31" end="0" resetval="0x0" description="Tx Ring base address (LSBs)" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_13_RINGACC0__CFG__CFG_BA_HI" acronym="VIRT_ALIAS_13_RINGACC0__CFG__CFG_BA_HI" offset="0x44" width="32" description="">
+		<bitfield id="ADDR_HI" width="16" begin="15" end="0" resetval="0x0" description="Tx Ring base address (MSBs)" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_13_RINGACC0__CFG__CFG_SIZE" acronym="VIRT_ALIAS_13_RINGACC0__CFG__CFG_SIZE" offset="0x48" width="32" description="">
+		<bitfield id="QMODE" width="2" begin="31" end="30" resetval="0x0" description="Defines the mode for this ring or queue." range="31 - 30" rwaccess="R/W"/> 
+		<bitfield id="ELSIZE" width="3" begin="26" end="24" resetval="0x0" description="Ring element size. This field is encoded as follows: 0 = 4 bytes 1 = 8 bytes 2 = 16 bytes 3 = 32 bytes 4 = 64 bytes 5 = 128 bytes 6 = 256 bytes 7 = RESERVED" range="26 - 24" rwaccess="R/W"/> 
+		<bitfield id="SIZE" width="20" begin="19" end="0" resetval="0x0" description="Tx Ring element count. This field configures the size of the ring in elements. For rings in CREDENTIALS or QM modes the size must be an even number." range="19 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_13_RINGACC0__CFG__CFG_EVT" acronym="VIRT_ALIAS_13_RINGACC0__CFG__CFG_EVT" offset="0x4C" width="32" description="">
+		<bitfield id="EVT" width="16" begin="15" end="0" resetval="0x65535" description="Defines the event for this ring or queue." range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_13_RINGACC0__CFG__CFG_ORDERID" acronym="VIRT_ALIAS_13_RINGACC0__CFG__CFG_ORDERID" offset="0x50" width="32" description="">
+		<bitfield id="REPLACE" width="1" begin="4" end="4" resetval="0x0" description="Indicates to replace the bus orderid value for this ring or queue with the orderid MMR field. This allows control over the orderid value when it must be restricted due to the topology for QoS reasons. 0 = bypass and use the orderid from the source transaction for the destination transaction. 1 = use the orderid MMR field value for the destination transaction." range="4" rwaccess="R/W"/> 
+		<bitfield id="ORDERID" width="4" begin="3" end="0" resetval="0x0" description="Defines the bus orderid value for this ring or queue." range="3 - 0" rwaccess="R/W"/>
+	</register>
+</module>

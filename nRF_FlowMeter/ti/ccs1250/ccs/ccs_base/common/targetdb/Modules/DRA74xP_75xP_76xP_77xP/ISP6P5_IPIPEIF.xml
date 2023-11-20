@@ -1,0 +1,547 @@
+<module name="ISP6P5_IPIPEIF" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="IPIPEIF_ENABLE" acronym="IPIPEIF_ENABLE" offset="0x0" width="32" description="IPIPEIF Enable.">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SYNCOFF" width="1" begin="1" end="1" resetval="0x0" description="VD output mask This register masks the VD output to the IPIPE module. This can be useful when one wants to read data from SDRAM which are stored in a double buffer. If the VD is not masked each time we start the module an new VD will be generated to the IPIPEIF module. Let's consider two buffers A and B of N lines each. *This bit field is latched by VD." range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="SYNCOFF_0" description="VD output mask is disabled."/>
+      <bitenum value="1" id="ENABLE" token="SYNCOFF_1" description="VD output mask is enabled."/>
+    </bitfield>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="IPIPE I/F Enable This register is used to start the operation of SDRAM buffer memory read and generates SYNC signals. This register is available when INPSRC1 or INPSCR2 = 1, 2 or 3." range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="ENABLE_0" description="IPIPE SDRAM I/F Disabled"/>
+      <bitenum value="1" id="ENABLE" token="ENABLE_1" description="IPIPE SDRAM I/F Enabled"/>
+    </bitfield>
+  </register>
+  <register id="IPIPEIF_CFG1" acronym="IPIPEIF_CFG1" offset="0x4" width="32" description="IPIPEIF Configuration #1">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="INPSRC1" width="2" begin="15" end="14" resetval="0x0" description="Selects the source for the mux (VPORT / ISIF / SDRAM) as well as the data format type." range="" rwaccess="RW">
+      <bitenum value="0" id="RAW" token="INPSRC1_0" description="RAW data from VPORT"/>
+      <bitenum value="1" id="SDRAM_RAW" token="INPSRC1_1" description="RAW data from SDRAM"/>
+      <bitenum value="3" id="SDRAM_YUV" token="INPSRC1_3" description="YUV data from SDRAM"/>
+      <bitenum value="2" id="ISIF_DARKFM" token="INPSRC1_2" description="ISIF_DARKFM Dark frame subtration or WDR merge is selected. Input ports to DFS/WDR submodule are VPORT and SDRAM."/>
+    </bitfield>
+    <bitfield id="DATASFT" width="3" begin="13" end="11" resetval="0x0" description="SDRAM read data shift This register is available when INPSRC1 or INPSRC2 = 1 or 2, i.e., when data are read from SDRAM. If UNPACK = 1 or 2, this value must be 0, 1, 2, 3, or 4." range="" rwaccess="RW">
+      <bitenum value="6" id="_6" token="DATASFT_6" description="If UNPACK=1 or 2, this value is invalid. If UNPACK=3 or (UNPACK=0 and RAW16=0) Output data[15:0] = '0000' read data[15:4] If UNPACK=0 and RAW16=1 Output data[15:0] = (read data[9:0]) '000000'"/>
+      <bitenum value="1" id="_1" token="DATASFT_1" description="If UNPACK 0 or RAW16=0 Output data[15:12] = '0000' Output data[11:0] = read data[10:0] '0'; If UNPACK=0 and RAW16=1 Output data[15:0] = (read data[14:0]) '0'"/>
+      <bitenum value="7" id="_7" token="DATASFT_7" description="If UNPACK=1 or 2, this value is invalid. If UNPACK=3 or (UNPACK=0 and RAW16=0) Output data[15:0] = '0000' read data[15:4] If UNPACK=0 and RAW16=1 Output data[15:0] = (read data[8:0]) '0000000'"/>
+      <bitenum value="0" id="_0" token="DATASFT_0" description="If UNPACK 0, or RAW16_SDRAM=0 Output data[15:12] = '0000' Output data[11:0] = read data[11:0] If UNPACK=0 and RAW16=1 Output data[15:0] = read data[15:0]"/>
+      <bitenum value="2" id="_2" token="DATASFT_2" description="If UNPACK 0 or RAW16=0 Output data[15:12] = '0000' Output data[11:0] = read data[9:0] '00' If UNPACK=0 and RAW16=1 Output data[15:0] = (read data[13:0]) '00'"/>
+      <bitenum value="4" id="_4" token="DATASFT_4" description="If UNPACK 0 or RAW16=0 Output data[15:12] = '0000' Output data[11:0] = read data[7:0] '0000' If UNPACK=0 and RAW16=1 Output data[15:0] = (read data[11:0]) '0000'"/>
+      <bitenum value="5" id="_5" token="DATASFT_5" description="If UNPACK=1 or 2, this value is invalid. If UNPACK=3 or (UNPACK=0 and RAW16=0) Output data[15:0] = '0000' read data[15:4] If UNPACK=0 and RAW16=1 Output data[15:0] = (read data[10:0]) '00000'"/>
+      <bitenum value="3" id="_3" token="DATASFT_3" description="If UNPACK 0 or RAW16=0 Output data[15:12] = '0000' Output data[11:0] = read data[8:0] '000' If UNPACK=0 and RAW16=1 Output data[15:0] = (read data[12:0]) '000'"/>
+    </bitfield>
+    <bitfield id="CLKSEL" width="1" begin="10" end="10" resetval="0x0" description="IPIPEIF IPIPE module pixel clock selection. This register shall be set to '1' when INPSRC1 or INPSRC2 = 1 or 3, i.e., data are solely read from SDRAM (VPORT inactive)." range="" rwaccess="RW">
+      <bitenum value="0" id="PCLK" token="CLKSEL_0" description="Selects the pixel clock from the VPORT."/>
+      <bitenum value="1" id="SDRAM_DIV_CLK" token="CLKSEL_1" description="Selects the pixel clock from the fractional clock divider. The fractional clock divider value is setup with the register."/>
+    </bitfield>
+    <bitfield id="UNPACK" width="2" begin="9" end="8" resetval="0x0" description="8-Bit, 12-bit Packed Mode When sensor raw data are stored in 8-bit packed mode or 12-bit packed mode, this register should code 1 or 3. This register is effective when INPSRC = 1 or 2." range="" rwaccess="RW">
+      <bitenum value="0" id="NORMAL_16_BITS_PIXEL" token="UNPACK_0" description="16 bits / pixel"/>
+      <bitenum value="1" id="PACK_8_BITS_PIXEL" token="UNPACK_1" description="8 bits / pixel"/>
+      <bitenum value="3" id="PACK_12_BITS_PIXEL" token="UNPACK_3" description="12 bits / pixel"/>
+      <bitenum value="2" id="PACK_8_BITS_PIXEL_ALAW" token="UNPACK_2" description="8 bits / pixel + inverse A law (8 bits to 10 bits)"/>
+    </bitfield>
+    <bitfield id="AVGFILT" width="1" begin="7" end="7" resetval="0x0" description="Averaging Filter It applies (1,2,1) filter for the RGB/YCbCr data. *This bit field is latched by VD." range="" rwaccess="RW">
+      <bitenum value="0" id="OFF" token="AVGFILT_0" description="off"/>
+      <bitenum value="1" id="ON" token="AVGFILT_1" description="on"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="2" begin="6" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RAW16_SDRAM" width="1" begin="4" end="4" resetval="0x0" description="RAW16/12 format of SDRAM This affect how DATASFT works. This bit is valid if UNPCK=0." range="" rwaccess="RW"/>
+    <bitfield id="INPSRC2" width="2" begin="3" end="2" resetval="0x0" description="Selects the source for the mux (ISIF / SDRAM) as well as the data format type." range="" rwaccess="RW">
+      <bitenum value="0" id="ISIF" token="INPSRC2_0" description="ISIF"/>
+      <bitenum value="1" id="SDRAM_RAW" token="INPSRC2_1" description="from SDRAM (raw data)"/>
+      <bitenum value="3" id="SDRAM_YUV" token="INPSRC2_3" description="from SDRAM (YUV data)"/>
+      <bitenum value="2" id="ISIF_DARKFM" token="INPSRC2_2" description="Dark frame subtration or WDR merge is selected. from ISIF SDRAM (Darkframe Subtraction : DFS, or WDR merge)"/>
+    </bitfield>
+    <bitfield id="DECIM" width="1" begin="1" end="1" resetval="0x0" description="Pixel Decimation The decimation rate defined by RSZ register. *This bit field is latched by VD." range="" rwaccess="RW">
+      <bitenum value="0" id="NODECIMATION" token="DECIM_0" description="No decimation"/>
+      <bitenum value="1" id="DECIMATE" token="DECIM_1" description="Decimation"/>
+    </bitfield>
+    <bitfield id="ONESHOT" width="1" begin="0" end="0" resetval="0x0" description="One Shot Mode This register is available when INPSRC = 1 or 3." range="" rwaccess="RW">
+      <bitenum value="0" id="CONTINUOUS" token="ONESHOT_0" description="Continuous mode"/>
+      <bitenum value="1" id="ONESHOT" token="ONESHOT_1" description="One shot mode"/>
+    </bitfield>
+  </register>
+  <register id="IPIPEIF_PPLN" acronym="IPIPEIF_PPLN" offset="0x8" width="32" description="IPIPEIF Interval of HD / Start pixel in HD">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="PPLN" width="13" begin="12" end="0" resetval="0x0" description="Case-1: Interval of Horizontal Sync (HD) Specifies the interval of horizontal sync. This register is available when INPSRC = 1 or 3. Case-2: Start Pixel in Horizontal Sync (HD) Specifies the start pixel in horizontal sync. This register is available when INPSRC = 2 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_LPFR" acronym="IPIPEIF_LPFR" offset="0xC" width="32" description="IPIPEIF Interval of VD / Start line in VD">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LPFR" width="13" begin="12" end="0" resetval="0x0" description="Case-1: Interval of Vertical Sync (VD) Specifies the interval of vertical sync. This register is available when INPSRC = 1 or 3. Case-2: Start Pixel in Vertical Sync (VD) Specifies the start line in vertical sync. This register is available when INPSRC = 2 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_HNUM" acronym="IPIPEIF_HNUM" offset="0x10" width="32" description="IPIPEIF Number of valid pixels per line">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="HNUM" width="13" begin="12" end="0" resetval="0x0" description="The Number of Valid Pixels in a Line Specifies the number of valid pixels in a horizontal line. This register is available when INPSRC = 1, 2 or 3 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_VNUM" acronym="IPIPEIF_VNUM" offset="0x14" width="32" description="IPIPEIF Number of valid lines per frame">
+    <bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VNUM" width="13" begin="12" end="0" resetval="0x0" description="The Number of Valid Line in a Vertical Specifies the number of valid line in a vertical. This register is available when INPSRC = 1, 2 or 3 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_ADDRU" acronym="IPIPEIF_ADDRU" offset="0x18" width="32" description="IPIPEIF Memory Address (Upper)">
+    <bitfield id="RESERVED" width="21" begin="31" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ADDRU" width="11" begin="10" end="0" resetval="0x0" description="Memory Address ? Upper Memory address upper 11-bits are specified in units of 32-bytes This register is available when INPSRC = 1, 2 or 3. *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_ADDRL" acronym="IPIPEIF_ADDRL" offset="0x1C" width="32" description="IPIPEIF Memory Address (Lower)">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ADDRL" width="16" begin="15" end="0" resetval="0x0" description="Memory Address - Lower Memory address lower 16-bits are specified in units of 32-bytes. This register is available when INPSRC = 1, 2 or 3. *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_ADOFS" acronym="IPIPEIF_ADOFS" offset="0x20" width="32" description="IPIPEIF Address offset">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ADOFS" width="12" begin="11" end="0" resetval="0x0" description="Specifies the SDRAM stride for each line in units of 32-bytes. This register is available when reading data from SDRAM: INPSRC1 or INPSRC2 = 1, 2 or 3. Assuming that the first line is at position ADDR, the second line is at address ADDR+ ADOFS, etc. *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_RSZ" acronym="IPIPEIF_RSZ" offset="0x24" width="32" description="IPIPEIF Horizontal Resizing Parameter on IPIPE datapath">
+    <bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RSZ" width="7" begin="6" end="0" resetval="0x10" description="Horizontal Resizing Parameter for IPIPE datapath Specifies the horizontal resizing parameter. The RSZ register can be configured within 16 to 112 range. This resizing ratio is determined by 16/RSZ (= 1/1 to 1/7) *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_GAIN" acronym="IPIPEIF_GAIN" offset="0x28" width="32" description="IPIPEIF Gain Parameter">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="GAIN" width="10" begin="9" end="0" resetval="0x200" description="Gain Parameter Specifies the gain applied to RAW data before it is forwarded to the IPIPE module. The gain value is expressed using the U10Q9 fractional format. The range is from 0.00195 (1/512) to 1.99805(1023/512). By default the unity gain is applied, i.e.,IPIPEIF_GAIN.GAIN = 0x200. The gain is applied to RAW data only (IPIPEIF_CFG1.INPSRC2 != 3): the gain is not applied if the input data is YCbCr. *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_DPCM" acronym="IPIPEIF_DPCM" offset="0x2C" width="32" description="IPIPEIF DPCM configuration This register applies only if.UNPACK = 1, i.e., RAW8 data is read from SDRAM. This register access is enabled by the Nokia Custom key">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="BITS" width="1" begin="2" end="2" resetval="0x0" description="DPCM bit mode for SDRAM data This register access is enabled by the Nokia Custom key" range="" rwaccess="RW">
+      <bitenum value="0" id="_8TO10" token="BITS_0" description="8bit to 10bit DPCM decompression"/>
+      <bitenum value="1" id="_8TO12" token="BITS_1" description="8bit to 12bit DPCM decompression"/>
+    </bitfield>
+    <bitfield id="PRED" width="1" begin="1" end="1" resetval="0x0" description="DPCM prediction mode for SDRAM data This register access is enabled by the Nokia Custom key" range="" rwaccess="RW">
+      <bitenum value="0" id="SIMPLE" token="PRED_0" description="Simple predictor"/>
+      <bitenum value="1" id="ADVANCED" token="PRED_1" description="Advanced predictor"/>
+    </bitfield>
+    <bitfield id="ENA" width="1" begin="0" end="0" resetval="0x0" description="DPCM decompression enable for SDRAM data." range="" rwaccess="RW">
+      <bitenum value="0" id="OFF" token="ENA_0" description="DPCM off (no decompression)"/>
+      <bitenum value="1" id="ON" token="ENA_1" description="DPCM on"/>
+    </bitfield>
+  </register>
+  <register id="IPIPEIF_CFG2" acronym="IPIPEIF_CFG2" offset="0x30" width="32" description="IPIPEIF Configuration #2">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="YUV8P" width="1" begin="7" end="7" resetval="0x0" description="8-bit YUV data unpacking to 16 bits WhenIPIPEIF_CFG1.INPSRC2 = 0 and IPIPEIF_CFG2.YUV16 = 1, the 8-bit YUV data are transformed into 16-bit YUV data. The way the data are unpacked from 8 bits to 16 bits is controlled by the IPIPEIF_CFG2.YUV8P register. The upper 8 bits of the 16-bit output are set to 0." range="" rwaccess="RW">
+      <bitenum value="0" id="Y" token="YUV8P_0" description="Y output on even pixels C output on odd pixels"/>
+      <bitenum value="1" id="C" token="YUV8P_1" description="C output on even pixels Y output on odd pixels"/>
+    </bitfield>
+    <bitfield id="YUV8" width="1" begin="6" end="6" resetval="0x0" description="YUV 8bit mode When ISIF_CFG1.INPSRC2 = 0 and YUV16 = 1, setting this bit to 1 enables the conversion from 8bit YUV input to 16bit YUV. This register is used when the input data from the ISIF module is 8-bit YUV data." range="" rwaccess="RW">
+      <bitenum value="0" id="YUV16" token="YUV8_0" description="YUV16 input"/>
+      <bitenum value="1" id="YUV8" token="YUV8_1" description="YUV 8bit input This value is not allowed if.INPSRC1=1 and .INPSRC2=0"/>
+    </bitfield>
+    <bitfield id="DFSDIR" width="1" begin="5" end="5" resetval="0x0" description="DFS direction Selects the direction of dark frame subtraction." range="" rwaccess="RW">
+      <bitenum value="0" id="VPORT" token="DFSDIR_0" description="In DFS mode VPORT IF(capture frame) - SDRAM (dark frame) In WDR mode Long Exposure: VPORT, Short Exposure: SDRAM"/>
+      <bitenum value="1" id="SDRAM" token="DFSDIR_1" description="In DFS mode SDRAM (capture frame) - VPORT IF(dark frame) In WDR mode Long Exposure: SDRAM, Short Exposure: VPORT"/>
+    </bitfield>
+    <bitfield id="WENE" width="1" begin="4" end="4" resetval="0x0" description="External WEN signal selection Do not use for OMAP4 and MONICA since there is not parallel interface at chip level. This register shall always be set to 0." range="" rwaccess="RW">
+      <bitenum value="0" id="NO_EXTERNAL_WEN" token="WENE_0" description="do not use external WEN"/>
+      <bitenum value="1" id="EXTERNAL_WEN" token="WENE_1" description="use external WEN"/>
+    </bitfield>
+    <bitfield id="YUV16" width="1" begin="3" end="3" resetval="0x0" description="Data type selection. The behavior of this bitfield depends upon other register settings. The functionality is best explained with the following pseudo code: if ((CFG1.INPSRC2==0 CFG2.YUV16) || CFG1.INPSRC2==3) { data_out[15:0] = yuv[15:0] } else if (CFG1.INPSRC2==1 CFG2.YUV16 CFG1.UNPACK=1) { data_out[15:8] = gain_clip[7:0]; data_out[ 7:0] = 0; } else { data_out[15: 0] = gain_clip[15:0]; } where: o data_out[15:0] = 16bit yuv or 16bit raw data to ipipe o yuv[15:0] = 16bit yuv data from 'horizontal pixel decimator' block. o gain_clip[15:0] = 16bit raw data from 'gain' block." range="" rwaccess="RW">
+      <bitenum value="0" id="RAW" token="YUV16_0" description="12-bit RAW data"/>
+      <bitenum value="1" id="YUV" token="YUV16_1" description="16-bit YUV data"/>
+    </bitfield>
+    <bitfield id="VDPOL" width="1" begin="2" end="2" resetval="0x0" description="VD Sync Polarity When input VD is active low SYNC pulse, this bit needs to be set to ?1?." range="" rwaccess="RW">
+      <bitenum value="0" id="POSITIVE" token="VDPOL_0" description="Positive"/>
+      <bitenum value="1" id="NEGATIVE" token="VDPOL_1" description="Negative"/>
+    </bitfield>
+    <bitfield id="HDPOL" width="1" begin="1" end="1" resetval="0x0" description="HD Sync Polarity When input HD is active low SYNC pulse, this bit needs to be set to ?1?." range="" rwaccess="RW">
+      <bitenum value="0" id="POSITIVE" token="HDPOL_0" description="Positive"/>
+      <bitenum value="1" id="NEGATIVE" token="HDPOL_1" description="Negative"/>
+    </bitfield>
+    <bitfield id="INTSW" width="1" begin="0" end="0" resetval="0x0" description="IPIPEIF interrupt source selection. This register select the interrupt source." range="" rwaccess="RW">
+      <bitenum value="0" id="VPORT" token="INTSW_0" description="Start position of VD from VPORT interface"/>
+      <bitenum value="1" id="ISIF" token="INTSW_1" description="Start position of VD from ISIF module"/>
+    </bitfield>
+  </register>
+  <register id="IPIPEIF_INIRSZ" acronym="IPIPEIF_INIRSZ" offset="0x34" width="32" description="IPIPEIF resize initial position - IPIPE data path. This value is not used in the c-model, as C-model expects the first pixel postion is the same as the first input pixel. To match HW with C-model, INIRSZ must be equal to the cycles between HD and the first cycle. In FDS/WDR mode, INIRSZ=PPLN">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ALNSYNC" width="1" begin="13" end="13" resetval="0x0" description="Align the HSYNC,VSYNC to initial position defined by INIRSZ." range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="ALNSYNC_0" description="Disable"/>
+      <bitenum value="1" id="ENABLE" token="ALNSYNC_1" description="Enable"/>
+    </bitfield>
+    <bitfield id="INIRSZ" width="13" begin="12" end="0" resetval="0x0" description="Offset used to re-initialize the HD/VD position after resizer. From 0 to 8191 PCLK cycles." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_OCLIP" acronym="IPIPEIF_OCLIP" offset="0x38" width="32" description="IPIPEIF output clipping value">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OCLIP" width="16" begin="15" end="0" resetval="0xfff" description="Output clipping value after gain control on IPIPE data path. This value is in U16Q0 data format. For nomarl mode, this value should be 0 OCLIP 4096 For WDR mode, this value should be 0 OCLIP 65536" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_DTUDF" acronym="IPIPEIF_DTUDF" offset="0x3C" width="32" description="IPIPEIF data underflow detection">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="10" begin="15" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FIFOWMRKLVL" width="4" begin="5" end="2" resetval="0x8" description="To guarantee that the FIFO does not overflow, the stall request is deasserted only when a certain number of locations in the FIFO are free. The number of free locations is configurable. A safe number of mandatory free locations can be configured by taking into consideration the pixel clock frequency (PCLK) with respect to that of the functional clock (FUNC CLK). The worst case occurs when PCLK = FUNC CLK. In that case, value should be configured to 0 (i.e. 16 free locations) so that the stall will be deasserted only when the 16-deep FIFO is completely empty." range="" rwaccess="RW">
+      <bitenum value="13" id="_13" token="FIFOWMRKLVL_13" description="Stall deassertion when FIFO has not more than 13 valid entry and SDRAM data available"/>
+      <bitenum value="1" id="_1" token="FIFOWMRKLVL_1" description="Stall deassertion when FIFO has not more than 1 valid entry and SDRAM data available"/>
+      <bitenum value="7" id="_7" token="FIFOWMRKLVL_7" description="Stall deassertion when FIFO has not more than 7 valid entry and SDRAM data available"/>
+      <bitenum value="6" id="_6" token="FIFOWMRKLVL_6" description="Stall deassertion when FIFO has not more than 6 valid entry and SDRAM data available"/>
+      <bitenum value="0" id="_0" token="FIFOWMRKLVL_0" description="Stall deassertion when FIFO is empty (16 free locations) and SDRAM data available"/>
+      <bitenum value="5" id="_5" token="FIFOWMRKLVL_5" description="Stall deassertion when FIFO has not more than 5 valid entry and SDRAM data available"/>
+      <bitenum value="10" id="_10" token="FIFOWMRKLVL_10" description="Stall deassertion when FIFO has not more than 10 valid entry and SDRAM data available"/>
+      <bitenum value="9" id="_9" token="FIFOWMRKLVL_9" description="Stall deassertion when FIFO has not more than 9 valid entry and SDRAM data available"/>
+      <bitenum value="11" id="_11" token="FIFOWMRKLVL_11" description="Stall deassertion when FIFO has not more than 11 valid entry and SDRAM data available"/>
+      <bitenum value="4" id="_4" token="FIFOWMRKLVL_4" description="Stall deassertion when FIFO has not more than 4 valid entry and SDRAM data available"/>
+      <bitenum value="2" id="_2" token="FIFOWMRKLVL_2" description="Stall deassertion when FIFO has not more than 2 valid entry and SDRAM data available"/>
+      <bitenum value="15" id="_15" token="FIFOWMRKLVL_15" description="Stall deassertion when FIFO has not more than 15 valid entry and SDRAM data available"/>
+      <bitenum value="12" id="_12" token="FIFOWMRKLVL_12" description="Stall deassertion when FIFO has not more than 12 valid entry and SDRAM data available"/>
+      <bitenum value="3" id="_3" token="FIFOWMRKLVL_3" description="Stall deassertion when FIFO has not more than 3 valid entry and SDRAM data available"/>
+      <bitenum value="8" id="_8" token="FIFOWMRKLVL_8" description="Stall deassertion when FIFO has not more than 8 valid entry and SDRAM data available"/>
+      <bitenum value="14" id="_14" token="FIFOWMRKLVL_14" description="Stall deassertion when FIFO has not more than 14 valid entry and SDRAM data available"/>
+    </bitfield>
+    <bitfield id="ENM2MSTALL" width="1" begin="1" end="1" resetval="0x0" description="Enable memory-to-memory stall mechanism" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="ENM2MSTALL_0" description="disable (no special stall mechanism for memory-to-memory use cases)"/>
+      <bitenum value="1" id="ENABLE" token="ENM2MSTALL_1" description="enable (stall mechanism for memory-to-memory use cases)"/>
+    </bitfield>
+    <bitfield id="DTUDF" width="1" begin="0" end="0" resetval="0x0" description="Data under flow error status register. Reading ?1? shows there is data under flow and at least one data is corrupted while reading from SDRAM. Writing ?1? to this register clears (=0) the error (=1) status. Underflow errors are non recoverable at ISP5 level, need to do a soft reset at ISS level. The IPIPEIF_UDF interrupt is generated when an underflow happens. The interrupt avoids polling this register for errors. If ENM2MSTALL is enabled, then programmers need to ensure that the SW does not clear DTUDF[0] as this would reset the MTC read interface. DTUDF[0] can be cleared only in the on-the-fly operation where the stall mechanism will not work." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_CLKDIV" acronym="IPIPEIF_CLKDIV" offset="0x40" width="32" description="IPIPEIF CLOCK DIVIDER">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CLKDIV" width="16" begin="15" end="0" resetval="0x1" description="IPIPEIF clock rate configuration IPIPE/IPIPEIF clock frequency = M/N x clk_vpss clock frequency. We have M = CLKDIV[15:8] + 1 and N = CLKDIV[7:0] + 1 This register is available whenIPIPEIF_CFG1.CLKSEL = 1." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_DPC1" acronym="IPIPEIF_DPC1" offset="0x44" width="32" description="IPIPEIF defect pixel correction #1">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ENA" width="1" begin="12" end="12" resetval="0x0" description="DPC enable. Applies DPC for video port data, ISIF input path." range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="ENA_0" description="Disable"/>
+      <bitenum value="1" id="ENABLE" token="ENA_1" description="Enable"/>
+    </bitfield>
+    <bitfield id="TH" width="12" begin="11" end="0" resetval="0x0" description="DPC threshold value" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_DPC2" acronym="IPIPEIF_DPC2" offset="0x48" width="32" description="IPIPEIF defect pixel correction #2">
+    <bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ENA" width="1" begin="12" end="12" resetval="0x0" description="DPC enable. Applies DPC for SDRAM input path." range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="ENA_0" description="Disable"/>
+      <bitenum value="1" id="ENABLE" token="ENA_1" description="Enable"/>
+    </bitfield>
+    <bitfield id="TH" width="12" begin="11" end="0" resetval="0x0" description="DPC threshold value" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_DFSGVL" acronym="IPIPEIF_DFSGVL" offset="0x4C" width="32" description="IPIPEIF DARK FRAME GAIN CONTROL - GAIN VALUE">
+    <bitfield id="RESERVED" width="21" begin="31" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DFSGEN" width="1" begin="10" end="10" resetval="0x0" description="DFS gain control enable. This functionality is protected by an eFuse. Not available when ISP5_EFUSE4_EN = '0'." range="" rwaccess="RW"/>
+    <bitfield id="DFSGVL" width="10" begin="9" end="0" resetval="0x0" description="DFS gain value. This functionality is protected by an eFuse. Not available when ISP5_EFUSE4_EN = '0'." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_DFSGTH" acronym="IPIPEIF_DFSGTH" offset="0x50" width="32" description="IPIPEIF DARK FRAME GAIN CONTROL - THRESHOLD VALUE">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DFSGTH" width="12" begin="11" end="0" resetval="0xfff" description="DFS gain threshold value. This functionality is protected by an eFuse. Not available when ISP5_EFUSE4_EN = '0'." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_RSZ3A" acronym="IPIPEIF_RSZ3A" offset="0x54" width="32" description="IPIPEIF HORIZONTAL RESIZING PARAMETER FOR H3A">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DECIM" width="1" begin="9" end="9" resetval="0x0" description="Pixel Decimation Enable The decimation rate defined by the RSZ bitfield. *This bit field is latched by VD." range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="DECIM_0" description="No Decimation"/>
+      <bitenum value="1" id="ENABLE" token="DECIM_1" description="Decimate"/>
+    </bitfield>
+    <bitfield id="AVGFILT" width="1" begin="8" end="8" resetval="0x0" description="Averaging Filter It applies a (1, 2, 1) filter for the RGB/YCbCr data. *This bit field is latched by VD." range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="AVGFILT_0" description="Disable"/>
+      <bitenum value="1" id="ENABLE" token="AVGFILT_1" description="Enable"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RSZ" width="7" begin="6" end="0" resetval="0x10" description="Horizontal Resizing Parameter for H3A datapath Specifies the horizontal resizing parameter. The RSZ register can be configured within 16 to 112 range. This resizing ratio is determined by 16/RSZ (= 1/1 to 1/7) *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_INIRSZ3A" acronym="IPIPEIF_INIRSZ3A" offset="0x58" width="32" description="IPIPEIF resize initial position - H3A data path.">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ALNSYNC" width="1" begin="13" end="13" resetval="0x0" description="Align the HD, VD to initial position defined by the INIRSZ bit field. It means that HD and VD are effectivly shifted by INIRSZ pixel clock cycles." range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="ALNSYNC_0" description="Disable"/>
+      <bitenum value="1" id="ENABLE" token="ALNSYNC_1" description="Enable"/>
+    </bitfield>
+    <bitfield id="INIRSZ" width="13" begin="12" end="0" resetval="0x0" description="Offset used to re-initialize the HD/VD position after resizer. From 0 to 8191 PCLK cycles." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_CFG3" acronym="IPIPEIF_CFG3" offset="0x5C" width="32" description="Parameters for Circular buffering">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="HSK_EOF" width="1" begin="29" end="29" resetval="0x0" description="Issue C_DONE at the end of frame. If this function is on, C_DONE is issued at the end of frame even if the last line not N-th line in ICM handshake sequence. If the last line is N-th line, C_DONE is issued regardless of this bit. *This bit field is latched by VD." range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="HSK_EOF_0" description="Disable C_DONE at the end of frame, unless it is the Nth line of ICM handshake proess."/>
+      <bitenum value="1" id="ENABLE" token="HSK_EOF_1" description="Enalble output of C_DONE at the enf of frame."/>
+    </bitfield>
+    <bitfield id="HSK_EN" width="1" begin="28" end="28" resetval="0x0" description="Handshake with ICM is enabled Note: If ICM handshake is on in DFS/WDR mode (INPSRC1=2 or INPSRC2=2), memory-to-memory stall mechanism must be on (IPIPEIF_DTUDF.ENM2MSTALL=1) *This bit field is latched by VD." range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="HSK_EN_0" description="Handshake with ICM is disabled"/>
+      <bitenum value="1" id="ENABLE" token="HSK_EN_1" description="Handshake with ICM is enabled"/>
+    </bitfield>
+    <bitfield id="CYN" width="12" begin="27" end="16" resetval="0x0" description="ICM Handshake cycle U12 *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CIR_EN" width="1" begin="12" end="12" resetval="0x0" description="Enable circular buffering *This bit field is latched by VD." range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="CIR_EN_0" description="Circular buffering disabled"/>
+      <bitenum value="1" id="ENABLE" token="CIR_EN_1" description="Circular buffer enabled"/>
+    </bitfield>
+    <bitfield id="CBN" width="12" begin="11" end="0" resetval="0x0" description="Circular buffer cycle U12 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_CFG4" acronym="IPIPEIF_CFG4" offset="0x60" width="32" description="IPIPEIF WDR configuration for WDR merging">
+    <bitfield id="RESERVED" width="11" begin="31" end="21" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DST" width="5" begin="20" end="16" resetval="0x0" description="Down shift value after WDR merge *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SBIT" width="4" begin="11" end="8" resetval="0x0" description="Shift up value for short exposure pixel Usually set (16- (bit width of long exposure pixels)). For example, if the input is 12 bit, set 4 here. *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="LBIT" width="4" begin="7" end="4" resetval="0x0" description="Shift up value for long exposure pixel Usually set (16- (bit width of long exposure pixels)). For example, if the input is 12 bit, set 4 here. *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="3" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="WGT_SEL" width="1" begin="1" end="1" resetval="0x0" description="Select the source for weight calculation in WDR merge *This bit field is latched by VD." range="" rwaccess="RW">
+      <bitenum value="0" id="LONG" token="WGT_SEL_0" description="Use long_exposure pixel for weight calculation"/>
+      <bitenum value="1" id="SHORT" token="WGT_SEL_1" description="Use short exposure value for weight calculation."/>
+    </bitfield>
+    <bitfield id="WDR_EN" width="1" begin="0" end="0" resetval="0x0" description="Enable WDR merge (Two frame/single frame) When this function is enabled, WDR is used instead of DFS. *This bit field is latched by VD." range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="WDR_EN_0" description="DISABLE WDR merging function."/>
+      <bitenum value="1" id="ENABLE" token="WDR_EN_1" description="ENABLE WDR function. WDR overtake DFS function."/>
+    </bitfield>
+  </register>
+  <register id="IPIPEIF_WDRAF" acronym="IPIPEIF_WDRAF" offset="0x64" width="32" description="WDR Merge parameter AF_M">
+    <bitfield id="RESERVED" width="7" begin="31" end="25" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="AFE" width="5" begin="24" end="20" resetval="0x0" description="WDR Merge parameter AFE Exponential part of a value in weight calculation Unsigned 5bit *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="19" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="AFM" width="16" begin="15" end="0" resetval="0x0" description="WDR Merge parameter AF_M Coefficient (mantissa) part of a value in weight calculation Signed 16bit *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_WDRBF" acronym="IPIPEIF_WDRBF" offset="0x68" width="32" description="WDR Merge parameter BF">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="BF" width="16" begin="15" end="0" resetval="0x0" description="WDR Merge parameter BF Q0.15) The actual value is BF x 2^-16 x 2^-5 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_WDRGAIN" acronym="IPIPEIF_WDRGAIN" offset="0x6C" width="32" description="Gain difference between long exposure and short exposure">
+    <bitfield id="GSHORT" width="16" begin="31" end="16" resetval="0x0" description="The gain applied to short exposure pixels. (U1.15) Usually, this value is 32768 *This bit field is latched by VD. For example, if the gain difference is x4, GDIFF = 8192" range="" rwaccess="RW"/>
+    <bitfield id="GLONG" width="16" begin="15" end="0" resetval="0x0" description="The gain applied to long exposure pixels. (U1.15) Usually, this value is GLONG = 32768 * (short exposure gain in camera)/(long exposure gain in camera) *This bit field is latched by VD. For example, if the gain difference is x4, GDIFF = 8192" range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_WDRTHR" acronym="IPIPEIF_WDRTHR" offset="0x70" width="32" description="Threshold value in WDR merging">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="THR" width="16" begin="15" end="0" resetval="0x0" description="T (Threshold value) U16 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_RSVD1" acronym="IPIPEIF_RSVD1" offset="0x74" width="32" description="White Balance used in weight calculation">
+    <bitfield id="RESERVED" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="IPIPEIF_RSVD2" acronym="IPIPEIF_RSVD2" offset="0x78" width="32" description="">
+    <bitfield id="RESERVED" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="IPIPEIF_WDRLBK1" acronym="IPIPEIF_WDRLBK1" offset="0x7C" width="32" description="Black level for Long exposure input">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LBK01" width="12" begin="27" end="16" resetval="0x0" description="Black level for long exposure pixel at [0, 1] (Odd pixel at even line) U12 *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LBK00" width="12" begin="11" end="0" resetval="0x0" description="Black level for long exposure pixel at [0, 0] (Even pixel at even line) U12 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_WDRLBK2" acronym="IPIPEIF_WDRLBK2" offset="0x80" width="32" description="Black level for Long exposure input">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LBK11" width="12" begin="27" end="16" resetval="0x0" description="Black level for long exposure pixel at [1, 1] (Odd pixel at odd line) U12 *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LBK10" width="12" begin="11" end="0" resetval="0x0" description="1lack level for long exposure pixel at [1, 0 ] (Even pixel at odd line) U12 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_WDRSBK1" acronym="IPIPEIF_WDRSBK1" offset="0x84" width="32" description="Black level for short exposure input">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SBK01" width="12" begin="27" end="16" resetval="0x0" description="Black level for short exposure pixel at [0, 1] (Odd pixel at even line) U12 *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SBK00" width="12" begin="11" end="0" resetval="0x0" description="Black level for short exposure pixel at [0, 0] (Even pixel at even line) U12 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_WDRSBK2" acronym="IPIPEIF_WDRSBK2" offset="0x88" width="32" description="Black level for short exposure input">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SBK11" width="12" begin="27" end="16" resetval="0x0" description="Black level for short exposure pixel at [1, 1] (Odd pixel at odd line) U12 *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SBK10" width="12" begin="11" end="0" resetval="0x0" description="1lack level for short exposure pixel at [1, 0 ] (Even pixel at odd line) U12 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_WDRMA" acronym="IPIPEIF_WDRMA" offset="0x8C" width="32" description="Threshold value in motion adaptive filter">
+    <bitfield id="MAS" width="16" begin="31" end="16" resetval="0x0" description="Slope in motion adaptive filter MAS = 32768/(D2-D1) U16 *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="MAD" width="16" begin="15" end="0" resetval="0xffff" description="Threshold (D1) in motion adaptive filter U16 To disable MA filtering, put the maximum value (65535: default) *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_WDRSAT_VP" acronym="IPIPEIF_WDRSAT_VP" offset="0x90" width="32" description="Saturation parameters for VPORT input">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VP_SAT" width="20" begin="19" end="0" resetval="0xfffff" description="Saturation value for VPORT input used in WDR split function for pseudo-long-exposure image Do disable, set maximum value (1048575: default) *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_WDRSAT_VP2" acronym="IPIPEIF_WDRSAT_VP2" offset="0x94" width="32" description="Saturation parameters for VPORT input">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="-" range="" rwaccess="R"/>
+    <bitfield id="VP_DCCLMP" width="8" begin="15" end="8" resetval="0x0" description="DC Clamp addition value for VPORT input (Used in WDR split function for pseudo-short-exposure) *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="VP_DSF" width="5" begin="7" end="3" resetval="0x0" description="Down shift value for VPORT input (Used in WDR split function for pseudo-short-exposure) *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="2" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VP_SATEN" width="1" begin="0" end="0" resetval="0x0" description="Enable saturation function on VPort *This bit field is latched by VD." range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="VP_SATEN_0" description="Saturation/Down shift on VPORT input is disabled"/>
+      <bitenum value="1" id="ENABLE" token="VP_SATEN_1" description="Saturation/Down shift on VPORT input is enabled"/>
+    </bitfield>
+  </register>
+  <register id="IPIPEIF_WDRSAT_ISIF" acronym="IPIPEIF_WDRSAT_ISIF" offset="0x98" width="32" description="Saturation parameters for ISIF input">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ISIF_SAT" width="20" begin="19" end="0" resetval="0xfffff" description="Saturation value for ISIF input used in WDR split function for pseudo-long-exposure image Do disable, set maximum value (1048575: default) *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_WDRSAT_ISIF2" acronym="IPIPEIF_WDRSAT_ISIF2" offset="0x9C" width="32" description="Saturation value for ISIF input">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="-" range="" rwaccess="R"/>
+    <bitfield id="ISIF_DCCLMP" width="8" begin="15" end="8" resetval="0x0" description="DC Clamp addition value for ISIF input (Used in WDR split function for pseudo-short-exposure) *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="ISIF_DSF" width="5" begin="7" end="3" resetval="0x0" description="Down shift value for ISIF input (Used in WDR split function for pseudo-short-exposure) *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="2" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ISIF_SATEN" width="1" begin="0" end="0" resetval="0x0" description="Enable saturation function on ISIF port *This bit field is latched by VD." range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="ISIF_SATEN_0" description="Saturation/Down shift on ISIF input is disabled"/>
+      <bitenum value="1" id="ENABLE" token="ISIF_SATEN_1" description="Saturation/Down shift on ISIF input is enabled"/>
+    </bitfield>
+  </register>
+  <register id="IPIPEIF_WDRSAT_SD" acronym="IPIPEIF_WDRSAT_SD" offset="0xA0" width="32" description="Saturation parameters for SDRAM input">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SD_SAT" width="20" begin="19" end="0" resetval="0xfffff" description="Saturation value for SDRAM input used in WDR split function for pseudo-long-exposure image Do disable, set maximum value (1048575: default) *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_WDRSAT_SD2" acronym="IPIPEIF_WDRSAT_SD2" offset="0xA4" width="32" description="Saturation params for SDRAM input">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="-" range="" rwaccess="R"/>
+    <bitfield id="SD_DCCLMP" width="8" begin="15" end="8" resetval="0x0" description="DC Clamp addition value for SD Port input (Used in WDR split function for pseudo-short-exposure) *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="SD_DSF" width="5" begin="7" end="3" resetval="0x0" description="Down shift value for SDRAM input (Used in WDR split function for pseudo-short-exposure) *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="2" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SD_SATEN" width="1" begin="0" end="0" resetval="0x0" description="Enable saturation function on SDRAM *This bit field is latched by VD." range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="SD_SATEN_0" description="Saturation/Down shift on SDRAM input is disabled"/>
+      <bitenum value="1" id="ENABLE" token="SD_SATEN_1" description="Saturation/Down shift on SDRAM input is enabled"/>
+    </bitfield>
+  </register>
+  <register id="IPIPEIF_WDRLWB1" acronym="IPIPEIF_WDRLWB1" offset="0xA8" width="32" description="White Balance used in weight calculation">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LWB01" width="13" begin="28" end="16" resetval="0x200" description="White balance for pixels at [0, 1] (Odd pixel at even line) U4.9 (for gain=1.0, set 512) *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LWB00" width="13" begin="12" end="0" resetval="0x200" description="White balance for pixels at [0, 0] (Even pixel at even line) U4.9 (for gain=1.0, set 512) *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_WDRLWB2" acronym="IPIPEIF_WDRLWB2" offset="0xAC" width="32" description="White Balance used in weight calculation">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LWB11" width="13" begin="28" end="16" resetval="0x200" description="White balance for pixels at [0, 1] (Odd pixel at odd line) U4.9 (for gain=1.0, set 512) *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LWB10" width="13" begin="12" end="0" resetval="0x200" description="White balance for pixels at [1, 0] (Even pixel at odd line) U4.9 (for gain=1.0, set 512) *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_WDRSWB1" acronym="IPIPEIF_WDRSWB1" offset="0xB0" width="32" description="White Balance used in weight calculation">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SWB01" width="13" begin="28" end="16" resetval="0x200" description="White balance for pixels at [0, 1] (Odd pixel at even line) U4.9 (for gain=1.0, set 512) *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SWB00" width="13" begin="12" end="0" resetval="0x200" description="White balance for pixels at [0, 0] (Even pixel at even line) U4.9 (for gain=1.0, set 512) *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_WDRSWB2" acronym="IPIPEIF_WDRSWB2" offset="0xB4" width="32" description="White Balance used in weight calculation">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SWB11" width="13" begin="28" end="16" resetval="0x200" description="White balance for pixels at [0, 1] (Odd pixel at odd line) U4.9 (for gain=1.0, set 512) *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SWB10" width="13" begin="12" end="0" resetval="0x200" description="White balance for pixels at [1, 0] (Even pixel at odd line) U4.9 (for gain=1.0, set 512) *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_VPDCMPXTHR1" acronym="IPIPEIF_VPDCMPXTHR1" offset="0xB8" width="32" description="Threshold value in VP Decomanding">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="XTHR1" width="16" begin="15" end="0" resetval="0xfff" description="X_THR_1 (Threshold value) U16 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_VPDCMPXTHR2" acronym="IPIPEIF_VPDCMPXTHR2" offset="0xBC" width="32" description="Threshold value in VP Decompanding">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="XTHR2" width="16" begin="15" end="0" resetval="0xffff" description="X_THR_2 (Threshold value) U16 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_VPDCMPXTHR3" acronym="IPIPEIF_VPDCMPXTHR3" offset="0xC0" width="32" description="Threshold value in VP Decompanding">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="XTHR3" width="16" begin="15" end="0" resetval="0xffff" description="X_THR_2 (Threshold value) U16 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_VPDCMPYTHR1" acronym="IPIPEIF_VPDCMPYTHR1" offset="0xC4" width="32" description="Threshold value in VP Decomanding">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="YTHR1" width="20" begin="19" end="0" resetval="0xfff" description="Y_THR_1 (Threshold value) U20 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_VPDCMPYTHR2" acronym="IPIPEIF_VPDCMPYTHR2" offset="0xC8" width="32" description="Threshold value in VP Decomanding">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="YTHR2" width="20" begin="19" end="0" resetval="0xfffff" description="Y_THR_2 (Threshold value) U20 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_VPDCMPYTHR3" acronym="IPIPEIF_VPDCMPYTHR3" offset="0xCC" width="32" description="Threshold value in VP Decomanding">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="YTHR3" width="20" begin="19" end="0" resetval="0xfffff" description="Y_THR_3 (Threshold value) U20 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_VPDCMPSLOPE1" acronym="IPIPEIF_VPDCMPSLOPE1" offset="0xD0" width="32" description="Slope value in VP Decomanding">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SLOPE1" width="16" begin="15" end="0" resetval="0x80" description="SLOPE_1 (Slope value) U16 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_VPDCMPSLOPE2" acronym="IPIPEIF_VPDCMPSLOPE2" offset="0xD4" width="32" description="Slope value in VP Decomanding">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SLOPE2" width="16" begin="15" end="0" resetval="0x80" description="SLOPE_2 (Slope value) U16 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_VPDCMPSLOPE3" acronym="IPIPEIF_VPDCMPSLOPE3" offset="0xD8" width="32" description="Slope value in VP Decomanding">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SLOPE3" width="16" begin="15" end="0" resetval="0x80" description="SLOPE_3 (Slope value) U16 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_VPDCMPSLOPE4" acronym="IPIPEIF_VPDCMPSLOPE4" offset="0xDC" width="32" description="Slope value in VP Decomanding">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SLOPE4" width="16" begin="15" end="0" resetval="0x80" description="SLOPE_4 (Slope value) U16 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_VPDCMPCFG" acronym="IPIPEIF_VPDCMPCFG" offset="0xE0" width="32" description="Configuration register for VP Decomanding">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SHIFT" width="5" begin="28" end="24" resetval="0x7" description="Shift value for PWL U5 *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LUTBITSEL" width="4" begin="19" end="16" resetval="0x0" description="LUTBITSEL (For selecting address to LUT) U4 *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="14" begin="15" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LUTSET" width="1" begin="1" end="1" resetval="0x0" description="Select Bit '0' : Choose PWL '1' : Choose LUT *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Enable for VP Decompanding *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_SDDCMPXTHR1" acronym="IPIPEIF_SDDCMPXTHR1" offset="0xE4" width="32" description="Threshold value in SD Decomanding">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="XTHR1" width="16" begin="15" end="0" resetval="0xfff" description="X_THR_1 (Threshold value) U16 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_SDDCMPXTHR2" acronym="IPIPEIF_SDDCMPXTHR2" offset="0xE8" width="32" description="Threshold value in SD Decompanding">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="XTHR2" width="16" begin="15" end="0" resetval="0xffff" description="X_THR_2 (Threshold value) U16 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_SDDCMPXTHR3" acronym="IPIPEIF_SDDCMPXTHR3" offset="0xEC" width="32" description="Threshold value in SD Decompanding">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="XTHR3" width="16" begin="15" end="0" resetval="0xffff" description="X_THR_2 (Threshold value) U16 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_SDDCMPYTHR1" acronym="IPIPEIF_SDDCMPYTHR1" offset="0xF0" width="32" description="Threshold value in SD Decomanding">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="YTHR1" width="20" begin="19" end="0" resetval="0xfff" description="Y_THR_1 (Threshold value) U20 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_SDDCMPYTHR2" acronym="IPIPEIF_SDDCMPYTHR2" offset="0xF4" width="32" description="Threshold value in SD Decomanding">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="YTHR2" width="20" begin="19" end="0" resetval="0xfffff" description="Y_THR_2 (Threshold value) U20 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_SDDCMPYTHR3" acronym="IPIPEIF_SDDCMPYTHR3" offset="0xF8" width="32" description="Threshold value in SD Decomanding">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="YTHR3" width="20" begin="19" end="0" resetval="0xfffff" description="Y_THR_3 (Threshold value) U20 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_SDDCMPSLOPE1" acronym="IPIPEIF_SDDCMPSLOPE1" offset="0xFC" width="32" description="Slope value in SD Decomanding">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SLOPE1" width="16" begin="15" end="0" resetval="0x80" description="SLOPE_1 (Slope value) U16 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_SDDCMPSLOPE2" acronym="IPIPEIF_SDDCMPSLOPE2" offset="0x100" width="32" description="Slope value in SD Decomanding">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SLOPE2" width="16" begin="15" end="0" resetval="0x80" description="SLOPE_2 (Slope value) U16 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_SDDCMPSLOPE3" acronym="IPIPEIF_SDDCMPSLOPE3" offset="0x104" width="32" description="Slope value in SD Decomanding">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SLOPE3" width="16" begin="15" end="0" resetval="0x80" description="SLOPE_3 (Slope value) U16 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_SDDCMPSLOPE4" acronym="IPIPEIF_SDDCMPSLOPE4" offset="0x108" width="32" description="Slope value in SD Decomanding">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SLOPE4" width="16" begin="15" end="0" resetval="0x80" description="SLOPE_4 (Slope value) U16 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_SDDCMPCFG" acronym="IPIPEIF_SDDCMPCFG" offset="0x10C" width="32" description="Configuration register for SD Decomanding">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SHIFT" width="5" begin="28" end="24" resetval="0x7" description="Shift value for PWL U5 *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LUTBITSEL" width="4" begin="19" end="16" resetval="0x0" description="LUTBITSEL (For selecting address to LUT) U4 *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="14" begin="15" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LUTSET" width="1" begin="1" end="1" resetval="0x0" description="Select Bit '0' : Choose PWL '1' : Choose LUT *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Enable for VP Decompanding *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_WDRCMPXTHR1" acronym="IPIPEIF_WDRCMPXTHR1" offset="0x110" width="32" description="Threshold value in SD WDR Companding">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="XTHR1" width="20" begin="19" end="0" resetval="0xfff" description="X_THR_1 (Threshold value) U16 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_WDRCMPXTHR2" acronym="IPIPEIF_WDRCMPXTHR2" offset="0x114" width="32" description="Threshold value in WDR Companding">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="XTHR2" width="20" begin="19" end="0" resetval="0xfffff" description="X_THR_2 (Threshold value) U16 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_WDRCMPXTHR3" acronym="IPIPEIF_WDRCMPXTHR3" offset="0x118" width="32" description="Threshold value in WDR Decompanding">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="XTHR3" width="20" begin="19" end="0" resetval="0xfffff" description="X_THR_2 (Threshold value) U16 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_WDRCMPYTHR1" acronym="IPIPEIF_WDRCMPYTHR1" offset="0x11C" width="32" description="Threshold value in WDR Companding">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="YTHR1" width="16" begin="15" end="0" resetval="0xfff" description="Y_THR_1 (Threshold value) U20 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_WDRCMPYTHR2" acronym="IPIPEIF_WDRCMPYTHR2" offset="0x120" width="32" description="Threshold value in WDR Decompanding">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="YTHR2" width="16" begin="15" end="0" resetval="0xffff" description="Y_THR_2 (Threshold value) U20 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_WDRCMPYTHR3" acronym="IPIPEIF_WDRCMPYTHR3" offset="0x124" width="32" description="Threshold value in WDR Companding">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="YTHR3" width="16" begin="15" end="0" resetval="0xffff" description="Y_THR_3 (Threshold value) U20 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_WDRCMPSLOPE1" acronym="IPIPEIF_WDRCMPSLOPE1" offset="0x128" width="32" description="Slope value in WDR Decompanding">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SLOPE1" width="16" begin="15" end="0" resetval="0x8000" description="SLOPE_1 (Slope value) U16 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_WDRCMPSLOPE2" acronym="IPIPEIF_WDRCMPSLOPE2" offset="0x12C" width="32" description="Slope value in WDR Decompanding">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SLOPE1" width="16" begin="15" end="0" resetval="0x8000" description="SLOPE_1 (Slope value) U16 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_WDRCMPSLOPE3" acronym="IPIPEIF_WDRCMPSLOPE3" offset="0x130" width="32" description="Slope value in WDR Decompanding">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SLOPE1" width="16" begin="15" end="0" resetval="0x8000" description="SLOPE_1 (Slope value) U16 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_WDRCMPSLOPE4" acronym="IPIPEIF_WDRCMPSLOPE4" offset="0x134" width="32" description="Slope value in WDR Decompanding">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SLOPE1" width="16" begin="15" end="0" resetval="0x8000" description="SLOPE_1 (Slope value) U16 *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_WDRCMPCFG" acronym="IPIPEIF_WDRCMPCFG" offset="0x138" width="32" description="Configuration register for WDR Decompanding">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SHIFT" width="5" begin="28" end="24" resetval="0xf" description="Shift value for PWL U5 *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LUTBITSEL" width="4" begin="19" end="16" resetval="0x0" description="LUTBITSEL (For selecting address to LUT) U4 *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="14" begin="15" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LUTSET" width="1" begin="1" end="1" resetval="0x0" description="Select Bit '0' : Choose PWL '1' : Choose LUT *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Enable for VP Decompanding *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+  <register id="IPIPEIF_WDRMRGCFG" acronym="IPIPEIF_WDRMRGCFG" offset="0x13C" width="32" description="Configuration register for WDR Merge">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MRGWTSFT" width="3" begin="26" end="24" resetval="0x4" description="Shift value for Weight black U3 *This bit field is latched by VD." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="23" end="20" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="WDRCLIP" width="20" begin="19" end="0" resetval="0xfffff" description="Clip value after WDR Merge *This bit field is latched by VD." range="" rwaccess="RW"/>
+  </register>
+</module>

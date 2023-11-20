@@ -1,0 +1,17 @@
+<module name="MCU_FSS0_HYPERBUS1P0_0_HPB_SS_CFG" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="HB__HPB_CFG__SYS__SS_CFG__SS_CFG_REG_REVISION_REG" acronym="HB__HPB_CFG__SYS__SS_CFG__SS_CFG_REG_REVISION_REG" offset="0x0" width="32" description="">
+		<bitfield id="MODID" width="16" begin="31" end="16" resetval="0x26720" description="Module ID field" range="31 - 16" rwaccess="R"/> 
+		<bitfield id="REVRTL" width="5" begin="15" end="11" resetval="0x29" description="RTL revision. Will vary depending on release" range="15 - 11" rwaccess="R"/> 
+		<bitfield id="REVMAJ" width="3" begin="10" end="8" resetval="0x1" description="Major revision" range="10 - 8" rwaccess="R"/> 
+		<bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom" range="7 - 6" rwaccess="R"/> 
+		<bitfield id="REVMIN" width="6" begin="5" end="0" resetval="0x0" description="Minor revision" range="5 - 0" rwaccess="R"/>
+	</register>
+	<register id="HB__HPB_CFG__SYS__SS_CFG__SS_CFG_REG_DLL_STAT_REG" acronym="HB__HPB_CFG__SYS__SS_CFG__SS_CFG_REG_DLL_STAT_REG" offset="0x4" width="32" description="">
+		<bitfield id="MDLL_CODE" width="9" begin="10" end="2" resetval="0x0" description="MDLL code. The slave delay line length that is currently enabled is determined by the MDLL code value" range="10 - 2" rwaccess="R"/> 
+		<bitfield id="SDL_LOCK" width="1" begin="1" end="1" resetval="0x0" description="SDL lock. When this bit is set, it indicates that the slave delay line in the MDLL is locked." range="1" rwaccess="R"/> 
+		<bitfield id="MDLL_LOCK" width="1" begin="0" end="0" resetval="0x0" description="MDLL lock. When this bit is set, it indicates that the master delay line in the MDLL is locked." range="0" rwaccess="R"/>
+	</register>
+	<register id="HB__HPB_CFG__SYS__SS_CFG__SS_CFG_REG_RAM_STAT_REG" acronym="HB__HPB_CFG__SYS__SS_CFG__SS_CFG_REG_RAM_STAT_REG" offset="0x8" width="32" description="">
+		<bitfield id="INIT_DONE" width="1" begin="0" end="0" resetval="0x0" description="FIFO RAM initialization done. When this bit is set, t indicates that all the FIFO RAM auto initialization is complete. Software should check that this bit is set before initiating transactions to the external memory" range="0" rwaccess="R"/>
+	</register>
+</module>

@@ -1,0 +1,112 @@
+<module name="R5FSS0" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="R5FSS_DISABLE_CR" acronym="R5FSS_DISABLE_CR" offset="0x0" width="32" description="Return to the . This register contains config bits to enable or disable change requests added to the IP.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="COMBINE_TCM_LOCKSTEP_MODE" width="1" begin="0" end="0" resetval="0x0" description="This bit disables the CR logic to combine TCM in lockstep mode" range="" rwaccess="RW"/>
+  </register>
+  <register id="R5FSS_CPU0_EVNT_BUS_SB_ERR_CNT_STATUS" acronym="R5FSS_CPU0_EVNT_BUS_SB_ERR_CNT_STATUS" offset="0x4" width="32" description="Return to the . Status bits showing the R5FSS CPU0 EVNT BUS single-bit error counters.">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS8" width="2" begin="17" end="16" resetval="0x0" description="Status bits showing the R5FSS CPU0 EVNT 8 single-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS7" width="2" begin="15" end="14" resetval="0x0" description="Status bits showing the R5FSS CPU0 EVNT 7 single-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS6" width="2" begin="13" end="12" resetval="0x0" description="Status bits showing the R5FSS CPU0 EVNT 6 single-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS5" width="2" begin="11" end="10" resetval="0x0" description="Status bits showing the R5FSS CPU0 EVNT 5 single-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS4" width="2" begin="9" end="8" resetval="0x0" description="Status bits showing the R5FSS CPU0 EVNT 4 single-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS3" width="2" begin="7" end="6" resetval="0x0" description="Status bits showing the R5FSS CPU0 EVNT 3 single-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS2" width="2" begin="5" end="4" resetval="0x0" description="Status bits showing the R5FSS CPU0 EVNT 2 single-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS1" width="2" begin="3" end="2" resetval="0x0" description="Status bits showing the R5FSS CPU0 EVNT 1 single-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS0" width="2" begin="1" end="0" resetval="0x0" description="Status bits showing the R5FSS CPU0 EVNT 0 single-bit error counter" range="" rwaccess="R"/>
+  </register>
+  <register id="R5FSS_CPU1_EVNT_BUS_SB_ERR_CNT_STATUS" acronym="R5FSS_CPU1_EVNT_BUS_SB_ERR_CNT_STATUS" offset="0x8" width="32" description="Return to the . Status bits showing the R5FSS CPU1 EVNT BUS single-bit error counters.">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS8" width="2" begin="17" end="16" resetval="0x0" description="Status bits showing the R5FSS CPU1 EVNT 8 single-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS7" width="2" begin="15" end="14" resetval="0x0" description="Status bits showing the R5FSS CPU1 EVNT 7 single-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS6" width="2" begin="13" end="12" resetval="0x0" description="Status bits showing the R5FSS CPU1 EVNT 6 single-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS5" width="2" begin="11" end="10" resetval="0x0" description="Status bits showing the R5FSS CPU1 EVNT 5 single-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS4" width="2" begin="9" end="8" resetval="0x0" description="Status bits showing the R5FSS CPU1 EVNT 4 single-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS3" width="2" begin="7" end="6" resetval="0x0" description="Status bits showing the R5FSS CPU1 EVNT 3 single-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS2" width="2" begin="5" end="4" resetval="0x0" description="Status bits showing the R5FSS CPU1 EVNT 2 single-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS1" width="2" begin="3" end="2" resetval="0x0" description="Status bits showing the R5FSS CPU1 EVNT 1 single-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS0" width="2" begin="1" end="0" resetval="0x0" description="Status bits showing the R5FSS CPU1 EVNT 0 single-bit error counter" range="" rwaccess="R"/>
+  </register>
+  <register id="R5FSS_CPU0_EVNT_BUS_MB_ERR_CNT_STATUS" acronym="R5FSS_CPU0_EVNT_BUS_MB_ERR_CNT_STATUS" offset="0xC" width="32" description="Return to the . Status bits showing the R5FSS CPU0 EVNT BUS multi-bit error counters.">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS6" width="2" begin="13" end="12" resetval="0x0" description="Status bits showing the R5FSS CPU0 EVNT 6 multi-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS5" width="2" begin="11" end="10" resetval="0x0" description="Status bits showing the R5FSS CPU0 EVNT 5 multi-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS4" width="2" begin="9" end="8" resetval="0x0" description="Status bits showing the R5FSS CPU0 EVNT 4 multi-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS3" width="2" begin="7" end="6" resetval="0x0" description="Status bits showing the R5FSS CPU0 EVNT 3 multi-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS2" width="2" begin="5" end="4" resetval="0x0" description="Status bits showing the R5FSS CPU0 EVNT 2 multi-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS1" width="2" begin="3" end="2" resetval="0x0" description="Status bits showing the R5FSS CPU0 EVNT 1 multi-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS0" width="2" begin="1" end="0" resetval="0x0" description="Status bits showing the R5FSS CPU0 EVNT 0 multi-bit error counter" range="" rwaccess="R"/>
+  </register>
+  <register id="R5FSS_CPU1_EVNT_BUS_MB_ERR_CNT_STATUS" acronym="R5FSS_CPU1_EVNT_BUS_MB_ERR_CNT_STATUS" offset="0x10" width="32" description="Return to the . Status bits showing the R5FSS CPU1 EVNT BUS multi-bit error counters.">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS6" width="2" begin="13" end="12" resetval="0x0" description="Status bits showing the R5FSS CPU1 EVNT 6 multi-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS5" width="2" begin="11" end="10" resetval="0x0" description="Status bits showing the R5FSS CPU1 EVNT 5 multi-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS4" width="2" begin="9" end="8" resetval="0x0" description="Status bits showing the R5FSS CPU1 EVNT 4 multi-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS3" width="2" begin="7" end="6" resetval="0x0" description="Status bits showing the R5FSS CPU1 EVNT 3 multi-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS2" width="2" begin="5" end="4" resetval="0x0" description="Status bits showing the R5FSS CPU1 EVNT 2 multi-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS1" width="2" begin="3" end="2" resetval="0x0" description="Status bits showing the R5FSS CPU1 EVNT 1 multi-bit error counter" range="" rwaccess="R"/>
+    <bitfield id="EVNT_BUS0" width="2" begin="1" end="0" resetval="0x0" description="Status bits showing the R5FSS CPU1 EVNT 0 multi-bit error counter" range="" rwaccess="R"/>
+  </register>
+  <register id="R5FSS_EVNT_BUS_ESM_STATUS" acronym="R5FSS_EVNT_BUS_ESM_STATUS" offset="0x14" width="32" description="Return to the . ESM status bits for the R5FSS EVNT BUS.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CPU1_MULTIPLE_BIT_ERROR" width="1" begin="3" end="3" resetval="0x0" description="ESM status of CPU1 multi-bit errors on EVNT BUS" range="" rwaccess="R"/>
+    <bitfield id="CPU1_SINGLE_BIT_ERROR" width="1" begin="2" end="2" resetval="0x0" description="ESM status of CPU1 single-bit errors on EVNT BUS" range="" rwaccess="R"/>
+    <bitfield id="CPU0_MULTIPLE_BIT_ERROR" width="1" begin="1" end="1" resetval="0x0" description="ESM status of CPU0 multi-bit errors on EVNT BUS" range="" rwaccess="R"/>
+    <bitfield id="CPU0_SINGLE_BIT_ERROR" width="1" begin="0" end="0" resetval="0x0" description="ESM status of CPU0 single-bit errors on EVNT BUS" range="" rwaccess="R"/>
+  </register>
+  <register id="R5FSS_EVNT_BUS_ESM_SET" acronym="R5FSS_EVNT_BUS_ESM_SET" offset="0x18" width="32" description="Return to the . Set the R5FSS EVNT BUS ESM events.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CPU1_MULTIPLE_BIT_ERROR" width="1" begin="3" end="3" resetval="0x0" description="Set CPU1 multi-bit errors ESM event" range="" rwaccess="RW1S"/>
+    <bitfield id="CPU1_SINGLE_BIT_ERROR" width="1" begin="2" end="2" resetval="0x0" description="Set CPU1 single-bit errors ESM event" range="" rwaccess="RW1S"/>
+    <bitfield id="CPU0_MULTIPLE_BIT_ERROR" width="1" begin="1" end="1" resetval="0x0" description="Set CPU0 multi-bit error ESM event" range="" rwaccess="RW1S"/>
+    <bitfield id="CPU0_SINGLE_BIT_ERROR" width="1" begin="0" end="0" resetval="0x0" description="Set CPU0 single-bit error ESM event" range="" rwaccess="RW1S"/>
+  </register>
+  <register id="R5FSS_EVNT_BUS_ESM_CLR" acronym="R5FSS_EVNT_BUS_ESM_CLR" offset="0x1C" width="32" description="Return to the . RESET the R5FSS EVNT BUS ESM events.">
+    <bitfield id="CPU1_EB6_MULTIPLE_BIT_ERROR" width="1" begin="31" end="31" resetval="0x0" description="Decrement CPU1 EVNT BUS 31 multi-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU1_EB5_MULTIPLE_BIT_ERROR" width="1" begin="30" end="30" resetval="0x0" description="Decrement CPU1 EVNT BUS 30 multi-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU1_EB4_MULTIPLE_BIT_ERROR" width="1" begin="29" end="29" resetval="0x0" description="Decrement CPU1 EVNT BUS 29 multi-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU1_EB3_MULTIPLE_BIT_ERROR" width="1" begin="28" end="28" resetval="0x0" description="Decrement CPU1 EVNT BUS 28 multi-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU1_EB2_MULTIPLE_BIT_ERROR" width="1" begin="27" end="27" resetval="0x0" description="Decrement CPU1 EVNT BUS 27 multi-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU1_EB1_MULTIPLE_BIT_ERROR" width="1" begin="26" end="26" resetval="0x0" description="Decrement CPU1 EVNT BUS 26 multi-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU1_EB0_MULTIPLE_BIT_ERROR" width="1" begin="25" end="25" resetval="0x0" description="Decrement CPU1 EVNT BUS 25 multi-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU1_EB8_SINGLE_BIT_ERROR" width="1" begin="24" end="24" resetval="0x0" description="Decrement CPU1 EVNT BUS 24 single-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU1_EB7_SINGLE_BIT_ERROR" width="1" begin="23" end="23" resetval="0x0" description="Decrement CPU1 EVNT BUS 23 single-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU1_EB6_SINGLE_BIT_ERROR" width="1" begin="22" end="22" resetval="0x0" description="Decrement CPU1 EVNT BUS 22 single-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU1_EB5_SINGLE_BIT_ERROR" width="1" begin="21" end="21" resetval="0x0" description="Decrement CPU1 EVNT BUS 21 single-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU1_EB4_SINGLE_BIT_ERROR" width="1" begin="20" end="20" resetval="0x0" description="Decrement CPU1 EVNT BUS 20 single-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU1_EB3_SINGLE_BIT_ERROR" width="1" begin="19" end="19" resetval="0x0" description="Decrement CPU1 EVNT BUS 19 single-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU1_EB2_SINGLE_BIT_ERROR" width="1" begin="18" end="18" resetval="0x0" description="Decrement CPU1 EVNT BUS 18 single-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU1_EB1_SINGLE_BIT_ERROR" width="1" begin="17" end="17" resetval="0x0" description="Decrement CPU1 EVNT BUS 17 single-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU1_EB0_SINGLE_BIT_ERROR" width="1" begin="16" end="16" resetval="0x0" description="Decrement CPU1 EVNT BUS 16 single-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU0_EB6_MULTIPLE_BIT_ERROR" width="1" begin="15" end="15" resetval="0x0" description="Decrement CPU0 EVNT BUS 15 multi-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU0_EB5_MULTIPLE_BIT_ERROR" width="1" begin="14" end="14" resetval="0x0" description="Decrement CPU0 EVNT BUS 14 multi-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU0_EB4_MULTIPLE_BIT_ERROR" width="1" begin="13" end="13" resetval="0x0" description="Decrement CPU0 EVNT BUS 13 multi-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU0_EB3_MULTIPLE_BIT_ERROR" width="1" begin="12" end="12" resetval="0x0" description="Decrement CPU0 EVNT BUS 12 multi-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU0_EB2_MULTIPLE_BIT_ERROR" width="1" begin="11" end="11" resetval="0x0" description="Decrement CPU0 EVNT BUS 11 multi-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU0_EB1_MULTIPLE_BIT_ERROR" width="1" begin="10" end="10" resetval="0x0" description="Decrement CPU0 EVNT BUS 10 multi-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU0_EB0_MULTIPLE_BIT_ERROR" width="1" begin="9" end="9" resetval="0x0" description="Decrement CPU0 EVNT BUS 9 multi-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU0_EB8_SINGLE_BIT_ERROR" width="1" begin="8" end="8" resetval="0x0" description="Decrement CPU0 EVNT BUS 8 single-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU0_EB7_SINGLE_BIT_ERROR" width="1" begin="7" end="7" resetval="0x0" description="Decrement CPU0 EVNT BUS 7 single-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU0_EB6_SINGLE_BIT_ERROR" width="1" begin="6" end="6" resetval="0x0" description="Decrement CPU0 EVNT BUS 6 single-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU0_EB5_SINGLE_BIT_ERROR" width="1" begin="5" end="5" resetval="0x0" description="Decrement CPU0 EVNT BUS 5 single-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU0_EB4_SINGLE_BIT_ERROR" width="1" begin="4" end="4" resetval="0x0" description="Decrement CPU0 EVNT BUS 4 single-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU0_EB3_SINGLE_BIT_ERROR" width="1" begin="3" end="3" resetval="0x0" description="Decrement CPU0 EVNT BUS 3 single-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU0_EB2_SINGLE_BIT_ERROR" width="1" begin="2" end="2" resetval="0x0" description="Decrement CPU0 EVNT BUS 2 single-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU0_EB1_SINGLE_BIT_ERROR" width="1" begin="1" end="1" resetval="0x0" description="Decrement CPU0 EVNT BUS 1 single-bit error counter" range="" rwaccess="RW"/>
+    <bitfield id="CPU0_EB0_SINGLE_BIT_ERROR" width="1" begin="0" end="0" resetval="0x0" description="Decrement CPU0 EVNT BUS 0 single-bit error counter" range="" rwaccess="RW"/>
+  </register>
+  <register id="R5FSS_EVNT_BUS_MASK_ESM_SET" acronym="R5FSS_EVNT_BUS_MASK_ESM_SET" offset="0x20" width="32" description="Return to the . Mask the R5FSS EVNT BUS ESM events.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CPU1_MULTIPLE_BIT_ERROR" width="1" begin="3" end="3" resetval="0x0" description="Mask CPU1 multi-bit errors ESM event" range="" rwaccess="RW1S"/>
+    <bitfield id="CPU1_SINGLE_BIT_ERROR" width="1" begin="2" end="2" resetval="0x0" description="Mask CPU1 single-bit errors ESM event" range="" rwaccess="RW1S"/>
+    <bitfield id="CPU0_MULTIPLE_BIT_ERROR" width="1" begin="1" end="1" resetval="0x0" description="Mask CPU0 multi-bit error ESM event" range="" rwaccess="RW1S"/>
+    <bitfield id="CPU0_SINGLE_BIT_ERROR" width="1" begin="0" end="0" resetval="0x0" description="Mask CPU0 single-bit error ESM event" range="" rwaccess="RW1S"/>
+  </register>
+  <register id="R5FSS_EVNT_BUS_MASK_ESM_CLR" acronym="R5FSS_EVNT_BUS_MASK_ESM_CLR" offset="0x24" width="32" description="Return to the . Unmask the R5FSS EVNT BUS ESM events.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CPU1_MULTIPLE_BIT_ERROR" width="1" begin="3" end="3" resetval="0x0" description="Unmask CPU1 multi-bit errors ESM event" range="" rwaccess="RW1C"/>
+    <bitfield id="CPU1_SINGLE_BIT_ERROR" width="1" begin="2" end="2" resetval="0x0" description="Unmask CPU1 single-bit errors ESM event" range="" rwaccess="RW1C"/>
+    <bitfield id="CPU0_MULTIPLE_BIT_ERROR" width="1" begin="1" end="1" resetval="0x0" description="Unmask CPU0 multi-bit error ESM event" range="" rwaccess="RW1C"/>
+    <bitfield id="CPU0_SINGLE_BIT_ERROR" width="1" begin="0" end="0" resetval="0x0" description="Unmask CPU0 single-bit error ESM event" range="" rwaccess="RW1C"/>
+  </register>
+</module>

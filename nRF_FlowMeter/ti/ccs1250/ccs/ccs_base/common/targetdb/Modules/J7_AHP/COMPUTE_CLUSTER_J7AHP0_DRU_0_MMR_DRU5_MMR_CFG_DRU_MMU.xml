@@ -1,0 +1,284 @@
+<module name="COMPUTE_CLUSTER_J7AHP0_DRU_0_MMR_DRU5_MMR_CFG_DRU_MMU" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_MMU_PID" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_MMU_PID" offset="0x0" width="64" description="">
+		<bitfield id="RSVD0" width="31" begin="62" end="32" resetval="0x0" description=" Reserved                        " range="62 - 32" rwaccess="R"/> 
+		<bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x1" description=" PID naming scheme               " range="31 - 30" rwaccess="R"/> 
+		<bitfield id="BU" width="2" begin="29" end="28" resetval="0x2" description=" Business Unit                   " range="29 - 28" rwaccess="R"/> 
+		<bitfield id="FUNC" width="12" begin="27" end="16" resetval="0x240" description=" MMU Function code               " range="27 - 16" rwaccess="R"/> 
+		<bitfield id="R" width="5" begin="15" end="11" resetval="0x0" description=" Minor Revision                  " range="15 - 11" rwaccess="R"/> 
+		<bitfield id="X" width="3" begin="10" end="8" resetval="0x0" description=" Architecture Revision           " range="10 - 8" rwaccess="R"/> 
+		<bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description=" Reuseable/Custom                " range="7 - 6" rwaccess="R"/> 
+		<bitfield id="Y" width="6" begin="5" end="0" resetval="0x0" description=" Configuration Revision          " range="5 - 0" rwaccess="R"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_TDRR" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_TDRR" offset="0x100" width="64" description="">
+		<bitfield id="COMP" width="1" begin="63" end="63" resetval="0x0" description=" Translation Completion Bit             " range="63" rwaccess="R/W"/> 
+		<bitfield id="RSVD0" width="6" begin="62" end="57" resetval="0x0" description=" Reserved                               " range="62 - 57" rwaccess="R"/> 
+		<bitfield id="PREF" width="1" begin="56" end="56" resetval="0x0" description=" Prefetchable                           " range="56" rwaccess="R/W"/> 
+		<bitfield id="OUTER" width="2" begin="55" end="54" resetval="0x0" description=" Outer Cacheability                     " range="55 - 54" rwaccess="R/W"/> 
+		<bitfield id="INNER" width="2" begin="53" end="52" resetval="0x0" description=" Inner Cacheability                     " range="53 - 52" rwaccess="R/W"/> 
+		<bitfield id="MEMTYPE" width="2" begin="51" end="50" resetval="0x0" description=" Memory Type                            " range="51 - 50" rwaccess="R/W"/> 
+		<bitfield id="SHARE" width="2" begin="49" end="48" resetval="0x0" description=" Shareability                           " range="49 - 48" rwaccess="R/W"/> 
+		<bitfield id="RSVD1" width="8" begin="47" end="40" resetval="0x0" description=" Reserved                               " range="47 - 40" rwaccess="R"/> 
+		<bitfield id="ADDR" width="28" begin="39" end="12" resetval="0x0" description=" Output Address, Faulting Stage-2 IPA   " range="39 - 12" rwaccess="R/W"/> 
+		<bitfield id="STATUS" width="12" begin="11" end="0" resetval="0x0" description=" Translation Response Status            " range="11 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_TDFAR" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_TDFAR" offset="0x140" width="64" description="">
+		<bitfield id="ADDR" width="64" begin="63" end="0" resetval="0x0" description=" Faulted Input Address             " range="63 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_TLB_INV" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_TLB_INV" offset="0x200" width="64" description="">
+		<bitfield id="RSVD0" width="8" begin="63" end="56" resetval="0x0" description=" Reserved                  " range="63 - 56" rwaccess="R"/> 
+		<bitfield id="ID" width="8" begin="55" end="48" resetval="0x0" description=" ASID Value                " range="55 - 48" rwaccess="W"/> 
+		<bitfield id="RSVD1" width="5" begin="47" end="43" resetval="0x0" description=" Reserved                  " range="47 - 43" rwaccess="R"/> 
+		<bitfield id="INV_TYPE" width="3" begin="42" end="40" resetval="0x0" description=" Invalidation Type         " range="42 - 40" rwaccess="W"/> 
+		<bitfield id="ASID" width="1" begin="39" end="39" resetval="0x0" description=" ASID Match                " range="39" rwaccess="W"/> 
+		<bitfield id="VA" width="1" begin="38" end="38" resetval="0x0" description=" VA Match                  " range="38" rwaccess="W"/> 
+		<bitfield id="LL" width="1" begin="37" end="37" resetval="0x0" description=" Last Level Only           " range="37" rwaccess="W"/> 
+		<bitfield id="ADDR" width="37" begin="36" end="0" resetval="0x0" description=" VA/IPA                    " range="36 - 0" rwaccess="W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_TLB_INVC" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_TLB_INVC" offset="0x280" width="64" description="">
+		<bitfield id="RSVD0" width="63" begin="63" end="1" resetval="0x0" description=" Reserved                   " range="63 - 1" rwaccess="R"/> 
+		<bitfield id="COMP" width="1" begin="0" end="0" resetval="0x0" description=" Invalidation Completed     " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_TLB_DBG" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_TLB_DBG" offset="0x2C0" width="64" description="">
+		<bitfield id="RSVD0" width="46" begin="63" end="18" resetval="0x0" description=" Reserved       " range="63 - 18" rwaccess="R"/> 
+		<bitfield id="TLB" width="2" begin="17" end="16" resetval="0x0" description=" TLB Type       " range="17 - 16" rwaccess="W"/> 
+		<bitfield id="RSVD1" width="2" begin="15" end="14" resetval="0x0" description=" Reserved       " range="15 - 14" rwaccess="R"/> 
+		<bitfield id="WAY" width="2" begin="13" end="12" resetval="0x0" description=" Way            " range="13 - 12" rwaccess="W"/> 
+		<bitfield id="RSVD2" width="5" begin="11" end="7" resetval="0x0" description=" Reserved       " range="11 - 7" rwaccess="R"/> 
+		<bitfield id="INDEX" width="7" begin="6" end="0" resetval="0x0" description=" Index          " range="6 - 0" rwaccess="W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_TLB_DBG_DATA0" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_TLB_DBG_DATA0" offset="0x300" width="64" description="">
+		<bitfield id="NS" width="1" begin="63" end="63" resetval="0x0" description=" Non-Secure Page, NSTable accumulation  " range="63" rwaccess="R"/> 
+		<bitfield id="DS_SIZE" width="4" begin="62" end="59" resetval="0x0" description=" Descriptor Size                        " range="62 - 59" rwaccess="R"/> 
+		<bitfield id="DS_TYPE" width="1" begin="58" end="58" resetval="0x0" description=" Descriptor Type                        " range="58" rwaccess="R"/> 
+		<bitfield id="IADDR" width="30" begin="57" end="28" resetval="0x0" description=" Input Address                          " range="57 - 28" rwaccess="R"/> 
+		<bitfield id="VMID" width="8" begin="27" end="20" resetval="0x0" description=" VMID                                   " range="27 - 20" rwaccess="R"/> 
+		<bitfield id="RSVD0" width="8" begin="19" end="12" resetval="0x0" description=" Reserved                               " range="19 - 12" rwaccess="R"/> 
+		<bitfield id="ASID" width="8" begin="11" end="4" resetval="0x0" description=" ASID                                   " range="11 - 4" rwaccess="R"/> 
+		<bitfield id="GBL" width="1" begin="3" end="3" resetval="0x0" description=" Global Page                            " range="3" rwaccess="R"/> 
+		<bitfield id="ROOT" width="1" begin="2" end="2" resetval="0x0" description=" Root Context                           " range="2" rwaccess="R"/> 
+		<bitfield id="SEC" width="1" begin="1" end="1" resetval="0x0" description=" Security Context                       " range="1" rwaccess="R"/> 
+		<bitfield id="VALID" width="1" begin="0" end="0" resetval="0x0" description=" Valid Entry                            " range="0" rwaccess="R"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_TLB_DBG_DATA1" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_TLB_DBG_DATA1" offset="0x340" width="64" description="">
+		<bitfield id="RSVD0" width="16" begin="63" end="48" resetval="0x0" description=" Reserved                          " range="63 - 48" rwaccess="R"/> 
+		<bitfield id="SHARE" width="2" begin="47" end="46" resetval="0x0" description=" Shareability                      " range="47 - 46" rwaccess="R"/> 
+		<bitfield id="S2_LVL" width="2" begin="45" end="44" resetval="0x0" description=" Stage 2 Level                     " range="45 - 44" rwaccess="R"/> 
+		<bitfield id="S2_MEM_TYPE" width="4" begin="43" end="40" resetval="0x0" description=" Stage 2 Memory Type               " range="43 - 40" rwaccess="R"/> 
+		<bitfield id="S2_PERM" width="4" begin="39" end="36" resetval="0x0" description=" S2 Access Permissions             " range="39 - 36" rwaccess="R"/> 
+		<bitfield id="S1_MEM_INDEX" width="3" begin="35" end="33" resetval="0x0" description=" Stage 1 Memory Attribute Index    " range="35 - 33" rwaccess="R"/> 
+		<bitfield id="S1_PERM" width="5" begin="32" end="28" resetval="0x0" description=" Stage 1 Access Permissions        " range="32 - 28" rwaccess="R"/> 
+		<bitfield id="OADDR" width="28" begin="27" end="0" resetval="0x0" description=" Output Address                    " range="27 - 0" rwaccess="R"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_SCR" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_SCR" offset="0x400" width="64" description="">
+		<bitfield id="HW" width="1" begin="63" end="63" resetval="0x0" description=" HW Mode                            " range="63" rwaccess="R/W"/> 
+		<bitfield id="RSVD0" width="55" begin="62" end="8" resetval="0x0" description=" Reserved                           " range="62 - 8" rwaccess="R"/> 
+		<bitfield id="INSTC" width="1" begin="7" end="7" resetval="0x0" description=" Stage 1 Instruction Caching        " range="7" rwaccess="R/W"/> 
+		<bitfield id="DATAC" width="1" begin="6" end="6" resetval="0x0" description=" Stage 1 Data Caching               " range="6" rwaccess="R/W"/> 
+		<bitfield id="FAULT" width="1" begin="5" end="5" resetval="0x0" description=" Caching faults in uTLBs            " range="5" rwaccess="R/W"/> 
+		<bitfield id="ASEL" width="1" begin="4" end="4" resetval="0x0" description=" ASID Selection                     " range="4" rwaccess="R/W"/> 
+		<bitfield id="WXN" width="1" begin="3" end="3" resetval="0x0" description=" Writeable memory Execute Never     " range="3" rwaccess="R/W"/> 
+		<bitfield id="ENDIAN1" width="1" begin="2" end="2" resetval="0x0" description=" Stage 1 Region 1 Endian            " range="2" rwaccess="R/W"/> 
+		<bitfield id="ENDIAN0" width="1" begin="1" end="1" resetval="0x0" description=" Stage 1 Region 0 Endian            " range="1" rwaccess="R/W"/> 
+		<bitfield id="S1_EN" width="1" begin="0" end="0" resetval="0x0" description=" Enable Stage 1 Address Translation " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_TCR0" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_TCR0" offset="0x440" width="64" description="">
+		<bitfield id="RSVD0" width="47" begin="63" end="17" resetval="0x0" description=" Reserved                                                               " range="63 - 17" rwaccess="R"/> 
+		<bitfield id="MEMTYPE" width="2" begin="16" end="15" resetval="0x0" description=" Memory Type of Translation Table Walks                                 " range="16 - 15" rwaccess="R/W"/> 
+		<bitfield id="COUTER" width="2" begin="14" end="13" resetval="0x0" description=" Outer Cacheability attribute of memory for Translation Table Walks     " range="14 - 13" rwaccess="R/W"/> 
+		<bitfield id="CINNER" width="2" begin="12" end="11" resetval="0x0" description=" Inner Cacheability attribute of memory for Translation Table Walks     " range="12 - 11" rwaccess="R/W"/> 
+		<bitfield id="SHARE" width="2" begin="10" end="9" resetval="0x0" description=" Shareability attribute of memory for Translation Table Walks           " range="10 - 9" rwaccess="R/W"/> 
+		<bitfield id="GRANULE" width="2" begin="8" end="7" resetval="0x0" description=" Translation Table Page Granule Size                                    " range="8 - 7" rwaccess="R/W"/> 
+		<bitfield id="TBL_SZ" width="6" begin="6" end="1" resetval="0x0" description=" Translation Table Region Size                                          " range="6 - 1" rwaccess="R/W"/> 
+		<bitfield id="WALK_EN" width="1" begin="0" end="0" resetval="0x0" description=" Enable Translation Table Walks                                         " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_TCR1" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_TCR1" offset="0x480" width="64" description="">
+		<bitfield id="RSVD0" width="47" begin="63" end="17" resetval="0x0" description=" Reserved                                                              " range="63 - 17" rwaccess="R"/> 
+		<bitfield id="MEMTYPE" width="2" begin="16" end="15" resetval="0x0" description=" Memory Type of Translation Table Walks                                " range="16 - 15" rwaccess="R/W"/> 
+		<bitfield id="COUTER" width="2" begin="14" end="13" resetval="0x0" description=" Outer Cacheability attribute of memory for Translation Table Walks    " range="14 - 13" rwaccess="R/W"/> 
+		<bitfield id="CINNER" width="2" begin="12" end="11" resetval="0x0" description=" Inner Cacheability attribute of memory for Translation Table Walks    " range="12 - 11" rwaccess="R/W"/> 
+		<bitfield id="SHARE" width="2" begin="10" end="9" resetval="0x0" description=" Shareability attribute of memory for Translation Table Walks          " range="10 - 9" rwaccess="R/W"/> 
+		<bitfield id="GRANULE" width="2" begin="8" end="7" resetval="0x0" description=" Translation Table Page Granule Size                                   " range="8 - 7" rwaccess="R/W"/> 
+		<bitfield id="TBL_SZ" width="6" begin="6" end="1" resetval="0x0" description=" Translation Table Region Size                                         " range="6 - 1" rwaccess="R/W"/> 
+		<bitfield id="WALK_EN" width="1" begin="0" end="0" resetval="0x0" description=" Enable Translation Table Walks                                        " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_TBR0" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_TBR0" offset="0x4C0" width="64" description="">
+		<bitfield id="RSVD0" width="8" begin="63" end="56" resetval="0x0" description=" Reserved                                                               " range="63 - 56" rwaccess="R"/> 
+		<bitfield id="ASID" width="8" begin="55" end="48" resetval="0x0" description=" Application Space ID                                                   " range="55 - 48" rwaccess="R/W"/> 
+		<bitfield id="RSVD1" width="8" begin="47" end="40" resetval="0x0" description=" Reserved                                                               " range="47 - 40" rwaccess="R"/> 
+		<bitfield id="BADDR" width="40" begin="39" end="0" resetval="0x0" description=" Table Base Address                                                     " range="39 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_TBR1" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_TBR1" offset="0x500" width="64" description="">
+		<bitfield id="RSVD0" width="8" begin="63" end="56" resetval="0x0" description=" Reserved                                          " range="63 - 56" rwaccess="R"/> 
+		<bitfield id="ASID" width="8" begin="55" end="48" resetval="0x0" description=" Application Space ID                              " range="55 - 48" rwaccess="R/W"/> 
+		<bitfield id="RSVD1" width="8" begin="47" end="40" resetval="0x0" description=" Reserved                                          " range="47 - 40" rwaccess="R"/> 
+		<bitfield id="BADDR" width="40" begin="39" end="0" resetval="0x0" description=" Table Base Address                                " range="39 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_MAR" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_MAR" offset="0x540" width="64" description="">
+		<bitfield id="ATTR7" width="8" begin="63" end="56" resetval="0x0" description=" Memory Attribute Index 7                           " range="63 - 56" rwaccess="R/W"/> 
+		<bitfield id="ATTR6" width="8" begin="55" end="48" resetval="0x0" description=" Memory Attribute Index 6                           " range="55 - 48" rwaccess="R/W"/> 
+		<bitfield id="ATTR5" width="8" begin="47" end="40" resetval="0x0" description=" Memory Attribute Index 5                           " range="47 - 40" rwaccess="R/W"/> 
+		<bitfield id="ATTR4" width="8" begin="39" end="32" resetval="0x0" description=" Memory Attribute Index 4                           " range="39 - 32" rwaccess="R/W"/> 
+		<bitfield id="ATTR3" width="8" begin="31" end="24" resetval="0x0" description=" Memory Attribute Index 3                           " range="31 - 24" rwaccess="R/W"/> 
+		<bitfield id="ATTR2" width="8" begin="23" end="16" resetval="0x0" description=" Memory Attribute Index 2                           " range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="ATTR1" width="8" begin="15" end="8" resetval="0x0" description=" Memory Attribute Index 1                           " range="15 - 8" rwaccess="R/W"/> 
+		<bitfield id="ATTR0" width="8" begin="7" end="0" resetval="0x0" description=" Memory Attribute Index 0                           " range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_TDAR" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_TDAR" offset="0x580" width="64" description="">
+		<bitfield id="ADDR" width="60" begin="63" end="4" resetval="0x0" description=" Input Address                                       " range="63 - 4" rwaccess="W"/> 
+		<bitfield id="INTEREST" width="1" begin="3" end="3" resetval="0x0" description=" Interest Flag                                        " range="3" rwaccess="W"/> 
+		<bitfield id="ACC_TYPE" width="2" begin="2" end="1" resetval="0x0" description=" Access Type                                          " range="2 - 1" rwaccess="W"/> 
+		<bitfield id="PRIV" width="1" begin="0" end="0" resetval="0x0" description=" Supervisor Access                                    " range="0" rwaccess="W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_SCR_GS" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_SCR_GS" offset="0x800" width="64" description="">
+		<bitfield id="HW" width="1" begin="63" end="63" resetval="0x0" description=" HW Mode                               " range="63" rwaccess="R/W"/> 
+		<bitfield id="RSVD0" width="55" begin="62" end="8" resetval="0x0" description=" Reserved                              " range="62 - 8" rwaccess="R"/> 
+		<bitfield id="INSTC" width="1" begin="7" end="7" resetval="0x0" description=" Stage 1 Instruction Caching           " range="7" rwaccess="R/W"/> 
+		<bitfield id="DATAC" width="1" begin="6" end="6" resetval="0x0" description=" Stage 1 Data Caching                  " range="6" rwaccess="R/W"/> 
+		<bitfield id="FAULT" width="1" begin="5" end="5" resetval="0x0" description=" Caching faults in uTLBs               " range="5" rwaccess="R/W"/> 
+		<bitfield id="ASEL" width="1" begin="4" end="4" resetval="0x0" description=" ASID Selection                        " range="4" rwaccess="R/W"/> 
+		<bitfield id="WXN" width="1" begin="3" end="3" resetval="0x0" description=" Writeable memory Execute Never        " range="3" rwaccess="R/W"/> 
+		<bitfield id="ENDIAN1" width="1" begin="2" end="2" resetval="0x0" description=" Stage 1 Region 1 Endian               " range="2" rwaccess="R/W"/> 
+		<bitfield id="ENDIAN0" width="1" begin="1" end="1" resetval="0x0" description=" Stage 1 Region 0 Endian               " range="1" rwaccess="R/W"/> 
+		<bitfield id="S1_EN" width="1" begin="0" end="0" resetval="0x0" description=" Enable Stage 1 Address Translation    " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_TCR0_GS" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_TCR0_GS" offset="0x840" width="64" description="">
+		<bitfield id="RSVD0" width="47" begin="63" end="17" resetval="0x0" description=" Reserved                                                              " range="63 - 17" rwaccess="R"/> 
+		<bitfield id="MEMTYPE" width="2" begin="16" end="15" resetval="0x0" description=" Memory Type of Translation Table Walks                                " range="16 - 15" rwaccess="R/W"/> 
+		<bitfield id="COUTER" width="2" begin="14" end="13" resetval="0x0" description=" Outer Cacheability attribute of memory for Translation Table Walks    " range="14 - 13" rwaccess="R/W"/> 
+		<bitfield id="CINNER" width="2" begin="12" end="11" resetval="0x0" description=" Inner Cacheability attribute of memory for Translation Table Walks    " range="12 - 11" rwaccess="R/W"/> 
+		<bitfield id="SHARE" width="2" begin="10" end="9" resetval="0x0" description=" Shareability attribute of memory for Translation Table Walks          " range="10 - 9" rwaccess="R/W"/> 
+		<bitfield id="GRANULE" width="2" begin="8" end="7" resetval="0x0" description=" Translation Table Page Granule Size                                   " range="8 - 7" rwaccess="R/W"/> 
+		<bitfield id="TBL_SZ" width="6" begin="6" end="1" resetval="0x0" description=" Translation Table Region Size                                         " range="6 - 1" rwaccess="R/W"/> 
+		<bitfield id="WALK_EN" width="1" begin="0" end="0" resetval="0x0" description=" Enable Translation Table Walks                                        " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_TCR1_GS" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_TCR1_GS" offset="0x880" width="64" description="">
+		<bitfield id="RSVD0" width="47" begin="63" end="17" resetval="0x0" description=" Reserved                                                              " range="63 - 17" rwaccess="R"/> 
+		<bitfield id="MEMTYPE" width="2" begin="16" end="15" resetval="0x0" description=" Memory Type of Translation Table Walks                                " range="16 - 15" rwaccess="R/W"/> 
+		<bitfield id="COUTER" width="2" begin="14" end="13" resetval="0x0" description=" Outer Cacheability attribute of memory for Translation Table Walks    " range="14 - 13" rwaccess="R/W"/> 
+		<bitfield id="CINNER" width="2" begin="12" end="11" resetval="0x0" description=" Inner Cacheability attribute of memory for Translation Table Walks    " range="12 - 11" rwaccess="R/W"/> 
+		<bitfield id="SHARE" width="2" begin="10" end="9" resetval="0x0" description=" Shareability attribute of memory for Translation Table Walks          " range="10 - 9" rwaccess="R/W"/> 
+		<bitfield id="GRANULE" width="2" begin="8" end="7" resetval="0x0" description=" Translation Table Page Granule Size                                   " range="8 - 7" rwaccess="R/W"/> 
+		<bitfield id="TBL_SZ" width="6" begin="6" end="1" resetval="0x0" description=" Translation Table Region Size                                         " range="6 - 1" rwaccess="R/W"/> 
+		<bitfield id="WALK_EN" width="1" begin="0" end="0" resetval="0x0" description=" Enable Translation Table Walks                                        " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_TBR0_GS" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_TBR0_GS" offset="0x8C0" width="64" description="">
+		<bitfield id="RSVD0" width="8" begin="63" end="56" resetval="0x0" description=" Reserved              " range="63 - 56" rwaccess="R"/> 
+		<bitfield id="ASID" width="8" begin="55" end="48" resetval="0x0" description=" Application Space ID  " range="55 - 48" rwaccess="R/W"/> 
+		<bitfield id="RSVD1" width="8" begin="47" end="40" resetval="0x0" description=" Reserved              " range="47 - 40" rwaccess="R"/> 
+		<bitfield id="BADDR" width="40" begin="39" end="0" resetval="0x0" description=" Table Base Address    " range="39 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_TBR1_GS" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_TBR1_GS" offset="0x900" width="64" description="">
+		<bitfield id="RSVD0" width="8" begin="63" end="56" resetval="0x0" description=" Reserved              " range="63 - 56" rwaccess="R"/> 
+		<bitfield id="ASID" width="8" begin="55" end="48" resetval="0x0" description=" Application Space ID  " range="55 - 48" rwaccess="R/W"/> 
+		<bitfield id="RSVD1" width="8" begin="47" end="40" resetval="0x0" description=" Reserved              " range="47 - 40" rwaccess="R"/> 
+		<bitfield id="BADDR" width="40" begin="39" end="0" resetval="0x0" description=" Table Base Address    " range="39 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_MAR_GS" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_MAR_GS" offset="0x940" width="64" description="">
+		<bitfield id="ATTR7" width="8" begin="63" end="56" resetval="0x0" description=" Memory Attribute Index 7       " range="63 - 56" rwaccess="R/W"/> 
+		<bitfield id="ATTR6" width="8" begin="55" end="48" resetval="0x0" description=" Memory Attribute Index 6       " range="55 - 48" rwaccess="R/W"/> 
+		<bitfield id="ATTR5" width="8" begin="47" end="40" resetval="0x0" description=" Memory Attribute Index 5       " range="47 - 40" rwaccess="R/W"/> 
+		<bitfield id="ATTR4" width="8" begin="39" end="32" resetval="0x0" description=" Memory Attribute Index 4       " range="39 - 32" rwaccess="R/W"/> 
+		<bitfield id="ATTR3" width="8" begin="31" end="24" resetval="0x0" description=" Memory Attribute Index 3       " range="31 - 24" rwaccess="R/W"/> 
+		<bitfield id="ATTR2" width="8" begin="23" end="16" resetval="0x0" description=" Memory Attribute Index 2       " range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="ATTR1" width="8" begin="15" end="8" resetval="0x0" description=" Memory Attribute Index 1       " range="15 - 8" rwaccess="R/W"/> 
+		<bitfield id="ATTR0" width="8" begin="7" end="0" resetval="0x0" description=" Memory Attribute Index 0       " range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_TDAR_GS" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_TDAR_GS" offset="0x980" width="64" description="">
+		<bitfield id="ADDR" width="60" begin="63" end="4" resetval="0x0" description=" Input Address           " range="63 - 4" rwaccess="W"/> 
+		<bitfield id="INTEREST" width="1" begin="3" end="3" resetval="0x0" description=" Interest Flag           " range="3" rwaccess="W"/> 
+		<bitfield id="ACC_TYPE" width="2" begin="2" end="1" resetval="0x0" description=" Access Type             " range="2 - 1" rwaccess="W"/> 
+		<bitfield id="PRIV" width="1" begin="0" end="0" resetval="0x0" description=" Supervisor Access       " range="0" rwaccess="W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_SCR_S" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_SCR_S" offset="0xC00" width="64" description="">
+		<bitfield id="HW" width="1" begin="63" end="63" resetval="0x0" description=" HW Mode                           " range="63" rwaccess="R/W"/> 
+		<bitfield id="RSVD0" width="55" begin="62" end="8" resetval="0x0" description=" Reserved                          " range="62 - 8" rwaccess="R"/> 
+		<bitfield id="INSTC" width="1" begin="7" end="7" resetval="0x0" description=" Stage 1 Instruction Caching       " range="7" rwaccess="R/W"/> 
+		<bitfield id="DATAC" width="1" begin="6" end="6" resetval="0x0" description=" Stage 1 Data Caching              " range="6" rwaccess="R/W"/> 
+		<bitfield id="FAULT" width="1" begin="5" end="5" resetval="0x0" description=" Caching faults in uTLBs           " range="5" rwaccess="R/W"/> 
+		<bitfield id="ASEL" width="1" begin="4" end="4" resetval="0x0" description=" ASID Selection                    " range="4" rwaccess="R/W"/> 
+		<bitfield id="WXN" width="1" begin="3" end="3" resetval="0x0" description=" Writeable memory Execute Never    " range="3" rwaccess="R/W"/> 
+		<bitfield id="ENDIAN1" width="1" begin="2" end="2" resetval="0x0" description=" Stage 1 Region 1 Endian           " range="2" rwaccess="R/W"/> 
+		<bitfield id="ENDIAN0" width="1" begin="1" end="1" resetval="0x0" description=" Stage 1 Region 0 Endian           " range="1" rwaccess="R/W"/> 
+		<bitfield id="S1_EN" width="1" begin="0" end="0" resetval="0x0" description=" Enable Stage 1 Address Translation" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_TCR0_S" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_TCR0_S" offset="0xC40" width="64" description="">
+		<bitfield id="RSVD0" width="47" begin="63" end="17" resetval="0x0" description=" Reserved                                                              " range="63 - 17" rwaccess="R"/> 
+		<bitfield id="MEMTYPE" width="2" begin="16" end="15" resetval="0x0" description=" Memory Type of Translation Table Walks                                " range="16 - 15" rwaccess="R/W"/> 
+		<bitfield id="COUTER" width="2" begin="14" end="13" resetval="0x0" description=" Outer Cacheability attribute of memory for Translation Table Walks    " range="14 - 13" rwaccess="R/W"/> 
+		<bitfield id="CINNER" width="2" begin="12" end="11" resetval="0x0" description=" Inner Cacheability attribute of memory for Translation Table Walks    " range="12 - 11" rwaccess="R/W"/> 
+		<bitfield id="SHARE" width="2" begin="10" end="9" resetval="0x0" description=" Shareability attribute of memory for Translation Table Walks          " range="10 - 9" rwaccess="R/W"/> 
+		<bitfield id="GRANULE" width="2" begin="8" end="7" resetval="0x0" description=" Translation Table Page Granule Size                                   " range="8 - 7" rwaccess="R/W"/> 
+		<bitfield id="TBL_SZ" width="6" begin="6" end="1" resetval="0x0" description=" Translation Table Region Size                                         " range="6 - 1" rwaccess="R/W"/> 
+		<bitfield id="WALK_EN" width="1" begin="0" end="0" resetval="0x0" description=" Enable Translation Table Walks                                        " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_TCR1_S" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_TCR1_S" offset="0xC80" width="64" description="">
+		<bitfield id="RSVD0" width="47" begin="63" end="17" resetval="0x0" description=" Reserved                                                              " range="63 - 17" rwaccess="R"/> 
+		<bitfield id="MEMTYPE" width="2" begin="16" end="15" resetval="0x0" description=" Memory Type of Translation Table Walks                                " range="16 - 15" rwaccess="R/W"/> 
+		<bitfield id="COUTER" width="2" begin="14" end="13" resetval="0x0" description=" Outer Cacheability attribute of memory for Translation Table Walks    " range="14 - 13" rwaccess="R/W"/> 
+		<bitfield id="CINNER" width="2" begin="12" end="11" resetval="0x0" description=" Inner Cacheability attribute of memory for Translation Table Walks    " range="12 - 11" rwaccess="R/W"/> 
+		<bitfield id="SHARE" width="2" begin="10" end="9" resetval="0x0" description=" Shareability attribute of memory for Translation Table Walks          " range="10 - 9" rwaccess="R/W"/> 
+		<bitfield id="GRANULE" width="2" begin="8" end="7" resetval="0x0" description=" Translation Table Page Granule Size                                   " range="8 - 7" rwaccess="R/W"/> 
+		<bitfield id="TBL_SZ" width="6" begin="6" end="1" resetval="0x0" description=" Translation Table Region Size                                         " range="6 - 1" rwaccess="R/W"/> 
+		<bitfield id="WALK_EN" width="1" begin="0" end="0" resetval="0x0" description=" Enable Translation Table Walks                                        " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_TBR0_S" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_TBR0_S" offset="0xCC0" width="64" description="">
+		<bitfield id="RSVD0" width="8" begin="63" end="56" resetval="0x0" description=" Reserved              " range="63 - 56" rwaccess="R"/> 
+		<bitfield id="ASID" width="8" begin="55" end="48" resetval="0x0" description=" Application Space ID  " range="55 - 48" rwaccess="R/W"/> 
+		<bitfield id="RSVD1" width="8" begin="47" end="40" resetval="0x0" description=" Reserved              " range="47 - 40" rwaccess="R"/> 
+		<bitfield id="BADDR" width="40" begin="39" end="0" resetval="0x0" description=" Table Base Address    " range="39 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_TBR1_S" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_TBR1_S" offset="0xD00" width="64" description="">
+		<bitfield id="RSVD0" width="8" begin="63" end="56" resetval="0x0" description=" Reserved              " range="63 - 56" rwaccess="R"/> 
+		<bitfield id="ASID" width="8" begin="55" end="48" resetval="0x0" description=" Application Space ID  " range="55 - 48" rwaccess="R/W"/> 
+		<bitfield id="RSVD1" width="8" begin="47" end="40" resetval="0x0" description=" Reserved              " range="47 - 40" rwaccess="R"/> 
+		<bitfield id="BADDR" width="40" begin="39" end="0" resetval="0x0" description=" Table Base Address    " range="39 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_MAR_S" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_MAR_S" offset="0xD40" width="64" description="">
+		<bitfield id="ATTR7" width="8" begin="63" end="56" resetval="0x0" description=" Memory Attribute Index 7 " range="63 - 56" rwaccess="R/W"/> 
+		<bitfield id="ATTR6" width="8" begin="55" end="48" resetval="0x0" description=" Memory Attribute Index 6 " range="55 - 48" rwaccess="R/W"/> 
+		<bitfield id="ATTR5" width="8" begin="47" end="40" resetval="0x0" description=" Memory Attribute Index 5 " range="47 - 40" rwaccess="R/W"/> 
+		<bitfield id="ATTR4" width="8" begin="39" end="32" resetval="0x0" description=" Memory Attribute Index 4 " range="39 - 32" rwaccess="R/W"/> 
+		<bitfield id="ATTR3" width="8" begin="31" end="24" resetval="0x0" description=" Memory Attribute Index 3 " range="31 - 24" rwaccess="R/W"/> 
+		<bitfield id="ATTR2" width="8" begin="23" end="16" resetval="0x0" description=" Memory Attribute Index 2 " range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="ATTR1" width="8" begin="15" end="8" resetval="0x0" description=" Memory Attribute Index 1 " range="15 - 8" rwaccess="R/W"/> 
+		<bitfield id="ATTR0" width="8" begin="7" end="0" resetval="0x0" description=" Memory Attribute Index 0 " range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_TDAR_S" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_TDAR_S" offset="0xD80" width="64" description="">
+		<bitfield id="ADDR" width="60" begin="63" end="4" resetval="0x0" description=" Input Address       " range="63 - 4" rwaccess="W"/> 
+		<bitfield id="INTEREST" width="1" begin="3" end="3" resetval="0x0" description=" Interest Flag       " range="3" rwaccess="W"/> 
+		<bitfield id="ACC_TYPE" width="2" begin="2" end="1" resetval="0x0" description=" Access Type         " range="2 - 1" rwaccess="W"/> 
+		<bitfield id="PRIV" width="1" begin="0" end="0" resetval="0x0" description=" Supervisor Access   " range="0" rwaccess="W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_VCR" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_VCR" offset="0x1800" width="64" description="">
+		<bitfield id="RSVD0" width="58" begin="63" end="6" resetval="0x0" description=" Reserved                             " range="63 - 6" rwaccess="R"/> 
+		<bitfield id="ID" width="1" begin="5" end="5" resetval="0x0" description=" Stage 2 Instruction Cache Disable    " range="5" rwaccess="R/W"/> 
+		<bitfield id="CD" width="1" begin="4" end="4" resetval="0x0" description=" Stage 2 Data Cache Disable           " range="4" rwaccess="R/W"/> 
+		<bitfield id="DC" width="1" begin="3" end="3" resetval="0x0" description=" Default Cacheable Mode               " range="3" rwaccess="R/W"/> 
+		<bitfield id="PROT" width="1" begin="2" end="2" resetval="0x0" description=" Protected Table Walk                 " range="2" rwaccess="R/W"/> 
+		<bitfield id="ENDIAN" width="1" begin="1" end="1" resetval="0x0" description=" Stage 2 Endian                       " range="1" rwaccess="R/W"/> 
+		<bitfield id="S2_EN" width="1" begin="0" end="0" resetval="0x0" description=" Enable Stage 2 Address Translation   " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_VTCR" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_VTCR" offset="0x1840" width="64" description="">
+		<bitfield id="RSVD0" width="45" begin="63" end="19" resetval="0x0" description=" Reserved                                                           " range="63 - 19" rwaccess="R"/> 
+		<bitfield id="SLEVEL" width="2" begin="18" end="17" resetval="0x0" description=" Stage 2 Starting Translation Level                                 " range="18 - 17" rwaccess="R/W"/> 
+		<bitfield id="MEMTYPE" width="2" begin="16" end="15" resetval="0x0" description=" Memory Type of Translation Table Walks                             " range="16 - 15" rwaccess="R/W"/> 
+		<bitfield id="COUTER" width="2" begin="14" end="13" resetval="0x0" description=" Outer Cacheability attribute of memory for Translation Table Walks " range="14 - 13" rwaccess="R/W"/> 
+		<bitfield id="CINNER" width="2" begin="12" end="11" resetval="0x0" description=" Inner Cacheability attribute of memory for Translation Table Walks " range="12 - 11" rwaccess="R/W"/> 
+		<bitfield id="SHARE" width="2" begin="10" end="9" resetval="0x0" description=" Shareability attribute of memory for Translation Table Walks       " range="10 - 9" rwaccess="R/W"/> 
+		<bitfield id="GRANULE" width="2" begin="8" end="7" resetval="0x0" description=" Translation Table Page Granule Size                                " range="8 - 7" rwaccess="R/W"/> 
+		<bitfield id="TBL_SZ" width="6" begin="6" end="1" resetval="0x0" description=" Translation Table Region Size                                      " range="6 - 1" rwaccess="R/W"/> 
+		<bitfield id="RSVD1" width="1" begin="0" end="0" resetval="0x0" description=" Reserved                                                           " range="0" rwaccess="R"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_VTBR" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_VTBR" offset="0x1880" width="64" description="">
+		<bitfield id="RSVD0" width="8" begin="63" end="56" resetval="0x0" description=" Reserved              " range="63 - 56" rwaccess="R"/> 
+		<bitfield id="VMID" width="8" begin="55" end="48" resetval="0x0" description=" Virtual Machine ID    " range="55 - 48" rwaccess="R/W"/> 
+		<bitfield id="RSVD1" width="8" begin="47" end="40" resetval="0x0" description=" Reserved              " range="47 - 40" rwaccess="R"/> 
+		<bitfield id="BADDR" width="40" begin="39" end="0" resetval="0x0" description=" Table Base Address    " range="39 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="MMR__DRU5_MMR_CFG__DRU_MMU_VTDAR" acronym="MMR__DRU5_MMR_CFG__DRU_MMU_VTDAR" offset="0x18C0" width="64" description="">
+		<bitfield id="ADDR" width="60" begin="63" end="4" resetval="0x0" description=" Input Address       " range="63 - 4" rwaccess="W"/> 
+		<bitfield id="INTEREST" width="1" begin="3" end="3" resetval="0x0" description=" Interest Flag       " range="3" rwaccess="W"/> 
+		<bitfield id="ACC_TYPE" width="2" begin="2" end="1" resetval="0x0" description=" Access Type         " range="2 - 1" rwaccess="W"/> 
+		<bitfield id="PRIV" width="1" begin="0" end="0" resetval="0x0" description=" Supervisor Access   " range="0" rwaccess="W"/>
+	</register>
+</module>

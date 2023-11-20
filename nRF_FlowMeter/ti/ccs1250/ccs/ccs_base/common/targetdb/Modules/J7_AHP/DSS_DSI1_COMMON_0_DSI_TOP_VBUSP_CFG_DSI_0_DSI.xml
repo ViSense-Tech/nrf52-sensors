@@ -1,0 +1,788 @@
+<module name="DSS_DSI1_COMMON_0_DSI_TOP_VBUSP_CFG_DSI_0_DSI" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_ip_conf" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_ip_conf" offset="0x0" width="32" description="">
+		<bitfield id="ASF_CONFIG" width="1" begin="31" end="31" resetval="0x1" description="Active Safety Features [ASF] Configuration: 0 = None; 1 = Full ASF." range="31" rwaccess="R"/> 
+		<bitfield id="SP_HS_FIFO_DEPTH" width="5" begin="30" end="26" resetval="0x5" description="SP_HS_FIFO_DEPTH : HS FIFO depth in sending path. " range="30 - 26" rwaccess="R"/> 
+		<bitfield id="SP_LP_FIFO_DEPTH" width="5" begin="25" end="21" resetval="0x4" description="SP_LP_FIFO_DEPTH : LP FIFO depth in sending path. " range="25 - 21" rwaccess="R"/> 
+		<bitfield id="VRS_FIFO_DEPTH" width="5" begin="20" end="16" resetval="0x4" description="VRS_FIFO_DEPTH : FIFO depth in the VRS block. " range="20 - 16" rwaccess="R"/> 
+		<bitfield id="DIRCMD_FIFO_DEPTH" width="3" begin="15" end="13" resetval="0x4" description="Direct Command FIFO Depth [2:0]. Depth in bytes = 2^[value+2]" range="15 - 13" rwaccess="R"/> 
+		<bitfield id="INTERFACE_DATASIZE" width="1" begin="12" end="12" resetval="0x1" description="SDI interface data width: 0 = 16 bit, 1 = 32bit" range="12" rwaccess="R"/> 
+		<bitfield id="DATAPATH_SIZE" width="2" begin="11" end="10" resetval="0x0" description="Internal Datapath.width 00 - 32 bit, 01 - 16bit, 11 - 8 Bits. " range="11 - 10" rwaccess="R"/> 
+		<bitfield id="NUM_INTERFACE" width="2" begin="9" end="8" resetval="0x0" description="Max Number of SDI interfaces [1-4] = [value+1]" range="9 - 8" rwaccess="R"/> 
+		<bitfield id="MAX_LANE_NB" width="2" begin="7" end="6" resetval="0x3" description="Max Number of Lanes [1-4] = [value+1]" range="7 - 6" rwaccess="R"/> 
+		<bitfield id="RX_FIFO_DEPTH" width="6" begin="5" end="0" resetval="0x16" description="RX FIFO Depth [5:0]" range="5 - 0" rwaccess="R"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_main_data_ctl" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_main_data_ctl" offset="0x4" width="32" description="">
+		<bitfield id="TE_MIPI_POLLING_EN" width="1" begin="25" end="25" resetval="0x0" description="TE_MIPI_POLLING_EN: enables TE Polling feature following MIPI recommendations [polling by software]" range="25" rwaccess="R/W"/> 
+		<bitfield id="TE_HW_POLLING_EN" width="1" begin="24" end="24" resetval="0x0" description="TE_HW_POLLING_EN: enables TE Polling feature following internal solution" range="24" rwaccess="R/W"/> 
+		<bitfield id="DISP_EOT_GEN" width="1" begin="18" end="18" resetval="0x0" description="DISP_EOT_GEN: display adds an EOT packet to its LPDT transfers" range="18" rwaccess="R/W"/> 
+		<bitfield id="HOST_EOT_GEN" width="1" begin="17" end="17" resetval="0x0" description="HOST_EOT_GEN: generates or not the EOT packet after a transfer in HS." range="17" rwaccess="R/W"/> 
+		<bitfield id="DISP_GEN_CHECKSUM" width="1" begin="16" end="16" resetval="0x0" description="DISP_GEN_CHECKSUM: display generates checksum on its response packets." range="16" rwaccess="R/W"/> 
+		<bitfield id="DISP_GEN_ECC" width="1" begin="15" end="15" resetval="0x0" description="DISP_GEN_ECC: display generates ECC on its response packets" range="15" rwaccess="R/W"/> 
+		<bitfield id="BTA_EN" width="1" begin="14" end="14" resetval="0x0" description="BTA_EN: enables BTA" range="14" rwaccess="R/W"/> 
+		<bitfield id="READ_EN" width="1" begin="13" end="13" resetval="0x0" description="READ_EN: enables read operation" range="13" rwaccess="R/W"/> 
+		<bitfield id="REG_TE_EN" width="1" begin="12" end="12" resetval="0x0" description="REG_TE_EN: enables Tearing Effect from register" range="12" rwaccess="R/W"/> 
+		<bitfield id="SPLIT_PANEL_MODE" width="1" begin="10" end="10" resetval="0x0" description="SPLIT_PANEL_MODE: when enabled, DSC stage controls data for split panel signle DPHY link	" range="10" rwaccess="R/W"/> 
+		<bitfield id="IF3_TE_EN" width="1" begin="9" end="9" resetval="0x0" description="IF3_TE_EN: enables Tearing Effect on interface 3. Note TE on all SDI interfaces is not supported and should be avoided" range="9" rwaccess="R/W"/> 
+		<bitfield id="IF1_TE_EN" width="1" begin="8" end="8" resetval="0x0" description="IF1_TE_EN: enables Tearing Effect on interface 1. Note TE on all SDI interfaces is not supported and should be avoided" range="8" rwaccess="R/W"/> 
+		<bitfield id="TVG_SEL" width="1" begin="6" end="6" resetval="0x0" description="TVG_SEL: Test Video Generator is enabled [it is not the start signal!] - should not be set if if1_en = 1 and if1_mode = 1 [see MCTL_MAIN_EN register ]" range="6" rwaccess="R/W"/> 
+		<bitfield id="VID_EN" width="1" begin="5" end="5" resetval="0x0" description="VID_EN: enables the video stream generator" range="5" rwaccess="R/W"/> 
+		<bitfield id="VID_IF_SELECT" width="2" begin="3" end="2" resetval="0x0" description="VID_IF_SELECT: Determines which video interface is active [00 : SDI , 01 : DPI, 10 : DSC]" range="3 - 2" rwaccess="R/W"/> 
+		<bitfield id="SDI_IF_VID_MODE" width="1" begin="1" end="1" resetval="0x0" description="SDI_IF_VID_MODE:1: selected interface is in video mode, 0: selected interface is in command mode]" range="1" rwaccess="R/W"/> 
+		<bitfield id="LINK_EN" width="1" begin="0" end="0" resetval="0x0" description="LINK_EN: enables [or not] the link]" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_main_phy_ctl" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_main_phy_ctl" offset="0x8" width="32" description="">
+		<bitfield id="HS_SKEWCAL_TIMEOUT_EN" width="1" begin="30" end="30" resetval="0x0" description="HS_SKEWCAL_TIMEOUT_EN: Activate the HS SkewCal Control to occur after a timeout." range="30" rwaccess="R/W"/> 
+		<bitfield id="HS_SKEWCAL_FORCE_EN" width="1" begin="29" end="29" resetval="0x0" description="HS_SKEWCAL_FORCE_EN: Force the HS SkewCal Control to occur immediately" range="29" rwaccess="R/W"/> 
+		<bitfield id="HS_SKEWCAL_EN" width="1" begin="28" end="28" resetval="0x0" description="HS_SKEWCAL_EN: activate the HS SkewCal Control at start of HS Transmission" range="28" rwaccess="R/W"/> 
+		<bitfield id="HS_INVERT_DAT4" width="1" begin="25" end="25" resetval="0x0" description="HS_INVERT_DAT4: invert HS signal on data lane 4" range="25" rwaccess="R/W"/> 
+		<bitfield id="SWAP_PINS_DAT4" width="1" begin="24" end="24" resetval="0x0" description="SWAP_PINS_DAT4: swap pins on clock lane 4" range="24" rwaccess="R/W"/> 
+		<bitfield id="HS_INVERT_DAT3" width="1" begin="23" end="23" resetval="0x0" description="HS_INVERT_DAT3: invert HS signal on data lane 3 " range="23" rwaccess="R/W"/> 
+		<bitfield id="SWAP_PINS_DAT3" width="1" begin="22" end="22" resetval="0x0" description="SWAP_PINS_DAT3: swap pins on clock lane 3 " range="22" rwaccess="R/W"/> 
+		<bitfield id="HS_INVERT_DAT2" width="1" begin="21" end="21" resetval="0x0" description="HS_INVERT_DAT2: invert HS signal on data lane 2 " range="21" rwaccess="R/W"/> 
+		<bitfield id="SWAP_PINS_DAT2" width="1" begin="20" end="20" resetval="0x0" description="SWAP_PINS_DAT2: swap pins on clock lane 2 " range="20" rwaccess="R/W"/> 
+		<bitfield id="HS_INVERT_DAT1" width="1" begin="19" end="19" resetval="0x0" description="HS_INVERT_DAT1: invert HS signal on data lane 1 " range="19" rwaccess="R/W"/> 
+		<bitfield id="SWAP_PINS_DAT1" width="1" begin="18" end="18" resetval="0x0" description="SWAP_PINS_DAT1: swap pins on data lane 1" range="18" rwaccess="R/W"/> 
+		<bitfield id="HS_INVERT_CLK" width="1" begin="17" end="17" resetval="0x0" description="HS_INVERT_CLK: invert HS signal on clock lane" range="17" rwaccess="R/W"/> 
+		<bitfield id="SWAP_PINS_CLK" width="1" begin="16" end="16" resetval="0x0" description="SWAP_PINS_CLK: swap pins on clock lane" range="16" rwaccess="R/W"/> 
+		<bitfield id="WAIT_BURST_TIME" width="4" begin="13" end="10" resetval="0x0" description="WAIT_BURST_TIME: delay to respect between two HS bursts. Value 0 is forbidden	" range="13 - 10" rwaccess="R/W"/> 
+		<bitfield id="DAT4_ULPM_EN" width="1" begin="9" end="9" resetval="0x0" description="DAT4_ULPM_EN: data lane 4 can be switched in ULP mode	" range="9" rwaccess="R/W"/> 
+		<bitfield id="DAT3_ULPM_EN" width="1" begin="8" end="8" resetval="0x0" description="DAT3_ULPM_EN: data lane 3 can be switched in ULP mode	" range="8" rwaccess="R/W"/> 
+		<bitfield id="DAT2_ULPM_EN" width="1" begin="7" end="7" resetval="0x0" description="DAT2_ULPM_EN: data lane 2 can be switched in ULP mode	" range="7" rwaccess="R/W"/> 
+		<bitfield id="DAT1_ULPM_EN" width="1" begin="6" end="6" resetval="0x0" description="DAT1_ULPM_EN: data lane 1 can be switched in ULP mode	" range="6" rwaccess="R/W"/> 
+		<bitfield id="CLK_ULPM_EN" width="1" begin="5" end="5" resetval="0x0" description="CLK_ULPM_EN: specifies that clock lane can be switched in ULP mode [on demand]	" range="5" rwaccess="R/W"/> 
+		<bitfield id="CLK_CONTINUOUS" width="1" begin="4" end="4" resetval="0x0" description="CLK_CONTINUOUS: clock lane should remain in HS sending mode [no return in STOP state]	" range="4" rwaccess="R/W"/> 
+		<bitfield id="LANE4_EN" width="1" begin="2" end="2" resetval="0x0" description="LANE4_EN: enables the fourth lane [ controls DCB FSM]	" range="2" rwaccess="R/W"/> 
+		<bitfield id="LANE3_EN" width="1" begin="1" end="1" resetval="0x0" description="LANE3_EN: enables the third lane [ controls DCB FSM]	" range="1" rwaccess="R/W"/> 
+		<bitfield id="LANE2_EN" width="1" begin="0" end="0" resetval="0x0" description="LANE2_EN: enables the second lane [ controls DCB FSM]	" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_main_en" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_main_en" offset="0xC" width="32" description="">
+		<bitfield id="FORCE_STOP_MODE" width="1" begin="17" end="17" resetval="0x0" description="FORCE_STOP_MODE: when enabled, data lanes are forced back in STOP mode - this value should remain asserted for 10 us minimum	" range="17" rwaccess="R/W"/> 
+		<bitfield id="CLK_FORCE_STOP" width="1" begin="16" end="16" resetval="0x0" description="CLK_FORCE_STOP : force clock lanes back in STOP mode - this value should remain asserted for 10 us minimum	" range="16" rwaccess="R/W"/> 
+		<bitfield id="IF3_EN" width="1" begin="15" end="15" resetval="0x0" description="IF3_EN: enables DSC interface [i.e. removes stall signal]" range="15" rwaccess="R/W"/> 
+		<bitfield id="IF2_EN" width="1" begin="14" end="14" resetval="0x0" description="IF2_EN: enables DPI interface [i.e. removes stall signal]" range="14" rwaccess="R/W"/> 
+		<bitfield id="IF1_EN" width="1" begin="13" end="13" resetval="0x0" description="IF1_EN: enables SDI interface [i.e. removes stall signal]" range="13" rwaccess="R/W"/> 
+		<bitfield id="DAT4_ULPM_REQ" width="1" begin="12" end="12" resetval="0x0" description="DAT4_ULPM_REQ: switches data lane 4 in ULP mode " range="12" rwaccess="R/W"/> 
+		<bitfield id="DAT3_ULPM_REQ" width="1" begin="11" end="11" resetval="0x0" description="DAT3_ULPM_REQ: switches data lane 3 in ULP mode" range="11" rwaccess="R/W"/> 
+		<bitfield id="DAT2_ULPM_REQ" width="1" begin="10" end="10" resetval="0x0" description="DAT2_ULPM_REQ: switches data lane 2 in ULP mode" range="10" rwaccess="R/W"/> 
+		<bitfield id="DAT1_ULPM_REQ" width="1" begin="9" end="9" resetval="0x0" description="DAT1_ULPM_REQ: switches data lane 1 in ULP mode" range="9" rwaccess="R/W"/> 
+		<bitfield id="CLKLANE_ULPM_REQ" width="1" begin="8" end="8" resetval="0x0" description="CLKLANE_ULPM_REQ: switches clock lane in ULP mode" range="8" rwaccess="R/W"/> 
+		<bitfield id="DAT4_EN" width="1" begin="7" end="7" resetval="0x0" description="DAT4_EN: 1: starts data lane 4 [FSM data lane 4 is stuck in start mode if 0]" range="7" rwaccess="R/W"/> 
+		<bitfield id="DAT3_EN" width="1" begin="6" end="6" resetval="0x0" description="DAT3_EN: 1: starts data lane 3 [FSM data lane 3 is stuck in start mode if 0]" range="6" rwaccess="R/W"/> 
+		<bitfield id="DAT2_EN" width="1" begin="5" end="5" resetval="0x0" description="DAT2_EN: 1: starts data lane 2 [FSM data lane 2 is stuck in start mode if 0]" range="5" rwaccess="R/W"/> 
+		<bitfield id="DAT1_EN" width="1" begin="4" end="4" resetval="0x0" description="DAT1_EN: 1: starts data lane 1 [FSM data lane 1 is stuck in start mode if 0]" range="4" rwaccess="R/W"/> 
+		<bitfield id="CKLANE_EN" width="1" begin="3" end="3" resetval="0x0" description="CKLANE_EN: 1: starts the clock lane" range="3" rwaccess="R/W"/> 
+		<bitfield id="PLL_START" width="1" begin="0" end="0" resetval="0x0" description="PLL_START: enables the PLL [when set, the PLL is started]" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_dphy_cfg0" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_dphy_cfg0" offset="0x10" width="32" description="">
+		<bitfield id="DPHY_C_RSTB" width="1" begin="20" end="20" resetval="0x0" description="Drives dphy_c_rstb output" range="20" rwaccess="R/W"/> 
+		<bitfield id="DPHY_D_RSTB" width="4" begin="19" end="16" resetval="0x0" description="Drives dphy_d_rstb output" range="19 - 16" rwaccess="R/W"/> 
+		<bitfield id="DPHY_PLL_PDN" width="1" begin="10" end="10" resetval="0x1" description="Drives dphy_pll_pdn output" range="10" rwaccess="R/W"/> 
+		<bitfield id="DPHY_CMN_PDN" width="1" begin="9" end="9" resetval="0x1" description="Drives dphy_cmn_pdn output" range="9" rwaccess="R/W"/> 
+		<bitfield id="DPHY_C_PDN" width="1" begin="8" end="8" resetval="0x0" description="Drives dphy_c_pdn output" range="8" rwaccess="R/W"/> 
+		<bitfield id="DPHY_D_PDN" width="4" begin="7" end="4" resetval="0x0" description="Drives dphy_d_pdn output" range="7 - 4" rwaccess="R/W"/> 
+		<bitfield id="DPHY_PLL_PSO" width="1" begin="1" end="1" resetval="0x0" description="Drives dphy_pll_pso output" range="1" rwaccess="R/W"/> 
+		<bitfield id="DPHY_CMN_PSO" width="1" begin="0" end="0" resetval="0x0" description="Drives dphy_cmn_pso output" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_dphy_timeout1" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_dphy_timeout1" offset="0x14" width="32" description="">
+		<bitfield id="HSTX_TO_VAL" width="18" begin="21" end="4" resetval="0x0" description="HSTX_TO_VAL: HS TX time-out detection value" range="21 - 4" rwaccess="R/W"/> 
+		<bitfield id="CLK_DIV" width="4" begin="3" end="0" resetval="0x0" description="CLK_DIV: clock division ratio" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_dphy_timeout2" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_dphy_timeout2" offset="0x18" width="32" description="">
+		<bitfield id="LPRX_TO_VAL" width="18" begin="17" end="0" resetval="0x0" description="LPRX_TO_VAL: LP RX time-out detection value" range="17 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_ulpout_time" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_ulpout_time" offset="0x1C" width="32" description="">
+		<bitfield id="DATA_ULPOUT_TIME" width="9" begin="17" end="9" resetval="0x0" description="DATA_ULPOUT_TIME: specify what the duration is to leave ULP mode is [for data lane[s] in system clock cycles" range="17 - 9" rwaccess="R/W"/> 
+		<bitfield id="CKLANE_ULPOUT_TIME" width="9" begin="8" end="0" resetval="0x0" description="CKLANE_ULPOUT_TIME: specify what the duration is to leave ULP mode is [for clock lane] in system clock cycles" range="8 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_3dvideo_ctl" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_3dvideo_ctl" offset="0x20" width="32" description="">
+		<bitfield id="VID_VSYNC_3D_EN" width="1" begin="7" end="7" resetval="0x0" description=" VID_VSYNC_3D_EN: Enable 3D Control this selects the 3D operation for VSYNC and video data control" range="7" rwaccess="R/W"/> 
+		<bitfield id="VID_VSYNC_3D_LR" width="1" begin="5" end="5" resetval="0x0" description=" VID_VSYNC_3D_LR: When 3D mode is enabled, this allows to choose which field to start the video stream                '0' - Data is sent Left first then right                '1' - Data is sent Right first then left" range="5" rwaccess="R/W"/> 
+		<bitfield id="VID_VSYNC_3D_SECOND_EN" width="1" begin="4" end="4" resetval="0x1" description=" VID_VSYNC_3D_SECOND_EN: When 3D mode is enabled, this allows to choose if a second VSYNC is enabled between L and R images                '0' - No sync pulses between left and right data                '1' - Sync pulse [HSYNC, VSYNC, Blanking] between left and right image data" range="4" rwaccess="R/W"/> 
+		<bitfield id="VID_VSYNC_3DFORMAT" width="2" begin="3" end="2" resetval="0x0" description="VID_VSYNC_3DFORMAT: video 3D Format for VSYNC Control Parameter1               '00' - Line Format, alternating line of left and right data               '01' - Frame Format, alternating frames of left and right data               '10' - Pixel Format, alternating pixels of left and right data               '11' - Reserved" range="3 - 2" rwaccess="R/W"/> 
+		<bitfield id="VID_VSYNC_3DMODE" width="2" begin="1" end="0" resetval="0x0" description="VID_VSYNC_3DMODE: video 3D mode for VSYNC Control Parameter1               '00' - 3D mode Off - 2D Mode only               '01' - 3D On - Portrait Orientation               '10' - 3D On - Landscape Orientation               '11' - Reserved" range="1 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_main_sts" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_main_sts" offset="0x24" width="32" description="">
+		<bitfield id="HS_SKEWCAL_DONE" width="1" begin="11" end="11" resetval="0x0" description="HS_SKEWCAL_DONE: HS SkewCal Control Done at start of HS Transmission " range="11" rwaccess="R"/> 
+		<bitfield id="IF3_UNTERM_PCK" width="1" begin="10" end="10" resetval="0x0" description="IF3_UNTERM_PCK: Indicates an unterminated packet on DSC interface" range="10" rwaccess="R"/> 
+		<bitfield id="IF2_UNTERM_PCK" width="1" begin="9" end="9" resetval="0x0" description="IF2_UNTERM_PCK: Indicates an unterminated packet on DPI interface" range="9" rwaccess="R"/> 
+		<bitfield id="IF1_UNTERM_PCK" width="1" begin="8" end="8" resetval="0x0" description="IF1_UNTERM_PCK: Indicates an unterminated packet on SDI Interface" range="8" rwaccess="R"/> 
+		<bitfield id="LPRX_TO_ERR" width="1" begin="7" end="7" resetval="0x0" description="LPRX_TO_ERR: Indicates an LP_RX time-out error" range="7" rwaccess="R"/> 
+		<bitfield id="HSTX_TO_ERR" width="1" begin="6" end="6" resetval="0x0" description="HSTX_TO_ERR: Indicates an HS_TX time-out error" range="6" rwaccess="R"/> 
+		<bitfield id="DAT4_READY" width="1" begin="5" end="5" resetval="0x0" description="DAT4_READY: Indicates data lane 4 is ready" range="5" rwaccess="R"/> 
+		<bitfield id="DAT3_READY" width="1" begin="4" end="4" resetval="0x0" description="DAT3_READY: Indicates data lane 3 is ready" range="4" rwaccess="R"/> 
+		<bitfield id="DAT2_READY" width="1" begin="3" end="3" resetval="0x0" description="DAT2_READY: Indicates data lane 2 is ready" range="3" rwaccess="R"/> 
+		<bitfield id="DAT1_READY" width="1" begin="2" end="2" resetval="0x0" description="DAT1_READY: Indicates data lane 1 is ready" range="2" rwaccess="R"/> 
+		<bitfield id="CLKLANE_READY" width="1" begin="1" end="1" resetval="0x0" description="CLKLANE_READY: Indicates the clock lane is ready [normal DSI operation can start]	" range="1" rwaccess="R"/> 
+		<bitfield id="PLL_LCK" width="1" begin="0" end="0" resetval="0x0" description="PLL_LCK: Indicates PLL is locked - data coming from DCB [if DSI link is PLL master] or copy of pll_en [if DSI link is slave]	" range="0" rwaccess="R"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_dphy_err" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_dphy_err" offset="0x28" width="32" description="">
+		<bitfield id="ERR_CONT_LP1_4" width="1" begin="25" end="25" resetval="0x0" description="ERR_CONT_LP1_4" range="25" rwaccess="R"/> 
+		<bitfield id="ERR_CONT_LP1_3" width="1" begin="24" end="24" resetval="0x0" description="ERR_CONT_LP1_3" range="24" rwaccess="R"/> 
+		<bitfield id="ERR_CONT_LP1_2" width="1" begin="23" end="23" resetval="0x0" description="ERR_CONT_LP1_2" range="23" rwaccess="R"/> 
+		<bitfield id="ERR_CONT_LP1_1" width="1" begin="22" end="22" resetval="0x0" description="ERR_CONT_LP1_1" range="22" rwaccess="R"/> 
+		<bitfield id="ERR_CONT_LP0_4" width="1" begin="21" end="21" resetval="0x0" description="ERR_CONT_LP0_4" range="21" rwaccess="R"/> 
+		<bitfield id="ERR_CONT_LP0_3" width="1" begin="20" end="20" resetval="0x0" description="ERR_CONT_LP0_3" range="20" rwaccess="R"/> 
+		<bitfield id="ERR_CONT_LP0_2" width="1" begin="19" end="19" resetval="0x0" description="ERR_CONT_LP0_2" range="19" rwaccess="R"/> 
+		<bitfield id="ERR_CONT_LP0_1" width="1" begin="18" end="18" resetval="0x0" description="ERR_CONT_LP0_1" range="18" rwaccess="R"/> 
+		<bitfield id="ERR_CONTROL_4" width="1" begin="17" end="17" resetval="0x0" description="ERR_CONTROL_4" range="17" rwaccess="R"/> 
+		<bitfield id="ERR_CONTROL_3" width="1" begin="16" end="16" resetval="0x0" description="ERR_CONTROL_3" range="16" rwaccess="R"/> 
+		<bitfield id="ERR_CONTROL_2" width="1" begin="15" end="15" resetval="0x0" description="ERR_CONTROL_2" range="15" rwaccess="R"/> 
+		<bitfield id="ERR_CONTROL_1" width="1" begin="14" end="14" resetval="0x0" description="ERR_CONTROL_1" range="14" rwaccess="R"/> 
+		<bitfield id="ERR_SYNCESC_4" width="1" begin="13" end="13" resetval="0x0" description="ERR_SYNCESC_4" range="13" rwaccess="R"/> 
+		<bitfield id="ERR_SYNCESC_3" width="1" begin="12" end="12" resetval="0x0" description="ERR_SYNCESC_3" range="12" rwaccess="R"/> 
+		<bitfield id="ERR_SYNCESC_2" width="1" begin="11" end="11" resetval="0x0" description="ERR_SYNCESC_2" range="11" rwaccess="R"/> 
+		<bitfield id="ERR_SYNCESC_1" width="1" begin="10" end="10" resetval="0x0" description="ERR_SYNCESC_1" range="10" rwaccess="R"/> 
+		<bitfield id="ERR_ESC_4" width="1" begin="9" end="9" resetval="0x0" description="ERR_ESC_4	" range="9" rwaccess="R"/> 
+		<bitfield id="ERR_ESC_3" width="1" begin="8" end="8" resetval="0x0" description="ERR_ESC_3	" range="8" rwaccess="R"/> 
+		<bitfield id="ERR_ESC_2" width="1" begin="7" end="7" resetval="0x0" description="ERR_ESC_2	" range="7" rwaccess="R"/> 
+		<bitfield id="ERR_ESC_1" width="1" begin="6" end="6" resetval="0x0" description="ERR_ESC_1	" range="6" rwaccess="R"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_lane_sts" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_lane_sts" offset="0x2C" width="32" description="">
+		<bitfield id="PPI_C_TX_READY_HS" width="1" begin="18" end="18" resetval="0x0" description="Value of ppi_c_tx_ready_hs input" range="18" rwaccess="R"/> 
+		<bitfield id="DPHY_PLL_LOCK" width="1" begin="17" end="17" resetval="0x0" description="Value of dphy_pll_lock input" range="17" rwaccess="R"/> 
+		<bitfield id="PPI_D_RX_ULPS_ESC" width="4" begin="15" end="12" resetval="0x0" description="Value of ppi_d_rx_ulps_esc input" range="15 - 12" rwaccess="R"/> 
+		<bitfield id="DATLANE4_STATE" width="2" begin="10" end="9" resetval="0x0" description="DATLANE4_STATE: state of the data lane 4 [00: start / 01: idle / 10: write / 11: ULPM]" range="10 - 9" rwaccess="R"/> 
+		<bitfield id="DATLANE3_STATE" width="2" begin="8" end="7" resetval="0x0" description="DATLANE3_STATE: state of the data lane 3 [00: start / 01: idle / 10: write / 11: ULPM]" range="8 - 7" rwaccess="R"/> 
+		<bitfield id="DATLANE2_STATE" width="2" begin="6" end="5" resetval="0x0" description="DATLANE2_STATE: state of the data lane 2 [00: start / 01: idle / 10: write / 11: ULPM]" range="6 - 5" rwaccess="R"/> 
+		<bitfield id="DATLANE1_STATE" width="3" begin="4" end="2" resetval="0x0" description="DATLANE1_STATE: state of the data lane 1 [000: start / 001: idle / 010: write / 011: ULPM / 100: read]" range="4 - 2" rwaccess="R"/> 
+		<bitfield id="CLKLANE_STATE" width="2" begin="1" end="0" resetval="0x0" description="CLKLANE_STATE: state of the clock lane [00: start / 01: idle / 10: HS / 11: ULPM]" range="1 - 0" rwaccess="R"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_dsc_mode_ctl" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_dsc_mode_ctl" offset="0x30" width="32" description="">
+		<bitfield id="DSC_MODE_EN" width="1" begin="0" end="0" resetval="0x0" description="Enable DSC Mode Controls" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_dsc_cmd_send" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_dsc_cmd_send" offset="0x34" width="32" description="">
+		<bitfield id="DSC_SEND_PPS" width="1" begin="1" end="1" resetval="0x0" description="Send PPS Command and Payload to the display" range="1" rwaccess="W"/> 
+		<bitfield id="DSC_EXECUTE_QUEUE" width="1" begin="0" end="0" resetval="0x0" description="Send Execute Queue Command to Synchonise the display drivers" range="0" rwaccess="W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_dsc_pps_wrdat" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_dsc_pps_wrdat" offset="0x38" width="32" description="">
+		<bitfield id="PPS_WRDAT3" width="8" begin="31" end="24" resetval="0x0" description="WRDAT3: 4th byte to be sent as part of PPS payload [stored in a FIFO]" range="31 - 24" rwaccess="R/W"/> 
+		<bitfield id="PPS_WRDAT2" width="8" begin="23" end="16" resetval="0x0" description="WRDAT2: 3rd byte to be sent as part of PPS payload [stored in a FIFO]" range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="PPS_WRDAT1" width="8" begin="15" end="8" resetval="0x0" description="WRDAT1: 2nd byte to be sent as part of PPS payload [stored in a FIFO]" range="15 - 8" rwaccess="R/W"/> 
+		<bitfield id="PPS_WRDAT0" width="8" begin="7" end="0" resetval="0x0" description="WRDAT0: 1st byte to be sent as part of PPS payload [stored in a FIFO]" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_dsc_mode_sts" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_dsc_mode_sts" offset="0x3C" width="32" description="">
+		<bitfield id="DSC_PPS_DONE" width="1" begin="1" end="1" resetval="0x0" description="DSC PPS Command Sent" range="1" rwaccess="R"/> 
+		<bitfield id="DSC_EXEC_DONE" width="1" begin="0" end="0" resetval="0x0" description="DSC Execute Command Sent" range="0" rwaccess="R"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_dphy_skewcal_timeout" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_dphy_skewcal_timeout" offset="0x40" width="32" description="">
+		<bitfield id="SKEWCAL_TO_VAL" width="32" begin="31" end="0" resetval="0x0" description="SKEWCAL_TO_VAL: Timeout value" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_cmd_mode_ctl" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_cmd_mode_ctl" offset="0x70" width="32" description="">
+		<bitfield id="IF3_LP_EN" width="1" begin="10" end="10" resetval="0x0" description="IF3_LP_EN: enable to send command from DSC interface in LP if possible" range="10" rwaccess="R/W"/> 
+		<bitfield id="IF1_LP_EN" width="1" begin="9" end="9" resetval="0x0" description="IF1_LP_EN: enable to send command from SDI interface in LP if possible" range="9" rwaccess="R/W"/> 
+		<bitfield id="IF3_ID" width="2" begin="3" end="2" resetval="0x0" description="IF3_ID: Virtual Channel ID of request from DSC interface command " range="3 - 2" rwaccess="R/W"/> 
+		<bitfield id="IF1_ID" width="2" begin="1" end="0" resetval="0x0" description="IF1_ID: Virtual Channel ID of request from SDI interface command " range="1 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_cmd_mode_ctl2" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_cmd_mode_ctl2" offset="0x74" width="32" description="">
+		<bitfield id="TE_TIMEOUT" width="12" begin="22" end="11" resetval="0x4095" description="TE_TIMEOUT  : on TE request - length of TE response window before timeout." range="22 - 11" rwaccess="R/W"/> 
+		<bitfield id="FIL_VALUE" width="8" begin="10" end="3" resetval="0x0" description="FIL_VALUE: value to use to fill packet during data underrun or to complete unterminated packet [referred as padding value]" range="10 - 3" rwaccess="R/W"/> 
+		<bitfield id="ARB_PRI" width="2" begin="2" end="1" resetval="0x0" description="ARB_PRI: in fixed mode, specify interface with higher priority SDI 01, DSC 10" range="2 - 1" rwaccess="R/W"/> 
+		<bitfield id="ARB_MODE" width="1" begin="0" end="0" resetval="0x0" description="ARB_MODE: arbitration mode [1: round robin, 0: fixed]" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_cmd_mode_sts" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_cmd_mode_sts" offset="0x78" width="32" description="">
+		<bitfield id="ERR_IF1_UNDERRUN" width="1" begin="4" end="4" resetval="0x0" description="ERR_IF1_UNDERRUN: Indicates a data shortage occurs on IF1" range="4" rwaccess="R"/> 
+		<bitfield id="ERR_UNWANTED_RD" width="1" begin="3" end="3" resetval="0x0" description="ERR_UNWANTED_RD: Indicates a read request was received while read capability was not enabled" range="3" rwaccess="R"/> 
+		<bitfield id="ERR_TE_MISS" width="1" begin="2" end="2" resetval="0x0" description="ERR_TE_MISS: error: TE window time-out" range="2" rwaccess="R"/> 
+		<bitfield id="ERR_NO_TE" width="1" begin="1" end="1" resetval="0x0" description="ERR_NO_TE: error: no TE generated by display" range="1" rwaccess="R"/> 
+		<bitfield id="CSM_RUNNING" width="1" begin="0" end="0" resetval="0x0" description="CSM_RUNNING: Indicates CSM is running - command[s] are being proceeded" range="0" rwaccess="R"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_send" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_send" offset="0x80" width="32" description="">
+		<bitfield id="DIRECT_CMD_SEND" width="32" begin="31" end="0" resetval="0x0" description="Initiate the direct command send operation" range="31 - 0" rwaccess="W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_main_settings" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_main_settings" offset="0x84" width="32" description="">
+		<bitfield id="TRIGGER_VAL" width="4" begin="28" end="25" resetval="0x0" description="TRIGGER_VAL: trigger value if trigger request [see Note about trigger mapping]                             - signal is one hot encoding [only one bit out of the 4 should be set to 1]." range="28 - 25" rwaccess="R/W"/> 
+		<bitfield id="CMD_LP_EN" width="1" begin="24" end="24" resetval="0x0" description="CMD_LP_EN: enables LP sending for the command request" range="24" rwaccess="R/W"/> 
+		<bitfield id="CMD_SIZE" width="8" begin="23" end="16" resetval="0x0" description="CMD_SIZE: size, in bytes, of the command payload.  Note that the value written here by software should comply with certain limits.               For write operations, any value written which is larger than the FIFO depth [direct_cmd_fifodepth parameter] will be ignored and                the command payload will be truncated to the maximum FIFO depth.               For read operations, any value written which is larger than 2 bytes will be ignored and the command payload will be truncated to 2 bytes." range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="CMD_ID" width="2" begin="15" end="14" resetval="0x0" description="CMD_ID: For a read/write command, Virtual Channel of the command" range="15 - 14" rwaccess="R/W"/> 
+		<bitfield id="CMD_HEAD" width="6" begin="13" end="8" resetval="0x0" description="CMD_HEAD: For a read/write command, datatype of the command" range="13 - 8" rwaccess="R/W"/> 
+		<bitfield id="CMD_LONGNOTSHORT" width="1" begin="3" end="3" resetval="0x0" description="CMD_LONGNOTSHORT: Tie this to '1' if a long packet has to be generated." range="3" rwaccess="R/W"/> 
+		<bitfield id="CMD_NAT" width="3" begin="2" end="0" resetval="0x0" description="CMD_NAT: Type of the direct command: 000: write command  001: read command 100: TE request  101: trigger request  110: BTA request" range="2 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_sts" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_sts" offset="0x88" width="32" description="">
+		<bitfield id="ACK_VAL" width="16" begin="31" end="16" resetval="0x0" description="ACK_VAL: if an acknowledge with error has been received, this field reports its value" range="31 - 16" rwaccess="R"/> 
+		<bitfield id="TRIGGER_VAL" width="4" begin="14" end="11" resetval="0x0" description="TRIGGER_VAL: if a trigger has been received, this field reports its value - refer to Note regarding trigger mapping" range="14 - 11" rwaccess="R"/> 
+		<bitfield id="READ_COMPLETED_WITH_ERR" width="1" begin="10" end="10" resetval="0x0" description="READ_COMPLETED_WITH_ERR: read command terminated with error" range="10" rwaccess="R"/> 
+		<bitfield id="BTA_FINISHED" width="1" begin="9" end="9" resetval="0x0" description="BTA_FINISHED: DSI link recovered link master role after a BTA request" range="9" rwaccess="R"/> 
+		<bitfield id="BTA_COMPLETED" width="1" begin="8" end="8" resetval="0x0" description="BTA_COMPLETED: indicates that BTA request completed" range="8" rwaccess="R"/> 
+		<bitfield id="TE_RECEIVED" width="1" begin="7" end="7" resetval="0x0" description="TE_RECEIVED: TE received" range="7" rwaccess="R"/> 
+		<bitfield id="TRIGGER_RECEIVED" width="1" begin="6" end="6" resetval="0x0" description="TRIGGER_RECEIVED: If command with BTA, this bit is set if an trigger was received " range="6" rwaccess="R"/> 
+		<bitfield id="ACK_WITH_ERR_RECEIVED" width="1" begin="5" end="5" resetval="0x0" description="ACKNOWLEDGE_WITH_ERR_RECEIVED: If command with BTA, this bit is set if an acknowledge with error was received" range="5" rwaccess="R"/> 
+		<bitfield id="ACK_RECEIVED" width="1" begin="4" end="4" resetval="0x0" description="ACKNOWLEDGE_RECEIVED: If command with BTA, this bit is set if an acknowledge with no error was received" range="4" rwaccess="R"/> 
+		<bitfield id="READ_COMPLETED" width="1" begin="3" end="3" resetval="0x0" description="READ_COMPLETED: read command request completed" range="3" rwaccess="R"/> 
+		<bitfield id="TRIGGER_COMPLETED" width="1" begin="2" end="2" resetval="0x0" description="TRIGGER_COMPLETED: trigger command request completed" range="2" rwaccess="R"/> 
+		<bitfield id="WRITE_COMPLETED" width="1" begin="1" end="1" resetval="0x0" description="WRITE_COMPLETED: write command request completed" range="1" rwaccess="R"/> 
+		<bitfield id="CMD_TRANSMISSION" width="1" begin="0" end="0" resetval="0x0" description="CMD_TRANSMISSION: a command is being sent" range="0" rwaccess="R"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_rd_init" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_rd_init" offset="0x8C" width="32" description="">
+		<bitfield id="STOP_READ_OPERATION" width="32" begin="31" end="0" resetval="0x0" description="Stop Read Operation" range="31 - 0" rwaccess="W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_wrdat" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_wrdat" offset="0x90" width="32" description="">
+		<bitfield id="WRDAT3" width="8" begin="31" end="24" resetval="0x0" description="WRDAT3: 4th byte to be sent as part of Direct Command [stored in a FIFO]" range="31 - 24" rwaccess="R/W"/> 
+		<bitfield id="WRDAT2" width="8" begin="23" end="16" resetval="0x0" description="WRDAT2: 3rd byte to be sent as part of Direct Command [stored in a FIFO]" range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="WRDAT1" width="8" begin="15" end="8" resetval="0x0" description="WRDAT1: 2nd byte to be sent as part of Direct Command [stored in a FIFO]" range="15 - 8" rwaccess="R/W"/> 
+		<bitfield id="WRDAT0" width="8" begin="7" end="0" resetval="0x0" description="WRDAT0: 1st byte to be sent as part of Direct Command [stored in a FIFO]" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_fifo_rst" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_fifo_rst" offset="0x94" width="32" description="">
+		<bitfield id="CMD_FIFO_RST" width="32" begin="31" end="0" resetval="0x0" description="Direct Command FIFO Reset" range="31 - 0" rwaccess="W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_rddat" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_rddat" offset="0xA0" width="32" description="">
+		<bitfield id="RDDAT3" width="8" begin="31" end="24" resetval="0x0" description="RDDAT3: 4th byte from incoming Direct Command receive path" range="31 - 24" rwaccess="R"/> 
+		<bitfield id="RDDAT2" width="8" begin="23" end="16" resetval="0x0" description="RDDAT2: 3rd byte from incoming Direct Command receive path" range="23 - 16" rwaccess="R"/> 
+		<bitfield id="RDDAT1" width="8" begin="15" end="8" resetval="0x0" description="RDDAT1: 2nd byte from incoming Direct Command receive path " range="15 - 8" rwaccess="R"/> 
+		<bitfield id="RDDAT0" width="8" begin="7" end="0" resetval="0x0" description="RDDAT0: 1st byte from incoming Direct Command receive path" range="7 - 0" rwaccess="R"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_rd_property" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_rd_property" offset="0xA4" width="32" description="">
+		<bitfield id="RD_DCSNOTGENERIC" width="1" begin="18" end="18" resetval="0x0" description="RD_DCSNOTGENERIC: Type of read command [DCS or generic]" range="18" rwaccess="R"/> 
+		<bitfield id="RD_ID" width="2" begin="17" end="16" resetval="0x0" description="RD_ID: Virtual channel of the read received" range="17 - 16" rwaccess="R"/> 
+		<bitfield id="RD_SIZE" width="16" begin="15" end="0" resetval="0x0" description="RD_SIZE: Size of the read data received" range="15 - 0" rwaccess="R"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_rd_sts" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_rd_sts" offset="0xA8" width="32" description="">
+		<bitfield id="ERR_EOT_WITH_ERR" width="1" begin="8" end="8" resetval="0x0" description="ERR_EOT_WITH_ERR: EOT received with error" range="8" rwaccess="R"/> 
+		<bitfield id="ERR_MISSING_EOT" width="1" begin="7" end="7" resetval="0x0" description="ERR_MISSING_EOT: EOT requested but not received" range="7" rwaccess="R"/> 
+		<bitfield id="ERR_WRONG_LENGTH" width="1" begin="6" end="6" resetval="0x0" description="ERR_WRONG_LENGTH : length error has been detected.       This error indicates that a packet has been received which was shorter than the expected length [longer packets than expected will result in ERR_RECEIVE field being set, as it is difficult to distinguish the extra information from other types of reception errors]." range="6" rwaccess="R"/> 
+		<bitfield id="ERR_OVERSIZE" width="1" begin="5" end="5" resetval="0x0" description="ERR_OVERSIZE : packet size exceeds maximum " range="5" rwaccess="R"/> 
+		<bitfield id="ERR_RECEIVE" width="1" begin="4" end="4" resetval="0x0" description="ERR_RECEIVE : received packet not complete.               This is a general error flag indicated that packet reception did not complete for some reason.               Example conditions: signalling errors [e.g. unexpected change in PPI direction signal]; longer packet received than expected. " range="4" rwaccess="R"/> 
+		<bitfield id="ERR_UNDECODABLE" width="1" begin="3" end="3" resetval="0x0" description="ERR_UNDECODABLE : command opcode not understood" range="3" rwaccess="R"/> 
+		<bitfield id="ERR_CHECKSUM" width="1" begin="2" end="2" resetval="0x0" description="ERR_CHECKSUM: error[s] detected by checksum " range="2" rwaccess="R"/> 
+		<bitfield id="ERR_UNCORRECTABLE" width="1" begin="1" end="1" resetval="0x0" description="ERR_UNCORRECTABLE : more than 1 error detected by ECC" range="1" rwaccess="R"/> 
+		<bitfield id="ERR_FIXED" width="1" begin="0" end="0" resetval="0x0" description="ERR_FIXED : one error detected and fixed by ECC" range="0" rwaccess="R"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_main_ctl" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_main_ctl" offset="0xB0" width="32" description="">
+		<bitfield id="VID_IGNORE_MISS_VSYNC" width="1" begin="31" end="31" resetval="0x1" description=" VID_IGNORE_MISSING_SYNC: When mode is enabled, this allows the video stream to go to IDLE during VFP and wait for new VSYNC without link failing to recovery" range="31" rwaccess="R/W"/> 
+		<bitfield id="RECOVERY_MODE" width="2" begin="26" end="25" resetval="0x0" description=" RECOVERY_MODE: specify recovery mode" range="26 - 25" rwaccess="R/W"/> 
+		<bitfield id="REG_BLKEOL_MODE" width="2" begin="24" end="23" resetval="0x0" description=" REG_BLKEOL_MODE: behavior during end of line in burst mode - same coding as reg_blkline_mode" range="24 - 23" rwaccess="R/W"/> 
+		<bitfield id="REG_BLKLINE_MODE" width="2" begin="22" end="21" resetval="0x0" description=" REG_BLKLINE_MODE : behavior during blanking time [1x: LP, 01: blanking packet - 00: NULL packet]" range="22 - 21" rwaccess="R/W"/> 
+		<bitfield id="SYNC_PULSE_HORIZONTAL" width="1" begin="20" end="20" resetval="0x0" description=" SYNC_PULSE_HORIZONTAL: syncs are pulse [1] or event [0] all the time [DSI protocol v1.00..._r6 and later] - to be set only when sync_pulse_active = 1" range="20" rwaccess="R/W"/> 
+		<bitfield id="SYNC_PULSE_ACTIVE" width="1" begin="19" end="19" resetval="0x0" description=" SYNC_PULSE_ACTIVE: syncs are pulse [1] or event [0] during active area [DSI protocol v1.00..._r3 and before]" range="19" rwaccess="R/W"/> 
+		<bitfield id="BURST_MODE" width="1" begin="18" end="18" resetval="0x0" description=" BURST_MODE: signals if system works in burst mode or not" range="18" rwaccess="R/W"/> 
+		<bitfield id="VID_PIXEL_MODE" width="4" begin="17" end="14" resetval="0x0" description=" VID_PIXEL_MODE:                                                                                                                                                                  0000: 16 bits RGB         - 0001: 18 bits RGB                                                                                                                                    0010: 18 bits RGB[loose]  - 0011: 24 bits RGB                                                                                                                             0100: 30 bits RGB         - 0101: 36 bits RGB                                                                                                                              1000: 12 bits YCbCr       - 1001: 16 bits YCbCr                                                                                                                        1010: 20 bits YCbCr       - 1011: 24 bits YCbCr                  1100: DSC Compressed" range="17 - 14" rwaccess="R/W"/> 
+		<bitfield id="HEADER" width="6" begin="13" end="8" resetval="0x0" description="HEADER : specify the datatype of RGB packets" range="13 - 8" rwaccess="R/W"/> 
+		<bitfield id="VID_ID" width="2" begin="5" end="4" resetval="0x0" description="VID_ID : specify the Virtual Channel Identifier of the video packets " range="5 - 4" rwaccess="R/W"/> 
+		<bitfield id="STOP_MODE" width="2" begin="3" end="2" resetval="0x0" description="STOP_MODE : video stop point [see description in Video Stream Generator [VSG] section] .[The configurations where the frame stops at the end of any line                        and at the end of the last active line - start_mode in [1;2] - are being deprecated, thus not verified anymore" range="3 - 2" rwaccess="R/W"/> 
+		<bitfield id="START_MODE" width="2" begin="1" end="0" resetval="0x0" description="START_MODE: video entry point [see description in Video Stream Generator [VSG] section][The configuration where the frame starts with a VFP -                                   start_mode=1 - is being deprecated, thus not verified anymore]" range="1 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_vsize1" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_vsize1" offset="0xB4" width="32" description="">
+		<bitfield id="VFP_LENGTH" width="8" begin="19" end="12" resetval="0x0" description="VFP_LENGTH: length of the VFP [in lines]" range="19 - 12" rwaccess="R/W"/> 
+		<bitfield id="VBP_LENGTH" width="6" begin="11" end="6" resetval="0x0" description="VBP_LENGTH: length of the VBP [in lines]" range="11 - 6" rwaccess="R/W"/> 
+		<bitfield id="VSA_LENGTH" width="6" begin="5" end="0" resetval="0x0" description="VSA_LENGTH: duration of the VSYNC pulse [in lines]" range="5 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_vsize2" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_vsize2" offset="0xB8" width="32" description="">
+		<bitfield id="VACT_LENGTH" width="13" begin="12" end="0" resetval="0x0" description="VACT_LENGTH: vertical length of active area [in line]" range="12 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_hsize1" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_hsize1" offset="0xC0" width="32" description="">
+		<bitfield id="HBP_LENGTH" width="16" begin="31" end="16" resetval="0x0" description="HBP_LENGTH: length of HBP [in bytes] - if 0, HBP packet is sent with 0 payload" range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="HSA_LENGTH" width="10" begin="9" end="0" resetval="0x0" description="HSA_LENGTH: duration of HSYNC pulse [in bytes] " range="9 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_hsize2" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_hsize2" offset="0xC4" width="32" description="">
+		<bitfield id="HFP_LENGTH" width="11" begin="26" end="16" resetval="0x0" description="HFP_LENGTH: length of HFP [in bytes] - if 0, no HFP packet is sent" range="26 - 16" rwaccess="R/W"/> 
+		<bitfield id="RGB_SIZE" width="15" begin="14" end="0" resetval="0x0" description="RGB_SIZE: size [in byte] of the RGB packet" range="14 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_blksize1" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_blksize1" offset="0xCC" width="32" description="">
+		<bitfield id="BLKEOL_PCK" width="15" begin="29" end="15" resetval="0x0" description="BLKEOL_PCK: packet length [in byte] on end of line if burst mode [reg_blkeol_mode = 0b0x]" range="29 - 15" rwaccess="R/W"/> 
+		<bitfield id="BLKLINE_EVENT_PCK" width="15" begin="14" end="0" resetval="0x0" description="BLKLINE_EVENT_PCK: packet length [in byte] in blanking line if line has to be filled with a packet [reg_blkline_mode = 0b0x] and sync is an event                    Event mode Blank line                                                                                                                                                                                                                                           |_____|________________________________blkline_event_pck___________________________|                  |_HSS_|HDR______________________________________________________________________CRC|_HSS_  " range="14 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_blksize2" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_blksize2" offset="0xD0" width="32" description="">
+		<bitfield id="BLKLINE_PULSE_PCK" width="15" begin="14" end="0" resetval="0x0" description="BLKLINE_PULSE_PCK: packet length in blanking line if line has to be filled with a packet [reg_blkline_mode = 0b0x] and sync is a pulse                                                                                      Pulse mode Blank line                                                                                                                                                                                                               |_____________ |_______________________blkline_pulse_pck___________________________|                   |_HSS_HSA_HSE__|HDR_____________________________________________________________CRC|_HSS_  " range="14 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_pck_time" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_pck_time" offset="0xD8" width="32" description="">
+		<bitfield id="BLKEOL_DURATION" width="15" begin="14" end="0" resetval="0x0" description="BLKEOL_DURATION: specify the duration in clock cycles of the BLLP period [used for burst mode]" range="14 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_dphy_time" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_dphy_time" offset="0xDC" width="32" description="">
+		<bitfield id="REG_WAKEUP_TIME" width="11" begin="27" end="17" resetval="0x0" description="REG_WAKEUP_TIME: estimated time [in clock cycles] to perform LP->HS on D-PHY      |___________reg_wakeup_time________________|                                    | Clk Request                                                                 |------------>| Clk Ready                                                                  | Data Request                                                      |-------------------> | Data Ready       " range="27 - 17" rwaccess="R/W"/> 
+		<bitfield id="REG_LINE_DURATION" width="17" begin="16" end="0" resetval="0x0" description="REG_LINE_DURATION: duration -in clock cycles - of the blanking area for VSA/VBP and VFP lines - considered when reg_blkline_mode = 1b1x             Pulse mode Blank LP line EOT disabled                                                           |_____________ |___________________________reg_line_duration_______________________|      |_HSS_HSA_HSE__|______________________________LP___________________________________|_HSS_                                                                                                                                                                                                                    Pulse mode Blank LP line EOT enabled                                                                                                                                                                                                    |______________|   |_______________________reg_line_duration_______________________|      |_HSS_HSA_HSE__|EoT|__________________________LP___________________________________|_HSS_                                                                                 Event mode Blank LP line EOT enabled                                                        |________|_________________________________reg_line_duration_______________________|      |_HSS|EoT|____________________________________LP___________________________________|_HSS_ " range="16 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_err_color1" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_err_color1" offset="0xE0" width="32" description="">
+		<bitfield id="COL_GREEN" width="12" begin="23" end="12" resetval="0x0" description="COL_GREEN: green component of the fill color" range="23 - 12" rwaccess="R/W"/> 
+		<bitfield id="COL_RED" width="12" begin="11" end="0" resetval="0x0" description="COL_RED: red component of the fill color" range="11 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_err_color2" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_err_color2" offset="0xE4" width="32" description="">
+		<bitfield id="PAD_VALUE" width="12" begin="23" end="12" resetval="0x0" description="PAD_VALUE: byte used to pad data [when system does not know exactly where it is]" range="23 - 12" rwaccess="R/W"/> 
+		<bitfield id="COL_BLUE" width="12" begin="11" end="0" resetval="0x0" description="COL_BLUE: blue component of the fill color" range="11 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_vpos" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_vpos" offset="0xE8" width="32" description="">
+		<bitfield id="LINE_VAL" width="13" begin="14" end="2" resetval="0x0" description="LINE_VAL: line number of the current area " range="14 - 2" rwaccess="R"/> 
+		<bitfield id="LINE_POS" width="2" begin="1" end="0" resetval="0x0" description="LINE_POS: position in the frame [see description in Video Stream Generator]" range="1 - 0" rwaccess="R"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_hpos" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_hpos" offset="0xEC" width="32" description="">
+		<bitfield id="HORIZONTAL_VAL" width="15" begin="17" end="3" resetval="0x0" description="HORIZONTAL_VAL: position in the current horizontal area [in clock cycles]" range="17 - 3" rwaccess="R"/> 
+		<bitfield id="HORIZONTAL_POS" width="3" begin="2" end="0" resetval="0x0" description="HORIZONTAL_POS: position in the line [see description in Video Stream Generator]" range="2 - 0" rwaccess="R"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_mode_sts" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_mode_sts" offset="0xF0" width="32" description="">
+		<bitfield id="VSG_RECOVERY" width="1" begin="10" end="10" resetval="0x0" description="VSG_RECOVERY: specifies whether the VSG is in recovery mode or not " range="10" rwaccess="R"/> 
+		<bitfield id="ERR_VRS_WRONG_LENGTH" width="1" begin="9" end="9" resetval="0x0" description="ERR_VRS_WRONG_LENGTH: signals that packets in SDI interface differ from the expected size [as specified by rgb_size]" range="9" rwaccess="R"/> 
+		<bitfield id="ERR_LONGREAD" width="1" begin="8" end="8" resetval="0x0" description="ERR_LONGREAD: signals the read was too long " range="8" rwaccess="R"/> 
+		<bitfield id="ERR_LINEWRITE" width="1" begin="7" end="7" resetval="0x0" description="ERR_LINEWRITE: signals the long packet is too long to pass during a long slot " range="7" rwaccess="R"/> 
+		<bitfield id="ERR_BURSTWRITE" width="1" begin="6" end="6" resetval="0x0" description="ERR_BURSTWRITE: signals a long packet has been sent during active area" range="6" rwaccess="R"/> 
+		<bitfield id="REG_ERR_SMALL_HEIGHT" width="1" begin="5" end="5" resetval="0x0" description="REG_ERR_SMALL_HEIGHT: fewer lines than expected between 2 VSYNC " range="5" rwaccess="R"/> 
+		<bitfield id="REG_ERR_SMALL_LENGTH" width="1" begin="4" end="4" resetval="0x0" description="REG_ERR_SMALL_LENGTH: fewer bytes received than expected between 2 HSYNC. Note that MISSING_DATA error may occur instead of SMALL_LENGTH, dependent upon timing." range="4" rwaccess="R"/> 
+		<bitfield id="ERR_MISSING_VSYNC" width="1" begin="3" end="3" resetval="0x0" description="ERR_MISSING_VSYNC: missing VSYNC " range="3" rwaccess="R"/> 
+		<bitfield id="ERR_MISSING_HSYNC" width="1" begin="2" end="2" resetval="0x0" description="ERR_MISSING_HSYNC: missing HSYNC " range="2" rwaccess="R"/> 
+		<bitfield id="ERR_MISSING_DATA" width="1" begin="1" end="1" resetval="0x0" description="ERR_MISSING_DATA: data starvation at input of the VSG. Note that this error report may also be triggered instead of the SMALL_LENGTH error, dependent upon timing." range="1" rwaccess="R"/> 
+		<bitfield id="VSG_RUNNING" width="1" begin="0" end="0" resetval="0x0" description="VSG_RUNNING: VSG is running [1] or stopped [0]" range="0" rwaccess="R"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_vca_setting1" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_vca_setting1" offset="0xF4" width="32" description="">
+		<bitfield id="BURST_LP" width="1" begin="16" end="16" resetval="0x0" description="BURST_LP: after an active line, the system can switch in LP [1] or should complete the line with NULL packet [0]" range="16" rwaccess="R/W"/> 
+		<bitfield id="MAX_BURST_LIMIT" width="16" begin="15" end="0" resetval="0x0" description="MAX_BURST_LIMIT: size of the 'biggest' burst packet [packet that fits after RGB in burst mode]" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_vca_setting2" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_vca_setting2" offset="0xF8" width="32" description="">
+		<bitfield id="MAX_LINE_LIMIT" width="16" begin="31" end="16" resetval="0x0" description="MAX_LINE_LIMIT: maximum size of the line packet [packet that fits in blanking line]" range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="EXACT_BURST_LIMIT" width="16" begin="15" end="0" resetval="0x0" description="EXACT_BURST_LIMIT: exact maximum size of the burst packet [packet that fits after RGB in burst mode]" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_tvg_ctl" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_tvg_ctl" offset="0xFC" width="32" description="">
+		<bitfield id="TVG_STRIPE_SIZE" width="3" begin="7" end="5" resetval="0x0" description="TVG_STRIPE_SIZE: size of the stripe [in pixels] - defined by 2^reg_tvg_stripe_size" range="7 - 5" rwaccess="R/W"/> 
+		<bitfield id="TVG_MODE" width="2" begin="4" end="3" resetval="0x0" description="TVG_MODE: TVG display mode : 00 : single color ; 01 : reserved ; 10 : vertical stripes ; 11 horizontal stripes" range="4 - 3" rwaccess="R/W"/> 
+		<bitfield id="TVG_STOPMODE" width="2" begin="2" end="1" resetval="0x0" description="TVG_STOPMODE: stop mode: 00: at end of frame, 01: at end of line, 1x: immediate" range="2 - 1" rwaccess="R/W"/> 
+		<bitfield id="TVG_RUN" width="1" begin="0" end="0" resetval="0x0" description="TVG_RUN: start/stop of the TVG" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_tvg_img_size" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_tvg_img_size" offset="0x100" width="32" description="">
+		<bitfield id="TVG_NBLINE" width="13" begin="28" end="16" resetval="0x0" description="TVG_NBLINE: Number of lines per frame" range="28 - 16" rwaccess="R/W"/> 
+		<bitfield id="TVG_LINE_SIZE" width="15" begin="14" end="0" resetval="0x0" description="TVG_LINE_SIZE: Number of bytes per line" range="14 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_tvg_color1" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_tvg_color1" offset="0x104" width="32" description="">
+		<bitfield id="COL1_GREEN" width="12" begin="23" end="12" resetval="0x0" description="COL1_GREEN: green component of the color 1" range="23 - 12" rwaccess="R/W"/> 
+		<bitfield id="COL1_RED" width="12" begin="11" end="0" resetval="0x0" description="COL1_RED: red component of the color 1" range="11 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_tvg_color1_bis" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_tvg_color1_bis" offset="0x108" width="32" description="">
+		<bitfield id="COL1_BLUE" width="12" begin="11" end="0" resetval="0x0" description="COL1_BLUE: blue component of the color 1" range="11 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_tvg_color2" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_tvg_color2" offset="0x10C" width="32" description="">
+		<bitfield id="COL2_GREEN" width="12" begin="23" end="12" resetval="0x0" description="COL2_GREEN: green component of the color 2" range="23 - 12" rwaccess="R/W"/> 
+		<bitfield id="COL2_RED" width="12" begin="11" end="0" resetval="0x0" description="COL2_RED: red component of the color 2" range="11 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_tvg_color2_bis" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_tvg_color2_bis" offset="0x110" width="32" description="">
+		<bitfield id="COL2_BLUE" width="12" begin="11" end="0" resetval="0x0" description="COL2_BLUE: blue component of the color 2" range="11 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_tvg_sts" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_tvg_sts" offset="0x114" width="32" description="">
+		<bitfield id="TVG_RUNNING" width="1" begin="0" end="0" resetval="0x0" description="TVG_RUNNING: status of the TVG " range="0" rwaccess="R"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_main_sts_ctl" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_main_sts_ctl" offset="0x130" width="32" description="">
+		<bitfield id="IF3_UNTERM_PCK_ERR_EDGE" width="1" begin="25" end="25" resetval="0x0" description="IF3_UNTERM_PCK_ERR_EDGE: edge detection of if3_unterm_pck_err" range="25" rwaccess="R/W"/> 
+		<bitfield id="IF1_UNTERM_PCK_ERR_EDGE" width="1" begin="24" end="24" resetval="0x0" description="IF1_UNTERM_PCK_ERR_EDGE: edge detection of if1_unterm_pck_err" range="24" rwaccess="R/W"/> 
+		<bitfield id="LPRX_TO_ERR_EDGE" width="1" begin="23" end="23" resetval="0x0" description="LPRX_TO_ERR_EDGE: edge detection of LP_RX time-out error" range="23" rwaccess="R/W"/> 
+		<bitfield id="HSTX_TO_ERR_EDGE" width="1" begin="22" end="22" resetval="0x0" description="HSTX_TO_ERR_EDGE: edge detection of HS_TX time-out error" range="22" rwaccess="R/W"/> 
+		<bitfield id="DAT4_READY_EDGE" width="1" begin="21" end="21" resetval="0x0" description="DAT4_READY_EDGE: edge detection of dat4_ready" range="21" rwaccess="R/W"/> 
+		<bitfield id="DAT3_READY_EDGE" width="1" begin="20" end="20" resetval="0x0" description="DAT3_READY_EDGE: edge detection of dat3_ready " range="20" rwaccess="R/W"/> 
+		<bitfield id="DAT2_READY_EDGE" width="1" begin="19" end="19" resetval="0x0" description="DAT2_READY_EDGE: edge detection of dat2_ready" range="19" rwaccess="R/W"/> 
+		<bitfield id="DAT1_READY_EDGE" width="1" begin="18" end="18" resetval="0x0" description="DAT1_READY_EDGE: edge detection of dat1_ready " range="18" rwaccess="R/W"/> 
+		<bitfield id="CLKLANE_READY_EDGE" width="1" begin="17" end="17" resetval="0x0" description="CLKLANE_READY_EDGE: edge detection of clklane_ready " range="17" rwaccess="R/W"/> 
+		<bitfield id="PLL_LOCK_EDGE" width="1" begin="16" end="16" resetval="0x0" description="PLL_LOCK_EDGE: edge detection of PLL lock " range="16" rwaccess="R/W"/> 
+		<bitfield id="IF3_UNTERM_PCK_ERR_EN" width="1" begin="9" end="9" resetval="0x0" description="IF3_UNTERM_PCK_ERR_EN: enables if3_unterm_pck_err" range="9" rwaccess="R/W"/> 
+		<bitfield id="IF1_UNTERM_PCK_ERR_EN" width="1" begin="8" end="8" resetval="0x0" description="IF1_UNTERM_PCK_ERR_EN: enables if1_unterm_pck_err " range="8" rwaccess="R/W"/> 
+		<bitfield id="LPRX_TO_ERR_EN" width="1" begin="7" end="7" resetval="0x0" description="LPRX_TO_ERR_EN: enables lprx_to_err" range="7" rwaccess="R/W"/> 
+		<bitfield id="HSTX_TO_ERR_EN" width="1" begin="6" end="6" resetval="0x0" description="HSTX_TO_ERR_EN: enables hstx_to_err" range="6" rwaccess="R/W"/> 
+		<bitfield id="DAT4_READY_EN" width="1" begin="5" end="5" resetval="0x0" description="DAT4_READY_EN: enables dat4_ready" range="5" rwaccess="R/W"/> 
+		<bitfield id="DAT3_READY_EN" width="1" begin="4" end="4" resetval="0x0" description="DAT3_READY_EN: enables dat3_ready" range="4" rwaccess="R/W"/> 
+		<bitfield id="DAT2_READY_EN" width="1" begin="3" end="3" resetval="0x0" description="DAT2_READY_EN: enables dat2_ready " range="3" rwaccess="R/W"/> 
+		<bitfield id="DAT1_READY_EN" width="1" begin="2" end="2" resetval="0x0" description="DAT1_READY_EN: enables dat1_ready " range="2" rwaccess="R/W"/> 
+		<bitfield id="CLKLANE_READY_EN" width="1" begin="1" end="1" resetval="0x0" description="CLKLANE_READY_EN: enables clklane_ready" range="1" rwaccess="R/W"/> 
+		<bitfield id="PLL_LOCK_EN" width="1" begin="0" end="0" resetval="0x0" description="PLL_LOCK_EN: enables PLL lock" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_cmd_mode_sts_ctl" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_cmd_mode_sts_ctl" offset="0x134" width="32" description="">
+		<bitfield id="ERR_IF3_UNDERRUN_EDGE" width="1" begin="21" end="21" resetval="0x0" description="ERR_IF3_UNDERRUN_EDGE: edge detection of err_IF3_underrun" range="21" rwaccess="R/W"/> 
+		<bitfield id="ERR_IF1_UNDERRUN_EDGE" width="1" begin="20" end="20" resetval="0x0" description="ERR_IF1_UNDERRUN_EDGE: edge detection of err_IF1_underrun" range="20" rwaccess="R/W"/> 
+		<bitfield id="ERR_UNWANTED_RD_EDGE" width="1" begin="19" end="19" resetval="0x0" description="ERR_UNWANTED_RD_EDGE: edge detection of err_unwanted_rd " range="19" rwaccess="R/W"/> 
+		<bitfield id="ERR_TE_MISS_EDGE" width="1" begin="18" end="18" resetval="0x0" description="ERR_TE_MISS_EDGE: edge detection of err_te_miss " range="18" rwaccess="R/W"/> 
+		<bitfield id="ERR_NO_TE_EDGE" width="1" begin="17" end="17" resetval="0x0" description="ERR_NO_TE_EDGE: edge detection of err_no_te  " range="17" rwaccess="R/W"/> 
+		<bitfield id="CSM_RUNNING_EDGE" width="1" begin="16" end="16" resetval="0x0" description="CSM_RUNNING_EDGE: edge detection of CSM running   " range="16" rwaccess="R/W"/> 
+		<bitfield id="ERR_IF3_UNDERRUN_EN" width="1" begin="5" end="5" resetval="0x0" description="ERR_IF3_UNDERRUN_EN: enables err_IF3_underrun " range="5" rwaccess="R/W"/> 
+		<bitfield id="ERR_IF1_UNDERRUN_EN" width="1" begin="4" end="4" resetval="0x0" description="ERR_IF1_UNDERRUN_EN: enables err_IF1_underrun " range="4" rwaccess="R/W"/> 
+		<bitfield id="ERR_UNWANTED_RD_EN" width="1" begin="3" end="3" resetval="0x0" description="ERR_UNWANTED_RD_EN: enables err_unwanted_rd  " range="3" rwaccess="R/W"/> 
+		<bitfield id="ERR_TE_MISS_EN" width="1" begin="2" end="2" resetval="0x0" description="ERR_TE_MISS_EN: enables err_te_miss  " range="2" rwaccess="R/W"/> 
+		<bitfield id="ERR_NO_TE_EN" width="1" begin="1" end="1" resetval="0x0" description="ERR_NO_TE_EN: enables err_no_te " range="1" rwaccess="R/W"/> 
+		<bitfield id="CSM_RUNNING_EN" width="1" begin="0" end="0" resetval="0x0" description="CSM_RUNNING_EN: enables signaling of CSM running  " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_sts_ctl" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_sts_ctl" offset="0x138" width="32" description="">
+		<bitfield id="READ_COMPLETED_WITH_ERR_EDGE" width="1" begin="26" end="26" resetval="0x0" description="READ_COMPLETED_WITH_ERR_EDGE: edge detection of read detection completed with errors " range="26" rwaccess="R/W"/> 
+		<bitfield id="BTA_FINISHED_EDGE" width="1" begin="25" end="25" resetval="0x0" description="BTA_FINISHED_EDGE: edge detection of BTA completion detection " range="25" rwaccess="R/W"/> 
+		<bitfield id="BTA_COMPLETED_EDGE" width="1" begin="24" end="24" resetval="0x0" description="BTA_COMPLETED_EDGE: edge detection of BTA request completed " range="24" rwaccess="R/W"/> 
+		<bitfield id="TE_RECEIVED_EDGE" width="1" begin="23" end="23" resetval="0x0" description="TE_RECEIVED_EDGE: edge detection of TE received    " range="23" rwaccess="R/W"/> 
+		<bitfield id="TRIGGER_RECEIVED_EDGE" width="1" begin="22" end="22" resetval="0x0" description="TRIGGER_RECEIVED_EDGE: edge detection of trigger     " range="22" rwaccess="R/W"/> 
+		<bitfield id="ACKNOWLEDGE_WITH_ERR_EDGE" width="1" begin="21" end="21" resetval="0x0" description="ACKNOWLEDGE_WITH_ERR_EDGE: edge detection of acknowledge with error  " range="21" rwaccess="R/W"/> 
+		<bitfield id="ACKNOWLEDGE_RECEIVED_EDGE" width="1" begin="20" end="20" resetval="0x0" description="ACKNOWLEDGE_RECEIVED_EDGE: edge detection of acknowledge  " range="20" rwaccess="R/W"/> 
+		<bitfield id="READ_COMPLETED_EDGE" width="1" begin="19" end="19" resetval="0x0" description="READ_COMPLETED_EDGE: edge detection of read request completed " range="19" rwaccess="R/W"/> 
+		<bitfield id="TRIGGER_COMPLETED_EDGE" width="1" begin="18" end="18" resetval="0x0" description="TRIGGER_COMPLETED_EDGE: edge detection of trigger request completed  " range="18" rwaccess="R/W"/> 
+		<bitfield id="WRITE_COMPLETED_EDGE" width="1" begin="17" end="17" resetval="0x0" description="WRITE_COMPLETED_EDGE: edge detection of detection of write request completed " range="17" rwaccess="R/W"/> 
+		<bitfield id="CMD_TRANSMISSION_EDGE" width="1" begin="16" end="16" resetval="0x0" description="CMD_TRANSMISSION_EDGE: edge detection of cmd_transmission     " range="16" rwaccess="R/W"/> 
+		<bitfield id="READ_COMPLETED_WITH_ERR_EN" width="1" begin="10" end="10" resetval="0x0" description="READ_COMPLETED_WITH_ERR_EN: enables detection of read completed with errors " range="10" rwaccess="R/W"/> 
+		<bitfield id="BTA_FINISHED_EN" width="1" begin="9" end="9" resetval="0x0" description="BTA_FINISHED_EN: enables BTA completion detection " range="9" rwaccess="R/W"/> 
+		<bitfield id="BTA_COMPLETED_EN" width="1" begin="8" end="8" resetval="0x0" description="BTA_COMPLETED_EN: enables BTA request completed " range="8" rwaccess="R/W"/> 
+		<bitfield id="TE_RECEIVED_EN" width="1" begin="7" end="7" resetval="0x0" description="TE_RECEIVED_EN: enables TE received  " range="7" rwaccess="R/W"/> 
+		<bitfield id="TRIGGER_RECEIVED_EN" width="1" begin="6" end="6" resetval="0x0" description="TRIGGER_RECEIVED_EN: enables trigger   " range="6" rwaccess="R/W"/> 
+		<bitfield id="ACKNOWLEDGE_WITH_ERR_EN" width="1" begin="5" end="5" resetval="0x0" description="ACKNOWLEDGE_WITH_ERR_EN: enables acknowledge with error  " range="5" rwaccess="R/W"/> 
+		<bitfield id="ACKNOWLEDGE_RECEIVED_EN" width="1" begin="4" end="4" resetval="0x0" description="ACKNOWLEDGE_RECEIVED_EN: enables acknowledge   " range="4" rwaccess="R/W"/> 
+		<bitfield id="READ_COMPLETED_EN" width="1" begin="3" end="3" resetval="0x0" description="READ_COMPLETED_EN: enables read request completed  " range="3" rwaccess="R/W"/> 
+		<bitfield id="TRIGGER_COMPLETED_EN" width="1" begin="2" end="2" resetval="0x0" description="TRIGGER_COMPLETED_EN: enables trigger_completed " range="2" rwaccess="R/W"/> 
+		<bitfield id="WRITE_COMPLETED_EN" width="1" begin="1" end="1" resetval="0x0" description="WRITE_COMPLETED_EN: enables write_completed " range="1" rwaccess="R/W"/> 
+		<bitfield id="CMD_TRANSMISSION_EN" width="1" begin="0" end="0" resetval="0x0" description="CMD_TRANSMISSION_EN: enables detection of cmd_transmission " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_rd_sts_ctl" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_rd_sts_ctl" offset="0x13C" width="32" description="">
+		<bitfield id="ERR_EOT_WITH_ERR_EDGE" width="1" begin="24" end="24" resetval="0x0" description="ERR_EOT_WITH_ERR_EDGE: edge detection of err_eot_with_err  " range="24" rwaccess="R/W"/> 
+		<bitfield id="ERR_MISSING_EOT_EDGE" width="1" begin="23" end="23" resetval="0x0" description="ERR_MISSING_EOT_EDGE: edge detection of err_missing_eot  " range="23" rwaccess="R/W"/> 
+		<bitfield id="ERR_WRONG_LENGTH_EDGE" width="1" begin="22" end="22" resetval="0x0" description="ERR_WRONG_LENGTH_EDGE: edge detection of err_wrong_length " range="22" rwaccess="R/W"/> 
+		<bitfield id="ERR_OVERSIZE_EDGE" width="1" begin="21" end="21" resetval="0x0" description="ERR_OVERSIZE_EDGE: edge detection of err_oversize   " range="21" rwaccess="R/W"/> 
+		<bitfield id="ERR_RECEIVE_EDGE" width="1" begin="20" end="20" resetval="0x0" description="ERR_RECEIVE_EDGE: edge detection of err_receive   " range="20" rwaccess="R/W"/> 
+		<bitfield id="ERR_UNDECODABLE_EDGE" width="1" begin="19" end="19" resetval="0x0" description="ERR_UNDECODABLE_EDGE: edge detection of err_undecodable " range="19" rwaccess="R/W"/> 
+		<bitfield id="ERR_CHECKSUM_EDGE" width="1" begin="18" end="18" resetval="0x0" description="ERR_CHECKSUM_EDGE: edge detection of err_checksum    " range="18" rwaccess="R/W"/> 
+		<bitfield id="ERR_UNCORRECTABLE_EDGE" width="1" begin="17" end="17" resetval="0x0" description="ERR_UNCORRECTABLE_EDGE: edge detection of err_uncorrectable " range="17" rwaccess="R/W"/> 
+		<bitfield id="ERR_FIXED_EDGE" width="1" begin="16" end="16" resetval="0x0" description="ERR_FIXED_EDGE: edge detection of err_fixed " range="16" rwaccess="R/W"/> 
+		<bitfield id="ERR_EOT_WITH_ERR_EN" width="1" begin="8" end="8" resetval="0x0" description="ERR_EOT_WITH_ERR_EN: enables err_eot_with_err " range="8" rwaccess="R/W"/> 
+		<bitfield id="ERR_MISSING_EOT_EN" width="1" begin="7" end="7" resetval="0x0" description="ERR_MISSING_EOT_EN: enables err_missing_eot  " range="7" rwaccess="R/W"/> 
+		<bitfield id="ERR_WRONG_LENGTH_EN" width="1" begin="6" end="6" resetval="0x0" description="ERR_WRONG_LENGTH_EN: enables err_wrong_length " range="6" rwaccess="R/W"/> 
+		<bitfield id="ERR_OVERSIZE_EN" width="1" begin="5" end="5" resetval="0x0" description="ERR_OVERSIZE_EN: enables err_oversize   " range="5" rwaccess="R/W"/> 
+		<bitfield id="ERR_RECEIVE_EN" width="1" begin="4" end="4" resetval="0x0" description="ERR_RECEIVE_EN: enables err_receive   " range="4" rwaccess="R/W"/> 
+		<bitfield id="ERR_UNDECODABLE_EN" width="1" begin="3" end="3" resetval="0x0" description="ERR_UNDECODABLE_EN: enables err_undecodable " range="3" rwaccess="R/W"/> 
+		<bitfield id="ERR_CHECKSUM_EN" width="1" begin="2" end="2" resetval="0x0" description="ERR_CHECKSUM_EN: enables err_checksum " range="2" rwaccess="R/W"/> 
+		<bitfield id="ERR_UNCORRECTABLE_EN" width="1" begin="1" end="1" resetval="0x0" description="ERR_UNCORRECTABLE_EN: enables err_uncorrectable" range="1" rwaccess="R/W"/> 
+		<bitfield id="ERR_FIXED_EN" width="1" begin="0" end="0" resetval="0x0" description="ERR_FIXED_EN: enables err_fixed " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_mode_sts_ctl" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_mode_sts_ctl" offset="0x140" width="32" description="">
+		<bitfield id="VSG_RECOVERY_EDGE" width="1" begin="26" end="26" resetval="0x0" description="VSG_RECOVERY_EDGE: edge detection of vsg_recovery  " range="26" rwaccess="R/W"/> 
+		<bitfield id="ERR_VRS_WRONG_LENGTH_EDGE" width="1" begin="25" end="25" resetval="0x0" description="ERR_VRS_WRONG_LENGTH_EDGE: edge detection of err_vrs_wrong_length" range="25" rwaccess="R/W"/> 
+		<bitfield id="ERR_LONGREAD_EDGE" width="1" begin="24" end="24" resetval="0x0" description="ERR_LONGREAD_EDGE: edge detection of err_longread " range="24" rwaccess="R/W"/> 
+		<bitfield id="ERR_LINEWRITE_EDGE" width="1" begin="23" end="23" resetval="0x0" description="ERR_LINEWRITE_EDGE: edge detection of err_line_write " range="23" rwaccess="R/W"/> 
+		<bitfield id="ERR_BURSTWRITE_EDGE" width="1" begin="22" end="22" resetval="0x0" description="ERR_BURSTWRITE_EDGE: edge detection of err_burst_write " range="22" rwaccess="R/W"/> 
+		<bitfield id="ERR_SMALL_HEIGHT_EDGE" width="1" begin="21" end="21" resetval="0x0" description="ERR_SMALL_HEIGHT_EDGE: edge detection of unaligned line number " range="21" rwaccess="R/W"/> 
+		<bitfield id="ERR_SMALL_LENGTH_EDGE" width="1" begin="20" end="20" resetval="0x0" description="ERR_SMALL_LENGTH_EDGE: edge detection of unaligned size " range="20" rwaccess="R/W"/> 
+		<bitfield id="ERR_MISSING_VSYNC_EDGE" width="1" begin="19" end="19" resetval="0x0" description="ERR_MISSING_VSYNC_EDGE: edge detection of detection of missing VSYNC" range="19" rwaccess="R/W"/> 
+		<bitfield id="ERR_MISSING_HSYNC_EDGE" width="1" begin="18" end="18" resetval="0x0" description="ERR_MISSING_HSYNC_EDGE: edge detection of detection of missing HSYNC" range="18" rwaccess="R/W"/> 
+		<bitfield id="ERR_MISSING_DATA_EDGE" width="1" begin="17" end="17" resetval="0x0" description="ERR_MISSING_DATA_EDGE: edge detection of data miss detection " range="17" rwaccess="R/W"/> 
+		<bitfield id="VSG_RUNNING_EDGE" width="1" begin="16" end="16" resetval="0x0" description="VSG_RUNNING_EDGE: edge detection of VSG status observation " range="16" rwaccess="R/W"/> 
+		<bitfield id="VSG_RECOVERY_EN" width="1" begin="10" end="10" resetval="0x0" description="VSG_RECOVERY_EN: enables vsg_recovery  " range="10" rwaccess="R/W"/> 
+		<bitfield id="ERR_VRS_WRONG_LENGTH_EN" width="1" begin="9" end="9" resetval="0x0" description="ERR_VRS_WRONG_LENGTH_EN: enables err_vrs_wrong_length " range="9" rwaccess="R/W"/> 
+		<bitfield id="ERR_LONGREAD_EN" width="1" begin="8" end="8" resetval="0x0" description="ERR_LONGREAD_EN: enables err_longread  " range="8" rwaccess="R/W"/> 
+		<bitfield id="ERR_LINEWRITE_EN" width="1" begin="7" end="7" resetval="0x0" description="ERR_LINEWRITE_EN: enables err_line_write " range="7" rwaccess="R/W"/> 
+		<bitfield id="ERR_BURSTWRITE_EN" width="1" begin="6" end="6" resetval="0x0" description="ERR_BURSTWRITE_EN: enables err_burst_write" range="6" rwaccess="R/W"/> 
+		<bitfield id="ERR_SMALL_HEIGHT_EN" width="1" begin="5" end="5" resetval="0x0" description="ERR_SMALL_HEIGHT_EN: enables detection of unaligned line number" range="5" rwaccess="R/W"/> 
+		<bitfield id="ERR_SMALL_LENGTH_EN" width="1" begin="4" end="4" resetval="0x0" description="ERR_SMALL_LENGTH_EN: enables detection of unaligned size " range="4" rwaccess="R/W"/> 
+		<bitfield id="ERR_MISSING_VSYNC_EN" width="1" begin="3" end="3" resetval="0x0" description="ERR_MISSING_VSYNC_EN: enables detection of missing VSYNC " range="3" rwaccess="R/W"/> 
+		<bitfield id="ERR_MISSING_HSYNC_EN" width="1" begin="2" end="2" resetval="0x0" description="ERR_MISSING_HSYNC_EN: enables detection of missing HSYNC " range="2" rwaccess="R/W"/> 
+		<bitfield id="ERR_MISSING_DATA_EN" width="1" begin="1" end="1" resetval="0x0" description="ERR_MISSING_DATA_EN: enables data miss detection" range="1" rwaccess="R/W"/> 
+		<bitfield id="VSG_RUNNING_EN" width="1" begin="0" end="0" resetval="0x0" description="VSG_RUNNING_EN: enables VSG status observation" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_tvg_sts_ctl" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_tvg_sts_ctl" offset="0x144" width="32" description="">
+		<bitfield id="TVG_STS_EDGE" width="1" begin="16" end="16" resetval="0x0" description="TVG_STS_EDGE: edge detection of TVG status observation" range="16" rwaccess="R/W"/> 
+		<bitfield id="TVG_STS_EN" width="1" begin="0" end="0" resetval="0x0" description="TVG_STS_EN: enables TVG status observation " range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_dphy_err_ctl1" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_dphy_err_ctl1" offset="0x148" width="32" description="">
+		<bitfield id="ERR_CONT_LP1_4_EN" width="1" begin="25" end="25" resetval="0x0" description="ERR_CONT_LP1_4_EN " range="25" rwaccess="R/W"/> 
+		<bitfield id="ERR_CONT_LP1_3_EN" width="1" begin="24" end="24" resetval="0x0" description="ERR_CONT_LP1_3_EN " range="24" rwaccess="R/W"/> 
+		<bitfield id="ERR_CONT_LP1_2_EN" width="1" begin="23" end="23" resetval="0x0" description="ERR_CONT_LP1_2_EN " range="23" rwaccess="R/W"/> 
+		<bitfield id="ERR_CONT_LP1_1_EN" width="1" begin="22" end="22" resetval="0x0" description="ERR_CONT_LP1_1_EN " range="22" rwaccess="R/W"/> 
+		<bitfield id="ERR_CONT_LP0_4_EN" width="1" begin="21" end="21" resetval="0x0" description="ERR_CONT_LP0_4_EN " range="21" rwaccess="R/W"/> 
+		<bitfield id="ERR_CONT_LP0_3_EN" width="1" begin="20" end="20" resetval="0x0" description="ERR_CONT_LP0_3_EN " range="20" rwaccess="R/W"/> 
+		<bitfield id="ERR_CONT_LP0_2_EN" width="1" begin="19" end="19" resetval="0x0" description="ERR_CONT_LP0_2_EN" range="19" rwaccess="R/W"/> 
+		<bitfield id="ERR_CONT_LP0_1_EN" width="1" begin="18" end="18" resetval="0x0" description="ERR_CONT_LP0_1_EN" range="18" rwaccess="R/W"/> 
+		<bitfield id="ERR_CONTROL_4_EN" width="1" begin="17" end="17" resetval="0x0" description="ERR_CONTROL_4_EN " range="17" rwaccess="R/W"/> 
+		<bitfield id="ERR_CONTROL_3_EN" width="1" begin="16" end="16" resetval="0x0" description="ERR_CONTROL_3_EN " range="16" rwaccess="R/W"/> 
+		<bitfield id="ERR_CONTROL_2_EN" width="1" begin="15" end="15" resetval="0x0" description="ERR_CONTROL_2_EN " range="15" rwaccess="R/W"/> 
+		<bitfield id="ERR_CONTROL_1_EN" width="1" begin="14" end="14" resetval="0x0" description="ERR_CONTROL_1_EN " range="14" rwaccess="R/W"/> 
+		<bitfield id="ERR_SYNCESC_4_EN" width="1" begin="13" end="13" resetval="0x0" description="ERR_SYNCESC_4_EN" range="13" rwaccess="R/W"/> 
+		<bitfield id="ERR_SYNCESC_3_EN" width="1" begin="12" end="12" resetval="0x0" description="ERR_SYNCESC_3_EN" range="12" rwaccess="R/W"/> 
+		<bitfield id="ERR_SYNCESC_2_EN" width="1" begin="11" end="11" resetval="0x0" description="ERR_SYNCESC_2_EN" range="11" rwaccess="R/W"/> 
+		<bitfield id="ERR_SYNCESC_1_EN" width="1" begin="10" end="10" resetval="0x0" description="ERR_SYNCESC_1_EN" range="10" rwaccess="R/W"/> 
+		<bitfield id="ERR_ESC_4_EN" width="1" begin="9" end="9" resetval="0x0" description="ERR_ESC_4_EN" range="9" rwaccess="R/W"/> 
+		<bitfield id="ERR_ESC_3_EN" width="1" begin="8" end="8" resetval="0x0" description="ERR_ESC_3_EN" range="8" rwaccess="R/W"/> 
+		<bitfield id="ERR_ESC_2_EN" width="1" begin="7" end="7" resetval="0x0" description="ERR_ESC_2_EN " range="7" rwaccess="R/W"/> 
+		<bitfield id="ERR_ESC_1_EN" width="1" begin="6" end="6" resetval="0x0" description="ERR_ESC_1_EN " range="6" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_dphy_err_ctl2" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_dphy_err_ctl2" offset="0x14C" width="32" description="">
+		<bitfield id="ERR_CONT_LP1_4_EDGE" width="1" begin="19" end="19" resetval="0x0" description="ERR_CONT_LP1_4_EDGE " range="19" rwaccess="R/W"/> 
+		<bitfield id="ERR_CONT_LP1_3_EDGE" width="1" begin="18" end="18" resetval="0x0" description="ERR_CONT_LP1_3_EDGE" range="18" rwaccess="R/W"/> 
+		<bitfield id="ERR_CONT_LP1_2_EDGE" width="1" begin="17" end="17" resetval="0x0" description="ERR_CONT_LP1_2_EDGE" range="17" rwaccess="R/W"/> 
+		<bitfield id="ERR_CONT_LP1_1_EDGE" width="1" begin="16" end="16" resetval="0x0" description="ERR_CONT_LP1_1_EDGE" range="16" rwaccess="R/W"/> 
+		<bitfield id="ERR_CONT_LP0_4_EDGE" width="1" begin="15" end="15" resetval="0x0" description="ERR_CONT_LP0_4_EDGE " range="15" rwaccess="R/W"/> 
+		<bitfield id="ERR_CONT_LP0_3_EDGE" width="1" begin="14" end="14" resetval="0x0" description="ERR_CONT_LP0_3_EDGE" range="14" rwaccess="R/W"/> 
+		<bitfield id="ERR_CONT_LP0_2_EDGE" width="1" begin="13" end="13" resetval="0x0" description="ERR_CONT_LP0_2_EDGE" range="13" rwaccess="R/W"/> 
+		<bitfield id="ERR_CONT_LP0_1_EDGE" width="1" begin="12" end="12" resetval="0x0" description="ERR_CONT_LP0_1_EDGE" range="12" rwaccess="R/W"/> 
+		<bitfield id="ERR_CONTROL_4_EDGE" width="1" begin="11" end="11" resetval="0x0" description="ERR_CONTROL_4_EDGE" range="11" rwaccess="R/W"/> 
+		<bitfield id="ERR_CONTROL_3_EDGE" width="1" begin="10" end="10" resetval="0x0" description="ERR_CONTROL_3_EDGE " range="10" rwaccess="R/W"/> 
+		<bitfield id="ERR_CONTROL_2_EDGE" width="1" begin="9" end="9" resetval="0x0" description="ERR_CONTROL_2_EDGE" range="9" rwaccess="R/W"/> 
+		<bitfield id="ERR_CONTROL_1_EDGE" width="1" begin="8" end="8" resetval="0x0" description="ERR_CONTROL_1_EDGE" range="8" rwaccess="R/W"/> 
+		<bitfield id="ERR_SYNCESC_4_EDGE" width="1" begin="7" end="7" resetval="0x0" description="ERR_SYNCESC_4_EDGE" range="7" rwaccess="R/W"/> 
+		<bitfield id="ERR_SYNCESC_3_EDGE" width="1" begin="6" end="6" resetval="0x0" description="ERR_SYNCESC_3_EDGE" range="6" rwaccess="R/W"/> 
+		<bitfield id="ERR_SYNCESC_2_EDGE" width="1" begin="5" end="5" resetval="0x0" description="ERR_SYNCESC_2_EDGE" range="5" rwaccess="R/W"/> 
+		<bitfield id="ERR_SYNCESC_1_EDGE" width="1" begin="4" end="4" resetval="0x0" description="ERR_SYNCESC_1_EDGE" range="4" rwaccess="R/W"/> 
+		<bitfield id="ERR_ESC_4_EDGE" width="1" begin="3" end="3" resetval="0x0" description="ERR_ESC_4_EDGE" range="3" rwaccess="R/W"/> 
+		<bitfield id="ERR_ESC_3_EDGE" width="1" begin="2" end="2" resetval="0x0" description="ERR_ESC_3_EDGE " range="2" rwaccess="R/W"/> 
+		<bitfield id="ERR_ESC_2_EDGE" width="1" begin="1" end="1" resetval="0x0" description="ERR_ESC_2_EDGE" range="1" rwaccess="R/W"/> 
+		<bitfield id="ERR_ESC_1_EDGE" width="1" begin="0" end="0" resetval="0x0" description="ERR_ESC_1_EDGE" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_main_sts_clr" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_main_sts_clr" offset="0x150" width="32" description="">
+		<bitfield id="IF3_UNTERM_PCK_ERR_CLR" width="1" begin="9" end="9" resetval="0x0" description="IF3_UNTERM_PCK_ERR_CLR: clears if3_unterm_pck_err " range="9" rwaccess="W"/> 
+		<bitfield id="IF1_UNTERM_PCK_ERR_CLR" width="1" begin="8" end="8" resetval="0x0" description="IF1_UNTERM_PCK_ERR_CLR: clears if1_unterm_pck_err " range="8" rwaccess="W"/> 
+		<bitfield id="LPRX_TO_ERR_CLR" width="1" begin="7" end="7" resetval="0x0" description="LPRX_TO_ERR_CLR: clears lprx_to_err " range="7" rwaccess="W"/> 
+		<bitfield id="HSTX_TO_ERR_CLR" width="1" begin="6" end="6" resetval="0x0" description="HSTX_TO_ERR_CLR: clears hstx_to_err " range="6" rwaccess="W"/> 
+		<bitfield id="DAT4_READY_CLR" width="1" begin="5" end="5" resetval="0x0" description="DAT4_READY_CLR: clears dat4_ready " range="5" rwaccess="W"/> 
+		<bitfield id="DAT3_READY_CLR" width="1" begin="4" end="4" resetval="0x0" description="DAT3_READY_CLR: clears dat3_ready " range="4" rwaccess="W"/> 
+		<bitfield id="DAT2_READY_CLR" width="1" begin="3" end="3" resetval="0x0" description="DAT2_READY_CLR: clears dat2_ready " range="3" rwaccess="W"/> 
+		<bitfield id="DAT1_READY_CLR" width="1" begin="2" end="2" resetval="0x0" description="DAT1_READY_CLR: clears dat1_ready " range="2" rwaccess="W"/> 
+		<bitfield id="CLKLANE_READY_CLR" width="1" begin="1" end="1" resetval="0x0" description="CLKLANE_READY_CLR: clears clklane_ready " range="1" rwaccess="W"/> 
+		<bitfield id="PLL_LOCK_CLR" width="1" begin="0" end="0" resetval="0x0" description="PLL_LOCK_CLR: clears PLL lock " range="0" rwaccess="W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_cmd_mode_sts_clr" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_cmd_mode_sts_clr" offset="0x154" width="32" description="">
+		<bitfield id="ERR_IF3_UNDERRUN_CLR" width="1" begin="5" end="5" resetval="0x0" description="ERR_IF3_UNDERRUN_CLR: clears err_IF3_underrun " range="5" rwaccess="R"/> 
+		<bitfield id="ERR_IF1_UNDERRUN_CLR" width="1" begin="4" end="4" resetval="0x0" description="ERR_IF1_UNDERRUN_CLR: clears err_IF1_underrun " range="4" rwaccess="W"/> 
+		<bitfield id="ERR_UNWANTED_RD_CLR" width="1" begin="3" end="3" resetval="0x0" description="ERR_UNWANTED_RD_CLR: clears err_unwanted_rd " range="3" rwaccess="W"/> 
+		<bitfield id="ERR_TE_MISS_CLR" width="1" begin="2" end="2" resetval="0x0" description="ERR_TE_MISS_CLR: clears err_te_miss " range="2" rwaccess="W"/> 
+		<bitfield id="ERR_NO_TE_CLR" width="1" begin="1" end="1" resetval="0x0" description="ERR_NO_TE_CLR: clears err_no_te" range="1" rwaccess="W"/> 
+		<bitfield id="CSM_RUNNING_CLR" width="1" begin="0" end="0" resetval="0x0" description="CSM_RUNNING_CLR: clears CSM running bit " range="0" rwaccess="W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_sts_clr" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_sts_clr" offset="0x158" width="32" description="">
+		<bitfield id="READ_COMPLETED_WITH_ERR_CLR" width="1" begin="10" end="10" resetval="0x0" description="READ_COMPLETED_WITH_ERR_CLR: clears detection of read completed with errors" range="10" rwaccess="W"/> 
+		<bitfield id="BTA_FINISHED_CLR" width="1" begin="9" end="9" resetval="0x0" description="BTA_FINISHED_CLR: clears BTA completion detection  " range="9" rwaccess="W"/> 
+		<bitfield id="BTA_COMPLETED_CLR" width="1" begin="8" end="8" resetval="0x0" description="BTA_COMPLETED_CLR: clears BTA request completed " range="8" rwaccess="W"/> 
+		<bitfield id="TE_RECEIVED_CLR" width="1" begin="7" end="7" resetval="0x0" description="TE_RECEIVED_CLR: clears TE received " range="7" rwaccess="W"/> 
+		<bitfield id="TRIGGER_RECEIVED_CLR" width="1" begin="6" end="6" resetval="0x0" description="TRIGGER_RECEIVED_CLR: clears trigger  " range="6" rwaccess="W"/> 
+		<bitfield id="ACK_WITH_ERR_CLR" width="1" begin="5" end="5" resetval="0x0" description="ACKNOWLEDGE_WITH_ERR_CLR: clears acknowledge with errors " range="5" rwaccess="W"/> 
+		<bitfield id="ACK_RECEIVED_CLR" width="1" begin="4" end="4" resetval="0x0" description="ACKNOWLEDGE_RECEIVED_CLR: clears acknowledge " range="4" rwaccess="W"/> 
+		<bitfield id="READ_COMPLETED_CLR" width="1" begin="3" end="3" resetval="0x0" description="READ_COMPLETED_CLR: clears read request completed " range="3" rwaccess="W"/> 
+		<bitfield id="TRIGGER_COMPLETED_CLR" width="1" begin="2" end="2" resetval="0x0" description="TRIGGER_COMPLETED_CLR: clears trigger request completed" range="2" rwaccess="W"/> 
+		<bitfield id="WRITE_COMPLETED_CLR" width="1" begin="1" end="1" resetval="0x0" description="WRITE_COMPLETED_CLR: clears detection of write request completed" range="1" rwaccess="W"/> 
+		<bitfield id="CMD_TRANSMISSION_CLR" width="1" begin="0" end="0" resetval="0x0" description="CMD_TRANSMISSION_CLR: clears cmd_transmission " range="0" rwaccess="W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_rd_sts_clr" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_rd_sts_clr" offset="0x15C" width="32" description="">
+		<bitfield id="ERR_EOT_WITH_ERR_CLR" width="1" begin="8" end="8" resetval="0x0" description="ERR_EOT_WITH_ERR_CLR: clears err_eot_with_err " range="8" rwaccess="W"/> 
+		<bitfield id="ERR_MISSING_EOT_CLR" width="1" begin="7" end="7" resetval="0x0" description="ERR_MISSING_EOT_CLR: clears err_missing_eot " range="7" rwaccess="W"/> 
+		<bitfield id="ERR_WRONG_LENGTH_CLR" width="1" begin="6" end="6" resetval="0x0" description="ERR_WRONG_LENGTH_CLR: clears err_wrong_length " range="6" rwaccess="W"/> 
+		<bitfield id="ERR_OVERSIZE_CLR" width="1" begin="5" end="5" resetval="0x0" description="ERR_OVERSIZE_CLR: clears err_oversize " range="5" rwaccess="W"/> 
+		<bitfield id="ERR_RECEIVE_CLR" width="1" begin="4" end="4" resetval="0x0" description="ERR_RECEIVE_CLR: clears err_receive" range="4" rwaccess="W"/> 
+		<bitfield id="ERR_UNDECODABLE_CLR" width="1" begin="3" end="3" resetval="0x0" description="ERR_UNDECODABLE_CLR: clears err_undecodable " range="3" rwaccess="W"/> 
+		<bitfield id="ERR_CHECKSUM_CLR" width="1" begin="2" end="2" resetval="0x0" description="ERR_CHECKSUM_CLR: clears err_checksum" range="2" rwaccess="W"/> 
+		<bitfield id="ERR_UNCORRECTABLE_CLR" width="1" begin="1" end="1" resetval="0x0" description="ERR_UNCORRECTABLE_CLR: clears err_uncorrectable" range="1" rwaccess="W"/> 
+		<bitfield id="ERR_FIXED_CLR" width="1" begin="0" end="0" resetval="0x0" description="ERR_FIXED_CLR: clears err_fixed" range="0" rwaccess="W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_mode_sts_clr" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_mode_sts_clr" offset="0x160" width="32" description="">
+		<bitfield id="VSG_RECOVERY_CLR" width="1" begin="10" end="10" resetval="0x0" description="VSG_RECOVERY_CLR: clears the bit vsg_recovery" range="10" rwaccess="W"/> 
+		<bitfield id="ERR_VRS_WRONG_LENGTH_CLR" width="1" begin="9" end="9" resetval="0x0" description="ERR_VRS_WRONG_LENGTH_CLR: clears the bit err_vid_wrong_length" range="9" rwaccess="W"/> 
+		<bitfield id="ERR_LONGREAD_CLR" width="1" begin="8" end="8" resetval="0x0" description="ERR_LONGREAD_CLR: clears err_longread " range="8" rwaccess="W"/> 
+		<bitfield id="ERR_LINEWRITE_CLR" width="1" begin="7" end="7" resetval="0x0" description="ERR_LINEWRITE_CLR: clears err_linewrite " range="7" rwaccess="W"/> 
+		<bitfield id="ERR_BURSTWRITE_CLR" width="1" begin="6" end="6" resetval="0x0" description="ERR_BURSTWRITE_CLR: clears err_burstwrite " range="6" rwaccess="W"/> 
+		<bitfield id="ERR_SMALL_HEIGHT_CLR" width="1" begin="5" end="5" resetval="0x0" description="ERR_SMALL_HEIGHT_CLR: clears unaligned line number" range="5" rwaccess="W"/> 
+		<bitfield id="ERR_SMALL_LENGTH_CLR" width="1" begin="4" end="4" resetval="0x0" description="ERR_SMALL_LENGTH_CLR: clears analigned size " range="4" rwaccess="W"/> 
+		<bitfield id="ERR_MISSING_VSYNC_CLR" width="1" begin="3" end="3" resetval="0x0" description="ERR_MISSING_VSYNC_CLR: clears missing VSYNC" range="3" rwaccess="W"/> 
+		<bitfield id="ERR_MISSING_HSYNC_CLR" width="1" begin="2" end="2" resetval="0x0" description="ERR_MISSING_HSYNC_CLR: clears missing HSYNC " range="2" rwaccess="W"/> 
+		<bitfield id="ERR_MISSING_DATA_CLR" width="1" begin="1" end="1" resetval="0x0" description="ERR_MISSING_DATA_CLR: clears data miss " range="1" rwaccess="W"/> 
+		<bitfield id="VSG_STS_CLR" width="1" begin="0" end="0" resetval="0x0" description="VSG_STS_CLR: clears VSG status" range="0" rwaccess="W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_tg_sts_clr" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_tg_sts_clr" offset="0x164" width="32" description="">
+		<bitfield id="TVG_STS_CLR" width="1" begin="0" end="0" resetval="0x0" description="TVG_STS_CLR: clears TVG status observation" range="0" rwaccess="W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_dphy_err_clr" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_dphy_err_clr" offset="0x168" width="32" description="">
+		<bitfield id="ERR_CONT_LP1_4_CLR" width="1" begin="25" end="25" resetval="0x0" description="ERR_CONT_LP1_4_CLR " range="25" rwaccess="W"/> 
+		<bitfield id="ERR_CONT_LP1_3_CLR" width="1" begin="24" end="24" resetval="0x0" description="ERR_CONT_LP1_3_CLR " range="24" rwaccess="W"/> 
+		<bitfield id="ERR_CONT_LP1_2_CLR" width="1" begin="23" end="23" resetval="0x0" description="ERR_CONT_LP1_2_CLR " range="23" rwaccess="W"/> 
+		<bitfield id="ERR_CONT_LP1_1_CLR" width="1" begin="22" end="22" resetval="0x0" description="ERR_CONT_LP1_1_CLR " range="22" rwaccess="W"/> 
+		<bitfield id="ERR_CONT_LP0_4_CLR" width="1" begin="21" end="21" resetval="0x0" description="ERR_CONT_LP0_4_CLR " range="21" rwaccess="W"/> 
+		<bitfield id="ERR_CONT_LP0_3_CLR" width="1" begin="20" end="20" resetval="0x0" description="ERR_CONT_LP0_3_CLR " range="20" rwaccess="W"/> 
+		<bitfield id="ERR_CONT_LP0_2_CLR" width="1" begin="19" end="19" resetval="0x0" description="ERR_CONT_LP0_2_CLR " range="19" rwaccess="W"/> 
+		<bitfield id="ERR_CONT_LP0_1_CLR" width="1" begin="18" end="18" resetval="0x0" description="ERR_CONT_LP0_1_CLR" range="18" rwaccess="W"/> 
+		<bitfield id="ERR_CONTROL_4_CLR" width="1" begin="17" end="17" resetval="0x0" description="ERR_CONTROL_4_CLR " range="17" rwaccess="W"/> 
+		<bitfield id="ERR_CONTROL_3_CLR" width="1" begin="16" end="16" resetval="0x0" description="ERR_CONTROL_3_CLR " range="16" rwaccess="W"/> 
+		<bitfield id="ERR_CONTROL_2_CLR" width="1" begin="15" end="15" resetval="0x0" description="ERR_CONTROL_2_CLR " range="15" rwaccess="W"/> 
+		<bitfield id="ERR_CONTROL_1_CLR" width="1" begin="14" end="14" resetval="0x0" description="ERR_CONTROL_1_CLR " range="14" rwaccess="W"/> 
+		<bitfield id="ERR_SYNCESC_4_CLR" width="1" begin="13" end="13" resetval="0x0" description="ERR_SYNCESC_4_CLR " range="13" rwaccess="W"/> 
+		<bitfield id="ERR_SYNCESC_3_CLR" width="1" begin="12" end="12" resetval="0x0" description="ERR_SYNCESC_3_CLR " range="12" rwaccess="W"/> 
+		<bitfield id="ERR_SYNCESC_2_CLR" width="1" begin="11" end="11" resetval="0x0" description="ERR_SYNCESC_2_CLR" range="11" rwaccess="W"/> 
+		<bitfield id="ERR_SYNCESC_1_CLR" width="1" begin="10" end="10" resetval="0x0" description="ERR_SYNCESC_1_CLR" range="10" rwaccess="W"/> 
+		<bitfield id="ERR_ESC_4_CLR" width="1" begin="9" end="9" resetval="0x0" description="ERR_ESC_4_CLR " range="9" rwaccess="W"/> 
+		<bitfield id="ERR_ESC_3_CLR" width="1" begin="8" end="8" resetval="0x0" description="ERR_ESC_3_CLR" range="8" rwaccess="W"/> 
+		<bitfield id="ERR_ESC_2_CLR" width="1" begin="7" end="7" resetval="0x0" description="ERR_ESC_2_CLR " range="7" rwaccess="W"/> 
+		<bitfield id="ERR_ESC_1_CLR" width="1" begin="6" end="6" resetval="0x0" description="ERR_ESC_1_CLR" range="6" rwaccess="W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_main_sts_flag" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_main_sts_flag" offset="0x170" width="32" description="">
+		<bitfield id="IF3_UNTERM_PCK_ERR_FLAG" width="1" begin="9" end="9" resetval="0x0" description="IF3_UNTERM_PCK_ERR_FLAG: flags if3_unterm_pck_err " range="9" rwaccess="R"/> 
+		<bitfield id="IF1_UNTERM_PCK_ERR_FLAG" width="1" begin="8" end="8" resetval="0x0" description="IF1_UNTERM_PCK_ERR_FLAG: flags if1_unterm_pck_err" range="8" rwaccess="R"/> 
+		<bitfield id="LPRX_TO_ERR_FLAG" width="1" begin="7" end="7" resetval="0x0" description="LPRX_TO_ERR_FLAG: flags lprx_to_err  " range="7" rwaccess="R"/> 
+		<bitfield id="HSTX_TO_ERR_FLAG" width="1" begin="6" end="6" resetval="0x0" description="HSTX_TO_ERR_FLAG: flags hstx_to_err " range="6" rwaccess="R"/> 
+		<bitfield id="DAT4_READY_FLAG" width="1" begin="5" end="5" resetval="0x0" description="DAT4_READY_FLAG: flags dat4_ready  " range="5" rwaccess="R"/> 
+		<bitfield id="DAT3_READY_FLAG" width="1" begin="4" end="4" resetval="0x0" description="DAT3_READY_FLAG: flags dat3_ready " range="4" rwaccess="R"/> 
+		<bitfield id="DAT2_READY_FLAG" width="1" begin="3" end="3" resetval="0x0" description="DAT2_READY_FLAG: flags dat2_ready " range="3" rwaccess="R"/> 
+		<bitfield id="DAT1_READY_FLAG" width="1" begin="2" end="2" resetval="0x0" description="DAT1_READY_FLAG: flags dat1_ready " range="2" rwaccess="R"/> 
+		<bitfield id="CLKLANE_READY_FLAG" width="1" begin="1" end="1" resetval="0x0" description="CLKLANE_READY_FLAG: flags clklane_ready" range="1" rwaccess="R"/> 
+		<bitfield id="PLL_LOCK_FLAG" width="1" begin="0" end="0" resetval="0x0" description="PLL_LOCK_FLAG: flags PLL lock " range="0" rwaccess="R"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_cmd_mode_sts_flag" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_cmd_mode_sts_flag" offset="0x174" width="32" description="">
+		<bitfield id="ERR_IF3_UNDERRUN_FLAG" width="1" begin="5" end="5" resetval="0x0" description="ERR_IF3_UNDERRUN_FLAG: flags err_IF3_underrun" range="5" rwaccess="R"/> 
+		<bitfield id="ERR_IF1_UNDERRUN_FLAG" width="1" begin="4" end="4" resetval="0x0" description="ERR_IF1_UNDERRUN_FLAG: flags err_IF1_underrun" range="4" rwaccess="R"/> 
+		<bitfield id="ERR_UNWANTED_RD_FLAG" width="1" begin="3" end="3" resetval="0x0" description="ERR_UNWANTED_RD_FLAG: flags fixed_err " range="3" rwaccess="R"/> 
+		<bitfield id="ERR_TE_MISS_FLAG" width="1" begin="2" end="2" resetval="0x0" description="ERR_TE_MISS_FLAG: flags err_te_miss" range="2" rwaccess="R"/> 
+		<bitfield id="ERR_NO_TE_FLAG" width="1" begin="1" end="1" resetval="0x0" description="ERR_NO_TE_FLAG: flags err_no_te" range="1" rwaccess="R"/> 
+		<bitfield id="CSM_RUNNING_FLAG" width="1" begin="0" end="0" resetval="0x0" description="CSM_RUNNING_FLAG: flags remaining_err " range="0" rwaccess="R"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_sts_flag" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_sts_flag" offset="0x178" width="32" description="">
+		<bitfield id="READ_COMPLETED_WITH_ERR_FLAG" width="1" begin="10" end="10" resetval="0x0" description="READ_COMPLETED_WITH_ERR_FLAG: flags detection of read completed with errors" range="10" rwaccess="R"/> 
+		<bitfield id="BTA_FINISHED_FLAG" width="1" begin="9" end="9" resetval="0x0" description="BTA_FINISHED_FLAG: flags BTA completion detection " range="9" rwaccess="R"/> 
+		<bitfield id="BTA_COMPLETED_FLAG" width="1" begin="8" end="8" resetval="0x0" description="BTA_COMPLETED_FLAG: flags BTA request completed" range="8" rwaccess="R"/> 
+		<bitfield id="TE_RECEIVED_FLAG" width="1" begin="7" end="7" resetval="0x0" description="TE_RECEIVED_FLAG: flags TE received " range="7" rwaccess="R"/> 
+		<bitfield id="TRIGGER_RECEIVED_FLAG" width="1" begin="6" end="6" resetval="0x0" description="TRIGGER_RECEIVED_FLAG: flags trigger" range="6" rwaccess="R"/> 
+		<bitfield id="ACK_WITH_ERR_RECEIVED_FLAG" width="1" begin="5" end="5" resetval="0x0" description="ACK_WITH_ERR_RECEIVED_FLAG: flag acknowledge with error detection" range="5" rwaccess="R"/> 
+		<bitfield id="ACKNOWLEDGE_RECEIVED_FLAG" width="1" begin="4" end="4" resetval="0x0" description="ACKNOWLEDGE_RECEIVED_FLAG: flags acknowledge" range="4" rwaccess="R"/> 
+		<bitfield id="READ_COMPLETED_FLAG" width="1" begin="3" end="3" resetval="0x0" description="READ_COMPLETED_FLAG: flags read request completed " range="3" rwaccess="R"/> 
+		<bitfield id="TRIGGER_COMPLETED_FLAG" width="1" begin="2" end="2" resetval="0x0" description="TRIGGER_COMPLETED_FLAG: flags trigger request completed " range="2" rwaccess="R"/> 
+		<bitfield id="WRITE_COMPLETED_FLAG" width="1" begin="1" end="1" resetval="0x0" description="WRITE_COMPLETED_FLAG: flags detection of write request completed " range="1" rwaccess="R"/> 
+		<bitfield id="CMD_TRANSMISSION_FLAG" width="1" begin="0" end="0" resetval="0x0" description="CMD_TRANSMISSION_FLAG: flags cmd_transmission " range="0" rwaccess="R"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_rd_sts_flag" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_direct_cmd_rd_sts_flag" offset="0x17C" width="32" description="">
+		<bitfield id="ERR_EOT_WITH_ERR_FLAG" width="1" begin="8" end="8" resetval="0x0" description="ERR_EOT_WITH_ERR_FLAG: flags err_eot_with_err" range="8" rwaccess="R"/> 
+		<bitfield id="ERR_MISSING_EOT_FLAG" width="1" begin="7" end="7" resetval="0x0" description="ERR_MISSING_EOT_FLAG: flags err_missing_eot " range="7" rwaccess="R"/> 
+		<bitfield id="ERR_WRONG_LENGTH_FLAG" width="1" begin="6" end="6" resetval="0x0" description="ERR_WRONG_LENGTH_FLAG: flags err_wrong_length " range="6" rwaccess="R"/> 
+		<bitfield id="ERR_OVERSIZE_FLAG" width="1" begin="5" end="5" resetval="0x0" description="ERR_OVERSIZE_FLAG: flags err_oversize " range="5" rwaccess="R"/> 
+		<bitfield id="ERR_RECEIVE_FLAG" width="1" begin="4" end="4" resetval="0x0" description="ERR_RECEIVE_FLAG: flags err_receive " range="4" rwaccess="R"/> 
+		<bitfield id="ERR_UNDECODABLE_FLAG" width="1" begin="3" end="3" resetval="0x0" description="ERR_UNDECODABLE_FLAG: flags err_undecodable" range="3" rwaccess="R"/> 
+		<bitfield id="ERR_CHECKSUM_FLAG" width="1" begin="2" end="2" resetval="0x0" description="ERR_CHECKSUM_FLAG: flags err_checksum" range="2" rwaccess="R"/> 
+		<bitfield id="ERR_UNCORRECTABLE_FLAG" width="1" begin="1" end="1" resetval="0x0" description="ERR_UNCORRECTABLE_FLAG: flags err_uncorrectable" range="1" rwaccess="R"/> 
+		<bitfield id="ERR_FIXED_FLAG" width="1" begin="0" end="0" resetval="0x0" description="ERR_FIXED_FLAG: flags err_fixed" range="0" rwaccess="R"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_mode_sts_flag" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_vid_mode_sts_flag" offset="0x180" width="32" description="">
+		<bitfield id="FLAG_VSG_RECOVERY" width="1" begin="10" end="10" resetval="0x0" description="FLAG_VSG_RECOVERY: lags vsg_recovery" range="10" rwaccess="R"/> 
+		<bitfield id="ERR_VRS_WRONG_LENGTH_FLAG" width="1" begin="9" end="9" resetval="0x0" description="ERR_VRS_WRONG_LENGTH_FLAG: flags err_vrs_wrong_length" range="9" rwaccess="R"/> 
+		<bitfield id="ERR_LONGREAD_FLAG" width="1" begin="8" end="8" resetval="0x0" description="ERR_LONGREAD_FLAG: flags err_longread " range="8" rwaccess="R"/> 
+		<bitfield id="ERR_LONGWRITE_FLAG" width="1" begin="7" end="7" resetval="0x0" description="ERR_LONGWRITE_FLAG: flags err_longwrite " range="7" rwaccess="R"/> 
+		<bitfield id="ERR_SHORTWRITE_FLAG" width="1" begin="6" end="6" resetval="0x0" description="ERR_SHORTWRITE_FLAG: flags err_shortwrite" range="6" rwaccess="R"/> 
+		<bitfield id="ERR_SMALL_HEIGHT_FLAG" width="1" begin="5" end="5" resetval="0x0" description="ERR_SMALL_HEIGHT_FLAG: flags the detection of unaligned line number" range="5" rwaccess="R"/> 
+		<bitfield id="ERR_SMALL_LENGTH_FLAG" width="1" begin="4" end="4" resetval="0x0" description="ERR_SMALL_LENGTH_FLAG: flags the detection of unaligned size" range="4" rwaccess="R"/> 
+		<bitfield id="ERR_MISS_VSYNC_FLAG" width="1" begin="3" end="3" resetval="0x0" description="ERR_MISS_VSYNC_FLAG: flags missing VSYNC" range="3" rwaccess="R"/> 
+		<bitfield id="ERR_MISSING_HSYNC_FLAG" width="1" begin="2" end="2" resetval="0x0" description="ERR_MISSING_HSYNC_FLAG: flags missing HSYNC" range="2" rwaccess="R"/> 
+		<bitfield id="ERR_MISSING_DATA_FLAG" width="1" begin="1" end="1" resetval="0x0" description="ERR_MISSING_DATA_FLAG: flags data miss" range="1" rwaccess="R"/> 
+		<bitfield id="VSG_STS_FLAG" width="1" begin="0" end="0" resetval="0x0" description="VSG_STS_FLAG: flags VSG status" range="0" rwaccess="R"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_tg_sts_flag" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_tg_sts_flag" offset="0x184" width="32" description="">
+		<bitfield id="TVG_STS_FLAG" width="1" begin="0" end="0" resetval="0x0" description="TVG_STS_FLAG: Indicates TVG status observation" range="0" rwaccess="R"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_dphy_err_flag" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_mctl_dphy_err_flag" offset="0x188" width="32" description="">
+		<bitfield id="ERR_CONT_LP1_4_FLAG" width="1" begin="25" end="25" resetval="0x0" description="ERR_CONT_LP1_4_FLAG" range="25" rwaccess="R"/> 
+		<bitfield id="ERR_CONT_LP1_3_FLAG" width="1" begin="24" end="24" resetval="0x0" description="ERR_CONT_LP1_3_FLAG" range="24" rwaccess="R"/> 
+		<bitfield id="ERR_CONT_LP1_2_FLAG" width="1" begin="23" end="23" resetval="0x0" description="ERR_CONT_LP1_2_FLAG" range="23" rwaccess="R"/> 
+		<bitfield id="ERR_CONT_LP1_1_FLAG" width="1" begin="22" end="22" resetval="0x0" description="ERR_CONT_LP1_1_FLAG" range="22" rwaccess="R"/> 
+		<bitfield id="ERR_CONT_LP0_4_FLAG" width="1" begin="21" end="21" resetval="0x0" description="ERR_CONT_LP0_4_FLAG" range="21" rwaccess="R"/> 
+		<bitfield id="ERR_CONT_LP0_3_FLAG" width="1" begin="20" end="20" resetval="0x0" description="ERR_CONT_LP0_3_FLAG" range="20" rwaccess="R"/> 
+		<bitfield id="ERR_CONT_LP0_2_FLAG" width="1" begin="19" end="19" resetval="0x0" description="ERR_CONT_LP0_2_FLAG" range="19" rwaccess="R"/> 
+		<bitfield id="ERR_CONT_LP0_1_FLAG" width="1" begin="18" end="18" resetval="0x0" description="ERR_CONT_LP0_1_FLAG" range="18" rwaccess="R"/> 
+		<bitfield id="ERR_CONTROL_4_FLAG" width="1" begin="17" end="17" resetval="0x0" description="ERR_CONTROL_4_FLAG" range="17" rwaccess="R"/> 
+		<bitfield id="ERR_CONTROL_3_FLAG" width="1" begin="16" end="16" resetval="0x0" description="ERR_CONTROL_3_FLAG" range="16" rwaccess="R"/> 
+		<bitfield id="ERR_CONTROL_2_FLAG" width="1" begin="15" end="15" resetval="0x0" description="ERR_CONTROL_2_FLAG" range="15" rwaccess="R"/> 
+		<bitfield id="ERR_CONTROL_1_FLAG" width="1" begin="14" end="14" resetval="0x0" description="ERR_CONTROL_1_FLAG" range="14" rwaccess="R"/> 
+		<bitfield id="ERR_SYNCESC_4_FLAG" width="1" begin="13" end="13" resetval="0x0" description="ERR_SYNCESC_4_FLAG " range="13" rwaccess="R"/> 
+		<bitfield id="ERR_SYNCESC_3_FLAG" width="1" begin="12" end="12" resetval="0x0" description="ERR_SYNCESC_3_FLAG" range="12" rwaccess="R"/> 
+		<bitfield id="ERR_SYNCESC_2_FLAG" width="1" begin="11" end="11" resetval="0x0" description="ERR_SYNCESC_2_FLAG" range="11" rwaccess="R"/> 
+		<bitfield id="ERR_SYNCESC_1_FLAG" width="1" begin="10" end="10" resetval="0x0" description="ERR_SYNCESC_1_FLAG" range="10" rwaccess="R"/> 
+		<bitfield id="ERR_ESC_4_FLAG" width="1" begin="9" end="9" resetval="0x0" description="ERR_ESC_4_FLAG" range="9" rwaccess="R"/> 
+		<bitfield id="ERR_ESC_3_FLAG" width="1" begin="8" end="8" resetval="0x0" description="ERR_ESC_3_FLAG" range="8" rwaccess="R"/> 
+		<bitfield id="ERR_ESC_2_FLAG" width="1" begin="7" end="7" resetval="0x0" description="ERR_ESC_2_FLAG" range="7" rwaccess="R"/> 
+		<bitfield id="ERR_ESC_1_FLAG" width="1" begin="6" end="6" resetval="0x0" description="ERR_ESC_1_FLAG" range="6" rwaccess="R"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_dpi_irq_en" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_dpi_irq_en" offset="0x1A0" width="32" description="">
+		<bitfield id="PIXEL_BUF_OVERFLOW_IRQ_EN" width="1" begin="0" end="0" resetval="0x0" description="Enable DPI FIFO Overflow interrupt" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_dpi_irq_clr" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_dpi_irq_clr" offset="0x1A4" width="32" description="">
+		<bitfield id="PIXEL_BUF_OVERFLOW_IRQ_CLR" width="1" begin="0" end="0" resetval="0x0" description="Clear DPI FIFO Overflow interrupt" range="0" rwaccess="W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_dpi_irq_sts" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_dpi_irq_sts" offset="0x1A8" width="32" description="">
+		<bitfield id="PIXEL_BUF_OVERFLOW_STS" width="1" begin="0" end="0" resetval="0x0" description="Status of DPI FIFO Overflow interrupt" range="0" rwaccess="R"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_dpi_cfg" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_dpi_cfg" offset="0x1AC" width="32" description="">
+		<bitfield id="DPI_CFG_FIFODEPTH" width="16" begin="31" end="16" resetval="0x2048" description="DPI FIFO depth - configuration paramter" range="31 - 16" rwaccess="R"/> 
+		<bitfield id="DPI_CFG_FIFO_LEVEL" width="16" begin="15" end="0" resetval="0x0" description="DPI FIFO fill level - can be read mid-line for debug purposes, to allow adjustment of settings" range="15 - 0" rwaccess="R"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_test_generic" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_test_generic" offset="0x1F0" width="32" description="">
+		<bitfield id="STATUS" width="16" begin="31" end="16" resetval="0x0" description="Test status - Value of test_generic_status input" range="31 - 16" rwaccess="R"/> 
+		<bitfield id="CTRL" width="16" begin="15" end="0" resetval="0x0" description="Test control - Drives test_generic_ctrl output" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_id_reg" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_id_reg" offset="0x1FC" width="32" description="">
+		<bitfield id="REV_VENDOR_ID" width="12" begin="31" end="20" resetval="0x3245" description="VENDOR_ID: IP vendor ID affected to CadenceIP [reset = 0xCAD]. " range="31 - 20" rwaccess="R"/> 
+		<bitfield id="REV_PRODUCT_ID" width="8" begin="19" end="12" resetval="0x213" description="PRODUCT_ID: unique IP identifier within IP portfolio [reset = 0xD5]. " range="19 - 12" rwaccess="R"/> 
+		<bitfield id="REV_HARDWARE" width="4" begin="11" end="8" resetval="0x1" description="H: Hardware revision number [reset = 0x1]. " range="11 - 8" rwaccess="R"/> 
+		<bitfield id="REV_X" width="4" begin="7" end="4" resetval="0x3" description="X: Major revision value [reset = 0x3]. " range="7 - 4" rwaccess="R"/> 
+		<bitfield id="REV_Y" width="4" begin="3" end="0" resetval="0x1" description="Y: Minor revision value [reset = 0x1]. " range="3 - 0" rwaccess="R"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_asf_int_status" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_asf_int_status" offset="0x200" width="32" description="">
+		<bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="Reserved, read as 0, ignored on write." range="31 - 7" rwaccess="N/A"/> 
+		<bitfield id="ASF_INTEGRITY_ERR" width="1" begin="6" end="6" resetval="0x0" description="Integrity error interrupt" range="6" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_ERR" width="1" begin="5" end="5" resetval="0x0" description="Protocol error interrupt" range="5" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_TRANS_TO_ERR" width="1" begin="4" end="4" resetval="0x0" description="Transaction timeouts error interrupt" range="4" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_CSR_ERR" width="1" begin="3" end="3" resetval="0x0" description="Configuration and status registers error interrupt" range="3" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_DAP_ERR" width="1" begin="2" end="2" resetval="0x0" description="Data and address paths parity error interrupt" range="2" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_SRAM_UNCORR_ERR" width="1" begin="1" end="1" resetval="0x0" description="SRAM uncorrectable error interrupt" range="1" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_SRAM_CORR_ERR" width="1" begin="0" end="0" resetval="0x0" description="SRAM correctable error interrupt" range="0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_asf_int_raw_status" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_asf_int_raw_status" offset="0x204" width="32" description="">
+		<bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="Reserved, read as 0, ignored on write." range="31 - 7" rwaccess="N/A"/> 
+		<bitfield id="ASF_INTEGRITY_ERR" width="1" begin="6" end="6" resetval="0x0" description="Integrity error interrupt" range="6" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_ERR" width="1" begin="5" end="5" resetval="0x0" description="Protocol error interrupt" range="5" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_TRANS_TO_ERR" width="1" begin="4" end="4" resetval="0x0" description="Transaction timeouts error interrupt" range="4" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_CSR_ERR" width="1" begin="3" end="3" resetval="0x0" description="Configuration and status registers error interrupt" range="3" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_DAP_ERR" width="1" begin="2" end="2" resetval="0x0" description="Data and address paths parity error interrupt" range="2" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_SRAM_UNCORR_ERR" width="1" begin="1" end="1" resetval="0x0" description="SRAM uncorrectable error interrupt" range="1" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_SRAM_CORR_ERR" width="1" begin="0" end="0" resetval="0x0" description="SRAM correctable error interrupt" range="0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_asf_int_mask" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_asf_int_mask" offset="0x208" width="32" description="">
+		<bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="Reserved, read as 0, ignored on write." range="31 - 7" rwaccess="N/A"/> 
+		<bitfield id="ASF_INTEGRITY_ERR_MASK" width="1" begin="6" end="6" resetval="0x1" description="Mask bit for integrity error interrupt" range="6" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_ERR_MASK" width="1" begin="5" end="5" resetval="0x1" description="Mask bit for protocol error interrupt." range="5" rwaccess="R/W"/> 
+		<bitfield id="ASF_TRANS_TO_ERR_MASK" width="1" begin="4" end="4" resetval="0x1" description="Mask bit for transaction timeouts error interrupt." range="4" rwaccess="R/W"/> 
+		<bitfield id="ASF_CSR_ERR_MASK" width="1" begin="3" end="3" resetval="0x1" description="Mask bit for configuration and status registers error interrupt." range="3" rwaccess="R/W"/> 
+		<bitfield id="ASF_DAP_ERR_MASK" width="1" begin="2" end="2" resetval="0x1" description="Mask bit for data and address paths parity error interrupt." range="2" rwaccess="R/W"/> 
+		<bitfield id="ASF_SRAM_UNCORR_ERR_MASK" width="1" begin="1" end="1" resetval="0x1" description="Mask bit for SRAM uncorrectable error interrupt." range="1" rwaccess="R/W"/> 
+		<bitfield id="ASF_SRAM_CORR_ERR_MASK" width="1" begin="0" end="0" resetval="0x1" description="Mask bit for SRAM correctable error interrupt." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_asf_int_test" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_asf_int_test" offset="0x20C" width="32" description="">
+		<bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="Reserved, read as 0, ignored on write." range="31 - 7" rwaccess="N/A"/> 
+		<bitfield id="ASF_INTEGRITY_ERR_TEST" width="1" begin="6" end="6" resetval="0x0" description="Test bit for integrity error interrupt" range="6" rwaccess="W"/> 
+		<bitfield id="ASF_PROTOCOL_ERR_TEST" width="1" begin="5" end="5" resetval="0x0" description="Test bit for protocol error interrupt." range="5" rwaccess="W"/> 
+		<bitfield id="ASF_TRANS_TO_ERR_TEST" width="1" begin="4" end="4" resetval="0x0" description="Test bit for transaction timeouts error interrupt." range="4" rwaccess="W"/> 
+		<bitfield id="ASF_CSR_ERR_TEST" width="1" begin="3" end="3" resetval="0x0" description="Test bit for configuration and status registers error interrupt." range="3" rwaccess="W"/> 
+		<bitfield id="ASF_DAP_ERR_TEST" width="1" begin="2" end="2" resetval="0x0" description="Test bit for data and address paths parity error interrupt." range="2" rwaccess="W"/> 
+		<bitfield id="ASF_SRAM_UNCORR_ERR_TEST" width="1" begin="1" end="1" resetval="0x0" description="Test bit for SRAM uncorrectable error interrupt." range="1" rwaccess="W"/> 
+		<bitfield id="ASF_SRAM_CORR_ERR_TEST" width="1" begin="0" end="0" resetval="0x0" description="Test bit for SRAM correctable error interrupt." range="0" rwaccess="W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_asf_fatal_nonfatal_select" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_asf_fatal_nonfatal_select" offset="0x210" width="32" description="">
+		<bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="Reserved, read as 0, ignored on write." range="31 - 7" rwaccess="N/A"/> 
+		<bitfield id="ASF_INTEGRITY_ERR" width="1" begin="6" end="6" resetval="0x1" description="Enable integrity error interrupt as fatal" range="6" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_ERR" width="1" begin="5" end="5" resetval="0x1" description="Enable protocol error interrupt as fatal." range="5" rwaccess="R/W"/> 
+		<bitfield id="ASF_TRANS_TO_ERR" width="1" begin="4" end="4" resetval="0x1" description="Enable transaction timeouts error interrupt as fatal." range="4" rwaccess="R/W"/> 
+		<bitfield id="ASF_CSR_ERR" width="1" begin="3" end="3" resetval="0x1" description="Enable configuration and status registers error interrupt as fatal." range="3" rwaccess="R/W"/> 
+		<bitfield id="ASF_DAP_ERR" width="1" begin="2" end="2" resetval="0x1" description="Enable data and address paths parity error interrupt as fatal." range="2" rwaccess="R/W"/> 
+		<bitfield id="ASF_SRAM_UNCORR_ERR" width="1" begin="1" end="1" resetval="0x1" description="Enable SRAM uncorrectable error interrupt as fatal." range="1" rwaccess="R/W"/> 
+		<bitfield id="ASF_SRAM_CORR_ERR" width="1" begin="0" end="0" resetval="0x1" description="Enable SRAM correctable error interrupt as fatal." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_asf_sram_corr_fault_status" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_asf_sram_corr_fault_status" offset="0x220" width="32" description="">
+		<bitfield id="ASF_SRAM_CORR_FAULT_INST" width="8" begin="31" end="24" resetval="0x0" description="Last SRAM instance that generated fault." range="31 - 24" rwaccess="R"/> 
+		<bitfield id="ASF_SRAM_CORR_FAULT_ADDR" width="24" begin="23" end="0" resetval="0x0" description="Last SRAM address that generated fault." range="23 - 0" rwaccess="R"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_asf_sram_uncorr_fault_status" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_asf_sram_uncorr_fault_status" offset="0x224" width="32" description="">
+		<bitfield id="ASF_SRAM_UNCORR_FAULT_INST" width="8" begin="31" end="24" resetval="0x0" description="Last SRAM instance that generated fault." range="31 - 24" rwaccess="R"/> 
+		<bitfield id="ASF_SRAM_UNCORR_FAULT_ADDR" width="24" begin="23" end="0" resetval="0x0" description="Last SRAM address that generated fault." range="23 - 0" rwaccess="R"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_asf_sram_fault_stats" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_asf_sram_fault_stats" offset="0x228" width="32" description="">
+		<bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="Reserved, read as 0, ignored on write." range="31 - 16" rwaccess="N/A"/> 
+		<bitfield id="ASF_SRAM_FAULT_CORR_STATS" width="16" begin="15" end="0" resetval="0x0" description="Count of number of correctable errors if implemented. Count value will saturate at 0xffff." range="15 - 0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_asf_trans_to_ctrl" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_asf_trans_to_ctrl" offset="0x230" width="32" description="">
+		<bitfield id="ASF_TRANS_TO_EN" width="1" begin="31" end="31" resetval="0x0" description="Enable transaction timeout monitoring." range="31" rwaccess="R/W"/> 
+		<bitfield id="ASF_TRANS_TO_CTRL" width="16" begin="15" end="0" resetval="0x0" description="Timer value to use for transaction timeout monitor." range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_asf_trans_to_fault_mask" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_asf_trans_to_fault_mask" offset="0x234" width="32" description="">
+		<bitfield id="ASF_TRANS_TO_FAULT_3_MASK" width="1" begin="3" end="3" resetval="0x1" description="Mask register for each ASF transaction timeout fault source." range="3" rwaccess="R/W"/> 
+		<bitfield id="ASF_TRANS_TO_FAULT_2_MASK" width="1" begin="2" end="2" resetval="0x1" description="Mask register for each ASF transaction timeout fault source." range="2" rwaccess="R/W"/> 
+		<bitfield id="ASF_TRANS_TO_FAULT_1_MASK" width="1" begin="1" end="1" resetval="0x1" description="Mask register for each ASF transaction timeout fault source." range="1" rwaccess="R/W"/> 
+		<bitfield id="ASF_TRANS_TO_FAULT_0_MASK" width="1" begin="0" end="0" resetval="0x1" description="Mask register for each ASF transaction timeout fault source." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_asf_trans_to_fault_status" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_asf_trans_to_fault_status" offset="0x238" width="32" description="">
+		<bitfield id="ASF_TRANS_TO_FAULT_3_STATUS" width="1" begin="3" end="3" resetval="0x0" description="Status bits for transaction timeouts faults." range="3" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_TRANS_TO_FAULT_2_STATUS" width="1" begin="2" end="2" resetval="0x0" description="Status bits for transaction timeouts faults." range="2" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_TRANS_TO_FAULT_1_STATUS" width="1" begin="1" end="1" resetval="0x0" description="Status bits for transaction timeouts faults." range="1" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_TRANS_TO_FAULT_0_STATUS" width="1" begin="0" end="0" resetval="0x0" description="Status bits for transaction timeouts faults." range="0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_asf_protocol_fault_mask" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_asf_protocol_fault_mask" offset="0x240" width="32" description="">
+		<bitfield id="ASF_PROTOCOL_FAULT_3_MASK" width="1" begin="3" end="3" resetval="0x1" description="Mask register for each ASF protocol fault source." range="3" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_2_MASK" width="1" begin="2" end="2" resetval="0x1" description="Mask register for each ASF protocol fault source." range="2" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_1_MASK" width="1" begin="1" end="1" resetval="0x1" description="Mask register for each ASF protocol fault source." range="1" rwaccess="R/W"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_0_MASK" width="1" begin="0" end="0" resetval="0x1" description="Mask register for each ASF protocol fault source." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_asf_protocol_fault_status" acronym="DSI_TOP__VBUSP_CFG_DSI_0__DSI_REGS_asf_protocol_fault_status" offset="0x244" width="32" description="">
+		<bitfield id="ASF_PROTOCOL_FAULT_3_STATUS" width="1" begin="3" end="3" resetval="0x0" description="Status bits for protocol faults." range="3" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_2_STATUS" width="1" begin="2" end="2" resetval="0x0" description="Status bits for protocol faults." range="2" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_1_STATUS" width="1" begin="1" end="1" resetval="0x0" description="Status bits for protocol faults." range="1" rwaccess="R/W1TC"/> 
+		<bitfield id="ASF_PROTOCOL_FAULT_0_STATUS" width="1" begin="0" end="0" resetval="0x0" description="Status bits for protocol faults." range="0" rwaccess="R/W1TC"/>
+	</register>
+</module>

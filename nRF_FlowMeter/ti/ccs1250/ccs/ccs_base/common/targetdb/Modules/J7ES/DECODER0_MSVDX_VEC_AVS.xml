@@ -1,0 +1,102 @@
+<module name="DECODER0_MSVDX_VEC_AVS" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="DECODER0_CR_VEC_AVS_FE_PIC0" acronym="DECODER0_CR_VEC_AVS_FE_PIC0" offset="0x0" width="32" description="Required parameter set for front end parsing">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="AVS_FE_PICTURETYPE" width="2" begin="11" end="10" resetval="0x0" description="Indicates the current picture type -" range="" rwaccess="RW"/>
+    <bitfield id="AVS_FE_PICTURE_STRUCTURE" width="1" begin="9" end="9" resetval="0x0" description="'0' indicates that the coded data of the two fields of current picture will" range="" rwaccess="RW"/>
+    <bitfield id="AVS_FE_SKIP_MODE_FLAG" width="1" begin="8" end="8" resetval="0x0" description="'0' indicates the macroblock skip mode is derived from mb_type" range="" rwaccess="RW"/>
+    <bitfield id="AVS_FE_PICTURE_REFERENCE_FLAG" width="1" begin="7" end="7" resetval="0x0" description="'0' means that every macroblock specifies the reference pictures to be used" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="6" end="1" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="AVS_FE_FIXED_PICTURE_QP" width="1" begin="0" end="0" resetval="0x0" description="'0' indicates the quantization parameter may change" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_AVS_FE_PIC1" acronym="DECODER0_CR_VEC_AVS_FE_PIC1" offset="0x4" width="32" description="Picture parameter set 1 for AVS">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="AVS_FE_PICHEIGHTINMBSLESS1" width="8" begin="15" end="8" resetval="0x0" description="Current picture height in macroblocks less 1" range="" rwaccess="RW"/>
+    <bitfield id="AVS_FE_PICWIDTHINMBSLESS1" width="8" begin="7" end="0" resetval="0x0" description="Current picture width in macroblocks less 1" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_AVS_FE_PIC2" acronym="DECODER0_CR_VEC_AVS_FE_PIC2" offset="0x8" width="32" description="Picture parameter set 2 for AVS">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="AVS_FE_PICSIZEINMBSLESS1" width="16" begin="15" end="0" resetval="0x0" description="Current picture size in macroblocks less 1" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_AVS_FE_SLICE0" acronym="DECODER0_CR_VEC_AVS_FE_SLICE0" offset="0x10" width="32" description="Slice parameter set 3 for AVS">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="AVS_FE_FIRST_MB_IN_SLICE" width="14" begin="30" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="16" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="AVS_FE_FIRST_MB_IN_SLICE_EXT" width="2" begin="12" end="11" resetval="0x0" description="Extension field for AVS_FE_FIRST_MB_IN_SLICE for 4k x 4k support" range="" rwaccess="RW"/>
+    <bitfield id="AVS_FE_FIRST_MB_IN_SLICE_Y_EXT" width="1" begin="10" end="10" resetval="0x0" description="Extension field for AVS_FE_FIRST_MB_IN_SLICE_Y for 4k x 4k support" range="" rwaccess="RW"/>
+    <bitfield id="AVS_FE_FIXED_SLICE_QP" width="1" begin="9" end="9" resetval="0x0" description="'0' means that the quantization parameter may change" range="" rwaccess="RW"/>
+    <bitfield id="AVS_FE_MB_WEIGHTING_FLAG" width="1" begin="8" end="8" resetval="0x0" description="'0' indicates that all inter coded macroblocks shall use weighted" range="" rwaccess="RW"/>
+    <bitfield id="AVS_FE_SLICE_WEIGHTING_FLAG" width="1" begin="7" end="7" resetval="0x0" description="'0' indicates that weighted prediction shall not be applied to inter prediction" range="" rwaccess="RW"/>
+    <bitfield id="AVS_FE_FIRST_MB_IN_SLICE_Y" width="7" begin="6" end="0" resetval="0x0" description="Indicates the starting Y address for the first macroblock in the slice." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_AVS_BE_PIC0" acronym="DECODER0_CR_VEC_AVS_BE_PIC0" offset="0x50" width="32" description="Required parameter set for back end parsing">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_TOP_FIELD_1ST" width="1" begin="13" end="13" resetval="0x0" description="'0' indicates that the bottom field is first" range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_PROGRESSIVE_FRAME" width="1" begin="12" end="12" resetval="0x0" description="'0' indicates that the 2 fields are interlaced fields" range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_PICTURETYPE" width="2" begin="11" end="10" resetval="0x0" description="Indicates the current picture type -" range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_PICTURE_STRUCTURE" width="1" begin="9" end="9" resetval="0x0" description="'0' indicates that the coded data of the two fields of current picture will" range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_SKIP_MODE_FLAG" width="1" begin="8" end="8" resetval="0x0" description="'0' indicates the macroblock skip mode is derived from mb_type" range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_PICTURE_REFERENCE_FLAG" width="1" begin="7" end="7" resetval="0x0" description="'0' means that every macroblock specifies the reference pictures to be used" range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_PICTURE_QP" width="6" begin="6" end="1" resetval="0x0" description="Picture QP value to be used if AVS_BE_FIXED_PICTURE_QP is set to '1'" range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_FIXED_PICTURE_QP" width="1" begin="0" end="0" resetval="0x0" description="'0' indicates the quantization parameter may change" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_AVS_BE_PIC1" acronym="DECODER0_CR_VEC_AVS_BE_PIC1" offset="0x54" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_PICHEIGHTINMBSLESS1" width="8" begin="15" end="8" resetval="0x0" description="Current picture height in macroblocks less 1" range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_PICWIDTHINMBSLESS1" width="8" begin="7" end="0" resetval="0x0" description="Current picture width in macroblocks less 1" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_AVS_BE_PIC2" acronym="DECODER0_CR_VEC_AVS_BE_PIC2" offset="0x58" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_PICSIZEINMBSLESS1" width="16" begin="15" end="0" resetval="0x0" description="Picture size in macroblocks less 1" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_AVS_BE_DIST_REF1_0" acronym="DECODER0_CR_VEC_AVS_BE_DIST_REF1_0" offset="0x5C" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_PIC_DIST_REF1" width="8" begin="15" end="8" resetval="0x0" description="picture_distance parameter for the 2nd most recently decoded field." range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_PIC_DIST_REF0" width="8" begin="7" end="0" resetval="0x0" description="picture_distance parameter for the most recently decoded field." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_AVS_BE_DIST_REF2_3" acronym="DECODER0_CR_VEC_AVS_BE_DIST_REF2_3" offset="0x60" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_PIC_DIST_REF3" width="8" begin="15" end="8" resetval="0x0" description="picture_distance parameter for the 4th most recently decoded field." range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_PIC_DIST_REF2" width="8" begin="7" end="0" resetval="0x0" description="picture_distance parameter for the 3rd most recently decoded field." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_AVS_BE_DIST_CURR" acronym="DECODER0_CR_VEC_AVS_BE_DIST_CURR" offset="0x64" width="32" description="">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_PIC_DIST_CURR" width="8" begin="7" end="0" resetval="0x0" description="Picture_distance parameter for the current picture" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_AVS_BE_DIST_BW_REF1_0" acronym="DECODER0_CR_VEC_AVS_BE_DIST_BW_REF1_0" offset="0x68" width="32" description="Indices of the 4 possible reference pictures of the backward reference picture">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_PIC_DIST_BW_REF1" width="8" begin="15" end="8" resetval="0x0" description="A stored version of PIC_DIST_REF1 as it was when the backward reference picture [last I/P picture] was decoded." range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_PIC_DIST_BW_REF0" width="8" begin="7" end="0" resetval="0x0" description="A stored version of PIC_DIST_REF0 as it was when the backward reference picture [last I/P picture] was decoded." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_AVS_BE_DIST_BW_REF3_2" acronym="DECODER0_CR_VEC_AVS_BE_DIST_BW_REF3_2" offset="0x6C" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_PIC_DIST_BW_REF3" width="8" begin="15" end="8" resetval="0x0" description="A stored version of PIC_DIST_REF3 as it was when the backward reference picture [last I/P picture] was decoded." range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_PIC_DIST_BW_REF2" width="8" begin="7" end="0" resetval="0x0" description="A stored version of PIC_DIST_REF2 as it was when the backward reference picture [last I/P picture] was decoded." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_AVS_BE_PIC_STRUCT" acronym="DECODER0_CR_VEC_AVS_BE_PIC_STRUCT" offset="0x70" width="32" description="">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_PIC_STRUCT_BW_REF" width="4" begin="7" end="4" resetval="0x0" description="A stored version of PIC_STRUCT_REF as it was when the backward reference picture [last I/P picture] was decoded." range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_PIC_STRUCT_REF" width="4" begin="3" end="0" resetval="0x0" description="picture_structure parameter for the 1st, 2nd, 3rd and 4th most recently decoded fields." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_AVS_BE_SLICE0" acronym="DECODER0_CR_VEC_AVS_BE_SLICE0" offset="0x74" width="32" description="Slice level parameters.">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_FIRST_MB_IN_SLICE_Y_EXT" width="1" begin="17" end="17" resetval="0x0" description="Extension field for AVS_BE_FIRST_MB_IN_SLICE_Y for 4k x 4k support" range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_CURR_BFF" width="1" begin="16" end="16" resetval="0x0" description="'0' indicates that the current field is top" range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_SLICE_QP" width="6" begin="15" end="10" resetval="0x0" description="Slice QP value to be used if AVS_BE_FIXED_SLICE_QP is set to '1'" range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_FIXED_SLICE_QP" width="1" begin="9" end="9" resetval="0x0" description="'0' means that the quantization parameter may change" range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_MB_WEIGHTING_FLAG" width="1" begin="8" end="8" resetval="0x0" description="'0' indicates that all inter coded macroblocks shall use weighted" range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_SLICE_WEIGHTING_FLAG" width="1" begin="7" end="7" resetval="0x0" description="'0' indicates that weighted prediction shall not be applied to inter prediction" range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_FIRST_MB_IN_SLICE_Y" width="7" begin="6" end="0" resetval="0x0" description="FIrst mblk in slice Y address" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_AVS_BE_SLICE1" acronym="DECODER0_CR_VEC_AVS_BE_SLICE1" offset="0x78" width="32" description="Back End AVS slice-level parameters (from Slice Header).">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="AVS_BE_SLICE_FIELD_TYPE" width="2" begin="1" end="0" resetval="0x0" description="SLICE_FIELD_TYPE of the Operating Mode Command" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_AVS_BE_BASE_ADDR_CUR_PIC" acronym="DECODER0_CR_VEC_AVS_BE_BASE_ADDR_CUR_PIC" offset="0xEC" width="32" description="Back End AVS base address for the macroblock parameters to be stored for the current picture">
+    <bitfield id="AVS_CURRPIC_PARAMS_BASE_ADDRESS" width="20" begin="31" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_AVS_BE_BASE_ADDR_COL_PIC" acronym="DECODER0_CR_VEC_AVS_BE_BASE_ADDR_COL_PIC" offset="0xF8" width="32" description="Back End AVS base address to read the macroblock parameters for the colocated picture. This address can change per slice">
+    <bitfield id="AVS_COL_PIC_PARAMS_BASE_ADDRESS" width="20" begin="31" end="12" resetval="0x0" description="Parameters base address for colocated picture" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+</module>

@@ -1,0 +1,40 @@
+<module name="VPAC0_PAR_VPAC_NF_S_VBUSP_MMR_VBUSP_NF_CFG" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="VPAC_NF_CORE_REVISION" acronym="VPAC_NF_CORE_REVISION" offset="0x0" width="32" description="The Register contains the major and minor revisions for the module.">
+    <bitfield id="MODID" width="16" begin="31" end="16" resetval="0x64C8" description="Module ID field" range="" rwaccess="R"/>
+    <bitfield id="REVRTL" width="5" begin="15" end="11" resetval="0x3" description="RTL" range="" rwaccess="R"/>
+    <bitfield id="REVMAJ" width="3" begin="10" end="8" resetval="0x1" description="Major" range="" rwaccess="R"/>
+    <bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom" range="" rwaccess="R"/>
+    <bitfield id="REVMIN" width="6" begin="5" end="0" resetval="0x0" description="Minor" range="" rwaccess="R"/>
+  </register>
+  <register id="VPAC_NF_CORE_CONTROL" acronym="VPAC_NF_CORE_CONTROL" offset="0x4" width="32" description="This contains parameters to NF Core">
+    <bitfield id="SUB_TABLE_SELECT" width="3" begin="31" end="29" resetval="0x0" description="Defines which sub table is used statically." range="" rwaccess="RW"/>
+    <bitfield id="NUM_SUB_TABLES" width="2" begin="28" end="27" resetval="0x0" description="Defines the number of sub-tables" range="" rwaccess="RW"/>
+    <bitfield id="OUTPUT_OFFSET" width="12" begin="26" end="15" resetval="0x0" description="unsigned offset value to added to output after shifting and before clipping" range="" rwaccess="RW"/>
+    <bitfield id="OUTPUT_SHIFT" width="4" begin="14" end="11" resetval="0x0" description="Signed 4 bit (24 is added before using it inside IP)" range="" rwaccess="RW"/>
+    <bitfield id="RSVD" width="5" begin="10" end="6" resetval="0x0" description="Always read as 0." range="" rwaccess="R"/>
+    <bitfield id="INTERLEAVE_MODE" width="1" begin="5" end="5" resetval="0x0" description="Interleave Mode." range="" rwaccess="RW"/>
+    <bitfield id="SKIP_ODD_MODE" width="1" begin="4" end="4" resetval="0x0" description="Skip Odd Mode." range="" rwaccess="RW"/>
+    <bitfield id="SKIP_MODE" width="1" begin="3" end="3" resetval="0x0" description="Skip Mode." range="" rwaccess="RW"/>
+    <bitfield id="ADAPTIVE_MODE" width="1" begin="2" end="2" resetval="0x0" description="Defines what controls the selection of the sub table." range="" rwaccess="RW"/>
+    <bitfield id="ENABLE_GENERIC_FILTERING" width="1" begin="1" end="1" resetval="0x0" description="Filter mode," range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="0" end="0" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_NF_CORE_CENTER_WEIGHT" acronym="VPAC_NF_CORE_CENTER_WEIGHT" offset="0x8" width="32" description="Contain center weight parameter">
+    <bitfield id="RSVD" width="23" begin="31" end="9" resetval="0x0" description="Always read as 0." range="" rwaccess="R"/>
+    <bitfield id="CENTRAL_PIXEL_WEIGHT_W00" width="9" begin="8" end="0" resetval="0xFF" description="Central pixel weight, 8 bit unsigned in Bi-lateral filtering, 9 bit signed in Generic 2D Filtering" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_NF_CORE_DEBUG" acronym="VPAC_NF_CORE_DEBUG" offset="0x80" width="32" description="">
+    <bitfield id="BYPASS" width="1" begin="31" end="31" resetval="0x0" description="Bypass Mode When enabled output equals the input , namely C2_R0 input matrix" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="RSVD" width="18" begin="29" end="12" resetval="0x0" description="Always read as 0." range="" rwaccess="R"/>
+    <bitfield id="OUT_COUNT" width="4" begin="11" end="8" resetval="0x0" description="output free running counter , gets reset on start of line" range="" rwaccess="R"/>
+    <bitfield id="IN_COUNT" width="4" begin="7" end="4" resetval="0x0" description="input free running counter , gets reset on start of line" range="" rwaccess="R"/>
+    <bitfield id="T_STATE" width="4" begin="3" end="0" resetval="0x0" description="StateMachine State" range="" rwaccess="R"/>
+  </register>
+  <register id="VPAC_NF_CORE_WEIGHT_LUT_Y" acronym="VPAC_NF_CORE_WEIGHT_LUT_Y" offset="0x100" width="32" description="This contains weights for LUT. These acts as 1280 size LUT (8 bit each) in Bi-lateral mode, while 24 size (9 bit in 16 bit container) in Generic Filtering mode Offset = 001C2100h + (y * 4h); where y = 0h to 13Fh">
+    <bitfield id="W_3" width="8" begin="31" end="24" resetval="0x0" description="weight W_3" range="" rwaccess="RW"/>
+    <bitfield id="W_2" width="8" begin="23" end="16" resetval="0x0" description="weight W_2" range="" rwaccess="RW"/>
+    <bitfield id="W_1" width="8" begin="15" end="8" resetval="0x0" description="weight W_1" range="" rwaccess="RW"/>
+    <bitfield id="W_0" width="8" begin="7" end="0" resetval="0x0" description="weight W_0" range="" rwaccess="RW"/>
+  </register>
+</module>

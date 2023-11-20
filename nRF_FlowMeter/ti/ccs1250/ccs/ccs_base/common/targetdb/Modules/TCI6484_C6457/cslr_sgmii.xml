@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module id="SGMII" HW_revision="" XML_version="1" description="Serial Gigabit Media independent Interface ">
+     <register id="IDVER" acronym="IDVER" offset="0x0000" width="32" description="Identification and  Version register">
+<bitfield id="TX_IDENT" width="16" begin="31" end="16" resetval="44" description="TX identification value" range="" rwaccess="R"></bitfield>
+<bitfield id="RTL_VER" width="5" begin="15" end="11" resetval="0" description="RTL version value" range="" rwaccess="R"></bitfield>
+<bitfield id="MAJOR_VER" width="3" begin="10" end="8" resetval="1" description="Major version value" range="" rwaccess="R"></bitfield>
+<bitfield id="MINOR_VER" width="8" begin="7" end="0" resetval="0" description="Minor version value" range="" rwaccess="R"></bitfield>
+</register>
+     <register id="SOFT_RESET" acronym="SOFT_RESET" offset="0x0004" width="32" description="Software Reset Register">
+<bitfield id="_RESV_1" width="30" begin="31" end="2" resetval="0" description="reserved  read as zero" range="" rwaccess="N"></bitfield>
+<bitfield id="RT_SOFT_RESET" width="1" begin="1" end="1" resetval="0" description="Transmit and Receive Software Reset. Writing 1 to this bit causes the  CPSGMII Transmit and Receive logic to be in reset condition" range="" rwaccess="RW">
+<bitenum id="YES" value="27" token="YES" description="Resets SGMII Tx/Rx logic" />
+<bitenum id="NO" value="11" token="NO" description="Removes SGMII Tx/Rx logic from reset condition" />
+</bitfield>
+<bitfield id="SOFT_RESET" width="1" begin="0" end="0" resetval="0" description="Software reset  Writing a one to this bit causes the CPSGMII logic to be reset. Software reset occurs immediately" range="" rwaccess="RW">
+<bitenum id="YES" value="27" token="YES" description="Resets SGMII logic" />
+</bitfield>
+</register>
+     <register id="CONTROL" acronym="CONTROL" offset="0x0010" width="32" description="Control Register">
+<bitfield id="_RESV_1" width="26" begin="31" end="6" resetval="0" description="reserved  read as zero" range="" rwaccess="N"></bitfield>
+<bitfield id="MASTER" width="1" begin="5" end="5" resetval="0" description="Master mode" range="" rwaccess="RW">
+<bitenum id="MASTER" value="27" token="MASTER" description="Master mode  set on one side for  a direct CPSGMII to CPSGMII link when SGMII_MODE is asserted" />
+<bitenum id="SLAVE" value="11" token="SLAVE" description="Slave mode" />
+</bitfield>
+<bitfield id="LOOPBACK" width="1" begin="4" end="4" resetval="0" description="Loop back mode. In loop back mode the transmit clock(TX_CLK) is used for  transmit/receive and auto-negotiation is bypassed" range="" rwaccess="RW">
+<bitenum id="YES" value="27" token="YES" description="Internal loop back mode " />
+<bitenum id="NO" value="11" token="NO" description="Not in internal loop back mode" />
+</bitfield>
+<bitfield id="_RESV_4" width="2" begin="3" end="2" resetval="0" description="reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="MR_AN_RESTART" width="1" begin="1" end="1" resetval="0" description="Auto-Negotiation restart" range="" rwaccess="RW">
+<bitenum id="YES" value="27" token="YES" description="Restarts auto-negotiation process" />
+</bitfield>
+<bitfield id="MR_AN_ENABLE" width="1" begin="0" end="0" resetval="0" description="Auto-Negotiation enable" range="" rwaccess="RW">
+<bitenum id="YES" value="27" token="YES" description="Enables auto-negotiation process" />
+</bitfield>
+</register>
+     <register id="STATUS" acronym="STATUS" offset="0x0014" width="32" description="Status Register">
+<bitfield id="_RESV_1" width="26" begin="31" end="6" resetval="0" description="Reserved " range="" rwaccess="N"></bitfield>
+<bitfield id="FIB_SIG_DETECT" width="1" begin="5" end="5" resetval="0" description="Fiber Signal Detect  This is  the FIB_SIG_DETECT input pin" range="" rwaccess="R"></bitfield>
+<bitfield id="LOCK" width="1" begin="4" end="4" resetval="0" description="Lock  This is the Lock input pin" range="" rwaccess="R"></bitfield>
+<bitfield id="_RESV_4" width="1" begin="3" end="3" resetval="0" description="Reserved " range="" rwaccess="N"></bitfield>
+<bitfield id="MR_AN_COMPLETE" width="1" begin="2" end="2" resetval="0" description="Auto-negotiation complete. This value is not valid until the lock status bit is  asserted" range="" rwaccess="R">
+<bitenum id="DONE" value="27" token="DONE" description="Auto-negotiation is completed" />
+<bitenum id="NOT_DONE" value="11" token="NOT_DONE" description="Auto-negotiation is not completed" />
+</bitfield>
+<bitfield id="AN_ERROR" width="1" begin="1" end="1" resetval="0" description="Auto-negotiation error. For SGMII mode an auto-negotiation error occurs  when half duplex gigabit is commanded. For FIBER mode, auto-negotiation error occurs when both sides can not be full duplex This bit is not valid until the lock status bit is asserted" range="" rwaccess="R">
+<bitenum id="OCCURED" value="27" token="OCCURED" description="Auto-negotiation error" />
+<bitenum id="NOT_OCCURED" value="11" token="NOT_OCCURED" description="No auto-negotiation error" />
+</bitfield>
+<bitfield id="LINK" width="1" begin="0" end="0" resetval="0" description="Link. This value is not valid until the lock status bit is asserted" range="" rwaccess="R">
+<bitenum id="UP" value="27" token="UP" description="Link is up" />
+<bitenum id="NOT_UP" value="11" token="NOT_UP" description="Link is not up" />
+</bitfield>
+</register>
+     <register id="MR_ADV_ABILITY" acronym="MR_ADV_ABILITY" offset="0x0018" width="32" description="Advertised Ability Register">
+<bitfield id="_RESV_1" width="16" begin="31" end="16" resetval="0" description="Reserved " range="" rwaccess="N"></bitfield>
+<bitfield id="MR_ADV_ABILITY" width="16" begin="15" end="0" resetval="0" description="Advertised Ability" range="" rwaccess="R/W"></bitfield>
+</register>
+     <register id="MR_LP_ADV_ABILITY" acronym="MR_LP_ADV_ABILITY" offset="0x0020" width="32" description="Link Partner Advertised Ability Register">
+<bitfield id="_RESV_1" width="16" begin="31" end="16" resetval="0" description="Reserved " range="" rwaccess="N"></bitfield>
+<bitfield id="MR_LP_ADV_ABILITY" width="16" begin="15" end="0" resetval="0" description="Link Partner Advertised Ability" range="" rwaccess="R"></bitfield>
+</register>
+     <register id="TX_CFG" acronym="TX_CFG" offset="0x0030" width="32" description="Transmit Configuration Register">
+<bitfield id="_RESV_1" width="15" begin="31" end="17" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="ENFTP" width="1" begin="16" end="16" resetval="0" description="Enables fixed-phase relationship of transmit input clock with respect to transmit output clock." range="" rwaccess="R/W"></bitfield>
+<bitfield id="DE" width="4" begin="15" end="12" resetval="0" description="De-emphasis." range="" rwaccess="R/W">
+<bitenum id="0" value="11" token="0" description="" />
+<bitenum id="4_76" value="27" token="4_76" description="" />
+<bitenum id="9_52" value="267" token="9_52" description="" />
+<bitenum id="14_28" value="17" token="14_28" description="" />
+<bitenum id="19_04" value="4107" token="19_04" description="" />
+<bitenum id="23_80" value="4123" token="23_80" description="" />
+<bitenum id="28_56" value="4363" token="28_56" description="" />
+<bitenum id="33_32" value="4379" token="33_32" description="" />
+<bitenum id="38_08" value="65547" token="38_08" description="" />
+<bitenum id="42_85" value="65563" token="42_85" description="" />
+<bitenum id="47_61" value="65803" token="47_61" description="" />
+<bitenum id="52_38" value="65819" token="52_38" description="" />
+<bitenum id="57_14" value="69643" token="57_14" description="" />
+<bitenum id="61_90" value="69659" token="61_90" description="" />
+<bitenum id="66_66" value="69899" token="66_66" description="" />
+<bitenum id="71_42" value="69915" token="71_42" description="" />
+</bitfield>
+<bitfield id="SWING" width="3" begin="11" end="9" resetval="0" description="Output swing." range="" rwaccess="R/W">
+<bitenum id="125" value="11" token="125" description="" />
+<bitenum id="250" value="27" token="250" description="" />
+<bitenum id="500" value="267" token="500" description="" />
+<bitenum id="625" value="283" token="625" description="" />
+<bitenum id="750" value="4107" token="750" description="" />
+<bitenum id="1000" value="4123" token="1000" description="" />
+<bitenum id="1125" value="4363" token="1125" description="" />
+<bitenum id="1250" value="4379" token="1250" description="" />
+</bitfield>
+<bitfield id="CM" width="1" begin="8" end="8" resetval="0" description="Common mode." range="" rwaccess="R/W">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="" />
+<bitenum id="RAISED" value="1" token="RAISED" description="" />
+</bitfield>
+<bitfield id="INVPAIR" width="1" begin="7" end="7" resetval="0" description="Invert polarity." range="" rwaccess="R/W">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="" />
+<bitenum id="INVERTED" value="1" token="INVERTED" description="" />
+</bitfield>
+<bitfield id="RATE" width="2" begin="6" end="5" resetval="0" description="Operating rate." range="" rwaccess="R/W">
+<bitenum id="FULL_LINE" value="11" token="FULL_LINE" description="" />
+<bitenum id="HALF_LINE" value="27" token="HALF_LINE" description="" />
+<bitenum id="QUARTER_LINE" value="267" token="QUARTER_LINE" description="" />
+</bitfield>
+<bitfield id="BUSWIDTH" width="3" begin="4" end="2" resetval="0" description="Bus width." range="" rwaccess="R/W">
+<bitenum id="10_BIT_WIDE" value="11" token="10_BIT_WIDE" description="" />
+</bitfield>
+<bitfield id="_RESV_9" width="1" begin="1" end="1" resetval="0" description="Reserved." range="" rwaccess="N"></bitfield>
+<bitfield id="ENTX" width="1" begin="0" end="0" resetval="0" description="Enable Transmitter" range="" rwaccess="R/W">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="" />
+<bitenum id="ENABLE" value="1" token="ENABLE" description="" />
+</bitfield>
+</register>
+     <register id="RX_CFG" acronym="RX_CFG" offset="0x0034" width="32" description="Receive Configuration Register">
+<bitfield id="_RESV_1" width="6" begin="31" end="26" resetval="0" description="Reserved." range="" rwaccess="N"></bitfield>
+<bitfield id="_RESV_2" width="2" begin="25" end="24" resetval="0" description="Reserved." range="" rwaccess="N"></bitfield>
+<bitfield id="_RESV_3" width="1" begin="23" end="23" resetval="0" description="Reserved." range="" rwaccess="N"></bitfield>
+<bitfield id="EQ" width="4" begin="22" end="19" resetval="0" description="Equalizer." range="" rwaccess="R/W">
+<bitenum id="LFG_MAX" value="11" token="LFG_MAX" description="" />
+<bitenum id="ADAPTIVE" value="27" token="ADAPTIVE" description="" />
+<bitenum id="LFG_ADAPIVE" value="65547" token="LFG_ADAPIVE" description="" />
+<bitenum id="ZF_1048" value="65547" token="ZF_1048" description="" />
+<bitenum id="ZF_805" value="65563" token="ZF_805" description="" />
+<bitenum id="ZF_573" value="65803" token="ZF_573" description="" />
+<bitenum id="ZF_402" value="65819" token="ZF_402" description="" />
+<bitenum id="ZF_304" value="69643" token="ZF_304" description="" />
+<bitenum id="ZF_216" value="69659" token="ZF_216" description="" />
+<bitenum id="ZF_156" value="69899" token="ZF_156" description="" />
+<bitenum id="ZF_135" value="69915" token="ZF_135" description="" />
+</bitfield>
+<bitfield id="CDR" width="3" begin="18" end="16" resetval="0" description="Clock/data recovery." range="" rwaccess="R/W">
+<bitenum id="FIRST_ORDER" value="11" token="FIRST_ORDER" description="" />
+<bitenum id="SECOND_ORDER_HP" value="27" token="SECOND_ORDER_HP" description="" />
+<bitenum id="SECOND_ORDER_MP" value="267" token="SECOND_ORDER_MP" description="" />
+<bitenum id="SECOND_ORDER_BR" value="283" token="SECOND_ORDER_BR" description="" />
+<bitenum id="FIRST_ORDER_FL" value="4107" token="FIRST_ORDER_FL" description="" />
+<bitenum id="SECOND_ORDER_FL_001" value="4123" token="SECOND_ORDER_FL_001" description="" />
+<bitenum id="SECOND_ORDER_FL_010" value="4363" token="SECOND_ORDER_FL_010" description="" />
+<bitenum id="SECOND_ORDER_FL_011" value="4379" token="SECOND_ORDER_FL_011" description="" />
+</bitfield>
+<bitfield id="LOS" width="2" begin="15" end="14" resetval="0" description="Loss of signal." range="" rwaccess="R/W">
+<bitenum id="DISABLED" value="11" token="DISABLED" description="" />
+<bitenum id="HIGH_THRESH" value="27" token="HIGH_THRESH" description="" />
+<bitenum id="LOW_THRESH" value="267" token="LOW_THRESH" description="" />
+</bitfield>
+<bitfield id="ALIGN" width="2" begin="13" end="12" resetval="0" description="Symbol alignment." range="" rwaccess="R/W">
+<bitenum id="DISABLED" value="11" token="DISABLED" description="" />
+<bitenum id="ENABLED" value="27" token="ENABLED" description="" />
+<bitenum id="JOG" value="267" token="JOG" description="" />
+</bitfield>
+<bitfield id="_RESV_8" width="1" begin="11" end="11" resetval="0" description="Reserved." range="" rwaccess="N"></bitfield>
+<bitfield id="TERM" width="3" begin="10" end="8" resetval="0" description="Input termination." range="" rwaccess="R/W">
+<bitenum id="0_8_VDDT" value="27" token="0_8_VDDT" description="" />
+</bitfield>
+<bitfield id="INVPAIR" width="1" begin="7" end="7" resetval="0" description="Invert polarity." range="" rwaccess="R/W">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="" />
+<bitenum id="INVERTED" value="1" token="INVERTED" description="" />
+</bitfield>
+<bitfield id="RATE" width="2" begin="6" end="5" resetval="0" description="Operating rate." range="" rwaccess="R/W">
+<bitenum id="FULL_LINE" value="11" token="FULL_LINE" description="" />
+<bitenum id="HALF_LINE" value="27" token="HALF_LINE" description="" />
+<bitenum id="QUARTER_LINE" value="267" token="QUARTER_LINE" description="" />
+</bitfield>
+<bitfield id="BUSWIDTH" width="3" begin="4" end="2" resetval="0" description="Bus Width." range="" rwaccess="R/W">
+<bitenum id="10_BIT_WIDE" value="11" token="10_BIT_WIDE" description="" />
+</bitfield>
+<bitfield id="_RESV_13" width="1" begin="1" end="1" resetval="0" description="Reserved." range="" rwaccess="N"></bitfield>
+<bitfield id="ENRX" width="1" begin="0" end="0" resetval="0" description="Enable receiver" range="" rwaccess="R/W">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="" />
+<bitenum id="ENABLE" value="1" token="ENABLE" description="" />
+</bitfield>
+</register>
+     <register id="AUX_CFG" acronym="AUX_CFG" offset="0x0038" width="32" description="Auxiliary Configuration Register">
+<bitfield id="_RESV_1" width="12" begin="31" end="20" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="LB" width="2" begin="19" end="18" resetval="0" description="Loop bandwidth." range="" rwaccess="R/W">
+<bitenum id="DISABLE" value="11" token="DISABLE" description="" />
+<bitenum id="BUMP_PAD_LOOPBACK" value="267" token="BUMP_PAD_LOOPBACK" description="" />
+</bitfield>
+<bitfield id="_RESV_3" width="13" begin="17" end="5" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="MPY" width="4" begin="4" end="1" resetval="0" description="PLL multiply." range="" rwaccess="R/W">
+<bitenum id="4_X" value="11" token="4_X" description="" />
+<bitenum id="5_X" value="27" token="5_X" description="" />
+<bitenum id="6_X" value="267" token="6_X" description="" />
+<bitenum id="8_X" value="4107" token="8_X" description="" />
+<bitenum id="10_X" value="4123" token="10_X" description="" />
+<bitenum id="12_X" value="4363" token="12_X" description="" />
+<bitenum id="12_5_X" value="4379" token="12_5_X" description="" />
+<bitenum id="15_X" value="65547" token="15_X" description="" />
+<bitenum id="20_X" value="65563" token="20_X" description="" />
+<bitenum id="25_X" value="65803" token="25_X" description="" />
+</bitfield>
+<bitfield id="ENPLL" width="1" begin="0" end="0" resetval="0" description="Enable PLL." range="" rwaccess="R/W">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="" />
+<bitenum id="ENABLE" value="1" token="ENABLE" description="" />
+</bitfield>
+</register>
+</module>

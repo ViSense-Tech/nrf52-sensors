@@ -1,0 +1,38 @@
+<module name="VPAC0_COMMON_0_PAR_VPAC_NF_S_VBUSP_MMR_VBUSP_NF_CFG" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="PAR_VPAC_NF__S_VBUSP__MMR__MMR_VBUSP__NF_CFG_REVISION" acronym="PAR_VPAC_NF__S_VBUSP__MMR__MMR_VBUSP__NF_CFG_REVISION" offset="0x0" width="32" description="">
+		<bitfield id="MODID" width="16" begin="31" end="16" resetval="0x25800" description="Module ID field" range="31 - 16" rwaccess="R"/> 
+		<bitfield id="REVRTL" width="5" begin="15" end="11" resetval="0x3" description="RTL revision. Will vary depending on release." range="15 - 11" rwaccess="R"/> 
+		<bitfield id="REVMAJ" width="3" begin="10" end="8" resetval="0x1" description="Major revision" range="10 - 8" rwaccess="R"/> 
+		<bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom" range="7 - 6" rwaccess="R"/> 
+		<bitfield id="REVMIN" width="6" begin="5" end="0" resetval="0x0" description="Minor revision" range="5 - 0" rwaccess="R"/>
+	</register>
+	<register id="PAR_VPAC_NF__S_VBUSP__MMR__MMR_VBUSP__NF_CFG_CONTROL" acronym="PAR_VPAC_NF__S_VBUSP__MMR__MMR_VBUSP__NF_CFG_CONTROL" offset="0x4" width="32" description="">
+		<bitfield id="SUB_TABLE_SELECT" width="3" begin="31" end="29" resetval="0x0" description="Defines which sub table is used statically. Only valid when adaptive_mode is disabled This allows the SW to statically define which sub table to use throughout the frame. SW must set this before the first  line of the frame                                                                      0 = sub Table 0 selected                                                                      1 = sub Table 1 selected                                                                      .                                                                      7 = sub Table 7 selected" range="31 - 29" rwaccess="R/W"/> 
+		<bitfield id="NUM_SUB_TABLES" width="2" begin="28" end="27" resetval="0x0" description="Defines the number of sub-tables                                                                      0 = 1 table                                                                      1 = 2 sub tables                                                                      2 = 4 sub tables                                                                      3 = 8 sub tables" range="28 - 27" rwaccess="R/W"/> 
+		<bitfield id="OUTPUT_OFFSET" width="12" begin="26" end="15" resetval="0x0" description="unsigned offset value to added to output after shifting and before clipping" range="26 - 15" rwaccess="R/W"/> 
+		<bitfield id="OUTPUT_SHIFT" width="4" begin="14" end="11" resetval="0x0" description="Signed 4 bit  (24 is added before using it inside IP)" range="14 - 11" rwaccess="R/W"/> 
+		<bitfield id="RSVD" width="5" begin="10" end="6" resetval="0x0" description="Always read as 0.  Writes have no affect" range="10 - 6" rwaccess=""/> 
+		<bitfield id="INTERLEAVE_MODE" width="1" begin="5" end="5" resetval="0x0" description="Interleave Mode.                                                                      0 = Disabled                                                                      1 = Enabled" range="5" rwaccess="R/W"/> 
+		<bitfield id="SKIP_ODD_MODE" width="1" begin="4" end="4" resetval="0x0" description="Skip Odd Mode.                                                                      0 = Disabled                                                                      1 = Enabled" range="4" rwaccess="R/W"/> 
+		<bitfield id="SKIP_MODE" width="1" begin="3" end="3" resetval="0x0" description="Skip Mode.                                                                      0 = Disabled                                                                      1 = Enabled" range="3" rwaccess="R/W"/> 
+		<bitfield id="ADAPTIVE_MODE" width="1" begin="2" end="2" resetval="0x0" description="Defines what controls the selection of the sub table.                                                                      0 = Bi-lateral filtering Adaptive mode is Disabled and sub_table_select defines which sub table is used                                                                      1 = Bi-lateral filtering Adaptive mode is Enabled and the 4x4 avg is used to determine which sub table is used" range="2" rwaccess="R/W"/> 
+		<bitfield id="ENABLE_GENERIC_FILTERING" width="1" begin="1" end="1" resetval="0x0" description="Filter mode, 0=> Bi-lateral filtering, 1= Generic 2D Filtering" range="1" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_VPAC_NF__S_VBUSP__MMR__MMR_VBUSP__NF_CFG_CENTER_WEIGHT" acronym="PAR_VPAC_NF__S_VBUSP__MMR__MMR_VBUSP__NF_CFG_CENTER_WEIGHT" offset="0x8" width="32" description="">
+		<bitfield id="RSVD" width="23" begin="31" end="9" resetval="0x0" description="Always read as 0.  Writes have no affect" range="31 - 9" rwaccess=""/> 
+		<bitfield id="CENTRAL_PIXEL_WEIGHT_W00" width="9" begin="8" end="0" resetval="0x255" description="Central pixel weight,  8 bit unsigned in Bi-lateral filtering, 9 bit signed in Generic 2D Filtering" range="8 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_VPAC_NF__S_VBUSP__MMR__MMR_VBUSP__NF_CFG_DEBUG" acronym="PAR_VPAC_NF__S_VBUSP__MMR__MMR_VBUSP__NF_CFG_DEBUG" offset="0x80" width="32" description="">
+		<bitfield id="BYPASS" width="1" begin="31" end="31" resetval="0x0" description="Bypass Mode When enabled output equals the input , namely  C2_R0 input matrix" range="31" rwaccess="R/W"/> 
+		<bitfield id="RSVD" width="18" begin="29" end="12" resetval="0x0" description="Always read as 0.  Writes have no affect" range="29 - 12" rwaccess=""/> 
+		<bitfield id="OUT_COUNT" width="4" begin="11" end="8" resetval="0x0" description="output free running counter , gets reset on start of line" range="11 - 8" rwaccess="R"/> 
+		<bitfield id="IN_COUNT" width="4" begin="7" end="4" resetval="0x0" description="input  free running counter , gets reset on start of line" range="7 - 4" rwaccess="R"/> 
+		<bitfield id="T_STATE" width="4" begin="3" end="0" resetval="0x0" description="StateMachine State" range="3 - 0" rwaccess="R"/>
+	</register>
+	<register id="PAR_VPAC_NF__S_VBUSP__MMR__MMR_VBUSP__NF_CFG_Weight_LUT" acronym="PAR_VPAC_NF__S_VBUSP__MMR__MMR_VBUSP__NF_CFG_Weight_LUT" offset="0x100" width="32" description="">
+		<bitfield id="W_3" width="8" begin="31" end="24" resetval="0x0" description="weight W_3" range="31 - 24" rwaccess="R/W"/> 
+		<bitfield id="W_2" width="8" begin="23" end="16" resetval="0x0" description="weight W_2" range="23 - 16" rwaccess="R/W"/> 
+		<bitfield id="W_1" width="8" begin="15" end="8" resetval="0x0" description="weight W_1" range="15 - 8" rwaccess="R/W"/> 
+		<bitfield id="W_0" width="8" begin="7" end="0" resetval="0x0" description="weight W_0" range="7 - 0" rwaccess="R/W"/>
+	</register>
+</module>

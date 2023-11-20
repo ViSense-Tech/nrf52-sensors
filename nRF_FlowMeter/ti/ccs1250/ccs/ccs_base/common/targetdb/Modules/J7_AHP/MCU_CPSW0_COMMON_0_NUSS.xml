@@ -1,0 +1,29 @@
+<module name="MCU_CPSW0_COMMON_0_NUSS" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="CPSW_NUSS_VBUSP_CPSW_NUSS_IDVER_REG" acronym="CPSW_NUSS_VBUSP_CPSW_NUSS_IDVER_REG" offset="0x0" width="32" description="">
+		<bitfield id="IDENT" width="16" begin="31" end="16" resetval="0x27552" description="Identification value" range="31 - 16" rwaccess="R"/> 
+		<bitfield id="RTL_VER" width="5" begin="15" end="11" resetval="0x4" description="RTL version value" range="15 - 11" rwaccess="R"/> 
+		<bitfield id="MAJOR_VER" width="3" begin="10" end="8" resetval="0x1" description="Major version value" range="10 - 8" rwaccess="R"/> 
+		<bitfield id="MINOR_VER" width="8" begin="7" end="0" resetval="0x2" description="Minor version value" range="7 - 0" rwaccess="R"/>
+	</register>
+	<register id="CPSW_NUSS_VBUSP_SYNCE_COUNT_REG" acronym="CPSW_NUSS_VBUSP_SYNCE_COUNT_REG" offset="0x4" width="32" description="">
+		<bitfield id="SYNCE_CNT" width="32" begin="31" end="0" resetval="0x0" description="Sync E Count Value" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CPSW_NUSS_VBUSP_SYNCE_MUX_REG" acronym="CPSW_NUSS_VBUSP_SYNCE_MUX_REG" offset="0x8" width="32" description="">
+		<bitfield id="SYNCE_SEL" width="6" begin="5" end="0" resetval="0x0" description="Sync E Select Value" range="5 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CPSW_NUSS_VBUSP_CONTROL_REG" acronym="CPSW_NUSS_VBUSP_CONTROL_REG" offset="0xC" width="32" description="">
+		<bitfield id="EEE_PHY_ONLY" width="1" begin="1" end="1" resetval="0x0" description="Energy Efficient Enable Phy Only Mode: 0=The low power indicate state includes gating off the CPPI_GCLK to the CPSW, 1=The low power indicate state does not gate the clock to the CPSW" range="1" rwaccess="R/W"/> 
+		<bitfield id="EEE_EN" width="1" begin="0" end="0" resetval="0x0" description="Energy Efficient Ethernet Enable: 0=EEE is disabled, 1=EEE is enabled" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CPSW_NUSS_VBUSP_SGMII_MODE_REG" acronym="CPSW_NUSS_VBUSP_SGMII_MODE_REG" offset="0x10" width="32" description="">
+		<bitfield id="SYNCE_SEL" width="1" begin="0" end="0" resetval="0x1" description="SGMII_MODE Input" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CPSW_NUSS_VBUSP_RGMII_STATUS_REG" acronym="CPSW_NUSS_VBUSP_RGMII_STATUS_REG" offset="0x18" width="32" description="">
+		<bitfield id="FULLDUPLEX" width="1" begin="3" end="3" resetval="0x0" description="Rgmii full dulex: 0=Half-duplex, 1=Full-duplex" range="3" rwaccess="R"/> 
+		<bitfield id="SPEED" width="2" begin="2" end="1" resetval="0x0" description="Rgmii speed: 00=10Mbps, 01=100Mbps, 10=1000Mbps, 11=reserved" range="2 - 1" rwaccess="R"/> 
+		<bitfield id="LINK" width="1" begin="0" end="0" resetval="0x0" description="Rgmii link indicator: 0=Link is down, 1=Link is up" range="0" rwaccess="R"/>
+	</register>
+	<register id="CPSW_NUSS_VBUSP_SUBSSYSTEM_STATUS_REG" acronym="CPSW_NUSS_VBUSP_SUBSSYSTEM_STATUS_REG" offset="0x1C" width="32" description="">
+		<bitfield id="EEE_CLKSTOP_ACK" width="1" begin="0" end="0" resetval="0x0" description="Energy Efficient Ethernet clockstop acknowledge from CPSW" range="0" rwaccess="R"/>
+	</register>
+</module>

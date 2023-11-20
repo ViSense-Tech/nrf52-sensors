@@ -1,0 +1,147 @@
+<module name="MLB0_VBP2APB_WRAP_MLB_CFG_VBP_MLBDIM" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="MLB_MLBC0" acronym="MLB_MLBC0" offset="0x0" width="32" description="MediaLB Control 0 Register.">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="FCNT" width="3" begin="17" end="15" resetval="0x0" description="Number of frames per sub-buffer (synchronous channels)." range="" rwaccess="RW"/>
+    <bitfield id="CTLRETRY" width="1" begin="14" end="14" resetval="0x0" description="Control Tx packet retry. When set, a control packet that is flagged with a Break or ProtocolError by the receiver is retransmitted. When cleared, a control packet that is flagged with a Break or ProtocolError by the receiver is skipped." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="13" end="13" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ASYRETRY" width="1" begin="12" end="12" resetval="0x0" description="Asynchronous Tx packet retry. Asynchronous Tx packet retry. When set, an asynchronous packet that is flagged with a Break or ProtocolError by the receiver is retransmitted. When cleared, an asynchronous packet that is flagged with a Break or ProtocolError by the receiver is skipped." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="11" end="8" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="MLBLK" width="1" begin="7" end="7" resetval="0x0" description="MediaLB lock status. When set, indicates that the MediaLB block is synchronized to the incoming MediaLB frame. If MLBLK is clear (unlocked), MLBLK is set after FRAMESYNC is detected at the same position for three consecutive frames. If MLBLK is set (locked), MLBLK is cleared after not receiving FRAMESYNC at the expected time for two consecutive frames. While MLBLK is set, FRAMESYNC patterns occurring at locations other than the expected one are ignored. (read-only)" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="6" end="6" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="MLBPEN" width="1" begin="5" end="5" resetval="0x0" description="MediaLB 6-pin enable." range="" rwaccess="RW"/>
+    <bitfield id="MLBCLK" width="3" begin="4" end="2" resetval="0x0" description="MediaLB clock speed select." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="1" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="MLBEN" width="1" begin="0" end="0" resetval="0x0" description="MediaLB enable. When set, MediaLB clock, signal, and data are received and transmitted on the appropriate MediaLB pins." range="" rwaccess="RW"/>
+  </register>
+  <register id="MLB_MS0" acronym="MLB_MS0" offset="0xC" width="32" description="MediaLB Channel Status 0 Register.">
+    <bitfield id="MCS_31_0" width="32" begin="31" end="0" resetval="0x0" description="MediaLB channel status (for channels 31 to 0). Channel status bits are set by hardware and cleared by software. Status is only set if the appropriate bits in the" range="" rwaccess="RW"/>
+  </register>
+  <register id="MLB_MS1" acronym="MLB_MS1" offset="0x14" width="32" description="MediaLB Channel Status 1 Register.">
+    <bitfield id="MCS_63_32" width="32" begin="31" end="0" resetval="0x0" description="MediaLB channel status (for channels 63 to 32). Indicates the channel status for MediaLB channels 63 to 32. Channel status bits are set by hardware and cleared by software. Status is only set if the appropriate bits in the" range="" rwaccess="RW"/>
+  </register>
+  <register id="MLB_MSS" acronym="MLB_MSS" offset="0x20" width="32" description="MediaLB System Status Register.">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="SERVREQ" width="1" begin="5" end="5" resetval="0x0" description="Service request enabled. When set, the MediaLB block responds with a &#8220;device present, request service&#8221; system response if a matching channel scan system command is detected. When cleared, the MediaLB block responds with a &#8220;device present&#8221; system response." range="" rwaccess="RW"/>
+    <bitfield id="SWSYSCMD" width="1" begin="4" end="4" resetval="0x0" description="Software system command detected (in the system quadlet). Set by hardware, cleared by software. Data is stored in the" range="" rwaccess="RW"/>
+    <bitfield id="CSSYSCMD" width="1" begin="3" end="3" resetval="0x0" description="Channel scan system command detected (in the system quadlet). Set by hardware, cleared by software. If the node address specified in Data quadlet matches the value in" range="" rwaccess="RW"/>
+    <bitfield id="ULKSYSCMD" width="1" begin="2" end="2" resetval="0x0" description="Network unlock system command detected (in the system quadlet). Set by hardware, cleared by software. Writing a 1 has no effect." range="" rwaccess="RW"/>
+    <bitfield id="LKSYSCMD" width="1" begin="1" end="1" resetval="0x0" description="Network lock system command detected (in the system quadlet). Set by hardware, cleared by software. Writing a 1 has no effect." range="" rwaccess="RW"/>
+    <bitfield id="RSTSYSCMD" width="1" begin="0" end="0" resetval="0x0" description="Reset system command detected (in the system quadlet). Set by hardware, cleared by software. Writing a 1 has no effect." range="" rwaccess="RW"/>
+  </register>
+  <register id="MLB_MSD" acronym="MLB_MSD" offset="0x24" width="32" description="MediaLB System Data Register.">
+    <bitfield id="SD3" width="8" begin="31" end="24" resetval="0x0" description="System data (byte 3). Updated with MediaLB Data[31-24] when a MediaLB software system command is received in the system quadlet. If" range="" rwaccess="R"/>
+    <bitfield id="SD2" width="8" begin="23" end="16" resetval="0x0" description="System data (byte 2). Updated with MediaLB Data[23:16] when a MediaLB software system command is received in the system quadlet. If" range="" rwaccess="R"/>
+    <bitfield id="SD1" width="8" begin="15" end="8" resetval="0x0" description="System data (byte 1). Updated with MediaLB Data[15:8] when a MediaLB software system command is received in the system quadlet. If" range="" rwaccess="R"/>
+    <bitfield id="SD0" width="8" begin="7" end="0" resetval="0x0" description="System data (byte 0). Updated with MediaLB Data[7:0] when a MediaLB software system command is received in the system quadlet. If" range="" rwaccess="R"/>
+  </register>
+  <register id="MLB_MIEN" acronym="MLB_MIEN" offset="0x2C" width="32" description="MediaLB Interrupt Enable Register.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="CTX_BREAK" width="1" begin="29" end="29" resetval="0x0" description="Control Tx break enable. When set, a ReceiverBreak response received from the receiver on a control Tx channel causes the appropriate channel bit in the" range="" rwaccess="RW"/>
+    <bitfield id="CTX_PE" width="1" begin="28" end="28" resetval="0x0" description="Control Tx protocol error enable. When set, a ProtocolError generated by the receiver on a control Tx channel causes the appropriate channel bit in the" range="" rwaccess="RW"/>
+    <bitfield id="CTX_DONE" width="1" begin="27" end="27" resetval="0x0" description="Control Tx packet done enable. When set, a packet transmitted with no errors on a control Tx channel causes the appropriate channel bit in the" range="" rwaccess="RW"/>
+    <bitfield id="CRX_BREAK" width="1" begin="26" end="26" resetval="0x0" description="Control Rx break enable. When set, a ControlBreak command received from the transmitter on a control Rx channel causes the appropriate channel bit in the" range="" rwaccess="RW"/>
+    <bitfield id="CRX_PE" width="1" begin="25" end="25" resetval="0x0" description="Control Rx protocol error enable. When set, a ProtocolError detected on a control Rx channel causes the appropriate channel bit in the" range="" rwaccess="RW"/>
+    <bitfield id="CRX_DONE" width="1" begin="24" end="24" resetval="0x0" description="Control Rx packet done enable. When set, a packet received with no errors on a control Rx channel causes the appropriate channel bit in the" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="ATX_BREAK" width="1" begin="22" end="22" resetval="0x0" description="Asynchronous Tx break enable. When set, a ReceiverBreak response received from the receiver on an asynchronous Tx channel causes the appropriate channel bit in the" range="" rwaccess="RW"/>
+    <bitfield id="ATX_PE" width="1" begin="21" end="21" resetval="0x0" description="Asynchronous Tx protocol error enable. When set, a ProtocolError generated by the receiver on an asynchronous Tx channel causes the appropriate channel bit in the" range="" rwaccess="RW"/>
+    <bitfield id="ATX_DONE" width="1" begin="20" end="20" resetval="0x0" description="Asynchronous Tx packet done enable. When set, a packet transmitted with no errors on an asynchronous Tx channel causes the appropriate channel bit in the" range="" rwaccess="RW"/>
+    <bitfield id="ARX_BREAK" width="1" begin="19" end="19" resetval="0x0" description="Asynchronous Rx break enable. When set, a AsyncBreak command received from the transmitter on an asynchronous Rx channel causes the appropriate channel bit in the" range="" rwaccess="RW"/>
+    <bitfield id="ARX_PE" width="1" begin="18" end="18" resetval="0x0" description="Asynchronous Rx protocol error enable. When set, a ProtocolError detected on an asynchronous Rx channel causes the appropriate channel bit in the" range="" rwaccess="RW"/>
+    <bitfield id="ARX_DONE" width="1" begin="17" end="17" resetval="0x0" description="Asynchronous Rx done enable. When set, a packet received with no errors on an asynchronous Rx channel causes the appropriate channel bit in the" range="" rwaccess="RW"/>
+    <bitfield id="SYNC_PE" width="1" begin="16" end="16" resetval="0x0" description="Synchronous protocol error enable. When set, a ProtocolError detected on a synchronous Rx channel causes the appropriate channel bit in the" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="14" begin="15" end="2" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="ISOC_BUFO" width="1" begin="1" end="1" resetval="0x0" description="Isochronous Rx buffer overflow enable. When set, a buffer overflow on an isochronous Rx channel causes the appropriate channel bit in the" range="" rwaccess="RW"/>
+    <bitfield id="ISOC_PE" width="1" begin="0" end="0" resetval="0x0" description="Isochronous Rx protocol error enable. When set, a ProtocolError detected on an isochronous Rx channel causes the appropriate channel bit in the" range="" rwaccess="RW"/>
+  </register>
+  <register id="MLB_MLBC1" acronym="MLB_MLBC1" offset="0x3C" width="32" description="MediaLB Control 1 Register.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="NDA" width="8" begin="15" end="8" resetval="0x0" description="Node device address. Used for system commands directed to individual MediaLB nodes." range="" rwaccess="RW"/>
+    <bitfield id="CLKM" width="1" begin="7" end="7" resetval="0x0" description="MediaLB clock missing status. Set when MediaLB clock is not toggling at the pin; cleared by software. Writing a 1 has no effect." range="" rwaccess="RW"/>
+    <bitfield id="LOCK" width="1" begin="6" end="6" resetval="0x0" description="MediaLB lock error status. Set when MediaLB is unlocked; cleared by software. Writing a 1 has no effect." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="5" end="0" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+  </register>
+  <register id="MLB_HCTL" acronym="MLB_HCTL" offset="0x80" width="32" description="HBI Control Register.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="EN" width="1" begin="15" end="15" resetval="0x0" description="HBI enable:" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="15" begin="14" end="0" resetval="0x0" description="Reserved (write default value)" range="" rwaccess="RW"/>
+  </register>
+  <register id="MLB_HCMR0" acronym="MLB_HCMR0" offset="0x88" width="32" description="HBI Channel Mask 0 Register.">
+    <bitfield id="CHM_31_0" width="32" begin="31" end="0" resetval="0x0" description="Bitwise channel mask bit:" range="" rwaccess="RW"/>
+  </register>
+  <register id="MLB_HCMR1" acronym="MLB_HCMR1" offset="0x8C" width="32" description="HBI Channel Mask 1 Register.">
+    <bitfield id="CHM_63_32" width="32" begin="31" end="0" resetval="0x0" description="Bitwise channel mask bit:" range="" rwaccess="RW"/>
+  </register>
+  <register id="MLB_HCER0" acronym="MLB_HCER0" offset="0x90" width="32" description="HBI Channel Error 0 Register.">
+    <bitfield id="CERR_31_0" width="32" begin="31" end="0" resetval="0x0" description="Bitwise channel error bit. Writing a 1 has no effect." range="" rwaccess="RW"/>
+  </register>
+  <register id="MLB_HCER1" acronym="MLB_HCER1" offset="0x94" width="32" description="HBI Channel Error 1 Register.">
+    <bitfield id="CERR_63_32" width="32" begin="31" end="0" resetval="0x0" description="Bitwise channel error bit. Writing a 1 has no effect." range="" rwaccess="RW"/>
+  </register>
+  <register id="MLB_HCBR0" acronym="MLB_HCBR0" offset="0x98" width="32" description="HBI Channel Busy 0 Register.">
+    <bitfield id="CHB_31_0" width="32" begin="31" end="0" resetval="0x0" description="Bitwise channel busy bit:" range="" rwaccess="R"/>
+  </register>
+  <register id="MLB_HCBR1" acronym="MLB_HCBR1" offset="0x9C" width="32" description="HBI Channel Busy 1 Register.">
+    <bitfield id="CHB_63_32" width="32" begin="31" end="0" resetval="0x0" description="Bitwise channel busy bit:" range="" rwaccess="R"/>
+  </register>
+  <register id="MLB_MDAT0" acronym="MLB_MDAT0" offset="0xC0" width="32" description="Memory Interface Data 0 Register.">
+    <bitfield id="DATA_31_0" width="32" begin="31" end="0" resetval="0x0" description="CTR data - bits[31-0] of 128-bit entry or" range="" rwaccess="RW"/>
+  </register>
+  <register id="MLB_MDAT1" acronym="MLB_MDAT1" offset="0xC4" width="32" description="Memory Interface Data 1 Register.">
+    <bitfield id="DATA_63_32" width="32" begin="31" end="0" resetval="0x0" description="CTR data - bits[63-32] of 128-bit entry" range="" rwaccess="RW"/>
+  </register>
+  <register id="MLB_MDAT2" acronym="MLB_MDAT2" offset="0xC8" width="32" description="Memory Interface Data 2 Register.">
+    <bitfield id="DATA_95_64" width="32" begin="31" end="0" resetval="0x0" description="CTR data - bits[95-64] of 128-bit entry" range="" rwaccess="RW"/>
+  </register>
+  <register id="MLB_MDAT3" acronym="MLB_MDAT3" offset="0xCC" width="32" description="Memory Interface Data 3 Register.">
+    <bitfield id="DATA_127_96" width="32" begin="31" end="0" resetval="0x0" description="CTR data - bits[127-96] of 128-bit entry" range="" rwaccess="RW"/>
+  </register>
+  <register id="MLB_MDWE0" acronym="MLB_MDWE0" offset="0xD0" width="32" description="Memory Interface Data Write Enable 0 Register.">
+    <bitfield id="MASK_31_0" width="32" begin="31" end="0" resetval="0x0" description="Bitwise write enable for CTR data - bits[31-0] (0 = disabled, 1 = enabled)" range="" rwaccess="RW"/>
+  </register>
+  <register id="MLB_MDWE1" acronym="MLB_MDWE1" offset="0xD4" width="32" description="Memory Interface Data Write Enable 1 Register.">
+    <bitfield id="MASK_63_32" width="32" begin="31" end="0" resetval="0x0" description="Bitwise write enable for CTR data - bits[63-32] (0 = disabled, 1 = enabled)" range="" rwaccess="RW"/>
+  </register>
+  <register id="MLB_MDWE2" acronym="MLB_MDWE2" offset="0xD8" width="32" description="Memory Interface Data Write Enable 2 Register.">
+    <bitfield id="MASK_95_64" width="32" begin="31" end="0" resetval="0x0" description="Bitwise write enable for CTR data - bits[95-64] (0 = disabled, 1 = enabled)" range="" rwaccess="RW"/>
+  </register>
+  <register id="MLB_MDWE3" acronym="MLB_MDWE3" offset="0xDC" width="32" description="Memory Interface Data Write Enable 3 Register.">
+    <bitfield id="MASK_127_96" width="32" begin="31" end="0" resetval="0x0" description="Bitwise write enable for CTR data - bits[127-96] (0 = disabled, 1 = enabled)" range="" rwaccess="RW"/>
+  </register>
+  <register id="MLB_MCTL" acronym="MLB_MCTL" offset="0xE0" width="32" description="Memory Interface Control Register.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved (write default value)" range="" rwaccess="RW"/>
+    <bitfield id="XCMP" width="1" begin="0" end="0" resetval="0x0" description="Transfer complete (write 0 to clear). Writing a 1 has no effect." range="" rwaccess="RW"/>
+  </register>
+  <register id="MLB_MADR" acronym="MLB_MADR" offset="0xE4" width="32" description="Memory Interface Address Register.">
+    <bitfield id="WNR" width="1" begin="31" end="31" resetval="0x0" description="Write-Not-Read selection (0 = read, 1 = write)" range="" rwaccess="RW"/>
+    <bitfield id="TB" width="1" begin="30" end="30" resetval="0x0" description="Target location bit (0 = selects CTR, 1 = selects DBR)" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="16" begin="29" end="14" resetval="0x0" description="Reserved (write default value)" range="" rwaccess="RW"/>
+    <bitfield id="ADDR_13_8" width="6" begin="13" end="8" resetval="0x0" description="DBR address of 8-bit entry - bits[13-8]" range="" rwaccess="RW"/>
+    <bitfield id="ADDR_7_0" width="8" begin="7" end="0" resetval="0x0" description="CTR address of 128-bit entry or DBR address of 8-bit entry - bits[7-0]" range="" rwaccess="RW"/>
+  </register>
+  <register id="MLB_PID" acronym="MLB_PID" offset="0xFC" width="32" description="MediaLB Core Revision Register.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="MAJOR" width="8" begin="15" end="8" resetval="0xX" description="Major revision" range="" rwaccess="R"/>
+    <bitfield id="MINOR" width="8" begin="7" end="0" resetval="0xX" description="Minor revision" range="" rwaccess="R"/>
+  </register>
+  <register id="MLB_ACTL" acronym="MLB_ACTL" offset="0x3C0" width="32" description="AHB Control Register.">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0" description="Reserved (write default value)" range="" rwaccess="RW"/>
+    <bitfield id="MPB" width="1" begin="4" end="4" resetval="0x0" description="Packet buffering mode:" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="Reserved (write default value)" range="" rwaccess="RW"/>
+    <bitfield id="DMA_MODE" width="1" begin="2" end="2" resetval="0x0" description="DMA Mode:" range="" rwaccess="RW"/>
+    <bitfield id="SMX" width="1" begin="1" end="1" resetval="0x0" description="AHB interrupt mux enable:" range="" rwaccess="RW"/>
+    <bitfield id="SCE" width="1" begin="0" end="0" resetval="0x0" description="Software clear enable:" range="" rwaccess="RW"/>
+  </register>
+  <register id="MLB_ACSR0" acronym="MLB_ACSR0" offset="0x3D0" width="32" description="AHB Channel Status 0 Register.">
+    <bitfield id="CHS_31_0" width="32" begin="31" end="0" resetval="0x0" description="Interrupt status for logical channels 31 to 0:" range="" rwaccess="RW1toCl"/>
+  </register>
+  <register id="MLB_ACSR1" acronym="MLB_ACSR1" offset="0x3D4" width="32" description="AHB Channel Status 1 Register.">
+    <bitfield id="CHS_63_32" width="32" begin="31" end="0" resetval="0x0" description="Interrupt status for logical channels 32 to 63:" range="" rwaccess="RW1toCl"/>
+  </register>
+  <register id="MLB_ACMR0" acronym="MLB_ACMR0" offset="0x3D8" width="32" description="AHB Channel Mask 0 Register.">
+    <bitfield id="CHM_31_0" width="32" begin="31" end="0" resetval="0x0" description="Bitwise channel mask bit:" range="" rwaccess="RW"/>
+  </register>
+  <register id="MLB_ACMR1" acronym="MLB_ACMR1" offset="0x3DC" width="32" description="AHB Channel Mask 1 Register.">
+    <bitfield id="CHM_63_32" width="32" begin="31" end="0" resetval="0x0" description="Bitwise channel mask bit:" range="" rwaccess="RW"/>
+  </register>
+</module>

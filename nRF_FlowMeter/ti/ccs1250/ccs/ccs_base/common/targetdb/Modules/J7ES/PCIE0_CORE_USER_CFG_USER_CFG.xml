@@ -1,0 +1,191 @@
+<module name="PCIE0_CORE_USER_CFG_USER_CFG" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="PCIE_USER_REVID" acronym="PCIE_USER_REVID" offset="0x0" width="32" description="Module ID register">
+    <bitfield id="MODID" width="16" begin="31" end="16" resetval="0x6812" description="Module ID field" range="" rwaccess="R"/>
+    <bitfield id="REVRTL" width="5" begin="15" end="11" resetval="0x10" description="RTL revision." range="" rwaccess="R"/>
+    <bitfield id="REVMAJ" width="3" begin="10" end="8" resetval="0x1" description="Major revision" range="" rwaccess="R"/>
+    <bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom" range="" rwaccess="R"/>
+    <bitfield id="REVMIN" width="6" begin="5" end="0" resetval="0x0" description="Minor revision" range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_CMD_STATUS" acronym="PCIE_USER_CMD_STATUS" offset="0x4" width="32" description="Command Status register">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LINK_TRAINING_ENABLE" width="1" begin="0" end="0" resetval="0x0" description="This bit must be set to 1 to enable the LTSSM to bring up the link." range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_USER_RSTCMD" acronym="PCIE_USER_RSTCMD" offset="0x8" width="32" description="Reset Command and Status register">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="INIT_HOT_RESET" width="1" begin="0" end="0" resetval="0x0" description="When this bit is set to 1'b1 in the RP mode, the core initiates a Hot Reset sequence on the PCIe link." range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_USER_INITCFG" acronym="PCIE_USER_INITCFG" offset="0xC" width="32" description="Initialization configuration register">
+    <bitfield id="RESERVED" width="7" begin="31" end="25" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CONFIG_ENABLE" width="1" begin="24" end="24" resetval="0x1" description="When this bit is set to 0 in the EP mode, the Controller will generate a CRS Completion in response to Configuration Requests." range="" rwaccess="RW"/>
+    <bitfield id="VC_COUNT" width="2" begin="23" end="22" resetval="0x3" description="Number of VCs configured." range="" rwaccess="RW"/>
+    <bitfield id="MAX_EVAL_ITERATION" width="7" begin="21" end="15" resetval="0x8" description="Denotes the maximum number of iterations to be performed during the DirectionChange Feedback Link Equalization in case the direction change feedback does not converge to 00." range="" rwaccess="RW"/>
+    <bitfield id="BYPASS_PHASE23" width="1" begin="14" end="14" resetval="0x0" description="This MMR should be programmed during system boot or initialization." range="" rwaccess="RW"/>
+    <bitfield id="BYPASS_REMOTE_TX_EQUALIZATION" width="1" begin="13" end="13" resetval="0x0" description="This MMR should be programmed during system boot or initialization." range="" rwaccess="RW"/>
+    <bitfield id="SUPPORTED_PRESET" width="11" begin="12" end="2" resetval="0x7FF" description="This MMR should be programmed during system boot or initialization." range="" rwaccess="RW"/>
+    <bitfield id="DISABLE_GEN3_DC_BALANCE" width="1" begin="1" end="1" resetval="0x0" description="This bit it is used to disable the transmission of special DC Balance symbols in TS1 training sequences for improving the DC balance of the bit stream at 8.0 GT/s or higher speed." range="" rwaccess="RW"/>
+    <bitfield id="SRIS_ENABLE" width="1" begin="0" end="0" resetval="0x1" description="Should be set as per the System Reference Clocking Implementation." range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_USER_PMCMD" acronym="PCIE_USER_PMCMD" offset="0x10" width="32" description="Power Management command register">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POWER_STATE_CHANGE_ACK" width="1" begin="2" end="2" resetval="0x0" description="Software must assert this bit for a minimum of one cycle in response to the assertion of POWER_STATE_CHANGE_INTERRUPT, when it is ready to transition to the low-power state requested by the configuration write request." range="" rwaccess="RW"/>
+    <bitfield id="CLIENT_REQ_EXIT_L1_SUBSTATE" width="1" begin="1" end="1" resetval="0x0" description="Client logic can trigger an explicit L" range="" rwaccess="RW"/>
+    <bitfield id="CLIENT_REQ_EXIT_L1" width="1" begin="0" end="0" resetval="0x0" description="Client logic can trigger an explicit L1 exit by setting this bit." range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_USER_LINKSTATUS" acronym="PCIE_USER_LINKSTATUS" offset="0x14" width="32" description="Link Status register">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="LTSSM_STATE" width="6" begin="29" end="24" resetval="0x0" description="Current state of the Link Training and Status State Machine within the core." range="" rwaccess="R"/>
+    <bitfield id="POWER_STATE_CHANGE_FUNCTION_NUM" width="8" begin="23" end="16" resetval="0x0" description="Function number of the function for which a power state change occurred." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="15" end="15" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="L1_PM_SUBSTATE" width="3" begin="14" end="12" resetval="0x0" description="This register provides the current state of the L1 PM substates state machine." range="" rwaccess="R"/>
+    <bitfield id="LINK_POWER_STATE" width="4" begin="11" end="8" resetval="0x0" description="Current power state of the PCIe link." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="NEGOTIATED_SPEED" width="2" begin="4" end="3" resetval="0x0" description="Current operating speed of the link is as follows:" range="" rwaccess="R"/>
+    <bitfield id="NEGOTIATED_LINK_WIDTH" width="1" begin="2" end="2" resetval="0x1" description="Current link width are as follows:" range="" rwaccess="R"/>
+    <bitfield id="LINK_STATUS" width="2" begin="1" end="0" resetval="0x0" description="Status of the PCI Express link." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_LEGACY_INTR_SET" acronym="PCIE_USER_LEGACY_INTR_SET" offset="0x18" width="32" description="Legacy interrupt set register">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="INTD_IN" width="1" begin="3" end="3" resetval="0x0" description="When the core is configured as EP, this bit is used by the client application to signal an interrupt from any of its PCI Functions to the RP using the Legacy PCI Express Interrupt Delivery mechanism of PCI Express." range="" rwaccess="RW"/>
+    <bitfield id="INTC_IN" width="1" begin="2" end="2" resetval="0x0" description="When the core is configured as EP, this bit is used by the client application to signal an interrupt from any of its PCI Functions to the RP using the Legacy PCI Express Interrupt Delivery mechanism of PCI Express." range="" rwaccess="RW"/>
+    <bitfield id="INTB_IN" width="1" begin="1" end="1" resetval="0x0" description="When the core is configured as EP, this bit is used by the client application to signal an interrupt from any of its PCI Functions to the RP using the Legacy PCI Express Interrupt Delivery mechanism of PCI Express." range="" rwaccess="RW"/>
+    <bitfield id="INTA_IN" width="1" begin="0" end="0" resetval="0x0" description="When the core is configured as EP, this bit is used by the client application to signal an interrupt from any of its PCI Functions to the RP using the Legacy PCI Express Interrupt Delivery mechanism of PCI Express." range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_USER_LEGACY_INT_PENDING" acronym="PCIE_USER_LEGACY_INT_PENDING" offset="0x1C" width="32" description="Legacy interrupt pending set register">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT_PENDING_STATUS" width="6" begin="5" end="0" resetval="0x0" description="When using legacy interrupts, this input is used to indicate the interrupt pending status of the Physical Functions." range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_USER_MSI_STAT" acronym="PCIE_USER_MSI_STAT" offset="0x20" width="32" description="MSI status register">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="MSI_ENABLE" width="6" begin="5" end="0" resetval="0x0" description="When the core is configured in the EndPoint mode to support MSI interrupts, this output is driven by the MSI Enable bit of the MSI Control Registers of the Physical Functions." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSI_VECTOR" acronym="PCIE_USER_MSI_VECTOR" offset="0x24" width="32" description="MSI vector register">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="MSI_VECTOR_COUNT" width="18" begin="17" end="0" resetval="0x0" description="When the core is configured in the EndPoint mode to support MSI interrupts, these outputs are driven by the Multiple Message Enable bits of the MSI Control Registers associated with Physical Functions." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSI_MASK_PF0" acronym="PCIE_USER_MSI_MASK_PF0" offset="0x28" width="32" description="PF0 MSI mask register">
+    <bitfield id="MSI_MASK_PF0" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Physical Function0." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSI_MASK_PF1" acronym="PCIE_USER_MSI_MASK_PF1" offset="0x2C" width="32" description="PF1 MSI mask register">
+    <bitfield id="MSI_MASK_PF1" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Physical Function1." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSI_MASK_PF2" acronym="PCIE_USER_MSI_MASK_PF2" offset="0x30" width="32" description="PF2 MSI mask register">
+    <bitfield id="MSI_MASK_PF2" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Physical Function2." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSI_MASK_PF3" acronym="PCIE_USER_MSI_MASK_PF3" offset="0x34" width="32" description="PF3 MSI mask register">
+    <bitfield id="MSI_MASK_PF3" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Physical Function3." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSI_MASK_PF4" acronym="PCIE_USER_MSI_MASK_PF4" offset="0x38" width="32" description="PF4 MSI mask register">
+    <bitfield id="MSI_MASK_PF4" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Physical Function4." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSI_MASK_PF5" acronym="PCIE_USER_MSI_MASK_PF5" offset="0x3C" width="32" description="PF5 MSI mask register">
+    <bitfield id="MSI_MASK_PF5" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Physical Function5." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSI_PENDING_STATUS_PF0" acronym="PCIE_USER_MSI_PENDING_STATUS_PF0" offset="0x40" width="32" description="PF0 MSI pending status input register">
+    <bitfield id="MSI_PENDING_STATUS_PF0" width="32" begin="31" end="0" resetval="0x0" description="These inputs provide the status of the MSI pending interrupts for the Physical Function0 from the client to the core." range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_USER_MSI_PENDING_STATUS_PF1" acronym="PCIE_USER_MSI_PENDING_STATUS_PF1" offset="0x44" width="32" description="PF1 MSI pending status input register">
+    <bitfield id="MSI_PENDING_STATUS_PF1" width="32" begin="31" end="0" resetval="0x0" description="These inputs provide the status of the MSI pending interrupts for the Physical Function1 from the client to the core, if MSI Pending Status In Mode Select is set to 1 in the Debug Mux Control 2 register in local management,the setting of this register determines the value read from the MSI Pending Bits Register PF1." range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_USER_MSI_PENDING_STATUS_PF2" acronym="PCIE_USER_MSI_PENDING_STATUS_PF2" offset="0x48" width="32" description="PF2 MSI pending status input register">
+    <bitfield id="MSI_PENDING_STATUS_PF2" width="32" begin="31" end="0" resetval="0x0" description="These inputs provide the status of the MSI pending interrupts for the Physical Function1 from the client to the core, if MSI Pending Status In Mode Select is set to 1 in the Debug Mux Control 2 register in local management,the setting of this register determines the value read from the MSI Pending Bits Register PF2." range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_USER_MSI_PENDING_STATUS_PF3" acronym="PCIE_USER_MSI_PENDING_STATUS_PF3" offset="0x4C" width="32" description="PF3 MSI pending status input register">
+    <bitfield id="MSI_PENDING_STATUS_PF3" width="32" begin="31" end="0" resetval="0x0" description="These inputs provide the status of the MSI pending interrupts for the Physical Function1 from the client to the core, if MSI Pending Status In Mode Select is set to 1 in the Debug Mux Control 2 register in local management,the setting of this register determines the value read from the MSI Pending Bits Register PF3." range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_USER_MSI_PENDING_STATUS_PF4" acronym="PCIE_USER_MSI_PENDING_STATUS_PF4" offset="0x50" width="32" description="PF4 MSI pending status input register">
+    <bitfield id="MSI_PENDING_STATUS_PF4" width="32" begin="31" end="0" resetval="0x0" description="These inputs provide the status of the MSI pending interrupts for the Physical Function1 from the client to the core, if MSI Pending Status In Mode Select is set to 1 in the Debug Mux Control 2 register in local management,the setting of this register determines the value read from the MSI Pending Bits Register PF4." range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_USER_MSI_PENDING_STATUS_PF5" acronym="PCIE_USER_MSI_PENDING_STATUS_PF5" offset="0x54" width="32" description="PF5 MSI pending status input register">
+    <bitfield id="MSI_PENDING_STATUS_PF5" width="32" begin="31" end="0" resetval="0x0" description="These inputs provide the status of the MSI pending interrupts for the Physical Function1 from the client to the core, if MSI Pending Status In Mode Select is set to 1 in the Debug Mux Control 2 register in local management,the setting of this register determines the value read from the MSI Pending Bits Register PF5." range="" rwaccess="RW"/>
+  </register>
+  <register id="PCIE_USER_MSI_STAT_VF" acronym="PCIE_USER_MSI_STAT_VF" offset="0x58" width="32" description="MSI_VF status register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="VF_MSI_ENABLE" width="16" begin="15" end="0" resetval="0x0" description="When the core is configured in the EndPoint mode to support MSI interrupts, this output is driven by the MSI Enable bit of the MSI Control Registers of the Virtual Functions." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSI_VECTOR0_VF" acronym="PCIE_USER_MSI_VECTOR0_VF" offset="0x5C" width="32" description="MSI_VF vector count register0">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="VF_MSI_VECTOR_COUNT0" width="24" begin="23" end="0" resetval="0x0" description="When the core is configured in the Endpoint mode to support MSI interrupts, these outputs are driven by the Multiple Message Enable bits of the MSI Control Registers associated with Virtual Function0 thru Virtual Function7." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSI_VECTOR1_VF" acronym="PCIE_USER_MSI_VECTOR1_VF" offset="0x60" width="32" description="MSI_VF vector count register1">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="VF_MSI_VECTOR_COUNT1" width="24" begin="23" end="0" resetval="0x0" description="When the core is configured in the Endpoint mode to support MSI interrupts, these outputs are driven by the Multiple Message Enable bits of the MSI Control Registers associated with Virtual Function8 thru Virtual Function15." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSI_MASK_VF0" acronym="PCIE_USER_MSI_MASK_VF0" offset="0x64" width="32" description="VF0MSI mask register">
+    <bitfield id="MSI_MASK_VF0" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function0." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSI_MASK_VF1" acronym="PCIE_USER_MSI_MASK_VF1" offset="0x68" width="32" description="VF1MSI mask register">
+    <bitfield id="MSI_MASK_VF1" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function1." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSI_MASK_VF2" acronym="PCIE_USER_MSI_MASK_VF2" offset="0x6C" width="32" description="VF2MSI mask register">
+    <bitfield id="MSI_MASK_VF2" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function2." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSI_MASK_VF3" acronym="PCIE_USER_MSI_MASK_VF3" offset="0x70" width="32" description="VF3MSI mask register">
+    <bitfield id="MSI_MASK_VF3" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function3." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSI_MASK_VF4" acronym="PCIE_USER_MSI_MASK_VF4" offset="0x74" width="32" description="VF4MSI mask register">
+    <bitfield id="MSI_MASK_VF4" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function4." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSI_MASK_VF5" acronym="PCIE_USER_MSI_MASK_VF5" offset="0x78" width="32" description="VF5MSI mask register">
+    <bitfield id="MSI_MASK_VF5" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function5." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSI_MASK_VF6" acronym="PCIE_USER_MSI_MASK_VF6" offset="0x7C" width="32" description="VF6MSI mask register">
+    <bitfield id="MSI_MASK_VF6" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function6." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSI_MASK_VF7" acronym="PCIE_USER_MSI_MASK_VF7" offset="0x80" width="32" description="VF7MSI mask register">
+    <bitfield id="MSI_MASK_VF7" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function7." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSI_MASK_VF8" acronym="PCIE_USER_MSI_MASK_VF8" offset="0x84" width="32" description="VF8MSI mask register">
+    <bitfield id="MSI_MASK_VF8" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function8." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSI_MASK_VF9" acronym="PCIE_USER_MSI_MASK_VF9" offset="0x88" width="32" description="VF9MSI mask register">
+    <bitfield id="MSI_MASK_VF9" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function9." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSI_MASK_VF10" acronym="PCIE_USER_MSI_MASK_VF10" offset="0x8C" width="32" description="VF10MSI mask register">
+    <bitfield id="MSI_MASK_VF10" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function10." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSI_MASK_VF11" acronym="PCIE_USER_MSI_MASK_VF11" offset="0x90" width="32" description="VF11MSI mask register">
+    <bitfield id="MSI_MASK_VF11" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function11." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSI_MASK_VF12" acronym="PCIE_USER_MSI_MASK_VF12" offset="0x94" width="32" description="VF12MSI mask register">
+    <bitfield id="MSI_MASK_VF12" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function12." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSI_MASK_VF13" acronym="PCIE_USER_MSI_MASK_VF13" offset="0x98" width="32" description="VF13MSI mask register">
+    <bitfield id="MSI_MASK_VF13" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function13." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSI_MASK_VF14" acronym="PCIE_USER_MSI_MASK_VF14" offset="0x9C" width="32" description="VF14MSI mask register">
+    <bitfield id="MSI_MASK_VF14" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function14." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSI_MASK_VF15" acronym="PCIE_USER_MSI_MASK_VF15" offset="0xA0" width="32" description="VF15MSI mask register">
+    <bitfield id="MSI_MASK_VF15" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function15." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSIX_STAT" acronym="PCIE_USER_MSIX_STAT" offset="0xA4" width="32" description="MSIX status register">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="MSIX_ENABLE" width="6" begin="5" end="0" resetval="0x0" description="These bits reflect the states of the MSI-X Enable bits in the PCI configuration space of Physical Functions.Bit0 represents the MSIX Enable for Physical Function0 and Bit1 represents the MSIX Enable for Physical Function 1" range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSIX_MASK" acronym="PCIE_USER_MSIX_MASK" offset="0xA8" width="32" description="MSIX mask register">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="MSIX_MASK" width="6" begin="5" end="0" resetval="0x0" description="These bits reflect the states of the MSI-X Function Mask bits in the PCI configuration space of Physical Functions." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSIX_STAT_VF" acronym="PCIE_USER_MSIX_STAT_VF" offset="0xAC" width="32" description="Virtual Function MSIX status register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="VF_MSIX_ENABLE" width="16" begin="15" end="0" resetval="0x0" description="These bits reflect the states of the MSI-X Enable bits in the PCI configuration space of virtual Functions.Bit0 represents the MSIX Enable for Virtual Function0, Bit1 represents the MSIX Enable for Virtual Function 1 and so on" range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_MSIX_MASK_VF" acronym="PCIE_USER_MSIX_MASK_VF" offset="0xB0" width="32" description="Virtual Function MSIX mask register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="VF_MSIX_MASK" width="16" begin="15" end="0" resetval="0x0" description="These bits reflect the states of the MSI-X Function Mask bits in the PCI configuration space of Virtual Functions." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_FLR_DONE" acronym="PCIE_USER_FLR_DONE" offset="0xB4" width="32" description="Physical Function-Level Reset Done register">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="FLR_DONE" width="6" begin="5" end="0" resetval="0x0" description="These bits are connected to the" range="" rwaccess="W"/>
+  </register>
+  <register id="PCIE_USER_VF_FLR_DONE" acronym="PCIE_USER_VF_FLR_DONE" offset="0xB8" width="32" description="Virtual Function-Level Reset Done register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VF_FLR_DONE" width="16" begin="15" end="0" resetval="0x0" description="These bits are connected to the" range="" rwaccess="W"/>
+  </register>
+  <register id="PCIE_USER_PTM_TIMER_LOW" acronym="PCIE_USER_PTM_TIMER_LOW" offset="0xBC" width="32" description="PTM timer value lower 32-bits">
+    <bitfield id="PTM_TIMER_OUT_LOW" width="32" begin="31" end="0" resetval="0x0" description="ptm_timer_out[31:0] value from PCIe core." range="" rwaccess="R"/>
+  </register>
+  <register id="PCIE_USER_PTM_TIMER_HIGH" acronym="PCIE_USER_PTM_TIMER_HIGH" offset="0xC0" width="32" description="PTM timer value upper 32-bits">
+    <bitfield id="PTM_TIMER_OUT_HIGH" width="32" begin="31" end="0" resetval="0x0" description="ptm_timer_out[63:32] value from PCIe core." range="" rwaccess="R"/>
+  </register>
+</module>

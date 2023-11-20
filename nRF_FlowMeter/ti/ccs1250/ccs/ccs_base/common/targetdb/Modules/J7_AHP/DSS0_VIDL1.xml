@@ -1,0 +1,284 @@
+<module name="DSS0_VIDL1" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="DISPC_0_VIDL1_ATTRIBUTES" acronym="DISPC_0_VIDL1_ATTRIBUTES" offset="0x20" width="32" description="">
+		<bitfield id="LUMAKEYENABLE" width="1" begin="31" end="31" resetval="0x0" description="Enable Luma Key transparency matching" range="31" rwaccess="R/W"/> 
+		<bitfield id="GAMMAINVERSION" width="1" begin="30" end="30" resetval="0x0" description="Inverse Gamma support [using the CLUT table]" range="30" rwaccess="R/W"/> 
+		<bitfield id="GAMMAINVERSIONPOS" width="1" begin="29" end="29" resetval="0x0" description="Position of Inverse Gamma operation" range="29" rwaccess="R/W"/> 
+		<bitfield id="PREMULTIPLYALPHA" width="1" begin="28" end="28" resetval="0x0" description="The field configures the DISPC VID to process incoming data as premultiplied alpha data or non premultiplied alpha data. Default setting is non premultiplied alpha data" range="28" rwaccess="R/W"/> 
+		<bitfield id="SELFREFRESH" width="1" begin="24" end="24" resetval="0x0" description="Enables the self refresh of the video window, from its own DMA buffer only" range="24" rwaccess="R/W"/> 
+		<bitfield id="ARBITRATION" width="1" begin="23" end="23" resetval="0x0" description="Determines the priority of the video pipeline. The video pipeline is one of the high priority pipelines. The arbitration gives always the priority first to the high priority pipelines using round-robin between them. When there are only normal priority pipelines sending requests, the round-robin applies between the normal priority pipelines" range="23" rwaccess="R/W"/> 
+		<bitfield id="RESERVED3" width="1" begin="21" end="21" resetval="0x0" description="Write 0's for future compatibility. Reads return 0" range="21" rwaccess="R"/> 
+		<bitfield id="BUFPRELOAD" width="1" begin="19" end="19" resetval="0x0" description="Video Preload Value" range="19" rwaccess="R/W"/> 
+		<bitfield id="RESERVED7" width="1" begin="18" end="18" resetval="0x0" description="Write 0's for future compatibility. Reads return 0" range="18" rwaccess="R"/> 
+		<bitfield id="SELFREFRESHAUTO" width="1" begin="17" end="17" resetval="0x0" description="Automatic self refresh mode" range="17" rwaccess="R/W"/> 
+		<bitfield id="CROP" width="1" begin="13" end="13" resetval="0x0" description="Enables cropping operation at the output of Video Pipeline" range="13" rwaccess="R/W"/> 
+		<bitfield id="FLIP" width="1" begin="12" end="12" resetval="0x0" description="Describes the frame buffer flip operation" range="12" rwaccess="R/W"/> 
+		<bitfield id="FULLRANGE" width="1" begin="11" end="11" resetval="0x0" description="Color Space Conversion full range setting" range="11" rwaccess="R/W"/> 
+		<bitfield id="NIBBLEMODE" width="1" begin="10" end="10" resetval="0x0" description="Video Nibble mode [only for 1-, 2- and 4-bpp]" range="10" rwaccess="R/W"/> 
+		<bitfield id="COLORCONVENABLE" width="1" begin="9" end="9" resetval="0x0" description="Enable the color space conversion. The HW does not enable/disable the conversion based on the pixel format" range="9" rwaccess="R/W"/> 
+		<bitfield id="RESERVED8" width="2" begin="8" end="7" resetval="0x0" description="Write 0's for future compatibility. Reads return 0" range="8 - 7" rwaccess="R"/> 
+		<bitfield id="FORMAT" width="6" begin="6" end="1" resetval="0x0" description="Video Format. It defines the pixel format when fetching the video frame buffer" range="6 - 1" rwaccess="R/W"/> 
+		<bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Video pipeline Enable" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_ATTRIBUTES2" acronym="DISPC_0_VIDL1_ATTRIBUTES2" offset="0x24" width="32" description="">
+		<bitfield id="TAGS" width="5" begin="30" end="26" resetval="0x15" description="Number of OCP TAGS to be used for the pipeline [from 0x0 to 0xF]. A value of 0x0 means only a single tag will be used. A value of 0xF means all 16 tags can be used" range="30 - 26" rwaccess="R/W"/> 
+		<bitfield id="MPORTSEL" width="1" begin="25" end="25" resetval="0x0" description="Master-Port Selection. By default, use primary master port only" range="25" rwaccess="R/W"/> 
+		<bitfield id="YUV_ALIGN" width="1" begin="10" end="10" resetval="0x0" description="Alignment [MSB or LSB align] for unpacked 10b/12b YUV data" range="10" rwaccess="R/W"/> 
+		<bitfield id="YUV_MODE" width="1" begin="9" end="9" resetval="0x0" description="Mode of packing for YUV data [only for 10b/12b formats]" range="9" rwaccess="R/W"/> 
+		<bitfield id="YUV_SIZE" width="2" begin="8" end="7" resetval="0x0" description="Size of YUV data 8b/10b/12b" range="8 - 7" rwaccess="R/W"/> 
+		<bitfield id="VC1_RANGE_CBCR" width="3" begin="6" end="4" resetval="0x0" description="Defines the VC1 range value for the CbCr component from 0 to 7" range="6 - 4" rwaccess="R/W"/> 
+		<bitfield id="VC1_RANGE_Y" width="3" begin="3" end="1" resetval="0x0" description="Defines the VC1 range value for the Y component from 0 to 7" range="3 - 1" rwaccess="R/W"/> 
+		<bitfield id="VC1ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Enable/disable the VC1 range mapping processing. The bit-field is ignored if the format is not one of the supported YUV formats" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_BA_0" acronym="DISPC_0_VIDL1_BA_0" offset="0x28" width="32" description="">
+		<bitfield id="BA" width="32" begin="31" end="0" resetval="0x0" description="Video base address. Base address of the video buffer [Aligned on pixel size boundary except for the following. In case of RGB24 packed format, 4-pixel alignment is required. In case of YUV422, 2-pixel alignment is required. In case of YUV420, byte alignment is required]" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_BA_1" acronym="DISPC_0_VIDL1_BA_1" offset="0x2C" width="32" description="">
+		<bitfield id="BA" width="32" begin="31" end="0" resetval="0x0" description="Video base address. Base address of the video buffer [Aligned on pixel size boundary except for the following. In case of RGB24 packed format, 4-pixel alignment is required. In case of YUV422, 2-pixel alignment is required. In case of YUV420, byte alignment is required]" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_BA_UV_0" acronym="DISPC_0_VIDL1_BA_UV_0" offset="0x30" width="32" description="">
+		<bitfield id="BA" width="32" begin="31" end="0" resetval="0x0" description="Video base address aligned on 16-bit boundary Base address of the UV video buffer used only in case of YUV420-NV12" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_BA_UV_1" acronym="DISPC_0_VIDL1_BA_UV_1" offset="0x34" width="32" description="">
+		<bitfield id="BA" width="32" begin="31" end="0" resetval="0x0" description="Video base address aligned on 16-bit boundary Base address of the UV video buffer used only in case of YUV420-NV12" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_BUF_SIZE_STATUS" acronym="DISPC_0_VIDL1_BUF_SIZE_STATUS" offset="0x38" width="32" description="">
+		<bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="31 - 16" rwaccess="R"/> 
+		<bitfield id="BUFSIZE" width="16" begin="15" end="0" resetval="0x4096" description="Video DMA buffer Size in number of 128-bits" range="15 - 0" rwaccess="R"/>
+	</register>
+	<register id="DISPC_0_VIDL1_BUF_THRESHOLD" acronym="DISPC_0_VIDL1_BUF_THRESHOLD" offset="0x3C" width="32" description="">
+		<bitfield id="BUFHIGHTHRESHOLD" width="16" begin="31" end="16" resetval="0x4095" description="DMA buffer High Threshold. Number of 128-bits defining the threshold value" range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="BUFLOWTHRESHOLD" width="16" begin="15" end="0" resetval="0x4088" description="DMA buffer Low Threshold. Number of 128-bits defining the threshold value" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_CSC_COEF0" acronym="DISPC_0_VIDL1_CSC_COEF0" offset="0x40" width="32" description="">
+		<bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="31 - 27" rwaccess="R"/> 
+		<bitfield id="C01" width="11" begin="26" end="16" resetval="0x0" description="C01 Coefficient. Encoded signed value [from -1024 to 1023]" range="26 - 16" rwaccess="R/W"/> 
+		<bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="15 - 11" rwaccess="R"/> 
+		<bitfield id="C00" width="11" begin="10" end="0" resetval="0x0" description="C00 Coefficient. Encoded signed value [from -1024 to 1023]" range="10 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_CSC_COEF1" acronym="DISPC_0_VIDL1_CSC_COEF1" offset="0x44" width="32" description="">
+		<bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="31 - 27" rwaccess="R"/> 
+		<bitfield id="C10" width="11" begin="26" end="16" resetval="0x0" description="C10 Coefficient. Encoded signed value [from -1024 to 1023]" range="26 - 16" rwaccess="R/W"/> 
+		<bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="15 - 11" rwaccess="R"/> 
+		<bitfield id="C02" width="11" begin="10" end="0" resetval="0x0" description="C02 Coefficient. Encoded signed value [from -1024 to 1023]" range="10 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_CSC_COEF2" acronym="DISPC_0_VIDL1_CSC_COEF2" offset="0x48" width="32" description="">
+		<bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="31 - 27" rwaccess="R"/> 
+		<bitfield id="C12" width="11" begin="26" end="16" resetval="0x0" description="C12 Coefficient. Encoded signed value [from -1024 to 1023]" range="26 - 16" rwaccess="R/W"/> 
+		<bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="15 - 11" rwaccess="R"/> 
+		<bitfield id="C11" width="11" begin="10" end="0" resetval="0x0" description="C11 Coefficient. Encoded signed value [from -1024 to 1023]" range="10 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_CSC_COEF3" acronym="DISPC_0_VIDL1_CSC_COEF3" offset="0x4C" width="32" description="">
+		<bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="31 - 27" rwaccess="R"/> 
+		<bitfield id="C21" width="11" begin="26" end="16" resetval="0x0" description="C21 coefficient. Encoded signed value [from -1024 to 1023]" range="26 - 16" rwaccess="R/W"/> 
+		<bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="15 - 11" rwaccess="R"/> 
+		<bitfield id="C20" width="11" begin="10" end="0" resetval="0x0" description="C20 coefficient. Encoded signed value [from -1024 to 1023]" range="10 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_CSC_COEF4" acronym="DISPC_0_VIDL1_CSC_COEF4" offset="0x50" width="32" description="">
+		<bitfield id="RESERVED" width="21" begin="31" end="11" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="31 - 11" rwaccess="R"/> 
+		<bitfield id="C22" width="11" begin="10" end="0" resetval="0x0" description="C22 Coefficient. Encoded signed value [from -1024 to 1023]" range="10 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_CSC_COEF5" acronym="DISPC_0_VIDL1_CSC_COEF5" offset="0x54" width="32" description="">
+		<bitfield id="PREOFFSET2" width="13" begin="31" end="19" resetval="0x0" description="Row-2 pre-offset. Encoded signed value [from -4096 to 4095]" range="31 - 19" rwaccess="R/W"/> 
+		<bitfield id="PREOFFSET1" width="13" begin="15" end="3" resetval="0x0" description="Row1 pre-offset. Encoded signed value [from -4096 to 4095]" range="15 - 3" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_CSC_COEF6" acronym="DISPC_0_VIDL1_CSC_COEF6" offset="0x58" width="32" description="">
+		<bitfield id="POSTOFFSET1" width="13" begin="31" end="19" resetval="0x0" description="Row-1 post-offset. Encoded signed value [from -4096 to 4095]" range="31 - 19" rwaccess="R/W"/> 
+		<bitfield id="PREOFFSET3" width="13" begin="15" end="3" resetval="0x0" description="Row-3 pre-offset. Encoded signed value [from -4096 to 4095]" range="15 - 3" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_GLOBAL_ALPHA" acronym="DISPC_0_VIDL1_GLOBAL_ALPHA" offset="0x1FC" width="32" description="">
+		<bitfield id="GLOBALALPHA" width="8" begin="7" end="0" resetval="0x255" description="Global alpha value from 0 to 255. 0 corresponds to fully transparent and 255 corresponds to fully opaque" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_MFLAG_THRESHOLD" acronym="DISPC_0_VIDL1_MFLAG_THRESHOLD" offset="0x208" width="32" description="">
+		<bitfield id="HT_MFLAG" width="16" begin="31" end="16" resetval="0x0" description="MFLAG High Threshold" range="31 - 16" rwaccess="R/W"/> 
+		<bitfield id="LT_MFLAG" width="16" begin="15" end="0" resetval="0x0" description="MFLAG Low Threshold" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_PICTURE_SIZE" acronym="DISPC_0_VIDL1_PICTURE_SIZE" offset="0x20C" width="32" description="">
+		<bitfield id="MEMSIZEY" width="14" begin="29" end="16" resetval="0x0" description="Number of lines of the video picture Encoded value [from 1 to 16384] to specify the number of lines of the video picture in memory [program to value minus one] When predecimation is set, the value represents the size of the image after predecimation but the max size of the unpredecimated image size in memory is still bounded to 2exp[11]" range="29 - 16" rwaccess="R/W"/> 
+		<bitfield id="MEMSIZEX" width="14" begin="13" end="0" resetval="0x0" description="Number of pixels of the video picture Encoded value [from 1 to 16384] to specify the number of pixels of the video picture in memory [program to value minus one]. The size is limited to the size of the line buffer of the vertical sampling block in case the video picture is processed by the vertical filtering unit [program to value minus one]. When predecimation is set, the value represents the size of the image after predecimation but the max size of the unpredecimated image size in memory is still bounded to 2exp[11]" range="13 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_PIXEL_INC" acronym="DISPC_0_VIDL1_PIXEL_INC" offset="0x210" width="32" description="">
+		<bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="31 - 8" rwaccess="R"/> 
+		<bitfield id="PIXELINC" width="8" begin="7" end="0" resetval="0x1" description="Number of bytes to increment between two pixels Encoded unsigned value [from 1 to 255] to specify the number of bytes between two pixels in the video buffer. The value 0 is invalid The value 1 means next pixel The value 1+n*bpp means increment of n pixels For YUV420. Max supported value is 128" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_PRELOAD" acronym="DISPC_0_VIDL1_PRELOAD" offset="0x218" width="32" description="">
+		<bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="31 - 12" rwaccess="R"/> 
+		<bitfield id="PRELOAD" width="12" begin="11" end="0" resetval="0x256" description="DMA buffer preload value. Number of 128-bit words defining the preload value" range="11 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_ROW_INC" acronym="DISPC_0_VIDL1_ROW_INC" offset="0x21C" width="32" description="">
+		<bitfield id="ROWINC" width="32" begin="31" end="0" resetval="0x1" description="Number of bytes to increment at the end of the row Encoded signed value [from -2^31-1 to 2^31] to specify the number of bytes to increment at the end of the row in the video buffer. The value 0 is invalid. The value 1 means next pixel. The value 1+n*bpp means increment of n pixels The value 1- [n+1]*bpp means decrement of n pixels" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_BA_EXT_0" acronym="DISPC_0_VIDL1_BA_EXT_0" offset="0x22C" width="32" description="">
+		<bitfield id="BA_EXT" width="16" begin="15" end="0" resetval="0x0" description="Video base address extension [16 bits]. Addr extension to make the address space 48b wide" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_BA_EXT_1" acronym="DISPC_0_VIDL1_BA_EXT_1" offset="0x230" width="32" description="">
+		<bitfield id="BA_EXT" width="16" begin="15" end="0" resetval="0x0" description="Video base address extension [16 bits]. Addr extension to make the address space 48b wide" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_BA_UV_EXT_0" acronym="DISPC_0_VIDL1_BA_UV_EXT_0" offset="0x234" width="32" description="">
+		<bitfield id="BA_UV_EXT" width="16" begin="15" end="0" resetval="0x0" description="Video base address extension [16 bits]. Addr extension to make the address space 48b wide" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_BA_UV_EXT_1" acronym="DISPC_0_VIDL1_BA_UV_EXT_1" offset="0x238" width="32" description="">
+		<bitfield id="BA_UV_EXT" width="16" begin="15" end="0" resetval="0x0" description="Video base address extension [16 bits]. Addr extension to make the address space 48b wide" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_CSC_COEF7" acronym="DISPC_0_VIDL1_CSC_COEF7" offset="0x23C" width="32" description="">
+		<bitfield id="POSTOFFSET3" width="13" begin="31" end="19" resetval="0x0" description="Row-3 post-offset. Encoded signed value [from -4096 to 4095]" range="31 - 19" rwaccess="R/W"/> 
+		<bitfield id="POSTOFFSET2" width="13" begin="15" end="3" resetval="0x0" description="Row-2 post-offset. Encoded signed value [from -4096 to 4095]" range="15 - 3" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_ROW_INC_UV" acronym="DISPC_0_VIDL1_ROW_INC_UV" offset="0x248" width="32" description="">
+		<bitfield id="ROWINC" width="32" begin="31" end="0" resetval="0x1" description="Number of bytes to increment at the end of the row Encoded signed value [from -2^31-1 to 2^31] to specify the number of bytes to increment at the end of the row in the video buffer. The value 0 is invalid The value 1 means next pixel. The value 1+n*bpp means increment of n pixels. The value 1- [n+1]*bpp means decrement of n pixels" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_TILE" acronym="DISPC_0_VIDL1_TILE" offset="0x24C" width="32" description="">
+		<bitfield id="TILEINDEX" width="23" begin="22" end="0" resetval="0x0" description="Defines the tile number for the first tile of the frame buffer: -0 means that the first tile is accessed otherwise some tiles are skipped to support cropping of the frame buffer" range="22 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_TILE2" acronym="DISPC_0_VIDL1_TILE2" offset="0x250" width="32" description="">
+		<bitfield id="NUM_TILES" width="23" begin="22" end="0" resetval="0x0" description="Defines the total number of tiles in the compressed frame buffer" range="22 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_FBDC_ATTRIBUTES" acronym="DISPC_0_VIDL1_FBDC_ATTRIBUTES" offset="0x254" width="32" description="">
+		<bitfield id="TILETYPE" width="2" begin="9" end="8" resetval="0x0" description="FBDC tile-type" range="9 - 8" rwaccess="R/W"/> 
+		<bitfield id="FORMAT" width="7" begin="7" end="1" resetval="0x0" description="FBDC format" range="7 - 1" rwaccess="R/W"/> 
+		<bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Frame Buffer Compression is Enabled. Transactions shall use secondary master port" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_FBDC_CLEAR_COLOR" acronym="DISPC_0_VIDL1_FBDC_CLEAR_COLOR" offset="0x258" width="32" description="">
+		<bitfield id="CLEARCOLOR" width="32" begin="31" end="0" resetval="0x0" description="Defines the Clear Color value to be used for the channel in FBDC" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_CLUT_0" acronym="DISPC_0_VIDL1_CLUT_0" offset="0x260" width="32" description="">
+		<bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="31" rwaccess="W"/> 
+		<bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="10-bit R-value to store at the location in the table defined by the incrementing INDEX" range="29 - 20" rwaccess="W"/> 
+		<bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="10-bit G-value to store at the location in the table defined by the incrementing INDEX" range="19 - 10" rwaccess="W"/> 
+		<bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="10-bit B-value to store at the location in the table defined by the incrementing INDEX" range="9 - 0" rwaccess="W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_CLUT_1" acronym="DISPC_0_VIDL1_CLUT_1" offset="0x264" width="32" description="">
+		<bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="31" rwaccess="W"/> 
+		<bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="10-bit R-value to store at the location in the table defined by the incrementing INDEX" range="29 - 20" rwaccess="W"/> 
+		<bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="10-bit G-value to store at the location in the table defined by the incrementing INDEX" range="19 - 10" rwaccess="W"/> 
+		<bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="10-bit B-value to store at the location in the table defined by the incrementing INDEX" range="9 - 0" rwaccess="W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_CLUT_2" acronym="DISPC_0_VIDL1_CLUT_2" offset="0x268" width="32" description="">
+		<bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="31" rwaccess="W"/> 
+		<bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="10-bit R-value to store at the location in the table defined by the incrementing INDEX" range="29 - 20" rwaccess="W"/> 
+		<bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="10-bit G-value to store at the location in the table defined by the incrementing INDEX" range="19 - 10" rwaccess="W"/> 
+		<bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="10-bit B-value to store at the location in the table defined by the incrementing INDEX" range="9 - 0" rwaccess="W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_CLUT_3" acronym="DISPC_0_VIDL1_CLUT_3" offset="0x26C" width="32" description="">
+		<bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="31" rwaccess="W"/> 
+		<bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="10-bit R-value to store at the location in the table defined by the incrementing INDEX" range="29 - 20" rwaccess="W"/> 
+		<bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="10-bit G-value to store at the location in the table defined by the incrementing INDEX" range="19 - 10" rwaccess="W"/> 
+		<bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="10-bit B-value to store at the location in the table defined by the incrementing INDEX" range="9 - 0" rwaccess="W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_CLUT_4" acronym="DISPC_0_VIDL1_CLUT_4" offset="0x270" width="32" description="">
+		<bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="31" rwaccess="W"/> 
+		<bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="10-bit R-value to store at the location in the table defined by the incrementing INDEX" range="29 - 20" rwaccess="W"/> 
+		<bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="10-bit G-value to store at the location in the table defined by the incrementing INDEX" range="19 - 10" rwaccess="W"/> 
+		<bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="10-bit B-value to store at the location in the table defined by the incrementing INDEX" range="9 - 0" rwaccess="W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_CLUT_5" acronym="DISPC_0_VIDL1_CLUT_5" offset="0x274" width="32" description="">
+		<bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="31" rwaccess="W"/> 
+		<bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="10-bit R-value to store at the location in the table defined by the incrementing INDEX" range="29 - 20" rwaccess="W"/> 
+		<bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="10-bit G-value to store at the location in the table defined by the incrementing INDEX" range="19 - 10" rwaccess="W"/> 
+		<bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="10-bit B-value to store at the location in the table defined by the incrementing INDEX" range="9 - 0" rwaccess="W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_CLUT_6" acronym="DISPC_0_VIDL1_CLUT_6" offset="0x278" width="32" description="">
+		<bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="31" rwaccess="W"/> 
+		<bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="10-bit R-value to store at the location in the table defined by the incrementing INDEX" range="29 - 20" rwaccess="W"/> 
+		<bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="10-bit G-value to store at the location in the table defined by the incrementing INDEX" range="19 - 10" rwaccess="W"/> 
+		<bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="10-bit B-value to store at the location in the table defined by the incrementing INDEX" range="9 - 0" rwaccess="W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_CLUT_7" acronym="DISPC_0_VIDL1_CLUT_7" offset="0x27C" width="32" description="">
+		<bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="31" rwaccess="W"/> 
+		<bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="10-bit R-value to store at the location in the table defined by the incrementing INDEX" range="29 - 20" rwaccess="W"/> 
+		<bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="10-bit G-value to store at the location in the table defined by the incrementing INDEX" range="19 - 10" rwaccess="W"/> 
+		<bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="10-bit B-value to store at the location in the table defined by the incrementing INDEX" range="9 - 0" rwaccess="W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_CLUT_8" acronym="DISPC_0_VIDL1_CLUT_8" offset="0x280" width="32" description="">
+		<bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="31" rwaccess="W"/> 
+		<bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="10-bit R-value to store at the location in the table defined by the incrementing INDEX" range="29 - 20" rwaccess="W"/> 
+		<bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="10-bit G-value to store at the location in the table defined by the incrementing INDEX" range="19 - 10" rwaccess="W"/> 
+		<bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="10-bit B-value to store at the location in the table defined by the incrementing INDEX" range="9 - 0" rwaccess="W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_CLUT_9" acronym="DISPC_0_VIDL1_CLUT_9" offset="0x284" width="32" description="">
+		<bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="31" rwaccess="W"/> 
+		<bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="10-bit R-value to store at the location in the table defined by the incrementing INDEX" range="29 - 20" rwaccess="W"/> 
+		<bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="10-bit G-value to store at the location in the table defined by the incrementing INDEX" range="19 - 10" rwaccess="W"/> 
+		<bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="10-bit B-value to store at the location in the table defined by the incrementing INDEX" range="9 - 0" rwaccess="W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_CLUT_10" acronym="DISPC_0_VIDL1_CLUT_10" offset="0x288" width="32" description="">
+		<bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="31" rwaccess="W"/> 
+		<bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="10-bit R-value to store at the location in the table defined by the incrementing INDEX" range="29 - 20" rwaccess="W"/> 
+		<bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="10-bit G-value to store at the location in the table defined by the incrementing INDEX" range="19 - 10" rwaccess="W"/> 
+		<bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="10-bit B-value to store at the location in the table defined by the incrementing INDEX" range="9 - 0" rwaccess="W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_CLUT_11" acronym="DISPC_0_VIDL1_CLUT_11" offset="0x28C" width="32" description="">
+		<bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="31" rwaccess="W"/> 
+		<bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="10-bit R-value to store at the location in the table defined by the incrementing INDEX" range="29 - 20" rwaccess="W"/> 
+		<bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="10-bit G-value to store at the location in the table defined by the incrementing INDEX" range="19 - 10" rwaccess="W"/> 
+		<bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="10-bit B-value to store at the location in the table defined by the incrementing INDEX" range="9 - 0" rwaccess="W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_CLUT_12" acronym="DISPC_0_VIDL1_CLUT_12" offset="0x290" width="32" description="">
+		<bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="31" rwaccess="W"/> 
+		<bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="10-bit R-value to store at the location in the table defined by the incrementing INDEX" range="29 - 20" rwaccess="W"/> 
+		<bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="10-bit G-value to store at the location in the table defined by the incrementing INDEX" range="19 - 10" rwaccess="W"/> 
+		<bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="10-bit B-value to store at the location in the table defined by the incrementing INDEX" range="9 - 0" rwaccess="W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_CLUT_13" acronym="DISPC_0_VIDL1_CLUT_13" offset="0x294" width="32" description="">
+		<bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="31" rwaccess="W"/> 
+		<bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="10-bit R-value to store at the location in the table defined by the incrementing INDEX" range="29 - 20" rwaccess="W"/> 
+		<bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="10-bit G-value to store at the location in the table defined by the incrementing INDEX" range="19 - 10" rwaccess="W"/> 
+		<bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="10-bit B-value to store at the location in the table defined by the incrementing INDEX" range="9 - 0" rwaccess="W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_CLUT_14" acronym="DISPC_0_VIDL1_CLUT_14" offset="0x298" width="32" description="">
+		<bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="31" rwaccess="W"/> 
+		<bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="10-bit R-value to store at the location in the table defined by the incrementing INDEX" range="29 - 20" rwaccess="W"/> 
+		<bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="10-bit G-value to store at the location in the table defined by the incrementing INDEX" range="19 - 10" rwaccess="W"/> 
+		<bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="10-bit B-value to store at the location in the table defined by the incrementing INDEX" range="9 - 0" rwaccess="W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_CLUT_15" acronym="DISPC_0_VIDL1_CLUT_15" offset="0x29C" width="32" description="">
+		<bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="31" rwaccess="W"/> 
+		<bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="10-bit R-value to store at the location in the table defined by the incrementing INDEX" range="29 - 20" rwaccess="W"/> 
+		<bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="10-bit G-value to store at the location in the table defined by the incrementing INDEX" range="19 - 10" rwaccess="W"/> 
+		<bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="10-bit B-value to store at the location in the table defined by the incrementing INDEX" range="9 - 0" rwaccess="W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_SAFETY_ATTRIBUTES" acronym="DISPC_0_VIDL1_SAFETY_ATTRIBUTES" offset="0x2A0" width="32" description="">
+		<bitfield id="FRAMESKIP" width="2" begin="12" end="11" resetval="0x0" description="Indicates which frames to be skipped while doing FRAMEFREEZE or DATACHECK [Useful for interlaced displays]. 0x0: No frames are skipped, 0x1: Even Frames are skipped starting from second frame after ENABLE, 0x2: Odd Frames are skipped starting from first frame after ENABLE, 0x3: Reserved" range="12 - 11" rwaccess="R/W"/> 
+		<bitfield id="THRESHOLD" width="8" begin="10" end="3" resetval="0x0" description="Allowed maximum number of frames with the same frame signature. When the freeze frame counter reaches 1 over this value [freeze_frame_thold+1], a freeze frame detection will occur. Note: The freeze frame counter is cleared on reset -OR- MISR not enabled -OR- terminal count reached -OR- compare == no match" range="10 - 3" rwaccess="R/W"/> 
+		<bitfield id="SEEDSELECT" width="1" begin="2" end="2" resetval="0x0" description="Initial seed selection control" range="2" rwaccess="R/W"/> 
+		<bitfield id="CAPTUREMODE" width="1" begin="1" end="1" resetval="0x0" description="Mode of operation of the safety check module" range="1" rwaccess="R/W"/> 
+		<bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Safety check Enable for the region. Note: Transition from 0 to 1 clears the signature register" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_SAFETY_CAPT_SIGNATURE" acronym="DISPC_0_VIDL1_SAFETY_CAPT_SIGNATURE" offset="0x2A4" width="32" description="">
+		<bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="The register configures the reference signature of the safety sub-region. Shadow register" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="DISPC_0_VIDL1_SAFETY_POSITION" acronym="DISPC_0_VIDL1_SAFETY_POSITION" offset="0x2A8" width="32" description="">
+		<bitfield id="POSY" width="14" begin="29" end="16" resetval="0x0" description="Y position of the safety sub-region. Encoded value [from 0 to 16383] to specify the Y position of the sub-region on the screen. The first line on the top of the screen has the Y-position 0" range="29 - 16" rwaccess="R/W"/> 
+		<bitfield id="POSX" width="14" begin="13" end="0" resetval="0x0" description="X position of the safety sub-region. Encoded value [from 0 to 16383] to specify the X position of the sub-region on the screen. The first pixel on the left of the screen has the X-position 0" range="13 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_SAFETY_REF_SIGNATURE" acronym="DISPC_0_VIDL1_SAFETY_REF_SIGNATURE" offset="0x2AC" width="32" description="">
+		<bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="The register configures the reference signature of the safety sub-region. Shadow register" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_SAFETY_SIZE" acronym="DISPC_0_VIDL1_SAFETY_SIZE" offset="0x2B0" width="32" description="">
+		<bitfield id="SIZEY" width="14" begin="29" end="16" resetval="0x0" description="Height of the safety sub-region. Encoded value [from 0 to 16383] to specify the height of the sub-region on the screen. One line height region has value of 0" range="29 - 16" rwaccess="R/W"/> 
+		<bitfield id="SIZEX" width="14" begin="13" end="0" resetval="0x0" description="Width of the safety sub-region. Encoded value [from 0 to 16383] to specify the width of the sub-region on the screen. One pixel wide region has value of 0" range="13 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_SAFETY_LFSR_SEED" acronym="DISPC_0_VIDL1_SAFETY_LFSR_SEED" offset="0x2B4" width="32" description="">
+		<bitfield id="SEED" width="32" begin="31" end="0" resetval="0x0" description="The register configures the seed [initial value] of the MISR. Otherwise, the MISR is initialized with 0xFFFF_FFFF. Shadow register" range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_LUMAKEY" acronym="DISPC_0_VIDL1_LUMAKEY" offset="0x2B8" width="32" description="">
+		<bitfield id="RESERVED1" width="4" begin="31" end="28" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="31 - 28" rwaccess="R"/> 
+		<bitfield id="LUMAKEYMAX" width="12" begin="27" end="16" resetval="0x0" description="12b luma_key_max value" range="27 - 16" rwaccess="R/W"/> 
+		<bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="15 - 12" rwaccess="R"/> 
+		<bitfield id="LUMAKEYMIN" width="12" begin="11" end="0" resetval="0x0" description="12b luma_key_min value" range="11 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_DMA_BUFSIZE" acronym="DISPC_0_VIDL1_DMA_BUFSIZE" offset="0x2BC" width="32" description="">
+		<bitfield id="BUFSIZE" width="5" begin="4" end="0" resetval="0x4" description="DMA buffer size, if VID pipe is enabled.If the value programmed is n, then the allocated buffer size is 16KB*n. Default:64KB" range="4 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_CROP" acronym="DISPC_0_VIDL1_CROP" offset="0x2C0" width="32" description="">
+		<bitfield id="CROPBOTTOM" width="5" begin="28" end="24" resetval="0x0" description="Crop Bottom in Lines.  Values from 0-31" range="28 - 24" rwaccess="R/W"/> 
+		<bitfield id="CROPTOP" width="5" begin="20" end="16" resetval="0x0" description="Crop Top in Lines.  Values from 0-31" range="20 - 16" rwaccess="R/W"/> 
+		<bitfield id="CROPRIGHT" width="5" begin="12" end="8" resetval="0x0" description="Crop Right in Pixels. Values from 0-31" range="12 - 8" rwaccess="R/W"/> 
+		<bitfield id="CROPLEFT" width="5" begin="4" end="0" resetval="0x0" description="Crop Left in Pixels. Values from 0-31" range="4 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_SECURE" acronym="DISPC_0_VIDL1_SECURE" offset="0x2C4" width="32" description="">
+		<bitfield id="SECURE" width="1" begin="0" end="0" resetval="0x0" description="Secure bit" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="DISPC_0_VIDL1_PIPE_GO" acronym="DISPC_0_VIDL1_PIPE_GO" offset="0x2C8" width="32" description="">
+		<bitfield id="GOBIT" width="1" begin="0" end="0" resetval="0x0" description="Go bit" range="0" rwaccess="R/W"/>
+	</register>
+</module>

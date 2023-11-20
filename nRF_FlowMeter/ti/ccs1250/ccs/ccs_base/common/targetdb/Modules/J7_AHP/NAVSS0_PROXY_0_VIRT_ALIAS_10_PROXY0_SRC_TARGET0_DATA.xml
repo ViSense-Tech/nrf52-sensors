@@ -1,0 +1,13 @@
+<module name="NAVSS0_PROXY_0_VIRT_ALIAS_10_PROXY0_SRC_TARGET0_DATA" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="VIRT_ALIAS_10_PROXY0__SRC__TARGET0_DATA_CTL_REG" acronym="VIRT_ALIAS_10_PROXY0__SRC__TARGET0_DATA_CTL_REG" offset="0x0" width="32" description="">
+		<bitfield id="ELSIZE" width="3" begin="26" end="24" resetval="0x0" description="Queue element size. This field is encoded as follows: 0 = 4 bytes 1 = 8 bytes 2 = 16 bytes 3 = 32 bytes 4 = 64 bytes 5 = 128 bytes 6 = 256 bytes 7 = 512 bytes" range="26 - 24" rwaccess="R/W"/> 
+		<bitfield id="MODE" width="2" begin="17" end="16" resetval="0x0" description="Proxy Queue Mode that determines how to access the queue." range="17 - 16" rwaccess="R/W"/> 
+		<bitfield id="QUEUE" width="16" begin="15" end="0" resetval="0x0" description="Proxy Queue" range="15 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_10_PROXY0__SRC__TARGET0_DATA_ST_REG" acronym="VIRT_ALIAS_10_PROXY0__SRC__TARGET0_DATA_ST_REG" offset="0x4" width="32" description="">
+		<bitfield id="ERROR" width="1" begin="31" end="31" resetval="0x0" description="Proxy Error status" range="31" rwaccess="R/W"/>
+	</register>
+	<register id="VIRT_ALIAS_10_PROXY0__SRC__TARGET0_DATA_DATA_REG" acronym="VIRT_ALIAS_10_PROXY0__SRC__TARGET0_DATA_DATA_REG" offset="0x200" width="32" description="">
+		<bitfield id="DATA" width="32" begin="31" end="0" resetval="0x0" description="Proxy Data" range="31 - 0" rwaccess="R/W"/>
+	</register>
+</module>

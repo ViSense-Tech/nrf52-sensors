@@ -1,0 +1,1081 @@
+<?xml version="1.0" encoding="UTF-8"?><module id="SYS" HW_revision="" XML_version="1" description="The DSP system module controls several features of the DSP, e.g. clock control, DMA event synchronization, PLL settings, and the CLKOUT source.">
+     <register id="EBSR" acronym="EBSR" page="2" offset="0X0000" width="16" description="External Bus Selection Register">
+<bitfield id="_RESV_1" width="1" begin="15" end="15" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="PPMODE" width="3" begin="14" end="12" resetval="0" description="Parallel port mode bits. These bits control the pin muxing on the parallel port." range="" rwaccess="RW">
+<bitenum id="MODE0" value="0" token="MODE0" description="Mode 0."/>
+<bitenum id="MODE1" value="1" token="MODE1" description="Mode 1."/>
+<bitenum id="MODE2" value="2" token="MODE2" description="Mode 2."/>
+<bitenum id="MODE3" value="3" token="MODE3" description="Mode 3."/>
+<bitenum id="MODE4" value="4" token="MODE4" description="Mode 4."/>
+<bitenum id="MODE5" value="5" token="MODE5" description="Mode 5."/>
+<bitenum id="MODE6" value="6" token="MODE6" description="Mode 6."/>
+<bitenum id="MODE7" value="7" token="MODE7" description="Reserved, do not use."/>
+</bitfield>
+<bitfield id="SP1MODE" width="2" begin="11" end="10" resetval="0" description="Serial port 1 mode bits. These bits control the pin muxing on serial port 1." range="" rwaccess="RW">
+<bitenum id="MODE0" value="0" token="MODE0" description="Mode 0."/>
+<bitenum id="MODE1" value="1" token="MODE1" description="Mode 1."/>
+<bitenum id="MODE2" value="2" token="MODE2" description="Mode 2."/>
+<bitenum id="MODE3" value="3" token="MODE3" description="Mode 3."/>
+</bitfield>
+<bitfield id="SP0MODE" width="2" begin="9" end="8" resetval="0" description="Serial port 0 mode bits. These bits control the pin muxing on serial port 0." range="" rwaccess="RW">
+<bitenum id="MODE0" value="0" token="MODE0" description="Mode 0."/>
+<bitenum id="MODE1" value="1" token="MODE1" description="Mode 1."/>
+<bitenum id="MODE2" value="2" token="MODE2" description="Mode 2."/>
+<bitenum id="MODE3" value="3" token="MODE3" description="Mode 3."/>
+</bitfield>
+<bitfield id="_RESV_5" width="2" begin="7" end="6" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="A20_MODE" width="1" begin="5" end="5" resetval="0" description="This bit controls the pin multiplexing on EM_A[20]." range="" rwaccess="RW">
+<bitenum id="MODE0" value="0" token="MODE0" description="Pin behaves as EM_A[20]."/>
+<bitenum id="MODE1" value="1" token="MODE1" description="Pin behaves as GP[26]."/>
+</bitfield>
+<bitfield id="A19_MODE" width="1" begin="4" end="4" resetval="0" description="This bit controls the pin multiplexing on EM_A[19]." range="" rwaccess="RW">
+<bitenum id="MODE0" value="0" token="MODE0" description="Pin behaves as EM_A[19]."/>
+<bitenum id="MODE1" value="1" token="MODE1" description="Pin behaves as GP[25]."/>
+</bitfield>
+<bitfield id="A18_MODE" width="1" begin="3" end="3" resetval="0" description="This bit controls the pin multiplexing on EM_A[18]." range="" rwaccess="RW">
+<bitenum id="MODE0" value="0" token="MODE0" description="Pin behaves as EM_A[18]."/>
+<bitenum id="MODE1" value="1" token="MODE1" description="Pin behaves as GP[24]."/>
+</bitfield>
+<bitfield id="A17_MODE" width="1" begin="2" end="2" resetval="0" description="This bit controls the pin multiplexing on EM_A[17]." range="" rwaccess="RW">
+<bitenum id="MODE0" value="0" token="MODE0" description="Pin behaves as EM_A[17]."/>
+<bitenum id="MODE1" value="1" token="MODE1" description="Pin behaves as GP[23]."/>
+</bitfield>
+<bitfield id="A16_MODE" width="1" begin="1" end="1" resetval="0" description="This bit controls the pin multiplexing on EM_A[16]." range="" rwaccess="RW">
+<bitenum id="MODE0" value="0" token="MODE0" description="Pin behaves as EM_A[16]."/>
+<bitenum id="MODE1" value="1" token="MODE1" description="Pin behaves as GP[22]."/>
+</bitfield>
+<bitfield id="A15_MODE" width="1" begin="0" end="0" resetval="0" description="This bit controls the pin multiplexing on EM_A[15]." range="" rwaccess="RW">
+<bitenum id="MODE0" value="0" token="MODE0" description="Pin behaves as EM_A[15]."/>
+<bitenum id="MODE1" value="1" token="MODE1" description="Pin behaves as GP[21]."/>
+</bitfield>
+</register>
+     <register id="PCGCR1" acronym="PCGCR1" page="2" offset="0X0002" width="16" description="Peripheral Clock Gating Configuration Register 1">
+<bitfield id="SYSCLKDIS" width="1" begin="15" end="15" resetval="0" description="System clock disable bit. This bit can be used to turn off the system clock. Setting the WAKEUP pin high enables the system clock. Since the WAKEUP pin is used to re-enable the system clock, the WAKEUP pin must be low to disable the system clock." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="System clock is active."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="System clock is disabled."/>
+</bitfield>
+<bitfield id="I2S2CG" width="1" begin="14" end="14" resetval="0" description="I2S2 clock gate control bit. This bit is used to enable and disable the I2S2 peripheral clock." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Peripheral clock is active."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="Peripheral clock is disabled."/>
+</bitfield>
+<bitfield id="TMR2CG" width="1" begin="13" end="13" resetval="0" description="Timer 2 clock gate control bit. This bit is used to enable and disable the Timer 2 peripheral clock." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Peripheral clock is active."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="Peripheral clock is disabled."/>
+</bitfield>
+<bitfield id="TMR1CG" width="1" begin="12" end="12" resetval="0" description="Timer 1 clock gate control bit. This bit is used to enable and disable the Timer 1 peripheral clock." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Peripheral clock is active."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="Peripheral clock is disabled."/>
+</bitfield>
+<bitfield id="EMIFCG" width="1" begin="11" end="11" resetval="0" description="EMIF clock gate control bit. This bit is used to enable and disable the EMIF peripheral clock.  NOTE: You must request permission before stopping the EMIF clock through the peripheral clock stop request/acknowledge register (CLKSTOP)." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Peripheral clock is active."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="Peripheral clock is disabled."/>
+</bitfield>
+<bitfield id="TMR0CG" width="1" begin="10" end="10" resetval="0" description="Timer 0 clock gate control bit. This bit is used to enable and disable the Timer 0 peripheral clock." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Peripheral clock is active."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="Peripheral clock is disabled."/>
+</bitfield>
+<bitfield id="I2S1CG" width="1" begin="9" end="9" resetval="0" description="I2S1 clock gate control bit. This bit is used to enable and disable the I2S1 peripheral clock." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Peripheral clock is active."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="Peripheral clock is disabled."/>
+</bitfield>
+<bitfield id="I2S0CG" width="1" begin="8" end="8" resetval="0" description="I2S0 clock gate control bit. This bit is used to enable and disable the I2S0 peripheral clock." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Peripheral clock is active."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="Peripheral clock is disabled."/>
+</bitfield>
+<bitfield id="MMCSD1CG" width="1" begin="7" end="7" resetval="0" description="MMC/SD1 clock gate control bit. This bit is used to enable and disable the MMC/SD1 peripheral clock." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Peripheral clock is active."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="Peripheral clock is disabled."/>
+</bitfield>
+<bitfield id="I2CCG" width="1" begin="6" end="6" resetval="0" description="I2C clock gate control bit. This bit is used to enable and disable the I2C peripheral clock." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Peripheral clock is active."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="Peripheral clock is disabled."/>
+</bitfield>
+<bitfield id="_RESV_11" width="1" begin="5" end="5" resetval="0" description="Reserved, you must always write 1 to this bit." range="" rwaccess="N"/>
+<bitfield id="MMCSD0CG" width="1" begin="4" end="4" resetval="0" description="MMC/SD0 clock gate control bit. This bit is used to enable and disable the MMC/SD0 peripheral clock." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Peripheral clock is active."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="Peripheral clock is disabled."/>
+</bitfield>
+<bitfield id="DMA0CG" width="1" begin="3" end="3" resetval="0" description="DMA controller 0 clock gate control bit. This bit is used to enable and disable the peripheral clock the DMA controller 0." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Peripheral clock is active."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="Peripheral clock is disabled."/>
+</bitfield>
+<bitfield id="UARTCG" width="1" begin="2" end="2" resetval="0" description="UART clock gate control bit. This bit is used to enable and disable the UART peripheral clock.  NOTE: You must request permission before stopping the UART clock through the peripheral clock stop request/acknowledge register (CLKSTOP)." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Peripheral clock is active."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="Peripheral clock is disabled."/>
+</bitfield>
+<bitfield id="SPICG" width="1" begin="1" end="1" resetval="0" description="SPI clock gate control bit. This bit is used to enable and disable the SPI controller peripheral clock." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Peripheral clock is active."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="Peripheral clock is disabled."/>
+</bitfield>
+<bitfield id="I2S3CG" width="1" begin="0" end="0" resetval="0" description="I2S3 clock gate control bit. This bit is used to enable and disable the I2S3 peripheral clock." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Peripheral clock is active."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="Peripheral clock is disabled."/>
+</bitfield>
+</register>
+     <register id="PCGCR2" acronym="PCGCR2" page="2" offset="0X0003" width="16" description="Peripheral Clock Gating Configuration Register 2">
+<bitfield id="_RESV_1" width="9" begin="15" end="7" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="ANAREGCG" width="1" begin="6" end="6" resetval="0" description="Analog registers clock gate control bit. This bit is used to enable and disable the clock to the registers that control the analog domain of the device, i.e. registers in the 7000h-70FFh I/O space address range.  NOTE: When SARCG = 0, the clocks to the analog domain registers is enabled regardless of the ANAREGCG setting." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Clock is active."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="Clock is disabled."/>
+</bitfield>
+<bitfield id="DMA3CG" width="1" begin="5" end="5" resetval="0" description="DMA controller 3 clock gate control bit. This bit is used to enable and disable the peripheral clock the DMA controller 3." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Peripheral clock is active."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="Peripheral clock is disabled."/>
+</bitfield>
+<bitfield id="DMA2CG" width="1" begin="4" end="4" resetval="0" description="DMA controller 2 clock gate control bit. This bit is used to enable and disable the peripheral clock the DMA controller 2." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Peripheral clock is active."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="Peripheral clock is disabled."/>
+</bitfield>
+<bitfield id="DMA1CG" width="1" begin="3" end="3" resetval="0" description="DMA controller 1 clock gate control bit. This bit is used to enable and disable the peripheral clock the DMA controller 1." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Peripheral clock is active."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="Peripheral clock is disabled."/>
+</bitfield>
+<bitfield id="USBCG" width="1" begin="2" end="2" resetval="0" description="USB clock gate control bit. This bit is used to enable and disable the peripheral clock the USB.   NOTE: You must request permission before stopping the USB clock through the peripheral clock stop request/acknowledge register (CLKSTOP)." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Peripheral clock is active."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="Peripheral clock is disabled."/>
+</bitfield>
+<bitfield id="SARCG" width="1" begin="1" end="1" resetval="0" description="SAR clock gate control bit. This bit is used to enable and disable the SAR peripheral clock.  NOTE: When SARCG = 0, the clocks to the analog domain registers is enabled regardless of the ANAREGCG setting." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Peripheral clock is active."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="Peripheral clock is disabled."/>
+</bitfield>
+<bitfield id="LCDCG" width="1" begin="0" end="0" resetval="0" description="LCD controller clock gate control bit. This bit is used to enable and disable the LCD controller peripheral clock." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="Peripheral clock is active."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="Peripheral clock is disabled."/>
+</bitfield>
+</register>
+     <register id="CLKSTOP" acronym="CLKSTOP" page="2" offset="0X003A" width="16" description="Peripheral Clock Stop Request/Acknowledge Register">
+<bitfield id="_RESV_1" width="10" begin="15" end="6" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="URTCLKSTPACK" width="1" begin="5" end="5" resetval="1" description="UART clock stop acknowledge bit. This bit is set to 1 when the UART has acknowledged a request for its clock to be stopped. The UART clock should not be stopped until this bit is set to 1." range="" rwaccess="R">
+<bitenum id="NACK" value="0" token="NACK" description="The request to stop the peripheral clock has not been acknowledged."/>
+<bitenum id="ACK" value="1" token="ACK" description="The request to stop the peripheral clock has been acknowledged, the clock can be stopped."/>
+</bitfield>
+<bitfield id="URTCLKSTPREQ" width="1" begin="4" end="4" resetval="1" description="UART peripheral clock stop request bit. When disabling the UART internal peripheral clock, you must set this bit to 1 to request permission to stop the clock. After the UART acknowledges the request (URTCLKSTPACK = 1) you can stop the clock through the peripheral clock gating control register 1 (PCGCR1).   When enabling the UART internal clock, enable the clock through PCGCR1, then set URTCKLSTPREQ to 0." range="" rwaccess="RW">
+<bitenum id="NREQ" value="0" token="NREQ" description="Normal operating mode."/>
+<bitenum id="REQ" value="1" token="REQ" description="Request permission to stop the peripheral clock."/>
+</bitfield>
+<bitfield id="USBCLKSTPACK" width="1" begin="3" end="3" resetval="1" description="USB clock stop acknowledge bit. This bit is set to 1 when the USB has acknowledged a request for its clock to be stopped. The USB clock should not be stopped until this bit is set to 1." range="" rwaccess="R">
+<bitenum id="NACK" value="0" token="NACK" description="The request to stop the peripheral clock has not been acknowledged."/>
+<bitenum id="ACK" value="1" token="ACK" description="The request to stop the peripheral clock has been acknowledged, the clock can be stopped."/>
+</bitfield>
+<bitfield id="USBCLKSTPREQ" width="1" begin="2" end="2" resetval="1" description="USB peripheral clock stop request bit. When disabling the USB internal peripheral clock, you must set this bit to 1 to request permission to stop the clock. After the USB acknowledges the request (USBCLKSTPACK = 1) you can stop the clock through the peripheral clock gating control register 2 (PCGCR2).   When enabling the USB internal clock, enable the clock through PCGCR2, then set USBCKLSTPREQ to 0." range="" rwaccess="RW">
+<bitenum id="NREQ" value="0" token="NREQ" description="Normal operating mode."/>
+<bitenum id="REQ" value="1" token="REQ" description="Request permission to stop the peripheral clock."/>
+</bitfield>
+<bitfield id="EMFCLKSTPACK" width="1" begin="1" end="1" resetval="1" description="EMIF clock stop acknowledge bit. This bit is set to 1 when the EMIF has acknowledged a request for its clock to be stopped. The EMIF clock should not be stopped until this bit is set to 1." range="" rwaccess="R">
+<bitenum id="NACK" value="0" token="NACK" description="The request to stop the peripheral clock has not been acknowledged."/>
+<bitenum id="ACK" value="1" token="ACK" description="The request to stop the peripheral clock has been acknowledged, the clock can be stopped."/>
+</bitfield>
+<bitfield id="EMFCLKSTPREQ" width="1" begin="0" end="0" resetval="1" description="EMIF peripheral clock stop request bit. When disabling the EMIF internal peripheral clock, you must set this bit to 1 to request permission to stop the clock. After the EMIF acknowledges the request (EMFCLKSTPACK = 1) you can stop the clock through the peripheral clock gating control register 1 (PCGCR1).   When enabling the EMIF internal clock, enable the clock through PCGCR1, then set EMFCKLSTPREQ to 0." range="" rwaccess="RW">
+<bitenum id="NREQ" value="0" token="NREQ" description="Normal operating mode."/>
+<bitenum id="REQ" value="1" token="REQ" description="Request permission to stop the peripheral clock."/>
+</bitfield>
+</register>
+     <register id="CCR2" acronym="CCR2" page="2" offset="0X001F" width="16" description="Clock Configuration Register 2">
+<bitfield id="_RESV_1" width="10" begin="15" end="6" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="SYSCLKSRC" width="2" begin="5" end="4" resetval="0" description="System clock source bits. These read-only bits reflect the source for the system clock." range="" rwaccess="R">
+<bitenum id="BYPRTC" value="0" token="BYPRTC" description="The system clock generator is in bypass mode; SYSCLK is driven by the RTC oscillator output."/>
+<bitenum id="LOCKRTC" value="1" token="LOCKRTC" description="The system clock generator is in lock mode; the RTC oscillator output provides the input clock."/>
+<bitenum id="BYPCLKIN" value="2" token="BYPCLKIN" description="The system clock generator is in bypass mode; SYSCLK is driven by CLKIN."/>
+<bitenum id="LOCKCLKIN" value="4" token="LOCKCLKIN" description="The system clock generator is in lock mode; the CLKIN pin provides the input clock."/>
+</bitfield>
+<bitfield id="TIMER0CLKSEL" width="1" begin="3" end="3" resetval="0" description="Timer0 clock source select bit. This bit specifies the input clock to Timer0." range="" rwaccess="R">
+<bitenum id="SYSCLK" value="0" token="SYSCLK" description="Timer0 uses SYSCLK as input clock."/>
+<bitenum id="PLLOUT" value="1" token="PLLOUT" description="Timer0 uses PLL output clock (PLLOUT) as input clock."/>
+</bitfield>
+<bitfield id="CLKSELSTAT" width="1" begin="2" end="2" resetval="0" description="CLK_SEL pin status bit. This reflects the state of the CLK_SEL pin." range="" rwaccess="R">
+<bitenum id="RTCIN" value="0" token="RTCIN" description="CLK_SEL pin is low (RTC input clock selected)."/>
+<bitenum id="CLKIN" value="1" token="CLKIN" description="CLK_SEL pin is high (CLKIN input clock selected.)"/>
+</bitfield>
+<bitfield id="_RESV_5" width="1" begin="1" end="1" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="SYSCLKSEL" width="1" begin="0" end="0" resetval="0" description="System clock source select bit. This bit is used to select between the two main clocking modes for the DSP: bypass and lock mode. In bypass mode,  the DSP clock generator is byassed and the system clock is set to either CLKIN or the RTC output (as determined by the CLKSEL pin).  In lock mode, the system clock is set to the output of the DSP clock generator.   Logic in the system clock generator prevents switching from bypass mode to lock mode if the PLL is powered down. After settings SYSCLKSEL = 1, you can check the SYSCLKSRC bits to determine if the system clock generator is in lock mode." range="" rwaccess="RW">
+<bitenum id="BYPASS" value="0" token="BYPASS" description="Bypass mode is selected."/>
+<bitenum id="LOCK" value="1" token="LOCK" description="Lock mode is selected."/>
+</bitfield>
+</register>
+     <register id="PSRCR" acronym="PSRCR" page="2" offset="0X0004" width="16" description="Peripheral Software Reset Counter Register">
+<bitfield id="COUNT" width="16" begin="15" end="0" resetval="0" description="Count bits. These bits specify the number of system clock (SYSCLK) cycles the software reset bits are asserted.  When the software counter reaches 0, the software reset bits will be cleared to 0. Always initialize this field with 20h." range="0-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="PRCR" acronym="PRCR" page="2" offset="0X0005" width="16" description="Peripheral Reset Control Register">
+<bitfield id="_RESV_1" width="8" begin="15" end="8" resetval="0" description="Reserved. Always write 0 to these bits." range="" rwaccess="N"/>
+<bitfield id="PG4_RST" width="1" begin="7" end="7" resetval="0" description="Peripheral group 4 software reset bit. Drives the LCD, I2S2, I2S3, UART, and SPI reset signal." range="" rwaccess="RW">
+<bitenum id="RST" value="0" token="RST" description="Reset deasserted, modules out of reset."/>
+<bitenum id="NRST" value="1" token="NRST" description="Reset asserted, modules in reset."/>
+</bitfield>
+<bitfield id="_RESV_3" width="1" begin="6" end="6" resetval="0" description="Reserved, always write 0 to this bit." range="" rwaccess="N"/>
+<bitfield id="PG3_RST" width="1" begin="5" end="5" resetval="0" description="Peripheral group 3 software reset bit. Drives the MMC/SD0, MMC/SD1, I2S0, and I2S1 reset signal." range="" rwaccess="RW">
+<bitenum id="RST" value="0" token="RST" description="Reset deasserted, modules out of reset."/>
+<bitenum id="NRST" value="1" token="NRST" description="Reset asserted, modules in reset."/>
+</bitfield>
+<bitfield id="DMA_RST" width="1" begin="4" end="4" resetval="0" description="DMA software reset bit. Drives the reset signal to the DMA controllers." range="" rwaccess="RW">
+<bitenum id="RST" value="0" token="RST" description="Reset deasserted, modules out of reset."/>
+<bitenum id="NRST" value="1" token="NRST" description="Reset asserted, modules in reset."/>
+</bitfield>
+<bitfield id="USB_RST" width="1" begin="3" end="3" resetval="0" description="USB software reset bit. Drives the USB reset signal." range="" rwaccess="RW">
+<bitenum id="RST" value="0" token="RST" description="Reset deasserted, module out of reset."/>
+<bitenum id="NRST" value="1" token="NRST" description="Reset asserted, module in reset."/>
+</bitfield>
+<bitfield id="SAR_RST" width="1" begin="2" end="2" resetval="0" description="Reserved. Always write 0 to these bits." range="" rwaccess="RW">
+<bitenum id="RST" value="0" token="RST" description="Reset deasserted, module out of reset."/>
+<bitenum id="NRST" value="1" token="NRST" description="Reset asserted, module in reset."/>
+</bitfield>
+<bitfield id="PG1_RST" width="1" begin="1" end="1" resetval="0" description="Peripheral group 1 software reset bit. Drives the EMIF and timers reset signal." range="" rwaccess="RW">
+<bitenum id="RST" value="0" token="RST" description="Reset deasserted, modules out of reset."/>
+<bitenum id="NRST" value="1" token="NRST" description="Reset asserted, modules in reset."/>
+</bitfield>
+<bitfield id="I2C_RST" width="1" begin="0" end="0" resetval="0" description="I2C software reset bit. Drives the I2C reset signal." range="" rwaccess="RW">
+<bitenum id="RST" value="0" token="RST" description="Reset deasserted, module out of reset."/>
+<bitenum id="NRST" value="1" token="NRST" description="Reset asserted, module in reset."/>
+</bitfield>
+</register>
+     <register id="DMAIFR" acronym="DMAIFR" page="2" offset="0X0030" width="16" description="Use this register to see which DMA channels have generated interrupts.">
+<bitfield id="DMA3CH3IF" width="1" begin="15" end="15" resetval="0" description="DMA controller 3, channel 3 interrupt status bit." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Interrupt has not been generated."/>
+<bitenum id="SET" value="1" token="SET" description="Interrupt has been generated."/>
+</bitfield>
+<bitfield id="DMA3CH2IF" width="1" begin="14" end="14" resetval="0" description="DMA controller 3, channel 2 interrupt status bit." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Interrupt has not been generated."/>
+<bitenum id="SET" value="1" token="SET" description="Interrupt has been generated."/>
+</bitfield>
+<bitfield id="DMA3CH1IF" width="1" begin="13" end="13" resetval="0" description="DMA controller 3, channel 1 interrupt status bit." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Interrupt has not been generated."/>
+<bitenum id="SET" value="1" token="SET" description="Interrupt has been generated."/>
+</bitfield>
+<bitfield id="DMA3CH0IF" width="1" begin="12" end="12" resetval="0" description="DMA controller 3, channel 0 interrupt status bit." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Interrupt has not been generated."/>
+<bitenum id="SET" value="1" token="SET" description="Interrupt has been generated."/>
+</bitfield>
+<bitfield id="DMA2CH3IF" width="1" begin="11" end="11" resetval="0" description="DMA controller 2, channel 3 interrupt status bit." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Interrupt has not been generated."/>
+<bitenum id="SET" value="1" token="SET" description="Interrupt has been generated."/>
+</bitfield>
+<bitfield id="DMA2CH2IF" width="1" begin="10" end="10" resetval="0" description="DMA controller 2, channel 2 interrupt status bit." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Interrupt has not been generated."/>
+<bitenum id="SET" value="1" token="SET" description="Interrupt has been generated."/>
+</bitfield>
+<bitfield id="DMA2CH1IF" width="1" begin="9" end="9" resetval="0" description="DMA controller 2, channel 1 interrupt status bit." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Interrupt has not been generated."/>
+<bitenum id="SET" value="1" token="SET" description="Interrupt has been generated."/>
+</bitfield>
+<bitfield id="DMA2CH0IF" width="1" begin="8" end="8" resetval="0" description="DMA controller 2, channel 0 interrupt status bit." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Interrupt has not been generated."/>
+<bitenum id="SET" value="1" token="SET" description="Interrupt has been generated."/>
+</bitfield>
+<bitfield id="DMA1CH3IF" width="1" begin="7" end="7" resetval="0" description="DMA controller 1, channel 3 interrupt status bit." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Interrupt has not been generated."/>
+<bitenum id="SET" value="1" token="SET" description="Interrupt has been generated."/>
+</bitfield>
+<bitfield id="DMA1CH2IF" width="1" begin="6" end="6" resetval="0" description="DMA controller 1, channel 2 interrupt status bit." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Interrupt has not been generated."/>
+<bitenum id="SET" value="1" token="SET" description="Interrupt has been generated."/>
+</bitfield>
+<bitfield id="DMA1CH1IF" width="1" begin="5" end="5" resetval="0" description="DMA controller 1, channel 1 interrupt status bit." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Interrupt has not been generated."/>
+<bitenum id="SET" value="1" token="SET" description="Interrupt has been generated."/>
+</bitfield>
+<bitfield id="DMA1CH0IF" width="1" begin="4" end="4" resetval="0" description="DMA controller 1, channel 0 interrupt status bit." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Interrupt has not been generated."/>
+<bitenum id="SET" value="1" token="SET" description="Interrupt has been generated."/>
+</bitfield>
+<bitfield id="DMA0CH3IF" width="1" begin="3" end="3" resetval="0" description="DMA controller 0, channel 3 interrupt status bit." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Interrupt has not been generated."/>
+<bitenum id="SET" value="1" token="SET" description="Interrupt has been generated."/>
+</bitfield>
+<bitfield id="DMA0CH2IF" width="1" begin="2" end="2" resetval="0" description="DMA controller 0, channel 2 interrupt status bit." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Interrupt has not been generated."/>
+<bitenum id="SET" value="1" token="SET" description="Interrupt has been generated."/>
+</bitfield>
+<bitfield id="DMA0CH1IF" width="1" begin="1" end="1" resetval="0" description="DMA controller 0, channel 1 interrupt status bit." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Interrupt has not been generated."/>
+<bitenum id="SET" value="1" token="SET" description="Interrupt has been generated."/>
+</bitfield>
+<bitfield id="DMA0CH0IF" width="1" begin="0" end="0" resetval="0" description="DMA controller 0, channel 0 interrupt status bit." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Interrupt has not been generated."/>
+<bitenum id="SET" value="1" token="SET" description="Interrupt has been generated."/>
+</bitfield>
+</register>
+     <register id="DMAIER" acronym="DMAIER" page="2" offset="0X0031" width="16" description="Use this register to enabled DMA controller channel interrupts.">
+<bitfield id="DMA3CH3IE" width="1" begin="15" end="15" resetval="0" description="DMA controller 3, channel 3 interrupt enable bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Interrupt is disabled."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="DMA3CH2IE" width="1" begin="14" end="14" resetval="0" description="DMA controller 3, channel 2 interrupt enable bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Interrupt is disabled."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="DMA3CH1IE" width="1" begin="13" end="13" resetval="0" description="DMA controller 3, channel 1 interrupt enable bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Interrupt is disabled."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="DMA3CH0IE" width="1" begin="12" end="12" resetval="0" description="DMA controller 3, channel 0 interrupt enable bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Interrupt is disabled."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="DMA2CH3IE" width="1" begin="11" end="11" resetval="0" description="DMA controller 2, channel 3 interrupt enable bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Interrupt is disabled."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="DMA2CH2IE" width="1" begin="10" end="10" resetval="0" description="DMA controller 2, channel 2 interrupt enable bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Interrupt is disabled."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="DMA2CH1IE" width="1" begin="9" end="9" resetval="0" description="DMA controller 2, channel 1 interrupt enable bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Interrupt is disabled."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="DMA2CH0IE" width="1" begin="8" end="8" resetval="0" description="DMA controller 2, channel 0 interrupt enable bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Interrupt is disabled."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="DMA1CH3IE" width="1" begin="7" end="7" resetval="0" description="DMA controller 1, channel 3 interrupt enable bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Interrupt is disabled."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="DMA1CH2IE" width="1" begin="6" end="6" resetval="0" description="DMA controller 1, channel 2 interrupt enable bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Interrupt is disabled."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="DMA1CH1IE" width="1" begin="5" end="5" resetval="0" description="DMA controller 1, channel 1 interrupt enable bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Interrupt is disabled."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="DMA1CH0IE" width="1" begin="4" end="4" resetval="0" description="DMA controller 1, channel 0 interrupt enable bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Interrupt is disabled."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="DMA0CH3IE" width="1" begin="3" end="3" resetval="0" description="DMA controller 0, channel 3 interrupt enable bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Interrupt is disabled."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="DMA0CH2IE" width="1" begin="2" end="2" resetval="0" description="DMA controller 0, channel 2 interrupt enable bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Interrupt is disabled."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="DMA0CH1IE" width="1" begin="1" end="1" resetval="0" description="DMA controller 0, channel 1 interrupt enable bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Interrupt is disabled."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="DMA0CH0IE" width="1" begin="0" end="0" resetval="0" description="DMA controller 0, channel 0 interrupt enable bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Interrupt is disabled."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Interrupt is enabled."/>
+</bitfield>
+</register>
+     <register id="DMA0CESR1" acronym="DMA0CESR1" page="2" offset="0X001A" width="16" description="Defines the synchronization events for DMA0 channel 1 and 0.">
+<bitfield id="_RESV_1" width="4" begin="15" end="12" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="CH1EVT" width="4" begin="11" end="8" resetval="0" description="Channel 1 synchronization events. When SYNCMODE = 1 in the channel DMATCR2, the CH1EVT bits in the DMAnCESR registers specify the synchronization event for activity in the DMA controller." range="0-Fh" rwaccess="RW"/>
+<bitfield id="_RESV_3" width="4" begin="7" end="4" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="CH0EVT" width="4" begin="3" end="0" resetval="0" description="Channel 0 synchronization events. When SYNCMODE = 1 in the channel DMATCR2, the CH0EVT bits in the DMAnCESR registers specify the synchronization event for activity in the DMA controller." range="0-Fh" rwaccess="RW"/>
+</register>
+     <register id="DMA0CESR2" acronym="DMA0CESR2" page="2" offset="0X001B" width="16" description="Defines the synchronization events for DMA0 channel 3 and 2.">
+<bitfield id="_RESV_1" width="4" begin="15" end="12" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="CH3EVT" width="4" begin="11" end="8" resetval="0" description="Channel 3 synchronization events. When SYNCMODE = 1 in the channel DMATCR2, the CH3EVT bits in the DMAnCESR registers specify the synchronization event for activity in the DMA controller." range="0-Fh" rwaccess="RW"/>
+<bitfield id="_RESV_3" width="4" begin="7" end="4" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="CH2EVT" width="4" begin="3" end="0" resetval="0" description="Channel 2 synchronization events. When SYNCMODE = 1 in the channel DMATCR2, the CH2EVT bits in the DMAnCESR registers specify the synchronization event for activity in the DMA controller." range="0-Fh" rwaccess="RW"/>
+</register>
+     <register id="DMA1CESR1" acronym="DMA1CESR1" page="2" offset="0X001C" width="16" description="Defines the synchronization events for DMA1 channel 1 and 0.">
+<bitfield id="_RESV_1" width="4" begin="15" end="12" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="CH1EVT" width="4" begin="11" end="8" resetval="0" description="Channel 1 synchronization events. When SYNCMODE = 1 in the channel DMATCR2, the CH1EVT bits in the DMAnCESR registers specify the synchronization event for activity in the DMA controller." range="0-Fh" rwaccess="RW"/>
+<bitfield id="_RESV_3" width="4" begin="7" end="4" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="CH0EVT" width="4" begin="3" end="0" resetval="0" description="Channel 0 synchronization events. When SYNCMODE = 1 in the channel DMATCR2, the CH0EVT bits in the DMAnCESR registers specify the synchronization event for activity in the DMA controller." range="0-Fh" rwaccess="RW"/>
+</register>
+     <register id="DMA1CESR2" acronym="DMA1CESR2" page="2" offset="0X001D" width="16" description="Defines the synchronization events for DMA1 channel 3 and 2.">
+<bitfield id="_RESV_1" width="4" begin="15" end="12" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="CH3EVT" width="4" begin="11" end="8" resetval="0" description="Channel 3 synchronization events. When SYNCMODE = 1 in the channel DMATCR2, the CH3EVT bits in the DMAnCESR registers specify the synchronization event for activity in the DMA controller." range="0-Fh" rwaccess="RW"/>
+<bitfield id="_RESV_3" width="4" begin="7" end="4" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="CH2EVT" width="4" begin="3" end="0" resetval="0" description="Channel 2 synchronization events. When SYNCMODE = 1 in the channel DMATCR2, the CH2EVT bits in the DMAnCESR registers specify the synchronization event for activity in the DMA controller." range="0-Fh" rwaccess="RW"/>
+</register>
+     <register id="DMA2CESR1" acronym="DMA2CESR1" page="2" offset="0X0036" width="16" description="Defines the synchronization events for DMA2 channel 1 and 0.">
+<bitfield id="_RESV_1" width="4" begin="15" end="12" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="CH1EVT" width="4" begin="11" end="8" resetval="0" description="Channel 1 synchronization events. When SYNCMODE = 1 in the channel DMATCR2, the CH1EVT bits in the DMAnCESR registers specify the synchronization event for activity in the DMA controller." range="0-Fh" rwaccess="RW"/>
+<bitfield id="_RESV_3" width="4" begin="7" end="4" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="CH0EVT" width="4" begin="3" end="0" resetval="0" description="Channel 0 synchronization events. When SYNCMODE = 1 in the channel DMATCR2, the CH0EVT bits in the DMAnCESR registers specify the synchronization event for activity in the DMA controller." range="0-Fh" rwaccess="RW"/>
+</register>
+     <register id="DMA2CESR2" acronym="DMA2CESR2" page="2" offset="0X0037" width="16" description="Defines the synchronization events for DMA2 channel 3 and 2.">
+<bitfield id="_RESV_1" width="4" begin="15" end="12" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="CH3EVT" width="4" begin="11" end="8" resetval="0" description="Channel 3 synchronization events. When SYNCMODE = 1 in the channel DMATCR2, the CH3EVT bits in the DMAnCESR registers specify the synchronization event for activity in the DMA controller." range="0-Fh" rwaccess="RW"/>
+<bitfield id="_RESV_3" width="4" begin="7" end="4" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="CH2EVT" width="4" begin="3" end="0" resetval="0" description="Channel 2 synchronization events. When SYNCMODE = 1 in the channel DMATCR2, the CH2EVT bits in the DMAnCESR registers specify the synchronization event for activity in the DMA controller." range="0-Fh" rwaccess="RW"/>
+</register>
+     <register id="DMA3CESR1" acronym="DMA3CESR1" page="2" offset="0X0038" width="16" description="Defines the synchronization events for DMA3 channel 1 and 0.">
+<bitfield id="_RESV_1" width="4" begin="15" end="12" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="CH1EVT" width="4" begin="11" end="8" resetval="0" description="Channel 1 synchronization events. When SYNCMODE = 1 in the channel DMATCR2, the CH1EVT bits in the DMAnCESR registers specify the synchronization event for activity in the DMA controller." range="0-Fh" rwaccess="RW"/>
+<bitfield id="_RESV_3" width="4" begin="7" end="4" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="CH0EVT" width="4" begin="3" end="0" resetval="0" description="Channel 0 synchronization events. When SYNCMODE = 1 in the channel DMATCR2, the CH0EVT bits in the DMAnCESR registers specify the synchronization event for activity in the DMA controller." range="0-Fh" rwaccess="RW"/>
+</register>
+     <register id="DMA3CESR2" acronym="DMA3CESR2" page="2" offset="0X0039" width="16" description="Defines the synchronization events for DMA3 channel 3 and 2.">
+<bitfield id="_RESV_1" width="4" begin="15" end="12" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="CH3EVT" width="4" begin="11" end="8" resetval="0" description="Channel 3 synchronization events. When SYNCMODE = 1 in the channel DMATCR2, the CH3EVT bits in the DMAnCESR registers specify the synchronization event for activity in the DMA controller." range="0-Fh" rwaccess="RW"/>
+<bitfield id="_RESV_3" width="4" begin="7" end="4" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="CH2EVT" width="4" begin="3" end="0" resetval="0" description="Channel 2 synchronization events. When SYNCMODE = 1 in the channel DMATCR2, the CH2EVT bits in the DMAnCESR registers specify the synchronization event for activity in the DMA controller." range="0-Fh" rwaccess="RW"/>
+</register>
+     <register id="CGCR1" acronym="CGCR1" page="2" offset="0X0020" width="16" description="Clock Generator Control Register 1">
+<bitfield id="CLR_CNTL" width="1" begin="15" end="15" resetval="0" description="Clear control bit. This bit is used to clear digital flip flops within the clock generator. This bit must be cleared to 0 while changing the PLL settings." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Digital flip-flops cleared."/>
+<bitenum id="SET" value="1" token="SET" description="Digital flip-flops not cleard (normal operation)."/>
+</bitfield>
+<bitfield id="_RESV_2" width="1" begin="14" end="14" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="PLL_STANDBY" width="1" begin="13" end="13" resetval="0" description="PLL standby bit. This bit is used to place the PLL in standy mode.  This bit is used for test purposes only and must always be cleared to 0." range="" rwaccess="RW">
+<bitenum id="ACTIVE" value="0" token="ACTIVE" description="PLL is active (normal operation)."/>
+<bitenum id="STANDBY" value="1" token="STANDBY" description="PLL is in standby mode."/>
+</bitfield>
+<bitfield id="PLL_PWRDN" width="1" begin="12" end="12" resetval="1" description="PLL power down bit. This bit is used to power down the PLL when it is not being used." range="" rwaccess="RW">
+<bitenum id="POWERED" value="0" token="POWERED" description="PLL is powered up."/>
+<bitenum id="POWERDWN" value="1" token="POWERDWN" description="PLL is powered down."/>
+</bitfield>
+<bitfield id="M" width="12" begin="11" end="0" resetval="0" description="PLL Multiplier" range="0-3h" rwaccess="RW"/>
+</register>
+     <register id="CGCR2" acronym="CGCR2" page="2" offset="0X0021" width="16" description="Clock Generator Control Register 2">
+<bitfield id="RDBYPASS" width="1" begin="15" end="15" resetval="0" description="Reference divider bypass bit. When this bit is set to 1 the reference divider in the DSP clock generator is bypassed. When this bit is set to 0, the reference clock to the DSP clock generator is divided by the reference divider. The RD bits specify the divider value." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Use the reference divider."/>
+<bitenum id="BYPASS" value="1" token="BYPASS" description="Bypass the reference divider."/>
+</bitfield>
+<bitfield id="_RESV_2" width="3" begin="14" end="12" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="RDRATIO" width="12" begin="11" end="0" resetval="0" description="Reference input frequency divider. The frequency inputted to the Phase Detector must fall between 30KHz and 170KHz. Divides the input clock rate to the PLL by the following number: 000000000000 = Divide by 1 000000000001 = Divide by 2 000000000010 = Divide by 3 000000000011 = Divide by 4 ... 111111111111 = Divide by 4095." range="0-FFFh" rwaccess="RW"/>
+</register>
+     <register id="CGCR3" acronym="CGCR3" page="2" offset="0X0022" width="16" description="Clock Generator Control Register 3">
+<bitfield id="INIT" width="16" begin="15" end="0" resetval="2054" description="Initialization bits for DSP clock generator.  These bits must initialized with a pre-determined value during PLL configuration." range="0-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="CGCR4" acronym="CGCR4" page="2" offset="0X0023" width="16" description="Clock Generator Control Register 4">
+<bitfield id="_RESV_1" width="6" begin="15" end="10" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="OUTDIVEN" width="1" begin="9" end="9" resetval="0" description="Output Divider Enable 0 = Output programmable divider bypassed and Output Divide-by-2 bypassed. 1 = Output programmable divider enabled and Output Divide-by-2 enabled." range="" rwaccess="RW">
+<bitenum id="BYPASS" value="0" token="BYPASS" description="The output divider and the fixed /2 divider are bypassed."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="The output divider and the fixed /2 divider are enabled."/>
+</bitfield>
+<bitfield id="_RESV_3" width="1" begin="8" end="8" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="OD" width="8" begin="7" end="0" resetval="0" description="Output Divider value 000000 = Divide-by-1 000001 = Divide-by-2.  &amp; 111111 = Divide-by-255" range="0-FFh" rwaccess="RW"/>
+</register>
+     <register id="CCSSR" acronym="CCSSR" page="2" offset="0X0024" width="16" description="CLKOUT Clock Source Register">
+<bitfield id="_RESV_1" width="12" begin="15" end="4" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="SRC" width="4" begin="3" end="0" resetval="11" description="CLKOUT source bits. These bits specify the source clock for the CLKOUT pin." range="" rwaccess="RW">
+<bitenum id="MODE0" value="0" token="MODE0" description="CLKOUT pin outputs System PLL output clock, PLLOUT."/>
+<bitenum id="MODE1" value="1" token="MODE1" description="CLKOUT pin is set high."/>
+<bitenum id="MODE2" value="2" token="MODE2" description="CLKOUT pin outputs System PLL output clock, PLLOUT."/>
+<bitenum id="MODE3" value="3" token="MODE3" description="CLKOUT pin is set low."/>
+<bitenum id="MODE4" value="4" token="MODE4" description="CLKOUT pin outputs System PLL output clock, PLLOUT."/>
+<bitenum id="MODE5" value="5" token="MODE5" description="CLKOUT pin is set low."/>
+<bitenum id="MODE6" value="6" token="MODE6" description="CLKOUT pin outputs System PLL output clock, PLLOUT."/>
+<bitenum id="MODE7" value="7" token="MODE7" description="CLKOUT pin outputs USB PLL output clock. "/>
+<bitenum id="MODE8" value="8" token="MODE8" description="CLKOUT pin outputs System PLL output clock, PLLOUT."/>
+<bitenum id="MODE9" value="9" token="MODE9" description="CLKOUT pin outputs SAR clock."/>
+<bitenum id="MODE10" value="16" token="MODE10" description="CLKOUT pin outputs System PLL output clock, PLLOUT."/>
+<bitenum id="MODE11" value="17" token="MODE11" description="CLKOUT pin outputs system clock, SYSCLK (default mode)."/>
+<bitenum id="MODE12" value="18" token="MODE12" description="CLKOUT pin outputs System PLL output clock, PLLOUT."/>
+<bitenum id="MODE13" value="19" token="MODE13" description="Reserved, do no use. "/>
+<bitenum id="MODE14" value="20" token="MODE14" description="CLKOUT pin outputs System PLL output clock, PLLOUT."/>
+<bitenum id="MODE15" value="21" token="MODE15" description="CLKOUT pin outputs USB PLL output clock. "/>
+</bitfield>
+</register>
+     <register id="TIAFR" acronym="TIAFR" page="2" offset="0X0014" width="16" description="Timer Interrupt Aggregation Flag Register">
+<bitfield id="_RESV_1" width="13" begin="15" end="3" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="TIM2FLAG" width="1" begin="2" end="2" resetval="0" description="Timer 2 interrupt flag bit. This bit latches the timer interrupt signal when the timer counter expires. You can clear this flag bit by writing a 1 to it." range="" rwaccess="RW1C">
+<bitenum id="NOINT" value="0" token="NOINT" description="Timer has not generated an interrupt."/>
+<bitenum id="INT" value="1" token="INT" description="Timer interrupt has occurred."/>
+</bitfield>
+<bitfield id="TIM1FLAG" width="1" begin="1" end="1" resetval="0" description="Timer 1 interrupt flag bit. This bit latches the timer interrupt signal when the timer counter expires. You can clear this flag bit by writing a 1 to it." range="" rwaccess="RW1C">
+<bitenum id="NOINT" value="0" token="NOINT" description="Timer has not generated an interrupt."/>
+<bitenum id="INT" value="1" token="INT" description="Timer interrupt has occurred."/>
+</bitfield>
+<bitfield id="TIM0FLAG" width="1" begin="0" end="0" resetval="0" description="Timer 0 interrupt flag bit. This bit latches the timer interrupt signal when the timer counter expires. You can clear this flag bit by writing a 1 to it." range="" rwaccess="RW1C">
+<bitenum id="NOINT" value="0" token="NOINT" description="Timer has not generated an interrupt."/>
+<bitenum id="INT" value="1" token="INT" description="Timer interrupt has occurred."/>
+</bitfield>
+</register>
+     <register id="ODSCR" acronym="ODSCR" page="2" offset="0X0016" width="16" description="Output Drive Strength Control Register">
+<bitfield id="_RESV_1" width="13" begin="15" end="3" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="CLKOUTDS" width="1" begin="2" end="2" resetval="1" description="CLKOUT pin output drive strength bits. These bits set the drive strength for the CLKOUT pin." range="" rwaccess="RW">
+<bitenum id="MIN" value="0" token="MIN" description="Minimum drive strength."/>
+<bitenum id="MAX" value="1" token="MAX" description="Maximum drive strength."/>
+</bitfield>
+<bitfield id="_RESV_3" width="1" begin="1" end="1" resetval="0" description="" range="" rwaccess="N"/>
+<bitfield id="EMIFDS" width="1" begin="0" end="0" resetval="1" description="EMIF pin output drive strength bits. These bits set the drive strength for the EMIF pins." range="" rwaccess="RW">
+<bitenum id="MIN" value="0" token="MIN" description="Minimum drive strength."/>
+<bitenum id="MAX" value="1" token="MAX" description="Maximum drive strength."/>
+</bitfield>
+</register>
+     <register id="PDINHIBR1" acronym="PDINHIBR1" page="2" offset="0X0017" width="16" description="Pull-Down Inhibit Register 1">
+<bitfield id="_RESV_1" width="2" begin="15" end="14" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="S15PD" width="1" begin="13" end="13" resetval="1" description="Serial port pin 15 pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="S14PD" width="1" begin="12" end="12" resetval="1" description="Serial port pin 14 pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="S13PD" width="1" begin="11" end="11" resetval="1" description="Serial port pin 13 pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="S12PD" width="1" begin="10" end="10" resetval="1" description="Serial port pin 12 pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="S11PD" width="1" begin="9" end="9" resetval="1" description="Serial port pin 11 pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="S10PD" width="1" begin="8" end="8" resetval="1" description="Serial port pin 10 pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="_RESV_8" width="2" begin="7" end="6" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="S5PD" width="1" begin="5" end="5" resetval="1" description="Serial port pin 5 pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="S4PD" width="1" begin="4" end="4" resetval="1" description="Serial port pin 4 pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="S3PD" width="1" begin="3" end="3" resetval="1" description="Serial port pin 3 pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="S2PD" width="1" begin="2" end="2" resetval="1" description="Serial port pin 2 pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="S1PD" width="1" begin="1" end="1" resetval="1" description="Serial port pin 1 pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="S0PD" width="1" begin="0" end="0" resetval="1" description="Serial port pin 0 pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+</register>
+     <register id="PDINHIBR2" acronym="PDINHIBR2" page="2" offset="0X0018" width="16" description="Pull-Down Inhibit Register 2">
+<bitfield id="_RESV_1" width="1" begin="15" end="15" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="INT1PU" width="1" begin="14" end="14" resetval="1" description="Interrupt 1 pin pull-up inhibit bit. Setting this bit to 1 disables the pin internal pull-up." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-up is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-up is disabled."/>
+</bitfield>
+<bitfield id="INT0PU" width="1" begin="13" end="13" resetval="1" description="Interrupt 0 pin pull-up inhibit bit. Setting this bit to 1 disables the pin internal pull-up." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-up is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-up is disabled."/>
+</bitfield>
+<bitfield id="RESETPU" width="1" begin="12" end="12" resetval="0" description="Reset pin pull-up inhibit bit. Setting this bit to 1 disables the pin internal pull-up." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-up is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-up is disabled."/>
+</bitfield>
+<bitfield id="EMU01PU" width="1" begin="11" end="11" resetval="0" description="EMU1 and EMU0 pin pull-up inhibit bit. Setting this bit to 1 disables the pin internal pull-up." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-up is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-up is disabled."/>
+</bitfield>
+<bitfield id="TDIPU" width="1" begin="10" end="10" resetval="0" description="TDI pin pull-up inhibit bit. Setting this bit to 1 disables the pin internal pull-up." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-up is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-up is disabled."/>
+</bitfield>
+<bitfield id="TMSPU" width="1" begin="9" end="9" resetval="0" description="TMS pin pull-up inhibit bit. Setting this bit to 1 disables the pin internal pull-up." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-up is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-up is disabled."/>
+</bitfield>
+<bitfield id="TCKPU" width="1" begin="8" end="8" resetval="0" description="TCK pin pull-up inhibit bit. Setting this bit to 1 disables the pin internal pull-up." range="" rwaccess="R">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-up is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-up is disabled."/>
+</bitfield>
+<bitfield id="_RESV_9" width="2" begin="7" end="6" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="A20PD" width="1" begin="5" end="5" resetval="1" description="EMIF A[20] pin pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="A19PD" width="1" begin="4" end="4" resetval="1" description="EMIF A[19] pin pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="A18PD" width="1" begin="3" end="3" resetval="1" description="EMIF A[18] pin pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="A17PD" width="1" begin="2" end="2" resetval="1" description="EMIF A[17] pin pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="A16PD" width="1" begin="1" end="1" resetval="1" description="EMIF A[16] pin pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="A15PD" width="1" begin="0" end="0" resetval="1" description="EMIF A[15] pin pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+</register>
+     <register id="PDINHIBR3" acronym="PDINHIBR3" page="2" offset="0X0019" width="16" description="Pull-Down Inhibit Register 3">
+<bitfield id="PD15PD" width="1" begin="15" end="15" resetval="0" description="Parallel port 15 pin pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="PD14PD" width="1" begin="14" end="14" resetval="1" description="Parallel port 14 pin pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="PD13PD" width="1" begin="13" end="13" resetval="1" description="Parallel port 13 pin pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="PD12PD" width="1" begin="12" end="12" resetval="0" description="Parallel port 12 pin pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="PD11PD" width="1" begin="11" end="11" resetval="0" description="Parallel port 11 pin pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="PD10PD" width="1" begin="10" end="10" resetval="0" description="Parallel port 10 pin pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="PD9PD" width="1" begin="9" end="9" resetval="0" description="Parallel port 9 pin pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="PD8PD" width="1" begin="8" end="8" resetval="0" description="Parallel port 8 pin pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="PD7PD" width="1" begin="7" end="7" resetval="0" description="Parallel port 7 pin pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="PD6PD" width="1" begin="6" end="6" resetval="0" description="Parallel port 6 pin pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="PD5PD" width="1" begin="5" end="5" resetval="1" description="Parallel port 5 pin pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="PD4PD" width="1" begin="4" end="4" resetval="1" description="Parallel port 4 pin pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="PD3PD" width="1" begin="3" end="3" resetval="1" description="Parallel port 3 pin pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="PD2PD" width="1" begin="2" end="2" resetval="1" description="Parallel port 2 pin pull-down inhibit bit. Setting this bit to 1 disables the pin internal pull-down." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="Pin pull-down is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="Pin pull-down is disabled."/>
+</bitfield>
+<bitfield id="_RESV_14" width="2" begin="1" end="0" resetval="1" description="Reserved." range="" rwaccess="N"/>
+</register>
+     <register id="SDRAMCCR" acronym="SDRAMCCR" page="2" offset="0X001E" width="16" description="SDRAM Clock Control Register">
+<bitfield id="_RESV_1" width="15" begin="15" end="1" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="SDCLK_EN" width="1" begin="0" end="0" resetval="1" description="SDRAM Clock Control 0 = SDCLK on. 1 = SDCLK off." range="" rwaccess="RW">
+<bitenum id="SDCLKon" value="0" token="SDCLKon" description="SDRAM clock is on."/>
+<bitenum id="SDCLKoff" value="1" token="SDCLKoff" description="SDRAM clock is off."/>
+</bitfield>
+</register>
+     <register id="ECDR" acronym="ECDR" page="2" offset="0X0026" width="16" description="EMIF Clock Divider Register">
+<bitfield id="_RESV_1" width="15" begin="15" end="1" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="EDIV" width="1" begin="0" end="0" resetval="1" description="EMIF clock divider select bits. The EMIF module can internally divide its input peripheral clock. When this bit is set to 0, the EMIF operates at half the clock rate of its peripheral clock. When this bit is set to 1 the EMIF operates at the full rate of its peripheral clock." range="" rwaccess="RW">
+<bitenum id="HALFRATE" value="0" token="HALFRATE" description="EMIF operates at half the peripheral clock rate."/>
+<bitenum id="FULLRATE" value="1" token="FULLRATE" description="EMIF operates at the same rate as the peripheral clock."/>
+</bitfield>
+</register>
+     <register id="ESCR" acronym="ESCR" page="2" offset="0X0033" width="16" description="EMIF System Control Register">
+<bitfield id="_RESV_1" width="14" begin="15" end="2" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="BYTEMODE" width="2" begin="1" end="0" resetval="0" description="EMIF byte mode select bits. These bits control CPU data and program accesses to external memory as well as CPU accesses the EMIF memory-mapped registers." range="" rwaccess="RW">
+<bitenum id="FULL" value="0" token="FULL" description="Word accesses by the CPU are allowed."/>
+<bitenum id="UPPER" value="1" token="UPPER" description="Byte accesses by the CPU are allowed (high byte is selected)."/>
+<bitenum id="LOWER" value="2" token="LOWER" description="Byte accesses by the CPU are allowed (low byte is selected)."/>
+<bitenum id="RSV" value="3" token="RSV" description="Reserved."/>
+</bitfield>
+</register>
+     <register id="USBSCR" acronym="USBSCR" page="2" offset="0X0032" width="16" description="USB System Control Register">
+<bitfield id="USBPWDN" width="1" begin="15" end="15" resetval="1" description="USB module power." range="" rwaccess="RW">
+<bitenum id="POWERED" value="0" token="POWERED" description="USB module is powered."/>
+<bitenum id="PWRDN" value="1" token="PWRDN" description="USB module is powered-down."/>
+</bitfield>
+<bitfield id="USBSESSEND" width="1" begin="14" end="14" resetval="0" description="USB VBUS session end comparator enable." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="USB VBUS session end comparator is disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="USB VBUS session end comparator is enabled."/>
+</bitfield>
+<bitfield id="USBVBUSDET" width="1" begin="13" end="13" resetval="1" description="USB VBUS detect enable." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="USB VBUS detect comparator is disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="USB VBUS detect comparator is enabled."/>
+</bitfield>
+<bitfield id="USBPLLEN" width="1" begin="12" end="12" resetval="0" description="USB PLL enable." range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="Normal USB operation."/>
+<bitenum id="FORCEON" value="1" token="FORCEON" description="Override USB suspend end behavior and force release of PLL from suspend state."/>
+</bitfield>
+<bitfield id="_RESV_5" width="5" begin="11" end="7" resetval="0" description="Reserved.  Always write 0 to these bits." range="" rwaccess="N"/>
+<bitfield id="USBDATPOL" width="1" begin="6" end="6" resetval="1" description="USB data polarity bit." range="" rwaccess="RW">
+<bitenum id="REVERSE" value="0" token="REVERSE" description="Reverse polarity on DP and DM signals."/>
+<bitenum id="NORMAL" value="1" token="NORMAL" description="Normal polarity."/>
+</bitfield>
+<bitfield id="_RESV_7" width="2" begin="5" end="4" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="USBOSCBIASDIS" width="1" begin="3" end="3" resetval="1" description="USB internal oscillator bias resistor disable." range="" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description="Internal oscillator bias resistor enabled (normal operating mode)."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="Internal oscillator bias resistor disabled."/>
+</bitfield>
+<bitfield id="USBOSCDIS" width="1" begin="2" end="2" resetval="1" description="USB oscillator disable bit." range="" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description="USB internal oscillator enabled."/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description="USB internal oscillator disabled."/>
+</bitfield>
+<bitfield id="BYTEMODE" width="2" begin="1" end="0" resetval="0" description="USB byte mode select bits." range="" rwaccess="RW">
+<bitenum id="FULL" value="0" token="FULL" description="Word accesses by the CPU are allowed."/>
+<bitenum id="UPPER" value="1" token="UPPER" description="Byte accesses by the CPU are allowed (high byte is selected)."/>
+<bitenum id="LOWER" value="2" token="LOWER" description="Byte accesses by the CPU are allowed (low byte is selected)."/>
+<bitenum id="RSV" value="3" token="RSV" description="Reserved."/>
+</bitfield>
+</register>
+     <register id="DIEIDR0" acronym="DIEIDR0" page="2" offset="0X0040" width="16" description="Die ID Register 0">
+<bitfield id="DIEID0" width="16" begin="15" end="0" resetval="0" description="Die ID bits." range="0-FFFFh" rwaccess="R"/>
+</register>
+     <register id="DIEIDR1" acronym="DIEIDR1" page="2" offset="0X0041" width="16" description="Die ID Register 1">
+<bitfield id="_RESV_1" width="2" begin="15" end="14" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="DIEID1" width="14" begin="13" end="0" resetval="0" description="Die ID bits." range="0-3FFFh" rwaccess="R"/>
+</register>
+     <register id="DIEIDR2" acronym="DIEIDR2" page="2" offset="0X0042" width="16" description="Die ID Register 2">
+<bitfield id="DIEID2" width="16" begin="15" end="0" resetval="0" description="Die ID bits." range="0-FFFFh" rwaccess="R"/>
+</register>
+     <register id="DIEIDR3" acronym="DIEIDR3" page="2" offset="0X0043" width="16" description="Die ID Register 3">
+<bitfield id="DESIGNREV" width="4" begin="15" end="12" resetval="5" description="Describes the Silicon Revision of Die CPU 0 = Silicon Revision 1.0. 1 = Silicon Revision 1.1. 2 = Silicon Revision 1.2. 3 = Silicon Revision 1.3. 4 = Silicon Revision 1.4. 5 = Silicon Revision 2.0." range="0-Fh" rwaccess="R"/>
+<bitfield id="DIEID3" width="12" begin="11" end="0" resetval="0" description="Die ID bits." range="0-FFFh" rwaccess="R"/>
+</register>
+     <register id="DIEIDR4" acronym="DIEIDR4" page="2" offset="0X0044" width="16" description="Die ID Register 4">
+<bitfield id="_RESV_1" width="10" begin="15" end="6" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="DIEID4" width="6" begin="5" end="0" resetval="0" description="Die ID bits." range="0-3Fh" rwaccess="R"/>
+</register>
+     <register id="DIEIDR5" acronym="DIEIDR5" page="2" offset="0X0045" width="16" description="Die ID Register 5">
+<bitfield id="_RESV_1" width="16" begin="15" end="0" resetval="0" description="Reserved." range="" rwaccess="N"/>
+</register>
+     <register id="DIEIDR6" acronym="DIEIDR6" page="2" offset="0X0046" width="16" description="Die ID Register 6">
+<bitfield id="_RESV_1" width="16" begin="15" end="0" resetval="0" description="Reserved." range="" rwaccess="N"/>
+</register>
+     <register id="DIEIDR7" acronym="DIEIDR7" page="2" offset="0X0047" width="16" description="Die ID Register 7">
+<bitfield id="_RESV_1" width="1" begin="15" end="15" resetval="0" description="Reserved." range="" rwaccess="N"/>
+<bitfield id="CHECKSUM" width="14" begin="14" end="1" resetval="0" description="Checksum bits." range="" rwaccess="R"/>
+<bitfield id="_RESV_3" width="1" begin="0" end="0" resetval="0" description="Reserved." range="" rwaccess="N"/>
+</register>
+     <register id="RAMSLPMDCNTLR1" acronym="RAMSLPMDCNTLR1" page="2" offset="0X0028" width="16" description="RAM Sleep Mode Control Register 1">
+<bitfield id="DARAM7SLPZVDD" width="1" begin="15" end="15" resetval="1" description="DARAM7 SLPZVDD Memory Standby Enable for DARAM7 0 = Enable DARAM7 SLPVDD during memory standby. 1 = Do not enable DARAM7 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="DARAM7SLPZVSS" width="1" begin="14" end="14" resetval="1" description="DARAM7 SLPZVSS Memory Standby Enable for DARAM7 0 = Enable DARAM7 SLPVSS during memory standby. 1 = Do not enable DARAM7 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="DARAM6SLPZVDD" width="1" begin="13" end="13" resetval="1" description="DARAM6 SLPZVDD Memory Standby Enable for DARAM6 0 = Enable DARAM6 SLPVDD during memory standby. 1 = Do not enable DARAM6 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="DARAM6SLPZVSS" width="1" begin="12" end="12" resetval="1" description="DARAM6 SLPZVSS Memory Standby Enable for DARAM6 0 = Enable DARAM6 SLPVSS during memory standby. 1 = Do not enable DARAM6 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="DARAM5SLPZVDD" width="1" begin="11" end="11" resetval="1" description="DARAM5 SLPZVDD Memory Standby Enable for DARAM5 0 = Enable DARAM5 SLPVDD during memory standby. 1 = Do not enable DARAM5 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="DARAM5SLPZVSS" width="1" begin="10" end="10" resetval="1" description="DARAM5 SLPZVSS Memory Standby Enable for DARAM5 0 = Enable DARAM5 SLPVSS during memory standby. 1 = Do not enable DARAM5 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="DARAM4SLPZVDD" width="1" begin="9" end="9" resetval="1" description="DARAM4 SLPZVDD Memory Standby Enable for DARAM4 0 = Enable DARAM4 SLPVDD during memory standby. 1 = Do not enable DARAM4 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="DARAM4SLPZVSS" width="1" begin="8" end="8" resetval="1" description="DARAM4 SLPZVSS Memory Standby Enable for DARAM4 0 = Enable DARAM4 SLPVSS during memory standby. 1 = Do not enable DARAM4 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="DARAM3SLPZVDD" width="1" begin="7" end="7" resetval="1" description="DARAM3 SLPZVDD Memory Standby Enable for DARAM3 0 = Enable DARAM3 SLPVDD during memory standby. 1 = Do not enable DARAM3 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="DARAM3SLPZVSS" width="1" begin="6" end="6" resetval="1" description="DARAM3 SLPZVSS Memory Standby Enable for DARAM3 0 = Enable DARAM3 SLPVSS during memory standby. 1 = Do not enable DARAM3 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="DARAM2SLPZVDD" width="1" begin="5" end="5" resetval="1" description="DARAM2 SLPZVDD Memory Standby Enable for DARAM2 0 = Enable DARAM2 SLPVDD during memory standby. 1 = Do not enable DARAM2 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="DARAM2SLPZVSS" width="1" begin="4" end="4" resetval="1" description="DARAM2 SLPZVSS Memory Standby Enable for DARAM2 0 = Enable DARAM2 SLPVSS during memory standby. 1 = Do not enable DARAM2 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="DARAM1SLPZVDD" width="1" begin="3" end="3" resetval="1" description="DARAM1 SLPZVDD Memory Standby Enable for DARAM1 0 = Enable DARAM1 SLPVDD during memory standby. 1 = Do not enable DARAM1 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="DARAM1SLPZVSS" width="1" begin="2" end="2" resetval="1" description="DARAM1 SLPZVSS Memory Standby Enable for DARAM1 0 = Enable DARAM1 SLPVSS during memory standby. 1 = Do not enable DARAM1 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="DARAM0SLPZVDD" width="1" begin="1" end="1" resetval="1" description="DARAM0 SLPZVDD Memory Standby Enable for DARAM0 0 = Enable DARAM0 SLPVDD during memory standby. 1 = Do not enable DARAM0 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="DARAM0SLPZVSS" width="1" begin="0" end="0" resetval="1" description="DARAM0 SLPZVSS Memory Standby Enable for DARAM0 0 = Enable DARAM0 SLPVSS during memory standby. 1 = Do not enable DARAM0 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+</register>
+     <register id="RAMSLPMDCNTLR2" acronym="RAMSLPMDCNTLR2" page="2" offset="0X002A" width="16" description="RAM Sleep Mode Control Register 2">
+<bitfield id="SARAM7SLPZVDD" width="1" begin="15" end="15" resetval="1" description="SARAM7 SLPZVDD Memory Standby Enable for SARAM7 0 = Enable SARAM7 SLPVDD during memory standby. 1 = Do not enable SARAM7 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM7SLPZVSS" width="1" begin="14" end="14" resetval="1" description="SARAM7 SLPZVSS Memory Standby Enable for SARAM7 0 = Enable SARAM7 SLPVSS during memory standby. 1 = Do not enable SARAM7 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM6SLPZVDD" width="1" begin="13" end="13" resetval="1" description="SARAM6 SLPZVDD Memory Standby Enable for SARAM6 0 = Enable SARAM6 SLPVDD during memory standby. 1 = Do not enable SARAM6 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM6SLPZVSS" width="1" begin="12" end="12" resetval="1" description="SARAM6 SLPZVSS Memory Standby Enable for SARAM6 0 = Enable SARAM6 SLPVSS during memory standby. 1 = Do not enable SARAM6 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM5SLPZVDD" width="1" begin="11" end="11" resetval="1" description="DARAM5 SLPZVDD Memory Standby Enable for DARAM5 0 = Enable DARAM5 SLPVDD during memory standby. 1 = Do not enable DARAM5 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM5SLPZVSS" width="1" begin="10" end="10" resetval="1" description="SARAM5 SLPZVSS Memory Standby Enable for SARAM5 0 = Enable SARAM5 SLPVSS during memory standby. 1 = Do not enable SARAM5 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM4SLPZVDD" width="1" begin="9" end="9" resetval="1" description="SARAM4 SLPZVDD Memory Standby Enable for SARAM4 0 = Enable SARAM4 SLPVDD during memory standby. 1 = Do not enable SARAM4 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM4SLPZVSS" width="1" begin="8" end="8" resetval="1" description="SARAM4 SLPZVSS Memory Standby Enable for SARAM4 0 = Enable SARAM4 SLPVSS during memory standby. 1 = Do not enable SARAM4 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM3SLPZVDD" width="1" begin="7" end="7" resetval="1" description="SARAM3 SLPZVDD Memory Standby Enable for SARAM3 0 = Enable SARAM3 SLPVDD during memory standby. 1 = Do not enable SARAM3 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM3SLPZVSS" width="1" begin="6" end="6" resetval="1" description="SARAM3 SLPZVSS Memory Standby Enable for SARAM3 0 = Enable SARAM3 SLPVSS during memory standby. 1 = Do not enable SARAM3 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM2SLPZVDD" width="1" begin="5" end="5" resetval="1" description="SARAM2 SLPZVDD Memory Standby Enable for SARAM2 0 = Enable SARAM2 SLPVDD during memory standby. 1 = Do not enable SARAM2 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM2SLPZVSS" width="1" begin="4" end="4" resetval="1" description="SARAM2 SLPZVSS Memory Standby Enable for SARAM2 0 = Enable SARAM2 SLPVSS during memory standby. 1 = Do not enable SARAM2 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM1SLPZVDD" width="1" begin="3" end="3" resetval="1" description="SARAM1 SLPZVDD Memory Standby Enable for SARAM1 0 = Enable SARAM1 SLPVDD during memory standby. 1 = Do not enable SARAM1 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM1SLPZVSS" width="1" begin="2" end="2" resetval="1" description="SARAM1 SLPZVSS Memory Standby Enable for SARAM1 0 = Enable SARAM1 SLPVSS during memory standby. 1 = Do not enable SARAM1 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM0SLPZVDD" width="1" begin="1" end="1" resetval="1" description="SARAM0 SLPZVDD Memory Standby Enable for SARAM0 0 = Enable SARAM0 SLPVDD during memory standby. 1 = Do not enable SARAM0 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM0SLPZVSS" width="1" begin="0" end="0" resetval="1" description="SARAM0 SLPZVSS Memory Standby Enable for SARAM0 0 = Enable SARAM0 SLPVSS during memory standby. 1 = Do not enable SARAM0 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+</register>
+     <register id="RAMSLPMDCNTLR3" acronym="RAMSLPMDCNTLR3" page="2" offset="0X002B" width="16" description="RAM Sleep Mode Control Register 3">
+<bitfield id="SARAM15SLPZVDD" width="1" begin="15" end="15" resetval="1" description="SARAM15 SLPZVDD Memory Standby Enable for SARAM15 0 = Enable SARAM15 SLPVDD during memory standby. 1 = Do not enable SARAM15 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM15SLPZVSS" width="1" begin="14" end="14" resetval="1" description="SARAM15 SLPZVSS Memory Standby Enable for SARAM15 0 = Enable SARAM15 SLPVSS during memory standby. 1 = Do not enable SARAM15 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM14SLPZVDD" width="1" begin="13" end="13" resetval="1" description="SARAM14 SLPZVDD Memory Standby Enable for SARAM14 0 = Enable SARAM14 SLPVDD during memory standby. 1 = Do not enable SARAM14 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM14SLPZVSS" width="1" begin="12" end="12" resetval="1" description="SARAM14 SLPZVSS Memory Standby Enable for SARAM14 0 = Enable SARAM14 SLPVSS during memory standby. 1 = Do not enable SARAM14 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM13SLPZVDD" width="1" begin="11" end="11" resetval="1" description="DARAM13 SLPZVDD Memory Standby Enable for DARAM13 0 = Enable DARAM13 SLPVDD during memory standby. 1 = Do not enable DARAM13 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM13SLPZVSS" width="1" begin="10" end="10" resetval="1" description="SARAM13 SLPZVSS Memory Standby Enable for SARAM13 0 = Enable SARAM13 SLPVSS during memory standby. 1 = Do not enable SARAM13 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM12SLPZVDD" width="1" begin="9" end="9" resetval="1" description="SARAM12 SLPZVDD Memory Standby Enable for SARAM12 0 = Enable SARAM12 SLPVDD during memory standby. 1 = Do not enable SARAM12 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM12SLPZVSS" width="1" begin="8" end="8" resetval="1" description="SARAM12 SLPZVSS Memory Standby Enable for SARAM12 0 = Enable SARAM12 SLPVSS during memory standby. 1 = Do not enable SARAM12 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM11SLPZVDD" width="1" begin="7" end="7" resetval="1" description="SARAM11 SLPZVDD Memory Standby Enable for SARAM11 0 = Enable SARAM11 SLPVDD during memory standby. 1 = Do not enable SARAM11 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM11SLPZVSS" width="1" begin="6" end="6" resetval="1" description="SARAM11 SLPZVSS Memory Standby Enable for SARAM11 0 = Enable SARAM11 SLPVSS during memory standby. 1 = Do not enable SARAM11 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM10SLPZVDD" width="1" begin="5" end="5" resetval="1" description="SARAM10 SLPZVDD Memory Standby Enable for SARAM10 0 = Enable SARAM10 SLPVDD during memory standby. 1 = Do not enable SARAM10 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM10SLPZVSS" width="1" begin="4" end="4" resetval="1" description="SARAM10 SLPZVSS Memory Standby Enable for SARAM10 0 = Enable SARAM10 SLPVSS during memory standby. 1 = Do not enable SARAM10 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM9SLPZVDD" width="1" begin="3" end="3" resetval="1" description="SARAM9 SLPZVDD Memory Standby Enable for SARAM9 0 = Enable SARAM9 SLPVDD during memory standby. 1 = Do not enable SARAM9 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM9SLPZVSS" width="1" begin="2" end="2" resetval="1" description="SARAM9 SLPZVSS Memory Standby Enable for SARAM9 0 = Enable SARAM9 SLPVSS during memory standby. 1 = Do not enable SARAM9 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM8SLPZVDD" width="1" begin="1" end="1" resetval="1" description="SARAM8 SLPZVDD Memory Standby Enable for SARAM8 0 = Enable SARAM8 SLPVDD during memory standby. 1 = Do not enable SARAM8 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM8SLPZVSS" width="1" begin="0" end="0" resetval="1" description="SARAM8 SLPZVSS Memory Standby Enable for SARAM8 0 = Enable SARAM8 SLPVSS during memory standby. 1 = Do not enable SARAM8 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+</register>
+     <register id="RAMSLPMDCNTLR4" acronym="RAMSLPMDCNTLR4" page="2" offset="0X002C" width="16" description="RAM Sleep Mode Control Register 4">
+<bitfield id="SARAM23SLPZVDD" width="1" begin="15" end="15" resetval="1" description="SARAM23 SLPZVDD Memory Standby Enable for SARAM23 0 = Enable SARAM23 SLPVDD during memory standby. 1 = Do not enable SARAM23 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM23SLPZVSS" width="1" begin="14" end="14" resetval="1" description="SARAM23 SLPZVSS Memory Standby Enable for SARAM23 0 = Enable SARAM23 SLPVSS during memory standby. 1 = Do not enable SARAM23 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM22SLPZVDD" width="1" begin="13" end="13" resetval="1" description="SARAM22 SLPZVDD Memory Standby Enable for SARAM22 0 = Enable SARAM22 SLPVDD during memory standby. 1 = Do not enable SARAM22 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM22SLPZVSS" width="1" begin="12" end="12" resetval="1" description="SARAM22 SLPZVSS Memory Standby Enable for SARAM22 0 = Enable SARAM22 SLPVSS during memory standby. 1 = Do not enable SARAM22 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM21SLPZVDD" width="1" begin="11" end="11" resetval="1" description="DARAM21 SLPZVDD Memory Standby Enable for DARAM21 0 = Enable DARAM21 SLPVDD during memory standby. 1 = Do not enable DARAM21 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM21SLPZVSS" width="1" begin="10" end="10" resetval="1" description="SARAM21 SLPZVSS Memory Standby Enable for SARAM21 0 = Enable SARAM21 SLPVSS during memory standby. 1 = Do not enable SARAM21 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM20SLPZVDD" width="1" begin="9" end="9" resetval="1" description="SARAM20 SLPZVDD Memory Standby Enable for SARAM20 0 = Enable SARAM20 SLPVDD during memory standby. 1 = Do not enable SARAM20 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM20SLPZVSS" width="1" begin="8" end="8" resetval="1" description="SARAM20 SLPZVSS Memory Standby Enable for SARAM20 0 = Enable SARAM20 SLPVSS during memory standby. 1 = Do not enable SARAM20 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM19SLPZVDD" width="1" begin="7" end="7" resetval="1" description="SARAM19 SLPZVDD Memory Standby Enable for SARAM19 0 = Enable SARAM19 SLPVDD during memory standby. 1 = Do not enable SARAM19 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM19SLPZVSS" width="1" begin="6" end="6" resetval="1" description="SARAM19 SLPZVSS Memory Standby Enable for SARAM19 0 = Enable SARAM19 SLPVSS during memory standby. 1 = Do not enable SARAM19 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM18SLPZVDD" width="1" begin="5" end="5" resetval="1" description="SARAM18 SLPZVDD Memory Standby Enable for SARAM18 0 = Enable SARAM18 SLPVDD during memory standby. 1 = Do not enable SARAM18 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM18SLPZVSS" width="1" begin="4" end="4" resetval="1" description="SARAM18 SLPZVSS Memory Standby Enable for SARAM18 0 = Enable SARAM18 SLPVSS during memory standby. 1 = Do not enable SARAM18 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM17SLPZVDD" width="1" begin="3" end="3" resetval="1" description="SARAM17 SLPZVDD Memory Standby Enable for SARAM17 0 = Enable SARAM17 SLPVDD during memory standby. 1 = Do not enable SARAM17 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM17SLPZVSS" width="1" begin="2" end="2" resetval="1" description="SARAM17 SLPZVSS Memory Standby Enable for SARAM17 0 = Enable SARAM17 SLPVSS during memory standby. 1 = Do not enable SARAM17 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM16SLPZVDD" width="1" begin="1" end="1" resetval="1" description="SARAM16 SLPZVDD Memory Standby Enable for SARAM16 0 = Enable SARAM16 SLPVDD during memory standby. 1 = Do not enable SARAM16 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM16SLPZVSS" width="1" begin="0" end="0" resetval="1" description="SARAM16 SLPZVSS Memory Standby Enable for SARAM16 0 = Enable SARAM16 SLPVSS during memory standby. 1 = Do not enable SARAM16 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+</register>
+     <register id="RAMSLPMDCNTLR5" acronym="RAMSLPMDCNTLR5" page="2" offset="0X002D" width="16" description="RAM Sleep Mode Control Register 5">
+<bitfield id="SARAM31SLPZVDD" width="1" begin="15" end="15" resetval="1" description="SARAM31 SLPZVDD Memory Standby Enable for SARAM31 0 = Enable SARAM31 SLPVDD during memory standby. 1 = Do not enable SARAM31 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM31SLPZVSS" width="1" begin="14" end="14" resetval="1" description="SARAM31 SLPZVSS Memory Standby Enable for SARAM31 0 = Enable SARAM31 SLPVSS during memory standby. 1 = Do not enable SARAM31 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM30SLPZVDD" width="1" begin="13" end="13" resetval="1" description="SARAM30 SLPZVDD Memory Standby Enable for SARAM30 0 = Enable SARAM30 SLPVDD during memory standby. 1 = Do not enable SARAM30 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM30SLPZVSS" width="1" begin="12" end="12" resetval="1" description="SARAM30 SLPZVSS Memory Standby Enable for SARAM30 0 = Enable SARAM30 SLPVSS during memory standby. 1 = Do not enable SARAM30 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM29SLPZVDD" width="1" begin="11" end="11" resetval="1" description="DARAM29 SLPZVDD Memory Standby Enable for DARAM29 0 = Enable DARAM29 SLPVDD during memory standby. 1 = Do not enable DARAM29 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM29SLPZVSS" width="1" begin="10" end="10" resetval="1" description="SARAM29 SLPZVSS Memory Standby Enable for SARAM29 0 = Enable SARAM29 SLPVSS during memory standby. 1 = Do not enable SARAM29 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM28SLPZVDD" width="1" begin="9" end="9" resetval="1" description="SARAM28 SLPZVDD Memory Standby Enable for SARAM28 0 = Enable SARAM28 SLPVDD during memory standby. 1 = Do not enable SARAM28 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM28SLPZVSS" width="1" begin="8" end="8" resetval="1" description="SARAM28 SLPZVSS Memory Standby Enable for SARAM28 0 = Enable SARAM28 SLPVSS during memory standby. 1 = Do not enable SARAM28 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM27SLPZVDD" width="1" begin="7" end="7" resetval="1" description="SARAM27 SLPZVDD Memory Standby Enable for SARAM27 0 = Enable SARAM27 SLPVDD during memory standby. 1 = Do not enable SARAM27 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM27SLPZVSS" width="1" begin="6" end="6" resetval="1" description="SARAM27 SLPZVSS Memory Standby Enable for SARAM27 0 = Enable SARAM27 SLPVSS during memory standby. 1 = Do not enable SARAM27 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM26SLPZVDD" width="1" begin="5" end="5" resetval="1" description="SARAM26 SLPZVDD Memory Standby Enable for SARAM26 0 = Enable SARAM26 SLPVDD during memory standby. 1 = Do not enable SARAM26 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM26SLPZVSS" width="1" begin="4" end="4" resetval="1" description="SARAM26 SLPZVSS Memory Standby Enable for SARAM26 0 = Enable SARAM26 SLPVSS during memory standby. 1 = Do not enable SARAM26 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM25SLPZVDD" width="1" begin="3" end="3" resetval="1" description="SARAM25 SLPZVDD Memory Standby Enable for SARAM25 0 = Enable SARAM25 SLPVDD during memory standby. 1 = Do not enable SARAM25 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM25SLPZVSS" width="1" begin="2" end="2" resetval="1" description="SARAM25 SLPZVSS Memory Standby Enable for SARAM25 0 = Enable SARAM25 SLPVSS during memory standby. 1 = Do not enable SARAM25 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM24SLPZVDD" width="1" begin="1" end="1" resetval="1" description="SARAM24 SLPZVDD Memory Standby Enable for SARAM24 0 = Enable SARAM24 SLPVDD during memory standby. 1 = Do not enable SARAM24 SLPVDD during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+<bitfield id="SARAM24SLPZVSS" width="1" begin="0" end="0" resetval="1" description="SARAM24 SLPZVSS Memory Standby Enable for SARAM24 0 = Enable SARAM24 SLPVSS during memory standby. 1 = Do not enable SARAM24 SLPVSS during memory standby (normal functional mode)." range="0-1h" rwaccess="RW">
+<bitenum id="ENABLED" value="0" token="ENABLED" description=""/>
+<bitenum id="DISABLED" value="1" token="DISABLED" description=""/>
+</bitfield>
+</register>
+</module>

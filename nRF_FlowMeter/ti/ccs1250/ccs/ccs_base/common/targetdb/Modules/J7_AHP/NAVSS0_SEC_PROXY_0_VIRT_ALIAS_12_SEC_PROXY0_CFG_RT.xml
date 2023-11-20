@@ -1,0 +1,11 @@
+<module name="NAVSS0_SEC_PROXY_0_VIRT_ALIAS_12_SEC_PROXY0_CFG_RT" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="VIRT_ALIAS_12_SEC_PROXY0__CFG__RT_status" acronym="VIRT_ALIAS_12_SEC_PROXY0__CFG__RT_status" offset="0x0" width="32" description="">
+		<bitfield id="ERROR" width="1" begin="31" end="31" resetval="0x0" description="Error detected on proxy thread. The error will also use the err_evt field to generate an error event which can generate an interrupt. While in error a proxy thread will not process any operations. Write a 0 to clear the error and reset the proxy thread." range="31" rwaccess="R/W"/> 
+		<bitfield id="DIR" width="1" begin="30" end="30" resetval="0x0" description="Direction for the proxy thread. 0 = outbound, write only. 1 = inbound, read only." range="30" rwaccess="R"/> 
+		<bitfield id="MAX_CNT" width="8" begin="23" end="16" resetval="0x0" description="Max message count allowed for an outbound proxy thread." range="23 - 16" rwaccess="R"/> 
+		<bitfield id="CUR_CNT" width="8" begin="7" end="0" resetval="0x0" description="Current message count for the proxy thread. For an inbound proxy this is the number of available messages. For an outbound proxy this is the number of free messages that can be written. This value will initialize itself to 0 if the THREAD[a]_CTL register is written with dir set to inbound, or to the max_cnt value if the THREAD[a]_CTL register is written with dir set to outbound, as these are the starting values for a newly configured thread." range="7 - 0" rwaccess="R"/>
+	</register>
+	<register id="VIRT_ALIAS_12_SEC_PROXY0__CFG__RT_thr" acronym="VIRT_ALIAS_12_SEC_PROXY0__CFG__RT_thr" offset="0x4" width="32" description="">
+		<bitfield id="THR_CNT" width="8" begin="7" end="0" resetval="0x0" description="Threshold count that causes proxy thread events. For an outbound proxy this will be the number of free messages to cause an event. For an inbound proxy this will be the number of available messages to cause an event." range="7 - 0" rwaccess="R/W"/>
+	</register>
+</module>

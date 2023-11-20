@@ -1,0 +1,179 @@
+<module name="PCIE2_CORE_USER_CFG_USER_CFG" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="CORE__USER_CFG__USER_CFG_revid" acronym="CORE__USER_CFG__USER_CFG_revid" offset="0x0" width="32" description="">
+		<bitfield id="MODID" width="16" begin="31" end="16" resetval="0x26644" description="Module ID field" range="31 - 16" rwaccess="R"/> 
+		<bitfield id="REVRTL" width="5" begin="15" end="11" resetval="0x8" description="RTL revision. Will vary depending on release" range="15 - 11" rwaccess="R"/> 
+		<bitfield id="REVMAJ" width="3" begin="10" end="8" resetval="0x1" description="Major revision" range="10 - 8" rwaccess="R"/> 
+		<bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom" range="7 - 6" rwaccess="R"/> 
+		<bitfield id="REVMIN" width="6" begin="5" end="0" resetval="0x0" description="Minor revision" range="5 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_cmd_status" acronym="CORE__USER_CFG__USER_CFG_cmd_status" offset="0x4" width="32" description="">
+		<bitfield id="LINK_TRAINING_ENABLE" width="1" begin="0" end="0" resetval="0x0" description="This bit must be set to 1 to enable the LTSSM to bring up the link. Setting it to 0 forces the LTSSM to stay in the Detect.Quiet state." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_rstcmd" acronym="CORE__USER_CFG__USER_CFG_rstcmd" offset="0x8" width="32" description="">
+		<bitfield id="INIT_HOT_RESET" width="1" begin="0" end="0" resetval="0x0" description="When this bit is set to 1'b1 in the RP mode, the core initiates a Hot Reset sequence on the PCIe link.  The controller will keep the PCIe link in hot reset when this bit is asserted. When de-asserted, controller will bring the PCIe link out of hot reset and initiate link training. Valid in RP mode only" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_initcfg" acronym="CORE__USER_CFG__USER_CFG_initcfg" offset="0xC" width="32" description="">
+		<bitfield id="CONFIG_ENABLE" width="1" begin="24" end="24" resetval="0x1" description="When this bit is set to 0 in the EP mode, the Controller will generate a CRS Completion in response to Configuration Requests. When this bit is set to 1 in the EP mode, the Controller will generate SC/UR Completion in response to Configuration Requests based on the target function. In systems where the Controller configuration registers are loaded from RAM on power-up, this prevents the Controller from responding to Configuration Requests before all the registers are loaded. This bit is unused in RP Mode. The default value of this bit will be 1 in EP mode and 0 in RP mode" range="24" rwaccess="R/W"/> 
+		<bitfield id="VC_COUNT" width="2" begin="23" end="22" resetval="0x3" description="Number of VCs configured. 00 = 1 VC 01 = 2 VCs, 10 = 3 VCs, 11 = 4 VCs, .. and so on" range="23 - 22" rwaccess="R/W"/> 
+		<bitfield id="MAX_EVAL_ITERATION" width="7" begin="21" end="15" resetval="0x8" description="Denotes the maximum number of iterations to be performed during the DirectionChange Feedback Link Equalization in case the direction change feedback does not converge to 00. Supported values are 8-63. Recommended Value is from 8-16 to avoid the 24ms timeout as defined in PCIe spec." range="21 - 15" rwaccess="R/W"/> 
+		<bitfield id="BYPASS_PHASE23" width="1" begin="14" end="14" resetval="0x0" description="This MMR should be programmed during system boot or initialization.  This is used only in Root Port Mode of the PCIe Core. If BYPASS_PHASE23==1: * Phase 2 AND Phase 3 of Link Equalization are bypassed during link equalization If BYPASS_PHASE23==0: * Phase 2 AND Phase 3 of Link Equalization are performed during link equalization" range="14" rwaccess="R/W"/> 
+		<bitfield id="BYPASS_REMOTE_TX_EQUALIZATION" width="1" begin="13" end="13" resetval="0x0" description="This MMR should be programmed during system boot or initialization. IF BYPASS_REMOTE_TX_EQUALIZATION==1: * In End-Point mode, Phase 2 of link equalization is bypassed * In Root-Port mode, Phase 3 of link equalization is bypassed IF BYPASS_REMOTE_TX_EQUALIZATION==0: * Remote TX Equalization is performed during link equalization" range="13" rwaccess="R/W"/> 
+		<bitfield id="SUPPORTED_PRESET" width="11" begin="12" end="2" resetval="0x2047" description="This MMR should be programmed during system boot or initialization. SUPPORTED_PRESET[i]=1. Indicates Preset #i supported by PHY. SUPPORTED_PRESET[i]=0. Indicates Preset #i is not supported by PHY. * For Full Swing, all presets [P0 - P10] must be supported. * For Reduced Swing, [P4, P1, P9, P5, P6, P3] must be supported, others are optional as per PCIe spec." range="12 - 2" rwaccess="R/W"/> 
+		<bitfield id="DISABLE_GEN3_DC_BALANCE" width="1" begin="1" end="1" resetval="0x0" description="This bit it is used to disable the transmission of special DC Balance symbols in TS1 training sequences for improving the DC balance of the bit stream at 8.0 GT/s or higher speed. This feature was introduced in the 0.71 version of the Gen3 spec.  Setting this input to 1 disables the transmission of the special DC Balance symbols by the Controller.  Note that the Controller can decode received training sequences with the special DC balance symbols in them correctly regardless of the setting of this input." range="1" rwaccess="R/W"/> 
+		<bitfield id="SRIS_ENABLE" width="1" begin="0" end="0" resetval="0x1" description="Should be set as per the System Reference Clocking Implementation. 0 = Separate Tx and Rx Reference Clocks with No Spread Spectum Clocking - SRNS Mode 1 = Separate Tx and Rx Reference Clocks with Spread Spectum Clocking - SRIS Mode. This is the default setting. Note that the common Refclk architecture utilizes the same Refclk for Tx and Rx and so does not introduce any difference between the Tx and Rx Refclk rates. SRIS_ENABLE should be tied to 0 in this case also." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_pmcmd" acronym="CORE__USER_CFG__USER_CFG_pmcmd" offset="0x10" width="32" description="">
+		<bitfield id="POWER_STATE_CHANGE_ACK" width="1" begin="2" end="2" resetval="0x0" description="Software must assert this bit for a minimum of one cycle in response to the assertion of POWER_STATE_CHANGE_INTERRUPT, when it is ready to transition to the low-power state requested by the configuration write request. Software may maintain this input high if it does not need to delay the return of the completions for the configuration write transactions causing power-state changes." range="2" rwaccess="R/W"/> 
+		<bitfield id="CLIENT_REQ_EXIT_L1_SUBSTATE" width="1" begin="1" end="1" resetval="0x0" description="Client logic can trigger an explicit L1-substate exit by setting this bit. This bit triggers an exit from L1-substates to L0 if controller is already in L1- substates. Controller waits in L1 state for this signal to become de-asserted before entering L1-substate.  Controller will respond to normal L1-exit triggers while it waits for de-assertion of this bit." range="1" rwaccess="R/W"/> 
+		<bitfield id="CLIENT_REQ_EXIT_L1" width="1" begin="0" end="0" resetval="0x0" description="Client logic can trigger an explicit L1 exit by setting this bit. This bit triggers an exit to L0 from L1 or from L1-substates. This bit can also be used to block L1 entry in End point controllers." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_linkstatus" acronym="CORE__USER_CFG__USER_CFG_linkstatus" offset="0x14" width="32" description="">
+		<bitfield id="LTSSM_STATE" width="6" begin="29" end="24" resetval="0x0" description="Current state of the Link Training and Status State Machine within the core. The encodings of this output are described in Appendix C of the Cadence User guide." range="29 - 24" rwaccess="R"/> 
+		<bitfield id="POWER_STATE_CHANGE_FUNCTION_NUM" width="8" begin="23" end="16" resetval="0x0" description="Function number of the function for which a power state change occurred. Software can read this value when the power_state_change interrupt is asserted to determine the physical function for which the power state change occured." range="23 - 16" rwaccess="R"/> 
+		<bitfield id="L1_PM_SUBSTATE" width="3" begin="14" end="12" resetval="0x0" description="This register provides the current state of the L1 PM substates state machine. Its encodings are: 000 = L1-substate machine not active 001 = L1.0 substate. L1_PM_SUBSTATE shows L1.0 after the delay programmed in L1 substate entry delay in reg:low_power_debug_control0 010 = L1.1 substate 011 = Reserved 100 = L1.2.Entry substate 101 = L1.2.Idle substate 110 = L1.2.Exit substate 111 = Reserved" range="14 - 12" rwaccess="R"/> 
+		<bitfield id="LINK_POWER_STATE" width="4" begin="11" end="8" resetval="0x0" description="Current power state of the PCIe link. 0001 = L0 0010 = L0s 0100 = L1 1000 = L2" range="11 - 8" rwaccess="R"/> 
+		<bitfield id="NEGOTIATED_SPEED" width="2" begin="5" end="4" resetval="0x0" description="Current operating speed of the link is as follows: 11: 16 GT/s 10: 8GT/s 01: 5GT/s 00: 2.5GT/s" range="5 - 4" rwaccess="R"/> 
+		<bitfield id="NEGOTIATED_LINK_WIDTH" width="2" begin="3" end="2" resetval="0x0" description="Current link width are as follows: 10: x4 01: x2 00: x1 Others: Reserved" range="3 - 2" rwaccess="R"/> 
+		<bitfield id="LINK_STATUS" width="2" begin="1" end="0" resetval="0x0" description="Status of the PCI Express link. 00 = No receivers detected. 01 = Link training in progress. 10 = Link up, DL initialization in progress. 11 = Link up, DL initialization completed." range="1 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_legacy_intr_set" acronym="CORE__USER_CFG__USER_CFG_legacy_intr_set" offset="0x18" width="32" description="">
+		<bitfield id="INTD_IN" width="1" begin="3" end="3" resetval="0x0" description="When the core is configured as EP, this bit is used by the client application to signal an interrupt from any of its PCI Functions to the RP using the Legacy PCI Express Interrupt Delivery mechanism of PCI Express. This bit corresponds to INTD of the PCI bus. Asserting this bit causes the core to send out an Assert_INTx message, and de-asserting this bit causes the core to transmit a Deassert_INTx message." range="3" rwaccess="R/W"/> 
+		<bitfield id="INTC_IN" width="1" begin="2" end="2" resetval="0x0" description="When the core is configured as EP, this bit is used by the client application to signal an interrupt from any of its PCI Functions to the RP using the Legacy PCI Express Interrupt Delivery mechanism of PCI Express. This bit corresponds to INTC of the PCI bus. Asserting this bit causes the core to send out an Assert_INTx message, and de-asserting this bit causes the core to transmit a Deassert_INTx message." range="2" rwaccess="R/W"/> 
+		<bitfield id="INTB_IN" width="1" begin="1" end="1" resetval="0x0" description="When the core is configured as EP, this bit is used by the client application to signal an interrupt from any of its PCI Functions to the RP using the Legacy PCI Express Interrupt Delivery mechanism of PCI Express. This bit corresponds to INTB of the PCI bus. Asserting this bit causes the core to send out an Assert_INTx message, and de-asserting this bit causes the core to transmit a Deassert_INTx message." range="1" rwaccess="R/W"/> 
+		<bitfield id="INTA_IN" width="1" begin="0" end="0" resetval="0x0" description="When the core is configured as EP, this bit is used by the client application to signal an interrupt from any of its PCI Functions to the RP using the Legacy PCI Express Interrupt Delivery mechanism of PCI Express. This bit corresponds to INTA of the PCI bus. Asserting this bit causes the core to send out an Assert_INTx message, and de-asserting this bit causes the core to transmit a Deassert_INTx message." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_legacy_int_pending" acronym="CORE__USER_CFG__USER_CFG_legacy_int_pending" offset="0x1C" width="32" description="">
+		<bitfield id="INT_ACK" width="1" begin="8" end="8" resetval="0x0" description="When using legacy interrupts, this bit indicates that the core has sent an INTx Assert or Deassert message in response to a change in the state of one of the INTx inputs." range="8" rwaccess="R/W1TC"/> 
+		<bitfield id="INT_PENDING_STATUS" width="6" begin="5" end="0" resetval="0x0" description="When using legacy interrupts, this input is used to indicate the interrupt pending status of the Physical Functions. The bit i must be set when an interrupt is pending in Function i." range="5 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_stat" acronym="CORE__USER_CFG__USER_CFG_msi_stat" offset="0x20" width="32" description="">
+		<bitfield id="MSI_ENABLE" width="6" begin="5" end="0" resetval="0x0" description="When the core is configured in the EndPoint mode to support MSI interrupts, this output is driven by the MSI Enable bit of the MSI Control Registers of the Physical Functions. Bit0 represents the MSI Enable for Physical Function0 and Bit1 represents the MSI Enable for Physical Function 1" range="5 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_vector" acronym="CORE__USER_CFG__USER_CFG_msi_vector" offset="0x24" width="32" description="">
+		<bitfield id="MSI_VECTOR_COUNT" width="18" begin="17" end="0" resetval="0x0" description="When the core is configured in the EndPoint mode to support MSI interrupts, these outputs are driven by the Multiple Message Enable bits of the MSI Control Registers associated with Physical Functions. These bits encode the number of allocated MSI interrupt vectors for the corresponding Function. Bits[2:0] represents Physical Function0 and Bits[5:3] represents Physical Function 1" range="17 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_mask_pf0" acronym="CORE__USER_CFG__USER_CFG_msi_mask_pf0" offset="0x28" width="32" description="">
+		<bitfield id="MSI_MASK_PF0" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Physical Function0." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_mask_pf1" acronym="CORE__USER_CFG__USER_CFG_msi_mask_pf1" offset="0x2C" width="32" description="">
+		<bitfield id="MSI_MASK_PF1" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Physical Function1." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_mask_pf2" acronym="CORE__USER_CFG__USER_CFG_msi_mask_pf2" offset="0x30" width="32" description="">
+		<bitfield id="MSI_MASK_PF2" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Physical Function2." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_mask_pf3" acronym="CORE__USER_CFG__USER_CFG_msi_mask_pf3" offset="0x34" width="32" description="">
+		<bitfield id="MSI_MASK_PF3" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Physical Function3." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_mask_pf4" acronym="CORE__USER_CFG__USER_CFG_msi_mask_pf4" offset="0x38" width="32" description="">
+		<bitfield id="MSI_MASK_PF4" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Physical Function4." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_mask_pf5" acronym="CORE__USER_CFG__USER_CFG_msi_mask_pf5" offset="0x3C" width="32" description="">
+		<bitfield id="MSI_MASK_PF5" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Physical Function5." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_pending_status_pf0" acronym="CORE__USER_CFG__USER_CFG_msi_pending_status_pf0" offset="0x40" width="32" description="">
+		<bitfield id="MSI_PENDING_STATUS_PF0" width="32" begin="31" end="0" resetval="0x0" description="These inputs provide the status of the MSI pending interrupts for the Physical Function0 from the client to the core. If MSI Pending Status In Mode Select is set to 1 in the Debug Mux Control 2 register in local management,the setting of this register determines the value read from the MSI Pending Bits Register PF0." range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_pending_status_pf1" acronym="CORE__USER_CFG__USER_CFG_msi_pending_status_pf1" offset="0x44" width="32" description="">
+		<bitfield id="MSI_PENDING_STATUS_PF1" width="32" begin="31" end="0" resetval="0x0" description="These inputs provide the status of the MSI pending interrupts for the Physical Function1 from the client to the core, if MSI Pending Status In Mode Select is set to 1 in the Debug Mux Control 2 register in local management,the setting of this register determines the value read from the MSI Pending Bits Register PF1." range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_pending_status_pf2" acronym="CORE__USER_CFG__USER_CFG_msi_pending_status_pf2" offset="0x48" width="32" description="">
+		<bitfield id="MSI_PENDING_STATUS_PF2" width="32" begin="31" end="0" resetval="0x0" description="These inputs provide the status of the MSI pending interrupts for the Physical Function1 from the client to the core, if MSI Pending Status In Mode Select is set to 1 in the Debug Mux Control 2 register in local management,the setting of this register determines the value read from the MSI Pending Bits Register PF2." range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_pending_status_pf3" acronym="CORE__USER_CFG__USER_CFG_msi_pending_status_pf3" offset="0x4C" width="32" description="">
+		<bitfield id="MSI_PENDING_STATUS_PF3" width="32" begin="31" end="0" resetval="0x0" description="These inputs provide the status of the MSI pending interrupts for the Physical Function1 from the client to the core, if MSI Pending Status In Mode Select is set to 1 in the Debug Mux Control 2 register in local management,the setting of this register determines the value read from the MSI Pending Bits Register PF3." range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_pending_status_pf4" acronym="CORE__USER_CFG__USER_CFG_msi_pending_status_pf4" offset="0x50" width="32" description="">
+		<bitfield id="MSI_PENDING_STATUS_PF4" width="32" begin="31" end="0" resetval="0x0" description="These inputs provide the status of the MSI pending interrupts for the Physical Function1 from the client to the core, if MSI Pending Status In Mode Select is set to 1 in the Debug Mux Control 2 register in local management,the setting of this register determines the value read from the MSI Pending Bits Register PF4." range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_pending_status_pf5" acronym="CORE__USER_CFG__USER_CFG_msi_pending_status_pf5" offset="0x54" width="32" description="">
+		<bitfield id="MSI_PENDING_STATUS_PF5" width="32" begin="31" end="0" resetval="0x0" description="These inputs provide the status of the MSI pending interrupts for the Physical Function1 from the client to the core, if MSI Pending Status In Mode Select is set to 1 in the Debug Mux Control 2 register in local management,the setting of this register determines the value read from the MSI Pending Bits Register PF5." range="31 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_stat_vf" acronym="CORE__USER_CFG__USER_CFG_msi_stat_vf" offset="0x58" width="32" description="">
+		<bitfield id="VF_MSI_ENABLE" width="16" begin="15" end="0" resetval="0x0" description="When the core is configured in the EndPoint mode to support MSI interrupts, this output is driven by the MSI Enable bit of the MSI Control Registers of the Virtual Functions. Bit0 represents the MSI Enable for Virtual Function0, Bit1 represents the MSI Enable for Virtual Function 1 and so on" range="15 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_vector0_vf" acronym="CORE__USER_CFG__USER_CFG_msi_vector0_vf" offset="0x5C" width="32" description="">
+		<bitfield id="VF_MSI_VECTOR_COUNT0" width="24" begin="23" end="0" resetval="0x0" description="When the core is configured in the Endpoint mode to support MSI interrupts, these outputs are driven by the Multiple Message Enable bits of the MSI Control Registers associated with Virtual Function0 thru Virtual Function7. These bits encode the number of allocated MSI interrupt vectors for the corresponding Function. Bits[2:0] represents Virtual Function0, Bits[5:3] represents Virtual Function 1 and so on" range="23 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_vector1_vf" acronym="CORE__USER_CFG__USER_CFG_msi_vector1_vf" offset="0x60" width="32" description="">
+		<bitfield id="VF_MSI_VECTOR_COUNT1" width="24" begin="23" end="0" resetval="0x0" description="When the core is configured in the Endpoint mode to support MSI interrupts, these outputs are driven by the Multiple Message Enable bits of the MSI Control Registers associated with Virtual Function8 thru Virtual Function15. These bits encode the number of allocated MSI interrupt vectors for the corresponding Function. Bits[2:0] represents Virtual Function11, Bits[5:3] represents Virtual Function12 and so on" range="23 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_mask_vf0" acronym="CORE__USER_CFG__USER_CFG_msi_mask_vf0" offset="0x64" width="32" description="">
+		<bitfield id="MSI_MASK_VF0" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function0." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_mask_vf1" acronym="CORE__USER_CFG__USER_CFG_msi_mask_vf1" offset="0x68" width="32" description="">
+		<bitfield id="MSI_MASK_VF1" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function1." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_mask_vf2" acronym="CORE__USER_CFG__USER_CFG_msi_mask_vf2" offset="0x6C" width="32" description="">
+		<bitfield id="MSI_MASK_VF2" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function2." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_mask_vf3" acronym="CORE__USER_CFG__USER_CFG_msi_mask_vf3" offset="0x70" width="32" description="">
+		<bitfield id="MSI_MASK_VF3" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function3." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_mask_vf4" acronym="CORE__USER_CFG__USER_CFG_msi_mask_vf4" offset="0x74" width="32" description="">
+		<bitfield id="MSI_MASK_VF4" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function4." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_mask_vf5" acronym="CORE__USER_CFG__USER_CFG_msi_mask_vf5" offset="0x78" width="32" description="">
+		<bitfield id="MSI_MASK_VF5" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function5." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_mask_vf6" acronym="CORE__USER_CFG__USER_CFG_msi_mask_vf6" offset="0x7C" width="32" description="">
+		<bitfield id="MSI_MASK_VF6" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function6." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_mask_vf7" acronym="CORE__USER_CFG__USER_CFG_msi_mask_vf7" offset="0x80" width="32" description="">
+		<bitfield id="MSI_MASK_VF7" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function7." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_mask_vf8" acronym="CORE__USER_CFG__USER_CFG_msi_mask_vf8" offset="0x84" width="32" description="">
+		<bitfield id="MSI_MASK_VF8" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function8." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_mask_vf9" acronym="CORE__USER_CFG__USER_CFG_msi_mask_vf9" offset="0x88" width="32" description="">
+		<bitfield id="MSI_MASK_VF9" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function9." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_mask_vf10" acronym="CORE__USER_CFG__USER_CFG_msi_mask_vf10" offset="0x8C" width="32" description="">
+		<bitfield id="MSI_MASK_VF10" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function10." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_mask_vf11" acronym="CORE__USER_CFG__USER_CFG_msi_mask_vf11" offset="0x90" width="32" description="">
+		<bitfield id="MSI_MASK_VF11" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function11." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_mask_vf12" acronym="CORE__USER_CFG__USER_CFG_msi_mask_vf12" offset="0x94" width="32" description="">
+		<bitfield id="MSI_MASK_VF12" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function12." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_mask_vf13" acronym="CORE__USER_CFG__USER_CFG_msi_mask_vf13" offset="0x98" width="32" description="">
+		<bitfield id="MSI_MASK_VF13" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function13." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_mask_vf14" acronym="CORE__USER_CFG__USER_CFG_msi_mask_vf14" offset="0x9C" width="32" description="">
+		<bitfield id="MSI_MASK_VF14" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function14." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msi_mask_vf15" acronym="CORE__USER_CFG__USER_CFG_msi_mask_vf15" offset="0xA0" width="32" description="">
+		<bitfield id="MSI_MASK_VF15" width="32" begin="31" end="0" resetval="0x0" description="These bits provide the setting of the MSI Mask registers of the Virtual Function15." range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msix_stat" acronym="CORE__USER_CFG__USER_CFG_msix_stat" offset="0xA4" width="32" description="">
+		<bitfield id="MSIX_ENABLE" width="6" begin="5" end="0" resetval="0x0" description="These bits reflect the states of the MSI-X Enable bits in the PCI configuration space of Physical Functions.Bit0 represents the MSIX Enable for Physical Function0 and Bit1 represents the MSIX Enable for Physical Function 1" range="5 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msix_mask" acronym="CORE__USER_CFG__USER_CFG_msix_mask" offset="0xA8" width="32" description="">
+		<bitfield id="MSIX_MASK" width="6" begin="5" end="0" resetval="0x0" description=" These bits reflect the states of the MSI-X Function Mask bits in the PCI configuration space of Physical Functions. Bit0 represents Physical Function0 and Bit1 represents Physical Function1" range="5 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msix_stat_vf" acronym="CORE__USER_CFG__USER_CFG_msix_stat_vf" offset="0xAC" width="32" description="">
+		<bitfield id="VF_MSIX_ENABLE" width="16" begin="15" end="0" resetval="0x0" description="These bits reflect the states of the MSI-X Enable bits in the PCI configuration space of virtual Functions.Bit0 represents the MSIX Enable for Virtual Function0, Bit1 represents the MSIX Enable for Virtual Function 1 and so on" range="15 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_msix_mask_vf" acronym="CORE__USER_CFG__USER_CFG_msix_mask_vf" offset="0xB0" width="32" description="">
+		<bitfield id="VF_MSIX_MASK" width="16" begin="15" end="0" resetval="0x0" description=" These bits reflect the states of the MSI-X Function Mask bits in the PCI configuration space of Virtual Functions. Bit0 represents Virtual Function0, Bit1 represents Virtual Function1 and so on" range="15 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_flr_done" acronym="CORE__USER_CFG__USER_CFG_flr_done" offset="0xB4" width="32" description="">
+		<bitfield id="FLR_DONE" width="6" begin="5" end="0" resetval="0x0" description="These bits are connected to the FLR_DONE bits on the PCIe controller core. In EP mode, software needs to write a 1 to bit0 within 100ms after PF0 function-level reset interrupt is asserted. The FLR_DONE[0] input of the PCIe controller is pulsed for one cycle to acknowledge to the core that the application level function level reset processing is complete. This bit will self-clear once the FLR_DONE[0] is pulsed. The PCIe controller will maintain FLR_IN_PROGRESS[0] output high until it is acknowledged by asserting FLR_DONE. Bit 1 is used to acknowledge FLR_DONE for PF1. These bits are not used in RP mode" range="5 - 0" rwaccess="W"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_vf_flr_done" acronym="CORE__USER_CFG__USER_CFG_vf_flr_done" offset="0xB8" width="32" description="">
+		<bitfield id="VF_FLR_DONE" width="16" begin="15" end="0" resetval="0x0" description="These bits are connected to the VF_FLR_DONE bits on the PCIe controller core. In EP mode, software needs to write a 1 to bit0 within 100ms after VF0 function-level reset interrupt is asserted. The VF_FLR_DONE[0] input of the PCIe controller is pulsed for one cycle to acknowledge to the core that the application level virtual function level reset processing is complete.  This bit will self-clear once the VF_FLR_DONE[0] is pulsed The PCIe controller will maintain VF_FLR_IN_PROGRESS[0] output high until it is acknowledged by asserting VF_FLR_DONE[0]. Bit 1 is used to acknowledge VF_FLR_DONE for VF1, bit2 is used to acknowledge VF_FLR_DONE for VF2 and so on. These bits are not used in RP mode" range="15 - 0" rwaccess="W"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_ptm_cfg" acronym="CORE__USER_CFG__USER_CFG_ptm_cfg" offset="0xBC" width="32" description="">
+		<bitfield id="PTM_EP_TIMER_ADJ" width="3" begin="10" end="8" resetval="0x1" description="PTM EP Timer tick adjust value. 1 will increment ptm_ep_timer by 1 each clock cycle, 2 will increment the timer by 2 .. 7 will increment the timer by 7. The adjust value should be set prior to enabling PTM operation in the PCIe controller." range="10 - 8" rwaccess="R/W"/> 
+		<bitfield id="PTM_CLK_SEL" width="7" begin="6" end="0" resetval="0x0" description="Select CPTS HW1 push input. 0 will select ptm_local_timer[0], 1 will select ptm_local_timer[1] ... 63 will select ptm_local_timer[63] and 64 will select ptm_local_timer_out_valid. The values 65 to 127 are unused. The PTM clock select bit should be set prior to enabling the PTM operation in the PCIe controller" range="6 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_ptm_timer_low" acronym="CORE__USER_CFG__USER_CFG_ptm_timer_low" offset="0xC0" width="32" description="">
+		<bitfield id="PTM_TIMER_OUT_LOW" width="32" begin="31" end="0" resetval="0x0" description="ptm_timer_out[31:0] value from PCIe core. Valid in EP mode only" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_ptm_timer_high" acronym="CORE__USER_CFG__USER_CFG_ptm_timer_high" offset="0xC4" width="32" description="">
+		<bitfield id="PTM_TIMER_OUT_HIGH" width="32" begin="31" end="0" resetval="0x0" description="ptm_timer_out[63:32] value from PCIe core. Valid in EP mode only" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CORE__USER_CFG__USER_CFG_eoi_vector" acronym="CORE__USER_CFG__USER_CFG_eoi_vector" offset="0xC8" width="32" description="">
+		<bitfield id="EOI_VECTOR" width="8" begin="7" end="0" resetval="0x0" description="EOI vector for level interrupts. Writing the EOI value as specfied to this register will re-trigger a pending interrupt. 0 - Downstream interrupt, 1 - FLR interrupt, 2 - Legacy interrupt, 3 - Power state interrupt" range="7 - 0" rwaccess="R/W"/>
+	</register>
+</module>

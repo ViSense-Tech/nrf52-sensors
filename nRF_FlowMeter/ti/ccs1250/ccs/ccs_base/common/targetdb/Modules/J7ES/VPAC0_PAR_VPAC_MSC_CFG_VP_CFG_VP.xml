@@ -1,0 +1,76 @@
+<module name="VPAC0_PAR_VPAC_MSC_CFG_VP_CFG_VP" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="VPAC_MSC_CORE_REVISION" acronym="VPAC_MSC_CORE_REVISION" offset="0x0" width="32" description="The Register contains the major and minor revisions for the VPAC MSC HWA module.">
+    <bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x1" description="Used to distinguish between old scheme and new scheme." range="" rwaccess="R"/>
+    <bitfield id="BU" width="2" begin="29" end="28" resetval="0x2" description="BU indicator DSPS ==&amp;amp;gt; 0x0 WTBU ==&amp;amp;gt; 0x1 Processors ==&amp;amp;gt; 0x2" range="" rwaccess="R"/>
+    <bitfield id="FUNC" width="12" begin="27" end="16" resetval="0x4C2" description="Function indicates a software compatible module family." range="" rwaccess="R"/>
+    <bitfield id="RTL" width="5" begin="15" end="11" resetval="0x0" description="RTL Version." range="" rwaccess="R"/>
+    <bitfield id="MAJOR" width="3" begin="10" end="8" resetval="0x1" description="Major" range="" rwaccess="R"/>
+    <bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Indicates a special version for a particular device." range="" rwaccess="R"/>
+    <bitfield id="MINOR" width="6" begin="5" end="0" resetval="0x0" description="Minor" range="" rwaccess="R"/>
+  </register>
+  <register id="VPAC_MSC_CORE_CONTROL" acronym="VPAC_MSC_CORE_CONTROL" offset="0x4" width="32" description="The Register allows the CPU to various aspects of the module.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="MSC_ENABLE" width="1" begin="0" end="0" resetval="0x0" description="MSC Core Enable: Enables the MSC HWA." range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_MSC_CORE_CFG_j" acronym="VPAC_MSC_CORE_CFG_j" offset="0x10" width="32" description="The FILT[a]_CFG register configures the modes of FILTER channel [a]. Offset = 001C0010h + (j * 20h); where j = 0h to 9h">
+    <bitfield id="RESERVED" width="9" begin="31" end="23" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SIGNED_DATA" width="1" begin="22" end="22" resetval="0x0" description="Integer type of input and output frame data:" range="" rwaccess="RW"/>
+    <bitfield id="COEF_SHIFT" width="4" begin="21" end="18" resetval="0x8" description="Coef Shift Size: configures the precision of the" range="" rwaccess="RW"/>
+    <bitfield id="UV_MODE" width="1" begin="17" end="17" resetval="0x0" description="Source data interleave format:" range="" rwaccess="RW"/>
+    <bitfield id="SAT_MODE" width="1" begin="16" end="16" resetval="0x0" description="Filter Output Saturation Mode" range="" rwaccess="RW"/>
+    <bitfield id="SP_VS_COEF_SEL" width="4" begin="15" end="12" resetval="0x0" description="Single Phase Vertical Filter Coef Selection (sp_vs_coef_src = 0)" range="" rwaccess="RW"/>
+    <bitfield id="SP_VS_COEF_SRC" width="1" begin="11" end="11" resetval="0x0" description="Single Phase Vertical Filter Coef Source Selection" range="" rwaccess="RW"/>
+    <bitfield id="SP_HS_COEF_SEL" width="4" begin="10" end="7" resetval="0x0" description="Single Phase Horizontal Filter Coef Selection (sp_hs_coef_src = 0)" range="" rwaccess="RW"/>
+    <bitfield id="SP_HS_COEF_SRC" width="1" begin="6" end="6" resetval="0x0" description="Single Phase Horizontal Filter Coef Source Selection" range="" rwaccess="RW"/>
+    <bitfield id="VS_COEF_SEL" width="2" begin="5" end="4" resetval="0x0" description="Multi-phase Vertical Coef Selection (Phase_mode=0)" range="" rwaccess="RW"/>
+    <bitfield id="HS_COEF_SEL" width="2" begin="3" end="2" resetval="0x0" description="Multi-phase Horizontal Coef Selection (Phase_mode=0)" range="" rwaccess="RW"/>
+    <bitfield id="PHASE_MODE" width="1" begin="1" end="1" resetval="0x0" description="Filter Phase mode selection" range="" rwaccess="RW"/>
+    <bitfield id="FILTER_MODE" width="1" begin="0" end="0" resetval="0x0" description="Filter Mode" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_MSC_CORE_SRC_ROI_j" acronym="VPAC_MSC_CORE_SRC_ROI_j" offset="0x14" width="32" description="The FILT[a]_SRC_ROI register configures the input ROI position within the input super frame for FILTER channel [a]. Set to 0 if ROI is full-size. Offset = 001C0014h + (j * 20h); where j = 0h to 9h">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="Y_OFFSET" width="13" begin="28" end="16" resetval="0x0" description="Source Y offset" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="X_OFFSET" width="13" begin="12" end="0" resetval="0x0" description="Source X offset (Must be an even # when FILT_CFG.uv_mode=1)" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_MSC_CORE_OUT_SIZE_j" acronym="VPAC_MSC_CORE_OUT_SIZE_j" offset="0x18" width="32" description="The FILT[a]_OUT_SIZE configures the output size for FILTER channel [a]. Offset = 001C0018h + (j * 20h); where j = 0h to 9h">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HEIGHT" width="13" begin="28" end="16" resetval="0x0" description="Output Height" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="WIDTH" width="13" begin="12" end="0" resetval="0x0" description="Output Width" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_MSC_CORE_FIRINC_j" acronym="VPAC_MSC_CORE_FIRINC_j" offset="0x1C" width="32" description="The FILT[a]_FIRINC register configures the FIRINC attributes of FILTER channel [a]. Offset = 001C001Ch + (j * 20h); where j = 0h to 9h">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VS" width="15" begin="30" end="16" resetval="0x0" description="FIRINC of VS filter" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="15" end="15" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HS" width="15" begin="14" end="0" resetval="0x0" description="FIRINC of HS filter" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_MSC_CORE_ACC_INIT_J" acronym="VPAC_MSC_CORE_ACC_INIT_J" offset="0x20" width="32" description="The FILT[a]_ACC_INIT register configures the FIRINC attributes of FILTER channel [a]. Offset = 001C0020h + (j * 20h); where j = 0h to 9h">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="VS" width="12" begin="27" end="16" resetval="0x0" description="ACC_INIT of VS filter" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HS" width="12" begin="11" end="0" resetval="0x0" description="ACC_INIT of HS filter" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_MSC_CORE_C210_j" acronym="VPAC_MSC_CORE_C210_j" offset="0x180" width="32" description="Single Phase Coef Set[a] coefficients C2/C1/C0 Offset = 001C0180h + (j * 8h); where j = 0h to 1h">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="FIR_C2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2" range="" rwaccess="RW"/>
+    <bitfield id="FIR_C1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1" range="" rwaccess="RW"/>
+    <bitfield id="FIR_C0" width="10" begin="9" end="0" resetval="0x0" description="Signed coefficient C0" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_MSC_CORE_C43_j" acronym="VPAC_MSC_CORE_C43_j" offset="0x184" width="32" description="Single Phase Coef Set[a] coefficients C4/C3 Offset = 001C0184h + (j * 8h); where j = 0h to 1h">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="FIR_C4" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C4" range="" rwaccess="RW"/>
+    <bitfield id="FIR_C3" width="10" begin="9" end="0" resetval="0x0" description="Signed coefficient C3" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_MSC_CORE_C210_j_k" acronym="VPAC_MSC_CORE_C210_j_k" offset="0x200" width="32" description="Multi Phase Coef Set[a] Phase[b] coefficients C2/C1/C0 Offset = 001C0200h + (j * 100h) + (k * 8h); where j = 0h to 3h, k = 0h to 1Fh">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="FIR_C2" width="10" begin="29" end="20" resetval="0x0" description="Signed coefficient C2" range="" rwaccess="RW"/>
+    <bitfield id="FIR_C1" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C1" range="" rwaccess="RW"/>
+    <bitfield id="FIR_C0" width="10" begin="9" end="0" resetval="0x0" description="Signed coefficient C0" range="" rwaccess="RW"/>
+  </register>
+  <register id="VPAC_MSC_CORE_C43_j_k" acronym="VPAC_MSC_CORE_C43_j_k" offset="0x204" width="32" description="Multi Phase Coef Set[a] Phase[b] coefficients C4/C3 Offset = 001C0204h + (j * 100h) + (k * 8h); where j = 0h to 3h, k = 0h to 1Fh">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="FIR_C4" width="10" begin="19" end="10" resetval="0x0" description="Signed coefficient C4" range="" rwaccess="RW"/>
+    <bitfield id="FIR_C3" width="10" begin="9" end="0" resetval="0x0" description="Signed coefficient C3" range="" rwaccess="RW"/>
+  </register>
+</module>

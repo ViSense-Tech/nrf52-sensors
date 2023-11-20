@@ -1,0 +1,17 @@
+<module name="DMPAC0_DMPAC_FOCO_0_CFG_SLV_DMPAC_FOCO_CORE_FOCO_REGS_CFG_IP_MMRS" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="DMPAC_FOCO_0_CH_CTRL_j" acronym="DMPAC_FOCO_0_CH_CTRL_j" offset="0x0" width="32" description="Defines parameters that control the format conversion for input-output channel pair.">
+    <bitfield id="MASK" width="16" begin="31" end="16" resetval="0xFFFF" description="16b mask value that will be and-ed with the result" range="" rwaccess="RW"/>
+    <bitfield id="ROUND" width="4" begin="15" end="12" resetval="0x0" description="Unsigned Rounding value that will be added" range="" rwaccess="RW"/>
+    <bitfield id="RSVD1" width="3" begin="11" end="9" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="DIR" width="1" begin="8" end="8" resetval="0x0" description="Shift direction - left or right.\n0 -&amp;amp;gt; Right\n 1 -&amp;amp;gt; Left" range="" rwaccess="RW"/>
+    <bitfield id="SHIFT_M1" width="3" begin="7" end="5" resetval="0x0" description="Amount of bit shift minus 1.Valid values 0 to 7 meaning shift of 1 to 8. For no shift, configure SHIFT_EN to 0" range="" rwaccess="RW"/>
+    <bitfield id="SHIFT_EN" width="1" begin="4" end="4" resetval="0x0" description="Enable for shifting.\n0 --&amp;amp;gt; No shift\n 1 --&amp;amp;gt; Shift determined by SHIFT_M1" range="" rwaccess="RW"/>
+    <bitfield id="RSVD" width="3" begin="3" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CH_EN" width="1" begin="0" end="0" resetval="0x0" description="Enable format conversion channel" range="" rwaccess="RW"/>
+  </register>
+  <register id="DMPAC_FOCO_0_CH_COUNT_j" acronym="DMPAC_FOCO_0_CH_COUNT_j" offset="0x4" width="32" description="Defines count values for pre/post load and functional operation for the format conversion for input-output channel pair.">
+    <bitfield id="TRIG" width="16" begin="31" end="16" resetval="0x0" description="Defines the number of FOCO module operations (HTS starts/dones) for which the actual format conversion happens after PRELOAD number of FOCO module operations.This number cannot be 0 for an active channel" range="" rwaccess="RW"/>
+    <bitfield id="POSTLOAD" width="8" begin="15" end="8" resetval="0x0" description="Defines the number of FOCO module operations (HTS starts/dones) that would be skipped after PRELOAD + TRIG number of FOCO module operations" range="" rwaccess="RW"/>
+    <bitfield id="PRELOAD" width="8" begin="7" end="0" resetval="0x0" description="Defines the number of FOCO module operations (HTS starts/dones) that would be skipped after HTS init" range="" rwaccess="RW"/>
+  </register>
+</module>

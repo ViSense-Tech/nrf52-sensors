@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module id="DEV" HW_revision="" XML_version="1" description="Device Registers on the SOC">
+     <register id="DEVID" acronym="DEVID" offset="0x818" width="32" description="Parameters for DSP device ID. Also referred to as JTAG or BSDL ID.These are readable by the configuration bus and can be accessed via the JTAG and the CPU.">
+<bitfield id="VARIANT" width="4" begin="31" end="28" resetval="0" description="Variant (4-Bit) value. The value of this field depends on the silicon revision being used." range="" rwaccess="R"></bitfield>
+<bitfield id="PARTNUMBER" width="16" begin="27" end="12" resetval="150" description="Part Number for boundary scan" range="" rwaccess="R"></bitfield>
+<bitfield id="MANUFACTURER" width="11" begin="11" end="1" resetval="23" description="Manufacturer" range="" rwaccess="R"></bitfield>
+<bitfield id="LSB" width="1" begin="0" end="0" resetval="1" description="This bit is read as a 1 for TCI6484" range="" rwaccess="R"></bitfield>
+</register>
+     <register id="DEVSTAT" acronym="DEVSTAT" offset="0x820" width="32" description="Device Status Register">
+<bitfield id="_RSVD" width="16" begin="31" end="16" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="ECLKINSEL" width="1" begin="15" end="15" resetval="0" description="EMIFA input clock select" range="" rwaccess="R">
+<bitenum id="ECLKIN" value="0" token="ECLKIN" description="" />
+<bitenum id="SYSCLK7" value="1" token="SYSCLK7" description="SYSCLK7 (CPU/x) Clock Rate. The SYSCLK7 clock rate is software selectable via the PLL1 Controller. By default, SYSCLK7 is selected as CPU/10 clock rate." />
+</bitfield>
+<bitfield id="HPIWIDTH" width="1" begin="14" end="14" resetval="0" description="HPI bus width control bit" range="" rwaccess="R">
+<bitenum id="16BIT" value="0" token="16BIT" description="HPI operating in 16-bit mode" />
+<bitenum id="32BIT" value="1" token="32BIT" description="HPI operating in 32-bit mode" />
+</bitfield>
+<bitfield id="CFGGP" width="5" begin="13" end="9" resetval="0" description="Used as general purpose input for configuration purposes. These pins are latched at power-on reset. These values can be used by software routines for boot operations." range="" rwaccess="R"></bitfield>
+<bitfield id="DEVNUM" width="4" begin="8" end="5" resetval="0" description="Device number" range="" rwaccess="R"></bitfield>
+<bitfield id="BOOTMODE" width="4" begin="4" end="1" resetval="0" description="Determines the boot method for the device." range="" rwaccess="R">
+<bitenum id="NONE" value="0" token="NONE" description="No Boot" />
+<bitenum id="I2C_MASTER1" value="1" token="I2C_MASTER1" description="I2C Master Boot (Slave Address 0x50)" />
+<bitenum id="I2C_MASTER2" value="2" token="I2C_MASTER2" description="I2C Master Boot (Slave Address 0x51)" />
+<bitenum id="I2C_SLAVE" value="3" token="I2C_SLAVE" description="I2C Slave Boot" />
+<bitenum id="HPI" value="4" token="HPI" description="0100 HPI Boot" />
+<bitenum id="EMIFA" value="5" token="EMIFA" description="0101 EMIFA Boot" />
+<bitenum id="EMAC_MASTER" value="6" token="EMAC_MASTER" description="0110 EMAC Master Boot" />
+<bitenum id="EMAC_SLAVE" value="7" token="EMAC_SLAVE" description="0111 EMAC Slave Boot" />
+<bitenum id="EMAC_FORCED" value="8" token="EMAC_FORCED" description="1000 EMAC Forced Mode Boot" />
+<bitenum id="RAPIDIO1" value="16" token="RAPIDIO1" description="1010 RapidIO Boot (Configuration 0)" />
+<bitenum id="RAPIDIO2" value="17" token="RAPIDIO2" description="1011 RapidIO Boot (Configuration 1)" />
+<bitenum id="RAPIDIO3" value="18" token="RAPIDIO3" description="1100 RapidIO Boot (Configuration 2)" />
+<bitenum id="RAPIDIO4" value="19" token="RAPIDIO4" description="1101 RapidIO Boot (Configuration 3)" />
+</bitfield>
+<bitfield id="LENDIAN" width="1" begin="0" end="0" resetval="1" description="Device Endian Mode" range="" rwaccess="R">
+<bitenum id="BE" value="0" token="BE" description="System is operating in Big Endian Mode" />
+<bitenum id="LE" value="1" token="LE" description="System is operating in Little Endian Mode" />
+</bitfield>
+</register>
+     <register id="KICK0" acronym="KICK0" offset="0x838" width="32" description="Key register 0">
+<bitfield id="KICK0" width="32" begin="31" end="0" resetval="0" description="Two successive key writes are required to get write access to any of the device state control registers. KICK0 is the first key register. The written data must be 0x83E70B13 to unlock it and it must be written. before the KICK1 register. Writing any other value will lock the device state control registers." range="" rwaccess="RW"></bitfield>
+</register>
+     <register id="KICK1" acronym="KICK1" offset="0x83C" width="32" description="Key register 1">
+<bitfield id="KICK1" width="32" begin="31" end="0" resetval="0" description="KICK1 is the second key register to be unlocked in order to get write access to any of the device state control registers. The written data must be 0x95A4F1E0 to unlock it and it must be written after the KICK0 register. Writing any other value will lock the device state control registers." range="" rwaccess="RW"></bitfield>
+</register>
+     <register id="DSP_BOOT_ADDR" acronym="DSP_BOOT_ADDR" offset="0x840" width="32" description="DSP Boot Address">
+<bitfield id="ISTP_RST_VAL" width="22" begin="31" end="10" resetval="0" description="On Non-Secure device  This field is RW by any Master or Emulator. On Secure device  This field is Read-only by Secure Master. Emulator cannot access this in Secure mode." range="" rwaccess="RW"></bitfield>
+<bitfield id="_RSVD" width="9" begin="9" end="1" resetval="0" description="" range="" rwaccess="N"></bitfield>
+<bitfield id="GEM_BOOT_RDY" width="1" begin="0" end="0" resetval="0" description="" range="" rwaccess="RW"></bitfield>
+</register>
+     <register id="DEVCFG" acronym="DEVCFG" offset="0x910" width="32" description="Device Configuration Register ">
+<bitfield id="_RSVD" width="29" begin="31" end="3" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="CLKS1" width="1" begin="2" end="2" resetval="0" description="McBSP1 CLKS Select" range="" rwaccess="RW">
+<bitenum id="CLKS1" value="0" token="CLKS1" description="CLKS1 device pin" />
+<bitenum id="CHIP_CLKS" value="1" token="CHIP_CLKS" description="chip_clks from Main.PLL" />
+</bitfield>
+<bitfield id="CLKS0" width="1" begin="1" end="1" resetval="0" description="McBSP0 CLKS Select" range="" rwaccess="RW">
+<bitenum id="CLKS0" value="0" token="CLKS0" description="CLKS0 device pin" />
+<bitenum id="CHIP_CLKS" value="1" token="CHIP_CLKS" description="chip_clks from Main.PLL" />
+</bitfield>
+<bitfield id="SYSCLKOUTEN" width="1" begin="0" end="0" resetval="1" description="SYSCLKOUT Enable" range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="No Clock Output" />
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Clock output Enabled" />
+</bitfield>
+</register>
+     <register id="PRI_ALLOC" acronym="PRI_ALLOC" offset="0x91C" width="32" description="Priority Allocation Register">
+<bitfield id="_RSVD" width="23" begin="31" end="9" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="UHPI" width="3" begin="8" end="6" resetval="267" description="VLYNQ priority" range="" rwaccess="RW"></bitfield>
+<bitfield id="RAPDIO" width="3" begin="5" end="3" resetval="27" description="RapidIO CPPI priority" range="" rwaccess="RW"></bitfield>
+<bitfield id="EMAC" width="3" begin="2" end="0" resetval="27" description="Emac Priority" range="" rwaccess="RW"></bitfield>
+</register>
+     <register id="WDRSTSEL" acronym="WDRSTSEL" offset="0x920" width="32" description="Reset select for Watchdog">
+<bitfield id="_RSVD" width="31" begin="31" end="1" resetval="0" description="Reserved" range="" rwaccess="N"></bitfield>
+<bitfield id="WDRSTSEL" width="1" begin="0" end="0" resetval="0" description="Reset select for watchdog timer" range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="TOUT1L does not cause WDRST to assert to GEM." />
+<bitenum id="ENABLED" value="1" token="ENABLED" description="TOUT1L causes a reset of the GEM via the host reset port of the LPSC" />
+</bitfield>
+</register>
+</module>

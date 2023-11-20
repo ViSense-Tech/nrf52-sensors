@@ -1,0 +1,83 @@
+<module name="VCP1_L3_MAIN" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="VCP_VCPIC0" acronym="VCP_VCPIC0" offset="0x0" width="32" description="The VCP version 2 Input Configuration Register 0">
+    <bitfield id="POLY3" width="8" begin="31" end="24" resetval="0xFF" description="Polynomial generator G." range="" rwaccess="RW"/>
+    <bitfield id="POLY2" width="8" begin="23" end="16" resetval="0xFF" description="Polynomial generator G." range="" rwaccess="RW"/>
+    <bitfield id="POLY1" width="8" begin="15" end="8" resetval="0xFF" description="Polynomial generator G." range="" rwaccess="RW"/>
+    <bitfield id="POLY0" width="8" begin="7" end="0" resetval="0xFF" description="Polynomial generator G." range="" rwaccess="RW"/>
+  </register>
+  <register id="VCP_VCPIC1" acronym="VCP_VCPIC1" offset="0x4" width="32" description="The VCP version 2 Input Configuration Register 1">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="YAMEN" width="1" begin="28" end="28" resetval="0x0" description="Yamamoto algorithm enable bit." range="" rwaccess="RW">
+      <bitenum value="0" id="Yamamoto_algorithm_is_disabled." token="YAMEN_0" description="Yamamoto algorithm is disabled."/>
+      <bitenum value="1" id="Yamamoto_algorithm_is_enabled." token="YAMEN_1" description="Yamamoto algorithm is enabled."/>
+    </bitfield>
+    <bitfield id="YAMT" width="12" begin="27" end="16" resetval="0xFFF" description="Yamamoto threshold value bits." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="16" begin="15" end="0" resetval="0x0000" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="VCP_VCPIC2" acronym="VCP_VCPIC2" offset="0x8" width="32" description="The VCP version 2 Input Configuration Register 2">
+    <bitfield id="R" width="16" begin="31" end="16" resetval="0xFFFF" description="Reliability length bits." range="" rwaccess="RW"/>
+    <bitfield id="F" width="16" begin="15" end="0" resetval="0xFFFF" description="Frame length bits." range="" rwaccess="RW"/>
+  </register>
+  <register id="VCP_VCPIC3" acronym="VCP_VCPIC3" offset="0xC" width="32" description="The VCP version 2 Input Configuration Register 3">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OUT_ORDER" width="1" begin="28" end="28" resetval="0x0" description="Defines the order of VCP output for decoded data." range="" rwaccess="RW">
+      <bitenum value="0" id="0_to_31" token="OUT_ORDER_0" description="0 to 31"/>
+      <bitenum value="1" id="31_to_0" token="OUT_ORDER_1" description="31 to 0"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="3" begin="27" end="25" resetval="" description="" range="" rwaccess="R"/>
+    <bitfield id="ITBEN" width="1" begin="24" end="24" resetval="0x0" description="Traceback state index enable/disable." range="" rwaccess="RW">
+      <bitenum value="0" id="Disabled" token="ITBEN_0" description="Disabled"/>
+      <bitenum value="1" id="1" token="ITBEN_1" description="Initialization of traceback starting state is enabled"/>
+    </bitfield>
+    <bitfield id="ITBI" width="8" begin="23" end="16" resetval="0xFF" description="Traceback state index. The index of the starting state for the traceback unit." range="" rwaccess="RW"/>
+    <bitfield id="C" width="16" begin="15" end="0" resetval="0xFFFF" description="Convergence distance bits. The length of the convergent section of the siding window. This is only used if F &amp;amp;gt; F + (K-1) in mixed mode, or if F &amp;amp;gt; F + C in convergence mode." range="" rwaccess="RW"/>
+  </register>
+  <register id="VCP_VCPIC4" acronym="VCP_VCPIC4" offset="0x10" width="32" description="The VCP version 2 Input Configuration Register 4">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IMINS" width="13" begin="28" end="16" resetval="0x1FFF" description="Minimum initial state metric value bits. 13 bits." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IMAXS" width="13" begin="12" end="0" resetval="0x1FFF" description="Maximum initial state metric value bits. 13 bits." range="" rwaccess="RW"/>
+  </register>
+  <register id="VCP_VCPIC5" acronym="VCP_VCPIC5" offset="0x14" width="32" description="The VCP version 2 Input Configuration Register 5">
+    <bitfield id="SDHD" width="1" begin="31" end="31" resetval="0x0" description="Output decision type select bit." range="" rwaccess="RW">
+      <bitenum value="0" id="Hard_decisions" token="SDHD_0" description="Hard decisions"/>
+      <bitenum value="1" id="Soft_decisions" token="SDHD_1" description="Soft decisions"/>
+    </bitfield>
+    <bitfield id="OUTF" width="1" begin="30" end="30" resetval="0x0" description="Output parameters read flag bit." range="" rwaccess="RW">
+      <bitenum value="0" id="VCP_0" token="OUTF_0" description="VCPnREVT is not generated by VCP for output parameters read"/>
+      <bitenum value="1" id="VCP_1" token="OUTF_1" description="VCPnREVT generated by VCP for output parameters read"/>
+    </bitfield>
+    <bitfield id="TB" width="2" begin="29" end="28" resetval="0x1" description="Traceback mode select bits." range="" rwaccess="RW">
+      <bitenum value="0" id="Reserved" token="TB_0" description="Reserved"/>
+      <bitenum value="1" id="Tailed,_F_&#8804;_F_max._See" token="TB_1" description="Tailed, F &#8804; F max. See"/>
+      <bitenum value="2" id="Convergent,_(no_tail_bits)" token="TB_2" description="Convergent, (no tail bits)"/>
+      <bitenum value="3" id="F_F_3" token="TB_3" description="Mixed, F &#8805; F max and tail bits are used. See"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="3" begin="27" end="25" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SYMR" width="5" begin="24" end="20" resetval="0xF" description="Determines decision buffer length in output FIFO. When programming register values for the SYMR bits, always subtract 1 from the value calculated. Valid values for the SYMR bits are from 0x0 to 0xF. For hard decision: If F &#8804; 2048; then symr = ceil[F/64]-1; If F &amp;amp;gt; 2048; then symr = 15 or 31 For soft decision: If F &#8804; 256; then symr = ceil[F/8]-1; If F &amp;amp;gt; 256; then symr = 15 or 31" range="" rwaccess="RW"/>
+    <bitfield id="SYMX" width="4" begin="19" end="16" resetval="0xF" description="Determines branch metrics buffer length in input FIFO." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IMAXI" width="8" begin="7" end="0" resetval="0xFF" description="Maximum initial state metric value bits. IMAXI bits determine which state should be initialized with the maximum state metrics value (IMAXS) bits in VCPIC4; All the other states will be initialized with the value in the IMINS bits." range="" rwaccess="RW"/>
+  </register>
+  <register id="VCP_VCPOUT0" acronym="VCP_VCPOUT0" offset="0x48" width="32" description="The VCP version 2 Output Register 0">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FMINS" width="13" begin="28" end="16" resetval="0xFFF" description="Minimum initial state metric value for the final trellis stage. 13 bits." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FMAXS" width="13" begin="12" end="0" resetval="0xFFF" description="Maximum state metric value for the final trellis stage (at trellis stage R+C). 13 bits." range="" rwaccess="RW"/>
+  </register>
+  <register id="VCP_VCPOUT1" acronym="VCP_VCPOUT1" offset="0x4C" width="32" description="The VCP version 2 Output Register 1">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0000" description="" range="" rwaccess="R"/>
+    <bitfield id="YAM" width="1" begin="16" end="16" resetval="0x0" description="Yamamoto bit result. This bit is a quality indicator bit and is only used if the Yamamoto logic is enabled." range="" rwaccess="RW">
+      <bitenum value="0" id="0" token="YAM_0" description="At least one trellis stage had an absolute difference less than the Yamamoto threshold and the decided frame has poor quality"/>
+      <bitenum value="1" id="1" token="YAM_1" description="No trellis stage had an absolute difference less than the Yamamoto threshold and the frame has good quality"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FMAXI" width="8" begin="7" end="0" resetval="0xFFF" description="State index for the state with the final maximum state metric. There are 2(k-1) state metrics for each trellis stage. Valid range for FMAXI is 0 to 2(k-1) -1." range="" rwaccess="RW"/>
+  </register>
+  <register id="VCP_VCPWBM" acronym="VCP_VCPWBM" offset="0x80" width="32" description="VCP branch metrics write FIFO register">
+    <bitfield id="WBM" width="32" begin="31" end="0" resetval="0x0000 0000" description="VCP branch metrics write FIFO" range="" rwaccess="RW"/>
+  </register>
+  <register id="VCP_VCPRDECS" acronym="VCP_VCPRDECS" offset="0xC0" width="32" description="VCP decisions read FIFO register">
+    <bitfield id="RDECS" width="32" begin="31" end="0" resetval="0x0000 0000" description="VCP decisions read FIFO" range="" rwaccess="R"/>
+  </register>
+</module>

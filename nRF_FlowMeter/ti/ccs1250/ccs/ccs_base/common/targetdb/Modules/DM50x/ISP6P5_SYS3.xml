@@ -1,0 +1,217 @@
+<module name="ISP6P5_SYS3" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="ISP_KEY_EN7" acronym="ISP_KEY_EN7" offset="0x0" width="32" description="GLBCE eFuse enable.">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="KEY2_EN" width="1" begin="1" end="1" resetval="0x1" description="EFUSE enable Equals 1 when ISP5_EFUSE6_EN = 1. Equals 0 otherwise. 1'b1 means GLBCE Decomapding function is present in HW 1'b0 means GLBCE Decomapding function is not present in HW" range="" rwaccess="R">
+      <bitenum value="0" id="DISABLE" token="KEY2_EN_0" description="GLBCE Disable"/>
+      <bitenum value="1" id="ENABLE" token="KEY2_EN_1" description="GLBCE Enable"/>
+    </bitfield>
+    <bitfield id="KEY1_EN" width="1" begin="0" end="0" resetval="0x1" description="EFUSE Enable. Equals 1 when ISP5_EFUSE5_EN = 1. Equals 0 otherwise. 1'b1 means GLBCE function is present in HW 1'b0 means GLBCE function is not present in HW" range="" rwaccess="R">
+      <bitenum value="0" id="DISABLE" token="KEY1_EN_0" description="GLBCE Disable"/>
+      <bitenum value="1" id="ENABLE" token="KEY1_EN_1" description="GLBCE Enable"/>
+    </bitfield>
+  </register>
+  <register id="ISP_SWT_SEL" acronym="ISP_SWT_SEL" offset="0x4" width="32" description="Controls the Switch block in ISP-Top.">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="GLBCE_SEL" width="2" begin="9" end="8" resetval="0x0" description="Select GLBCE Module processing order" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="GLBCE_SEL_0" description="Disable data passing to GLBCE ISP6 works same way as ISP6 without GLBCE function."/>
+      <bitenum value="1" id="CAL" token="GLBCE_SEL_1" description="Enable GLBCE with CAL"/>
+      <bitenum value="3" id="RESERVED" token="GLBCE_SEL_3" description="reserved"/>
+      <bitenum value="2" id="ISP" token="GLBCE_SEL_2" description="Enable GLBCE before IPIPE (VP-2 path)"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DPC_SEL" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="DPC_SEL_0" description="DPC before NSF3V is disabled."/>
+      <bitenum value="1" id="ENABLE" token="DPC_SEL_1" description="DPC in NSF3V path is enabled. valid only if NSF3V_SEL=1 or 2. To actually activate the function, dpc function in IPIPE must be properly configured."/>
+    </bitfield>
+    <bitfield id="RESERVED" width="2" begin="3" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="NSF3V_SEL" width="2" begin="1" end="0" resetval="0x0" description="Select NSF3V Module processing order" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="NSF3V_SEL_0" description="Disable data passing to NSF3V. ISP6 works same way as ISP6 without NSF3V function."/>
+      <bitenum value="1" id="CAL" token="NSF3V_SEL_1" description="Enable NSF3V with CAL"/>
+      <bitenum value="3" id="RESERVED" token="NSF3V_SEL_3" description="Reserved"/>
+      <bitenum value="2" id="ISP" token="NSF3V_SEL_2" description="Enable NSF3V before ISIF in VP-1 path"/>
+    </bitfield>
+  </register>
+  <register id="ISP_NSF3V_MODESET" acronym="ISP_NSF3V_MODESET" offset="0xC" width="32" description="Note: This entry is not shadowed">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="INPMOD" width="2" begin="13" end="12" resetval="0x0" description="Data input mode for NSF3V (VP-1 and CAL-1) For CAL, this value must be either 0 (RAW) or 1 (8bit) This bit can be changed only when NSF3V is in idle. When switching to 16bit-YCbCr, PCLK must be equal to or less than 1/2 of FCLK." range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="INPMOD_0" description="RAW data"/>
+      <bitenum value="1" id="NEWENUM2" token="INPMOD_1" description="YCbCr 16bit - VP-1 YUV422 16bit YUV420-Y 8bit (although this is 8bit, it is treated as 16bit mode since Y is mapeed to MSB 8bit of 16bit bus) - CAL This value is not valid"/>
+      <bitenum value="3" id="NEWENUM4" token="INPMOD_3" description="Reserved"/>
+      <bitenum value="2" id="NEWENUM3" token="INPMOD_2" description="YCbCr 8bit - CAL YUV422 8bit YUV420-Y 8bit YUV420-C 8bit - VP-1: YUV422 8bit YUV420-C 8bit"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="5" begin="11" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DPOL" width="1" begin="6" end="6" resetval="0x0" description="Image sensor input data polarity (only for VP-1)" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="DPOL_0" description="No change"/>
+      <bitenum value="1" id="NEWENUM2" token="DPOL_1" description="One's complement"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="2" begin="5" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="HDPOL" width="1" begin="3" end="3" resetval="0x0" description="HD Sync Signal Polarity of input signal (only for VP-1) Switch will convert HD polarity to high active regardless of the input polarity" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="HDPOL_0" description="Positive"/>
+      <bitenum value="1" id="NEWENUM2" token="HDPOL_1" description="Negative"/>
+    </bitfield>
+    <bitfield id="VDPOL" width="1" begin="2" end="2" resetval="0x0" description="VD Sync Signal Polarity of input signal (Only for VP-1) Switch will convert VD polarity to high active regardless of the input polarity" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="VDPOL_0" description="Positive"/>
+      <bitenum value="1" id="NEWENUM2" token="VDPOL_1" description="Negative"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="2" begin="1" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ISP_VP1_SPH" acronym="ISP_VP1_SPH" offset="0x10" width="32" description="Start Pixel Horizontal">
+    <bitfield id="RESERVED" width="17" begin="31" end="15" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SPH" width="15" begin="14" end="0" resetval="0x0" description="The location of the first active pixel in a line. This is specified by the number of cycles. This register is latched at VD or at corresponding SYNCEN rising edge" range="" rwaccess="RW"/>
+  </register>
+  <register id="ISP_VP1_LNH" acronym="ISP_VP1_LNH" offset="0x14" width="32" description="This register is latched at VD or at corresponding SYNCEN rising edge">
+    <bitfield id="RESERVED" width="17" begin="31" end="15" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LNH" width="15" begin="14" end="0" resetval="0x0" description="Number of active pixels in an line Number of pixels = LNH + 1. This number is specified by the number of cycles. Therefore, for YUV422 8bit mode, the number of pixels is (LNH+1)/2. This register is latched at VD or at corresponding SYNCEN rising edge" range="" rwaccess="RW"/>
+  </register>
+  <register id="ISP_VP1_SLV" acronym="ISP_VP1_SLV" offset="0x18" width="32" description="Start Line, Vertical">
+    <bitfield id="RESERVED" width="17" begin="31" end="15" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SLV" width="15" begin="14" end="0" resetval="0x0" description="Start Line, Vertical Sets line at which active data will begin, measured from the start of VD This register is latched at VD or at corresponding SYNCEN rising edge" range="" rwaccess="RW"/>
+  </register>
+  <register id="ISP_VP1_LNV" acronym="ISP_VP1_LNV" offset="0x1C" width="32" description="">
+    <bitfield id="RESERVED" width="17" begin="31" end="15" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LNV" width="15" begin="14" end="0" resetval="0x0" description="The number of active lines Number of lines = LNV + 1 This register is latched at VD or at corresponding SYNCEN rising edge" range="" rwaccess="RW"/>
+  </register>
+  <register id="ISP_NSF3V_CGAMMAWD" acronym="ISP_NSF3V_CGAMMAWD" offset="0x20" width="32" description="">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="GWDI" width="4" begin="4" end="1" resetval="0x0" description="Selects MSB position of Input Data for NSF3V (VP-1 and CAL) For input of IN[15..0], corresponding output is given to DPC and/or NSF3V. This bit is only valid in Bayer (RAW) mode. In YUV input, this bit is ignored. There is no GWDO for NSF3V process, since 12 bit is always mapped to LSB." range="" rwaccess="RW">
+      <bitenum value="6" id="BIT9" token="GWDI_6" description="OUTPUT: (IN[9..0] 2)"/>
+      <bitenum value="1" id="BIT14" token="GWDI_1" description="OUTPUT: IN[14..3]"/>
+      <bitenum value="7" id="BIT8" token="GWDI_7" description="OUTPUT: (IN[8..0] 3)"/>
+      <bitenum value="0" id="BIT15" token="GWDI_0" description="OUTPUT: IN[15..4]"/>
+      <bitenum value="2" id="BIT13" token="GWDI_2" description="OUTPUT: IN[13..2]"/>
+      <bitenum value="8" id="BIT7" token="GWDI_8" description="OUTPUT: (IN[7..0] 4)"/>
+      <bitenum value="9" id="NEWENUM10" token="GWDI_9" description="Reserved"/>
+      <bitenum value="4" id="BIT11" token="GWDI_4" description="OUTPUT: IN[11..0]"/>
+      <bitenum value="5" id="BIT10" token="GWDI_5" description="OUTPUT: (IN[10..0] 1)"/>
+      <bitenum value="3" id="BIT12" token="GWDI_3" description="OUTPUT: IN[12..1]"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ISP_VP1_CCDCFG" acronym="ISP_VP1_CCDCFG" offset="0x24" width="32" description="">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OO" width="2" begin="23" end="22" resetval="0x0" description="The color pattern of the odd line and odd pixel used in DPC This parameter is valid when NSF3V_SEL=1 or 2, and DPC_SEL=1." range="" rwaccess="RW">
+      <bitenum value="0" id="R" token="OO_0" description="R"/>
+      <bitenum value="1" id="GR" token="OO_1" description="GR"/>
+      <bitenum value="3" id="B" token="OO_3" description="B"/>
+      <bitenum value="2" id="GB" token="OO_2" description="GB"/>
+    </bitfield>
+    <bitfield id="OE" width="2" begin="21" end="20" resetval="0x0" description="The color pattern of the odd line and even pixel used in DPC This parameter is valid when NSF3V_SEL=1 or 2, and DPC_SEL=1." range="" rwaccess="RW">
+      <bitenum value="0" id="R" token="OE_0" description="R"/>
+      <bitenum value="1" id="GR" token="OE_1" description="GR"/>
+      <bitenum value="3" id="B" token="OE_3" description="B"/>
+      <bitenum value="2" id="GB" token="OE_2" description="GB"/>
+    </bitfield>
+    <bitfield id="EO" width="2" begin="19" end="18" resetval="0x0" description="The color pattern of the even line and odd pixel used in DPC This parameter is valid when NSF3V_SEL=1 or 2, and DPC_SEL=1." range="" rwaccess="RW">
+      <bitenum value="0" id="R" token="EO_0" description="R"/>
+      <bitenum value="1" id="GR" token="EO_1" description="GR"/>
+      <bitenum value="3" id="B" token="EO_3" description="B"/>
+      <bitenum value="2" id="GB" token="EO_2" description="GB"/>
+    </bitfield>
+    <bitfield id="EE" width="2" begin="17" end="16" resetval="0x0" description="The color pattern of the even line and even pixel used in DPC This parameter is valid when NSF3V_SEL=1 or 2, and DPC_SEL=1." range="" rwaccess="RW">
+      <bitenum value="0" id="R" token="EE_0" description="R"/>
+      <bitenum value="1" id="GR" token="EE_1" description="GR"/>
+      <bitenum value="3" id="B" token="EE_3" description="B"/>
+      <bitenum value="2" id="GB" token="EE_2" description="GB"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="Y8POS" width="1" begin="11" end="11" resetval="0x0" description="Selects Y signal position when in 8bit input mode" range="" rwaccess="RW">
+      <bitenum value="0" id="EVEN" token="Y8POS_0" description="Y is at even pixel Y is at 0th, 2nd, 4th, ... pixels. Cb is at 1st, 5th, ... pixels. Cr is at 3rd, 7th, ... pixels."/>
+      <bitenum value="1" id="ODD" token="Y8POS_1" description="Y is at odd pixel Cb is at 0th, 4th, 8th, ... pixels Cr is at 2nd, 6th, 10th, ... pixels Y is at 1st, 3rd, 5th, ... pixels"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="6" begin="10" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="YCINSWP" width="1" begin="4" end="4" resetval="0x0" description="The ISIF module has a 16-bit interface. When 16-bit YUV data are input, the luma data (YIN7-0) are expected to be on the 8 MS bits and the chroma (CIN7-0) data are expected to be on the LS bits. This bit enables to swap the 8 MS bits with the 8 LS bits of the interface in case the luma and chroma do not come in the correct order. (This function is same as ISIF's. Refer to the top-level ISIF block diagram.)" range="" rwaccess="RW">
+      <bitenum value="0" id="NEWENUM1" token="YCINSWP_0" description="YIN7-0 = Y signal / CIN7-0 = C signal"/>
+      <bitenum value="1" id="NEWENUM2" token="YCINSWP_1" description="YIN7-0 = C signal / CIN7-0 = Y signal"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="4" begin="3" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ISP_VP1_DLAY" acronym="ISP_VP1_DLAY" offset="0x28" width="32" description="Horizontal/Vertical Delay of VP1 port">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DELAY_SWT" width="1" begin="30" end="30" resetval="0x0" description="This bit changes the delay between NSF3V input VD/HD and output VD/HD Usually, this bit is '0'. This bit is supposed to be used when NSF3V works with ISP (VP1), and IPIPEIF is in DFS/WDR mode. In this case VD must be at least one line earlier than the first valid line." range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLE" token="DELAY_SWT_0" description="The output of VD (VD_OUT) is at the same clock as the first pixel output of the frame. The output of HD (HD_OUT)is at the same clock as the firlst pixel output in each line."/>
+      <bitenum value="1" id="ENABLE" token="DELAY_SWT_1" description="The VD/HD timing is controlled by DLV/DLH. VD output (VD_OUT) timing is DLV lines after VD input (VD_IN), on the same clock as HD output (HD_OUT) HD output (HD_OUT) timing is DLH pixel clocks after HD input (HD_IN)"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="6" begin="29" end="24" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DLV" width="8" begin="23" end="16" resetval="0x0" description="Vertical Delay of VP1 port from VS_IN to VD_OUT. This field is only used if DELAY_SWT=='1', and ignored if DELAY_SWT=='0' This register is latched at VS. If DELAY_SWT is '1', after number of lines specified here following VD_IN, VD_OUT is output. This value should be equalt to or smaller than NSF3V line latency for meaningfull operation. The only possible case that this field is used is when NSF3V is used with ISP, and IPIPEIF is in DFS or WDR mode. A value between 0 and 3 should be specified for TB_BORDER=00 or 10 case. A value between 0 and 17 should be specified for TB_BODER=01 or 11 case. Since there is DLV lines between VD and the first valid line, the down stream modules need to be programmed accordingly." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DLH" width="8" begin="7" end="0" resetval="0x0" description="This field is only used if DELAY_SWT=='1', and ignored if DELAY_SWT=='0' VP1 port horizontal delay from HS_IN (derived from HD_IN) to HD_OUT, which affect the cycles between HD_OUT and first valid pixel. This register is latched at VS. The meaning of this value changes depending on the input format (ISP_NSF3V_MODESET.INPMOD). For YCbCr-16bit (ISP_NSF3V_MODESET.INPMOD==1) The maximum DLH value allowed is 8. If DLH=8, HD output is at the same clock as the first pixel output in each line. If DLH 8, HD output is (8-DLH) clock before the first pixel output. For Bayer input or YCbCr-8bit input (ISP_NSF3V_MODESET.INPMOD==0 or 2) Maximum DLH allowed is 16. If DLH=16, HD output is at the same clock as the first pixel output in each line. If DLH 16, HD output is (16-DLH) clock before the first pixel output." range="" rwaccess="RW"/>
+  </register>
+  <register id="ISP_VP2_SPH" acronym="ISP_VP2_SPH" offset="0x30" width="32" description="Start Pixel Horizontal">
+    <bitfield id="RESERVED" width="17" begin="31" end="15" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SPH" width="15" begin="14" end="0" resetval="0x0" description="The location of the first active pixel in a line" range="" rwaccess="RW"/>
+  </register>
+  <register id="RSERVED2" acronym="RSERVED2" offset="0x34" width="32" description="Reserved">
+    <bitfield id="RESERVED" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ISP_VP2_SLV" acronym="ISP_VP2_SLV" offset="0x38" width="32" description="Start Line, Vertical">
+    <bitfield id="RESERVED" width="17" begin="31" end="15" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SLV" width="15" begin="14" end="0" resetval="0x0" description="Start Line, Vertical Sets line at which active data will begin, measured from the start of VD This register is latched at VD or at corresponding SYNCEN rising edge" range="" rwaccess="RW"/>
+  </register>
+  <register id="ISP_GLBCE_CGAMMAWD" acronym="ISP_GLBCE_CGAMMAWD" offset="0x40" width="32" description="">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="GWDO" width="4" begin="11" end="8" resetval="0x0" description="Selects MSB position of output data from GLBCE (VP2/CAL2) This value is only used at GLBCE output, and does not affect if GLBCE is skipped (IPIPEIF to IPIPE case)." range="" rwaccess="RW">
+      <bitenum value="6" id="_10BIT" token="GWDO_6" description="'000000' [15..6]"/>
+      <bitenum value="1" id="_15BIT" token="GWDO_1" description="'0' [15..1]"/>
+      <bitenum value="7" id="_9BIT" token="GWDO_7" description="'0000000' [15..7]"/>
+      <bitenum value="0" id="_16BIT" token="GWDO_0" description="[15..0]"/>
+      <bitenum value="2" id="_14BIT" token="GWDO_2" description="'00' [15..2]"/>
+      <bitenum value="8" id="_8BIT" token="GWDO_8" description="'00000000' [15..8]"/>
+      <bitenum value="9" id="OTHERS" token="GWDO_9" description="Reserved"/>
+      <bitenum value="4" id="_12BIT" token="GWDO_4" description="'0000' [15..4]"/>
+      <bitenum value="5" id="_11BIT" token="GWDO_5" description="'00000' [15..5]"/>
+      <bitenum value="3" id="_13BIT" token="GWDO_3" description="'000' [15..3]"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="GWDI" width="4" begin="4" end="1" resetval="0x0" description="Selects MSB position of Input Data for GLBCE (VP2/CAL2) This value is only used at GLBCE input, and does not affect if GLBCE is skipped (IPIPEIF to IPIPE case)." range="" rwaccess="RW">
+      <bitenum value="6" id="BIT9" token="GWDI_6" description="[9..0] '000000'"/>
+      <bitenum value="1" id="BIT14" token="GWDI_1" description="[14..0] '0'"/>
+      <bitenum value="7" id="BIT8" token="GWDI_7" description="[8..0] '0000000'"/>
+      <bitenum value="0" id="BIT15" token="GWDI_0" description="[15..0]"/>
+      <bitenum value="2" id="BIT13" token="GWDI_2" description="[13..0] '00'"/>
+      <bitenum value="8" id="BIT7" token="GWDI_8" description="[7..0]*'00000000'"/>
+      <bitenum value="9" id="OTHERS" token="GWDI_9" description="Reserved"/>
+      <bitenum value="4" id="BIT11" token="GWDI_4" description="[11..0] '0000'"/>
+      <bitenum value="5" id="BIT10" token="GWDI_5" description="[10..0] '00000'"/>
+      <bitenum value="3" id="BIT12" token="GWDI_3" description="[12..0] '000'"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ISP_VP2_DLAY" acronym="ISP_VP2_DLAY" offset="0x44" width="32" description="Horizontal/Vertical Delay of VP2 port">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DLV" width="8" begin="23" end="16" resetval="0x1" description="Vertical Delay of VP1 port from VS_IN to VD_IN. After number of lines specified here following VD_IN, VD_IN is output. This value should be equalt to or smaller than GLBCE line latency for meaningfull operation. This register is latched at VS or at corresponding SYNCEN rising edge Usually, this value should be left as default (1)" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DLH" width="8" begin="7" end="0" resetval="0x3b" description="VP1 port horizontal delay from HS_IN (derived from HD_IN) to HD_OUT. The latency of NSF3V should be set in this field. This register is latched at VS or at corresponding SYNCEN rising edge Usually, this value should be left as default (67)" range="" rwaccess="RW"/>
+  </register>
+  <register id="ISP_CNF_EN" acronym="ISP_CNF_EN" offset="0x50" width="32" description="">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CNFB_CDSEN" width="1" begin="5" end="5" resetval="0x0" description="Note: This is don't care in ISP6.5 since CNF-B is removed. CDS (Chroma down sample) is enabled in CNF process on RZB path. This is only valid if CNF is enabled (RZB_CNFEN=1)." range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLED" token="CNFB_CDSEN_0" description="CDS is disabled in CNF process on RZB output"/>
+      <bitenum value="1" id="ENABLED" token="CNFB_CDSEN_1" description="CDS is enabled in CNF process on RZB output"/>
+    </bitfield>
+    <bitfield id="CNFB_EN" width="1" begin="4" end="4" resetval="0x0" description="?WARNING This shouldn't be enabled in ISP6.5 (ADAS-LOW Program) since CNF-B is removed. Enable CNF (Chroma noise filter) on RZB path. This is only valid if the output is 420, and UV pass is active. In other case, this bit must be zero. In specific, this bit is valid in the following cases. 1. YUV420-UV inputRSZ_SRC_FMT1.IN420=1 RSZ_SRC_FMT1.COL=1 2. YUV422 input, YUV420-YUV or YUV420-UV output RSZ_SRC_FMT1.IN420=0 RZB_420.CEN = 1 (RZB_420.YEN can be 0 or 1)" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLED" token="CNFB_EN_0" description="CNF is disabled on RZB output"/>
+      <bitenum value="1" id="ENABLED" token="CNFB_EN_1" description="CNF is enabled on RZB output"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="2" begin="3" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CNFA_CDSEN" width="1" begin="1" end="1" resetval="0x0" description="CDS (Chroma down sample) is enabled in CNF process on RZA path. This is only valid if CNF is enabled (RZA_CNFEN=1)." range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLED" token="CNFA_CDSEN_0" description="CDS is disabled in CNF process on RZA output"/>
+      <bitenum value="1" id="ENABLED" token="CNFA_CDSEN_1" description="CDS is enabled in CNF process on RZA output"/>
+    </bitfield>
+    <bitfield id="CNFA_EN" width="1" begin="0" end="0" resetval="0x0" description="Enable CNF (Chroma noise filter) on RZA path This is only valid if the output is 420, and UV pass is active. In other case, this bit must be zero. In specific, this bit is valid in the following cases. 1. YUV420-UV inputRSZ_SRC_FMT1.IN420=1 RSZ_SRC_FMT1.COL=1 2. YUV422 input, YUV420-YUV or YUV420-UV output RSZ_SRC_FMT1.IN420=0 RZA_420.CEN = 1 (RZA_420.YEN can be 0 or 1)" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLED" token="CNFA_EN_0" description="CNF is disabled on RZA output"/>
+      <bitenum value="1" id="ENABLED" token="CNFA_EN_1" description="CNF is enabled on RZA output"/>
+    </bitfield>
+  </register>
+  <register id="ISP_CNFA_SIZ" acronym="ISP_CNFA_SIZ" offset="0x54" width="32" description="">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="HEIGHT" width="14" begin="29" end="16" resetval="0x0" description="The height of CNFA output. This number MUST be - Same as Resizer-A chroma output height, if CDS is off - 1/2 of Resizer-A output height, if CDS is on Therefore, the Resizer-A chroma output height must be even if CDS is on. Resizer-A's MMR must be programmed accordingly. This number MUST be the same as CNFA-Core's input height. CNF-A's MMR must be programmed accordingly." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="WIDTH" width="14" begin="13" end="0" resetval="0x0" description="The width of CNFA output. This number MUST be even. This number MUST be - Same as Resizer-A output width, if CDS is off - 1/2 of Resizer-A output width, if CDS is on Therefore, the Resizer-A output width must be a multiple of 4 if CDS is on. Resizer-A's MMR must be programmed accordingly. This number MUST be the same as CNFA-Core's input width. CNF-A's MMR must be programmed accordingly." range="" rwaccess="RW"/>
+  </register>
+  <register id="ISP_CNFB_SIZ" acronym="ISP_CNFB_SIZ" offset="0x58" width="32" description="">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="HEIGHT" width="14" begin="29" end="16" resetval="0x0" description="Note: This is don't care in ISP6.5 since CNF-B is removed. The height of CNFB output. This number MUST be - Same as Resizer-B chroma output height, if CDS is off - 1/2 of Resizer-B chroma output height, if CDS is on Therefore, the Resizer-B chroma output height must be even if CDS is on. Resizer-B's MMR must be programmed accordingly. This number MUST be the same as CNFB-Core's input height. CNF's MMR must be programmed accordingly." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="WIDTH" width="14" begin="13" end="0" resetval="0x0" description="Note: This is don't care in ISP6.5 since CNF-B is removed. The width of CNFB output. This number MUST be even. This number MUST be - Same as Resizer-B output width if CDS is off - 1/2 of Resizer-B output width if CDS is on Therefore, the Resizer-B output width must be a multiple of 4 if CDS is on. Resizer-B's MMR must be programmed accordingly. This number MUST be the same as CNFB-Core's input width. CNF-B's MMR must be programmed accordingly." range="" rwaccess="RW"/>
+  </register>
+</module>

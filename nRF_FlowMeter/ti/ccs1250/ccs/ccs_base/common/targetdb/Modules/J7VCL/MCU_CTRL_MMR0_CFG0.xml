@@ -1,0 +1,531 @@
+<module name="MCU_CTRL_MMR0_CFG0" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="CTRLMMR_MCU_PID" acronym="CTRLMMR_MCU_PID" offset="0x2000" width="32" description="">
+    <bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x1" description="" range="" rwaccess="R"/>
+    <bitfield id="BU" width="2" begin="29" end="28" resetval="0x2" description="Business unit - Processors" range="" rwaccess="R"/>
+    <bitfield id="FUNC" width="12" begin="27" end="16" resetval="0x180" description="Module functional identifier - CTRL MMR" range="" rwaccess="R"/>
+    <bitfield id="R_RTL" width="5" begin="15" end="11" resetval="0x0" description="RTL revision number" range="" rwaccess="R"/>
+    <bitfield id="X_MAJOR" width="3" begin="10" end="8" resetval="0x0" description="Major revision number" range="" rwaccess="R"/>
+    <bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom revision number" range="" rwaccess="R"/>
+    <bitfield id="Y_MINOR" width="6" begin="5" end="0" resetval="0x0" description="Minor revision number" range="" rwaccess="R"/>
+  </register>
+  <register id="CTRLMMR_MCU_MMR_CFG1" acronym="CTRLMMR_MCU_MMR_CFG1" offset="0x2008" width="32" description="">
+    <bitfield id="PROXY_EN" width="1" begin="31" end="31" resetval="0x1" description="Proxy addressing enabled" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="23" begin="30" end="8" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="PARTITIONS" width="8" begin="7" end="0" resetval="0x1F" description="Indicates present partitions" range="" rwaccess="R"/>
+  </register>
+  <register id="CTRLMMR_MCU_IPC_SET0" acronym="CTRLMMR_MCU_IPC_SET0" offset="0x2100" width="32" description="">
+    <bitfield id="IPC_SRC_SET" width="28" begin="31" end="4" resetval="0x0" description="Read returns current value" range="" rwaccess="W1TS"/>
+    <bitfield id="RESERVED" width="3" begin="3" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="IPC_SET" width="1" begin="0" end="0" resetval="0x0" description="Read returns 0" range="" rwaccess="W1TS"/>
+  </register>
+  <register id="CTRLMMR_MCU_IPC_SET1" acronym="CTRLMMR_MCU_IPC_SET1" offset="0x2104" width="32" description="">
+    <bitfield id="IPC_SRC_SET" width="28" begin="31" end="4" resetval="0x0" description="Read returns current value" range="" rwaccess="W1TS"/>
+    <bitfield id="RESERVED" width="3" begin="3" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="IPC_SET" width="1" begin="0" end="0" resetval="0x0" description="Read returns 0" range="" rwaccess="W1TS"/>
+  </register>
+  <register id="CTRLMMR_MCU_IPC_SET8" acronym="CTRLMMR_MCU_IPC_SET8" offset="0x2120" width="32" description="">
+    <bitfield id="IPC_SRC_SET" width="28" begin="31" end="4" resetval="0x0" description="Read returns current value" range="" rwaccess="W1TS"/>
+    <bitfield id="RESERVED" width="3" begin="3" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="IPC_SET" width="1" begin="0" end="0" resetval="0x0" description="Read returns 0" range="" rwaccess="W1TS"/>
+  </register>
+  <register id="CTRLMMR_MCU_IPC_CLR0" acronym="CTRLMMR_MCU_IPC_CLR0" offset="0x2180" width="32" description="">
+    <bitfield id="IPC_SRC_CLR" width="28" begin="31" end="4" resetval="0x0" description="Read returns current value" range="" rwaccess="W1TC"/>
+    <bitfield id="RESERVED" width="3" begin="3" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="IPC_CLR" width="1" begin="0" end="0" resetval="0x0" description="Read returns current value" range="" rwaccess="W1TC"/>
+  </register>
+  <register id="CTRLMMR_MCU_IPC_CLR1" acronym="CTRLMMR_MCU_IPC_CLR1" offset="0x2184" width="32" description="">
+    <bitfield id="IPC_SRC_CLR" width="28" begin="31" end="4" resetval="0x0" description="Read returns current value" range="" rwaccess="W1TC"/>
+    <bitfield id="RESERVED" width="3" begin="3" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="IPC_CLR" width="1" begin="0" end="0" resetval="0x0" description="Read returns current value" range="" rwaccess="W1TC"/>
+  </register>
+  <register id="CTRLMMR_MCU_IPC_CLR8" acronym="CTRLMMR_MCU_IPC_CLR8" offset="0x21A0" width="32" description="">
+    <bitfield id="IPC_SRC_CLR" width="28" begin="31" end="4" resetval="0x0" description="Read returns current value" range="" rwaccess="W1TC"/>
+    <bitfield id="RESERVED" width="3" begin="3" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="IPC_CLR" width="1" begin="0" end="0" resetval="0x0" description="Read returns current value" range="" rwaccess="W1TC"/>
+  </register>
+  <register id="CTRLMMR_MCU_MAC_ID0" acronym="CTRLMMR_MCU_MAC_ID0" offset="0x2200" width="32" description="">
+    <bitfield id="MACID_LO" width="32" begin="31" end="0" resetval="0xX" description="32 lsbs of MAC address" range="" rwaccess="WOT"/>
+  </register>
+  <register id="CTRLMMR_MCU_MAC_ID1" acronym="CTRLMMR_MCU_MAC_ID1" offset="0x2204" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="MACID_HI" width="16" begin="15" end="0" resetval="0xX" description="16 msbs of MAC address" range="" rwaccess="WOT"/>
+  </register>
+  <register id="CTRLMMR_MCU_LOCK0_KICK0" acronym="CTRLMMR_MCU_LOCK0_KICK0" offset="0x3008" width="32" description="">
+    <bitfield id="KEY" width="31" begin="31" end="1" resetval="0x0" description="Write the kick0 unlock value followed by the kick1 unlock value to unlock the write-protected Partition0 registers" range="" rwaccess="RW"/>
+    <bitfield id="UNLOCKED" width="1" begin="0" end="0" resetval="0x0" description="Unlock status. When set indicates that the proper unlock sequence has been performed and the partition is unlocked for writing." range="" rwaccess="R"/>
+  </register>
+  <register id="CTRLMMR_MCU_LOCK0_KICK1" acronym="CTRLMMR_MCU_LOCK0_KICK1" offset="0x300C" width="32" description="">
+    <bitfield id="KEY" width="32" begin="31" end="0" resetval="0x0" description="Write the kick1 unlock value after the kick0 unlock value to unlock the write-protected Partition0 registers" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_INTR_RAW_STAT" acronym="CTRLMMR_MCU_INTR_RAW_STAT" offset="0x3010" width="32" description="">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="PROXY_ERR" width="1" begin="3" end="3" resetval="0x0" description="Proxy violation occurred (attempt to write a Proxy1 claimed register through its Proxy0 address)" range="" rwaccess="W1TS"/>
+    <bitfield id="LOCK_ERR" width="1" begin="2" end="2" resetval="0x0" description="Lock violation occurred (attempt to write a write-locked register with partition locked)" range="" rwaccess="W1TS"/>
+    <bitfield id="ADDR_ERR" width="1" begin="1" end="1" resetval="0x0" description="Address violation occurred (attempt to read or write an invalid register address)" range="" rwaccess="W1TS"/>
+    <bitfield id="PROT_ERR" width="1" begin="0" end="0" resetval="0x0" description="Protection violation occurred (attempt to read or write a register with insufficient security or privilege access rights)" range="" rwaccess="W1TS"/>
+  </register>
+  <register id="CTRLMMR_MCU_INTR_STAT_CLR" acronym="CTRLMMR_MCU_INTR_STAT_CLR" offset="0x3014" width="32" description="">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="EN_PROXY_ERR" width="1" begin="3" end="3" resetval="0x0" description="Enabled proxy interrupt event status" range="" rwaccess="W1TC"/>
+    <bitfield id="EN_LOCK_ERR" width="1" begin="2" end="2" resetval="0x0" description="Enabled lock interrupt event status" range="" rwaccess="W1TC"/>
+    <bitfield id="EN_ADDR_ERR" width="1" begin="1" end="1" resetval="0x0" description="Enabled address interrupt event status" range="" rwaccess="W1TC"/>
+    <bitfield id="EN_PROT_ERR" width="1" begin="0" end="0" resetval="0x0" description="Enabled protection interrupt event status" range="" rwaccess="W1TC"/>
+  </register>
+  <register id="CTRLMMR_MCU_INTR_EN_SET" acronym="CTRLMMR_MCU_INTR_EN_SET" offset="0x3018" width="32" description="">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="PROXY_ERR_EN_SET" width="1" begin="3" end="3" resetval="0x0" description="Proxy interrupt enable" range="" rwaccess="W1TS"/>
+    <bitfield id="LOCK_ERR_EN_SET" width="1" begin="2" end="2" resetval="0x0" description="Lock interrupt enable" range="" rwaccess="W1TS"/>
+    <bitfield id="ADDR_ERR_EN_SET" width="1" begin="1" end="1" resetval="0x0" description="Address interrupt enable" range="" rwaccess="W1TS"/>
+    <bitfield id="PROT_ERR_EN_SET" width="1" begin="0" end="0" resetval="0x0" description="Protection interrupt enable" range="" rwaccess="W1TS"/>
+  </register>
+  <register id="CTRLMMR_MCU_INTR_EN_CLR" acronym="CTRLMMR_MCU_INTR_EN_CLR" offset="0x301C" width="32" description="">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="PROXY_ERR_EN_CLR" width="1" begin="3" end="3" resetval="0x0" description="Proxy interrupt disable" range="" rwaccess="W1TC"/>
+    <bitfield id="LOCK_ERR_EN_CLR" width="1" begin="2" end="2" resetval="0x0" description="Lock interrupt disable" range="" rwaccess="W1TC"/>
+    <bitfield id="ADDR_ERR_EN_CLR" width="1" begin="1" end="1" resetval="0x0" description="Address interrupt disable" range="" rwaccess="W1TC"/>
+    <bitfield id="PROT_ERR_EN_CLR" width="1" begin="0" end="0" resetval="0x0" description="Protection interrupt disable" range="" rwaccess="W1TC"/>
+  </register>
+  <register id="CTRLMMR_MCU_EOI" acronym="CTRLMMR_MCU_EOI" offset="0x3020" width="32" description="">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="VECTOR" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_FAULT_ADDR" acronym="CTRLMMR_MCU_FAULT_ADDR" offset="0x3024" width="32" description="">
+    <bitfield id="ADDRESS" width="32" begin="31" end="0" resetval="0x0" description="Address of the faulted access" range="" rwaccess="R"/>
+  </register>
+  <register id="CTRLMMR_MCU_FAULT_TYPE" acronym="CTRLMMR_MCU_FAULT_TYPE" offset="0x3028" width="32" description="">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="TYPE" width="6" begin="5" end="0" resetval="0x0" description="Type of access which faulted 0h - No fault 1h - User execute access 2h - User write access 4h - User read access 8h - Supervisor execute access 10h - Supervisor write access 20h - Supervisor read access" range="" rwaccess="R"/>
+  </register>
+  <register id="CTRLMMR_MCU_FAULT_ATTR" acronym="CTRLMMR_MCU_FAULT_ATTR" offset="0x302C" width="32" description="">
+    <bitfield id="XID" width="12" begin="31" end="20" resetval="0x0" description="Transaction ID" range="" rwaccess="R"/>
+    <bitfield id="ROUTEID" width="12" begin="19" end="8" resetval="0x0" description="Route ID" range="" rwaccess="R"/>
+    <bitfield id="PRIVID" width="8" begin="7" end="0" resetval="0x0" description="Privilege ID" range="" rwaccess="R"/>
+  </register>
+  <register id="CTRLMMR_MCU_FAULT_CLR" acronym="CTRLMMR_MCU_FAULT_CLR" offset="0x3030" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CLEAR" width="1" begin="0" end="0" resetval="0x0" description="Fault clear" range="" rwaccess="W1TC"/>
+  </register>
+  <register id="CTRLMMR_MCU_P0_CLAIM0" acronym="CTRLMMR_MCU_P0_CLAIM0" offset="0x3100" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P0_CLAIM1" acronym="CTRLMMR_MCU_P0_CLAIM1" offset="0x3104" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P0_CLAIM2" acronym="CTRLMMR_MCU_P0_CLAIM2" offset="0x3108" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P0_CLAIM3" acronym="CTRLMMR_MCU_P0_CLAIM3" offset="0x310C" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P0_CLAIM4" acronym="CTRLMMR_MCU_P0_CLAIM4" offset="0x3110" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_MSMC_CFG" acronym="CTRLMMR_MCU_MSMC_CFG" offset="0x6030" width="32" description="">
+    <bitfield id="DDR_ASSYM_EMIF_SEL" width="1" begin="31" end="31" resetval="0x0" description="In the asymmetric interleave, controls which EMIF controller implements the separated range of the memory window" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="DDR_INTRLV_GRAN" width="6" begin="29" end="24" resetval="0x0" description="Defines the size of each memory stripe for interleaved memory space" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="23" end="22" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="DDR_INTRLV_SIZE" width="6" begin="21" end="16" resetval="0x0" description="Defines the memory window size for the interleaved region starting at the bottom of the external memory address range." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="MEM_SIZE" width="4" begin="11" end="8" resetval="0x4" description="Indicates the size of MSMC shared SRAM/Cache 0h - 0.0 MB 1h - 0.25 MB 2h - 0.5 MB 3h - 0.75 MB 4h - 1.0 MB 5h - 1.25 MB 6h - 1.5 MB 7h - 1.75 MB 8h - 2.0 MB" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="MEM_INIT_DIS" width="1" begin="4" end="4" resetval="0x0" description="Disables MSMC SRAM initialization (Data, Cache Tags, and Snoop Filters). This is required for proper initial ECC initialization." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="3" end="0" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+  </register>
+  <register id="CTRLMMR_MCU_ENET_CTRL" acronym="CTRLMMR_MCU_ENET_CTRL" offset="0x6040" width="32" description="">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="RGMII_ID_MODE" width="1" begin="4" end="4" resetval="0x0" description="Port1 RGMII internal transmit delay selection" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="3" end="2" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="MODE_SEL" width="2" begin="1" end="0" resetval="0x1" description="Selects Ethernet switch Port1 interface 0h - GMII/MII (not supported) 1h - RMII 2h - RGMII 3h - SGMII (not supported)" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_SPI1_CTRL" acronym="CTRLMMR_MCU_SPI1_CTRL" offset="0x6060" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="SPI1_LINKDIS" width="1" begin="0" end="0" resetval="0x0" description="Disables direct connection of MCU_SPI1 to SPI3 0h - MCU_SPI1 is tied as a slave to SPI3. MCU_SPI1 CLK, DATA1 and CS0 are driven from SPI3, DATA OUT drives SPI3 DATA0 1h - MCU_SPI1 is NOT tied as a slave to SPI3. MCU_SPI1 CLK, DATA0, DATA1 and CS[3:0] are controlled through their respective MCU_SPI1 pins and SPI3 CLK, DATA0, DATA1, and CS[3:0] are controlled through their respective SPI3 pins." range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_I3C0_CTRL0" acronym="CTRLMMR_MCU_I3C0_CTRL0" offset="0x6070" width="32" description="">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="PID_MFR_ID" width="15" begin="30" end="16" resetval="0x102" description="Manufacturer ID" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="7" begin="15" end="9" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ROLE" width="1" begin="8" end="8" resetval="0x0" description="Master Role" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="PID_INSTANCE" width="4" begin="3" end="0" resetval="0x0" description="Provisional ID Instance. This input corresponds to bits[15:12] of the Provisional ID. It is intended to provide a way of differentiating several I3C devices if there would be no other way to have each manufactured device have a unique Provisional ID" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_I3C0_CTRL1" acronym="CTRLMMR_MCU_I3C0_CTRL1" offset="0x6074" width="32" description="">
+    <bitfield id="BUS_AVAIL_TIME" width="8" begin="31" end="24" resetval="0x0" description="Indicates the number of pclk cycles in the Bus Available condition" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="23" end="18" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="BUS_IDLE_TIME" width="18" begin="17" end="0" resetval="0x0" description="Indicates the number of pclk cycles in the Bus Idle condition" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_I2C0_CTRL" acronym="CTRLMMR_MCU_I2C0_CTRL" offset="0x6080" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="HS_MCS_EN" width="1" begin="0" end="0" resetval="0x0" description="HS Mode master current source enable." range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_I2C1_CTRL" acronym="CTRLMMR_MCU_I2C1_CTRL" offset="0x6084" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="HS_MCS_EN" width="1" begin="0" end="0" resetval="0x0" description="HS Mode master current source enable." range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_FSS_CTRL" acronym="CTRLMMR_MCU_FSS_CTRL" offset="0x60A0" width="32" description="">
+    <bitfield id="RESERVED" width="7" begin="31" end="25" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="24" end="24" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="23" end="22" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="6" begin="21" end="16" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="7" begin="15" end="9" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="S0_BOOT_SIZE" width="1" begin="8" end="8" resetval="0x0" description="Selects the size of the boot block to be used for the S0 (OSPI0 or Hyperbus) flash interface" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="7" end="6" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="S0_BOOT_SEG" width="6" begin="5" end="0" resetval="0x0" description="Selects the boot block to be used for the S0 (OSPI0 or Hyperbus) flash interface. If the s0_boot_size is 128 MB then only bits [4:0] of this field are used. Care must be taken to account for the address translation as to not fall off or wrap the address of the flash. (e.g. if both ECC and authentication are enabled for 64 MB boot, the highest valid block number is 49, as sector 50 is only .2M Bytes in size.)" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_ADC0_CTRL" acronym="CTRLMMR_MCU_ADC0_CTRL" offset="0x60B0" width="32" description="">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="GPI_MODE_EN" width="1" begin="16" end="16" resetval="0x0" description="Enables MCU_ADC0 data pins to be used as general purpose inputs when set. This signal is tied to the en_dig_test input of MCU_ADC0" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="11" begin="15" end="5" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="TRIG_SEL" width="5" begin="4" end="0" resetval="0x0" description="Selects the source of the ADC hardware event trigger 0h - MCU_ADC_EXT_TRIGGER0 pin 1h - MCU_ADC_EXT_TRIGGER1 pin 2h - eHRPWM SOCA event 3h - eHRPWM SOCB event 4h - MCU Timer0 PWM output 5h - MCU Timer1 PWM output 6h - MCU Timer2 PWM output 7h - MCU Timer3 PWM output 8h - Timer0 PWM output 9h - Timer1 PWM output Ah - Timer2 PWM output Bh - Timer3 PWM output Ch - Timer4 PWM output Dh - Timer5 PWM output Eh - Timer6 PWM output Fh - Timer7 PWM output 10h - Timer8 PWM output 11h - Timer9 PWM output 12h - Timer10 PWM output 13h - Timer11 PWM output 15h - Reserved (tied 0h) 16h - Reserved (tied 0h) 18h - MCU Timer4 PWM output 19h - MCU Timer5 PWM output 1Ah - MCU Timer6 PWM output 1Bh - MCU Timer7 PWM output 1Ch - MCU Timer8 PWM output 1Dh - MCU Timer9 PWM output 1Eh - Reserved (tied 0h) 1Fh - Reserved (tied 0h)" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_ADC0_TRIM" acronym="CTRLMMR_MCU_ADC0_TRIM" offset="0x60C0" width="32" description="">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="TRIM5" width="3" begin="26" end="24" resetval="0xX" description="Refer to AFE specification" range="" rwaccess="RW"/>
+    <bitfield id="TRIM4" width="3" begin="23" end="21" resetval="0xX" description="Refer to AFE specification" range="" rwaccess="RW"/>
+    <bitfield id="TRIM3" width="3" begin="20" end="18" resetval="0xX" description="Refer to AFE specification" range="" rwaccess="RW"/>
+    <bitfield id="TRIM2" width="4" begin="17" end="14" resetval="0xX" description="Refer to AFE specification" range="" rwaccess="RW"/>
+    <bitfield id="TRIM1" width="4" begin="13" end="10" resetval="0xX" description="Refer to AFE specification" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE_CALB" width="5" begin="9" end="5" resetval="0xX" description="Refer to AFE specification" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE_CAL" width="5" begin="4" end="0" resetval="0xX" description="Refer to AFE specification" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMER0_CTRL" acronym="CTRLMMR_MCU_TIMER0_CTRL" offset="0x6200" width="32" description="">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CAP_SEL" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal. This control is only used when TIMER0 is configured for capture operation. 0h - Use MCU_TIMER_IO0 pin 1h - Use MCU_TIMER_IO1 pin 2h - Use MCU_TIMER_IO2 pin 3h - Use MCU_TIMER_IO3 pin 4h - Use MCU_TIMER_IO4 pin 5h - Use MCU_TIMER_IO5 pin 6h - Use MCU_TIMER_IO6 pin 7h - Use MCU_TIMER_IO7 pin 8h - Use MCU_TIMER_IO8 pin 9h - Use MCU_TIMER_IO9 pin" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMER1_CTRL" acronym="CTRLMMR_MCU_TIMER1_CTRL" offset="0x6204" width="32" description="">
+    <bitfield id="RESERVED" width="23" begin="31" end="9" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CASCADE_EN" width="1" begin="8" end="8" resetval="0x0" description="When set, enables cascading of MCU_TIMER1 to MCU_TIMER0" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CAP_SEL" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal. This control is only used when TIMER1 is configured for capture operation. 0h - Use MCU_TIMER_IO0 pin 1h - Use MCU_TIMER_IO1 pin 2h - Use MCU_TIMER_IO2 pin 3h - Use MCU_TIMER_IO3 pin 4h - Use MCU_TIMER_IO4 pin 5h - Use MCU_TIMER_IO5 pin 6h - Use MCU_TIMER_IO6 pin 7h - Use MCU_TIMER_IO7 pin 8h - Use MCU_TIMER_IO8 pin 9h - Use MCU_TIMER_IO9 pin" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMER2_CTRL" acronym="CTRLMMR_MCU_TIMER2_CTRL" offset="0x6208" width="32" description="">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CAP_SEL" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal. This control is only used when TIMER2 is configured for capture operation. 0h - Use MCU_TIMER_IO0 pin 1h - Use MCU_TIMER_IO1 pin 2h - Use MCU_TIMER_IO2 pin 3h - Use MCU_TIMER_IO3 pin 4h - Use MCU_TIMER_IO4 pin 5h - Use MCU_TIMER_IO5 pin 6h - Use MCU_TIMER_IO6 pin 7h - Use MCU_TIMER_IO7 pin 8h - Use MCU_TIMER_IO8 pin 9h - Use MCU_TIMER_IO9 pin" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMER3_CTRL" acronym="CTRLMMR_MCU_TIMER3_CTRL" offset="0x620C" width="32" description="">
+    <bitfield id="RESERVED" width="23" begin="31" end="9" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CASCADE_EN" width="1" begin="8" end="8" resetval="0x0" description="When set, enables cascading of MCU_TIMER3 to MCU_TIMER2" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CAP_SEL" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal. This control is only used when TIMER3 is configured for capture operation. 0h - Use MCU_TIMER_IO0 pin 1h - Use MCU_TIMER_IO1 pin 2h - Use MCU_TIMER_IO2 pin 3h - Use MCU_TIMER_IO3 pin 4h - Use MCU_TIMER_IO4 pin 5h - Use MCU_TIMER_IO5 pin 6h - Use MCU_TIMER_IO6 pin 7h - Use MCU_TIMER_IO7 pin 8h - Use MCU_TIMER_IO8 pin 9h - Use MCU_TIMER_IO9 pin" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMER4_CTRL" acronym="CTRLMMR_MCU_TIMER4_CTRL" offset="0x6210" width="32" description="">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CAP_SEL" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal. This control is only used when TIMER4 is configured for capture operation. 0h - Use MCU_TIMER_IO0 pin 1h - Use MCU_TIMER_IO1 pin 2h - Use MCU_TIMER_IO2 pin 3h - Use MCU_TIMER_IO3 pin 4h - Use MCU_TIMER_IO4 pin 5h - Use MCU_TIMER_IO5 pin 6h - Use MCU_TIMER_IO6 pin 7h - Use MCU_TIMER_IO7 pin 8h - Use MCU_TIMER_IO8 pin 9h - Use MCU_TIMER_IO9 pin" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMER5_CTRL" acronym="CTRLMMR_MCU_TIMER5_CTRL" offset="0x6214" width="32" description="">
+    <bitfield id="RESERVED" width="23" begin="31" end="9" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CASCADE_EN" width="1" begin="8" end="8" resetval="0x0" description="When set, enables cascading of MCU_TIMER5 to MCU_TIMER4" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CAP_SEL" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal. This control is only used when TIMER5 is configured for capture operation. 0h - Use MCU_TIMER_IO0 pin 1h - Use MCU_TIMER_IO1 pin 2h - Use MCU_TIMER_IO2 pin 3h - Use MCU_TIMER_IO3 pin 4h - Use MCU_TIMER_IO4 pin 5h - Use MCU_TIMER_IO5 pin 6h - Use MCU_TIMER_IO6 pin 7h - Use MCU_TIMER_IO7 pin 8h - Use MCU_TIMER_IO8 pin 9h - Use MCU_TIMER_IO9 pin" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMER6_CTRL" acronym="CTRLMMR_MCU_TIMER6_CTRL" offset="0x6218" width="32" description="">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CAP_SEL" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal. This control is only used when TIMER6 is configured for capture operation. 0h - Use MCU_TIMER_IO0 pin 1h - Use MCU_TIMER_IO1 pin 2h - Use MCU_TIMER_IO2 pin 3h - Use MCU_TIMER_IO3 pin 4h - Use MCU_TIMER_IO4 pin 5h - Use MCU_TIMER_IO5 pin 6h - Use MCU_TIMER_IO6 pin 7h - Use MCU_TIMER_IO7 pin 8h - Use MCU_TIMER_IO8 pin 9h - Use MCU_TIMER_IO9 pin" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMER7_CTRL" acronym="CTRLMMR_MCU_TIMER7_CTRL" offset="0x621C" width="32" description="">
+    <bitfield id="RESERVED" width="23" begin="31" end="9" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CASCADE_EN" width="1" begin="8" end="8" resetval="0x0" description="When set, enables cascading of MCU_TIMER7 to MCU_TIMER6" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CAP_SEL" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal. This control is only used when TIMER7 is configured for capture operation. 0h - Use MCU_TIMER_IO0 pin 1h - Use MCU_TIMER_IO1 pin 2h - Use MCU_TIMER_IO2 pin 3h - Use MCU_TIMER_IO3 pin 4h - Use MCU_TIMER_IO4 pin 5h - Use MCU_TIMER_IO5 pin 6h - Use MCU_TIMER_IO6 pin 7h - Use MCU_TIMER_IO7 pin 8h - Use MCU_TIMER_IO8 pin 9h - Use MCU_TIMER_IO9 pin" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMER8_CTRL" acronym="CTRLMMR_MCU_TIMER8_CTRL" offset="0x6220" width="32" description="">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CAP_SEL" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal. This control is only used when TIMER8 is configured for capture operation. 0h - Use MCU_TIMER_IO0 pin 1h - Use MCU_TIMER_IO1 pin 2h - Use MCU_TIMER_IO2 pin 3h - Use MCU_TIMER_IO3 pin 4h - Use MCU_TIMER_IO4 pin 5h - Use MCU_TIMER_IO5 pin 6h - Use MCU_TIMER_IO6 pin 7h - Use MCU_TIMER_IO7 pin 8h - Use MCU_TIMER_IO8 pin 9h - Use MCU_TIMER_IO9 pin" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMER9_CTRL" acronym="CTRLMMR_MCU_TIMER9_CTRL" offset="0x6224" width="32" description="">
+    <bitfield id="RESERVED" width="23" begin="31" end="9" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CASCADE_EN" width="1" begin="8" end="8" resetval="0x0" description="When set, enables cascading of MCU_TIMER9 to MCU_TIMER8" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CAP_SEL" width="4" begin="3" end="0" resetval="0x0" description="Selects the MCU_TIMERIO input pin for capture input signal. This control is only used when TIMER9 is configured for capture operation. 0h - Use MCU_TIMER_IO0 pin 1h - Use MCU_TIMER_IO1 pin 2h - Use MCU_TIMER_IO2 pin 3h - Use MCU_TIMER_IO3 pin 4h - Use MCU_TIMER_IO4 pin 5h - Use MCU_TIMER_IO5 pin 6h - Use MCU_TIMER_IO6 pin 7h - Use MCU_TIMER_IO7 pin 8h - Use MCU_TIMER_IO8 pin 9h - Use MCU_TIMER_IO9 pin" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMERIO0_CTRL" acronym="CTRLMMR_MCU_TIMERIO0_CTRL" offset="0x6280" width="32" description="">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="OUT_SEL" width="4" begin="3" end="0" resetval="0xF" description="Selects the source of the MCU_TIMERIO0 output 0h - MCU_TIMERIO0 is driven by MCU_TIMER0 output 1h - MCU_TIMERIO0 is driven by MCU_TIMER1 output 2h - MCU_TIMERIO0 is driven by MCU_TIMER2 output 3h - MCU_TIMERIO0 is driven by MCU_TIMER3 output 4h - MCU_TIMERIO0 is driven by MCU_TIMER4 output 5h - MCU_TIMERIO0 is driven by MCU_TIMER5 output 6h - MCU_TIMERIO0 is driven by MCU_TIMER6 output 7h - MCU_TIMERIO0 is driven by MCU_TIMER7 output 8h - MCU_TIMERIO0 is driven by MCU_TIMER8 output 9h - MCU_TIMERIO0 is driven by MCU_TIMER9 output Ah - MCU_TIMERIO0 is driven low Bh - MCU_TIMERIO0 is driven high Ch - MCU_TIMERIO0 is driven low Dh - MCU_TIMERIO0 is driven high Eh - MCU_TIMERIO0 is driven low Fh - MCU_TIMERIO0 is driven high" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMERIO1_CTRL" acronym="CTRLMMR_MCU_TIMERIO1_CTRL" offset="0x6284" width="32" description="">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="OUT_SEL" width="4" begin="3" end="0" resetval="0xF" description="Selects the source of the MCU_TIMERIO1 output 0h - MCU_TIMERIO1 is driven by MCU_TIMER0 output 1h - MCU_TIMERIO1 is driven by MCU_TIMER1 output 2h - MCU_TIMERIO1 is driven by MCU_TIMER2 output 3h - MCU_TIMERIO1 is driven by MCU_TIMER3 output 4h - MCU_TIMERIO1 is driven by MCU_TIMER4 output 5h - MCU_TIMERIO1 is driven by MCU_TIMER5 output 6h - MCU_TIMERIO1 is driven by MCU_TIMER6 output 7h - MCU_TIMERIO1 is driven by MCU_TIMER7 output 8h - MCU_TIMERIO1 is driven by MCU_TIMER8 output 9h - MCU_TIMERIO1 is driven by MCU_TIMER9 output Ah - MCU_TIMERIO1 is driven low Bh - MCU_TIMERIO1 is driven high Ch - MCU_TIMERIO1 is driven low Dh - MCU_TIMERIO1 is driven high Eh - MCU_TIMERIO1 is driven low Fh - MCU_TIMERIO1 is driven high" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMERIO2_CTRL" acronym="CTRLMMR_MCU_TIMERIO2_CTRL" offset="0x6288" width="32" description="">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="OUT_SEL" width="4" begin="3" end="0" resetval="0xF" description="Selects the source of the MCU_TIMERIO2 output 0h - MCU_TIMERIO2 is driven by MCU_TIMER0 output 1h - MCU_TIMERIO2 is driven by MCU_TIMER1 output 2h - MCU_TIMERIO2 is driven by MCU_TIMER2 output 3h - MCU_TIMERIO2 is driven by MCU_TIMER3 output 4h - MCU_TIMERIO2 is driven by MCU_TIMER4 output 5h - MCU_TIMERIO2 is driven by MCU_TIMER5 output 6h - MCU_TIMERIO2 is driven by MCU_TIMER6 output 7h - MCU_TIMERIO2 is driven by MCU_TIMER7 output 8h - MCU_TIMERIO2 is driven by MCU_TIMER8 output 9h - MCU_TIMERIO2 is driven by MCU_TIMER9 output Ah - MCU_TIMERIO2 is driven low Bh - MCU_TIMERIO2 is driven high Ch - MCU_TIMERIO2 is driven low Dh - MCU_TIMERIO2 is driven high Eh - MCU_TIMERIO2 is driven low Fh - MCU_TIMERIO2 is driven high" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMERIO3_CTRL" acronym="CTRLMMR_MCU_TIMERIO3_CTRL" offset="0x628C" width="32" description="">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="OUT_SEL" width="4" begin="3" end="0" resetval="0xF" description="Selects the source of the MCU_TIMERIO3 output 0h - MCU_TIMERIO3 is driven by MCU_TIMER0 output 1h - MCU_TIMERIO3 is driven by MCU_TIMER1 output 2h - MCU_TIMERIO3 is driven by MCU_TIMER2 output 3h - MCU_TIMERIO3 is driven by MCU_TIMER3 output 4h - MCU_TIMERIO3 is driven by MCU_TIMER4 output 5h - MCU_TIMERIO3 is driven by MCU_TIMER5 output 6h - MCU_TIMERIO3 is driven by MCU_TIMER6 output 7h - MCU_TIMERIO3 is driven by MCU_TIMER7 output 8h - MCU_TIMERIO3 is driven by MCU_TIMER8 output 9h - MCU_TIMERIO3 is driven by MCU_TIMER9 output Ah - MCU_TIMERIO3 is driven low Bh - MCU_TIMERIO3 is driven high Ch - MCU_TIMERIO3 is driven low Dh - MCU_TIMERIO3 is driven high Eh - MCU_TIMERIO3 is driven low Fh - MCU_TIMERIO3 is driven high" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMERIO4_CTRL" acronym="CTRLMMR_MCU_TIMERIO4_CTRL" offset="0x6290" width="32" description="">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="OUT_SEL" width="4" begin="3" end="0" resetval="0xF" description="Selects the source of the MCU_TIMERIO4 output 0h - MCU_TIMERIO4 is driven by MCU_TIMER0 output 1h - MCU_TIMERIO4 is driven by MCU_TIMER1 output 2h - MCU_TIMERIO4 is driven by MCU_TIMER2 output 3h - MCU_TIMERIO4 is driven by MCU_TIMER3 output 4h - MCU_TIMERIO4 is driven by MCU_TIMER4 output 5h - MCU_TIMERIO4 is driven by MCU_TIMER5 output 6h - MCU_TIMERIO4 is driven by MCU_TIMER6 output 7h - MCU_TIMERIO4 is driven by MCU_TIMER7 output 8h - MCU_TIMERIO4 is driven by MCU_TIMER8 output 9h - MCU_TIMERIO4 is driven by MCU_TIMER9 output Ah - MCU_TIMERIO4 is driven low Bh - MCU_TIMERIO4 is driven high Ch - MCU_TIMERIO4 is driven low Dh - MCU_TIMERIO4 is driven high Eh - MCU_TIMERIO4 is driven low Fh - MCU_TIMERIO4 is driven high" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMERIO5_CTRL" acronym="CTRLMMR_MCU_TIMERIO5_CTRL" offset="0x6294" width="32" description="">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="OUT_SEL" width="4" begin="3" end="0" resetval="0xF" description="Selects the source of the MCU_TIMERIO5 output 0h - MCU_TIMERIO5 is driven by MCU_TIMER0 output 1h - MCU_TIMERIO5 is driven by MCU_TIMER1 output 2h - MCU_TIMERIO5 is driven by MCU_TIMER2 output 3h - MCU_TIMERIO5 is driven by MCU_TIMER3 output 4h - MCU_TIMERIO5 is driven by MCU_TIMER4 output 5h - MCU_TIMERIO5 is driven by MCU_TIMER5 output 6h - MCU_TIMERIO5 is driven by MCU_TIMER6 output 7h - MCU_TIMERIO5 is driven by MCU_TIMER7 output 8h - MCU_TIMERIO5 is driven by MCU_TIMER8 output 9h - MCU_TIMERIO5 is driven by MCU_TIMER9 output Ah - MCU_TIMERIO5 is driven low Bh - MCU_TIMERIO5 is driven high Ch - MCU_TIMERIO5 is driven low Dh - MCU_TIMERIO5 is driven high Eh - MCU_TIMERIO5 is driven low Fh - MCU_TIMERIO5 is driven high" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMERIO6_CTRL" acronym="CTRLMMR_MCU_TIMERIO6_CTRL" offset="0x6298" width="32" description="">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="OUT_SEL" width="4" begin="3" end="0" resetval="0xF" description="Selects the source of the MCU_TIMERIO6 output 0h - MCU_TIMERIO6 is driven by MCU_TIMER0 output 1h - MCU_TIMERIO6 is driven by MCU_TIMER1 output 2h - MCU_TIMERIO6 is driven by MCU_TIMER2 output 3h - MCU_TIMERIO6 is driven by MCU_TIMER3 output 4h - MCU_TIMERIO6 is driven by MCU_TIMER4 output 5h - MCU_TIMERIO6 is driven by MCU_TIMER5 output 6h - MCU_TIMERIO6 is driven by MCU_TIMER6 output 7h - MCU_TIMERIO6 is driven by MCU_TIMER7 output 8h - MCU_TIMERIO6 is driven by MCU_TIMER8 output 9h - MCU_TIMERIO6 is driven by MCU_TIMER9 output Ah - MCU_TIMERIO6 is driven low Bh - MCU_TIMERIO6 is driven high Ch - MCU_TIMERIO6 is driven low Dh - MCU_TIMERIO6 is driven high Eh - MCU_TIMERIO6 is driven low Fh - MCU_TIMERIO6 is driven high" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMERIO7_CTRL" acronym="CTRLMMR_MCU_TIMERIO7_CTRL" offset="0x629C" width="32" description="">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="OUT_SEL" width="4" begin="3" end="0" resetval="0xF" description="Selects the source of the MCU_TIMERIO7 output 0h - MCU_TIMERIO7 is driven by MCU_TIMER0 output 1h - MCU_TIMERIO7 is driven by MCU_TIMER1 output 2h - MCU_TIMERIO7 is driven by MCU_TIMER2 output 3h - MCU_TIMERIO7 is driven by MCU_TIMER3 output 4h - MCU_TIMERIO7 is driven by MCU_TIMER4 output 5h - MCU_TIMERIO7 is driven by MCU_TIMER5 output 6h - MCU_TIMERIO7 is driven by MCU_TIMER6 output 7h - MCU_TIMERIO7 is driven by MCU_TIMER7 output 8h - MCU_TIMERIO7 is driven by MCU_TIMER8 output 9h - MCU_TIMERIO7 is driven by MCU_TIMER9 output Ah - MCU_TIMERIO7 is driven low Bh - MCU_TIMERIO7 is driven high Ch - MCU_TIMERIO7 is driven low Dh - MCU_TIMERIO7 is driven high Eh - MCU_TIMERIO7 is driven low Fh - MCU_TIMERIO7 is driven high" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMERIO8_CTRL" acronym="CTRLMMR_MCU_TIMERIO8_CTRL" offset="0x62A0" width="32" description="">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="OUT_SEL" width="4" begin="3" end="0" resetval="0xF" description="Selects the source of the MCU_TIMERIO8 output 0h - MCU_TIMERIO8 is driven by MCU_TIMER0 output 1h - MCU_TIMERIO8 is driven by MCU_TIMER1 output 2h - MCU_TIMERIO8 is driven by MCU_TIMER2 output 3h - MCU_TIMERIO8 is driven by MCU_TIMER3 output 4h - MCU_TIMERIO8 is driven by MCU_TIMER4 output 5h - MCU_TIMERIO8 is driven by MCU_TIMER5 output 6h - MCU_TIMERIO8 is driven by MCU_TIMER6 output 7h - MCU_TIMERIO8 is driven by MCU_TIMER7 output 8h - MCU_TIMERIO8 is driven by MCU_TIMER8 output 9h - MCU_TIMERIO8 is driven by MCU_TIMER9 output Ah - MCU_TIMERIO8 is driven low Bh - MCU_TIMERIO8 is driven high Ch - MCU_TIMERIO8 is driven low Dh - MCU_TIMERIO8 is driven high Eh - MCU_TIMERIO8 is driven low Fh - MCU_TIMERIO8 is driven high" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMERIO9_CTRL" acronym="CTRLMMR_MCU_TIMERIO9_CTRL" offset="0x62A4" width="32" description="">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="OUT_SEL" width="4" begin="3" end="0" resetval="0xF" description="Selects the source of the MCU_TIMERIO9 output 0h - MCU_TIMERIO9 is driven by MCU_TIMER0 output 1h - MCU_TIMERIO9 is driven by MCU_TIMER1 output 2h - MCU_TIMERIO9 is driven by MCU_TIMER2 output 3h - MCU_TIMERIO9 is driven by MCU_TIMER3 output 4h - MCU_TIMERIO9 is driven by MCU_TIMER4 output 5h - MCU_TIMERIO9 is driven by MCU_TIMER5 output 6h - MCU_TIMERIO9 is driven by MCU_TIMER6 output 7h - MCU_TIMERIO9 is driven by MCU_TIMER7 output 8h - MCU_TIMERIO9 is driven by MCU_TIMER8 output 9h - MCU_TIMERIO9 is driven by MCU_TIMER9 output Ah - MCU_TIMERIO9 is driven low Bh - MCU_TIMERIO9 is driven high Ch - MCU_TIMERIO9 is driven low Dh - MCU_TIMERIO9 is driven high Eh - MCU_TIMERIO9 is driven low Fh - MCU_TIMERIO9 is driven high" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_MTOG0_CTRL" acronym="CTRLMMR_MCU_MTOG0_CTRL" offset="0x6300" width="32" description="">
+    <bitfield id="IDLE_STAT" width="1" begin="31" end="31" resetval="0xX" description="Idle status" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="7" begin="30" end="24" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="FORCE_TIMEOUT" width="8" begin="23" end="16" resetval="0x0" description="Force Timeout" range="" rwaccess="RW"/>
+    <bitfield id="TIMEOUT_EN" width="1" begin="15" end="15" resetval="0x0" description="Timeout Enable" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="14" end="3" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="TIMEOUT_VAL" width="3" begin="2" end="0" resetval="0x0" description="Gasket Timeout Value 0h - 1024 clock cycles 1h - 4096 clock cycles 2h - 16,384 clock cycles 3h - 65,536 clock cycles 4h - 262,144 clock cycles 5h - 1,048,576 clock cycles 6h - 2,097,152 clock cycles 7h - 4,194,303 clock cycles" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_LOCK1_KICK0" acronym="CTRLMMR_MCU_LOCK1_KICK0" offset="0x7008" width="32" description="">
+    <bitfield id="KEY" width="31" begin="31" end="1" resetval="0x0" description="Write the kick0 unlock value followed by the kick1 unlock value to unlock the write-protected Partition1 registers" range="" rwaccess="RW"/>
+    <bitfield id="UNLOCKED" width="1" begin="0" end="0" resetval="0x0" description="Unlock status. When set indicates that the proper unlock sequence has been performed and the partition is unlocked for writing." range="" rwaccess="R"/>
+  </register>
+  <register id="CTRLMMR_MCU_LOCK1_KICK1" acronym="CTRLMMR_MCU_LOCK1_KICK1" offset="0x700C" width="32" description="">
+    <bitfield id="KEY" width="32" begin="31" end="0" resetval="0x0" description="Write the kick1 unlock value after the kick0 unlock value to unlock the write-protected Partition1 registers" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P1_CLAIM0" acronym="CTRLMMR_MCU_P1_CLAIM0" offset="0x7100" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P1_CLAIM1" acronym="CTRLMMR_MCU_P1_CLAIM1" offset="0x7104" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P1_CLAIM2" acronym="CTRLMMR_MCU_P1_CLAIM2" offset="0x7108" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P1_CLAIM3" acronym="CTRLMMR_MCU_P1_CLAIM3" offset="0x710C" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P1_CLAIM4" acronym="CTRLMMR_MCU_P1_CLAIM4" offset="0x7110" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P1_CLAIM5" acronym="CTRLMMR_MCU_P1_CLAIM5" offset="0x7114" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P1_CLAIM6" acronym="CTRLMMR_MCU_P1_CLAIM6" offset="0x7118" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_CLKOUT0_CTRL" acronym="CTRLMMR_MCU_CLKOUT0_CTRL" offset="0xA010" width="32" description="">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CLK_EN" width="1" begin="4" end="4" resetval="0x0" description="When set, enables MCU_CLKOUT0 output" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="3" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CLK_SEL" width="1" begin="0" end="0" resetval="0x0" description="Selects MCU_CLKOUT0 clock source" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_EFUSE_CLKSEL" acronym="CTRLMMR_MCU_EFUSE_CLKSEL" offset="0xA018" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CLK_SEL" width="1" begin="0" end="0" resetval="0x0" description="Selects the clock source 0h - EFUSE_CLK (HFOSC0_CLKOUT or CLK_12M_RC) 1h - MCU_SYSCLK0 / 8" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_MCAN0_CLKSEL" acronym="CTRLMMR_MCU_MCAN0_CLKSEL" offset="0xA020" width="32" description="">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CLK_SEL" width="2" begin="1" end="0" resetval="0x0" description="MCU_MCAN MCAN_CLK selection" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_MCAN1_CLKSEL" acronym="CTRLMMR_MCU_MCAN1_CLKSEL" offset="0xA024" width="32" description="">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CLK_SEL" width="2" begin="1" end="0" resetval="0x0" description="MCU_MCAN MCAN_CLK selection" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_OSPI0_CLKSEL" acronym="CTRLMMR_MCU_OSPI0_CLKSEL" offset="0xA030" width="32" description="">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="LOOPCLK_SEL" width="1" begin="4" end="4" resetval="0x0" description="OBSPI0 Loopback clock source" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="3" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CLK_SEL" width="1" begin="0" end="0" resetval="0x0" description="OSPI0 reference clock selection" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_ADC0_CLKSEL" acronym="CTRLMMR_MCU_ADC0_CLKSEL" offset="0xA040" width="32" description="">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CLK_SEL" width="2" begin="1" end="0" resetval="0x0" description="Selects the sampling clock source for ADC0 0h - HFOSC0_CLKOUT 1h - MCU_PLL1_HSDIV1_CLKOUT1 2h - MCU_PLL0_HSDIV1_CLKOUT1 3h - MCU_EXT_REFCLK0" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_ENET_CLKSEL" acronym="CTRLMMR_MCU_ENET_CLKSEL" offset="0xA050" width="32" description="">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CPTS_CLKSEL" width="4" begin="11" end="8" resetval="0xF" description="Selects the clock source for the CPSW2x Ethernet switch Common Platform Time Stamp module 0h - MAIN_PLL3_HSDIV1_CLKOUT 1h - MAIN_PLL0_HSDIV6_CLKOUT 2h - MCU_CPTS_REF_CLK (pin) 3h - CPTS_RFT_CLK (pin) 4h - MCU_EXT_REFCLK0 (pin) 5h - EXT_REFCLK1 (pin) 6h - SERDES0_IP2_LN0_TXMCLK 7h - SERDES0_IP2_LN1_TXMCLK 8h - SERDES0_IP2_LN2_TXMCLK 9h - SERDES0_IP2_LN3_TXMCLK Ah - SERDES4_IP2_LN0_TXMCLK Bh - SERDES4_IP2_LN1_TXMCLK Ch - SERDES4_IP2_LN2_TXMCLK Dh - SERDES4_IP2_LN3_TXMCLK Eh - MCU_PLL2_HSDIV1_CLKOUT Fh - MAIN_SYSCLK0 / 2" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="7" begin="7" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="RMII_CLK_SEL" width="1" begin="0" end="0" resetval="0x0" description="Selects the rmii clock (rmii_mhz_50_clk) source. This defaults to the internal 50 MHz clock source for proper clockstop operation" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_R5_CORE0_CLKSEL" acronym="CTRLMMR_MCU_R5_CORE0_CLKSEL" offset="0xA080" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CLK_SEL" width="1" begin="0" end="0" resetval="0x0" description="Selects the Core 0 functional clock and mcu/interface clock ratio." range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMER0_CLKSEL" acronym="CTRLMMR_MCU_TIMER0_CLKSEL" offset="0xA100" width="32" description="">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CLK_SEL" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control 0h - HFOSC0_CLKOUT 1h - MCU_SYSCLK0 / 4 2h - CLK_12M_RC 3h - MCU_PLL2_HSDIV2_CLKOUT 4h - MCU_EXT_REFCLK0 5h - LFXOSC_CLKOUT 6h - CPSW_GENF0 7h - CLK_32K" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMER1_CLKSEL" acronym="CTRLMMR_MCU_TIMER1_CLKSEL" offset="0xA104" width="32" description="">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CLK_SEL" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control 0h - HFOSC0_CLKOUT 1h - MCU_SYSCLK0 / 4 2h - CLK_12M_RC 3h - MCU_PLL2_HSDIV2_CLKOUT 4h - MCU_EXT_REFCLK0 5h - LFXOSC_CLKOUT 6h - CPSW_GENF0 7h - CLK_32K" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMER2_CLKSEL" acronym="CTRLMMR_MCU_TIMER2_CLKSEL" offset="0xA108" width="32" description="">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CLK_SEL" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control 0h - HFOSC0_CLKOUT 1h - MCU_SYSCLK0 / 4 2h - CLK_12M_RC 3h - MCU_PLL2_HSDIV2_CLKOUT 4h - MCU_EXT_REFCLK0 5h - LFXOSC_CLKOUT 6h - CPSW_GENF0 7h - CLK_32K" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMER3_CLKSEL" acronym="CTRLMMR_MCU_TIMER3_CLKSEL" offset="0xA10C" width="32" description="">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CLK_SEL" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control 0h - HFOSC0_CLKOUT 1h - MCU_SYSCLK0 / 4 2h - CLK_12M_RC 3h - MCU_PLL2_HSDIV2_CLKOUT 4h - MCU_EXT_REFCLK0 5h - LFXOSC_CLKOUT 6h - CPSW_GENF0 7h - CLK_32K" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMER4_CLKSEL" acronym="CTRLMMR_MCU_TIMER4_CLKSEL" offset="0xA110" width="32" description="">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CLK_SEL" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control 0h - HFOSC0_CLKOUT 1h - MCU_SYSCLK0 / 4 2h - CLK_12M_RC 3h - MCU_PLL2_HSDIV2_CLKOUT 4h - MCU_EXT_REFCLK0 5h - LFXOSC_CLKOUT 6h - CPSW_GENF0 7h - CLK_32K" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMER5_CLKSEL" acronym="CTRLMMR_MCU_TIMER5_CLKSEL" offset="0xA114" width="32" description="">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CLK_SEL" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control 0h - HFOSC0_CLKOUT 1h - MCU_SYSCLK0 / 4 2h - CLK_12M_RC 3h - MCU_PLL2_HSDIV2_CLKOUT 4h - MCU_EXT_REFCLK0 5h - LFXOSC_CLKOUT 6h - CPSW_GENF0 7h - CLK_32K" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMER6_CLKSEL" acronym="CTRLMMR_MCU_TIMER6_CLKSEL" offset="0xA118" width="32" description="">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CLK_SEL" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control 0h - HFOSC0_CLKOUT 1h - MCU_SYSCLK0 / 4 2h - CLK_12M_RC 3h - MCU_PLL2_HSDIV2_CLKOUT 4h - MCU_EXT_REFCLK0 5h - LFXOSC_CLKOUT 6h - CPSW_GENF0 7h - CLK_32K" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMER7_CLKSEL" acronym="CTRLMMR_MCU_TIMER7_CLKSEL" offset="0xA11C" width="32" description="">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CLK_SEL" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control 0h - HFOSC0_CLKOUT 1h - MCU_SYSCLK0 / 4 2h - CLK_12M_RC 3h - MCU_PLL2_HSDIV2_CLKOUT 4h - MCU_EXT_REFCLK0 5h - LFXOSC_CLKOUT 6h - CPSW_GENF0 7h - CLK_32K" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMER8_CLKSEL" acronym="CTRLMMR_MCU_TIMER8_CLKSEL" offset="0xA120" width="32" description="">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CLK_SEL" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control 0h - HFOSC0_CLKOUT 1h - MCU_SYSCLK0 / 4 2h - CLK_12M_RC 3h - MCU_PLL2_HSDIV2_CLKOUT 4h - MCU_EXT_REFCLK0 5h - LFXOSC_CLKOUT 6h - CPSW_GENF0 7h - CLK_32K" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_TIMER9_CLKSEL" acronym="CTRLMMR_MCU_TIMER9_CLKSEL" offset="0xA124" width="32" description="">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CLK_SEL" width="3" begin="2" end="0" resetval="0x0" description="Timer functional clock input select mux control 0h - HFOSC0_CLKOUT 1h - MCU_SYSCLK0 / 4 2h - CLK_12M_RC 3h - MCU_PLL2_HSDIV2_CLKOUT 4h - MCU_EXT_REFCLK0 5h - LFXOSC_CLKOUT 6h - CPSW_GENF0 7h - CLK_32K" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_RTI0_CLKSEL" acronym="CTRLMMR_MCU_RTI0_CLKSEL" offset="0xA180" width="32" description="">
+    <bitfield id="WRTLOCK" width="1" begin="31" end="31" resetval="0x0" description="When set, locks further writes to" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="28" begin="30" end="3" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CLK_SEL" width="3" begin="2" end="0" resetval="0x0" description="RTI functional clock input select mux control 0h - HFOSC0_CLKOUT 1h - LFXOSC_CLKOUT 2h - CLK_12M_RC 3h - CLK_32K" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_RTI1_CLKSEL" acronym="CTRLMMR_MCU_RTI1_CLKSEL" offset="0xA184" width="32" description="">
+    <bitfield id="WRTLOCK" width="1" begin="31" end="31" resetval="0x0" description="When set, locks further writes to" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="28" begin="30" end="3" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CLK_SEL" width="3" begin="2" end="0" resetval="0x0" description="RTI functional clock input select mux control 0h - HFOSC0_CLKOUT 1h - LFXOSC_CLKOUT 2h - CLK_12M_RC 3h - CLK_32K" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_USART_CLKSEL" acronym="CTRLMMR_MCU_USART_CLKSEL" offset="0xA1C0" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CLK_SEL" width="1" begin="0" end="0" resetval="0x0" description="MCU_USART0 FCLK selection" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_LOCK2_KICK0" acronym="CTRLMMR_MCU_LOCK2_KICK0" offset="0xB008" width="32" description="">
+    <bitfield id="KEY" width="31" begin="31" end="1" resetval="0x0" description="Write the kick0 unlock value followed by the kick1 unlock value to unlock the write-protected Partition2 registers" range="" rwaccess="RW"/>
+    <bitfield id="UNLOCKED" width="1" begin="0" end="0" resetval="0x0" description="Unlock status. When set indicates that the proper unlock sequence has been performed and the partition is unlocked for writing." range="" rwaccess="R"/>
+  </register>
+  <register id="CTRLMMR_MCU_LOCK2_KICK1" acronym="CTRLMMR_MCU_LOCK2_KICK1" offset="0xB00C" width="32" description="">
+    <bitfield id="KEY" width="32" begin="31" end="0" resetval="0x0" description="Write the kick1 unlock value after the kick0 unlock value to unlock the write-protected Partition2 registers" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P2_CLAIM0" acronym="CTRLMMR_MCU_P2_CLAIM0" offset="0xB100" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P2_CLAIM1" acronym="CTRLMMR_MCU_P2_CLAIM1" offset="0xB104" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P2_CLAIM2" acronym="CTRLMMR_MCU_P2_CLAIM2" offset="0xB108" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P2_CLAIM3" acronym="CTRLMMR_MCU_P2_CLAIM3" offset="0xB10C" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_LBIST_CTRL" acronym="CTRLMMR_MCU_LBIST_CTRL" offset="0xE000" width="32" description="">
+    <bitfield id="BIST_RESET" width="1" begin="31" end="31" resetval="0xX" description="Reset LBIST macro" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="30" end="28" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="BIST_RUN" width="4" begin="27" end="24" resetval="0xX" description="Starts LBIST if all bits are 1" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="23" end="16" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="RUNBIST_MODE" width="4" begin="15" end="12" resetval="0xX" description="Runbist mode enable if all bits are 1" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="11" end="10" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="DC_DEF" width="2" begin="9" end="8" resetval="0xX" description="Clock delay after scan_enable switching" range="" rwaccess="RW"/>
+    <bitfield id="LOAD_DIV" width="1" begin="7" end="7" resetval="0xX" description="Loads LBIST clock divide ratio on transition from 0 to 1" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="6" end="5" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="DIVIDE_RATIO" width="5" begin="4" end="0" resetval="0xX" description="LBIST clock divide ratio" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_LBIST_PATCOUNT" acronym="CTRLMMR_MCU_LBIST_PATCOUNT" offset="0xE004" width="32" description="">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="STATIC_PC_DEF" width="14" begin="29" end="16" resetval="0xX" description="Number of stuck-at patterns to run" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="SET_PC_DEF" width="4" begin="11" end="8" resetval="0xX" description="Number of set patterns to run" range="" rwaccess="RW"/>
+    <bitfield id="RESET_PC_DEF" width="4" begin="7" end="4" resetval="0xX" description="Number of reset patterns to run" range="" rwaccess="RW"/>
+    <bitfield id="SCAN_PC_DEF" width="4" begin="3" end="0" resetval="0xX" description="Number of chain test patterns to run" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_LBIST_SEED0" acronym="CTRLMMR_MCU_LBIST_SEED0" offset="0xE008" width="32" description="">
+    <bitfield id="PRPG_DEF" width="32" begin="31" end="0" resetval="0xX" description="Initial seed for PRPG (bits 31:0)" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_LBIST_SEED1" acronym="CTRLMMR_MCU_LBIST_SEED1" offset="0xE00C" width="32" description="">
+    <bitfield id="RESERVED" width="11" begin="31" end="21" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="PRPG_DEF" width="21" begin="20" end="0" resetval="0xX" description="Initial seed for PRPG (bits 52:32)" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_LBIST_SPARE0" acronym="CTRLMMR_MCU_LBIST_SPARE0" offset="0xE010" width="32" description="">
+    <bitfield id="SPARE0" width="30" begin="31" end="2" resetval="0x0" description="LBIST spare bits" range="" rwaccess="RW"/>
+    <bitfield id="PBIST_SELFTEST_EN" width="1" begin="1" end="1" resetval="0x0" description="PBIST isolation control" range="" rwaccess="RW"/>
+    <bitfield id="LBIST_SELFTEST_EN" width="1" begin="0" end="0" resetval="0x0" description="LBIST isolation control" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_LBIST_SPARE1" acronym="CTRLMMR_MCU_LBIST_SPARE1" offset="0xE014" width="32" description="">
+    <bitfield id="SPARE1" width="32" begin="31" end="0" resetval="0x0" description="LBIST spare bits" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_LBIST_STAT" acronym="CTRLMMR_MCU_LBIST_STAT" offset="0xE018" width="32" description="">
+    <bitfield id="BIST_DONE" width="1" begin="31" end="31" resetval="0xX" description="LBIST is done" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="15" begin="30" end="16" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="BIST_RUNNING" width="1" begin="15" end="15" resetval="0xX" description="LBIST is running" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="14" end="10" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="OUT_MUX_CTL" width="2" begin="9" end="8" resetval="0x0" description="Selects source of LBIST output" range="" rwaccess="RW"/>
+    <bitfield id="MISR_MUX_CTL" width="8" begin="7" end="0" resetval="0x0" description="Selects block of 32 MISR bits to read. A value of 0 selects a compacted 32-bit version of the full MISR. A value of 1-32 select a 32-bit segment of the MISR." range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_LBIST_MISR" acronym="CTRLMMR_MCU_LBIST_MISR" offset="0xE01C" width="32" description="">
+    <bitfield id="MISR_RESULT" width="32" begin="31" end="0" resetval="0xX" description="32-bits of MISR value selected by misr_mux_ctl" range="" rwaccess="R"/>
+  </register>
+  <register id="CTRLMMR_MCU_LBIST_SIG" acronym="CTRLMMR_MCU_LBIST_SIG" offset="0xE280" width="32" description="">
+    <bitfield id="MISR_SIG" width="32" begin="31" end="0" resetval="0xX" description="MISR signature" range="" rwaccess="R"/>
+  </register>
+  <register id="CTRLMMR_MCU_LOCK3_KICK0" acronym="CTRLMMR_MCU_LOCK3_KICK0" offset="0xF008" width="32" description="">
+    <bitfield id="KEY" width="31" begin="31" end="1" resetval="0x0" description="Write the kick0 unlock value followed by the kick1 unlock value to unlock the write-protected Partition3 registers" range="" rwaccess="RW"/>
+    <bitfield id="UNLOCKED" width="1" begin="0" end="0" resetval="0x0" description="Unlock status. When set indicates that the proper unlock sequence has been performed and the partition is unlocked for writing." range="" rwaccess="R"/>
+  </register>
+  <register id="CTRLMMR_MCU_LOCK3_KICK1" acronym="CTRLMMR_MCU_LOCK3_KICK1" offset="0xF00C" width="32" description="">
+    <bitfield id="KEY" width="32" begin="31" end="0" resetval="0x0" description="Write the kick1 unlock value after the kick0 unlock value to unlock the write-protected Partition3 registers" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P3_CLAIM0" acronym="CTRLMMR_MCU_P3_CLAIM0" offset="0xF100" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P3_CLAIM1" acronym="CTRLMMR_MCU_P3_CLAIM1" offset="0xF104" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P3_CLAIM2" acronym="CTRLMMR_MCU_P3_CLAIM2" offset="0xF108" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P3_CLAIM3" acronym="CTRLMMR_MCU_P3_CLAIM3" offset="0xF10C" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P3_CLAIM4" acronym="CTRLMMR_MCU_P3_CLAIM4" offset="0xF110" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P3_CLAIM5" acronym="CTRLMMR_MCU_P3_CLAIM5" offset="0xF114" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_LOCK4_KICK0" acronym="CTRLMMR_MCU_LOCK4_KICK0" offset="0x13008" width="32" description="">
+    <bitfield id="KEY" width="31" begin="31" end="1" resetval="0x0" description="Write the kick0 unlock value followed by the kick1 unlock value to unlock the write-protected Partition4 registers" range="" rwaccess="RW"/>
+    <bitfield id="UNLOCKED" width="1" begin="0" end="0" resetval="0x0" description="Unlock status. When set indicates that the proper unlock sequence has been performed and the partition is unlocked for writing." range="" rwaccess="R"/>
+  </register>
+  <register id="CTRLMMR_MCU_LOCK4_KICK1" acronym="CTRLMMR_MCU_LOCK4_KICK1" offset="0x1300C" width="32" description="">
+    <bitfield id="KEY" width="32" begin="31" end="0" resetval="0x0" description="Write the kick1 unlock value after the kick0 unlock value to unlock the write-protected Partition4 registers" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P4_CLAIM0" acronym="CTRLMMR_MCU_P4_CLAIM0" offset="0x13100" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P4_CLAIM1" acronym="CTRLMMR_MCU_P4_CLAIM1" offset="0x13104" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P4_CLAIM2" acronym="CTRLMMR_MCU_P4_CLAIM2" offset="0x13108" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P4_CLAIM3" acronym="CTRLMMR_MCU_P4_CLAIM3" offset="0x1310C" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P4_CLAIM4" acronym="CTRLMMR_MCU_P4_CLAIM4" offset="0x13110" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P4_CLAIM5" acronym="CTRLMMR_MCU_P4_CLAIM5" offset="0x13114" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRLMMR_MCU_P4_CLAIM6" acronym="CTRLMMR_MCU_P4_CLAIM6" offset="0x13118" width="32" description="">
+    <bitfield id="PROXY1_CLAIMED" width="32" begin="31" end="0" resetval="0x0" description="Proxy1 register claim bit" range="" rwaccess="RW"/>
+  </register>
+</module>

@@ -1,0 +1,55 @@
+<module name="USB0_MMR_MMRVBP_USBSS_CMN" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="USB3P0SS_PID" acronym="USB3P0SS_PID" offset="0x0" width="32" description="The Revision Register contains the major and minor revisions for the module.">
+    <bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x1" description="Register scheme" range="" rwaccess="R"/>
+    <bitfield id="BU" width="2" begin="29" end="28" resetval="0x2" description="BU" range="" rwaccess="R"/>
+    <bitfield id="MODULE_ID" width="12" begin="27" end="16" resetval="0x822" description="Module ID" range="" rwaccess="R"/>
+    <bitfield id="RTL" width="5" begin="15" end="11" resetval="0xA" description="RTL revision." range="" rwaccess="R"/>
+    <bitfield id="MAJOR" width="3" begin="10" end="8" resetval="0x1" description="Major revision" range="" rwaccess="R"/>
+    <bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom" range="" rwaccess="R"/>
+    <bitfield id="MINOR" width="6" begin="5" end="0" resetval="0x0" description="Minor revision" range="" rwaccess="R"/>
+  </register>
+  <register id="USB3P0SS_W1" acronym="USB3P0SS_W1" offset="0x4" width="32" description="Wrapper register containing soft reset, mode selection, and overcurrent indicator.">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="USB2_ONLY_MODE" width="1" begin="19" end="19" resetval="0x0" description="Selects USB2 only mode." range="" rwaccess="RW"/>
+    <bitfield id="MODESTRAP" width="2" begin="18" end="17" resetval="0x0" description="Modestrap input to the Controller." range="" rwaccess="RW"/>
+    <bitfield id="OVERCURRENT_N" width="1" begin="16" end="16" resetval="0x1" description="Overcurrent indicator to the controller. Software writes 0 when overcurrent was detected by external circuitry." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="MODESTRAP_SEL" width="1" begin="9" end="9" resetval="0x0" description="This bit has to be always set to 1." range="" rwaccess="RW"/>
+    <bitfield id="OVERCURRENT_SEL" width="1" begin="8" end="8" resetval="0x0" description="Overcurrent select." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="7" begin="7" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="PWRUP_RST_N" width="1" begin="0" end="0" resetval="0x0" description="Power up reset for the controller." range="" rwaccess="RW"/>
+  </register>
+  <register id="USB3P0SS_STATIC_CONFIG" acronym="USB3P0SS_STATIC_CONFIG" offset="0x8" width="32" description="Wrapper register containing static settings. All bits in this register have to be written before setting PWRUP_RST_N bit in register.">
+    <bitfield id="RESERVED" width="23" begin="31" end="9" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="PLL_REF_SEL" width="4" begin="8" end="5" resetval="0x4" description="Indicates the frequency of the REF_CLOCK input used by the USB PLL." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="4" end="3" resetval="0x0" description="Reserved. Always keep at 0x0" range="" rwaccess="RW"/>
+    <bitfield id="VBUS_SEL" width="2" begin="2" end="1" resetval="0x0" description="VBUS select. Always set to 0x1" range="" rwaccess="RW"/>
+    <bitfield id="LANE_REVERSE" width="1" begin="0" end="0" resetval="0x0" description="USB2PHY D+/D- reverse selection." range="" rwaccess="RW"/>
+  </register>
+  <register id="USB3P0SS_PHY_TEST" acronym="USB3P0SS_PHY_TEST" offset="0xC" width="32" description="Register containing PLL bypass select, BIST control and status">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="Reserved bits" range="" rwaccess="R"/>
+    <bitfield id="BIST_MODE" width="1" begin="17" end="17" resetval="0x0" description="Set for bist mode." range="" rwaccess="RW"/>
+    <bitfield id="BIST_ERROR_COUNT" width="8" begin="16" end="9" resetval="0x0" description="Number of bytes that have errors while running BIST." range="" rwaccess="R"/>
+    <bitfield id="BIST_ERROR" width="1" begin="8" end="8" resetval="0x0" description="If set, this bit indicates that BIST completed with error." range="" rwaccess="R"/>
+    <bitfield id="BIST_COMPLETE" width="1" begin="7" end="7" resetval="0x0" description="If set, this bit indicates that the BIST operation is completed." range="" rwaccess="R"/>
+    <bitfield id="BIST_ON" width="1" begin="6" end="6" resetval="0x0" description="Setting this bit starts the BIST operation." range="" rwaccess="RW"/>
+    <bitfield id="BIST_MODE_EN" width="1" begin="5" end="5" resetval="0x0" description="BIST Mode Enable." range="" rwaccess="RW"/>
+    <bitfield id="BIST_MODE_SEL" width="4" begin="4" end="1" resetval="0x0" description="BIST Mode Selection." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="0" end="0" resetval="0x0" description="Reserved. Keep at 0x0" range="" rwaccess="RW"/>
+  </register>
+  <register id="USB3P0SS_DEBUG_CTRL" acronym="USB3P0SS_DEBUG_CTRL" offset="0x10" width="32" description="USB Controller debug selection register">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0" description="Reserved bits" range="" rwaccess="R"/>
+    <bitfield id="DEBUG_SEL" width="5" begin="4" end="0" resetval="0x0" description="Debug selection to be shown in DEBUG_INFO" range="" rwaccess="RW"/>
+  </register>
+  <register id="USB3P0SS_DEBUG_INFO" acronym="USB3P0SS_DEBUG_INFO" offset="0x14" width="32" description="USB Controller debug information register">
+    <bitfield id="DEBUG_INFO" width="32" begin="31" end="0" resetval="0x0" description="Debug information selected by DEBUG_SEL" range="" rwaccess="R"/>
+  </register>
+  <register id="USB3P0SS_DEBUG_LINK_STATE" acronym="USB3P0SS_DEBUG_LINK_STATE" offset="0x18" width="32" description="USB Controller debug link state information">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0x0" description="Reserved bits" range="" rwaccess="R"/>
+    <bitfield id="DEBUG_LINK_STATE" width="31" begin="30" end="0" resetval="0x0" description="Debug link state information" range="" rwaccess="R"/>
+  </register>
+  <register id="USB3P0SS_DEVICE_CTRL" acronym="USB3P0SS_DEVICE_CTRL" offset="0x1C" width="32" description="Register for device control">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved bits" range="" rwaccess="R"/>
+    <bitfield id="DEV_WAKEUP" width="1" begin="0" end="0" resetval="0x0" description="Set this bit to trigger device wakeup interrupt on IRQ[7]" range="" rwaccess="RW"/>
+  </register>
+</module>

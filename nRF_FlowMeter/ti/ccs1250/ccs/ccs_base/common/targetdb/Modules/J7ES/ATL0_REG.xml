@@ -1,0 +1,135 @@
+<module name="ATL0_REG" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="ATL_REVISION" acronym="ATL_REVISION" offset="0x0" width="32" description="Return to the . The Revision Register contains the major and minor revisions for the module.">
+    <bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x0" description="PID register scheme" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="2" begin="29" end="28" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="FUNCTION" width="12" begin="27" end="16" resetval="0xA07" description="Module ID" range="" rwaccess="R"/>
+    <bitfield id="RTL" width="5" begin="15" end="11" resetval="0x4" description="RTL" range="" rwaccess="R"/>
+    <bitfield id="MAJOR" width="3" begin="10" end="8" resetval="0x1" description="Major" range="" rwaccess="R"/>
+    <bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom" range="" rwaccess="R"/>
+    <bitfield id="MINOR" width="6" begin="5" end="0" resetval="0x0" description="Minor" range="" rwaccess="R"/>
+  </register>
+  <register id="ATL0_PPMR" acronym="ATL0_PPMR" offset="0x200" width="32" description="Return to the . The PPM register is used by the Audio re-timing code. The DAC over-sampling clock will slow down or speed up by the PPM written to bits [8:0].">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PPM_SD" width="1" begin="15" end="15" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="14" end="9" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PPM_SET" width="9" begin="8" end="0" resetval="0x0" description="This is the" range="" rwaccess="RW"/>
+  </register>
+  <register id="ATL0_BBSR" acronym="ATL0_BBSR" offset="0x204" width="32" description="Return to the . The measuring circuit produces a 16-bit Sample Count. Its inputs are the Audio IIS Word Select (AWS) and the Baseband IIS Word Select (BWS) from their respective MCASP pins. The sample count is a read-only register.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="SMP_CNT" width="16" begin="15" end="0" resetval="0x0" description="This is the" range="" rwaccess="R"/>
+  </register>
+  <register id="ATL0_ATLCR" acronym="ATL0_ATLCR" offset="0x208" width="32" description="Return to the . The modem Clock Divide Select bit is used during factory calibration of the radio to match latency between the analog and digital signal paths. The ATL Internal Divider divides down the ATL master clock to make ATCLK.">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CLK_DIV_SEL" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT_DIV" width="5" begin="4" end="0" resetval="0x18" description="Sets ratio of ATLPCLK to ATCLK" range="" rwaccess="RW"/>
+  </register>
+  <register id="ATL0_SWEN" acronym="ATL0_SWEN" offset="0x210" width="32" description="Return to the . The software enable register is used to enable/disable the ATL.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="When disabled the ATL registers are forced to known states for simulation purposes." range="" rwaccess="RW"/>
+  </register>
+  <register id="ATL0_BWSMUX" acronym="ATL0_BWSMUX" offset="0x214" width="32" description="Return to the . The Baseband IIS Word Select mux select control register">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SELECT" width="4" begin="3" end="0" resetval="0x0" description="BWS input select:" range="" rwaccess="RW"/>
+  </register>
+  <register id="ATL0_AWSMUX" acronym="ATL0_AWSMUX" offset="0x218" width="32" description="Return to the . The Audio IIS Word Select mux select control register">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SELECT" width="4" begin="3" end="0" resetval="0x0" description="AWS input select:" range="" rwaccess="RW"/>
+  </register>
+  <register id="ATL0_PCLKMUX" acronym="ATL0_PCLKMUX" offset="0x21C" width="32" description="Return to the . ATL core input clock mux select control register">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SELECT" width="1" begin="0" end="0" resetval="0x0" description="ATL" range="" rwaccess="RW"/>
+  </register>
+  <register id="ATL1_PPMR" acronym="ATL1_PPMR" offset="0x280" width="32" description="Return to the . The PPM register is used by the Audio re-timing code. The DAC over-sampling clock will slow down or speed up by the PPM written to bits [8:0].">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PPM_SD" width="1" begin="15" end="15" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="14" end="9" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PPM_SET" width="9" begin="8" end="0" resetval="0x0" description="This is the" range="" rwaccess="RW"/>
+  </register>
+  <register id="ATL1_BBSR" acronym="ATL1_BBSR" offset="0x284" width="32" description="Return to the . The measuring circuit produces a 16-bit Sample Count. Its inputs are the Audio IIS Word Select (AWS) and the Baseband IIS Word Select (BWS) from their respective MCASP pins. The sample count is a read-only register.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="SMP_CNT" width="16" begin="15" end="0" resetval="0x0" description="This is the" range="" rwaccess="R"/>
+  </register>
+  <register id="ATL1_ATLCR" acronym="ATL1_ATLCR" offset="0x288" width="32" description="Return to the . The modem Clock Divide Select bit is used during factory calibration of the radio to match latency between the analog and digital signal paths. The ATL Internal Divider divides down the ATL master clock to make ATCLK.">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CLK_DIV_SEL" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT_DIV" width="5" begin="4" end="0" resetval="0x18" description="Sets ratio of ATLPCLK to ATCLK" range="" rwaccess="RW"/>
+  </register>
+  <register id="ATL1_SWEN" acronym="ATL1_SWEN" offset="0x290" width="32" description="Return to the . The software enable register is used to enable/disable the ATL.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="When disabled the ATL registers are forced to known states for simulation purposes." range="" rwaccess="RW"/>
+  </register>
+  <register id="ATL1_BWSMUX" acronym="ATL1_BWSMUX" offset="0x294" width="32" description="Return to the . The Baseband IIS Word Select mux select control register">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SELECT" width="4" begin="3" end="0" resetval="0x0" description="BWS input select:" range="" rwaccess="RW"/>
+  </register>
+  <register id="ATL1_AWSMUX" acronym="ATL1_AWSMUX" offset="0x298" width="32" description="Return to the . The Audio IIS Word Select mux select control register">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SELECT" width="4" begin="3" end="0" resetval="0x0" description="AWS input select:" range="" rwaccess="RW"/>
+  </register>
+  <register id="ATL1_PCLKMUX" acronym="ATL1_PCLKMUX" offset="0x29C" width="32" description="Return to the . ATL core input clock mux select control register">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SELECT" width="1" begin="0" end="0" resetval="0x0" description="Non-functional" range="" rwaccess="RW"/>
+  </register>
+  <register id="ATL2_PPMR" acronym="ATL2_PPMR" offset="0x300" width="32" description="Return to the . The PPM register is used by the Audio re-timing code. The DAC over-sampling clock will slow down or speed up by the PPM written to bits [8:0].">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PPM_SD" width="1" begin="15" end="15" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="14" end="9" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PPM_SET" width="9" begin="8" end="0" resetval="0x0" description="This is the" range="" rwaccess="RW"/>
+  </register>
+  <register id="ATL2_BBSR" acronym="ATL2_BBSR" offset="0x304" width="32" description="Return to the . The measuring circuit produces a 16-bit Sample Count. Its inputs are the Audio IIS Word Select (AWS) and the Baseband IIS Word Select (BWS) from their respective MCASP pins. The sample count is a read-only register.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="SMP_CNT" width="16" begin="15" end="0" resetval="0x0" description="This is the" range="" rwaccess="R"/>
+  </register>
+  <register id="ATL2_ATLCR" acronym="ATL2_ATLCR" offset="0x308" width="32" description="Return to the . The modem Clock Divide Select bit is used during factory calibration of the radio to match latency between the analog and digital signal paths. The ATL Internal Divider divides down the ATL master clock to make ATCLK.">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CLK_DIV_SEL" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT_DIV" width="5" begin="4" end="0" resetval="0x18" description="Sets ratio of ATLPCLK to ATCLK" range="" rwaccess="RW"/>
+  </register>
+  <register id="ATL2_SWEN" acronym="ATL2_SWEN" offset="0x310" width="32" description="Return to the . The software enable register is used to enable/disable the ATL.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="When disabled the ATL registers are forced to known states for simulation purposes." range="" rwaccess="RW"/>
+  </register>
+  <register id="ATL2_BWSMUX" acronym="ATL2_BWSMUX" offset="0x314" width="32" description="Return to the . The Baseband IIS Word Select mux select control register">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SELECT" width="4" begin="3" end="0" resetval="0x0" description="BWS input select:" range="" rwaccess="RW"/>
+  </register>
+  <register id="ATL2_AWSMUX" acronym="ATL2_AWSMUX" offset="0x318" width="32" description="Return to the . The Audio IIS Word Select mux select control register">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SELECT" width="4" begin="3" end="0" resetval="0x0" description="AWS input select:" range="" rwaccess="RW"/>
+  </register>
+  <register id="ATL2_PCLKMUX" acronym="ATL2_PCLKMUX" offset="0x31C" width="32" description="Return to the . ATL core input clock mux select control register">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SELECT" width="1" begin="0" end="0" resetval="0x0" description="Non-functional" range="" rwaccess="RW"/>
+  </register>
+  <register id="ATL3_PPMR" acronym="ATL3_PPMR" offset="0x380" width="32" description="Return to the . The PPM register is used by the Audio re-timing code. The DAC over-sampling clock will slow down or speed up by the PPM written to bits [8:0].">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PPM_SD" width="1" begin="15" end="15" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="14" end="9" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PPM_SET" width="9" begin="8" end="0" resetval="0x0" description="This is the" range="" rwaccess="RW"/>
+  </register>
+  <register id="ATL3_BBSR" acronym="ATL3_BBSR" offset="0x384" width="32" description="Return to the . The measuring circuit produces a 16-bit Sample Count. Its inputs are the Audio IIS Word Select (AWS) and the Baseband IIS Word Select (BWS) from their respective MCASP pins. The sample count is a read-only register.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="R"/>
+    <bitfield id="SMP_CNT" width="16" begin="15" end="0" resetval="0x0" description="This is the" range="" rwaccess="R"/>
+  </register>
+  <register id="ATL3_ATLCR" acronym="ATL3_ATLCR" offset="0x388" width="32" description="Return to the . The modem Clock Divide Select bit is used during factory calibration of the radio to match latency between the analog and digital signal paths. The ATL Internal Divider divides down the ATL master clock to make ATCLK.">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CLK_DIV_SEL" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INT_DIV" width="5" begin="4" end="0" resetval="0x18" description="Sets ratio of ATLPCLK to ATCLK" range="" rwaccess="RW"/>
+  </register>
+  <register id="ATL3_SWEN" acronym="ATL3_SWEN" offset="0x390" width="32" description="Return to the . The software enable register is used to enable/disable the ATL.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="When disabled the ATL registers are forced to known states for simulation purposes." range="" rwaccess="RW"/>
+  </register>
+  <register id="ATL3_BWSMUX" acronym="ATL3_BWSMUX" offset="0x394" width="32" description="Return to the . The Baseband IIS Word Select mux select control register">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SELECT" width="4" begin="3" end="0" resetval="0x0" description="BWS input select:" range="" rwaccess="RW"/>
+  </register>
+  <register id="ATL3_AWSMUX" acronym="ATL3_AWSMUX" offset="0x398" width="32" description="Return to the . The Audio IIS Word Select mux select control register">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SELECT" width="4" begin="3" end="0" resetval="0x0" description="AWS input select:" range="" rwaccess="RW"/>
+  </register>
+  <register id="ATL3_PCLKMUX" acronym="ATL3_PCLKMUX" offset="0x39C" width="32" description="Return to the . ATL core input clock mux select control register">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SELECT" width="1" begin="0" end="0" resetval="0x0" description="Non-functional" range="" rwaccess="RW"/>
+  </register>
+</module>

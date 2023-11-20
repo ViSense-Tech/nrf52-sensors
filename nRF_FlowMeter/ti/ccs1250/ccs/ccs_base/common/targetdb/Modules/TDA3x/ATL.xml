@@ -1,0 +1,209 @@
+<module name="ATL" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="ATL_REVID" acronym="ATL_REVID" offset="0x0" width="32" description="ATL IP revision. Value is hard wired and revised for each new IP release">
+    <bitfield id="REV" width="32" begin="31" end="0" resetval="0x0000 0000" description="Identifies the ATL revision." range="" rwaccess="R"/>
+  </register>
+  <register id="ATL_PPMR0" acronym="ATL_PPMR0" offset="0x200" width="32" description="Parts per million register for the first ATL instance. This register is used by the adjusting circuit. The Parts-Per-Million Registers 0-2 (PPMRn) are used by the audio re-timing code to adjust the DAC clocking rate by changing the MCASP clocks. The MCASP high-speed clock slows down or speeds up by the PPM written to PPM_SETTING bits [8:0], which changes the DAC over-sampling clock or the frame sync and bit clocks.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0000" description="" range="" rwaccess="R"/>
+    <bitfield id="PPM_SLOWDOWN" width="1" begin="15" end="15" resetval="0" description="Part-Per-Million Slowdown" range="" rwaccess="RW">
+      <bitenum value="0" id="Speed_up" token="PPM_SLOWDOWN_0" description="Speed up"/>
+      <bitenum value="1" id="Slow_down" token="PPM_SLOWDOWN_1" description="Slow down"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="6" begin="14" end="9" resetval="0x00" description="" range="" rwaccess="R"/>
+    <bitfield id="PPM_SETTING" width="9" begin="8" end="0" resetval="" description="PPM_SETTING PPM adjustment = PPMR[8:0] &#247; 2" range="" rwaccess=""/>
+  </register>
+  <register id="ATL_BBSR0" acronym="ATL_BBSR0" offset="0x204" width="32" description="Baseband sample register for the first ATL instance.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0000" description="" range="" rwaccess="R"/>
+    <bitfield id="SAMPLE_COUNT" width="16" begin="15" end="0" resetval="0x0000" description="The measuring circuit produces a 16- bit Sample Count that is stored in the BBSR register. Its inputs are the Audio IIS Word Select (AWS) and the Baseband IIS Word Select (BWS) from their respective MCASP pins." range="" rwaccess="R"/>
+  </register>
+  <register id="ATL_ATLCR0" acronym="ATL_ATLCR0" offset="0x208" width="32" description="ATL configuration register for first ATL instance.">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0000 00" description="" range="" rwaccess="R"/>
+    <bitfield id="ATL_INTERNAL_DIVIDER" width="5" begin="4" end="0" resetval="0x00" description="ATL Internal Divider. Sets ATLPCLK-to-ATCLK ratio. The ATL Internal Divider divides down the ATL master clock (ATLPCLK) to generate ATCLK." range="" rwaccess="RW"/>
+  </register>
+  <register id="ATL_SWEN0" acronym="ATL_SWEN0" offset="0x210" width="32" description="Software enable bit for the first ATL instance. The audio tracking logic (ATL) must be held in reset while the AWS, BWS, and ATPCLK mux selections are set, and while the system level clocking is configured.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="SWEN" width="1" begin="0" end="0" resetval="0" description="Software enable bit. The software must enable this bit to enable the first ATL instance." range="" rwaccess="RW">
+      <bitenum value="0" id="ATL0_disabled" token="SWEN_0" description="ATL0 disabled"/>
+      <bitenum value="1" id="ATL0_enabled" token="SWEN_1" description="ATL0 enabled"/>
+    </bitfield>
+  </register>
+  <register id="ATL_BWSMUX0" acronym="ATL_BWSMUX0" offset="0x214" width="32" description="Select source for BWS input to first ATL instance. The ATL baseband word input can be connected to up to 15 different input sources. This register must be configured to set the MCASP (or other input) desired for the first ATL instance.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="BWSMUX" width="4" begin="3" end="0" resetval="0" description="Baseband Word Select Mux. Selects the source for the BWS input to the first ATL instance." range="" rwaccess="RW">
+      <bitenum value="0" id="MCASP1_FSR" token="BWSMUX_0" description="MCASP1_FSR"/>
+      <bitenum value="2" id="MCASP2_FSR" token="BWSMUX_2" description="MCASP2_FSR"/>
+      <bitenum value="3" id="MCASP2_FSX" token="BWSMUX_3" description="MCASP2_FSX"/>
+      <bitenum value="4" id="MCASP3_FSR" token="BWSMUX_4" description="MCASP3_FSR"/>
+      <bitenum value="5" id="MCASP3_FSX" token="BWSMUX_5" description="MCASP3_FSX"/>
+    </bitfield>
+  </register>
+  <register id="ATL_AWSMUX0" acronym="ATL_AWSMUX0" offset="0x218" width="32" description="Select source for AWS input to the first ATL instance. The ATL audio word input can be connected to up to 15 different input sources. This register must be configured to set the MCASP (or other input) desired for the first ATL instance.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="AWSMUX" width="4" begin="3" end="0" resetval="0" description="Audio Word Select Mux. Selects the source for the AWS input to the first ATL instance." range="" rwaccess="RW">
+      <bitenum value="0" id="MCASP1_FSR" token="AWSMUX_0" description="MCASP1_FSR"/>
+      <bitenum value="2" id="MCASP2_FSR" token="AWSMUX_2" description="MCASP2_FSR"/>
+      <bitenum value="3" id="MCASP2_FSX" token="AWSMUX_3" description="MCASP2_FSX"/>
+      <bitenum value="4" id="MCASP3_FSR" token="AWSMUX_4" description="MCASP3_FSR"/>
+      <bitenum value="5" id="MCASP3_FSX" token="AWSMUX_5" description="MCASP3_FSX"/>
+    </bitfield>
+  </register>
+  <register id="ATL_PCLKMUX0" acronym="ATL_PCLKMUX0" offset="0x21C" width="32" description="Select source for ATLPCLK input to all four ATL instances. The ATL clock input can be driven from with the OCP_CLK or the ATLPCLK inputs. The ATLPCLK selection register determines the final clock source for the ATL core audio tracking logic. In most use cases this will be set to the ATLPCLK input to use the system clocks shown in the device specific data manual.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="PCLKMUX" width="1" begin="0" end="0" resetval="0" description="ATLPCLK Selection Register Mux. Selects the source for the ATLPCLK input to all four ATL instances." range="" rwaccess="RW">
+      <bitenum value="0" id="OCP_CLK_input" token="PCLKMUX_0" description="OCP_CLK input"/>
+      <bitenum value="1" id="ATLPCLK_input" token="PCLKMUX_1" description="ATLPCLK input"/>
+    </bitfield>
+  </register>
+  <register id="ATL_PPMR1" acronym="ATL_PPMR1" offset="0x280" width="32" description="Parts per million register for the second ATL instance. This register is used by the adjusting circuit. The Parts-Per-Million Registers 0-2 (PPMRn) are used by the audio re-timing code to adjust the DAC clocking rate by changing the MCASP clocks. The MCASP high-speed clock slows down or speeds up by the PPM written to PPM_SETTING bits [8:0], which changes the DAC over-sampling clock or the frame sync and bit clocks.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0000" description="" range="" rwaccess="R"/>
+    <bitfield id="PPM_SLOWDOWN" width="1" begin="15" end="15" resetval="0" description="Part-Per-Million Slowdown" range="" rwaccess="RW">
+      <bitenum value="0" id="Speed_up" token="PPM_SLOWDOWN_0" description="Speed up"/>
+      <bitenum value="1" id="Slow_down" token="PPM_SLOWDOWN_1" description="Slow down"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="6" begin="14" end="9" resetval="0x00" description="" range="" rwaccess="R"/>
+    <bitfield id="PPM_SETTING" width="9" begin="8" end="0" resetval="" description="PPM_SETTING PPM adjustment = PPMR[8:0] &#247; 2" range="" rwaccess=""/>
+  </register>
+  <register id="ATL_BBSR1" acronym="ATL_BBSR1" offset="0x284" width="32" description="Baseband sample register for the second ATL instance.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0000" description="" range="" rwaccess="R"/>
+    <bitfield id="SAMPLE_COUNT" width="16" begin="15" end="0" resetval="0x0000" description="The measuring circuit produces a 16- bit Sample Count that is stored in the BBSR register. Its inputs are the Audio IIS Word Select (AWS) and the Baseband IIS Word Select (BWS) from their respective MCASP pins." range="" rwaccess="R"/>
+  </register>
+  <register id="ATL_ATLCR1" acronym="ATL_ATLCR1" offset="0x288" width="32" description="ATL configuration register for the second ATL instance.">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0000 00" description="" range="" rwaccess="R"/>
+    <bitfield id="ATL_INTERNAL_DIVIDER" width="5" begin="4" end="0" resetval="0x00" description="ATL Internal Divider. Sets ATLPCLK-to-ATCLK ratio. The ATL Internal Divider divides down the ATL master clock (ATLPCLK) to generate ATCLK." range="" rwaccess="RW"/>
+  </register>
+  <register id="ATL_SWEN1" acronym="ATL_SWEN1" offset="0x290" width="32" description="Software enable bit for the second ATL instance. The audio tracking logic (ATL) must be held in reset while the AWS, BWS, and ATPCLK mux selections are set, and while the system level clocking is configured.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="SWEN" width="1" begin="0" end="0" resetval="0" description="Software enable bit. The software must enable this bit to enable the second ATL instance." range="" rwaccess="RW">
+      <bitenum value="0" id="ATL1_disabled" token="SWEN_0" description="ATL1 disabled"/>
+      <bitenum value="1" id="ATL1_enabled" token="SWEN_1" description="ATL1 enabled"/>
+    </bitfield>
+  </register>
+  <register id="ATL_BWSMUX1" acronym="ATL_BWSMUX1" offset="0x294" width="32" description="Select source for BWS input to the second ATL instance. The ATL baseband word input can be connected to up to 15 different input sources. This register must be configured to set the MCASP (or other input) desired for the second ATL instance.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="BWSMUX" width="4" begin="3" end="0" resetval="0" description="Baseband Word Select Mux. Selects the source for the BWS input to the second ATL instance." range="" rwaccess="RW">
+      <bitenum value="0" id="MCASP1_FSR" token="BWSMUX_0" description="MCASP1_FSR"/>
+      <bitenum value="2" id="MCASP2_FSR" token="BWSMUX_2" description="MCASP2_FSR"/>
+      <bitenum value="3" id="MCASP2_FSX" token="BWSMUX_3" description="MCASP2_FSX"/>
+      <bitenum value="4" id="MCASP3_FSR" token="BWSMUX_4" description="MCASP3_FSR"/>
+      <bitenum value="5" id="MCASP3_FSX" token="BWSMUX_5" description="MCASP3_FSX"/>
+    </bitfield>
+  </register>
+  <register id="ATL_AWSMUX1" acronym="ATL_AWSMUX1" offset="0x298" width="32" description="Select source for AWS input to the second ATL instance. The ATL audio word input can be connected to up to 15 different input sources. This register must be configured to set the MCASP (or other input) desired for the second ATL instance.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="AWSMUX" width="4" begin="3" end="0" resetval="0" description="Audio Word Select Mux. Selects the source for the AWS input to the second ATL instance." range="" rwaccess="RW">
+      <bitenum value="0" id="MCASP1_FSR" token="AWSMUX_0" description="MCASP1_FSR"/>
+      <bitenum value="2" id="MCASP2_FSR" token="AWSMUX_2" description="MCASP2_FSR"/>
+      <bitenum value="3" id="MCASP2_FSX" token="AWSMUX_3" description="MCASP2_FSX"/>
+      <bitenum value="4" id="MCASP3_FSR" token="AWSMUX_4" description="MCASP3_FSR"/>
+      <bitenum value="5" id="MCASP3_FSX" token="AWSMUX_5" description="MCASP3_FSX"/>
+    </bitfield>
+  </register>
+  <register id="ATL_PCLKMUX1" acronym="ATL_PCLKMUX1" offset="0x29C" width="32" description="Select source for ATLPCLK input to the second ATL instance. The ATL clock input can be driven from with the OCP_CLK or the ATLPCLK inputs. The ATLPCLK selection register determines the final clock source for the ATL core audio tracking logic. In most use cases this will be set to the ATLPCLK input to use the system clocks shown in the device specific data manual.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="PCLKMUX" width="1" begin="0" end="0" resetval="0" description="ATLPCLK Selection Register Mux. Selects the source for the ATLPCLK input to the second ATL instance. (Not functional)." range="" rwaccess="RW">
+      <bitenum value="0" id="OCP_CLK_input" token="PCLKMUX_0" description="OCP_CLK input"/>
+      <bitenum value="1" id="ATLPCLK_input" token="PCLKMUX_1" description="ATLPCLK input"/>
+    </bitfield>
+  </register>
+  <register id="ATL_PPMR2" acronym="ATL_PPMR2" offset="0x300" width="32" description="Parts per million register for the third ATL instance. This register is used by the adjusting circuit. The Parts-Per-Million Registers 0-2 (PPMRn) are used by the audio re-timing code to adjust the DAC clocking rate by changing the MCASP clocks. The MCASP high-speed clock slows down or speeds up by the PPM written to PPM_SETTING bits [8:0], which changes the DAC over-sampling clock or the frame sync and bit clocks.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0000" description="" range="" rwaccess="R"/>
+    <bitfield id="PPM_SLOWDOWN" width="1" begin="15" end="15" resetval="0" description="Part-Per-Million Slowdown" range="" rwaccess="RW">
+      <bitenum value="0" id="Speed_up" token="PPM_SLOWDOWN_0" description="Speed up"/>
+      <bitenum value="1" id="Slow_down" token="PPM_SLOWDOWN_1" description="Slow down"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="6" begin="14" end="9" resetval="0x00" description="" range="" rwaccess="R"/>
+    <bitfield id="PPM_SETTING" width="9" begin="8" end="0" resetval="" description="PPM_SETTING PPM adjustment = PPMR[8:0] &#247; 2" range="" rwaccess=""/>
+  </register>
+  <register id="ATL_BBSR2" acronym="ATL_BBSR2" offset="0x304" width="32" description="Baseband sample register for third ATL instance.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0000" description="" range="" rwaccess="R"/>
+    <bitfield id="SAMPLE_COUNT" width="16" begin="15" end="0" resetval="0x0000" description="The measuring circuit produces a 16- bit Sample Count that is stored in the BBSR register. Its inputs are the Audio IIS Word Select (AWS) and the Baseband IIS Word Select (BWS) from their respective MCASP pins." range="" rwaccess="R"/>
+  </register>
+  <register id="ATL_ATLCR2" acronym="ATL_ATLCR2" offset="0x308" width="32" description="ATL configuration register for the third ATL instance.">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0000 00" description="" range="" rwaccess="R"/>
+    <bitfield id="ATL_INTERNAL_DIVIDER" width="5" begin="4" end="0" resetval="0x00" description="ATL Internal Divider. Sets ATLPCLK-to-ATCLK ratio. The ATL Internal Divider divides down the ATL master clock (ATLPCLK) to generate ATCLK." range="" rwaccess="RW"/>
+  </register>
+  <register id="ATL_SWEN2" acronym="ATL_SWEN2" offset="0x310" width="32" description="Software enable bit for the third ATL instance. The audio tracking logic (ATL) must be held in reset while the AWS, BWS, and ATPCLK mux selections are set, and while the system level clocking is configured.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="SWEN" width="1" begin="0" end="0" resetval="0" description="Software enable bit. The software must enable this bit to enable the third ATL instance." range="" rwaccess="RW">
+      <bitenum value="0" id="ATL2_disabled" token="SWEN_0" description="ATL2 disabled"/>
+      <bitenum value="1" id="ATL2_enabled" token="SWEN_1" description="ATL2 enabled"/>
+    </bitfield>
+  </register>
+  <register id="ATL_BWSMUX2" acronym="ATL_BWSMUX2" offset="0x314" width="32" description="Select source for BWS input to to the third ATL instance. The ATL baseband word input can be connected to up to 15 different input sources. This register must be configured to set the MCASP (or other input) desired for the third ATL instance.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0000 000" description="" range="" rwaccess="R"/>
+    <bitfield id="BWSMUX" width="4" begin="3" end="0" resetval="0x0" description="Baseband Word Select Mux. Selects the source for the BWS input to the third ATL instance." range="" rwaccess="RW">
+      <bitenum value="0" id="MCASP1_FSR" token="BWSMUX_0" description="MCASP1_FSR"/>
+      <bitenum value="2" id="MCASP2_FSR" token="BWSMUX_2" description="MCASP2_FSR"/>
+      <bitenum value="3" id="MCASP2_FSX" token="BWSMUX_3" description="MCASP2_FSX"/>
+      <bitenum value="4" id="MCASP3_FSR" token="BWSMUX_4" description="MCASP3_FSR"/>
+      <bitenum value="5" id="MCASP3_FSX" token="BWSMUX_5" description="MCASP3_FSX"/>
+    </bitfield>
+  </register>
+  <register id="ATL_AWSMUX2" acronym="ATL_AWSMUX2" offset="0x318" width="32" description="Select source for AWS input to the third ATL instance. The ATL audio word input can be connected to up to 15 different input sources. This register must be configured to set the MCASP (or other input) desired for the third ATL instance.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="AWSMUX" width="4" begin="3" end="0" resetval="0" description="Audio Word Select Mux. Selects the source for the AWS input to the third ATL instance." range="" rwaccess="RW">
+      <bitenum value="0" id="MCASP1_FSR" token="AWSMUX_0" description="MCASP1_FSR"/>
+      <bitenum value="2" id="MCASP2_FSR" token="AWSMUX_2" description="MCASP2_FSR"/>
+      <bitenum value="3" id="MCASP2_FSX" token="AWSMUX_3" description="MCASP2_FSX"/>
+      <bitenum value="4" id="MCASP3_FSR" token="AWSMUX_4" description="MCASP3_FSR"/>
+      <bitenum value="5" id="MCASP3_FSX" token="AWSMUX_5" description="MCASP3_FSX"/>
+    </bitfield>
+  </register>
+  <register id="ATL_PCLKMUX2" acronym="ATL_PCLKMUX2" offset="0x31C" width="32" description="Select source for ATLPCLK input to the third ATL instance. The ATL clock input can be driven from with the OCP_CLK or the ATLPCLK inputs. The ATLPCLK selection register determines the final clock source for the ATL core audio tracking logic. In most use cases this will be set to the ATLPCLK input to use the system clocks shown in the device specific data manual.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="PCLKMUX" width="1" begin="0" end="0" resetval="0" description="ATLPCLK Selection Register Mux. Selects the source for the ATLPCLK input to the third instance. (Not functional)." range="" rwaccess="RW">
+      <bitenum value="0" id="OCP_CLK_input" token="PCLKMUX_0" description="OCP_CLK input"/>
+      <bitenum value="1" id="ATLPCLK_input" token="PCLKMUX_1" description="ATLPCLK input"/>
+    </bitfield>
+  </register>
+  <register id="ATL_PPMR3" acronym="ATL_PPMR3" offset="0x380" width="32" description="Parts per million register fourth ATL instance. This register is used by the adjusting circuit. The Parts-Per-Million Registers 0-2 (PPMRn) are used by the audio re-timing code to adjust the DAC clocking rate by changing the MCASP clocks. The MCASP high-speed clock slows down or speeds up by the PPM written to PPM_SETTING bits [8:0], which changes the DAC over-sampling clock or the frame sync and bit clocks.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0000" description="" range="" rwaccess="R"/>
+    <bitfield id="PPM_SLOWDOWN" width="1" begin="15" end="15" resetval="0" description="Part-Per-Million Slowdown" range="" rwaccess="RW">
+      <bitenum value="0" id="Speed_up" token="PPM_SLOWDOWN_0" description="Speed up"/>
+      <bitenum value="1" id="Slow_down" token="PPM_SLOWDOWN_1" description="Slow down"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="6" begin="14" end="9" resetval="0x00" description="" range="" rwaccess="R"/>
+    <bitfield id="PPM_SETTING" width="9" begin="8" end="0" resetval="" description="PPM_SETTING PPM adjustment = PPMR[8:0] &#247; 2" range="" rwaccess=""/>
+  </register>
+  <register id="ATL_BBSR3" acronym="ATL_BBSR3" offset="0x384" width="32" description="Baseband sample register fourth ATL instance.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0000" description="" range="" rwaccess="R"/>
+    <bitfield id="SAMPLE_COUNT" width="16" begin="15" end="0" resetval="0x0000" description="The measuring circuit produces a 16- bit Sample Count that is stored in the BBSR register. Its inputs are the Audio IIS Word Select (AWS) and the Baseband IIS Word Select (BWS) from their respective MCASP pins." range="" rwaccess="R"/>
+  </register>
+  <register id="ATL_ATLCR3" acronym="ATL_ATLCR3" offset="0x388" width="32" description="ATL configuration register fourth ATL instance.">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0000 00" description="" range="" rwaccess="R"/>
+    <bitfield id="ATL_INTERNAL_DIVIDER" width="5" begin="4" end="0" resetval="0x00" description="ATL Internal Divider. Sets ATLPCLK-to-ATCLK ratio. The ATL Internal Divider divides down the ATL master clock (ATLPCLK) to generate ATCLK." range="" rwaccess="RW"/>
+  </register>
+  <register id="ATL_SWEN3" acronym="ATL_SWEN3" offset="0x390" width="32" description="Software enable bit for fourth ATL instance. The audio tracking logic (ATL) must be held in reset while the AWS, BWS, and ATPCLK mux selections are set, and while the system level clocking is configured.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="SWEN" width="1" begin="0" end="0" resetval="0" description="Software enable bit. The software must enable this bit to enable the fourth ATL instance." range="" rwaccess="RW">
+      <bitenum value="0" id="ATL3_disabled" token="SWEN_0" description="ATL3 disabled"/>
+      <bitenum value="1" id="ATL3_enabled" token="SWEN_1" description="ATL3 enabled"/>
+    </bitfield>
+  </register>
+  <register id="ATL_BWSMUX3" acronym="ATL_BWSMUX3" offset="0x394" width="32" description="Select source for BWS input to fourth instance ATL. The ATL baseband word input can be connected to up to 15 different input sources. This register must be configured to set the MCASP (or other input) desired for the fourth ATL instance.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0000 000" description="" range="" rwaccess="R"/>
+    <bitfield id="BWSMUX" width="4" begin="3" end="0" resetval="0x0" description="Baseband Word Select Mux. Selects the source for the BWS input to the fourth ATL instance." range="" rwaccess="RW">
+      <bitenum value="0" id="MCASP1_FSR" token="BWSMUX_0" description="MCASP1_FSR"/>
+      <bitenum value="2" id="MCASP2_FSR" token="BWSMUX_2" description="MCASP2_FSR"/>
+      <bitenum value="3" id="MCASP2_FSX" token="BWSMUX_3" description="MCASP2_FSX"/>
+      <bitenum value="4" id="MCASP3_FSR" token="BWSMUX_4" description="MCASP3_FSR"/>
+      <bitenum value="5" id="MCASP3_FSX" token="BWSMUX_5" description="MCASP3_FSX"/>
+    </bitfield>
+  </register>
+  <register id="ATL_AWSMUX3" acronym="ATL_AWSMUX3" offset="0x398" width="32" description="Select source for AWS input to fourth instance ATL. The ATL audio word input can be connected to up to 15 different input sources. This register must be configured to set the MCASP (or other input) desired for the fourth ATL instance.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="AWSMUX" width="4" begin="3" end="0" resetval="0" description="Audio Word Select Mux. Selects the source for the AWS input to the fourth ATL instance" range="" rwaccess="RW">
+      <bitenum value="0" id="MCASP1_FSR" token="AWSMUX_0" description="MCASP1_FSR"/>
+      <bitenum value="2" id="MCASP2_FSR" token="AWSMUX_2" description="MCASP2_FSR"/>
+      <bitenum value="3" id="MCASP2_FSX" token="AWSMUX_3" description="MCASP2_FSX"/>
+      <bitenum value="4" id="MCASP3_FSR" token="AWSMUX_4" description="MCASP3_FSR"/>
+      <bitenum value="5" id="MCASP3_FSX" token="AWSMUX_5" description="MCASP3_FSX"/>
+    </bitfield>
+  </register>
+  <register id="ATL_PCLKMUX3" acronym="ATL_PCLKMUX3" offset="0x39C" width="32" description="Select source for ATLPCLK input to fourth instance ATL. The ATL clock input can be driven from with the OCP_CLK or the ATLPCLK inputs. The ATLPCLK selection register determines the final clock source for the ATL core audio tracking logic. In most use cases this will be set to the ATLPCLK input to use the system clocks shown in the device specific data manual.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="PCLKMUX" width="1" begin="0" end="0" resetval="0" description="ATLPCLK Selection Register Mux. Selects the source for the ATLPCLK input to the fourth ATL instance. (Not functional)." range="" rwaccess="RW">
+      <bitenum value="0" id="OCP_CLK_input" token="PCLKMUX_0" description="OCP_CLK input"/>
+      <bitenum value="1" id="ATLPCLK_input" token="PCLKMUX_1" description="ATLPCLK input"/>
+    </bitfield>
+  </register>
+</module>

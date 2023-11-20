@@ -1,0 +1,39 @@
+<module name="COMPUTE_CLUSTER_J7AHP0_CFG_WRAP_0_CC" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="CC_REGS_ARM_0_REV" acronym="CC_REGS_ARM_0_REV" offset="0x0" width="32" description="">
+		<bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x1" description="Scheme" range="31 - 30" rwaccess="R"/> 
+		<bitfield id="BU" width="2" begin="29" end="28" resetval="0x2" description="Scheme" range="29 - 28" rwaccess="R"/> 
+		<bitfield id="MODULE_ID" width="12" begin="27" end="16" resetval="0x2" description="Module ID" range="27 - 16" rwaccess="R"/> 
+		<bitfield id="REVRTL" width="5" begin="15" end="11" resetval="0x0" description="RTL version" range="15 - 11" rwaccess="R"/> 
+		<bitfield id="REVMAX" width="3" begin="10" end="8" resetval="0x0" description="Major version" range="10 - 8" rwaccess="R"/> 
+		<bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom version" range="7 - 6" rwaccess="R"/> 
+		<bitfield id="REVMIN" width="6" begin="5" end="0" resetval="0x0" description="Minor version" range="5 - 0" rwaccess="R"/>
+	</register>
+	<register id="CC_REGS_ARM_1_REV" acronym="CC_REGS_ARM_1_REV" offset="0x4" width="32" description="">
+		<bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x1" description="Scheme" range="31 - 30" rwaccess="R"/> 
+		<bitfield id="BU" width="2" begin="29" end="28" resetval="0x2" description="Scheme" range="29 - 28" rwaccess="R"/> 
+		<bitfield id="MODULE_ID" width="12" begin="27" end="16" resetval="0x2" description="Module ID" range="27 - 16" rwaccess="R"/> 
+		<bitfield id="REVRTL" width="5" begin="15" end="11" resetval="0x0" description="RTL version" range="15 - 11" rwaccess="R"/> 
+		<bitfield id="REVMAX" width="3" begin="10" end="8" resetval="0x0" description="Major version" range="10 - 8" rwaccess="R"/> 
+		<bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom version" range="7 - 6" rwaccess="R"/> 
+		<bitfield id="REVMIN" width="6" begin="5" end="0" resetval="0x0" description="Minor version" range="5 - 0" rwaccess="R"/>
+	</register>
+	<register id="CC_REGS_ARM_0_PBIST_BISOR_CNTRL" acronym="CC_REGS_ARM_0_PBIST_BISOR_CNTRL" offset="0x100" width="32" description="">
+		<bitfield id="CC_ARM0_1_DFT_SELF_REPAIR_MODE_OVERRIDE" width="1" begin="1" end="1" resetval="0x0" description="bisor 1 override for cpu0" range="1" rwaccess="R/W"/> 
+		<bitfield id="CC_ARM0_0_DFT_SELF_REPAIR_MODE_OVERRIDE" width="1" begin="0" end="0" resetval="0x0" description="bisor 0 override for cpu0" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CC_REGS_ARM_1_PBIST_BISOR_CNTRL" acronym="CC_REGS_ARM_1_PBIST_BISOR_CNTRL" offset="0x104" width="32" description="">
+		<bitfield id="CC_ARM0_1_DFT_SELF_REPAIR_MODE_OVERRIDE" width="1" begin="1" end="1" resetval="0x0" description="bisor 1 override for cpu1" range="1" rwaccess="R/W"/> 
+		<bitfield id="CC_ARM0_0_DFT_SELF_REPAIR_MODE_OVERRIDE" width="1" begin="0" end="0" resetval="0x0" description="bisor 0 override for cpu1" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CC_REGS_CC_CNTRL" acronym="CC_REGS_CC_CNTRL" offset="0x200" width="32" description="">
+		<bitfield id="DRU_7_CTSET_SEL" width="2" begin="23" end="22" resetval="0x0" description="DRU ctset mux control. 00 - DRU7 ctset and CMMU events are connected to debug_wrap hwdbg event. 01 - DRU1 ctset and CMMU events are connected to debug_wrap hwdbg event. 10 - Unused. 11 - Unused" range="23 - 22" rwaccess="R/W"/> 
+		<bitfield id="DRU_6_CTSET_SEL" width="2" begin="21" end="20" resetval="0x0" description="DRU ctset mux control. 00 - DRU6 ctset and CMMU events are connected to debug_wrap hwdbg event. 01 - DRU1 ctset and CMMU events are connected to debug_wrap hwdbg event. 10 - Unused. 11 - Unused" range="21 - 20" rwaccess="R/W"/> 
+		<bitfield id="DRU_5_CTSET_SEL" width="2" begin="19" end="18" resetval="0x0" description="DRU ctset mux control. 00 - DRU5 ctset and CMMU events are connected to debug_wrap hwdbg event. 01 - DRU1 ctset and CMMU events are connected to debug_wrap hwdbg event. 10 - Unused. 11 - Unused" range="19 - 18" rwaccess="R/W"/> 
+		<bitfield id="DRU_4_CTSET_SEL" width="2" begin="17" end="16" resetval="0x0" description="DRU ctset mux control. 00 - DRU4 ctset and CMMU events are connected to debug_wrap hwdbg event. 01 - DRU1 ctset and CMMU events are connected to debug_wrap hwdbg event. 10 - Unused. 11 - Unused" range="17 - 16" rwaccess="R/W"/> 
+		<bitfield id="DSP_7_DEBUG_CLKEN_OVERRIDE" width="1" begin="11" end="11" resetval="0x0" description="DSP I0/I1 clock gate override. Can be used to override DSP I0/I1 clock enables for debug on all instances. This bit has to set before AC71 powerup. 1 - Override I0/I1 clock enable on all DSP instances in compute cluster." range="11" rwaccess="R/W"/> 
+		<bitfield id="DSP_6_DEBUG_CLKEN_OVERRIDE" width="1" begin="10" end="10" resetval="0x0" description="DSP I0/I1 clock gate override. Can be used to override DSP I0/I1 clock enables for debug on all instances. This bit has to set before AC71 powerup. 1 - Override I0/I1 clock enable on all DSP instances in compute cluster." range="10" rwaccess="R/W"/> 
+		<bitfield id="DSP_5_DEBUG_CLKEN_OVERRIDE" width="1" begin="9" end="9" resetval="0x0" description="DSP I0/I1 clock gate override. Can be used to override DSP I0/I1 clock enables for debug on all instances. This bit has to set before AC71 powerup. 1 - Override I0/I1 clock enable on all DSP instances in compute cluster." range="9" rwaccess="R/W"/> 
+		<bitfield id="DSP_4_DEBUG_CLKEN_OVERRIDE" width="1" begin="8" end="8" resetval="0x0" description="DSP I0/I1 clock gate override. Can be used to override DSP I0/I1 clock enables for debug on all instances. This bit has to set before AC71 powerup. 1 - Override I0/I1 clock enable on all DSP instances in compute cluster." range="8" rwaccess="R/W"/> 
+		<bitfield id="DRU_CTSET_SEL" width="2" begin="1" end="0" resetval="0x0" description="DRU ctset mux control. 00 - DRU0 ctset and CMMU events are connected to debug_wrap hwdbg event. 01 - DRU1 ctset and CMMU events are connected to debug_wrap hwdbg event. 10 - Unused. 11 - Unused" range="1 - 0" rwaccess="R/W"/>
+	</register>
+</module>

@@ -1,0 +1,723 @@
+<module name="EVE1_DSP" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="EVE_REVISION" acronym="EVE_REVISION" offset="0x80000" width="32" description="">
+    <bitfield id="REVISION" width="32" begin="31" end="0" resetval="0x0" description="Revision" range="" rwaccess="R"/>
+  </register>
+  <register id="EVE_HWINFO" acronym="EVE_HWINFO" offset="0x80004" width="32" description="">
+    <bitfield id="INFO" width="28" begin="31" end="4" resetval="0x00" description="0x0: No configurable options in EVE" range="" rwaccess="R"/>
+    <bitfield id="EVENUM" width="4" begin="3" end="0" resetval="0x0" description="EVE instance number set by eve_num inputs. In a multi-EVE system must be set to unique/incrementing values for each EVE." range="" rwaccess="R"/>
+  </register>
+  <register id="EVE_SYSCONFIG" acronym="EVE_SYSCONFIG" offset="0x80008" width="32" description="">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0x0000" description="Reserved. Read returns 0s" range="" rwaccess="RW"/>
+    <bitfield id="STANDBYMODE" width="2" begin="5" end="4" resetval="0x0" description="00: Force-Standby mode: This mode is a backup mode intended to be used only if the smart-idle mode is bugged. When in this mode / the SAF asserts with minimal hardware condition the status saying :I am in standby:. It is the responsibility of the software to ensure that the SAF is in a correct quiet state before programming this mode. Additionally when in this mode / the SAF is not allowed to generate wakeup reques . 01: No-Standby: This mode is a backup mode intended to be used only if the smart-idle mode is bugged. When in this mode / the SAF never asserts the status declaring that the system is in standby. 10: Smart-Standby: default. EVE generates the standby status based upon all hardware internal status / namely after having performed all hardware operations necessary to be in a correct quiet state. Additionally when in this mode / the SAF is not allowed to generate wakeup request. 11: Smart-Standby-Wkup: Same as Smart-Standby. (EVE generates the standby status based upon all hardware internal status / namely after having performed all hardware operations necessary to be in a correct quiet state ). . Additionally when in this mode / the SAF is allowed to generate wakeup request" range="" rwaccess="RW"/>
+    <bitfield id="IDLEMODE" width="2" begin="3" end="2" resetval="0x0" description="00: Force-idle: This mode is a backup mode intended to be used only if the smart-idle mode is bugged. When in this mode the IAF acknowledges a request to go idle from the power manager with minimal hardware condition. It is the responsibility of the software to ensure that the IAF are in a correct quiet state before requesting a force-idle transition. Additionaly when in this mode the IAF is not allowed to generate any wakeup request. 01: No-idle: When in this mode the IAF disregards any request to go idle from the power manager. 10: Smart-idle: default mode. default. When in this mode / the IAF acknowledges a request to go idle from the power manager after having performed all hardware operations necessary to be in a correct quiet state. Additionally when in this mode / the IAF is not allowed to generate any wakeup reques 11: SmartIdleWkup : When in this mode / the IAF acknowledges a request to go idle from the power manager after having performed all hardware operations necessary for the IAF to be in a correct quiet state. Additionally when in this mode / the IAF is allowed to generate wakeup request" range="" rwaccess="RW"/>
+    <bitfield id="FREEEMU" width="1" begin="1" end="1" resetval="0x0" description="Resered. Note that SCTM has free control bit to define the timer operation during ARP32 debug halt mode" range="" rwaccess="R"/>
+    <bitfield id="SOFTRESET" width="1" begin="0" end="0" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+  </register>
+  <register id="EVE_STAT" acronym="EVE_STAT" offset="0x8000C" width="32" description="">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0000" description="" range="" rwaccess="R"/>
+    <bitfield id="OCPI_DISC_STAT" width="2" begin="21" end="20" resetval="0x0000" description="OCP Initiator(s) Disconnect status2:" range="" rwaccess="R">
+      <bitenum value="2" id="2" token="OCPI_DISC_STAT_2" description="One or both initiators are active, no request to disconnect is pending"/>
+      <bitenum value="1" id="1" token="OCPI_DISC_STAT_1" description="One or both initiators are attempting to disconnect"/>
+      <bitenum value="0" id="EVEs_OCP_initiators_are_disconnected" token="OCPI_DISC_STAT_0" description="EVEs OCP initiators are disconnected"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="2" begin="19" end="18" resetval="0" description="" range="" rwaccess="R"/>
+    <bitfield id="ARP32_DISC_STATUS" width="2" begin="17" end="16" resetval="0" description="ARP32 Program/Data Bus Disconnect Status 2:" range="" rwaccess="R">
+      <bitenum value="2" id="ARP32_2" token="ARP32_DISC_STATUS_2" description="ARP32 program and data busses are active, no request to disconnect is pending"/>
+      <bitenum value="1" id="ARP32_1" token="ARP32_DISC_STATUS_1" description="ARP32 program and data buses are attempting to disconnect"/>
+      <bitenum value="0" id="ARP32_0" token="ARP32_DISC_STATUS_0" description="ARP32 program and data buses are disconnected"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="7" begin="15" end="9" resetval="0" description="" range="" rwaccess="R"/>
+    <bitfield id="INT_OUT_STAT" width="1" begin="8" end="8" resetval="0" description="Interrupt Output status:" range="" rwaccess="R">
+      <bitenum value="0" id="No_edabled_interrupts_pending" token="INT_OUT_STAT_0" description="No edabled interrupts pending"/>
+      <bitenum value="1" id="1" token="INT_OUT_STAT_1" description="Active (at least one enabled interrupt source is pending in the output reducer)"/>
+    </bitfield>
+    <bitfield id="ARP32_INTC_STAT" width="1" begin="7" end="7" resetval="0" description="Interrupt Controller Status:" range="" rwaccess="R">
+      <bitenum value="0" id="No_enabled_interrupts_pending" token="ARP32_INTC_STAT_0" description="No enabled interrupts pending"/>
+      <bitenum value="1" id="ARP32_1" token="ARP32_INTC_STAT_1" description="Active (at least one enabled interrupt source is pending in the ARP32 interrupt controller)"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="6" end="6" resetval="0" description="" range="" rwaccess="R"/>
+    <bitfield id="TC1_STAT" width="1" begin="5" end="5" resetval="0" description="Transfer Controller1 Status:" range="" rwaccess="R">
+      <bitenum value="0" id="Idle" token="TC1_STAT_0" description="Idle"/>
+      <bitenum value="1" id="Active" token="TC1_STAT_1" description="Active"/>
+    </bitfield>
+    <bitfield id="TC0_STAT" width="1" begin="4" end="4" resetval="0" description="Transfer Controller0 Status:" range="" rwaccess="R">
+      <bitenum value="0" id="Idle" token="TC0_STAT_0" description="Idle"/>
+      <bitenum value="1" id="Active" token="TC0_STAT_1" description="Active"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0" description="" range="" rwaccess="R"/>
+    <bitfield id="PC_STAT" width="1" begin="2" end="2" resetval="0" description="Program Cache Status:" range="" rwaccess="R">
+      <bitenum value="0" id="Idle" token="PC_STAT_0" description="Idle"/>
+      <bitenum value="1" id="CPU_1" token="PC_STAT_1" description="Active (Program cache is either performing prefetch/preload/invalidation, or is servicing a CPU program fetch request (hit or miss))."/>
+    </bitfield>
+    <bitfield id="VCOP_STAT" width="1" begin="1" end="1" resetval="0" description="VCOP Status :" range="" rwaccess="R">
+      <bitenum value="0" id="Idle" token="VCOP_STAT_0" description="Idle"/>
+      <bitenum value="1" id="VCOP_OCP_1" token="VCOP_STAT_1" description="Active (Program execution in progress. Based on inverse of vcop_done. Does not account for activity on VCOP OCP debug interface)"/>
+    </bitfield>
+    <bitfield id="ARP32_STAT" width="1" begin="0" end="0" resetval="0" description="Program Cache Status:" range="" rwaccess="R">
+      <bitenum value="0" id="Idle" token="ARP32_STAT_0" description="Idle"/>
+      <bitenum value="1" id="1" token="ARP32_STAT_1" description="Active (based on inverse of arp32_stanby)."/>
+    </bitfield>
+  </register>
+  <register id="EVE_DISC_CONFIG" acronym="EVE_DISC_CONFIG" offset="0x80010" width="32" description="Color 0 noise threshold">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OCPI_DISC" width="1" begin="4" end="4" resetval="0x0" description="OCP Initiator Disconnect request:" range="" rwaccess="RW">
+      <bitenum value="1" id="OCP_1" token="OCPI_DISC_1_w" description="request for OCP initiator to disconnect and mask write byte enable signals. Writing 0 has no effect"/>
+      <bitenum value="0" id="0" token="OCPI_DISC_0_r" description="Disconnect not in progress of has completed. Read 1: Disconnect request in progress."/>
+    </bitfield>
+    <bitfield id="RESERVED" width="3" begin="3" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ARP32_DISC" width="1" begin="0" end="0" resetval="0x0" description="ARP32 Initiator Disconnect request." range="" rwaccess="RW">
+      <bitenum value="1" id="ARP32_1" token="ARP32_DISC_1_w" description="Request for ARP32 program and data buses to disconnect and mask write byte enable signals. Writing 0 has no effect."/>
+      <bitenum value="1" id="1" token="ARP32_DISC_1_r" description="disconnect request in progress. Read 0: disconnect not in progress or has completed."/>
+    </bitfield>
+  </register>
+  <register id="EVE_BUS_CONFIG" acronym="EVE_BUS_CONFIG" offset="0x80014" width="32" description="Color 0 noise threshold">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="TC1_DBS" width="2" begin="13" end="12" resetval="0x3" description="TC1 default burst size. 00: 16 byte, 01: 32 byte, 10: 64 byte, 11: 128 byte (recommended)" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="11" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="TC0_DBS" width="2" begin="9" end="8" resetval="0x3" description="TC0 default burst size. 00: 16 byte, 01: 32 byte, 10: 64 byte, 11: 128 byte (recommended)" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="" description="" range="" rwaccess="R"/>
+    <bitfield id="DBP_ENABLE" width="1" begin="4" end="4" resetval="0x0" description="Program Cache Demand Based Prefetch enable:" range="" rwaccess="RW">
+      <bitenum value="0" id="DBP_disabled" token="DBP_ENABLE_0" description="DBP disabled"/>
+      <bitenum value="1" id="DBP_enabled" token="DBP_ENABLE_1" description="DBP enabled"/>
+    </bitfield>
+    <bitfield id="MAX_IN_FLIGHT" width="4" begin="3" end="0" resetval="0x4" description="Defines maximum number of OCP requests in flight. Can be reduced to limit the peak bandwidth for software direct preload, which in turn may provide advantage to other EVE level (e.g. EDMA) or system-level initiators. 0: Reserved. 1: 1 request in flight allowed. 2: 2 requests in flight allowed.. F: 15 requests in flight allowed." range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_VCOP_HALT_CONFIG" acronym="EVE_VCOP_HALT_CONFIG" offset="0x80018" width="32" description="">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="FORCE_ABORT" width="1" begin="2" end="2" resetval="0x0000" description="VCOP Force Abort Write: Read always returns 0sWrite 0 has no effect. ." range="" rwaccess="RW">
+      <bitenum value="1" id="VCOP_1" token="FORCE_ABORT_1_w" description="issues force_abort command to VCOP (through pulse on vcop force abort input"/>
+    </bitfield>
+    <bitfield id="MSW_EN" width="1" begin="1" end="1" resetval="0x00" description="VCOP Memory Seitch Error Halt Enable:" range="" rwaccess="RW">
+      <bitenum value="0" id="Disabled" token="MSW_EN_0" description="Disabled"/>
+      <bitenum value="1" id="VCOP_VCOP_1" token="MSW_EN_1" description="Enabled. VCOP halts on VCOP initiated memory swithc error"/>
+    </bitfield>
+    <bitfield id="ED_EN" width="1" begin="0" end="0" resetval="0x000" description="VCOP Parity Error Detect Halt Enable:" range="" rwaccess="RW">
+      <bitenum value="0" id="Disabled" token="ED_EN_0" description="Disabled"/>
+      <bitenum value="1" id="VCOP_VCOP_1" token="ED_EN_1" description="Enabled. VCOP halts on VCOP initiated parity error."/>
+    </bitfield>
+  </register>
+  <register id="EVE_MMU_CONFIG" acronym="EVE_MMU_CONFIG" offset="0x8001C" width="32" description="">
+    <bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0x00" description="" range="" rwaccess="R"/>
+    <bitfield id="MMU1_ABORT" width="1" begin="12" end="12" resetval="0x000" description="Causes the MMU to abort the current operation in case of lockup" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="11" end="9" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MMU0_ABORT" width="1" begin="8" end="8" resetval="0x000" description="Causes the MMU to abort the current operation in case of lockup" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MMU1_EN" width="1" begin="4" end="4" resetval="0x0" description="Clearing this bit disables MMU table lookup and causes accesses to use the non-translated address. This bit defaults to enabled but an identical bit within an MMU configuration register defaults to disabled and must be set after the page tables are programmed for MMU operation" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="3" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MMU0_EN" width="1" begin="0" end="0" resetval="0x0" description="Clearing this bit disables MMU table lookup and causes accesses to use the non-translated address. This bit defaults to enabled but an identical bit within an MMU configuration register defaults to disabled and must be set after the page tables are programmed for MMU operation" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_MEMMAP" acronym="EVE_MEMMAP" offset="0x80020" width="32" description="">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LCL_EDMA_ALIAS" width="1" begin="4" end="4" resetval="0x000" description="0: Local EDMA views full memory map" range="" rwaccess="RW">
+      <bitenum value="1" id="VCOP_VCOP_IBUFLA_IBUFLB_IBUFHA_IBUFHB_IBUFLA_IBUFLB_IBUFHA_IBUFHB_1" token="LCL_EDMA_ALIAS_1" description="VCOP vies aliased memory map. In this mode VCOP views IBUFLA and IBUFLB at the same address and views IBUFHA and IBUFHB at the same address. In this mode only one of IBUFLA or IBUFLB and IBUFHA or IBUFHB can be owned by the system.Refer to Error: Reference source not found for full truth table. Software must poll for updated value to ensure mode change has taken effect."/>
+    </bitfield>
+    <bitfield id="RESERVED" width="3" begin="3" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VCOP_ALIAS" width="1" begin="0" end="0" resetval="0x0000" description="0: VCOP views full memory map" range="" rwaccess="RW">
+      <bitenum value="1" id="VCOP_VCOP_IBUFLA_IBUFLB_IBUFHA_IBUFHB_IBUFLA_IBUFLB_VCOP;_IBUFHA_IBUFHB_VCOP._1" token="VCOP_ALIAS_1" description="VCOP views Aliased memory map. In this mode / VCOP views IBUFLA and IBUFLB at the same address / and views IBUFHA and IBUFHB at the same address. In this mode / only one of IBUFLA or IBUFLB can be :owned: by VCOP; and only one of IBUFHA or IBUFHB can be :owned: by VCOP. Refer to Error: Reference source not found for full truth table. Software must poll for updated value to ensure mode change has taken effect"/>
+    </bitfield>
+  </register>
+  <register id="EVE_MSW_CTL" acronym="EVE_MSW_CTL" offset="0x80024" width="32" description="Memory switch control register">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="WBUF" width="1" begin="16" end="16" resetval="0x0000" description="Working buffer onwership. Value can be modified through direct writes to the memory mapped register address or through ARP32 executing custom instruction __SwitchBuffer(ucst20)." range="" rwaccess="RW">
+      <bitenum value="0" id="System_owned" token="WBUF_0" description="System owned"/>
+      <bitenum value="1" id="VCOP_owned" token="WBUF_1" description="VCOP owned"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x00" description="" range="" rwaccess="R"/>
+    <bitfield id="IBUFHB" width="1" begin="12" end="12" resetval="0x000" description="Image buffer high B ownership. Value can be modified through direct writes to the memory mapped register address or through ARP32 executing custom instruction __SwitchBuffer(ucst20).:" range="" rwaccess="RW">
+      <bitenum value="0" id="System_owned" token="IBUFHB_0" description="System owned"/>
+      <bitenum value="1" id="VCOP_owned" token="IBUFHB_1" description="VCOP owned"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="3" begin="11" end="9" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IBUFLB" width="1" begin="8" end="8" resetval="0x0" description="Image buffer low B ownership. Value can be modified through direct writes to the memory mapped register address or through ARP32 executing custom instruction __SwitchBuffer(ucst20).:" range="" rwaccess="RW">
+      <bitenum value="0" id="System_owned" token="IBUFLB_0" description="System owned"/>
+      <bitenum value="1" id="VCOP_owned" token="IBUFLB_1" description="VCOP owned"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IBUFHA" width="1" begin="4" end="4" resetval="0x0" description="Image buffer high A ownership. Value can be modified through direct writes to the memory mapped register address or through ARP32 executing custom instruction __SwitchBuffer(ucst20).:" range="" rwaccess="RW">
+      <bitenum value="0" id="System_owned" token="IBUFHA_0" description="System owned"/>
+      <bitenum value="1" id="VCOP_owned" token="IBUFHA_1" description="VCOP owned"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="3" begin="3" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IBUFLA" width="1" begin="0" end="0" resetval="0x0" description="Image buffer low A ownership. Value can be modified through direct writes to the memory mapped register address or through ARP32 executing custom instruction __SwitchBuffer(ucst20).:" range="" rwaccess="RW">
+      <bitenum value="0" id="System_owned" token="IBUFLA_0" description="System owned"/>
+      <bitenum value="1" id="VCOP_owned" token="IBUFLA_1" description="VCOP owned"/>
+    </bitfield>
+  </register>
+  <register id="EVE_MSW_ERR" acronym="EVE_MSW_ERR" offset="0x80028" width="32" description="Memory Switch Error register">
+    <bitfield id="RESERVED" width="7" begin="31" end="25" resetval="0x00" description="" range="" rwaccess="R"/>
+    <bitfield id="CONNID" width="9" begin="24" end="16" resetval="0x000" description="Reads: OCP CONNID value for OCP request that results in buffer ownership error. CONNID[8] = 0 indicates system initiated request. CONNID[8] = 1 indicates internally initiated request. Valid only when SYSERR is set to 1 otherwise returns 0x0. Undefined when no error status bits are set. CONNID = 0x000 through 0x0FF / system initiator CONNID = 0x100 / ARP32 initiated error CONNID = 0x101 / VCOP initiated error CONNID = 0x102 / EDMA TC0 initiated error CONNID = 0x103 / EDMA TC1 initiated error. Cleared through write :1: to ERR bit field" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="12" begin="15" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SYSERR" width="1" begin="3" end="3" resetval="0x000" description="0 - System initiated buffer ownership error not recorded 1 - System initiated buffer ownership error detected/recorded. Write 1 to clear." range="" rwaccess="WO"/>
+    <bitfield id="DMAERR" width="1" begin="2" end="2" resetval="0x0" description="0 : EDMA initiated buffer ownership error not recorded 1 : EDMA buffer ownership error detected/recorded Write 1 to clear." range="" rwaccess="WO"/>
+    <bitfield id="VERR" width="1" begin="1" end="1" resetval="0x0" description="0 : VCOP initiated buffer ownership error not recorded 1 : VCOP initiated buffer ownership error detected/recorded Write 1 to clear." range="" rwaccess="WO"/>
+    <bitfield id="ARP32ERR" width="1" begin="0" end="0" resetval="0x0" description="0 : ARP32 initiated buffer ownership error not recorded 1 : ARP32 initiated buffer ownership error detected/recorded Write 1 to clear." range="" rwaccess="WO"/>
+  </register>
+  <register id="EVE_MSW_ERRADDR" acronym="EVE_MSW_ERRADDR" offset="0x8002C" width="32" description="Memory switch error address register">
+    <bitfield id="ADDR" width="32" begin="31" end="0" resetval="0x0000 0000" description="Physical Address (i.e. / not aliased address) of memory switch error. For VCOP accesses / indicates 32-B aligned address. For EDMA or System accesses / indicates 16-B aligned access. For ARP32 / indicates 4-B aligned address. Value is undefined when no ERR bits set." range="" rwaccess="R"/>
+  </register>
+  <register id="EVE_PC_INV" acronym="EVE_PC_INV" offset="0x80040" width="32" description="Invalidate all register">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="I" width="1" begin="0" end="0" resetval="0x0" description="Invalidate all:Read: 0 : Invalidate operation complete / or not in progress 1 : Invalidate operation still in progress ." range="" rwaccess="RW">
+      <bitenum value="0" id="0" token="I_0_w" description="no effet. Write 1: initiate invalidate all command"/>
+    </bitfield>
+  </register>
+  <register id="EVE_PC_IBAR" acronym="EVE_PC_IBAR" offset="0x80050" width="32" description="Invalidate Base Address register">
+    <bitfield id="ADDR" width="32" begin="31" end="0" resetval="0x0000 0000" description="Invalidate Base Address register. Defines system byte address base to be invalidated from L1P. The entire range to be invalidated is (loosely speaking) from the base address to the base address + byte count. The actual range is inclusive of cache line (32-B aligned) addresses containing the start address and end address" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_PC_IBC" acronym="EVE_PC_IBC" offset="0x80054" width="32" description="Invalidate byte count register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="BC" width="16" begin="15" end="0" resetval="0x0000" description="Invalidate Byte Count register. Defines number of bytes relative to Invalidate Base Address (IBAR.ADDR) to be invalidated from L1P. Maximum of 32k (0x8000). Reads return 0x0 when invalidate range operation is complete." range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_PC_ISAR" acronym="EVE_PC_ISAR" offset="0x80058" width="32" description="Invalidate single address register">
+    <bitfield id="ADDR" width="32" begin="31" end="0" resetval="0x0000 0000" description="Invalidate Single Address register. Defines system byte address (1 line only) to be invalidated from L1P. Reads return 0x0 when the invalidate operation is complete." range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_PC_ISAR_DONE" acronym="EVE_PC_ISAR_DONE" offset="0x8005C" width="32" description="Invalidate single address done register">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DONE" width="1" begin="0" end="0" resetval="0x0" description="Reads return 0x1 when the invalidate operation is complete. Cleared on the next write to theEVE_PC_ISAR register" range="" rwaccess="R"/>
+  </register>
+  <register id="EVE_PC_PBAR" acronym="EVE_PC_PBAR" offset="0x80060" width="32" description="Program cache preload base address register">
+    <bitfield id="ADDR" width="32" begin="31" end="0" resetval="0x0000 0000" description="Preload Base Address register. Defines system byte address base to be Preloaded into L1P. The entire range to be Preloaded is (loosely speaking) from the base address to the base address + byte count. The actual range is inclusive of cache line (32-B aligned) addresses containing the start address and end address" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_PC_PBC" acronym="EVE_PC_PBC" offset="0x80064" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0000" description="" range="" rwaccess="R"/>
+    <bitfield id="BC" width="16" begin="15" end="0" resetval="0x0000" description="Preload Byte Count register. Defines number of bytes relative to Preload Base Address (PBAR.ADDR) to be Preloaded into L1P. Maximum of 32k (0x8000). Reads return 0x0 when Preload range operation is complete" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_PMEM_ED_CTL" acronym="EVE_PMEM_ED_CTL" offset="0x80080" width="32" description="Program Memory Error Detection Control register">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x00" description="" range="" rwaccess="R"/>
+    <bitfield id="INV" width="1" begin="1" end="1" resetval="0x0" description="Read 0: Error detection logic is not inverted. Read 1: Error detection logic is inverted. Writes to memory set parity as normal. Reds from meory return inverse of parity bit.Write 0 to clear, write 1 to set. Must be set when EN is set ." range="" rwaccess="RW"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="Error detection logic enable. Writes update parity, reads check parity" range="" rwaccess="RW">
+      <bitenum value="0" id="Disabled" token="EN_0" description="Disabled"/>
+      <bitenum value="1" id="Enabled" token="EN_1" description="Enabled"/>
+    </bitfield>
+  </register>
+  <register id="EVE_PMEM_ED_STAT" acronym="EVE_PMEM_ED_STAT" offset="0x80084" width="32" description="Error detection status register">
+    <bitfield id="RESERVED" width="7" begin="31" end="25" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SYSCONNID" width="9" begin="24" end="16" resetval="0x0000" description="Reads: OCP CONNID value for OCP request that results in buffer ownership error. CONNID[8] = 0 indicates system initiated request. CONNID[8] = 1 indicates internally initiated request. Valid only when SYSERR is set to 1 otherwise returns 0x0. CONNID = 0x000 through 0x0FF / system initiator CONNID = 0x100 / ARP32 initiated error CONNID = 0x101 / VCOP initiated error CONNID = 0x102 / EDMA TC0 initiated error CONNID = 0x103 / EDMA TC1 initiated error. Cleared through write :1: to *ERR bit field." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="15" end="4" resetval="0x000" description="" range="" rwaccess="R"/>
+    <bitfield id="SYSERR" width="1" begin="3" end="3" resetval="0x0" description="0 - System initiated parity error not recorded 1 - System initiated parity error detected/recorded. Write 1 to clear." range="" rwaccess="RW"/>
+    <bitfield id="DMAERR" width="1" begin="2" end="2" resetval="0x0" description="0 : EDMA initiated parity error not recorded 1 : EDMA parity error detected/recorded Write 1 to clear." range="" rwaccess="RW"/>
+    <bitfield id="VERR" width="1" begin="1" end="1" resetval="0x0" description="0 : VCOP initiated parity error not recorded 1 : VCOP initiated parity error detected/recorded Write 1 to clear." range="" rwaccess="RW"/>
+    <bitfield id="ARP32ERR" width="1" begin="0" end="0" resetval="0x0" description="0 : ARP32 initiated parity error not recorded 1 : ARP32 initiated parity error detected/recorded Write 1 to clear" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_PMEM_EDADDR" acronym="EVE_PMEM_EDADDR" offset="0x80088" width="32" description="Program memory error detection address">
+    <bitfield id="ADDR" width="32" begin="31" end="0" resetval="0x0" description="Physical Address (i.e. / not aliased address) of parity error. For VCOP accesses / indicates 32-B aligned address. For EDMA or System accesses / indicates 16-B aligned access. For ARP32 / indicates 4-B aligned address." range="" rwaccess="R"/>
+  </register>
+  <register id="EVE_DMEM_ED_CTL" acronym="EVE_DMEM_ED_CTL" offset="0x80090" width="32" description="DMEM error detection control">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x00" description="" range="" rwaccess="R"/>
+    <bitfield id="INV" width="1" begin="1" end="1" resetval="0x0" description="Read 0: Error detection logic is not inverted. Read 1: Error detection logic is inverted. Writes to memory set parity as normal. Reads from meory return inverse of parity bit.Write 0 to clear, write 1 to set. Must be set when EN is set ." range="" rwaccess="RW"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="Error detection logic enable. Writes update parity, reads check parity" range="" rwaccess="RW">
+      <bitenum value="0" id="Disabled" token="EN_0" description="Disabled"/>
+      <bitenum value="1" id="Enabled" token="EN_1" description="Enabled"/>
+    </bitfield>
+  </register>
+  <register id="EVE_DMEM_ED_STAT" acronym="EVE_DMEM_ED_STAT" offset="0x80094" width="32" description="DMEM error detection status register">
+    <bitfield id="RESERVED" width="7" begin="31" end="25" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SYSCONNID" width="9" begin="24" end="16" resetval="0x0000" description="Reads: OCP CONNID value for OCP request that results in buffer ownership error. CONNID[8] = 0 indicates system initiated request. CONNID[8] = 1 indicates internally initiated request. Valid only when SYSERR is set to 1 otherwise returns 0x0. CONNID = 0x000 through 0x0FF / system initiator CONNID = 0x100 / ARP32 initiated error CONNID = 0x101 / VCOP initiated error CONNID = 0x102 / EDMA TC0 initiated error CONNID = 0x103 / EDMA TC1 initiated error. Cleared through write :1: to *ERR bit field." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="15" end="4" resetval="0x000" description="" range="" rwaccess="R"/>
+    <bitfield id="SYSERR" width="1" begin="3" end="3" resetval="0x0" description="0 - System initiated parity error not recorded 1 - System initiated parity error detected/recorded. Write 1 to clear." range="" rwaccess="RW"/>
+    <bitfield id="DMAERR" width="1" begin="2" end="2" resetval="0x0" description="0 : EDMA initiated parity error not recorded 1 : EDMA parity error detected/recorded Write 1 to clear." range="" rwaccess="RW"/>
+    <bitfield id="VERR" width="1" begin="1" end="1" resetval="0x0" description="0 : VCOP initiated parity error not recorded 1 : VCOP initiated parity error detected/recorded Write 1 to clear." range="" rwaccess="RW"/>
+    <bitfield id="ARP32ERR" width="1" begin="0" end="0" resetval="0x0" description="0 : ARP32 initiated parity error not recorded 1 : ARP32 initiated parity error detected/recorded Write 1 to clear" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_DMEM_EDADDR" acronym="EVE_DMEM_EDADDR" offset="0x80098" width="32" description="DMEM error detection address register">
+    <bitfield id="ADDR" width="32" begin="31" end="0" resetval="0x0" description="Physical Address (i.e. / not aliased address) of parity error. For VCOP accesses / indicates 32-B aligned address. For EDMA or System accesses / indicates 16-B aligned access. For ARP32 / indicates 4-B aligned address." range="" rwaccess="R"/>
+  </register>
+  <register id="EVE_DMEM_EDADDR_BO" acronym="EVE_DMEM_EDADDR_BO" offset="0x8009C" width="32" description="DMEM error detection address byte offset register">
+    <bitfield id="BO" width="32" begin="31" end="0" resetval="0x0" description="Address byte offset for parity error. Indicates that an error has occured in byte offset #n. 0: No error occuredin byte offset #n; 1: Error occured in byte offset #n. Write to clear any of MEM.SYSERR/DMARR/ARP32/or VERR." range="" rwaccess="R"/>
+  </register>
+  <register id="EVE_WBUF_ED_CTL" acronym="EVE_WBUF_ED_CTL" offset="0x800A0" width="32" description="WBUF error detection control">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x00" description="" range="" rwaccess="R"/>
+    <bitfield id="INV" width="1" begin="1" end="1" resetval="0x0" description="Read 0: Error detection logic is not inverted. Read 1: Error detection logic is inverted. Writes to memory set parity as normal. Reads from meory return inverse of parity bit.Write 0 to clea Write 1 to set. Must be set when EN is set ." range="" rwaccess="RW"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="Error detection logic enable. Writes update parity, reads check parity" range="" rwaccess="RW">
+      <bitenum value="0" id="Disabled" token="EN_0" description="Disabled"/>
+      <bitenum value="1" id="Enabled" token="EN_1" description="Enabled"/>
+    </bitfield>
+  </register>
+  <register id="EVE_WBUF_ED_STAT" acronym="EVE_WBUF_ED_STAT" offset="0x800A4" width="32" description="WBUF error detection status register">
+    <bitfield id="RESERVED" width="7" begin="31" end="25" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SYSCONNID" width="9" begin="24" end="16" resetval="0x0000" description="Reads: OCP CONNID value for OCP request that results in buffer ownership error. CONNID[8] = 0 indicates system initiated request. CONNID[8] = 1 indicates internally initiated request. Valid only when SYSERR is set to 1 otherwise returns 0x0. CONNID = 0x000 through 0x0FF / system initiator CONNID = 0x100 / ARP32 initiated error CONNID = 0x101 / VCOP initiated error CONNID = 0x102 / EDMA TC0 initiated error CONNID = 0x103 / EDMA TC1 initiated error. Cleared through write :1: to *ERR bit field." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="15" end="4" resetval="0x000" description="" range="" rwaccess="R"/>
+    <bitfield id="SYSERR" width="1" begin="3" end="3" resetval="0x0" description="0 - System initiated parity error not recorded 1 - System initiated parity error detected/recorded. Write 1 to clear." range="" rwaccess="RW"/>
+    <bitfield id="DMAERR" width="1" begin="2" end="2" resetval="0x0" description="0 : EDMA initiated parity error not recorded 1 : EDMA parity error detected/recorded Write 1 to clear." range="" rwaccess="RW"/>
+    <bitfield id="VERR" width="1" begin="1" end="1" resetval="0x0" description="0 : VCOP initiated parity error not recorded 1 : VCOP initiated parity error detected/recorded Write 1 to clear." range="" rwaccess="RW"/>
+    <bitfield id="ARP32ERR" width="1" begin="0" end="0" resetval="0x0" description="0 : ARP32 initiated parity error not recorded 1 : ARP32 initiated parity error detected/recorded Write 1 to clear" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_WBUF_EDADDR" acronym="EVE_WBUF_EDADDR" offset="0x800A8" width="32" description="WBUF error detection address register">
+    <bitfield id="ADDR" width="32" begin="31" end="0" resetval="0x0" description="Physical Address (i.e. / not aliased address) of parity error. For VCOP accesses / indicates 32-B aligned address. For EDMA or System accesses / indicates 16-B aligned access. For ARP32 / indicates 4-B aligned address." range="" rwaccess="R"/>
+  </register>
+  <register id="EVE_WBUF_EDADDR_BO" acronym="EVE_WBUF_EDADDR_BO" offset="0x800AC" width="32" description="WBUF error detection address byte offset register">
+    <bitfield id="BO" width="32" begin="31" end="0" resetval="0x0" description="Address byte offset for parity error. Indicates that an error has occured in byte offset #n. 0: No error occuredin byte offset #n; 1: Error occured in byte offset #n. Write to clear any of MEM.SYSERR/DMARR/ARP32/or VERR." range="" rwaccess="R"/>
+  </register>
+  <register id="EVE_IBUF_ED_CTL" acronym="EVE_IBUF_ED_CTL" offset="0x800B0" width="32" description="IBUF error detection control">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x00" description="" range="" rwaccess="R"/>
+    <bitfield id="INV" width="1" begin="1" end="1" resetval="0x0" description="Read 0: Error detection logic is not inverted. Read 1: Error detection logic is inverted. Writes to memory set parity as normal. Reads from meory return inverse of parity bit.Write 0 to clear, write 1 to set. Must be set when EN is set ." range="" rwaccess="RW"/>
+    <bitfield id="EN" width="1" begin="0" end="0" resetval="0x0" description="Error detection logic enable. Writes update parity, reads check parity" range="" rwaccess="RW">
+      <bitenum value="0" id="Disabled" token="EN_0" description="Disabled"/>
+      <bitenum value="1" id="Enabled" token="EN_1" description="Enabled"/>
+    </bitfield>
+  </register>
+  <register id="EVE_IBUF_ED_STAT" acronym="EVE_IBUF_ED_STAT" offset="0x800B4" width="32" description="IBUF error detection status register">
+    <bitfield id="RESERVED" width="7" begin="31" end="25" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SYSCONNID" width="9" begin="24" end="16" resetval="0x0000" description="Reads: OCP CONNID value for OCP request that results in buffer ownership error. CONNID[8] = 0 indicates system initiated request. CONNID[8] = 1 indicates internally initiated request. Valid only when SYSERR is set to 1 otherwise returns 0x0. CONNID = 0x000 through 0x0FF / system initiator CONNID = 0x100 / ARP32 initiated error CONNID = 0x101 / VCOP initiated error CONNID = 0x102 / EDMA TC0 initiated error CONNID = 0x103 / EDMA TC1 initiated error. Cleared through write :1: to *ERR bit field." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="15" end="4" resetval="0x000" description="" range="" rwaccess="R"/>
+    <bitfield id="SYSERR" width="1" begin="3" end="3" resetval="0x0" description="0 - System initiated parity error not recorded 1 - System initiated parity error detected/recorded. Write 1 to clear." range="" rwaccess="RW"/>
+    <bitfield id="DMAERR" width="1" begin="2" end="2" resetval="0x0" description="0 : EDMA initiated parity error not recorded 1 : EDMA parity error detected/recorded Write 1 to clear." range="" rwaccess="RW"/>
+    <bitfield id="VERR" width="1" begin="1" end="1" resetval="0x0" description="0 : VCOP initiated parity error not recorded 1 : VCOP initiated parity error detected/recorded Write 1 to clear." range="" rwaccess="RW"/>
+    <bitfield id="ARP32ERR" width="1" begin="0" end="0" resetval="0x0" description="0 : ARP32 initiated parity error not recorded 1 : ARP32 initiated parity error detected/recorded Write 1 to clear" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_IBUF_EDADDR" acronym="EVE_IBUF_EDADDR" offset="0x800B8" width="32" description="IBUF error detection address register">
+    <bitfield id="ADDR" width="32" begin="31" end="0" resetval="0x0" description="Physical Address (i.e. / not aliased address) of parity error. For VCOP accesses / indicates 32-B aligned address. For EDMA or System accesses / indicates 16-B aligned access. For ARP32 / indicates 4-B aligned address." range="" rwaccess="R"/>
+  </register>
+  <register id="EVE_IBUF_EDADDR_BO" acronym="EVE_IBUF_EDADDR_BO" offset="0x800BC" width="32" description="IBUF error detection address byte offset register">
+    <bitfield id="BO" width="32" begin="31" end="0" resetval="0x0" description="Address byte offset for parity error. Indicates that an error has occured in byte offset #n. 0: No error occuredin byte offset #n; 1: Error occured in byte offset #n. Write to clear any of MEM.SYSERR/DMARR/ARP32/or VERR." range="" rwaccess="R"/>
+  </register>
+  <register id="EVE_ED_ARP32_DISC_EN" acronym="EVE_ED_ARP32_DISC_EN" offset="0x800F8" width="32" description="ARP32 disconnect enable register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0000" description="" range="" rwaccess="R"/>
+    <bitfield id="ENABLE" width="16" begin="15" end="0" resetval="0x0000" description="Disconnect Enable for Event #n 0: Disconnect disabled 1: Disconnect enabled" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_ED_OCPI_DISC_EN" acronym="EVE_ED_OCPI_DISC_EN" offset="0x800FC" width="32" description="OCP interface disconnect enable register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0000" description="" range="" rwaccess="R"/>
+    <bitfield id="ENABLE" width="16" begin="15" end="0" resetval="0x0000" description="Disconnect Enable for Event #n. 0: Disconnect disabled 1: Disconnect enabled" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_MSW_ERR_IRQSTATUS_RAW" acronym="EVE_MSW_ERR_IRQSTATUS_RAW" offset="0x80110" width="32" description="Per event memory switch error interrupt status register.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EVENT" width="4" begin="3" end="0" resetval="0x0" description="settable raw status for event #n Write 0: No action Read 0: No event pending Read 1: Event pending Write 1: Set event (for debug)" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_MSW_ERR_IRQSTATUS" acronym="EVE_MSW_ERR_IRQSTATUS" offset="0x80114" width="32" description="Memory switch error interrupt status register.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EVENT" width="4" begin="3" end="0" resetval="0x0" description="Clearable / enabled status for event #N Write 0: No action Read 0: No (enabled) event pending Read 1: Enabled Event pending Write 1: Clear raw event" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_MSW_ERR_IRQENABLE_SET" acronym="EVE_MSW_ERR_IRQENABLE_SET" offset="0x80118" width="32" description="Memory switch error interrupt enable register.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ENABLE" width="4" begin="3" end="0" resetval="0x0" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Enable interrupt" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_MSW_ERR_IRQENABLE_CLR" acronym="EVE_MSW_ERR_IRQENABLE_CLR" offset="0x8011C" width="32" description="Memory switch error interrupt clear register.">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="ENABLE" width="4" begin="3" end="0" resetval="0x0" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Disable interrupt (i.e. / clear ENABLEn bit)" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_ED_LCL_IRQSTATUS_RAW" acronym="EVE_ED_LCL_IRQSTATUS_RAW" offset="0x80120" width="32" description="Per event error detection local interrupt status register.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0000" description="" range="" rwaccess="R"/>
+    <bitfield id="EVENT" width="16" begin="15" end="0" resetval="0x0000" description="settable raw status for event #n Write 0: No action Read 0: No event pending Read 1: Event pending Write 1: Set event (for debug)" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_ED_LCL_IRQSTATUS" acronym="EVE_ED_LCL_IRQSTATUS" offset="0x80124" width="32" description="Error detection local interrupt status register.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0000" description="" range="" rwaccess="R"/>
+    <bitfield id="EVENT" width="16" begin="15" end="0" resetval="0x0000" description="Clearable / enabled status for event #N Write 0: No action Read 0: No (enabled) event pending Read 1: Enabled Event pending Write 1: Clear raw event" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_ED_LCL_IRQENABLE_SET" acronym="EVE_ED_LCL_IRQENABLE_SET" offset="0x80128" width="32" description="Error detection local interrupt enable register.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0000" description="" range="" rwaccess="R"/>
+    <bitfield id="ENABLE" width="16" begin="15" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Enable interrupt" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_ED_LCL_IRQENABLE_CLR" acronym="EVE_ED_LCL_IRQENABLE_CLR" offset="0x8012C" width="32" description="Error detection local interrupt clear register.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0000" description="" range="" rwaccess="R"/>
+    <bitfield id="ENABLE" width="16" begin="15" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Disable interrupt (i.e. / clear ENABLEn bit)" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTn_IRQSTATUS_RAW_4" acronym="ARP32_INTn_IRQSTATUS_RAW_4" offset="0x80210" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000" description="settable raw status for event #n Write 0: No action Read 0: No event pending Read 1: Event pending Write 1: Set event (for debug)" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTn_IRQSTATUS_RAW_5" acronym="ARP32_INTn_IRQSTATUS_RAW_5" offset="0x80220" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000" description="settable raw status for event #n Write 0: No action Read 0: No event pending Read 1: Event pending Write 1: Set event (for debug)" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTn_IRQSTATUS_RAW_6" acronym="ARP32_INTn_IRQSTATUS_RAW_6" offset="0x80230" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000" description="settable raw status for event #n Write 0: No action Read 0: No event pending Read 1: Event pending Write 1: Set event (for debug)" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTn_IRQSTATUS_RAW_7" acronym="ARP32_INTn_IRQSTATUS_RAW_7" offset="0x80240" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000" description="settable raw status for event #n Write 0: No action Read 0: No event pending Read 1: Event pending Write 1: Set event (for debug)" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTn_IRQSTATUS_4" acronym="ARP32_INTn_IRQSTATUS_4" offset="0x80214" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000" description="Clearable / enabled status for event #N Write 0: No action Read 0: No (enabled) event pending Read 1: Enabled Event pending Write 1: Clear raw event" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTn_IRQSTATUS_5" acronym="ARP32_INTn_IRQSTATUS_5" offset="0x80224" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000" description="Clearable / enabled status for event #N Write 0: No action Read 0: No (enabled) event pending Read 1: Enabled Event pending Write 1: Clear raw event" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTn_IRQSTATUS_6" acronym="ARP32_INTn_IRQSTATUS_6" offset="0x80234" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000" description="Clearable / enabled status for event #N Write 0: No action Read 0: No (enabled) event pending Read 1: Enabled Event pending Write 1: Clear raw event" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTn_IRQSTATUS_7" acronym="ARP32_INTn_IRQSTATUS_7" offset="0x80244" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000" description="Clearable / enabled status for event #N Write 0: No action Read 0: No (enabled) event pending Read 1: Enabled Event pending Write 1: Clear raw event" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTn_IRQENABLE_SET_4" acronym="ARP32_INTn_IRQENABLE_SET_4" offset="0x80218" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Enable interrupt" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTn_IRQENABLE_SET_5" acronym="ARP32_INTn_IRQENABLE_SET_5" offset="0x80228" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Enable interrupt" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTn_IRQENABLE_SET_6" acronym="ARP32_INTn_IRQENABLE_SET_6" offset="0x80238" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Enable interrupt" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTn_IRQENABLE_SET_7" acronym="ARP32_INTn_IRQENABLE_SET_7" offset="0x80248" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Enable interrupt" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTn_IRQENABLE_CLR_4" acronym="ARP32_INTn_IRQENABLE_CLR_4" offset="0x8021C" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Disable interrupt (i.e. / clear ENABLEn bit)" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTn_IRQENABLE_CLR_5" acronym="ARP32_INTn_IRQENABLE_CLR_5" offset="0x8022C" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Disable interrupt (i.e. / clear ENABLEn bit)" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTn_IRQENABLE_CLR_6" acronym="ARP32_INTn_IRQENABLE_CLR_6" offset="0x8023C" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Disable interrupt (i.e. / clear ENABLEn bit)" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTn_IRQENABLE_CLR_7" acronym="ARP32_INTn_IRQENABLE_CLR_7" offset="0x8024C" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Disable interrupt (i.e. / clear ENABLEn bit)" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_NMI_IRQSTATUS_RAW" acronym="ARP32_NMI_IRQSTATUS_RAW" offset="0x80200" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000" description="settable raw status for event #n Write 0: No action Read 0: No event pending Read 1: Event pending Write 1: Set event (for debug)" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_NMI_IRQSTATUS" acronym="ARP32_NMI_IRQSTATUS" offset="0x80204" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000" description="Clearable / enabled status for event #N Write 0: No action Read 0: No (enabled) event pending Read 1: Enabled Event pending Write 1: Clear raw event" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_NMI_IRQENABLE_SET" acronym="ARP32_NMI_IRQENABLE_SET" offset="0x80208" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Enable interrupt" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_NMI_IRQENABLE_CLR" acronym="ARP32_NMI_IRQENABLE_CLR" offset="0x8020C" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Disable interrupt (i.e. / clear ENABLEn bit)" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_IRQWAKEEN" acronym="ARP32_IRQWAKEEN" offset="0x802FC" width="32" description="Wake enable register">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x00" description="" range="" rwaccess="R"/>
+    <bitfield id="ENABLE" width="24" begin="23" end="0" resetval="0x00 0000" description="Wakeup Enable for event EVE_EVT_INT #n 0: Interrupt #n disabled for wakeup 1: Interrupt #n enabled for wakeup" range="" rwaccess="RW"/>
+  </register>
+  <register id="MMR_LOCKi_0" acronym="MMR_LOCKi_0" offset="0x80300" width="32" description="MMR Lock/Unlock register">
+    <bitfield id="MMR_LOCK" width="32" begin="31" end="0" resetval="0x0000 0000" description="Lock/Unlock register for corresponding region" range="" rwaccess="RW"/>
+  </register>
+  <register id="MMR_LOCKi_1" acronym="MMR_LOCKi_1" offset="0x80304" width="32" description="MMR Lock/Unlock register">
+    <bitfield id="MMR_LOCK" width="32" begin="31" end="0" resetval="0x0000 0000" description="Lock/Unlock register for corresponding region" range="" rwaccess="RW"/>
+  </register>
+  <register id="MMR_LOCKi_2" acronym="MMR_LOCKi_2" offset="0x80308" width="32" description="MMR Lock/Unlock register">
+    <bitfield id="MMR_LOCK" width="32" begin="31" end="0" resetval="0x0000 0000" description="Lock/Unlock register for corresponding region" range="" rwaccess="RW"/>
+  </register>
+  <register id="MMR_LOCKi_3" acronym="MMR_LOCKi_3" offset="0x8030C" width="32" description="MMR Lock/Unlock register">
+    <bitfield id="MMR_LOCK" width="32" begin="31" end="0" resetval="0x0000 0000" description="Lock/Unlock register for corresponding region" range="" rwaccess="RW"/>
+  </register>
+  <register id="MMR_LOCKi_4" acronym="MMR_LOCKi_4" offset="0x80310" width="32" description="MMR Lock/Unlock register">
+    <bitfield id="MMR_LOCK" width="32" begin="31" end="0" resetval="0x0000 0000" description="Lock/Unlock register for corresponding region" range="" rwaccess="RW"/>
+  </register>
+  <register id="MMR_LOCKi_5" acronym="MMR_LOCKi_5" offset="0x80314" width="32" description="MMR Lock/Unlock register">
+    <bitfield id="MMR_LOCK" width="32" begin="31" end="0" resetval="0x0000 0000" description="Lock/Unlock register for corresponding region" range="" rwaccess="RW"/>
+  </register>
+  <register id="MMR_LOCKi_6" acronym="MMR_LOCKi_6" offset="0x80318" width="32" description="MMR Lock/Unlock register">
+    <bitfield id="MMR_LOCK" width="32" begin="31" end="0" resetval="0x0000 0000" description="Lock/Unlock register for corresponding region" range="" rwaccess="RW"/>
+  </register>
+  <register id="MMR_LOCKi_7" acronym="MMR_LOCKi_7" offset="0x8031C" width="32" description="MMR Lock/Unlock register">
+    <bitfield id="MMR_LOCK" width="32" begin="31" end="0" resetval="0x0000 0000" description="Lock/Unlock register for corresponding region" range="" rwaccess="RW"/>
+  </register>
+  <register id="MMR_LOCKi_8" acronym="MMR_LOCKi_8" offset="0x80320" width="32" description="MMR Lock/Unlock register">
+    <bitfield id="MMR_LOCK" width="32" begin="31" end="0" resetval="0x0000 0000" description="Lock/Unlock register for corresponding region" range="" rwaccess="RW"/>
+  </register>
+  <register id="MMR_LOCKi_9" acronym="MMR_LOCKi_9" offset="0x80324" width="32" description="MMR Lock/Unlock register">
+    <bitfield id="MMR_LOCK" width="32" begin="31" end="0" resetval="0x0000 0000" description="Lock/Unlock register for corresponding region" range="" rwaccess="RW"/>
+  </register>
+  <register id="MISR_CTL" acronym="MISR_CTL" offset="0x80400" width="32" description="">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="" description="" range="" rwaccess=""/>
+    <bitfield id="ENABLE" width="3" begin="2" end="0" resetval="0x0000" description="MISR Enable #N 0: MISR #n disabled 1: MISR #n enabled Bit 0: MISR 0 - ARP32 PMEM path Bit 1: MISR 1 - ARP32 DMEM path Bit 2: MISR 2 - INTC WBUF path" range="" rwaccess="RW"/>
+  </register>
+  <register id="MISR_CLEAR" acronym="MISR_CLEAR" offset="0x80404" width="32" description="">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CLEAR" width="3" begin="2" end="0" resetval="0x00" description="MISR Clear #N Write 0: no effect Write 1: Clear MISR #n Read 0: Previous MISR clear command has completed. Read 1: MISR Clear in progress (this state may never actually be readable)" range="" rwaccess="RW"/>
+  </register>
+  <register id="MISR0_A" acronym="MISR0_A" offset="0x80410" width="32" description="">
+    <bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0000 0000" description="MISR Signature Value Write value to initialize to a desired seed. (only valid when disabled / undefined when enabled). Must be written as a 32-b write w/ all byte enable signals active. Read value returns current signature value." range="" rwaccess="RW"/>
+  </register>
+  <register id="MISR0_D" acronym="MISR0_D" offset="0x80414" width="32" description="">
+    <bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0000 0000" description="MISR Signature Value Write value to initialize to a desired seed. (only valid when disabled / undefined when enabled). Must be written as a 32-b write w/ all byte enable signals active. Read value returns current signature value." range="" rwaccess="RW"/>
+  </register>
+  <register id="MISR1_A" acronym="MISR1_A" offset="0x80418" width="32" description="">
+    <bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0000 0000" description="MISR Signature Value Write value to initialize to a desired seed. (only valid when disabled / undefined when enabled). Must be written as a 32-b write w/ all byte enable signals active. Read value returns current signature value." range="" rwaccess="RW"/>
+  </register>
+  <register id="MISR1_D" acronym="MISR1_D" offset="0x8041C" width="32" description="">
+    <bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0000 0000" description="MISR Signature Value Write value to initialize to a desired seed. (only valid when disabled / undefined when enabled). Must be written as a 32-b write w/ all byte enable signals active. Read value returns current signature value." range="" rwaccess="RW"/>
+  </register>
+  <register id="MISR2_Dk_0" acronym="MISR2_Dk_0" offset="0x80420" width="32" description="">
+    <bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0000 0000" description="MISR Signature Value Write value to initialize to a desired seed. (only valid when disabled / undefined when enabled). Must be written as a 32-b write w/ all byte enable signals active. Read value returns current signature value." range="" rwaccess="RW"/>
+  </register>
+  <register id="MISR2_Dk_1" acronym="MISR2_Dk_1" offset="0x80424" width="32" description="">
+    <bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0000 0000" description="MISR Signature Value Write value to initialize to a desired seed. (only valid when disabled / undefined when enabled). Must be written as a 32-b write w/ all byte enable signals active. Read value returns current signature value." range="" rwaccess="RW"/>
+  </register>
+  <register id="MISR2_Dk_2" acronym="MISR2_Dk_2" offset="0x80428" width="32" description="">
+    <bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0000 0000" description="MISR Signature Value Write value to initialize to a desired seed. (only valid when disabled / undefined when enabled). Must be written as a 32-b write w/ all byte enable signals active. Read value returns current signature value." range="" rwaccess="RW"/>
+  </register>
+  <register id="MISR2_Dk_3" acronym="MISR2_Dk_3" offset="0x8042C" width="32" description="">
+    <bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0000 0000" description="MISR Signature Value Write value to initialize to a desired seed. (only valid when disabled / undefined when enabled). Must be written as a 32-b write w/ all byte enable signals active. Read value returns current signature value." range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_IRQ_EOI" acronym="EVE_IRQ_EOI" offset="0x80500" width="32" description="">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LINE_NUMBER" width="3" begin="2" end="0" resetval="0x0" description="Software End Of Interrupt (EOI) control. Write number of interrupt output to force re-evaluation of associated pending interrupts. Refer to Section Error: Reference source not found for EOI mapping. Reads always return 0x0. Write n : EOI for Interrupt output associated w/ EOI #n." range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_ED_OUT_IRQSTATUS_RAW" acronym="EVE_ED_OUT_IRQSTATUS_RAW" offset="0x80510" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0000" description="" range="" rwaccess="R"/>
+    <bitfield id="EVENT" width="16" begin="15" end="0" resetval="0x0000" description="Settable raw status for event #n Write 0: No action Read 0: No event pending Read 1: Event pending Write 1: Set event (for debug)" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_ED_OUT_IRQSTATUS" acronym="EVE_ED_OUT_IRQSTATUS" offset="0x80514" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0000" description="" range="" rwaccess="R"/>
+    <bitfield id="EVENT" width="16" begin="15" end="0" resetval="0x0000" description="Clearable / enabled status for event #N Write 0: No action Read 0: No (enabled) event pending Read 1: Enabled Event pending Write 1: Clear raw event" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_ED_OUT_IRQENABLE_SET" acronym="EVE_ED_OUT_IRQENABLE_SET" offset="0x80518" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0000" description="" range="" rwaccess="R"/>
+    <bitfield id="ENABLE" width="16" begin="15" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Enable interrupt" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_ED_OUT_IRQENABLE_CLR" acronym="EVE_ED_OUT_IRQENABLE_CLR" offset="0x8051C" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0000" description="" range="" rwaccess="R"/>
+    <bitfield id="ENABLE" width="16" begin="15" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Disable interrupt (i.e. / clear ENABLEn bit)" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_INTk_OUT_IRQSTATUS_RAW_0" acronym="EVE_INTk_OUT_IRQSTATUS_RAW_0" offset="0x80520" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="settable raw status for event #n Write 0: No action Read 0: No event pending Read 1: Event pending Write 1: Set event (for debug)" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_INTk_OUT_IRQSTATUS_RAW_1" acronym="EVE_INTk_OUT_IRQSTATUS_RAW_1" offset="0x80530" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="settable raw status for event #n Write 0: No action Read 0: No event pending Read 1: Event pending Write 1: Set event (for debug)" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_INTk_OUT_IRQSTATUS_RAW_2" acronym="EVE_INTk_OUT_IRQSTATUS_RAW_2" offset="0x80540" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="settable raw status for event #n Write 0: No action Read 0: No event pending Read 1: Event pending Write 1: Set event (for debug)" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_INTk_OUT_IRQSTATUS_RAW_3" acronym="EVE_INTk_OUT_IRQSTATUS_RAW_3" offset="0x80550" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="settable raw status for event #n Write 0: No action Read 0: No event pending Read 1: Event pending Write 1: Set event (for debug)" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_INTk_OUT_IRQSTATUS_0" acronym="EVE_INTk_OUT_IRQSTATUS_0" offset="0x80524" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="Clearable / enabled status for event #N Write 0: No action Read 0: No (enabled) event pending Read 1: Enabled Event pending Write 1: Clear raw event." range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_INTk_OUT_IRQSTATUS_1" acronym="EVE_INTk_OUT_IRQSTATUS_1" offset="0x80534" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="Clearable / enabled status for event #N Write 0: No action Read 0: No (enabled) event pending Read 1: Enabled Event pending Write 1: Clear raw event." range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_INTk_OUT_IRQSTATUS_2" acronym="EVE_INTk_OUT_IRQSTATUS_2" offset="0x80544" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="Clearable / enabled status for event #N Write 0: No action Read 0: No (enabled) event pending Read 1: Enabled Event pending Write 1: Clear raw event." range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_INTk_OUT_IRQSTATUS_3" acronym="EVE_INTk_OUT_IRQSTATUS_3" offset="0x80554" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="Clearable / enabled status for event #N Write 0: No action Read 0: No (enabled) event pending Read 1: Enabled Event pending Write 1: Clear raw event." range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_INTk_OUT_IRQENABLE_SET_0" acronym="EVE_INTk_OUT_IRQENABLE_SET_0" offset="0x80528" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000 0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Enable interrupt" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_INTk_OUT_IRQENABLE_SET_1" acronym="EVE_INTk_OUT_IRQENABLE_SET_1" offset="0x80538" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000 0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Enable interrupt" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_INTk_OUT_IRQENABLE_SET_2" acronym="EVE_INTk_OUT_IRQENABLE_SET_2" offset="0x80548" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000 0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Enable interrupt" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_INTk_OUT_IRQENABLE_SET_3" acronym="EVE_INTk_OUT_IRQENABLE_SET_3" offset="0x80558" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000 0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Enable interrupt" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_INTk_OUT_IRQENABLE_CLR_0" acronym="EVE_INTk_OUT_IRQENABLE_CLR_0" offset="0x8052C" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000 0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Disable interrupt (i.e. / clear ENABLEn bit)" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_INTk_OUT_IRQENABLE_CLR_1" acronym="EVE_INTk_OUT_IRQENABLE_CLR_1" offset="0x8053C" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000 0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Disable interrupt (i.e. / clear ENABLEn bit)" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_INTk_OUT_IRQENABLE_CLR_2" acronym="EVE_INTk_OUT_IRQENABLE_CLR_2" offset="0x8054C" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000 0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Disable interrupt (i.e. / clear ENABLEn bit)" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_INTk_OUT_IRQENABLE_CLR_3" acronym="EVE_INTk_OUT_IRQENABLE_CLR_3" offset="0x8055C" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000 0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Disable interrupt (i.e. / clear ENABLEn bit)" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTj_IRQSTATUS_RAW_8" acronym="ARP32_INTj_IRQSTATUS_RAW_8" offset="0x80600" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="settable raw status for event #n Write 0: No action Read 0: No event pending Read 1: Event pending Write 1: Set event (for debug)" range="" rwaccess="R"/>
+  </register>
+  <register id="ARP32_INTj_IRQSTATUS_RAW_9" acronym="ARP32_INTj_IRQSTATUS_RAW_9" offset="0x80610" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="settable raw status for event #n Write 0: No action Read 0: No event pending Read 1: Event pending Write 1: Set event (for debug)" range="" rwaccess="R"/>
+  </register>
+  <register id="ARP32_INTj_IRQSTATUS_RAW_10" acronym="ARP32_INTj_IRQSTATUS_RAW_10" offset="0x80620" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="settable raw status for event #n Write 0: No action Read 0: No event pending Read 1: Event pending Write 1: Set event (for debug)" range="" rwaccess="R"/>
+  </register>
+  <register id="ARP32_INTj_IRQSTATUS_RAW_11" acronym="ARP32_INTj_IRQSTATUS_RAW_11" offset="0x80630" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="settable raw status for event #n Write 0: No action Read 0: No event pending Read 1: Event pending Write 1: Set event (for debug)" range="" rwaccess="R"/>
+  </register>
+  <register id="ARP32_INTj_IRQSTATUS_RAW_12" acronym="ARP32_INTj_IRQSTATUS_RAW_12" offset="0x80640" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="settable raw status for event #n Write 0: No action Read 0: No event pending Read 1: Event pending Write 1: Set event (for debug)" range="" rwaccess="R"/>
+  </register>
+  <register id="ARP32_INTj_IRQSTATUS_RAW_13" acronym="ARP32_INTj_IRQSTATUS_RAW_13" offset="0x80650" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="settable raw status for event #n Write 0: No action Read 0: No event pending Read 1: Event pending Write 1: Set event (for debug)" range="" rwaccess="R"/>
+  </register>
+  <register id="ARP32_INTj_IRQSTATUS_8" acronym="ARP32_INTj_IRQSTATUS_8" offset="0x80604" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="Clearable / enabled status for event #N Write 0: No action Read 0: No (enabled) event pending Read 1: Enabled Event pending Write 1: Clear raw event" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTj_IRQSTATUS_9" acronym="ARP32_INTj_IRQSTATUS_9" offset="0x80614" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="Clearable / enabled status for event #N Write 0: No action Read 0: No (enabled) event pending Read 1: Enabled Event pending Write 1: Clear raw event" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTj_IRQSTATUS_10" acronym="ARP32_INTj_IRQSTATUS_10" offset="0x80624" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="Clearable / enabled status for event #N Write 0: No action Read 0: No (enabled) event pending Read 1: Enabled Event pending Write 1: Clear raw event" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTj_IRQSTATUS_11" acronym="ARP32_INTj_IRQSTATUS_11" offset="0x80634" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="Clearable / enabled status for event #N Write 0: No action Read 0: No (enabled) event pending Read 1: Enabled Event pending Write 1: Clear raw event" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTj_IRQSTATUS_12" acronym="ARP32_INTj_IRQSTATUS_12" offset="0x80644" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="Clearable / enabled status for event #N Write 0: No action Read 0: No (enabled) event pending Read 1: Enabled Event pending Write 1: Clear raw event" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTj_IRQSTATUS_13" acronym="ARP32_INTj_IRQSTATUS_13" offset="0x80654" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="Clearable / enabled status for event #N Write 0: No action Read 0: No (enabled) event pending Read 1: Enabled Event pending Write 1: Clear raw event" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTj_IRQENABLE_SET_8" acronym="ARP32_INTj_IRQENABLE_SET_8" offset="0x80608" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Enable interrupt" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTj_IRQENABLE_SET_9" acronym="ARP32_INTj_IRQENABLE_SET_9" offset="0x80618" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Enable interrupt" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTj_IRQENABLE_SET_10" acronym="ARP32_INTj_IRQENABLE_SET_10" offset="0x80628" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Enable interrupt" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTj_IRQENABLE_SET_11" acronym="ARP32_INTj_IRQENABLE_SET_11" offset="0x80638" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Enable interrupt" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTj_IRQENABLE_SET_12" acronym="ARP32_INTj_IRQENABLE_SET_12" offset="0x80648" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Enable interrupt" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTj_IRQENABLE_SET_13" acronym="ARP32_INTj_IRQENABLE_SET_13" offset="0x80658" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Enable interrupt" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTj_IRQENABLE_CLR_8" acronym="ARP32_INTj_IRQENABLE_CLR_8" offset="0x8060C" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Disable interrupt (i.e. / clear ENABLEn bit)" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTj_IRQENABLE_CLR_9" acronym="ARP32_INTj_IRQENABLE_CLR_9" offset="0x8061C" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Disable interrupt (i.e. / clear ENABLEn bit)" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTj_IRQENABLE_CLR_10" acronym="ARP32_INTj_IRQENABLE_CLR_10" offset="0x8062C" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Disable interrupt (i.e. / clear ENABLEn bit)" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTj_IRQENABLE_CLR_11" acronym="ARP32_INTj_IRQENABLE_CLR_11" offset="0x8063C" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Disable interrupt (i.e. / clear ENABLEn bit)" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTj_IRQENABLE_CLR_12" acronym="ARP32_INTj_IRQENABLE_CLR_12" offset="0x8064C" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Disable interrupt (i.e. / clear ENABLEn bit)" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INTj_IRQENABLE_CLR_13" acronym="ARP32_INTj_IRQENABLE_CLR_13" offset="0x8065C" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Disable interrupt (i.e. / clear ENABLEn bit)" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INT14_IRQSTATUS_RAW" acronym="ARP32_INT14_IRQSTATUS_RAW" offset="0x80680" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x00" description="settable raw status for event #n Write 0: No action Read 0: No event pending Read 1: Event pending Write 1: Set event (for debug)" range="" rwaccess="R"/>
+  </register>
+  <register id="ARP32_INT14_IRQSTATUS" acronym="ARP32_INT14_IRQSTATUS" offset="0x80684" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="Clearable / enabled status for event #N Write 0: No action Read 0: No (enabled) event pending Read 1: Enabled Event pending Write 1: Clear raw event" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INT14_IRQENABLE_SET" acronym="ARP32_INT14_IRQENABLE_SET" offset="0x80688" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Enable interrupt" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INT14_IRQENABLE_CLR" acronym="ARP32_INT14_IRQENABLE_CLR" offset="0x8068C" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Disable interrupt (i.e. / clear ENABLEn bit)" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INT15_IRQSTATUS_RAW" acronym="ARP32_INT15_IRQSTATUS_RAW" offset="0x80690" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x00" description="settable raw status for event #n Write 0: No action Read 0: No event pending Read 1: Event pending Write 1: Set event (for debug)" range="" rwaccess="R"/>
+  </register>
+  <register id="ARP32_INT15_IRQSTATUS" acronym="ARP32_INT15_IRQSTATUS" offset="0x80694" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="Clearable / enabled status for event #N Write 0: No action Read 0: No (enabled) event pending Read 1: Enabled Event pending Write 1: Clear raw event" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INT15_IRQENABLE_SET" acronym="ARP32_INT15_IRQENABLE_SET" offset="0x80698" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0000" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Enable interrupt" range="" rwaccess="RW"/>
+  </register>
+  <register id="ARP32_INT15_IRQENABLE_CLR" acronym="ARP32_INT15_IRQENABLE_CLR" offset="0x8069C" width="32" description="">
+    <bitfield id="ENABLE" width="32" begin="31" end="0" resetval="0x0" description="Enable for event #n Write 0: No action Read 0: Interrupt disabled Read 1: Interrupt enabled Write 1: Disable interrupt (i.e. / clear ENABLEn bit)" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_GPOUTm_0" acronym="EVE_GPOUTm_0" offset="0x80700" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="GP Output #n Write 0: Drive GP Output #n low/1 Read 0: GP Output #n is low/0. Write 1: Drive GP Output #n high/1. Read 1: GP Output is high/1." range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_GPOUTm_1" acronym="EVE_GPOUTm_1" offset="0x80710" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="GP Output #n Write 0: Drive GP Output #n low/1 Read 0: GP Output #n is low/0. Write 1: Drive GP Output #n high/1. Read 1: GP Output is high/1." range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_GPOUTm_SET_0" acronym="EVE_GPOUTm_SET_0" offset="0x80704" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="GP Output #n Write 0: No action Read 0: GP Output #n is low/0. Write 1: Drive GP Output #n high/1. Read 1: GP Output is high/1." range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_GPOUTm_SET_1" acronym="EVE_GPOUTm_SET_1" offset="0x80714" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="GP Output #n Write 0: No action Read 0: GP Output #n is low/0. Write 1: Drive GP Output #n high/1. Read 1: GP Output is high/1." range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_GPOUTm_CLR_0" acronym="EVE_GPOUTm_CLR_0" offset="0x80708" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="GP Output #n Write 0: Drive GP Output #n low/1 Read 0: GP Output #n is low/0. Write 1: Drive GP Output #n high/1. Read 1: GP Output is high/1." range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_GPOUTm_CLR_1" acronym="EVE_GPOUTm_CLR_1" offset="0x80718" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="GP Output #n Write 0: Drive GP Output #n low/1 Read 0: GP Output #n is low/0. Write 1: Drive GP Output #n high/1. Read 1: GP Output is high/1." range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_GPOUTm_PULSE_0" acronym="EVE_GPOUTm_PULSE_0" offset="0x8070C" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="GP Output #n Write 0: No action Read 0: GP Output #n is low/0. Write 1: Drive GP Output #n high/1 for four cycles / then drive low/0. Read 1: GP Output #n is high/1. Note: Writing to GPOUT registers when the four cycles for the previous write to GPOUT_PULSE register have not been completed can result in unpredictable output." range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_GPOUTm_PULSE_1" acronym="EVE_GPOUTm_PULSE_1" offset="0x8071C" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="GP Output #n Write 0: No action Read 0: GP Output #n is low/0. Write 1: Drive GP Output #n high/1 for four cycles / then drive low/0. Read 1: GP Output #n is high/1. Note: Writing to GPOUT registers when the four cycles for the previous write to GPOUT_PULSE register have not been completed can result in unpredictable output." range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_GPIN0" acronym="EVE_GPIN0" offset="0x80740" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="GP Input #n Read 0: GP Input #n is low/0. Read 1: GP Input is high/1." range="" rwaccess="R"/>
+  </register>
+  <register id="EVE_GPIN1" acronym="EVE_GPIN1" offset="0x80744" width="32" description="">
+    <bitfield id="EVENT" width="32" begin="31" end="0" resetval="0x0000 0000" description="GP Input #n Read 0: GP Input #n is low/0. Read 1: GP Input is high/1." range="" rwaccess="R"/>
+  </register>
+  <register id="EVE_CME_DONE_GPOUT" acronym="EVE_CME_DONE_GPOUT" offset="0x80780" width="32" description="">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x000" description="" range="" rwaccess="R"/>
+    <bitfield id="EVENT" width="8" begin="7" end="0" resetval="0x00" description="Internal CME Done Output #n. Write 0: Drive Internal CME Done #n low/1 Read 0: Drive Internal CME Done #n is low/0. Write 1: Drive Internal CME Done #n high/1. Read 1: Internal CME Done is high/1." range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_CME_DONE_GPOUT_SET" acronym="EVE_CME_DONE_GPOUT_SET" offset="0x80784" width="32" description="">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x000" description="" range="" rwaccess="R"/>
+    <bitfield id="EVENT" width="8" begin="7" end="0" resetval="0x00" description="Internal CME Done #n Write 0: No action Read 0: Internal CME Done #n is low/0. Write 1: Drive Internal CME Done #n high/1. Read 1: Internal CME Done is high/1." range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_CME_DONE_GPOUT_CLR" acronym="EVE_CME_DONE_GPOUT_CLR" offset="0x80788" width="32" description="">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x000" description="" range="" rwaccess="R"/>
+    <bitfield id="EVENT" width="8" begin="7" end="0" resetval="0x00" description="Internal CME Done #n Write 0: No action Read 0: Internal CME Done #n is low/0. Write 1: Drive Internal CME Done #n low/0. Read 1: Internal CME Done #n is high/1." range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_CME_DONE_GPOUT_PULSE" acronym="EVE_CME_DONE_GPOUT_PULSE" offset="0x8078C" width="32" description="">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x000" description="" range="" rwaccess="R"/>
+    <bitfield id="EVENT" width="8" begin="7" end="0" resetval="0x00" description="Internal CME Done #n Write 0: No action Read 0: Internal CME Done #n is low/0. Write 1: Drive Internal CME Done #n high/1 for four cycles / then drive low/0. Read 1: Internal CME Done #n is high/1. Note: Writing to GPOUT registers when the four cycles for the previous write to GPOUT_PULSE register have not been completed can result in unpredictable output." range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_CME_DONE_SEL" acronym="EVE_CME_DONE_SEL" offset="0x80790" width="32" description="">
+    <bitfield id="SEL7" width="4" begin="31" end="28" resetval="0x0" description="CME Done Output select for Bit #7 (n=7)." range="" rwaccess="RW"/>
+    <bitfield id="SEL6" width="4" begin="27" end="24" resetval="0x0" description="CME Done Output select for Bit #6 (n=6)." range="" rwaccess="RW"/>
+    <bitfield id="SEL5" width="4" begin="23" end="20" resetval="0x0" description="CME Done Output select for Bit #5 (n=5)." range="" rwaccess="RW"/>
+    <bitfield id="SEL4" width="4" begin="19" end="16" resetval="0x0" description="CME Done Output select for Bit #4 (n=4)." range="" rwaccess="RW"/>
+    <bitfield id="SEL3" width="4" begin="15" end="12" resetval="0x0" description="CME Done Output select for Bit #3 (n=3)." range="" rwaccess="RW"/>
+    <bitfield id="SEL2" width="4" begin="11" end="8" resetval="0x0" description="CME Done Output select for Bit #2 (n=2)." range="" rwaccess="RW"/>
+    <bitfield id="SEL1" width="4" begin="7" end="4" resetval="0x0" description="CME Done Output select for Bit #1 (n=1)." range="" rwaccess="RW"/>
+    <bitfield id="SEL0" width="4" begin="3" end="0" resetval="0x0" description="CME Done Output select for Bit #0 (n=0) 0: Driven by EDMA cc_int0 1: Driven by EDMA cc_int1 2: Driven by EDMA cc_int2 3: Driven by EDMA cc_int3 4: Driven by EDMA cc_int4 5: Driven by EDMA cc_int5 6: Driven by EDMA cc_int6 7: Driven by EDMA cc_int7 8: Driven by EVE_CME_DONE_GPOUTn 9: driven by eve_cme_done_gpout[0+n] (from EVE1) 10: driven by eve_cme_done_gpout[8+n] (from EVE2)11: driven by eve_cme_done_gpout[16+n] (from EVE3) 12: driven by eve_cme_done_gpout[24+n] (from EVE4)" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_CME_DONE_EN" acronym="EVE_CME_DONE_EN" offset="0x80794" width="32" description="">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="EN" width="8" begin="7" end="0" resetval="0x0" description="EVE CME Done EN #n Write 0: No action Read 0: EVE CME Done #n is disabled. Write 1: Enable EVE CME Done #n event. This allows the status of the CME Done #n to propagate to the output. Read 1: EVE CME Done #n is enabled." range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_PM_STAT0" acronym="EVE_PM_STAT0" offset="0x80FE0" width="32" description="">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OCPM1_SCONNECT" width="3" begin="30" end="28" resetval="0x0" description="Readable state of OCP Power management handshake" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="2" begin="27" end="26" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OCPM1_MCONNECT" width="2" begin="25" end="24" resetval="0x0" description="Readable state of OCP Power management handshake" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OCPM0_SCONNECT" width="3" begin="22" end="20" resetval="0x0" description="Readable state of OCP Power management handshake" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="2" begin="19" end="18" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OCPM0_MCONNECT" width="2" begin="17" end="16" resetval="0x0" description="Readable state of OCP Power management handshake" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="15" end="15" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OCPS_SCONNECT" width="3" begin="14" end="12" resetval="0x0" description="Readable state of OCP Power management handshake" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="2" begin="11" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="OCPS_MCONNECT" width="2" begin="9" end="8" resetval="0x0" description="Readable state of OCP Power management handshake" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="2" begin="7" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MWAIT" width="1" begin="5" end="5" resetval="0x0" description="Readable state of OCP Power management handshake" range="" rwaccess="R"/>
+    <bitfield id="MSTANDBY" width="1" begin="4" end="4" resetval="0x0" description="Readable state of OCP Power management handshake" range="" rwaccess="R"/>
+    <bitfield id="SWAKEUP" width="1" begin="3" end="3" resetval="0x0" description="Readable state of OCP Power management handshake" range="" rwaccess="R"/>
+    <bitfield id="SIDLEACK" width="2" begin="2" end="1" resetval="0x0" description="Readable state of OCP Power management handshake" range="" rwaccess="R"/>
+    <bitfield id="SIDLEREQ" width="1" begin="0" end="0" resetval="0x0" description="Readable state of OCP Power management handshake" range="" rwaccess="R"/>
+  </register>
+  <register id="EVE_PM_STAT1" acronym="EVE_PM_STAT1" offset="0x80FE4" width="32" description="">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="STBY_MDISCACK_OCPM1" width="2" begin="23" end="22" resetval="0x0" description="Readable state of internal power management handshake" range="" rwaccess="R"/>
+    <bitfield id="STBY_MDISCACK_OCPM0" width="2" begin="21" end="20" resetval="0x0" description="Readable state of internal power management handshake" range="" rwaccess="R"/>
+    <bitfield id="STBY_MDISCREQ_OCPM1" width="1" begin="19" end="19" resetval="0x0" description="Readable state of internal power management handshake" range="" rwaccess="R"/>
+    <bitfield id="STBY_MDISCREQ_OCPM0" width="1" begin="18" end="18" resetval="0x0" description="Readable state of internal power management handshake" range="" rwaccess="R"/>
+    <bitfield id="IDLE_SDISCONNECT_ACK" width="1" begin="17" end="17" resetval="0x0" description="Readable state of internal power management handshake" range="" rwaccess="R"/>
+    <bitfield id="IDLE_SDISCONNECT_REQ" width="1" begin="16" end="16" resetval="0x0" description="Readable state of internal power management handshake" range="" rwaccess="R"/>
+    <bitfield id="EVE_IDLE_INTR_DISABLE" width="1" begin="15" end="15" resetval="0x0" description="Readable state of internal power management handshake" range="" rwaccess="R"/>
+    <bitfield id="TPTC1_MWAIT" width="1" begin="14" end="14" resetval="0x0" description="Readable state of internal power management handshake" range="" rwaccess="R"/>
+    <bitfield id="TPTC0_MWAIT" width="1" begin="13" end="13" resetval="0x0" description="Readable state of internal power management handshake" range="" rwaccess="R"/>
+    <bitfield id="EVE_PCACHE_OCP_BUSY" width="1" begin="12" end="12" resetval="0x0" description="Readable state of internal power management handshake" range="" rwaccess="R"/>
+    <bitfield id="EVE_CONTROL_SIDLEACK" width="1" begin="11" end="11" resetval="0x0" description="Readable state of internal power management handshake" range="" rwaccess="R"/>
+    <bitfield id="SMSET_SIDLEACK" width="1" begin="10" end="10" resetval="0x0" description="Readable state of internal power management handshake" range="" rwaccess="R"/>
+    <bitfield id="L2_EVE_SIDLEACK" width="1" begin="9" end="9" resetval="0x0" description="Readable state of internal power management handshake" range="" rwaccess="R"/>
+    <bitfield id="MMU1_CONFIG_SIDLEACK" width="1" begin="8" end="8" resetval="0x0" description="Readable state of internal power management handshake" range="" rwaccess="R"/>
+    <bitfield id="MMU1_SIDLEACK" width="1" begin="7" end="7" resetval="0x0" description="Readable state of internal power management handshake" range="" rwaccess="R"/>
+    <bitfield id="MMU0_CONFIG_SIDLEACK" width="1" begin="6" end="6" resetval="0x0" description="Readable state of internal power management handshake" range="" rwaccess="R"/>
+    <bitfield id="MMU0_SIDLEACK" width="1" begin="5" end="5" resetval="0x0" description="Readable state of internal power management handshake" range="" rwaccess="R"/>
+    <bitfield id="SCTM_SIDLEACK" width="1" begin="4" end="4" resetval="0x0" description="Readable state of internal power management handshake" range="" rwaccess="R"/>
+    <bitfield id="TPCC_SIDLEACK" width="1" begin="3" end="3" resetval="0x0" description="Readable state of internal power management handshake" range="" rwaccess="R"/>
+    <bitfield id="TPTC1_SIDLEACK" width="1" begin="2" end="2" resetval="0x0" description="Readable state of internal power management handshake" range="" rwaccess="R"/>
+    <bitfield id="TPTC0_SIDLEACK" width="1" begin="1" end="1" resetval="0x0" description="Readable state of internal power management handshake" range="" rwaccess="R"/>
+    <bitfield id="SUBMODULE_IDLE_REQ" width="1" begin="0" end="0" resetval="" description="" range="" rwaccess=""/>
+  </register>
+  <register id="EVE_DBGOUT" acronym="EVE_DBGOUT" offset="0x80FE8" width="32" description="">
+    <bitfield id="VALUE" width="24" begin="31" end="8" resetval="0x000" description="Read returns state of eve_dbgout bus." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="GROUP" width="4" begin="3" end="0" resetval="0x0" description="Debug Group Output control : mux select 0x0 : disabled / all debug outputs driven to 0x0. 0x1 : select output group1 0x2 : select output group2 : 0xN : select output groupN Others - reserved" range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_RSVD0" acronym="EVE_RSVD0" offset="0x80FF4" width="32" description="">
+    <bitfield id="VAL" width="32" begin="31" end="0" resetval="0x0000 0000" description="Value; This register is reserved for any necessary ECOs that may be required later in the design cycle." range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_RSVD1" acronym="EVE_RSVD1" offset="0x80FF8" width="32" description="">
+    <bitfield id="VAL" width="32" begin="31" end="0" resetval="0x0000 0000" description="Value; This register is reserved for any necessary ECOs that may be required later in the design cycle." range="" rwaccess="RW"/>
+  </register>
+  <register id="EVE_TEST" acronym="EVE_TEST" offset="0x80FFC" width="32" description="">
+    <bitfield id="VAL" width="32" begin="31" end="0" resetval="0x0000 0000" description="Value; This register is reserved for any necessary ECOs that may be required later in the design cycle." range="" rwaccess="RW"/>
+  </register>
+</module>

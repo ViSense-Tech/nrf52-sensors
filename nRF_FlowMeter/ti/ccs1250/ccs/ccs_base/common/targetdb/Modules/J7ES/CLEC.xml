@@ -1,0 +1,39 @@
+<module name="CLEC" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="CLEC_PID" acronym="CLEC_PID" offset="0x0" width="32" description="Peripheral identification register. Uniquely identifies the module and its specific revision.">
+    <bitfield id="REV" width="32" begin="31" end="0" resetval="0x60100100" description="TI internal data. Identifies revision of peripheral." range="" rwaccess="R"/>
+  </register>
+  <register id="CLEC_EFR_k" acronym="CLEC_EFR_k" offset="0xA000" width="32" description="Event flag register. This is a read-only register which contains pending flag for all events queued by CLEC. This flag is set regardless if corresponding event is enabled or disabled. Offset = A000h + (k * 4h); where k = 0h to 3Eh.">
+    <bitfield id="EVNTFR" width="32" begin="31" end="0" resetval="0x0" description="Event pending flags for events 0 to N. For pulse events, an event flag is cleared as soon as corresponding event is sent. For level events, an event flag is cleared when corresponding interrupt event is deasserted. This is to support scenario where CPU wants to disable some event temporarily, while doing some important task, and then re-enable the event; however, when CPU re-enables the event, CPU does not want to miss any event that occurred when it was disabled temporarily." range="" rwaccess="R"/>
+  </register>
+  <register id="CLEC_EDR_k" acronym="CLEC_EDR_k" offset="0xB000" width="32" description="Event drop register. This is a read-only register which contains dropped event flag for each event. For input events which are pulse and not level, if CLEC receives back to back pulses of event and second pulse comes before event flag for the first event is cleared (which means event is not sent from CLEC queue yet), there is no way to tell destination that there were two events requested. CLEC will generate dropped event interrupt in this case and will also set corresponding event dropped flag in CLEC_EDR_k register. Offset = B000h + (k * 4h); where k = 0h to 3Eh.">
+    <bitfield id="EVNTFR" width="32" begin="31" end="0" resetval="0x0" description="Dropped event flags for events 0 to N. This flag bit is set until SW clears it by writing 0x2 to the corresponding" range="" rwaccess="R"/>
+  </register>
+  <register id="CLEC_GELRS" acronym="CLEC_GELRS" offset="0xC000" width="32" description="Global event lock register for secure claims. The purpose of this register is to allow a hypervisor to expose an event to a virtual machine container, while preventing that virtual machine from changing the configuration. The hypervisor must provide a writeable page to the contained virtual machine so that the virtual machine can use the register. The register acts as a global control, removing write permission to when [31] S = 1. Since only root supervisor has access to the global registers, only root supervisor may change the value of the [0] LOCK bit.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="LOCK" width="1" begin="0" end="0" resetval="0x0" description="Global event lock bit for secure claims. When set, all the event configurations that are marked with" range="" rwaccess="RW"/>
+  </register>
+  <register id="CLEC_GELRNS" acronym="CLEC_GELRNS" offset="0xD000" width="32" description="Global event lock register for non-secure claims. The purpose of this register is to allow a hypervisor to expose an event to a virtual machine container, while preventing that virtual machine from changing the configuration. The hypervisor must provide a writeable page to the contained virtual machine so that the virtual machine can use the register. The register acts as a global control, removing write permission to when [31] S = 0. Since only root supervisor has access to the global registers, only root supervisor may change the value of the [0] LOCK bit.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="LOCK" width="1" begin="0" end="0" resetval="0x0" description="Global event lock bit for secure claims. When set, all the event configurations that are marked with" range="" rwaccess="RW"/>
+  </register>
+  <register id="CLEC_MRR_j" acronym="CLEC_MRR_j" offset="0x11000" width="32" description="Map and routing register. This register is readable by any privilege level. It is writeable by supervisor mode if unlocked by or registers. Offset = 11000h + (j * 00010000h); where j = 0h to 7FEh.">
+    <bitfield id="S" width="1" begin="31" end="31" resetval="0x1" description="Secure claim. If set to 1, a non-secure read/write to" range="" rwaccess="RW"/>
+    <bitfield id="ESE" width="1" begin="30" end="30" resetval="0x0" description="Event send enable. Controls whether CLEC sends this event when" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="29" end="26" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="EVTPF" width="1" begin="25" end="25" resetval="0x0" description="Event pending flag. Same value as corresponding" range="" rwaccess="R"/>
+    <bitfield id="IS_LVL" width="1" begin="24" end="24" resetval="0x1" description="Indicates if input event is level (1) or pulse (0). It is expected from firmware to initialize this information accurately for proper CLEC operation" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="23" end="22" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="RTMAP" width="6" begin="21" end="16" resetval="0x1" description="Routing table map" range="" rwaccess="RW"/>
+    <bitfield id="EXT_EVTNUM" width="8" begin="15" end="8" resetval="0x0" description="Encoded external event number to send when this event is triggered" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="7" end="6" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="C7X_EVTNUM" width="6" begin="5" end="0" resetval="0x0" description="C7x event number to send when this event is triggered" range="" rwaccess="RW"/>
+  </register>
+  <register id="CLEC_ESR_j" acronym="CLEC_ESR_j" offset="0x13000" width="32" description="Event send register. This is a write-only register. It ignores the value written (stateless). When written, the CLEC will: Otherwise, the CLEC does not send an event in response to the write; instead, it returns a privilege error for the write status. Corepac powerup/powerdown sequence should comprehend CLEC sequencing to avoid interrupt dropped events. Offset = 13000h + (j * 00010000h); where j = 0h to 7FEh.">
+    <bitfield id="RESERVED" width="32" begin="31" end="0" resetval="0x0" description="Reserved" range="" rwaccess="W"/>
+  </register>
+  <register id="CLEC_ECR_j" acronym="CLEC_ECR_j" offset="0x14000" width="32" description="Event clear register. This is a write-only register. When written value 0x1, the CLEC will clear any level interrupt set for that event. Offset = 14000h + (j * 00010000h); where j = 0h to 7FEh">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="Reserved" range="" rwaccess="W"/>
+    <bitfield id="ECR_PFLAG" width="1" begin="1" end="1" resetval="0x0" description="Writing 1 to this bit clears associated" range="" rwaccess="W"/>
+    <bitfield id="ECR_FLAG" width="1" begin="0" end="0" resetval="0x0" description="Writing 1 to this bit clears event and associated" range="" rwaccess="W"/>
+  </register>
+</module>

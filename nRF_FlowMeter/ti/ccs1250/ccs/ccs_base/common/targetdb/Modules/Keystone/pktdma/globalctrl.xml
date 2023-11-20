@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module id="PKTDMA_GLBCTRL" HW_revision="" XML_version="1" description="">
+  <!-- Global Control Registers -->
+  <register id="Revision_Register" offset="0x0" width="32" description="The Revision Register contains the major and minor revisions for the module.">
+    <bitfield id="modid" width="14" begin="29" end="16" description="Module ID Field" rwaccess="R" />
+    <bitfield id="revrtl" width="5" begin="15" end="11" description="RTL Revision" rwaccess="R" />
+    <bitfield id="revmaj" width="3" begin="10" end="8" description="Major Revision" rwaccess="R" />
+    <bitfield id="revmin" width="8" begin="7" end="0" description="Minor Revision" rwaccess="R" />
+  </register>
+  <register id="Performance_Control_Register" offset="0x4" width="32" description="The performance control register contains fields which can be used to adjust the performance of the CDMAHP in the system.">
+    <bitfield id="warb_fifo_depth" width="6" begin="21" end="16" description="Depth of the Write Arbitration FIFO" rwaccess="RW" />
+    <bitfield id="timeout_cnt" width="16" begin="15" end="0" description="Timeout Duration in Clock Cycles" rwaccess="RW" />
+  </register>
+  <register id="Emulation_Control_Register" offset="0x8" width="32" description="The emulation control register is used to control the behavior of the DMA when the emususp input is asserted.">
+    <bitfield id="loopback_en" width="1" begin="31" end="31" description="Loopback Enable" rwaccess="RW" />
+    <bitfield id="soft" width="1" begin="1" end="1" description="" rwaccess="RW" />
+    <bitfield id="free" width="1" begin="0" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="Priority_Control_Register" offset="0xc" width="32" description="The priority control register is used to control the priority of the transactions which the DMA generates on it's master interface.">
+    <bitfield id="rx_priority" width="3" begin="18" end="16" description="Receive Priority" rwaccess="RW" />
+    <bitfield id="tx_priority" width="3" begin="2" end="0" description="Transmit Priority" rwaccess="RW" />
+  </register>
+  <register id="Queue_Manager_0_Base_Address_Register" offset="0x10" width="32" description="This register is used to provide a pointer to the base address to the Queues region of Queue Manager 0.">
+    <bitfield id="qm0_base" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="Queue_Manager_1_Base_Address_Register" offset="0x14" width="32" description="This register is used to provide a pointer to the base address to the Queues region of Queue Manager 1.">
+    <bitfield id="qm1_base" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="Queue_Manager_2_Base_Address_Register" offset="0x18" width="32" description="This register is used to provide a pointer to the base address to the Queues region of Queue Manager 2.">
+    <bitfield id="qm2_base" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+  <register id="Queue_Manager_3_Base_Address_Register" offset="0x1c" width="32" description="This register is used to provide a pointer to the base address to the Queues region of Queue Manager 3.">
+    <bitfield id="qm3_base" width="32" begin="31" end="0" description="" rwaccess="RW" />
+  </register>
+ </module>

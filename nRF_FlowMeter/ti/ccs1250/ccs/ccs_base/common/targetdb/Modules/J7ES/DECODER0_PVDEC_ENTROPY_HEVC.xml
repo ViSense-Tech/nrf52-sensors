@@ -1,0 +1,244 @@
+<module name="DECODER0_PVDEC_ENTROPY_HEVC" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="DECODER0_CR_HEVC_SPS_PARAM_0" acronym="DECODER0_CR_HEVC_SPS_PARAM_0" offset="0x0" width="32" description="">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MAX_TRANSFORM_HIERARCHY_DEPTH_INTRA" width="3" begin="30" end="28" resetval="0x0" description="Defines the maximum hierarchy depth an Intra Coded block can be split into smaller transforms [cannot be gretaer than Log2CtbSizeY [maximum is" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="27" end="27" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MAX_TRANSFORM_HIERARCHY_DEPTH_INTER" width="3" begin="26" end="24" resetval="0x0" description="Defines the maximum hierarchy depth an Inter Coded block can be split into smaller transforms [cannot be gretaer than Log2CtbSizeY [maximum is" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="23" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LOG2_DIFF_MAX_MIN_TRANSFORM_BLOCK_SIZE" width="2" begin="21" end="20" resetval="0x0" description="Defines the difference between minimum and maximum transform block size [where LOG2_MIN_TRANSFORM_BLOCK_SIZE_MINUS2 + LOG2_DIFF_MAX_MIN_TRANSFORM_BLOCK_SIZE must be &amp;amp;lt;= 3, and must also be less than or equal to the maximum coded block size]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="19" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LOG2_MIN_TRANSFORM_BLOCK_SIZE_MINUS2" width="2" begin="17" end="16" resetval="0x0" description="Defines the minimum transform block size [where the minimum transform block size can not be greater than the minimum luma coded block size]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LOG2_DIFF_MAX_MIN_LUMA_CODING_BLOCK_SIZE" width="2" begin="13" end="12" resetval="0x0" description="Defines the difference between minimum and maximum luma coded block size, where the resulting size is sometimes refered to as the Coded Tree Unit size or CTU_SIZE [where for Main Profile, LOG2_MIN_LUMA_CODING_BLOCK_SIZE_MINUS3 + LOG2_DIFF_MAX_MIN_LUMA_CODING_BLOCK_SIZE will be in the range 1 to 3]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="11" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="LOG2_MIN_LUMA_CODING_BLOCK_SIZE_MINUS3" width="2" begin="9" end="8" resetval="0x0" description="Defines the minimum luma coded block size" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="7" end="7" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BIT_DEPTH_CHROMA_MINUS8" width="3" begin="6" end="4" resetval="0x0" description="8 less than the bit depth of chroma samples" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BIT_DEPTH_LUMA_MINUS8" width="3" begin="2" end="0" resetval="0x0" description="8 less than the bit depth of luma samples" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SPS_PARAM_1" acronym="DECODER0_CR_HEVC_SPS_PARAM_1" offset="0x4" width="32" description="">
+    <bitfield id="RESERVED" width="9" begin="31" end="23" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="TRANSFORM_SKIP_CONTEXT_ENABLED_FLAG" width="1" begin="22" end="22" resetval="0x0" description="Indicates that a particular context is used for the parsing of the sig_coeff_flag for transform blocks with a skipped transform" range="" rwaccess="RW"/>
+    <bitfield id="PERSISTENT_RICE_ADAPTATION_ENABLED_FLAG" width="1" begin="21" end="21" resetval="0x0" description="Indicates that the Rice parameter derivation for the binarization of coeff_abs_level_remaining uses a fast adaptation method" range="" rwaccess="RW"/>
+    <bitfield id="CABAC_BYPASS_ALIGNMENT_ENABLED_FLAG" width="1" begin="20" end="20" resetval="0x0" description="Indicates CABAC alignment process is used prior to decoding coef_sign_flag and coef_abs_level_remaining syntax elements" range="" rwaccess="RW"/>
+    <bitfield id="IMPLICIT_RDPCM_ENABLED_FLAG" width="1" begin="19" end="19" resetval="0x0" description="Indicates that the residual modification process for blocks using a transform bypass may be used for intra blocks" range="" rwaccess="RW"/>
+    <bitfield id="EXPLICIT_RDPCM_ENABLED_FLAG" width="1" begin="18" end="18" resetval="0x0" description="Indicates that the residual modification process for blocks using a transform bypass may be used for inter blocks" range="" rwaccess="RW"/>
+    <bitfield id="EXTENDED_PRECISION_PROCESSING_FLAG" width="1" begin="17" end="17" resetval="0x0" description="Indicates that an extended dynamic range is used for inter prediction interpolation and inverse transform processing" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="16" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="PCM_BIT_DEPTH_CHROMA" width="4" begin="15" end="12" resetval="0x0" description="This field is 1 greater than the 'psm_sample_bit_depth_chroma_minus1' field in the bitstream, where this field can be in the range 1 to 14, but must be less than or equal to chroma sample depth" range="" rwaccess="RW"/>
+    <bitfield id="PCM_BIT_DEPTH_LUMA" width="4" begin="11" end="8" resetval="0x0" description="This field is 1 greater than the 'psm_sample_bit_depth_luma_minus1' field in the bitstream, where this field can be in the range 1 to 14, but must be less than or equal to luma sample depth" range="" rwaccess="RW"/>
+    <bitfield id="LOG2_DIFF_MAX_MIN_PCM_LUMA_CODING_BLOCK_SIZE" width="2" begin="7" end="6" resetval="0x0" description="If PCM is enabled, defines the difference between minimum and maximum coded block size at which PCM coding may be used [where LOG2_MIN_PCM_LUMA_CODING_BLOCK_SIZE_MINUS3 + LOG2_DIFF_MAX_MIN_PCM_LUMA_CODING_BLOCK_SIZE must be &amp;amp;lt;= 2]" range="" rwaccess="RW"/>
+    <bitfield id="LOG2_MIN_PCM_LUMA_CODING_BLOCK_SIZE_MINUS3" width="2" begin="5" end="4" resetval="0x0" description="If PCM is enabled, defines the minimum coded block size at which PCM coding may be used" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="PCM_LOOP_FILTER_DISABLE_FLAG" width="1" begin="2" end="2" resetval="0x0" description="If PCM is enabled, this flag controls if in-loop filtering is disabled for PCM samples" range="" rwaccess="RW"/>
+    <bitfield id="PCM_ENABLED_FLAG" width="1" begin="1" end="1" resetval="0x0" description="When set it indicates PCM coded blocks may be included in the bitstream" range="" rwaccess="RW"/>
+    <bitfield id="AMP_ENABLED_FLAG" width="1" begin="0" end="0" resetval="0x0" description="When set it indicates PartMode of Inter prediction blocks can use asymmetric motion partitions" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_PPS_PARAM_0" acronym="DECODER0_CR_HEVC_PPS_PARAM_0" offset="0x8" width="32" description="">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="NUM_TILE_ROWS_MINUS1" width="5" begin="28" end="24" resetval="0x0" description="If tiles are enabled, this field is one less than the number of tile rows the picture has been split into [where a value of zero means a tile spans the whole picture height]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="23" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="NUM_TILE_COLUMNS_MINUS1" width="5" begin="20" end="16" resetval="0x0" description="If tiles are enabled, this field is one less than the number of tile columns the picture has been split into [where a value of zero means a tile spans the whole picture width]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DIFF_CU_CHROMA_QP_OFFSET_DEPTH" width="2" begin="13" end="12" resetval="0x0" description="Indicates the difference between the luma coding tree block size and the minimum luma coding block size of coding units that convey cu_chroma_qp_offset_flag and cu_chroma_qp_offset_idx" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ENTROPY_CODING_SYNC_ENABLE_FLAG" width="1" begin="10" end="10" resetval="0x0" description="When set indicates CABAC state is stored after 2 CTUs in a tile row, which is then used to initialise the CABAC at the start of the next tile row" range="" rwaccess="RW"/>
+    <bitfield id="TILES_ENABLED_FLAG" width="1" begin="9" end="9" resetval="0x0" description="When set indicates the picture is divided into tiles" range="" rwaccess="RW"/>
+    <bitfield id="TRANSQUANT_BYPASS_ENABLE_FLAG" width="1" begin="8" end="8" resetval="0x0" description="When set indicates the cu_transquant_bypass_flag is present in the coded unit" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="7" end="6" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DIFF_CU_QP_DELTA_DEPTH" width="2" begin="5" end="4" resetval="0x0" description="Specifies the granularoty at which cu_qp_delta_abs may be coded in the bit stream [in the range 0 to LOG2_DIFF_MAX_MIN_LUMA_CODING_BLOCK_SIZE]" range="" rwaccess="RW"/>
+    <bitfield id="CU_QP_DELTA_ENABLED_FLAG" width="1" begin="3" end="3" resetval="0x0" description="When set indicates cu_qp_delta_abs may be present in the transform unit syntax" range="" rwaccess="RW"/>
+    <bitfield id="TRANSFORM_SKIP_ENABLED_FLAG" width="1" begin="2" end="2" resetval="0x0" description="When set indicates transform_skip_flag may be present in the residual coding syntax" range="" rwaccess="RW"/>
+    <bitfield id="CROSS_COMPONENT_PREDICTION_FLAG" width="1" begin="1" end="1" resetval="0x0" description="Indicates that log2_res_scale_abs_plus1 and res_scale_sign_flag may be present in the transform unit syntax" range="" rwaccess="RW"/>
+    <bitfield id="SIGN_DATA_HIDING_FLAG" width="1" begin="0" end="0" resetval="0x0" description="Indicates if sign bit hiding is enabled" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_INDEPENDENT_SLICE_START" acronym="DECODER0_CR_HEVC_INDEPENDENT_SLICE_START" offset="0x10" width="32" description="">
+    <bitfield id="DEPENDENT_SLICE_SEGMENT" width="1" begin="31" end="31" resetval="0x0" description="If this flag is set, the current slice is a dependent slice." range="" rwaccess="RW"/>
+    <bitfield id="LOG2_MAX_TRANSFORM_SKIP_BLOCK_SIZE_MINUS2" width="3" begin="30" end="28" resetval="0x0" description="Indicates the maximum transform block size for which transform_skip_flag may be present" range="" rwaccess="RW"/>
+    <bitfield id="INDEPENDENT_SLICE_MB_NO_Y" width="12" begin="27" end="16" resetval="0x0" description="The vertical offset of the first 16x16 block in the current independent slice, or from the start of the previous independent slice if this is a dependent slice [where this field counts from 0] [For HEVC CTU sizes larger than 16x16 this is the co-ordinate of the top left 16x16 block within the CTU]" range="" rwaccess="RW"/>
+    <bitfield id="CHROMA_QP_OFFSET_LIST_LEN_MINUS1" width="3" begin="15" end="13" resetval="0x0" description="Specifies 1 less than the number of cb_qp_offset_list and cr_qp_offset_list syntax elements that are present" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="INDEPENDENT_SLICE_MB_NO_X" width="12" begin="11" end="0" resetval="0x0" description="The horizontal offset of the first 16x16 block in the current independent slice, or from the start of the previous independent slice if this is a dependent slice [where this field counts from 0] [For HEVC CTU sizes larger than 16x16 this is the co-ordinate of the top left 16x16 block within the CTU]" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_SLICE_PARAM_0" acronym="DECODER0_CR_HEVC_SLICE_PARAM_0" offset="0x14" width="32" description="">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_QPY" width="7" begin="30" end="24" resetval="0x0" description="The result of 26 + pic_init_qp_minus26 + slice_qp_delta + QpBdOffsety [which will be in the range 0 to 51+QpBdOffsety]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MAX_NUM_MERGE_CAND" width="3" begin="22" end="20" resetval="0x5" description="Calcaulated from" range="" rwaccess="RW"/>
+    <bitfield id="CU_CHROMA_QP_OFFSET_ENABLED_FLAG" width="1" begin="19" end="19" resetval="0x0" description="Indicates that the cu_chroma_qp_offset_flag may be present in the transform unit syntax" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="18" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CABAC_INIT_FLAG" width="1" begin="17" end="17" resetval="0x0" description="Either from the bit-stream, or set to 0 if it is not present" range="" rwaccess="RW"/>
+    <bitfield id="MVD_L1_ZERO_FLAG" width="1" begin="16" end="16" resetval="0x0" description="In a B slice, when set indicates the mvd_coding syntax for list 1 is not parsed, but instead is set to 0" range="" rwaccess="RW"/>
+    <bitfield id="NUM_REF_IDX_L1_ACTIVE_MINUS1" width="4" begin="15" end="12" resetval="0x0" description="In a B slice, the field is either directly from num_ref_idx_l1_active_minus1, or inferred from num_ref_idx_l1_default_active_minus1, in the range 0 to 15" range="" rwaccess="RW"/>
+    <bitfield id="NUM_REF_IDX_L0_ACTIVE_MINUS1" width="4" begin="11" end="8" resetval="0x0" description="Field is either directly from num_ref_idx_l0_active_minus1, or inferred from num_ref_idx_l0_default_active_minus1, in the range 0 to 15" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_SAO_CHROMA_FLAG" width="1" begin="3" end="3" resetval="0x0" description="When set, indicates SAO is enabled for the chroma component in the current slice" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_SAO_LUMA_FLAG" width="1" begin="2" end="2" resetval="0x0" description="When set, indicates SAO is enabled for the luma component in the current slice" range="" rwaccess="RW"/>
+    <bitfield id="SLICE_TYPE" width="2" begin="1" end="0" resetval="0x0" description="Slice type [N.B." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_LEFT_POINTER_0" acronym="DECODER0_CR_HEVC_TILE_LEFT_POINTER_0" offset="0x20" width="32" description="If HEVC tiling is used, these registers keep track of the GENC fragment at the right edge of the tile to the left of the current tile. Normally these fields are updated by the hardare only. If stream switching is used, these fields can be written to restore contex.">
+    <bitfield id="TILE_TO_LEFT_1" width="16" begin="31" end="16" resetval="0x0" description="Fragment table entry pointer for the next tile row, for the rightmost fragment of the tile to the left, for GENC buffer 1 [not used if tiling isn't used." range="" rwaccess="RW"/>
+    <bitfield id="TILE_TO_LEFT_0" width="16" begin="15" end="0" resetval="0x0" description="Fragment table entry pointer for the next tile row, for the rightmost fragment of the tile to the left, for GENC buffer 0 [not used if tiling isn't used." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_LEFT_POINTER_1" acronym="DECODER0_CR_HEVC_TILE_LEFT_POINTER_1" offset="0x24" width="32" description="">
+    <bitfield id="TILE_TO_LEFT_3" width="16" begin="31" end="16" resetval="0x0" description="Fragment table entry pointer for the next tile row, for the rightmost fragment of the tile to the left, for GENC buffer 3 [not used if tiling isn't used." range="" rwaccess="RW"/>
+    <bitfield id="TILE_TO_LEFT_2" width="16" begin="15" end="0" resetval="0x0" description="Fragment table entry pointer for the next tile row, for the rightmost fragment of the tile to the left, for GENC buffer 2 [not used if tiling isn't used." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_00" acronym="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_00" offset="0x40" width="32" description="If tiles are enabled and NUM_TILE_COLUMNS_MINUS1 is greater than 0, these fields define the horizontal offset in multiples of 16x16 luma blocks to the start of each tile column (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_COLUMNS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the right edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_01" acronym="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_01" offset="0x44" width="32" description="If tiles are enabled and NUM_TILE_COLUMNS_MINUS1 is greater than 0, these fields define the horizontal offset in multiples of 16x16 luma blocks to the start of each tile column (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_COLUMNS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the right edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_02" acronym="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_02" offset="0x48" width="32" description="If tiles are enabled and NUM_TILE_COLUMNS_MINUS1 is greater than 0, these fields define the horizontal offset in multiples of 16x16 luma blocks to the start of each tile column (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_COLUMNS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the right edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_03" acronym="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_03" offset="0x4C" width="32" description="If tiles are enabled and NUM_TILE_COLUMNS_MINUS1 is greater than 0, these fields define the horizontal offset in multiples of 16x16 luma blocks to the start of each tile column (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_COLUMNS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the right edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_04" acronym="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_04" offset="0x50" width="32" description="If tiles are enabled and NUM_TILE_COLUMNS_MINUS1 is greater than 0, these fields define the horizontal offset in multiples of 16x16 luma blocks to the start of each tile column (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_COLUMNS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the right edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_05" acronym="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_05" offset="0x54" width="32" description="If tiles are enabled and NUM_TILE_COLUMNS_MINUS1 is greater than 0, these fields define the horizontal offset in multiples of 16x16 luma blocks to the start of each tile column (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_COLUMNS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the right edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_06" acronym="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_06" offset="0x58" width="32" description="If tiles are enabled and NUM_TILE_COLUMNS_MINUS1 is greater than 0, these fields define the horizontal offset in multiples of 16x16 luma blocks to the start of each tile column (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_COLUMNS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the right edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_07" acronym="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_07" offset="0x5C" width="32" description="If tiles are enabled and NUM_TILE_COLUMNS_MINUS1 is greater than 0, these fields define the horizontal offset in multiples of 16x16 luma blocks to the start of each tile column (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_COLUMNS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the right edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_08" acronym="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_08" offset="0x60" width="32" description="If tiles are enabled and NUM_TILE_COLUMNS_MINUS1 is greater than 0, these fields define the horizontal offset in multiples of 16x16 luma blocks to the start of each tile column (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_COLUMNS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the right edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_09" acronym="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_09" offset="0x64" width="32" description="If tiles are enabled and NUM_TILE_COLUMNS_MINUS1 is greater than 0, these fields define the horizontal offset in multiples of 16x16 luma blocks to the start of each tile column (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_COLUMNS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the right edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_10" acronym="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_10" offset="0x68" width="32" description="If tiles are enabled and NUM_TILE_COLUMNS_MINUS1 is greater than 0, these fields define the horizontal offset in multiples of 16x16 luma blocks to the start of each tile column (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_COLUMNS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the right edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_11" acronym="DECODER0_CR_HEVC_TILE_COLUMN_BOUNDARY_11" offset="0x6C" width="32" description="If tiles are enabled and NUM_TILE_COLUMNS_MINUS1 is greater than 0, these fields define the horizontal offset in multiples of 16x16 luma blocks to the start of each tile column (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_COLUMNS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the right edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="COLUMN_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_00" acronym="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_00" offset="0x80" width="32" description="If tiles are enabled and NUM_TILE_ROWS_MINUS1 is greater than 0, these fields define the vertical offset in multiples of 16x16 luma blocks to the start of each tile row (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_ROWS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the bottom edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_01" acronym="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_01" offset="0x84" width="32" description="If tiles are enabled and NUM_TILE_ROWS_MINUS1 is greater than 0, these fields define the vertical offset in multiples of 16x16 luma blocks to the start of each tile row (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_ROWS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the bottom edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_02" acronym="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_02" offset="0x88" width="32" description="If tiles are enabled and NUM_TILE_ROWS_MINUS1 is greater than 0, these fields define the vertical offset in multiples of 16x16 luma blocks to the start of each tile row (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_ROWS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the bottom edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_03" acronym="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_03" offset="0x8C" width="32" description="If tiles are enabled and NUM_TILE_ROWS_MINUS1 is greater than 0, these fields define the vertical offset in multiples of 16x16 luma blocks to the start of each tile row (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_ROWS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the bottom edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_04" acronym="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_04" offset="0x90" width="32" description="If tiles are enabled and NUM_TILE_ROWS_MINUS1 is greater than 0, these fields define the vertical offset in multiples of 16x16 luma blocks to the start of each tile row (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_ROWS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the bottom edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_05" acronym="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_05" offset="0x94" width="32" description="If tiles are enabled and NUM_TILE_ROWS_MINUS1 is greater than 0, these fields define the vertical offset in multiples of 16x16 luma blocks to the start of each tile row (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_ROWS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the bottom edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_06" acronym="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_06" offset="0x98" width="32" description="If tiles are enabled and NUM_TILE_ROWS_MINUS1 is greater than 0, these fields define the vertical offset in multiples of 16x16 luma blocks to the start of each tile row (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_ROWS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the bottom edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_07" acronym="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_07" offset="0x9C" width="32" description="If tiles are enabled and NUM_TILE_ROWS_MINUS1 is greater than 0, these fields define the vertical offset in multiples of 16x16 luma blocks to the start of each tile row (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_ROWS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the bottom edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_08" acronym="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_08" offset="0xA0" width="32" description="If tiles are enabled and NUM_TILE_ROWS_MINUS1 is greater than 0, these fields define the vertical offset in multiples of 16x16 luma blocks to the start of each tile row (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_ROWS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the bottom edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_09" acronym="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_09" offset="0xA4" width="32" description="If tiles are enabled and NUM_TILE_ROWS_MINUS1 is greater than 0, these fields define the vertical offset in multiples of 16x16 luma blocks to the start of each tile row (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_ROWS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the bottom edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_10" acronym="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_10" offset="0xA8" width="32" description="If tiles are enabled and NUM_TILE_ROWS_MINUS1 is greater than 0, these fields define the vertical offset in multiples of 16x16 luma blocks to the start of each tile row (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_ROWS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the bottom edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_11" acronym="DECODER0_CR_HEVC_TILE_ROW_BOUNDARY_11" offset="0xAC" width="32" description="If tiles are enabled and NUM_TILE_ROWS_MINUS1 is greater than 0, these fields define the vertical offset in multiples of 16x16 luma blocks to the start of each tile row (used in the calculation of which neighbouring blocks are available as well as the block co-ordinate calculation). Only the first NUM_TILE_ROWS_MINUS1 entries are valid. The first tile always starts at offset 0, and the last tile ends at the bottom edge of the picture.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_1" width="12" begin="27" end="16" resetval="0x0" description="Tile column boundary for the 3rd, 5th, ..." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="ROW_BOUNDARY_0" width="12" begin="11" end="0" resetval="0x0" description="Tile column boundary for the 2nd, 4th, ..." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_GENC_TILE_OFFSET" acronym="DECODER0_CR_HEVC_GENC_TILE_OFFSET" offset="0xC0" width="32" description="This register stores the offset into TILE_COLUMN_BOUNDARY_TABLE and TILE_ROW_BOUNDARY_TABLE at which the last slice finished. Normally the GENC hardware will update this field, but on a context change this register should be saved and restored.">
+    <bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_HEVC_GENC_TILE_ROW_OFFSET" width="5" begin="12" end="8" resetval="0x0" description="The offset to the entry in TILE_ROW_BOUNDARY_TABLE at which the last slice finished" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_HEVC_GENC_TILE_COLUMN_OFFSET" width="5" begin="4" end="0" resetval="0x0" description="The offset to the entry in TILE_COLUMN_BOUNDARY_TABLE at which the last slice finished" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_HEVC_GENC_BACKWARDS_MODE" acronym="DECODER0_CR_HEVC_GENC_BACKWARDS_MODE" offset="0xC4" width="32" description="This register stores information on the GENC encoder backwards error correction mode - a flag to indicate the mode is in use, and the last macroblock row on which backwards error correction will be active. This will be one tile to the right of the row one before the start of the slice that caused the backwards step, or the bottom row of a tile at the right edge of the picture if that occurs sooner.Normally the GENC hardware will update these fields, but on a context change this register should be saved and restored.">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="GENC_BACKWARDS_ERROR" width="1" begin="16" end="16" resetval="0x0" description="When set, indicates the GENC encoder is in backwards error correction mode." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="GENC_BACKWARDS_MB_NO_Y" width="12" begin="11" end="0" resetval="0x0" description="Indicates the last macroblock row for backwards error correction." range="" rwaccess="RW"/>
+  </register>
+</module>

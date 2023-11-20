@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?><module id="ANACTRL " HW_revision="" XML_version="1" description="SAR registers &amp; USB LDO Control">
+     <register id="LDOCNTL" acronym="LDOCNTL" page="2" offset="0x0004" width="16" description="USB LDO enable register">
+<bitfield id="_RESV_1" width="14" begin="15" end="2" resetval="0" description="" range="" rwaccess="N"/>
+<bitfield id="DSPLDOCNTL" width="1" begin="1" end="1" resetval="0" description="Used to select the DSP LDO voltage" range="" rwaccess="RW">
+<bitenum id="1.3V" value="0" token="1.3V" description="DSP LDO Output Voltage is regulated to 1.3 V."/>
+<bitenum id="1.05V" value="1" token="1.05V" description="DSP LDO Output Voltage is regulated to 1.05 V."/>
+</bitfield>
+<bitfield id="USBLDOEN" width="1" begin="0" end="0" resetval="0" description="Used to enable the USB LDO" range="" rwaccess="RW">
+<bitenum id="disabled" value="0" token="disabled" description="USB LDO is disabled "/>
+<bitenum id="enabled" value="1" token="enabled" description="USB LDO is enabled "/>
+</bitfield>
+</register>
+     <register id="SARCTRL" acronym="SARCTRL" page="2" offset="0X0012" width="16" description="SAR  Control  Register">
+<bitfield id="ADCSTRT" width="1" begin="15" end="15" resetval="0" description="ADC start" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="No Conversion"/>
+<bitenum id="SET" value="1" token="SET" description="Start conversion cycle"/>
+</bitfield>
+<bitfield id="CHSEL" width="3" begin="14" end="12" resetval="0" description="Channel Selection" range="" rwaccess="RW">
+<bitenum id="AIN0" value="0" token="AIN0" description="Analog Input Ch0 selcted"/>
+<bitenum id="AIN1" value="1" token="AIN1" description="Analog Input Ch1 selcted"/>
+<bitenum id="AIN2" value="2" token="AIN2" description="Analog Input Ch2 selcted"/>
+<bitenum id="AIN3" value="3" token="AIN3" description="Analog Input Ch3 selcted"/>
+<bitenum id="AIN4" value="4" token="AIN4" description="Analog Input Ch4 selcted"/>
+<bitenum id="AIN5" value="5" token="AIN5" description="Analog Input Ch5 selcted"/>
+<bitenum id="RES0" value="6" token="RES0" description=""/>
+<bitenum id="RES1" value="7" token="RES1" description=""/>
+</bitfield>
+<bitfield id="MULTCH" width="1" begin="11" end="11" resetval="0" description="MultiChannel mode" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="No discharge of array"/>
+<bitenum id="SET" value="1" token="SET" description="Discharge array after switching to new channel and performing a new conversion."/>
+</bitfield>
+<bitfield id="SNGCYC" width="1" begin="10" end="10" resetval="0" description="single cycle mode" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="continously perform conversions as long as SDC Start is set"/>
+<bitenum id="SET" value="1" token="SET" description="Perform 1 conversion and stop.  ADC start must be cleared and then set high to perform another conversion"/>
+</bitfield>
+<bitfield id="_RESV_5" width="10" begin="9" end="0" resetval="0" description="" range="" rwaccess="N"/>
+</register>
+     <register id="SARDATA" acronym="SARDATA" page="2" offset="0X0014" width="16" description="SAR Data Register">
+<bitfield id="ADCBSY" width="1" begin="15" end="15" resetval="0" description="ADC busy status" range="" rwaccess="R">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="ADC data available"/>
+<bitenum id="SET" value="1" token="SET" description="ADC Busy"/>
+</bitfield>
+<bitfield id="CHAN" width="3" begin="14" end="12" resetval="0" description="Channel Selection" range="" rwaccess="R">
+<bitenum id="AIN0" value="0" token="AIN0" description="Analog Input Ch0 was selcted"/>
+<bitenum id="AIN1" value="1" token="AIN1" description="Analog Input Ch1 was selcted"/>
+<bitenum id="AIN2" value="2" token="AIN2" description="Analog Input Ch2 was selcted"/>
+<bitenum id="AIN3" value="3" token="AIN3" description="Analog Input Ch3 was selcted"/>
+<bitenum id="AIN4" value="4" token="AIN4" description="Analog Input Ch4 was selcted"/>
+<bitenum id="AIN5" value="5" token="AIN5" description="Analog Input Ch5 was selcted"/>
+<bitenum id="RES0" value="6" token="RES0" description=""/>
+<bitenum id="RES1" value="7" token="RES1" description=""/>
+</bitfield>
+<bitfield id="_RESV_3" width="2" begin="11" end="10" resetval="0" description="Reseverd" range="" rwaccess="N"/>
+<bitfield id="ADCDAT" width="10" begin="9" end="0" resetval="0" description="Converter Data" range="0 - 3FFh" rwaccess="R"/>
+</register>
+     <register id="SARCLKCTRL" acronym="SARCLKCTRL" page="2" offset="0X0016" width="16" description="SAR Clock Control Register">
+<bitfield id="_RESV_1" width="9" begin="15" end="7" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="ADCCLKDIV" width="7" begin="6" end="0" resetval="0" description="specifies the divider rate of the system clock: Fsar_clock = (Fsystem_clock)/(ADCCLKDIV[14:0]+1)" range="0 - 7FFFh" rwaccess="RW"/>
+</register>
+     <register id="SARPINCTRL" acronym="SARPINCTRL" page="2" offset="0X0018" width="16" description="SAR Pin Control Register">
+<bitfield id="_RESV_1" width="1" begin="15" end="15" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="STATUSMASK" width="1" begin="14" end="14" resetval="0" description="Asserting this bit causes the channel selected and ADC busy bits from being added into the memory." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="The SARDATA register includes the status info in bits 12-15"/>
+<bitenum id="SET" value="1" token="SET" description="The SARDATA register bits 12-15 are always 0000"/>
+</bitfield>
+<bitfield id="PWRUPBIAS" width="1" begin="13" end="13" resetval="0" description="Enables the current bias circuit which is needed for the SAR to perform A/D conversion" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Powered Down (low power setting)"/>
+<bitenum id="SET" value="1" token="SET" description="Powered up.  Required for A/D"/>
+</bitfield>
+<bitfield id="SARPWRUP" width="1" begin="12" end="12" resetval="0" description="0:SAR_analog powered down, 1:SAR_analog powered up" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="SAR analog Powered down"/>
+<bitenum id="SET" value="1" token="SET" description="SAR analog Power present"/>
+</bitfield>
+<bitfield id="_RESV_5" width="1" begin="11" end="11" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="REFBUFFEN" width="1" begin="10" end="10" resetval="0" description="Reference buffer enable" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Ref Buffer disabled (low power setting)"/>
+<bitenum id="SET" value="1" token="SET" description="Ref Buffer enabled. Required when using bandgap generated Vref"/>
+</bitfield>
+<bitfield id="REFLVSEL" width="1" begin="9" end="9" resetval="0" description="Bandgap based reference voltage value select" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Bandgap based ref voltage set to .8V"/>
+<bitenum id="SET" value="1" token="SET" description="BG based ref voltage set to 1V"/>
+</bitfield>
+<bitfield id="REFAVDDSEL" width="1" begin="8" end="8" resetval="0" description="ADC Reference voltage select" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="BG based ref voltage is used for ADC ref voltage"/>
+<bitenum id="SET" value="1" token="SET" description="Ref voltage is set to Analog Voltage"/>
+</bitfield>
+<bitfield id="_RESV_9" width="3" begin="7" end="5" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="TOUCHSCREENMODE" width="1" begin="4" end="4" resetval="0" description="Enables Touchscreen mode" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Touchscreen mode disabled"/>
+<bitenum id="SET" value="1" token="SET" description="Touchscreen mode enabled"/>
+</bitfield>
+<bitfield id="AVDDMEAS" width="1" begin="3" end="3" resetval="0" description="enable measurement of internal analog voltage" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="analog voltage not connected to ch 3 ADC"/>
+<bitenum id="SET" value="1" token="SET" description="analog voltage connected to CH 3 ADC"/>
+</bitfield>
+<bitfield id="_RESV_12" width="1" begin="2" end="2" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="GNDON" width="1" begin="1" end="1" resetval="0" description="SAR CH0 is grounded and resistor divider network on CH1" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="SAR Ana CH0 not grounded"/>
+<bitenum id="SET" value="1" token="SET" description="SAR Ana CH0 grounded and resistor divider on Ch1 "/>
+</bitfield>
+<bitfield id="HALF" width="1" begin="0" end="0" resetval="0" description="ADC analog input divided by 2 before conversion" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="A/D conversion based on Vin"/>
+<bitenum id="SET" value="1" token="SET" description="A/D conversion based on Vin/2"/>
+</bitfield>
+</register>
+     <register id="SARGPOCTRL" acronym="SARGPOCTRL" page="2" offset="0X001A" width="16" description="SAR GPO Control register">
+<bitfield id="_RESV_1" width="6" begin="15" end="10" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="PENIRQSTAT" width="1" begin="9" end="9" resetval="0" description="Pen Interrupt Status" range="" rwaccess="R">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="No Pen input detected"/>
+<bitenum id="SET" value="1" token="SET" description="Pen input detected"/>
+</bitfield>
+<bitfield id="PENIRQEN" width="1" begin="8" end="8" resetval="0" description="Pen Interrupt request Enable" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Disable Pen interrupt"/>
+<bitenum id="SET" value="1" token="SET" description="Enable Pen interrupt (SAR interrupt signal)"/>
+</bitfield>
+<bitfield id="GPO3EN" width="1" begin="7" end="7" resetval="0" description="Enable general purpose output on GPO3" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="GPAIN3 output driver disabled"/>
+<bitenum id="SET" value="1" token="SET" description="GPAIN3 used as output"/>
+</bitfield>
+<bitfield id="GPO2EN" width="1" begin="6" end="6" resetval="0" description="Enable general purpose output on GPO2" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="GPAIN2 output driver disabled"/>
+<bitenum id="SET" value="1" token="SET" description="GPAIN2 used as output"/>
+</bitfield>
+<bitfield id="GPO1EN" width="1" begin="5" end="5" resetval="0" description="Enable general purpose output on GPO1" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="GPAIN1 output driver disabled"/>
+<bitenum id="SET" value="1" token="SET" description="GPAIN1 used as output"/>
+</bitfield>
+<bitfield id="GPO0EN" width="1" begin="4" end="4" resetval="0" description="Enable general purpose output on GPO0" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="GPAIN0 output driver disabled"/>
+<bitenum id="SET" value="1" token="SET" description="GPAIN0 used as output"/>
+</bitfield>
+<bitfield id="GPO3" width="1" begin="3" end="3" resetval="0" description="GP3 grounded or driven high" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="GPAIN3 grounded"/>
+<bitenum id="SET" value="1" token="SET" description="GPAIN3 driven High"/>
+</bitfield>
+<bitfield id="GPO2" width="1" begin="2" end="2" resetval="0" description="GP2 grounded or driven high" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="GPAIN2 grounded"/>
+<bitenum id="SET" value="1" token="SET" description="GPAIN2 driven High"/>
+</bitfield>
+<bitfield id="GPO1" width="1" begin="1" end="1" resetval="0" description="GP1 grounded or driven high" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="GPAIN1 grounded"/>
+<bitenum id="SET" value="1" token="SET" description="GPAIN1 driven High"/>
+</bitfield>
+<bitfield id="GPO0" width="1" begin="0" end="0" resetval="0" description="GPO grounded or driven high" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="GPAIN0 grounded"/>
+<bitenum id="SET" value="1" token="SET" description="GPAIN0 driven High"/>
+</bitfield>
+</register>
+</module>

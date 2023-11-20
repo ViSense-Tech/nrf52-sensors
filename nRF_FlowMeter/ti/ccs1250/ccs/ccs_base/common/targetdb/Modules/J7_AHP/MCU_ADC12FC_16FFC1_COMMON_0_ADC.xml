@@ -1,0 +1,85 @@
+<module name="MCU_ADC12FC_16FFC1_COMMON_0_ADC" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="ADCREGS_REVISION" acronym="ADCREGS_REVISION" offset="0x0" width="32" description="">
+		<bitfield id="MODID" width="16" begin="31" end="16" resetval="0x27072" description="Module ID field" range="31 - 16" rwaccess="R"/> 
+		<bitfield id="REVRTL" width="5" begin="15" end="11" resetval="0x7" description="RTL revision. Will vary depending on release." range="15 - 11" rwaccess="R"/> 
+		<bitfield id="REVMAJ" width="3" begin="10" end="8" resetval="0x1" description="Major revision" range="10 - 8" rwaccess="R"/> 
+		<bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom" range="7 - 6" rwaccess="R"/> 
+		<bitfield id="REVMIN" width="6" begin="5" end="0" resetval="0x0" description="Minor revision" range="5 - 0" rwaccess="R"/>
+	</register>
+	<register id="ADCREGS_DMAENABLE_SET" acronym="ADCREGS_DMAENABLE_SET" offset="0x38" width="32" description="">
+		<bitfield id="ENABLE1" width="1" begin="1" end="1" resetval="0x0" description="enable DMA reguest FIFO1" range="1" rwaccess="R/W1TS"/> 
+		<bitfield id="ENABLE0" width="1" begin="0" end="0" resetval="0x0" description="enable DMA reguest FIFO0" range="0" rwaccess="R/W1TS"/>
+	</register>
+	<register id="ADCREGS_DMAENABLE_CLR" acronym="ADCREGS_DMAENABLE_CLR" offset="0x3C" width="32" description="">
+		<bitfield id="ENABLE1" width="1" begin="1" end="1" resetval="0x0" description="clears the enable of the DMA reguest FIFO1. Disables DMA request when writing 1" range="1" rwaccess="R/W1TC"/> 
+		<bitfield id="ENABLE0" width="1" begin="0" end="0" resetval="0x0" description="clears the enable of the DMA reguest FIFO0. Disables DMA request when writing 1" range="0" rwaccess="R/W1TC"/>
+	</register>
+	<register id="ADCREGS_CONTROL" acronym="ADCREGS_CONTROL" offset="0x40" width="32" description="">
+		<bitfield id="HI_MID_SEL" width="1" begin="11" end="11" resetval="0x0" description="Functional safety debug mode. =1 choose ADCREFP, =0 VMID reference input to ADC" range="11" rwaccess="R/W"/> 
+		<bitfield id="HI_MID_EN" width="1" begin="10" end="10" resetval="0x0" description="Functional safety debug mode. enable fixed reference to ADC for testing" range="10" rwaccess="R/W"/> 
+		<bitfield id="HW_PREEMPT" width="1" begin="9" end="9" resetval="0x0" description="1 steps are preempted" range="9" rwaccess="R/W"/> 
+		<bitfield id="HW_MAP" width="1" begin="8" end="8" resetval="0x0" description="1 = hw events enabled" range="8" rwaccess="R/W"/> 
+		<bitfield id="PD" width="1" begin="4" end="4" resetval="0x1" description="AFE powered down" range="4" rwaccess="R/W"/> 
+		<bitfield id="BIAS_SEL" width="1" begin="3" end="3" resetval="0x0" description="AFE select bias control" range="3" rwaccess="R/W"/> 
+		<bitfield id="STEP_ID_EN" width="1" begin="1" end="1" resetval="0x0" description="writing 1 will store the stepid number with the captured adc data in the fifo" range="1" rwaccess="R/W"/> 
+		<bitfield id="MODULE_ENABLE" width="1" begin="0" end="0" resetval="0x0" description="ADC12_SS module enable bit.  After programming all the configuration and step enable registers, write a 1 to this bit to start conversion. Writing a 0 will disable the module after the current conversion. Before turning on again, the ADC_SEQUENCER_STATUS  register show read back STEP_ID=Idle and FSM_BUSY=0. Enabling the controller will be held off until mem_init_done =1." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="ADCREGS_SEQUENCER_STAT" acronym="ADCREGS_SEQUENCER_STAT" offset="0x44" width="32" description="">
+		<bitfield id="GPADC_BUSY" width="1" begin="8" end="8" resetval="0x0" description="Monitor the AFE internal calibration, busy bit" range="8" rwaccess="R"/> 
+		<bitfield id="MEM_INIT_DONE" width="1" begin="6" end="6" resetval="0x0" description="status of ram initialization, 1= ram initialization to 0 after reset is done." range="6" rwaccess="R"/> 
+		<bitfield id="FSM_BUSY" width="1" begin="5" end="5" resetval="0x1" description="status of fsm, 1= conversion in progress" range="5" rwaccess="R"/> 
+		<bitfield id="STEP_IDLE" width="5" begin="4" end="0" resetval="0x0" description="10000 = idle, 000000 -> 01111 corresponds to step 1 -> step 16" range="4 - 0" rwaccess="R"/>
+	</register>
+	<register id="ADCREGS_RANGE" acronym="ADCREGS_RANGE" offset="0x48" width="32" description="">
+		<bitfield id="HIRANGE" width="12" begin="27" end="16" resetval="0x0" description="If the sampled data is > value, then interrupt is generated" range="27 - 16" rwaccess="R/W"/> 
+		<bitfield id="LOWRANGE" width="12" begin="11" end="0" resetval="0x0" description="If the sampled data is &#60; value, then interrupt is generated" range="11 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="ADCREGS_MISC" acronym="ADCREGS_MISC" offset="0x50" width="32" description="">
+		<bitfield id="AFE_SPARE_OUT" width="4" begin="11" end="8" resetval="0x0" description="Spare outputs from AFE" range="11 - 8" rwaccess="R"/> 
+		<bitfield id="AFE_SPARE_IN" width="4" begin="3" end="0" resetval="0x0" description="Spare inputs to AFE" range="3 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="ADCREGS_STEPENABLE" acronym="ADCREGS_STEPENABLE" offset="0x54" width="32" description="">
+		<bitfield id="STEP16" width="1" begin="16" end="16" resetval="0x0" description="Enable step" range="16" rwaccess="R/W"/> 
+		<bitfield id="STEP15" width="1" begin="15" end="15" resetval="0x0" description="Enable step" range="15" rwaccess="R/W"/> 
+		<bitfield id="STEP14" width="1" begin="14" end="14" resetval="0x0" description="Enable step" range="14" rwaccess="R/W"/> 
+		<bitfield id="STEP13" width="1" begin="13" end="13" resetval="0x0" description="Enable step" range="13" rwaccess="R/W"/> 
+		<bitfield id="STEP12" width="1" begin="12" end="12" resetval="0x0" description="Enable step" range="12" rwaccess="R/W"/> 
+		<bitfield id="STEP11" width="1" begin="11" end="11" resetval="0x0" description="Enable step" range="11" rwaccess="R/W"/> 
+		<bitfield id="STEP10" width="1" begin="10" end="10" resetval="0x0" description="Enable step" range="10" rwaccess="R/W"/> 
+		<bitfield id="STEP9" width="1" begin="9" end="9" resetval="0x0" description="Enable step" range="9" rwaccess="R/W"/> 
+		<bitfield id="STEP8" width="1" begin="8" end="8" resetval="0x0" description="Enable step" range="8" rwaccess="R/W"/> 
+		<bitfield id="STEP7" width="1" begin="7" end="7" resetval="0x0" description="Enable step" range="7" rwaccess="R/W"/> 
+		<bitfield id="STEP6" width="1" begin="6" end="6" resetval="0x0" description="Enable step" range="6" rwaccess="R/W"/> 
+		<bitfield id="STEP5" width="1" begin="5" end="5" resetval="0x0" description="Enable step" range="5" rwaccess="R/W"/> 
+		<bitfield id="STEP4" width="1" begin="4" end="4" resetval="0x0" description="Enable step" range="4" rwaccess="R/W"/> 
+		<bitfield id="STEP3" width="1" begin="3" end="3" resetval="0x0" description="Enable step" range="3" rwaccess="R/W"/> 
+		<bitfield id="STEP2" width="1" begin="2" end="2" resetval="0x0" description="Enable step" range="2" rwaccess="R/W"/> 
+		<bitfield id="STEP1" width="1" begin="1" end="1" resetval="0x0" description="Enable step" range="1" rwaccess="R/W"/>
+	</register>
+	<register id="ADCREGS_FIFO0WC" acronym="ADCREGS_FIFO0WC" offset="0xE4" width="32" description="">
+		<bitfield id="NUMWDS" width="9" begin="8" end="0" resetval="0x0" description="number of words in the FIFO" range="8 - 0" rwaccess="R"/>
+	</register>
+	<register id="ADCREGS_FIFO0THRESHOLD" acronym="ADCREGS_FIFO0THRESHOLD" offset="0xE8" width="32" description="">
+		<bitfield id="THRESHOLD" width="8" begin="7" end="0" resetval="0x0" description="Program the desired FIFO0 data sample level minus 1 to reach before generating interrupt to CPU" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="ADCREGS_FIFO0DMAREQ" acronym="ADCREGS_FIFO0DMAREQ" offset="0xEC" width="32" description="">
+		<bitfield id="DMAREQLEVEL" width="8" begin="7" end="0" resetval="0x0" description="Number of words minus 1 in FIFO0 before generating a DMA request " range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="ADCREGS_FIFO1WC" acronym="ADCREGS_FIFO1WC" offset="0xF0" width="32" description="">
+		<bitfield id="NUMWDS" width="9" begin="8" end="0" resetval="0x0" description="number of words in the FIFO" range="8 - 0" rwaccess="R"/>
+	</register>
+	<register id="ADCREGS_FIFO1THRESHOLD" acronym="ADCREGS_FIFO1THRESHOLD" offset="0xF4" width="32" description="">
+		<bitfield id="THRESHOLD" width="8" begin="7" end="0" resetval="0x0" description="Program the desired FIFO1 data sample level minus 1 to reach before generating interrupt to CPU" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="ADCREGS_FIFO1DMAREQ" acronym="ADCREGS_FIFO1DMAREQ" offset="0xF8" width="32" description="">
+		<bitfield id="DMAREQLEVEL" width="8" begin="7" end="0" resetval="0x0" description="Number of words minus 1 in FIFO1 before generating a DMA request " range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="ADCREGS_FIFO0DATA" acronym="ADCREGS_FIFO0DATA" offset="0x100" width="32" description="">
+		<bitfield id="ADCCHANLID" width="4" begin="19" end="16" resetval="0x0" description="Optional ID tag of channel that captured the data. If tag option is disabled, these bits will be 0" range="19 - 16" rwaccess="R"/> 
+		<bitfield id="ADCDATA" width="12" begin="11" end="0" resetval="0x0" description="sampled ADC converted data value stored in FIFO" range="11 - 0" rwaccess="R"/>
+	</register>
+	<register id="ADCREGS_FIFO1DATA" acronym="ADCREGS_FIFO1DATA" offset="0x200" width="32" description="">
+		<bitfield id="ADCCHANLID" width="4" begin="19" end="16" resetval="0x0" description="Optional ID tag of channel that captured the data. If tag option is disabled, these bits will be 0" range="19 - 16" rwaccess="R"/> 
+		<bitfield id="ADCDATA" width="12" begin="11" end="0" resetval="0x0" description="sampled ADC converted data value stored in FIFO" range="11 - 0" rwaccess="R"/>
+	</register>
+</module>

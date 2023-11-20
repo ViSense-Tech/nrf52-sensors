@@ -1,0 +1,141 @@
+<module name="DECODER0_MSVDX_VEC_MPEG4" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="DECODER0_CR_VEC_MPEG4_FE_SPS0" acronym="DECODER0_CR_VEC_MPEG4_FE_SPS0" offset="0x0" width="32" description="End MPEG4 sequence-level parameters (from a Sequence Parameter Set) required for decoding macroblocks">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FE_SORENSON" width="1" begin="11" end="11" resetval="0x0" description="Should be set if this is the Sorenson version of H.263" range="" rwaccess="RW"/>
+    <bitfield id="FE_SHORT_HEADER_FLAG" width="1" begin="10" end="10" resetval="0x0" description="The short_video_header is an internal flag which is set to 1 when an abbreviated header format is used for the VOP" range="" rwaccess="RW"/>
+    <bitfield id="FE_PROFILE" width="2" begin="9" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FE_VOP_WIDTH_IN_MBS_LESS_1" width="8" begin="7" end="0" resetval="0x0" description="size, in macroblock units minus 1, of the rectangle that includes the VOP" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_FE_VOP_SPS0" acronym="DECODER0_CR_VEC_MPEG4_FE_VOP_SPS0" offset="0x4" width="32" description="End MPEG4 sequence-level parameters (from a Sequence Parameter Set) required for decoding macroblocks in a VOP">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FE_VOP_HEIGHT_IN_MBS_LESS_1" width="8" begin="16" end="9" resetval="0x0" description="of picture in MBs minus 1" range="" rwaccess="RW"/>
+    <bitfield id="QUANT_PRECISION" width="4" begin="8" end="5" resetval="0x0" description="Number of bits used to represent quantiser scales" range="" rwaccess="RW"/>
+    <bitfield id="FE_NO_OF_GMC_WARPING_POINTS" width="1" begin="4" end="4" resetval="0x0" description="According to the mpeg4 spec this is a" range="" rwaccess="RW"/>
+    <bitfield id="FE_GMC_ENABLE" width="1" begin="3" end="3" resetval="0x0" description="This is a" range="" rwaccess="RW"/>
+    <bitfield id="REVERSIBLE_VLC" width="1" begin="2" end="2" resetval="0x0" description="When set to 1 indicates that the macroblock data is rearranged differently, specifically, motion vector data is separated from the texture data" range="" rwaccess="RW"/>
+    <bitfield id="FE_DATA_PARTITIONED" width="1" begin="1" end="1" resetval="0x0" description="When set to 1 indicates that the macroblock data is rearranged differently, specifically, motion vector data is separated from the texture data" range="" rwaccess="RW"/>
+    <bitfield id="FE_INTERLACED" width="1" begin="0" end="0" resetval="0x0" description="When set to 1 indicates that the VOPs associated with the VOL may contain interlaced video" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_FE_VOP_PPS0" acronym="DECODER0_CR_VEC_MPEG4_FE_VOP_PPS0" offset="0x8" width="32" description="End MPEG4 picture-level parameters (from a Picture Parameter Set) required for decoding macroblocks in a VOP">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BACKWARD_REF_VOP_CODING_TYPE" width="2" begin="28" end="27" resetval="0x0" description="vop_coding_type of the backward reference VOP" range="" rwaccess="RW"/>
+    <bitfield id="FE_FCODE_BACKWARD" width="3" begin="26" end="24" resetval="0x0" description="This is a" range="" rwaccess="RW"/>
+    <bitfield id="FE_FCODE_FORWARD" width="3" begin="23" end="21" resetval="0x0" description="This is a" range="" rwaccess="RW"/>
+    <bitfield id="INTRA_DC_VLC_THR" width="3" begin="20" end="18" resetval="0x0" description="Specifies a threshold value of quantiser scale used to switch between two VLC's for coding of Intra DC coefficients" range="" rwaccess="RW"/>
+    <bitfield id="FE_VOP_CODING_TYPE" width="2" begin="17" end="16" resetval="0x0" description="Identifies whether a picture is an intra-coded [I], predictive-coded [P], bidirectionally predictive-coded [B] or sprite coded [S]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_FE_PICSH_PPS0" acronym="DECODER0_CR_VEC_MPEG4_FE_PICSH_PPS0" offset="0xC" width="32" description="End MPEG4 picture-level parameters (from a Picture Parameter Set) required for decoding macroblocks in a picture of short-header mode">
+    <bitfield id="RESERVED" width="17" begin="31" end="15" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="NUM_MBS_IN_GOB" width="9" begin="14" end="6" resetval="0x0" description="Fixed number of macroblocks in the VOP" range="" rwaccess="RW"/>
+    <bitfield id="NUM_GOBS_IN_VOP" width="5" begin="5" end="1" resetval="0x0" description="Number of GOBs in the VOP" range="" rwaccess="RW"/>
+    <bitfield id="FE_PICSH_CODING_TYPE" width="1" begin="0" end="0" resetval="0x0" description="Identifies whether a picture woth short header is an intra-coded [I] or predictive-coded [P]" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_FE_SLICE0" acronym="DECODER0_CR_VEC_MPEG4_FE_SLICE0" offset="0x10" width="32" description="End MPEG4 slice-level parameters required for decoding macroblocks">
+    <bitfield id="RESERVED" width="6" begin="31" end="26" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FE_FIRST_MB_IN_SLICE_Y_EXT" width="1" begin="25" end="25" resetval="0x0" description="Extension of first_mb_in_slice_y to allow 4kx4k image size" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="24" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FE_FIRST_MB_IN_SLICE_X_EXT" width="1" begin="23" end="23" resetval="0x0" description="Extension of first_mb_in_slice_x to allow 4kx4k image size" range="" rwaccess="RW"/>
+    <bitfield id="FE_VOP_QUANT" width="9" begin="22" end="14" resetval="0x0" description="Specifies the absolute value of quantiser scale to be used for inverse quantising the macroblocks" range="" rwaccess="RW"/>
+    <bitfield id="FE_FIRST_MB_IN_SLICE_Y" width="7" begin="13" end="7" resetval="0x0" description="Vertical coordinate of the first macroblock of the slice" range="" rwaccess="RW"/>
+    <bitfield id="FE_FIRST_MB_IN_SLICE_X" width="7" begin="6" end="0" resetval="0x0" description="Horizontal coordinate of the first macroblock of the slice" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_FE_PARSER_VLR_BASE_ADDR" acronym="DECODER0_CR_VEC_MPEG4_FE_PARSER_VLR_BASE_ADDR" offset="0x14" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FE_PARSER_VLR_BASE_ADDR" width="10" begin="27" end="18" resetval="0x0" description="Base address pointer within VEC Local RAM for the MPEG4 parser to store not_coded bits." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="18" begin="17" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_FE_DATAPARTITION0_BASE_ADDR" acronym="DECODER0_CR_VEC_MPEG4_FE_DATAPARTITION0_BASE_ADDR" offset="0x18" width="32" description="">
+    <bitfield id="FE_DATAPARTITION0_BASE_ADDR" width="20" begin="31" end="12" resetval="0x0" description="The base address in host memory to be used for storing phase 0 parameters when decoding a Data Partitioned stream" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_FE_DATAPARTITION1_BASE_ADDR" acronym="DECODER0_CR_VEC_MPEG4_FE_DATAPARTITION1_BASE_ADDR" offset="0x1C" width="32" description="">
+    <bitfield id="FE_DATAPARTITION1_BASE_ADDR" width="20" begin="31" end="12" resetval="0x0" description="The base address in host memory to be used for storing phase 1 parameters when decoding a Data Partitioned stream 1 s16" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_FE_DATAPARTITION_VLR_BASE_ADDR" acronym="DECODER0_CR_VEC_MPEG4_FE_DATAPARTITION_VLR_BASE_ADDR" offset="0x20" width="32" description="">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="FE_DATAPARTITION_VLR_BASE_ADDR" width="12" begin="11" end="0" resetval="0x0" description="The base address in VEC Local RAM to be used by VLRIF for storing phase 0 and phase 1 parameters when decoding a Data Partitioned stream" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_BE_SPS0" acronym="DECODER0_CR_VEC_MPEG4_BE_SPS0" offset="0x50" width="32" description="Back End MPEG4 sequence-level parameters (from a Sequence Parameter Set) required for decoding macroblocks">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_SHORT_HEADER_FLAG" width="1" begin="2" end="2" resetval="0x0" description="The short_video_header is an internal flag which is set to 1 when an abbreviated header format is used for the VOP" range="" rwaccess="RW"/>
+    <bitfield id="BE_PROFILE" width="2" begin="1" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_BE_SPS1" acronym="DECODER0_CR_VEC_MPEG4_BE_SPS1" offset="0x54" width="32" description="End MPEG4 sequence-level parameters (from a Sequence Parameter Set) required for decoding macroblocks">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_VOP_HEIGHT_IN_MBS_EXT" width="1" begin="15" end="15" resetval="0x0" description="Extension for BE vop_height_in_mbs_less_1 to allow for 4k x 4k resolution" range="" rwaccess="RW"/>
+    <bitfield id="BE_VOP_WIDTH_IN_MBS_LESS_1" width="8" begin="14" end="7" resetval="0x0" description="size, in macroblock units minus 1, of the rectangle that includes the VOP" range="" rwaccess="RW"/>
+    <bitfield id="VOP_HEIGHT_IN_MBS_LESS_1" width="7" begin="6" end="0" resetval="0x0" description="Vertical size, in macroblock units minus 1, of the rectangle that includes the VOP" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_BE_VOP_SPS0" acronym="DECODER0_CR_VEC_MPEG4_BE_VOP_SPS0" offset="0x58" width="32" description="End MPEG4 sequence-level parameters (from a Sequence Parameter Set) required for decoding macroblocks in a VOP">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="QUANT_TYPE" width="1" begin="2" end="2" resetval="0x0" description="This is a one-bit flag which when set to '1' indicates that the first inverse quantisation method is used for inverse quantisation of the DCT coefficients, and when set to '0' indicates that the second inverse quantisation method is used" range="" rwaccess="RW"/>
+    <bitfield id="OBMC_DISABLE" width="1" begin="1" end="1" resetval="0x0" description="This is a one-bit flag which when set to '1' disables overlapped block motion compensation" range="" rwaccess="RW"/>
+    <bitfield id="QUARTER_SAMPLE" width="1" begin="0" end="0" resetval="0x0" description="This is a one-bit flag which when set to '0' indicates that half sample mode and when set to '1' indicates that quarter sample mode shall be used for motion compensation of the luminance component" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_BE_VOP_SPS1" acronym="DECODER0_CR_VEC_MPEG4_BE_VOP_SPS1" offset="0x5C" width="32" description="End MPEG4 sequence-level parameters (from a Sequence Parameter Set) required for decoding macroblocks in a VOP">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="GMC_WARPING_ACCURACY" width="2" begin="5" end="4" resetval="0x0" description="This is a" range="" rwaccess="RW"/>
+    <bitfield id="BE_NO_OF_GMC_WARPING_POINTS" width="1" begin="3" end="3" resetval="0x0" description="According to the mpeg4 spec this is a" range="" rwaccess="RW"/>
+    <bitfield id="BE_GMC_ENABLE" width="1" begin="2" end="2" resetval="0x0" description="This is a" range="" rwaccess="RW"/>
+    <bitfield id="BE_DATA_PARTITIONED" width="1" begin="1" end="1" resetval="0x0" description="When set to 1 indicates that the macroblock data is rearranged" range="" rwaccess="RW"/>
+    <bitfield id="BE_INTERLACED" width="1" begin="0" end="0" resetval="0x0" description="When set to 1 indicates that the VOPs associated with the VOL may contain interlaced video" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_BE_VOP_PPS0" acronym="DECODER0_CR_VEC_MPEG4_BE_VOP_PPS0" offset="0x60" width="32" description="End MPEG4 picture-level parameters (from a Picture Parameter Set) required for decoding macroblocks in a VOP">
+    <bitfield id="RESERVED" width="21" begin="31" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_FCODE_BACKWARD" width="3" begin="10" end="8" resetval="0x0" description="This is a" range="" rwaccess="RW"/>
+    <bitfield id="BE_FCODE_FORWARD" width="3" begin="7" end="5" resetval="0x0" description="This is a" range="" rwaccess="RW"/>
+    <bitfield id="ALTERNATE_VERTICAL_SCAN_FLAG" width="1" begin="4" end="4" resetval="0x0" description="This is a" range="" rwaccess="RW"/>
+    <bitfield id="TOP_FIELD_FIRST" width="1" begin="3" end="3" resetval="0x0" description="This is a" range="" rwaccess="RW"/>
+    <bitfield id="ROUNDING_TYPE" width="1" begin="2" end="2" resetval="0x0" description="This is a one-bit flag which signals the value of the parameter rounding_control used for pixel value interpolation in motion compensation for P- and S[GMC]- VOPs." range="" rwaccess="RW"/>
+    <bitfield id="BE_VOP_CODING_TYPE" width="2" begin="1" end="0" resetval="0x0" description="The vop_coding_type identifies whether a VOP is an intra-coded VOP [I], predictive-coded VOP [P], bidirectionally predictive-coded VOP [B] or sprite coded VOP [S]" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_BE_PICSH_PPS0" acronym="DECODER0_CR_VEC_MPEG4_BE_PICSH_PPS0" offset="0x64" width="32" description="End MPEG4 picture-level parameters (from a Picture Parameter Set) required for decoding macroblocks from a picture in short-header mode">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_NUM_MBS_IN_GOB" width="9" begin="9" end="1" resetval="0x0" description="Fixed number of macroblocks in the VOP" range="" rwaccess="RW"/>
+    <bitfield id="BE_PICSH_CODING_TYPE" width="1" begin="0" end="0" resetval="0x0" description="Identifies whether a picture woth short header is an intra-coded [I] or predictive-coded [P]" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_BE_GMC_X" acronym="DECODER0_CR_VEC_MPEG4_BE_GMC_X" offset="0x68" width="32" description="End MPEG4 GMC MVs required for decoding macroblocks">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="GMC_X" width="14" begin="13" end="0" resetval="0x0" description="Horizontal GMC MV Component" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_BE_GMC_Y" acronym="DECODER0_CR_VEC_MPEG4_BE_GMC_Y" offset="0x6C" width="32" description="End MPEG4 GMC MVs required for decoding macroblocks">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="GMC_Y" width="14" begin="13" end="0" resetval="0x0" description="Vertical GMC MV Component" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_BE_SLICE0" acronym="DECODER0_CR_VEC_MPEG4_BE_SLICE0" offset="0x70" width="32" description="End MPEG4 slice-level parameters required for decoding macroblocks">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_FIRST_MB_IN_SLICE_X_EXT" width="1" begin="15" end="15" resetval="0x0" description="Extension of BE_FIRST_MB_IN_SLICE_X to allow for 4k x 4k resolutions" range="" rwaccess="RW"/>
+    <bitfield id="BE_FIRST_MB_IN_SLICE_Y" width="8" begin="14" end="7" resetval="0x0" description="coordinate of the first macroblock of the slice" range="" rwaccess="RW"/>
+    <bitfield id="BE_FIRST_MB_IN_SLICE_X" width="7" begin="6" end="0" resetval="0x0" description="Horizontal coordinate of the first macroblock of the slice" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_BE_VOP_TRB" acronym="DECODER0_CR_VEC_MPEG4_BE_VOP_TRB" offset="0x74" width="32" description="info (No delta)\pard">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_TRB" width="16" begin="15" end="0" resetval="0x0" description="TRB : Temporal distance between current VOP and past anchor VOP" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_BE_VOP_TRD" acronym="DECODER0_CR_VEC_MPEG4_BE_VOP_TRD" offset="0x78" width="32" description="info (No delta)">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_TRD" width="16" begin="15" end="0" resetval="0x0" description="Temporal distance between past anchor VOP and the future anchor VOP." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_BE_DATAPARTITION0_BASE_ADDR" acronym="DECODER0_CR_VEC_MPEG4_BE_DATAPARTITION0_BASE_ADDR" offset="0xE4" width="32" description="">
+    <bitfield id="BE_DATAPARTITION0_BASE_ADDR" width="20" begin="31" end="12" resetval="0x0" description="The base address in host memory to be used for loading back phase 0 parameters when decoding a Data Partitioned stream" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_BE_DATAPARTITION1_BASE_ADDR" acronym="DECODER0_CR_VEC_MPEG4_BE_DATAPARTITION1_BASE_ADDR" offset="0xE8" width="32" description="">
+    <bitfield id="BE_DATAPARTITION1_BASE_ADDR" width="20" begin="31" end="12" resetval="0x0" description="The base address in host memory to be used for loading back phase 1 parameters when decoding a Data Partitioned stream" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_BE_PARAM_BASE_ADDR" acronym="DECODER0_CR_VEC_MPEG4_BE_PARAM_BASE_ADDR" offset="0xEC" width="32" description="">
+    <bitfield id="PARAM_BASE_ADDRESS" width="20" begin="31" end="12" resetval="0x0" description="Base address for the memory to store MB parameters" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_BE_DATAPARTITION_VLR_BASE_ADDR" acronym="DECODER0_CR_VEC_MPEG4_BE_DATAPARTITION_VLR_BASE_ADDR" offset="0xF0" width="32" description="">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BE_DATAPARTITION_VLR_BASE_ADDR" width="12" begin="11" end="0" resetval="0x0" description="The base address in VEC Local RAM to be used for loading back phase 0 and phase 1 parameters when decoding a Data Partitioned stream" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_MPEG4_BE_COLPARAM_BASE_ADDR" acronym="DECODER0_CR_VEC_MPEG4_BE_COLPARAM_BASE_ADDR" offset="0xF8" width="32" description="">
+    <bitfield id="COLPARAM_BASE_ADDRESS" width="20" begin="31" end="12" resetval="0x0" description="Base address for the memory to access co-located MB parameters" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+</module>

@@ -1,0 +1,126 @@
+<module name="VPAC0_PAR_VPAC_VISS0_S_VBUSP_VISS_FCP_EE_VBUSP_FLEXEE" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="VISS_FCP_EE_EE_CFG_0" acronym="VISS_FCP_EE_EE_CFG_0" offset="0x0" width="32" description="The Control Register controls the input width and height of the module.">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HEIGHT" width="13" begin="28" end="16" resetval="0x0" description="Height of the input image" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="WIDTH" width="13" begin="12" end="0" resetval="0x0" description="Width of the input image" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_EE_EE_CFG_1" acronym="VISS_FCP_EE_EE_CFG_1" offset="0x4" width="32" description="The CEE route config Register controls the routing of trafic through and around the EE.">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="YUV12_CL_ALIGN" width="1" begin="28" end="28" resetval="0x0" description="Enables the alignment of the Chroma and Luma for the yuv12 stream." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="27" end="25" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="YUV8_CL_ALIGN" width="1" begin="24" end="24" resetval="0x0" description="Enables the alignment of the Chroma and Luma for the yuv8 stream." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="EE_FE_MUX_SEL" width="1" begin="22" end="22" resetval="0x0" description="Selects which data stream to pass through the EE block." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="21" end="20" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SHIFTLEFT_NUM" width="2" begin="19" end="18" resetval="0x0" description="Sects the amount to shift left the incoming pixel to the EE block." range="" rwaccess="RW"/>
+    <bitfield id="SHIFTRIGHT_NUM" width="2" begin="17" end="16" resetval="0x0" description="Sects the amount to shift right the outgoing pixel from the EE block." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LLSE12_MUX_SEL" width="1" begin="12" end="12" resetval="0x0" description="Selects Luma stream for the yuv12 output." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="11" end="9" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CLSE12_MUX_SEL" width="1" begin="8" end="8" resetval="0x0" description="Selects Chroma stream for the yuv12 output." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LLSE8_MUX_SEL" width="1" begin="4" end="4" resetval="0x0" description="Selects Luma stream for the yuv8 output." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="3" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CLSE8_MUX_SEL" width="1" begin="0" end="0" resetval="0x0" description="Selects Chroma stream for the yuv8 output." range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_EE_EE_ENABLE" acronym="VISS_FCP_EE_EE_ENABLE" offset="0x8" width="32" description="The EE Enable register control the internal bypass of the EE block.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="YEE_ENABLE" width="1" begin="0" end="0" resetval="0x0" description="The EE Enable register control the internal bypass of the EE block." range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_EE_YEE_SHIFT" acronym="VISS_FCP_EE_YEE_SHIFT" offset="0xC" width="32" description="The YEE Shift register controls">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="YEE_SHIFT" width="6" begin="5" end="0" resetval="0x0" description="The YEE Shift register controls" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_EE_YEE_COEF_R0_C0" acronym="VISS_FCP_EE_YEE_COEF_R0_C0" offset="0x10" width="32" description="The YEE Coefficient Row x Column x defines the">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="YEE_COEF_R0_C0" width="10" begin="9" end="0" resetval="0x0" description="The" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_EE_YEE_COEF_R0_C1" acronym="VISS_FCP_EE_YEE_COEF_R0_C1" offset="0x14" width="32" description="The YEE Coefficient Row x Column x defines the">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="YEE_COEF_R0_C1" width="10" begin="9" end="0" resetval="0x0" description="The" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_EE_YEE_COEF_R0_C2" acronym="VISS_FCP_EE_YEE_COEF_R0_C2" offset="0x18" width="32" description="The YEE Coefficient Row x Column x defines the">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="YEE_COEF_R0_C2" width="10" begin="9" end="0" resetval="0x0" description="The" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_EE_YEE_COEF_R1_C0" acronym="VISS_FCP_EE_YEE_COEF_R1_C0" offset="0x20" width="32" description="The YEE Coefficient Row x Column x defines the">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="YEE_COEF_R1_C0" width="10" begin="9" end="0" resetval="0x0" description="The" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_EE_YEE_COEF_R1_C1" acronym="VISS_FCP_EE_YEE_COEF_R1_C1" offset="0x24" width="32" description="The YEE Coefficient Row x Column x defines the">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="YEE_COEF_R1_C1" width="10" begin="9" end="0" resetval="0x0" description="The" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_EE_YEE_COEF_R1_C2" acronym="VISS_FCP_EE_YEE_COEF_R1_C2" offset="0x28" width="32" description="The YEE Coefficient Row x Column x defines the">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="YEE_COEF_R1_C2" width="10" begin="9" end="0" resetval="0x0" description="The" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_EE_YEE_COEF_R2_C0" acronym="VISS_FCP_EE_YEE_COEF_R2_C0" offset="0x30" width="32" description="The YEE Coefficient Row x Column x defines the">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="YEE_COEF_R2_C0" width="10" begin="9" end="0" resetval="0x0" description="The" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_EE_YEE_COEF_R2_C1" acronym="VISS_FCP_EE_YEE_COEF_R2_C1" offset="0x34" width="32" description="The YEE Coefficient Row x Column x defines the">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="YEE_COEF_R2_C1" width="10" begin="9" end="0" resetval="0x0" description="The" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_EE_YEE_COEF_R2_C2" acronym="VISS_FCP_EE_YEE_COEF_R2_C2" offset="0x38" width="32" description="The YEE Coefficient Row x Column x defines the">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="YEE_COEF_R2_C2" width="10" begin="9" end="0" resetval="0x0" description="The" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_EE_YEE_E_THR" acronym="VISS_FCP_EE_YEE_E_THR" offset="0x40" width="32" description="The">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="YEE_E_THR" width="10" begin="9" end="0" resetval="0x0" description="The" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_EE_YEE_MERGESEL" acronym="VISS_FCP_EE_YEE_MERGESEL" offset="0x44" width="32" description="The Merge selects the output that is added to the target pixel.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="YEE_MERGESEL" width="1" begin="0" end="0" resetval="0x0" description="The" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_EE_YES_E_HAL" acronym="VISS_FCP_EE_YES_E_HAL" offset="0x48" width="32" description="The Halo selects Halo reduction mode.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="YES_E_HAL" width="1" begin="0" end="0" resetval="0x0" description="The" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_EE_YES_G_GAIN" acronym="VISS_FCP_EE_YES_G_GAIN" offset="0x4C" width="32" description="The">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="YES_G_GAIN" width="8" begin="7" end="0" resetval="0x0" description="The Gradient Gain" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_EE_YES_E_GAIN" acronym="VISS_FCP_EE_YES_E_GAIN" offset="0x50" width="32" description="The">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="YES_E_GAIN" width="12" begin="11" end="0" resetval="0x0" description="The Band-pass filter gain" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_EE_YES_E_THR1" acronym="VISS_FCP_EE_YES_E_THR1" offset="0x54" width="32" description="The">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="YES_E_THR1" width="16" begin="15" end="0" resetval="0x0" description="The shrink threshold" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_EE_YES_E_THR2" acronym="VISS_FCP_EE_YES_E_THR2" offset="0x58" width="32" description="The">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="YES_E_THR2" width="10" begin="9" end="0" resetval="0x0" description="The clip threshold" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_EE_YES_G_OFT" acronym="VISS_FCP_EE_YES_G_OFT" offset="0x5C" width="32" description="The">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="YES_G_OFT" width="10" begin="9" end="0" resetval="0x0" description="The offset applied to the Gradient gain" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_EE_INT_STATUS" acronym="VISS_FCP_EE_INT_STATUS" offset="0x100" width="32" description="Status/clear register for flexee interrupts">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="EE_HZ_ALIGN8" width="1" begin="3" end="3" resetval="0x0" description="status/clear for EE horizontal aligner yuv8 overflow error indicates that the luma and chroma line starts were not within hardware synchronization limits." range="" rwaccess="RW1C"/>
+    <bitfield id="EE_HZ_ALIGN12" width="1" begin="2" end="2" resetval="0x0" description="status/clear for EE horizontal aligner yuv12 overflow error indicates that the luma and chroma line starts were not within hardware synchronization limits." range="" rwaccess="RW1C"/>
+    <bitfield id="EE_PIX_ERR" width="1" begin="1" end="1" resetval="0x0" description="status/clear for error on line array, set when software accesses EE pixel array during active frame causing potential frame corruption." range="" rwaccess="RW1C"/>
+    <bitfield id="EELUT_CFG_ERR" width="1" begin="0" end="0" resetval="0x0" description="status/clear for error on EE LUT cfg, set when software accesses EE LUT during active frame causing potential frame corruption." range="" rwaccess="RW1C"/>
+  </register>
+  <register id="VISS_FCP_EE_LINE_SEL" acronym="VISS_FCP_EE_LINE_SEL" offset="0x1008" width="32" description="Selector for which line memory is read or written">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LINE_SELECTOR" width="3" begin="2" end="0" resetval="0x0" description="Selects which line is read or written from the line memory array." range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_EE_EELUT_RAM_y" acronym="VISS_FCP_EE_EELUT_RAM_y" offset="0x2000" width="32" description="The host will program the EE LUT RAM so that the pixels are translated from 14 bit to 12 bit using LUT entries. Offset = 000D2000h + (y * 4h); where y = 0h to 7FFh">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="EELUT_ENTRY_HI" width="13" begin="28" end="16" resetval="0x0" description="The lower EE LUT entry n+1." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="EELUT_ENTRY_LO" width="13" begin="12" end="0" resetval="0x0" description="The lower EE LUT entry n+0." range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_EE_PIXEL_RAM_y" acronym="VISS_FCP_EE_PIXEL_RAM_y" offset="0x4000" width="32" description="The pixel RAM contains the array of 12 bit pixels stored and used by the CFA logic. Pixels are 16 bit aligned. Pixels can only be written two at a time. Offset = 000D4000h + (y * 4h); where y = 0h to 7FFh">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PIXEL_HI" width="12" begin="27" end="16" resetval="0x0" description="The 12 bit pixel data for the selected line upper pixel 'n+1'" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PIXEL_LO" width="12" begin="11" end="0" resetval="0x0" description="The 12 bit pixel data for the selected line lower pixel 'n'" range="" rwaccess="RW"/>
+  </register>
+</module>

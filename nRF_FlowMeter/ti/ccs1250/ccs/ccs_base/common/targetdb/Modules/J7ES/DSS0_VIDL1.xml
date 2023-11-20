@@ -1,0 +1,342 @@
+<module name="DSS0_VIDL1" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="DSS0_VID_ATTRIBUTES" acronym="DSS0_VID_ATTRIBUTES" offset="0x20" width="32" description="The register configures the of the video window. Shadow register">
+    <bitfield id="LUMAKEYENABLE" width="1" begin="31" end="31" resetval="0x0" description="Enable Luma Key transparency matching" range="" rwaccess="RW"/>
+    <bitfield id="GAMMAINVERSION" width="1" begin="30" end="30" resetval="0x0" description="Inverse Gamma support [using the CLUT table]" range="" rwaccess="RW"/>
+    <bitfield id="GAMMAINVERSIONPOS" width="1" begin="29" end="29" resetval="0x0" description="Position of Inverse Gamma operation" range="" rwaccess="RW"/>
+    <bitfield id="PREMULTIPLYALPHA" width="1" begin="28" end="28" resetval="0x0" description="The field configures the DISPC VID to process incoming data as premultiplied alpha data or non premultiplied alpha data." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="27" end="25" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="SELFREFRESH" width="1" begin="24" end="24" resetval="0x0" description="Enables the self refresh of the video window, from its own DMA buffer only" range="" rwaccess="RW"/>
+    <bitfield id="ARBITRATION" width="1" begin="23" end="23" resetval="0x0" description="Determines the priority of the video pipeline." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="22" end="22" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="VERTICALTAPS" width="1" begin="21" end="21" resetval="0x0" description="Video Vertical Resize Tap Number." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="20" end="20" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="BUFPRELOAD" width="1" begin="19" end="19" resetval="0x0" description="Video" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="18" end="18" resetval="0x0" description="Write 0's for future compatibility." range="" rwaccess="R"/>
+    <bitfield id="SELFREFRESHAUTO" width="1" begin="17" end="17" resetval="0x0" description="Automatic self refresh mode" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="16" end="14" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CROP" width="1" begin="13" end="13" resetval="0x0" description="Enables cropping operation at the output of Video Pipeline" range="" rwaccess="RW"/>
+    <bitfield id="FLIP" width="1" begin="12" end="12" resetval="0x0" description="Describes the frame buffer flip operation" range="" rwaccess="RW"/>
+    <bitfield id="FULLRANGE" width="1" begin="11" end="11" resetval="0x0" description="Color Space Conversion full range setting" range="" rwaccess="RW"/>
+    <bitfield id="NIBBLEMODE" width="1" begin="10" end="10" resetval="0x0" description="Video Nibble mode [only for" range="" rwaccess="RW"/>
+    <bitfield id="COLORCONVENABLE" width="1" begin="9" end="9" resetval="0x0" description="Enable the color space conversion." range="" rwaccess="RW"/>
+    <bitfield id="RESIZEENABLE" width="2" begin="8" end="7" resetval="0x0" description="Video Resize Enable" range="" rwaccess="RW"/>
+    <bitfield id="FORMAT" width="6" begin="6" end="1" resetval="0x0" description="Video Format." range="" rwaccess="RW"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Video pipeline Enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_ATTRIBUTES2" acronym="DSS0_VID_ATTRIBUTES2" offset="0x24" width="32" description="The register configures the of the video window. Shadow register">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="TAGS" width="5" begin="30" end="26" resetval="0xF" description="Number of OCP TAGS to be used for the pipeline [from 0x0 to 0xF]." range="" rwaccess="RW"/>
+    <bitfield id="MPORTSEL" width="1" begin="25" end="25" resetval="0x0" description="Master-Port Selection." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="24" end="20" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="19" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="YUV_ALIGN" width="1" begin="10" end="10" resetval="0x0" description="Alignment [MSB or LSB align] for unpacked 10b/12b YUV data" range="" rwaccess="RW"/>
+    <bitfield id="YUV_MODE" width="1" begin="9" end="9" resetval="0x0" description="Mode of packing for YUV data [only for 10b/12b formats]" range="" rwaccess="RW"/>
+    <bitfield id="YUV_SIZE" width="2" begin="8" end="7" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC1_RANGE_CBCR" width="3" begin="6" end="4" resetval="0x0" description="Defines the VC1 range value for the CbCr component from 0 to 7" range="" rwaccess="RW"/>
+    <bitfield id="VC1_RANGE_Y" width="3" begin="3" end="1" resetval="0x0" description="Defines the VC1 range value for the Y component from 0 to 7" range="" rwaccess="RW"/>
+    <bitfield id="VC1ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Enable/disable the VC1 range mapping processing." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_BA_0" acronym="DSS0_VID_BA_0" offset="0x28" width="32" description="The register configures the base address of the single video buffer. In case of single plane ARGB or YUV, this is the BA. In case of two plane YUV, this is the BA_Y. In case of two plane RGB565-A8, this is the BA_Alpha. BA__0 &amp;amp; BA__1 for ping-pong mechanism with external trigger, based on the field polarity otherwise only BA__0 is used. Shadow register">
+    <bitfield id="BA" width="32" begin="31" end="0" resetval="0x0" description="Video base address." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_BA_1" acronym="DSS0_VID_BA_1" offset="0x2C" width="32" description="The register configures the base address of the single video buffer. In case of single plane ARGB or YUV, this is the BA. In case of two plane YUV, this is the BA_Y. In case of two plane RGB565-A8, this is the BA_Alpha. BA__0 &amp;amp; BA__1 for ping-pong mechanism with external trigger, based on the field polarity otherwise only BA__0 is used. Shadow register">
+    <bitfield id="BA" width="32" begin="31" end="0" resetval="0x0" description="Video base address." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_BA_UV_0" acronym="DSS0_VID_BA_UV_0" offset="0x30" width="32" description="The register configures the base address of the UV buffer for two plane YUV or RGB buffer for two plane RGB565-A8, for the video window. BA_UV__0 &amp;amp; BA_UV__1 for ping-pong mechanism with external trigger, based on the field polarity otherwise only BA_UV__0 is used. Shadow register">
+    <bitfield id="BA" width="32" begin="31" end="0" resetval="0x0" description="Video base address aligned on 16-bit boundary Base address of the UV video buffer used only in case of YUV420-NV12" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_BA_UV_1" acronym="DSS0_VID_BA_UV_1" offset="0x34" width="32" description="The register configures the base address of the UV buffer for two plane YUV or RGB buffer for two plane RGB565-A8, for the video window. BA_UV__0 &amp;amp; BA_UV__1 for ping-pong mechanism with external trigger, based on the field polarity otherwise only BA_UV__0 is used. Shadow register">
+    <bitfield id="BA" width="32" begin="31" end="0" resetval="0x0" description="Video base address aligned on 16-bit boundary Base address of the UV video buffer used only in case of YUV420-NV12" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_BUF_SIZE_STATUS" acronym="DSS0_VID_BUF_SIZE_STATUS" offset="0x38" width="32" description="The register returns the Video buffer for the video pipeline">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="BUFSIZE" width="16" begin="15" end="0" resetval="0x1000" description="Video DMA buffer" range="" rwaccess="R"/>
+  </register>
+  <register id="DSS0_VID_BUF_THRESHOLD" acronym="DSS0_VID_BUF_THRESHOLD" offset="0x3C" width="32" description="The register configures the video buffer associated with the video pipeline. Shadow register">
+    <bitfield id="BUFHIGHTHRESHOLD" width="16" begin="31" end="16" resetval="0xFFF" description="DMA buffer High Threshold." range="" rwaccess="RW"/>
+    <bitfield id="BUFLOWTHRESHOLD" width="16" begin="15" end="0" resetval="0xFF8" description="DMA buffer Low Threshold." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_CSC_COEF0" acronym="DSS0_VID_CSC_COEF0" offset="0x40" width="32" description="The register configures the color space conversion matrix coefficients. Shadow register">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="C01" width="11" begin="26" end="16" resetval="0x0" description="C01 Coefficient." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="C00" width="11" begin="10" end="0" resetval="0x0" description="C00 Coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_CSC_COEF1" acronym="DSS0_VID_CSC_COEF1" offset="0x44" width="32" description="The register configures the color space conversion matrix coefficients. Shadow register">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="C10" width="11" begin="26" end="16" resetval="0x0" description="C10 Coefficient." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="C02" width="11" begin="10" end="0" resetval="0x0" description="C02 Coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_CSC_COEF2" acronym="DSS0_VID_CSC_COEF2" offset="0x48" width="32" description="The register configures the color space conversion matrix coefficients. Shadow register">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="C12" width="11" begin="26" end="16" resetval="0x0" description="C12 Coefficient." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="C11" width="11" begin="10" end="0" resetval="0x0" description="C11 Coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_CSC_COEF3" acronym="DSS0_VID_CSC_COEF3" offset="0x4C" width="32" description="The register configures the color space conversion matrix coefficients. Shadow register">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="C21" width="11" begin="26" end="16" resetval="0x0" description="C21 coefficient." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="C20" width="11" begin="10" end="0" resetval="0x0" description="C20 coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_CSC_COEF4" acronym="DSS0_VID_CSC_COEF4" offset="0x50" width="32" description="The register configures the color space conversion matrix coefficients. Shadow register">
+    <bitfield id="RESERVED" width="21" begin="31" end="11" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="C22" width="11" begin="10" end="0" resetval="0x0" description="C22 Coefficient." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_CSC_COEF5" acronym="DSS0_VID_CSC_COEF5" offset="0x54" width="32" description="The register configures the color space conversion matrix coefficients. Shadow register">
+    <bitfield id="PREOFFSET2" width="13" begin="31" end="19" resetval="0x0" description="Row-2 pre-offset." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="18" end="16" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="PREOFFSET1" width="13" begin="15" end="3" resetval="0x0" description="Row1 pre-offset." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="2" end="0" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+  </register>
+  <register id="DSS0_VID_CSC_COEF6" acronym="DSS0_VID_CSC_COEF6" offset="0x58" width="32" description="The register configures the color space conversion matrix coefficients. Shadow register">
+    <bitfield id="POSTOFFSET1" width="13" begin="31" end="19" resetval="0x0" description="Row-1 post-offset." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="18" end="16" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="PREOFFSET3" width="13" begin="15" end="3" resetval="0x0" description="Row-3 pre-offset." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="2" end="0" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+  </register>
+  <register id="DSS0_VID_GLOBAL_ALPHA" acronym="DSS0_VID_GLOBAL_ALPHA" offset="0x1FC" width="32" description="The register defines the global alpha value for the video pipeline. Shadow register">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="GLOBALALPHA" width="8" begin="7" end="0" resetval="0xFF" description="Global alpha value from 0 to 255." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_MFLAG_THRESHOLD" acronym="DSS0_VID_MFLAG_THRESHOLD" offset="0x208" width="32" description="Register">
+    <bitfield id="HT_MFLAG" width="16" begin="31" end="16" resetval="0x0" description="MFlag High Threshold" range="" rwaccess="RW"/>
+    <bitfield id="LT_MFLAG" width="16" begin="15" end="0" resetval="0x0" description="MFlag Low Threshold" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_PICTURE_SIZE" acronym="DSS0_VID_PICTURE_SIZE" offset="0x20C" width="32" description="The register configures the of the video picture associated with the video layer before up/down-scaling. Shadow register">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="MEMSIZEY" width="14" begin="29" end="16" resetval="0x0" description="Number of lines of the video picture Encoded value [from 1 to 16384] to specify the number of lines of the video picture in memory [program to value minus one] When predecimation is set, the value represents the" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="MEMSIZEX" width="14" begin="13" end="0" resetval="0x0" description="Number of pixels of the video picture Encoded value [from 1 to 16384] to specify the number of pixels of the video picture in memory [program to value minus one]." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_PIXEL_INC" acronym="DSS0_VID_PIXEL_INC" offset="0x210" width="32" description="The register configures the number of bytes to increment between two pixels for the buffer associated with the video window. Shadow register">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="PIXELINC" width="8" begin="7" end="0" resetval="0x1" description="Number of bytes to increment between two pixels Encoded unsigned value [from 1 to 255] to specify the number of bytes between two pixels in the video buffer." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_PRELOAD" acronym="DSS0_VID_PRELOAD" offset="0x218" width="32" description="The register configures the DMA buffer of the video pipeline. Shadow register">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="PRELOAD" width="12" begin="11" end="0" resetval="0x100" description="DMA buffer" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_ROW_INC" acronym="DSS0_VID_ROW_INC" offset="0x21C" width="32" description="The register configures the number of bytes to increment at the end of the row for the buffer associated with the video window. For YUV420 formats this corresponds to the Y Buffer. Shadow register">
+    <bitfield id="ROWINC" width="32" begin="31" end="0" resetval="0x1" description="Number of bytes to increment at the end of the row Encoded signed value [from -2" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_SIZE" acronym="DSS0_VID_SIZE" offset="0x220" width="32" description="The register configures the of the video window. Shadow register">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SIZEY" width="14" begin="29" end="16" resetval="0x0" description="Number of lines of the video window Encoded value [from 1 to 16384] to specify the number of lines of the video window [program" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SIZEX" width="14" begin="13" end="0" resetval="0x0" description="Number of pixels of the video window Encoded value [from 1 to 16384] to specify the number of pixels of the video window [program" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_BA_EXT_0" acronym="DSS0_VID_BA_EXT_0" offset="0x22C" width="32" description="The register configures the 16-bit base address extension. It is the base-address of the single video buffer for single plane ARGB or YUV. For the Y buffer for two plane YUV. For the Alpha buffer for two plane RGB565-A8. 0 &amp;amp; 1 : For ping-pong mechanism with external trigger, based on the field polarity. Shadow register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="BA_EXT" width="16" begin="15" end="0" resetval="0x0" description="Video base address extension [16 bits]." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_BA_EXT_1" acronym="DSS0_VID_BA_EXT_1" offset="0x230" width="32" description="The register configures the 16-bit base address extension. It is the base-address of the single video buffer for single plane ARGB or YUV. For the Y buffer for two plane YUV. For the Alpha buffer for two plane RGB565-A8. 0 &amp;amp; 1 : For ping-pong mechanism with external trigger, based on the field polarity. Shadow register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="BA_EXT" width="16" begin="15" end="0" resetval="0x0" description="Video base address extension [16 bits]." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_BA_UV_EXT_0" acronym="DSS0_VID_BA_UV_EXT_0" offset="0x234" width="32" description="The register configures the 16-bit base address extension of the UV buffer for two plane YUV or the RGB buffer for two plane RGB565-A8. 0 &amp;amp; 1 : For ping-pong mechanism with external trigger, based on the field polarity. Shadow register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="BA_UV_EXT" width="16" begin="15" end="0" resetval="0x0" description="Video base address extension [16 bits]." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_BA_UV_EXT_1" acronym="DSS0_VID_BA_UV_EXT_1" offset="0x238" width="32" description="The register configures the 16-bit base address extension of the UV buffer for two plane YUV or the RGB buffer for two plane RGB565-A8. 0 &amp;amp; 1 : For ping-pong mechanism with external trigger, based on the field polarity. Shadow register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="BA_UV_EXT" width="16" begin="15" end="0" resetval="0x0" description="Video base address extension [16 bits]." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_CSC_COEF7" acronym="DSS0_VID_CSC_COEF7" offset="0x23C" width="32" description="The register configures the color space conversion matrix coefficients. Shadow register">
+    <bitfield id="POSTOFFSET3" width="13" begin="31" end="19" resetval="0x0" description="Row-3 post-offset." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="18" end="16" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="POSTOFFSET2" width="13" begin="15" end="3" resetval="0x0" description="Row-2 post-offset." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="2" end="0" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+  </register>
+  <register id="DSS0_VID_ROW_INC_UV" acronym="DSS0_VID_ROW_INC_UV" offset="0x248" width="32" description="The register configures the number of bytes to increment at the end of the row for the UV buffer associated with the video window for YUV420 formats. For non-YUV420 formats this register is unused. Shadow register">
+    <bitfield id="ROWINC" width="32" begin="31" end="0" resetval="0x1" description="Number of bytes to increment at the end of the row Encoded signed value [from -2" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_TILE" acronym="DSS0_VID_TILE" offset="0x24C" width="32" description="Defines the characteristics of the position of the first pixel inside the compressed frame buffer. In case of non-compressed frame buffer, the register is not used.">
+    <bitfield id="RESERVED" width="9" begin="31" end="23" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="TILEINDEX" width="23" begin="22" end="0" resetval="0x0" description="Defines the" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_TILE2" acronym="DSS0_VID_TILE2" offset="0x250" width="32" description="Defines the number of tiles in the frame buffer. In case of non-compressed frame buffer, the register is not used.">
+    <bitfield id="RESERVED" width="9" begin="31" end="23" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="NUM_TILES" width="23" begin="22" end="0" resetval="0x0" description="Defines the total number of tiles in the compressed frame buffer" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_FBDC_ATTRIBUTES" acronym="DSS0_VID_FBDC_ATTRIBUTES" offset="0x254" width="32" description="Defines the for the compression engine -FBDC">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="TILETYPE" width="2" begin="9" end="8" resetval="0x0" description="FBDC" range="" rwaccess="RW"/>
+    <bitfield id="FORMAT" width="7" begin="7" end="1" resetval="0x0" description="FBDC format" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Frame Buffer Compression is Enabled." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_FBDC_CLEAR_COLOR" acronym="DSS0_VID_FBDC_CLEAR_COLOR" offset="0x258" width="32" description="Defines the Clear Color value to be used for the channel in FBDC">
+    <bitfield id="CLEARCOLOR" width="32" begin="31" end="0" resetval="0x0" description="Defines the Clear Color value to be used for the channel in FBDC" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_CLUT_0" acronym="DSS0_VID_CLUT_0" offset="0x260" width="32" description="The register configures the Color Look Up Table CLUT for VID pipeline. CLUT is used in conjunction with bitmap formats">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VID_CLUT_1" acronym="DSS0_VID_CLUT_1" offset="0x264" width="32" description="The register configures the Color Look Up Table CLUT for VID pipeline. CLUT is used in conjunction with bitmap formats">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VID_CLUT_2" acronym="DSS0_VID_CLUT_2" offset="0x268" width="32" description="The register configures the Color Look Up Table CLUT for VID pipeline. CLUT is used in conjunction with bitmap formats">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VID_CLUT_3" acronym="DSS0_VID_CLUT_3" offset="0x26C" width="32" description="The register configures the Color Look Up Table CLUT for VID pipeline. CLUT is used in conjunction with bitmap formats">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VID_CLUT_4" acronym="DSS0_VID_CLUT_4" offset="0x270" width="32" description="The register configures the Color Look Up Table CLUT for VID pipeline. CLUT is used in conjunction with bitmap formats">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VID_CLUT_5" acronym="DSS0_VID_CLUT_5" offset="0x274" width="32" description="The register configures the Color Look Up Table CLUT for VID pipeline. CLUT is used in conjunction with bitmap formats">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VID_CLUT_6" acronym="DSS0_VID_CLUT_6" offset="0x278" width="32" description="The register configures the Color Look Up Table CLUT for VID pipeline. CLUT is used in conjunction with bitmap formats">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VID_CLUT_7" acronym="DSS0_VID_CLUT_7" offset="0x27C" width="32" description="The register configures the Color Look Up Table CLUT for VID pipeline. CLUT is used in conjunction with bitmap formats">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VID_CLUT_8" acronym="DSS0_VID_CLUT_8" offset="0x280" width="32" description="The register configures the Color Look Up Table CLUT for VID pipeline. CLUT is used in conjunction with bitmap formats">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VID_CLUT_9" acronym="DSS0_VID_CLUT_9" offset="0x284" width="32" description="The register configures the Color Look Up Table CLUT for VID pipeline. CLUT is used in conjunction with bitmap formats">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VID_CLUT_10" acronym="DSS0_VID_CLUT_10" offset="0x288" width="32" description="The register configures the Color Look Up Table CLUT for VID pipeline. CLUT is used in conjunction with bitmap formats">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VID_CLUT_11" acronym="DSS0_VID_CLUT_11" offset="0x28C" width="32" description="The register configures the Color Look Up Table CLUT for VID pipeline. CLUT is used in conjunction with bitmap formats">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VID_CLUT_12" acronym="DSS0_VID_CLUT_12" offset="0x290" width="32" description="The register configures the Color Look Up Table CLUT for VID pipeline. CLUT is used in conjunction with bitmap formats">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VID_CLUT_13" acronym="DSS0_VID_CLUT_13" offset="0x294" width="32" description="The register configures the Color Look Up Table CLUT for VID pipeline. CLUT is used in conjunction with bitmap formats">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VID_CLUT_14" acronym="DSS0_VID_CLUT_14" offset="0x298" width="32" description="The register configures the Color Look Up Table CLUT for VID pipeline. CLUT is used in conjunction with bitmap formats">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VID_CLUT_15" acronym="DSS0_VID_CLUT_15" offset="0x29C" width="32" description="The register configures the Color Look Up Table CLUT for VID pipeline. CLUT is used in conjunction with bitmap formats">
+    <bitfield id="INDEX" width="1" begin="31" end="31" resetval="0x0" description="Write 1 to reset the index" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_R" width="10" begin="29" end="20" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_G" width="10" begin="19" end="10" resetval="0x0" description="" range="" rwaccess="W"/>
+    <bitfield id="VALUE_B" width="10" begin="9" end="0" resetval="0x0" description="" range="" rwaccess="W"/>
+  </register>
+  <register id="DSS0_VID_SAFETY_ATTRIBUTES" acronym="DSS0_VID_SAFETY_ATTRIBUTES" offset="0x2A0" width="32" description="The register configures the safety sub-region. Shadow register">
+    <bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="FRAMESKIP" width="2" begin="12" end="11" resetval="0x0" description="Indicates which frames to be skipped while doing FRAMEFREEZE or DATACHECK [Useful for interlaced displays]." range="" rwaccess="RW"/>
+    <bitfield id="THRESHOLD" width="8" begin="10" end="3" resetval="0x0" description="Allowed maximum number of frames with the same frame signature." range="" rwaccess="RW"/>
+    <bitfield id="SEEDSELECT" width="1" begin="2" end="2" resetval="0x0" description="Initial seed selection control" range="" rwaccess="RW"/>
+    <bitfield id="CAPTUREMODE" width="1" begin="1" end="1" resetval="0x0" description="Mode of operation of the safety check module" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Safety check Enable for the region." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_SAFETY_CAPT_SIGNATURE" acronym="DSS0_VID_SAFETY_CAPT_SIGNATURE" offset="0x2A4" width="32" description="The register captures the signature from the MISR of the safety sub-region. Shadow register">
+    <bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="The register configures the reference signature of the safety sub-region." range="" rwaccess="R"/>
+  </register>
+  <register id="DSS0_VID_SAFETY_POSITION" acronym="DSS0_VID_SAFETY_POSITION" offset="0x2A8" width="32" description="The register configures the position of the safety sub-region. Shadow register">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSY" width="14" begin="29" end="16" resetval="0x0" description="Y position of the safety sub-region." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSX" width="14" begin="13" end="0" resetval="0x0" description="X position of the safety sub-region." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_SAFETY_REF_SIGNATURE" acronym="DSS0_VID_SAFETY_REF_SIGNATURE" offset="0x2AC" width="32" description="The register configures the reference signature of the safety sub-region. Shadow register">
+    <bitfield id="SIGNATURE" width="32" begin="31" end="0" resetval="0x0" description="The register configures the reference signature of the safety sub-region." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_SAFETY_SIZE" acronym="DSS0_VID_SAFETY_SIZE" offset="0x2B0" width="32" description="The register configures the of the safety sub-region. Shadow register">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SIZEY" width="14" begin="29" end="16" resetval="0x0" description="Height of the safety sub-region." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SIZEX" width="14" begin="13" end="0" resetval="0x0" description="Width of the safety sub-region." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_SAFETY_LFSR_SEED" acronym="DSS0_VID_SAFETY_LFSR_SEED" offset="0x2B4" width="32" description="The register configures the seed [initial value] of the MISR. Otherwise, the MISR is initialized with 0xFFFF_FFFF. Shadow register">
+    <bitfield id="SEED" width="32" begin="31" end="0" resetval="0x0" description="The register configures the seed [initial value] of the MISR." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_LUMAKEY" acronym="DSS0_VID_LUMAKEY" offset="0x2B8" width="32" description="The register configures the LUMA KEY transparency min and max values. Shadow register">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="LUMAKEYMAX" width="12" begin="27" end="16" resetval="0x0" description="12b luma_key_max value" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="Write 0's for future compatibility Reads return 0" range="" rwaccess="R"/>
+    <bitfield id="LUMAKEYMIN" width="12" begin="11" end="0" resetval="0x0" description="12b luma_key_min value" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_DMA_BUFSIZE" acronym="DSS0_VID_DMA_BUFSIZE" offset="0x2BC" width="32" description="The register configures the DMA buffer allocated to the pipeline - New Shared memory feature">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="BUFSIZE" width="5" begin="4" end="0" resetval="0x4" description="DMA buffer" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_CROP" acronym="DSS0_VID_CROP" offset="0x2C0" width="32" description="Defines the for the output cropping in Video Pipe">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CROPBOTTOM" width="5" begin="28" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="23" end="21" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CROPTOP" width="5" begin="20" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CROPRIGHT" width="5" begin="12" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CROPLEFT" width="5" begin="4" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_SECURE" acronym="DSS0_VID_SECURE" offset="0x2C4" width="32" description="Security bit settings for the sub-module">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="SECURE" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_VID_PIPE_GO" acronym="DSS0_VID_PIPE_GO" offset="0x2C8" width="32" description="PIPE GO bit settings">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="GOBIT" width="1" begin="0" end="0" resetval="0x0" description="Go bit" range="" rwaccess="RW"/>
+  </register>
+</module>

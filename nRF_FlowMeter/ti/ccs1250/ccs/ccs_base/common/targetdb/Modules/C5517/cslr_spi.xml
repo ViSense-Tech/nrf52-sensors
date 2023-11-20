@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><module id="SPI" HW_revision="" XML_version="1" description="The SPI is a high-speed synchronous serial input/output port that allows a serial bit stream of programmed length (1 to 32 bits) to be shifted into and out of the device at a programmed bit-transfer rate. The SPI supports multi-chip operation of up to four SPI slave devices. The SPI can operate as a master device only.">
+     <register id="SPICDR" acronym="SPICDR" page="2" offset="0X0000" width="16" description="The clock divider register (SPICDR) specifies the clock divider value for the SPI input clock. ">
+<bitfield id="CLKDV" width="16" begin="15" end="0" resetval="0" description="Clock divider bits. The SPI input clock is divided down to generate the SPI interface clock (SPI_CLK). You can specify the divider value through the CLKDV bits.  The frequency SPI_CLK is:  SPI_CLK frequency = ( SPI input clock frequency ) / (CLKDV + 1)  The duty cycle of SPI_CLK depends on the value of CLKDV + 1. When CLKDV + 1 is odd, the resulting duty cycle is approximately 33%. When CLKDV + 1 is even, the duty cycle is approximately 50%.  NOTE: CLKDV must be set to a value greater than or equal to 2 such that the frequency of SPI_CLK is at least three times slower than the frequency of the SPI input clock." range="" rwaccess="RW"/>
+</register>
+     <register id="SPICCR" acronym="SPICCR" page="2" offset="0X0001" width="16" description="The clock control register (SPICCR) is used to enable the clock output and to initiate a soft reset to the SPI module.">
+<bitfield id="CLKEN" width="1" begin="15" end="15" resetval="0" description="Clock enable bit. This bit is is used to enable and disable the SPI interface clock (SPI_CLK)." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="SPI_CLK is disabled and held at the logic value specified by the clock polarity bit of SPIDC."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="SPI_CLK is enabled."/>
+</bitfield>
+<bitfield id="RST" width="1" begin="14" end="14" resetval="0" description="Soft reset bit. Writing a 1 to this bit will reset the SPI module. This bit is self-clearing and will deactivate the soft reset on the next SPI input clock cycle after this bit is set to 1." range="" rwaccess="W">
+<bitenum id="RELEASE" value="0" token="RELEASE" description="Soft reset is released."/>
+<bitenum id="ASSERT" value="1" token="ASSERT" description="Soft reset is asserted."/>
+</bitfield>
+<bitfield id="_RESV_3" width="14" begin="13" end="0" resetval="0" description="Reserved" range="" rwaccess="N"/>
+</register>
+     <register id="SPIDCR1" acronym="SPIDCR1" page="2" offset="0X0002" width="16" description="The device configuration registers (SPIDCR1 and SPIDCR2) are used to specify the clock phase, clock polarity, and data delay for each SPI slave connected to the SPI chip select pins. ">
+<bitfield id="_RESV_1" width="3" begin="15" end="13" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="DD1" width="2" begin="12" end="11" resetval="0" description="Data delay for chip select 1 pin (SPI_CS1)." range="" rwaccess="RW">
+<bitenum id="DELAY0" value="0" token="DELAY0" description="Data is output on the same cycle as the SPI_CS1 goes active."/>
+<bitenum id="DELAY1" value="1" token="DELAY1" description="Data is output one SPI_CLK cycle after the SPI_CS1 goes active."/>
+<bitenum id="DELAY2" value="2" token="DELAY2" description="Data is output two SPI_CLK cycles after the SPI_CS1 goes active."/>
+<bitenum id="DELAY3" value="3" token="DELAY3" description="Data is output three SPI_CLK cycles after the SPI_CS1 goes active."/>
+</bitfield>
+<bitfield id="CKPH1" width="1" begin="10" end="10" resetval="0" description="Clock phase for chip select 1 pin (SPI_CS1). The clock phase bit, in conjunction with the clock polarity bit (CKP1), controls the clock-data relationship between master and slave." range="" rwaccess="RW">
+<bitenum id="LOW" value="0" token="LOW" description="When CKP1 = 0, data shifted out on falling edge, input captured on rising edge. When CKP1 = 1, data shifted out on rising edge, input captured on falling edge."/>
+<bitenum id="HIGH" value="1" token="HIGH" description="When CKP1 = 0, data shifted out on rising edge, input captured on falling edge. When CKP1 = 1, data shifted out on falling edge, input captured on rising edge."/>
+</bitfield>
+<bitfield id="CSP1" width="1" begin="9" end="9" resetval="0" description="Polarity for chip select 1 pin (SPI_CS1)." range="" rwaccess="RW">
+<bitenum id="LOW" value="0" token="LOW" description="Active low."/>
+<bitenum id="HIGH" value="1" token="HIGH" description="Active high."/>
+</bitfield>
+<bitfield id="CKP1" width="1" begin="8" end="8" resetval="0" description="Clock polarity inactive state for the clock pin during accesses to chip select 1." range="" rwaccess="RW">
+<bitenum id="LOW" value="0" token="LOW" description="When data is not being transferred, a steady state low value is produced at the SCK pin."/>
+<bitenum id="HIGH" value="1" token="HIGH" description="When data is not being transferred, a steady state high value is produced at the SCK pin."/>
+</bitfield>
+<bitfield id="_RESV_6" width="3" begin="7" end="5" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="DD0" width="2" begin="4" end="3" resetval="0" description="Data delay for chip select 0 pin (SPI_CS0)." range="" rwaccess="RW">
+<bitenum id="DELAY0" value="0" token="DELAY0" description="Data is output on the same cycle as the SPI_CS0 goes active."/>
+<bitenum id="DELAY1" value="1" token="DELAY1" description="Data is output one SPI_CLK cycle after the SPI_CS0 goes active."/>
+<bitenum id="DELAY2" value="2" token="DELAY2" description="Data is output two SPI_CLK cycles after the SPI_CS0 goes active."/>
+<bitenum id="DELAY3" value="3" token="DELAY3" description="Data is output three SPI_CLK cycles after the SPI_CS0 goes active."/>
+</bitfield>
+<bitfield id="CKPH0" width="1" begin="2" end="2" resetval="0" description="Clock phase for chip select 0 pin (SPI_CS0). The clock phase bit, in conjunction with the clock polarity bit (CKP0), controls the clock-data relationship between master and slave." range="" rwaccess="RW">
+<bitenum id="LOW" value="0" token="LOW" description="When CKP0 = 0, data shifted out on falling edge, input captured on rising edge. When CKP0 = 1, data shifted out on rising edge, input captured on falling edge."/>
+<bitenum id="HIGH" value="1" token="HIGH" description="When CKP0 = 0, data shifted out on rising edge, input captured on falling edge. When CKP0 = 1, data shifted out on falling edge, input captured on rising edge."/>
+</bitfield>
+<bitfield id="CSP0" width="1" begin="1" end="1" resetval="0" description="Polarity for chip select 0 pin (SPI_CS0)." range="" rwaccess="RW">
+<bitenum id="LOW" value="0" token="LOW" description="Active low."/>
+<bitenum id="HIGH" value="1" token="HIGH" description="Active high."/>
+</bitfield>
+<bitfield id="CKP0" width="1" begin="0" end="0" resetval="0" description="Clock polarity inactive state for the clock pin during accesses to chip select 0." range="" rwaccess="RW">
+<bitenum id="LOW" value="0" token="LOW" description="When data is not being transferred, a steady state low value is produced at the SCK pin."/>
+<bitenum id="HIGH" value="1" token="HIGH" description="When data is not being transferred, a steady state high value is produced at the SCK pin."/>
+</bitfield>
+</register>
+     <register id="SPIDCR2" acronym="SPIDCR2" page="2" offset="0X0003" width="16" description="The device configuration registers (SPIDCR1 and SPIDCR2) are used to specify the clock phase, clock polarity, and data delay for each SPI slave connected to the SPI chip select pins. ">
+<bitfield id="LPBK" width="1" begin="15" end="15" resetval="0" description="Loopback mode enable bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Loopback mode is disabled."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Loopback mode is enabled."/>
+</bitfield>
+<bitfield id="_RESV_2" width="2" begin="14" end="13" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="DD3" width="2" begin="12" end="11" resetval="0" description="Data delay for chip select 3 pin (SPI_CS3)." range="" rwaccess="RW">
+<bitenum id="DELAY0" value="0" token="DELAY0" description="Data is output on the same cycle as the SPI_CS3 goes active."/>
+<bitenum id="DELAY1" value="1" token="DELAY1" description="Data is output one SPI_CLK cycle after the SPI_CS3 goes active."/>
+<bitenum id="DELAY2" value="2" token="DELAY2" description="Data is output two SPI_CLK cycles after the SPI_CS3 goes active."/>
+<bitenum id="DELAY3" value="3" token="DELAY3" description="Data is output three SPI_CLK cycles after the SPI_CS3 goes active."/>
+</bitfield>
+<bitfield id="CKPH3" width="1" begin="10" end="10" resetval="0" description="Clock phase for chip select 3 pin (SPI_CS3). The clock phase bit, in conjunction with the clock polarity bit (CKP3), controls the clock-data relationship between master and slave." range="" rwaccess="RW">
+<bitenum id="LOW" value="0" token="LOW" description="When CKP3 = 0, data shifted out on falling edge, input captured on rising edge. When CKP3 = 1, data shifted out on rising edge, input captured on falling edge."/>
+<bitenum id="HIGH" value="1" token="HIGH" description="When CKP3 = 0, data shifted out on rising edge, input captured on falling edge. When CKP3 = 1, data shifted out on falling edge, input captured on rising edge."/>
+</bitfield>
+<bitfield id="CSP3" width="1" begin="9" end="9" resetval="0" description="Polarity for chip select 3 pin (SPI_CS3)." range="" rwaccess="RW">
+<bitenum id="LOW" value="0" token="LOW" description="Active low."/>
+<bitenum id="HIGH" value="1" token="HIGH" description="Active high."/>
+</bitfield>
+<bitfield id="CKP3" width="1" begin="8" end="8" resetval="0" description="Clock polarity inactive state for the clock pin during accesses to chip select 3." range="" rwaccess="RW">
+<bitenum id="LOW" value="0" token="LOW" description="When data is not being transferred, a steady state low value is produced at the SCK pin."/>
+<bitenum id="HIGH" value="1" token="HIGH" description="When data is not being transferred, a steady state high value is produced at the SCK pin."/>
+</bitfield>
+<bitfield id="_RESV_7" width="3" begin="7" end="5" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="DD2" width="2" begin="4" end="3" resetval="0" description="Data delay for chip select 2 pin (SPI_CS2)." range="" rwaccess="RW">
+<bitenum id="DELAY0" value="0" token="DELAY0" description="Data is output on the same cycle as the SPI_CS2 goes active."/>
+<bitenum id="DELAY1" value="1" token="DELAY1" description="Data is output one SPI_CLK cycle after the SPI_CS2 goes active."/>
+<bitenum id="DELAY2" value="2" token="DELAY2" description="Data is output two SPI_CLK cycles after the SPI_CS2 goes active."/>
+<bitenum id="DELAY3" value="3" token="DELAY3" description="Data is output three SPI_CLK cycles after the SPI_CS2 goes active."/>
+</bitfield>
+<bitfield id="CKPH2" width="1" begin="2" end="2" resetval="0" description="Clock phase for chip select 2 pin (SPI_CS2). The clock phase bit, in conjunction with the clock polarity bit (CKP2), controls the clock-data relationship between master and slave." range="" rwaccess="RW">
+<bitenum id="LOW" value="0" token="LOW" description="When CKP2 = 0, data shifted out on falling edge, input captured on rising edge. When CKP2 = 1, data shifted out on rising edge, input captured on falling edge."/>
+<bitenum id="HIGH" value="1" token="HIGH" description="When CKP2 = 0, data shifted out on rising edge, input captured on falling edge. When CKP2 = 1, data shifted out on falling edge, input captured on rising edge."/>
+</bitfield>
+<bitfield id="CSP2" width="1" begin="1" end="1" resetval="0" description="Polarity for chip select 2 pin (SPI_CS2)." range="" rwaccess="RW">
+<bitenum id="LOW" value="0" token="LOW" description="Active low."/>
+<bitenum id="HIGH" value="1" token="HIGH" description="Active high."/>
+</bitfield>
+<bitfield id="CKP2" width="1" begin="0" end="0" resetval="0" description="Clock polarity inactive state for the clock pin during accesses to chip select 2." range="" rwaccess="RW">
+<bitenum id="LOW" value="0" token="LOW" description="When data is not being transferred, a steady state low value is produced at the SCK pin."/>
+<bitenum id="HIGH" value="1" token="HIGH" description="When data is not being transferred, a steady state high value is produced at the SCK pin."/>
+</bitfield>
+</register>
+     <register id="SPICMD1" acronym="SPICMD1" page="2" offset="0X0004" width="16" description="Used to enable character and frame complete interrupts and specify the number of characters in a frame. ">
+<bitfield id="FIRQ" width="1" begin="15" end="15" resetval="0" description="Frame count interrupt enable." range="" rwaccess="R">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="No interrupt generated at the end of the frame count."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Interrupt generated at the end of the frame count."/>
+</bitfield>
+<bitfield id="CIRQ" width="1" begin="14" end="14" resetval="0" description="Character interrupt enable." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="No interrupt generated at the end of the character transfer."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Interrupt generated at the end of the character transfer."/>
+</bitfield>
+<bitfield id="_RESV_3" width="2" begin="13" end="12" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="FLEN" width="12" begin="11" end="0" resetval="0" description="Frame length bits. These bits are used to specify the length of entire transfer.  The total number of characters transferred equals FLEN + 1.  For example, if FLEN = 63, a frame consists of a total of 64 characters." range="" rwaccess="RW"/>
+</register>
+     <register id="SPICMD2" acronym="SPICMD2" page="2" offset="0X0005" width="16" description="The command to use (read or write), character length, and chip select pin used during SPI transfers are specified through SPICMD2. Writing to SPICMD2 will cause the SPI to execute the command specified by the transfer command bits (CMD).">
+<bitfield id="_RESV_1" width="2" begin="15" end="14" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="CSNUM" width="2" begin="13" end="12" resetval="0" description="Device select. Sets the active chip select for the transfer." range="" rwaccess="RW">
+<bitenum id="CS0" value="0" token="CS0" description="Chip select 0 is active."/>
+<bitenum id="CS1" value="1" token="CS1" description="Chip select 1 is active."/>
+<bitenum id="CS2" value="2" token="CS2" description="Chip select 2 is active."/>
+<bitenum id="CS3" value="3" token="CS3" description="Chip select 3 is active."/>
+</bitfield>
+<bitfield id="_RESV_3" width="4" begin="11" end="8" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="CLEN" width="5" begin="7" end="3" resetval="0" description="Character length. Sets the transfer size of the individual transfer elements from 1 to 32 bits. The character length is set to CLEN + 1.  For example, if CLEN = 7, the character length is set to 8 bits." range="" rwaccess="RW"/>
+<bitfield id="_RESV_5" width="1" begin="2" end="2" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="CMD" width="2" begin="1" end="0" resetval="0" description="Transfer command bits. These bits specify the type of transaction being used." range="" rwaccess="RW">
+<bitenum id="RSV1" value="0" token="RSV1" description="Reserved."/>
+<bitenum id="READ" value="1" token="READ" description="Read."/>
+<bitenum id="WRITE" value="2" token="WRITE" description="Write."/>
+<bitenum id="RSV2" value="3" token="RSV2" description="Reserved."/>
+</bitfield>
+</register>
+     <register id="SPISTAT1" acronym="SPISTAT1" page="2" offset="0X0006" width="16" description="The status registers (SPISTAT1 and SPISTAT2) contain indicators to allow you to monitor the progression of a frame transfer.">
+<bitfield id="_RESV_1" width="13" begin="15" end="3" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="FC" width="1" begin="2" end="2" resetval="0" description="Frame complete. This bit is set after all the requested characters have been transferred. This bit is reset when SPISTAT2 is read and when SPICMD2 is written to." range="" rwaccess="R">
+<bitenum id="NOTCOMPLETE" value="0" token="NOTCOMPLETE" description="Transfer is not complete."/>
+<bitenum id="COMPLETE" value="1" token="COMPLETE" description="All characters have been transferred."/>
+</bitfield>
+<bitfield id="CC" width="1" begin="1" end="1" resetval="0" description="Character complete. This bit is set after each character transfer is completed. This bit is reset when SPISTAT2 is read and when SPICMD2 is written to." range="" rwaccess="R">
+<bitenum id="NOTCOMPLETE" value="0" token="NOTCOMPLETE" description="Character transfer is not complete."/>
+<bitenum id="COMPLETE" value="1" token="COMPLETE" description="Character transfer is complete."/>
+</bitfield>
+<bitfield id="BSY" width="1" begin="0" end="0" resetval="0" description="Busy bit. This bit is set during an active character transfer. Between characters this bit will be cleared to signal that the data registers can be accessed." range="" rwaccess="R">
+<bitenum id="NOTBUSY" value="0" token="NOTBUSY" description="Idle, no character transfers in progress."/>
+<bitenum id="BUSY" value="1" token="BUSY" description="Active, a character transfer is in progress."/>
+</bitfield>
+</register>
+     <register id="SPISTAT2" acronym="SPISTAT2" page="2" offset="0X0007" width="16" description="The status registers (SPISTAT1 and SPISTAT2) contain indicators to allow you to monitor the progression of a frame transfer.">
+<bitfield id="_RESV_1" width="4" begin="15" end="12" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="CCNT" width="12" begin="11" end="0" resetval="0" description="Character count. These bits reflect the total number of characters transferred minus one. For example, when CCNT = 63, a total of 64 characters have been transferred." range="000-FFFh" rwaccess="R"/>
+</register>
+     <register id="SPIDR1" acronym="SPIDR1" page="2" offset="0X0008" width="16" description="The data registers (SPIDAT1 and SPIDAT2) are treated as a 32-bit shift register. Data received by the SPI is shifted into the least-significant bit of SPIDAT1 and the contents of both registers are shifted to the left. Similarly, data transferred by the SPI is shifted out of the most-significant bit of SPIDAT2 and the contents of both registers are shifted to the left. ">
+<bitfield id="DATA" width="16" begin="15" end="0" resetval="0" description="Low part of data during read and write operations." range="0000-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="SPIDR2" acronym="SPIDR2" page="2" offset="0X0009" width="16" description="The data registers (SPIDAT1 and SPIDAT2) are treated as a 32-bit shift register. Data received by the SPI is shifted into the least-significant bit of SPIDAT1 and the contents of both registers are shifted to the left. Similarly, data transferred by the SPI is shifted out of the most-significant bit of SPIDAT2 and the contents of both registers are shifted to the left. ">
+<bitfield id="DATA" width="16" begin="15" end="0" resetval="0" description="High part of data during read and write operations." range="0000-FFFFh" rwaccess="RW"/>
+</register>
+</module>

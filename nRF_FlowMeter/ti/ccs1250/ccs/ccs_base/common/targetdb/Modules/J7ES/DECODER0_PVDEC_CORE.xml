@@ -1,0 +1,220 @@
+<module name="DECODER0_PVDEC_CORE" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="DECODER0_CR_PVDEC_SOFT_RESET" acronym="DECODER0_CR_PVDEC_SOFT_RESET" offset="0x0" width="32" description="">
+    <bitfield id="CR_PVDEC_PIXEL_PROCESSING_SOFT_RESET" width="8" begin="31" end="24" resetval="0x0" description="For each instance of the back-end pixel processing pipe, writing '1' to this bit resets the corresponding pixel processing pipe [where bit 0 resets 'pipe 1', etc.]." range="" rwaccess="RW"/>
+    <bitfield id="CR_PVDEC_ENTROPY_SOFT_RESET" width="8" begin="23" end="16" resetval="0x0" description="For each instance of the front-end entropy pipe, writing '1' to this bit resets the corresponding front-end entropy pipe [where bit 0 resets 'pipe 1', etc.]." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="14" begin="15" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_PVDEC_MMU_SOFT_RESET" width="1" begin="1" end="1" resetval="0x0" description="Allows the MMU to be reset." range="" rwaccess="RW"/>
+    <bitfield id="CR_PVDEC_SOFT_RESET" width="1" begin="0" end="0" resetval="0x0" description="Allows the core to be reset." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PVDEC_HOST_INTERRUPT_STATUS" acronym="DECODER0_CR_PVDEC_HOST_INTERRUPT_STATUS" offset="0x10" width="32" description="">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_HOST_SYS_WDT" width="1" begin="28" end="28" resetval="0x0" description="Timeout condition encountered by system Watch Dog Timer [Pulse generated at event, held by edge detection logic]" range="" rwaccess="RW"/>
+    <bitfield id="CR_HOST_READ_TIMEOUT_PROC_IRQ" width="1" begin="27" end="27" resetval="0x0" description="Embedded processor interface timeout of read [command accepted but no data returned] [Pulse generated at event, held by edge detection logic]" range="" rwaccess="RW"/>
+    <bitfield id="CR_HOST_COMMAND_TIMEOUT_PROC_IRQ" width="1" begin="26" end="26" resetval="0x0" description="Embedded processor interface timeout of command phase [Pulse generated at event, held by edge detection logic]" range="" rwaccess="RW"/>
+    <bitfield id="CR_HOST_READ_TIMEOUT_HOST_IRQ" width="1" begin="25" end="25" resetval="0x0" description="Host interface timeout of read [command accepted but no data returned] [Pulse generated at event, held by edge detection logic]" range="" rwaccess="RW"/>
+    <bitfield id="CR_HOST_COMMAND_TIMEOUT_HOST_IRQ" width="1" begin="24" end="24" resetval="0x0" description="Host interface timeout of command phase [Pulse generated at event, held by edge detection logic]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="23" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_HOST_PROC_GPIO_IRQ" width="1" begin="21" end="21" resetval="0x0" description="General purpose interrupt from the embedded processor [Level from register in the embedded processor]" range="" rwaccess="RW"/>
+    <bitfield id="CR_HOST_PROC_IRQ" width="1" begin="20" end="20" resetval="0x0" description="Serious interrupt from the embedded processor." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="19" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_HOST_MMU_FAULT_IRQ" width="1" begin="16" end="16" resetval="0x0" description="MMU page fault interrupt, read the" range="" rwaccess="RW"/>
+    <bitfield id="CR_HOST_PIXEL_PROCESSING_IRQ" width="8" begin="15" end="8" resetval="0x0" description="Pixel processing pipe interrupt, where bit 0 corresponds to 'pixel processing pipe 1', etc." range="" rwaccess="RW"/>
+    <bitfield id="CR_HOST_ENTROPY_PIPE_IRQ" width="8" begin="7" end="0" resetval="0x0" description="Entropy pipe interrupt, where bit 0 corresponds to 'entropy pipe 1', etc." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PVDEC_INTERRUPT_CLEAR" acronym="DECODER0_CR_PVDEC_INTERRUPT_CLEAR" offset="0x14" width="32" description="">
+    <bitfield id="CR_IRQ_CLEAR" width="16" begin="31" end="16" resetval="0x0" description="The value read from the top half of PVDEC interrupt status registers is based on 'input source' ORed with 'rising edge detection' logic." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PVDEC_HOST_INTERRUPT_ENABLE" acronym="DECODER0_CR_PVDEC_HOST_INTERRUPT_ENABLE" offset="0x18" width="32" description="">
+    <bitfield id="CR_HOST_IRQ_ENABLE" width="16" begin="31" end="16" resetval="0x0" description="Enables interrupts to the host." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PVDEC_PROC1_INTERRUPT_STATUS" acronym="DECODER0_CR_PVDEC_PROC1_INTERRUPT_STATUS" offset="0x20" width="32" description="">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC1_SYS_WDT" width="1" begin="28" end="28" resetval="0x0" description="Timeout condition encountered by system Watch Dog Timer [Pulse generated at event, held by edge detection logic]" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC1_READ_TIMEOUT_PROC_IRQ" width="1" begin="27" end="27" resetval="0x0" description="Embedded processor interface timeout of read [command accepted but no data returned] [Pulse generated at event, held by edge detection logic]" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC1_COMMAND_TIMEOUT_PROC_IRQ" width="1" begin="26" end="26" resetval="0x0" description="Embedded processor interface timeout of command phase [Pulse generated at event, held by edge detection logic]" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC1_READ_TIMEOUT_HOST_IRQ" width="1" begin="25" end="25" resetval="0x0" description="Host interface timeout of read [command accepted but no data returned] [Pulse generated at event, held by edge detection logic]" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC1_COMMAND_TIMEOUT_HOST_IRQ" width="1" begin="24" end="24" resetval="0x0" description="Host interface timeout of command phase [Pulse generated at event, held by edge detection logic]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="23" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC1_PROC_GPIO_IRQ" width="1" begin="21" end="21" resetval="0x0" description="General purpose interrupt from the embedded processor [Level from register in the embedded processor]" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC1_PROC_IRQ" width="1" begin="20" end="20" resetval="0x0" description="Serious interrupt from the embedded processor." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="19" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC1_MMU_FAULT_IRQ" width="1" begin="16" end="16" resetval="0x0" description="MMU page fault interrupt, read the" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC1_PIXEL_PROCESSING_IRQ" width="8" begin="15" end="8" resetval="0x0" description="Pixel processing pipe interrupt, where bit 0 corresponds to 'pixel processing pipe 1', etc." range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC1_ENTROPY_PIPE_IRQ" width="8" begin="7" end="0" resetval="0x0" description="Entropy pipe interrupt, where bit 0 corresponds to 'entropy pipe 1', etc." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PVDEC_PROC1_INTERRUPT_ENABLE" acronym="DECODER0_CR_PVDEC_PROC1_INTERRUPT_ENABLE" offset="0x28" width="32" description="">
+    <bitfield id="CR_PROC1_IRQ_ENABLE" width="16" begin="31" end="16" resetval="0x0" description="Enables interrupts to the embedded processor triggerA." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PVDEC_PROC2_INTERRUPT_STATUS" acronym="DECODER0_CR_PVDEC_PROC2_INTERRUPT_STATUS" offset="0x30" width="32" description="">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC2_SYS_WDT" width="1" begin="28" end="28" resetval="0x0" description="Timeout condition encountered by system Watch Dog Timer [Pulse generated at event, held by edge detection logic]" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC2_READ_TIMEOUT_PROC_IRQ" width="1" begin="27" end="27" resetval="0x0" description="Embedded processor interface timeout of read [command accepted but no data returned] [Pulse generated at event, held by edge detection logic]" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC2_COMMAND_TIMEOUT_PROC_IRQ" width="1" begin="26" end="26" resetval="0x0" description="Embedded processor interface timeout of command phase [Pulse generated at event, held by edge detection logic]" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC2_READ_TIMEOUT_HOST_IRQ" width="1" begin="25" end="25" resetval="0x0" description="Host interface timeout of read [command accepted but no data returned] [Pulse generated at event, held by edge detection logic]" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC2_COMMAND_TIMEOUT_HOST_IRQ" width="1" begin="24" end="24" resetval="0x0" description="Host interface timeout of command phase [Pulse generated at event, held by edge detection logic]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="23" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC2_PROC_GPIO_IRQ" width="1" begin="21" end="21" resetval="0x0" description="General purpose interrupt from the embedded processor [Level from register in the embedded processor]" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC2_PROC_IRQ" width="1" begin="20" end="20" resetval="0x0" description="Serious interrupt from the embedded processor." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="19" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC2_MMU_FAULT_IRQ" width="1" begin="16" end="16" resetval="0x0" description="MMU page fault interrupt, read the" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC2_PIXEL_PROCESSING_IRQ" width="8" begin="15" end="8" resetval="0x0" description="Pixel processing pipe interrupt, where bit 0 corresponds to 'pixel processing pipe 1', etc." range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC2_ENTROPY_PIPE_IRQ" width="8" begin="7" end="0" resetval="0x0" description="Entropy core interrupt, where bit 0 corresponds to 'entropy core 1', etc." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PVDEC_PROC2_INTERRUPT_ENABLE" acronym="DECODER0_CR_PVDEC_PROC2_INTERRUPT_ENABLE" offset="0x38" width="32" description="">
+    <bitfield id="CR_PROC2_IRQ_ENABLE" width="16" begin="31" end="16" resetval="0x0" description="Enables interrupts to the embedded processor triggerB." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PVDEC_MAN_CLK_ENABLE" acronym="DECODER0_CR_PVDEC_MAN_CLK_ENABLE" offset="0x40" width="32" description="">
+    <bitfield id="CR_PIXEL_PROCESSING_MAN_CLK_ENABLE" width="8" begin="31" end="24" resetval="0x0" description="Controls the clock for each instance of the pixel processing pipe [if this bit is set, clock is active and AUTO_CLOCK_ENABLE is ignored]." range="" rwaccess="RW"/>
+    <bitfield id="CR_ENTROPY_PIPE_MAN_CLK_ENABLE" width="8" begin="23" end="16" resetval="0x0" description="Controls the clock for each instance of the entropy pipe [if this bit is set, clock is active and AUTO_CLOCK_ENABLE is ignored]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="7" begin="15" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_MEM_MAN_CLK_ENABLE" width="1" begin="8" end="8" resetval="0x1" description="Controls the clock for the PVDEC MMU module [If this bit is set, clock is active and AUTO_CLOCK_ENABLE is ignored]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_PVDEC_REG_MAN_CLK_ENABLE" width="1" begin="4" end="4" resetval="0x1" description="Controls the clock for the PVDEC core registers [If this bit is set, clock is active and AUTO_CLOCK_ENABLE is ignored]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="3" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC_MAN_CLK_ENABLE" width="1" begin="1" end="1" resetval="0x1" description="Controls the clock for the embedded processor" range="" rwaccess="RW"/>
+    <bitfield id="CR_CORE_MAN_CLK_ENABLE" width="1" begin="0" end="0" resetval="0x1" description="Controls the clock for the PVDEC core N.B." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PVDEC_AUTO_CLK_ENABLE" acronym="DECODER0_CR_PVDEC_AUTO_CLK_ENABLE" offset="0x44" width="32" description="">
+    <bitfield id="CR_PIXEL_PROCESSING_AUTO_CLK_ENABLE" width="8" begin="31" end="24" resetval="0xFF" description="Controls automatic clock gating for each instance of the pixel processing pipe [if MAN_CLK_ENABLE is clear and AUTO_CLOCK_ENABLE is set, clock will stop if pixel processing pipe is idle]." range="" rwaccess="RW"/>
+    <bitfield id="CR_ENTROPY_PIPE_AUTO_CLK_ENABLE" width="8" begin="23" end="16" resetval="0xFF" description="Controls automatic clock gating for each instance of the entropy pipe [if MAN_CLK_ENABLE is clear and AUTO_CLOCK_ENABLE is set, clock will stop if entropy pipe is idle]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="7" begin="15" end="9" resetval="0x7F" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_MEM_AUTO_CLK_ENABLE" width="1" begin="8" end="8" resetval="0x1" description="Controls the clock for the PVDEC MMU module [if MAN_CLK_ENABLE is clear and AUTO_CLOCK_ENABLE is set, clock will stop if MMU is idle]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x7" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_PVDEC_REG_AUTO_CLK_ENABLE" width="1" begin="4" end="4" resetval="0x1" description="Controls the clock for the PVDEC core registers [if MAN_CLK_ENABLE is clear and AUTO_CLOCK_ENABLE is set, clock will stop if PVDEC core register access is idle]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="3" end="0" resetval="0xF" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PVDEC_PROC_MONITOR_ENABLE" acronym="DECODER0_CR_PVDEC_PROC_MONITOR_ENABLE" offset="0x48" width="32" description="">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC_IDLE_DETECT_CTRL" width="1" begin="2" end="2" resetval="0x0" description="Sets the method to detect the processor idle status." range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC_IDLE_ENABLE" width="1" begin="1" end="1" resetval="0x0" description="Enables mtx idle signal for clock gating" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC_MONITOR_ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Allows proper setting of idle signals" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PVDEC_CLK_STATUS" acronym="DECODER0_CR_PVDEC_CLK_STATUS" offset="0x4C" width="32" description="">
+    <bitfield id="CR_PIXEL_PROCESSING_CLK_STATUS" width="8" begin="31" end="24" resetval="0x0" description="Indicates if the clock is enabled to each instance of the pixel processing pipe." range="" rwaccess="R"/>
+    <bitfield id="CR_ENTROPY_PIPE_CLK_STATUS" width="8" begin="23" end="16" resetval="0x0" description="Indicates if the clock is enabled to each instance of the entropy pipe." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="7" begin="15" end="9" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_MEM_CLK_STATUS" width="1" begin="8" end="8" resetval="0x0" description="Indicates if the clock is enabled to MMU" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_PVDEC_REG_CLK_STATUS" width="1" begin="4" end="4" resetval="0x0" description="Indicates if the clock is enabled to PVDEC core registers" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="3" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_PVDEC_STATUS_0" acronym="DECODER0_CR_PVDEC_STATUS_0" offset="0x50" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_PIXEL_PROCESSING_PIPE_IDLE" width="8" begin="15" end="8" resetval="0xFF" description="Indicates the idle signal from pixel_processing_pipe [pixel_idle]." range="" rwaccess="R"/>
+    <bitfield id="CR_ENTROPY_PIPE_IDLE" width="8" begin="7" end="0" resetval="0xFF" description="Indicates the idle signal from entropy_pipe [entropy_idle]." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_PVDEC_HOST_PIPE_SELECT" acronym="DECODER0_CR_PVDEC_HOST_PIPE_SELECT" offset="0x60" width="32" description="">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_PVDEC_HOST_PIPE_SELECT" width="4" begin="3" end="0" resetval="0x1" description="When doing read or write operations from the host to registers of the 'entropy pipe' or 'pixel processing pipe' regions in the first 64kbyte of address space, this register controls which pipeline is accessed." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PVDEC_PROC_PIPE_SELECT" acronym="DECODER0_CR_PVDEC_PROC_PIPE_SELECT" offset="0x64" width="32" description="">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_PVDEC_PROC_PIPE_SELECT" width="4" begin="3" end="0" resetval="0x1" description="When doing read or write operations from the embedded processor to registers of the 'entropy pipe' or 'pixel processing pipe' regions in the first 64kbyte of address space, this register controls which pipeline is accessed." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PVDEC_TIMEOUT_CTRL" acronym="DECODER0_CR_PVDEC_TIMEOUT_CTRL" offset="0x70" width="32" description="Controls the maximum timeout value for Host and Embedded processor accesses to the PVDEC core">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC_READ_TIMEOUT_SELECT" width="2" begin="7" end="6" resetval="0x0" description="Selects the maximum number of cycles a read can remain outstanding for an embedded processor access before a timeout is flagged to indicate that PVDEC has locked up" range="" rwaccess="RW"/>
+    <bitfield id="CR_HOST_READ_TIMEOUT_SELECT" width="2" begin="5" end="4" resetval="0x0" description="Selects the maximum number of cycles a read can remain outstanding for a host access before a timeout is flagged to indicate that PVDEC has locked up" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC_TIMEOUT_SELECT" width="2" begin="3" end="2" resetval="0x0" description="Selects the maximum number of cycles an outstanding embedded processor access can be stalled before a timeout is flagged to indicate that PVDEC has locked up" range="" rwaccess="RW"/>
+    <bitfield id="CR_HOST_TIMEOUT_SELECT" width="2" begin="1" end="0" resetval="0x0" description="Selects the maximum number of cycles an outstanding host access can be stalled before a timeout is flagged to indicate that PVDEC has locked up" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_SYS_PVDEC_WDT_CONTROL" acronym="DECODER0_CR_SYS_PVDEC_WDT_CONTROL" offset="0x80" width="32" description="">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SYS_WDT_ENABLE" width="1" begin="16" end="16" resetval="0x0" description="Watch Dog Timer enable" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="13" begin="15" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SYS_WDT_CLKDIV_SELECT" width="3" begin="2" end="0" resetval="0x0" description="Watch Dog Timer clock select" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_SYS_PVDEC_WDTIMER" acronym="DECODER0_CR_SYS_PVDEC_WDTIMER" offset="0x84" width="32" description="">
+    <bitfield id="SYS_WDT_COUNTER" width="32" begin="31" end="0" resetval="0x0" description="Watch Dog Timer counter value." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PVDEC_REQ_PRIORITY" acronym="DECODER0_CR_PVDEC_REQ_PRIORITY" offset="0x90" width="32" description="This register controls the generation of a memory priority signal which could be used to dynamically influence the proportion of bandwidth made available to the decoder.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_REQ_PRIORITY_DECR" width="12" begin="27" end="16" resetval="0x258" description="Programmable decrement value for performance counter in range [0,4095]" range="" rwaccess="RW"/>
+    <bitfield id="CR_REQ_PRIORITY_THRESH" width="16" begin="15" end="0" resetval="0xFFFF" description="Programmable threshold with step size 16 giving range [0,1048560]" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PROC_DEBUG" acronym="DECODER0_CR_PROC_DEBUG" offset="0x100" width="32" description="">
+    <bitfield id="CR_MTX_RAM_SIZE" width="24" begin="31" end="8" resetval="0x80" description="If MTX_RAM_NEW_REPRESENTAION is 1, {" range="" rwaccess="RW"/>
+    <bitfield id="CR_MTX_RAM_NEW_REPRESENTAION" width="1" begin="7" end="7" resetval="0x1" description="Determines whether the MTX RAM size is represented in the new way, as explained in CR_MTX_RAM_SIZE{" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="6" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC_DBG_GPIO_OUT" width="2" begin="4" end="3" resetval="0x0" description="Data provided by dbg_gpio_out by the embedded processor." range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC_DBG_IS_SLAVE" width="1" begin="2" end="2" resetval="0x1" description="Determines whether the JTAG port of the embedded processor is to be master or slave" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC_DBG_GPIO_IN" width="2" begin="1" end="0" resetval="0x0" description="Data for dbg_gpio_in for the embedded processor" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PROC_DMAC_CONTROL" acronym="DECODER0_CR_PROC_DMAC_CONTROL" offset="0x104" width="32" description="">
+    <bitfield id="CR_BOOT_ON_DMA_CH0" width="1" begin="31" end="31" resetval="0x0" description="Enables MTX to boot upon DMA Ch0 transfer complete" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="30" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_COPRO_ENTROPY_PIPE" width="1" begin="20" end="20" resetval="0x0" description="If the Embedded processor co-processor port is used to access the shift register, if this field is low a Pixel Processing pipe shift register is accessed." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="19" end="19" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_COPRO_PIPE_SELECT" width="3" begin="18" end="16" resetval="0x0" description="If the Embedded processor co-processor port is used to access the shift register, this register must specify the index of the Pixel Processing pipe or Entropy pipe which contains the shift register to be accessed." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PROC_DEBUG_FIFO" acronym="DECODER0_CR_PROC_DEBUG_FIFO" offset="0x108" width="32" description="">
+    <bitfield id="CR_PROC_DEBUG_FIFO" width="32" begin="31" end="0" resetval="0xFFFFFFFF" description="Embedded processor may write / read to this register location that is connected to the internal FIFO defined in the Debug FIFO Control register" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PROC_DEBUG_FIFO_CTRL_0" acronym="DECODER0_CR_PROC_DEBUG_FIFO_CTRL_0" offset="0x10C" width="32" description="">
+    <bitfield id="CR_PROC_DEBUG_FIFO_COUNT" width="16" begin="31" end="16" resetval="0x0" description="Number of valid DWORDS" range="" rwaccess="R"/>
+    <bitfield id="CR_PROC_DEBUG_FIFO_SIZE" width="16" begin="15" end="0" resetval="0x0" description="Depth of the Debug FIFO in DWORDS" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_PROC_DEBUG_FIFO_CTRL_1" acronym="DECODER0_CR_PROC_DEBUG_FIFO_CTRL_1" offset="0x110" width="32" description="">
+    <bitfield id="RESERVED" width="23" begin="31" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC_DEBUG_FIFO_FULL_CTRL" width="1" begin="8" end="8" resetval="0x0" description="Controls the write accesses when the Debug FIFO is full" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC_DEBUG_FIFO_FLUSH" width="1" begin="4" end="4" resetval="0x0" description="Flush command for the Debug FIFO [write only]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="3" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC_DEBUG_FIFO_FULL" width="1" begin="1" end="1" resetval="0x0" description="Full flag of the Debug FIFO [read only]" range="" rwaccess="RW"/>
+    <bitfield id="CR_PROC_DEBUG_FIFO_VALID" width="1" begin="0" end="0" resetval="0x0" description="Valid flag of the Debug FIFO [read only]" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_FBC_CONTROL" acronym="DECODER0_CR_FBC_CONTROL" offset="0x180" width="32" description="">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_FBC_VDMC_AUTO_INVALIDATE" width="1" begin="2" end="2" resetval="0x0" description="Controls hardware invalidation of FBDC header cache" range="" rwaccess="RW"/>
+    <bitfield id="CR_FBC_WRITE_ROUNDUP" width="1" begin="1" end="1" resetval="0x0" description="Controls write bursts for compressed data output by FBC module" range="" rwaccess="RW"/>
+    <bitfield id="CR_FBC_BYPASS" width="1" begin="0" end="0" resetval="0x0" description="Even if commnand bus indicates frame buffer compression should be used, this field can be used to bypass the actual compression logic [but the frame store format does change to a tiled 16x4 format]" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_FBC_CONTEXT" acronym="DECODER0_CR_FBC_CONTEXT" offset="0x184" width="32" description="">
+    <bitfield id="CR_FBC_PIPE_CONTEXT" width="4" begin="31" end="28" resetval="0x0" description="In the case of Frame Buffer Compression being used on a multi-pipe HEVC decode, for each pixel pipe in the chain which is not the first, this field should be set to the index of the first pixel pipe in the chain [i.e." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="28" begin="27" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_FBC_ICTRL_FBDC" acronym="DECODER0_CR_FBC_ICTRL_FBDC" offset="0x188" width="32" description="">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_FBC_ICTRL_INVALIDATE_PENDING" width="1" begin="16" end="16" resetval="0x0" description="Writing 1 to this bit triggers invalidation of the FBDC Header Cache, but only entries for which the corresponding context bit is set will be invalidated." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="15" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_FBC_ICTRL_INVALIDATE_CONTEXT" width="1" begin="7" end="7" resetval="0x0" description="Each INVALIDATE_CONTEXT bit corresponds to requests from a specific pipe [bit 0 for pipe 1, bit 1 for pipe 2, etc]." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="7" begin="6" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PVDEC_INTERNAL" acronym="DECODER0_CR_PVDEC_INTERNAL" offset="0x204" width="32" description="Revision control register used internally within Imagination to record intermediate versions between release versions">
+    <bitfield id="CR_PVDEC_INTERNAL_CONFIG" width="8" begin="31" end="24" resetval="0x0" description="Revision control register used internally within Imagination to record different hardware configurations for testing purposes" range="" rwaccess="R"/>
+    <bitfield id="CR_PVDEC_INTERNAL" width="24" begin="23" end="0" resetval="0x0" description="Revision control register used internally within Imagination to record intermediate versions between release versions" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_PVDEC_RTM_STATUS" acronym="DECODER0_CR_PVDEC_RTM_STATUS" offset="0x208" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_RTM_B_BUS" width="8" begin="15" end="8" resetval="0x0" description="[Read only field] Read registered version of value output on RTM bus b" range="" rwaccess="R"/>
+    <bitfield id="CR_RTM_A_BUS" width="8" begin="7" end="0" resetval="0x0" description="[Read only field] Read registered version of value output on RTM bus a" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_PVDEC_RTM_SELECT" acronym="DECODER0_CR_PVDEC_RTM_SELECT" offset="0x20C" width="32" description="">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_RTM_PIPE_SELECT_B" width="4" begin="19" end="16" resetval="0x0" description="Each pipe will generate it's own RTM bus, and this field selects the pipe to output on the common RTM bus B" range="" rwaccess="RW"/>
+    <bitfield id="CR_RTM_PIPE_SELECT_A" width="4" begin="15" end="12" resetval="0x0" description="Each pipe will generate it's own RTM bus, and this field selects the pipe to output on the common RTM bus A" range="" rwaccess="RW"/>
+    <bitfield id="CR_RTM_SELECT_B_MODULE" width="3" begin="11" end="9" resetval="0x0" description="Selects the module driving the upper 8 bits of the RTM bus" range="" rwaccess="RW"/>
+    <bitfield id="CR_RTM_SELECT_A_MODULE" width="3" begin="8" end="6" resetval="0x0" description="Selects the module driving the lower 8 bits of the RTM bus" range="" rwaccess="RW"/>
+    <bitfield id="CR_RTM_SELECT_B" width="3" begin="5" end="3" resetval="0x0" description="Selects the output for the upper 8 bits of the RTM for that module" range="" rwaccess="RW"/>
+    <bitfield id="CR_RTM_SELECT_A" width="3" begin="2" end="0" resetval="0x0" description="Selects the output for the bottom 8 bits of the RTM for that module" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_PVDEC_CORE_ID" acronym="DECODER0_CR_PVDEC_CORE_ID" offset="0x230" width="32" description="">
+    <bitfield id="CR_GROUP_ID" width="8" begin="31" end="24" resetval="0x3" description="This identifies the core as part of an IMG IP family group." range="" rwaccess="R"/>
+    <bitfield id="CR_CORE_ID" width="8" begin="23" end="16" resetval="0x3" description="This identifies the member of the IP group." range="" rwaccess="R"/>
+    <bitfield id="CR_PVDEC_CORE_CONFIG" width="16" begin="15" end="0" resetval="0x80" description="IMG Core Configuration:-" range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_PVDEC_CORE_REV" acronym="DECODER0_CR_PVDEC_CORE_REV" offset="0x240" width="32" description="">
+    <bitfield id="CR_PVDEC_DESIGNER" width="8" begin="31" end="24" resetval="0x0" description="Company ID [Allocated by IMG]" range="" rwaccess="R"/>
+    <bitfield id="CR_PVDEC_MAJOR_REV" width="8" begin="23" end="16" resetval="0x8" description="IMG Family Major Revision." range="" rwaccess="R"/>
+    <bitfield id="CR_PVDEC_MINOR_REV" width="8" begin="15" end="8" resetval="0x0" description="IMG Core Minor Revision." range="" rwaccess="R"/>
+    <bitfield id="CR_PVDEC_MAINT_REV" width="8" begin="7" end="0" resetval="0x0" description="IMG Maintenance Revision." range="" rwaccess="R"/>
+  </register>
+  <register id="DECODER0_CR_PVDEC_RSVD0" acronym="DECODER0_CR_PVDEC_RSVD0" offset="0x270" width="32" description="">
+    <bitfield id="CR_RSVD0" width="32" begin="31" end="0" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+  </register>
+</module>

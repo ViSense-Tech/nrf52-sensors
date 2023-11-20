@@ -1,0 +1,178 @@
+<module name="DECODER0_MSVDX_VEC_VC1" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="DECODER0_CR_VEC_VC1_FE_SPS0" acronym="DECODER0_CR_VEC_VC1_FE_SPS0" offset="0x0" width="32" description="">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_SYNCMARKER" width="1" begin="2" end="2" resetval="0x0" description="Syncmarker Flag" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_VSTRANSFORM" width="1" begin="1" end="1" resetval="0x0" description="Variable Sized Transform Flag" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_INTERLACE" width="1" begin="0" end="0" resetval="0x0" description="Interlace Content [INTERLACE] [1 bit]" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VC1_FE_PPS0" acronym="DECODER0_CR_VEC_VC1_FE_PPS0" offset="0x4" width="32" description="">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_FIRST_MB_IN_SLICE_Y_EXT" width="1" begin="28" end="28" resetval="0x0" description="Extension to VC1_FE_FIRST_MB_IN_SLICE_Y to allow for 4k x 4k resolution" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_PIC_HEIGHT_IN_MBS_EXT" width="1" begin="27" end="27" resetval="0x0" description="Extension to VC1_FE_PIC_HEIGHT_IN_MBS_LESS1 to allow for 4k x 4k resolution" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_PIC_WIDTH_IN_MBS_LESS1" width="8" begin="26" end="19" resetval="0x0" description="of MBs less 1 across the width of the picture" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_PIC_HEIGHT_IN_MBS_LESS1" width="7" begin="18" end="12" resetval="0x0" description="Number of MBs less 1 along the height of the picture [field or frame]" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_FIRST_MB_IN_SLICE_Y" width="7" begin="11" end="5" resetval="0x0" description="Slice Address" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_PTYPE" width="3" begin="4" end="2" resetval="0x0" description="Picture Type [PTYPE] [Variable size]" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_FCM" width="2" begin="1" end="0" resetval="0x0" description="Frame Coding Mode" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VC1_FE_PPS1" acronym="DECODER0_CR_VEC_VC1_FE_PPS1" offset="0x8" width="32" description="">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_BP_FORMAT" width="1" begin="29" end="29" resetval="0x0" description="BP format in memory" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_BP_PRESENT" width="3" begin="28" end="26" resetval="0x0" description="Vector that indicates whether a given bitplane is present in the picture" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_RAWCODINGFLAG" width="7" begin="25" end="19" resetval="0x0" description="Vector that indicates whether a given bitplane is coded in raw mode" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_MVMODE" width="3" begin="18" end="16" resetval="0x0" description="Motion Vector Mode" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="15" end="15" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_MVMODE2" width="2" begin="14" end="13" resetval="0x0" description="Motion Vector Mode 2" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_TTMBF" width="1" begin="12" end="12" resetval="0x0" description="Macroblock-level Transform Type Flag" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_TTFRM" width="2" begin="11" end="10" resetval="0x0" description="Frame-level Transform Type" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_BFRACTION" width="5" begin="9" end="5" resetval="0x0" description="Picture Fraction" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_CONDOVER" width="2" begin="3" end="2" resetval="0x0" description="Conditional Overlap Flag" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_EXTEND_X" width="1" begin="1" end="1" resetval="0x0" description="Extended Horizontal Differential Motion Vector Range Flag" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_EXTEND_Y" width="1" begin="0" end="0" resetval="0x0" description="Extended Vertical Differential Motion Vector Range Flag" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VC1_FE_PPS2" acronym="DECODER0_CR_VEC_VC1_FE_PPS2" offset="0xC" width="32" description="">
+    <bitfield id="RESERVED" width="6" begin="31" end="26" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_DQXBEDGE" width="2" begin="25" end="24" resetval="0x0" description="DQSBEDGE or DQDBEDGE, only one is present at any given instance" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_DQUANT" width="2" begin="23" end="22" resetval="0x0" description="Macroblock Quantization Flag [DQUANT]" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_VOPDQUANT_PRESENT" width="1" begin="21" end="21" resetval="0x0" description="Indicates whether MB Quantisation is used" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_PQUANT" width="5" begin="20" end="16" resetval="0x0" description="Picture Quantizer Scale [PQUANT]" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_HALFQP" width="1" begin="15" end="15" resetval="0x0" description="Half QP Step" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_DQUANTFRM" width="1" begin="14" end="14" resetval="0x0" description="Differential Quantizer Frame" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_DQUANT_INFRAME" width="1" begin="13" end="13" resetval="0x0" description="Indicates if quantizer can vary between the macroblocks of a frame." range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_ALTPQUANT" width="5" begin="12" end="8" resetval="0x0" description="Alternative Picture quantizer scale, defined by VOPDQUANT parameters, shall be applied to specific areas of the picture [in the same manner as PQUANT] when DQUANTFRM is set" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_DQPROFILE" width="2" begin="7" end="6" resetval="0x0" description="Differential Quantizer Profile [DQPROFILE] [2 bits]" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_DQBILEVEL" width="1" begin="5" end="5" resetval="0x0" description="Differential Quantizer Binary Level [DQBILEVEL] [1 bit]" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_PQINDEX_GT8" width="1" begin="4" end="4" resetval="0x0" description="Flag to represent whether PQINDEX [described below] is greater than 8" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_TRANSACFRM" width="2" begin="3" end="2" resetval="0x0" description="Frame-level Transform AC Coding Set Index" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_TRANSACFRM2" width="2" begin="1" end="0" resetval="0x0" description="Frame-level Transform AC Table-2 Index" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VC1_FE_MVD_LITE0" acronym="DECODER0_CR_VEC_VC1_FE_MVD_LITE0" offset="0x10" width="32" description="">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_MVD_LITE_ENABLE" width="1" begin="30" end="30" resetval="0x0" description="Flag to indicate whether MVD Lite is to be enabled" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_PULLBACK_X" width="14" begin="29" end="16" resetval="0x0" description="X value for Pullback" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_PULLBACK_Y" width="14" begin="13" end="0" resetval="0x0" description="Y value for Pullback" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VC1_FE_MVD_LITE1" acronym="DECODER0_CR_VEC_VC1_FE_MVD_LITE1" offset="0x14" width="32" description="">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_TFF" width="1" begin="30" end="30" resetval="0x0" description="Top field first indicator" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_SCAN_INDEX" width="3" begin="29" end="27" resetval="0x0" description="Indicates picture type and profile for Inverse Scan to select the set of scan tables to use" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_REFDIST" width="5" begin="26" end="22" resetval="0x0" description="P Reference Distance [REFDIST]" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_NUMREF" width="1" begin="21" end="21" resetval="0x0" description="Number of Reference Pictures [NUMREF] [1 bit]" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_REFFIELD" width="1" begin="20" end="20" resetval="0x0" description="Reference Field Picture Indicator [REFFIELD] [1 bit]" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_MVRANGE" width="2" begin="19" end="18" resetval="0x0" description="Extended MV Range Flag [MVRANGE] [Variable size]" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_HALFPEL_FLAG" width="1" begin="17" end="17" resetval="0x0" description="Indicates the precision used for the MVs in the picture" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_BOTTOM_FIELD_FLAG" width="1" begin="16" end="16" resetval="0x0" description="Signals bottom field of current picture" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_ADVANCED_PROFILE" width="1" begin="15" end="15" resetval="0x0" description="Advanced profile flag - needed to check whether end of data implies that there might be extra skipped macroblocks to generate" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="15" begin="14" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VC1_FE_BITPLANES_BASE_ADDR0" acronym="DECODER0_CR_VEC_VC1_FE_BITPLANES_BASE_ADDR0" offset="0x18" width="32" description="">
+    <bitfield id="VC1_FE_BITPLANES_BASE_ADDR0" width="20" begin="31" end="12" resetval="0x0" description="Base address in the System Memory of Bitplane 0." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VC1_FE_BITPLANES_BASE_ADDR1" acronym="DECODER0_CR_VEC_VC1_FE_BITPLANES_BASE_ADDR1" offset="0x1C" width="32" description="">
+    <bitfield id="VC1_FE_BITPLANES_BASE_ADDR1" width="20" begin="31" end="12" resetval="0x0" description="Base address in the System RAM of the Bitplane 1." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VC1_FE_BITPLANES_BASE_ADDR2" acronym="DECODER0_CR_VEC_VC1_FE_BITPLANES_BASE_ADDR2" offset="0x20" width="32" description="">
+    <bitfield id="VC1_FE_BITPLANES_BASE_ADDR2" width="20" begin="31" end="12" resetval="0x0" description="Base address in the System RAM of the Bitplane 2." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VC1_FE_PPS3" acronym="DECODER0_CR_VEC_VC1_FE_PPS3" offset="0x24" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_PARSER_VLR_BASE_ADDR" width="10" begin="27" end="18" resetval="0x0" description="Base address pointer within VEC Local RAM used by VC-1 or MVD-lite or VC-1 bitplane parser." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="17" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC1_FE_PIC_SIZE_IN_MBS_LESS1" width="16" begin="15" end="0" resetval="0x0" description="Size of picture in MBs less 1." range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VC1_BE_SPS0" acronym="DECODER0_CR_VEC_VC1_BE_SPS0" offset="0x50" width="32" description="">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_EXTENDED_DMV" width="1" begin="3" end="3" resetval="0x0" description="Extended Differential Motion Vector Range Flag" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_EXTENDED_MV" width="1" begin="2" end="2" resetval="0x0" description="Extended Motion Vector Flag" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_FASTUVMC" width="1" begin="1" end="1" resetval="0x0" description="Fast UV Motion Compensation Flag" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_INTERLACE" width="1" begin="0" end="0" resetval="0x0" description="Interlace Content" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VC1_BE_SPS1" acronym="DECODER0_CR_VEC_VC1_BE_SPS1" offset="0x54" width="32" description="">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_PIC_HEIGHT_IN_MBS_LESS1" width="8" begin="7" end="0" resetval="0x0" description="of MBs less 1 along the height of the picture [field or frame]" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VC1_BE_SPS2" acronym="DECODER0_CR_VEC_VC1_BE_SPS2" offset="0x58" width="32" description="">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_PIC_WIDTH_IN_MBS_LESS1" width="8" begin="7" end="0" resetval="0x0" description="of MBs less 1 across the width of the picture" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VC1_BE_PPS2" acronym="DECODER0_CR_VEC_VC1_BE_PPS2" offset="0x60" width="32" description="">
+    <bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_COLLOCATED_SKIPPED" width="1" begin="6" end="6" resetval="0x0" description="Flag to indicate whether to use 0 collocated MVs" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_FCM_REF2" width="2" begin="5" end="4" resetval="0x0" description="Frame Coding Mode for 3rd most recent reference picture" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_FCM_REF1" width="2" begin="3" end="2" resetval="0x0" description="Frame Coding Mode for 2nd most recent reference picture" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_FCM_REF0" width="2" begin="1" end="0" resetval="0x0" description="Frame Coding Mode for most recent reference picture" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VC1_BE_PPS0" acronym="DECODER0_CR_VEC_VC1_BE_PPS0" offset="0x64" width="32" description="">
+    <bitfield id="RESERVED" width="17" begin="31" end="15" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_IQ_OVERLAP" width="1" begin="14" end="14" resetval="0x0" description="If [picture_is_B OR CONDITIONAL_OVERLAP == 0 ] return 0" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_UNIFORM_QUANTIZER" width="1" begin="13" end="13" resetval="0x0" description="Indicates whether a uniform quantizer is used to inverse quantize block pixel data" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_TFF_BWD" width="1" begin="12" end="12" resetval="0x0" description="Indicates wether the top field was encoded first in the bitstream for the backward reference frame" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_TFF_FWD" width="1" begin="11" end="11" resetval="0x0" description="Indicates wether the top field was encoded first in the bitstream for the forward reference frame" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_TFF" width="1" begin="10" end="10" resetval="0x0" description="Top Field First" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_SECOND_FIELD" width="1" begin="9" end="9" resetval="0x0" description="Indicates whether the current field is the first or second to be decoded" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_HALFQP" width="1" begin="8" end="8" resetval="0x0" description="Half QP Step" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_BFRACTION" width="5" begin="7" end="3" resetval="0x0" description="B Picture Fraction" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_FCM" width="2" begin="2" end="1" resetval="0x0" description="Frame Coding Mode" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_RNDCTRL" width="1" begin="0" end="0" resetval="0x0" description="Rounding Control Bit" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VC1_BE_PPS1" acronym="DECODER0_CR_VEC_VC1_BE_PPS1" offset="0x68" width="32" description="">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_EXTEND_Y" width="1" begin="16" end="16" resetval="0x0" description="Extended Vertical Differential Motion Vector Range Flag" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_EXTEND_X" width="1" begin="15" end="15" resetval="0x0" description="Extended Horizontal Differential Motion Vector Range" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_QUANTIZER" width="2" begin="14" end="13" resetval="0x0" description="Quantizer specifier at the picture layer" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_PQUANT" width="5" begin="12" end="8" resetval="0x0" description="Picture Quantizer Scale [PQUANT]" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_MVMODE" width="3" begin="7" end="5" resetval="0x0" description="Motion Vector Mode" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_MVMODE2" width="2" begin="4" end="3" resetval="0x0" description="Motion Vector Mode 2" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_PTYPE" width="3" begin="2" end="0" resetval="0x0" description="Picture Type [PTYPE] [Variable size]" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VC1_BE_MVD0" acronym="DECODER0_CR_VEC_VC1_BE_MVD0" offset="0x6C" width="32" description="">
+    <bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_BRPD" width="5" begin="12" end="8" resetval="0x0" description="Backward Reference Picture Distance" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_FRPD" width="5" begin="4" end="0" resetval="0x0" description="Forward Reference Picture Distance" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VC1_BE_MVD1" acronym="DECODER0_CR_VEC_VC1_BE_MVD1" offset="0x70" width="32" description="">
+    <bitfield id="RESERVED" width="21" begin="31" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_SCALEFACTOR" width="11" begin="10" end="0" resetval="0x0" description="SCALEFACTOR used for direct mode temporal scaling of motion vectors" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VC1_BE_MVD2" acronym="DECODER0_CR_VEC_VC1_BE_MVD2" offset="0x74" width="32" description="">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_PULLBACK_X" width="14" begin="13" end="0" resetval="0x0" description="MV Pullback parameter for X dimension" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VC1_BE_MVD3" acronym="DECODER0_CR_VEC_VC1_BE_MVD3" offset="0x78" width="32" description="">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_PULLBACK_Y" width="14" begin="13" end="0" resetval="0x0" description="MV Pullback parameter for Y dimension" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VC1_BE_MVD4" acronym="DECODER0_CR_VEC_VC1_BE_MVD4" offset="0x7C" width="32" description="">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_FIRST_MB_IN_SLICE_Y" width="8" begin="7" end="0" resetval="0x0" description="Slice Address" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VC1_BE_MVD5" acronym="DECODER0_CR_VEC_VC1_BE_MVD5" offset="0x80" width="32" description="">
+    <bitfield id="RESERVED" width="17" begin="31" end="15" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_SCAN_INDEX" width="3" begin="14" end="12" resetval="0x0" description="Indicates picture type and profile for Inverse Scan to select the set of scan tables to use" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_REFDIST" width="5" begin="11" end="7" resetval="0x0" description="P Reference Distance" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_NUMREF" width="1" begin="6" end="6" resetval="0x0" description="Number of Reference Pictures" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_REFFIELD" width="1" begin="5" end="5" resetval="0x0" description="Reference Field Picture Indicator" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_MVRANGE" width="2" begin="4" end="3" resetval="0x0" description="Extended MV Range Flag" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_HALFPEL_FLAG" width="1" begin="2" end="2" resetval="0x0" description="Indicates the precision used for the MVs in the picture" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_BOTTOM_FIELD_FLAG" width="1" begin="1" end="1" resetval="0x0" description="Signals bottom field of current picture" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BE_ADVANCED_PROFILE" width="1" begin="0" end="0" resetval="0x0" description="Advanced profile flag" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VC1_BE_PARAM_BASE_ADDR" acronym="DECODER0_CR_VEC_VC1_BE_PARAM_BASE_ADDR" offset="0xEC" width="32" description="">
+    <bitfield id="VC1_BE_PARAM_BASE_ADDRESS" width="20" begin="31" end="12" resetval="0x0" description="address for the memory to store MB parameters" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VC1_BE_COLPARAM_BASE_ADDR" acronym="DECODER0_CR_VEC_VC1_BE_COLPARAM_BASE_ADDR" offset="0xF8" width="32" description="">
+    <bitfield id="VC1_BE_COLPARAM_BASE_ADDRESS" width="20" begin="31" end="12" resetval="0x0" description="address for the memory to access co-located MB parameters" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DECODER0_CR_VEC_VC1_BP_READ" acronym="DECODER0_CR_VEC_VC1_BP_READ" offset="0x100" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="VC1_BP_READ" width="16" begin="15" end="0" resetval="0x0" description="This is the read only register for transfering bitplane data from the CABAC RAM to the host memory." range="" rwaccess="RW"/>
+  </register>
+</module>

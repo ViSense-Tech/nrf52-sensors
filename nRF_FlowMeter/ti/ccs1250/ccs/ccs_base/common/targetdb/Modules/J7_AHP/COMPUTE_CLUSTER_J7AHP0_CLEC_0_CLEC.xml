@@ -1,0 +1,37 @@
+<module name="COMPUTE_CLUSTER_J7AHP0_CLEC_0_CLEC" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="CLEC_REGS_PID" acronym="CLEC_REGS_PID" offset="0x0" width="32" description="">
+		<bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x1" description="Scheme" range="31 - 30" rwaccess="R"/> 
+		<bitfield id="BU" width="2" begin="29" end="28" resetval="0x2" description="Scheme" range="29 - 28" rwaccess="R"/> 
+		<bitfield id="MODULE_ID" width="12" begin="27" end="16" resetval="0x16" description="Module ID" range="27 - 16" rwaccess="R"/> 
+		<bitfield id="REVRTL" width="5" begin="15" end="11" resetval="0x0" description="RTL version" range="15 - 11" rwaccess="R"/> 
+		<bitfield id="REVMAX" width="3" begin="10" end="8" resetval="0x1" description="Major version" range="10 - 8" rwaccess="R"/> 
+		<bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom version" range="7 - 6" rwaccess="R"/> 
+		<bitfield id="REVMIN" width="6" begin="5" end="0" resetval="0x0" description="Minor version" range="5 - 0" rwaccess="R"/>
+	</register>
+	<register id="CLEC_REGS_GELRS" acronym="CLEC_REGS_GELRS" offset="0xC000" width="32" description="">
+		<bitfield id="LOCK" width="1" begin="0" end="0" resetval="0x0" description="GELRS.LOCK" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CLEC_REGS_GELRNS" acronym="CLEC_REGS_GELRNS" offset="0xD000" width="32" description="">
+		<bitfield id="LOCK" width="1" begin="0" end="0" resetval="0x0" description="GELRNS.LOCK" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="CLEC_REGS_MRR" acronym="CLEC_REGS_MRR" offset="0x1000" width="32" description="">
+		<bitfield id="S" width="1" begin="31" end="31" resetval="0x1" description="MRR.S" range="31" rwaccess="R/W"/> 
+		<bitfield id="ESE" width="1" begin="30" end="30" resetval="0x0" description="MRR.ESE" range="30" rwaccess="R/W"/> 
+		<bitfield id="AC_DRU" width="1" begin="22" end="22" resetval="0x0" description="MRR.AC_DRU" range="22" rwaccess="R/W"/> 
+		<bitfield id="RTMAP" width="6" begin="21" end="16" resetval="0x1" description="MRR.EXT_EVTNUM" range="21 - 16" rwaccess="R/W"/> 
+		<bitfield id="EXT_EVTNUM" width="6" begin="13" end="8" resetval="0x0" description="MRR.EXT_EVTNUM" range="13 - 8" rwaccess="R/W"/> 
+		<bitfield id="C7X_EVTNUM" width="6" begin="5" end="0" resetval="0x0" description="MRR.C7x_EVTNUM" range="5 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="CLEC_REGS_ESR" acronym="CLEC_REGS_ESR" offset="0x3000" width="32" description="">
+		
+	</register>
+	<register id="CLEC_REGS_ECR" acronym="CLEC_REGS_ECR" offset="0x4000" width="32" description="">
+		
+	</register>
+	<register id="CLEC_REGS_EFR" acronym="CLEC_REGS_EFR" offset="0x0" width="32" description="">
+		<bitfield id="EVNTFR" width="32" begin="31" end="0" resetval="0x0" description="event flags" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="CLEC_REGS_EDR" acronym="CLEC_REGS_EDR" offset="0x0" width="32" description="">
+		<bitfield id="EVNTFR" width="32" begin="31" end="0" resetval="0x0" description="dropped event flags" range="31 - 0" rwaccess="R"/>
+	</register>
+</module>

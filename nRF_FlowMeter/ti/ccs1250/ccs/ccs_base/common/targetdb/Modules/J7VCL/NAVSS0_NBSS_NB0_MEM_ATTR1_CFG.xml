@@ -1,0 +1,9 @@
+<module name="NAVSS0_NBSS_NB0_MEM_ATTR1_CFG" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="NB_MEMATTR64K_y" acronym="NB_MEMATTR64K_y" offset="0x0" width="32" description="The Memory Attribute register contains the attributes for all the 64K mapped regions. Offset = 0h + (y * 4h); where y = 0h to 1FFFh">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="MEMTYPE" width="2" begin="7" end="6" resetval="0x1" description="This defines the type for the memory. 0h = Device 1h = Writeback 2h = Writethrough 3h = Non-cacheable" range="" rwaccess="RW"/>
+    <bitfield id="SDOMAIN" width="2" begin="5" end="4" resetval="0x1" description="This defines the shareability domain of the memory. 0h = Non-shared 1h = Inner shared 2h = Outer shared 3h = System shared" range="" rwaccess="RW"/>
+    <bitfield id="OUTER" width="2" begin="3" end="2" resetval="0x0" description="This defines the outer allocatability of the memory. 0h = Non-allocatable 1h = Writes allocate, reads do not 2h = Reads allocate, writes do not 3h = Reads and writes allocate" range="" rwaccess="RW"/>
+    <bitfield id="INNER" width="2" begin="1" end="0" resetval="0x0" description="This defines the inner allocatability of the memory. 0h = Non-allocatable 1h = Writes allocate, reads do not 2h = Reads allocate, writes do not 3h = Reads and writes allocate" range="" rwaccess="RW"/>
+  </register>
+</module>

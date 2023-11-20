@@ -1,0 +1,99 @@
+<module name="DSS0_OVR1" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="DSS0_OVR_CONFIG" acronym="DSS0_OVR_CONFIG" offset="0x0" width="32" description="The control register configures the Display Controller module for the VP output. Shadow register">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="13" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="TCKLCDSELECTION" width="1" begin="11" end="11" resetval="0x0" description="Transparency Color Key Selection" range="" rwaccess="RW"/>
+    <bitfield id="TCKLCDENABLE" width="1" begin="10" end="10" resetval="0x0" description="Transparency Color Key Enable" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="9" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="COLORBAREN" width="1" begin="1" end="1" resetval="0x0" description="Enable the Color-Bar" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="DSS0_OVR_VIRTUALVP" acronym="DSS0_OVR_VIRTUALVP" offset="0x4" width="32" description="Configures the new VIRTUAL VP operation. Shadow register">
+    <bitfield id="ENABLE" width="1" begin="31" end="31" resetval="0x0" description="Enable the Virtual VP Operation" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="30" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LPP" width="14" begin="29" end="16" resetval="0x0" description="Lines per panel Encoded value [from 1 to 16384] to specify the number of lines on the Virtual VP [program to value minus 1]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PPL" width="14" begin="13" end="0" resetval="0x0" description="Pixels per line Encoded value [from 1 to 16384] to specify the number of pixels contains within each line on the Virtual VP [program to value minus 1]" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_OVR_DEFAULT_COLOR" acronym="DSS0_OVR_DEFAULT_COLOR" offset="0x8" width="32" description="The control register configures the default solid background color LSB[31:0]. Shadow register">
+    <bitfield id="DEFAULTCOLOR" width="32" begin="31" end="0" resetval="0x0" description="32-bit LSB of ARGB background color" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_OVR_DEFAULT_COLOR2" acronym="DSS0_OVR_DEFAULT_COLOR2" offset="0xC" width="32" description="The control register configures the default solid background color MSB[47:32]. Shadow register">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DEFAULTCOLOR" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_OVR_TRANS_COLOR_MAX" acronym="DSS0_OVR_TRANS_COLOR_MAX" offset="0x10" width="32" description="The register sets the max transparency color value for the overlays. Shadow register">
+    <bitfield id="TRANSCOLORKEY" width="32" begin="31" end="0" resetval="0x0" description="LSB[31:0]." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_OVR_TRANS_COLOR_MAX2" acronym="DSS0_OVR_TRANS_COLOR_MAX2" offset="0x14" width="32" description="The register sets the max transparency color value for the overlays. Shadow register">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="TRANSCOLORKEY" width="4" begin="3" end="0" resetval="0x0" description="MSB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_OVR_TRANS_COLOR_MIN" acronym="DSS0_OVR_TRANS_COLOR_MIN" offset="0x18" width="32" description="The register sets the min transparency color value for the overlays. Shadow register">
+    <bitfield id="TRANSCOLORKEY" width="32" begin="31" end="0" resetval="0x0" description="LSB[31:0]." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_OVR_TRANS_COLOR_MIN2" acronym="DSS0_OVR_TRANS_COLOR_MIN2" offset="0x1C" width="32" description="The register sets the min transparency color value for the overlays. Shadow register">
+    <bitfield id="RESERVED" width="28" begin="31" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="TRANSCOLORKEY" width="4" begin="3" end="0" resetval="0x0" description="MSB" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_OVR_ATTRIBUTES_0" acronym="DSS0_OVR_ATTRIBUTES_0" offset="0x20" width="32" description="The register configures the attributes of layer-0, ZORDER= 0, of the Overlay manager. Shadow register">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHANNELIN" width="4" begin="4" end="1" resetval="0x0" description="Input channel connected to Layer" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Layer Enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_OVR_ATTRIBUTES_1" acronym="DSS0_OVR_ATTRIBUTES_1" offset="0x24" width="32" description="The register configures the attributes of layer-1, ZORDER= 1, of the Overlay manager. Shadow register">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHANNELIN" width="4" begin="4" end="1" resetval="0x0" description="Input channel connected to Layer" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Layer Enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_OVR_ATTRIBUTES_2" acronym="DSS0_OVR_ATTRIBUTES_2" offset="0x28" width="32" description="The register configures the attributes of layer-2, ZORDER= 2, of the Overlay manager. Shadow register">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHANNELIN" width="4" begin="4" end="1" resetval="0x0" description="Input channel connected to Layer" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Layer Enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_OVR_ATTRIBUTES_3" acronym="DSS0_OVR_ATTRIBUTES_3" offset="0x2C" width="32" description="The register configures the attributes of layer-3, ZORDER= 3, of the Overlay manager. Shadow register">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHANNELIN" width="4" begin="4" end="1" resetval="0x0" description="Input channel connected to Layer" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Layer Enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_OVR_ATTRIBUTES_4" acronym="DSS0_OVR_ATTRIBUTES_4" offset="0x30" width="32" description="The register configures the attributes of layer-4, ZORDER= 4, of the Overlay manager. Shadow register">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CHANNELIN" width="4" begin="4" end="1" resetval="0x0" description="Input channel connected to Layer" range="" rwaccess="RW"/>
+    <bitfield id="ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Layer Enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_OVR_ATTRIBUTES2_0" acronym="DSS0_OVR_ATTRIBUTES2_0" offset="0x34" width="32" description="The register configures the additional attributes of layer-0, ZORDER= 0, of the Overlay manager. Shadow register">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSY" width="14" begin="29" end="16" resetval="0x0" description="Y position of the layer." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSX" width="14" begin="13" end="0" resetval="0x0" description="X position of the layer." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_OVR_ATTRIBUTES2_1" acronym="DSS0_OVR_ATTRIBUTES2_1" offset="0x38" width="32" description="The register configures the additional attributes of layer-1, ZORDER= 1, of the Overlay manager. Shadow register">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSY" width="14" begin="29" end="16" resetval="0x0" description="Y position of the layer." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSX" width="14" begin="13" end="0" resetval="0x0" description="X position of the layer." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_OVR_ATTRIBUTES2_2" acronym="DSS0_OVR_ATTRIBUTES2_2" offset="0x3C" width="32" description="The register configures the additional attributes of layer-2, ZORDER= 2, of the Overlay manager. Shadow register">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSY" width="14" begin="29" end="16" resetval="0x0" description="Y position of the layer." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSX" width="14" begin="13" end="0" resetval="0x0" description="X position of the layer." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_OVR_ATTRIBUTES2_3" acronym="DSS0_OVR_ATTRIBUTES2_3" offset="0x40" width="32" description="The register configures the additional attributes of layer-3, ZORDER= 3, of the Overlay manager. Shadow register">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSY" width="14" begin="29" end="16" resetval="0x0" description="Y position of the layer." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSX" width="14" begin="13" end="0" resetval="0x0" description="X position of the layer." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_OVR_ATTRIBUTES2_4" acronym="DSS0_OVR_ATTRIBUTES2_4" offset="0x44" width="32" description="The register configures the additional attributes of layer-4, ZORDER= 4, of the Overlay manager. Shadow register">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSY" width="14" begin="29" end="16" resetval="0x0" description="Y position of the layer." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="POSX" width="14" begin="13" end="0" resetval="0x0" description="X position of the layer." range="" rwaccess="RW"/>
+  </register>
+  <register id="DSS0_OVR_SECURE" acronym="DSS0_OVR_SECURE" offset="0x48" width="32" description="Security bit settings for the sub-module">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="SECURE" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+</module>

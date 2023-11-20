@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?><module id="I2C" HW_revision="" XML_version="1" description="The I2C peripheral provides an interface between the DSP and other devices that are compliant with the I2C-bus specification and connected by way of an I2C-bus. External components that are attached to this two-wire serial bus can transmit and receive data that is up to eight bits wide both to and from the DSP through the I2C peripheral.">
+     <register id="ICOAR" acronym="ICOAR" page="2" offset="0X0000" width="16" description="The I2C own address register (ICOAR) is used to specify its own slave address, which distinguishes it from other slaves connected to the I2C-bus. If the 7-bit addressing mode is selected (XA = 0 in ICMDR), only bits 6-0 are used; bits 9-7 are ignored.">
+<bitfield id="_RESV_1" width="6" begin="15" end="10" resetval="0" description="These reserved bit locations are always read as zeros. A value written to this field has no effect." range="" rwaccess="N"/>
+<bitfield id="OADDR" width="10" begin="9" end="0" resetval="0" description="Own slave address. Provides the slave address of the I2C. In 7-bit addressing mode (XA = 0 in ICMDR): bits 6-0 provide the 7-bit slave address of the I2C. Bits 9-7 are ignored. In 10-bit addressing mode (XA = 1 in ICMDR): bits 9-0 provide the 10-bit slave address of the I2C." range="0-3FFh" rwaccess="RW"/>
+</register>
+     <register id="ICIMR" acronym="ICIMR" page="2" offset="0X0004" width="16" description="The I2C interrupt mask register (ICIMR) is used to individually enable or disable I2C interrupt requests.">
+<bitfield id="_RESV_1" width="9" begin="15" end="7" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="AAS" width="1" begin="6" end="6" resetval="0" description="Address-as-slave interrupt enable bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Interrupt request is disabled."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Interrupt request is enabled."/>
+</bitfield>
+<bitfield id="SCD" width="1" begin="5" end="5" resetval="0" description="Stop condition detected interrupt enable bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Interrupt request is disabled."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Interrupt request is enabled."/>
+</bitfield>
+<bitfield id="ICXRDY" width="1" begin="4" end="4" resetval="0" description="Transmit-data-ready interrupt enable bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Interrupt request is disabled."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Interrupt request is enabled."/>
+</bitfield>
+<bitfield id="ICRRDY" width="1" begin="3" end="3" resetval="0" description="Receive-data-ready interrupt enable bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Interrupt request is disabled."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Interrupt request is enabled."/>
+</bitfield>
+<bitfield id="ARDY" width="1" begin="2" end="2" resetval="0" description="Register-access-ready interrupt enable bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Interrupt request is disabled."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Interrupt request is enabled."/>
+</bitfield>
+<bitfield id="NACK" width="1" begin="1" end="1" resetval="0" description="No-acknowledgment interrupt enable bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Interrupt request is disabled."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Interrupt request is enabled."/>
+</bitfield>
+<bitfield id="AL" width="1" begin="0" end="0" resetval="0" description="Arbitration-lost interrupt enable bit" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Interrupt request is disabled."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Interrupt request is enabled."/>
+</bitfield>
+</register>
+     <register id="ICSTR" acronym="ICSTR" page="2" offset="0X0008" width="16" description="The I2C interrupt status register (ICSTR) is used to determine which interrupt has occurred and to read status information.">
+<bitfield id="_RESV_1" width="1" begin="15" end="15" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="SDIR" width="1" begin="14" end="14" resetval="0" description="Slave direction bit. In digital-loopback mode (DLB), the SDIR bit is cleared to 0. SDIR is cleared by one of the following events: - A STOP or a START condition. - SDIR is manually cleared. To clear this bit, write a 1 to it." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="I2C is acting as a master-transmitter/receiver or a slave-receiver."/>
+<bitenum id="SET" value="1" token="SET" description="I2C is acting as a slave-transmitter."/>
+</bitfield>
+<bitfield id="NACKSNT" width="1" begin="13" end="13" resetval="0" description="No-acknowledgment sent bit. NACKSNT bit is used when the I2C is in the receiver mode. One instance in which NACKSNT is affected is when the NACK mode is used (see the description for NACKMOD in Section 3.9). NACKSNT is cleared by one of the following events: - It is manually cleared. To clear this bit, write a 1 to it. - The I2C is reset (either when 0 is written to the IRS bit of ICMDR or when the processor is reset)." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="NACK is not sent."/>
+<bitenum id="SET" value="1" token="SET" description="NACK is sent."/>
+</bitfield>
+<bitfield id="BB" width="1" begin="12" end="12" resetval="0" description="Bus busy bit. BB bit indicates whether the I2C-bus is busy or is free for another data transfer. In the master mode, BB is controlled by the software. BB is cleared by one of the following events: - The I2C receives or transmits a STOP bit (bus free). - BB is manually cleared. To clear this bit, write a 1 to it. - The I2C is reset (either when 0 is written to the IRS bit of ICMDR or when the processor is reset). BB is set by one of the following events: - The I2C has received or transmitted a START bit on the bus. - SCL is in a low state and the IRS bit in ICMDR is 0." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Bus is free."/>
+<bitenum id="SET" value="1" token="SET" description="Bus is busy."/>
+</bitfield>
+<bitfield id="RSFULL" width="1" begin="11" end="11" resetval="0" description="Receive shift register full bit. RSFULL indicates an overrun condition during reception. Overrun occurs when the receive shift register (ICRSR) is full with new data but the previous data has not been read from the data receive register (ICDRR). The new data will not be copied to ICDRR until the previous data is read. As new bits arrive from the SDA pin, they overwrite the bits in ICRSR. RSFULL is cleared by one of the following events: - ICDRR is read. - The I2C is reset (either when 0 is written to the IRS bit of ICMDR or when the processor is reset)." range="" rwaccess="R">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="No overrun is detected."/>
+<bitenum id="SET" value="1" token="SET" description="Overrun is detected."/>
+</bitfield>
+<bitfield id="XSMT" width="1" begin="10" end="10" resetval="1" description="Transmit shift register empty bit. XSMT indicates that the transmitter has experienced underflow. Underflow occurs when the transmit shift register (ICXSR) is empty but the data transmit register (ICDXR) has not been loaded since the last ICDXR-to-ICXSR transfer. The next ICDXR-to-ICXSR transfer will not occur until new data is in ICDXR. If new data is not transferred in time, the previous data may be re-transmitted on the SDA pin.  XSMT is set by one of the following events: - Data is written to ICDXR. - The I2C is reset (either when 0 is written to the IRS bit of ICMDR or when the processor is reset)." range="" rwaccess="R">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Underflow is detected."/>
+<bitenum id="SET" value="1" token="SET" description="No underflow is detected."/>
+</bitfield>
+<bitfield id="AAS" width="1" begin="9" end="9" resetval="0" description="Addressed-as-slave bit." range="" rwaccess="R">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="The AAS bit has been cleared by a repeated START condition or by a STOP condition."/>
+<bitenum id="SET" value="1" token="SET" description="AAS is set by one of the following events: - I2C has recognized its own slave address or an address of all zeros (general call). - The first data word has been received in the free data format (FDF = 1 in ICMDR)."/>
+</bitfield>
+<bitfield id="AD0" width="1" begin="8" end="8" resetval="0" description="Address 0 bit." range="" rwaccess="R">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="AD0 has been cleared by a START or STOP condition."/>
+<bitenum id="SET" value="1" token="SET" description="An address of all zeros (general call) is detected."/>
+</bitfield>
+<bitfield id="_RESV_9" width="2" begin="7" end="6" resetval="0" description="These reserved bit locations are always read as zeros. A value written to this field has no effect." range="" rwaccess="N"/>
+<bitfield id="SCD" width="1" begin="5" end="5" resetval="0" description="Stop condition detected bit. SCD indicates when a STOP condition has been detected on the I2C bus. The STOP condition could be generated by the I2C or by another I2C device connected to the bus. SCD is cleared by one of the following events: - By reading the INTCODE bits in ICIVR as 110b. - SCD is manually cleared. To clear this bit, write a 1 to it." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="No STOP condition has been detected."/>
+<bitenum id="SET" value="1" token="SET" description="A STOP condition has been detected."/>
+</bitfield>
+<bitfield id="ICXRDY" width="1" begin="4" end="4" resetval="1" description="Transmit-data-ready interrupt flag bit. ICXRDY indicates that the data transmit register (ICDXR) is ready to accept new data because the previous data has been copied from ICDXR to the transmit shift register (ICXSR). The CPU can poll ICXRDY or use the XRDY interrupt request. ICXRDY is cleared by one of the following events: - Data is written to ICDXR. - ICXRDY is manually cleared. To clear this bit, write a 1 to it." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="ICDXR is not ready."/>
+<bitenum id="SET" value="1" token="SET" description="ICDXR is ready. Data has been copied from ICDXR to ICXSR. ICXRDY is forced to 1 when the I2C is reset."/>
+</bitfield>
+<bitfield id="ICRRDY" width="1" begin="3" end="3" resetval="0" description="Receive-data-ready interrupt flag bit. ICRRDY indicates that the data receive register (ICDRR) is ready to be read because data has been copied from the receive shift register (ICRSR) to ICDRR. The CPU can poll ICRRDY or use the RRDY interrupt request. 0 ICDRR is not ready. ICRRDY is cleared by one of the following events:   ICDRR is read.   ICRRDY is manually cleared. To clear this bit, write a 1 to it.   The I2C is reset (either when 0 is written to the IRS bit of ICMDR or when the processor is reset). 1 ICDRR is ready. Data has been copied from ICRSR to ICDRR." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="ICDRR is not ready."/>
+<bitenum id="SET" value="1" token="SET" description="ICDRR is ready. Data has been copied from ICRSR to ICDRR."/>
+</bitfield>
+<bitfield id="ARDY" width="1" begin="2" end="2" resetval="0" description="Register-access-ready interrupt flag bit (only applicable when the I2C is in the master mode). ARDY indicates that the I2C registers are ready to be accessed because the previously programmed address, data, and command values have been used. The CPU can poll ARDY or use the ARDY interrupt request.  ARDY is cleared by one of the following events: - The I2C starts using the current register contents. - ARDY is manually cleared. To clear this bit, write a 1 to it. - The I2C is reset (either when 0 is written to the IRS bit of ICMDR or when the processor is reset). This bit is set after the slave address appears on the I2C bus. - In the nonrepeat mode (RM = 0 in ICMDR): If STP = 0 in ICMDR, ARDY is set when the internal data counter counts down to 0. If STP = 1, ARDY is not affected (instead, the I2C generates a STOP condition when the counter reaches 0). - In the repeat mode (RM = 1): ARDY is set at the end of each data word transmitted from ICDXR." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="The registers are not ready to be accessed."/>
+<bitenum id="SET" value="1" token="SET" description="The registers are ready to be accessed."/>
+</bitfield>
+<bitfield id="NACK" width="1" begin="1" end="1" resetval="0" description="No-acknowledgment interrupt flag bit. NACK applies when the I2C is a transmitter (master or slave). NACK indicates whether the I2C has detected an acknowledge bit (ACK) or a no-acknowledge bit (NACK) from the receiver. The CPU can poll NACK or use the NACK interrupt request. NACK is cleared by one of the following events: - An acknowledge bit (ACK) has been sent by the receiver. - NACK is manually cleared. To clear this bit, write a 1 to it. - The CPU reads the interrupt source register (ICISR) when the register contains the code for a NACK interrupt. - The I2C is reset (either when 0 is written to the IRS bit of ICMDR or when the processor is reset). Note: While the I2C performs a general call transfer, NACK is 1, even if one or more slaves send acknowledgment." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="ACK received/NACK is not received."/>
+<bitenum id="SET" value="1" token="SET" description="NACK bit is received."/>
+</bitfield>
+<bitfield id="AL" width="1" begin="0" end="0" resetval="0" description="Arbitration-lost interrupt flag bit (only applicable when the I2C is a master-transmitter). AL primarily indicates when the I2C has lost an arbitration contest with another master-transmitter. The CPU can poll AL or use the AL interrupt request. AL is cleared by one of the following events: - AL is manually cleared. To clear this bit, write a 1 to it. - The CPU reads the interrupt source register (ICISR) when the register contains the code for an AL interrupt. - The I2C is reset (either when 0 is written to the IRS bit of ICMDR or when the processor is reset). AL is set by one of the following events: - The I2C senses that it has lost an arbitration with two or more competing transmitters that started a transmission almost simultaneously. - The I2C attempts to start a transfer while the BB (bus busy) bit is set to 1. When AL is set to 1, the MST and STP bits of ICMDR are cleared, and the I2C becomes a slave-receiver." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Arbitration is not lost."/>
+<bitenum id="SET" value="1" token="SET" description="Arbitration is lost."/>
+</bitfield>
+</register>
+     <register id="ICCLKL" acronym="ICCLKL" page="2" offset="0X000C" width="16" description="For each I2C serial clock cycle, ICCL determines the amount of time the signal is low. ICCLKL must be configured while the I2C is still in reset (IRS = 0 in ICMDR).">
+<bitfield id="ICCL" width="16" begin="15" end="0" resetval="0" description="Clock low-time divide-down value of 1-65536. The period of the module clock is multiplied by (ICCL + d) to produce the low-time duration of the I2C serial on the SCL pin." range="0-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="ICCLKH" acronym="ICCLKH" page="2" offset="0X0010" width="16" description="For each I2C serial clock cycle, ICCH determines the amount of time the signal is high. ICCLKH must be configured while the I2C is still in reset (IRS = 0 in ICMDR).">
+<bitfield id="ICCH" width="16" begin="15" end="0" resetval="0" description="Clock high-time divide-down value of 1-65536. The period of the module clock is multiplied by (ICCH + d) to produce the high-time duration of the I2C serial on the SCL pin." range="0-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="ICCNT" acronym="ICCNT" page="2" offset="0X0014" width="16" description="The I2C data count register (ICCNT) is used to indicate how many data words to transfer when the I2C is configured as a master-transmitter (MST = 1 and TRX = 1 in ICMDR) and the repeat mode is off (RM = 0 in ICMDR). In the repeat mode (RM = 1), ICCNT is not used.">
+<bitfield id="ICDC" width="16" begin="15" end="0" resetval="0" description="Data count value. When RM = 0 in ICMDR, ICDC indicates the number of data words to transfer in the nonrepeat mode. When RM = 1 in ICMDR, the value in ICCNT is a don't care. If STP = 1 in ICMDR, a STOP condition is generated when the internal data counter counts down to 0. When ICDC = 0, the start value loaded to the internal data counter is 65536." range="0-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="ICDRR" acronym="ICDRR" page="2" offset="0X0018" width="16" description="The I2C data receive register (ICDRR) is used to read the receive data.">
+<bitfield id="_RESV_1" width="8" begin="15" end="8" resetval="0" description="These reserved bit locations are always read as zeros. A value written to this field has no effect." range="" rwaccess="N"/>
+<bitfield id="D" width="8" begin="7" end="0" resetval="0" description="Receive data." range="0-FFh" rwaccess="R"/>
+</register>
+     <register id="ICSAR" acronym="ICSAR" page="2" offset="0X001C" width="16" description="The I2C slave address register (ICSAR) contains a 7-bit or 10-bit slave address.">
+<bitfield id="_RESV_1" width="6" begin="15" end="10" resetval="0" description="These reserved bit locations are always read as zeros. A value written to this field has no effect." range="" rwaccess="N"/>
+<bitfield id="SADDR" width="10" begin="9" end="0" resetval="1023" description="Slave address. Provides the slave address that the I2C transmits when it is in master-transmitter mode. In 7-bit addressing mode (XA = 0 in ICMDR): bits 6-0 provide the 7-bit slave address that the I2C transmits when it is in the master-transmitter mode. Bits 9-7 are ignored. In 10-bit addressing mode (XA = 1 in ICMDR): Bits 9-0 provide the 10-bit slave address that the I2C transmits when it is in the master-transmitter mode." range="0-3FFh" rwaccess="RW"/>
+</register>
+     <register id="ICDXR" acronym="ICDXR" page="2" offset="0X0020" width="16" description="The CPU or DMA writes transmit data to the I2C data transmit register (ICDXR).">
+<bitfield id="_RESV_1" width="8" begin="15" end="8" resetval="0" description="These reserved bit locations are always read as zeros. A value written to this field has no effect." range="" rwaccess="N"/>
+<bitfield id="D" width="8" begin="7" end="0" resetval="0" description="Transmit data." range="0-FFh" rwaccess="RW"/>
+</register>
+     <register id="ICMDR" acronym="ICMDR" page="2" offset="0X0024" width="16" description="The I2C mode register (ICMDR) contains the control bits of the I2C.">
+<bitfield id="NACKMOD" width="1" begin="15" end="15" resetval="0" description="No-acknowledge (NACK) mode bit (only applicable when the I2C is a receiver)." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="In slave-receiver mode: The I2C sends an acknowledge (ACK) bit to the transmitter during the each acknowledge cycle on the bus. The I2C only sends a no-acknowledge (NACK) bit if you set the NACKMOD bit. In master-receiver mode: The I2C sends an ACK bit during each acknowledge cycle until the internal data counter counts down to 0. When the counter reaches 0, the I2C sends a NACK bit to the transmitter. To have a NACK bit sent earlier, you must set the NACKMOD bit."/>
+<bitenum id="SET" value="1" token="SET" description="In either slave-receiver or master-receiver mode: The I2C sends a NACK bit to the transmitter during the next acknowledge cycle on the bus. Once the NACK bit has been sent, NACKMOD is cleared. To send a NACK bit in the next acknowledge cycle, you must set NACKMOD before the rising edge of the last data bit."/>
+</bitfield>
+<bitfield id="FREE" width="1" begin="14" end="14" resetval="0" description="This emulation mode bit is used to determine the state of the I2C when a breakpoint is encountered in the high-level language debugger." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="When I2C is master: If SCL is low when the breakpoint occurs, the I2C stops immediately and keeps driving SCL low, whether the I2C is the transmitter or the receiver. If SCL is high, the I2C waits until SCL becomes low and then stops. When I2C is slave: A breakpoint forces the I2C to stop when the current transmission/reception is complete."/>
+<bitenum id="SET" value="1" token="SET" description="The I2C runs free; that is, it continues to operate when a breakpoint occurs."/>
+</bitfield>
+<bitfield id="STT" width="1" begin="13" end="13" resetval="0" description="START condition bit (only applicable when the I2C is a master). The RM, STT, and STP bits determine when the I2C starts and stops data transmissions. Note that the STT and STP bits can be used to terminate the repeat mode." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="In master mode, STT is automatically cleared after the START condition has been generated. In slave mode, if STT is 0, the I2C does not monitor the bus for commands from a master. As a result, the I2C performs no data transfers."/>
+<bitenum id="SET" value="1" token="SET" description="In master mode, setting STT to 1 causes the I2C to generate a START condition on the I2C-bus. In slave mode, if STT is 1, the I2C monitors the bus and transmits/receives data in response to commands from a master."/>
+</bitfield>
+<bitfield id="_RESV_4" width="1" begin="12" end="12" resetval="0" description="These reserved bit locations are always read as zeros. A value written to this field has no effect." range="" rwaccess="N"/>
+<bitfield id="STP" width="1" begin="11" end="11" resetval="0" description="STOP condition bit (only applicable when the I2C is a master). The RM, STT, and STP bits determine when the I2C starts and stops data transmissions. Note that the STT and STP bits can be used to terminate the repeat mode." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="STP is automatically cleared after the STOP condition has been generated."/>
+<bitenum id="SET" value="1" token="SET" description="STP has been set to generate a STOP condition when the internal data counter of the I2C counts down to 0."/>
+</bitfield>
+<bitfield id="MST" width="1" begin="10" end="10" resetval="0" description="Master mode bit. MST determines whether the I2C is in the slave mode or the master mode. MST is automatically changed from 1 to 0 when the I2C master generates a STOP condition." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Slave mode. The I2C is a slave and receives the serial clock from the master."/>
+<bitenum id="SET" value="1" token="SET" description="Master mode. The I2C is a master and generates the serial clock on the SCL pin."/>
+</bitfield>
+<bitfield id="TRX" width="1" begin="9" end="9" resetval="0" description="Transmitter mode bit. When relevant, TRX selects whether the I2C is in the transmitter mode or the receiver mode." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Receiver mode. The I2C is a receiver and receives data on the SDA pin."/>
+<bitenum id="SET" value="1" token="SET" description="Transmitter mode. The I2C is a transmitter and transmits data on the SDA pin."/>
+</bitfield>
+<bitfield id="XA" width="1" begin="8" end="8" resetval="0" description="Expanded address enable bit." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="7-bit addressing mode (normal address mode). The I2C transmits 7-bit slave addresses (from bits 6-0 of ICSAR), and its own slave address has 7 bits (bits 6-0 of ICOAR)."/>
+<bitenum id="SET" value="1" token="SET" description="10-bit addressing mode (expanded address mode). The I2C transmits 10-bit slave addresses (from bits 9-0 of ICSAR), and its own slave address has 10 bits (bits 9-0 of ICOAR)."/>
+</bitfield>
+<bitfield id="RM" width="1" begin="7" end="7" resetval="0" description="Repeat mode bit (only applicable when the I2C is a master-transmitter). The RM, STT, and STP bits determine when the I2C starts and stops data transmissions. If the I2C is configured in slave mode, the RM bit is don't care." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Nonrepeat mode. The value in the data count register (ICCNT) determines how many data words are received/transmitted by the I2C."/>
+<bitenum id="SET" value="1" token="SET" description="Repeat mode. Data words are continuously received/transmitted by the I2C until the STP bit is manually set to 1."/>
+</bitfield>
+<bitfield id="DLB" width="1" begin="6" end="6" resetval="0" description="Digital loopback mode bit (only applicable when the I2C is a master-transmitter). This bit disables or enables the digital loopback mode of the I2C. Note that DLB mode in the free data format mode (DLB = 1 and FDF = 1) is not supported." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Digital loopback mode is disabled."/>
+<bitenum id="SET" value="1" token="SET" description="Digital loopback mode is enabled. In this mode, the MST bit must be set to 1 and data transmitted out of ICDXR is received in ICDRR after n clock cycles by an internal path, where: n = ((I2C input clock frequency/prescaled module clock frequency) ´ 8) The transmit clock is also the receive clock. The address transmitted on the SDA pin is the address in ICOAR."/>
+</bitfield>
+<bitfield id="IRS" width="1" begin="5" end="5" resetval="0" description="I2C reset bit. Note that if IRS is reset during a transfer, it can cause the I2C bus to hang (SDA and SCL are in a high-impedance state)." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="The I2C is in reset/disabled. When this bit is cleared to 0, all status bits (in ICSTR) are set to their default values."/>
+<bitenum id="SET" value="1" token="SET" description="The I2C is enabled."/>
+</bitfield>
+<bitfield id="STB" width="1" begin="4" end="4" resetval="0" description="START byte mode bit (only applicable when the I2C is a master). As described in version 2.1 of the Philips I2C-bus specification, the START byte can be used to help a slave that needs extra time to detect a START condition. When the I2C is a slave, the I2C ignores a START byte from a master, regardless of the value of the STB bit." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="The I2C is not in the START byte mode."/>
+<bitenum id="SET" value="1" token="SET" description="The I2C is in the START byte mode. When you set the START condition bit (STT), the I2C begins the transfer with more than just a START condition. Specifically, it generates: 1. A START condition 2. A START byte (0000 0001b) 3. A dummy acknowledge clock pulse 4. A repeated START condition  The I2C sends the slave address that is in ICSAR."/>
+</bitfield>
+<bitfield id="FDF" width="1" begin="3" end="3" resetval="0" description="Free data format mode bit. Note that DLB mode in the free data format mode (DLB = 1 and FDF = 1) is not supported." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Free data format mode is disabled. Transfers use the 7-/10-bit addressing format selected by the XA bit."/>
+<bitenum id="SET" value="1" token="SET" description="Free data format mode is enabled."/>
+</bitfield>
+<bitfield id="BC" width="3" begin="2" end="0" resetval="0" description="Bit count bits. BC defines the number of bits (2 to 8) in the next data word that is to be received or transmitted by the I2C. The number of bits selected with BC must match the data size of the other device. Note that when BC = 0, a data word has 8 bits." range="" rwaccess="RW">
+<bitenum id="8BITS" value="0" token="8BITS" description="8 bits per data word"/>
+<bitenum id="RSV" value="1" token="RSV" description="Reserved"/>
+<bitenum id="2BITS" value="2" token="2BITS" description="2 bits per data word"/>
+<bitenum id="3BITS" value="3" token="3BITS" description="3 bits per data word"/>
+<bitenum id="4BITS" value="4" token="4BITS" description="4 bits per data word"/>
+<bitenum id="5BITS" value="5" token="5BITS" description="5 bits per data word"/>
+<bitenum id="6BITS" value="6" token="6BITS" description="6 bits per data word"/>
+<bitenum id="7BITS" value="7" token="7BITS" description="7 bits per data word"/>
+</bitfield>
+</register>
+     <register id="ICIVR" acronym="ICIVR" page="2" offset="0X0028" width="16" description="The I2C interrupt vector register (ICIVR) is used by the CPU to determine which event generated the I2C interrupt.">
+<bitfield id="_RESV_1" width="13" begin="15" end="3" resetval="0" description="These reserved bit locations are always read as zeros. A value written to this field has no effect." range="" rwaccess="N"/>
+<bitfield id="INTCODE" width="3" begin="2" end="0" resetval="0" description="Interrupt code. The binary-coded-interrupt vector indicates which interrupt has occurred. Reading the ICIVR clears the interrupt flag; if other interrupts are pending, a new interrupt is generated. If there are more than one interrupt flag, reading the ICIVR clears the highest priority interrupt flag. Note that users must read (clear) the IVR before doing another start otherwise the IVR could contain incorrect (old interrupt flags) value." range="" rwaccess="R">
+<bitenum id="NONE" value="0" token="NONE" description="No interrupt occurred"/>
+<bitenum id="AL" value="1" token="AL" description="Arbitration-lost interrupt (AL)"/>
+<bitenum id="NACK" value="2" token="NACK" description="No-acknowledgment interrupt (NACK)"/>
+<bitenum id="ARDY" value="3" token="ARDY" description="Register-access-ready interrupt (ARDY)"/>
+<bitenum id="RDR" value="4" token="RDR" description="Receive-data-ready interrupt (ICRRDY)"/>
+<bitenum id="TDR" value="5" token="TDR" description="Transmit-data-ready interrupt (ICXRDY)"/>
+<bitenum id="SCD" value="6" token="SCD" description="Stop condition detected interrupt (SCD)"/>
+<bitenum id="AAS" value="7" token="AAS" description="Address-as-slave interrupt (AAS)"/>
+</bitfield>
+</register>
+     <register id="ICEMDR" acronym="ICEMDR" page="2" offset="0X002C" width="16" description="The I2C extended mode register (ICEMDR) is used to indicate which condition generates a transmit data ready interrupt.">
+<bitfield id="_RESV_1" width="14" begin="15" end="2" resetval="0" description="These reserved bit locations are always read as zeros. A value written to this field has no effect." range="" rwaccess="N"/>
+<bitfield id="IGNACK" width="1" begin="1" end="1" resetval="0" description="Ignore NACK mode." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Master transmitter operates normally, that is, it discontinues the data transfer and sets the ARDY and NACK bits in ICSTR when receiving a NACK from the slave."/>
+<bitenum id="SET" value="1" token="SET" description="Master transmitter ignores a NACK from the slave."/>
+</bitfield>
+<bitfield id="BCM" width="1" begin="0" end="0" resetval="1" description="Backward compatibility mode bit. Determines which condition generates a transmit data ready interrupt. The BCM bit only has an effect when the I2C is operating as a slave-transmitter." range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="The transmit data ready interrupt is generated when the master requests more data by sending an acknowledge signal after the transmission of the last data."/>
+<bitenum id="SET" value="1" token="SET" description="The transmit data ready interrupt is generated when the data in ICDXR is copied to ICXSR."/>
+</bitfield>
+</register>
+     <register id="ICPSC" acronym="ICPSC" page="2" offset="0X0030" width="16" description="The I2C prescaler register (ICPSC) is used for dividing down the I2C input clock to obtain the desired prescaled module clock for the operation of the I2C.">
+<bitfield id="_RESV_1" width="8" begin="15" end="8" resetval="0" description="These reserved bit locations are always read as zeros. A value written to this field has no effect." range="" rwaccess="N"/>
+<bitfield id="IPSC" width="8" begin="7" end="0" resetval="0" description="I2C prescaler divide-down value. IPSC determines how much the I2C input clock is divided to create the I2C prescaled module clock: I2C clock frequency = I2C input clock frequency/(IPSC + 1) Note: IPSC must be initialized while the I2C is in reset (IRS = 0 in ICMDR)." range="0-FFh" rwaccess="RW"/>
+</register>
+     <register id="ICPID1" acronym="ICPID1" page="2" offset="0X0034" width="16" description="The I2C peripheral identification registers (ICPID1) contain identification data (class, revision, and type) for the peripheral.">
+<bitfield id="CLASS" width="8" begin="15" end="8" resetval="1" description="Identifies class of peripheral." range="" rwaccess="R"/>
+<bitfield id="REVISION" width="8" begin="7" end="0" resetval="6" description="Identifies revision of peripheral." range="" rwaccess="R"/>
+</register>
+     <register id="ICPID2" acronym="ICPID2" page="2" offset="0X0038" width="16" description="The I2C peripheral identification register (ICPID2).">
+<bitfield id="_RESV_1" width="8" begin="15" end="8" resetval="0" description="These reserved bit locations are always read as zeros. A value written to this field has no effect." range="" rwaccess="N"/>
+<bitfield id="TYPE" width="8" begin="7" end="0" resetval="5" description="Identifies type of peripheral." range="" rwaccess="R"/>
+</register>
+</module>

@@ -1,0 +1,11 @@
+<module name="NAVSS0_BCDMA_0_CRED" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="CRED_CRED" acronym="CRED_CRED" offset="0x0" width="32" description="">
+		<bitfield id="SECURE" width="1" begin="26" end="26" resetval="0x0" description="Secure attribute" range="26" rwaccess="R/W"/> 
+		<bitfield id="PRIV" width="2" begin="25" end="24" resetval="0x0" description="Privelege attribute" range="25 - 24" rwaccess="R/W"/> 
+		<bitfield id="PRIVID" width="8" begin="23" end="16" resetval="0x0" description="Privelege ID attribute" range="23 - 16" rwaccess="R/W"/>
+	</register>
+	<register id="CRED_CRED_VIRT" acronym="CRED_CRED_VIRT" offset="0x4" width="32" description="">
+		<bitfield id="ATYPE" width="2" begin="25" end="24" resetval="0x0" description="This field controls how pointers will be interpreted for Ring Accelerator accesses on this channel.  The values are encoded as follows:  0 = Pointers are physical addresses 1 = Pointers are intermediate addresses which require intermediate to physical transaction before they can be decoded 2 = Pointers are virtual addresses which require virtual to physical translation before they can be decoded.  All transactions from this channel which are destined to the Ring Accelerator will have the mem*_catype attribute set equal to the value given in this register field." range="25 - 24" rwaccess="R/W"/> 
+		<bitfield id="VIRTID" width="12" begin="11" end="0" resetval="0x0" description="" range="11 - 0" rwaccess="R/W"/>
+	</register>
+</module>

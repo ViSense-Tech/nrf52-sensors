@@ -1,0 +1,163 @@
+<module name="ENCODER0_REG_TOPAZHP_COREEXT_0" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="ENCODER0_CR_SCALER_INPUT_SIZE" acronym="ENCODER0_CR_SCALER_INPUT_SIZE" offset="0x0" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_SCALER_INPUT_HEIGHT_MIN1" width="12" begin="27" end="16" resetval="0x0" description="Height in pixels of the in the input image to be scaled, minus 1" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_SCALER_INPUT_WIDTH_MIN1" width="12" begin="11" end="0" resetval="0x0" description="Width in pixels of in the input image that is to be scaled, minus 1." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SCALER_PITCH" acronym="ENCODER0_CR_SCALER_PITCH" offset="0x4" width="32" description="">
+    <bitfield id="CR_SCALER_VER_BILINEAR_FILTER" width="1" begin="31" end="31" resetval="0x0" description="When set the input image will be pre-processed using a bilinear filter to effectively half the image size in the vertical direction." range="" rwaccess="RW"/>
+    <bitfield id="CR_SCALER_INPUT_VER_PITCH" width="15" begin="30" end="16" resetval="0x0" description="Input Scaler vertical pitch:" range="" rwaccess="RW"/>
+    <bitfield id="CR_SCALER_HOR_BILINEAR_FILTER" width="1" begin="15" end="15" resetval="0x0" description="When set the input image will be pre-processed using a bilinear filter to effectively half the image size in the horizontal direction." range="" rwaccess="RW"/>
+    <bitfield id="CR_SCALER_INPUT_HOR_PITCH" width="15" begin="14" end="0" resetval="0x0" description="Input Scaler horizontal pitch:" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SCALER_CROP" acronym="ENCODER0_CR_SCALER_CROP" offset="0x8" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_SCALER_INPUT_CROP_HOR" width="8" begin="15" end="8" resetval="0x0" description="Input_Scaler horizontal crop:" range="" rwaccess="RW"/>
+    <bitfield id="CR_SCALER_INPUT_CROP_VER" width="8" begin="7" end="0" resetval="0x0" description="Input_Scaler vertical crop:" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SCALER_VER_LUMA_COEFFS_00" acronym="ENCODER0_CR_SCALER_VER_LUMA_COEFFS_00" offset="0x10" width="32" description="Coeffs for 1/16, 3/16, 5/16, 7/16These are mirrored internally to get 9/16, 11/16, 13/16 and 15/16 as well">
+    <bitfield id="CR_SCALER_VER_LUMA_COEFF" width="8" begin="31" end="24" resetval="0x0" description="Vertical Luma coefficient for each of the 4 taps" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SCALER_VER_LUMA_COEFFS_01" acronym="ENCODER0_CR_SCALER_VER_LUMA_COEFFS_01" offset="0x14" width="32" description="Coeffs for 1/16, 3/16, 5/16, 7/16These are mirrored internally to get 9/16, 11/16, 13/16 and 15/16 as well">
+    <bitfield id="CR_SCALER_VER_LUMA_COEFF" width="8" begin="31" end="24" resetval="0x0" description="Vertical Luma coefficient for each of the 4 taps" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SCALER_VER_LUMA_COEFFS_02" acronym="ENCODER0_CR_SCALER_VER_LUMA_COEFFS_02" offset="0x18" width="32" description="Coeffs for 1/16, 3/16, 5/16, 7/16These are mirrored internally to get 9/16, 11/16, 13/16 and 15/16 as well">
+    <bitfield id="CR_SCALER_VER_LUMA_COEFF" width="8" begin="31" end="24" resetval="0x0" description="Vertical Luma coefficient for each of the 4 taps" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SCALER_VER_LUMA_COEFFS_03" acronym="ENCODER0_CR_SCALER_VER_LUMA_COEFFS_03" offset="0x1C" width="32" description="Coeffs for 1/16, 3/16, 5/16, 7/16These are mirrored internally to get 9/16, 11/16, 13/16 and 15/16 as well">
+    <bitfield id="CR_SCALER_VER_LUMA_COEFF" width="8" begin="31" end="24" resetval="0x0" description="Vertical Luma coefficient for each of the 4 taps" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SCALER_VER_CHROMA_COEFFS_00" acronym="ENCODER0_CR_SCALER_VER_CHROMA_COEFFS_00" offset="0x20" width="32" description="Coeffs for 1/16, 3/16, 5/16, 7/16These are mirrored internally to get 9/16, 11/16, 13/16 and 15/16 as well">
+    <bitfield id="CR_SCALER_VER_CHROMA_COEFF" width="8" begin="31" end="24" resetval="0x0" description="Vertical Chroma coefficient for each of the 4 taps" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SCALER_VER_CHROMA_COEFFS_01" acronym="ENCODER0_CR_SCALER_VER_CHROMA_COEFFS_01" offset="0x24" width="32" description="Coeffs for 1/16, 3/16, 5/16, 7/16These are mirrored internally to get 9/16, 11/16, 13/16 and 15/16 as well">
+    <bitfield id="CR_SCALER_VER_CHROMA_COEFF" width="8" begin="31" end="24" resetval="0x0" description="Vertical Chroma coefficient for each of the 4 taps" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SCALER_VER_CHROMA_COEFFS_02" acronym="ENCODER0_CR_SCALER_VER_CHROMA_COEFFS_02" offset="0x28" width="32" description="Coeffs for 1/16, 3/16, 5/16, 7/16These are mirrored internally to get 9/16, 11/16, 13/16 and 15/16 as well">
+    <bitfield id="CR_SCALER_VER_CHROMA_COEFF" width="8" begin="31" end="24" resetval="0x0" description="Vertical Chroma coefficient for each of the 4 taps" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SCALER_VER_CHROMA_COEFFS_03" acronym="ENCODER0_CR_SCALER_VER_CHROMA_COEFFS_03" offset="0x2C" width="32" description="Coeffs for 1/16, 3/16, 5/16, 7/16These are mirrored internally to get 9/16, 11/16, 13/16 and 15/16 as well">
+    <bitfield id="CR_SCALER_VER_CHROMA_COEFF" width="8" begin="31" end="24" resetval="0x0" description="Vertical Chroma coefficient for each of the 4 taps" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SCALER_HOR_LUMA_COEFFS_00" acronym="ENCODER0_CR_SCALER_HOR_LUMA_COEFFS_00" offset="0x30" width="32" description="Coeffs for 1/16, 3/16, 5/16, 7/16These are mirrored internally to get 9/16, 11/16, 13/16 and 15/16 as well">
+    <bitfield id="CR_SCALER_HOR_LUMA_COEFF" width="8" begin="31" end="24" resetval="0x0" description="Horizontal Luma coefficient for each of the 4 taps" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SCALER_HOR_LUMA_COEFFS_01" acronym="ENCODER0_CR_SCALER_HOR_LUMA_COEFFS_01" offset="0x34" width="32" description="Coeffs for 1/16, 3/16, 5/16, 7/16These are mirrored internally to get 9/16, 11/16, 13/16 and 15/16 as well">
+    <bitfield id="CR_SCALER_HOR_LUMA_COEFF" width="8" begin="31" end="24" resetval="0x0" description="Horizontal Luma coefficient for each of the 4 taps" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SCALER_HOR_LUMA_COEFFS_02" acronym="ENCODER0_CR_SCALER_HOR_LUMA_COEFFS_02" offset="0x38" width="32" description="Coeffs for 1/16, 3/16, 5/16, 7/16These are mirrored internally to get 9/16, 11/16, 13/16 and 15/16 as well">
+    <bitfield id="CR_SCALER_HOR_LUMA_COEFF" width="8" begin="31" end="24" resetval="0x0" description="Horizontal Luma coefficient for each of the 4 taps" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SCALER_HOR_LUMA_COEFFS_03" acronym="ENCODER0_CR_SCALER_HOR_LUMA_COEFFS_03" offset="0x3C" width="32" description="Coeffs for 1/16, 3/16, 5/16, 7/16These are mirrored internally to get 9/16, 11/16, 13/16 and 15/16 as well">
+    <bitfield id="CR_SCALER_HOR_LUMA_COEFF" width="8" begin="31" end="24" resetval="0x0" description="Horizontal Luma coefficient for each of the 4 taps" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SCALER_HOR_CHROMA_COEFFS_00" acronym="ENCODER0_CR_SCALER_HOR_CHROMA_COEFFS_00" offset="0x40" width="32" description="Coeffs for 1/16, 3/16, 5/16, 7/16These are mirrored internally to get 9/16, 11/16, 13/16 and 15/16 as well\par">
+    <bitfield id="CR_SCALER_HOR_CHROMA_COEFF" width="8" begin="31" end="24" resetval="0x0" description="Horizontal Chroma coefficient for each of the 4 taps" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SCALER_HOR_CHROMA_COEFFS_01" acronym="ENCODER0_CR_SCALER_HOR_CHROMA_COEFFS_01" offset="0x44" width="32" description="Coeffs for 1/16, 3/16, 5/16, 7/16These are mirrored internally to get 9/16, 11/16, 13/16 and 15/16 as well\par">
+    <bitfield id="CR_SCALER_HOR_CHROMA_COEFF" width="8" begin="31" end="24" resetval="0x0" description="Horizontal Chroma coefficient for each of the 4 taps" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SCALER_HOR_CHROMA_COEFFS_02" acronym="ENCODER0_CR_SCALER_HOR_CHROMA_COEFFS_02" offset="0x48" width="32" description="Coeffs for 1/16, 3/16, 5/16, 7/16These are mirrored internally to get 9/16, 11/16, 13/16 and 15/16 as well\par">
+    <bitfield id="CR_SCALER_HOR_CHROMA_COEFF" width="8" begin="31" end="24" resetval="0x0" description="Horizontal Chroma coefficient for each of the 4 taps" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SCALER_HOR_CHROMA_COEFFS_03" acronym="ENCODER0_CR_SCALER_HOR_CHROMA_COEFFS_03" offset="0x4C" width="32" description="Coeffs for 1/16, 3/16, 5/16, 7/16These are mirrored internally to get 9/16, 11/16, 13/16 and 15/16 as well\par">
+    <bitfield id="CR_SCALER_HOR_CHROMA_COEFF" width="8" begin="31" end="24" resetval="0x0" description="Horizontal Chroma coefficient for each of the 4 taps" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="24" begin="23" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SCALER_MEM_BURST_REQ_CRC" acronym="ENCODER0_CR_SCALER_MEM_BURST_REQ_CRC" offset="0x50" width="32" description="">
+    <bitfield id="CR_SCALER_MEM_BURST_REQ_CRC" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_SCALER_MEM_READ_DATA_CRC" acronym="ENCODER0_CR_SCALER_MEM_READ_DATA_CRC" offset="0x54" width="32" description="">
+    <bitfield id="CR_SCALER_MEM_READ_DATA_CRC" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_CURRENT_MB_DATA_CRC" acronym="ENCODER0_CR_CURRENT_MB_DATA_CRC" offset="0x58" width="32" description="">
+    <bitfield id="CR_CURRENT_MB_DATA_CRC" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_HOR_BIFILTER_DATA_CRC" acronym="ENCODER0_CR_HOR_BIFILTER_DATA_CRC" offset="0x5C" width="32" description="">
+    <bitfield id="CR_HOR_BIFILTER_DATA_CRC" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_SCALER_CONTROL" acronym="ENCODER0_CR_SCALER_CONTROL" offset="0x64" width="32" description="Scaler control">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_ENABLE_COLOUR_SPACE_CONVERSION" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="CR_SCALER_ENABLE" width="1" begin="0" end="0" resetval="0x0" description="Scaler enable flag: 0 scaler is disabled, 1 scaler is enabled." range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_INPUT_SCALER_CONTROL" acronym="ENCODER0_CR_INPUT_SCALER_CONTROL" offset="0x68" width="32" description="">
+    <bitfield id="RESERVED" width="9" begin="31" end="23" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_INPUT_FRAME_STORE_FORMAT" width="7" begin="22" end="16" resetval="0x20" description="Input frame store format, where the bits" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="7" begin="15" end="9" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_ENCODE_BIT_DEPTH" width="1" begin="8" end="8" resetval="0x0" description="Pixel component resolution to encode" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="7" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_ENCODE_CHROMA_FORMAT" width="2" begin="1" end="0" resetval="0x0" description="Chroma resolution of 'input scaler' output" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_CSC_SOURCE_MOD_Y_00" acronym="ENCODER0_CR_CSC_SOURCE_MOD_Y_00" offset="0x6C" width="32" description="For each of the source planes A, B and C, these fields define the contribution to the 3 output planes in the colour space conversion process.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CSC_SOURCE_SRC_TO_Y" width="12" begin="27" end="16" resetval="0x0" description="Scaling factor applied to modified source pixel component contributing to luma output plane [although colour space conversion may not be to YCbCr] [signed fixed point 2.10]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="14" begin="15" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CSC_SOURCE_MOD" width="2" begin="1" end="0" resetval="0x0" description="This field defines any modification to source pixel component prior to scaling" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_CSC_SOURCE_CB_CR_00" acronym="ENCODER0_CR_CSC_SOURCE_CB_CR_00" offset="0x70" width="32" description="For each of the source planes A, B and C, these fields define the contribution to the 3 output planes in the colour space conversion process.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CSC_SOURCE_SRC_TO_CR" width="12" begin="27" end="16" resetval="0x0" description="Scaling factor applied to modified source pixel component contributing to Cr output plane [although colour space conversion may not be to YCbCr] [signed fixed point 2.10]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CSC_SOURCE_SRC_TO_CB" width="12" begin="11" end="0" resetval="0x0" description="Scaling factor applied to modified source pixel component contributing to Cb output plane [although colour space conversion may not be to YCbCr] [signed fixed point 2.10]" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_CSC_SOURCE_MOD_Y_01" acronym="ENCODER0_CR_CSC_SOURCE_MOD_Y_01" offset="0x74" width="32" description="For each of the source planes A, B and C, these fields define the contribution to the 3 output planes in the colour space conversion process.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CSC_SOURCE_SRC_TO_Y" width="12" begin="27" end="16" resetval="0x0" description="Scaling factor applied to modified source pixel component contributing to luma output plane [although colour space conversion may not be to YCbCr] [signed fixed point 2.10]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="14" begin="15" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CSC_SOURCE_MOD" width="2" begin="1" end="0" resetval="0x0" description="This field defines any modification to source pixel component prior to scaling" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_CSC_SOURCE_CB_CR_01" acronym="ENCODER0_CR_CSC_SOURCE_CB_CR_01" offset="0x78" width="32" description="For each of the source planes A, B and C, these fields define the contribution to the 3 output planes in the colour space conversion process.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CSC_SOURCE_SRC_TO_CR" width="12" begin="27" end="16" resetval="0x0" description="Scaling factor applied to modified source pixel component contributing to Cr output plane [although colour space conversion may not be to YCbCr] [signed fixed point 2.10]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CSC_SOURCE_SRC_TO_CB" width="12" begin="11" end="0" resetval="0x0" description="Scaling factor applied to modified source pixel component contributing to Cb output plane [although colour space conversion may not be to YCbCr] [signed fixed point 2.10]" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_CSC_SOURCE_MOD_Y_02" acronym="ENCODER0_CR_CSC_SOURCE_MOD_Y_02" offset="0x7C" width="32" description="For each of the source planes A, B and C, these fields define the contribution to the 3 output planes in the colour space conversion process.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CSC_SOURCE_SRC_TO_Y" width="12" begin="27" end="16" resetval="0x0" description="Scaling factor applied to modified source pixel component contributing to luma output plane [although colour space conversion may not be to YCbCr] [signed fixed point 2.10]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="14" begin="15" end="2" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CSC_SOURCE_MOD" width="2" begin="1" end="0" resetval="0x0" description="This field defines any modification to source pixel component prior to scaling" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_CSC_SOURCE_CB_CR_02" acronym="ENCODER0_CR_CSC_SOURCE_CB_CR_02" offset="0x80" width="32" description="For each of the source planes A, B and C, these fields define the contribution to the 3 output planes in the colour space conversion process.">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CSC_SOURCE_SRC_TO_CR" width="12" begin="27" end="16" resetval="0x0" description="Scaling factor applied to modified source pixel component contributing to Cr output plane [although colour space conversion may not be to YCbCr] [signed fixed point 2.10]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CSC_SOURCE_SRC_TO_CB" width="12" begin="11" end="0" resetval="0x0" description="Scaling factor applied to modified source pixel component contributing to Cb output plane [although colour space conversion may not be to YCbCr] [signed fixed point 2.10]" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_CSC_OUTPUT_COEFF_00" acronym="ENCODER0_CR_CSC_OUTPUT_COEFF_00" offset="0x84" width="32" description="The first register defines the modification and clipping applied to the luma output plane, and the second register defines the modification and clipping applied to both the Cb and Cr output planes.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CSC_OUTPUT_MOD" width="2" begin="29" end="28" resetval="0x0" description="This field defines any modification to source pixel component prior to scaling" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="27" end="26" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CSC_OUTPUT_MAX_CLIP" width="10" begin="25" end="16" resetval="0x3FF" description="Output from colour space conversion is clipped to this maximum value [in the case of" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CSC_OUTPUT_MIN_CLIP" width="10" begin="9" end="0" resetval="0x0" description="Output from colour space conversion is clipped to this minimum value [in the case of" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_CSC_OUTPUT_COEFF_01" acronym="ENCODER0_CR_CSC_OUTPUT_COEFF_01" offset="0x88" width="32" description="The first register defines the modification and clipping applied to the luma output plane, and the second register defines the modification and clipping applied to both the Cb and Cr output planes.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CSC_OUTPUT_MOD" width="2" begin="29" end="28" resetval="0x0" description="This field defines any modification to source pixel component prior to scaling" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="27" end="26" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CSC_OUTPUT_MAX_CLIP" width="10" begin="25" end="16" resetval="0x3FF" description="Output from colour space conversion is clipped to this maximum value [in the case of" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CR_CSC_OUTPUT_MIN_CLIP" width="10" begin="9" end="0" resetval="0x0" description="Output from colour space conversion is clipped to this minimum value [in the case of" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_SCALER_CSC_DATA_CRC" acronym="ENCODER0_CR_SCALER_CSC_DATA_CRC" offset="0x90" width="32" description="">
+    <bitfield id="CR_SCALER_CSC_DATA_CRC" width="32" begin="31" end="0" resetval="0x0" description="CRC signature of the colour space conversion output data" range="" rwaccess="R"/>
+  </register>
+</module>

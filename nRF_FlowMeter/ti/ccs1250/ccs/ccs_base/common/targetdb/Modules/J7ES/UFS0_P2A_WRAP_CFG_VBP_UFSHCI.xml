@@ -1,0 +1,590 @@
+<module name="UFS0_P2A_WRAP_CFG_VBP_UFSHCI" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="UFS_CAP" acronym="UFS_CAP" offset="0x0" width="32" description="Host Controller Capabilities Register This register describes the basic capabilities of the UFS host controller.">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="MHS" width="1" begin="29" end="29" resetval="0x0" description="Multi-Host Support" range="" rwaccess="R"/>
+    <bitfield id="CS" width="1" begin="28" end="28" resetval="0x1" description="Crypto Support" range="" rwaccess="R"/>
+    <bitfield id="DBMMS" width="1" begin="27" end="27" resetval="0x0" description="Device Bus Master Mode Supported (Unified Memory (UM) UFSHCI Only)" range="" rwaccess="R"/>
+    <bitfield id="UICDMETMS" width="1" begin="26" end="26" resetval="0x1" description="UIC DME_TEST_MODE Command Supported" range="" rwaccess="R"/>
+    <bitfield id="OODDS" width="1" begin="25" end="25" resetval="0x0" description="Out of Order Data Delivery Supported" range="" rwaccess="R"/>
+    <bitfield id="AS64" width="1" begin="24" end="24" resetval="0x1" description="64-bit Addressing Supported" range="" rwaccess="R"/>
+    <bitfield id="AUTOH8" width="1" begin="23" end="23" resetval="0x1" description="Auto-Hibernation Support" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="22" end="19" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="NUTMRS" width="3" begin="18" end="16" resetval="0x7" description="Number of UTP Task Management Request Slots" range="" rwaccess="R"/>
+    <bitfield id="NORTT" width="8" begin="15" end="8" resetval="0x3" description="Number of Pending RTTs supported" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="NUTRS" width="5" begin="4" end="0" resetval="0x1F" description="Number of UTP Transfer Request Slots" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_VER" acronym="UFS_VER" offset="0x8" width="32" description="UFS Version Register This register indicates the major and minor version of the UFSHCI specification that the controller implementation supports. The upper two bytes represent the major version number, and the lower two bytes represent the minor version number.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="MJR" width="8" begin="15" end="8" resetval="0x2" description="Major Version Number" range="" rwaccess="R"/>
+    <bitfield id="MNR" width="4" begin="7" end="4" resetval="0x1" description="Minor Version Number" range="" rwaccess="R"/>
+    <bitfield id="VER" width="4" begin="3" end="0" resetval="0x0" description="Version Suffix (VS)" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_HCPID" acronym="UFS_HCPID" offset="0x10" width="32" description="Host Controller Identification Descriptor Register (Device ID and Device Class) This register indicates the product identification information for host controller.">
+    <bitfield id="PID" width="32" begin="31" end="0" resetval="0x0" description="Product ID" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_HCMID" acronym="UFS_HCMID" offset="0x14" width="32" description="Host Controller Identification Descriptor Register (Product ID and Manufacturer ID) This register provides Manufacturer identification information for host controller manufacturer. The Manufacturer ID is defined by JEDEC in Standard Manufacturer's identification code (JEDEC-JEP106). The Manufacturer ID consists of two parts: Manufacturer Identification Code and Bank Index.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="BI" width="8" begin="15" end="8" resetval="0x0" description="Bank Index" range="" rwaccess="R"/>
+    <bitfield id="MIC" width="8" begin="7" end="0" resetval="0x0" description="Manufacturer Identification Code" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_AHIT" acronym="UFS_AHIT" offset="0x18" width="32" description="Auto-Hibernate Idle Timer Register The UFS utilizes UniPro and SCSI standards as its power management framework. To improve power efficiency, the UFS host controller may support a mechanism called auto-hibernation. Auto-hibernation allows the host controller to put the UFS link into HIBERN8 state autonomously. The [23] AUTOH8 bit provides a method for software to detect support of this feature. The [9-0] AH8ITV bit filed together with the [12-10] TS bit filed provides a method for software to directly control of this feature. Note: Additionally to the above conditions, the auto-hibernation counter checks the status of the UniPro protocol layer. The host controller will only enter hibernate state when there is no pending UniPro communication.">
+    <bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="TS" width="3" begin="12" end="10" resetval="0x0" description="Time Scale" range="" rwaccess="RW"/>
+    <bitfield id="AH8ITV" width="10" begin="9" end="0" resetval="0x0" description="Auto-Hibernate Idle Timer Value" range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_IS" acronym="UFS_IS" offset="0x20" width="32" description="Interrupt Status Register This register indicates pending interrupts that require service by the low level driver firmware.">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CEFES" width="1" begin="18" end="18" resetval="0x0" description="Crypto Engine Fatal Error Status" range="" rwaccess="RW1C"/>
+    <bitfield id="SBFES" width="1" begin="17" end="17" resetval="0x0" description="System Bus Fatal Error Status" range="" rwaccess="RW1C"/>
+    <bitfield id="HCFES" width="1" begin="16" end="16" resetval="0x0" description="Host Controller Fatal Error Status" range="" rwaccess="RW1C"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="UTPES" width="1" begin="12" end="12" resetval="0x0" description="UTP Error Status" range="" rwaccess="RW1C"/>
+    <bitfield id="DFES" width="1" begin="11" end="11" resetval="0x0" description="Device Fatal Error Status" range="" rwaccess="RW1C"/>
+    <bitfield id="UCCS" width="1" begin="10" end="10" resetval="0x0" description="UIC Command Completion Status" range="" rwaccess="RW1C"/>
+    <bitfield id="UTMRCS" width="1" begin="9" end="9" resetval="0x0" description="UTP Task Management Request Completion Status" range="" rwaccess="RW1C"/>
+    <bitfield id="ULSS" width="1" begin="8" end="8" resetval="0x0" description="UIC Link Startup Status" range="" rwaccess="RW1C"/>
+    <bitfield id="ULLS" width="1" begin="7" end="7" resetval="0x0" description="UIC Link Lost Status" range="" rwaccess="RW1C"/>
+    <bitfield id="UHES" width="1" begin="6" end="6" resetval="0x0" description="UIC Hibernate Enter Status" range="" rwaccess="RW1C"/>
+    <bitfield id="UHXS" width="1" begin="5" end="5" resetval="0x0" description="UIC Hibernate Exit Status" range="" rwaccess="RW1C"/>
+    <bitfield id="UPMS" width="1" begin="4" end="4" resetval="0x0" description="UIC Power Mode Status" range="" rwaccess="RW1C"/>
+    <bitfield id="UTMS" width="1" begin="3" end="3" resetval="0x0" description="UIC Test Mode Status" range="" rwaccess="RW1C"/>
+    <bitfield id="UE" width="1" begin="2" end="2" resetval="0x0" description="UIC Error" range="" rwaccess="RW1C"/>
+    <bitfield id="UDEPRI" width="1" begin="1" end="1" resetval="0x0" description="UIC DME_ENDPOINTRESET Indication" range="" rwaccess="RW1C"/>
+    <bitfield id="UTRCS" width="1" begin="0" end="0" resetval="0x0" description="UTP Transfer Request Completion Status" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="UFS_IE" acronym="UFS_IE" offset="0x24" width="32" description="Interrupt Enable Register This register enables and disables the reporting of the corresponding interrupt to host software. When a bit is set (1h) and the corresponding interrupt condition is active, then an interrupt is generated. Interrupt sources that are disabled (0h) are still indicated in the register. The register bit assignment matches with the register.">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CEFEE" width="1" begin="18" end="18" resetval="0x0" description="Crypto Engine Fatal Error Enable" range="" rwaccess="RW"/>
+    <bitfield id="SBFEE" width="1" begin="17" end="17" resetval="0x0" description="System Bus Fatal Error Enable" range="" rwaccess="RW"/>
+    <bitfield id="HCFEE" width="1" begin="16" end="16" resetval="0x0" description="Host Controller Fatal Error Enable" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="UTPEE" width="1" begin="12" end="12" resetval="0x0" description="UTP Error Enable" range="" rwaccess="RW"/>
+    <bitfield id="DFEE" width="1" begin="11" end="11" resetval="0x0" description="Device Fatal Error Enable" range="" rwaccess="RW"/>
+    <bitfield id="UCCE" width="1" begin="10" end="10" resetval="0x0" description="UIC COMMAND Completion Enable" range="" rwaccess="RW"/>
+    <bitfield id="UTMRCE" width="1" begin="9" end="9" resetval="0x0" description="UTP Task Management Request Completion Enable" range="" rwaccess="RW"/>
+    <bitfield id="ULSSE" width="1" begin="8" end="8" resetval="0x0" description="UIC Link Startup Status Enable" range="" rwaccess="RW"/>
+    <bitfield id="ULLSE" width="1" begin="7" end="7" resetval="0x0" description="UIC Link Lost Status Enable" range="" rwaccess="RW"/>
+    <bitfield id="UHESE" width="1" begin="6" end="6" resetval="0x0" description="UIC Hibernate Enter Status Enable" range="" rwaccess="RW"/>
+    <bitfield id="UHXSE" width="1" begin="5" end="5" resetval="0x0" description="UIC Hibernate Exit Status Enable" range="" rwaccess="RW"/>
+    <bitfield id="UPMSE" width="1" begin="4" end="4" resetval="0x0" description="UIC Power Mode Status Enable" range="" rwaccess="RW"/>
+    <bitfield id="UTMSE" width="1" begin="3" end="3" resetval="0x0" description="UIC Test Mode Status Enable" range="" rwaccess="RW"/>
+    <bitfield id="UEE" width="1" begin="2" end="2" resetval="0x0" description="UIC Error Enable" range="" rwaccess="RW"/>
+    <bitfield id="UDEPRIE" width="1" begin="1" end="1" resetval="0x0" description="UIC DME_ENDPOINTRESET" range="" rwaccess="RW"/>
+    <bitfield id="UTRCE" width="1" begin="0" end="0" resetval="0x0" description="UTP Transfer Request Completion Enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_HCS" acronym="UFS_HCS" offset="0x30" width="32" description="Host Controller Status Register The software shall check that the [2] UTMRLRDY bit is set to 1h before issuing a Task Management command. The software shall check that the [1] UTRLRDY bit is set to 1h before issuing an UTP command. The prerequisite to send any DME command is that the [0] HCE and [3] UCRDY bits are set to 1h. The hardware does not check nor restrict the usage of any UIC command. Sending the DME_ENABLE UIC command is not permitted. Additional UIC command specific prerequisites: DME cmd = DME_SET, DP = Don't care, UIC state = Don't care DME cmd = DME_GET, DP = Don't care, UIC state = Don't care DME cmd = DME_PEER_SET, DP = 1, UIC state = LinkUp DME cmd = DME_PEER_GET, DP = 1, UIC state = LinkUp DME cmd = DME_RESET, DP = Don't care, UIC state = Don't care DME cmd = DME_ENPOINTRESET, DP = 1, UIC state = LinkUp DME cmd = DME_LINKSTARTUP, DP = 0, UIC state = LinkDown DME cmd = DME_HIBERNATE_ENTER, DP = Don't care, UIC state = LinkUp, LinkDown DME cmd = DME_HIBERNATE_EXIT, DP = 0, UIC state = Hibernate">
+    <bitfield id="TLUNUTPE" width="8" begin="31" end="24" resetval="0x0" description="Target LUN of UTP Error" range="" rwaccess="R"/>
+    <bitfield id="TTAGUTPE" width="8" begin="23" end="16" resetval="0x0" description="Task Tag of UTP Error" range="" rwaccess="R"/>
+    <bitfield id="UTPEC" width="4" begin="15" end="12" resetval="0x0" description="UTP Error Code" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="11" end="11" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="UPMCRS" width="3" begin="10" end="8" resetval="0x0" description="UIC Power Mode Change Request Status" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="UCRDY" width="1" begin="3" end="3" resetval="0x0" description="UIC COMMAND Ready" range="" rwaccess="R"/>
+    <bitfield id="UTMRLRDY" width="1" begin="2" end="2" resetval="0x0" description="UTP Task Management Request List Ready" range="" rwaccess="R"/>
+    <bitfield id="UTRLRDY" width="1" begin="1" end="1" resetval="0x0" description="UTP Transfer Request List Ready" range="" rwaccess="R"/>
+    <bitfield id="DP" width="1" begin="0" end="0" resetval="0x0" description="Device Present" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_HCE" acronym="UFS_HCE" offset="0x34" width="32" description="Host Controller Enable Register">
+    <bitfield id="RESERVED" width="30" begin="31" end="2" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CGE" width="1" begin="1" end="1" resetval="0x0" description="Crypto General Enable" range="" rwaccess="RW"/>
+    <bitfield id="HCE" width="1" begin="0" end="0" resetval="0x0" description="Host Controller Enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_UECPA" acronym="UFS_UECPA" offset="0x38" width="32" description="Host Controller UIC Error Code PHY Adapter Layer Register Note: The register content is automatically cleared after reading.">
+    <bitfield id="ERR" width="1" begin="31" end="31" resetval="0x0" description="UIC PHY Adapter Layer Error" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="26" begin="30" end="5" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="EC" width="5" begin="4" end="0" resetval="0x0" description="UIC Adapter Layer Error" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_UECDL" acronym="UFS_UECDL" offset="0x3C" width="32" description="Host UIC Error Code Data Link Layer Register Note: The register content is automatically cleared after reading.">
+    <bitfield id="ERR" width="1" begin="31" end="31" resetval="0x0" description="UIC Data Link Layer Error" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="16" begin="30" end="15" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="EC" width="15" begin="14" end="0" resetval="0x0" description="UIC Data Link Layer Error" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_UECN" acronym="UFS_UECN" offset="0x40" width="32" description="Host UIC Error Code Network Layer Register Note: The register content is automatically cleared after reading.">
+    <bitfield id="ERR" width="1" begin="31" end="31" resetval="0x0" description="UIC Network Layer Error" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="28" begin="30" end="3" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="EC" width="3" begin="2" end="0" resetval="0x0" description="UIC Network Layer Error Code" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_UECT" acronym="UFS_UECT" offset="0x44" width="32" description="Host UIC Error Code Transport Layer Register Note: The register content is automatically cleared after reading.">
+    <bitfield id="ERR" width="1" begin="31" end="31" resetval="0x0" description="UIC Transport Layer Error" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="24" begin="30" end="7" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="EC" width="7" begin="6" end="0" resetval="0x0" description="UIC Transport Layer Error Code" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_UECDME" acronym="UFS_UECDME" offset="0x48" width="32" description="Host UIC Error Code DME Register The register is reserved for future use and is fixed to 0000 0000h. Note: The register content is automatically cleared after reading.">
+    <bitfield id="ERR" width="1" begin="31" end="31" resetval="0x0" description="UIC DME Error" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="30" begin="30" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="EC" width="1" begin="0" end="0" resetval="0x0" description="UIC DME Error Code" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_UTRIACR" acronym="UFS_UTRIACR" offset="0x4C" width="32" description="UTP Transfer Request Interrupt Aggregation Control Register">
+    <bitfield id="IAEN" width="1" begin="31" end="31" resetval="0x0" description="Interrupt Aggregation Enable/Disable" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="30" end="25" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="IAPWEN" width="1" begin="24" end="24" resetval="0x0" description="Interrupt Aggregation Parameter Write Enable" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="23" end="21" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="IASB" width="1" begin="20" end="20" resetval="0x0" description="Interrupt Aggregation Status Bit" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="19" end="17" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CTR" width="1" begin="16" end="16" resetval="0x0" description="Counter and Timer Reset" range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="IACTH" width="5" begin="12" end="8" resetval="0x0" description="Interrupt Aggregation Counter Threshold" range="" rwaccess="RW"/>
+    <bitfield id="IATOVAL" width="8" begin="7" end="0" resetval="0x0" description="Interrupt Aggregation Timeout Value" range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_UTRLBA" acronym="UFS_UTRLBA" offset="0x50" width="32" description="UTP Transfer Request List Base Address Register">
+    <bitfield id="UTRLBA" width="22" begin="31" end="10" resetval="0x0" description="UTP Transfer Request List Base Address" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_UTRLBAU" acronym="UFS_UTRLBAU" offset="0x54" width="32" description="UTP Transfer Request List Base Address Upper 32-bits Register Note: Since this UFS host controller implementation supports an 32-bit address bus, the upper 32-bit of the base address are ignored.">
+    <bitfield id="UTRLBAU" width="32" begin="31" end="0" resetval="0x0" description="UTP Transfer Request List Base Address Upper" range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_UTRLDBR" acronym="UFS_UTRLDBR" offset="0x58" width="32" description="UTP Transfer Request List Door Bell Register This register controls the basic actions of the host controller.">
+    <bitfield id="UTRLDBR" width="32" begin="31" end="0" resetval="0x0" description="UTP Transfer Request List Door Bell Register" range="" rwaccess="RW1S"/>
+  </register>
+  <register id="UFS_UTRLCLR" acronym="UFS_UTRLCLR" offset="0x5C" width="32" description="UTP Transfer Request List Clear Register">
+    <bitfield id="UTRLCLR" width="32" begin="31" end="0" resetval="0x0" description="UTP Transfer Request List Clear" range="" rwaccess="W"/>
+  </register>
+  <register id="UFS_UTRLRSR" acronym="UFS_UTRLRSR" offset="0x60" width="32" description="UTP Transfer Request List Run Stop Register This register controls the command processing of the UFS host controller.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="UTRLRSR" width="1" begin="0" end="0" resetval="0x0" description="UTP Transfer Request List Run-Stop" range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_UTRLCNR" acronym="UFS_UTRLCNR" offset="0x64" width="32" description="UTP Transfer Request List Completion Notification Register">
+    <bitfield id="UTRLCNR" width="32" begin="31" end="0" resetval="0x0" description="UTP Transfer Request List Completion Notification Register" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="UFS_UTMRLBA" acronym="UFS_UTMRLBA" offset="0x70" width="32" description="UTP Task Management Request List Base Address">
+    <bitfield id="UTMRLBA" width="22" begin="31" end="10" resetval="0x0" description="UTP Task Management Request List Base Address" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="10" begin="9" end="0" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_UTMRLBAU" acronym="UFS_UTMRLBAU" offset="0x74" width="32" description="UTP Task Management Request List Base Address Upper 32-bits Register Note: This register is only used when the host is configured to use a 64-bit address bus.">
+    <bitfield id="UTMRLBAU" width="32" begin="31" end="0" resetval="0x0" description="UTP Task Management Request List Base Address" range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_UTMRLDBR" acronym="UFS_UTMRLDBR" offset="0x78" width="32" description="UTP Task Management Request List Door Bell Register">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="UTMRLDBR" width="8" begin="7" end="0" resetval="0x0" description="UTP Task Management Request List Doorbell Register" range="" rwaccess="RW1S"/>
+  </register>
+  <register id="UFS_UTMRLCLR" acronym="UFS_UTMRLCLR" offset="0x7C" width="32" description="UTP Task Management Request List Clear Register">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="UTMRLCLR" width="8" begin="7" end="0" resetval="0x0" description="UTP Task Management List Clear Register" range="" rwaccess="W"/>
+  </register>
+  <register id="UFS_UTMRLRSR" acronym="UFS_UTMRLRSR" offset="0x80" width="32" description="- UTP Task Management Request List Run Stop Register">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="UTMRLRSR" width="1" begin="0" end="0" resetval="0x0" description="UTP Task Management Request List Run-Stop Register" range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_UICCMD" acronym="UFS_UICCMD" offset="0x90" width="32" description="UIC Command Register Sending the DME_ENABLE UIC command is not permitted since this will be done automatically during the UFS host controller initialization.">
+    <bitfield id="RESERVED" width="24" begin="31" end="8" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CMDOP" width="8" begin="7" end="0" resetval="0x0" description="Command Opcode" range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_UICCMDARG1" acronym="UFS_UICCMDARG1" offset="0x94" width="32" description="UIC Command Argument 1 Register MIBattribute: Indicates the ID of the attribute of the requested. See MIPI UniPro Specification (UNIPRO) for the details of the MIBattribute parameter. GenSelectorIndex: Indicates the targeted M-PHY data lane or CPort or Test Feature when relevant. See MIPI UniPro Specification (UNIPRO) for the details of the GenSelectorIndex parameter. Layer: L1 - Valid Range: 0 to 2&#215;PA_MaxDataLanes - 1 Layer: L4/Cport - Valid Range: 0 to T_NumCPorts - 1 Layer: L4/Test Feature - Valid Range: 0 to T_NumTestFeatures - 1 ResetLevel: Indicates the reset type. See MIPI UniPro Specification (UNIPRO) for the details of the ResetLevel parameter. 0h - Cold Reset 1h - Warm Reset 2h-FFh - Reserved">
+    <bitfield id="ARG1" width="32" begin="31" end="0" resetval="0x0" description="UIC Command Argument 1 (MIBattribute, GenSelectorIndex, ResetLevel)" range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_UICCMDARG2" acronym="UFS_UICCMDARG2" offset="0x98" width="32" description="UIC Command Argument 2 Register AttrSetType: Indicates whether the attribute value (AttrSet = NORMAL) or the attribute non-volatile reset value (STATIC) setting is requested. See MIPI UniPro Specification (UNIPRO) for the details of the AttrSetType parameter. ConfigResultCode: Indicates the result of the UIC configuration command request. It is valid after host controller has set the [10] UCCS bit to 1h. See MIPI UniPro Specification (UNIPRO) for the details of the ConfigResultCode parameter. 0h = SUCCESS 1h = INVALID_MIB_ATTRIBUTE 2h = INVALID_MIB_ATTRIBUTE_VALUE 3h = READ_ONLY_MIB_ATTRIBUTE 4h = WRITE_ONLY_MIB_ATTRIBUTE 5h = BAD_INDEX 6h = LOCKED_MIB_ATTRIBUTE 7h = BAD_TEST_FEATURE_INDEX 8h = PEER_COMMUNICATION_FAILURE 9h = BUSY Ah = DME_FAILURE Bh-FFh = Reserved GenericErrorCode: Indicates the result of the UIC control command request. It is valid after host controller has set the [10] UCCS bit to 1h. See MIPI UniPro Specification (UNIPRO) for the details of the GenericErrorCode parameter. 0h = SUCCESS 1h = FAILURE 2h-FFh = Reserved">
+    <bitfield id="ARG2" width="32" begin="31" end="0" resetval="0x0" description="UIC Command Argument 2 (AttrSetType, ConfigResultCode, GenericErrorCode)" range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_UICCMDARG3" acronym="UFS_UICCMDARG3" offset="0x9C" width="32" description="UIC Command Argument 3 Register MIBvalue_R: Indicates the value of the attribute as returned by the UIC command returned. It is valid after host controller has set the [10] UCCS bit to 1h. See MIPI UniPro Specification (UNIPRO) for the details of the MIBvalue parameter. MIBvalue_W: Indicates the value of the attribute to be set. See MIPI UniPro Specification (UNIPRO) for details of the MIBvalue parameter.">
+    <bitfield id="ARG3" width="32" begin="31" end="0" resetval="0x0" description="Argument 3" range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_SYSTHRTL" acronym="UFS_SYSTHRTL" offset="0xA0" width="32" description="SYS Throttling Register In case of heavy data traffic, the UFS host controller might not leave sufficient bandwidth of the OCP/AXI fabric for other peripheral. This register allows throttling the UFS host controller either by limiting the number of outstanding read requests on the OCP/AXI bus or by specifying a minimum delay between two consecutive OCP/AXI accesses. Limiting the number of outstanding requests may also be required in case the bus fabric can only handle a limited amount of requests.">
+    <bitfield id="RESERVED" width="7" begin="31" end="25" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="MAXOSYSRW" width="9" begin="24" end="16" resetval="0x18" description="Max Outstanding SYS Write Requests (AXI Only)" range="" rwaccess="RW"/>
+    <bitfield id="MAXOSYSRR" width="8" begin="15" end="8" resetval="0x12" description="Max Outstanding SYS Read Requests" range="" rwaccess="RW"/>
+    <bitfield id="SYSDLY" width="8" begin="7" end="0" resetval="0x0" description="SYS Delay" range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_HCI_MMIO_TOSH_UNIRESPOL" acronym="UFS_HCI_MMIO_TOSH_UNIRESPOL" offset="0xAC" width="32" description="UniPro Reset Polling Register">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="RESPOL" width="1" begin="0" end="0" resetval="0x0" description="UniPro Reset Polling" range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_OSYSR" acronym="UFS_OSYSR" offset="0xC4" width="32" description="Outstanding SYS Requests Register">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="OSYSW" width="6" begin="11" end="6" resetval="0x0" description="Outstanding SYS Write Requests" range="" rwaccess="R"/>
+    <bitfield id="OSYSR" width="6" begin="5" end="0" resetval="0x0" description="Outstanding SYS Read Requests" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_XCNF" acronym="UFS_XCNF" offset="0xC8" width="32" description="Extended Configuration Register">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="PCPCONFEX" width="2" begin="17" end="16" resetval="0x0" description="Peer C-Port Configuration Extended" range="" rwaccess="RW"/>
+    <bitfield id="DSGM" width="2" begin="15" end="14" resetval="0x0" description="Deep-Sleep Generation Mode" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="13" end="13" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CAPWREN" width="1" begin="12" end="12" resetval="0x0" description="Capability Register Write Enable" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="11" end="11" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="MHSDIS" width="1" begin="10" end="10" resetval="0x0" description="MHSDIS" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="9" end="8" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="MCLKGE" width="5" begin="7" end="3" resetval="0x0" description="Module Clock Gating Enable" range="" rwaccess="RW"/>
+    <bitfield id="AXIIDS" width="1" begin="2" end="2" resetval="0x1" description="AXI ID support" range="" rwaccess="RW"/>
+    <bitfield id="DSE" width="1" begin="1" end="1" resetval="0x0" description="Deep Sleep Enable" range="" rwaccess="RW"/>
+    <bitfield id="XRSE" width="1" begin="0" end="0" resetval="0x0" description="Extended Register Space Enable" range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_ADSIT" acronym="UFS_ADSIT" offset="0xCC" width="32" description="Auto-Deep-Sleep Idle Timer Register UFS utilizes UniPro and SCSI standards as its power management framework. To improve power efficiency, the UFS host controller may support a mechanism called deep-sleep. Deep-Sleep allows the host controller to put the UFS link into deep-sleep state autonomously. Unlike hibernation, deep-sleep can be entered without input or information from the (UFS) application layer. Thus, deep-sleep is transparent to the UFS software stack. In case, both, Auto-Hibernate and Auto-DeepSleep are both enabled, the Auto Hibernate Time shall be set greater than the Auto DeepSleep Time: [12-10] TS bit filed &#215; [9-0] AH8ITV bit filed greater than [12-10] TS bit filed &#215; [9-0] ADSTV bit filed">
+    <bitfield id="RESERVED" width="19" begin="31" end="13" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="TS" width="3" begin="12" end="10" resetval="0x0" description="Time Scale" range="" rwaccess="RW"/>
+    <bitfield id="ADSTV" width="10" begin="9" end="0" resetval="0x0" description="Auto-Deep-Sleep Idle Timer Value" range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_CDACFG" acronym="UFS_CDACFG" offset="0xD0" width="32" description="C-Port Direct Access Configuration Register This register configures and manages the basic functionality of this feature. To use this function in a 128-bit system, the IP module provides shadow register for the upper 64 bit data. A write in the following order is required: , CDATX1S, , CDATX2S. For receive data, a read in the following order is required: , CDARX1S, , CDARX2S.">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CDAEN" width="1" begin="28" end="28" resetval="0x0" description="C-Port Direct Access Enable" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="11" begin="27" end="17" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CDAEOM" width="1" begin="16" end="16" resetval="0x0" description="C-Port Direct Access" range="" rwaccess="RW"/>
+    <bitfield id="CDABE" width="8" begin="15" end="8" resetval="0x0" description="C-Port Direct Access Byte Enables" range="" rwaccess="RW"/>
+    <bitfield id="CDABES" width="8" begin="7" end="0" resetval="0x0" description="C-Port Direct Access Shadow Byte Enables" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_CDATX1" acronym="UFS_CDATX1" offset="0xD4" width="32" description="C-Port Direct Access Transmit 1 Register This register takes the lower 32 bit of the 64-bit data word to be transferred. In a 128-bit implementation, an additional shadow register is available under the same address. Thus two writes are required to set the lower 64 bit of a received 128-bit word. Note: Since the UIC layer follows big endian byte order, also the and registers follow big endian byte order.">
+    <bitfield id="CDATX1B4" width="8" begin="31" end="24" resetval="0x0" description="CDATX1B" range="" rwaccess="RW"/>
+    <bitfield id="CDATX1B5" width="8" begin="23" end="16" resetval="0x0" description="CDATX1B" range="" rwaccess="RW"/>
+    <bitfield id="CDATX1B6" width="8" begin="15" end="8" resetval="0x0" description="CDATX1B" range="" rwaccess="RW"/>
+    <bitfield id="CDATX1B7" width="8" begin="7" end="0" resetval="0x0" description="CDATX1B" range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_CDATX2" acronym="UFS_CDATX2" offset="0xD8" width="32" description="C-Port Direct Access Transmit 2 Register This register takes the lower 32 bit of the 64-bit data word to be transferred. Writing to this address will push the data to the UniPro adapter. In a 128bit implementation, an additional shadow register is available under the same address. Thus two writes are required to set the lower 64 bit of a received 128-bit word. Note: Since the UIC layer follows big endian byte order, also the and registers follow big endian byte order.">
+    <bitfield id="CDATX2B0" width="8" begin="31" end="24" resetval="0x0" description="CDATX2B" range="" rwaccess="RW"/>
+    <bitfield id="CDATX2B1" width="8" begin="23" end="16" resetval="0x0" description="CDATX2B" range="" rwaccess="RW"/>
+    <bitfield id="CDATX2B2" width="8" begin="15" end="8" resetval="0x0" description="CDATX2B" range="" rwaccess="RW"/>
+    <bitfield id="CDATX2B3" width="8" begin="7" end="0" resetval="0x0" description="CDATX2B" range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_CDARX1" acronym="UFS_CDARX1" offset="0xDC" width="32" description="C-Port Direct Access Receive 1 Register This register takes the lower 32 bit of the received 64-bit data word in case of a 64-bit system bus configuration. In a 128-bit implementation, an additional shadow register is available under the same address. Thus two reads are required to get the lower 64 bit of a received 128-bit word. Note: Since the UIC layer follows big endian byte order, also the and registers follow big endian byte order.">
+    <bitfield id="CDARX1B4" width="8" begin="31" end="24" resetval="0x0" description="CDARX1B" range="" rwaccess="R"/>
+    <bitfield id="CDARX1B5" width="8" begin="23" end="16" resetval="0x0" description="CDARX1B" range="" rwaccess="R"/>
+    <bitfield id="CDARX1B6" width="8" begin="15" end="8" resetval="0x0" description="CDARX1B" range="" rwaccess="R"/>
+    <bitfield id="CDARX1B7" width="8" begin="7" end="0" resetval="0x0" description="CDARX1B" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_CDARX2" acronym="UFS_CDARX2" offset="0xE0" width="32" description="C-Port Direct Access Receive 2 Register This register takes the upper 32 bit of the received 64-bit data word. In a 128-bit implementation, an additional shadow register is available under the same address. Thus two reads are required to get the upper 64 bit of a received 128-bit word. Note: Since the UIC layer follows big endian byte order, also the and registers follow big endian byte order.">
+    <bitfield id="CDARX2B0" width="8" begin="31" end="24" resetval="0x0" description="CDARX2B" range="" rwaccess="R"/>
+    <bitfield id="CDARX2B1" width="8" begin="23" end="16" resetval="0x0" description="CDARX2B" range="" rwaccess="R"/>
+    <bitfield id="CDARX2B2" width="8" begin="15" end="8" resetval="0x0" description="CDARX2B" range="" rwaccess="R"/>
+    <bitfield id="CDARX2B3" width="8" begin="7" end="0" resetval="0x0" description="CDARX2B" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_CDASTA" acronym="UFS_CDASTA" offset="0xE4" width="32" description="C-Port Direct Access Status Register This register contains status information related to the last transfer.">
+    <bitfield id="RESERVED" width="9" begin="31" end="23" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CDARES" width="3" begin="22" end="20" resetval="0x0" description="C-Port Direct Access Result" range="" rwaccess="R"/>
+    <bitfield id="CDABUSY" width="1" begin="19" end="19" resetval="0x0" description="C-Port Direct Access Busy" range="" rwaccess="R"/>
+    <bitfield id="CDASTA" width="1" begin="18" end="18" resetval="0x0" description="C-Port Direct Access Status" range="" rwaccess="R"/>
+    <bitfield id="CDAEOM" width="1" begin="17" end="17" resetval="0x0" description="C-Port Direct Access EOM" range="" rwaccess="R"/>
+    <bitfield id="CDASOM" width="1" begin="16" end="16" resetval="0x0" description="C-Port Direct Access SOM" range="" rwaccess="R"/>
+    <bitfield id="CDABE" width="8" begin="15" end="8" resetval="0x0" description="C-Port Direct Access Byte Enable" range="" rwaccess="R"/>
+    <bitfield id="CDASBE" width="8" begin="7" end="0" resetval="0x0" description="C-Port Direct Access Shadow Byte Enable" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_XASB" acronym="UFS_XASB" offset="0xE8" width="32" description="Extended Address Space Base Register">
+    <bitfield id="RESERVED" width="18" begin="31" end="14" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="PEP" width="6" begin="13" end="8" resetval="0x3" description="Pseudo Error Page" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="7" end="6" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="XDP" width="6" begin="5" end="0" resetval="0x2" description="Extended Debug Page" range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_LBMCFG" acronym="UFS_LBMCFG" offset="0xF0" width="32" description="UPIU Loopback Configuration Register">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="BEP" width="4" begin="19" end="16" resetval="0x0" description="Byte Enable Pattern" range="" rwaccess="RW"/>
+    <bitfield id="BEPS" width="1" begin="15" end="15" resetval="0x0" description="Byte Enable Pattern Selection" range="" rwaccess="RW"/>
+    <bitfield id="TRTLDV" width="4" begin="14" end="11" resetval="0x1" description="Throttle Divide" range="" rwaccess="RW"/>
+    <bitfield id="MRTTE" width="1" begin="10" end="10" resetval="0x0" description="Multi RTT Enable" range="" rwaccess="RW"/>
+    <bitfield id="LBME" width="1" begin="9" end="9" resetval="0x0" description="Loopback Enable bit" range="" rwaccess="RW"/>
+    <bitfield id="PDSIZE" width="4" begin="8" end="5" resetval="0x0" description="Data Size" range="" rwaccess="RW"/>
+    <bitfield id="USDLY" width="1" begin="4" end="4" resetval="0x0" description="UPIU Source Delay" range="" rwaccess="RW"/>
+    <bitfield id="UDLY" width="4" begin="3" end="0" resetval="0x0" description="UPIU Delay" range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_LBMSTA" acronym="UFS_LBMSTA" offset="0xF4" width="32" description="UPIU Loopback Status Register">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ERR" width="1" begin="0" end="0" resetval="0x0" description="Error Indicator" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_DBG" acronym="UFS_DBG" offset="0xF8" width="32" description="Debug Register">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="HCIER" width="2" begin="17" end="16" resetval="0x0" description="Host Controller Internal Error Register" range="" rwaccess="R"/>
+    <bitfield id="HCSTATE" width="16" begin="15" end="0" resetval="0x0" description="Host Controller State" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_HCLKDIV" acronym="UFS_HCLKDIV" offset="0xFC" width="32" description="Host Clock Divider Register Note: This register configures the Tick1us clock required by UniPro. This clock is actually a 500 KHz signal, thus there is one clock edge every 1 &#181;s (rising and falling). This signal is used for UniPro internal counters. The signal is not used as a clock directly. Rather the UniPro logic is doing an edge detection and the signal sampled inside the core. As an alternative the UFSHCI also provides an external input ad a select to provide the signal. From a system's point of view, this signal may be created by the M-PHY logic.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="HCLKDIV" width="16" begin="15" end="0" resetval="0x190" description="Host Clock Divide" range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_CCAP" acronym="UFS_CCAP" offset="0x100" width="32" description="Crypto Capabilities Register">
+    <bitfield id="CFGPTR" width="8" begin="31" end="24" resetval="0x5" description="Configuration Array Pointer" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="8" begin="23" end="16" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CFGC" width="8" begin="15" end="8" resetval="0x1" description="Configuration Count" range="" rwaccess="R"/>
+    <bitfield id="CC" width="8" begin="7" end="0" resetval="0x1" description="Crypto Capabilities" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_CRYPTOCAP" acronym="UFS_CRYPTOCAP" offset="0x104" width="32" description="Crypto Capability X Register">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="KS" width="8" begin="23" end="16" resetval="0x1" description="Key Size" range="" rwaccess="R"/>
+    <bitfield id="SDUSB" width="8" begin="15" end="8" resetval="0x8" description="Supported Data Unit Size Bitmask" range="" rwaccess="R"/>
+    <bitfield id="ALGID" width="8" begin="7" end="0" resetval="0x2" description="Algorithm" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_CRYPTOCFG0" acronym="UFS_CRYPTOCFG0" offset="0x500" width="32" description="Crypto Configuration 0 Register">
+    <bitfield id="CRYPTOKEY0" width="32" begin="31" end="0" resetval="0x0" description="Crypto Key 0" range="" rwaccess="W"/>
+  </register>
+  <register id="UFS_CRYPTOCFG1" acronym="UFS_CRYPTOCFG1" offset="0x504" width="32" description="Crypto Configuration 1 Register">
+    <bitfield id="CRYPTOKEY1" width="32" begin="31" end="0" resetval="0x0" description="Crypto Key 1" range="" rwaccess="W"/>
+  </register>
+  <register id="UFS_CRYPTOCFG2" acronym="UFS_CRYPTOCFG2" offset="0x508" width="32" description="Crypto Configuration 2 Register">
+    <bitfield id="CRYPTOKEY2" width="32" begin="31" end="0" resetval="0x0" description="Crypto Key 2" range="" rwaccess="W"/>
+  </register>
+  <register id="UFS_CRYPTOCFG3" acronym="UFS_CRYPTOCFG3" offset="0x50C" width="32" description="Crypto Configuration 3 Register">
+    <bitfield id="CRYPTOKEY3" width="32" begin="31" end="0" resetval="0x0" description="Crypto Key 3" range="" rwaccess="W"/>
+  </register>
+  <register id="UFS_CRYPTOCFG16" acronym="UFS_CRYPTOCFG16" offset="0x540" width="32" description="Crypto Configuration 16 Register">
+    <bitfield id="CFGE" width="1" begin="31" end="31" resetval="0x0" description="Configuration Enable" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="15" begin="30" end="16" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CAPIDX" width="8" begin="15" end="8" resetval="0x0" description="Crypto Capability Index" range="" rwaccess="RW"/>
+    <bitfield id="DUSIZE" width="8" begin="7" end="0" resetval="0x0" description="Data Unit Size" range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_CRYPTOCFG17" acronym="UFS_CRYPTOCFG17" offset="0x544" width="32" description="Crypto Configuration 17 Register">
+    <bitfield id="VSB" width="16" begin="31" end="16" resetval="0x0" description="Vendor-Specific Bits" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="16" begin="15" end="0" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_CRYPTOCFG32" acronym="UFS_CRYPTOCFG32" offset="0x580" width="32" description="Crypto Configuration 0 for Second Crypto Configuration Register">
+    <bitfield id="CRYPTOKEY32" width="32" begin="31" end="0" resetval="0x0" description="Crypto Key 0 for second crypto configuration" range="" rwaccess="W"/>
+  </register>
+  <register id="UFS_CRYPTOCFG33" acronym="UFS_CRYPTOCFG33" offset="0x584" width="32" description="Crypto Configuration 1 for Second Crypto Configuration Register">
+    <bitfield id="CRYPTOKEY33" width="32" begin="31" end="0" resetval="0x0" description="Crypto Key 1 for second crypto configuration" range="" rwaccess="W"/>
+  </register>
+  <register id="UFS_CRYPTOCFG34" acronym="UFS_CRYPTOCFG34" offset="0x588" width="32" description="Crypto Configuration 2 for Second Crypto Configuration Register">
+    <bitfield id="CRYPTOKEY34" width="32" begin="31" end="0" resetval="0x0" description="Crypto Key 2 for second crypto configuration" range="" rwaccess="W"/>
+  </register>
+  <register id="UFS_CRYPTOCFG35" acronym="UFS_CRYPTOCFG35" offset="0x58C" width="32" description="Crypto Configuration 3 for Second Crypto Configuration Register">
+    <bitfield id="CRYPTOKEY35" width="32" begin="31" end="0" resetval="0x0" description="Crypto Key 3 for second crypto configuration" range="" rwaccess="W"/>
+  </register>
+  <register id="UFS_CRYPTOCFG48" acronym="UFS_CRYPTOCFG48" offset="0x5C0" width="32" description="Crypto Configuration 16 for Second Crypto Configuration Register">
+    <bitfield id="CFGE1" width="1" begin="31" end="31" resetval="0x0" description="Configuration Enable for second crypto configuration" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="15" begin="30" end="16" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CAPIDX1" width="8" begin="15" end="8" resetval="0x0" description="Crypto Capability Index for second crypto configuration" range="" rwaccess="RW"/>
+    <bitfield id="DUSIZE1" width="8" begin="7" end="0" resetval="0x0" description="Data Unit Size for second crypto configuration" range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_CRYPTOCFG49" acronym="UFS_CRYPTOCFG49" offset="0x5C4" width="32" description="Crypto Configuration 17 for Second Crypto Configuration Register">
+    <bitfield id="VSB1" width="16" begin="31" end="16" resetval="0x0" description="Vendor-Specific Bits for Second Crypto Configuration" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="16" begin="15" end="0" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_ASF_INT_STATUS" acronym="UFS_ASF_INT_STATUS" offset="0x1000" width="32" description="ASF Interrupt Status Register This register indicates the source of ASF interrupts. The corresponding bit in the mask register must be clear for a bit to be set. If any bit is set in this register the asf_int_fatal or asf_int_nonfatal signal will be asserted. Writing to either raw or masked status registers, clear both registers. For test purposes, trigger signal interrupt event by writing to the ASF interrupt status test register.">
+    <bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ASF_INTEGRITY_ERR" width="1" begin="6" end="6" resetval="0x0" description="Integrity error interrupt" range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_PROTOCOL_ERR" width="1" begin="5" end="5" resetval="0x0" description="Protocol error interrupt" range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_TRANS_TO_ERR" width="1" begin="4" end="4" resetval="0x0" description="Transaction timeouts error interrupt" range="" rwaccess="RW1C"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="2" end="2" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ASF_SRAM_UNCORR_ERR" width="1" begin="1" end="1" resetval="0x0" description="SRAM uncorrectable error interrupt" range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_SRAM_CORR_ERR" width="1" begin="0" end="0" resetval="0x0" description="SRAM correctable error interrupt" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="UFS_ASF_INT_RAW_STATUS" acronym="UFS_ASF_INT_RAW_STATUS" offset="0x1004" width="32" description="ASF Interrupt Raw Status Register A bit set in this raw register indicates a source of ASF fault in the corresponding feature. Writing to either raw or masked status registers, clear both registers. For test purposes, trigger signal interrupt event by writing to the ASF interrupt status test register.">
+    <bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ASF_INTEGRITY_ERR" width="1" begin="6" end="6" resetval="0x0" description="Integrity error interrupt" range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_PROTOCOL_ERR" width="1" begin="5" end="5" resetval="0x0" description="Protocol error interrupt" range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_TRANS_TO_ERR" width="1" begin="4" end="4" resetval="0x0" description="Transaction timeouts error interrupt" range="" rwaccess="RW1C"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="2" end="2" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ASF_SRAM_UNCORR_ERR" width="1" begin="1" end="1" resetval="0x0" description="SRAM uncorrectable error interrupt" range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_SRAM_CORR_ERR" width="1" begin="0" end="0" resetval="0x0" description="SRAM correctable error interrupt" range="" rwaccess="RW1C"/>
+  </register>
+  <register id="UFS_ASF_INT_MASK" acronym="UFS_ASF_INT_MASK" offset="0x1008" width="32" description="ASF Interrupt Mask Register The ASF interrupt mask register indicating which interrupt bits in the ASF interrupt status register are masked. All bits are set at reset. Clear the individual bit to enable the corresponding interrupt.">
+    <bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ASF_INTEGRITY_ERR_MASK" width="1" begin="6" end="6" resetval="0x1" description="Mask bit for integrity error interrupt" range="" rwaccess="RW"/>
+    <bitfield id="ASF_PROTOCOL_ERR_MASK" width="1" begin="5" end="5" resetval="0x1" description="Mask bit for protocol error interrupt." range="" rwaccess="RW"/>
+    <bitfield id="ASF_TRANS_TO_ERR_MASK" width="1" begin="4" end="4" resetval="0x1" description="Mask bit for transaction timeouts error interrupt." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="2" end="2" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ASF_SRAM_UNCORR_ERR_MASK" width="1" begin="1" end="1" resetval="0x1" description="Mask bit for SRAM uncorrectable error interrupt." range="" rwaccess="RW"/>
+    <bitfield id="ASF_SRAM_CORR_ERR_MASK" width="1" begin="0" end="0" resetval="0x1" description="Mask bit for SRAM correctable error interrupt." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_ASF_INT_TEST" acronym="UFS_ASF_INT_TEST" offset="0x100C" width="32" description="ASF Interrupt Test Register The ASF interrupt test register emulate hardware even. Write one to individual bit to trigger single event in (masked and raw) status registers according to mask and will generate interrupt accordingly.">
+    <bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ASF_INTEGRITY_ERR_TEST" width="1" begin="6" end="6" resetval="0x1" description="Test bit for integrity error interrupt" range="" rwaccess="W"/>
+    <bitfield id="ASF_PROTOCOL_ERR_TEST" width="1" begin="5" end="5" resetval="0x1" description="Test bit for protocol error interrupt." range="" rwaccess="W"/>
+    <bitfield id="ASF_TRANS_TO_ERR_TEST" width="1" begin="4" end="4" resetval="0x1" description="Test bit for transaction timeouts error interrupt." range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="2" end="2" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ASF_SRAM_UNCORR_ERR_TEST" width="1" begin="1" end="1" resetval="0x1" description="Test bit for SRAM uncorrectable error interrupt." range="" rwaccess="W"/>
+    <bitfield id="ASF_SRAM_CORR_ERR_TEST" width="1" begin="0" end="0" resetval="0x1" description="Test bit for SRAM correctable error interrupt." range="" rwaccess="W"/>
+  </register>
+  <register id="UFS_ASF_FATAL_NONFATAL_SELECT" acronym="UFS_ASF_FATAL_NONFATAL_SELECT" offset="0x1010" width="32" description="Fatal or Non-Fatal Interrupt Register The fatal or non-fatal interrupt register selects whether a fatal (asf_int_fatal) or non-fatal (asf_int_nonfatal) interrupt is triggered. If the bit of the event will be set to one then fatal interrupt (asf_int_fatal) will be triggered. Otherwise the non-fatal interrupt (asf_int_nonfatal) will be triggered.">
+    <bitfield id="RESERVED" width="25" begin="31" end="7" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ASF_INTEGRITY_ERR" width="1" begin="6" end="6" resetval="0x1" description="Enable integrity error interrupt as fatal" range="" rwaccess="RW"/>
+    <bitfield id="ASF_PROTOCOL_ERR" width="1" begin="5" end="5" resetval="0x1" description="Enable protocol error interrupt as fatal." range="" rwaccess="RW"/>
+    <bitfield id="ASF_TRANS_TO_ERR" width="1" begin="4" end="4" resetval="0x1" description="Enable transaction timeouts error interrupt as fatal." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="2" end="2" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ASF_SRAM_UNCORR_ERR" width="1" begin="1" end="1" resetval="0x1" description="Enable SRAM uncorrectable error interrupt as fatal." range="" rwaccess="RW"/>
+    <bitfield id="ASF_SRAM_CORR_ERR" width="1" begin="0" end="0" resetval="0x1" description="Enable SRAM correctable error interrupt as fatal." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_ASF_SRAM_CORR_FAULT_STATUS" acronym="UFS_ASF_SRAM_CORR_FAULT_STATUS" offset="0x1020" width="32" description="Status Register for SRAM Correctable Fault Register This captures all SRAM ECC Correctable Errors. This records the Instance and the address of the first error seen in the SRAM Correctable error.">
+    <bitfield id="ASF_SRAM_CORR_FAULT_INST" width="8" begin="31" end="24" resetval="0x0" description="This encoding indicates which SRAM Instance has a Correctable Fault." range="" rwaccess="R"/>
+    <bitfield id="ASF_SRAM_CORR_FAULT_ADDR" width="24" begin="23" end="0" resetval="0x0" description="This indicates the address where the Correctable fault was observed." range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_ASF_SRAM_UNCORR_FAULT_STATUS" acronym="UFS_ASF_SRAM_UNCORR_FAULT_STATUS" offset="0x1024" width="32" description="Status Register (For SRAM Uncorrectable Fault) This captures all SRAM ECC UnCorrectable Errors. Uncorrectable Errors Include both ECC multi bit errors and parity errors found on data and address for SRAM. This records the Instance and the address of the first error seen in the SRAM UnCorrectable error.">
+    <bitfield id="ASF_SRAM_UNCORR_FAULT_INST" width="8" begin="31" end="24" resetval="0x0" description="This encoding indicates which SRAM Instance has a UnCorrectable Fault." range="" rwaccess="R"/>
+    <bitfield id="ASF_SRAM_UNCORR_FAULT_ADDR" width="24" begin="23" end="0" resetval="0x0" description="This indicates the address where the UnCorrectable fault was observed." range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_ASF_SRAM_FAULT_STATS" acronym="UFS_ASF_SRAM_FAULT_STATS" offset="0x1028" width="32" description="Statistics Register (For SRAM Faults) Note that this register clears when software writes to any field.">
+    <bitfield id="ASF_SRAM_FAULT_UNCORR_STATS" width="16" begin="31" end="16" resetval="0x0" description="Count of number of uncorrectable errors if implemented." range="" rwaccess="RW1C"/>
+    <bitfield id="ASF_SRAM_FAULT_CORR_STATS" width="16" begin="15" end="0" resetval="0x0" description="Count of number of correctable errors if implemented." range="" rwaccess="RW1C"/>
+  </register>
+  <register id="UFS_ASF_TRANS_TO_CTRL" acronym="UFS_ASF_TRANS_TO_CTRL" offset="0x1030" width="32" description="Control Register (To Configure The ASF Transaction Timeout Monitors)">
+    <bitfield id="ASF_TRANS_TO_EN" width="1" begin="31" end="31" resetval="0x0" description="Enable transaction timeout monitoring." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="15" begin="30" end="16" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ASF_TRANS_TO_CTRL" width="16" begin="15" end="0" resetval="0x0" description="Reserved" range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_ASF_TRANS_TO_FAULT_MASK" acronym="UFS_ASF_TRANS_TO_FAULT_MASK" offset="0x1034" width="32" description="Control Register (To Mask Out ASF Transaction Timeout Faults From Triggering Interrupts) On reset, all bits are set to mask out all sources. Clear the corresponding bit to enable the interrupt source. The width of this field is parameterizable and the bit definitions are implementation specific.">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="TCX_REPL_TMR_MASK" width="1" begin="2" end="2" resetval="0x1" description="TCx_REPLAY_TIMER_EXPIRED mask." range="" rwaccess="RW"/>
+    <bitfield id="AFCX_REQ_TMR_MASK" width="1" begin="1" end="1" resetval="0x1" description="AFCx_REQUEST_TIMER_EXPIRED mask." range="" rwaccess="RW"/>
+    <bitfield id="FCX_PROT_TMR_MASK" width="1" begin="0" end="0" resetval="0x1" description="FCx_PROTECTION_TIMER_EXPIRED mask." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_ASF_TRANS_TO_FAULT_STATUS" acronym="UFS_ASF_TRANS_TO_FAULT_STATUS" offset="0x1038" width="32" description="Status Register (For Transaction Timeouts Fault) Status register for transaction timeouts fault. If a fault occurs the relevant status bit will be set to 1h. Each bit can be cleared by software writing 1h to each bit.">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="TCX_REPL_TMR_ERR" width="1" begin="2" end="2" resetval="0x0" description="TCx_REPLAY_TIMER_EXPIRED timeout detected." range="" rwaccess="RW1C"/>
+    <bitfield id="AFCX_REQ_TMR_ERR" width="1" begin="1" end="1" resetval="0x0" description="AFCx_REQUEST_TIMER_EXPIRED timeout detected." range="" rwaccess="RW1C"/>
+    <bitfield id="FCX_PROT_TMR_ERR" width="1" begin="0" end="0" resetval="0x0" description="FCx_PROTECTION_TIMER_EXPIRED timeout detected." range="" rwaccess="RW1C"/>
+  </register>
+  <register id="UFS_ASF_PROTOCOL_FAULT_MASK" acronym="UFS_ASF_PROTOCOL_FAULT_MASK" offset="0x1040" width="32" description="Control Register (To Mask Out ASF Protocol Faults From Triggering Interrupts) On reset, all bits are set to mask out all sources. Clear the corresponding bit to enable the interrupt source. The width of this field is parameterizable and the bit definitions are implementation specific.">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="PA_IND_RCV_MASK" width="1" begin="11" end="11" resetval="0x1" description="When set to 1h disables the UniPro PA_ERROR_IND_RECEIVED." range="" rwaccess="RW"/>
+    <bitfield id="PA_INT_MASK" width="1" begin="10" end="10" resetval="0x1" description="When set to 1h disables the UniPro PA_INIT_ERROR." range="" rwaccess="RW"/>
+    <bitfield id="BAD_CTRL_S_MASK" width="1" begin="9" end="9" resetval="0x1" description="When set to 1h disables the UniPro BAD_CTRL_SYMBOL_TYPE." range="" rwaccess="RW"/>
+    <bitfield id="FRM_S_MASK" width="1" begin="8" end="8" resetval="0x1" description="When set to 1h disables the UniPro FRAME_SYNTAX_ERROR." range="" rwaccess="RW"/>
+    <bitfield id="EOF_S_MASK" width="1" begin="7" end="7" resetval="0x1" description="When set to 1h disables the UniPro EOF_SYNTAX_ERROR." range="" rwaccess="RW"/>
+    <bitfield id="NAC_F_S_MASK" width="1" begin="6" end="6" resetval="0x1" description="When set to 1h disables the UniPro NAC_FRAME_SYNTAX_ERROR." range="" rwaccess="RW"/>
+    <bitfield id="AFC_F_S_MASK" width="1" begin="5" end="5" resetval="0x1" description="When set to 1h disables the UniPro AFC_FRAME_SYNTAX_ERROR." range="" rwaccess="RW"/>
+    <bitfield id="WSQ_NO_MASK" width="1" begin="4" end="4" resetval="0x1" description="When set to 1h disables the UniPro WRONG_SEQUENCE_NUMBER." range="" rwaccess="RW"/>
+    <bitfield id="MFL_EX_MASK" width="1" begin="3" end="3" resetval="0x1" description="When set to 1h disables the UniPro MAX_FRAME_LENGTH_EXCEEDED." range="" rwaccess="RW"/>
+    <bitfield id="RXBUG_OF_MASK" width="1" begin="2" end="2" resetval="0x1" description="When set to 1h disables the UniPro RX_BUFFER_OVERFLOW." range="" rwaccess="RW"/>
+    <bitfield id="CRC_ERR_MASK" width="1" begin="1" end="1" resetval="0x1" description="When set to 1h disables the UniPro CRC_ERROR." range="" rwaccess="RW"/>
+    <bitfield id="NAC_RCV_MASK" width="1" begin="0" end="0" resetval="0x1" description="When set to 1h disables the UniPro NAC_RECEIVED." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_ASF_PROTOCOL_FAULT_STATUS" acronym="UFS_ASF_PROTOCOL_FAULT_STATUS" offset="0x1044" width="32" description="Status Register (For Protocol Faults) If a fault occurs the relevant status bit will be set to 1h. Each bit can be cleared by software writing 1h to each bit.">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="PA_IND_RCV_ERR" width="1" begin="11" end="11" resetval="0x0" description="UniPro PA_ERROR_IND_RECEIVED reported." range="" rwaccess="RW1C"/>
+    <bitfield id="PA_INT_ERR" width="1" begin="10" end="10" resetval="0x0" description="UniPro PA_INIT_ERROR reported." range="" rwaccess="RW1C"/>
+    <bitfield id="BAD_CTRL_S_ERR" width="1" begin="9" end="9" resetval="0x0" description="UniPro BAD_CTRL_SYMBOL_TYPE reported." range="" rwaccess="RW1C"/>
+    <bitfield id="FRM_S_ERR" width="1" begin="8" end="8" resetval="0x0" description="UniPro FRAME_SYNTAX_ERROR reported." range="" rwaccess="RW1C"/>
+    <bitfield id="EOF_S_ERR" width="1" begin="7" end="7" resetval="0x0" description="UniPro EOF_SYNTAX_ERROR reported." range="" rwaccess="RW1C"/>
+    <bitfield id="NAC_F_S_ERR" width="1" begin="6" end="6" resetval="0x0" description="UniPro NAC_FRAME_SYNTAX_ERROR reported." range="" rwaccess="RW1C"/>
+    <bitfield id="AFC_F_S_ERR" width="1" begin="5" end="5" resetval="0x0" description="UniPro AFC_FRAME_SYNTAX_ERROR reported." range="" rwaccess="RW1C"/>
+    <bitfield id="WSQ_NO_ERR" width="1" begin="4" end="4" resetval="0x0" description="UniPro WRONG_SEQUENCE_NUMBER reported." range="" rwaccess="RW1C"/>
+    <bitfield id="MFL_EX_ERR" width="1" begin="3" end="3" resetval="0x0" description="UniPro MAX_FRAME_LENGTH_EXCEEDED reported." range="" rwaccess="RW1C"/>
+    <bitfield id="RXBUG_OF_ERR" width="1" begin="2" end="2" resetval="0x0" description="UniPro RX_BUFFER_OVERFLOW reported." range="" rwaccess="RW1C"/>
+    <bitfield id="CRC_ERR_ERR" width="1" begin="1" end="1" resetval="0x0" description="UniPro CRC_ERROR reported." range="" rwaccess="RW1C"/>
+    <bitfield id="NAC_RCV_ERR" width="1" begin="0" end="0" resetval="0x0" description="UniPro NAC_RECEIVED reported." range="" rwaccess="RW1C"/>
+  </register>
+  <register id="UFS_ASF_INTEGRITY_ERR_INJ" acronym="UFS_ASF_INTEGRITY_ERR_INJ" offset="0x1058" width="32" description="ASF Integrity Test Register Write one to the enable register inject error to individual n-bit (trigger asf integrity fail to the IP Fault Logging and Reporting module). Please note that only injection error with number to N will generate a fail (i.e. the higher values do not generate fail) where N is the higher value specified in the asf_integrity_err_inj_num field.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="ASF_INTEGRITY_ERR_INJ_EN" width="1" begin="15" end="15" resetval="0x0" description="Enable integrity error injection." range="" rwaccess="RW"/>
+    <bitfield id="ASF_INTEGRITY_ERR_INJ_NUM" width="15" begin="14" end="0" resetval="0x0" description="Bit number at which error is injected." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_MAG_NUM" acronym="UFS_MAG_NUM" offset="0x1100" width="32" description="Magic Number Register">
+    <bitfield id="MAG_NUM" width="32" begin="31" end="0" resetval="0x0005040A" description="Magic Number" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_MPHYSTAT_XCFGO1" acronym="UFS_MPHYSTAT_XCFGO1" offset="0x1104" width="32" description="Output Debug Bits For PHY 1 Register">
+    <bitfield id="XCFGO1" width="32" begin="31" end="0" resetval="0x0" description="Output debug bits for PHY. This field is read only." range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_MPHYSTAT_XCFGO2" acronym="UFS_MPHYSTAT_XCFGO2" offset="0x1108" width="32" description="Output Debug Bits For PHY 2 Register">
+    <bitfield id="XCFGO2" width="32" begin="31" end="0" resetval="0x0" description="Output debug bits for PHY. This filed is read only." range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_MPHYSTAT_XCFGO3" acronym="UFS_MPHYSTAT_XCFGO3" offset="0x110C" width="32" description="Output Debug Bits For PHY 3 Register">
+    <bitfield id="XCFGO3" width="32" begin="31" end="0" resetval="0x0" description="Output debug bits for PHY. This filed is read only." range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_MPHYSTAT_XCFGO4" acronym="UFS_MPHYSTAT_XCFGO4" offset="0x1110" width="32" description="Output Debug Bits For PHY 4 Register">
+    <bitfield id="XCFGO4" width="32" begin="31" end="0" resetval="0x0" description="Output debug bits for PHY. This filed is read only." range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_MPHYSTAT_XCFGO5" acronym="UFS_MPHYSTAT_XCFGO5" offset="0x1114" width="32" description="Output Debug Bits For PHY 5 Register">
+    <bitfield id="XCFGO5" width="32" begin="31" end="0" resetval="0x0" description="Output debug bits for PHY. This filed is read only." range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_MPHYSTAT_XCFGO6" acronym="UFS_MPHYSTAT_XCFGO6" offset="0x1118" width="32" description="Output Debug Bits For PHY 6 Register">
+    <bitfield id="XCFGO6" width="32" begin="31" end="0" resetval="0x0" description="Output debug bits for PHY. This filed is read only." range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_MPHYSTAT_XCFGO7" acronym="UFS_MPHYSTAT_XCFGO7" offset="0x111C" width="32" description="Output Debug Bits For PHY 7 Register">
+    <bitfield id="XCFGO7" width="32" begin="31" end="0" resetval="0x0" description="Output debug bits for PHY. This filed is read only." range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_MPHYSTAT_XCFGO8" acronym="UFS_MPHYSTAT_XCFGO8" offset="0x1120" width="32" description="Output Debug Bits For PHY 8 Register">
+    <bitfield id="XCFGO8" width="32" begin="31" end="0" resetval="0x0" description="Output debug bits for PHY. This filed is read only." range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_MPHYSTAT_XCFGO9" acronym="UFS_MPHYSTAT_XCFGO9" offset="0x1124" width="32" description="Output Debug Bits For PHY 9 Register">
+    <bitfield id="XCFGO9" width="32" begin="31" end="0" resetval="0x0" description="Output debug bits for PHY. This filed is read only." range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_MPHY_DEBUG_OUT" acronym="UFS_MPHY_DEBUG_OUT" offset="0x1128" width="32" description="M-PHY Debug Out Register">
+    <bitfield id="DEBUG_OUT" width="32" begin="31" end="0" resetval="0x60" description="MPHY debug out" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_MPHY_BIST" acronym="UFS_MPHY_BIST" offset="0x112C" width="32" description="BIST pattern check passed for Lane 0 and Lane 1">
+    <bitfield id="MPHY_BIST" width="32" begin="31" end="0" resetval="0x0" description="BIST pattern check passed for Lane 0 and Lane 1. This field is read only." range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_MPHY_SF" acronym="UFS_MPHY_SF" offset="0x1130" width="32" description="Safety Register">
+    <bitfield id="MPHY_SF" width="32" begin="31" end="0" resetval="0x0" description="Safety related. This field is read only." range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_MPHYSTAT" acronym="UFS_MPHYSTAT" offset="0x1134" width="32" description="MPHY Status Register">
+    <bitfield id="RESERVED" width="32" begin="31" end="0" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_MPHY_MMIO_A" acronym="UFS_MPHY_MMIO_A" offset="0x1138" width="32" description="M-PHY Configuration - MMIO Access Register">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="MMIO_A" width="1" begin="0" end="0" resetval="0x0" description="This bit is read-write. Enable MPHY MMIO access." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_MPHYCFG_XCFGD1" acronym="UFS_MPHYCFG_XCFGD1" offset="0x113C" width="32" description="M-PHY Configuration For Digital Part 1 Register">
+    <bitfield id="MPHYCFG_XCFGD1" width="32" begin="31" end="0" resetval="0x0" description="This field is read-write. MPHY Configuration for digital part." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_MPHYCFG_XCFGD2" acronym="UFS_MPHYCFG_XCFGD2" offset="0x1140" width="32" description="M-PHY Configuration For Digital Part 2 Register">
+    <bitfield id="MPHYCFG_XCFGD2" width="32" begin="31" end="0" resetval="0x0" description="This field is read-write. MPHY Configuration for digital part." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_MPHYCFG_XCFGD3" acronym="UFS_MPHYCFG_XCFGD3" offset="0x1144" width="32" description="M-PHY Configuration For Digital Part 3 Register">
+    <bitfield id="MPHYCFG_XCFGD3" width="32" begin="31" end="0" resetval="0x0" description="This field is read-write. MPHY Configuration for digital part." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_MPHYCFG_XCFGD4" acronym="UFS_MPHYCFG_XCFGD4" offset="0x1148" width="32" description="M-PHY Configuration For Digital Part 4 Register">
+    <bitfield id="MPHYCFG_XCFGD4" width="32" begin="31" end="0" resetval="0x0" description="This field is read-write. MPHY Configuration for digital part." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_MPHYCFG_XCFGD5" acronym="UFS_MPHYCFG_XCFGD5" offset="0x114C" width="32" description="M-PHY Configuration For Digital Part 5 Register">
+    <bitfield id="RESERVED" width="27" begin="31" end="5" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="MPHYCFG_XCFGD5" width="5" begin="4" end="0" resetval="0x0" description="This field is read-write. MPHY Configuration for digital part." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_MPHYCFG_XCFGA1" acronym="UFS_MPHYCFG_XCFGA1" offset="0x1150" width="32" description="M-PHY Configuration For Analog Part 1 Register">
+    <bitfield id="MPHYCFG_XCFGA1" width="32" begin="31" end="0" resetval="0x0" description="This field is read-write. MPHY Configuration for analog part." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_MPHYCFG_XCFGA2" acronym="UFS_MPHYCFG_XCFGA2" offset="0x1154" width="32" description="M-PHY Configuration For Analog Part 2 Register">
+    <bitfield id="MPHYCFG_XCFGA2" width="32" begin="31" end="0" resetval="0x0" description="This field is read-write. MPHY Configuration for analog part." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_MPHYCFG_XCFGA3" acronym="UFS_MPHYCFG_XCFGA3" offset="0x1158" width="32" description="M-PHY Configuration For Analog Part 3 Register">
+    <bitfield id="MPHYCFG_XCFGA3" width="32" begin="31" end="0" resetval="0x0" description="This field is read-write. MPHY Configuration for analog part." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_MPHYCFG_XCFGA4" acronym="UFS_MPHYCFG_XCFGA4" offset="0x115C" width="32" description="M-PHY Configuration For Analog Part 4 Register">
+    <bitfield id="MPHYCFG_XCFGA4" width="32" begin="31" end="0" resetval="0x0" description="This field is read-write. MPHY Configuration for analog part." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_MPHYCFG_XCFGA5" acronym="UFS_MPHYCFG_XCFGA5" offset="0x1160" width="32" description="M-PHY Configuration For Analog Part 5 Register">
+    <bitfield id="MPHYCFG_XCFGA5" width="32" begin="31" end="0" resetval="0x0" description="This field is read-write. MPHY Configuration for analog part." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_MPHYCFG_XCFGA6" acronym="UFS_MPHYCFG_XCFGA6" offset="0x1164" width="32" description="M-PHY Configuration For Analog Part 6 Register">
+    <bitfield id="MPHYCFG_XCFGA6" width="32" begin="31" end="0" resetval="0x0" description="This field is read-write. MPHY Configuration for analog part." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_MPHYCFG_XCFGA7" acronym="UFS_MPHYCFG_XCFGA7" offset="0x1168" width="32" description="M-PHY Configuration For Analog Part 7 Register">
+    <bitfield id="MPHYCFG_XCFGA7" width="32" begin="31" end="0" resetval="0x0" description="This field is read-write. MPHY Configuration for analog part." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_MPHYCFG_XCFGA8" acronym="UFS_MPHYCFG_XCFGA8" offset="0x116C" width="32" description="M-PHY Configuration For Analog Part 8 Register">
+    <bitfield id="MPHYCFG_XCFGA8" width="32" begin="31" end="0" resetval="0x0" description="This field is read-write. MPHY Configuration for analog part." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_MPHYCFG_XCFGA9" acronym="UFS_MPHYCFG_XCFGA9" offset="0x1170" width="32" description="M-PHY Configuration For Analog Part 9 Register">
+    <bitfield id="MPHYCFG_XCFGA9" width="32" begin="31" end="0" resetval="0x0" description="This field is read-write. MPHY Configuration for analog part." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_MPHYCFG_XCFGA10" acronym="UFS_MPHYCFG_XCFGA10" offset="0x1174" width="32" description="M-PHY Configuration For Analog Part 10 Register">
+    <bitfield id="MPHYCFG_XCFGA10" width="32" begin="31" end="0" resetval="0x0" description="This field is read-write. MPHY Configuration for analog part." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_MPHYCFG_XCFGA11" acronym="UFS_MPHYCFG_XCFGA11" offset="0x1178" width="32" description="M-PHY Configuration For Analog Part 11 Register">
+    <bitfield id="MPHYCFG_XCFGA11" width="32" begin="31" end="0" resetval="0x0" description="This field is read-write. MPHY Configuration for analog part." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_MPHYCFG_XCFGA12" acronym="UFS_MPHYCFG_XCFGA12" offset="0x117C" width="32" description="M-PHY Configuration For Analog Part 12 Register">
+    <bitfield id="MPHYCFG_XCFGA12" width="32" begin="31" end="0" resetval="0x0" description="This field is read-write. MPHY Configuration for analog part." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_MPHYCFG_XCFGA13" acronym="UFS_MPHYCFG_XCFGA13" offset="0x1180" width="32" description="M-PHY Configuration For Analog Part 13 Register">
+    <bitfield id="MPHYCFG_XCFGA13" width="32" begin="31" end="0" resetval="0x0" description="This field is read-write. MPHY Configuration for analog part." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_MPHYCFG_MISC" acronym="UFS_MPHYCFG_MISC" offset="0x1184" width="32" description="M-PHY MISC Configuration Register">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="CMN_MPX_EN_MMIO" width="1" begin="29" end="29" resetval="0x0" description="Special debug mode for PLL/CDR" range="" rwaccess="RW"/>
+    <bitfield id="CMN_MPX_SEL_MMIO" width="3" begin="28" end="26" resetval="0x0" description="Special debug mode for PLL/CDR" range="" rwaccess="RW"/>
+    <bitfield id="TX0_TEST_15_MMIO" width="1" begin="25" end="25" resetval="0x0" description="Special debug mode for PLL/CDR" range="" rwaccess="RW"/>
+    <bitfield id="TX1_TEST_15_MMIO" width="1" begin="24" end="24" resetval="0x0" description="Special debug mode for PLL/CDR" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="23" end="18" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="REFCLK_NOGATED" width="1" begin="17" end="17" resetval="0x0" description="This bit is read-write." range="" rwaccess="RW"/>
+    <bitfield id="REFCLK_FREQ_SEL" width="2" begin="16" end="15" resetval="0x0" description="This field is read-write." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="14" end="13" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="TX_DEEP_STALL_EN" width="1" begin="12" end="12" resetval="0x0" description="This bit is read-write." range="" rwaccess="RW"/>
+    <bitfield id="RX_DEEP_STALL_EN" width="1" begin="11" end="11" resetval="0x0" description="This bit is read-write." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="10" end="7" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="DEBUG_SEL" width="7" begin="6" end="0" resetval="0x0" description="This field is read-write. Debug signal group selection." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_MPHYCFG_VCONTROL" acronym="UFS_MPHYCFG_VCONTROL" offset="0x1188" width="32" description="M-PHY VCONTROL Configuration Register">
+    <bitfield id="RESERVED" width="15" begin="31" end="17" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="VCONTROL_LA_SA_SEL" width="1" begin="16" end="16" resetval="0x0" description="This bit is read-write. TX amplitude selection in VENDOR control mode." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="VCONTROL_DEEMP_SEL" width="2" begin="11" end="10" resetval="0x0" description="This field is read-write. TX deemphasis selection in VENDOR control mode." range="" rwaccess="RW"/>
+    <bitfield id="VCONTROL" width="10" begin="9" end="0" resetval="0x0" description="This field is read-write. VCONTROL test mode selection." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_MPHY_BIST_CTRLPIN" acronym="UFS_MPHY_BIST_CTRLPIN" offset="0x118C" width="32" description="M-PHY BIST Control Pins Register">
+    <bitfield id="MPHY_BIST_CTRLPIN" width="32" begin="31" end="0" resetval="0x0" description="This field is read-write." range="" rwaccess="RW"/>
+  </register>
+  <register id="UFS_MPHY_SF_WD" acronym="UFS_MPHY_SF_WD" offset="0x1190" width="32" description="M-PHY Safety Related Watch Dog Register">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="SF_PLL_WATCHDOG_EN_MMIO" width="1" begin="2" end="2" resetval="0x0" description="This bit is read-write." range="" rwaccess="RW"/>
+    <bitfield id="SF_CDR0_WATCHDOG_EN_MMIO" width="1" begin="1" end="1" resetval="0x0" description="This bit is read-write" range="" rwaccess="RW"/>
+    <bitfield id="SF_CDR1_WATCHDOG_EN_MMIO" width="1" begin="0" end="0" resetval="0x0" description="This bit is read-write" range="" rwaccess="RW"/>
+  </register>
+</module>

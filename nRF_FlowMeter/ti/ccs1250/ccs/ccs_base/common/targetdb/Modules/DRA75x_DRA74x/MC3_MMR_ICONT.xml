@@ -1,0 +1,46 @@
+<module name="MC3_MMR_ICONT" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="MC_PID" acronym="MC_PID" offset="0x0" width="32" description="PID register">
+    <bitfield id="PID" width="32" begin="31" end="0" resetval="TI internal data" description="PID of the MC3 module" range="" rwaccess="R"/>
+  </register>
+  <register id="MC_CNT" acronym="MC_CNT" offset="0x4" width="32" description="Benchmark counter register">
+    <bitfield id="MC_CNT_EN" width="1" begin="31" end="31" resetval="0" description="Counter enable (MC_CNT_EN) 0: The benchmark counter is disabled. 1: The benchmark counter is enabled." range="" rwaccess="RW"/>
+    <bitfield id="MC_CNT_RST" width="1" begin="30" end="30" resetval="0" description="Counter reset (MC_CNT_RST) Writing 0 results in no effect. Writing 1 results in clearing the benchmark counter to 0. Always read as 0." range="" rwaccess="W"/>
+    <bitfield id="RESERVED" width="14" begin="29" end="16" resetval="0x0000" description="" range="" rwaccess="R"/>
+    <bitfield id="MC_COUNT" width="16" begin="15" end="0" resetval="0x0000" description="Counter value (MC_COUNT). Indicates current value of the benchmark counter. When MC_CNT_EN is 1 and IP is busy (en = 1), the benchmark counter counts up based on clk_mc. Writing has no effect." range="" rwaccess="R"/>
+  </register>
+  <register id="MC_CTRL" acronym="MC_CTRL" offset="0x8" width="32" description="Control register">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+    <bitfield id="MC_DBG" width="1" begin="2" end="2" resetval="0" description="H.264 MBAFF debug mode bit (MC_DBG). This bit is used for H.264 MBAFF mode only. For the other codecs, this bit must be 0. 0: Normal mode 1: Debug mode(1MB prediction/step)" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="1" end="1" resetval="0" description="" range="" rwaccess="R"/>
+    <bitfield id="MC_EN" width="1" begin="0" end="0" resetval="0" description="Module start and status (MC_EN). Writing 1 starts a set of commands, and writing 0 is ignored. Writing to this register is forbidden while MC_EN = 1. 0: Idle 1: Busy" range="" rwaccess="RW"/>
+  </register>
+  <register id="MC_PARAM0" acronym="MC_PARAM0" offset="0xC" width="32" description="Motion compression parameter register">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="VC1_SMP_MOD" width="1" begin="29" end="29" resetval="0" description="VC-1 sample mode 0: Bilinear Interpolation 1: Bicubic Interpolation" range="" rwaccess="RW"/>
+    <bitfield id="VC1_RND_CTRL" width="1" begin="28" end="28" resetval="0" description="VC-1 round control bit" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="16" begin="27" end="12" resetval="0x0000" description="" range="" rwaccess="R"/>
+    <bitfield id="H264_WGT_BIPRD_IDC" width="2" begin="11" end="10" resetval="0x0" description="H.264 weighted_bipred_idc" range="" rwaccess="RW"/>
+    <bitfield id="H264_WGT_PRD" width="1" begin="9" end="9" resetval="0" description="H.264 weighted_pred_flag" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="8" end="4" resetval="0x00" description="" range="" rwaccess="R"/>
+    <bitfield id="CODEC_TYPE" width="4" begin="3" end="0" resetval="0x0" description="Codec_type select 0: H.264 2: VC-1 4: MPEG-4 5: MPEG-2 6: AVS-1.0 8: RealVideo-8/9/10 9: On2 VP6 10: On2 VP7" range="" rwaccess="RW"/>
+  </register>
+  <register id="MC_PARAM1" acronym="MC_PARAM1" offset="0x10" width="32" description="Motion compression parameter register">
+    <bitfield id="RESERVED" width="32" begin="31" end="0" resetval="0x0000 0000" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="MC_ADDR_0" acronym="MC_ADDR_0" offset="0x18" width="32" description="Base address of reference data Luma L0">
+    <bitfield id="BASE_YREF_BOT_L0_ADD" width="16" begin="31" end="16" resetval="0x0000" description="Base address of reference data Y L0 bottom (BASE_YREF_BOT_L0_ADD) (Reference for bottom field)" range="" rwaccess="RW"/>
+    <bitfield id="BASE_YREF_TOP_L0_ADD" width="16" begin="15" end="0" resetval="0x0000" description="Base address of reference data Y L0 top (BASE_YREF_TOP_L0_ADD) (Reference for progressive/top field)" range="" rwaccess="RW"/>
+  </register>
+  <register id="MC_ADDR_1" acronym="MC_ADDR_1" offset="0x1C" width="32" description="Base address of reference data Luma L1">
+    <bitfield id="BASE_YREF_BOT_L1_ADD" width="16" begin="31" end="16" resetval="0x0000" description="Base address of reference data Y L1 bottom (BASE_YREF_BOT_L1_ADD) (Reference for bottom field)" range="" rwaccess="RW"/>
+    <bitfield id="BASE_YREF_TOP_L1_ADD" width="16" begin="15" end="0" resetval="0x0000" description="Base address of reference data Y L1 top (BASE_YREF_TOP_L1_ADD) (Reference for progressive/top field)" range="" rwaccess="RW"/>
+  </register>
+  <register id="MC_ADDR_2" acronym="MC_ADDR_2" offset="0x20" width="32" description="Base address of reference data chroma L0">
+    <bitfield id="BASE_CREF_BOT_L0_ADD" width="16" begin="31" end="16" resetval="0x0000" description="Base address of reference data C L0 bottom (BASE_CREF_BOT_L0_ADD) (Reference for bottom field)" range="" rwaccess="RW"/>
+    <bitfield id="BASE_CREF_TOP_L0_ADD" width="16" begin="15" end="0" resetval="0x0000" description="Base address of reference data C L0 top (BASE_CREF_TOP_L0_ADD) (Reference for progressive/top field)" range="" rwaccess="RW"/>
+  </register>
+  <register id="MC_ADDR_3" acronym="MC_ADDR_3" offset="0x24" width="32" description="">
+    <bitfield id="BASE_CREF_BOT_L1_ADD" width="16" begin="31" end="16" resetval="0x0000" description="Base address of reference data C L1 bottom (BASE_CREF_BOT_L1_ADD) (Reference for bottom field)" range="" rwaccess="RW"/>
+    <bitfield id="BASE_CREF_TOP_L1_ADD" width="16" begin="15" end="0" resetval="0x0000" description="Base address of reference data C L1 top (BASE_CREF_TOP_L1_ADD) (Reference for progressive/top field)" range="" rwaccess="RW"/>
+  </register>
+</module>

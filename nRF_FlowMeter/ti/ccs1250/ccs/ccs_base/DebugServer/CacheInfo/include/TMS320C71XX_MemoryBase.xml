@@ -1,0 +1,530 @@
+<!-- The GEM Memory hierarchy consists of the following:
+	L1P Memory: Region 0, Region 1 (PMC - Program Memory Controller)
+	L1P Cache 
+	L1D Memory: Region 0, Region 1 (DMC - Data Memory Controller)
+	L1D Cache 
+	L2 Memory: Region 0, Region 1  (UMC - Unified Memory Controller)
+	L2 Cache 
+	External Memory 
+	
+	The following variables are defined as External Entity Parameters:
+	
+	-->
+	
+<AddressSpaceName>Unified</AddressSpaceName>
+<!-- id=0 : L1D memory Region 0 -->
+<MemoryType>
+	<Name>L1D memory Region 0</Name>
+	<MemoryLevelName>L1D memory Region 0</MemoryLevelName>
+	<GTIMemHierarchyReadEnableFlags>0x02</GTIMemHierarchyReadEnableFlags>
+	<MemLevelBitFlag>0x01</MemLevelBitFlag>
+	<Description>L1D memory Region 0</Description>
+	<CanBeBypassed>true</CanBeBypassed>
+	<IsBypassedByDefault>false</IsBypassedByDefault>
+	<SimulatorSupportsConsistencyChecking>false</SimulatorSupportsConsistencyChecking>
+	<CanBeLocked>false</CanBeLocked>
+	<!-- CanBeSecured = false for simulator, true for emulator -->
+	<CanBeSecured>false</CanBeSecured>
+	<CanBeNonEmulatable>false</CanBeNonEmulatable>
+	<CanBeProtected>false</CanBeProtected>
+	<HasMemoryAccessIDs>false</HasMemoryAccessIDs>
+	<IsCache>false</IsCache>
+	<IsMapped>true</IsMapped>
+	<IsProgram>false</IsProgram>
+	<IsData>true</IsData>
+	<IsIOSpace>false</IsIOSpace>
+	<IsExternal>false</IsExternal>
+	<IsShared>false</IsShared>
+	<IsReserved>false</IsReserved>
+	<IsROM>false</IsROM>
+	<IsPaged>false</IsPaged>
+	<IsVirtualMemorySupported>false</IsVirtualMemorySupported>
+	<IsVirtualWayConversionEnabled>false</IsVirtualWayConversionEnabled>
+	<Linesize>&L1DLineSize;</Linesize>
+	<HierarchyDepth>1</HierarchyDepth>
+	<!-- the following are only read if IsCache is false -->
+	<MappedMemory>
+		<PhysicalAddresses>
+			<CanBeDisabled>false</CanBeDisabled>
+			<StartAddress>
+				<IsFixed>true</IsFixed>
+				<!-- For Himalaya, Region 0 = 0x0 -->
+				<FixedValue>&L1DRegion0StartAdrs;</FixedValue>
+			</StartAddress>
+			<Length>
+				<IsFixed>true</IsFixed>
+				<!-- For Himalaya, Region 0 = 0x0 -->
+				<FixedValue>&L1DRegion0Length;</FixedValue>
+				<ConfigReg>L1DCFG</ConfigReg>
+				<DecoderName>GetL1DCacheSize</DecoderName>
+			</Length>
+		</PhysicalAddresses>
+	</MappedMemory>
+</MemoryType>
+<!-- id=1 : L1D memory Region 1 -->
+<MemoryType>
+	<Name>L1D memory Region 1</Name>
+	<MemoryLevelName>L1D memory Region 1</MemoryLevelName>
+	<GTIMemHierarchyReadEnableFlags>0x02</GTIMemHierarchyReadEnableFlags>
+	<MemLevelBitFlag>0x01</MemLevelBitFlag>
+	<Description>L1D memory Region 1</Description>
+	<CanBeBypassed>true</CanBeBypassed>
+	<IsBypassedByDefault>false</IsBypassedByDefault>
+	<SimulatorSupportsConsistencyChecking>false</SimulatorSupportsConsistencyChecking>
+	<CanBeLocked>false</CanBeLocked>
+	<!-- CanBeSecured = false for simulator, true for emulator -->
+	<CanBeSecured>false</CanBeSecured>
+	<CanBeNonEmulatable>false</CanBeNonEmulatable>
+	<CanBeProtected>false</CanBeProtected>
+	<HasMemoryAccessIDs>false</HasMemoryAccessIDs>
+	<IsCache>false</IsCache>
+	<IsMapped>true</IsMapped>
+	<IsProgram>false</IsProgram>
+	<IsData>true</IsData>
+	<IsIOSpace>false</IsIOSpace>
+	<IsExternal>false</IsExternal>
+	<IsShared>false</IsShared>
+	<IsReserved>false</IsReserved>
+	<IsROM>false</IsROM>
+	<IsPaged>false</IsPaged>
+	<IsVirtualMemorySupported>false</IsVirtualMemorySupported>
+	<IsVirtualWayConversionEnabled>false</IsVirtualWayConversionEnabled>
+	<Linesize>&L1DLineSize;</Linesize>
+	<HierarchyDepth>1</HierarchyDepth>
+	<!-- the following are only read if IsCache is false -->
+	<MappedMemory>
+		<PhysicalAddresses>
+			<CanBeDisabled>false</CanBeDisabled>
+			<StartAddress>
+				<IsFixed>true</IsFixed>
+				<!-- For Himalaya, Region 1 = 0x00F00000 -->
+				<FixedValue>&L1DRegion1StartAdrs;</FixedValue>
+			</StartAddress>
+			<Length>
+				<IsFixed>true</IsFixed>
+				<!-- For Himalaya, Region 1 = 0x08000 -->
+				<FixedValue>&L1DRegion1Length;</FixedValue>
+				<ConfigReg>L1DCFG</ConfigReg>
+				<DecoderName>GetL1DCacheSize</DecoderName>
+			</Length>
+		</PhysicalAddresses>
+	</MappedMemory>
+</MemoryType>
+<!-- id=5 : L1D cache -->
+<MemoryType>
+	<Name>L1D cache</Name>
+	<MemoryLevelName>L1D</MemoryLevelName>
+	<GTIMemHierarchyReadEnableFlags>0x20</GTIMemHierarchyReadEnableFlags>
+	<MemLevelBitFlag>0x01</MemLevelBitFlag>
+	<Description>L1D memory</Description>
+	<CanBeBypassed>true</CanBeBypassed>
+	<IsBypassedByDefault>false</IsBypassedByDefault>
+	<SimulatorSupportsConsistencyChecking>false</SimulatorSupportsConsistencyChecking>
+	<CanBeLocked>false</CanBeLocked>
+	<CanBeSecured>false</CanBeSecured>
+	<CanBeNonEmulatable>true</CanBeNonEmulatable>
+	<CanBeProtected>false</CanBeProtected>
+	<HasMemoryAccessIDs>false</HasMemoryAccessIDs>
+	<IsCache>true</IsCache>
+	<IsMapped>false</IsMapped>
+	<IsProgram>false</IsProgram>
+	<IsData>true</IsData>
+	<IsIOSpace>false</IsIOSpace>
+	<IsExternal>false</IsExternal>
+	<IsShared>false</IsShared>
+	<IsReserved>false</IsReserved>
+	<IsROM>false</IsROM>
+	<IsPaged>false</IsPaged>
+	<IsVirtualMemorySupported>false</IsVirtualMemorySupported>
+	<IsVirtualWayConversionEnabled>false</IsVirtualWayConversionEnabled>
+	<Linesize>&L1DLineSize;</Linesize>
+	<HierarchyDepth>1</HierarchyDepth>
+	<!--the following are only read if the memory level is cache-->
+	<Cache>
+		<IsCacheTagRamDecodingSupported>&IsCacheTagRamDecodingSupported;</IsCacheTagRamDecodingSupported>
+		<MaxNumCacheLines>&L1DMaxNumCacheLines;</MaxNumCacheLines>
+		<NumCacheLines>
+			<ConfigReg>L1DCFG</ConfigReg>
+			<DecoderName>GetL1DNumCacheLines</DecoderName>
+		</NumCacheLines>
+		<CacheSize>
+			<ConfigReg>L1DCFG</ConfigReg>
+			<DecoderName>GetL1DCacheSize</DecoderName>
+		</CacheSize>
+		<IsCacheEnabled>
+			<ConfigReg>L1DCFG</ConfigReg>
+			<DecoderName>IsCacheEnabled</DecoderName>
+		</IsCacheEnabled>
+		<IsCacheSharedBitAccessible>true</IsCacheSharedBitAccessible>
+		<IsCacheExclusiveBitAccessible>true</IsCacheExclusiveBitAccessible>
+		<IsCacheModifiedBitAccessible>true</IsCacheModifiedBitAccessible>
+		<IsCacheSecureBitAccessible>true</IsCacheSecureBitAccessible>
+		<IsCacheTableBaseBitAccessible>true</IsCacheTableBaseBitAccessible>
+		<IsCacheDirtyBitAccessible>false</IsCacheDirtyBitAccessible>
+		<IsPhysicallyTagged>true</IsPhysicallyTagged>
+		<IsLruSupported>false</IsLruSupported>
+		<isVictimSupported>true</isVictimSupported>
+		<NumBitsInLruBitField>2</NumBitsInLruBitField>
+		<NumWaysInCache>2</NumWaysInCache>
+		<DecoderName>L1DLruToWayMap</DecoderName>
+	</Cache>
+</MemoryType>
+<!-- id=0 : L1P memory Region 0 -->
+<MemoryType>
+	<Name>L1P memory Region 0</Name>
+	<MemoryLevelName>L1P memory Region 0</MemoryLevelName>
+	<!-- Custom Background colors can be defined like this:
+                        <BackColor>WhiteSmoke</BackColor>
+                        -->
+	<GTIMemHierarchyReadEnableFlags>0x01</GTIMemHierarchyReadEnableFlags>
+	<MemLevelBitFlag>0x02</MemLevelBitFlag>
+	<Description>L1P memory Region 0</Description>
+	<CanBeBypassed>true</CanBeBypassed>
+	<IsBypassedByDefault>false</IsBypassedByDefault>
+	<SimulatorSupportsConsistencyChecking>false</SimulatorSupportsConsistencyChecking>
+	<CanBeLocked>false</CanBeLocked>
+	<!-- CanBeSecured = false for simulator, true for emulator -->
+	<CanBeSecured>false</CanBeSecured>
+	<CanBeNonEmulatable>false</CanBeNonEmulatable>
+	<CanBeProtected>false</CanBeProtected>
+	<HasMemoryAccessIDs>false</HasMemoryAccessIDs>
+	<IsCache>false</IsCache>
+	<IsMapped>true</IsMapped>
+	<IsProgram>true</IsProgram>
+	<IsData>false</IsData>
+	<IsIOSpace>false</IsIOSpace>
+	<IsExternal>false</IsExternal>
+	<IsShared>false</IsShared>
+	<IsReserved>false</IsReserved>
+	<IsROM>&L1PRegion0IsROM;</IsROM>
+	<IsPaged>false</IsPaged>
+	<IsVirtualMemorySupported>true</IsVirtualMemorySupported>
+	<IsVirtualWayConversionEnabled>true</IsVirtualWayConversionEnabled>
+	<Linesize>&L1PLineSize;</Linesize>
+	<HierarchyDepth>1</HierarchyDepth>
+	<!-- the following are only read if IsCache is false -->
+	<MappedMemory>
+		<PhysicalAddresses>
+			<CanBeDisabled>false</CanBeDisabled>
+			<StartAddress>
+				<IsFixed>true</IsFixed>
+				<!-- For Himalaya: 0x0 -->
+				<FixedValue>&L1PRegion0StartAdrs;</FixedValue>
+				<ConfigReg></ConfigReg>
+				<DecoderName></DecoderName>
+			</StartAddress>
+			<Length>
+				<IsFixed>true</IsFixed>
+				<!-- For Himalaya: 0x0 -->
+				<FixedValue>&L1PRegion0Length;</FixedValue>
+				<ConfigReg></ConfigReg>
+				<DecoderName></DecoderName>
+			</Length>
+		</PhysicalAddresses>
+	</MappedMemory>
+</MemoryType>
+<!-- id=1 : L1P memory Region 1 -->
+<MemoryType>
+	<Name>L1P memory Region 1</Name>
+	<MemoryLevelName>L1P memory Region 1</MemoryLevelName>
+	<!-- Custom Background colors can be defined like this:
+                        <BackColor>WhiteSmoke</BackColor>
+                        -->
+	<GTIMemHierarchyReadEnableFlags>0x01</GTIMemHierarchyReadEnableFlags>
+	<MemLevelBitFlag>0x02</MemLevelBitFlag>
+	<Description>L1P memory Region 1</Description>
+	<CanBeBypassed>true</CanBeBypassed>
+	<IsBypassedByDefault>false</IsBypassedByDefault>
+	<SimulatorSupportsConsistencyChecking>false</SimulatorSupportsConsistencyChecking>
+	<CanBeLocked>false</CanBeLocked>
+	<!-- CanBeSecured = false for simulator, true for emulator -->
+	<CanBeSecured>false</CanBeSecured>
+	<CanBeNonEmulatable>false</CanBeNonEmulatable>
+	<CanBeProtected>false</CanBeProtected>
+	<HasMemoryAccessIDs>false</HasMemoryAccessIDs>
+	<IsCache>false</IsCache>
+	<IsMapped>true</IsMapped>
+	<IsProgram>true</IsProgram>
+	<IsData>false</IsData>
+	<IsIOSpace>false</IsIOSpace>
+	<IsExternal>false</IsExternal>
+	<IsShared>false</IsShared>
+	<IsReserved>false</IsReserved>
+	<IsROM>&L1PRegion1IsROM;</IsROM>
+	<IsPaged>false</IsPaged>
+	<IsVirtualMemorySupported>true</IsVirtualMemorySupported>
+	<IsVirtualWayConversionEnabled>true</IsVirtualWayConversionEnabled>
+	<Linesize>&L1PLineSize;</Linesize>
+	<HierarchyDepth>1</HierarchyDepth>
+	<!-- the following are only read if IsCache is false -->
+	<MappedMemory>
+		<PhysicalAddresses>
+			<CanBeDisabled>false</CanBeDisabled>
+			<StartAddress>
+				<IsFixed>true</IsFixed>
+				<!-- For Himalaya: 0x0E00000 -->
+				<FixedValue>&L1PRegion1StartAdrs;</FixedValue>
+				<ConfigReg></ConfigReg>
+				<DecoderName></DecoderName>
+			</StartAddress>
+			<Length>
+				<IsFixed>true</IsFixed>
+				<!-- For Himalaya: 0x08000 -->
+				<FixedValue>&L1PRegion1Length;</FixedValue>
+				<ConfigReg></ConfigReg>
+				<DecoderName></DecoderName>
+			</Length>
+		</PhysicalAddresses>
+	</MappedMemory>
+</MemoryType>
+<!-- id=2 : L1P cache -->
+<MemoryType>
+	<Name>L1P cache</Name>
+	<MemoryLevelName>L1P</MemoryLevelName>
+	<GTIMemHierarchyReadEnableFlags>0x10</GTIMemHierarchyReadEnableFlags>
+	<MemLevelBitFlag>0x02</MemLevelBitFlag>
+	<Description>L1P Cache</Description>
+	<CanBeBypassed>true</CanBeBypassed>
+	<IsBypassedByDefault>true</IsBypassedByDefault>
+	<SimulatorSupportsConsistencyChecking>false</SimulatorSupportsConsistencyChecking>
+	<CanBeLocked>false</CanBeLocked>
+	<CanBeSecured>false</CanBeSecured>
+	<CanBeNonEmulatable>true</CanBeNonEmulatable>
+	<CanBeProtected>false</CanBeProtected>
+	<HasMemoryAccessIDs>false</HasMemoryAccessIDs>
+	<IsCache>true</IsCache>
+	<IsMapped>false</IsMapped>
+	<IsProgram>true</IsProgram>
+	<IsData>false</IsData>
+	<IsExternal>false</IsExternal>
+	<IsIOSpace>false</IsIOSpace>
+	<IsShared>false</IsShared>
+	<IsReserved>false</IsReserved>
+	<IsROM>false</IsROM>
+	<IsPaged>false</IsPaged>
+	<IsVirtualMemorySupported>true</IsVirtualMemorySupported>
+	<IsVirtualWayConversionEnabled>false</IsVirtualWayConversionEnabled>
+	<Linesize>&L1PLineSize;</Linesize>
+	<HierarchyDepth>1</HierarchyDepth>
+	<!--the following are only read if the memory level is cache-->
+	<Cache>
+		<IsCacheTagRamDecodingSupported>&IsCacheTagRamDecodingSupported;</IsCacheTagRamDecodingSupported>
+		<MaxNumCacheLines>&L1PMaxNumCacheLines;</MaxNumCacheLines>
+		<NumCacheLines>&L1PNumCacheLines;</NumCacheLines>
+		<CacheSize>&L1PCacheSize;</CacheSize>
+		<IsCacheEnabled>true</IsCacheEnabled>
+		<IsCacheSharedBitAccessible>true</IsCacheSharedBitAccessible>
+		<IsCacheExclusiveBitAccessible>true</IsCacheExclusiveBitAccessible>
+		<IsCacheModifiedBitAccessible>true</IsCacheModifiedBitAccessible>
+		<IsCacheSecureBitAccessible>true</IsCacheSecureBitAccessible>
+		<IsCacheTableBaseBitAccessible>true</IsCacheTableBaseBitAccessible>
+		<IsCacheDirtyBitAccessible>false</IsCacheDirtyBitAccessible>
+		<IsPhysicallyTagged>false</IsPhysicallyTagged>		
+		<IsLruSupported>false</IsLruSupported>
+		<isVictimSupported>false</isVictimSupported>		
+		<NumWaysInCache>4</NumWaysInCache>		
+	</Cache>
+</MemoryType>
+<!-- id=6 : L2 memory Region 0 -->
+<MemoryType>
+	<Name>L2 memory Region 0</Name>
+	<MemoryLevelName>L2 memory Region 0</MemoryLevelName>
+	<GTIMemHierarchyReadEnableFlags>0x04</GTIMemHierarchyReadEnableFlags>
+	<MemLevelBitFlag>0x04</MemLevelBitFlag>
+	<Description>L2 memory Region 0</Description>
+	<CanBeBypassed>false</CanBeBypassed>
+	<IsBypassedByDefault>false</IsBypassedByDefault>
+	<SimulatorSupportsConsistencyChecking>false</SimulatorSupportsConsistencyChecking>
+	<CanBeLocked>false</CanBeLocked>
+	<!-- CanBeSecured = false for simulator, true for emulator -->
+	<CanBeSecured>false</CanBeSecured>
+	<CanBeNonEmulatable>false</CanBeNonEmulatable>
+	<CanBeProtected>false</CanBeProtected>
+	<HasMemoryAccessIDs>false</HasMemoryAccessIDs>
+	<IsCache>false</IsCache>
+	<IsMapped>true</IsMapped>
+	<IsProgram>true</IsProgram>
+	<IsData>true</IsData>
+	<IsIOSpace>false</IsIOSpace>
+	<IsExternal>false</IsExternal>
+	<IsShared>false</IsShared>
+	<IsReserved>false</IsReserved>
+	<IsROM>&L2Region0IsROM;</IsROM>
+	<IsPaged>false</IsPaged>
+	<IsVirtualMemorySupported>false</IsVirtualMemorySupported>
+	<IsVirtualWayConversionEnabled>false</IsVirtualWayConversionEnabled>
+	<Linesize>&L2LineSize;</Linesize>
+	<HierarchyDepth>2</HierarchyDepth>
+	<!-- the following are only read if IsCache is false -->
+	<MappedMemory>
+		<PhysicalAddresses>
+			<CanBeDisabled>false</CanBeDisabled>
+			<StartAddress>
+				<IsFixed>true</IsFixed>
+				<!-- For Joule Region 0, = 0x0 -->
+				<FixedValue>&L2Region0StartAdrs;</FixedValue>
+			</StartAddress>
+			<Length>
+				<IsFixed>true</IsFixed>
+				<!-- For Joule Region 0, 0x0 -->
+				<FixedValue>&L2Region0Length;</FixedValue>
+				<ConfigReg>L2CFG</ConfigReg>
+				<DecoderName>GetL2CacheSize</DecoderName>
+			</Length>
+		</PhysicalAddresses>
+		
+	</MappedMemory>
+</MemoryType>
+<!-- id=7 : L2 memory Region 1 -->
+<MemoryType>
+	<Name>L2 memory Region 1</Name>
+	<MemoryLevelName>L2 memory Region 1</MemoryLevelName>
+	<GTIMemHierarchyReadEnableFlags>0x04</GTIMemHierarchyReadEnableFlags>
+	<MemLevelBitFlag>0x04</MemLevelBitFlag>
+	<Description>L2 memory Region 1</Description>
+	<CanBeBypassed>false</CanBeBypassed>
+	<IsBypassedByDefault>false</IsBypassedByDefault>
+	<SimulatorSupportsConsistencyChecking>false</SimulatorSupportsConsistencyChecking>
+	<CanBeLocked>false</CanBeLocked>
+	<!-- CanBeSecured = false for simulator, true for emulator -->
+	<CanBeSecured>false</CanBeSecured>
+	<CanBeNonEmulatable>false</CanBeNonEmulatable>
+	<CanBeProtected>false</CanBeProtected>
+	<HasMemoryAccessIDs>false</HasMemoryAccessIDs>
+	<IsCache>false</IsCache>
+	<IsMapped>true</IsMapped>
+	<IsProgram>true</IsProgram>
+	<IsData>true</IsData>
+	<IsIOSpace>false</IsIOSpace>
+	<IsExternal>false</IsExternal>
+	<IsShared>false</IsShared>
+	<IsReserved>false</IsReserved>
+	<IsROM>&L2Region1IsROM;</IsROM>
+	<IsPaged>false</IsPaged>
+	<IsVirtualMemorySupported>false</IsVirtualMemorySupported>
+	<IsVirtualWayConversionEnabled>false</IsVirtualWayConversionEnabled>
+	<Linesize>&L2LineSize;</Linesize>
+	<HierarchyDepth>2</HierarchyDepth>
+	<!-- the following are only read if IsCache is false -->
+	<MappedMemory>
+		<PhysicalAddresses>
+			<CanBeDisabled>false</CanBeDisabled>
+			<StartAddress>
+				<IsFixed>true</IsFixed>
+				<!-- For Himalaya Region 0, = 0x0 -->
+				<FixedValue>&L2Region1StartAdrs;</FixedValue>
+			</StartAddress>
+			<Length>
+				<IsFixed>true</IsFixed>
+				<!-- For Himalaya Region 0 = 0x0 -->
+				<FixedValue>&L2Region1Length;</FixedValue>
+				<ConfigReg>L2CFG</ConfigReg>
+				<DecoderName>GetL2CacheSize</DecoderName>
+			</Length>
+		</PhysicalAddresses>
+	</MappedMemory>
+</MemoryType>
+<!-- id=8 : L2 cache -->
+<MemoryType>
+	<Name>L2 cache</Name>
+	<MemoryLevelName>L2</MemoryLevelName>
+	<GTIMemHierarchyReadEnableFlags>0x40</GTIMemHierarchyReadEnableFlags>
+	<MemLevelBitFlag>0x04</MemLevelBitFlag>
+	<Description>L2 cache</Description>
+	<CanBeBypassed>true</CanBeBypassed>
+	<IsBypassedByDefault>false</IsBypassedByDefault>
+	<SimulatorSupportsConsistencyChecking>false</SimulatorSupportsConsistencyChecking>
+	<CanBeLocked>false</CanBeLocked>
+	<CanBeSecured>false</CanBeSecured>
+	<CanBeNonEmulatable>true</CanBeNonEmulatable>
+	<CanBeProtected>false</CanBeProtected>
+	<HasMemoryAccessIDs>false</HasMemoryAccessIDs>
+	<IsCache>true</IsCache>
+	<IsMapped>false</IsMapped>
+	<IsProgram>true</IsProgram>
+	<IsData>true</IsData>
+	<IsIOSpace>false</IsIOSpace>
+	<IsExternal>false</IsExternal>
+	<IsShared>false</IsShared>
+	<IsReserved>false</IsReserved>
+	<IsROM>false</IsROM>
+	<IsPaged>false</IsPaged>
+	<IsVirtualMemorySupported>false</IsVirtualMemorySupported>
+	<IsVirtualWayConversionEnabled>false</IsVirtualWayConversionEnabled>
+	<Linesize>&L2LineSize;</Linesize>
+	<HierarchyDepth>2</HierarchyDepth>
+	<!--the following are only read if the memory level is cache-->
+	<Cache>
+		<IsCacheTagRamDecodingSupported>&IsCacheTagRamDecodingSupported;</IsCacheTagRamDecodingSupported>
+		<MaxNumCacheLines>&L2MaxNumCacheLines;</MaxNumCacheLines>
+		<NumCacheLines>
+			<ConfigReg>L2CFG</ConfigReg>
+			<DecoderName>GetL2NumCacheLines</DecoderName>
+		</NumCacheLines>
+		<CacheSize>
+			<ConfigReg>L2CFG</ConfigReg>
+			<DecoderName>GetL2CacheSize</DecoderName>
+		</CacheSize>
+		<IsCacheEnabled>
+			<ConfigReg>L2CFG</ConfigReg>
+			<DecoderName>IsCacheEnabled</DecoderName>
+		</IsCacheEnabled>
+		<IsCacheSharedBitAccessible>true</IsCacheSharedBitAccessible>
+		<IsCacheExclusiveBitAccessible>true</IsCacheExclusiveBitAccessible>
+		<IsCacheModifiedBitAccessible>true</IsCacheModifiedBitAccessible>
+		<IsCacheSecureBitAccessible>true</IsCacheSecureBitAccessible>
+		<IsCacheTableBaseBitAccessible>true</IsCacheTableBaseBitAccessible>
+		<IsCacheDirtyBitAccessible>false</IsCacheDirtyBitAccessible>
+		<IsPhysicallyTagged>true</IsPhysicallyTagged>		
+		<IsLruSupported>false</IsLruSupported>
+		<isVictimSupported>false</isVictimSupported>		
+		<NumWaysInCache>8</NumWaysInCache>
+	</Cache>
+</MemoryType>
+<!-- id=9 : External -->
+<MemoryType>
+	<Name>External</Name>
+	<MemoryLevelName>External</MemoryLevelName>
+	<GTIMemHierarchyReadEnableFlags>0x08</GTIMemHierarchyReadEnableFlags>
+	<MemLevelBitFlag>0x08</MemLevelBitFlag>
+	<Description>External memory</Description>
+	<CanBeBypassed>false</CanBeBypassed>
+	<IsBypassedByDefault>false</IsBypassedByDefault>
+	<SimulatorSupportsConsistencyChecking>false</SimulatorSupportsConsistencyChecking>
+	<CanBeLocked>false</CanBeLocked>
+	<CanBeSecured>false</CanBeSecured>
+	<CanBeNonEmulatable>false</CanBeNonEmulatable>
+	<CanBeProtected>false</CanBeProtected>
+	<HasMemoryAccessIDs>false</HasMemoryAccessIDs>
+	<IsCache>false</IsCache>
+	<IsMapped>true</IsMapped>
+	<IsProgram>true</IsProgram>
+	<IsData>true</IsData>
+	<IsIOSpace>false</IsIOSpace>
+	<IsExternal>true</IsExternal>
+	<IsShared>false</IsShared>
+	<IsROM>false</IsROM>
+	<IsPaged>false</IsPaged>
+	<IsVirtualMemorySupported>false</IsVirtualMemorySupported>
+	<IsVirtualWayConversionEnabled>false</IsVirtualWayConversionEnabled>
+	<Linesize>&ExternalLineSize;</Linesize>
+	<HierarchyDepth>3</HierarchyDepth>
+	<!-- the following are only read if IsCache is false -->
+	<MappedMemory>
+		<PhysicalAddresses>
+			<CanBeDisabled>false</CanBeDisabled>
+			<StartAddress>
+				<IsFixed>true</IsFixed>
+				<FixedValue>&ExternalStartAdrs;</FixedValue>
+				<ConfigReg></ConfigReg>
+				<DecoderName></DecoderName>
+			</StartAddress>
+			<Length>
+				<IsFixed>true</IsFixed>
+				<FixedValue>&ExternalLength;</FixedValue>
+				<ConfigReg></ConfigReg>
+				<DecoderName></DecoderName>
+			</Length>
+		</PhysicalAddresses>
+	</MappedMemory>
+</MemoryType>

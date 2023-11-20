@@ -1,0 +1,506 @@
+<module name="CTRL_MODULE_WKUP" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="CTRL_WKUP_SEC_CTRL" acronym="CTRL_WKUP_SEC_CTRL" offset="0x100" width="32" description="Control Register">
+    <bitfield id="SECCTRLWRDISABLE" width="1" begin="31" end="31" resetval="0x0" description="Control Register write disable control. 0x0 = Write in this register is allowed 0x1 = Write in this register is forbidden" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="26" begin="30" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="SECURE_EMIF_CONFIG_RO_EN" width="1" begin="4" end="4" resetval="0x0" description="Access mode for registers: CTRL_WKUP_EMIF1_SDRAM_CONFIG CTRL_WKUP_EMIF2_SDRAM_CONFIG 0x0 = These registers are RW 0x1 = These registers are RO" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="3" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTRL_WKUP_SEC_TAP" acronym="CTRL_WKUP_SEC_TAP" offset="0x108" width="32" description="TAP controllers register.">
+    <bitfield id="SECTAPWR_DISABLE" width="1" begin="31" end="31" resetval="0x0" description="TAP controllers register write disable control" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="30" end="27" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="26" end="26" resetval="0x1" description="Reserved. This bit must not be modified." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="13" begin="25" end="13" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DSP2_TAPENABLE" width="1" begin="12" end="12" resetval="0x1" description="DSP2 TAP control" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLED" token="DSP2_TAPENABLE_0" description="DSP2 TAP controller is disabled"/>
+      <bitenum value="1" id="ENABLED" token="DSP2_TAPENABLE_1" description="DSP2 TAP controller is enabled"/>
+    </bitfield>
+    <bitfield id="JTAGEXT_TAPENABLE" width="1" begin="11" end="11" resetval="0x1" description="External JTAG expansion TAP control." range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLED" token="JTAGEXT_TAPENABLE_0" description="external JTAG TAP controller is disabled"/>
+      <bitenum value="1" id="ENABLED" token="JTAGEXT_TAPENABLE_1" description="external JTAG TAP controller is enabled"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="6" begin="10" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="IEEE1500_ENABLE" width="1" begin="4" end="4" resetval="0x1" description="IEEE1500 and P1500 access enable" range="" rwaccess="RW"/>
+    <bitfield id="P1500_ENABLE" width="1" begin="3" end="3" resetval="0x1" description="P1500 access enable" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLED" token="P1500_ENABLE_0" description="P1500 controller is disabled"/>
+      <bitenum value="1" id="ENABLED" token="P1500_ENABLE_1" description="P1500 controller is enabled"/>
+    </bitfield>
+    <bitfield id="IPU1_TAPENABLE" width="1" begin="2" end="2" resetval="0x1" description="IPU1 TAP control" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLED" token="IPU1_TAPENABLE_0" description="IPU1 TAP controller is disabled"/>
+      <bitenum value="1" id="ENABLED" token="IPU1_TAPENABLE_1" description="IPU1 TAP controller is enabled"/>
+    </bitfield>
+    <bitfield id="DSP1_TAPENABLE" width="1" begin="1" end="1" resetval="0x1" description="DSP1 TAP control" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLED" token="DSP1_TAPENABLE_0" description="DSP1 TAP controller is disabled"/>
+      <bitenum value="1" id="ENABLED" token="DSP1_TAPENABLE_1" description="DSP1 TAP controller is enabled"/>
+    </bitfield>
+    <bitfield id="DAP_TAPENABLE" width="1" begin="0" end="0" resetval="0x1" description="DAP TAP control" range="" rwaccess="RW">
+      <bitenum value="0" id="DISABLED" token="DAP_TAPENABLE_0" description="DAP TAP controller is disabled"/>
+      <bitenum value="1" id="ENABLED" token="DAP_TAPENABLE_1" description="DAP TAP controller is enabled"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_OCPREG_SPARE" acronym="CTRL_WKUP_OCPREG_SPARE" offset="0x10C" width="32" description="OCP Spare Register">
+    <bitfield id="OCPREG_SPARE31" width="1" begin="31" end="31" resetval="0x0" description="OCP spare register 31" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE30" width="1" begin="30" end="30" resetval="0x0" description="OCP spare register 30" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE29" width="1" begin="29" end="29" resetval="0x0" description="OCP spare register 29" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE28" width="1" begin="28" end="28" resetval="0x0" description="OCP spare register 28" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE27" width="1" begin="27" end="27" resetval="0x0" description="OCP spare register 27" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE26" width="1" begin="26" end="26" resetval="0x0" description="OCP spare register 26" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE25" width="1" begin="25" end="25" resetval="0x0" description="OCP spare register 25" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE24" width="1" begin="24" end="24" resetval="0x0" description="OCP spare register 24" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE23" width="1" begin="23" end="23" resetval="0x0" description="OCP spare register 23" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE22" width="1" begin="22" end="22" resetval="0x0" description="OCP spare register 22" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE21" width="1" begin="21" end="21" resetval="0x0" description="OCP spare register 21" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE20" width="1" begin="20" end="20" resetval="0x0" description="OCP spare register 20" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE19" width="1" begin="19" end="19" resetval="0x0" description="OCP spare register 19" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE18" width="1" begin="18" end="18" resetval="0x0" description="OCP spare register 18" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE17" width="1" begin="17" end="17" resetval="0x0" description="OCP spare register 17" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE16" width="1" begin="16" end="16" resetval="0x0" description="OCP spare register 16" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE15" width="1" begin="15" end="15" resetval="0x0" description="OCP spare register 15" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE14" width="1" begin="14" end="14" resetval="0x0" description="OCP spare register 14" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE13" width="1" begin="13" end="13" resetval="0x0" description="OCP spare register 13" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE12" width="1" begin="12" end="12" resetval="0x0" description="OCP spare register 12" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE11" width="1" begin="11" end="11" resetval="0x0" description="OCP spare register 11" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE10" width="1" begin="10" end="10" resetval="0x0" description="OCP spare register 10" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE9" width="1" begin="9" end="9" resetval="0x0" description="OCP spare register 9" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE8" width="1" begin="8" end="8" resetval="0x0" description="OCP spare register 8" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE7" width="1" begin="7" end="7" resetval="0x0" description="OCP spare register 7" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE6" width="1" begin="6" end="6" resetval="0x0" description="OCP spare register 6" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE5" width="1" begin="5" end="5" resetval="0x0" description="OCP spare register 5" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE4" width="1" begin="4" end="4" resetval="0x0" description="OCP spare register 4" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE3" width="1" begin="3" end="3" resetval="0x0" description="OCP spare register 3" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE2" width="1" begin="2" end="2" resetval="0x0" description="OCP spare register 2" range="" rwaccess="RW"/>
+    <bitfield id="OCPREG_SPARE1" width="1" begin="1" end="1" resetval="0x0" description="OCP spare register 1" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTRL_WKUP_SECURE_EMIF1_SDRAM_CONFIG" acronym="CTRL_WKUP_SECURE_EMIF1_SDRAM_CONFIG" offset="0x110" width="32" description="EMIF1 SDRAM configuration register. Its values are exported to EMIF_SDRAM_CONFIG register at POR. For bit field descriptions see EMIF_SDRAM_CONFIG register in, EMIF Controller, in , Memory Subsystem. Write to this register is allowed if the [4] SECURE_EMIF_CONFIG_RO_EN bit is set to 0x0 (default).">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EMIF1_SDRAM_IBANK_POS" width="2" begin="28" end="27" resetval="0x0" description="Internal bank position." range="" rwaccess="RW"/>
+    <bitfield id="EMIF1_SDRAM_DDR_TERM" width="3" begin="26" end="24" resetval="0x0" description="DDR2 and DDR3 termination resistor value." range="" rwaccess="RW"/>
+    <bitfield id="EMIF1_SDRAM_DDR2_DDQS" width="1" begin="23" end="23" resetval="0x1" description="DDR2 differential DQS enable." range="" rwaccess="RW"/>
+    <bitfield id="EMIF1_SDRAM_DYN_ODT" width="2" begin="22" end="21" resetval="0x0" description="DDR3 Dynamic ODT." range="" rwaccess="RW"/>
+    <bitfield id="EMIF1_SDRAM_DDR_DISABLE_DLL" width="1" begin="20" end="20" resetval="0x0" description="Disable DLL select." range="" rwaccess="RW"/>
+    <bitfield id="EMIF1_SDRAM_DRIVE" width="2" begin="19" end="18" resetval="0x0" description="SDRAM drive strength." range="" rwaccess="RW"/>
+    <bitfield id="EMIF1_SDRAM_CWL" width="2" begin="17" end="16" resetval="0x0" description="DDR3 CAS Write latency." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EMIF1_SDRAM_CL" width="4" begin="13" end="10" resetval="0x0" description="CAS Latency." range="" rwaccess="RW"/>
+    <bitfield id="EMIF1_SDRAM_ROWSIZE" width="3" begin="9" end="7" resetval="0x0" description="Row Size." range="" rwaccess="RW"/>
+    <bitfield id="EMIF1_SDRAM_IBANK" width="3" begin="6" end="4" resetval="0x0" description="Internal Bank setup." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EMIF1_SDRAM_PAGESIZE" width="3" begin="2" end="0" resetval="0x0" description="Page Size." range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRL_WKUP_STD_FUSE_CONF" acronym="CTRL_WKUP_STD_FUSE_CONF" offset="0x13C" width="32" description="Standard Fuse conf [63:32]. Register shows part of the chip eFuse configuration on the OCP interface. Reading at the address of one of these registers provides a direct view into a part of the eFuse chain.">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x-" description="" range="" rwaccess="R"/>
+    <bitfield id="STD_FUSE_EMIF1_INITREF_DEF_DIS" width="1" begin="19" end="19" resetval="0x-" description="Disable EMIF1 DDR refresh and initialization sequence 0x0 = refresh and initialization sequence is enabled 0x1 = refresh and initialization sequence is disabled" range="" rwaccess="R"/>
+    <bitfield id="STD_FUSE_EMIF1_DDR3_LPDDR2N" width="1" begin="18" end="18" resetval="0x-" description="EMIF1 DDR3 0x0 = LPDDR2 configured 0x1 = DDR3 configured" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="5" begin="17" end="13" resetval="0x-" description="" range="" rwaccess="R"/>
+    <bitfield id="STD_FUSE_CH_SPEEDUP_DISABLE" width="1" begin="12" end="12" resetval="0x-" description="ROM code settings for configuration header block and speedup block. Only SW access (no hardware access). 0x0 = enables CH and speedup 0x1 = disables CH and speedup" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="12" begin="11" end="0" resetval="0x-" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTRL_WKUP_EMIF1_SDRAM_CONFIG_EXT" acronym="CTRL_WKUP_EMIF1_SDRAM_CONFIG_EXT" offset="0x144" width="32" description="SLICE register for emif1 and emif2">
+    <bitfield id="RESERVED" width="14" begin="31" end="18" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="EMIF1_NARROW_ONLY" width="1" begin="17" end="17" resetval="0x0" description="EMIF1 operates in narrow mode, to allow for data macros to be powered down to save power 0x0 = narrow mode disabled 0x1 = narrow mode enabled" range="" rwaccess="RW"/>
+    <bitfield id="EMIF1_EN_ECC" width="1" begin="16" end="16" resetval="0x0" description="EMIF1 ECC enable 0x0 = ECC is disabled 0x1 = ECC is enabled" range="" rwaccess="RW"/>
+    <bitfield id="EMIF1_REG_PHY_NUM_OF_SAMPLES" width="2" begin="15" end="14" resetval="0x0" description="Controls the number of DQ samples required for read leveling. The recommended setting for full leveling is 0x3 (128 samples) and for incremental leveling is 0x0 (4 samples). 0x0 = 4 samples 0x1 = 8 samples. 0x2 = 16 samples 0x3 = 128 samples" range="" rwaccess="RW"/>
+    <bitfield id="EMIF1_REG_PHY_SEL_LOGIC" width="1" begin="13" end="13" resetval="0x0" description="Selects an algorithm for read leveling. The use of algorithm 1 (set by default) is recommended. 0x0 = Algorithm 1 is used 0x1 = Algorithm 2 is used" range="" rwaccess="RW"/>
+    <bitfield id="EMIF1_REG_PHY_ALL_DQ_MPR_RD_RESP" width="1" begin="12" end="12" resetval="0x0" description="Analysis method of DQ bits during read leveling. 0x0: if the DRAM provides a read response on only one DQ bit. This is the default setting and works with all memory types (memories send responses on all DQ bits or on a single DQ bit). 0x1: if the DRAM provides a read response on all DQ bits." range="" rwaccess="RW"/>
+    <bitfield id="EMIF1_REG_PHY_OUTPUT_STATUS_SELECT" width="3" begin="11" end="9" resetval="0x0" description="Selects the status to be observed on the outputs of the DDR PHYs through 0x0 = selects phy_reg_rdlvl_start_ratio[7:0] 0x1 = selects phy_reg_rdlvl_start_ratio[15:8] 0x2 = selects phy_reg_rdlvl_end_ratio[7:0] 0x3 = selects phy_reg_rdlvl_end_ratio[15:8]" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="8" end="8" resetval="0x1" description="" range="" rwaccess="R"/>
+    <bitfield id="EMIF1_SDRAM_DISABLE_RESET" width="1" begin="7" end="7" resetval="0x0" description="DDR3 SDRAM reset disable. 0x0 = DDR3 SDRAM reset signal is enabled. It can be asserted by EMIF 0x1 = DDR3 SDRAM reset signal is disabled. It is forbidden to EMIF to assert it." range="" rwaccess="RW"/>
+    <bitfield id="EMIF1_PHY_RD_LOCAL_ODT" width="2" begin="6" end="5" resetval="0x0" description="Control of ODT (on &#8211; die termination) settings for the device DDR I/Os. ODT is enabled only during read operations when termination is required. 0x0 = ODT disabled 0x1= 60 Ohms 0x2 = 80 Ohms 0x3 =120 Ohms" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="4" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="EMIF1_DFI_CLOCK_PHASE_CTRL" width="1" begin="3" end="3" resetval="0x0" description="EMIF_FICLK clock phase control (shifting by 180&#176;). For normal operation this bit must always be set to 0x0 (disabled)." range="" rwaccess="RW"/>
+    <bitfield id="EMIF1_EN_SLICE_2" width="1" begin="2" end="2" resetval="0x1" description="Enable command PHY 2. When using DDR3 this bit can be set to 0x0 or 0x1. For lower power consumption 0x0 is used." range="" rwaccess="RW"/>
+    <bitfield id="EMIF1_EN_SLICE_1" width="1" begin="1" end="1" resetval="0x1" description="Enable command PHY 1. 0x1 is the mandatory setting if DDR3 is used. EMIF1_EN_SLICE_0 and EMIF1_EN_SLICE_1 have to be programmed with the same value." range="" rwaccess="RW"/>
+    <bitfield id="EMIF1_EN_SLICE_0" width="1" begin="0" end="0" resetval="0x1" description="Enable command PHY 0. 0x1 is the mandatory setting if DDR3 is used. EMIF1_EN_SLICE_0 and EMIF1_EN_SLICE_1 have to be programmed with the same value." range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRL_WKUP_EMIF1_SDRAM_CONFIG_EXT_1" acronym="CTRL_WKUP_EMIF1_SDRAM_CONFIG_EXT_1" offset="0x14C" width="32" description="">
+    <bitfield id="EMIF1_PHY_REG_READ_DATA_EYE_LVL" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTRL_WKUP_LDOSRAM_CORE_VOLTAGE_CTRL" acronym="CTRL_WKUP_LDOSRAM_CORE_VOLTAGE_CTRL" offset="0x164" width="32" description="Core SRAM LDO Control register">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LDOSRAMCORE_RETMODE_MUX_CTRL" width="1" begin="26" end="26" resetval="0x0" description="Override control of EFUSE Retention Mode Voltage value" range="" rwaccess="RW">
+      <bitenum value="0" id="EFUSE" token="LDOSRAMCORE_RETMODE_MUX_CTRL_0" description="eFuse value is used"/>
+      <bitenum value="1" id="OCP" token="LDOSRAMCORE_RETMODE_MUX_CTRL_1" description="Override value is used"/>
+    </bitfield>
+    <bitfield id="LDOSRAMCORE_RETMODE_VSET_IN" width="5" begin="25" end="21" resetval="0x0" description="EFUSE Retention Mode Voltage value (vset[9:5])" range="" rwaccess="R"/>
+    <bitfield id="LDOSRAMCORE_RETMODE_VSET_OUT" width="5" begin="20" end="16" resetval="0x0" description="Override value for Retention Mode Voltage" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LDOSRAMCORE_ACTMODE_MUX_CTRL" width="1" begin="10" end="10" resetval="0x0" description="Override control of EFUSE Active Mode Voltage value" range="" rwaccess="RW">
+      <bitenum value="0" id="EFUSE" token="LDOSRAMCORE_ACTMODE_MUX_CTRL_0" description="eFuse value is used"/>
+      <bitenum value="1" id="OCP" token="LDOSRAMCORE_ACTMODE_MUX_CTRL_1" description="Override value is used"/>
+    </bitfield>
+    <bitfield id="LDOSRAMCORE_ACTMODE_VSET_IN" width="5" begin="9" end="5" resetval="0x0" description="EFUSE Active Mode Voltage value (vset[4:0])" range="" rwaccess="R"/>
+    <bitfield id="LDOSRAMCORE_ACTMODE_VSET_OUT" width="5" begin="4" end="0" resetval="0x0" description="Override value for Active Mode Voltage value" range="" rwaccess="RW"/>
+  </register>
+  <register id="CTRL_WKUP_STD_FUSE_DIE_ID_0" acronym="CTRL_WKUP_STD_FUSE_DIE_ID_0" offset="0x200" width="32" description="Die ID Register : Part 0. Register shows part of the chip eFuse configuration on the OCP interface. Reading at the address of one of these registers provides a direct view into a part of the eFuse chain.">
+    <bitfield id="STD_FUSE_DIE_ID_0" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTRL_WKUP_ID_CODE" acronym="CTRL_WKUP_ID_CODE" offset="0x204" width="32" description="ID_CODE Key Register">
+    <bitfield id="STD_FUSE_IDCODE" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTRL_WKUP_STD_FUSE_DIE_ID_1" acronym="CTRL_WKUP_STD_FUSE_DIE_ID_1" offset="0x208" width="32" description="Die ID Register : Part 1. Register shows part of the chip eFuse configuration on the OCP interface. Reading at the address of one of these registers provides a direct view into a part of the eFuse chain.">
+    <bitfield id="STD_FUSE_DIE_ID_1" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTRL_WKUP_STD_FUSE_DIE_ID_2" acronym="CTRL_WKUP_STD_FUSE_DIE_ID_2" offset="0x20C" width="32" description="Die ID Register : Part 2. Register shows part of the chip eFuse configuration on the OCP interface. Reading at the address of one of these registers provides a direct view into a part of the eFuse chain.">
+    <bitfield id="STD_FUSE_DIE_ID_2" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTRL_WKUP_STD_FUSE_DIE_ID_3" acronym="CTRL_WKUP_STD_FUSE_DIE_ID_3" offset="0x210" width="32" description="Die ID Register : Part 3. Register shows part of the chip eFuse configuration on the OCP interface. Reading at the address of one of these registers provides a direct view into a part of the eFuse chain.">
+    <bitfield id="STD_FUSE_DIE_ID_3" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTRL_WKUP_STD_FUSE_PROD_ID_0" acronym="CTRL_WKUP_STD_FUSE_PROD_ID_0" offset="0x214" width="32" description="Prod ID Register : Part 0. Register shows part of the chip eFuse configuration on the OCP interface. Reading at the address of one of these registers provides a direct view into a part of the eFuse chain.">
+    <bitfield id="STD_FUSE_PROD_ID" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTRL_WKUP_CONTROL_XTAL_OSCILLATOR" acronym="CTRL_WKUP_CONTROL_XTAL_OSCILLATOR" offset="0x5AC" width="32" description="XTAL OSCILLATOR control">
+    <bitfield id="OSCILLATOR0_BOOST" width="1" begin="31" end="31" resetval="0x1" description="Fast startup control of OSC0 0x0 = Fast startup is disabled 0x1 = Fast startup is enabled" range="" rwaccess="RW"/>
+    <bitfield id="OSCILLATOR0_OS_OUT" width="1" begin="30" end="30" resetval="0x0" description="Oscillator output of OSC0 0x0 = low to high transition in BOOST mode 0x1 = BOOST is disabled" range="" rwaccess="R"/>
+    <bitfield id="OSCILLATOR1_BOOST" width="1" begin="29" end="29" resetval="0x1" description="Fast startup control of OSC1 0x0 = Fast startup is disabled 0x1 = Fast startup is enabled" range="" rwaccess="RW"/>
+    <bitfield id="OSCILLATOR1_OS_OUT" width="1" begin="28" end="28" resetval="0x0" description="Oscillator output of OSC1 0x0 = low to high transition in BOOST mode 0x1 = BOOST is disabled" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="28" begin="27" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTRL_WKUP_EFUSE_1" acronym="CTRL_WKUP_EFUSE_1" offset="0x5C8" width="32" description="EFUSE compensation 1">
+    <bitfield id="DDRDIFF_PTV_NORTH_SIDE_N5" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_NORTH_SIDE_N4" width="1" begin="30" end="30" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_NORTH_SIDE_N3" width="1" begin="29" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_NORTH_SIDE_N2" width="1" begin="28" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_NORTH_SIDE_N1" width="1" begin="27" end="27" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_NORTH_SIDE_N0" width="1" begin="26" end="26" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_NORTH_SIDE_P5" width="1" begin="25" end="25" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_NORTH_SIDE_P4" width="1" begin="24" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_NORTH_SIDE_P3" width="1" begin="23" end="23" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_NORTH_SIDE_P2" width="1" begin="22" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_NORTH_SIDE_P1" width="1" begin="21" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_NORTH_SIDE_P0" width="1" begin="20" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_EAST_SIDE_N5" width="1" begin="19" end="19" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_EAST_SIDE_N4" width="1" begin="18" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_EAST_SIDE_N3" width="1" begin="17" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_EAST_SIDE_N2" width="1" begin="16" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_EAST_SIDE_N1" width="1" begin="15" end="15" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_EAST_SIDE_N0" width="1" begin="14" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_EAST_SIDE_P5" width="1" begin="13" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_EAST_SIDE_P4" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_EAST_SIDE_P3" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_EAST_SIDE_P2" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_EAST_SIDE_P1" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_EAST_SIDE_P0" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTRL_WKUP_EFUSE_2" acronym="CTRL_WKUP_EFUSE_2" offset="0x5CC" width="32" description="EFUSE compensation 2">
+    <bitfield id="DDRDIFF_PTV_SOUTH_SIDE_N5" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_SOUTH_SIDE_N4" width="1" begin="30" end="30" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_SOUTH_SIDE_N3" width="1" begin="29" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_SOUTH_SIDE_N2" width="1" begin="28" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_SOUTH_SIDE_N1" width="1" begin="27" end="27" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_SOUTH_SIDE_N0" width="1" begin="26" end="26" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_SOUTH_SIDE_P5" width="1" begin="25" end="25" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_SOUTH_SIDE_P4" width="1" begin="24" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_SOUTH_SIDE_P3" width="1" begin="23" end="23" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_SOUTH_SIDE_P2" width="1" begin="22" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_SOUTH_SIDE_P1" width="1" begin="21" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_SOUTH_SIDE_P0" width="1" begin="20" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_WEST_SIDE_N5" width="1" begin="19" end="19" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_WEST_SIDE_N4" width="1" begin="18" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_WEST_SIDE_N3" width="1" begin="17" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_WEST_SIDE_N2" width="1" begin="16" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_WEST_SIDE_N1" width="1" begin="15" end="15" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_WEST_SIDE_N0" width="1" begin="14" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_WEST_SIDE_P5" width="1" begin="13" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_WEST_SIDE_P4" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_WEST_SIDE_P3" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_WEST_SIDE_P2" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_WEST_SIDE_P1" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRDIFF_PTV_WEST_SIDE_P0" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTRL_WKUP_EFUSE_3" acronym="CTRL_WKUP_EFUSE_3" offset="0x5D0" width="32" description="EFUSE compensation 3">
+    <bitfield id="DDRSE_PTV_NORTH_SIDE_N5" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_NORTH_SIDE_N4" width="1" begin="30" end="30" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_NORTH_SIDE_N3" width="1" begin="29" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_NORTH_SIDE_N2" width="1" begin="28" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_NORTH_SIDE_N1" width="1" begin="27" end="27" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_NORTH_SIDE_N0" width="1" begin="26" end="26" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_NORTH_SIDE_P5" width="1" begin="25" end="25" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_NORTH_SIDE_P4" width="1" begin="24" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_NORTH_SIDE_P3" width="1" begin="23" end="23" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_NORTH_SIDE_P2" width="1" begin="22" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_NORTH_SIDE_P1" width="1" begin="21" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_NORTH_SIDE_P0" width="1" begin="20" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_EAST_SIDE_N5" width="1" begin="19" end="19" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_EAST_SIDE_N4" width="1" begin="18" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_EAST_SIDE_N3" width="1" begin="17" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_EAST_SIDE_N2" width="1" begin="16" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_EAST_SIDE_N1" width="1" begin="15" end="15" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_EAST_SIDE_N0" width="1" begin="14" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_EAST_SIDE_P5" width="1" begin="13" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_EAST_SIDE_P4" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_EAST_SIDE_P3" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_EAST_SIDE_P2" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_EAST_SIDE_P1" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_EAST_SIDE_P0" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTRL_WKUP_EFUSE_4" acronym="CTRL_WKUP_EFUSE_4" offset="0x5D4" width="32" description="EFUSE compensation 4">
+    <bitfield id="DDRSE_PTV_SOUTH_SIDE_N5" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_SOUTH_SIDE_N4" width="1" begin="30" end="30" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_SOUTH_SIDE_N3" width="1" begin="29" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_SOUTH_SIDE_N2" width="1" begin="28" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_SOUTH_SIDE_N1" width="1" begin="27" end="27" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_SOUTH_SIDE_N0" width="1" begin="26" end="26" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_SOUTH_SIDE_P5" width="1" begin="25" end="25" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_SOUTH_SIDE_P4" width="1" begin="24" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_SOUTH_SIDE_P3" width="1" begin="23" end="23" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_SOUTH_SIDE_P2" width="1" begin="22" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_SOUTH_SIDE_P1" width="1" begin="21" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_SOUTH_SIDE_P0" width="1" begin="20" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_WEST_SIDE_N5" width="1" begin="19" end="19" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_WEST_SIDE_N4" width="1" begin="18" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_WEST_SIDE_N3" width="1" begin="17" end="17" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_WEST_SIDE_N2" width="1" begin="16" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_WEST_SIDE_N1" width="1" begin="15" end="15" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_WEST_SIDE_N0" width="1" begin="14" end="14" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_WEST_SIDE_P5" width="1" begin="13" end="13" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_WEST_SIDE_P4" width="1" begin="12" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_WEST_SIDE_P3" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_WEST_SIDE_P2" width="1" begin="10" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_WEST_SIDE_P1" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="DDRSE_PTV_WEST_SIDE_P0" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTRL_WKUP_EFUSE_13" acronym="CTRL_WKUP_EFUSE_13" offset="0x5F8" width="32" description="">
+    <bitfield id="SDIO1833_PTV_N5" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SDIO1833_PTV_N4" width="1" begin="30" end="30" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SDIO1833_PTV_N3" width="1" begin="29" end="29" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SDIO1833_PTV_N2" width="1" begin="28" end="28" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SDIO1833_PTV_N1" width="1" begin="27" end="27" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SDIO1833_PTV_N0" width="1" begin="26" end="26" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SDIO1833_PTV_P5" width="1" begin="25" end="25" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SDIO1833_PTV_P4" width="1" begin="24" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SDIO1833_PTV_P3" width="1" begin="23" end="23" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SDIO1833_PTV_P2" width="1" begin="22" end="22" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SDIO1833_PTV_P1" width="1" begin="21" end="21" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="SDIO1833_PTV_P0" width="1" begin="20" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="20" begin="19" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_0" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_0" offset="0x700" width="32" description="This register is used to select an observable signal for WKUP observability line 0.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 0. This signal can then be mapped to obs0 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[0] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(0)" token="MODE_0" description="hwobs_int_prm(0)"/>
+      <bitenum value="1" id="hwobs_int_cm1(0)" token="MODE_1" description="hwobs_int_cm1(0)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_1" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_1" offset="0x704" width="32" description="This register is used to select an observable signal for WKUP observability line 1.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 1. This signal can then be mapped to obs1 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[1] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(1)" token="MODE_0" description="hwobs_int_prm(1)"/>
+      <bitenum value="1" id="hwobs_int_cm1(1)" token="MODE_1" description="hwobs_int_cm1(1)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_2" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_2" offset="0x708" width="32" description="This register is used to select an observable signal for WKUP observability line 2.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 2. This signal can then be mapped to obs2 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[2] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(2)" token="MODE_0" description="hwobs_int_prm(2)"/>
+      <bitenum value="1" id="hwobs_int_cm1(2)" token="MODE_1" description="hwobs_int_cm1(2)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_3" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_3" offset="0x70C" width="32" description="This register is used to select an observable signal for WKUP observability line 3.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 3. This signal can then be mapped to obs3 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[3] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(3)" token="MODE_0" description="hwobs_int_prm(3)"/>
+      <bitenum value="1" id="hwobs_int_cm1(3)" token="MODE_1" description="hwobs_int_cm1(3)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_4" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_4" offset="0x710" width="32" description="This register is used to select an observable signal for WKUP observability line 4.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 4. This signal can then be mapped to obs4 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[4] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(4)" token="MODE_0" description="hwobs_int_prm(4)"/>
+      <bitenum value="1" id="hwobs_int_cm1(4)" token="MODE_1" description="hwobs_int_cm1(4)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_5" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_5" offset="0x714" width="32" description="This register is used to select an observable signal for WKUP observability line 5.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 5. This signal can then be mapped to obs5 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[5] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(5)" token="MODE_0" description="hwobs_int_prm(5)"/>
+      <bitenum value="1" id="hwobs_int_cm1(5)" token="MODE_1" description="hwobs_int_cm1(5)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_6" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_6" offset="0x718" width="32" description="This register is used to select an observable signal for WKUP observability line 6.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 6. This signal can then be mapped to obs6 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[6] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(6)" token="MODE_0" description="hwobs_int_prm(6)"/>
+      <bitenum value="1" id="hwobs_int_cm1(6)" token="MODE_1" description="hwobs_int_cm1(6)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_7" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_7" offset="0x71C" width="32" description="This register is used to select an observable signal for WKUP observability line 7.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 7. This signal can then be mapped to obs7 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[7] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(7)" token="MODE_0" description="hwobs_int_prm(7)"/>
+      <bitenum value="1" id="hwobs_int_cm1(7)" token="MODE_1" description="hwobs_int_cm1(7)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_8" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_8" offset="0x720" width="32" description="This register is used to select an observable signal for WKUP observability line 8.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 8. This signal can then be mapped to obs8 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[8] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(8)" token="MODE_0" description="hwobs_int_prm(8)"/>
+      <bitenum value="1" id="hwobs_int_cm1(8)" token="MODE_1" description="hwobs_int_cm1(8)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_9" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_9" offset="0x724" width="32" description="This register is used to select an observable signal for WKUP observability line 9.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 9. This signal can then be mapped to obs9 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[9] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(9)" token="MODE_0" description="hwobs_int_prm(9)"/>
+      <bitenum value="1" id="hwobs_int_cm1(9)" token="MODE_1" description="hwobs_int_cm1(9)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_10" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_10" offset="0x728" width="32" description="This register is used to select an observable signal for WKUP observability line 10.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 10. This signal can then be mapped to obs10 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[10] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(10)" token="MODE_0" description="hwobs_int_prm(10)"/>
+      <bitenum value="1" id="hwobs_int_cm1(10)" token="MODE_1" description="hwobs_int_cm1(10)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_11" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_11" offset="0x72C" width="32" description="This register is used to select an observable signal for WKUP observability line 11.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 11. This signal can then be mapped to obs11 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[11] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(11)" token="MODE_0" description="hwobs_int_prm(11)"/>
+      <bitenum value="1" id="hwobs_int_cm1(11)" token="MODE_1" description="hwobs_int_cm1(11)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_12" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_12" offset="0x730" width="32" description="This register is used to select an observable signal for WKUP observability line 12.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 12. This signal can then be mapped to obs12 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[12] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(12)" token="MODE_0" description="hwobs_int_prm(12)"/>
+      <bitenum value="1" id="hwobs_int_cm1(12)" token="MODE_1" description="hwobs_int_cm1(12)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_13" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_13" offset="0x734" width="32" description="This register is used to select an observable signal for WKUP observability line 13.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 13. This signal can then be mapped to obs13 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[13] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(13)" token="MODE_0" description="hwobs_int_prm(13)"/>
+      <bitenum value="1" id="hwobs_int_cm1(13)" token="MODE_1" description="hwobs_int_cm1(13)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_14" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_14" offset="0x738" width="32" description="This register is used to select an observable signal for WKUP observability line 14.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 14. This signal can then be mapped to obs14 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[14] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(14)" token="MODE_0" description="hwobs_int_prm(14)"/>
+      <bitenum value="1" id="hwobs_int_cm1(14)" token="MODE_1" description="hwobs_int_cm1(14)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_15" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_15" offset="0x73C" width="32" description="This register is used to select an observable signal for WKUP observability line 15.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 15. This signal can then be mapped to obs15 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[15] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(15)" token="MODE_0" description="hwobs_int_prm(15)"/>
+      <bitenum value="1" id="hwobs_int_cm1(15)" token="MODE_1" description="hwobs_int_cm1(15)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_16" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_16" offset="0x740" width="32" description="This register is used to select an observable signal for WKUP observability line 16.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 16. This signal can then be mapped to obs16 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[16] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(16)" token="MODE_0" description="hwobs_int_prm(16)"/>
+      <bitenum value="1" id="hwobs_int_cm1(16)" token="MODE_1" description="hwobs_int_cm1(16)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_17" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_17" offset="0x744" width="32" description="This register is used to select an observable signal for WKUP observability line 17.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 17. This signal can then be mapped to obs17 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[17] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(17)" token="MODE_0" description="hwobs_int_prm(17)"/>
+      <bitenum value="1" id="hwobs_int_cm1(17)" token="MODE_1" description="hwobs_int_cm1(17)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_18" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_18" offset="0x748" width="32" description="This register is used to select an observable signal for WKUP observability line 18.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 18. This signal can then be mapped to obs18 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[18] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(18)" token="MODE_0" description="hwobs_int_prm(18)"/>
+      <bitenum value="1" id="hwobs_int_cm1(18)" token="MODE_1" description="hwobs_int_cm1(18)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_19" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_19" offset="0x74C" width="32" description="This register is used to select an observable signal for WKUP observability line 19.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 19. This signal can then be mapped to obs19 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[19] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(19)" token="MODE_0" description="hwobs_int_prm(19)"/>
+      <bitenum value="1" id="hwobs_int_cm1(19)" token="MODE_1" description="hwobs_int_cm1(19)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_20" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_20" offset="0x750" width="32" description="This register is used to select an observable signal for WKUP observability line 20.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 20. This signal can then be mapped to obs20 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[20] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(20)" token="MODE_0" description="hwobs_int_prm(20)"/>
+      <bitenum value="1" id="hwobs_int_cm1(20)" token="MODE_1" description="hwobs_int_cm1(20)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_21" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_21" offset="0x754" width="32" description="This register is used to select an observable signal for WKUP observability line 21.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 21. This signal can then be mapped to obs21 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[21] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(21)" token="MODE_0" description="hwobs_int_prm(21)"/>
+      <bitenum value="1" id="hwobs_int_cm1(21)" token="MODE_1" description="hwobs_int_cm1(21)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_22" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_22" offset="0x758" width="32" description="This register is used to select an observable signal for WKUP observability line 22.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 22. This signal can then be mapped to obs22 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[22] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(22)" token="MODE_0" description="hwobs_int_prm(22)"/>
+      <bitenum value="1" id="hwobs_int_cm1(22)" token="MODE_1" description="hwobs_int_cm1(22)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_23" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_23" offset="0x75C" width="32" description="This register is used to select an observable signal for WKUP observability line 23.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 23. This signal can then be mapped to obs23 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[23] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(23)" token="MODE_0" description="hwobs_int_prm(23)"/>
+      <bitenum value="1" id="hwobs_int_cm1(23)" token="MODE_1" description="hwobs_int_cm1(23)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_24" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_24" offset="0x760" width="32" description="This register is used to select an observable signal for WKUP observability line 24.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 24. This signal can then be mapped to obs24 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[24] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(24)" token="MODE_0" description="hwobs_int_prm(24)"/>
+      <bitenum value="1" id="hwobs_int_cm1(24)" token="MODE_1" description="hwobs_int_cm1(24)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_25" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_25" offset="0x764" width="32" description="This register is used to select an observable signal for WKUP observability line 25.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 25. This signal can then be mapped to obs25 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[25] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(25)" token="MODE_0" description="hwobs_int_prm(25)"/>
+      <bitenum value="1" id="hwobs_int_cm1(25)" token="MODE_1" description="hwobs_int_cm1(25)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_26" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_26" offset="0x768" width="32" description="This register is used to select an observable signal for WKUP observability line 26.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 26. This signal can then be mapped to obs26 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[26] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(26)" token="MODE_0" description="hwobs_int_prm(26)"/>
+      <bitenum value="1" id="hwobs_int_cm1(26)" token="MODE_1" description="hwobs_int_cm1(26)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_27" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_27" offset="0x76C" width="32" description="This register is used to select an observable signal for WKUP observability line 27.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 27. This signal can then be mapped to obs27 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[27] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(27)" token="MODE_0" description="hwobs_int_prm(27)"/>
+      <bitenum value="1" id="hwobs_int_cm1(27)" token="MODE_1" description="hwobs_int_cm1(27)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_28" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_28" offset="0x770" width="32" description="This register is used to select an observable signal for WKUP observability line 28.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 28. This signal can then be mapped to obs28 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[28] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(28)" token="MODE_0" description="hwobs_int_prm(28)"/>
+      <bitenum value="1" id="hwobs_int_cm1(28)" token="MODE_1" description="hwobs_int_cm1(28)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_29" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_29" offset="0x774" width="32" description="This register is used to select an observable signal for WKUP observability line 29.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 29. This signal can then be mapped to obs29 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[29] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(29)" token="MODE_0" description="hwobs_int_prm(29)"/>
+      <bitenum value="1" id="hwobs_int_cm1(29)" token="MODE_1" description="hwobs_int_cm1(29)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_30" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_30" offset="0x778" width="32" description="This register is used to select an observable signal for WKUP observability line 30.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 30. This signal can then be mapped to obs30 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[30] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(30)" token="MODE_0" description="hwobs_int_prm(30)"/>
+      <bitenum value="1" id="hwobs_int_cm1(30)" token="MODE_1" description="hwobs_int_cm1(30)"/>
+    </bitfield>
+  </register>
+  <register id="CTRL_WKUP_CONF_DEBUG_SEL_TST_31" acronym="CTRL_WKUP_CONF_DEBUG_SEL_TST_31" offset="0x77C" width="32" description="This register is used to select an observable signal for WKUP observability line 31.">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MODE" width="1" begin="0" end="0" resetval="0x0" description="Selects one of the following signals to be available on WKUP observability line 31. This signal can then be mapped to obs31 line throughCTRL_CORE_HWOBS_FINAL_MUX_SEL[31] bit." range="" rwaccess="RW">
+      <bitenum value="0" id="hwobs_int_prm(31)" token="MODE_0" description="hwobs_int_prm(31)"/>
+      <bitenum value="1" id="hwobs_int_cm1(31)" token="MODE_1" description="hwobs_int_cm1(31)"/>
+    </bitfield>
+  </register>
+</module>

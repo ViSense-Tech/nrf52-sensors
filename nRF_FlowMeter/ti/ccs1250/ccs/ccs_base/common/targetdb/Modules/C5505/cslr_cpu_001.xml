@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?><module id="CPU" HW_revision="" XML_version="1" description="The C55x CPU is main processing unit of the DSP.">
+     <register id="IER0" acronym="IER0" page="1" offset="0X0000" width="16" description="Interrupt Enable Register 0">
+<bitfield id="RCV2" width="1" begin="15" end="15" resetval="0" description="I2S2 receive interrupt mask bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable interrupt."/>
+</bitfield>
+<bitfield id="XMT2" width="1" begin="14" end="14" resetval="0" description="I2S2 transmit interrupt mask bit" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable interrupt."/>
+</bitfield>
+<bitfield id="SAR" width="1" begin="13" end="13" resetval="0" description="10-bit SAR A/D conversion or pen interrupt mask bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable interrupt."/>
+</bitfield>
+<bitfield id="LCD" width="1" begin="12" end="12" resetval="0" description="LCD interrupt mask bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable interrupt."/>
+</bitfield>
+<bitfield id="PROG3" width="1" begin="11" end="11" resetval="0" description="Programmable receive interrupt 3 mask bit. This bit is used as either the I2S1 receive interrupt mask bit or the MMC/SD1 SDIO interrupt mask bit. The function of this bit is selected depending on the setting of the SP1MODE bit in the external bus selection register. If SP1MODE = 00b, this bit supports MMC/SD1 SDIO interrupts. If SP1MODE = 01, this bit supports I2S1 interrupts." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable interrupt."/>
+</bitfield>
+<bitfield id="_RESV_6" width="1" begin="10" end="10" resetval="0" description="Reserved. This bit should always be written with 0." range="0-1h" rwaccess="N"/>
+<bitfield id="PROG2" width="1" begin="9" end="9" resetval="0" description="Programmable transmit interrupt 2 mask bit. This bit is used as either the I2S1 transmit interrupt mask bit or the MMC/SD1 interrupt mask bit. The function of this bit is selected depending on the setting of the SP1MODE bit in the external bus selection register. If SP1MODE = 00b, this bit supports MMC/SD1 interrupts. If SP1MODE = 01, this bit supports I2S1 interrupts." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable interrupt."/>
+</bitfield>
+<bitfield id="DMA" width="1" begin="8" end="8" resetval="0" description="DMA aggregated interrupt mask bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable interrupt."/>
+</bitfield>
+<bitfield id="PROG1" width="1" begin="7" end="7" resetval="0" description="Programmable receive interrupt 1 mask bit. This bit is used as either the I2S0 receive interrupt mask bit or the MMC/SD0 SDIO interrupt mask bit. The function of this bit is selected depending on the setting of the SP0MODE bit in the external bus selection register. If SP0MODE = 00b, this bit supports MMC/SD0 SDIO interrupts. If SP0MODE = 01, this bit supports I2S0 interrupts." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable interrupt."/>
+</bitfield>
+<bitfield id="UART" width="1" begin="6" end="6" resetval="0" description="UART interrupt mask bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable interrupt."/>
+</bitfield>
+<bitfield id="PROG0" width="1" begin="5" end="5" resetval="0" description="Programmable transmit interrupt 0 mask bit. This bit is used either the I2S0 transmit interrupt mask bit or the MMC/SD0 interrupt mask bit. The function of this bit is selected depending on the setting of the SP0MODE bit in the external bus selection register. If SP0MODE = 00b, this bit supports MMC/SD0 interrupts. If SP0MODE = 01, this bit supports I2S0 interrupts." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable interrupt."/>
+</bitfield>
+<bitfield id="TINT" width="1" begin="4" end="4" resetval="0" description="Timer aggregated interrupt mask bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable interrupt."/>
+</bitfield>
+<bitfield id="INT1" width="1" begin="3" end="3" resetval="0" description="External user interrupt #1 mask bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable interrupt."/>
+</bitfield>
+<bitfield id="INT0" width="1" begin="2" end="2" resetval="0" description="External user interrupt #0 mask bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable interrupt."/>
+</bitfield>
+<bitfield id="_RESV_15" width="2" begin="1" end="0" resetval="0" description="Reserved. These bits should always be written with 0." range="00h" rwaccess="N"/>
+</register>
+     <register id="IER1" acronym="IER1" page="1" offset="0X0045" width="16" description="Interrupt Enable Register 1">
+<bitfield id="_RESV_1" width="5" begin="15" end="11" resetval="0" description="Reserved. These bits should always be written with 0." range="0h" rwaccess="N"/>
+<bitfield id="RTOS" width="1" begin="10" end="10" resetval="0" description="Real-time operating system interrupt mask bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable interrupt."/>
+</bitfield>
+<bitfield id="DLOG" width="1" begin="9" end="9" resetval="0" description="Data log interrupt mask bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable interrupt."/>
+</bitfield>
+<bitfield id="BERR" width="1" begin="8" end="8" resetval="0" description="Bus error interrupt mask bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable interrupt."/>
+</bitfield>
+<bitfield id="I2C" width="1" begin="7" end="7" resetval="0" description="I2C interrupt mask bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable interrupt."/>
+</bitfield>
+<bitfield id="EMIF" width="1" begin="6" end="6" resetval="0" description="EMIF error interrupt mask bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable interrupt."/>
+</bitfield>
+<bitfield id="GPIO" width="1" begin="5" end="5" resetval="0" description="GPIO aggregated interrupt mask bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable interrupt."/>
+</bitfield>
+<bitfield id="USB" width="1" begin="4" end="4" resetval="0" description="USB interrupt mask bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable interrupt."/>
+</bitfield>
+<bitfield id="SPI" width="1" begin="3" end="3" resetval="0" description="SPI interrupt mask bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable interrupt."/>
+</bitfield>
+<bitfield id="RTC" width="1" begin="2" end="2" resetval="0" description="Wakeup or real-time clock interrupt mask bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable interrupt."/>
+</bitfield>
+<bitfield id="RCV3" width="1" begin="1" end="1" resetval="0" description="I2S3 receive interrupt mask bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable interrupt."/>
+</bitfield>
+<bitfield id="XMT3" width="1" begin="0" end="0" resetval="0" description="I2S3 transmit interrupt mask bit." range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable interrupt."/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable interrupt."/>
+</bitfield>
+</register>
+     <register id="IFR0" acronym="IFR0" page="1" offset="0X0001" width="16" description="Interrupt Flag Register 0">
+<bitfield id="RCV2" width="1" begin="15" end="15" resetval="0" description="I2S2 receive interrupt flag bit." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Interrupt is disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="XMT2" width="1" begin="14" end="14" resetval="0" description="I2S2 transmit interrupt flag bit" range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Interrupt is disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="SAR" width="1" begin="13" end="13" resetval="0" description="10-bit SAR A/D conversion or pen interrupt flag bit." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Interrupt is disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="LCD" width="1" begin="12" end="12" resetval="0" description="LCD interrupt flag bit." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Interrupt is disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="PROG3" width="1" begin="11" end="11" resetval="0" description="Programmable receive interrupt 3 flag bit. This bit is used as either the I2S1 receive interrupt flag bit or the MMC/SD1 SDIO interrupt flag bit. The function of this bit is selected depending on the setting of the SP1MODE bit in the external bus selection register. If SP1MODE = 00b, this bit supports MMC/SD1 SDIO interrupts. If SP1MODE = 01, this bit supports I2S1 interrupts." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Interrupt is disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="_RESV_6" width="1" begin="10" end="10" resetval="0" description="Reserved. This bit should always be written with 0." range="0h" rwaccess="N"/>
+<bitfield id="PROG2" width="1" begin="9" end="9" resetval="0" description="Programmable transmit interrupt 2 flag bit. This bit is used as either the I2S1 transmit interrupt flag bit or the MMC/SD1 interrupt flag bit. The function of this bit is selected depending on the setting of the SP1MODE bit in the external bus selection register. If SP1MODE = 00b, this bit supports MMC/SD1 interrupts. If SP1MODE = 01, this bit supports I2S1 interrupts." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Interrupt is disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="DMA" width="1" begin="8" end="8" resetval="0" description="DMA aggregated interrupt flag bit." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Interrupt is disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="PROG1" width="1" begin="7" end="7" resetval="0" description="Programmable receive interrupt 1 flag bit. This bit is used as either the I2S0 receive interrupt flag bit or the MMC/SD0 SDIO interrupt flag bit. The function of this bit is selected depending on the setting of the SP0MODE bit in the external bus selection register. If SP0MODE = 00b, this bit supports MMC/SD0 SDIO interrupts. If SP0MODE = 01, this bit supports I2S0 interrupts." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Interrupt is disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="UART" width="1" begin="6" end="6" resetval="0" description="UART interrupt flag bit." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Interrupt is disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="PROG0" width="1" begin="5" end="5" resetval="0" description="Programmable transmit interrupt 0 flag bit. This bit is used either the I2S0 transmit interrupt flag bit or the MMC/SD0 interrupt flag bit. The function of this bit is selected depending on the setting of the SP0MODE bit in the external bus selection register. If SP0MODE = 00b, this bit supports MMC/SD0 interrupts. If SP0MODE = 01, this bit supports I2S0 interrupts." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Interrupt is disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="TINT" width="1" begin="4" end="4" resetval="0" description="Timer aggregated interrupt flag bit." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Interrupt is disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="INT1" width="1" begin="3" end="3" resetval="0" description="External user interrupt #1 flag bit." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Interrupt is disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="INT0" width="1" begin="2" end="2" resetval="0" description="External user interrupt #0 flag bit." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Interrupt is disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="_RESV_15" width="2" begin="1" end="0" resetval="0" description="Reserved. These bits should always be written with 0." range="0h" rwaccess="N"/>
+</register>
+     <register id="IFR1" acronym="IFR1" page="1" offset="0X0046" width="16" description="Interrupt Flag Register 1">
+<bitfield id="_RESV_1" width="5" begin="15" end="11" resetval="0" description="Reserved. These bits should always be written with 0." range="0h" rwaccess="N"/>
+<bitfield id="RTOS" width="1" begin="10" end="10" resetval="0" description="Real-time operating system interrupt flag bit." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Interrupt is disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="DLOG" width="1" begin="9" end="9" resetval="0" description="Data log interrupt flag bit." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Interrupt is disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="BERR" width="1" begin="8" end="8" resetval="0" description="Bus error interrupt flag bit." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Interrupt is disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="I2C" width="1" begin="7" end="7" resetval="0" description="I2C interrupt flag bit." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Interrupt is disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="EMIF" width="1" begin="6" end="6" resetval="0" description="EMIF error interrupt flag bit." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Interrupt is disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="GPIO" width="1" begin="5" end="5" resetval="0" description="GPIO aggregated interrupt flag bit." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Interrupt is disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="USB" width="1" begin="4" end="4" resetval="0" description="USB interrupt flag bit." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Interrupt is disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="SPI" width="1" begin="3" end="3" resetval="0" description="SPI interrupt flag bit." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Interrupt is disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="RTC" width="1" begin="2" end="2" resetval="0" description="Wakeup or real-time clock interrupt flag bit." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Interrupt is disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="RCV3" width="1" begin="1" end="1" resetval="0" description="I2S3 receive interrupt flag bit." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Interrupt is disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Interrupt is enabled."/>
+</bitfield>
+<bitfield id="XMT3" width="1" begin="0" end="0" resetval="0" description="I2S3 transmit interrupt flag bit." range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Interrupt is disabled."/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Interrupt is enabled."/>
+</bitfield>
+</register>
+     <register id="ST0_55" acronym="ST0_55" page="1" offset="0X0002" width="16" description="Status Register 0">
+<bitfield id="ACOV2" width="1" begin="15" end="15" resetval="0" description="AC2 overflow flag." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="Overflow not detected."/>
+<bitenum id="ON" value="1" token="ON" description="Overflow detected."/>
+</bitfield>
+<bitfield id="ACOV3" width="1" begin="14" end="14" resetval="0" description="AC3 overflow flag." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="Overflow not detected."/>
+<bitenum id="ON" value="1" token="ON" description="Overflow detected."/>
+</bitfield>
+<bitfield id="TC1" width="1" begin="13" end="13" resetval="1" description="Test/control flag 1." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="Test/control bit is cleared."/>
+<bitenum id="ON" value="1" token="ON" description="Test/control bit is set."/>
+</bitfield>
+<bitfield id="TC2" width="1" begin="12" end="12" resetval="1" description="Test/control flag 2." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="Test/control bit is cleared."/>
+<bitenum id="ON" value="1" token="ON" description="Test/control bit is set."/>
+</bitfield>
+<bitfield id="CARRY" width="1" begin="11" end="11" resetval="1" description="Carry bit." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="Carry bit is not set."/>
+<bitenum id="ON" value="1" token="ON" description="Carry bit is set."/>
+</bitfield>
+<bitfield id="ACOV0" width="1" begin="10" end="10" resetval="0" description="AC0 overflow flag." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="Overflow not detected."/>
+<bitenum id="ON" value="1" token="ON" description="Overflow detected."/>
+</bitfield>
+<bitfield id="ACVO1" width="1" begin="9" end="9" resetval="0" description="AC1 overflow flag." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="Overflow not detected."/>
+<bitenum id="ON" value="1" token="ON" description="Overflow detected."/>
+</bitfield>
+<bitfield id="DP" width="9" begin="8" end="0" resetval="0" description="Copy of the 9 most significant bits of the data page register (DP)." range="0-1FFh" rwaccess="RW"/>
+</register>
+     <register id="ST1_55" acronym="ST1_55" page="1" offset="0X0003" width="16" description="Status Register 1">
+<bitfield id="BRAF" width="1" begin="15" end="15" resetval="0" description="Block-repeat active flag." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="No block-repeat operation is active."/>
+<bitenum id="ON" value="1" token="ON" description="A block-repeat operation is active."/>
+</bitfield>
+<bitfield id="CPL" width="1" begin="14" end="14" resetval="0" description="Compiler mode bit." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="DP direct addressing mode. Direct accesses to data space are made relative to the data page register (DP)."/>
+<bitenum id="ON" value="1" token="ON" description="SP direct addressing mode. Direct accesses to data space are made relative to the data stack pointer (SP). The DSP is said to be in compiler mode."/>
+</bitfield>
+<bitfield id="XF" width="1" begin="13" end="13" resetval="1" description="External flag." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="XF is set low."/>
+<bitenum id="ON" value="1" token="ON" description="XF is set high."/>
+</bitfield>
+<bitfield id="_RESV_4" width="1" begin="12" end="12" resetval="0" description="Reserved." range="0-1h" rwaccess="N"/>
+<bitfield id="INTM" width="1" begin="11" end="11" resetval="1" description="Interrupt mode bit." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="All unmasked interrupts are enabled."/>
+<bitenum id="ON" value="1" token="ON" description="All maskable interrupts are disabled."/>
+</bitfield>
+<bitfield id="M40" width="1" begin="10" end="10" resetval="0" description="Computation mode bit for the D unit." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="32-bit mode."/>
+<bitenum id="ON" value="1" token="ON" description="40-bit mode."/>
+</bitfield>
+<bitfield id="SATD" width="1" begin="9" end="9" resetval="0" description="Saturation mode bit for the D unit." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="Off. No saturation is performed."/>
+<bitenum id="ON" value="1" token="ON" description="On. If an operation performed by the D unit results in an overflow, the result is saturated."/>
+</bitfield>
+<bitfield id="SXMD" width="1" begin="8" end="8" resetval="1" description="Sign-extension mode bit for the D unit." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="Sign-extension mode is off."/>
+<bitenum id="ON" value="1" token="ON" description="Sign-extension mode is on."/>
+</bitfield>
+<bitfield id="C16" width="1" begin="7" end="7" resetval="0" description="Dual 16-bit arithmetic mode bit. If C54CM = 1: The arithmetic performed in the D-unit ALU depends on C16. If C54CM = 0: The CPU ignores C16. The instruction syntax alone determines whether dual 16-bit arithmetic or 32-bit arithmetic is used." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="Off. For an instruction that is affected by C16, the D-unit ALU performs one 32-bit operation."/>
+<bitenum id="ON" value="1" token="ON" description="On. For an instruction that is affected by C16, the D-unit ALU performs two 16-bit operations in parallel."/>
+</bitfield>
+<bitfield id="FRCT" width="1" begin="6" end="6" resetval="0" description="Fractional mode bit." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="Off. Results of multiply operations are not shifted."/>
+<bitenum id="ON" value="1" token="ON" description="On. Results of multiply operations are shifted left by 1 bit for decimal point adjustment. This is required when you multiply two signed Q15 values and you need a Q31 result."/>
+</bitfield>
+<bitfield id="C54CM" width="1" begin="5" end="5" resetval="1" description="TMS320C54x DSPcompatible mode bit." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="Disabled. The CPU supports code written for a TMS320C55x (C55x) DSP."/>
+<bitenum id="ON" value="1" token="ON" description="Enabled. This mode must be set when you are using code that was originally developed for a TMS320C54x (C54x) DSP. All the C55x DSP CPU resources remain available; therefore, as you translate code, you can take advantage of the additional features on the C55x DSP to optimize your code."/>
+</bitfield>
+<bitfield id="ASM" width="5" begin="4" end="0" resetval="0" description="Accumulator shift mode bits." range="0-1Fh" rwaccess="RW"/>
+</register>
+     <register id="ST2_55" acronym="ST2_55" page="1" offset="0X004B" width="16" description="Status Register 2">
+<bitfield id="ARMS" width="1" begin="15" end="15" resetval="0" description="AR mode switch bit." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="DSP mode operands, which provide efficient execution of DSP intensive applications. Among these operands are those that use reverse carry propagation when adding to or subtracting from a pointer. Short-offset operands are not available."/>
+<bitenum id="ON" value="1" token="ON" description="Control mode operands, which enable optimized code size for control system applications. The short-offset operand *ARn(short(#k3)) is available. (Other offsets require a 2-byte extension on an instruction, and instructions with these extensions cannot be executed in parallel with other instructions.)"/>
+</bitfield>
+<bitfield id="_RESV_2" width="2" begin="14" end="13" resetval="3" description="Reserved." range="0-3h" rwaccess="N"/>
+<bitfield id="DBGM" width="1" begin="12" end="12" resetval="1" description="Debug mode bit." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="Debug events are enabled."/>
+<bitenum id="ON" value="1" token="ON" description="Debug events are disabled. The emulator cannot access memory or registers. Software breakpoints still cause the CPU to halt, but hardware breakpoints or halt requests are ignored."/>
+</bitfield>
+<bitfield id="EALLOW" width="1" begin="11" end="11" resetval="0" description="Emulation access enable bit." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="Write access to non-CPU emulation registers is disabled."/>
+<bitenum id="ON" value="1" token="ON" description="Write access to non-CPU emulation registers is enabled."/>
+</bitfield>
+<bitfield id="RDM" width="1" begin="10" end="10" resetval="0" description="Rounding mode bit." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="Round to the infinite. The CPU adds 8000h (2 raised to the 15th power) to the 40-bit operand. Then the CPU clears bits 15 through 0 to generate a rounded result in a 24- or 16-bit representation. For a 24-bit representation, only bits 39 through 16 of the result are meaningful. For a 16-bit representation, only bits 31 through 16 of the result are meaningful."/>
+<bitenum id="ON" value="1" token="ON" description="Round to the nearest. The rounding depends on bits 15 through 0 of the 40-bit operand, as shown by the following if statements. The rounded result is in a 24-bit representation (in bits 39 through 16) or a 16-bit representation (in bits 31 through 16)."/>
+</bitfield>
+<bitfield id="_RESV_6" width="1" begin="9" end="9" resetval="0" description="Reserved." range="0-1h" rwaccess="N"/>
+<bitfield id="CDPLC" width="1" begin="8" end="8" resetval="0" description="CDP linear/circular configuration bit." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="CDP is used for linear addessing."/>
+<bitenum id="ON" value="1" token="ON" description="CDP is used for circular addressing."/>
+</bitfield>
+<bitfield id="AR7LC" width="1" begin="7" end="7" resetval="0" description="AR7 linear/circular configuration bit." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="AR7 is used for linear addressing."/>
+<bitenum id="ON" value="1" token="ON" description="AR7 is used for circular addressing."/>
+</bitfield>
+<bitfield id="AR6LC" width="1" begin="6" end="6" resetval="0" description="AR6 linear/circular configuration bit." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="AR6 is used for linear addressing."/>
+<bitenum id="ON" value="1" token="ON" description="AR6 is used for circular addressing."/>
+</bitfield>
+<bitfield id="AR5LC" width="1" begin="5" end="5" resetval="0" description="AR5 linear/circular configuration bit." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="AR5 is used for linear addressing."/>
+<bitenum id="ON" value="1" token="ON" description="AR5 is used for circular addressing."/>
+</bitfield>
+<bitfield id="AR4LC" width="1" begin="4" end="4" resetval="0" description="AR4 linear/circular configuration bit." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="AR4 is used for linear addressing."/>
+<bitenum id="ON" value="1" token="ON" description="AR4 is used for circular addressing."/>
+</bitfield>
+<bitfield id="AR3LC" width="1" begin="3" end="3" resetval="0" description="AR3 linear/circular configuration bit." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="AR3 is used for linear addressing."/>
+<bitenum id="ON" value="1" token="ON" description="AR3 is used for circular addressing."/>
+</bitfield>
+<bitfield id="AR2LC" width="1" begin="2" end="2" resetval="0" description="AR2 linear/circular configuration bit." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="AR2 is used for linear addressing."/>
+<bitenum id="ON" value="1" token="ON" description="AR2 is used for circular addressing."/>
+</bitfield>
+<bitfield id="AR1LC" width="1" begin="1" end="1" resetval="0" description="AR1 linear/circular configuration bit." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="AR1 is used for linear addressing."/>
+<bitenum id="ON" value="1" token="ON" description="AR1 is used for circular addressing."/>
+</bitfield>
+<bitfield id="AR0LC" width="1" begin="0" end="0" resetval="0" description="AR0 linear/circular configuration bit." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="AR0 is used for linear addressing."/>
+<bitenum id="ON" value="1" token="ON" description="AR0 is used for circular addressing."/>
+</bitfield>
+</register>
+     <register id="ST3_55" acronym="ST3_55" page="1" offset="0X0004" width="16" description="Status Register 3">
+<bitfield id="_RESV_1" width="1" begin="15" end="15" resetval="0" description="Reserved, always write 0 to this bit." range="0h" rwaccess="N"/>
+<bitfield id="_RESV_2" width="1" begin="14" end="14" resetval="0" description="Reserved, always write 0 to this bit." range="0h" rwaccess="N"/>
+<bitfield id="_RESV_3" width="1" begin="13" end="13" resetval="0" description="Reserved, always write 0 to this bit." range="0h" rwaccess="N"/>
+<bitfield id="_RESV_4" width="1" begin="12" end="12" resetval="1" description="Reserved, always write 0 to this bit." range="0h" rwaccess="N"/>
+<bitfield id="_RESV_5" width="4" begin="11" end="8" resetval="69643" description="" range="1100b" rwaccess="N"/>
+<bitfield id="CBERR" width="1" begin="7" end="7" resetval="0" description="CPU bus error flag." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="The flag has been cleared by your program or by a reset."/>
+<bitenum id="ON" value="1" token="ON" description="An internal bus error has been detected."/>
+</bitfield>
+<bitfield id="MPNMC" width="1" begin="6" end="6" resetval="0" description="Microprocessor/microcomputer mode bit." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="Microcomputer mode. The on-chip ROM is enabled; it is addressable in program space."/>
+<bitenum id="ON" value="1" token="ON" description="Microprocessor mode. The on-chip ROM is disabled; it is not in the program-space map."/>
+</bitfield>
+<bitfield id="SATA" width="1" begin="5" end="5" resetval="0" description="Saturation mode bit for the A unit." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="Saturation mode on A unit is off. No saturatio is performed."/>
+<bitenum id="ON" value="1" token="ON" description="Saturation mode on A unit is on. If a calculation in the A-unit ALU results in an overflow, the result is saturated to 7FFFh (for overflow in the positive direction) or 8000h (for overflow in the negative direction)."/>
+</bitfield>
+<bitfield id="_RESV_9" width="1" begin="4" end="4" resetval="0" description="Always write 0 to this bit." range="0h" rwaccess="N"/>
+<bitfield id="_RESV_10" width="1" begin="3" end="3" resetval="0" description="Reserved." range="0-1h" rwaccess="N"/>
+<bitfield id="CLKOFF" width="1" begin="2" end="2" resetval="0" description="CLKOUT disable bit." range="" rwaccess="RW">
+<bitenum id="ENABLE" value="0" token="ENABLE" description="CLKOUT pin is enabled."/>
+<bitenum id="DISABLE" value="1" token="DISABLE" description="CLKOUT pin is disabled."/>
+</bitfield>
+<bitfield id="SMUL" width="1" begin="1" end="1" resetval="0" description="Saturation-on-multiplication mode bit." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="Saturation-on-multiplication mode is off."/>
+<bitenum id="ON" value="1" token="ON" description="Saturation-on-multiplication mode is on. When SMUL = 1, FRCT = 1, and SATD = 1, the result of 18000h × 18000h is saturated to 7FFF FFFFh (regardless of the value of the M40 bit). This forces the product of the two negative numbers to be a positive number."/>
+</bitfield>
+<bitfield id="SST" width="1" begin="0" end="0" resetval="0" description="Saturate-on-store mode bit." range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="Saturation-on-store mode is off."/>
+<bitenum id="ON" value="1" token="ON" description="Saturation-on-store mode is on. For an instruction that is affected by SST, the CPU saturates a shifted or unshifted accumulator value before storing it."/>
+</bitfield>
+</register>
+     <register id="IVPD" acronym="IVPD" page="1" offset="0X0049" width="16" description="Interrupt vector pointer register. IVPD points to the 256-byte program page for interrupt vectors 0-15.">
+<bitfield id="IVPD" width="16" begin="15" end="0" resetval="65535" description="IVPD value." range="0-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="IVPH" acronym="IVPH" page="1" offset="0X004A" width="16" description="Interrupt vector pointer register. IVPH points to the 256-byte program page for interrupt vectors 16-23.">
+<bitfield id="IVPH" width="16" begin="15" end="0" resetval="65535" description="IVPH value." range="0-FFFFh" rwaccess="RW"/>
+</register>
+</module>

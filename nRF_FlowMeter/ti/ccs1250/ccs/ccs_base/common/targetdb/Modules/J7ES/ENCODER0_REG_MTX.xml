@@ -1,0 +1,105 @@
+<module name="ENCODER0_REG_MTX" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="ENCODER0_CR_MTX_ENABLE" acronym="ENCODER0_CR_MTX_ENABLE" offset="0x0" width="32" description="">
+    <bitfield id="MTX_MAJ_REV" width="8" begin="31" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MTX_MIN_REV" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MTX_TCAPS" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MTX_ARCH" width="1" begin="11" end="11" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="10" end="8" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MTX_STEP_REC" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MTX_TSTOPPED" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MTX_TOFF" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MTX_ENABLE" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_MTX_STATUS" acronym="ENCODER0_CR_MTX_STATUS" offset="0x8" width="32" description="">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MTX_HREASON" width="2" begin="19" end="18" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="7" begin="17" end="11" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MTX_LSM_STEP" width="3" begin="10" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="7" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MTX_CF_Z" width="1" begin="3" end="3" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MTX_CF_N" width="1" begin="2" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MTX_CR_O" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MTX_CF_C" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_MTX_KICK" acronym="ENCODER0_CR_MTX_KICK" offset="0x80" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MTX_KICK" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_MTX_KICKI" acronym="ENCODER0_CR_MTX_KICKI" offset="0x88" width="32" description="">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MTX_KICKI" width="16" begin="15" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_MTX_FAULT0" acronym="ENCODER0_CR_MTX_FAULT0" offset="0x90" width="32" description="">
+    <bitfield id="REQ_LD_REG" width="5" begin="31" end="27" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="26" end="24" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="REQ_LD_DEST" width="8" begin="23" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="REQ_STATE" width="2" begin="11" end="10" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="9" end="9" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="REQ_RN_W" width="1" begin="8" end="8" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="REQ_SB" width="8" begin="7" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_MTX_REGISTER_READ_WRITE_DATA" acronym="ENCODER0_CR_MTX_REGISTER_READ_WRITE_DATA" offset="0xF8" width="32" description="">
+    <bitfield id="MTX_RWDATA" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_MTX_REGISTER_READ_WRITE_REQUEST" acronym="ENCODER0_CR_MTX_REGISTER_READ_WRITE_REQUEST" offset="0xFC" width="32" description="">
+    <bitfield id="MTX_DREADY" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="14" begin="30" end="17" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MTX_RNW" width="1" begin="16" end="16" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="9" begin="15" end="7" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MTX_RSPECIFIER" width="3" begin="6" end="4" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MTX_USPECIFIER" width="4" begin="3" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_MTX_RAM_ACCESS_DATA_EXCHANGE" acronym="ENCODER0_CR_MTX_RAM_ACCESS_DATA_EXCHANGE" offset="0x100" width="32" description="">
+    <bitfield id="MTX_MCMDATAX" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_MTX_RAM_ACCESS_DATA_TRANSFER" acronym="ENCODER0_CR_MTX_RAM_ACCESS_DATA_TRANSFER" offset="0x104" width="32" description="">
+    <bitfield id="MTX_MCMDATAT" width="32" begin="31" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_MTX_RAM_ACCESS_CONTROL" acronym="ENCODER0_CR_MTX_RAM_ACCESS_CONTROL" offset="0x108" width="32" description="">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MTX_MCMID" width="8" begin="27" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MTX_MCM_ADDR" width="18" begin="19" end="2" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MTX_MCMAI" width="1" begin="1" end="1" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="MTX_MCMR" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_MTX_RAM_ACCESS_STATUS" acronym="ENCODER0_CR_MTX_RAM_ACCESS_STATUS" offset="0x10C" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MTX_MTX_MCM_STAT" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_MTX_SOFT_RESET" acronym="ENCODER0_CR_MTX_SOFT_RESET" offset="0x200" width="32" description="">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MTX_RESET" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_MTX_SYSC_CDMAC" acronym="ENCODER0_CR_MTX_SYSC_CDMAC" offset="0x340" width="32" description="">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="BURSTSIZE" width="3" begin="26" end="24" resetval="0x0" description="This specifies the burst size used for DMA transfers." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="23" end="18" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RNW" width="1" begin="17" end="17" resetval="0x0" description="This should be set to '0' to write to the core memories, or '1' to read from the core memories." range="" rwaccess="RW"/>
+    <bitfield id="ENABLE" width="1" begin="16" end="16" resetval="0x0" description="Causes a transfer to begin next time the transfer state machine is ready." range="" rwaccess="RW"/>
+    <bitfield id="LENGTH" width="16" begin="15" end="0" resetval="0x0" description="This specifies the transfer size of the DMA operation in terms of" range="" rwaccess="RW"/>
+  </register>
+  <register id="ENCODER0_CR_MTX_SYSC_CDMAA" acronym="ENCODER0_CR_MTX_SYSC_CDMAA" offset="0x344" width="32" description="">
+    <bitfield id="RESERVED" width="6" begin="31" end="26" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CDMAA_ADDRESS" width="24" begin="25" end="2" resetval="0x0" description="This is the core DMA transfer start address." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="1" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_MTX_SYSC_CDMAS0" acronym="ENCODER0_CR_MTX_SYSC_CDMAS0" offset="0x348" width="32" description="">
+    <bitfield id="COUNT" width="16" begin="31" end="16" resetval="0x0" description="This is the count of remaining items to be transferred." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RAMNUMBER" width="4" begin="11" end="8" resetval="0x0" description="This indicates the current RAM number that a DMA transfer is targeting." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DMAREQUEST" width="1" begin="4" end="4" resetval="0x0" description="This is a duplicate of the DMA request hardware line from this block to the DMA controller and may be needed if data transfer is from a host processor rather than the DMA controller." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="3" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="DONOTHING" width="1" begin="0" end="0" resetval="0x1" description="Transfer State == 'do_nothing'." range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_MTX_SYSC_CDMAS1" acronym="ENCODER0_CR_MTX_SYSC_CDMAS1" offset="0x34C" width="32" description="">
+    <bitfield id="RESERVED" width="6" begin="31" end="26" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CDMAS1_ADDRESS" width="24" begin="25" end="2" resetval="0x0" description="This is the current core DMA transfer address." range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="2" begin="1" end="0" resetval="0x0" description="" range="" rwaccess="R"/>
+  </register>
+  <register id="ENCODER0_CR_MTX_SYSC_CDMAT" acronym="ENCODER0_CR_MTX_SYSC_CDMAT" offset="0x350" width="32" description="">
+    <bitfield id="TRANSFERDATA" width="32" begin="31" end="0" resetval="0x0" description="Data to be written to core RAMs [when writing only], or data read from core RAMs [when reading only]." range="" rwaccess="RW"/>
+  </register>
+</module>

@@ -1,0 +1,112 @@
+<module name="DMPAC0_SDE_0_PAR_PAR_SDE_S_VBUSP_MMR_VBUSP_MMR" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+	<register id="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_PID" acronym="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_PID" offset="0x0" width="32" description="">
+		<bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x1" description="Used to  distinguish between old scheme and new scheme. Spare bit to encode future schemes" range="31 - 30" rwaccess="R"/> 
+		<bitfield id="BU" width="2" begin="29" end="28" resetval="0x2" description="BU indicator DSPS ==> 0x0  WTBU ==> 0x1  Processors ==> 0x2" range="29 - 28" rwaccess="R"/> 
+		<bitfield id="FUNC" width="12" begin="27" end="16" resetval="0x1156" description="Function indicates a software compatible module family. If there is no level of software compatibility a new FUNC number, and hence PID, should be assigned." range="27 - 16" rwaccess="R"/> 
+		<bitfield id="RTL" width="5" begin="15" end="11" resetval="0x0" description="RTL Version.  R as described in PDR with additional clarifications and definitions below.  Must be easily ECO-able or controlled during fabrication.  Ideally through a top level metal mask or e-fuse. This number is maintained/owned by IP design owner.   RTL follows a numbering such as X.Y.R.Z which are explained in this table.   R changes ONLY when:  (1) PDS uploads occur which may have been due to spec changes  (2) Bug fixes occur  (3) Resets to '0' when X or Y changes.   Design team has an internal 'Z' (customer invisible) number which increments on every drop that happens due to DV and RTL updates. Z resets to 0 when R increments. " range="15 - 11" rwaccess="R"/> 
+		<bitfield id="MAJOR" width="3" begin="10" end="8" resetval="0x1" description="Major Revision.   X as described in PDR with additional clarifications/definitions below. This number is owned/maintained by IP specification owner. X is part of IP numbering X.Y.R.Z.  X changes ONLY when:  (1) There is a major feature addition. An example would be adding Master Mode to Utopia Level2. The Func field (or Class/Type in old PID format) will remain the same.   X does NOT change due to:  (1) Bug fixes  (2) Change in feature parameters. " range="10 - 8" rwaccess="R"/> 
+		<bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Indicates a special version for a particular device.  Consequence of use may avoid use of standard Chip Support Library (CSL) / Drivers.   0 if non-custom. " range="7 - 6" rwaccess="R"/> 
+		<bitfield id="MINOR" width="6" begin="5" end="0" resetval="0x0" description="Minor Revision.   Y as described in PDR with additional clarifications/definitions below.  This number is owned/maintained by IP specification owner.   Y changes ONLY when:  (1) Features are scaled (up or down). Flexibility exists in that this feature scalability may either be represented in the Y change or a specific register in the IP that indicates which features are exactly available.  (2) When feature creeps from Is-Not list to Is list. But this may not be the case once it sees silicon - in which case X will change.   Y does NOT change due to:  (1) Bug fixes  (2) Typos or clarifications  (3) major functional/feature change/addition/deletion. Instead these changes may be reflected via R, S, X as applicable.   Spec owner maintains a customer-invisible number 'S' which changes due to:  (1) Typos/clarifications  (2) Bug documentation. Note that this bug is not due to a spec change but due to implementation. Nevertheless, the spec tracks the IP bugs. An RTL release (say for silicon PG1.1) that occurs due to bug fix should document the corresponding spec number (X.Y.S) in its release notes. " range="5 - 0" rwaccess="R"/>
+	</register>
+	<register id="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_CTRL_REG" acronym="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_CTRL_REG" offset="0x4" width="32" description="">
+		<bitfield id="RSVD" width="28" begin="31" end="4" resetval="0x0" description="always read as 0. Write has no effect" range="31 - 4" rwaccess="R"/> 
+		<bitfield id="RRSRCHEN" width="1" begin="3" end="3" resetval="0x0" description="Enable reduced range search on pixels near right margin where the search range is less than the configured maximum disparity. Write a '1' to enable reduced range search. Default is full range search where disparity is only produced for pixels where a full range search is possible" range="3" rwaccess="R/W"/> 
+		<bitfield id="MEDFEN" width="1" begin="2" end="2" resetval="0x0" description="Median filter enable. Write a '1' to enable median filter for post processing" range="2" rwaccess="R/W"/> 
+		<bitfield id="SDEEN" width="1" begin="1" end="1" resetval="0x0" description="SDE enable. Write a '1' to enable DMPAC stereo" range="1" rwaccess="R/W"/> 
+		<bitfield id="RSVD1" width="1" begin="0" end="0" resetval="0x0" description="always read as 0. Write has no effect" range="0" rwaccess="R"/>
+	</register>
+	<register id="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_STATUS_REG" acronym="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_STATUS_REG" offset="0x8" width="32" description="">
+		<bitfield id="RSVD" width="21" begin="31" end="11" resetval="0x0" description="always read as 0. Write has no effect" range="31 - 11" rwaccess="R"/> 
+		<bitfield id="SDEIDLE" width="1" begin="10" end="10" resetval="0x1" description="sdeidle=1 indicate SDE is idle" range="10" rwaccess="R"/> 
+		<bitfield id="LCCSTAT" width="2" begin="9" end="8" resetval="0x0" description="LCC sub-module status: 2'b00: IDLE, 2'b01: ACTIVE, 2'b10: PAUSE, 2'b11: RSVD" range="9 - 8" rwaccess="R"/> 
+		<bitfield id="SCASTAT" width="2" begin="7" end="6" resetval="0x0" description="SCA sub-module status: 2'b00: IDLE, 2'b01: ACTIVE, 2'b10: PAUSE, 2'b11: RSVD" range="7 - 6" rwaccess="R"/> 
+		<bitfield id="DRCGSTAT" width="2" begin="5" end="4" resetval="0x0" description="DRCG sub-module status: 2'b00: IDLE, 2'b01: ACTIVE, 2'b10: PAUSE, 2'b11: RSVD" range="5 - 4" rwaccess="R"/> 
+		<bitfield id="MEDFCGSTAT" width="2" begin="3" end="2" resetval="0x0" description="Median filter sub-module status: 2'b00: IDLE, 2'b01: ACTIVE, 2'b10: PAUSE, 2'b11: RSVD" range="3 - 2" rwaccess="R"/> 
+		<bitfield id="DPACKSTAT" width="2" begin="1" end="0" resetval="0x0" description="Disparity packing sub-module status: 2'b00: IDLE, 2'b01: ACTIVE, 2'b10: PAUSE, 2'b11: RSVD" range="1 - 0" rwaccess="R"/>
+	</register>
+	<register id="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_IMGRES_REG" acronym="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_IMGRES_REG" offset="0xC" width="32" description="">
+		<bitfield id="RSVD" width="9" begin="31" end="23" resetval="0x0" description="always read as 0. Write has no effect" range="31 - 23" rwaccess="R"/> 
+		<bitfield id="IWINC" width="7" begin="22" end="16" resetval="0x120" description="Image width increment factor. Image width iw=128 + 16*iwinc pixels, iwinc=0,1,...,120. Any value greater than 120 will be treated as 120." range="22 - 16" rwaccess="R/W"/> 
+		<bitfield id="RSVD1" width="10" begin="15" end="6" resetval="0x0" description="always read as 0. Write has no effect" range="15 - 6" rwaccess="R"/> 
+		<bitfield id="IHINC" width="6" begin="5" end="0" resetval="0x60" description="Image height increment factor. Image height ih=64 + 16*ihinc pixels, ihinc=0,1,...,60. Any value greater than 60 will be treated as 60." range="5 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_SRCHRNG_REG" acronym="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_SRCHRNG_REG" offset="0x10" width="32" description="">
+		<bitfield id="RSVD" width="29" begin="31" end="3" resetval="0x0" description="always read as 0. Write has no effect" range="31 - 3" rwaccess="R"/> 
+		<bitfield id="CFGDRANGE" width="2" begin="2" end="1" resetval="0x2" description="Configure disparity search range in pixels. 2'b00: search range= 64 (-3 to 60 or 0 to 63), 2'b01:search range=128 (-3 to 124 or 0 to 127), others: search range =192 (-3 to 188 or 0 to 191)." range="2 - 1" rwaccess="R/W"/> 
+		<bitfield id="CFGDMIN" width="1" begin="0" end="0" resetval="0x0" description="Configure minimum disparity (minDisp) to be searched in pixels. 0: minDisp=0, 1:minDisp= -3." range="0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_LRCHCK_REG" acronym="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_LRCHCK_REG" offset="0x14" width="32" description="">
+		<bitfield id="RSVD" width="24" begin="31" end="8" resetval="0x0" description="always read as 0. Write has no effect" range="31 - 8" rwaccess="R"/> 
+		<bitfield id="DIFFTHLD" width="8" begin="7" end="0" resetval="0x1" description="Left-right consistence check threshold in pixels. Program diffThld >= maxDisp-minDisp will disable Left-right consistence check." range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_TXTFLT_REG" acronym="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_TXTFLT_REG" offset="0x18" width="32" description="">
+		<bitfield id="RSVD" width="23" begin="31" end="9" resetval="0x0" description="always read as 0. Write has no effect" range="31 - 9" rwaccess="R"/> 
+		<bitfield id="TXTTHLD" width="8" begin="8" end="1" resetval="0x204" description="Scaled texture threshold. Any pixel whose texture metric is lower than txtthld is considered to be low texture. It is specified as normalized texture threshold times 1024. For instance, if txtthld = 204, the normalized texture threshold is 204/1024 = 0.1992." range="8 - 1" rwaccess="R/W"/> 
+		<bitfield id="TXTFLTEN" width="1" begin="0" end="0" resetval="0x0" description="Enable texture based filtering" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_PNLTY_REG" acronym="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_PNLTY_REG" offset="0x1C" width="32" description="">
+		<bitfield id="RSVD" width="9" begin="31" end="23" resetval="0x0" description="always read as 0. Write has no effect" range="31 - 23" rwaccess="R"/> 
+		<bitfield id="P1" width="7" begin="22" end="16" resetval="0x16" description="SDE aggregation penalty P1. Optimization penalty constant for small disparity change." range="22 - 16" rwaccess="R/W"/> 
+		<bitfield id="RSVD1" width="7" begin="14" end="8" resetval="0x0" description="always read as 0. Write has no effect" range="14 - 8" rwaccess="R"/> 
+		<bitfield id="P2" width="8" begin="7" end="0" resetval="0x192" description="SDE aggregation penalty P2. Optimization penalty constant for large disparity change. p2 &#60;= 192. Any value greater than 192 will be treated as 192" range="7 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_CONFMAPG0_REG" acronym="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_CONFMAPG0_REG" offset="0x20" width="32" description="">
+		<bitfield id="RSVD0" width="9" begin="31" end="23" resetval="0x0" description="always read as 0. Write has no effect" range="31 - 23" rwaccess="R"/> 
+		<bitfield id="CONFMAP_0" width="7" begin="22" end="16" resetval="0x15" description="SDE confidence score mapping 0. Internal confidence score will map to level 0 (of 8 level output) if it is less than confmap_0" range="22 - 16" rwaccess="R/W"/> 
+		<bitfield id="RSVD1" width="9" begin="15" end="7" resetval="0x0" description="always read as 0. Write has no effect" range="15 - 7" rwaccess="R"/> 
+		<bitfield id="CONFMAP_1" width="7" begin="6" end="0" resetval="0x31" description="SDE confidence score mapping 1. Internal confidence score will map to level 1 if it is less than confmap_1 but greater than or equal to confmap_0" range="6 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_CONFMAPG1_REG" acronym="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_CONFMAPG1_REG" offset="0x24" width="32" description="">
+		<bitfield id="RSVD0" width="9" begin="31" end="23" resetval="0x0" description="always read as 0. Write has no effect" range="31 - 23" rwaccess="R"/> 
+		<bitfield id="CONFMAP_2" width="7" begin="22" end="16" resetval="0x47" description="SDE confidence score mapping 2. Internal confidence score will map to level 2 if it is less than confmap_2 but greater than or equal to confmap_1" range="22 - 16" rwaccess="R/W"/> 
+		<bitfield id="RSVD1" width="9" begin="15" end="7" resetval="0x0" description="always read as 0. Write has no effect" range="15 - 7" rwaccess="R"/> 
+		<bitfield id="CONFMAP_3" width="7" begin="6" end="0" resetval="0x63" description="SDE confidence score mapping 3. Internal confidence score will map to level 3  if it is less than confmap_3 but greater than or equal to confmap_2" range="6 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_CONFMAPG2_REG" acronym="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_CONFMAPG2_REG" offset="0x28" width="32" description="">
+		<bitfield id="RSVD0" width="9" begin="31" end="23" resetval="0x0" description="always read as 0. Write has no effect" range="31 - 23" rwaccess="R"/> 
+		<bitfield id="CONFMAP_4" width="7" begin="22" end="16" resetval="0x79" description="SDE confidence score mapping 4. Internal confidence score will map to level 4 if it is less than confmap_4 but greater than or equal to confmap_3" range="22 - 16" rwaccess="R/W"/> 
+		<bitfield id="RSVD1" width="9" begin="15" end="7" resetval="0x0" description="always read as 0. Write has no effect" range="15 - 7" rwaccess="R"/> 
+		<bitfield id="CONFMAP_5" width="7" begin="6" end="0" resetval="0x95" description="SDE confidence score mapping 5. Internal confidence score will map to level 5  if it is less than confmap_5 but greater than or equal to confmap_4" range="6 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_CONFMAPG3_REG" acronym="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_CONFMAPG3_REG" offset="0x2C" width="32" description="">
+		<bitfield id="RSVD0" width="9" begin="31" end="23" resetval="0x0" description="always read as 0. Write has no effect" range="31 - 23" rwaccess="R"/> 
+		<bitfield id="CONFMAP_6" width="7" begin="22" end="16" resetval="0x111" description="SDE confidence score mapping 6. Internal confidence score will map to level 6 if it is less than confmap_6 but greater than or equal to confmap_5" range="22 - 16" rwaccess="R/W"/> 
+		<bitfield id="RSVD1" width="16" begin="15" end="0" resetval="0x0" description="always read as 0. Write has no effect" range="15 - 0" rwaccess="R"/>
+	</register>
+	<register id="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_BASEIMGADDR_REG" acronym="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_BASEIMGADDR_REG" offset="0x30" width="32" description="">
+		<bitfield id="RSVD" width="12" begin="31" end="20" resetval="0x0" description="always read as 0. Write has no effect" range="31 - 20" rwaccess="R"/> 
+		<bitfield id="BASEAD" width="20" begin="19" end="0" resetval="0x0" description="SL2 base image buffer start address (byte address aligned to 64 byte boundary, basead[5:0] should be programmed as 0)." range="19 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_BASEIMGWD_REG" acronym="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_BASEIMGWD_REG" offset="0x34" width="32" description="">
+		<bitfield id="RSVD" width="20" begin="31" end="12" resetval="0x0" description="always read as 0. Write has no effect" range="31 - 12" rwaccess="R"/> 
+		<bitfield id="BWIDTH" width="12" begin="11" end="0" resetval="0x3072" description="SL2 base image buffer width in bytes. bwidth has to satisfy bwidth >= 1.5iw (image width) and is aligned to 64 byte boundaries (LSB 6 bits are always programmed as 0)." range="11 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_REFIMGADDR_REG" acronym="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_REFIMGADDR_REG" offset="0x38" width="32" description="">
+		<bitfield id="RSVD" width="12" begin="31" end="20" resetval="0x0" description="always read as 0. Write has no effect" range="31 - 20" rwaccess="R"/> 
+		<bitfield id="REFAD" width="20" begin="19" end="0" resetval="0x0" description="SL2 reference image buffer start address (byte address aligned to 64 byte boundary, refad[5:0] should be programmed as 0)." range="19 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_REFIMGWD_REG" acronym="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_REFIMGWD_REG" offset="0x3C" width="32" description="">
+		<bitfield id="RSVD" width="20" begin="31" end="12" resetval="0x0" description="always read as 0. Write has no effect" range="31 - 12" rwaccess="R"/> 
+		<bitfield id="RWIDTH" width="12" begin="11" end="0" resetval="0x3072" description="SL2 reference image buffer width in bytes. rwidth has to satisfy rwidth >= 1.5*iw (image width) and is aligned to 64 byte boundaries (LSB 6 bits are always programmed as 0). " range="11 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_DISPBUFCFG_REG" acronym="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_DISPBUFCFG_REG" offset="0x40" width="32" description="">
+		<bitfield id="RSVD0" width="3" begin="31" end="29" resetval="0x0" description="always read as 0. Write has no effect" range="31 - 29" rwaccess="R"/> 
+		<bitfield id="NUMDISPBUF_M1" width="5" begin="28" end="24" resetval="0x0" description="number of SL2 disparity block buffers minus 1. For instance, programming numdispbuf_m1 to 1 makes a ping-pong buffer (number of disparity buffers is 2). When SL2 memory is available, programming numdispbuf_m1 to a larger value allow SDE to process more blocks before getting triggers for the corresponding blocks" range="28 - 24" rwaccess="R/W"/> 
+		<bitfield id="RSVD1" width="4" begin="23" end="20" resetval="0x0" description="always read as 0. Write has no effect" range="23 - 20" rwaccess="R"/> 
+		<bitfield id="DISPBUFAD" width="20" begin="19" end="0" resetval="0x0" description="SL2 disparity output block buffer start address  (byte address aligned to 64 byte boundary, dispbufad[5:0] should be programmed as 0)." range="19 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_IRCBUF_REG" acronym="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_IRCBUF_REG" offset="0x44" width="32" description="">
+		<bitfield id="RSVD1" width="12" begin="31" end="20" resetval="0x0" description="always read as 0. Write has no effect" range="31 - 20" rwaccess="R"/> 
+		<bitfield id="IRCBUFAD" width="20" begin="19" end="0" resetval="0x0" description="SL2 image row cost buffer start address  (byte address aligned to 64 byte boundary, ircbufad[5:0] should be programmed as 0)." range="19 - 0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_psa_ctrl" acronym="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_psa_ctrl" offset="0x50" width="32" description="">
+		<bitfield id="PSA_EN_CFG" width="1" begin="0" end="0" resetval="0x0" description="Enable calculating 32b CRC signature on 16b stereo disparity and confidence score output" range="0" rwaccess="R/W"/>
+	</register>
+	<register id="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_psa_signature" acronym="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_psa_signature" offset="0x54" width="32" description="">
+		<bitfield id="CRC_STS" width="32" begin="31" end="0" resetval="0x4294967295" description="32b CRC signature value as calculated on 16b stereo disparity and confidence score output" range="31 - 0" rwaccess="R"/>
+	</register>
+	<register id="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_HIST" acronym="PAR_PAR_SDE__S_VBUSP__MMR__MMR_VBUSP__MMR_HIST" offset="0x60" width="32" description="">
+		<bitfield id="RSVD" width="11" begin="31" end="21" resetval="0x0" description="Always read as 0. Writes have no effect. " range="31 - 21" rwaccess="R"/> 
+		<bitfield id="BIN_STS" width="21" begin="20" end="0" resetval="0x0" description="BIN accumulated counter value.  Clear to 0 within a 128 cycle window after hts_sde_init is asserted. " range="20 - 0" rwaccess="R"/>
+	</register>
+</module>

@@ -1,0 +1,86 @@
+<module name="MCU_R5FSS0_CORE0" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="CBASS_FW_REGION_i_CONTROL" acronym="CBASS_FW_REGION_i_CONTROL" offset="0x0" width="32" description="The Firewall Region i Control Register defines the control fields for the slave module (see ) region i firewall. Offset = 0h + (i * 20h). See column 'Firewall Regions' in through for the 'i' values associated with each slave.">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CACHE_MODE" width="1" begin="9" end="9" resetval="0x0" description="Cache mode for region.Set to 1 to check cache permissions.Set to 0 to ignore cache permissions." range="" rwaccess="RW"/>
+    <bitfield id="BACKGROUND" width="1" begin="8" end="8" resetval="0x0" description="Background enable for region.There can be one background region per firewall and foreground regions can have overlapping addresses only with the background region." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LOCK" width="1" begin="4" end="4" resetval="0x0" description="Lock region.Once set region values cannot be modified." range="" rwaccess="RW1S"/>
+    <bitfield id="ENABLE" width="4" begin="3" end="0" resetval="0x0" description="Enable region.A value of 0xA enables, others disable." range="" rwaccess="RW"/>
+  </register>
+  <register id="CBASS_FW_REGION_i_PERMISSION_0" acronym="CBASS_FW_REGION_i_PERMISSION_0" offset="0x4" width="32" description="The Firewall Region i Permission 0 Register defines the permissions for the slave module (see ) region i firewall. Offset = 4h + (i * 20h). See column 'Firewall Regions' in through for the 'i' values associated with each slave.">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PRIV_ID" width="8" begin="23" end="16" resetval="0x0" description="Allowed privid." range="" rwaccess="RW"/>
+    <bitfield id="NONSEC_USER_DEBUG" width="1" begin="15" end="15" resetval="0x0" description="Non-secure user debug allowed." range="" rwaccess="RW"/>
+    <bitfield id="NONSEC_USER_CACHEABLE" width="1" begin="14" end="14" resetval="0x0" description="Non-secure user cacheable allowed." range="" rwaccess="RW"/>
+    <bitfield id="NONSEC_USER_READ" width="1" begin="13" end="13" resetval="0x0" description="Non-secure user read allowed." range="" rwaccess="RW"/>
+    <bitfield id="NONSEC_USER_WRITE" width="1" begin="12" end="12" resetval="0x0" description="Non-secure user write allowed." range="" rwaccess="RW"/>
+    <bitfield id="NONSEC_SUPV_DEBUG" width="1" begin="11" end="11" resetval="0x0" description="Non-secure supervisor debug allowed." range="" rwaccess="RW"/>
+    <bitfield id="NONSEC_SUPV_CACHEABLE" width="1" begin="10" end="10" resetval="0x0" description="Non-secure supervisor cacheable allowed." range="" rwaccess="RW"/>
+    <bitfield id="NONSEC_SUPV_READ" width="1" begin="9" end="9" resetval="0x0" description="Non-secure supervisor read allowed." range="" rwaccess="RW"/>
+    <bitfield id="NONSEC_SUPV_WRITE" width="1" begin="8" end="8" resetval="0x0" description="Non-secure supervisor write allowed." range="" rwaccess="RW"/>
+    <bitfield id="SEC_USER_DEBUG" width="1" begin="7" end="7" resetval="0x0" description="Secure user debug allowed." range="" rwaccess="RW"/>
+    <bitfield id="SEC_USER_CACHEABLE" width="1" begin="6" end="6" resetval="0x0" description="Secure user cacheable allowed." range="" rwaccess="RW"/>
+    <bitfield id="SEC_USER_READ" width="1" begin="5" end="5" resetval="0x0" description="Secure user read allowed." range="" rwaccess="RW"/>
+    <bitfield id="SEC_USER_WRITE" width="1" begin="4" end="4" resetval="0x0" description="Secure user write allowed." range="" rwaccess="RW"/>
+    <bitfield id="SEC_SUPV_DEBUG" width="1" begin="3" end="3" resetval="0x0" description="Secure supervisor debug allowed." range="" rwaccess="RW"/>
+    <bitfield id="SEC_SUPV_CACHEABLE" width="1" begin="2" end="2" resetval="0x0" description="Secure supervisor cacheable allowed." range="" rwaccess="RW"/>
+    <bitfield id="SEC_SUPV_READ" width="1" begin="1" end="1" resetval="0x0" description="Secure supervisor read allowed." range="" rwaccess="RW"/>
+    <bitfield id="SEC_SUPV_WRITE" width="1" begin="0" end="0" resetval="0x0" description="Secure supervisor write allowed." range="" rwaccess="RW"/>
+  </register>
+  <register id="CBASS_FW_REGION_i_PERMISSION_1" acronym="CBASS_FW_REGION_i_PERMISSION_1" offset="0x8" width="32" description="The Firewall Region i Permission 1 Register defines the permissions for the slave module (see ) region i firewall. Offset = 8h + (i * 20h). See column 'Firewall Regions' in through for the 'i' values associated with each slave.">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PRIV_ID" width="8" begin="23" end="16" resetval="0x0" description="Allowed privid." range="" rwaccess="RW"/>
+    <bitfield id="NONSEC_USER_DEBUG" width="1" begin="15" end="15" resetval="0x0" description="Non-secure user debug allowed." range="" rwaccess="RW"/>
+    <bitfield id="NONSEC_USER_CACHEABLE" width="1" begin="14" end="14" resetval="0x0" description="Non-secure user cacheable allowed." range="" rwaccess="RW"/>
+    <bitfield id="NONSEC_USER_READ" width="1" begin="13" end="13" resetval="0x0" description="Non-secure user read allowed." range="" rwaccess="RW"/>
+    <bitfield id="NONSEC_USER_WRITE" width="1" begin="12" end="12" resetval="0x0" description="Non-secure user write allowed." range="" rwaccess="RW"/>
+    <bitfield id="NONSEC_SUPV_DEBUG" width="1" begin="11" end="11" resetval="0x0" description="Non-secure supervisor debug allowed." range="" rwaccess="RW"/>
+    <bitfield id="NONSEC_SUPV_CACHEABLE" width="1" begin="10" end="10" resetval="0x0" description="Non-secure supervisor cacheable allowed." range="" rwaccess="RW"/>
+    <bitfield id="NONSEC_SUPV_READ" width="1" begin="9" end="9" resetval="0x0" description="Non-secure supervisor read allowed." range="" rwaccess="RW"/>
+    <bitfield id="NONSEC_SUPV_WRITE" width="1" begin="8" end="8" resetval="0x0" description="Non-secure supervisor write allowed." range="" rwaccess="RW"/>
+    <bitfield id="SEC_USER_DEBUG" width="1" begin="7" end="7" resetval="0x0" description="Secure user debug allowed." range="" rwaccess="RW"/>
+    <bitfield id="SEC_USER_CACHEABLE" width="1" begin="6" end="6" resetval="0x0" description="Secure user cacheable allowed." range="" rwaccess="RW"/>
+    <bitfield id="SEC_USER_READ" width="1" begin="5" end="5" resetval="0x0" description="Secure user read allowed." range="" rwaccess="RW"/>
+    <bitfield id="SEC_USER_WRITE" width="1" begin="4" end="4" resetval="0x0" description="Secure user write allowed." range="" rwaccess="RW"/>
+    <bitfield id="SEC_SUPV_DEBUG" width="1" begin="3" end="3" resetval="0x0" description="Secure supervisor debug allowed." range="" rwaccess="RW"/>
+    <bitfield id="SEC_SUPV_CACHEABLE" width="1" begin="2" end="2" resetval="0x0" description="Secure supervisor cacheable allowed." range="" rwaccess="RW"/>
+    <bitfield id="SEC_SUPV_READ" width="1" begin="1" end="1" resetval="0x0" description="Secure supervisor read allowed." range="" rwaccess="RW"/>
+    <bitfield id="SEC_SUPV_WRITE" width="1" begin="0" end="0" resetval="0x0" description="Secure supervisor write allowed." range="" rwaccess="RW"/>
+  </register>
+  <register id="CBASS_FW_REGION_i_PERMISSION_2" acronym="CBASS_FW_REGION_i_PERMISSION_2" offset="0xC" width="32" description="The Firewall Region i Permission 2 Register defines the permissions for the module (see ) region i firewall. Offset = Ch + (i * 20h). See column 'Firewall Regions' in through for the 'i' values associated with each slave.">
+    <bitfield id="RESERVED" width="8" begin="31" end="24" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PRIV_ID" width="8" begin="23" end="16" resetval="0x0" description="Allowed privid." range="" rwaccess="RW"/>
+    <bitfield id="NONSEC_USER_DEBUG" width="1" begin="15" end="15" resetval="0x0" description="Non-secure user debug allowed." range="" rwaccess="RW"/>
+    <bitfield id="NONSEC_USER_CACHEABLE" width="1" begin="14" end="14" resetval="0x0" description="Non-secure user cacheable allowed." range="" rwaccess="RW"/>
+    <bitfield id="NONSEC_USER_READ" width="1" begin="13" end="13" resetval="0x0" description="Non-secure user read allowed." range="" rwaccess="RW"/>
+    <bitfield id="NONSEC_USER_WRITE" width="1" begin="12" end="12" resetval="0x0" description="Non-secure user write allowed." range="" rwaccess="RW"/>
+    <bitfield id="NONSEC_SUPV_DEBUG" width="1" begin="11" end="11" resetval="0x0" description="Non-secure supervisor debug allowed." range="" rwaccess="RW"/>
+    <bitfield id="NONSEC_SUPV_CACHEABLE" width="1" begin="10" end="10" resetval="0x0" description="Non-secure supervisor cacheable allowed." range="" rwaccess="RW"/>
+    <bitfield id="NONSEC_SUPV_READ" width="1" begin="9" end="9" resetval="0x0" description="Non-secure supervisor read allowed." range="" rwaccess="RW"/>
+    <bitfield id="NONSEC_SUPV_WRITE" width="1" begin="8" end="8" resetval="0x0" description="Non-secure supervisor write allowed." range="" rwaccess="RW"/>
+    <bitfield id="SEC_USER_DEBUG" width="1" begin="7" end="7" resetval="0x0" description="Secure user debug allowed." range="" rwaccess="RW"/>
+    <bitfield id="SEC_USER_CACHEABLE" width="1" begin="6" end="6" resetval="0x0" description="Secure user cacheable allowed." range="" rwaccess="RW"/>
+    <bitfield id="SEC_USER_READ" width="1" begin="5" end="5" resetval="0x0" description="Secure user read allowed." range="" rwaccess="RW"/>
+    <bitfield id="SEC_USER_WRITE" width="1" begin="4" end="4" resetval="0x0" description="Secure user write allowed." range="" rwaccess="RW"/>
+    <bitfield id="SEC_SUPV_DEBUG" width="1" begin="3" end="3" resetval="0x0" description="Secure supervisor debug allowed." range="" rwaccess="RW"/>
+    <bitfield id="SEC_SUPV_CACHEABLE" width="1" begin="2" end="2" resetval="0x0" description="Secure supervisor cacheable allowed." range="" rwaccess="RW"/>
+    <bitfield id="SEC_SUPV_READ" width="1" begin="1" end="1" resetval="0x0" description="Secure supervisor read allowed." range="" rwaccess="RW"/>
+    <bitfield id="SEC_SUPV_WRITE" width="1" begin="0" end="0" resetval="0x0" description="Secure supervisor write allowed." range="" rwaccess="RW"/>
+  </register>
+  <register id="CBASS_FW_REGION_i_START_ADDRESS_L" acronym="CBASS_FW_REGION_i_START_ADDRESS_L" offset="0x10" width="32" description="The Firewall Region i Start Address Low Register defines the start address bits 31 to 0 for the slave module (see ) region i firewall. Offset = 10h + (i * 20h). See column 'Firewall Regions' in through for the 'i' values associated with each slave.">
+    <bitfield id="START_ADDRESS_L" width="20" begin="31" end="12" resetval="0xX" description="Start address bits 31 to 12.Lowest 12 bits are forced to 0 as address must be 4KB aligned." range="" rwaccess="RW"/>
+    <bitfield id="START_ADDRESS_LSB" width="12" begin="11" end="0" resetval="0x0" description="Start address bits 11 to 0 are forced to 0 as address must be 4KB aligned." range="" rwaccess="R"/>
+  </register>
+  <register id="CBASS_FW_REGION_i_START_ADDRESS_H" acronym="CBASS_FW_REGION_i_START_ADDRESS_H" offset="0x14" width="32" description="The Firewall Region i Start Address High Register defines the start address bits 47 to 32 for the slave module (see ) region i firewall. Offset = 14h + (i * 20h). See column 'Firewall Regions' in through for the 'i' values associated with each slave.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="START_ADDRESS_H" width="16" begin="15" end="0" resetval="0x0" description="Start address bits 47 to 32." range="" rwaccess="RW"/>
+  </register>
+  <register id="CBASS_FW_REGION_i_END_ADDRESS_L" acronym="CBASS_FW_REGION_i_END_ADDRESS_L" offset="0x18" width="32" description="The Firewall Region i End Address Low Register defines the end address bits 31 to 0 to include for the slave module (see ) region i firewall. Offset = 18h + (i * 20h). See column 'Firewall Regions' in through for the 'i' values associated with each slave.">
+    <bitfield id="END_ADDRESS_L" width="20" begin="31" end="12" resetval="0xX" description="End address bits 31 to 12 to include in the match.Lowest 12 bits are forced to 1s as address must be 4KB aligned." range="" rwaccess="RW"/>
+    <bitfield id="END_ADDRESS_LSB" width="12" begin="11" end="0" resetval="0xFFF" description="End address bits 11 to 0 are forced to 1s as address must be 4KB aligned minus 1." range="" rwaccess="R"/>
+  </register>
+  <register id="CBASS_FW_REGION_i_END_ADDRESS_H" acronym="CBASS_FW_REGION_i_END_ADDRESS_H" offset="0x1C" width="32" description="The Firewall Region i End Address High Register defines the end address bits 47 to 32 to include for the slave module (see ) region i firewall. Offset = 1Ch + (i * 20h). See column 'Firewall Regions' in through for the 'i' values associated with each slave.">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="END_ADDRESS_H" width="16" begin="15" end="0" resetval="0x0" description="End address bits 47 to 32 to include in the match." range="" rwaccess="RW"/>
+  </register>
+</module>

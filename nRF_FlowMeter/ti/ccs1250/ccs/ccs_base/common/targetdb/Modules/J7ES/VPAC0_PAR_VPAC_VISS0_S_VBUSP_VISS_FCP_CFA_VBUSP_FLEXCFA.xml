@@ -1,0 +1,168 @@
+<module name="VPAC0_PAR_VPAC_VISS0_S_VBUSP_VISS_FCP_CFA_VBUSP_FLEXCFA" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="VISS_FCP_CFA_LUT_y" acronym="VISS_FCP_CFA_LUT_y" offset="0x0" width="32" description="The LUT table contains the information used to reduce the pixle width to 12 from 13-16 Offset = 00088000h + (y * 4h); where y = 0h to 13Fh">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LUT_ENTRY_HI" width="12" begin="27" end="16" resetval="0x0" description="The upper LUT entry n+1." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LUT_ENTRY_LO" width="12" begin="11" end="0" resetval="0x0" description="The lower LUT entry n+0." range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_CFA_CFG_0" acronym="VISS_FCP_CFA_CFG_0" offset="0x1004" width="32" description="The Control Register controls the input width and height of the module.">
+    <bitfield id="RESERVED" width="3" begin="31" end="29" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="HEIGHT" width="13" begin="28" end="16" resetval="0x0" description="Height of the input image" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="15" end="13" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="WIDTH" width="13" begin="12" end="0" resetval="0x0" description="Width of the input image" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_CFA_CFG_1" acronym="VISS_FCP_CFA_CFG_1" offset="0x1008" width="32" description="The Control Register identifies the bit width of the input image">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="BYPASS_CORE3" width="1" begin="11" end="11" resetval="0x0" description="Setting the ~ibypass_core3 bit will bypass filtering operation, output = input" range="" rwaccess="RW"/>
+    <bitfield id="BYPASS_CORE2" width="1" begin="10" end="10" resetval="0x0" description="Setting the ~ibypass_core2 bit will bypass filtering operation, output = input" range="" rwaccess="RW"/>
+    <bitfield id="BYPASS_CORE1" width="1" begin="9" end="9" resetval="0x0" description="Setting the ~ibypass_core1 bit will bypass filtering operation, output = input" range="" rwaccess="RW"/>
+    <bitfield id="BYPASS_CORE0" width="1" begin="8" end="8" resetval="0x0" description="Setting the ~ibypass_core0 bit will bypass filtering operation, output = input" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="7" end="6" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LUT_ENABLE" width="1" begin="5" end="5" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="BITWIDTH" width="5" begin="4" end="0" resetval="0x0" description="BitWidth of the input image, values greater than 16 will be treated as 16 and values less than 12 will be treated as 12." range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_CFA_COEF_j_k_l_m_N" acronym="VISS_FCP_CFA_COEF_j_k_l_m_N" offset="0x100C" width="32" description="Coefficients for a=core, b=dir, c=phase, d=row, column=e*2+1 and e*2 Offset = 0008900Ch + (j * 360h) + (k * 120h) + (l * 48h) + (m * Ch) + (n * 4h); where j = 0h to 3h, k = 0h to 2h, l = 0h to 3h, m = 0h to 5h, n = 0h to 2h">
+    <bitfield id="RESERVED" width="7" begin="31" end="25" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="COEF_1" width="9" begin="24" end="16" resetval="0x0" description="Coefficient - e*2+1" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="7" begin="15" end="9" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="COEF_0" width="9" begin="8" end="0" resetval="0x0" description="Coefficient - e*2" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_CFA_GRAD_CFG" acronym="VISS_FCP_CFA_GRAD_CFG" offset="0x1D8C" width="32" description="Gradient configuration for all 4 cores">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="BLENDMODECORE3" width="2" begin="26" end="25" resetval="0x0" description="Core-3 Blend (" range="" rwaccess="RW"/>
+    <bitfield id="BITMASKSELCORE3" width="1" begin="24" end="24" resetval="0x0" description="Core-3 Bitmask Select (" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="23" end="19" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="BLENDMODECORE2" width="2" begin="18" end="17" resetval="0x0" description="Core-2 Blend (" range="" rwaccess="RW"/>
+    <bitfield id="BITMASKSELCORE2" width="1" begin="16" end="16" resetval="0x0" description="Core-2 Bitmask Select (" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="15" end="11" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="BLENDMODECORE1" width="2" begin="10" end="9" resetval="0x0" description="Core-1 Blend (" range="" rwaccess="RW"/>
+    <bitfield id="BITMASKSELCORE1" width="1" begin="8" end="8" resetval="0x0" description="Core-1 Bitmask Select (" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="5" begin="7" end="3" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="BLENDMODECORE0" width="2" begin="2" end="1" resetval="0x0" description="Core-0 Blend (" range="" rwaccess="RW"/>
+    <bitfield id="BITMASKSELCORE0" width="1" begin="0" end="0" resetval="0x0" description="Core-0 Bitmask Select (" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_CFA_SET0_GRAD_HZ" acronym="VISS_FCP_CFA_SET0_GRAD_HZ" offset="0x1D90" width="32" description="Gradient Bitfield selector, Set-0 for Horizontal">
+    <bitfield id="PHASE3" width="8" begin="31" end="24" resetval="0x0" description="Bitfield selector for Phase-3" range="" rwaccess="RW"/>
+    <bitfield id="PHASE2" width="8" begin="23" end="16" resetval="0x0" description="Bitfield selector for Phase-2" range="" rwaccess="RW"/>
+    <bitfield id="PHASE1" width="8" begin="15" end="8" resetval="0x0" description="Bitfield selector for Phase-1" range="" rwaccess="RW"/>
+    <bitfield id="PHASE0" width="8" begin="7" end="0" resetval="0x0" description="Bitfield selector for Phase-0" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_CFA_SET0_GRAD_VT" acronym="VISS_FCP_CFA_SET0_GRAD_VT" offset="0x1D94" width="32" description="Gradient Bitfield selector, Set-0 for Vertical">
+    <bitfield id="PHASE3" width="8" begin="31" end="24" resetval="0x0" description="Bitfield selector for Phase-3" range="" rwaccess="RW"/>
+    <bitfield id="PHASE2" width="8" begin="23" end="16" resetval="0x0" description="Bitfield selector for Phase-2" range="" rwaccess="RW"/>
+    <bitfield id="PHASE1" width="8" begin="15" end="8" resetval="0x0" description="Bitfield selector for Phase-1" range="" rwaccess="RW"/>
+    <bitfield id="PHASE0" width="8" begin="7" end="0" resetval="0x0" description="Bitfield selector for Phase-0" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_CFA_SET0_INTENSITY0" acronym="VISS_FCP_CFA_SET0_INTENSITY0" offset="0x1D98" width="32" description="Intensity Bitfield selector and shift for phase0/1">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SHIFT_PH1" width="3" begin="30" end="28" resetval="0x0" description="Intensity shift for Phase-1" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="27" end="20" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="BITFIELD_PH1" width="4" begin="19" end="16" resetval="0x0" description="Intensity Bitfield selector for Phase-1" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="15" end="15" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SHIFT_PH0" width="3" begin="14" end="12" resetval="0x0" description="Intensity shift for Phase-0" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="11" end="4" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="BITFIELD_PH0" width="4" begin="3" end="0" resetval="0x0" description="Intensity Bitfield selector for Phase-0" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_CFA_SET0_INTENSITY1" acronym="VISS_FCP_CFA_SET0_INTENSITY1" offset="0x1D9C" width="32" description="Intensity Bitfield selector and shift for phase2/3">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SHIFT_PH3" width="3" begin="30" end="28" resetval="0x0" description="Intensity shift for Phase-3" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="27" end="20" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="BITFIELD_PH3" width="4" begin="19" end="16" resetval="0x0" description="Intensity Bitfield selector for Phase-3" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="15" end="15" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SHIFT_PH2" width="3" begin="14" end="12" resetval="0x0" description="Intensity shift for Phase-2" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="11" end="4" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="BITFIELD_PH2" width="4" begin="3" end="0" resetval="0x0" description="Intensity Bitfield selector for Phase-2" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_CFA_SET1_GRAD_HZ" acronym="VISS_FCP_CFA_SET1_GRAD_HZ" offset="0x1DA0" width="32" description="Gradient Bitfield selector, Set-1 for Horizontal">
+    <bitfield id="PHASE3" width="8" begin="31" end="24" resetval="0x0" description="Bitfield selector for Phase-3" range="" rwaccess="RW"/>
+    <bitfield id="PHASE2" width="8" begin="23" end="16" resetval="0x0" description="Bitfield selector for Phase-2" range="" rwaccess="RW"/>
+    <bitfield id="PHASE1" width="8" begin="15" end="8" resetval="0x0" description="Bitfield selector for Phase-1" range="" rwaccess="RW"/>
+    <bitfield id="PHASE0" width="8" begin="7" end="0" resetval="0x0" description="Bitfield selector for Phase-0" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_CFA_SET1_GRAD_VT" acronym="VISS_FCP_CFA_SET1_GRAD_VT" offset="0x1DA4" width="32" description="Gradient Bitfield selector, Set-1 for Vertical">
+    <bitfield id="PHASE3" width="8" begin="31" end="24" resetval="0x0" description="Bitfield selector for Phase-3" range="" rwaccess="RW"/>
+    <bitfield id="PHASE2" width="8" begin="23" end="16" resetval="0x0" description="Bitfield selector for Phase-2" range="" rwaccess="RW"/>
+    <bitfield id="PHASE1" width="8" begin="15" end="8" resetval="0x0" description="Bitfield selector for Phase-1" range="" rwaccess="RW"/>
+    <bitfield id="PHASE0" width="8" begin="7" end="0" resetval="0x0" description="Bitfield selector for Phase-0" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_CFA_SET1_INTENSITY0" acronym="VISS_FCP_CFA_SET1_INTENSITY0" offset="0x1DA8" width="32" description="Intensity Bitfield selector and shift for phase0/1">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SHIFT_PH1" width="3" begin="30" end="28" resetval="0x0" description="Intensity shift for Phase-1" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="27" end="20" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="BITFIELD_PH1" width="4" begin="19" end="16" resetval="0x0" description="Intensity Bitfield selector for Phase-1" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="15" end="15" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SHIFT_PH0" width="3" begin="14" end="12" resetval="0x0" description="Intensity shift for Phase-0" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="11" end="4" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="BITFIELD_PH0" width="4" begin="3" end="0" resetval="0x0" description="Intensity Bitfield selector for Phase-0" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_CFA_SET1_INTENSITY1" acronym="VISS_FCP_CFA_SET1_INTENSITY1" offset="0x1DAC" width="32" description="Intensity Bitfield selector and shift for phase2/3">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SHIFT_PH3" width="3" begin="30" end="28" resetval="0x0" description="Intensity shift for Phase-3" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="27" end="20" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="BITFIELD_PH3" width="4" begin="19" end="16" resetval="0x0" description="Intensity Bitfield selector for Phase-3" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="15" end="15" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SHIFT_PH2" width="3" begin="14" end="12" resetval="0x0" description="Intensity shift for Phase-2" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="8" begin="11" end="4" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="BITFIELD_PH2" width="4" begin="3" end="0" resetval="0x0" description="Intensity Bitfield selector for Phase-2" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_CFA_SET0_THR0_1" acronym="VISS_FCP_CFA_SET0_THR0_1" offset="0x1DB0" width="32" description="Set0 Thr0_1 for H/V Grad difference">
+    <bitfield id="THR_1" width="16" begin="31" end="16" resetval="0x0" description="H/V Grad diff Threshold_1" range="" rwaccess="RW"/>
+    <bitfield id="THR_0" width="16" begin="15" end="0" resetval="0x0" description="H/V Grad diff Threshold_0" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_CFA_SET0_THR2_3" acronym="VISS_FCP_CFA_SET0_THR2_3" offset="0x1DB4" width="32" description="Set0 Thr2_3 for H/V Grad difference">
+    <bitfield id="THR_3" width="16" begin="31" end="16" resetval="0x0" description="H/V Grad diff Threshold_3" range="" rwaccess="RW"/>
+    <bitfield id="THR_2" width="16" begin="15" end="0" resetval="0x0" description="H/V Grad diff Threshold_2" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_CFA_SET0_THR4_5" acronym="VISS_FCP_CFA_SET0_THR4_5" offset="0x1DB8" width="32" description="Set0 Thr4_5 for H/V Grad difference">
+    <bitfield id="THR_5" width="16" begin="31" end="16" resetval="0x0" description="H/V Grad diff Threshold_5" range="" rwaccess="RW"/>
+    <bitfield id="THR_4" width="16" begin="15" end="0" resetval="0x0" description="H/V Grad diff Threshold_4" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_CFA_SET0_THR6" acronym="VISS_FCP_CFA_SET0_THR6" offset="0x1DBC" width="32" description="Set0 Thr6 for H/V Grad difference">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="THR_6" width="16" begin="15" end="0" resetval="0x0" description="H/V Grad diff Threshold_6" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_CFA_SET1_THR0_1" acronym="VISS_FCP_CFA_SET1_THR0_1" offset="0x1DC0" width="32" description="Set1 Thr0_1 for H/V Grad difference">
+    <bitfield id="THR_1" width="16" begin="31" end="16" resetval="0x0" description="H/V Grad diff Threshold_1" range="" rwaccess="RW"/>
+    <bitfield id="THR_0" width="16" begin="15" end="0" resetval="0x0" description="H/V Grad diff Threshold_0" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_CFA_SET1_THR2_3" acronym="VISS_FCP_CFA_SET1_THR2_3" offset="0x1DC4" width="32" description="Set1 Thr2_3 for H/V Grad difference">
+    <bitfield id="THR_3" width="16" begin="31" end="16" resetval="0x0" description="H/V Grad diff Threshold_3" range="" rwaccess="RW"/>
+    <bitfield id="THR_2" width="16" begin="15" end="0" resetval="0x0" description="H/V Grad diff Threshold_2" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_CFA_SET1_THR4_5" acronym="VISS_FCP_CFA_SET1_THR4_5" offset="0x1DC8" width="32" description="Set1 Thr4_5 for H/V Grad difference">
+    <bitfield id="THR_5" width="16" begin="31" end="16" resetval="0x0" description="H/V Grad diff Threshold_5" range="" rwaccess="RW"/>
+    <bitfield id="THR_4" width="16" begin="15" end="0" resetval="0x0" description="H/V Grad diff Threshold_4" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_CFA_SET1_THR6" acronym="VISS_FCP_CFA_SET1_THR6" offset="0x1DCC" width="32" description="Set1 Thr6 for H/V Grad difference">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="THR_6" width="16" begin="15" end="0" resetval="0x0" description="H/V Grad diff Threshold_6" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_CFA_INT_STATUS" acronym="VISS_FCP_CFA_INT_STATUS" offset="0x1DD0" width="32" description="Status/clear register for flexcfa interrupts">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="CFA_MMR_ERR" width="1" begin="2" end="2" resetval="0x0" description="status/clear for error writes to the FIR Filter MMRs during active frame causing potential frame corruption." range="" rwaccess="RW1C"/>
+    <bitfield id="CFA_PIX_ERR" width="1" begin="1" end="1" resetval="0x0" description="status/clear for error on line array, set when software accesses pixel array during active frame causing potential frame corruption." range="" rwaccess="RW1C"/>
+    <bitfield id="LUT_CFG_ERR" width="1" begin="0" end="0" resetval="0x0" description="status/clear for error on LUT cfg, set when software accesses LUT during active frame causing potential frame corruption." range="" rwaccess="RW1C"/>
+  </register>
+  <register id="VISS_FCP_CFA_DEBUG_CTL" acronym="VISS_FCP_CFA_DEBUG_CTL" offset="0x2000" width="32" description="Enable for different debug events">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SOF_EN" width="1" begin="2" end="2" resetval="0x0" description="Enable for sof event" range="" rwaccess="RW"/>
+    <bitfield id="SOL_EN" width="1" begin="1" end="1" resetval="0x0" description="Enable for sol event" range="" rwaccess="RW"/>
+    <bitfield id="DBG_EN" width="1" begin="0" end="0" resetval="0x0" description="Enable debug features, set to '0' to disable all debug events" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_CFA_DEBUG_STATUS" acronym="VISS_FCP_CFA_DEBUG_STATUS" offset="0x2004" width="32" description="Set/Clear for debug events">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="SOF_EVENT" width="1" begin="2" end="2" resetval="0x0" description="Status/Clear for sof event, write '1' to clear" range="" rwaccess="RW1C"/>
+    <bitfield id="SOL_EVENT" width="1" begin="1" end="1" resetval="0x0" description="Status/Clear for sol event, write '1' to clear" range="" rwaccess="RW1C"/>
+    <bitfield id="RESERVED" width="1" begin="0" end="0" resetval="0xX" description="" range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_CFA_LINE_SEL" acronym="VISS_FCP_CFA_LINE_SEL" offset="0x2008" width="32" description="Selector for which line memory is read or written">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="LINE_SELECTOR" width="3" begin="2" end="0" resetval="0x0" description="Selects which line is read or written from the line memory array." range="" rwaccess="RW"/>
+  </register>
+  <register id="VISS_FCP_CFA_PIXEL_RAM_y" acronym="VISS_FCP_CFA_PIXEL_RAM_y" offset="0x4000" width="32" description="The pixel RAM contains the array of 12 bit pixels stored and used by the CFA logic. Pixels are 16 bit aligned. Pixels can only be written two at a time. Offset = 0008C000h + (y * 4h); where y = 0h to 7FFh">
+    <bitfield id="RESERVED" width="4" begin="31" end="28" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PIXEL_HI" width="12" begin="27" end="16" resetval="0x0" description="The 12 bit pixel data for the selected line upper pixel 'n+1'" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0xX" description="" range="" rwaccess="RW"/>
+    <bitfield id="PIXEL_LO" width="12" begin="11" end="0" resetval="0x0" description="The 12 bit pixel data for the selected line lower pixel 'n'" range="" rwaccess="RW"/>
+  </register>
+</module>

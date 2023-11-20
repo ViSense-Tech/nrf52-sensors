@@ -1,0 +1,18 @@
+<module name="UFS0_SYSCFG_SS_CFG" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="UFS_SS_PID" acronym="UFS_SS_PID" offset="0x0" width="32" description="The Revision Register contains the major and minor revisions for the module.">
+    <bitfield id="SCHEME" width="2" begin="31" end="30" resetval="0x1" description="Register Scheme" range="" rwaccess="R"/>
+    <bitfield id="BU" width="2" begin="29" end="28" resetval="0x2" description="Business Unit: 2h = Processors" range="" rwaccess="R"/>
+    <bitfield id="MODULE_ID" width="12" begin="27" end="16" resetval="0x855" description="Module ID" range="" rwaccess="R"/>
+    <bitfield id="RTL" width="5" begin="15" end="11" resetval="0xC" description="RTL Revision" range="" rwaccess="R"/>
+    <bitfield id="MAJOR" width="3" begin="10" end="8" resetval="0x1" description="Major Revision" range="" rwaccess="R"/>
+    <bitfield id="CUSTOM" width="2" begin="7" end="6" resetval="0x0" description="Custom" range="" rwaccess="R"/>
+    <bitfield id="MINOR" width="6" begin="5" end="0" resetval="0x0" description="Minor Revision" range="" rwaccess="R"/>
+  </register>
+  <register id="UFS_SS_CTRL" acronym="UFS_SS_CTRL" offset="0x4" width="32" description="The Control Register contains general control bits for the module.">
+    <bitfield id="RESERVED" width="26" begin="31" end="6" resetval="0x0" description="Reserved" range="" rwaccess="R"/>
+    <bitfield id="MPHY_REFCLK_FREQ_SEL" width="2" begin="5" end="4" resetval="0x0" description="Reference Clock Frequency Selection 0h = 19.2 MHz 1h = 26 MHz 2h = Reserved 3h = Reserved" range="" rwaccess="RW"/>
+    <bitfield id="MPHY_VCONTROL_DEEMP_SEL" width="2" begin="3" end="2" resetval="0x0" description="M-PHY De-Emphasis Select 0h = No De-Emphasis 1h = De-Emphasis" range="" rwaccess="RW"/>
+    <bitfield id="MPHY_VCONTROL_LA_SA_SEL" width="1" begin="1" end="1" resetval="0x0" description="M-PHY Amplitude Select 0h = Small Amplitude 1h = Large Amplitude" range="" rwaccess="RW"/>
+    <bitfield id="RST_N_PCS" width="1" begin="0" end="0" resetval="0x0" description="Active Low Reset to UFS Slave Device" range="" rwaccess="RW"/>
+  </register>
+</module>

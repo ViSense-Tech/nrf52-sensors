@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?><module id="LCDC" HW_revision="" XML_version="1" description="LCD Controller">
+     <register id="LCDREVMIN" acronym="LCDREVMIN" page="2" offset="0X0000" width="16" description="LCD Minor Revision Register ">
+<bitfield id="REVMIN" width="16" begin="15" end="0" resetval="4096" description="Minor Revision" range="0000h - FFFFh" rwaccess="RW"/>
+</register>
+     <register id="LCDREVMAJ" acronym="LCDREVMAJ" page="2" offset="0X0002" width="16" description="LCD Major Revision Register ">
+<bitfield id="REVMAJ" width="16" begin="15" end="0" resetval="311552" description="Major Revision" range="0000h - FFFFh" rwaccess="RW"/>
+</register>
+     <register id="LCDCR" acronym="LCDCR" page="2" offset="0X0004" width="16" description="LCD Control Register">
+<bitfield id="CLKDIV" width="8" begin="15" end="8" resetval="0" description="Clock Divisor Value (from 0 255) is used to specify the frequency of the pixel clock (in Raster mode) or MCLK (in LIDD mode) based on the lcd_clk frequency. Pixel clock frequency can range from lcd_clk/2 to lcd_clk/255 (clkdiv=0 or clkdiv=1 are N/A); MCLK can vary from lcd_clk to lcd_clk/255 (clkdiv=0 or clkdiv=1 sets MCLK=lcd_clk)" range="00h - FFh" rwaccess="RW"/>
+<bitfield id="_RESV_2" width="7" begin="7" end="1" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="MODESEL" width="1" begin="0" end="0" resetval="0" description="LCD Mode Select" range="" rwaccess="RW">
+<bitenum id="LIDD" value="0" token="LIDD" description="LCD Controller in LIDD mode"/>
+<bitenum id="RASTER" value="1" token="RASTER" description="LCD Controller in Raster mode"/>
+</bitfield>
+</register>
+     <register id="LCDSR" acronym="LCDSR" page="2" offset="0X0008" width="16" description="LCD Status Register">
+<bitfield id="_RESV_1" width="6" begin="15" end="10" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="EOF1" width="1" begin="9" end="9" resetval="0" description="End of Frame 1 0: no end of frame 1 detected 1: end of frame 1 detected" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="End of frame 1 not detected"/>
+<bitenum id="SET" value="1" token="SET" description="end of frame 1 detected"/>
+</bitfield>
+<bitfield id="EOF0" width="1" begin="8" end="8" resetval="0" description="End of Frame 0 0: no end of frame 0 detected 1: end of frame 0 detected" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="End of frame 0 not detected"/>
+<bitenum id="SET" value="1" token="SET" description="end of frame 0 detected"/>
+</bitfield>
+<bitfield id="_RESV_4" width="1" begin="7" end="7" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="PL" width="1" begin="6" end="6" resetval="0" description="Loaded Palette 0: The palette is not loaded 1: The palette is loaded                                                                                                                                                         " range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Palette not loaded"/>
+<bitenum id="SET" value="1" token="SET" description="Palette loaded"/>
+</bitfield>
+<bitfield id="FUF" width="1" begin="5" end="5" resetval="0" description="FIFO Underflow Status 0: FIFO has not underrun 1: LCD dither logic not supplying data to FIFO at a sufficient rate, FIFO has completely emptied and data pin driver logic has attempted to take added data from FIFO" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="No FIFO underrun"/>
+<bitenum id="SET" value="1" token="SET" description="FIFO completely empty and data pin attempted to take added data from FIFO"/>
+</bitfield>
+<bitfield id="_RESV_7" width="1" begin="4" end="4" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="ABC" width="1" begin="3" end="3" resetval="0" description="AC Bias Count Status 0: AC bias transition counter has not decremented to zero 1: AC bias transition counter has decremented to zero, indicating that the lcd_ac_o line has transitioned the number of times which is specified by the acbi control bit-field. Counter is reloaded with value in acbi but is disabled until the user clears ABC" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="AC bias transition counter not zero"/>
+<bitenum id="SET" value="1" token="SET" description="AC bias transition counter decremented to zero"/>
+</bitfield>
+<bitfield id="SYNC" width="1" begin="2" end="2" resetval="0" description="Sync Lost 0: normal 1: Frame Synchronization Lost has occurred" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Normal operation"/>
+<bitenum id="SET" value="1" token="SET" description="Lost Frame Sync"/>
+</bitfield>
+<bitfield id="_RESV_10" width="1" begin="1" end="1" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="DONE" width="1" begin="0" end="0" resetval="0" description="Raster or LIDD Frame Done (shared; depends on whether Raster or LIDD mode enabled) 0: Raster or DMA-to-LIDD engine is enabled 1: Raster or DMA-to-LIDD disabled and the active frame has just completed" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Raster engine enabled"/>
+<bitenum id="SET" value="1" token="SET" description="Raster engine disabled"/>
+</bitfield>
+</register>
+     <register id="LCDLIDDCR" acronym="LCDLIDDCR" page="2" offset="0X000C" width="16" description="LCD LIDD Control Register ">
+<bitfield id="_RESV_1" width="5" begin="15" end="11" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="DONE_INT_EN" width="1" begin="10" end="10" resetval="0" description="LIDD Frame Done Interrupt Enable 0: Disable LIDD Frame Done interrupt 1: Enable LIDD Frame Done interrupt (seen on LCD Status Reg bit 0)     " range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable LIDD Frame Done interrupt"/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable LIDD Frame Done interrupt (seen on LCD Status Reg bit 0)    "/>
+</bitfield>
+<bitfield id="DMA_CS0_CS1" width="1" begin="9" end="9" resetval="0" description="CS0/CS1 Select for LIDD DMA writes 0: DMA writes to LIDD CS0 1: DMA writes to LIDD CS1                                                                   " range="" rwaccess="RW">
+<bitenum id="CS0" value="0" token="CS0" description="DMA writes to LIDD CS0"/>
+<bitenum id="CS1" value="1" token="CS1" description="DMA writes to LIDD CS1  "/>
+</bitfield>
+<bitfield id="LIDD_DMA_EN" width="1" begin="8" end="8" resetval="0" description="LIDD DMA Enable 0: Deactivate DMA control of LIDD interface; DMA control is released upon completion of transfer of the currentframe of data (LIDD Frame Done) after this bit is cleared.  The MPU has direct read/write access to the panel in this mode 1: Activate DMA to drive LIDD interface to support streaming data to  smart  panels. The MPU cannot access the panel directly in this mode      " range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Disable DMA control of LIDD"/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Enable DMA to drive LIDD interface to support streaming data to smart panels. "/>
+</bitfield>
+<bitfield id="CS1_E1_POL" width="1" begin="7" end="7" resetval="0" description="Chip Select 1/Enable 1 (Secondary) Polarity Control 0: Do Not Invert Chip Select 1/Enable 1 1: Invert Chip Select 1/Enable 1 Chip Select 1 is active low by default; Enable 1 is active high by default" range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="No Invert for CS1/EN1"/>
+<bitenum id="INVERT" value="1" token="INVERT" description="Inverts CS1/EN1"/>
+</bitfield>
+<bitfield id="CS0_E0_POL" width="1" begin="6" end="6" resetval="0" description="Chip Select 0/Enable 0 (Primary) Polarity Control 0: Do Not Invert Chip Select 0/Enable 0 1: Invert Chip Select 0/Enable 0 Chip Select 0 is active low by default; Enable 0 is active high by default" range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="No Invert for CS0/EN0"/>
+<bitenum id="INVERT" value="1" token="INVERT" description="Inverts CS0/EN0"/>
+</bitfield>
+<bitfield id="WS_DIR_POL" width="1" begin="5" end="5" resetval="0" description="Write Strobe/Direction Polarity Control 0: Do Not Invert Write Strobe/Direction 1: Invert Write Strobe/Direction Write Strobe/Direction is active low/write low by default" range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="No Invert for WS/Dir"/>
+<bitenum id="INVERT" value="1" token="INVERT" description="Invert WS/Dir"/>
+</bitfield>
+<bitfield id="RS_EN_POL" width="1" begin="4" end="4" resetval="0" description="Read Strobe/Enable Polarity Control 0: Do Not Invert Read Strobe/Enable 1: Invert Read Strobe/Enable Read Strobe is active low by default; Enable is active high by default" range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="No invert for RS/En"/>
+<bitenum id="INVERT" value="1" token="INVERT" description="Invert RS/En"/>
+</bitfield>
+<bitfield id="ALEPOL" width="1" begin="3" end="3" resetval="0" description="Address Latch Enable (ALE) Polarity Control 0: Do Not Invert ALE 1: Invert ALE ALE is active low by default" range="" rwaccess="RW">
+<bitenum id="NORMAL" value="0" token="NORMAL" description="No invert for ALE"/>
+<bitenum id="INVERT" value="1" token="INVERT" description="Invert ALE"/>
+</bitfield>
+<bitfield id="LIDD_MODE_SEL" width="3" begin="2" end="0" resetval="0" description="LIDD Mode Select.  Selects type of LCD display interface for the LIDD to drive LIDD Mode Select defines the function of LCD external pins as follows ------------------------------------------------------------------------------------ PIN             000b       001b       010b       011b      100b ------------------------------------------------------------------------------------ lcd_cp         En          En          Rs           Rs         N/A lcd_lp          Dir          Dir          Ws          Ws        Dir lcd_fp          Ale         Ale         Ale          Ale         Ale lcd_ac        Cs0        Cs0         Cs0         Cs0        E0 lcd_mclk     Mclk      Cs1         Mclk        Cs1        E1          " range="" rwaccess="RW">
+<bitenum id="SYNC_MPU68" value="0" token="SYNC_MPU68" description="Sync MPU68"/>
+<bitenum id="ASYNC_MPU68" value="1" token="ASYNC_MPU68" description="Async MPU68"/>
+<bitenum id="SYNC_MPU80" value="2" token="SYNC_MPU80" description="Sync MPU80"/>
+<bitenum id="ASYNC_MPU80" value="3" token="ASYNC_MPU80" description="Async MPU80"/>
+<bitenum id="HITACHI" value="4" token="HITACHI" description="Hitachi (Async)"/>
+</bitfield>
+</register>
+     <register id="LCDLIDDCS0CONFIG0" acronym="LCDLIDDCS0CONFIG0" page="2" offset="0X0010" width="16" description="LCD LIDD CS0 Configuration Register 0">
+<bitfield id="R_SU0" width="4" begin="15" end="12" resetval="0" description="Read Strobe Set-Up cycles (lower 4 bits upper bit is in LIDD CSO config reg 1 at bit-0) Field value defines number of memclk cycles after Data Bus/Pad Output Enable,  ALE,  Direction bit and Chip Select 0 have been set-up before the Read Strobe is asserted when performing a read access" range="00h - FFh" rwaccess="RW"/>
+<bitfield id="R_STROBE" width="6" begin="11" end="6" resetval="1" description="Read Strobe Duration cycles Field value defines number of memclk cycles for which the Read Strobe is held active when performing a read access" range="00h - 3Fh" rwaccess="RW"/>
+<bitfield id="R_HOLD" width="4" begin="5" end="2" resetval="1" description="Read Strobe Hold cycles Field value defines number of memclk cycles for which Data Bus/Pad Output Enable,  ALE,  Direction bit and Chip Select 0 are held after the Read Strobe is deasserted when performing a read access" range="0h - Fh" rwaccess="RW"/>
+<bitfield id="TA" width="2" begin="1" end="0" resetval="0" description="Field value defines number of memclk cycles between the end of one CS0 device access and the start of another CS0 device access unless the two accesses are both reads, in which case this delay is not incurred" range="0h - 3h" rwaccess="RW"/>
+</register>
+     <register id="LCDLIDDCS0CONFIG1" acronym="LCDLIDDCS0CONFIG1" page="2" offset="0X0012" width="16" description="LCD LIDD CS0 Configuration Register 1">
+<bitfield id="W_SU" width="5" begin="15" end="11" resetval="0" description="Write Strobe Set-Up cycles Field value defines number of memclk cycles after Data Bus/Pad Output Enable,  ALE,  Direction bit and Chip Select 0 have been set-up before the Write Strobe is asserted when performing a write access" range="00h - 1F" rwaccess="RW"/>
+<bitfield id="W_STROBE" width="6" begin="10" end="5" resetval="1" description="Write Strobe Duration cycles Field value defines number of memclk cycles for which the Write Strobe is held active when performing a write access" range="00h - 3Fh" rwaccess="RW"/>
+<bitfield id="W_HOLD" width="4" begin="4" end="1" resetval="1" description="Write Strobe Hold cycles Field value defines number of memclk cycles for which Data Bus/Pad Output Enable,  ALE,  Direction bit and Chip Select 0 are held after the Write Strobe is deasserted when performing a write access" range="0h - Fh" rwaccess="RW"/>
+<bitfield id="R_SU1" width="1" begin="0" end="0" resetval="0" description="Most Significant Bit for Read Strobe Set-Up cycles (upper bit.  The lower 4 bits are located in LIDD CSO confir reg 0) Field value defines number of memclk cycles after Data Bus/Pad Output Enable,  ALE,  Direction bit and Chip Select 0 have been set-up before the Read Strobe is asserted when performing a read access" range="0-1h" rwaccess="RW"/>
+</register>
+     <register id="LCDLIDDCS0ADDR" acronym="LCDLIDDCS0ADDR" page="2" offset="0X0014" width="16" description="LCD LIDD CS0 Address Read/Write Register ">
+<bitfield id="ADR_INDX" width="16" begin="15" end="0" resetval="0" description="Peripheral Device Address/Index value On writes this field is loaded into the CS0 peripheral device s address generator                                                                                                                                               On reads this field contains the CS0 peripheral device s status" range="0000h - FFFFh" rwaccess="RW"/>
+</register>
+     <register id="LCDLIDDCS0DATA" acronym="LCDLIDDCS0DATA" page="2" offset="0X0018" width="16" description="LCD LIDD CS0 Data Read/Write Register ">
+<bitfield id="DATA" width="16" begin="15" end="0" resetval="0" description="Peripheral Device Data value On writes this field is loaded into the CS0 peripheral device                                                                                                                                                On reads this field contains the CS0 peripheral device s data" range="0000h - FFFFh" rwaccess="RW"/>
+</register>
+     <register id="LCDLIDDCS1CONFIG0" acronym="LCDLIDDCS1CONFIG0" page="2" offset="0X001C" width="16" description="LCD LIDD CS1 Configuration Register 0">
+<bitfield id="R_SU0" width="4" begin="15" end="12" resetval="0" description="Read Strobe Set-Up cycles (lower 4 bits upper bit is in LIDD CSO config reg 1 at bit-0) Field value defines number of memclk cycles after Data Bus/Pad Output Enable,  ALE,  Direction bit and Chip Select 0 have been set-up before the Read Strobe is asserted when performing a read access" range="00h - FFh" rwaccess="RW"/>
+<bitfield id="R_STROBE" width="6" begin="11" end="6" resetval="1" description="Read Strobe Duration cycles Field value defines number of memclk cycles for which the Read Strobe is held active when performing a read access" range="00h - 3Fh" rwaccess="RW"/>
+<bitfield id="R_HOLD" width="4" begin="5" end="2" resetval="1" description="Read Strobe Hold cycles Field value defines number of memclk cycles for which Data Bus/Pad Output Enable,  ALE,  Direction bit and Chip Select 0 are held after the Read Strobe is deasserted when performing a read access" range="0h - Fh" rwaccess="RW"/>
+<bitfield id="TA" width="2" begin="1" end="0" resetval="0" description="Field value defines number of memclk cycles between the end of one CS0 device access and the start of another CS0 device access unless the two accesses are both reads, in which case this delay is not incurred" range="0h - 3h" rwaccess="RW"/>
+</register>
+     <register id="LCDLIDDCS1CONFIG1" acronym="LCDLIDDCS1CONFIG1" page="2" offset="0X001D" width="16" description="LCD LIDD CS1 Configuration Register 1">
+<bitfield id="W_SU" width="5" begin="15" end="11" resetval="0" description="Write Strobe Set-Up cycles Field value defines number of memclk cycles after Data Bus/Pad Output Enable,  ALE,  Direction bit and Chip Select 0 have been set-up before the Write Strobe is asserted when performing a write access" range="00h - 1F" rwaccess="RW"/>
+<bitfield id="W_STROBE" width="6" begin="10" end="5" resetval="1" description="Write Strobe Duration cycles Field value defines number of memclk cycles for which the Write Strobe is held active when performing a write access" range="00h - 3Fh" rwaccess="RW"/>
+<bitfield id="W_HOLD" width="4" begin="4" end="1" resetval="1" description="Write Strobe Hold cycles Field value defines number of memclk cycles for which Data Bus/Pad Output Enable,  ALE,  Direction bit and Chip Select 0 are held after the Write Strobe is deasserted when performing a write access" range="0h - Fh" rwaccess="RW"/>
+<bitfield id="R_SU1" width="1" begin="0" end="0" resetval="0" description="Read Strobe Set-Up cycles (upper bit.  The lower 4 bits are located in LIDD CSO confir reg 0) Field value defines number of memclk cycles after Data Bus/Pad Output Enable,  ALE,  Direction bit and Chip Select 0 have been set-up before the Read Strobe is asserted when performing a read access" range="0-1h" rwaccess="RW"/>
+</register>
+     <register id="LCDLIDDCS1ADDR" acronym="LCDLIDDCS1ADDR" page="2" offset="0X0020" width="16" description="LCD LIDD CS1 Address Read/Write Register ">
+<bitfield id="ADR_INDX" width="16" begin="15" end="0" resetval="0" description="Peripheral Device Address/Index value On writes this field is loaded into the CS0 peripheral device s address generator                                                                                                                                               On reads this field contains the CS0 peripheral device s status" range="0000h - FFFFh" rwaccess="RW"/>
+</register>
+     <register id="LCDLIDDCS1DATA" acronym="LCDLIDDCS1DATA" page="2" offset="0X0024" width="16" description="LCD LIDD CS1 Data Read/Write Register ">
+<bitfield id="DATA" width="16" begin="15" end="0" resetval="0" description="Peripheral Device Data value On writes this field is loaded into the CS0 peripheral device                                                                                                                                                On reads this field contains the CS0 peripheral device s data" range="0000h - FFFFh" rwaccess="RW"/>
+</register>
+     <register id="LCDRASTCR0" acronym="LCDRASTCR0" page="2" offset="0X0028" width="16" description="LCD Raster Control Register 0">
+<bitfield id="REQDLY0" width="4" begin="15" end="12" resetval="0" description="FIFO DMA Request Delay Encoded value (0-255) used to specify the number of memory controller clocks the input FIFO DMA request should be disabled. The clock count starts after 16 words read in the input FIFO. Programming reqdly=00h disables this function" range="00h - FFh" rwaccess="RW"/>
+<bitfield id="_RESV_2" width="2" begin="11" end="10" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="MONO8B" width="1" begin="9" end="9" resetval="0" description="Mono 8 Bit Mode 0: lcd_pixel_o[3:0] is used to output four pixel values to the panel each pixel clock transition 1: lcd_pixel_o[7:0] is used to output eight pixel values to the panel each pixel clock transition This bit is ignored in all other modes" range="" rwaccess="RW">
+<bitenum id="FOUR" value="0" token="FOUR" description="Each LCD pixel has 4 values"/>
+<bitenum id="EIGHT" value="1" token="EIGHT" description="Each LCD pixel has 8 values"/>
+</bitfield>
+<bitfield id="RDORDER" width="1" begin="8" end="8" resetval="0" description="Raster Data Order Select 0: Frame buffer data is ordered from least-to-most significant bit/nibble/byte/halfword 1: Frame buffer data is ordered from most-to-least significant bit/nibble/byte/halfword" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="Frame buffer data is ordered from Least to Most significant"/>
+<bitenum id="SET" value="1" token="SET" description="Frame buffer data is ordered from Most to Least significant"/>
+</bitfield>
+<bitfield id="LCDTFT" width="1" begin="7" end="7" resetval="0" description="LCD TFT 0: Passive or STN display operation enabled, dither logic is enabled 1: Active or TFT display operation enabled, external palette and DAC required, dither logic bypassed,  pin timing changes to support continuous pixel clock, output enable, vsync and hsync" range="" rwaccess="RW">
+<bitenum id="PASSIVE" value="0" token="PASSIVE" description="Passive display operation enabled"/>
+<bitenum id="ACTIVE" value="1" token="ACTIVE" description="Active display operation enabled"/>
+</bitfield>
+<bitfield id="FUFEN" width="1" begin="6" end="6" resetval="0" description="FIFO Underflow interrupt enable" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="FIFO Interrupt Disabled"/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="FIFO Interrupt enabled"/>
+</bitfield>
+<bitfield id="SYNCEN" width="1" begin="5" end="5" resetval="0" description="Sync Lost interrupt enable" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Sync Lost interrupt disabled"/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Sync Lost interrupt enabled"/>
+</bitfield>
+<bitfield id="LOADEN" width="1" begin="4" end="4" resetval="0" description="Palette Load interrupt enable" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Palette load interrupt disabled"/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Palette load interrupt enabled"/>
+</bitfield>
+<bitfield id="DONEEN" width="1" begin="3" end="3" resetval="0" description="Frame Done interrupt enable" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Frame done interrupt disabled"/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Frame done interrupt enabled"/>
+</bitfield>
+<bitfield id="ABCEN" width="1" begin="2" end="2" resetval="0" description="AC Bias Count interrupt enable" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="AC bias count interrupt disabled"/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="AC bias count interrupt enabled"/>
+</bitfield>
+<bitfield id="LCDBW" width="1" begin="1" end="1" resetval="0" description="LCD Monochrome 0: Color operation enabled 1: Monochrome operation enabled" range="" rwaccess="RW">
+<bitenum id="COLOR" value="0" token="COLOR" description="Color enabled"/>
+<bitenum id="MONO" value="1" token="MONO" description="Monochrome enabled"/>
+</bitfield>
+<bitfield id="LCDEN" width="1" begin="0" end="0" resetval="0" description="LCD Controller Enable" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="LCD controller disabled"/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="LCD controller enabled"/>
+</bitfield>
+</register>
+     <register id="LCDRASTCR1" acronym="LCDRASTCR1" page="2" offset="0X002A" width="16" description="LCD Raster Control Register 1">
+<bitfield id="_RESV_1" width="7" begin="15" end="9" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="STN565" width="1" begin="8" end="8" resetval="0" description="12 BPP (5-6-5) mode 0: off 1: on (16 bit data in frame buffer, but only 12 bits are dithered and sent out)" range="" rwaccess="RW">
+<bitenum id="OFF" value="0" token="OFF" description="12 BPP mode off"/>
+<bitenum id="ON" value="1" token="ON" description="12 BPP mode on"/>
+</bitfield>
+<bitfield id="TFTMAP" width="1" begin="7" end="7" resetval="0" description="TFT Alternate Signal Mapping 0: output pixel data for 1, 2, 4, and 8 bpp modes will be right aligned on lcd_pins (11:0) 1: output pixel data for 1, 2, 4, and 8 bpp will be converted to 5,6,5 format and use pins (15:0)  R3 R2 R1 R0 R3 G3 G2 G1 G0 G3 G2 B3 B2 B1 B0 B3" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="output pixel data for 1, 2, 4, and 8 bpp modes will be right aligned on lcd_pins (11:0)"/>
+<bitenum id="SET" value="1" token="SET" description=" output pixel data for 1, 2, 4, and 8 bpp will be converted to 5,6,5 format and use pins (15:0)  R3 R2 R1 R0 R3 G3 G2 G1 G0 G3 G2 B3 B2 B1 B0 B3"/>
+</bitfield>
+<bitfield id="NIBMODE" width="1" begin="6" end="6" resetval="0" description="Nibble Mode 0: Nibble mode is disabled 1: Nibble mode is enabled" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Nibble mode disabled"/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Nibble mode enabled"/>
+</bitfield>
+<bitfield id="PALMODE" width="2" begin="5" end="4" resetval="0" description="Palette Loading Mode 00: Palette and data loading ( reset value) 01: Palette loading 10: Data loading" range="" rwaccess="RW">
+<bitenum id="DEFAULT" value="0" token="DEFAULT" description="Palette and data loading (default)"/>
+<bitenum id="PALETTE" value="1" token="PALETTE" description="Palette loading"/>
+<bitenum id="DATA" value="2" token="DATA" description="Data loading"/>
+</bitfield>
+<bitfield id="REQDLY1" width="4" begin="3" end="0" resetval="0" description="FIFO DMA Request Delay Encoded value (0-255) used to specify the number of memory controller clocks the input FIFO DMA request should be disabled. The clock count starts after 16 words read in the input FIFO. Programming reqdly=00h disables this function" range="00h - FFh" rwaccess="RW"/>
+</register>
+     <register id="LCDRASTT0R" acronym="LCDRASTT0R" page="2" offset="0X002C" width="16" description="LCD Raster Timing 0 Register ">
+<bitfield id="HSW" width="6" begin="15" end="10" resetval="0" description="Horizontal Sync Pulse Width Encoded value (from 1 64) is used to specify number of pixel clock periods to pulse the line clock at the end of each line (program to value minus one). Note that pixel clock is held in its inactive state during the generation of the line clock in passive display mode and is permitted to transition in active display mode" range="00h - 3Fh" rwaccess="RW"/>
+<bitfield id="PPL" width="6" begin="9" end="4" resetval="0" description="Pixels-per-line Encoded value (from 1 1024) is used to specify number of pixels contained within each line on the LCD display (program to value minus one)" range="00h - 3Fh" rwaccess="RW"/>
+<bitfield id="_RESV_3" width="4" begin="3" end="0" resetval="0" description="Reserved" range="" rwaccess="N"/>
+</register>
+     <register id="LCDRASTT1R" acronym="LCDRASTT1R" page="2" offset="0X002E" width="16" description="LCD Raster Timing 1 Register ">
+<bitfield id="HBP" width="8" begin="15" end="8" resetval="0" description="Horizontal Back Porch Encoded value (from 1 256) is used to specify number of pixel clock periods to add to the beginning of a line transmission before the first set of pixels is output to the display (program to value minus one).  Note that pixel clock is held in its inactive state during the beginning of line wait period in passive display mode and is permitted to transition in active display mode" range="00h - FFh" rwaccess="RW"/>
+<bitfield id="HFP" width="8" begin="7" end="0" resetval="0" description="Horizontal Front Porch Encoded value (from 1 256) is used to specify number of pixel clock periods to add to the end of a line transmission before line clock is asserted (program to value minus one). Note that pixel clock is held in its inactive state during the end of line wait period in passive display mode and is permitted to transition in active display mode" range="00h - FFh" rwaccess="RW"/>
+</register>
+     <register id="LCDRASTT2R" acronym="LCDRASTT2R" page="2" offset="0X0030" width="16" description="LCD Raster Timing 2 Register ">
+<bitfield id="VSW" width="6" begin="15" end="10" resetval="0" description="Vertical Sync Pulse Width In active mode (lcdtft=1), encoded value (from 1 64) used to specify number of line clock periods to pulse the lcd_fp pin at the end of each frame after the end of frame wait (vfp) period elapses. Frame clock used as VSYNC signal in active mode In passive mode (lcdtft=0), encoded value (from 1 64) used to specify number of extra line clock periods to insert after the vertical front porch (vfp) period has elapsed. Note that the width of lcd_fp is not effected by vsw in passive mode, and that line clock transitions during the insertionof the extra line clock periods (program to value minus one)" range="00h - 3Fh" rwaccess="RW"/>
+<bitfield id="LPP" width="10" begin="9" end="0" resetval="0" description="Pixels-per-line Encoded value (from 1 1024) used to specify number of lines per panel. It represents the total number of lines on the LCD (program to value minus one)" range="00h - 3FFh" rwaccess="RW"/>
+</register>
+     <register id="LCDRASTT3R" acronym="LCDRASTT3R" page="2" offset="0X0032" width="16" description="LCD Raster Timing 3 Register ">
+<bitfield id="VBP" width="8" begin="15" end="8" resetval="0" description="Vertical Back Porch Value (from 0 255) used to specify number of line clock periods to add to the beginning of a frame before the first set of pixels is output to the display. Note that line clock transitions during the insertion of the extra line clock periods" range="00h - FFh" rwaccess="RW"/>
+<bitfield id="VFP" width="8" begin="7" end="0" resetval="0" description="Vertical Front Porch Value (from 0 255) used to specify number of line clock periods to add to the end of each frame.  Note that the line clock transitions during the insertion of the extra line clock periods" range="00h - FFh" rwaccess="RW"/>
+</register>
+     <register id="LCDRASTT4R" acronym="LCDRASTT4R" page="2" offset="0X0034" width="16" description="LCD Raster Timing 4 Register ">
+<bitfield id="ACB" width="8" begin="15" end="8" resetval="0" description="AC Bias Pin Frequency Value (from 0 255) used to specify the number of line clocks to count before transitioning the AC Bias pin. This pin is used to periodically invert the polarity of the power supply to prevent DC charge build-up within the display. acb: Number of line clocks/toggle of the lcd_ac pin" range="00h - FFh" rwaccess="RW"/>
+<bitfield id="_RESV_2" width="8" begin="7" end="0" resetval="0" description="Reserved" range="" rwaccess="N"/>
+</register>
+     <register id="LCDRASTT5R" acronym="LCDRASTT5R" page="2" offset="0X0036" width="16" description="LCD Raster Timing 5 Register ">
+<bitfield id="_RESV_1" width="6" begin="15" end="10" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="PHSVS_ON_OFF" width="1" begin="9" end="9" resetval="0" description="Hsync/Vsync Pixel Clock Control On/Off  Should be ON only when in TFT mode  0: lcd_lp and lcd_fp are driven on opposite edges of pixel clock than the lcd_pixel_o 1: lcd_lp and lcd_fp are driven according to bit 24" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="lcd_lp and lcd_fp are driven on opposite edges of pixel clock than the lcd_pixel_o"/>
+<bitenum id="SET" value="1" token="SET" description="lcd_lp and lcd_fp are driven according to bit 24"/>
+</bitfield>
+<bitfield id="PHSVS_RF" width="1" begin="8" end="8" resetval="0" description="Program Hsync/Vsync Rise or Fall 0: lcd_lp and lcd_fp are driven on rising edge of pixel clock. (bit 25 must be set to 1) 1: lcd_lp and lcd_fp are driven on falling edge of pixel clock. (bit 25 must be set to 1)" range="" rwaccess="RW">
+<bitenum id="RISING" value="0" token="RISING" description="lcd_lp and lcd_fp are driven on rising edge of pixel clock. (bit 25 must be set to 1)"/>
+<bitenum id="FALLING" value="1" token="FALLING" description="lcd_lp and lcd_fp are driven on falling edge of pixel clock. (bit 25 must be set to 1)"/>
+</bitfield>
+<bitfield id="IEO" width="1" begin="7" end="7" resetval="0" description="Invert Output Enable 0: lcd_ac pin is active high in active display mode 1: lcd_ac pin is active low in active display mode Active display mode: data driven out to the LCD s data lines on programmed pixel clock edge when AC-bias is active. Note that IEO is ignored in passive display mode" range="" rwaccess="RW">
+<bitenum id="HIGH" value="0" token="HIGH" description="LCD_AC pin is active high in Active Display mode"/>
+<bitenum id="LOW" value="1" token="LOW" description="LCD_AC pin is active low in Active Display mode"/>
+</bitfield>
+<bitfield id="IPC" width="1" begin="6" end="6" resetval="0" description="Invert Pixel Clock 0: Data is driven on the LCD s data lines on the rising edge of lcd_cp 1: Data is driven on the LCD s data lines on the falling edge of lcd_cp" range="" rwaccess="RW">
+<bitenum id="RISING" value="0" token="RISING" description="Data driven on rising edge"/>
+<bitenum id="FALLING" value="1" token="FALLING" description="Data driven on Falling edge"/>
+</bitfield>
+<bitfield id="IHS" width="1" begin="5" end="5" resetval="0" description="Invert Hsync 0: lcd_lp pin is active high and inactive low 1: lcd_lp pin is active low and inactive high Active and passive mode: horizontal sync pulse/line clock active between lines, after end of line wait period" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="lcd_lp pin is active high and inactive low"/>
+<bitenum id="SET" value="1" token="SET" description="lcd_lp pin is active low and inactive high"/>
+</bitfield>
+<bitfield id="IVS" width="1" begin="4" end="4" resetval="0" description="Invert Vsync 0: lcd_fp pin is active high and inactive low 1: lcd_fp pin is active low and inactive high Active mode: vertical sync pulse active between frames, after end of frame wait period Passive mode: frame clock active during first line of each frame" range="" rwaccess="RW">
+<bitenum id="CLEAR" value="0" token="CLEAR" description="lcd_fp pin is active high and inactive low"/>
+<bitenum id="SET" value="1" token="SET" description="lcd_fp pin is active low and inactive high"/>
+</bitfield>
+<bitfield id="ACBI" width="4" begin="3" end="0" resetval="0" description="AC Bias Pin Transitions per Interrupt Value (from 0 to 255) used to specify the number of AC Bias pin transitions to count before setting the line count status (lcs) bit, signaling an interrupt request. Counter is frozen when lcs is set and is restarted when lcs is cleared by software. This function is disabled when acbi = 0x0000" range="" rwaccess="RW">
+<bitenum id="" value="0-4080" token="" description=""/>
+</bitfield>
+</register>
+     <register id="LCDRASTSUBPANDISP0" acronym="LCDRASTSUBPANDISP0" page="2" offset="0X0038" width="16" description="LCD Raster Sub-panel Display Register 0">
+<bitfield id="DPD" width="12" begin="15" end="4" resetval="0" description="Default Pixel Data     DPD defines the default value of the pixel data sent to the panel for the lines until LPPT is reached or after passing the LPPT" range="0 - FFFh" rwaccess="RW"/>
+<bitfield id="_RESV_2" width="4" begin="3" end="0" resetval="0" description="Reserved" range="" rwaccess="N"/>
+</register>
+     <register id="LCDRASTSUBPANDISP1" acronym="LCDRASTSUBPANDISP1" page="2" offset="0X003A" width="16" description="LCD Raster Sub-panel Display Register 1">
+<bitfield id="SPEN" width="1" begin="15" end="15" resetval="0" description="Sub panel Enable 0: function disabled 1: sub-panel function mode enabled" range="" rwaccess="RW">
+<bitenum id="DISABLE" value="0" token="DISABLE" description="Sub panel function disabled"/>
+<bitenum id="ENABLE" value="1" token="ENABLE" description="Sub panel function enabled"/>
+</bitfield>
+<bitfield id="_RESV_2" width="1" begin="14" end="14" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="HOLS" width="1" begin="13" end="13" resetval="0" description="High or Low Signal The field indicates the position of sub-panel compared to the LPPT value" range="" rwaccess="RW">
+<bitenum id="LOW" value="0" token="LOW" description="subpanel below LPPT value"/>
+<bitenum id="HIGH" value="1" token="HIGH" description="subpanel above LPPT value"/>
+</bitfield>
+<bitfield id="_RESV_4" width="3" begin="12" end="10" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="LPPT" width="10" begin="9" end="0" resetval="0" description="Line Per Panel Threshold This field defines the number of lines to be refreshed (1   1024)" range="0-3FFh" rwaccess="RW"/>
+</register>
+     <register id="LCDDMACR" acronym="LCDDMACR" page="2" offset="0X0040" width="16" description="LCD DMA Control Register">
+<bitfield id="_RESV_1" width="9" begin="15" end="7" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="BURST_SIZE" width="3" begin="6" end="4" resetval="0" description="Burst Size setting for DMA transfers (all DMA transfers are 32 bits wide)  " range="" rwaccess="RW">
+<bitenum id="BSIZE1" value="0" token="BSIZE1" description="burst size of 1"/>
+<bitenum id="BSIZE2" value="1" token="BSIZE2" description="burst size of 2"/>
+<bitenum id="BSIZE4" value="2" token="BSIZE4" description="burst size of 4"/>
+<bitenum id="BSIZE8" value="3" token="BSIZE8" description="burst size of 8"/>
+<bitenum id="BSIZE16" value="4" token="BSIZE16" description="burst size of 16 "/>
+<bitenum id="RES1" value="5" token="RES1" description="Reserved"/>
+<bitenum id="RES2" value="6" token="RES2" description="Reserved"/>
+<bitenum id="RES7" value="7" token="RES7" description="Reserved"/>
+</bitfield>
+<bitfield id="_RESV_3" width="1" begin="3" end="3" resetval="0" description="Reserved" range="" rwaccess="N"/>
+<bitfield id="EOF_INTEN" width="1" begin="2" end="2" resetval="0" description="End of Frame interrupt enable     Setting this bit allows the End of Frame 0 or 1 Status bits in the LCD Status Register to trigger an interrupt 0: End of Frame 0/1Interrupt disabled                                                      1: End of Frame 0/1Interrupt enabled" range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="EoF Interrupt disabled"/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="EoF Interrupt enabled"/>
+</bitfield>
+<bitfield id="BIGENDIAN" width="1" begin="1" end="1" resetval="0" description="Big Endian enable       Use this bit when the processor is operating in Big Endian mode and writes to the frame buffer(s) are less than 32 bits wide; only in this scenario  we need to change the byte alignment for data coming into the FIFO from the frame buffer(s)                 0: Big Endian data reordering disabled 1: Big Endian data reordering enabled" range="" rwaccess="RW">
+<bitenum id="DISABLED" value="0" token="DISABLED" description="Big Endian disabled"/>
+<bitenum id="ENABLED" value="1" token="ENABLED" description="Big Endian enabled"/>
+</bitfield>
+<bitfield id="FRAME_MODE" width="1" begin="0" end="0" resetval="0" description="Frame Mode                                                                                        0: one frame buffer (FB0 only) used 1: two frame buffers used; DMA ping-pongs between FB0 and FB1 in this mode" range="" rwaccess="RW">
+<bitenum id="ONE" value="0" token="ONE" description="One Frame buffer used"/>
+<bitenum id="TWO" value="1" token="TWO" description="two frame buffers used.  "/>
+</bitfield>
+</register>
+     <register id="LCDDMAFB0BAR0" acronym="LCDDMAFB0BAR0" page="2" offset="0X0044" width="16" description="LCD DMA Frame Buffer 0 Base Address Register 0">
+<bitfield id="FB0_BASE0" width="16" begin="15" end="0" resetval="0" description="Frame Buffer 0 Base Address pointer LSW;  2 LSBs are hardwired to be 00" range="0-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="LCDDMAFB0BAR1" acronym="LCDDMAFB0BAR1" page="2" offset="0X0046" width="16" description="LCD DMA Frame Buffer 0 Base Address Register 1">
+<bitfield id="FB0_BASE1" width="16" begin="15" end="0" resetval="0" description="Frame Buffer 0 Base Address pointer MSW" range="0-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="LCDDMAFB0CAR0" acronym="LCDDMAFB0CAR0" page="2" offset="0X0048" width="16" description="LCD DMA Frame Buffer 0 Ceiling Address Register 0">
+<bitfield id="FB0_CEIL0" width="16" begin="15" end="0" resetval="0" description="Frame Buffer 0 Ceiling Address pointer LSW;  2 LSBs are hardwired to be 00" range="0-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="LCDDMAFB0CAR1" acronym="LCDDMAFB0CAR1" page="2" offset="0x0049" width="16" description="LCD DMA Frame Buffer 0 Ceiling Address Register 1">
+<bitfield id="FB0_CEIL1" width="16" begin="15" end="0" resetval="0" description="Frame Buffer 0 Ceiling Address pointer MSW" range="0-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="LCDDMAFB1BAR0" acronym="LCDDMAFB1BAR0" page="2" offset="0X004C" width="16" description="LCD DMA Frame Buffer 1 Base Address Register 0">
+<bitfield id="FB1_BASE0" width="16" begin="15" end="0" resetval="0" description="Frame Buffer 1 Base Address pointer LSW;  2 LSBs are hardwired to be 00" range="0-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="LCDDMAFB1BAR1" acronym="LCDDMAFB1BAR1" page="2" offset="0x004D" width="16" description="LCD DMA Frame Buffer 1 Base Address Register 1">
+<bitfield id="FB1_BASE1" width="16" begin="15" end="0" resetval="0" description="Frame Buffer 1 Base Address pointer MSW" range="0-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="LCDDMAFB1CAR0" acronym="LCDDMAFB1CAR0" page="2" offset="0X0050" width="16" description="LCD DMA Frame Buffer 1 Ceiling Address Register 0">
+<bitfield id="FB1_CEIL0" width="16" begin="15" end="0" resetval="0" description="Frame Buffer 1 Ceiling Address pointer LSW;  2 LSBs are hardwired to be 00" range="0-FFFFh" rwaccess="RW"/>
+</register>
+     <register id="LCDDMAFB1CAR1" acronym="LCDDMAFB1CAR1" page="2" offset="0X0051" width="16" description="LCD DMA Frame Buffer 1 Ceiling Address Register 1">
+<bitfield id="FB1_CEIL1" width="16" begin="15" end="0" resetval="0" description="Frame Buffer 1 Ceiling Address pointer MSW" range="0-FFFFh" rwaccess="RW"/>
+</register>
+</module>

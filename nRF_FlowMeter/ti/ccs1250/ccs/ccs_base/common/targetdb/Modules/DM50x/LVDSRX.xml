@@ -1,0 +1,979 @@
+<module name="LVDSRX" acronym="" XML_version="1.0" HW_revision="n/a" description="">
+  <register id="LVDSRX_REVISION" acronym="LVDSRX_REVISION" offset="0x0" width="32" description="IP Revision Identifier (X.Y.R) Used by software to track features, bugs, and compatibility">
+    <bitfield id="REVISION" width="32" begin="31" end="0" resetval="See" description="IP Revision" range="" rwaccess="R"/>
+  </register>
+  <register id="LVDSRX_SYSCONFIG" acronym="LVDSRX_SYSCONFIG" offset="0x10" width="32" description="Reserved">
+    <bitfield id="RESERVED" width="31" begin="31" end="1" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="1" begin="0" end="0" resetval="0x0" description="" range="" rwaccess="RW">
+      <bitenum value="0" id="DONE" token="RESERVED_0" description="Reset done, no pending action"/>
+      <bitenum value="1" id="RESET" token="RESERVED_1" description="Initiate software reset"/>
+    </bitfield>
+  </register>
+  <register id="LVDSRX_CAMCFG" acronym="LVDSRX_CAMCFG" offset="0x14" width="32" description="Camera port enable">
+    <bitfield id="RESERVED" width="12" begin="31" end="20" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CAM4TEST" width="1" begin="19" end="19" resetval="0x0" description="Camera port #4 monitor" range="" rwaccess="RW">
+      <bitenum value="0" id="DIABLE" token="CAM4TEST_0" description="DIABLE"/>
+      <bitenum value="1" id="ENABLE" token="CAM4TEST_1" description="ENABLE"/>
+    </bitfield>
+    <bitfield id="CAM3TEST" width="1" begin="18" end="18" resetval="0x0" description="Camera port #3 monitor" range="" rwaccess="RW">
+      <bitenum value="0" id="DIABLE" token="CAM3TEST_0" description="DIABLE"/>
+      <bitenum value="1" id="ENABLE" token="CAM3TEST_1" description="ENABLE"/>
+    </bitfield>
+    <bitfield id="CAM2TEST" width="1" begin="17" end="17" resetval="0x0" description="Camera port #2 monitor" range="" rwaccess="RW">
+      <bitenum value="0" id="DIABLE" token="CAM2TEST_0" description="DIABLE"/>
+      <bitenum value="1" id="ENABLE" token="CAM2TEST_1" description="ENABLE"/>
+    </bitfield>
+    <bitfield id="CAM1TEST" width="1" begin="16" end="16" resetval="0x0" description="Camera port #1 monitor" range="" rwaccess="RW">
+      <bitenum value="0" id="DIABLE" token="CAM1TEST_0" description="DIABLE"/>
+      <bitenum value="1" id="ENABLE" token="CAM1TEST_1" description="ENABLE"/>
+    </bitfield>
+    <bitfield id="RESERVED" width="12" begin="15" end="4" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CAM4ENA" width="1" begin="3" end="3" resetval="0x0" description="Camera port #4 control" range="" rwaccess="RW">
+      <bitenum value="0" id="DIABLE" token="CAM4ENA_0" description="DIABLE"/>
+      <bitenum value="1" id="ENABLE" token="CAM4ENA_1" description="ENABLE"/>
+    </bitfield>
+    <bitfield id="CAM3ENA" width="1" begin="2" end="2" resetval="0x0" description="Camera port #3 control" range="" rwaccess="RW">
+      <bitenum value="0" id="DIABLE" token="CAM3ENA_0" description="DIABLE"/>
+      <bitenum value="1" id="ENABLE" token="CAM3ENA_1" description="ENABLE"/>
+    </bitfield>
+    <bitfield id="CAM2ENA" width="1" begin="1" end="1" resetval="0x0" description="Camera port #2 control" range="" rwaccess="RW">
+      <bitenum value="0" id="DIABLE" token="CAM2ENA_0" description="DIABLE"/>
+      <bitenum value="1" id="ENABLE" token="CAM2ENA_1" description="ENABLE"/>
+    </bitfield>
+    <bitfield id="CAM1ENA" width="1" begin="0" end="0" resetval="0x0" description="Camera port #1 control" range="" rwaccess="RW">
+      <bitenum value="0" id="DIABLE" token="CAM1ENA_0" description="DIABLE"/>
+      <bitenum value="1" id="ENABLE" token="CAM1ENA_1" description="ENABLE"/>
+    </bitfield>
+  </register>
+  <register id="LVDSRX_IRQ_EOI" acronym="LVDSRX_IRQ_EOI" offset="0x1C" width="32" description="End Of Interrupt number specification">
+    <bitfield id="RESERVED" width="29" begin="31" end="3" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="LINE_NUMBER" width="3" begin="2" end="0" resetval="0x0" description="Software End Of Interrupt (EOI) control. Write number of interrupt output to force re-evaluation of associated pending interrupts. Write n: EOI for interrupt output associated with EOI #n." range="" rwaccess="RW">
+      <bitenum value="0" id="READ0" token="LINE_NUMBER_0" description="Reads always 0 (no EOI memory)"/>
+      <bitenum value="1" id="EOI1" token="LINE_NUMBER_1" description="EOI for interrupt output line #1"/>
+      <bitenum value="3" id="EOI3" token="LINE_NUMBER_3" description="EOI for interrupt output line #3"/>
+      <bitenum value="4" id="EOI4" token="LINE_NUMBER_4" description="EOI for interrupt output line #4"/>
+      <bitenum value="2" id="EOI2" token="LINE_NUMBER_2" description="EOI for interrupt output line #2"/>
+    </bitfield>
+  </register>
+  <register id="LVDSRX_IRQSTATUS_RAW_0" acronym="LVDSRX_IRQSTATUS_RAW_0" offset="0x20" width="32" description="Per-event raw interrupt status vector, line #0. Raw status is set even if event is not enabled.">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CAM1_ERR7" width="1" begin="9" end="9" resetval="0x0" description="sync detected timeout reached" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM1_ERR7_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM1_ERR7_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR6" width="1" begin="8" end="8" resetval="0x0" description="CRC error" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM1_ERR6_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM1_ERR6_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR5" width="1" begin="7" end="7" resetval="0x0" description="unexpected SOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM1_ERR5_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM1_ERR5_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR4" width="1" begin="6" end="6" resetval="0x0" description="unexpected SOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM1_ERR4_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM1_ERR4_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR3" width="1" begin="5" end="5" resetval="0x0" description="unexpected EOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM1_ERR3_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM1_ERR3_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR2" width="1" begin="4" end="4" resetval="0x0" description="unexpected EOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM1_ERR2_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM1_ERR2_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR1" width="1" begin="3" end="3" resetval="0x0" description="unexpected SOV" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM1_ERR1_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM1_ERR1_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR0" width="1" begin="2" end="2" resetval="0x0" description="EOX not received" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM1_ERR0_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM1_ERR0_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM1_EOF" width="1" begin="1" end="1" resetval="0x0" description="End of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM1_EOF_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM1_EOF_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM1_SOF" width="1" begin="0" end="0" resetval="0x0" description="Start of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM1_SOF_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM1_SOF_1" description="Event pending"/>
+    </bitfield>
+  </register>
+  <register id="LVDSRX_IRQSTATUS_0" acronym="LVDSRX_IRQSTATUS_0" offset="0x24" width="32" description="Per-event 'enabled' interrupt status vector, line #0. Enabled status isn't set unless event is enabled.">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CAM1_ERR7" width="1" begin="9" end="9" resetval="0x0" description="sync detected timeout reached" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM1_ERR7_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM1_ERR7_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR6" width="1" begin="8" end="8" resetval="0x0" description="CRC error" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM1_ERR6_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM1_ERR6_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR5" width="1" begin="7" end="7" resetval="0x0" description="unexpected SOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM1_ERR5_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM1_ERR5_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR4" width="1" begin="6" end="6" resetval="0x0" description="unexpected SOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM1_ERR4_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM1_ERR4_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR3" width="1" begin="5" end="5" resetval="0x0" description="unexpected EOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM1_ERR3_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM1_ERR3_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR2" width="1" begin="4" end="4" resetval="0x0" description="unexpected EOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM1_ERR2_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM1_ERR2_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR1" width="1" begin="3" end="3" resetval="0x0" description="unexpected SOV" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM1_ERR1_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM1_ERR1_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR0" width="1" begin="2" end="2" resetval="0x0" description="EOX not received" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM1_ERR0_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM1_ERR0_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM1_EOF" width="1" begin="1" end="1" resetval="0x0" description="End of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM1_EOF_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM1_EOF_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM1_SOF" width="1" begin="0" end="0" resetval="0x0" description="Start of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM1_SOF_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM1_SOF_1" description="Event pending"/>
+    </bitfield>
+  </register>
+  <register id="LVDSRX_IRQENABLE_SET_0" acronym="LVDSRX_IRQENABLE_SET_0" offset="0x28" width="32" description="Per-event interrupt enable bit vector Write 1 to set (enable interrupt). Readout equal to corresponding _CLR register.">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CAM1_ERR7" width="1" begin="9" end="9" resetval="0x0" description="sync detected timeout reached" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM1_ERR7_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM1_ERR7_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR6" width="1" begin="8" end="8" resetval="0x0" description="CRC error" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM1_ERR6_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM1_ERR6_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR5" width="1" begin="7" end="7" resetval="0x0" description="unexpected SOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM1_ERR5_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM1_ERR5_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR4" width="1" begin="6" end="6" resetval="0x0" description="unexpected SOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM1_ERR4_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM1_ERR4_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR3" width="1" begin="5" end="5" resetval="0x0" description="unexpected EOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM1_ERR3_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM1_ERR3_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR2" width="1" begin="4" end="4" resetval="0x0" description="unexpected EOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM1_ERR2_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM1_ERR2_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR1" width="1" begin="3" end="3" resetval="0x0" description="unexpected SOV" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM1_ERR1_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM1_ERR1_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR0" width="1" begin="2" end="2" resetval="0x0" description="EOX not received" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM1_ERR0_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM1_ERR0_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM1_EOF" width="1" begin="1" end="1" resetval="0x0" description="End of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM1_EOF_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM1_EOF_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM1_SOF" width="1" begin="0" end="0" resetval="0x0" description="Start of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM1_SOF_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM1_SOF_1" description="Interrupt enabled"/>
+    </bitfield>
+  </register>
+  <register id="LVDSRX_IRQENABLE_CLR_0" acronym="LVDSRX_IRQENABLE_CLR_0" offset="0x2C" width="32" description="Per-event interrupt enable bit vector Write 1 to clear (disable interrupt). Readout equal to corresponding _SET register.">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CAM1_ERR7" width="1" begin="9" end="9" resetval="0x0" description="sync detected timeout reached" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM1_ERR7_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM1_ERR7_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR6" width="1" begin="8" end="8" resetval="0x0" description="CRC error" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM1_ERR6_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM1_ERR6_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR5" width="1" begin="7" end="7" resetval="0x0" description="unexpected SOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM1_ERR5_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM1_ERR5_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR4" width="1" begin="6" end="6" resetval="0x0" description="unexpected SOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM1_ERR4_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM1_ERR4_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR3" width="1" begin="5" end="5" resetval="0x0" description="unexpected EOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM1_ERR3_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM1_ERR3_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR2" width="1" begin="4" end="4" resetval="0x0" description="unexpected EOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM1_ERR2_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM1_ERR2_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR1" width="1" begin="3" end="3" resetval="0x0" description="unexpected SOV" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM1_ERR1_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM1_ERR1_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM1_ERR0" width="1" begin="2" end="2" resetval="0x0" description="EOX not received" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM1_ERR0_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM1_ERR0_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM1_EOF" width="1" begin="1" end="1" resetval="0x0" description="End of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM1_EOF_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM1_EOF_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM1_SOF" width="1" begin="0" end="0" resetval="0x0" description="Start of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM1_SOF_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM1_SOF_1" description="Interrupt enabled"/>
+    </bitfield>
+  </register>
+  <register id="LVDSRX_IRQSTATUS_RAW_1" acronym="LVDSRX_IRQSTATUS_RAW_1" offset="0x30" width="32" description="Per-event raw interrupt status vector, line #1. Raw status is set even if event is not enabled.">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CAM2_ERR7" width="1" begin="9" end="9" resetval="0x0" description="sync detected timeout reached" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM2_ERR7_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM2_ERR7_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR6" width="1" begin="8" end="8" resetval="0x0" description="CRC error" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM2_ERR6_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM2_ERR6_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR5" width="1" begin="7" end="7" resetval="0x0" description="unexpected SOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM2_ERR5_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM2_ERR5_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR4" width="1" begin="6" end="6" resetval="0x0" description="unexpected SOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM2_ERR4_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM2_ERR4_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR3" width="1" begin="5" end="5" resetval="0x0" description="unexpected EOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM2_ERR3_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM2_ERR3_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR2" width="1" begin="4" end="4" resetval="0x0" description="unexpected EOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM2_ERR2_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM2_ERR2_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR1" width="1" begin="3" end="3" resetval="0x0" description="unexpected SOV" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM2_ERR1_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM2_ERR1_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR0" width="1" begin="2" end="2" resetval="0x0" description="EOX not received" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM2_ERR0_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM2_ERR0_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM2_EOF" width="1" begin="1" end="1" resetval="0x0" description="End of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM2_EOF_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM2_EOF_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM2_SOF" width="1" begin="0" end="0" resetval="0x0" description="Start of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM2_SOF_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM2_SOF_1" description="Event pending"/>
+    </bitfield>
+  </register>
+  <register id="LVDSRX_IRQSTATUS_1" acronym="LVDSRX_IRQSTATUS_1" offset="0x34" width="32" description="Per-event 'enabled' interrupt status vector, line #1. Enabled status isn't set unless event is enabled.">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CAM2_ERR7" width="1" begin="9" end="9" resetval="0x0" description="sync detected timeout reached" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM2_ERR7_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM2_ERR7_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR6" width="1" begin="8" end="8" resetval="0x0" description="CRC error" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM2_ERR6_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM2_ERR6_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR5" width="1" begin="7" end="7" resetval="0x0" description="unexpected SOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM2_ERR5_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM2_ERR5_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR4" width="1" begin="6" end="6" resetval="0x0" description="unexpected SOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM2_ERR4_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM2_ERR4_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR3" width="1" begin="5" end="5" resetval="0x0" description="unexpected EOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM2_ERR3_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM2_ERR3_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR2" width="1" begin="4" end="4" resetval="0x0" description="unexpected EOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM2_ERR2_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM2_ERR2_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR1" width="1" begin="3" end="3" resetval="0x0" description="unexpected SOV" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM2_ERR1_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM2_ERR1_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR0" width="1" begin="2" end="2" resetval="0x0" description="EOX not received" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM2_ERR0_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM2_ERR0_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM2_EOF" width="1" begin="1" end="1" resetval="0x0" description="End of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM2_EOF_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM2_EOF_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM2_SOF" width="1" begin="0" end="0" resetval="0x0" description="Start of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM2_SOF_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM2_SOF_1" description="Event pending"/>
+    </bitfield>
+  </register>
+  <register id="LVDSRX_IRQENABLE_SET_1" acronym="LVDSRX_IRQENABLE_SET_1" offset="0x38" width="32" description="Per-event interrupt enable bit vector Write 1 to set (enable interrupt). Readout equal to corresponding _CLR register.">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CAM2_ERR7" width="1" begin="9" end="9" resetval="0x0" description="sync detected timeout reached" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM2_ERR7_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM2_ERR7_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR6" width="1" begin="8" end="8" resetval="0x0" description="CRC error" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM2_ERR6_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM2_ERR6_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR5" width="1" begin="7" end="7" resetval="0x0" description="unexpected SOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM2_ERR5_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM2_ERR5_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR4" width="1" begin="6" end="6" resetval="0x0" description="unexpected SOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM2_ERR4_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM2_ERR4_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR3" width="1" begin="5" end="5" resetval="0x0" description="unexpected EOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM2_ERR3_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM2_ERR3_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR2" width="1" begin="4" end="4" resetval="0x0" description="unexpected EOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM2_ERR2_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM2_ERR2_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR1" width="1" begin="3" end="3" resetval="0x0" description="unexpected SOV" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM2_ERR1_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM2_ERR1_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR0" width="1" begin="2" end="2" resetval="0x0" description="EOX not received" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM2_ERR0_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM2_ERR0_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM2_EOF" width="1" begin="1" end="1" resetval="0x0" description="End of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM2_EOF_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM2_EOF_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM2_SOF" width="1" begin="0" end="0" resetval="0x0" description="Start of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM2_SOF_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM2_SOF_1" description="Interrupt enabled"/>
+    </bitfield>
+  </register>
+  <register id="LVDSRX_IRQENABLE_CLR_1" acronym="LVDSRX_IRQENABLE_CLR_1" offset="0x3C" width="32" description="Per-event interrupt enable bit vector Write 1 to clear (disable interrupt). Readout equal to corresponding _SET register.">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CAM2_ERR7" width="1" begin="9" end="9" resetval="0x0" description="sync detected timeout reached" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM2_ERR7_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM2_ERR7_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR6" width="1" begin="8" end="8" resetval="0x0" description="CRC error" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM2_ERR6_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM2_ERR6_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR5" width="1" begin="7" end="7" resetval="0x0" description="unexpected SOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM2_ERR5_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM2_ERR5_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR4" width="1" begin="6" end="6" resetval="0x0" description="unexpected SOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM2_ERR4_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM2_ERR4_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR3" width="1" begin="5" end="5" resetval="0x0" description="unexpected EOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM2_ERR3_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM2_ERR3_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR2" width="1" begin="4" end="4" resetval="0x0" description="unexpected EOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM2_ERR2_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM2_ERR2_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR1" width="1" begin="3" end="3" resetval="0x0" description="unexpected SOV" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM2_ERR1_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM2_ERR1_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM2_ERR0" width="1" begin="2" end="2" resetval="0x0" description="EOX not received" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM2_ERR0_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM2_ERR0_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM2_EOF" width="1" begin="1" end="1" resetval="0x0" description="End of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM2_EOF_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM2_EOF_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM2_SOF" width="1" begin="0" end="0" resetval="0x0" description="Start of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM2_SOF_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM2_SOF_1" description="Interrupt enabled"/>
+    </bitfield>
+  </register>
+  <register id="LVDSRX_IRQSTATUS_RAW2_2" acronym="LVDSRX_IRQSTATUS_RAW2_2" offset="0x40" width="32" description="Per-event raw interrupt status vector, line #2. Raw status is set even if event is not enabled.">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CAM3_ERR7" width="1" begin="9" end="9" resetval="0x0" description="sync detected timeout reached" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM3_ERR7_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM3_ERR7_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR6" width="1" begin="8" end="8" resetval="0x0" description="CRC error" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM3_ERR6_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM3_ERR6_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR5" width="1" begin="7" end="7" resetval="0x0" description="unexpected SOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM3_ERR5_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM3_ERR5_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR4" width="1" begin="6" end="6" resetval="0x0" description="unexpected SOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM3_ERR4_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM3_ERR4_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR3" width="1" begin="5" end="5" resetval="0x0" description="unexpected EOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM3_ERR3_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM3_ERR3_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR2" width="1" begin="4" end="4" resetval="0x0" description="unexpected EOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM3_ERR2_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM3_ERR2_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR1" width="1" begin="3" end="3" resetval="0x0" description="unexpected SOV" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM3_ERR1_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM3_ERR1_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR0" width="1" begin="2" end="2" resetval="0x0" description="EOX not received" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM3_ERR0_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM3_ERR0_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM3_EOF" width="1" begin="1" end="1" resetval="0x0" description="End of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM3_EOF_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM3_EOF_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM3_SOF" width="1" begin="0" end="0" resetval="0x0" description="Start of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM3_SOF_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM3_SOF_1" description="Event pending"/>
+    </bitfield>
+  </register>
+  <register id="LVDSRX_IRQSTATUS_2" acronym="LVDSRX_IRQSTATUS_2" offset="0x44" width="32" description="Per-event 'enabled' interrupt status vector, line #2. Enabled status isn't set unless event is enabled.">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CAM3_ERR7" width="1" begin="9" end="9" resetval="0x0" description="sync detected timeout reached" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM3_ERR7_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM3_ERR7_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR6" width="1" begin="8" end="8" resetval="0x0" description="CRC error" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM3_ERR6_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM3_ERR6_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR5" width="1" begin="7" end="7" resetval="0x0" description="unexpected SOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM3_ERR5_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM3_ERR5_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR4" width="1" begin="6" end="6" resetval="0x0" description="unexpected SOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM3_ERR4_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM3_ERR4_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR3" width="1" begin="5" end="5" resetval="0x0" description="unexpected EOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM3_ERR3_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM3_ERR3_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR2" width="1" begin="4" end="4" resetval="0x0" description="unexpected EOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM3_ERR2_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM3_ERR2_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR1" width="1" begin="3" end="3" resetval="0x0" description="unexpected SOV" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM3_ERR1_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM3_ERR1_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR0" width="1" begin="2" end="2" resetval="0x0" description="EOX not received" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM3_ERR0_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM3_ERR0_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM3_EOF" width="1" begin="1" end="1" resetval="0x0" description="End of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM3_EOF_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM3_EOF_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM3_SOF" width="1" begin="0" end="0" resetval="0x0" description="Start of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM3_SOF_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM3_SOF_1" description="Event pending"/>
+    </bitfield>
+  </register>
+  <register id="LVDSRX_IRQENABLE_SET_2" acronym="LVDSRX_IRQENABLE_SET_2" offset="0x48" width="32" description="Per-event interrupt enable bit vector Write 1 to set (enable interrupt). Readout equal to corresponding _CLR register.">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CAM3_ERR7" width="1" begin="9" end="9" resetval="0x0" description="sync detected timeout reached" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM3_ERR7_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM3_ERR7_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR6" width="1" begin="8" end="8" resetval="0x0" description="CRC error" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM3_ERR6_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM3_ERR6_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR5" width="1" begin="7" end="7" resetval="0x0" description="unexpected SOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM3_ERR5_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM3_ERR5_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR4" width="1" begin="6" end="6" resetval="0x0" description="unexpected SOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM3_ERR4_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM3_ERR4_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR3" width="1" begin="5" end="5" resetval="0x0" description="unexpected EOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM3_ERR3_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM3_ERR3_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR2" width="1" begin="4" end="4" resetval="0x0" description="unexpected EOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM3_ERR2_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM3_ERR2_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR1" width="1" begin="3" end="3" resetval="0x0" description="unexpected SOV" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM3_ERR1_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM3_ERR1_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR0" width="1" begin="2" end="2" resetval="0x0" description="EOX not received" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM3_ERR0_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM3_ERR0_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM3_EOF" width="1" begin="1" end="1" resetval="0x0" description="End of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM3_EOF_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM3_EOF_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM3_SOF" width="1" begin="0" end="0" resetval="0x0" description="Start of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM3_SOF_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM3_SOF_1" description="Interrupt enabled"/>
+    </bitfield>
+  </register>
+  <register id="LVDSRX_IRQENABLE_CLR_2" acronym="LVDSRX_IRQENABLE_CLR_2" offset="0x4C" width="32" description="Per-event interrupt enable bit vector Write 1 to clear (disable interrupt). Readout equal to corresponding _SET register.">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CAM3_ERR7" width="1" begin="9" end="9" resetval="0x0" description="sync detected timeout reached" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM3_ERR7_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM3_ERR7_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR6" width="1" begin="8" end="8" resetval="0x0" description="CRC error" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM3_ERR6_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM3_ERR6_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR5" width="1" begin="7" end="7" resetval="0x0" description="unexpected SOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM3_ERR5_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM3_ERR5_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR4" width="1" begin="6" end="6" resetval="0x0" description="unexpected SOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM3_ERR4_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM3_ERR4_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR3" width="1" begin="5" end="5" resetval="0x0" description="unexpected EOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM3_ERR3_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM3_ERR3_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR2" width="1" begin="4" end="4" resetval="0x0" description="unexpected EOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM3_ERR2_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM3_ERR2_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR1" width="1" begin="3" end="3" resetval="0x0" description="unexpected SOV" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM3_ERR1_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM3_ERR1_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM3_ERR0" width="1" begin="2" end="2" resetval="0x0" description="EOX not received" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM3_ERR0_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM3_ERR0_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM3_EOF" width="1" begin="1" end="1" resetval="0x0" description="End of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM3_EOF_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM3_EOF_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM3_SOF" width="1" begin="0" end="0" resetval="0x0" description="Start of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM3_SOF_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM3_SOF_1" description="Interrupt enabled"/>
+    </bitfield>
+  </register>
+  <register id="LVDSRX_IRQSTATUS_RAW_3" acronym="LVDSRX_IRQSTATUS_RAW_3" offset="0x50" width="32" description="Per-event raw interrupt status vector, line #3. Raw status is set even if event is not enabled.">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CAM4_ERR7" width="1" begin="9" end="9" resetval="0x0" description="sync detected timeout reached" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM4_ERR7_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM4_ERR7_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM4_ERR6" width="1" begin="8" end="8" resetval="0x0" description="CRC error" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM4_ERR6_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM4_ERR6_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM4_ERR5" width="1" begin="7" end="7" resetval="0x0" description="unexpected SOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM4_ERR5_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM4_ERR5_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM4_ERR4" width="1" begin="6" end="6" resetval="0x0" description="unexpected SOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM4_ERR4_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM4_ERR4_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM4_ERR3" width="1" begin="5" end="5" resetval="0x0" description="unexpected EOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM4_ERR3_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM4_ERR3_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM4_ERR2" width="1" begin="4" end="4" resetval="0x0" description="unexpected EOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM4_ERR2_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM4_ERR2_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM5_ERR1" width="1" begin="3" end="3" resetval="0x0" description="unexpected SOV" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM5_ERR1_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM5_ERR1_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM4_ERR0" width="1" begin="2" end="2" resetval="0x0" description="EOX not received" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM4_ERR0_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM4_ERR0_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM4_EOF" width="1" begin="1" end="1" resetval="0x0" description="End of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM4_EOF_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM4_EOF_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM4_SOF" width="1" begin="0" end="0" resetval="0x0" description="Start of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM4_SOF_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM4_SOF_1" description="Event pending"/>
+    </bitfield>
+  </register>
+  <register id="LVDSRX_IRQSTATUS_3" acronym="LVDSRX_IRQSTATUS_3" offset="0x54" width="32" description="Per-event 'enabled' interrupt status vector, line #3. Enabled status isn't set unless event is enabled.">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CAM4_ERR7" width="1" begin="9" end="9" resetval="0x0" description="sync detected timeout reached" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM4_ERR7_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM4_ERR7_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM4_ERR6" width="1" begin="8" end="8" resetval="0x0" description="CRC error" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM4_ERR6_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM4_ERR6_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM4_ERR5" width="1" begin="7" end="7" resetval="0x0" description="unexpected SOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM4_ERR5_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM4_ERR5_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM4_ERR4" width="1" begin="6" end="6" resetval="0x0" description="unexpected SOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM4_ERR4_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM4_ERR4_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM4_ERR3" width="1" begin="5" end="5" resetval="0x0" description="unexpected EOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM4_ERR3_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM4_ERR3_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM4_ERR2" width="1" begin="4" end="4" resetval="0x0" description="unexpected EOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM4_ERR2_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM4_ERR2_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM4_ERR1" width="1" begin="3" end="3" resetval="0x0" description="unexpected SOV" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM4_ERR1_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM4_ERR1_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM4_ERR0" width="1" begin="2" end="2" resetval="0x0" description="EOX not received" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM4_ERR0_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM4_ERR0_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM4_EOF" width="1" begin="1" end="1" resetval="0x0" description="End of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM4_EOF_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM4_EOF_1" description="Event pending"/>
+    </bitfield>
+    <bitfield id="CAM4_SOF" width="1" begin="0" end="0" resetval="0x0" description="Start of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOEVENT" token="CAM4_SOF_0" description="No event pending"/>
+      <bitenum value="1" id="PENDING" token="CAM4_SOF_1" description="Event pending"/>
+    </bitfield>
+  </register>
+  <register id="LVDSRX_IRQENABLE_SET_3" acronym="LVDSRX_IRQENABLE_SET_3" offset="0x58" width="32" description="Per-event interrupt enable bit vector Write 1 to set (enable interrupt). Readout equal to corresponding _CLR register.">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CAM4_ERR7" width="1" begin="9" end="9" resetval="0x0" description="sync detected timeout reached" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM4_ERR7_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM4_ERR7_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM4_ERR6" width="1" begin="8" end="8" resetval="0x0" description="CRC error" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM4_ERR6_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM4_ERR6_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM4_ERR5" width="1" begin="7" end="7" resetval="0x0" description="unexpected SOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM4_ERR5_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM4_ERR5_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM4_ERR4" width="1" begin="6" end="6" resetval="0x0" description="unexpected SOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM4_ERR4_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM4_ERR4_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM4_ERR3" width="1" begin="5" end="5" resetval="0x0" description="unexpected EOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM4_ERR3_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM4_ERR3_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM4_ERR2" width="1" begin="4" end="4" resetval="0x0" description="unexpected EOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM4_ERR2_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM4_ERR2_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM4_ERR1" width="1" begin="3" end="3" resetval="0x0" description="unexpected SOV" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM4_ERR1_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM4_ERR1_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM4_ERR0" width="1" begin="2" end="2" resetval="0x0" description="EOX not received" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM4_ERR0_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM4_ERR0_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM4_EOF" width="1" begin="1" end="1" resetval="0x0" description="End of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM4_EOF_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM4_EOF_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM4_SOF" width="1" begin="0" end="0" resetval="0x0" description="Start of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM4_SOF_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM4_SOF_1" description="Interrupt enabled"/>
+    </bitfield>
+  </register>
+  <register id="LVDSRX_IRQENABLE_CLR_3" acronym="LVDSRX_IRQENABLE_CLR_3" offset="0x5C" width="32" description="Per-event interrupt enable bit vector Write 1 to clear (disable interrupt). Readout equal to corresponding _SET register.">
+    <bitfield id="RESERVED" width="22" begin="31" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="CAM4_ERR7" width="1" begin="9" end="9" resetval="0x0" description="sync detected timeout reached" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM4_ERR7_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM4_ERR7_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM4_ERR6" width="1" begin="8" end="8" resetval="0x0" description="CRC error" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM4_ERR6_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM4_ERR6_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM4_ERR5" width="1" begin="7" end="7" resetval="0x0" description="unexpected SOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM4_ERR5_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM4_ERR5_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM4_ERR4" width="1" begin="6" end="6" resetval="0x0" description="unexpected SOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM4_ERR4_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM4_ERR4_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM4_ERR3" width="1" begin="5" end="5" resetval="0x0" description="unexpected EOF" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM4_ERR3_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM4_ERR3_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM4_ERR2" width="1" begin="4" end="4" resetval="0x0" description="unexpected EOL" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM4_ERR2_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM4_ERR2_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM4_ERR1" width="1" begin="3" end="3" resetval="0x0" description="unexpected SOV" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM4_ERR1_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM4_ERR1_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM4_ERR0" width="1" begin="2" end="2" resetval="0x0" description="EOX not received" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM4_ERR0_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM4_ERR0_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM4_EOF" width="1" begin="1" end="1" resetval="0x0" description="End of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM4_EOF_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM4_EOF_1" description="Interrupt enabled"/>
+    </bitfield>
+    <bitfield id="CAM4_SOF" width="1" begin="0" end="0" resetval="0x0" description="Start of frame timing" range="" rwaccess="RW">
+      <bitenum value="0" id="NOACTION" token="CAM4_SOF_0" description="No action"/>
+      <bitenum value="1" id="ENABLED" token="CAM4_SOF_1" description="Interrupt enabled"/>
+    </bitfield>
+  </register>
+  <register id="LVDSRX_CAM1_CFG" acronym="LVDSRX_CAM1_CFG" offset="0x60" width="32" description="CAM output port #1 configuration This register associate one bit for each context in order to enable/disable each context individually.">
+    <bitfield id="RESERVED" width="1" begin="31" end="31" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="NUM_LANE4" width="3" begin="30" end="28" resetval="0x0" description="Number of lanes of PHY4 when NUM_PHY 3" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="27" end="27" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="NUM_LANE3" width="3" begin="26" end="24" resetval="0x0" description="Number of lanes of PHY3 when NUM_PHY 2" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="NUM_LANE2" width="3" begin="22" end="20" resetval="0x0" description="Number of lanes of PHY2 when NUM_PHY 1" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="19" end="19" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="NUM_LANE1" width="3" begin="18" end="16" resetval="0x0" description="Number of lanes of PHY1" range="" rwaccess="RW"/>
+    <bitfield id="ALIGN" width="1" begin="15" end="15" resetval="0x0" description="MSB, LSB alignment for output pixel data 0: LSB align 1: MSB align" range="" rwaccess="RW"/>
+    <bitfield id="DENDIAN" width="1" begin="14" end="14" resetval="0x0" description="Transmit format of none SYNC area 0: Little endian 1: big endian" range="" rwaccess="RW"/>
+    <bitfield id="FILEN" width="1" begin="13" end="13" resetval="0x0" description="1: Transmitted data includes filier codes" range="" rwaccess="RW"/>
+    <bitfield id="CRCEN" width="1" begin="12" end="12" resetval="0x0" description="1: enables checking of the checksum transmitted in the APTINA HiSPi data stream" range="" rwaccess="RW"/>
+    <bitfield id="SENDIAN" width="1" begin="11" end="11" resetval="0x0" description="Transmit format of SYNC area 0: Little endian 1: big endian" range="" rwaccess="RW"/>
+    <bitfield id="PIX_WIDTH" width="3" begin="10" end="8" resetval="0x0" description="Word width of recovered parallel data. 0: 8-BITS 1: 10-BITS 2: 12-BITS 3: 14-BITS 4: 16-BITS 5-7: RESERVED" range="" rwaccess="RW"/>
+    <bitfield id="FRSTAT_INIT" width="1" begin="7" end="7" resetval="0x0" description="Specifies Initial frame state in mode2,mode4,mod5 and mode8. If the first comming sync code is knows as start of frame(SOF) when enable decoding, it is able to write 0. If sync code is unknown, should write 1. In other mode, should be coded 0." range="" rwaccess="RW"/>
+    <bitfield id="NUMPHY" width="3" begin="6" end="4" resetval="0x0" description="Number of PHYs 0 ~ 4 is available" range="" rwaccess="RW"/>
+    <bitfield id="OP_MODE" width="4" begin="3" end="0" resetval="0x0" description="Protocol selection 0: Serial LVDS mode 1 1: Serial LVDS mode 2 2: Serial LVDS mode 3 3: Serial LVDS mode 4 4: Serial LVDS mode 5 5: Serial LVDS mode 6 6: Serial LVDS mode 7 7: Serial LVDS mode 8 8: Serial LVDS mode 9 9-15: Reserved" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM1_FRMSIZE" acronym="LVDSRX_CAM1_FRMSIZE" offset="0x64" width="32" description="CAM port #1 frame X*Y width">
+    <bitfield id="FRWIDTH" width="16" begin="31" end="16" resetval="0x0" description="Frame size in number of image lines" range="" rwaccess="RW"/>
+    <bitfield id="LNWIDTH" width="16" begin="15" end="0" resetval="0x0" description="Image line width in number of data words" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM1_MAXWIDTH" acronym="LVDSRX_CAM1_MAXWIDTH" offset="0x68" width="32" description="CAM port #1 maximum line width">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MAXWIDTH" width="16" begin="15" end="0" resetval="0xffff" description="The maximum line width expected in number of pixels." range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM1_SYNCSOF" acronym="LVDSRX_CAM1_SYNCSOF" offset="0x6C" width="32" description="Specifies SYNC pattern">
+    <bitfield id="BITMASK" width="16" begin="31" end="16" resetval="0xf" description="Specifies the mask bit to be compared. Ex.) set 0x3ff when does pattern matching for low 10bit." range="" rwaccess="RW"/>
+    <bitfield id="SOFPTN" width="16" begin="15" end="0" resetval="0x3" description="Specifies SOF(Start Of Frame) sync pattern" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM1_SYNCEOF" acronym="LVDSRX_CAM1_SYNCEOF" offset="0x70" width="32" description="Specifies SYNC pattern">
+    <bitfield id="BITMASK" width="16" begin="31" end="16" resetval="0x7" description="Specifies the mask bit to be compared. Ex.) set 0x3ff when does pattern matching for low 10bit." range="" rwaccess="RW"/>
+    <bitfield id="SOFPTN" width="16" begin="15" end="0" resetval="0x7" description="Specifies SOF(End Of Frame) sync pattern" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM1_SYNCSOL" acronym="LVDSRX_CAM1_SYNCSOL" offset="0x74" width="32" description="Specifies SYNC pattern">
+    <bitfield id="BITMASK" width="16" begin="31" end="16" resetval="0xf" description="Specifies the mask bit to be compared. Ex.) set 0x3ff when does pattern matching for low 10bit." range="" rwaccess="RW"/>
+    <bitfield id="SOFPTN" width="16" begin="15" end="0" resetval="0x1" description="Specifies SOF(Start Of Line) sync pattern" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM1_SYNCEOL" acronym="LVDSRX_CAM1_SYNCEOL" offset="0x78" width="32" description="Specifies SYNC pattern">
+    <bitfield id="BITMASK" width="16" begin="31" end="16" resetval="0x7" description="Specifies the mask bit to be compared. Ex.) set 0x3ff when does pattern matching for low 10bit." range="" rwaccess="RW"/>
+    <bitfield id="SOFPTN" width="16" begin="15" end="0" resetval="0x5" description="Specifies SOF(End Of Line) sync pattern" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM1_SYNCSOV" acronym="LVDSRX_CAM1_SYNCSOV" offset="0x7C" width="32" description="Specifies SYNC pattern">
+    <bitfield id="BITMASK" width="16" begin="31" end="16" resetval="0x0" description="Specifies the mask bit to be compared. Ex.) set 0x3ff when does pattern matching for low 10bit." range="" rwaccess="RW"/>
+    <bitfield id="SOFPTN" width="16" begin="15" end="0" resetval="0x0" description="Specifies SOF(Start Of V-blanking) sync pattern" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM2_CFG" acronym="LVDSRX_CAM2_CFG" offset="0x80" width="32" description="CAM output port #2 configuration This register associate one bit for each context in order to enable/disable each context individually.">
+    <bitfield id="RESERVED" width="5" begin="31" end="27" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="26" end="24" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="23" end="23" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="RESERVED" width="3" begin="22" end="20" resetval="0x0" description="" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="19" end="19" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="NUM_LANE" width="3" begin="18" end="16" resetval="0x0" description="Number of lanes of PHY2" range="" rwaccess="RW"/>
+    <bitfield id="ALIGN" width="1" begin="15" end="15" resetval="0x0" description="MSB, LSB alignment for output pixel data 0: LSB align 1: MSB align" range="" rwaccess="RW"/>
+    <bitfield id="DENDIAN" width="1" begin="14" end="14" resetval="0x0" description="Transmit format of none SYNC area 0: Little endian 1: big endian" range="" rwaccess="RW"/>
+    <bitfield id="FILEN" width="1" begin="13" end="13" resetval="0x0" description="1: Transmitted data includes filier codes" range="" rwaccess="RW"/>
+    <bitfield id="CRCEN" width="1" begin="12" end="12" resetval="0x0" description="1: enables checking of the checksum transmitted in the APTINA HiSPi data stream" range="" rwaccess="RW"/>
+    <bitfield id="SENDIAN" width="1" begin="11" end="11" resetval="0x0" description="Transmit format of SYNC area 0: Little endian 1: big endian" range="" rwaccess="RW"/>
+    <bitfield id="PIX_WIDTH" width="3" begin="10" end="8" resetval="0x0" description="Word width of recovered parallel data. 0: 8-BITS 1: 10-BITS 2: 12-BITS 3: 14-BITS 4: 16-BITS 5-7: RESERVED" range="" rwaccess="RW"/>
+    <bitfield id="FRSTAT_INIT" width="1" begin="7" end="7" resetval="0x0" description="Specifies Initial frame state in mode2,mode4,mod5 and mode8. If the first comming sync code is knows as start of frame(SOF) when enable decoding, it is able to write 0. If sync code is unknown, should write 1. In other mode, should be coded 0." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="NUMPHY" width="2" begin="5" end="4" resetval="0x0" description="Number of PHYs 0 ~ 1 is available" range="" rwaccess="RW"/>
+    <bitfield id="OP_MODE" width="4" begin="3" end="0" resetval="0x0" description="Protocol selection 0: Serial LVDS mode 1 1: Serial LVDS mode 2 2: Serial LVDS mode 3 3: Serial LVDS mode 4 4: Serial LVDS mode 5 5: Serial LVDS mode 6 6: Serial LVDS mode 7 7: Serial LVDS mode 8 8: Serial LVDS mode 9 9-15: Reserved" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM2_FRMSIZE" acronym="LVDSRX_CAM2_FRMSIZE" offset="0x84" width="32" description="CAM port #2 frame X*Y width">
+    <bitfield id="FRWIDTH" width="16" begin="31" end="16" resetval="0x0" description="Frame size in number of image lines" range="" rwaccess="RW"/>
+    <bitfield id="LNWIDTH" width="16" begin="15" end="0" resetval="0x0" description="Image line width in number of data words" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM2_MAXWIDTH" acronym="LVDSRX_CAM2_MAXWIDTH" offset="0x88" width="32" description="CAM port #2 maximum line width">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MAXWIDTH" width="16" begin="15" end="0" resetval="0xffff" description="The maximum line width expected in number of pixels." range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM2_SYNCSOF" acronym="LVDSRX_CAM2_SYNCSOF" offset="0x8C" width="32" description="Specifies SYNC pattern">
+    <bitfield id="BITMASK" width="16" begin="31" end="16" resetval="0xf" description="Specifies the mask bit to be compared. Ex.) set 0x3ff when does pattern matching for low 10bit." range="" rwaccess="RW"/>
+    <bitfield id="SOFPTN" width="16" begin="15" end="0" resetval="0x3" description="Specifies SOF(Start Of Frame) sync pattern" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM2_SYNCEOF" acronym="LVDSRX_CAM2_SYNCEOF" offset="0x90" width="32" description="Specifies SYNC pattern">
+    <bitfield id="BITMASK" width="16" begin="31" end="16" resetval="0x7" description="Specifies the mask bit to be compared. Ex.) set 0x3ff when does pattern matching for low 10bit." range="" rwaccess="RW"/>
+    <bitfield id="SOFPTN" width="16" begin="15" end="0" resetval="0x7" description="Specifies SOF(End Of Frame) sync pattern" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM2_SYNCSOL" acronym="LVDSRX_CAM2_SYNCSOL" offset="0x94" width="32" description="Specifies SYNC pattern">
+    <bitfield id="BITMASK" width="16" begin="31" end="16" resetval="0xf" description="Specifies the mask bit to be compared. Ex.) set 0x3ff when does pattern matching for low 10bit." range="" rwaccess="RW"/>
+    <bitfield id="SOFPTN" width="16" begin="15" end="0" resetval="0x1" description="Specifies SOF(Start Of Line) sync pattern" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM2_SYNCEOL" acronym="LVDSRX_CAM2_SYNCEOL" offset="0x98" width="32" description="Specifies SYNC pattern">
+    <bitfield id="BITMASK" width="16" begin="31" end="16" resetval="0x7" description="Specifies the mask bit to be compared. Ex.) set 0x3ff when does pattern matching for low 10bit." range="" rwaccess="RW"/>
+    <bitfield id="SOFPTN" width="16" begin="15" end="0" resetval="0x5" description="Specifies SOF(End Of Line) sync pattern" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM2_SYNCSOV" acronym="LVDSRX_CAM2_SYNCSOV" offset="0x9C" width="32" description="Specifies SYNC pattern">
+    <bitfield id="BITMASK" width="16" begin="31" end="16" resetval="0x0" description="Specifies the mask bit to be compared. Ex.) set 0x3ff when does pattern matching for low 10bit." range="" rwaccess="RW"/>
+    <bitfield id="SOFPTN" width="16" begin="15" end="0" resetval="0x0" description="Specifies SOF(Start Of V-blanking) sync pattern" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM3_CFG" acronym="LVDSRX_CAM3_CFG" offset="0xA0" width="32" description="CAM output port #3 configuration This register associate one bit for each context in order to enable/disable each context individually.">
+    <bitfield id="RESERVED" width="9" begin="31" end="23" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="NUM_LANE2" width="3" begin="22" end="20" resetval="0x0" description="Number of lanes of PHY4 when NUM_PHY 1" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="19" end="19" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="NUM_LANE1" width="3" begin="18" end="16" resetval="0x0" description="Number of lanes of PHY3" range="" rwaccess="RW"/>
+    <bitfield id="ALIGN" width="1" begin="15" end="15" resetval="0x0" description="MSB, LSB alignment for output pixel data 0: LSB align 1: MSB align" range="" rwaccess="RW"/>
+    <bitfield id="DENDIAN" width="1" begin="14" end="14" resetval="0x0" description="Transmit format of none SYNC area 0: Little endian 1: big endian" range="" rwaccess="RW"/>
+    <bitfield id="FILEN" width="1" begin="13" end="13" resetval="0x0" description="1: Transmitted data includes filier codes" range="" rwaccess="RW"/>
+    <bitfield id="CRCEN" width="1" begin="12" end="12" resetval="0x0" description="1: enables checking of the checksum transmitted in the APTINA HiSPi data stream" range="" rwaccess="RW"/>
+    <bitfield id="SENDIAN" width="1" begin="11" end="11" resetval="0x0" description="Transmit format of SYNC area 0: Little endian 1: big endian" range="" rwaccess="RW"/>
+    <bitfield id="PIX_WIDTH" width="3" begin="10" end="8" resetval="0x0" description="Word width of recovered parallel data. 0: 8-BITS 1: 10-BITS 2: 12-BITS 3: 14-BITS 4: 16-BITS 5-7: RESERVED" range="" rwaccess="RW"/>
+    <bitfield id="FRSTAT_INIT" width="1" begin="7" end="7" resetval="0x0" description="Specifies Initial frame state in mode2,mode4,mod5 and mode8. If the first comming sync code is knows as start of frame(SOF) when enable decoding, it is able to write 0. If sync code is unknown, should write 1. In other mode, should be coded 0." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="1" begin="6" end="6" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="NUMPHY" width="2" begin="5" end="4" resetval="0x0" description="Number of PHYs 0,1, 2 is available" range="" rwaccess="RW"/>
+    <bitfield id="OP_MODE" width="4" begin="3" end="0" resetval="0x0" description="Protocol selection 0: Serial LVDS mode 1 1: Serial LVDS mode 2 2: Serial LVDS mode 3 3: Serial LVDS mode 4 4: Serial LVDS mode 5 5: Serial LVDS mode 6 6: Serial LVDS mode 7 7: Serial LVDS mode 8 8: Serial LVDS mode 9 9-15: Reserved" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM3_FRMSIZE" acronym="LVDSRX_CAM3_FRMSIZE" offset="0xA4" width="32" description="CAM port #3 frame X*Y width">
+    <bitfield id="FRWIDTH" width="16" begin="31" end="16" resetval="0x0" description="Frame size in number of image lines" range="" rwaccess="RW"/>
+    <bitfield id="LNWIDTH" width="16" begin="15" end="0" resetval="0x0" description="Image line width in number of data words" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM3_MAXWIDTH" acronym="LVDSRX_CAM3_MAXWIDTH" offset="0xA8" width="32" description="CAM port #3 maximum line width">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MAXWIDTH" width="16" begin="15" end="0" resetval="0xffff" description="The maximum line width expected in number of pixels." range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM3_SYNCSOF" acronym="LVDSRX_CAM3_SYNCSOF" offset="0xAC" width="32" description="Specifies SYNC pattern">
+    <bitfield id="BITMASK" width="16" begin="31" end="16" resetval="0xf" description="Specifies the mask bit to be compared. Ex.) set 0x3ff when does pattern matching for low 10bit." range="" rwaccess="RW"/>
+    <bitfield id="SOFPTN" width="16" begin="15" end="0" resetval="0x3" description="Specifies SOF(Start Of Frame) sync pattern" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM3_SYNCEOF" acronym="LVDSRX_CAM3_SYNCEOF" offset="0xB0" width="32" description="Specifies SYNC pattern">
+    <bitfield id="BITMASK" width="16" begin="31" end="16" resetval="0x7" description="Specifies the mask bit to be compared. Ex.) set 0x3ff when does pattern matching for low 10bit." range="" rwaccess="RW"/>
+    <bitfield id="SOFPTN" width="16" begin="15" end="0" resetval="0x7" description="Specifies SOF(End Of Frame) sync pattern" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM3_SYNCSOL" acronym="LVDSRX_CAM3_SYNCSOL" offset="0xB4" width="32" description="Specifies SYNC pattern">
+    <bitfield id="BITMASK" width="16" begin="31" end="16" resetval="0xf" description="Specifies the mask bit to be compared. Ex.) set 0x3ff when does pattern matching for low 10bit." range="" rwaccess="RW"/>
+    <bitfield id="SOFPTN" width="16" begin="15" end="0" resetval="0x1" description="Specifies SOF(Start Of Line) sync pattern" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM3_SYNCEOL" acronym="LVDSRX_CAM3_SYNCEOL" offset="0xB8" width="32" description="Specifies SYNC pattern">
+    <bitfield id="BITMASK" width="16" begin="31" end="16" resetval="0x7" description="Specifies the mask bit to be compared. Ex.) set 0x3ff when does pattern matching for low 10bit." range="" rwaccess="RW"/>
+    <bitfield id="SOFPTN" width="16" begin="15" end="0" resetval="0x5" description="Specifies SOF(End Of Line) sync pattern" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM3_SYNCSOV" acronym="LVDSRX_CAM3_SYNCSOV" offset="0xBC" width="32" description="Specifies SYNC pattern">
+    <bitfield id="BITMASK" width="16" begin="31" end="16" resetval="0x0" description="Specifies the mask bit to be compared. Ex.) set 0x3ff when does pattern matching for low 10bit." range="" rwaccess="RW"/>
+    <bitfield id="SOFPTN" width="16" begin="15" end="0" resetval="0x0" description="Specifies SOF(Start Of V-blanking) sync pattern" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM4_CFG" acronym="LVDSRX_CAM4_CFG" offset="0xC0" width="32" description="CAM output port #4 configuration This register associate one bit for each context in order to enable/disable each context individually.">
+    <bitfield id="RESERVED" width="13" begin="31" end="19" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="NUM_LANE" width="3" begin="18" end="16" resetval="0x0" description="Number of lanes of PHY4" range="" rwaccess="RW"/>
+    <bitfield id="ALIGN" width="1" begin="15" end="15" resetval="0x0" description="MSB, LSB alignment for output pixel data 0: LSB align 1: MSB align" range="" rwaccess="RW"/>
+    <bitfield id="DENDIAN" width="1" begin="14" end="14" resetval="0x0" description="Transmit format of none SYNC area 0: Little endian 1: big endian" range="" rwaccess="RW"/>
+    <bitfield id="FILEN" width="1" begin="13" end="13" resetval="0x0" description="1: Transmitted data includes filier codes" range="" rwaccess="RW"/>
+    <bitfield id="CRCEN" width="1" begin="12" end="12" resetval="0x0" description="1: enables checking of the checksum transmitted in the APTINA HiSPi data stream" range="" rwaccess="RW"/>
+    <bitfield id="SENDIAN" width="1" begin="11" end="11" resetval="0x0" description="Transmit format of SYNC area 0: Little endian 1: big endian" range="" rwaccess="RW"/>
+    <bitfield id="PIX_WIDTH" width="3" begin="10" end="8" resetval="0x0" description="Word width of recovered parallel data. 0: 8-BITS 1: 10-BITS 2: 12-BITS 3: 14-BITS 4: 16-BITS 5-7: RESERVED" range="" rwaccess="RW"/>
+    <bitfield id="FRSTAT_INIT" width="1" begin="7" end="7" resetval="0x0" description="Specifies Initial frame state in mode2,mode4,mod5 and mode8. If the first comming sync code is knows as start of frame(SOF) when enable decoding, it is able to write 0. If sync code is unknown, should write 1. In other mode, should be coded 0." range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="6" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="NUMPHY" width="1" begin="4" end="4" resetval="0x0" description="Number of PHYs 0,1 is available" range="" rwaccess="RW"/>
+    <bitfield id="OP_MODE" width="4" begin="3" end="0" resetval="0x0" description="Protocol selection 0: Serial LVDS mode 1 1: Serial LVDS mode 2 2: Serial LVDS mode 3 3: Serial LVDS mode 4 4: Serial LVDS mode 5 5: Serial LVDS mode 6 6: Serial LVDS mode 7 7: Serial LVDS mode 8 8: Serial LVDS mode 9 9-13: Reserved 14: CMOS parallel IF (CCIR656 embeded sync) 15: CMOS parallel IF (extenal HSYNC/VSYNC) When in mode 14,15, the input parallel i/f signals go to CAM #4 output port.)" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM4_FRMSIZE" acronym="LVDSRX_CAM4_FRMSIZE" offset="0xC4" width="32" description="CAM port #4 frame X*Y width">
+    <bitfield id="FRWIDTH" width="16" begin="31" end="16" resetval="0x0" description="Frame size in number of image lines" range="" rwaccess="RW"/>
+    <bitfield id="LNWIDTH" width="16" begin="15" end="0" resetval="0x0" description="Image line width in number of data words" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM4_MAXWIDTH" acronym="LVDSRX_CAM4_MAXWIDTH" offset="0xC8" width="32" description="CAM port #4 maximum line width">
+    <bitfield id="RESERVED" width="16" begin="31" end="16" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="MAXWIDTH" width="16" begin="15" end="0" resetval="0xffff" description="The maximum line width expected in number of pixels." range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM4_SYNCSOF" acronym="LVDSRX_CAM4_SYNCSOF" offset="0xCC" width="32" description="Specifies SYNC pattern">
+    <bitfield id="BITMASK" width="16" begin="31" end="16" resetval="0xf" description="Specifies the mask bit to be compared. Ex.) set 0x3ff when does pattern matching for low 10bit." range="" rwaccess="RW"/>
+    <bitfield id="SOFPTN" width="16" begin="15" end="0" resetval="0x3" description="Specifies SOF(Start Of Frame) sync pattern" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM4_SYNCEOF" acronym="LVDSRX_CAM4_SYNCEOF" offset="0xD0" width="32" description="Specifies SYNC pattern">
+    <bitfield id="BITMASK" width="16" begin="31" end="16" resetval="0x7" description="Specifies the mask bit to be compared. Ex.) set 0x3ff when does pattern matching for low 10bit." range="" rwaccess="RW"/>
+    <bitfield id="SOFPTN" width="16" begin="15" end="0" resetval="0x7" description="Specifies SOF(End Of Frame) sync pattern" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM4_SYNCSOL" acronym="LVDSRX_CAM4_SYNCSOL" offset="0xD4" width="32" description="Specifies SYNC pattern">
+    <bitfield id="BITMASK" width="16" begin="31" end="16" resetval="0xf" description="Specifies the mask bit to be compared. Ex.) set 0x3ff when does pattern matching for low 10bit." range="" rwaccess="RW"/>
+    <bitfield id="SOFPTN" width="16" begin="15" end="0" resetval="0x1" description="Specifies SOF(Start Of Line) sync pattern" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM4_SYNCEOL" acronym="LVDSRX_CAM4_SYNCEOL" offset="0xD8" width="32" description="Specifies SYNC pattern">
+    <bitfield id="BITMASK" width="16" begin="31" end="16" resetval="0x7" description="Specifies the mask bit to be compared. Ex.) set 0x3ff when does pattern matching for low 10bit." range="" rwaccess="RW"/>
+    <bitfield id="SOFPTN" width="16" begin="15" end="0" resetval="0x5" description="Specifies SOF(End Of Line) sync pattern" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_CAM4_SYNCSOV" acronym="LVDSRX_CAM4_SYNCSOV" offset="0xDC" width="32" description="Specifies SYNC pattern">
+    <bitfield id="BITMASK" width="16" begin="31" end="16" resetval="0x0" description="Specifies the mask bit to be compared. Ex.) set 0x3ff when does pattern matching for low 10bit." range="" rwaccess="RW"/>
+    <bitfield id="SOFPTN" width="16" begin="15" end="0" resetval="0x0" description="Specifies SOF(Start Of V-blanking) sync pattern" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_WDRCFG" acronym="LVDSRX_WDRCFG" offset="0xE0" width="32" description="">
+    <bitfield id="RESERVED" width="20" begin="31" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="PIX_WIDTH" width="4" begin="11" end="8" resetval="0x0" description="Word width after de-companded. 0: 12-BITS 1: 13-BITS 2: 14-BITS 3: 15-BITS 4: 16-BITS 5: 17-BITS 6: 18-BITS 7: 19-BITS 8: 20-BITS 9-15: RESERVED" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="3" begin="7" end="5" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="WDRMODE" width="1" begin="4" end="4" resetval="0x0" description="WDR mode select 0: de-companding 1: bit interlaced format Not alloweed to code 1 to WDRENA3 and WDRENA4 at the same time." range="" rwaccess="RW"/>
+    <bitfield id="WDRENA4" width="1" begin="3" end="3" resetval="0x0" description="WDR mode enable for CAM port #4. 0: disable 1: enable WDR function Not alloweed to code 1 to WDRENA3 and WDRENA4 at the same time." range="" rwaccess="RW"/>
+    <bitfield id="WDRENA3" width="1" begin="2" end="2" resetval="0x0" description="WDR mode enable for CAM port #3. 0: disable 1: enable WDR function Not alloweed to code 1 to WDRENA3 and WDRENA4 at the same time." range="" rwaccess="RW"/>
+    <bitfield id="WDRENA2" width="1" begin="1" end="1" resetval="0x0" description="WDR mode enable for CAM port #2. 0: disable 1: enable WDR function Not alloweed to code 1 to WDRENA1 and WDRENA2 at the same time." range="" rwaccess="RW"/>
+    <bitfield id="WDRENA1" width="1" begin="0" end="0" resetval="0x0" description="WDR mode enable for CAM port #1. 0: disable 1: enable WDR function Not alloweed to code 1 to WDRENA1 and WDRENA2 at the same time." range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_WDRGN" acronym="LVDSRX_WDRGN" offset="0xE4" width="32" description="WDR gain configuration">
+    <bitfield id="RESERVED" width="10" begin="31" end="22" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="WDRNPXY1" width="6" begin="21" end="16" resetval="0x0" description="Specifies the pixel level for area #1 knee point inX/ Y axis. Level = WDRNPXY1 * 256" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="4" begin="15" end="12" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="WDRGN4" width="4" begin="11" end="8" resetval="0x0" description="Specifies the gain for area #4 Gain = 1/2^WDRGN4" range="" rwaccess="RW"/>
+    <bitfield id="WDRGN3" width="4" begin="7" end="4" resetval="0x0" description="Specifies the gain for area #3 Gain = 1/2^WDRGN3" range="" rwaccess="RW"/>
+    <bitfield id="WDRGN2" width="4" begin="3" end="0" resetval="0x0" description="Specifies the gain for area #2 Gain = 1/2^WDRGN2" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_WDRKP1" acronym="LVDSRX_WDRKP1" offset="0xE8" width="32" description="WDR knee point configuration">
+    <bitfield id="RESERVED" width="6" begin="31" end="26" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="WDRNPY3" width="10" begin="25" end="16" resetval="0x0" description="Specifies the pixel level for area #3 knee point in Y axis. Level = WDRNPY3 * 256" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="6" begin="15" end="10" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="WDRNPY2" width="10" begin="9" end="0" resetval="0x0" description="Specifies the pixel level for area #2 knee point in Y axis. Level = WDRNPY2 * 256" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_WDRKP2" acronym="LVDSRX_WDRKP2" offset="0xEC" width="32" description="">
+    <bitfield id="RESERVED" width="2" begin="31" end="30" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="WDRNPX3" width="14" begin="29" end="16" resetval="0x0" description="Specifies the pixel level for area #3 knee point in X axis. Level = WDRNPX3" range="" rwaccess="RW"/>
+    <bitfield id="RESERVED" width="2" begin="15" end="14" resetval="0x0" description="" range="" rwaccess="R"/>
+    <bitfield id="WDRNPX2" width="14" begin="13" end="0" resetval="0x0" description="Specifies the pixel level for area #2 knee point in X axis. Level = WDRNPX2" range="" rwaccess="RW"/>
+  </register>
+  <register id="LVDSRX_TEST1" acronym="LVDSRX_TEST1" offset="0x100" width="32" description="When.CAM1TEST=1, PHY #1 data (8bitx4 lanes) can be monitored by this register.">
+    <bitfield id="LANE4" width="8" begin="31" end="24" resetval="0x0" description="lane #4 byte data" range="" rwaccess="R"/>
+    <bitfield id="LANE3" width="8" begin="23" end="16" resetval="0x0" description="lane #3 byte data" range="" rwaccess="R"/>
+    <bitfield id="LANE2" width="8" begin="15" end="8" resetval="0x0" description="lane #2 byte data" range="" rwaccess="R"/>
+    <bitfield id="LANE1" width="8" begin="7" end="0" resetval="0x0" description="lane #1 byte data" range="" rwaccess="R"/>
+  </register>
+  <register id="LVDSRX_TEST2" acronym="LVDSRX_TEST2" offset="0x104" width="32" description="When.CAM2TEST=1, PHY #2 data (8bitx4 lanes) can be monitored by this register.">
+    <bitfield id="LANE4" width="8" begin="31" end="24" resetval="0x0" description="lane #4 byte data" range="" rwaccess="R"/>
+    <bitfield id="LANE3" width="8" begin="23" end="16" resetval="0x0" description="lane #3 byte data" range="" rwaccess="R"/>
+    <bitfield id="LANE2" width="8" begin="15" end="8" resetval="0x0" description="lane #2 byte data" range="" rwaccess="R"/>
+    <bitfield id="LANE1" width="8" begin="7" end="0" resetval="0x0" description="lane #1 byte data" range="" rwaccess="R"/>
+  </register>
+  <register id="LVDSRX_TEST3" acronym="LVDSRX_TEST3" offset="0x108" width="32" description="When.CAM3TEST=1, PHY #3 data (8bitx4 lanes) can be monitored by this register.">
+    <bitfield id="LANE4" width="8" begin="31" end="24" resetval="0x0" description="lane #4 byte data" range="" rwaccess="R"/>
+    <bitfield id="LANE3" width="8" begin="23" end="16" resetval="0x0" description="lane #3 byte data" range="" rwaccess="R"/>
+    <bitfield id="LANE2" width="8" begin="15" end="8" resetval="0x0" description="lane #2 byte data" range="" rwaccess="R"/>
+    <bitfield id="LANE1" width="8" begin="7" end="0" resetval="0x0" description="lane #1 byte data" range="" rwaccess="R"/>
+  </register>
+  <register id="LVDSRX_TEST4" acronym="LVDSRX_TEST4" offset="0x10C" width="32" description="When.CAM4TEST=1, PHY #4 data (8bitx4 lanes) can be monitored by this register.">
+    <bitfield id="LANE4" width="8" begin="31" end="24" resetval="0x0" description="lane #4 byte data" range="" rwaccess="R"/>
+    <bitfield id="LANE3" width="8" begin="23" end="16" resetval="0x0" description="lane #3 byte data" range="" rwaccess="R"/>
+    <bitfield id="LANE2" width="8" begin="15" end="8" resetval="0x0" description="lane #2 byte data" range="" rwaccess="R"/>
+    <bitfield id="LANE1" width="8" begin="7" end="0" resetval="0x0" description="lane #1 byte data" range="" rwaccess="R"/>
+  </register>
+</module>
