@@ -29,11 +29,30 @@ char cFlowRate[MSG_SIZE] = {0};
 static int nRxBuffIdx = 0;
 static bool bRxCmplt = false;
 static _eRxState RxState = START;
+static double dMinGPM = 10.000;
 
 /***************************FUNCTION DECLARATION*********************/
-static void ReadGPSPacket(uint8_t ucByte);
 
 /*****************************FUNCTION DEFINITION***********************/
+/**
+ * @brief Getting min GPM value
+ * @param None
+ * @return GPM minimum value;
+*/
+double GetMinGPM()
+{
+    return dMinGPM;
+}
+
+/**
+ * @brief Setting GPM value 
+ * @param dGPMVal : GPM min value to set
+ * @return None
+*/
+void SetMinGPM(double dGPMVal)
+{
+    dMinGPM = dGPMVal;
+}
 /**
  * @brief  Send data via uart
  * @param  pcData : data to send

@@ -79,10 +79,13 @@ bool ParseRxData(uint8_t *pData,const char *pckey, uint8_t ucLen, uint64_t *pucD
             //printk("JsonData: %s\n", cbuff);
             cJSON *root = cJSON_Parse(cbuff);
             RxData = cJSON_GetObjectItem(root, pckey);
-            *pucData = (RxData->valuedouble);
-            cJSON_Delete(root);
-           // free(cbuff);
-            bRetVal = true;
+            if (RxData)
+            {
+                *pucData = (RxData->valuedouble);
+                cJSON_Delete(root);
+            // free(cbuff);
+                bRetVal = true;
+            }
         }
 
     }

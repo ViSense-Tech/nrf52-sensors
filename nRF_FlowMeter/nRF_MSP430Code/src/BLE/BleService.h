@@ -20,3 +20,5 @@ void BleSensorDataNotify(const struct bt_gatt_attr *attr, uint16_t value);
 bool IsNotificationenabled();
 bool IsConnected();
 void SetFileSystem(struct nvs_fs *fs);
+bool IsConfigNotifyEnabled();
+bool IshistoryNotificationenabled();

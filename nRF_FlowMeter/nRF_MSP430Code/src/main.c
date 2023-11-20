@@ -40,6 +40,8 @@ static bool WriteConfiguredtimeToRTC(void);
 static bool GetTimeFromRTC();
 static bool UpdateConfigurations();
 static bool CheckForConfigChange();
+static void SendConfigDataToApp();
+static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength);
 
 /*************************FUNTION DEFINITION*****************/
 /**
@@ -88,15 +90,26 @@ int main(void)
 		while(sys_clock_tick_get() - TimeNow < (ALIVE_TIME * TICK_RATE))
 		{
 	#endif		
+            if (UpdateConfigurations())
+            {
+                printk("INFO: Updating config \n\r");           
+            }
+
+            WriteConfiguredtimeToRTC();
+            SendConfigDataToApp();
+
 			pMainObject = cJSON_CreateObject();
 			memset(ucNotifyBuffer, 0, ADV_BUFF_SIZE);
 			ucNotifyBuffer[0] = 0x05;
 
 			if (IsRxComplete())
 			{
-				
 				strcpy(cBuffer, GetFlowRate());
 				dFlowRate = strtod(cBuffer, NULL);
+                if (dFlowRate <= GetMinGPM())
+                {
+                    printk("WARN: flowrate is below minGPM\n\r");
+                }
 				memset(cBuffer, 0, sizeof(cBuffer));
 				sprintf(cBuffer, "%f", dFlowRate);
 				AddItemtoJsonObject(&pMainObject, STRING, "FlowRate", cBuffer, sizeof(float));
@@ -109,6 +122,7 @@ int main(void)
 			}
 
 			cJsonBuffer = cJSON_Print(pMainObject);
+            SendHistoryDataToApp(cJsonBuffer, strlen(cJsonBuffer));
 
 			strcpy((char *)ucNotifyBuffer+2, cJsonBuffer);
 			ucNotifyBuffer[1] = (uint8_t)strlen((char *)ucNotifyBuffer+2);
@@ -126,7 +140,7 @@ int main(void)
 		}
 		EnterSleepMode(GetSleepTime());
         ExitSleepMode();
-        printk("INFO: Syncing time with RTC\n\r");
+        //printk("INFO: Syncing time with RTC\n\r");
         if (!GetTimeFromRTC())
         {
             printk("WARN: Getting time from RTC failed\n\r");
@@ -292,6 +306,54 @@ static bool CheckForConfigChange()
 }
 
 /**
+ * @brief Sending history data over ble
+ * @param pcBuffer : data to send
+ * @param unLength : Length of data
+ * @return None
+*/
+static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
+{
+
+    char cBuffer[ADV_BUFF_SIZE];
+    bool bRetval = false;
+
+
+    if (pcBuffer)
+    {
+        if(!IsConnected()) // && sConfigData.flag & (1 << 4) can include this condition also if config is mandetory during initial setup
+        {
+            
+            memset(cBuffer, '\0', sizeof(cBuffer));
+            memcpy(cBuffer, pcBuffer, unLength);
+            writeJsonToFlash(&fs, uFlashIdx, NUMBER_OF_ENTRIES, cBuffer, strlen(cBuffer));
+            k_msleep(50);
+            if (readJsonToFlash(&fs, uFlashIdx, NUMBER_OF_ENTRIES, cBuffer, strlen(cBuffer)))
+            {
+                printk("Read succes\n\r");
+            }
+            uFlashIdx++;
+            sConfigData.flashIdx = uFlashIdx;
+            nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
+            if(uFlashIdx>= NUMBER_OF_ENTRIES)
+            {
+                uFlashIdx = 0;
+            }
+        }
+ 
+
+        if(IshistoryNotificationenabled() && IsConnected())
+        {
+            VisenseHistoryDataNotify();
+            uFlashIdx = 0; 
+        }
+
+        bRetval = true;
+    }
+
+    return bRetval;
+}
+
+/**
  * @brief Write the configured time from BLE to RTC
  * @param None
  * @return true for success
@@ -329,6 +391,43 @@ static bool WriteConfiguredtimeToRTC(void)
     }
 
     return bRetVal;
+}
+
+/**
+ * @brief send config data to application over ble
+ * @param None
+ * @return None
+*/
+static void SendConfigDataToApp()
+{
+    cJSON *pConfigObject = NULL;
+    char *cJsonConfigBuffer = NULL;
+    uint32_t ulSleepTime = 0;
+    double dGPM=0.00;
+    char cBuffer[30] =  {0};
+
+    pConfigObject = cJSON_CreateObject();
+    ulSleepTime = GetSleepTime();
+    dGPM = GetMinGPM();
+    strcpy(cBuffer, VISENSE_FLOWMTR_FIRMWARE_VERSION);
+    AddItemtoJsonObject(&pConfigObject, STRING, "VERSION", cBuffer, strlen(cBuffer));
+    memset(cBuffer, 0, sizeof(cBuffer));
+    sprintf(cBuffer, "%ds", ulSleepTime);
+    AddItemtoJsonObject(&pConfigObject, STRING, "Sleep", cBuffer, strlen(cBuffer));
+    memset(cBuffer, 0, sizeof(cBuffer));
+    sprintf(cBuffer, "%fGPM", dGPM);
+    AddItemtoJsonObject(&pConfigObject, STRING, "GPM", cBuffer, strlen(cBuffer));
+    cJsonConfigBuffer = cJSON_Print(pConfigObject);
+
+    printk("ConfigJSON:\n%s\n", cJsonConfigBuffer);
+
+    if (IsConfigNotifyEnabled())
+    {
+        VisenseConfigDataNotify(cJsonConfigBuffer, (uint16_t)strlen(cJsonConfigBuffer));
+    }
+
+    cJSON_free(cJsonConfigBuffer);
+    cJSON_Delete(pConfigObject);
 }
 
 /**

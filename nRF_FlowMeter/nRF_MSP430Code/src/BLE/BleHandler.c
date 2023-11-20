@@ -154,7 +154,11 @@ bool BleStopAdvertise()
     int nError = 0;
     bool bRetVal = false;
 
+#ifdef EXTENDED_ADV
     nError = bt_le_ext_adv_stop(adv);
+#else
+    nError = bt_le_adv_stop();
+#endif
 
  	if (!nError) 
     {

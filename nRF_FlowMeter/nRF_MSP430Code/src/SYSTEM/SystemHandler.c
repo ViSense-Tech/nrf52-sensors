@@ -52,7 +52,7 @@ void EnterSleepMode(int nDuration)
     // pAdc = GetADCHandle();
     // pm_device_action_run(pAdc, PM_DEVICE_ACTION_SUSPEND);
     BleStopAdvertise();
-    gpio_pin_set(sSleepStatusLED.port, sSleepStatusLED.pin, 1);
+   // gpio_pin_set(sSleepStatusLED.port, sSleepStatusLED.pin, 1);
     k_sleep(K_SECONDS(nDuration));
 
 }

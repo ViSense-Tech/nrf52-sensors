@@ -23,13 +23,12 @@
 
 /***************************FUNCTION DECLARATION*********************/
 bool InitUart(void);
-// bool ReadLocationData(char *pcLocation);
 void SendData(const char *pcData);
 bool IsRxComplete(void);
 char *GetFlowRate(void);
 void SetRxStatus(bool bStatus);
-// bool ConvertNMEAtoCoordinates(char *pcLocData, float *pfLat, float *pfLon);
-// bool ReadSOGData(float *pfSOG);
+double GetMinGPM();
+void SetMinGPM(double dGPMVal);
 
 #endif
 
