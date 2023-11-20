@@ -1,1 +1,0 @@
-/* TICLD-3074 This is a dummy file added to resolve TICLD-2493. Remove eventually. */
