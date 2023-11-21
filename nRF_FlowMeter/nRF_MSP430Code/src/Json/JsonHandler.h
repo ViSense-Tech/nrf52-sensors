@@ -14,6 +14,7 @@
 #include <stdbool.h>
 #include "cJSON.h"
 /**************************************MACROS*****************************/
+#define FLOW_METER    0x05
 
 /**************************************TYPEDEFS***************************/
 typedef enum __eJsonDataType

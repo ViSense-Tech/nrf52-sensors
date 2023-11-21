@@ -70,20 +70,15 @@ bool ParseRxData(uint8_t *pData,const char *pckey, uint8_t ucLen, uint64_t *pucD
 
     if (pData && pckey && pucData)
     {
-        if (pData[0] == 0x01)
+        if (pData[0] == FLOW_METER)
         {
-           // cbuff =
-          // cbuff = malloc((ucLen+1) *sizeof(uint8_t));
             memcpy(cbuff ,pData+2, ucLen);
-            //cbuff[ucLen] = '\0';
-            //printk("JsonData: %s\n", cbuff);
             cJSON *root = cJSON_Parse(cbuff);
             RxData = cJSON_GetObjectItem(root, pckey);
             if (RxData)
             {
                 *pucData = (RxData->valuedouble);
                 cJSON_Delete(root);
-            // free(cbuff);
                 bRetVal = true;
             }
         }

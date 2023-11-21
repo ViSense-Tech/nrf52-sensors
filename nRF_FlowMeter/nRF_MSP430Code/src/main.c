@@ -100,7 +100,7 @@ int main(void)
 
 			pMainObject = cJSON_CreateObject();
 			memset(ucNotifyBuffer, 0, ADV_BUFF_SIZE);
-			ucNotifyBuffer[0] = 0x05;
+			ucNotifyBuffer[0] = FLOW_METER;
 
 			if (IsRxComplete())
 			{
