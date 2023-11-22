@@ -20,18 +20,17 @@
 /* File system for storing JSON payload */
 #define DATA_FS 0
 /* Specify number of hours of historical data is required to be stored on external flash. */
-#define HOURS_OF_STORAGE 1 
+#define HOURS_OF_STORAGE 3
 /*Number of entries in one min to the flash*/
-#define NUMBER_OF_ENTRIES_IN_MINUTE 43
+#define NUMBER_OF_ENTRIES_IN_MINUTE 13//43
 /*write alignment of flash*/
-#define WRITE_ALIGNMENT 128
+#define WRITE_ALIGNMENT 256//128
 /*Number of minute in hour*/
 #define MINUTE_IN_HOUR 60
 /* Number of entries to the flash*/
 #define NUMBER_OF_ENTRIES  (NUMBER_OF_ENTRIES_IN_MINUTE * MINUTE_IN_HOUR * HOURS_OF_STORAGE)   // calculate accordingly
 /*NUmber of sector used for storing JSON*/
 #define SECTOR_COUNT ((NUMBER_OF_ENTRIES * WRITE_ALIGNMENT) / 4096)
-
 
 
 

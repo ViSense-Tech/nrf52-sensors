@@ -20,7 +20,7 @@
 
 
 /*******************************MACROS****************************************/
-#define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
+// #define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
 #define PRESSURE_SENSOR         0x01
 // diagnostics
 #define SENSOR_DIAGNOSTICS       (1<<0)
@@ -39,6 +39,7 @@ uint32_t diagnostic_data = 0;
 uint32_t pressureMax = 929; //analog reading of pressure transducer at 100psi
 uint32_t pressureZero = 110; //analog reading of pressure transducer at 0psi
 uint32_t uFlashIdx = 0;  // initialise data counter
+char cWriteBuffer[256] = {0};
 
 /*******************************FUNCTION DECLARATIONS********************************/
 extern void SetFileSystem(struct nvs_fs *fs);
@@ -53,6 +54,7 @@ static bool GetTimeFromRTC();
 static bool WriteConfiguredtimeToRTC(void);
 static void SendConfigDataToApp();
 static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength);
+static bool WriteBatchDtataToFlash(uint8_t *pucSensorData, uint32_t *uFlashCounter);
 
 /*******************************FUNCTION DEFINITIONS********************************/
 
@@ -69,6 +71,7 @@ int main(void)
     cJSON *pMainObject = NULL;
     long long llEpochNow = 0;
     int64_t Timenow = 0;
+
 
     PrintBanner();
     printk("VISENSE_PRESSURE_FIRMWARE_VERSION: %s\n\r", VISENSE_PRESSURE_SENSOR_FIRMWARE_VERSION);
@@ -96,7 +99,6 @@ int main(void)
     //     /* code */
     // }
     
-
     while (1) 
     {
         #ifdef SLEEP_ENABLE
@@ -276,19 +278,21 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
             
             memset(cBuffer, '\0', sizeof(cBuffer));
             memcpy(cBuffer, pcBuffer, unLength);
-            printk("Flash Idex%d\n\r",uFlashIdx);
+            // printk("Flash Idex%d\n\r",uFlashIdx);
 
-            if(writeJsonToExternalFlash(cBuffer, uFlashIdx,(int) unLength))
-            {
-                // NO OP
-            }
-            k_msleep(50);
-            if (readJsonFromExternalFlash(cBuffer, uFlashIdx, unLength))
-            {
-                printk("\nId: %d, Stored_Data: %s\n",uFlashIdx, cBuffer);
-            }
+            WriteBatchDtataToFlash(cBuffer, &uFlashIdx);
+            // if(writeJsonToExternalFlash(cBuffer, uFlashIdx,(int) unLength))
+            // {
+            //     // NO OP
+            // }
+            // k_msleep(50);
+            // if (readJsonFromExternalFlash(cBuffer, uFlashIdx, unLength))
+            // {
+            //     printk("\nId: %d, Stored_Data: %s\n",uFlashIdx, cBuffer);
+            // }
             
-            uFlashIdx++;
+        //    uFlashIdx++;
+            printk("Flash Idex%d\n\r",uFlashIdx);
             sConfigData.flashIdx = uFlashIdx;
             nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
             if(uFlashIdx >= NUMBER_OF_ENTRIES)
@@ -302,8 +306,13 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
         if(IshistoryNotificationenabled() && IsConnected())
         {
             printk("In history notif\n\r");
-            VisenseHistoryDataNotify();
-            uFlashIdx = 0; 
+            if(VisenseHistoryDataNotify(uFlashIdx))
+            {
+                uFlashIdx = 0; 
+                sConfigData.flashIdx = uFlashIdx;
+                nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
+            }
+            
         }
 
         bRetval = true;
@@ -508,6 +517,43 @@ static bool CheckForConfigChange()
     }
 
     return bRetVal;
+}
+/**
+ * @brief Write data to external flash
+ * @param pcBuffer : data buffer
+ * @param uFlashCounter : index
+ * @return true for success
+*/
+static bool WriteBatchDtataToFlash(uint8_t *pcBuffer, uint32_t *uFlashCounter)
+{
+    bool bRetVal = false;
+    uint16_t uVacantSpace = 0;
+    char cReadBuffer[256];
+    uint16_t uBytesRead = 0;
+	uint16_t uFilledBuf = 0;
+
+
+    memset(cReadBuffer, '\0', 256);
+    // char *pWriteBuffer = cWriteBuffer;
+    uBytesRead = strlen(pcBuffer);
+    uFilledBuf = strlen(cWriteBuffer);
+    uVacantSpace = NOTIFY_BUFFER_SIZE - uFilledBuf;
+    if (uVacantSpace >= uBytesRead)
+    {
+        strcat(cWriteBuffer, pcBuffer);
+        // printk("\nVacant Space: %d , Ble_Batched_Data: %s\n",uVacantSpace, pWriteBuffer);
+    }
+    else
+    {
+        writeJsonToExternalFlash(cWriteBuffer, *uFlashCounter, 256);
+        memset(cWriteBuffer, '\0', 256);
+        strcat(cWriteBuffer, pcBuffer);
+        k_msleep(50);
+        readJsonFromExternalFlash(cReadBuffer, *uFlashCounter, 256);
+        printk("\nId: %d, Ble_Batched_Data: %s\n", *uFlashCounter, cReadBuffer);
+        *uFlashCounter = *uFlashCounter + 1;   
+    }
+    
 }
 
 /**

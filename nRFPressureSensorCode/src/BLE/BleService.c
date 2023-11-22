@@ -38,6 +38,8 @@ struct bt_conn *psConnHandle = NULL;
 static bool hNotificationEnabled = false;
 struct nvs_fs *FileSys;
 static bool bConfigNotifyEnabled = false;
+/*Read index from flash*/
+uint32_t ucIdx = 0;
 
 
 extern void SetPressureZero(uint32_t *ucbuffer);
@@ -204,6 +206,7 @@ void SetFileSystem(struct nvs_fs *fs)
 */
 static void connected(struct bt_conn *conn, uint8_t err)
 {
+	// struct bt_le_conn_param *parameter = NULL;
 
 	if (err) 
     {
@@ -211,7 +214,12 @@ static void connected(struct bt_conn *conn, uint8_t err)
 	} 
     else 
     {
-		bt_conn_le_data_len_update(conn, BT_LE_DATA_LEN_PARAM_MAX);
+		// parameter->interval_min = 8;
+		// parameter->interval_max = 12;
+		// parameter->latency = 0;
+		// parameter->timeout = 5;
+		// bt_conn_le_param_update(conn, parameter);
+		 bt_conn_le_data_len_update(conn, BT_LE_DATA_LEN_PARAM_MAX);
 		bConnected = true;
 	}
 }
@@ -271,46 +279,83 @@ int VisenseSensordataNotify(uint8_t *pucSensorData, uint16_t unLen)
 /**
  * @brief 	History data notification 
  * @param 	len : length of data
- * @return 	None
+ * @return 	true for success
 */
-bool VisenseHistoryDataNotify()  //history
+bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 {
 	bool bRetVal = false;
-	uint32_t ucIdx = 0;
-	char NotifyBuf[ADV_BUFF_SIZE];
+	bool bFullDataRead = false;
+	char NotifyBuf[NOTIFY_BUFFER_SIZE];
 	int nRetVal = 0;
-	int uReadCount = 0;
+	uint32_t uFlashCounter = 0;
+	if (ucIdx > ulWritePos)
+	{
+		uFlashCounter = ucIdx - ulWritePos;
+	}
 
-	for (ucIdx = 0 ; ucIdx < NUMBER_OF_ENTRIES; ucIdx++)
+	while(ucIdx <= NUMBER_OF_ENTRIES)
 	{	
-		memset(NotifyBuf, 0, ADV_BUFF_SIZE);
-		uReadCount = readJsonFromExternalFlash(NotifyBuf, ucIdx, WRITE_ALIGNMENT);
+		if (!IsConnected())
+		{
+			break;
+		}
+		
+		memset(NotifyBuf, '\0', NOTIFY_BUFFER_SIZE);
+		nRetVal = readJsonFromExternalFlash(NotifyBuf, ucIdx, 256);
+		// nRetVal = ReadAndBatchData(NotifyBuf, &uFlashCounter);
+		// printk("\nuFlashCounter: %d\n",uFlashCounter);
 		printk("\nId: %d, Ble_Stored_Data: %s\n",ucIdx, NotifyBuf);
+		// if (nRetVal == true)
+		// {
+		// 	bFullDataRead = true;
+		// 	break;
+		// }
 		if (NotifyBuf[0] != 0x7B)
 		{
+			bFullDataRead = true;
 			break;
 		}
 		k_msleep(100);
 
-		if (uReadCount > 0)
+		if (nRetVal)
 		{
 			nRetVal = bt_gatt_notify(NULL, &VisenseService.attrs[8], 
-			NotifyBuf,WRITE_ALIGNMENT);
+			NotifyBuf, strlen(NotifyBuf));
 			if (nRetVal < 0)
 			{
 				printk("Notification failed%d\n\r",nRetVal);
 			}
-			bRetVal = true;
+			
+		}
+		ucIdx++;
+		uFlashCounter++;
+		if (ucIdx == NUMBER_OF_ENTRIES)
+		{
+			ucIdx = 0;
+		}
+		if (uFlashCounter > NUMBER_OF_ENTRIES )
+		{
+			bFullDataRead = true;
+			break;	
 		}
 		
+		
+		// bRetVal = true;
 	}
+	
 	hNotificationEnabled = false;     //history callback set 
-	if(!EraseExternalFlash(SECTOR_COUNT))
+	if (bFullDataRead == true) 
 	{
-		printk("Flash erase failed!\n");
-		return bRetVal;
+		if(!EraseExternalFlash(SECTOR_COUNT))
+		{
+			printk("Flash erase failed!\n");
+			return bRetVal;
+		}
+		printk("Flash Cleared");
+		ucIdx = 0;
+		bRetVal = true;
 	}
-	printk("Flash Cleared");
+	
 	return bRetVal;
 }
 
@@ -346,4 +391,55 @@ bool IsConfigNotifyEnabled()
 bool IsConnected()
 {
 	return bConnected;
+}
+/**
+ * @brief Read from flash and batch data
+ * @param pucSensorData - buffer for data to notify
+ * @param unLen - length of the buffer to notify
+*/
+bool ReadAndBatchData(uint8_t *pucSensorData, uint32_t *uFlashCounter)
+{
+	bool bRetVal = false;
+	char cReadBuf[256];
+	uint16_t uBytesRead = 0;
+	uint16_t uFilledBuf = 0;
+	uint16_t uVacantSpace = 0;
+	while (1)
+	{
+		if (!IsConnected())
+		{
+			break;
+		}
+		memset(cReadBuf, '\0', WRITE_ALIGNMENT);
+		if (!readJsonFromExternalFlash(cReadBuf, ucIdx, 128))
+		{
+			break;
+		}
+		// printk("\nId: %d, Ble_Batched_Data: %s\n",ucIdx, cReadBuf);
+		if (ucIdx == NUMBER_OF_ENTRIES)
+		{
+			ucIdx = 0;
+		}
+		if (cReadBuf[0] != 0x7B)
+		{
+			break;
+		}
+		uBytesRead = strlen(cReadBuf);
+		uFilledBuf = strlen(pucSensorData);
+		uVacantSpace = NOTIFY_BUFFER_SIZE - uFilledBuf;
+		if(uVacantSpace >= uBytesRead)
+		{
+			pucSensorData = strcat(pucSensorData, cReadBuf);
+			// printk("\nVacant Space: %d , uBytesRead: %d, Ble_Batched_Data: %s\n",uVacantSpace, uBytesRead, pucSensorData);
+		}
+		else
+		{
+			break;
+		}
+		bRetVal = true;
+		ucIdx++;
+		*uFlashCounter = * uFlashCounter + 1;
+		//  k_msleep(1000);
+	}
+	return bRetVal;
 }

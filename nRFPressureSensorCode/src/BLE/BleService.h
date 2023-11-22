@@ -10,7 +10,7 @@
 #include "BleHandler.h"
 
 /***************************************MACROS*******************************/
-
+#define NOTIFY_BUFFER_SIZE  247
 /**************************************TYPEDEFS******************************/
 
 /*************************************FUNCTION DECLARATION*******************/
@@ -21,4 +21,5 @@ bool IsConnected();
 bool IsConfigNotifyEnabled();
 int VisenseConfigDataNotify(uint8_t *pucConfigData, uint16_t unLen);
 bool IshistoryNotificationenabled();
-bool VisenseHistoryDataNotify();
+bool VisenseHistoryDataNotify(uint32_t);
+bool ReadAndBatchData(uint8_t *pucSensorData, uint32_t *uFlashCounter);

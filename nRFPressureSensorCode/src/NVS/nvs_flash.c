@@ -112,6 +112,7 @@ bool writeJsonToExternalFlash(char *pcBuffer, uint32_t flashIdx, int unLength) /
 	int rc = 0;
 	flashIdx = (flashIdx * WRITE_ALIGNMENT);
 
+
 	do
 	{
 		if (!device_is_ready(flash_dev)) 
@@ -119,7 +120,7 @@ bool writeJsonToExternalFlash(char *pcBuffer, uint32_t flashIdx, int unLength) /
 			printk("%s: device not ready.\n", flash_dev->name);
 			break;
 		}
-		rc = flash_write(flash_dev, SPI_FLASH_REGION_OFFSET + flashIdx, pcBuffer, WRITE_ALIGNMENT);
+		rc = flash_write(flash_dev, SPI_FLASH_REGION_OFFSET + flashIdx, pcBuffer, unLength);
 		if (rc != 0)
 		{
 			printf("Flash write failed! %d\n", rc);
@@ -148,6 +149,7 @@ bool readJsonFromExternalFlash(char *pcBuffer, uint32_t flashIdx, int unLength)
 	bool bRetval = false;
 	int rc = 0;
 	
+	// flashIdx = flashIdx * 256;
 	flashIdx = flashIdx * WRITE_ALIGNMENT;
 	
 
