@@ -26,7 +26,7 @@ void InitAdc(nrf_saadc_input_t eAdcChannel, int nChannelIdx);
 void InitIrroMtrExcitingPins(void);
 float AnalogRead(void);
 int GetAdcResult(struct gpio_dt_spec *psExcitingGpio);
-bool ReadFromADC(nrf_saadc_input_t eAdcChannel, int nChannelIdx, int *pnWM_CB);
+bool ReadFromADC(uint8_t ucMuxChannel, int *pnWM_CB);
 int CalculateCBvalue(int res, float TC, float cF);
 struct device *GetADCdevice(void);
 int GetADCReadingInForwardBias(void);

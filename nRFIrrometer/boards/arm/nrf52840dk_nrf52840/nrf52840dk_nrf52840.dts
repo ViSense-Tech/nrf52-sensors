@@ -55,6 +55,21 @@
 			gpios = <&gpio1 10 GPIO_ACTIVE_LOW>;
 			status = "okay";
 		};
+		muxinputa: muxinput_a {
+			compatible = "eac,testpin";
+			gpios = <&gpio1 6 GPIO_ACTIVE_LOW>;
+			status = "okay";
+		};
+		muxinputb: muxinput_b {
+			compatible = "eac,testpin";
+			gpios = <&gpio1 7 GPIO_ACTIVE_LOW>;
+			status = "okay";
+		};
+		muxenable: mux_enable {
+			compatible = "eac,testpin";
+			gpios = <&gpio1 5 GPIO_ACTIVE_LOW>;
+			status = "okay";
+		};		
 	};
 	
 	pwmleds {
@@ -128,6 +143,9 @@
 		pwm-led0 = &pwm_led0;
 		testpin0 = &testpin0;
 		testpin1 = &testpin1;
+		muxinputa = &muxinputa;
+		muxinputb  = &muxinputb;
+		muxenable = &muxenable;
 		sw0 = &button0;
 		sw1 = &button1;
 		sw2 = &button2;

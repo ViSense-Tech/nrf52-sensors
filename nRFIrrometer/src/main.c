@@ -19,7 +19,7 @@
 #include "Timerhandler.h"
 
 /*******************************MACROS****************************************/
-#define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
+//#define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
 #define TIME_STAMP_ERROR   (1<<1)
 #define TIME_STAMP_OK      ~(1<<1)
 
@@ -54,7 +54,7 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength);
 int main(void)
 {
     int Ret;
-    char cbuffer[20] = {0};
+    char cbuffer[50] = {0};
     char *cJsonBuffer = NULL;
     cJSON *pMainObject = NULL;
     int nCBValue = 0;
@@ -86,6 +86,9 @@ int main(void)
     {
         printk("WARN: Getting time from RTC failed\n\r");
     }
+
+    InitIrroMtrExcitingPins();
+    InitAdc(NRF_SAADC_INPUT_AIN1, 1);
     
      while (1) 
      {
@@ -105,8 +108,8 @@ int main(void)
             SendConfigDataToApp();
 
             pMainObject = cJSON_CreateObject();
-
-           if (ReadFromADC(NRF_SAADC_INPUT_AIN1, 1,  &nCBValue))
+           
+           if (ReadFromADC(0,  &nCBValue))
             {
                 memset(cbuffer, '\0', sizeof(cbuffer));
                 sprintf(cbuffer,"CB=%d", abs(nCBValue));
@@ -117,34 +120,33 @@ int main(void)
                 AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC1", &ADCReading1, sizeof(uint16_t));
                 AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC2", &ADCReading2, sizeof(uint16_t));
                 AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer)); 
-                nrfx_saadc_uninit();
             }
-        #if 0 /*Commented for now for test purpose. Below portion will get added after
-                single irrometer test is success*/
-            if (ReadFromADC(NRF_SAADC_INPUT_AIN2, 2,  &nCBValue))
+
+            if (ReadFromADC(1,  &nCBValue))
             {
                 memset(cbuffer, '\0', sizeof(cbuffer));
                 sprintf(cbuffer,"CB=%d", abs(nCBValue));
                 printk("Data:%s\n", cbuffer);
                 pSensorObj=cJSON_AddObjectToObject(pMainObject, "S2");
-                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC1", &sAdcReadValue1, sizeof(uint16_t));
-                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC2", &sAdcReadValue2, sizeof(uint16_t));
-                AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer)); 
-                nrfx_saadc_uninit();        
+                ADCReading1 = GetADCReadingInForwardBias();
+                ADCReading2 = GetADCReadingInReverseBias();
+                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC1", &ADCReading1, sizeof(uint16_t));
+                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC2", &ADCReading2, sizeof(uint16_t));
+                AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer));        
             }
 
-            if (ReadFromADC(NRF_SAADC_INPUT_AIN4, 4, &nCBValue))
+            if (ReadFromADC(2, &nCBValue))
             {
                 memset(cbuffer, '\0', sizeof(cbuffer));
                 sprintf(cbuffer,"CB=%d", abs(nCBValue));
                 printk("Data:%s\n", cbuffer);
                 pSensorObj=cJSON_AddObjectToObject(pMainObject, "S3");
-                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC1", &sAdcReadValue1, sizeof(uint16_t));
-                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC2", &sAdcReadValue2, sizeof(uint16_t));
-                AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer)); 
-                nrfx_saadc_uninit();
+                ADCReading1 = GetADCReadingInForwardBias();
+                ADCReading2 = GetADCReadingInReverseBias();
+                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC1", &ADCReading1, sizeof(uint16_t));
+                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC2", &ADCReading2, sizeof(uint16_t));
+                AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer));
             }
-           #endif 
            
             if (GetCurrentTime(&llEpochNow))
             {
@@ -188,15 +190,16 @@ int main(void)
             memset(pucAdvBuffer, 0, ADV_BUFF_SIZE);
             cJSON_Delete(pMainObject);
             cJSON_free(cJsonBuffer);
-
+            
             #ifndef SLEEP_ENABLE 
-            k_msleep(600);
+            k_msleep(1000);
             #endif
         #ifdef SLEEP_ENABLE
         }
         #endif
 
         #ifdef SLEEP_ENABLE
+         k_msleep(1000);
          EnterSleepMode(GetSleepTime());
          ExitSleepMode();
         #endif
@@ -243,6 +246,7 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
             {
                 printk("Read succes\n\r");
             }
+
             uFlashIdx++;
             sConfigData.flashIdx = uFlashIdx;
             nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));

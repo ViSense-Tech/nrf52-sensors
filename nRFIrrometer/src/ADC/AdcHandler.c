@@ -26,6 +26,8 @@ int  nAdcValueRvrsBias = 0;
 const struct device *pAdc = NULL;
 const struct gpio_dt_spec sSensorExcitePin1 = GPIO_DT_SPEC_GET(DT_ALIAS(testpin0), gpios);
 const struct gpio_dt_spec sSensorExcitePin2 = GPIO_DT_SPEC_GET(DT_ALIAS(testpin1), gpios);
+const struct gpio_dt_spec sMuxInput1 = GPIO_DT_SPEC_GET(DT_ALIAS(muxinputa), gpios);
+const struct gpio_dt_spec sMuxInput2 = GPIO_DT_SPEC_GET(DT_ALIAS(muxinputb), gpios);
 /***************************************FUNCTION DECLARTAION*********************/
 
 /***************************************FUNCTION DEFINITIONS*********************/
@@ -177,6 +179,34 @@ int CalculateCBvalue(int res, float TC, float cF)
 	return WM_CB;
 }
 
+void SelectMuxChannel(uint8_t ucChannel)
+{
+    switch(ucChannel)
+    {   
+        /*State of pin is inverted in nRF52840 DK need to investigate*/
+        case 0: gpio_pin_set(sMuxInput1.port, sMuxInput1.pin , 1);
+                gpio_pin_set(sMuxInput2.port, sMuxInput2.pin , 1);
+                break;
+
+        case 1: gpio_pin_set(sMuxInput1.port, sMuxInput1.pin , 0);
+                gpio_pin_set(sMuxInput2.port, sMuxInput2.pin , 1);
+                break;
+
+        case 2: gpio_pin_set(sMuxInput1.port, sMuxInput1.pin , 1);
+                gpio_pin_set(sMuxInput2.port, sMuxInput2.pin , 0);
+                break;
+
+        case 3: gpio_pin_set(sMuxInput1.port, sMuxInput1.pin , 0);
+                gpio_pin_set(sMuxInput2.port, sMuxInput2.pin , 0);
+                break;   
+
+        default:
+                 break;                     
+            
+    }
+   
+}
+
 /**
  * @brief Initialize the GPIO pins for exciting the irrometer sensor
  * @param None
@@ -186,6 +216,8 @@ void InitIrroMtrExcitingPins(void)
 {
     gpio_pin_configure_dt(&sSensorExcitePin1, GPIO_OUTPUT_LOW);
     gpio_pin_configure_dt(&sSensorExcitePin2, GPIO_OUTPUT_LOW);
+    gpio_pin_configure_dt(&sMuxInput1, GPIO_OUTPUT_LOW);
+    gpio_pin_configure_dt(&sMuxInput2, GPIO_OUTPUT_LOW);       
 }
 
 /**
@@ -284,14 +316,14 @@ int GetAdcResult(struct gpio_dt_spec *psExcitingGpio)
  * @param pnWM_CB - CB value 
  * @return true for success
 */
-bool ReadFromADC(nrf_saadc_input_t eAdcChannel, int nChannelIdx, int *pnWM_CB)
+bool ReadFromADC(uint8_t ucMuxChannel, int *pnWM_CB)
 {
     bool bRetVal = false;
     float WM_Resistance = 0.0;
 
     if (pnWM_CB)
     {
-        InitAdc(eAdcChannel, nChannelIdx);
+        SelectMuxChannel(ucMuxChannel);
         k_msleep(50);
         nAdcValueFwdBias = GetAdcResult(&sSensorExcitePin1);
         if (nAdcValueFwdBias < ADC_READING_LOWER || nAdcValueFwdBias > ADC_READING_UPPER)
