@@ -57,7 +57,7 @@ int nvs_initialisation( struct nvs_fs *fs, uint8_t selector)
 
 int writeJsonToFlash(struct nvs_fs *fs, uint16_t data_count,uint16_t count_max, char *data, uint8_t len)
 {
-	char writebuf[180]; 
+	char writebuf[212]; 
 	strcpy(writebuf, data);
 
 	int rc= nvs_write(fs, (STRING_ID + data_count), writebuf, len);

@@ -25,7 +25,7 @@
 /* File system for storing JSON payload */
 #define DATA_FS 0
 /* Number of entries to the flash*/
-#define NUMBER_OF_ENTRIES 100
+#define NUMBER_OF_ENTRIES 5
 
 #define STRING_ID 0
 
