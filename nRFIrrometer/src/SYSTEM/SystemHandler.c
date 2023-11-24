@@ -20,6 +20,7 @@
 const struct gpio_dt_spec sSleepStatusLED = GPIO_DT_SPEC_GET(DT_ALIAS(led0), gpios);
 bool bSleepTimeSet = false;
 uint32_t ulSleepTime = SLEEP_TIME; 
+static uint32_t ulDiagnosticData = 0;
 
 /***************************************FUNCTION DECLARTAION*********************/
 
@@ -128,4 +129,13 @@ void SetSleepTimeSetStataus(bool bStatus)
 uint32_t GetSleepTime()
 {
     return ulSleepTime;
+}
+/**
+ * @brief  Get diagnostic data
+ * @param  None
+ * @return pointer to the diagnostic data
+*/
+uint32_t *GetDiagData()
+{
+    return &ulDiagnosticData;
 }
