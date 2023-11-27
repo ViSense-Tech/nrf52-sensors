@@ -275,11 +275,14 @@ static bool SendHistoryDataToApp(uint16_t uPressureValue, char *pcBuffer, uint16
             
             memset(cBuffer, '\0', sizeof(cBuffer));
             memcpy(cBuffer, pcBuffer, unLength);
-            writeJsonToFlash(&fs, uFlashIdx, NUMBER_OF_ENTRIES, cBuffer, strlen(cBuffer));
-            k_msleep(50);
-            if (readJsonToFlash(&fs, uFlashIdx, NUMBER_OF_ENTRIES, cBuffer, strlen(cBuffer)))
+            if(writeJsonToExternalFlash(cBuffer, uFlashIdx, WRITE_ALIGNMENT))
             {
-                printk("\nId: %d, Stored_Data: %s\n",STRING_ID + uFlashIdx, cBuffer);
+                // NO OP
+            }
+            k_msleep(50);
+            if (readJsonFromExternalFlash(cBuffer, uFlashIdx, WRITE_ALIGNMENT))
+            {
+                printk("\nId: %d, Stored_Data: %s\n",uFlashIdx, cBuffer);
             }
             uFlashIdx++;
             sConfigData.flashIdx = uFlashIdx;
@@ -297,6 +300,8 @@ static bool SendHistoryDataToApp(uint16_t uPressureValue, char *pcBuffer, uint16
             if (VisenseHistoryDataNotify(uFlashIdx))
             {
                 uFlashIdx = 0;
+                sConfigData.flashIdx = uFlashIdx;
+                nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
             } 
         }
 
