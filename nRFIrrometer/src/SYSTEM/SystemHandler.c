@@ -82,6 +82,7 @@ void ExitSleepMode()
     struct gpio_dt_spec *psSensorExcitePin2 = NULL; 
 
     pAdc = GetADCdevice();
+    StartAdv();
     psSensorExcitePin1 = GetExcitePin1();
     psSensorExcitePin2 = GetExcitePin2();
     pm_device_action_run(pAdc, PM_DEVICE_ACTION_RESUME);

@@ -11,7 +11,7 @@
 
 
 /***************************************MACROS*******************************/
-#define NOTIFY_BUFFER_SIZE  247
+#define NOTIFY_BUFFER_SIZE  256
 #define CONFIG_WRITE_OK         ~(1<<0)
 #define CONFIG_WRITE_FAILED     (1<<0)
 /**************************************TYPEDEFS******************************/

@@ -222,7 +222,7 @@ int main(void)
             cJSON_free(cJsonBuffer);
             
             #ifndef SLEEP_ENABLE 
-            k_msleep(1000);
+            k_msleep(500);
             #endif
         #ifdef SLEEP_ENABLE
         }
