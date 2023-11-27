@@ -119,6 +119,15 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 			printk("sleep:%d\n\r",ucbuff);
 		}
 	}
+	if (ParseRxData(ucConfigData2, "PressureMin", len, &ucbuff))
+	{
+		if (len)
+		{
+			SetPressureMin(ucbuff);
+			printk("Pressure minimum:%d\n\r",ucbuff);
+		}
+	}
+	
 	return len;
 }
 
@@ -176,7 +185,7 @@ void BleConfigDataNotify(const struct bt_gatt_attr *attr, uint16_t value)
 BT_GATT_SERVICE_DEFINE(VisenseService,
     BT_GATT_PRIMARY_SERVICE(&sServiceUUID),
     BT_GATT_CHARACTERISTIC(&sSensorChara.uuid,
-                BT_GATT_CHRC_NOTIFY,
+                BT_GATT_CHRC_NOTIFY | BT_GATT_CHRC_READ,
                 BT_GATT_PERM_READ | BT_GATT_PERM_WRITE,
                 CharaRead, CharaWrite, ucSensorData),
 	BT_GATT_CCC(BleSensorDataNotify, BT_GATT_PERM_READ | BT_GATT_PERM_WRITE),

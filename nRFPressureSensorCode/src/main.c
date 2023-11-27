@@ -20,11 +20,11 @@
 
 
 /*******************************MACROS****************************************/
-#define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
+// #define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
 #define PRESSURE_SENSOR         0x01
 // diagnostics
-#define SENSOR_DIAGNOSTICS       (1<<0)
-#define SENSOR_STATUS_OK        ~(1<<0)
+#define SENSOR_DIAGNOSTICS       (1<<2)
+#define SENSOR_STATUS_OK        ~(1<<2)
 #define TIME_STAMP_ERROR         (1<<1)
 #define TIME_STAMP_OK           ~(1<<1)
 
@@ -180,11 +180,11 @@ int main(void)
             
             if ((sConfigData.flag & (1 << 4))) //check whether config data is read from the flash / updated from mobile
             {
-                // NO OP
+                diagnostic_data = diagnostic_data & CONFIG_WRITE_OK; //added a diagnostic information to the application
             }
             else
             {
-                diagnostic_data = diagnostic_data | (1 << 4); //added a diagnostic information to the application
+                diagnostic_data = diagnostic_data | CONFIG_WRITE_FAILED; //added a diagnostic information to the application
             }
             
             memset(pucAdvertisingdata, 0, ADV_BUFF_SIZE);
@@ -218,14 +218,16 @@ static bool UpdateConfigurations()
     uint32_t ulRetCode = 0;
     bool bRetVal = false;
 
-    if (IsPressureZeroSet() && IsPressureMaxSet() && IsSleepTimeSet())
+    if (IsPressureZeroSet() && IsPressureMaxSet() && IsSleepTimeSet() && IsPressureMinSet())
     {
         sConfigData.sleepTime = GetSleepTime();
         sConfigData.pressureZero = GetPressureZero();
         sConfigData.pressureMax = GetPressureMax();
+        sConfigData.pressureMin = GetPressureMin();
         SetPressureZeroSetStatus(false);
         SetPressureMaxSetStatus(false);
         SetSleepTimeSetStataus(false);
+        SetPressureMinSetStatus(false);
         sConfigData.flag = sConfigData.flag | (1 << 0); //set flag for config data update and store it into flash
 
         do
@@ -268,7 +270,7 @@ static bool SendHistoryDataToApp(uint16_t uPressureValue, char *pcBuffer, uint16
 
     if (pcBuffer)
     {
-        if(!IsConnected() && (uPressureValue != 0)) // && sConfigData.flag & (1 << 4) can include this condition also if config is mandetory during initial setup
+        if(!IsConnected() && (uPressureValue >= GetPressureMin())) // && sConfigData.flag & (1 << 4) can include this condition also if config is mandetory during initial setup
         {
             
             memset(cBuffer, '\0', sizeof(cBuffer));
@@ -315,13 +317,16 @@ static void SendConfigDataToApp()
     char *cJsonConfigBuffer = NULL;
     uint32_t ulSleepTime = 0;
     char cBuffer[30] =  {0};
+    uint32_t unPressureMin = 0;
 
     pConfigObject = cJSON_CreateObject();
     ulSleepTime = GetSleepTime();
+    unPressureMin = (uint32_t)GetPressureMin();
     strcpy(cBuffer, VISENSE_PRESSURE_SENSOR_FIRMWARE_VERSION);
     AddItemtoJsonObject(&pConfigObject, NUMBER, "PressureZero", &pressureZero, sizeof(uint32_t));
     AddItemtoJsonObject(&pConfigObject, NUMBER, "PressureMax", &pressureMax, sizeof(uint32_t));
     AddItemtoJsonObject(&pConfigObject, STRING, "VERSION", cBuffer, strlen(cBuffer));
+    AddItemtoJsonObject(&pConfigObject, NUMBER, "PressureMin", &unPressureMin, sizeof(uint32_t));
     memset(cBuffer, 0, sizeof(cBuffer));
     sprintf(cBuffer, "%ds", ulSleepTime);
     AddItemtoJsonObject(&pConfigObject, STRING, "SLEEP", cBuffer, strlen(cBuffer));
@@ -356,11 +361,11 @@ static bool WriteConfiguredtimeToRTC(void)
             RetCode = nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
             if(RetCode < 0)
             {
-                diagnostic_data = diagnostic_data | (1<<4);
+                diagnostic_data = diagnostic_data | CONFIG_WRITE_FAILED;
             }
             else
             {
-                diagnostic_data = diagnostic_data & (~(1<<4));
+                diagnostic_data = diagnostic_data & CONFIG_WRITE_OK;
                 diagnostic_data = diagnostic_data & TIME_STAMP_OK;
                 printk("Time updated\n");
                 bRetVal = true;
@@ -488,7 +493,7 @@ static bool CheckForConfigChange()
     if(sConfigData.flag == 0) 
     {
         printk("\n\rError occured while reading config data: %d\n", ulRetCode);
-        diagnostic_data = diagnostic_data | (1<<4); // flag will shows error while reading config data from flash and added to the application
+        diagnostic_data = diagnostic_data | CONFIG_WRITE_FAILED; // flag will shows error while reading config data from flash and added to the application
     }
     else
     {
@@ -496,11 +501,13 @@ static bool CheckForConfigChange()
         SetPressureMax(sConfigData.pressureMax);
         SetSleepTime(sConfigData.sleepTime);
         uFlashIdx = sConfigData.flashIdx;
+        SetPressureMin(sConfigData.pressureMin);
         printk("PressureZero = %d, PressureMax = %d, sConfigFlag %d ,flashIdx = %d\n",
                                      sConfigData.pressureZero, 
                                      sConfigData.pressureMax,
                                      sConfigData.flag,
                                      sConfigData.flashIdx); //get all the config params from the flash if a reboot occures
+        diagnostic_data = diagnostic_data & CONFIG_WRITE_OK;
 
         bRetVal = true;
     }

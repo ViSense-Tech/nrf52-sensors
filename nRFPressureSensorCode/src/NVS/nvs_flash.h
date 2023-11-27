@@ -26,6 +26,7 @@ typedef struct __attribute__((packed)) __sConfigData
     uint32_t sleepTime;
     uint32_t pressureZero;
     uint32_t pressureMax;
+    uint16_t pressureMin;
     uint8_t flag;
 }_sConfigData;
 
