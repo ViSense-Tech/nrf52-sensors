@@ -218,16 +218,26 @@ static bool UpdateConfigurations()
     uint32_t ulRetCode = 0;
     bool bRetVal = false;
 
-    if (IsPressureZeroSet() && IsPressureMaxSet() && IsSleepTimeSet() && IsPressureMinSet())
+    if (IsPressureZeroSet() || IsPressureMaxSet() || IsSleepTimeSet() || IsPressureMinSet())
     {
-        sConfigData.sleepTime = GetSleepTime();
-        sConfigData.pressureZero = GetPressureZero();
-        sConfigData.pressureMax = GetPressureMax();
-        sConfigData.pressureMin = GetPressureMin();
-        SetPressureZeroSetStatus(false);
-        SetPressureMaxSetStatus(false);
-        SetSleepTimeSetStataus(false);
-        SetPressureMinSetStatus(false);
+        if (IsPressureZeroSet() && IsPressureMaxSet())
+        {
+            sConfigData.pressureZero = GetPressureZero();
+            sConfigData.pressureMax = GetPressureMax();
+            SetPressureZeroSetStatus(false);
+            SetPressureMaxSetStatus(false);
+        }
+        if (IsSleepTimeSet())
+        {
+            sConfigData.sleepTime = GetSleepTime();
+            SetSleepTimeSetStataus(false);
+        }
+        if (IsPressureMinSet())
+        {
+            sConfigData.pressureMin = GetPressureMin();
+            SetPressureMinSetStatus(false);
+        }
+
         sConfigData.flag = sConfigData.flag | (1 << 0); //set flag for config data update and store it into flash
 
         do
@@ -499,6 +509,7 @@ static bool CheckForConfigChange()
     {
         printk("\n\rError occured while reading config data: %d\n", ulRetCode);
         diagnostic_data = diagnostic_data | CONFIG_WRITE_FAILED; // flag will shows error while reading config data from flash and added to the application
+        EraseExternalFlash(SECTOR_COUNT);
     }
     else
     {

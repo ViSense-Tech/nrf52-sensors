@@ -148,8 +148,7 @@ bool readJsonFromExternalFlash(char *pcBuffer, uint32_t flashIdx, int unLength)
 {
 	bool bRetval = false;
 	int rc = 0;
-	
-	// flashIdx = flashIdx * 256;
+
 	flashIdx = flashIdx * WRITE_ALIGNMENT;
 	
 

@@ -185,7 +185,7 @@ void BleConfigDataNotify(const struct bt_gatt_attr *attr, uint16_t value)
 BT_GATT_SERVICE_DEFINE(VisenseService,
     BT_GATT_PRIMARY_SERVICE(&sServiceUUID),
     BT_GATT_CHARACTERISTIC(&sSensorChara.uuid,
-                BT_GATT_CHRC_NOTIFY | BT_GATT_CHRC_READ,
+                BT_GATT_CHRC_NOTIFY,
                 BT_GATT_PERM_READ | BT_GATT_PERM_WRITE,
                 CharaRead, CharaWrite, ucSensorData),
 	BT_GATT_CCC(BleSensorDataNotify, BT_GATT_PERM_READ | BT_GATT_PERM_WRITE),
@@ -305,7 +305,7 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 		}
 		
 		memset(NotifyBuf, '\0', NOTIFY_BUFFER_SIZE);
-		nRetVal = readJsonFromExternalFlash(NotifyBuf, ucIdx, 256);
+		nRetVal = readJsonFromExternalFlash(NotifyBuf, ucIdx, WRITE_ALIGNMENT);
 		printk("\nId: %d, Ble_Stored_Data: %s\n",ucIdx, NotifyBuf);
 		if (NotifyBuf[0] != 0x7B)
 		{
