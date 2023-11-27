@@ -119,6 +119,15 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 			printk("sleep:%d\n\r",ucbuff);
 		}
 	}
+	if (ParseRxData(ucConfigData2, "PressureMin", len, &ucbuff))
+	{
+		if (len)
+		{
+			SetPressureMin(ucbuff);
+			printk("Pressure minimum:%d\n\r",ucbuff);
+		}
+	}
+	
 	return len;
 }
 
@@ -280,10 +289,9 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 {
 	bool bRetVal = false;
 	bool bFullDataRead = false;
-	char NotifyBuf[ADV_BUFF_SIZE];
+	char NotifyBuf[NOTIFY_BUFFER_SIZE];
 	int nRetVal = 0;
-	int uReadCount = 0;
-	uint8_t uFlashCounter = 0;
+	uint32_t uFlashCounter = 0;
 	if (ucIdx > ulWritePos)
 	{
 		uFlashCounter = ucIdx - ulWritePos;
@@ -296,21 +304,20 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 			break;
 		}
 		
-		memset(NotifyBuf, 0, ADV_BUFF_SIZE);
-		uReadCount = readJsonToFlash(FileSys, ucIdx, 0, NotifyBuf, ADV_BUFF_SIZE);
+		memset(NotifyBuf, '\0', NOTIFY_BUFFER_SIZE);
+		nRetVal = readJsonFromExternalFlash(NotifyBuf, ucIdx, WRITE_ALIGNMENT);
 		printk("\nId: %d, Ble_Stored_Data: %s\n",ucIdx, NotifyBuf);
-		if (uReadCount < 0)
+		if (NotifyBuf[0] != 0x7B)
 		{
 			bFullDataRead = true;
 			break;
 		}
-	
 		k_msleep(100);
 
-		if (uReadCount > 0)
+		if (nRetVal)
 		{
 			nRetVal = bt_gatt_notify(NULL, &VisenseService.attrs[8], 
-			NotifyBuf,uReadCount);
+			NotifyBuf, strlen(NotifyBuf));
 			if (nRetVal < 0)
 			{
 				printk("Notification failed%d\n\r",nRetVal);
@@ -336,7 +343,11 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 	hNotificationEnabled = false;     //history callback set 
 	if (bFullDataRead == true) 
 	{
-		deleteFlash(FileSys);
+		if(!EraseExternalFlash(SECTOR_COUNT))
+		{
+			printk("Flash erase failed!\n");
+			return bRetVal;
+		}
 		printk("Flash Cleared");
 		ucIdx = 0;
 		bRetVal = true;
