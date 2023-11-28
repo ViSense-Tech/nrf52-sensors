@@ -1,16 +1,11 @@
-"""Spreadsheet Column Printer
+"""Visense Testing Script
 
-This script allows the user to print to the console all columns in the
-spreadsheet. It is assumed that the first row of the spreadsheet is the
-location of the columns.
+This script intended for the use of testing visense units. This scripts actually
+dumps data from a COM port to a CSV file. 
 
-This tool accepts comma separated value files (.csv) as well as excel
-(.xls, .xlsx) files.
-
-This script requires that `pandas` be installed within the Python
-environment you are running this script in.
-
-This file can also be imported as a module and contains the following
+Script will dump the live JSON data from visense units to a csv file unless a STOP
+button is pressed in the UI. Also this UI supports selecting different visense units
+selecting file to dump. Also configuring of serial port.
 """
 
 # Import packages
