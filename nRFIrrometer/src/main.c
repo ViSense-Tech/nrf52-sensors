@@ -197,7 +197,7 @@ int main(void)
             pucAdvBuffer[2] = 0x02;
             pucAdvBuffer[3] = (uint8_t)strlen(cJsonBuffer);
             memcpy(pucAdvBuffer+4, cJsonBuffer, strlen(cJsonBuffer));
-            printk("JSON:\n%s\n", cJsonBuffer);
+            printk("JSON:\n*%s#\n", cJsonBuffer);
 
             SendHistoryDataToApp(cJsonBuffer, strlen(cJsonBuffer));
 

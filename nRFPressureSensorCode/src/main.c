@@ -160,7 +160,7 @@ int main(void)
                 
             SendHistoryDataToApp(unPressureResult, cJsonBuffer, strlen(cJsonBuffer)); //save to flash only if Mobile Phone is NOT connected
             
-            printk("JSON:\n%s\n", cJsonBuffer);
+            printk("JSON:\n*%s#\n", cJsonBuffer);
 
             if(IsNotificationenabled())
             {
