@@ -237,10 +237,14 @@ def clicked(BtnTxt):
         Baud = BrInput.get()
         print(Baud)
         ser = serial.Serial(Com, Baud) 
+        UpdateBtn['text'] = "CONNECTED" 
+        UpdateBtn['fg'] = "green"
         messagebox.showinfo(title="Click event", message=f"Com Settings updated")
     elif BtnTxt == "RUN":
         RunTest()
     elif BtnTxt == "STOP":
+        UpdateBtn['text'] = "CONNECT" 
+        UpdateBtn['fg'] = "blue"
         Dumpflag = True
 
 def OnSelected(event):
