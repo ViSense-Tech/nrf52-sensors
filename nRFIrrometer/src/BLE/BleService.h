@@ -9,8 +9,11 @@
 /**************************************INCLUDES******************************/
 #include "BleHandler.h"
 
-/***************************************MACROS*******************************/
 
+/***************************************MACROS*******************************/
+#define NOTIFY_BUFFER_SIZE  256
+#define CONFIG_WRITE_OK         ~(1<<0)
+#define CONFIG_WRITE_FAILED     (1<<0)
 /**************************************TYPEDEFS******************************/
 
 /*************************************FUNCTION DECLARATION*******************/
@@ -20,4 +23,4 @@ bool IsNotificationenabled();
 bool IsConnected();
 bool IsConfigNotifyEnabled();
 int VisenseConfigDataNotify(uint8_t *pucConfigData, uint16_t unLen);
-bool VisenseHistoryDataNotify(void);
+bool VisenseHistoryDataNotify(uint32_t uFlashIdx);

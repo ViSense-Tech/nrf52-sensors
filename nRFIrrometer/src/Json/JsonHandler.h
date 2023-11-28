@@ -18,11 +18,13 @@
 /**************************************TYPEDEFS***************************/
 typedef enum __eJsonDataType
 {
-    NUMBER,
+    NUMBER_INT,
+    NUMBER_FLOAT,
     STRING,
     ARRAY,
     OBJECT,
 }_eJsonDataType;
+
 
 /***********************************FUNCTION DECLARATION******************/
 

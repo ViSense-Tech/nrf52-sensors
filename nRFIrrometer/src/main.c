@@ -17,17 +17,18 @@
 #include "SystemHandler.h"
 #include "AdcHandler.h"
 #include "Timerhandler.h"
+#include "TempSensor.h"
 
 /*******************************MACROS****************************************/
-//#define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
+#define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
 #define TIME_STAMP_ERROR   (1<<1)
 #define TIME_STAMP_OK      ~(1<<1)
+
 
 /*******************************GLOBAL VARIABLES********************************/
 cJSON *pcData = NULL;
 uint8_t *pucAdvBuffer = NULL;
 struct nvs_fs fs; 
-int32_t lDiagnosticdata = 0; 
 _sConfigData sConfigData = {0};
 struct nvs_fs fs;    //file system
 struct nvs_fs sConfigFs;
@@ -45,6 +46,10 @@ static bool UpdateConfigurations();
 static bool WriteConfiguredtimeToRTC(void);
 static void SendConfigDataToApp();
 static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength);
+/*This function is declared here for now. But prototype is in SystemHandler
+will remove this from here later now did this for completing the functionality*/
+uint32_t *GetDiagData();
+
 
 /*******************************FUNCTION DEFINITIONS********************************/
 
@@ -61,9 +66,11 @@ int main(void)
     uint32_t ulsleepTime = 0;
     cJSON *pSensorObj = NULL;
     long long llEpochNow = 0;
+    double dTemperature = 0.0;
     int64_t Timenow =0;
     int ADCReading1;
     int ADCReading2;
+    uint32_t *pDiagData = NULL;
 
     PrintBanner();
     printk("VISENSE_IRROMETER_FIRMWARE_VERSION: %s\n\r", VISENSE_IRROMETER_FIRMWARE_VERSION);
@@ -89,9 +96,9 @@ int main(void)
 
     InitIrroMtrExcitingPins();
     InitAdc(NRF_SAADC_INPUT_AIN1, 1);
-    
-     while (1) 
-     {
+    pDiagData = GetDiagData();
+    while (1) 
+    {
         #ifdef SLEEP_ENABLE
         Timenow = sys_clock_tick_get();
 
@@ -111,40 +118,64 @@ int main(void)
            
            if (ReadFromADC(0,  &nCBValue))
             {
+                if(nCBValue >= 255)
+                {
+                    *pDiagData = *pDiagData | IRROMETER_1_ERROR;
+                }
+                else
+                {
+                    *pDiagData = *pDiagData & IRROMETER_1_OK;
+                }
                 memset(cbuffer, '\0', sizeof(cbuffer));
                 sprintf(cbuffer,"CB=%d", abs(nCBValue));
                 printk("Data:%s\n", cbuffer);
                 pSensorObj=cJSON_AddObjectToObject(pMainObject, "S1");
                 ADCReading1 = GetADCReadingInForwardBias();
                 ADCReading2 = GetADCReadingInReverseBias();
-                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC1", &ADCReading1, sizeof(uint16_t));
-                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC2", &ADCReading2, sizeof(uint16_t));
+                AddItemtoJsonObject(&pSensorObj, NUMBER_INT, "ADC1", &ADCReading1, sizeof(uint16_t));
+                AddItemtoJsonObject(&pSensorObj, NUMBER_INT, "ADC2", &ADCReading2, sizeof(uint16_t));
                 AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer)); 
             }
 
             if (ReadFromADC(1,  &nCBValue))
             {
+                if(nCBValue >= 255)
+                {
+                    *pDiagData = *pDiagData | IRROMETER_2_ERROR;
+                }
+                else
+                {
+                    *pDiagData = *pDiagData & IRROMETER_2_OK;
+                }
                 memset(cbuffer, '\0', sizeof(cbuffer));
                 sprintf(cbuffer,"CB=%d", abs(nCBValue));
                 printk("Data:%s\n", cbuffer);
                 pSensorObj=cJSON_AddObjectToObject(pMainObject, "S2");
                 ADCReading1 = GetADCReadingInForwardBias();
                 ADCReading2 = GetADCReadingInReverseBias();
-                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC1", &ADCReading1, sizeof(uint16_t));
-                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC2", &ADCReading2, sizeof(uint16_t));
+                AddItemtoJsonObject(&pSensorObj, NUMBER_INT, "ADC1", &ADCReading1, sizeof(uint16_t));
+                AddItemtoJsonObject(&pSensorObj, NUMBER_INT, "ADC2", &ADCReading2, sizeof(uint16_t));
                 AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer));        
             }
 
             if (ReadFromADC(2, &nCBValue))
             {
+                if(nCBValue >= 255)
+                {
+                    *pDiagData = *pDiagData | IRROMETER_3_ERROR;
+                }
+                else
+                {
+                    *pDiagData = *pDiagData & IRROMETER_3_OK;
+                }
                 memset(cbuffer, '\0', sizeof(cbuffer));
                 sprintf(cbuffer,"CB=%d", abs(nCBValue));
                 printk("Data:%s\n", cbuffer);
                 pSensorObj=cJSON_AddObjectToObject(pMainObject, "S3");
                 ADCReading1 = GetADCReadingInForwardBias();
                 ADCReading2 = GetADCReadingInReverseBias();
-                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC1", &ADCReading1, sizeof(uint16_t));
-                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC2", &ADCReading2, sizeof(uint16_t));
+                AddItemtoJsonObject(&pSensorObj, NUMBER_INT, "ADC1", &ADCReading1, sizeof(uint16_t));
+                AddItemtoJsonObject(&pSensorObj, NUMBER_INT, "ADC2", &ADCReading2, sizeof(uint16_t));
                 AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer));
             }
            
@@ -153,8 +184,14 @@ int main(void)
                 printk("CurrentTime=%llu\n\r", llEpochNow);
             }
             printCurrentTime();
-            AddItemtoJsonObject(&pMainObject, NUMBER, "TS", &llEpochNow, sizeof(long long));
-            AddItemtoJsonObject(&pMainObject, NUMBER, "DIAG", &lDiagnosticdata, sizeof(uint32_t));
+            
+            if (ReadTemperatureFromDS18b20(&dTemperature))
+            {
+                AddItemtoJsonObject(&pMainObject, NUMBER_FLOAT, "Temp", &dTemperature, sizeof(double));
+            }
+
+            AddItemtoJsonObject(&pMainObject, NUMBER_INT, "TS", &llEpochNow, sizeof(long long));
+            AddItemtoJsonObject(&pMainObject, NUMBER_INT, "DIAG", pDiagData, sizeof(uint32_t));
             cJsonBuffer = cJSON_Print(pMainObject);
 
             pucAdvBuffer[2] = 0x02;
@@ -170,29 +207,22 @@ int main(void)
             }
             else if (!IsConnected())
             {
-                UpdateAdvData();
-                StartAdv();
+                #ifdef EXT_ADV
+                    UpdateAdvData();
+                    StartAdv();
+                #endif
             }
             else
             {
                 //No Op
             }
-
-            if ((sConfigData.flag & (1 << 4))) //check whether config data is read from the flash / updated from mobile
-            {
-                // NO OP
-            }
-            else
-            {
-                lDiagnosticdata = lDiagnosticdata | (1 << 4); //added a diagnostic information to the application
-            }
-
+            
             memset(pucAdvBuffer, 0, ADV_BUFF_SIZE);
             cJSON_Delete(pMainObject);
             cJSON_free(cJsonBuffer);
             
             #ifndef SLEEP_ENABLE 
-            k_msleep(1000);
+            k_msleep(500);
             #endif
         #ifdef SLEEP_ENABLE
         }
@@ -203,7 +233,7 @@ int main(void)
          EnterSleepMode(GetSleepTime());
          ExitSleepMode();
         #endif
-     }
+    }
 }
 
 /**
@@ -240,27 +270,34 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
             
             memset(cBuffer, '\0', sizeof(cBuffer));
             memcpy(cBuffer, pcBuffer, unLength);
-            writeJsonToFlash(&fs, uFlashIdx, NUMBER_OF_ENTRIES, cBuffer, strlen(cBuffer));
-            k_msleep(50);
-            if (readJsonToFlash(&fs, uFlashIdx, NUMBER_OF_ENTRIES, cBuffer, strlen(cBuffer)))
+            if(writeJsonToExternalFlash(cBuffer, uFlashIdx,WRITE_ALIGNMENT))
             {
-                printk("Read succes\n\r");
+                // NO OP
             }
-
+            k_msleep(50);
+            if (readJsonFromExternalFlash(cBuffer, uFlashIdx, WRITE_ALIGNMENT))
+            {
+                printk("\nId: %d, Stored_Data: %s\n",uFlashIdx, cBuffer);
+            }
             uFlashIdx++;
             sConfigData.flashIdx = uFlashIdx;
             nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
             if(uFlashIdx>= NUMBER_OF_ENTRIES)
             {
-                uFlashIdx = 0;
+                uFlashIdx = 0;   
             }
         }
  
 
         if(IshistoryNotificationenabled() && IsConnected())
         {
-            VisenseHistoryDataNotify();
-            uFlashIdx = 0; 
+            if(VisenseHistoryDataNotify(uFlashIdx))
+            {
+                uFlashIdx = 0; 
+                sConfigData.flashIdx = uFlashIdx;
+                nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
+            }
+            
         }
 
         bRetval = true;
@@ -309,6 +346,9 @@ static bool WriteConfiguredtimeToRTC(void)
 {
     bool bRetVal = false;
     int RetCode = 0;
+    uint32_t *pDiagData = NULL;
+
+    pDiagData = GetDiagData();
 
     if (GetTimeUpdateStatus())
     {
@@ -319,12 +359,12 @@ static bool WriteConfiguredtimeToRTC(void)
             RetCode = nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
             if(RetCode < 0)
             {
-                lDiagnosticdata = lDiagnosticdata | (1<<4);
+                *pDiagData = *pDiagData | CONFIG_WRITE_FAILED;
             }
             else
             {
-                lDiagnosticdata = lDiagnosticdata & (~(1<<4));
-                lDiagnosticdata = lDiagnosticdata & TIME_STAMP_OK;
+                *pDiagData = *pDiagData & CONFIG_WRITE_OK;
+                *pDiagData = *pDiagData & TIME_STAMP_OK;
                 printk("Time updated\n");
                 bRetVal = true;
             }
@@ -333,7 +373,7 @@ static bool WriteConfiguredtimeToRTC(void)
         {
             printk("WARN: Check RTC is connected\n\r");
             SetTimeUpdateStatus(false); 
-            lDiagnosticdata = lDiagnosticdata | TIME_STAMP_ERROR;
+            *pDiagData = *pDiagData | TIME_STAMP_ERROR;
         }
     }
 
@@ -365,6 +405,7 @@ static bool InitBle()
             break;
         }
 
+#ifdef EXT_ADV
         nError = InitExtAdv();
         
         if (nError) 
@@ -372,6 +413,7 @@ static bool InitBle()
             printk("Advertising failed to create (err %d)\n", nError);
             break;
         }
+#endif        
 
         StartAdv();
         bRetVal = true;
@@ -433,6 +475,9 @@ static bool CheckForConfigChange()
 {
     uint32_t ulRetCode = 0;
     bool bRetVal = false;
+    uint32_t *pDiagData = NULL;
+
+    pDiagData = GetDiagData();
 
     nvs_initialisation(&sConfigFs, CONFIG_DATA_FS); 
     k_msleep(100);
@@ -440,7 +485,8 @@ static bool CheckForConfigChange()
     if(sConfigData.flag == 0) 
     {
         printk("\n\rError occured while reading config data: %d\n", ulRetCode);
-        lDiagnosticdata = lDiagnosticdata | (1<<4); // flag will shows error while reading config data from flash and added to the application
+        EraseExternalFlash(SECTOR_COUNT);   
+        *pDiagData = *pDiagData | CONFIG_WRITE_FAILED; // flag will shows error while reading config data from flash and added to the application
     }
     else
     {
@@ -506,17 +552,20 @@ static bool GetTimeFromRTC()
 {
     long long llEpochNow = 0;
     bool bRetVal = false;
+    uint32_t *pDiagData = NULL;
+
+    pDiagData = GetDiagData();
 
     if (GetCurrenTimeInEpoch(&llEpochNow))
     {
         printk("CurrentTime=%llu\n\r", llEpochNow);
         SetCurrentTime(llEpochNow);
-        lDiagnosticdata = lDiagnosticdata & TIME_STAMP_OK;
+        *pDiagData = *pDiagData & TIME_STAMP_OK;
         bRetVal = true;
     }
     else
     {
-        lDiagnosticdata = lDiagnosticdata | TIME_STAMP_ERROR;
+        *pDiagData = *pDiagData | TIME_STAMP_ERROR;
     }
 
     return bRetVal;

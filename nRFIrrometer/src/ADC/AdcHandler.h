@@ -18,6 +18,12 @@
 /***************************************MACROS**********************************/
 #define ADC_READING_LOWER  0
 #define ADC_READING_UPPER  1024
+#define IRROMETER_1_ERROR   (1<<2)
+#define IRROMETER_1_OK      ~(1<<2)
+#define IRROMETER_2_ERROR   (1<<3)
+#define IRROMETER_2_OK      ~(1<<3)
+#define IRROMETER_3_ERROR   (1<<4)
+#define IRROMETER_3_OK      ~(1<<4)
 
 /***************************************TYPEDEFS*********************************/
 
