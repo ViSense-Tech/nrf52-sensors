@@ -19,7 +19,9 @@
 /**************************************TYPEDEFS***************************/
 typedef enum __eJsonDataType
 {
-    NUMBER,
+    NUMBER_INT,
+    NUMBER_FLOAT,
+    //NUMBER,
     STRING,
     ARRAY,
     OBJECT,

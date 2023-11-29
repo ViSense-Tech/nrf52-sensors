@@ -34,8 +34,11 @@ bool AddItemtoJsonObject(cJSON **pcJsonHandle, _eJsonDataType JsondataType, cons
     {
         switch(JsondataType)
         {
-            case NUMBER: 
-                         cJSON_AddNumberToObject(*pcJsonHandle, pcKey, *((int*)(pcValue)));
+            case NUMBER_INT: 
+                         cJSON_AddNumberToObject(*pcJsonHandle, pcKey, *((uint32_t*)(pcValue)));
+                         break;
+            case NUMBER_FLOAT: 
+                         cJSON_AddNumberToObject(*pcJsonHandle, pcKey, *((double*)(pcValue)));
                          break;
             case STRING: cJSON_AddStringToObject(*pcJsonHandle, pcKey, (char* )pcValue);
                          break;

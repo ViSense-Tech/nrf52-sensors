@@ -57,6 +57,7 @@ int main(void)
 	uint8_t *pucAdvBuffer = NULL;
 	char *cJsonBuffer = NULL;
 	char cBuffer[30];
+    char *pcEnd = NULL;
 	double dFlowRate = 0.0;
     cJSON * pMainObject = NULL;
 
@@ -105,20 +106,34 @@ int main(void)
 			if (IsRxComplete())
 			{
 				strcpy(cBuffer, GetFlowRate());
-				dFlowRate = strtod(cBuffer, NULL);
+                printk("flowrate test %s\n\r", cBuffer);
+                //dFlowRate = strtod(cBuffer, pcEnd);
+                //sscanf( cBuffer, "$Flowrate: %f", &dFlowRate);
+                pcEnd = strchr(cBuffer, ':');
+                pcEnd = pcEnd+2;
+                strcpy(cBuffer, pcEnd);
+                
+                //printk("double value: %s\n\r",cBuffer);
+				dFlowRate = atof(cBuffer);
+                printk("flow: %f\n\r",dFlowRate);
                 if (dFlowRate <= GetMinGPM())
                 {
                     printk("WARN: flowrate is below minGPM\n\r");
                 }
 				memset(cBuffer, 0, sizeof(cBuffer));
 				sprintf(cBuffer, "%f", dFlowRate);
-				AddItemtoJsonObject(&pMainObject, STRING, "FlowRate", cBuffer, sizeof(float));
+                
+				AddItemtoJsonObject(&pMainObject, NUMBER_FLOAT, "FlowRate", &dFlowRate, sizeof(float));
 				SetRxStatus(false);
 			}
+            else
+            {
+                printk("Not ecieved data from msp\n\r");
+            }
 
 			if (GetCurrentTime(&llEpochNow))
 			{
-				AddItemtoJsonObject(&pMainObject, NUMBER, "TS", &llEpochNow, sizeof(long long));
+				AddItemtoJsonObject(&pMainObject, NUMBER_INT, "TS", &llEpochNow, sizeof(long long));
 			}
 
 			cJsonBuffer = cJSON_Print(pMainObject);
