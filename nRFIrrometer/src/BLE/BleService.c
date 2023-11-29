@@ -37,6 +37,7 @@ static bool bConnected = false;
 static bool hNotificationEnabled = false; 
 static bool bConfigNotifyEnabled = false;
 struct nvs_fs *FileSys;
+uint32_t ucIdx = 0;
 
 /****************************FUNCTION DEFINITION********************************/
 
@@ -245,42 +246,74 @@ int VisenseConfigDataNotify(uint8_t *pucCongigData, uint16_t unLen)
  * @param 	len : length of data
  * @return 	true for success
 */
-bool VisenseHistoryDataNotify(void)  //history
+bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 {
 	bool bRetVal = false;
-	uint8_t ucIdx = 1;
-	char NotifyBuf[ADV_BUFF_SIZE];
+	bool bFullDataRead = false;
+	char NotifyBuf[NOTIFY_BUFFER_SIZE];
 	int nRetVal = 0;
-	int uReadCount = 0;
+	uint32_t uFlashCounter = 0;
+	if (ucIdx > ulWritePos)
+	{
+		uFlashCounter = ucIdx - ulWritePos;
+	}
 
-	for (ucIdx = 1 ; ucIdx < NUMBER_OF_ENTRIES; ucIdx++)
+	while(ucIdx <= NUMBER_OF_ENTRIES)
 	{	
-		memset(NotifyBuf, 0, ADV_BUFF_SIZE);
-		uReadCount = readJsonToFlash(FileSys, ucIdx, 0, NotifyBuf, ADV_BUFF_SIZE);
-		printk("\nId: %d, Ble_Stored_Data: %s\n",ucIdx, NotifyBuf);
-		if (uReadCount < 0)
+		if (!IsConnected())
 		{
 			break;
 		}
-	
+		
+		memset(NotifyBuf, '\0', NOTIFY_BUFFER_SIZE);
+		nRetVal = readJsonFromExternalFlash(NotifyBuf, ucIdx, 256);
+		printk("\nId: %d, Ble_Stored_Data: %s\n",ucIdx, NotifyBuf);
+		if (NotifyBuf[0] != 0x7B)
+		{
+			bFullDataRead = true;
+			break;
+		}
 		k_msleep(100);
 
-		if (uReadCount > 0)
+		if (nRetVal)
 		{
 			nRetVal = bt_gatt_notify(NULL, &VisenseService.attrs[8], 
-			NotifyBuf,uReadCount);
+			NotifyBuf, strlen(NotifyBuf));
 			if (nRetVal < 0)
 			{
 				printk("Notification failed%d\n\r",nRetVal);
 			}
-			bRetVal = true;
+			
+		}
+		ucIdx++;
+		uFlashCounter++;
+		if (ucIdx == NUMBER_OF_ENTRIES)
+		{
+			ucIdx = 0;
+		}
+		if (uFlashCounter > NUMBER_OF_ENTRIES )
+		{
+			bFullDataRead = true;
+			break;	
 		}
 		
+		
+		// bRetVal = true;
 	}
 	
 	hNotificationEnabled = false;     //history callback set 
-	deleteFlash(FileSys,0,50);
-	printk("Flash Cleared");
+	if (bFullDataRead == true) 
+	{
+		if(!EraseExternalFlash(SECTOR_COUNT))
+		{
+			printk("Flash erase failed!\n");
+			return bRetVal;
+		}
+		printk("Flash Cleared");
+		ucIdx = 0;
+		bRetVal = true;
+	}
+	
 	return bRetVal;
 }
 

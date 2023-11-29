@@ -20,8 +20,10 @@ uint8_t ucAdvBuffer[ADV_BUFF_SIZE] = {0x00, 0x00, 0x00, 0x00, 0x00};
 
 static const struct bt_data ad[] = {
 	BT_DATA_BYTES(BT_DATA_FLAGS, (BT_LE_AD_GENERAL | BT_LE_AD_NO_BREDR)),
-	BT_DATA(BT_DATA_NAME_SHORTENED, DEVICE_NAME, DEVICE_NAME_LEN),
-	BT_DATA(BT_DATA_MANUFACTURER_DATA, ucAdvBuffer, ADV_BUFF_SIZE)
+	BT_DATA(BT_DATA_NAME_SHORTENED, DEVICE_NAME, DEVICE_NAME_LEN)
+    #ifdef EXT_ADV
+    ,BT_DATA(BT_DATA_MANUFACTURER_DATA, ucAdvBuffer, ADV_BUFF_SIZE)
+    #endif
 };
 
 /**********************************FUNCTION DEFINITION****************/
@@ -72,8 +74,11 @@ int InitExtAdv(void)
 int StartAdv(void)
 {
 	int nError = 0;
-
+#ifdef EXT_ADV
 	nError = bt_le_ext_adv_start(adv, NULL);
+#else
+    nError = bt_le_adv_start(BT_LE_ADV_CONN, ad, ARRAY_SIZE(ad), NULL, 0);
+#endif    
 
 	if (nError) 
     {
@@ -137,7 +142,11 @@ bool BleStopAdv()
     int nError = 0;
     bool bRetVal = false;
 
+#ifdef EXT_ADV
     nError = bt_le_ext_adv_stop(adv);
+#else    
+    nError = bt_le_adv_stop();
+#endif    
 
  	if (!nError) 
     {
@@ -173,4 +182,26 @@ bool EnableBLE()
     }
 
     return bRetVal;
+}
+
+/**
+ * @brief function to start advertising
+ * @return nError - 0 for success
+*/
+int StartAdvertising(void)
+{
+	int nError = 0;
+
+	nError = bt_le_adv_start(BT_LE_ADV_CONN, ad, ARRAY_SIZE(ad), NULL, 0);
+
+	if (nError) 
+    {
+		printk("Failed to start advertising set (err %d)\n", nError);
+	}
+    else
+    {
+        printk("Advertiser %p set started\n", adv);
+    }
+
+    return nError;
 }

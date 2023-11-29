@@ -18,6 +18,12 @@
 /***************************************MACROS**********************************/
 #define ADC_READING_LOWER  0
 #define ADC_READING_UPPER  1024
+#define IRROMETER_1_ERROR   (1<<2)
+#define IRROMETER_1_OK      ~(1<<2)
+#define IRROMETER_2_ERROR   (1<<3)
+#define IRROMETER_2_OK      ~(1<<3)
+#define IRROMETER_3_ERROR   (1<<4)
+#define IRROMETER_3_OK      ~(1<<4)
 
 /***************************************TYPEDEFS*********************************/
 
@@ -26,7 +32,7 @@ void InitAdc(nrf_saadc_input_t eAdcChannel, int nChannelIdx);
 void InitIrroMtrExcitingPins(void);
 float AnalogRead(void);
 int GetAdcResult(struct gpio_dt_spec *psExcitingGpio);
-bool ReadFromADC(nrf_saadc_input_t eAdcChannel, int nChannelIdx, int *pnWM_CB);
+bool ReadFromADC(uint8_t ucMuxChannel, int *pnWM_CB);
 int CalculateCBvalue(int res, float TC, float cF);
 struct device *GetADCdevice(void);
 int GetADCReadingInForwardBias(void);

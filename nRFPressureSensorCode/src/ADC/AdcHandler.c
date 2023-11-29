@@ -22,6 +22,8 @@ static uint32_t pressureZero = 119; //analog reading of pressure transducer at 0
 static uint32_t pressureMax = 564; //analog reading of pressure transducer at 100psi
                             //PressureMax = 2.5/3.3V*1024~775  taken from Arduino code refernce from visense  
  struct device *pAdc = NULL;
+static uint16_t unPressureMin = 0; // minimum pressure value set by user for notification and flash storage
+bool bPressureMinSet = false;
 /***************************************FUNCTION DEFINITIONS********************/
 /**
  * @brief  This function is to read raw adc value
@@ -207,7 +209,7 @@ void SetPressureZeroSetStatus(bool bStatus)
 */
 void SetPressureMaxSetStatus(bool bStatus)
 {
-    bPressureZeroSet = bStatus;
+    bPressureMaxSet = bStatus;
 }
 
 /**
@@ -219,4 +221,45 @@ struct device *GetADCHandle()
 {
     pAdc = device_get_binding("arduino_adc");
     return pAdc;
+}
+
+/**
+ * @brief Set pressure min
+ * @param unPressureVal : pressure value
+ * @return None
+*/
+void SetPressureMin(uint16_t unPressureVal)
+{
+    unPressureMin = unPressureVal;
+    bPressureMinSet = true;
+}
+
+/**
+ * @brief Get pressure min
+ * @param None
+ * @return pressure min
+*/
+uint16_t GetPressureMin()
+{
+    return unPressureMin;
+}
+
+/**
+ * @brief Check if pressure min is set
+ * @param None
+ * @return pressure min status
+*/
+bool IsPressureMinSet()
+{
+    return bPressureMinSet;
+}
+
+/**
+ * @brief Set pressure min status
+ * @param bStatus : status to set
+ * @return None
+*/
+void SetPressureMinSetStatus(bool bStatus)
+{
+    bPressureMinSet = bStatus;
 }

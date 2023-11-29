@@ -37,5 +37,9 @@ bool IsPressureMaxSet();
 void SetPressureZeroSetStatus(bool bStatus);
 void SetPressureMaxSetStatus(bool bStatus);
 struct device *GetADCHandle();
+void SetPressureMin(uint16_t unPressureVal);
+uint16_t GetPressureMin();
+bool IsPressureMinSet();
+void SetPressureMinSetStatus(bool bStatus);
 
 #endif
