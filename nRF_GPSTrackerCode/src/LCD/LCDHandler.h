@@ -38,6 +38,8 @@
 #define LCD_SHIFT_LEFT         0x18
 #define LCD_SHIFT_RIGHT        0x1E
 #define LCD_TYPE               2       // 0 -> 5x7 | 1 -> 5x10 | 2 -> 2 lines
+#define LCD_WRITE_FAILED        (1<<3)
+#define LCD_WRITE_OK           ~(1<<3)
 
 
 /***************************TYPEDEFS********************************/

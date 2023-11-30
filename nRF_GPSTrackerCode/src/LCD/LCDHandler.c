@@ -8,6 +8,7 @@
 
 /***************************INCLUDES*********************************/
 #include "LCDHandler.h"
+#include "SystemHandler.h"
 
 /***************************MACROS***********************************/
 #define LCD_WR_ADDR     0x4E
@@ -20,6 +21,7 @@
 static const struct device *psI2CHandle = DEVICE_DT_GET(DT_NODELABEL(i2c0));
 unsigned char RS = 0;
 unsigned char BackLight_State = LCD_NOBACKLIGHT;
+
 
 /***************************FUNCTION DECLARATION*********************/
 
@@ -50,7 +52,8 @@ void InitLCD(void)
 
 void IOExpanderWrite(unsigned char Data) 
 {
-
+    uint32_t *pDiagData = NULL;
+    pDiagData = GetDiagnosticData();
     if (!device_is_ready(psI2CHandle))
     {
         printk("Error: I2C not ready\n");
@@ -58,7 +61,15 @@ void IOExpanderWrite(unsigned char Data)
     }
 
     Data = Data | LCD_BACKLIGHT;
-    i2c_write(psI2CHandle, &Data, 1, LCD_DEV_ADDR);
+   if(i2c_write(psI2CHandle, &Data, 1, LCD_DEV_ADDR)) 
+   {
+      printk("Error: I2C write failed\n");
+     *pDiagData = *pDiagData | LCD_WRITE_FAILED; 
+   } 
+   else 
+   {
+      *pDiagData = *pDiagData & LCD_WRITE_OK; 
+   }                          
 }
 
 void WriteNibbleToLCD(unsigned char Nibble, unsigned char RS) 
@@ -67,7 +78,7 @@ void WriteNibbleToLCD(unsigned char Nibble, unsigned char RS)
   Nibble |= RS;
   IOExpanderWrite(Nibble | 0x04);
   IOExpanderWrite(Nibble & 0xFB);
-  k_usleep(50);
+  k_usleep(10);
 }
 
 void WriteLCDCmd(unsigned char CMD) 
