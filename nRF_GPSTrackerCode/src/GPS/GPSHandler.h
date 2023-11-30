@@ -17,7 +17,8 @@
 #include <stdlib.h>
 
 /***************************MACROS**********************************/
-
+#define GPS_FIX_OK        ~(1<<4)
+#define GPS_FIX_FAILED     (1<<4)
 
 /***************************TYPEDEFS********************************/
 
@@ -25,9 +26,13 @@
 bool InitUart(void);
 bool ReadLocationData(char *pcLocation);
 void SendData(const char *pcData);
-bool ConvertNMEAtoCoordinates(char *pcLocData, float *pfLat, float *pfLon);
+bool ConvertNMEAtoCoordinates(char *pcLocData, double *pfLat, double *pfLon);
 bool ReadSOGData(float *pfSOG);
-
+bool polygonPoint(double latitude, double longitude, int fenceSize);
+void setLat(double);
+void setLon(double);
+float GetSogMax();
+void SetSogMax(float fVal);
 #endif
 
 //EOF

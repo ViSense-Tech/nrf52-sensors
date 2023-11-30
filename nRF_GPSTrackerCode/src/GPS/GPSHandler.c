@@ -8,6 +8,9 @@
 
 /***************************INCLUDES*********************************/
 #include "GPSHandler.h"
+#include<math.h>
+#include "JsonHandler.h"
+#include "BleService.h"
 
 /***************************MACROS***********************************/
 #define MSG_SIZE 255
@@ -20,6 +23,16 @@ typedef enum __eRxState
  END
 }_eRxState;
 
+#ifdef HAVERSINE
+/*haversine function takes in a location and sets a geofence as a circle or raduis dDistance*/
+ double hardcodedLat = 10.055555555555557;  
+ double hardcodedLon = -76.35472222222222;
+ double dDistance=0;
+ #define EARTH_RADIUS 6371000.0
+#endif
+#define M_PI		3.14159265358979323846
+#define SCALING_FACTOR 100000000000000.0
+
 
 /****************************GLoBALS*********************************/
 static const struct device *const psUartDev = DEVICE_DT_GET(DT_NODELABEL(uart0));
@@ -28,11 +41,31 @@ static char cRxBuffer[MSG_SIZE] = {0};
 static int nRxBuffIdx = 0;
 static bool bRxCmplt = false;
 static _eRxState RxState = START;
+static float fSOG = 0.0;
+
+
+double latitude;
+double longitude;
+
+int fence;
+char cumulativeAngle[12];
+int targetStatus;
 
 /***************************FUNCTION DECLARATION*********************/
 static void ReadGPSPacket(uint8_t ucByte);
 
 /*****************************FUNCTION DEFINITION***********************/
+void SetSogMax(float fVal)
+{
+    fSOG = fVal;
+}
+
+float GetSogMax()
+{
+    return fSOG;
+}
+// extern void SetSleeptime(uint32_t *ucbuffer2);
+// extern void SetTime(uint32_t *ucbuffer2);
 /**
  * @brief  Send data via uart
  * @param  pcData : data to send
@@ -61,12 +94,14 @@ void SendData(const char *pcData)
  * @param pfLon     : Longitude coordinate
  * @return true for success
 */
-bool ConvertNMEAtoCoordinates(char *pcLocData, float *pfLat, float *pfLon)
+bool ConvertNMEAtoCoordinates(char *pcLocData, double *pfLat, double *pfLon)
 {
     char *cSubstr = NULL;
     bool bRetVal = false;
-    float fDegrees = 0.00;
-    float fMinutes = 0;
+    double fDegrees = 0.00;
+    double fMinutes = 0;
+    int temp = 0;
+
 
     if (pcLocData && pfLat && pfLon)
     {
@@ -78,9 +113,14 @@ bool ConvertNMEAtoCoordinates(char *pcLocData, float *pfLat, float *pfLon)
         }
         
         *pfLat = atof(cSubstr);
+        printk("Latitude %f\n\r", *pfLat);
         fDegrees = *pfLat;
-        fMinutes = (int)fDegrees%100;
-        *pfLat = ((int)fDegrees/100) + (fMinutes/60);
+        temp = fDegrees/100;
+        fMinutes = fDegrees/ 100;
+        fMinutes = fMinutes - temp;
+        fMinutes = fMinutes * 100;
+        printk("min: %f", fMinutes);
+        *pfLat = temp + (fMinutes/60);
         cSubstr = strtok(NULL, ",");
 
         if (cSubstr == NULL)
@@ -98,9 +138,14 @@ bool ConvertNMEAtoCoordinates(char *pcLocData, float *pfLat, float *pfLon)
         if (strlen(cSubstr) > 2)
         {
             *pfLon = atof(cSubstr);
+            printk("Longtude %f\n\r", *pfLon);
             fDegrees = *pfLon;
-            fMinutes = (int)fDegrees%100;
-            *pfLon = ((int)fDegrees/100) + (fMinutes/60);
+            temp = fDegrees/100;
+            fMinutes = fDegrees/ 100;
+            fMinutes = fMinutes - temp;
+            fMinutes = fMinutes * 100;
+            printk("min: %f", fMinutes);
+            *pfLon = temp + (fMinutes/60);
             bRetVal = true;
         }
     }
@@ -154,6 +199,7 @@ bool ProcessRxdData(void)
         /* read until FIFO empty */
     if (uart_fifo_read(psUartDev, &ucByte, 1) > 0) 
     {
+       // printk("%c", (char)ucByte);
         ReadGPSPacket(ucByte);
         bRetval = true;
     }
@@ -319,4 +365,65 @@ bool ReadSOGData(float *pfSOG)
     }
 
     return bRetVal;
+}
+
+#ifdef HAVERSINE 
+/**
+ * @brief  haversine Distance calculation to find if the device is inside the fence or not
+ * @param  None
+ * @return 0 on exit
+*/
+double haversineDistance(double lat1, double lon1, double lat2, double lon2) {                                     
+    double dLat = deg2rad(lat2 - lat1);
+    double dLon = deg2rad(lon2 - lon1);
+    
+    double a = sin(dLat / 2) * sin(dLat / 2) + cos(deg2rad(lat1)) * cos(deg2rad(lat2)) * sin(dLon / 2) * sin(dLon / 2);
+    double c = 2 * atan2(sqrt(a), sqrt(1 - a));
+    
+    double distance = EARTH_RADIUS * c;
+    return distance;
+}
+#endif
+
+/**
+ * @brief  Point-in-polygon algorithm
+ * @param  None
+ * @return 0 on exit
+*/
+bool polygonPoint(double latitude, double longitude, int fenceSize) 
+{
+    double vectors[fenceSize][2];
+	_sFenceData *psFenceData = NULL;
+    psFenceData = GetFenceTable();
+    for(int i = 0; i < fenceSize; i++) {
+        vectors[i][0] = (psFenceData->dLatitude)- latitude;
+        vectors[i][1] = (psFenceData->dLongitude) - longitude; 
+        
+        //printk("Lat[%d]: %lf Lon[%d]: %lf\n\r", i, psFenceData->dLatitude, i, psFenceData->dLongitude);
+
+        
+        psFenceData++;
+    }
+    
+    double angle = 0;
+    double num, den;
+
+    for(int i = 0; i < fenceSize; i++) {
+        num = (vectors[i % fenceSize][0]) * (vectors[(i + 1) % fenceSize][0]) + (vectors[i % fenceSize][1]) * (vectors[(i + 1) % fenceSize][1]);
+        den = (sqrt(pow(vectors[i % fenceSize][0], 2) + pow(vectors[i % fenceSize][1], 2))) * 
+              (sqrt(pow(vectors[(i + 1) % fenceSize][0], 2) + pow(vectors[(i + 1) % fenceSize][1], 2)));
+
+        angle = angle + (180 * acos(num / den) / M_PI);
+    }
+
+    if (angle > 355 && angle < 365) { 
+        targetStatus = 1;
+    } else {
+        targetStatus = 0;
+    }
+    // SetConfigChangeLat(false);
+    // SetConfigChangeLon(false);
+    printk("Target: %d\n\r",targetStatus);
+    printk("Angle: %lf\n\r",angle);
+    return targetStatus;
 }
