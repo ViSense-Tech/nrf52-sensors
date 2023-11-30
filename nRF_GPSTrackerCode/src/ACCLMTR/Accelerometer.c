@@ -9,6 +9,7 @@
 /***************************INCLUDES*********************************/
 #include "LCDHandler.h"
 #include "Accelerometer.h"
+#include "SystemHandler.h"
 
 /***************************MACROS**********************************/
 
@@ -73,8 +74,10 @@ bool ReadFromAccelerometer(_sAcclData *psAcclData)
     struct device *psI2CDevice = NULL;
     uint8_t ucAcclbuffer[9] = {0};
     uint8_t ucbyte;
+    uint32_t *pDiagData = NULL;
 
     psI2CDevice = GetI2CDevice();
+    pDiagData = GetDiagnosticData();
      if (psI2CDevice && psAcclData)
     {
         
@@ -84,11 +87,18 @@ bool ReadFromAccelerometer(_sAcclData *psAcclData)
             psAcclData->unAccX = ucAcclbuffer[0] | ucAcclbuffer[1] << 8;
             psAcclData->unAccY = ucAcclbuffer[2] | ucAcclbuffer[3] << 8;
             psAcclData->unAccZ = ucAcclbuffer[4] | ucAcclbuffer[5] << 8;
+           *pDiagData = *pDiagData & ACCLMTR_READ_OK;
+
             bRetVal = true;
         }
         else
         {
-            printk("read failed\n\r");
+            printk("Accelerometer i2c read failed\n\r");
+            //diag of accelerometer
+           *pDiagData = *pDiagData | ACCLMTR_READ_FAILED;
+            
+        
+
         }
     }
 
