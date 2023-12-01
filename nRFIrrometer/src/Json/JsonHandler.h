@@ -18,7 +18,8 @@
 /**************************************TYPEDEFS***************************/
 typedef enum __eJsonDataType
 {
-    NUMBER,
+    NUMBER_INT,
+    NUMBER_FLOAT,
     STRING,
     ARRAY,
     OBJECT,
@@ -28,4 +29,5 @@ typedef enum __eJsonDataType
 
 bool AddItemtoJsonObject(cJSON **pcJsonHandle, _eJsonDataType JsondataType, const char *pcKey, 
                     void *pcValue, uint8_t ucLen);
+bool ParseRxData(uint8_t *pData,const char *pckey, uint8_t ucLen, uint64_t *pucData);
 #endif

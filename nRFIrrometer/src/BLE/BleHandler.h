@@ -17,7 +17,8 @@
 #include <zephyr/bluetooth/gatt.h>
 
 /***************************************MACROS*******************************/
-#define ADV_BUFF_SIZE           (212)
+#define ADV_BUFF_SIZE           (247)
+//#define EXT_ADV               /*Uncomment this line to enable extended advertising*/
 
 /**************************************TYPEDEFS******************************/
 
@@ -27,6 +28,7 @@ uint8_t *GetAdvBuffer();
 int InitExtAdv(void);
 int StartAdv(void);
 int UpdateAdvData(void);
-// bool BleStopAdvertise();
+bool BleStopAdv();
+
 
 #endif

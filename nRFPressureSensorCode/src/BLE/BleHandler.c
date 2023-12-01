@@ -20,8 +20,11 @@ uint8_t ucAdVertsingBuffer[ADV_BUFF_SIZE] = {0x00, 0x00, 0x00, 0x00, 0x00};
 
 static const struct bt_data ad[] = {
 	BT_DATA_BYTES(BT_DATA_FLAGS, (BT_LE_AD_GENERAL | BT_LE_AD_NO_BREDR)),
-	BT_DATA(BT_DATA_NAME_SHORTENED, DEVICE_NAME, DEVICE_NAME_LEN),
-	BT_DATA(BT_DATA_MANUFACTURER_DATA, ucAdVertsingBuffer, ADV_BUFF_SIZE)
+	BT_DATA(BT_DATA_NAME_COMPLETE, DEVICE_NAME, DEVICE_NAME_LEN)
+#ifdef EXTENDED_ADV
+	,BT_DATA(BT_DATA_MANUFACTURER_DATA, ucAdVertsingBuffer, ADV_BUFF_SIZE)
+#endif
+
 };
 
 /**********************************FUNCTION DEFINITION****************/
@@ -94,22 +97,24 @@ int InitExtendedAdv(void)
 int StartAdvertising(void)
 {
 	int nError = 0;
-
+#ifdef EXTENDED_ADV
 	nError = bt_le_ext_adv_start(adv, NULL);
-
+#else
+	nError = bt_le_adv_start(BT_LE_ADV_CONN, ad, ARRAY_SIZE(ad), NULL, 0);
+#endif
 	if (nError) 
     {
 		printk("Failed to start advertising set (err %d)\n", nError);
 	}
     else
     {
-        printk("Advertiser %p set started\n", adv);
+        printk("Advertiser set started\n");
     }
 
     return nError;
 }
 
-
+#ifdef EXTENDED_ADV
 /**
  * @brief function to update advertising data
  * @return nError - 0 for success
@@ -138,7 +143,7 @@ int UpdateAdvertiseData(void)
     return nError;
     
 }
-
+#endif
 /**
  * @brief Getting advertising buffer 
  * @param None
@@ -153,9 +158,11 @@ bool BleStopAdvertise()
 {
     int nError = 0;
     bool bRetVal = false;
-
+#ifdef EXTENDED_ADV
     nError = bt_le_ext_adv_stop(adv);
-
+#else
+    nError = bt_le_adv_stop();
+#endif
  	if (!nError) 
     {
         bRetVal = true;

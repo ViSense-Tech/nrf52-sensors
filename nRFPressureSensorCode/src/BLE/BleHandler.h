@@ -17,7 +17,8 @@
 #include <zephyr/bluetooth/gatt.h>
 
 /***************************************MACROS*******************************/
-#define ADV_BUFF_SIZE           (100)
+#define ADV_BUFF_SIZE           (180)
+// #define EXTENDED_ADV
 /**************************************TYPEDEFS******************************/
 
 /*************************************FUNCTION DECLARATION*******************/

@@ -8,297 +8,494 @@
 
 
 /*******************************INCLUDES****************************************/
-#include <zephyr/pm/pm.h>
-#include <zephyr/pm/device.h>
-#include <zephyr/drivers/gpio.h>
-#include <zephyr/sys/printk.h>
-#include <zephyr/sys/util.h>
-#include <nrfx_example.h>
-#include <saadc_examples_common.h>
-#include <nrfx_saadc.h>
-#include <nrfx_log.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include "Json/cJSON.h"
 #include "BleHandler.h"
 #include "BleService.h"
 #include "JsonHandler.h"
 #include "RtcHandler.h"
+#include "nvs_flash.h"
+#include "SystemHandler.h"
+#include "AdcHandler.h"
+#include "Timerhandler.h"
+#include "TempSensor.h"
 
 /*******************************MACROS****************************************/
 #define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
-#define ADC_READING_LOWER  0
-#define ADC_READING_UPPER  1024
-#define ALIVE_TIME         10 //Time the device will be active after a sleep time(in seconds)
-#define SLEEP_TIME         30
-#define TICK_RATE          32768
+#define TIME_STAMP_ERROR   (1<<1)
+#define TIME_STAMP_OK      ~(1<<1)
+
 
 /*******************************GLOBAL VARIABLES********************************/
-int  sAdcReadValue1 = 0;
-int  sAdcReadValue2 = 0;
-
-const int Rx = 10000;
-const float default_TempC = 24.0;
-const long open_resistance = 35000;
-const long short_resistance = 200;
-const long short_CB = 240, open_CB = 255;
-const float SupplyV = 3.3;
-const float cFactor = 1.1;
 cJSON *pcData = NULL;
-const struct device *pAdc = NULL;
-const struct gpio_dt_spec sSensorPwSpec1 = GPIO_DT_SPEC_GET(DT_ALIAS(testpin0), gpios);
-const struct gpio_dt_spec sSensorPwSpec2 = GPIO_DT_SPEC_GET(DT_ALIAS(testpin1), gpios);
-const struct gpio_dt_spec sSleepStatusLED = GPIO_DT_SPEC_GET(DT_ALIAS(led0), gpios);
-const struct device *psUartHandle = DEVICE_DT_GET(DT_NODELABEL(uart0));
+uint8_t *pucAdvBuffer = NULL;
+struct nvs_fs fs; 
+_sConfigData sConfigData = {0};
+struct nvs_fs fs;    //file system
+struct nvs_fs sConfigFs;
+uint32_t uFlashIdx = 0;  // initialise data counter
 
+/*******************************FUNCTION DECLARATION********************************/
+static void PrintBanner();
+static bool InitAllModules();
+static void InitDataPartition();
+static bool InitBle();
+static bool InitPowerManager();
+static bool CheckForConfigChange();
+static bool GetTimeFromRTC();
+static bool UpdateConfigurations();
+static bool WriteConfiguredtimeToRTC(void);
+static void SendConfigDataToApp();
+static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength);
+/*This function is declared here for now. But prototype is in SystemHandler
+will remove this from here later now did this for completing the functionality*/
+uint32_t *GetDiagData();
 
 
 /*******************************FUNCTION DEFINITIONS********************************/
 
 /**
- * @brief  This function is to read raw adc value
- * @param  None 
- * @return float - ADC result
+ * @brief Main function
 */
-float AnalogRead(void)
+int main(void)
 {
+    int Ret;
+    char cbuffer[50] = {0};
+    char *cJsonBuffer = NULL;
+    cJSON *pMainObject = NULL;
+    int nCBValue = 0;
+    uint32_t ulsleepTime = 0;
+    cJSON *pSensorObj = NULL;
+    long long llEpochNow = 0;
+    double dTemperature = 0.0;
+    int64_t Timenow =0;
+    int ADCReading1;
+    int ADCReading2;
+    uint32_t *pDiagData = NULL;
 
-    nrfx_err_t status;
-    nrf_saadc_value_t sample_value;
+    PrintBanner();
+    printk("VISENSE_IRROMETER_FIRMWARE_VERSION: %s\n\r", VISENSE_IRROMETER_FIRMWARE_VERSION);
+    k_msleep(1000);
+    printk("FEATURES: %s", VISENSE_IRROMETER_FEATURES);
+    k_msleep(1000);
+    printk("\n\r");
 
-    status = nrfx_saadc_buffer_set(&sample_value, 1);
-    NRFX_ASSERT(status == NRFX_SUCCESS);
-    
-    status = nrfx_saadc_mode_trigger();
-    NRFX_ASSERT(status == NRFX_SUCCESS);
-    return sample_value;
-}
-
-/**
- * @brief Get ADC reading
- * @param Sensor excitation pins
- * @return ADC readout
-*/
-int GetAdcResult( const struct gpio_dt_spec *excite_pin_spec)
-{
-    int16_t AdcReadValue ;
-    if (!device_is_ready(excite_pin_spec->port)) {
-        printk("Error: %s device not ready\n", excite_pin_spec->port->name);
-        return -1;
+    if (!InitAllModules())
+    {
+            printk("ERROR: Initialising all modules failed \n\r");
     }
-    gpio_pin_set(excite_pin_spec->port, excite_pin_spec->pin, 1);
-    k_sleep(K_USEC(90)); 
 
-    AdcReadValue = AnalogRead();
-
-    gpio_pin_set(excite_pin_spec->port, excite_pin_spec->pin, 0);
-    k_sleep(K_MSEC(100)); 
-
-    
-    return AdcReadValue;
-}
-
-/**
- * @brief Calculating CB value 
- * @param res: resistance value calculated
- * @param TC:soil temperature
- * @param CF
- * @return CB value
-*/
-int CalculateCBvalue(int res, float TC, float cF)
-{  
-
-	int WM_CB;
-	float resK = res / 1000.0;
-	float tempD = 1.00 + 0.018 * (TC - 24.00);
-
-	if (res > 550.00)
-    { 
-		if (res > 8000.00)
-        { 
-			WM_CB = (-2.246 - 5.239 * resK * (1 + .018 * (TC - 24.00)) - .06756 * resK * resK * (tempD * tempD)) * cF;
-		}
-        else if (res > 1000.00)
-        {
-			WM_CB = (-3.213 * resK - 4.093) / (1 - 0.009733 * resK - 0.01205 * (TC)) * cF ;
-		}
-        else
-        {
-			WM_CB = (resK * 23.156 - 12.736) * tempD;
-		}
-	} 
-    else
+    if (!CheckForConfigChange())
     {
-		if (res > 300.00)
-        {
-			WM_CB = 0.00;
-		}
-		if (res < 300.00 && res >= short_resistance)
-        {
-			WM_CB = short_CB;
-			printk("Sensor Short WM \n");
-		}
-	}
-	if (res >= open_resistance || res==0)
+        printk("ERROR: Config check failed\n\r");
+    }    
+
+    if (!GetTimeFromRTC())
     {
-		WM_CB = open_CB;
-	}
-	
-	return WM_CB;
+        printk("WARN: Getting time from RTC failed\n\r");
+    }
+
+    InitIrroMtrExcitingPins();
+    InitAdc(NRF_SAADC_INPUT_AIN1, 1);
+    pDiagData = GetDiagData();
+    while (1) 
+    {
+        #ifdef SLEEP_ENABLE
+        Timenow = sys_clock_tick_get();
+
+        while(sys_clock_tick_get() - Timenow < (ALIVE_TIME * TICK_RATE))
+        {
+        #endif    
+
+            if (UpdateConfigurations())
+            {
+                printk("INFO: Updating config \n\r");           
+            }
+
+            WriteConfiguredtimeToRTC();
+            SendConfigDataToApp();
+
+            pMainObject = cJSON_CreateObject();
+           
+           if (ReadFromADC(0,  &nCBValue))
+            {
+                if(nCBValue >= 255)
+                {
+                    *pDiagData = *pDiagData | IRROMETER_1_ERROR;
+                }
+                else
+                {
+                    *pDiagData = *pDiagData & IRROMETER_1_OK;
+                }
+                memset(cbuffer, '\0', sizeof(cbuffer));
+                sprintf(cbuffer,"CB=%d", abs(nCBValue));
+                printk("Data:%s\n", cbuffer);
+                pSensorObj=cJSON_AddObjectToObject(pMainObject, "S1");
+                ADCReading1 = GetADCReadingInForwardBias();
+                ADCReading2 = GetADCReadingInReverseBias();
+                AddItemtoJsonObject(&pSensorObj, NUMBER_INT, "ADC1", &ADCReading1, sizeof(uint16_t));
+                AddItemtoJsonObject(&pSensorObj, NUMBER_INT, "ADC2", &ADCReading2, sizeof(uint16_t));
+                AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer)); 
+            }
+
+            if (ReadFromADC(1,  &nCBValue))
+            {
+                if(nCBValue >= 255)
+                {
+                    *pDiagData = *pDiagData | IRROMETER_2_ERROR;
+                }
+                else
+                {
+                    *pDiagData = *pDiagData & IRROMETER_2_OK;
+                }
+                memset(cbuffer, '\0', sizeof(cbuffer));
+                sprintf(cbuffer,"CB=%d", abs(nCBValue));
+                printk("Data:%s\n", cbuffer);
+                pSensorObj=cJSON_AddObjectToObject(pMainObject, "S2");
+                ADCReading1 = GetADCReadingInForwardBias();
+                ADCReading2 = GetADCReadingInReverseBias();
+                AddItemtoJsonObject(&pSensorObj, NUMBER_INT, "ADC1", &ADCReading1, sizeof(uint16_t));
+                AddItemtoJsonObject(&pSensorObj, NUMBER_INT, "ADC2", &ADCReading2, sizeof(uint16_t));
+                AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer));        
+            }
+
+            if (ReadFromADC(2, &nCBValue))
+            {
+                if(nCBValue >= 255)
+                {
+                    *pDiagData = *pDiagData | IRROMETER_3_ERROR;
+                }
+                else
+                {
+                    *pDiagData = *pDiagData & IRROMETER_3_OK;
+                }
+                memset(cbuffer, '\0', sizeof(cbuffer));
+                sprintf(cbuffer,"CB=%d", abs(nCBValue));
+                printk("Data:%s\n", cbuffer);
+                pSensorObj=cJSON_AddObjectToObject(pMainObject, "S3");
+                ADCReading1 = GetADCReadingInForwardBias();
+                ADCReading2 = GetADCReadingInReverseBias();
+                AddItemtoJsonObject(&pSensorObj, NUMBER_INT, "ADC1", &ADCReading1, sizeof(uint16_t));
+                AddItemtoJsonObject(&pSensorObj, NUMBER_INT, "ADC2", &ADCReading2, sizeof(uint16_t));
+                AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer));
+            }
+           
+            if (GetCurrentTime(&llEpochNow))
+            {
+                printk("CurrentTime=%llu\n\r", llEpochNow);
+            }
+            printCurrentTime();
+            
+            if (ReadTemperatureFromDS18b20(&dTemperature))
+            {
+                AddItemtoJsonObject(&pMainObject, NUMBER_FLOAT, "Temp", &dTemperature, sizeof(double));
+            }
+
+            AddItemtoJsonObject(&pMainObject, NUMBER_INT, "TS", &llEpochNow, sizeof(long long));
+            AddItemtoJsonObject(&pMainObject, NUMBER_INT, "DIAG", pDiagData, sizeof(uint32_t));
+            cJsonBuffer = cJSON_Print(pMainObject);
+
+            pucAdvBuffer[2] = 0x02;
+            pucAdvBuffer[3] = (uint8_t)strlen(cJsonBuffer);
+            memcpy(pucAdvBuffer+4, cJsonBuffer, strlen(cJsonBuffer));
+            printk("JSON:\n*%s#\n", cJsonBuffer);
+
+            SendHistoryDataToApp(cJsonBuffer, strlen(cJsonBuffer));
+
+            if(IsNotificationenabled() && IsConnected())
+            {
+                VisenseSensordataNotify(pucAdvBuffer+2, ADV_BUFF_SIZE);
+            }
+            else if (!IsConnected())
+            {
+                #ifdef EXT_ADV
+                    UpdateAdvData();
+                    StartAdv();
+                #endif
+            }
+            else
+            {
+                //No Op
+            }
+            
+            memset(pucAdvBuffer, 0, ADV_BUFF_SIZE);
+            cJSON_Delete(pMainObject);
+            cJSON_free(cJsonBuffer);
+            
+            #ifndef SLEEP_ENABLE 
+            k_msleep(500);
+            #endif
+        #ifdef SLEEP_ENABLE
+        }
+        #endif
+
+        #ifdef SLEEP_ENABLE
+         k_msleep(1000);
+         EnterSleepMode(GetSleepTime());
+         ExitSleepMode();
+        #endif
+    }
 }
 
 /**
- * @brief calaculating irrometer resistamce
- * @return Resistance value
- * @return None
+ * @brief Initialise power manager module
+ * @param None
+ * @return true for success
 */
-float readWMsensor(void)
-{
-    float SenVWM1 = (sAdcReadValue1 / 1024.0) * SupplyV;
-    float SenVWM2 = (sAdcReadValue2 / 1024.0) * SupplyV;
-
-    printk("Sensor Voltage A: %.3f V\n", SenVWM1);
-    printk("Sensor Voltage B: %.3f V\n", SenVWM2);
-
-    double WM_ResistanceA = (Rx * (SupplyV - SenVWM1) / SenVWM1);
-    double WM_ResistanceB = (Rx * SenVWM2) / (SupplyV - SenVWM2);
-
-    return (WM_ResistanceA + WM_ResistanceB) / 2.0;
-}
-
-/**
- * @brief ADC event handler
-*/
-void saadc_callback(nrfx_saadc_evt_t const * p_event) 
-{
-    // Handle SAADC events here if needed.
-}
-
-/**
- * @brief function to initialize adc
- * @param ADC channel
- * @return void
-*/
-static void InitAdc(nrf_saadc_input_t eAdcChannel, int nChannelIdx)
-{
-    nrfx_err_t status;
-    status = nrfx_saadc_init(NRFX_SAADC_DEFAULT_CONFIG_IRQ_PRIORITY);
-    NRFX_ASSERT(status == NRFX_SUCCESS);
-
-    nrfx_saadc_channel_t saadc_channel = {
-        .channel_config = {
-            .resistor_p        = NRF_SAADC_RESISTOR_DISABLED,
-            .resistor_n        = NRF_SAADC_RESISTOR_DISABLED,
-            .gain              = NRF_SAADC_GAIN1_4,
-            .reference         = NRF_SAADC_REFERENCE_VDD4,
-            .acq_time          = NRF_SAADC_ACQTIME_10US,
-            .mode              = NRF_SAADC_MODE_SINGLE_ENDED,
-            .burst             = NRF_SAADC_BURST_DISABLED,
-        },
-        .pin_p             = eAdcChannel,
-        .pin_n             = NRF_SAADC_INPUT_DISABLED,
-        .channel_index     = nChannelIdx
-    };
-
-    status = nrfx_saadc_channel_config(&saadc_channel);
-    NRFX_ASSERT(status == NRFX_SUCCESS);
-    
-    uint32_t channels_mask = nrfx_saadc_channels_configured_get();
-    status = nrfx_saadc_simple_mode_set(channels_mask,
-                                        NRF_SAADC_RESOLUTION_10BIT,
-                                        NRF_SAADC_OVERSAMPLE_DISABLED,
-                                        NULL);
-    NRFX_ASSERT(status == NRFX_SUCCESS);
-
-    k_sleep(K_MSEC(100)); 
-
-}
-/**
- * @brief function to add json object to json
- * @param pcJsonHandle - Json object handle
- * @param pcKey - Key name
- * @param pcValue - value
- * @param ucLen - value length
- * @return true or false
-*/
-
-static bool SetPMState()
+static bool InitPowerManager()
 {
     bool bRetVal = false;
 
-    struct pm_state_info info =
-    {
-        .exit_latency_us  = 0,
-        .min_residency_us = 0,
-        .state            = PM_STATE_SUSPEND_TO_RAM,
-        .substate_id      = 0,
-    };
+    bRetVal = SetPMState();
 
-    bRetVal = pm_state_force(0, &info);
     return bRetVal;
 }
 
 /**
- * @brief function for entering sleep mode
- * @param nDuration - time interval keeping device in sleep.
+ * @brief Sending history data over ble
+ * @param pcBuffer : data to send
+ * @param unLength : Length of data
  * @return None
 */
-static void EnterSleepMode(int nDuration)
+static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
 {
-    pm_device_action_run(pAdc, PM_DEVICE_ACTION_SUSPEND);
-    pm_device_action_run(&sSensorPwSpec1, PM_DEVICE_ACTION_SUSPEND);
-    pm_device_action_run(&sSensorPwSpec2, PM_DEVICE_ACTION_SUSPEND);
-    BleStopAdv();
-    gpio_pin_set(sSleepStatusLED.port, sSleepStatusLED.pin, 1);
-    k_sleep(K_SECONDS(nDuration));
+
+    char cBuffer[ADV_BUFF_SIZE];
+    bool bRetval = false;
+
+
+    if (pcBuffer)
+    {
+        if(!IsConnected()) // && sConfigData.flag & (1 << 4) can include this condition also if config is mandetory during initial setup
+        {
+            
+            memset(cBuffer, '\0', sizeof(cBuffer));
+            memcpy(cBuffer, pcBuffer, unLength);
+            if(writeJsonToExternalFlash(cBuffer, uFlashIdx,WRITE_ALIGNMENT))
+            {
+                // NO OP
+            }
+            k_msleep(50);
+            if (readJsonFromExternalFlash(cBuffer, uFlashIdx, WRITE_ALIGNMENT))
+            {
+                printk("\nId: %d, Stored_Data: %s\n",uFlashIdx, cBuffer);
+            }
+            uFlashIdx++;
+            sConfigData.flashIdx = uFlashIdx;
+            nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
+            if(uFlashIdx>= NUMBER_OF_ENTRIES)
+            {
+                uFlashIdx = 0;   
+            }
+        }
+ 
+
+        if(IshistoryNotificationenabled() && IsConnected())
+        {
+            if(VisenseHistoryDataNotify(uFlashIdx))
+            {
+                uFlashIdx = 0; 
+                sConfigData.flashIdx = uFlashIdx;
+                nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
+            }
+            
+        }
+
+        bRetval = true;
+    }
+
+    return bRetval;
 }
 
 /**
- * @brief function for exiting sleep mode
- * @return none
+ * @brief send config data to application over ble
+ * @param None
+ * @return None
 */
-static void ExitSleepMode()
+static void SendConfigDataToApp()
 {
-    pm_device_action_run(pAdc, PM_DEVICE_ACTION_RESUME);
-    pm_device_action_run(&sSensorPwSpec1, PM_DEVICE_ACTION_RESUME);
-    pm_device_action_run(&sSensorPwSpec2, PM_DEVICE_ACTION_RESUME);
-    gpio_pin_set(sSleepStatusLED.port, sSleepStatusLED.pin, 0);
+    cJSON *pConfigObject = NULL;
+    char *cJsonConfigBuffer = NULL;
+    uint32_t ulSleepTime = 0;
+    char cBuffer[30] =  {0};
+
+    pConfigObject = cJSON_CreateObject();
+    ulSleepTime = GetSleepTime();
+    strcpy(cBuffer, VISENSE_IRROMETER_FIRMWARE_VERSION);
+    AddItemtoJsonObject(&pConfigObject, STRING, "VERSION", cBuffer, strlen(cBuffer));
+    memset(cBuffer, 0, sizeof(cBuffer));
+    sprintf(cBuffer, "%ds", ulSleepTime);
+    AddItemtoJsonObject(&pConfigObject, STRING, "Sleep", cBuffer, strlen(cBuffer));
+    cJsonConfigBuffer = cJSON_Print(pConfigObject);
+    printk("ConfigJSON:\n%s\n", cJsonConfigBuffer);
+
+    if (IsConfigNotifyEnabled())
+    {
+        VisenseConfigDataNotify(cJsonConfigBuffer, (uint16_t)strlen(cJsonConfigBuffer));
+    }
+
+    cJSON_free(cJsonConfigBuffer);
+    cJSON_Delete(pConfigObject);
 }
 
 /**
- * @brief Read from ADC cahnnel
- * @param eAdcChannel - ADC channel used
- * @param nChannelIdx - Channel index needs to be used
- * @param pnWM_CB - CB value 
+ * @brief Write the configured time from BLE to RTC
+ * @param None
  * @return true for success
 */
-static bool ReadFromADC(nrf_saadc_input_t eAdcChannel, int nChannelIdx, int *pnWM_CB)
+static bool WriteConfiguredtimeToRTC(void)
 {
     bool bRetVal = false;
-    float WM_Resistance = 0.0;
+    int RetCode = 0;
+    uint32_t *pDiagData = NULL;
 
-    if (pnWM_CB)
+    pDiagData = GetDiagData();
+
+    if (GetTimeUpdateStatus())
     {
-        InitAdc(eAdcChannel, nChannelIdx);
-        k_msleep(50);
-        sAdcReadValue1 = GetAdcResult(&sSensorPwSpec1);
-        if (sAdcReadValue1 < ADC_READING_LOWER || sAdcReadValue1 > ADC_READING_UPPER)
+        if (InitRtc())
         {
-            sAdcReadValue1 = 0;
+            SetTimeUpdateStatus(false); 
+            sConfigData.flag = sConfigData.flag | (1 << 4); //set flag for timestamp config data update and store it into flash
+            RetCode = nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
+            if(RetCode < 0)
+            {
+                *pDiagData = *pDiagData | CONFIG_WRITE_FAILED;
+            }
+            else
+            {
+                *pDiagData = *pDiagData & CONFIG_WRITE_OK;
+                *pDiagData = *pDiagData & TIME_STAMP_OK;
+                printk("Time updated\n");
+                bRetVal = true;
+            }
         }
-        k_msleep(50);
-        printk("Reading A1: %d\n", sAdcReadValue1);
-        sAdcReadValue2 = GetAdcResult(&sSensorPwSpec2);
-        if (sAdcReadValue2 < ADC_READING_LOWER || sAdcReadValue1 > ADC_READING_UPPER)
+        else
         {
-           sAdcReadValue2 = 0;
-        }        
-        printk("Reading A2: %d\n", sAdcReadValue2);
+            printk("WARN: Check RTC is connected\n\r");
+            SetTimeUpdateStatus(false); 
+            *pDiagData = *pDiagData | TIME_STAMP_ERROR;
+        }
+    }
+
+    return bRetVal;
+}
+
+/**
+ * @brief Initialise BLE functions
+ * @param None
+ * @return true for success
+*/
+static bool InitBle()
+{
+    bool bRetVal = false;
+    int nError = 0;
+
+    pucAdvBuffer = GetAdvBuffer();
+
+    do
+    {
+        if (pucAdvBuffer == NULL)
+        {
+            break;
+        }
+
+        if (!EnableBLE())
+        {
+            printk("Bluetooth init failed (err %d)\n", nError);
+            break;
+        }
+
+#ifdef EXT_ADV
+        nError = InitExtAdv();
         
-        WM_Resistance = readWMsensor();
-        printk("WM Resistance(Ohms): %d\n", (int)WM_Resistance);
-        *pnWM_CB = CalculateCBvalue((int)WM_Resistance, default_TempC, cFactor);
-        printk("WM1(cb/kPa): %d\n", abs(*pnWM_CB));
+        if (nError) 
+        {
+            printk("Advertising failed to create (err %d)\n", nError);
+            break;
+        }
+#endif        
+
+        StartAdv();
+        bRetVal = true;
+    } while (0);
+    
+    return bRetVal;
+}
+
+/**
+ * @brief initialise data partitions
+ * @param None
+ * @return None
+*/
+static void InitDataPartition()
+{
+    nvs_initialisation(&fs, DATA_FS); 
+    SetFileSystem(&fs);
+}
+
+/**
+ * @brief Init all modules RTC, BLE,.. etc
+ * @param None
+ * @return true for success
+*/
+static bool InitAllModules()
+{
+    bool bRetVal = false;
+
+    do
+    {
+       if(!InitPowerManager()) 
+       {
+            printk("ERROR: Init PM failed\n\r");
+            break;
+       }
+
+       InitTimer();
+       k_sleep(K_TICKS(100));
+
+       InitDataPartition();
+
+       if (!InitBle())
+       {
+            printk("ERROR: Init BLE failed\n\r");
+            break;       
+       }
+       bRetVal = true;
+    } while (0);
+    
+    return bRetVal;
+}
+
+/**
+ * @brief Check for config change and update value from flash
+ * @param None
+ * @return true for success
+*/
+static bool CheckForConfigChange()
+{
+    uint32_t ulRetCode = 0;
+    bool bRetVal = false;
+    uint32_t *pDiagData = NULL;
+
+    pDiagData = GetDiagData();
+
+    nvs_initialisation(&sConfigFs, CONFIG_DATA_FS); 
+    k_msleep(100);
+    ulRetCode = readJsonToFlash(&sConfigFs, 0, 0, (char *)&sConfigData, sizeof(sConfigData)); // read config params from the flash
+    if(sConfigData.flag == 0) 
+    {
+        printk("\n\rError occured while reading config data: %d\n", ulRetCode);
+        EraseExternalFlash(SECTOR_COUNT);   
+        *pDiagData = *pDiagData | CONFIG_WRITE_FAILED; // flag will shows error while reading config data from flash and added to the application
+    }
+    else
+    {
+        SetSleepTime(sConfigData.sleepTime);
+        uFlashIdx = sConfigData.flashIdx;
+        printk("sConfigFlag %d ,flashIdx = %d\n",
+                                     sConfigData.flag,
+                                     sConfigData.flashIdx); //get all the config params from the flash if a reboot occures
+
         bRetVal = true;
     }
 
@@ -306,134 +503,97 @@ static bool ReadFromADC(nrf_saadc_input_t eAdcChannel, int nChannelIdx, int *pnW
 }
 
 /**
- * @brief Main function
+ * @brief Update Configurations if any config value is written via Ble
+ * @param None
+ * @return true for success
 */
-int main(void)
+static bool UpdateConfigurations()
 {
-    nrfx_err_t status;
-    int Ret;
-    char cbuffer[20] = {0};
-    char *cJsonBuffer = NULL;
-    cJSON *pMainObject = NULL;
-    uint8_t *pucAdvBuffer = NULL;
-    int nCBValue = 0;
-    cJSON *pSensorObj = NULL;
-    long long llEpochNow = 0;
-    int64_t Timenow =0;
+    uint32_t ulRetCode = 0;
+    bool bRetVal = false;
 
-    InitRtc();
-    gpio_pin_configure_dt(&sSensorPwSpec1, GPIO_OUTPUT_LOW);
-    gpio_pin_configure_dt(&sSensorPwSpec2, GPIO_OUTPUT_LOW);
-    pucAdvBuffer = GetAdvBuffer();
-    Ret = bt_enable(NULL);
-	if (Ret) 
+    if (IsSleepTimeSet())
     {
-		printk("Bluetooth init failed (err %d)\n", Ret);
-		return 0;
-	}
-    Ret = InitExtAdv();
-	if (Ret) 
-    {
-		printk("Advertising failed to create (err %d)\n", Ret);
-		return 0;
-	}
-    Ret = StartAdv();
-    if(Ret)
-    {
-        printk("Advertising failed to start (err %d)\n", Ret);
-        return 0;
-    }
-    
-     while (1) 
-     {
-        #ifdef SLEEP_ENABLE
-        Timenow = sys_clock_tick_get();
+        sConfigData.sleepTime = GetSleepTime();
+        SetSleepTimeSetStataus(false);
+        sConfigData.flag = sConfigData.flag | (1 << 0); //set flag for config data update and store it into flash
 
-        while(sys_clock_tick_get() - Timenow < (ALIVE_TIME * TICK_RATE))
+        do
         {
-        #endif    
-            pMainObject = cJSON_CreateObject();
+            ulRetCode = nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
 
-            if (GetCurrenTimeInEpoch(&llEpochNow))
+            if (ulRetCode < 0)
             {
-                printk("CurrentEpochTime=%llu\n\r", llEpochNow);
-            }
-            else
-            {
-                llEpochNow = 0; 
-                printk("Read RTC time failed\n\rCheck RTC chip is connected\n\r");
+                printk("ERROR: Write failed with ret code:%d\n", ulRetCode);
+                break;
             }
 
-            if (ReadFromADC(NRF_SAADC_INPUT_AIN1, 1,  &nCBValue))
+            k_msleep(100);
+            ulRetCode = nvs_read(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
+
+            if (ulRetCode < 0)
             {
-                memset(cbuffer, '\0', sizeof(cbuffer));
-                sprintf(cbuffer,"CB=%d", abs(nCBValue));
-                printk("Data:%s\n", cbuffer);
-                pSensorObj=cJSON_AddObjectToObject(pMainObject, "S1");
-                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC1", &sAdcReadValue1, sizeof(uint16_t));
-                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC2", &sAdcReadValue2, sizeof(uint16_t));
-                AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer)); 
-                nrfx_saadc_uninit();
+                printk("ERROR: Write failed with ret code:%d\n", ulRetCode);
+                break;
             }
+            bRetVal = true;
+        } while (0);
+    }
 
-            if (ReadFromADC(NRF_SAADC_INPUT_AIN2, 2,  &nCBValue))
-            {
-                memset(cbuffer, '\0', sizeof(cbuffer));
-                sprintf(cbuffer,"CB=%d", abs(nCBValue));
-                printk("Data:%s\n", cbuffer);
-                pSensorObj=cJSON_AddObjectToObject(pMainObject, "S2");
-                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC1", &sAdcReadValue1, sizeof(uint16_t));
-                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC2", &sAdcReadValue2, sizeof(uint16_t));
-                AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer)); 
-                nrfx_saadc_uninit();        
-            }
-
-            if (ReadFromADC(NRF_SAADC_INPUT_AIN4, 4, &nCBValue))
-            {
-                    memset(cbuffer, '\0', sizeof(cbuffer));
-                sprintf(cbuffer,"CB=%d", abs(nCBValue));
-                printk("Data:%s\n", cbuffer);
-                pSensorObj=cJSON_AddObjectToObject(pMainObject, "S3");
-                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC1", &sAdcReadValue1, sizeof(uint16_t));
-                AddItemtoJsonObject(&pSensorObj, NUMBER, "ADC2", &sAdcReadValue2, sizeof(uint16_t));
-                AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer)); 
-                nrfx_saadc_uninit();
-            }
-                AddItemtoJsonObject(&pMainObject, NUMBER, "TimeStamp", &llEpochNow, sizeof(long long));
-
-            cJsonBuffer = cJSON_Print(pMainObject);
-            memset(cbuffer,0 , sizeof(cbuffer));
-
-            pucAdvBuffer[2] = 0x02;
-            pucAdvBuffer[3] = (uint8_t)strlen(cJsonBuffer);
-            memcpy(pucAdvBuffer+4, cJsonBuffer, strlen(cJsonBuffer));
-
-            printk("JSON:\n%s\n", cJsonBuffer);
-            cJSON_Delete(pMainObject);
-            cJSON_free(cJsonBuffer);
-
-            if(IsNotificationenabled())
-            {
-                VisenseSensordataNotify(pucAdvBuffer+2, ADV_BUFF_SIZE);
-            }
-            else
-            {
-                UpdateAdvData();
-                StartAdv();
-            }
-
-            memset(pucAdvBuffer, 0, ADV_BUFF_SIZE);
-            #ifndef SLEEP_ENABLE 
-            k_sleep(K_MSEC(1000));
-            #endif
-        #ifdef SLEEP_ENABLE
-        }
-        #endif
-
-        #ifdef SLEEP_ENABLE
-         EnterSleepMode(SLEEP_TIME);
-         ExitSleepMode();
-        #endif
-     }
+    return bRetVal;
 }
-    
+
+/**
+ * @brief Getting time from RTC
+ * @param None
+ * @return true for success
+*/
+static bool GetTimeFromRTC()
+{
+    long long llEpochNow = 0;
+    bool bRetVal = false;
+    uint32_t *pDiagData = NULL;
+
+    pDiagData = GetDiagData();
+
+    if (GetCurrenTimeInEpoch(&llEpochNow))
+    {
+        printk("CurrentTime=%llu\n\r", llEpochNow);
+        SetCurrentTime(llEpochNow);
+        *pDiagData = *pDiagData & TIME_STAMP_OK;
+        bRetVal = true;
+    }
+    else
+    {
+        *pDiagData = *pDiagData | TIME_STAMP_ERROR;
+    }
+
+    return bRetVal;
+}
+
+/**
+ * @brief  printing visense banner
+ * @param  None
+ * @return None
+*/
+static void PrintBanner()
+{
+    printk("\n\r");
+    printk("'##::::'##:'####::'######::'########:'##::: ##::'######::'########:\n\r");
+    k_msleep(50);
+    printk("##:::: ##:. ##::'##... ##: ##.....:: ###:: ##:'##... ##: ##.....::\n\r");
+    k_msleep(50);
+    printk("##:::: ##:: ##:: ##:::..:: ##::::::: ####: ##: ##:::..:: ##:::::::\n\r");
+    k_msleep(50);
+    printk("##:::: ##:: ##::. ######:: ######::: ## ## ##:. ######:: ######:::\n\r");
+    k_msleep(50);
+    printk(". ##:: ##::: ##:::..... ##: ##...:::: ##. ####::..... ##: ##...::::\n\r");
+    k_msleep(50);
+    printk(":. ## ##:::: ##::'##::: ##: ##::::::: ##:. ###:'##::: ##: ##:::::::\n\r");
+    k_msleep(50);
+    printk("::. ###::::'####:. ######:: ########: ##::. ##:. ######:: ########:\n\r");
+    k_msleep(50);
+    printk(":::...:::::....:::......:::........::..::::..:::......:::........::\n\r");
+    k_msleep(50);
+    printk("\n\r");
+}

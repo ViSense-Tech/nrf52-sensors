@@ -10,7 +10,7 @@
 /**************************************INCLUDES***************************/
 #include "JsonHandler.h"
 /**************************************MACROS*****************************/
-
+#define IRROMTR_SNSR        0x02
 /**************************************TYPEDEFS***************************/
 
 /***********************************FUNCTION DEFINITION*******************/
@@ -34,9 +34,12 @@ bool AddItemtoJsonObject(cJSON **pcJsonHandle, _eJsonDataType JsondataType, cons
     {
         switch(JsondataType)
         {
-            case NUMBER: 
-                         cJSON_AddNumberToObject(*pcJsonHandle, pcKey, *((int*)(pcValue)));
+            case NUMBER_INT: 
+                         cJSON_AddNumberToObject(*pcJsonHandle, pcKey, *((uint32_t*)(pcValue)));
                          break;
+            case NUMBER_FLOAT: 
+                         cJSON_AddNumberToObject(*pcJsonHandle, pcKey, *((double*)(pcValue)));
+                         break;                         
             case STRING: cJSON_AddStringToObject(*pcJsonHandle, pcKey, (char* )pcValue);
                          break;
             case OBJECT: 
@@ -48,7 +51,7 @@ bool AddItemtoJsonObject(cJSON **pcJsonHandle, _eJsonDataType JsondataType, cons
                         {
                             for (ucIndex = 0; ucIndex < ucLen; ucIndex++)
                             {
-                                cJSON_AddItemToArray(pcData, cJSON_CreateNumber(*((uint16_t*)pcValue+ucIndex)));
+                                cJSON_AddItemToArray(pcData, cJSON_CreateNumber(*((uint32_t*)pcValue+ucIndex)));
                             }
                         }
                          break;
@@ -58,5 +61,38 @@ bool AddItemtoJsonObject(cJSON **pcJsonHandle, _eJsonDataType JsondataType, cons
         bRetVal = true;
     }
 
+    return bRetVal;
+}
+
+/**
+ * @brief Parse received data
+ * @param pData   : Data to  parse
+ * @param pckey   : key value to parse
+ * @param ucLen   : Length of data
+ * @param pucData : buffer to store the parsed data
+ * @return true for success
+*/
+bool ParseRxData(uint8_t *pData,const char *pckey, uint8_t ucLen, uint64_t *pucData)
+{
+    bool bRetVal = false;
+    char cbuff[150];
+    cJSON *RxData = NULL;
+
+    if (pData && pckey && pucData)
+    {
+        if (pData[0] == IRROMTR_SNSR)
+        {
+            memcpy(cbuff ,pData+2, ucLen);
+            cJSON *root = cJSON_Parse(cbuff);
+            RxData = cJSON_GetObjectItem(root, pckey);
+
+            if (RxData)
+            {
+                *pucData = (RxData->valuedouble);
+                cJSON_Delete(root);
+                bRetVal = true;
+            }
+        }
+    }
     return bRetVal;
 }
