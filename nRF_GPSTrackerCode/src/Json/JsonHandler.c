@@ -8,6 +8,7 @@
 
 /**************************************INCLUDES***************************/
 #include "JsonHandler.h"
+#include <string.h>
 /**************************************MACROS*****************************/
 
 /**************************************TYPEDEFS***************************/
@@ -16,16 +17,27 @@
 
  _sFenceData sFenceData[6] = {0};
 
-
+/**
+ * @brief  : Get Fence table
+ * @param  : None
+ * @return : Fence Table
+*/
 _sFenceData *GetFenceTable()
 {
     return &sFenceData;
 }
 
- void SetFenceTable(_sFenceData *sFenceTable)
- {
-     memcpy(&sFenceData, sFenceTable, sizeof(sFenceTable));
- }
+/**
+ * @brief : Set Fence data table
+ * @param : sFenceTable : Fence data table
+ * @return : None
+ * 
+*/
+void SetFenceTable(_sFenceData *sFenceTable)
+{
+    memcpy(&sFenceData, sFenceTable, sizeof(sFenceData));
+}
+
 /**
  * @brief function to add json object to json
  * @param pcJsonHandle - Json object handle
@@ -76,31 +88,34 @@ bool AddItemtoJsonObject(cJSON **pcJsonHandle, _eJsonDataType JsondataType, cons
     return bRetVal;
 }
 
+/**
+ * @brief   : parse json data 
+ * @param   : pData   : Receieved byte array
+ *            pckey   : key value to parse
+ *            ucLen   : length of data
+ *            pucData : buffer to store parsed data
+ * @return  : true for success
+*/
 bool ParseRxData(uint8_t *pData, const char *pckey, uint16_t ucLen, uint64_t *pucData)
 {
-    // const char *cbuff = "{\"cc\": 4, \"lt\": [10.05567067533764, 10.05667067133764, 10.05567067137764, 10.05567067133564] }";
-
     bool bRetVal = false;
     char cbuff[150] = {0};
     cJSON *RxData = NULL;
-    //printk("inside ParseRxData- ucLen= %d\n\r", ucLen);
+    
     if (ucLen >= 150)
     {
         return bRetVal;
     }
     if (pData && pckey && pucData)
     {
-        // if (pData[0] == 0x01)
-        if (1)     //length check
+    
+        if (pData[0])     //length check
         {
 
-            // memcpy(cbuff ,pData+2, ucLen);
             cJSON *root = cJSON_Parse(pData + 2);
             if (root != NULL)
             {
-                printk("cjson parse");
                 RxData = cJSON_GetObjectItem(root, pckey);
-                // printk("json get obj");
                 if (RxData)
                 {
                     *pucData = (RxData->valuedouble);
@@ -110,45 +125,46 @@ bool ParseRxData(uint8_t *pData, const char *pckey, uint16_t ucLen, uint64_t *pu
             }
             else
             {
-                printk("root null \n\r");
+                printk("ERR: parse failed\n\r");
             }
         }
     }
     return bRetVal;
 }
 
+/**
+ * @brief   : parse json array
+ * @param   : pData   : Receieved byte array
+ *            pckey   : key value to parse
+ *            ucLen   : length of data
+ *            pucData : buffer to store parsed data
+ * @return  : true for success
+*/
 bool ParseArray(uint8_t *pData, const char *pckey, uint16_t ucLen, char *pucData)
 {
     bool bRetVal = false;
     char *cbuff = NULL;
-    // char LocData[6][20];
     cJSON *RxData = NULL;
     int arraySize;
-    printk("1 inParseArray\n\r");
+
     if (pData && pckey)
     {
 
-        // if (pData[0] == 0x01) {
-        // memcpy(cbuff, pData + 2, ucLen);
         cJSON *root = cJSON_Parse(pData + 2);
-        printk("2,cjson parseed y\n");
+
         if (root != NULL)
         {
             RxData = cJSON_GetObjectItem(root, pckey);
-            printk("cjson get obj\n");
-            
 
             if (cJSON_IsArray(RxData))
             {
-                printk("parsed item is an array..\n\r");
                 arraySize = cJSON_GetArraySize(RxData);
-                printk("array size %d\n", arraySize);
+
                 for (int i = 0; i < arraySize; i++)
                 {
                     cJSON *arrayItem = cJSON_GetArrayItem(RxData, i);
                     if (arrayItem != NULL)
                     {
-                        //  pucData[i] = arrayItem->valuedouble;
                         bRetVal = true;
                         memcpy(pucData, (arrayItem->valuestring), strlen(arrayItem->valuestring));
 
@@ -156,16 +172,13 @@ bool ParseArray(uint8_t *pData, const char *pckey, uint16_t ucLen, char *pucData
                         *pucData = ',';
                         pucData++;
 
-                        // printk("\n\rParsed data :%f",pucData[i]);
                     }
                 }
             }
 
-            // bRetVal = true;
-            //  }
+            bRetVal = true;
             cJSON_Delete(root); // Free the cJSON structure
         }
-        // }
     }
 
     return bRetVal;

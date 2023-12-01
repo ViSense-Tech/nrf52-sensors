@@ -6,7 +6,7 @@
 static const struct device *const flash_dev = DEVICE_DT_GET(DT_ALIAS(spi_flash0));
 // static const struct device *const psUartDev = DEVICE_DT_GET(DT_NODELABEL(uart0));
 
-int nvs_initialisation( struct nvs_fs *fs, uint8_t selector)
+int FlashInit( struct nvs_fs *fs, uint8_t selector)
 {
     int rc = 0;
 
@@ -151,7 +151,6 @@ bool readJsonFromExternalFlash(char *pcBuffer, uint32_t flashIdx, int unLength)
 	
 	flashIdx = flashIdx * WRITE_ALIGNMENT;
 	
-
 	do
 	{
 		rc = flash_read(flash_dev,SPI_FLASH_REGION_OFFSET + flashIdx, pcBuffer, WRITE_ALIGNMENT);

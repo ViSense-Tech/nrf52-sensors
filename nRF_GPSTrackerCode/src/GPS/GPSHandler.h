@@ -17,8 +17,8 @@
 #include <stdlib.h>
 
 /***************************MACROS**********************************/
-#define GPS_FIX_OK        ~(1<<4)
-#define GPS_FIX_FAILED     (1<<4)
+#define GPS_LOC_OK        ~(1<<4)
+#define GPS_LOC_FAILED     (1<<4)
 
 /***************************TYPEDEFS********************************/
 

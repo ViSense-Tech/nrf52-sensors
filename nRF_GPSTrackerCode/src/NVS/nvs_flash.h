@@ -50,7 +50,7 @@ typedef struct __attribute__((packed)) __sConfigData
 
 /**********************************************************FUNCTION DECLARATIONS*******************************/
  int nvs_logger(char* cjson, int data_count);
-int nvs_initialisation( struct nvs_fs *fs, uint8_t selector);
+int FlashInit( struct nvs_fs *fs, uint8_t selector);
 int writeJsonToFlash(struct nvs_fs *fs, uint16_t data_count,uint16_t count_max, char *buf, uint8_t len);
 int readJsonToFlash(struct nvs_fs *fs, uint16_t data_count,uint16_t count_max, char *buf, uint8_t len);
 int deleteFlash(struct nvs_fs *fs, uint16_t data_count,uint16_t count_max);

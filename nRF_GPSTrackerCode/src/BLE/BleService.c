@@ -94,7 +94,6 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 
 	static uint8_t coordcount;
 	double latitudeArray[4];
-	// uint8_t *value1 = {0x7B,0x22,0x63,0x63,0x22,0x3A,0x20,0x34,0x7D};
 
 	if (offset + len > VND_MAX_LEN)
 	{
@@ -105,7 +104,6 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 	memcpy(value + offset, buf, len);
 
 	memcpy(ucConfigData2, value, len);
-	// memcpy(ucConfigData2, value1, 9);
 	uPayloadLen = ucConfigData2[1];
 	printk("Written Data: %s\n\r", (char *)value);
 	printk("len%d\n", len);
@@ -172,12 +170,9 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 	}
 
 	/*parsing array of strings */
-
 	if (ParseArray(ucConfigData2, "lat", len, ucbuff)) // for lattitude
 	{
-		// Handle "lt" array data
 		printk("ParseArray\n");
-		// for (int i = 0; i < 2; i++) {
 		printk("\n\rlat: %s", ucbuff);
 		psFenceData = GetFenceTable();
 		cSplitStr = strtok(ucbuff, ",");
@@ -197,27 +192,20 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 
 	if (ParseArray(ucConfigData2, "lon", len, ucbuff)) // for longitude
 	{
-		// Handle "lt" array data
 		printk("ParseArray\n");
 		printk("\n\rlon: %s", ucbuff);
 		psFenceData = GetFenceTable(); //!
 		cSplitStr = strtok(ucbuff, ",");
 		while (cSplitStr != NULL)
 		{
-			// printf("lon1: %f\n\r", );
-			// sscanf(cSplitStr, "%lf", psFenceData->dLongitude);
-			//  dBuf = atof(cSplitStr);
-			//  memcpy(&psFenceData->dLongitude, &dBuf, sizeof(double));
+
 			psFenceData->dLongitude = atof(cSplitStr);
 			psFenceData++;
-			// printf(" % s\n", token);
 			cSplitStr = strtok(NULL, ",");
 		}
-		// for (int i = 0; i < 2; i++) {
 		bFenceLon = true;
 	}
 
-	// printk("charwrite end\n\r");
 	psFenceData = GetFenceTable();
 	for (ucIdx = 0; ucIdx < 4; ucIdx++)
 	{
@@ -473,7 +461,7 @@ bool IshistoryNotificationenabled()
 {
     return hNotificationEnabled;
 }
-//#endif
+
 /**
  * @brief Check if notification is enabled
  * @param None
@@ -484,6 +472,11 @@ bool IsNotificationenabled()
 	return bNotificationEnabled;
 }
 
+/**
+ * @brief  : Check config chara notification enabled
+ * @param  : None
+ * @return : notification stataus
+*/
 bool IsConfigNotifyEnabled()
 {
 	return bConfigNotifyEnabled;
@@ -497,10 +490,22 @@ bool IsConnected()
 {
 	return bConnected;
 }
+
+/**
+ * @brief  : Fence coordinate set status
+ * @param  : status : fence latitudes set status
+ * @return : None
+*/
 void SetConfigChangeLat(bool status)
 {
 	bFenceLat = status;
 }
+
+/**
+ * @brief  : Fence coordinate set status
+ * @param  : status : fence longitudes set status
+ * @return : None
+*/
 void SetConfigChangeLon(bool status)
 {
 	bFenceLon = status;
