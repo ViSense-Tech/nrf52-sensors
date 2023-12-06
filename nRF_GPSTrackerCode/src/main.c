@@ -115,8 +115,12 @@ int main(void)
 			}
 			if (!(*pDiagData & (1 << 4)))
 			{
-				AddItemtoJsonObject(&pMainObject, FLOAT, "Latitude", &fLatitude, sizeof(float));
-				AddItemtoJsonObject(&pMainObject, FLOAT, "Longitude", &fLongitude, sizeof(float));
+				memset(pcLocation, 0, sizeof(pcLocation));
+				sprintf(pcLocation,"%f", fLatitude);
+				AddItemtoJsonObject(&pMainObject, STRING, "Latitude", pcLocation, sizeof(pcLocation));
+				memset(pcLocation, 0, sizeof(pcLocation));
+				sprintf(pcLocation,"%f", fLongitude);				
+				AddItemtoJsonObject(&pMainObject, STRING, "Longitude", pcLocation, sizeof(pcLocation));
 			}
 			
 
@@ -369,19 +373,7 @@ static bool UpdateConfigurations()
 				printk("ERR: Write failed\n\r");
 				break;
 			}
-			ulRetCode = nvs_read(&sConfigFs, 0, (char *)&ConfigData, sizeof(_sConfigData));
 			
-			if (ulRetCode > 0)
-			{
-				memcpy(psFenceData, ConfigData.FenceData, sizeof(ConfigData.FenceData));
-				printk("Write succeed................................................................%s\n",sConfigData.FenceData);
-				for (int ucIdx = 0; ucIdx < 4; ucIdx++)
-				{
-					printk("Lat[%d]: %lf Lon[%d]: %lf\n\r", ucIdx, psFenceData->dLatitude, ucIdx, psFenceData->dLongitude);
-					psFenceData++;
-				}
-				
-			}
 			free(psFenceData);
 		} while (0);
 
@@ -507,7 +499,7 @@ static void DisplayFenceStatus()
 
 	strcpy(cLCDMessage, "INSIDE-FENCE");
 	WriteStringToLCD(cLCDMessage);
-	k_sleep(K_MSEC(200));
+	k_sleep(K_MSEC(500));
 }
 
 /**
