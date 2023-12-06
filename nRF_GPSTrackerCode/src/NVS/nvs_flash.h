@@ -51,10 +51,10 @@ typedef struct __attribute__((packed)) __sConfigData
 /**********************************************************FUNCTION DECLARATIONS*******************************/
  int nvs_logger(char* cjson, int data_count);
 int FlashInit( struct nvs_fs *fs, uint8_t selector);
-int writeJsonToFlash(struct nvs_fs *fs, uint16_t data_count,uint16_t count_max, char *buf, uint8_t len);
-int readJsonToFlash(struct nvs_fs *fs, uint16_t data_count,uint16_t count_max, char *buf, uint8_t len);
-int deleteFlash(struct nvs_fs *fs, uint16_t data_count,uint16_t count_max);
-int freeSpaceCalc(struct nvs_fs *fs, uint16_t data_count,uint16_t count_max);
+// int writeJsonToFlash(struct nvs_fs *fs, uint16_t data_count,uint16_t count_max, char *buf, uint8_t len);
+ int ReadJsonFromFlash(struct nvs_fs *fs, uint16_t data_count, char *buf, uint8_t len);
+void deleteFlash(struct nvs_fs *fs, uint8_t selector);
+int freeSpaceCalc(struct nvs_fs *fs);
 
 // external flash support functions
 bool writeJsonToExternalFlash(char *pcBuffer, uint32_t flashIdx, int unLength);

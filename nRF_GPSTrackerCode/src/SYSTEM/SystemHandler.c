@@ -48,11 +48,9 @@ bool SetPMState()
 */
 void EnterSleepMode(int nDuration)
 {
-    /*Need to routine when entering sleep*/
-    // struct device *pAdc = NULL;
+    /*Need to add other functions also currently stopping ble 
+    advertisement when entering sleep*/
 
-    // pAdc = GetADCHandle();
-    // pm_device_action_run(pAdc, PM_DEVICE_ACTION_SUSPEND);
     BleStopAdvertise();
     gpio_pin_set(sSleepStatusLED.port, sSleepStatusLED.pin, 1);
     k_sleep(K_SECONDS(nDuration));
@@ -65,16 +63,8 @@ void EnterSleepMode(int nDuration)
 */
 void ExitSleepMode()
 {
-    /*Need to rotine after a sleep*/
-    // struct device *pAdc = NULL;
-
-    // // pAdc = GetADCHandle();
-
-    // // if (pAdc)
-    // // {    
-    // //     pm_device_action_run(pAdc, PM_DEVICE_ACTION_RESUME);
-    // //     gpio_pin_set(sSleepStatusLED.port, sSleepStatusLED.pin, 0);
-    // // }
+    /*Need to add other functions that is waking up another peripherals 
+    currently starting advertisement after exiting  sleep*/
     StartAdvertising();
 }
 
@@ -126,8 +116,6 @@ uint32_t GetSleepTime()
 */
 uint32_t *GetDiagnosticData()
 {
-    // printk("Diagnostics data: %d\n", ulDiagnosticData);
     return &ulDiagnosticData;
-
 }
 

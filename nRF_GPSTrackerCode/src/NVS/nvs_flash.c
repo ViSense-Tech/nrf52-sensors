@@ -4,73 +4,76 @@
 
 /**************************************************************GLOBAL VARIABLES*********************************/
 static const struct device *const flash_dev = DEVICE_DT_GET(DT_ALIAS(spi_flash0));
-// static const struct device *const psUartDev = DEVICE_DT_GET(DT_NODELABEL(uart0));
 
+/**
+ * @brief  Initialise flash
+ * @param  fs 	    : File pointer 
+ * @param  selector : decides if config or data partition is selected
+ * @return return code for flash initialisation
+*/
 int FlashInit( struct nvs_fs *fs, uint8_t selector)
 {
     int rc = 0;
-
-	
 	uint32_t counter = 0U, counter_his;
 	struct flash_pages_info info;
-
 	fs->flash_device = NVS_PARTITION_DEVICE;
-	if (!device_is_ready(fs->flash_device)) {
-		printk("Flash device %s is not ready\n", fs->flash_device->name);
-		return 0;
-	}
 
-	if (selector == DATA_FS) // data
+	do
 	{
-		fs->offset = NVS_PARTITION_OFFSET + 8192;
-		rc = flash_get_page_info_by_offs(fs->flash_device, fs->offset, &info);
+		if (!device_is_ready(fs->flash_device)) 
+		{
+			printk("Flash device %s is not ready\n", fs->flash_device->name);
+			break;
+		}
+
+		if (selector == DATA_FS) // data
+		{
+			fs->offset = NVS_PARTITION_OFFSET + 8192;
+			rc = flash_get_page_info_by_offs(fs->flash_device, fs->offset, &info);
+			if (rc) 
+			{
+				printk("Unable to get page info\n");
+				break;
+			}
+			fs->sector_size = info.size;
+			fs->sector_count = 4U;
+		}
+		
+		if (selector == CONFIG_DATA_FS) // config data
+		{
+			fs->offset = NVS_PARTITION_OFFSET;
+			rc = flash_get_page_info_by_offs(fs->flash_device, fs->offset, &info);
+			if (rc) 
+			{
+				printk("Unable to get page info\n");
+				break;
+			}
+			fs->sector_size = info.size;
+			fs->sector_count = 2U;
+		}
+
+		rc = nvs_mount(fs);
 		if (rc) 
 		{
-			printk("Unable to get page info\n");
-			return 0;
+			printk("Flash Init failed%d\n",rc);
+			break;
 		}
-		fs->sector_size = info.size;
-		fs->sector_count = 4U;
-	}
+
+	} while (0);
 	
-	if (selector == CONFIG_DATA_FS) // config data
-	{
-		fs->offset = NVS_PARTITION_OFFSET;
-		rc = flash_get_page_info_by_offs(fs->flash_device, fs->offset, &info);
-		if (rc) 
-		{
-			printk("Unable to get page info\n");
-			return 0;
-		}
-		fs->sector_size = info.size;
-		fs->sector_count = 2U;
-	}
-
-	rc = nvs_mount(fs);
-	if (rc) {
-		printk("Flash Init failed%d\n",rc);
-		return 0;
-	}
-	// return fs;
-
+	return rc;
 }  
 
-
-int writeJsonToFlash(struct nvs_fs *fs, uint16_t data_count,uint16_t count_max, char *data, uint8_t len)
-{
-	char writebuf[180]; 
-	strcpy(writebuf, data);
-
-	int rc= nvs_write(fs, (STRING_ID + data_count), writebuf, len);
-	printk("Size of written buf:%d\n",rc);
-	if(rc!=len)
-	{
-		printk("write_failed:%d\n",rc);
-	}
-}
-
-
-int readJsonToFlash(struct nvs_fs *fs, uint16_t data_count,uint16_t count_max, char *buf, uint8_t len)
+/**
+ * @brief Read Data from flash
+ * @param fs         : File pointer
+ * @param data_count : number of json entry
+ * @param buf		 : buffer to store read data
+ * @param len 		 : length of data
+ * @return number of bytes read on success
+ * 
+*/
+int ReadJsonFromFlash(struct nvs_fs *fs, uint16_t data_count, char *buf, uint8_t len)
 {
 	int rc;
 
@@ -85,17 +88,25 @@ int readJsonToFlash(struct nvs_fs *fs, uint16_t data_count,uint16_t count_max, c
 		
 }
 
-
-int deleteFlash(struct nvs_fs *fs, uint16_t data_count,uint16_t count_max)
+/**
+ * @brief Delete data from flash
+ * @param fs       : File pointer
+ * @param selector : decides if config or data partition is selected
+ * @return None
+*/
+void deleteFlash(struct nvs_fs *fs, uint8_t selector)
 {
 	nvs_clear(fs);
-	nvs_initialisation(fs, DATA_FS); //deleting data
+	nvs_initialisation(fs, selector); //deleting data
 	printk("Deleted all..");
-
 }
 
-
-int freeSpaceCalc(struct nvs_fs *fs, uint16_t data_count,uint16_t count_max)
+/**
+ * @brief Calculate available space in config or data partition
+ * @param fs : File pointer
+ * @return free space available in config or data partition
+*/
+int freeSpaceCalc(struct nvs_fs *fs)
 {
 	int free_space = nvs_calc_free_space(fs);
 	printk("\n free space %d ", free_space);

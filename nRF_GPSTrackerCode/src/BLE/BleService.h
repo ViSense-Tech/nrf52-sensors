@@ -26,3 +26,5 @@ bool IsConfigLat();
 bool IsConfiglon();
 void SetConfigChangeLat(bool);
 void SetConfigChangeLon(bool);
+bool IsFenceConfigured();
+void SetFenceConfigStatus(bool bStatus);

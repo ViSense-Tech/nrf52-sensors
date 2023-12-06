@@ -64,8 +64,7 @@ float GetSogMax()
 {
     return fSOG;
 }
-// extern void SetSleeptime(uint32_t *ucbuffer2);
-// extern void SetTime(uint32_t *ucbuffer2);
+
 /**
  * @brief  Send data via uart
  * @param  pcData : data to send
@@ -248,6 +247,12 @@ bool ReadLocationData(char *pcLocation)
     if (bRxCmplt)
     {
         cSubString = strstr(cRxBuffer, "$GNGGA");
+
+        if (cSubString == NULL)
+        {
+            cSubString = strstr(cRxBuffer, "$GPGGA");
+        }
+
         if (cSubString != NULL)
         {
             memcpy(pcLocation, cSubString, strlen(cSubString));
@@ -258,9 +263,9 @@ bool ReadLocationData(char *pcLocation)
             ucIdx++;
             memcpy(pcLocation, pcLocation+ucIdx, strlen(pcLocation+ucIdx));
 
-            if (strchr(pcLocation, 'E') != NULL && strchr(pcLocation, 'N') != NULL)
+            if (strchr(pcLocation, 'E') != NULL || strchr(pcLocation, 'W') != NULL && strchr(pcLocation, 'N') != NULL)
             {
-                for (ucIdx = 0; pcLocation[ucIdx] != 'E'; ucIdx++);
+                for (ucIdx = 0; (pcLocation[ucIdx] != 'E') && (pcLocation[ucIdx] != 'W'); ucIdx++);
                 ucIdx++;
                 memset(pcLocation+ucIdx, '\0', strlen(pcLocation+ucIdx));
             }
@@ -330,13 +335,21 @@ bool ReadSOGData(float *pfSOG)
 
     if (bRxCmplt)
     {
-        //printk(cRxBuffer);
-        //printk("\n\r");
         pcSubString = strstr(cRxBuffer, "$GNRMC");
+
+        if (pcSubString == NULL)
+        {
+            pcSubString = strstr(cRxBuffer, "$GPGGA");
+        }
 
         if (pcSubString != NULL)
         {
             pcSOGData = strchr(pcSubString, 'E');
+
+            if (pcSOGData == NULL)
+            {
+                pcSOGData = strchr(pcSubString, 'W');
+            }
 
             if (pcSOGData != NULL)
             {
@@ -351,7 +364,6 @@ bool ReadSOGData(float *pfSOG)
                     printk("SOG str: %s\n\r", cSOG);
                     memset(cSOG+ucIdx, '\0', strlen(cSOG+ucIdx));
                     *pfSOG = atof(cSOG);
-                    //printk("SOG %f\n\r", *pfSOG);
                     bRetVal = true;
                 }
                 else
@@ -394,21 +406,19 @@ bool polygonPoint(double latitude, double longitude, int fenceSize)
 {
     double vectors[fenceSize][2];
 	_sFenceData *psFenceData = NULL;
-    psFenceData = GetFenceTable();
-    for(int i = 0; i < fenceSize; i++) {
-        vectors[i][0] = (psFenceData->dLatitude)- latitude;
-        vectors[i][1] = (psFenceData->dLongitude) - longitude; 
-        
-        //printk("Lat[%d]: %lf Lon[%d]: %lf\n\r", i, psFenceData->dLatitude, i, psFenceData->dLongitude);
-
-        
-        psFenceData++;
-    }
-    
     double angle = 0;
     double num, den;
 
-    for(int i = 0; i < fenceSize; i++) {
+    psFenceData = GetFenceTable();
+    for(int i = 0; i < fenceSize; i++) 
+    {
+        vectors[i][0] = (psFenceData->dLatitude)- latitude;
+        vectors[i][1] = (psFenceData->dLongitude) - longitude;         
+        psFenceData++;
+    }
+    
+    for(int i = 0; i < fenceSize; i++) 
+    {
         num = (vectors[i % fenceSize][0]) * (vectors[(i + 1) % fenceSize][0]) + (vectors[i % fenceSize][1]) * (vectors[(i + 1) % fenceSize][1]);
         den = (sqrt(pow(vectors[i % fenceSize][0], 2) + pow(vectors[i % fenceSize][1], 2))) * 
               (sqrt(pow(vectors[(i + 1) % fenceSize][0], 2) + pow(vectors[(i + 1) % fenceSize][1], 2)));
@@ -421,8 +431,7 @@ bool polygonPoint(double latitude, double longitude, int fenceSize)
     } else {
         targetStatus = 0;
     }
-    // SetConfigChangeLat(false);
-    // SetConfigChangeLon(false);
+
     printk("Target: %d\n\r",targetStatus);
     printk("Angle: %lf\n\r",angle);
     return targetStatus;

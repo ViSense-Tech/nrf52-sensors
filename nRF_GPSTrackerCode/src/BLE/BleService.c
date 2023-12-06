@@ -43,6 +43,7 @@ struct bt_conn *psConnHandle = NULL;
 static bool hNotificationEnabled = false;
 struct nvs_fs *FileSys;
 static bool bConfigNotifyEnabled = false;
+static bool bFenceStatus = false;
 /*Read index from flash*/
 uint8_t ucIdx = 0;
 bool bFenceLat = false;
@@ -204,6 +205,11 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 			cSplitStr = strtok(NULL, ",");
 		}
 		bFenceLon = true;
+	}
+
+	if (bFenceLat && bFenceLon)
+	{
+		bFenceStatus = true;
 	}
 
 	psFenceData = GetFenceTable();
@@ -398,11 +404,7 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 		memset(NotifyBuf, 0, WRITE_ALIGNMENT);
 		uReadCount = readJsonFromExternalFlash(NotifyBuf, ucIdx, WRITE_ALIGNMENT);
 		printk("\nId: %d, Ble_Stored_Data: %s\n",ucIdx, NotifyBuf);
-		// if (uReadCount < 0)
-		// {
-		// 	bFullDataRead = true;
-		// 	break;
-		// }
+
 		if (NotifyBuf[0] != 0x7B)
 		{
 			bFullDataRead = true;
@@ -433,8 +435,6 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 			break;	
 		}
 		
-		
-		// bRetVal = true;
 	}
 	
 	hNotificationEnabled = false;     //history callback set 
@@ -509,4 +509,23 @@ void SetConfigChangeLat(bool status)
 void SetConfigChangeLon(bool status)
 {
 	bFenceLon = status;
+}
+
+/**
+ * @brief check if fence is configured
+ * @param none
+ * @return bFenceStatus : true if configured false for else
+*/
+bool IsFenceConfigured()
+{
+    return bFenceStatus;
+}
+/**
+ * @brief Set Fence config status
+ * @param bStatus : fence set status
+ * @return None
+*/
+void SetFenceConfigStatus(bool bStatus)
+{
+    bFenceStatus = bStatus;
 }

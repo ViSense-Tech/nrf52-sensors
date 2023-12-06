@@ -151,7 +151,9 @@ static bool ConvertEpochToTime(long long llTimeStamp, struct tm *psTimeStruct, c
 }
 
 /**
- * Getting current time
+ * @brief  print current time on console
+ * @param  None
+ * @return None
 */
 void printCurrentTime()
 {
@@ -296,7 +298,6 @@ bool GetCurrenTimeInEpoch(long long *pllCurrEpoch)
 			}
 
 			sTimeStamp.tm_sec = ConvertBCDToDecimal(ucData);
-			//printk("Seconds: %d\n\r",sTimeStamp.tm_sec);
 			ucReg++;
 
 			if (0 != i2c_reg_read_byte(i2c_dev, RTC_DEV_ADDR, ucReg, &ucData))
@@ -306,7 +307,6 @@ bool GetCurrenTimeInEpoch(long long *pllCurrEpoch)
 			}
 			
 			sTimeStamp.tm_min = ConvertBCDToDecimal(ucData);
-			//printk("Min: %d\n\r",sTimeStamp.tm_min);
 			ucReg++;
 
 			if (0 != i2c_reg_read_byte(i2c_dev, RTC_DEV_ADDR, ucReg, &ucData))
@@ -316,7 +316,6 @@ bool GetCurrenTimeInEpoch(long long *pllCurrEpoch)
 			}
 			
 			sTimeStamp.tm_hour = ConvertBCDToDecimal(ucData);
-			//printk("Hours: %d\n\r",sTimeStamp.tm_hour);
 			ucReg++;
 
 			if (0 != i2c_reg_read_byte(i2c_dev, RTC_DEV_ADDR, ucReg, &ucData))
@@ -326,7 +325,6 @@ bool GetCurrenTimeInEpoch(long long *pllCurrEpoch)
 			}
 			
 			sTimeStamp.tm_wday = ConvertBCDToDecimal(ucData);
-			//printk("Day: %d\n\r",sTimeStamp.tm_wday);
 			ucReg++;
 
 			if (0 != i2c_reg_read_byte(i2c_dev, RTC_DEV_ADDR, ucReg, &ucData))
@@ -336,7 +334,6 @@ bool GetCurrenTimeInEpoch(long long *pllCurrEpoch)
 			}
 			
 			sTimeStamp.tm_mday = ConvertBCDToDecimal(ucData);
-			//printk("Date: %d\n\r",sTimeStamp.tm_mday);
 			ucReg++;	
 
 			if (0 != i2c_reg_read_byte(i2c_dev, RTC_DEV_ADDR, ucReg, &ucData))
@@ -346,7 +343,6 @@ bool GetCurrenTimeInEpoch(long long *pllCurrEpoch)
 			}
 			
 			sTimeStamp.tm_mon = ConvertBCDToDecimal(ucData);
-			//printk("Month: %d\n\r",sTimeStamp.tm_mon);
 			ucReg++;		
 
 			if (0 != i2c_reg_read_byte(i2c_dev, RTC_DEV_ADDR, ucReg, &ucData))
@@ -356,7 +352,6 @@ bool GetCurrenTimeInEpoch(long long *pllCurrEpoch)
 			}
 			
 			sTimeStamp.tm_year = ((ConvertBCDToDecimal(ucData)+2000) - 1900);
-			//printk("Year: %d\n\r",sTimeStamp.tm_year+1900);
 			strftime(cTimeBuffer, sizeof(cTimeBuffer), "%a %Y-%m-%d %H:%M:%S %Z", &sTimeStamp);
 			printk("Current Time: %s\n\r", cTimeBuffer);
 			sTimeStamp.tm_isdst = -1;

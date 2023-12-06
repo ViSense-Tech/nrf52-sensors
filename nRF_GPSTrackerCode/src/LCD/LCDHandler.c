@@ -26,7 +26,11 @@ unsigned char BackLight_State = LCD_NOBACKLIGHT;
 /***************************FUNCTION DECLARATION*********************/
 
 /*****************************FUNCTION DEFINITION***********************/
-
+/**
+ * @brief Initialise LCD
+ * @param None
+ * @return None
+*/
 void InitLCD(void) 
 {
   IOExpanderWrite(0x00);
@@ -50,6 +54,11 @@ void InitLCD(void)
   Backlight();
 }
 
+/**
+ * @brief Write to IO expander of LCD
+ * @param Data : byte to write
+ * @return None
+*/
 void IOExpanderWrite(unsigned char Data) 
 {
     uint32_t *pDiagData = NULL;
@@ -72,6 +81,12 @@ void IOExpanderWrite(unsigned char Data)
    }                          
 }
 
+/**
+ * @brief write bytes as upper and lower nibbles to LCD
+ * @param Nibble : byte to write
+ * @param RS     : To switch between data and command
+ * @return None
+*/
 void WriteNibbleToLCD(unsigned char Nibble, unsigned char RS) 
 {
   // Get The RS Value To LSB OF Data  
@@ -81,6 +96,11 @@ void WriteNibbleToLCD(unsigned char Nibble, unsigned char RS)
   k_usleep(10);
 }
 
+/**
+ * @brief Write command to LCD
+ * @param CMD : Command to LCD
+ * @return : None
+*/
 void WriteLCDCmd(unsigned char CMD) 
 {
   RS = 0; // Command Register Select
@@ -88,6 +108,11 @@ void WriteLCDCmd(unsigned char CMD)
   WriteNibbleToLCD((CMD << 4) & 0xF0, RS);
 }
 
+/**
+ * @brief Write character to LCD
+ * @param Data : Single byte to write
+ * @param None
+*/
 void WriteCharacterToLCD(char Data)
 {
   RS = 1;  // Data Register Select
@@ -95,12 +120,23 @@ void WriteCharacterToLCD(char Data)
   WriteNibbleToLCD((Data << 4) & 0xF0, RS);
 }
 
+/**
+ * @brief Write string to LCD
+ * @param Str : String to write
+ * @return None
+*/
 void WriteStringToLCD(char* Str)
 {
     for(int i=0; Str[i]!='\0'; i++)
        WriteCharacterToLCD(Str[i]); 
 }
 
+/**
+ * @brief Set LCD cursor position
+ * @param ROW : Row position of LCD
+ * @param COL : Colum position of LCD
+ * @return None
+*/
 void SetLCDCursor(unsigned char ROW, unsigned char COL) 
 {    
   switch(ROW) 
@@ -120,26 +156,44 @@ void SetLCDCursor(unsigned char ROW, unsigned char COL)
   }
 }
 
+/**
+ * @brief Enable backlight command
+ * @param None
+ * @return None
+*/
 void Backlight() 
 {
   BackLight_State = LCD_BACKLIGHT;
   IOExpanderWrite(0);
 }
 
+/**
+ * @brief Disable backlight command
+ * @param None
+ * @return None
+*/
 void noBacklight() 
 {
   BackLight_State = LCD_NOBACKLIGHT;
   IOExpanderWrite(0);
 }
 
-
+/**
+ * @brief Clear LCD display
+ * @param None
+ * @return None
+*/
 void ClearLCD()
 {
   WriteLCDCmd(0x01); 
   k_usleep(40);
 }
 
-
+/**
+ * @brief Get I2C handle
+ * @param None
+ * @return I2C handle
+*/
 struct device *GetI2CDevice()
 {
   if (psI2CHandle)

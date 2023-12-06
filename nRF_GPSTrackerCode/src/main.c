@@ -36,6 +36,10 @@ static bool DisplayAcclData(_sAcclData *psAcclData);
 static void DisplaySOG(float fSOG);
 static void DisplayLocation(double fLatitude, double fLongitude);
 static void PrintBanner();
+static bool UpdateConfigurations();
+static bool SendHistoryDataToFlash(char *pcJsonBuffer);
+static void DisplayFenceStatus();
+
 
 /***************************GLOBAL VARIABLES******************************/
 struct nvs_fs sConfigFs;
@@ -89,7 +93,9 @@ int main(void)
 	{
 
 		pMainObject = cJSON_CreateObject();
+		UpdateConfigurations();
 		TimeNow = sys_clock_tick_get();
+
 #ifdef SLEEP_ENABLE
 		sysTime = sys_clock_tick_get();
 
@@ -127,11 +133,7 @@ int main(void)
 					if (targetStatus && fSOG > mSog) // if device inside fence & crossed threshold values
 					{
 						printk("/n/r________________INSIDE FENCE_____________: %f\n\r", fSOG);
-						// WriteLCDCmd(0x01); // Clear
-						// SetLCDCursor(0, 1);
-						// sprintf(cLCDWarning, "INSIDE-FENCE%f", fSOG);
-						// WriteStringToLCD(cLCDWarning);
-						k_sleep(K_MSEC(200));
+						DisplayFenceStatus();
 					}
 				}
 			}
@@ -155,15 +157,10 @@ int main(void)
 			pucAdvBuffer[3] = (uint8_t)strlen(cJsonBuffer);
 			memcpy(pucAdvBuffer + 4, cJsonBuffer, strlen(cJsonBuffer));
 
-			if (IshistoryNotificationenabled() && IsConnected())
-			{
-				if (VisenseHistoryDataNotify(ulFlashidx))
-				{
-					ulFlashidx = 0;
-				}
-			}
+			SendHistoryDataToFlash(cJsonBuffer);
 
-			if (IsConfigLat() && IsConfigLon())
+
+			if (IsFenceConfigured())
 			{
 				if (polygonPoint(fLatitude, fLongitude, 4)) // func def in gpshandler.c
 				{
@@ -187,7 +184,7 @@ int main(void)
 				printk("flash count: %d\n\r", ulFlashidx);
 			}
 
-			if ((sConfigData.flag & (1 << 4))) // check whether config data is read from the flash / updated from mobile at runtime
+			if ((sConfigData.flag & (1 << 1))) // check whether config data is read from the flash / updated from mobile at runtime
 			{
 				*pDiagData = *pDiagData & CONFIG_WRITE_OK; // added a diagnostic information to the application
 			}
@@ -214,6 +211,7 @@ int main(void)
 	}
 	return 0;
 }
+
 /**
  * @brief Getting time from RTC
  * @param None
@@ -240,6 +238,7 @@ static bool GetTimeFromRTC()
 
 	return bRetVal;
 }
+
 /**
  * @brief Write the configured time from BLE to RTC
  * @param None
@@ -279,6 +278,7 @@ static bool WriteConfiguredtimeToRTC(void)
 
 	return bRetVal;
 }
+
 /**
  * @brief Check for config change and update value from flash
  * @param None
@@ -292,7 +292,7 @@ static bool CheckForConfigChange() // check for config change and update value f
 	pDiagData = GetDiagnosticData();
 
 	k_msleep(100);
-	ulRetCode = readJsonToFlash(&sConfigFs, 0, 0, (char *)&sConfigData, sizeof(sConfigData)); // read config params from the flash
+	ulRetCode = ReadJsonFromFlash(&sConfigFs, 0, (char *)&sConfigData, sizeof(sConfigData)); // read config params from the flash
 	if (sConfigData.flag == 0)
 	{
 		printk("\n\rError occured while reading config data: %d\n", ulRetCode);
@@ -312,6 +312,7 @@ static bool CheckForConfigChange() // check for config change and update value f
 
 	return bRetVal;
 }
+
 /**
  * @brief Update Configurations if any config value is written via Ble
  * @param None
@@ -321,6 +322,8 @@ static bool UpdateConfigurations()
 {
 	uint32_t ulRetCode = 0;
 	bool bRetVal = false;
+	_sConfigData ConfigData;
+	_sFenceData *psFenceData = NULL;
 
 	if (IsSleepTimeSet())
 	{
@@ -339,7 +342,7 @@ static bool UpdateConfigurations()
 			}
 
 			k_msleep(100);
-			ulRetCode = nvs_read(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
+			ulRetCode = nvs_read(&sConfigFs, 0, (char *)&ConfigData, sizeof(_sConfigData));
 
 			if (ulRetCode < 0)
 			{
@@ -349,17 +352,39 @@ static bool UpdateConfigurations()
 			bRetVal = true;
 		} while (0);
 	}
-	if (IsConfigLat() && IsConfiglon())
+	if (IsConfigLat() && IsConfigLon())
 	{
-
-		memcpy(&sConfigData.FenceData, GetFenceTable(), sizeof(GetFenceTable()));
-		SetConfigLat(false);
-		SetConfigLon(false);
+		psFenceData = malloc(sizeof(_sFenceData));
+		psFenceData = GetFenceTable();
+		memcpy(&sConfigData.FenceData, psFenceData, sizeof(_sFenceData));
+		SetConfigChangeLon(false);
+		SetConfigChangeLat(false);
 		sConfigData.flag = sConfigData.flag | (1 << 1); // set flag for config data update and store it into flash
 		do
 		{
 			ulRetCode = nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
+
+			if (ulRetCode <= 0)
+			{
+				printk("ERR: Write failed\n\r");
+				break;
+			}
+			ulRetCode = nvs_read(&sConfigFs, 0, (char *)&ConfigData, sizeof(_sConfigData));
+			
+			if (ulRetCode > 0)
+			{
+				memcpy(psFenceData, ConfigData.FenceData, sizeof(ConfigData.FenceData));
+				printk("Write succeed................................................................%s\n",sConfigData.FenceData);
+				for (int ucIdx = 0; ucIdx < 4; ucIdx++)
+				{
+					printk("Lat[%d]: %lf Lon[%d]: %lf\n\r", ucIdx, psFenceData->dLatitude, ucIdx, psFenceData->dLongitude);
+					psFenceData++;
+				}
+				
+			}
+			free(psFenceData);
 		} while (0);
+
 		bRetVal = true;
 
 		return bRetVal;
@@ -469,6 +494,23 @@ static void DisplayLocation(double fLatitude, double fLongitude)
 }
 
 /**
+ * @brief  Display fence status in LCD
+ * @param  None
+ * @return None
+*/
+static void DisplayFenceStatus()
+{
+	char cLCDMessage[50] = {0};
+
+	WriteLCDCmd(0x01); // Clear
+	SetLCDCursor(1, 1);
+
+	strcpy(cLCDMessage, "INSIDE-FENCE");
+	WriteStringToLCD(cLCDMessage);
+	k_sleep(K_MSEC(200));
+}
+
+/**
  * @brief  : Display SOG value in LCD
  * @param  : fSOG : Speed over Ground value
  * @return : None
@@ -499,7 +541,7 @@ static bool DisplayAcclData(_sAcclData *psAcclData)
 
 	if (psAcclData)
 	{
-		
+		WriteLCDCmd(0x01);
 		SetLCDCursor(1, 1);
 		k_usleep(10);
 		sprintf(cLCDMessage, "X:%d",
@@ -520,7 +562,6 @@ static bool DisplayAcclData(_sAcclData *psAcclData)
 		WriteStringToLCD(cLCDMessage);
 		k_sleep(K_MSEC(300));
 		bRetVal = true;
-		WriteLCDCmd(0x01);
 	}
 
 	return bRetVal;
@@ -586,6 +627,61 @@ static bool GetAccelerometerDataAndUpdateJson(cJSON *pMainObject)
 	} while (0);
 
 	return bRetVal;
+}
+
+/**
+ * @brief History notification function
+ * @param pcJsonBuffer : History data to notify
+ * @return true for success
+*/
+static bool SendHistoryDataToFlash(char *pcJsonBuffer)
+{
+ 
+    char cBuffer[WRITE_ALIGNMENT];
+    bool bRetval = false;
+ 
+ 
+    if (pcJsonBuffer)
+    {
+        if(!IsConnected()) // && sConfigData.flag & (1 << 4) can include this condition also if config is mandetory during initial setup
+        {
+           
+            memset(cBuffer, '\0', sizeof(cBuffer));
+            memcpy(cBuffer, pcJsonBuffer, strlen(pcJsonBuffer));
+            if(writeJsonToExternalFlash(cBuffer, ulFlashidx, WRITE_ALIGNMENT))
+            {
+                // NO OP
+            }
+            k_msleep(50);
+            if (readJsonFromExternalFlash(cBuffer, ulFlashidx, WRITE_ALIGNMENT))
+            {
+                printk("\nId: %d, Stored_Data: %s\n",ulFlashidx, cBuffer);
+            }
+            ulFlashidx++;
+            sConfigData.flashIdx = ulFlashidx;
+            nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
+            if(ulFlashidx>= NUMBER_OF_ENTRIES)
+            {
+                ulFlashidx = 0;
+            }
+        }
+ 
+ 
+        if(IshistoryNotificationenabled() && IsConnected())
+        {
+            printk("In history notif\n\r");
+            if (VisenseHistoryDataNotify(ulFlashidx))
+            {
+                ulFlashidx = 0;
+                sConfigData.flashIdx = ulFlashidx;
+                nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
+            }
+        }
+ 
+        bRetval = true;
+    }
+ 
+    return bRetval;
 }
 
 /**
