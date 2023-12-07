@@ -27,6 +27,10 @@ static const struct bt_data ad[] = {
 
 };
 
+static const struct bt_data sd[] = {
+    BT_DATA_BYTES(BT_DATA_UUID128_ALL, BT_UUID_CUSTOM_SERVICE_VAL)
+};
+
 /**********************************FUNCTION DEFINITION****************/
 
 /**
@@ -77,7 +81,7 @@ int InitExtendedAdv(void)
 	    }
 
 	    printk("Created adv: %p\n", adv);
-	    nRetVal = bt_le_ext_adv_set_data(adv, ad,ARRAY_SIZE(ad), NULL, 0);
+	    nRetVal = bt_le_ext_adv_set_data(adv, ad,ARRAY_SIZE(ad), sd, ARRAY_SIZE(sd));
 
 	    if (nRetVal) 
         {
@@ -100,7 +104,7 @@ int StartAdvertising(void)
 #ifdef EXTENDED_ADV
 	nError = bt_le_ext_adv_start(adv, NULL);
 #else
-	nError = bt_le_adv_start(BT_LE_ADV_CONN, ad, ARRAY_SIZE(ad), NULL, 0);
+	nError = bt_le_adv_start(BT_LE_ADV_CONN, ad, ARRAY_SIZE(ad), sd, ARRAY_SIZE(sd));
 #endif
 	if (nError) 
     {

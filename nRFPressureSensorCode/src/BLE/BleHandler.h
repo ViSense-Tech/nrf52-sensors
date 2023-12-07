@@ -20,6 +20,8 @@
 #define ADV_BUFF_SIZE           (180)
 // #define EXTENDED_ADV
 /**************************************TYPEDEFS******************************/
+#define BT_UUID_CUSTOM_SERVICE_VAL \
+	BT_UUID_128_ENCODE(0xe076567e, 0x5d3b, 0x11ee, 0x8c99, 0x0242ac120002)
 
 /*************************************FUNCTION DECLARATION*******************/
 bool EnableBLE();
