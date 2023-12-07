@@ -204,7 +204,6 @@ BT_CONN_CB_DEFINE(conn_callbacks) = {
 	.disconnected = disconnected,
 };
 
-
 /**
  * @brief Sending sensor data as notification
  * @param pucSensorData - Data to notify

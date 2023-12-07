@@ -1,6 +1,6 @@
 /**
- * @file Packethandler.h
- * @brief file containg functions for handling packets
+ * @file JsonHandler.h
+ * @brief file containg functions for handling JSON
  * @author Adhil
  * @date  29-092023
  * @note
@@ -18,16 +18,27 @@
 /**************************************TYPEDEFS***************************/
 typedef enum __eJsonDataType
 {
-    NUMBER_INT,
-    NUMBER_FLOAT,
+    FLOAT,
+    NUMBER,
     STRING,
     ARRAY,
     OBJECT,
 }_eJsonDataType;
 
+
+typedef struct __sFenceData
+{
+    double dLatitude;
+    double dLongitude;
+}_sFenceData;
+
 /***********************************FUNCTION DECLARATION******************/
 
 bool AddItemtoJsonObject(cJSON **pcJsonHandle, _eJsonDataType JsondataType, const char *pcKey, 
                     void *pcValue, uint8_t ucLen);
-bool ParseRxData(uint8_t *pData,const char *pckey, uint8_t ucLen, uint64_t *pucData);
+bool ParseRxData(uint8_t *pData,const char *pckey, uint16_t ucLen, uint64_t *pucData);
+bool ParseArray(uint8_t *pData,const char *pckey, uint16_t ucLen, char *pucData);
+_sFenceData *GetFenceTable();
+void SetFenceTable(_sFenceData *sFenceTable);
+
 #endif
