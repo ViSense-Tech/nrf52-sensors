@@ -102,16 +102,10 @@ bool ParseRxData(uint8_t *pData, const char *pckey, uint16_t ucLen, uint64_t *pu
     char cbuff[150] = {0};
     cJSON *RxData = NULL;
     
-    if (ucLen >= 150)
-    {
-        return bRetVal;
-    }
     if (pData && pckey && pucData)
     {
-    
         if (pData[0])     //length check
         {
-
             cJSON *root = cJSON_Parse(pData + 2);
             if (root != NULL)
             {

@@ -8,7 +8,7 @@
 //#include "BleService.h" 
 /******************************************************MACROS*****************************************/
 
-#define NVS_PARTITION		storage_partition
+#define NVS_PARTITION		    storage_partition
 #define NVS_PARTITION_DEVICE	FIXED_PARTITION_DEVICE(NVS_PARTITION)
 #define NVS_PARTITION_OFFSET	FIXED_PARTITION_OFFSET(NVS_PARTITION)
 /* SPI flash region*/
@@ -42,6 +42,7 @@
 typedef struct __attribute__((packed)) __sConfigData
 {
     long long lastUpdatedTime;
+    uint8_t ucCoordCount;
     _sFenceData FenceData[6];
      uint32_t flashIdx;
     uint32_t sleepTime;

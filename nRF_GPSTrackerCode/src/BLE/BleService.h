@@ -28,3 +28,5 @@ void SetConfigChangeLat(bool);
 void SetConfigChangeLon(bool);
 bool IsFenceConfigured();
 void SetFenceConfigStatus(bool bStatus);
+void SetFenceCoordCount(uint8_t ucCount);
+uint8_t GetCoordCount();

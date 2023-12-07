@@ -39,6 +39,7 @@ static void PrintBanner();
 static bool UpdateConfigurations();
 static bool SendHistoryDataToFlash(char *pcJsonBuffer);
 static void DisplayFenceStatus();
+static void SendConfigDataToApp();
 
 
 /***************************GLOBAL VARIABLES******************************/
@@ -148,6 +149,7 @@ int main(void)
 			}
 
 			WriteConfiguredtimeToRTC();
+			SendConfigDataToApp();
 			if (GetCurrentTime(&llEpochTime))
 			{
 				AddItemtoJsonObject(&pMainObject, NUMBER, "TS", &llEpochTime, sizeof(long long));
@@ -160,6 +162,7 @@ int main(void)
 			pucAdvBuffer[2] = 0x03;
 			pucAdvBuffer[3] = (uint8_t)strlen(cJsonBuffer);
 			memcpy(pucAdvBuffer + 4, cJsonBuffer, strlen(cJsonBuffer));
+
 
 			SendHistoryDataToFlash(cJsonBuffer);
 
@@ -199,11 +202,13 @@ int main(void)
 		
 			printk("JSON:\n%s\n", cJsonBuffer);
 			cJSON_Delete(pMainObject);
-			cJSON_free(cJsonBuffer);	
+			cJSON_free(cJsonBuffer);
+
 #ifdef SLEEP_ENABLE
 		}
 		EnterSleepMode(GetSleepTime());
 		ExitSleepMode();
+
 		// printk("INFO: Syncing time with RTC\n\r");
 		if (!GetTimeFromRTC())
 		{
@@ -214,6 +219,53 @@ int main(void)
 #endif
 	}
 	return 0;
+}
+
+/**
+ * @brief send config data to application over ble
+ * @param None
+ * @return None
+*/
+static void SendConfigDataToApp()
+{
+    cJSON *pConfigObject = NULL;
+    char *cJsonConfigBuffer = NULL;
+	_sFenceData *psFenceData = NULL;
+    uint32_t ulSleepTime = 0;
+	uint8_t ucCoordCount = 0;
+	uint8_t ucIdx = 0;
+    char cBuffer[30] =  {0};
+	uint8_t cKeyBuff[10] = {0};
+
+    pConfigObject = cJSON_CreateObject();
+    ulSleepTime = GetSleepTime();
+    sprintf(cBuffer, "%ds", ulSleepTime);
+    AddItemtoJsonObject(&pConfigObject, STRING, "Sleep", cBuffer, strlen(cBuffer));
+	ucCoordCount = GetCoordCount();
+	AddItemtoJsonObject(&pConfigObject, NUMBER, "cc", ucCoordCount, sizeof(ucCoordCount));
+   	psFenceData = GetFenceTable();
+	for (ucIdx=0; ucIdx < ucCoordCount; ucIdx++)
+	{
+		sprintf(cKeyBuff, "Lat%d", ucIdx+1);
+		sprintf(cBuffer, "%f", psFenceData->dLatitude);
+		AddItemtoJsonObject(&pConfigObject, STRING, cKeyBuff, cBuffer, strlen(cBuffer));
+		memset(cKeyBuff, 0, sizeof(cKeyBuff));
+		memset(cBuffer, 0, sizeof(cBuffer));
+		sprintf(cKeyBuff, "Lon%d", ucIdx+1);
+		sprintf(cBuffer, "%f", psFenceData->dLongitude);
+		AddItemtoJsonObject(&pConfigObject, STRING, cKeyBuff, cBuffer, strlen(cBuffer));		
+	}
+
+	cJsonConfigBuffer = cJSON_Print(pConfigObject);
+    printk("ConfigJSON:\n%s\n", cJsonConfigBuffer);
+
+    if (IsConfigNotifyEnabled())
+    {
+        VisenseConfigDataNotify(cJsonConfigBuffer, (uint16_t)strlen(cJsonConfigBuffer));
+    }
+
+    cJSON_free(cJsonConfigBuffer);
+    cJSON_Delete(pConfigObject);
 }
 
 /**
@@ -291,6 +343,7 @@ static bool WriteConfiguredtimeToRTC(void)
 static bool CheckForConfigChange() // check for config change and update value from flash
 {
 	uint32_t ulRetCode = 0;
+	uint8_t ucIdx = 0;
 	bool bRetVal = false;
 	uint32_t *pDiagData = NULL;
 	pDiagData = GetDiagnosticData();
@@ -307,10 +360,16 @@ static bool CheckForConfigChange() // check for config change and update value f
 	{
 		SetSleepTime(sConfigData.sleepTime);
 		ulFlashidx = sConfigData.flashIdx;
-		printk("sConfigFlag %d ,flashIdx = %d\n",
+		printk("sConfigFlag %d ,flashIdx = %d\n CC=%d",
 			   sConfigData.flag,
-			   sConfigData.flashIdx);		   // get all the config params from the flash if a reboot occures
+			   sConfigData.flashIdx,
+			   sConfigData.ucCoordCount);		   // get all the config params from the flash if a reboot occures
 		SetFenceTable(&sConfigData.FenceData); // get coordinates from the flash if a reboot occures
+		for (ucIdx = 0; sConfigData.ucCoordCount > ucIdx ; ucIdx++)
+		{
+			printk("Lat: %f Lon: %f\n\r", 
+			sConfigData.FenceData[ucIdx].dLatitude, sConfigData.FenceData[ucIdx].dLongitude);
+		}
 		bRetVal = true;
 	}
 
@@ -324,9 +383,9 @@ static bool CheckForConfigChange() // check for config change and update value f
  */
 static bool UpdateConfigurations()
 {
-	uint32_t ulRetCode = 0;
+	int32_t ulRetCode = 0;
 	bool bRetVal = false;
-	_sConfigData ConfigData;
+	//_sConfigData ConfigData;
 	_sFenceData *psFenceData = NULL;
 
 	if (IsSleepTimeSet())
@@ -346,7 +405,7 @@ static bool UpdateConfigurations()
 			}
 
 			k_msleep(100);
-			ulRetCode = nvs_read(&sConfigFs, 0, (char *)&ConfigData, sizeof(_sConfigData));
+			ulRetCode = nvs_read(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
 
 			if (ulRetCode < 0)
 			{
@@ -360,12 +419,23 @@ static bool UpdateConfigurations()
 	{
 		psFenceData = malloc(sizeof(_sFenceData));
 		psFenceData = GetFenceTable();
-		memcpy(&sConfigData.FenceData, psFenceData, sizeof(_sFenceData));
+		sConfigData.ucCoordCount = GetCoordCount();
+
+		memcpy(sConfigData.FenceData, psFenceData, sizeof(_sFenceData) * 6);
+
+		for (uint8_t ucIdx = 0; sConfigData.ucCoordCount > ucIdx ; ucIdx++)
+		{
+			printk("\n\rUCLat: %f UCLon: %f\n\r", 
+			sConfigData.FenceData[ucIdx].dLatitude, sConfigData.FenceData[ucIdx].dLongitude);
+			//psFenceData++;
+		}	
 		SetConfigChangeLon(false);
 		SetConfigChangeLat(false);
+		
 		sConfigData.flag = sConfigData.flag | (1 << 1); // set flag for config data update and store it into flash
 		do
-		{
+		{		
+
 			ulRetCode = nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
 
 			if (ulRetCode <= 0)
@@ -440,15 +510,15 @@ static bool InitAllModules()
 			break;
 		}
 
-		if (!InitRtc())
+		if (FlashInit(&sConfigFs, CONFIG_DATA_FS) != 0)
 		{
-			printk("WARN: RTC init failed\n\r");
+			printk("ERR: Flashinit failed\n\r");
 			break;
 		}
 
-		if (FlashInit(&sConfigFs, CONFIG_DATA_FS) == 0)
+		if (!InitRtc())
 		{
-			printk("ERR: Flashinit failed\n\r");
+			printk("WARN: RTC init failed\n\r");
 			break;
 		}
 

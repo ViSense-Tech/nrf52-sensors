@@ -44,6 +44,7 @@ static bool hNotificationEnabled = false;
 struct nvs_fs *FileSys;
 static bool bConfigNotifyEnabled = false;
 static bool bFenceStatus = false;
+static uint8_t ucCoordCount;
 /*Read index from flash*/
 uint8_t ucIdx = 0;
 bool bFenceLat = false;
@@ -118,7 +119,7 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 		if (len)
 		{
 			printk("..cc:%d\n\r", ucbuff2);
-			
+			SetFenceCoordCount(ucbuff2);
 		}
 	}
 	else
@@ -520,6 +521,7 @@ bool IsFenceConfigured()
 {
     return bFenceStatus;
 }
+
 /**
  * @brief Set Fence config status
  * @param bStatus : fence set status
@@ -528,4 +530,24 @@ bool IsFenceConfigured()
 void SetFenceConfigStatus(bool bStatus)
 {
     bFenceStatus = bStatus;
+}
+
+/**
+ * @brief Setting coordinate count
+ * @param ucCount : Coordinate count
+ * @return None
+*/
+void SetFenceCoordCount(uint8_t ucCount)
+{
+	ucCoordCount = ucCount;
+}
+
+/**
+ * @brief Get coordinate count
+ * @param None
+ * @return Fence coordinate count
+*/
+uint8_t GetCoordCount()
+{
+	return ucCoordCount;
 }
