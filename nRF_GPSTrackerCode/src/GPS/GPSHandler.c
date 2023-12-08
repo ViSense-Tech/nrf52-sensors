@@ -339,7 +339,7 @@ bool ReadSOGData(float *pfSOG)
 
         if (pcSubString == NULL)
         {
-            pcSubString = strstr(cRxBuffer, "$GPGGA");
+            pcSubString = strstr(cRxBuffer, "$GPRMC");
         }
 
         if (pcSubString != NULL)
