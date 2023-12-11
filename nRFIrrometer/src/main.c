@@ -18,6 +18,7 @@
 #include "AdcHandler.h"
 #include "Timerhandler.h"
 #include "TempSensor.h"
+#include "PMIC/PMICHandler.h"
 
 /*******************************MACROS****************************************/
 #define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
@@ -67,6 +68,7 @@ int main(void)
     cJSON *pSensorObj = NULL;
     long long llEpochNow = 0;
     double dTemperature = 0.0;
+    float fSOC=0.0;
     int64_t Timenow =0;
     int ADCReading1;
     int ADCReading2;
@@ -178,7 +180,8 @@ int main(void)
                 AddItemtoJsonObject(&pSensorObj, NUMBER_INT, "ADC2", &ADCReading2, sizeof(uint16_t));
                 AddItemtoJsonObject(&pSensorObj, STRING, "CB", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer));
             }
-           
+
+
             if (GetCurrentTime(&llEpochNow))
             {
                 printk("CurrentTime=%llu\n\r", llEpochNow);
@@ -192,6 +195,11 @@ int main(void)
 
             AddItemtoJsonObject(&pMainObject, NUMBER_INT, "TS", &llEpochNow, sizeof(long long));
             AddItemtoJsonObject(&pMainObject, NUMBER_INT, "DIAG", pDiagData, sizeof(uint32_t));
+            PMICUpdate(&fSOC);
+            memset(cbuffer, '\0', sizeof(cbuffer));
+            printk("soc=%f\n\r", fSOC);
+            sprintf(cbuffer,"%f%%", fSOC);
+            AddItemtoJsonObject(&pMainObject, STRING, "BattLvl", cbuffer, sizeof(float));
             cJsonBuffer = cJSON_Print(pMainObject);
 
             pucAdvBuffer[2] = 0x02;
@@ -216,7 +224,7 @@ int main(void)
             {
                 //No Op
             }
-            
+        
             memset(pucAdvBuffer, 0, ADV_BUFF_SIZE);
             cJSON_Delete(pMainObject);
             cJSON_free(cJsonBuffer);
@@ -277,7 +285,7 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
             k_msleep(50);
             if (readJsonFromExternalFlash(cBuffer, uFlashIdx, WRITE_ALIGNMENT))
             {
-                printk("\nId: %d, Stored_Data: %s\n",uFlashIdx, cBuffer);
+                printk("\nId: %d, Stored_Data: %s\n",uFlashIdx, pcBuffer);
             }
             uFlashIdx++;
             sConfigData.flashIdx = uFlashIdx;
@@ -449,8 +457,9 @@ static bool InitAllModules()
             printk("ERROR: Init PM failed\n\r");
             break;
        }
+       PMICInit();
 
-       InitTimer();
+      // InitTimer();
        k_sleep(K_TICKS(100));
 
        InitDataPartition();
@@ -460,6 +469,7 @@ static bool InitAllModules()
             printk("ERROR: Init BLE failed\n\r");
             break;       
        }
+
        bRetVal = true;
     } while (0);
     
