@@ -24,6 +24,9 @@ static const struct bt_data ad[] = {
 	//BT_DATA(BT_DATA_MANUFACTURER_DATA, ucAdVertsingBuffer, ADV_BUFF_SIZE)
 };
 
+static const struct bt_data sd[] = {
+    BT_DATA_BYTES(BT_DATA_UUID128_ALL, BT_UUID_CUSTOM_SERVICE_VAL)
+};
 /**********************************FUNCTION DEFINITION****************/
 
 /**
@@ -95,7 +98,7 @@ int StartAdvertising(void)
 {
 	int nError = 0;
 
-	nError = bt_le_adv_start(BT_LE_ADV_CONN, ad, ARRAY_SIZE(ad), NULL, 0);
+	nError = bt_le_adv_start(BT_LE_ADV_CONN, ad, ARRAY_SIZE(ad), sd, ARRAY_SIZE(sd));
 
 	if (nError) 
     {
