@@ -26,6 +26,10 @@ static const struct bt_data ad[] = {
     #endif
 };
 
+static const struct bt_data sd[] = {
+    BT_DATA_BYTES(BT_DATA_UUID128_ALL, BT_UUID_CUSTOM_SERVICE_VAL)
+};
+
 /**********************************FUNCTION DEFINITION****************/
 
 
@@ -77,7 +81,7 @@ int StartAdv(void)
 #ifdef EXT_ADV
 	nError = bt_le_ext_adv_start(adv, NULL);
 #else
-    nError = bt_le_adv_start(BT_LE_ADV_CONN, ad, ARRAY_SIZE(ad), NULL, 0);
+    nError = bt_le_adv_start(BT_LE_ADV_CONN, ad, ARRAY_SIZE(ad), sd, ARRAY_SIZE(sd));
 #endif    
 
 	if (nError) 
@@ -182,26 +186,4 @@ bool EnableBLE()
     }
 
     return bRetVal;
-}
-
-/**
- * @brief function to start advertising
- * @return nError - 0 for success
-*/
-int StartAdvertising(void)
-{
-	int nError = 0;
-
-	nError = bt_le_adv_start(BT_LE_ADV_CONN, ad, ARRAY_SIZE(ad), NULL, 0);
-
-	if (nError) 
-    {
-		printk("Failed to start advertising set (err %d)\n", nError);
-	}
-    else
-    {
-        printk("Advertiser %p set started\n", adv);
-    }
-
-    return nError;
 }

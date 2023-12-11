@@ -68,6 +68,7 @@ void EnterSleepMode(int nDuration)
     pm_device_action_run(psSensorExcitePin2, PM_DEVICE_ACTION_SUSPEND);
     BleStopAdv();
     gpio_pin_set(sSleepStatusLED.port, sSleepStatusLED.pin, 1);
+    printk("INFO: Entering Sleep for %dseconds\n\r", nDuration);
     k_sleep(K_SECONDS(nDuration));
 }
 
@@ -79,8 +80,9 @@ void ExitSleepMode()
 {
     struct device *pAdc = NULL;
     struct gpio_dt_spec *psSensorExcitePin1 = NULL;
-    struct gpio_dt_spec *psSensorExcitePin2 = NULL; 
+    struct gpio_dt_spec *psSensorExcitePin2 = NULL;
 
+    printk("Exiting Sleep\n\r");
     pAdc = GetADCdevice();
     StartAdv();
     psSensorExcitePin1 = GetExcitePin1();
