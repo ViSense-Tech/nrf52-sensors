@@ -198,8 +198,8 @@ int main(void)
             PMICUpdate(&fSOC);
             memset(cbuffer, '\0', sizeof(cbuffer));
             printk("soc=%f\n\r", fSOC);
-            sprintf(cbuffer,"%f%%", fSOC);
-            AddItemtoJsonObject(&pMainObject, STRING, "BattLvl", cbuffer, sizeof(float));
+            sprintf(cbuffer,"%d%%", (int)fSOC);
+            AddItemtoJsonObject(&pMainObject, STRING, "Batt", cbuffer, sizeof(float));
             cJsonBuffer = cJSON_Print(pMainObject);
 
             pucAdvBuffer[2] = 0x02;
