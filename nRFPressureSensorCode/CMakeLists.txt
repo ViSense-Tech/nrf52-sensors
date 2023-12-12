@@ -24,6 +24,7 @@ target_sources(app PRIVATE src/main.c
                            src/NVS/nvs_flash.c
                            src/SYSTEM/SystemHandler.c
                            src/Timer/Timerhandler.c
+                           src/PMIC/PMICHandler.c
                            "C:/ncs/v2.4.2/modules/hal/nordic/nrfx/samples/src/nrfx_saadc/common/saadc_examples_common.c")
 target_include_directories(app PRIVATE src/Json 
                                        src/BLE
@@ -32,4 +33,5 @@ target_include_directories(app PRIVATE src/Json
                                        src/NVS
                                        src/SYSTEM
                                        src/Timer
+                                       src/PMIC
                                        ${COMMON_PATH} "C:/ncs/v2.4.2/modules/hal/nordic/nrfx/samples/src/nrfx_saadc/common")
