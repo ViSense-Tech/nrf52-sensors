@@ -7,6 +7,7 @@
 
 /************************INCLUDES***************************/
 #include "GPSHandler.h"
+#include "PMIC/PMICHandler.h"
 #include "LCDHandler.h"
 #include "Accelerometer.h"
 #include "BleHandler.h"
@@ -62,12 +63,14 @@ int main(void)
 	long long TimeNow = 0, sysTime = 0;
 	char *cJsonBuffer = NULL;
 	char pcLocation[100];
+	char cBuffer[30] =  {0};
 	bool targetStatus = false; // flag to check geoFence
 	uint8_t ucIdx = 0;
 	uint8_t *pucAdvBuffer = NULL;
 	char cFlashReadBuf[128] = {0};
 	long long llEpochTime = 0;
 	uint32_t *pDiagData = NULL;
+	float fSOC = 0.0;
 	cJSON *pMainObject = NULL;
 
 	PrintBanner();
@@ -157,6 +160,11 @@ int main(void)
 			printk("DIAG data : %d\n\r", *pDiagData);
 			AddItemtoJsonObject(&pMainObject, NUMBER, "DIAG", pDiagData, sizeof(uint32_t));
 			*pDiagData = *pDiagData | GPS_LOC_FAILED;
+			PMICUpdate(&fSOC);
+            memset(cBuffer, '\0', sizeof(cBuffer));
+            printk("soc=%f\n\r", fSOC);
+            sprintf(cBuffer,"%d%%", (int)fSOC);
+            AddItemtoJsonObject(&pMainObject, STRING, "Batt", cBuffer, sizeof(float));
 			cJsonBuffer = cJSON_Print(pMainObject);
 
 			pucAdvBuffer[2] = 0x03;
@@ -498,6 +506,7 @@ static bool InitAllModules()
 	{
 		InitLCD();
 		InitTimer();
+		PMICInit();
 
 		if (!InitBle())
 		{
