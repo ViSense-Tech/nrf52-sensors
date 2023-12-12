@@ -27,12 +27,12 @@ static struct bt_uuid_128 sServiceUUID = BT_UUID_INIT_128(
 	BT_UUID_CUSTOM_SERVICE_VAL);
 
 static struct bt_uuid_128 sSensorChara = BT_UUID_INIT_128(
-	BT_UUID_128_ENCODE(0xe0765908, 0x5d3b, 0x11ee, 0x8c99, 0x0242ac120002));
+	BT_UUID_128_ENCODE(0x1f1e5e42, 0x98ad, 0x11ee, 0xb9d1, 0x0242ac120002));
 
 static struct bt_uuid_128 sConfigChara = BT_UUID_INIT_128(
-	BT_UUID_128_ENCODE(0xe0765909, 0x5d3b, 0x11ee, 0x8c99, 0x0242ac120002));
+	BT_UUID_128_ENCODE(0x1f1e5f96, 0x98ad, 0x11ee, 0xb9d1, 0x0242ac120002));
 static struct bt_uuid_128 sHistoryChara = BT_UUID_INIT_128(
-	BT_UUID_128_ENCODE(0xe0766000, 0x5d3b, 0x11ee, 0x8c99, 0x0242ac120002));
+	BT_UUID_128_ENCODE(0x1f1e60b8, 0x98ad, 0x11ee, 0xb9d1, 0x0242ac120002));
 
 static uint8_t ucSensorData[VND_MAX_LEN + 1] = {0x11, 0x22, 0x33, 0x44, 0x55};
 static uint8_t ucConfigData2[VND_MAX_LEN + 1];
