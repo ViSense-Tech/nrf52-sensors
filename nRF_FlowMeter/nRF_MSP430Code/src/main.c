@@ -13,6 +13,7 @@
 #include "TimerHandler.h"
 #include "FlashHandler.h"
 #include "SystemHandler.h"
+#include "PMIC/PMICHandler.h"
 #include "Common.h"
 
 /*************************MACROS****************************/
@@ -57,6 +58,7 @@ int main(void)
 	uint8_t *pucAdvBuffer = NULL;
 	char *cJsonBuffer = NULL;
 	char cBuffer[30];
+    float fSOC = 0.0;
     char *pcEnd = NULL;
 	double dFlowRate = 0.0;
     cJSON * pMainObject = NULL;
@@ -135,7 +137,11 @@ int main(void)
 			{
 				AddItemtoJsonObject(&pMainObject, NUMBER_INT, "TS", &llEpochNow, sizeof(long long));
 			}
-
+			PMICUpdate(&fSOC);
+            memset(cBuffer, '\0', sizeof(cBuffer));
+            printk("soc=%f\n\r", fSOC);
+            sprintf(cBuffer,"%d%%", (int)fSOC);
+            AddItemtoJsonObject(&pMainObject, STRING, "Batt", cBuffer, sizeof(float));
 			cJsonBuffer = cJSON_Print(pMainObject);
             SendHistoryDataToApp(cJsonBuffer, strlen(cJsonBuffer));
 
@@ -239,7 +245,7 @@ static bool InitAllModules()
 			printk("ERROR: Init PM failed\n\r");
 			break;
 		}
-
+        PMICInit();
 		InitTimer();
 		k_sleep(K_TICKS(100));
 
