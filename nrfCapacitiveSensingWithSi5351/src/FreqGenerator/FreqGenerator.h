@@ -48,4 +48,6 @@
 
 /***************************************FUNCTION DECLARTAION*********************/
 void si5351aSetFrequency(uint32_t frequency);
+void InitMuxInputPins(void);
+void SelectMuxChannel(uint8_t ucChannel);
 #endif

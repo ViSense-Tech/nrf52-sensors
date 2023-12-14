@@ -8,6 +8,9 @@
 
 /***************************************INCLUDES*********************************/
 #include "FreqGenerator.h"
+#include <zephyr/kernel.h>
+#include <zephyr/drivers/gpio.h>
+#include <zephyr/devicetree.h>
 #include <string.h>
 
 /***************************************MACROS*********************************/
@@ -16,10 +19,50 @@
 /***************************************GLOBALS*********************************/
 
 static const struct device *i2c_dev = DEVICE_DT_GET(DT_NODELABEL(i2c0));
-
+const struct gpio_dt_spec sMuxInput1 = GPIO_DT_SPEC_GET(DT_ALIAS(muxinputa), gpios);
+const struct gpio_dt_spec sMuxInput2 = GPIO_DT_SPEC_GET(DT_ALIAS(muxinputb), gpios);
 
 
 /***************************************FUNCTION DEFINITIONS********************/
+
+void SelectMuxChannel(uint8_t ucChannel)
+{
+    switch(ucChannel)
+    {   
+        /*State of pin is inverted in nRF52840 DK need to investigate*/
+        case 0: gpio_pin_set(sMuxInput1.port, sMuxInput1.pin , 1);
+                gpio_pin_set(sMuxInput2.port, sMuxInput2.pin , 1);
+                break;
+
+        case 1: gpio_pin_set(sMuxInput1.port, sMuxInput1.pin , 0);
+                gpio_pin_set(sMuxInput2.port, sMuxInput2.pin , 1);
+                break;
+
+        case 2: gpio_pin_set(sMuxInput1.port, sMuxInput1.pin , 1);
+                gpio_pin_set(sMuxInput2.port, sMuxInput2.pin , 0);
+                break;
+
+        case 3: gpio_pin_set(sMuxInput1.port, sMuxInput1.pin , 0);
+                gpio_pin_set(sMuxInput2.port, sMuxInput2.pin , 0);
+                break;   
+
+        default:
+                 break;                     
+            
+    }
+   
+}
+
+/**
+ * @brief Initialize the GPIO pins for exciting the irrometer sensor
+ * @param None
+ * @return None
+*/
+void InitMuxInputPins(void)
+{
+    gpio_pin_configure_dt(&sMuxInput1, GPIO_OUTPUT_LOW);
+    gpio_pin_configure_dt(&sMuxInput2, GPIO_OUTPUT_LOW);       
+}
 
 //
 // Set up specified PLL with mult, num and denom
@@ -110,6 +153,7 @@ void si5351aSetFrequency(uint32_t frequency)
 
 									// Set up PLL A with the calculated multiplication ratio
 	setupPLL(SI_SYNTH_PLL_A, mult, num, denom);
+
 									// Set up MultiSynth divider 0, with the calculated divider. 
 									// The final R division stage can divide by a power of two, from 1..128. 
 									// reprented by constants SI_R_DIV1 to SI_R_DIV128 (see si5351a.h header file)
@@ -121,215 +165,17 @@ void si5351aSetFrequency(uint32_t frequency)
 	i2c_reg_write_byte(i2c_dev, CK_GEN_ADDR, SI_PLL_RESET, 0xA0);	
 									// Finally switch on the CLK0 output (0x4F)
 									// and set the MultiSynth0 input to be PLL A
-	i2c_reg_write_byte(i2c_dev, CK_GEN_ADDR, SI_CLK0_CONTROL, 0x4F | SI_CLK_SRC_PLL_A);
+	i2c_reg_write_byte(i2c_dev, CK_GEN_ADDR, SI_CLK0_CONTROL /*| SI_CLK1_CONTROL | SI_CLK2_CONTROL*/,
+														 0x4F | SI_CLK_SRC_PLL_A);
+	setupPLL(SI_SYNTH_PLL_B, mult, num, denom);													 
+
+	setupMultisynth(SI_SYNTH_MS_1, divider, SI_R_DIV_1);
+
+	i2c_reg_write_byte(i2c_dev, CK_GEN_ADDR, SI_CLK1_CONTROL, 0x4F | SI_CLK_SRC_PLL_B);
+
+	setupMultisynth(SI_SYNTH_MS_2, divider, SI_R_DIV_1);
+
+	i2c_reg_write_byte(i2c_dev, CK_GEN_ADDR, SI_CLK2_CONTROL, 0x4F | SI_CLK_SRC_PLL_B);
+
+
 }
-
-
-// /**
-//  * @brief Setting time and date of RTC
-//  * @param None
-//  * @return true for success
-// */
-// static bool SetTimeDate()
-// {
-// 	bool bRetVal = false;
-// 	struct tm sTimeDate;
-// 	char cTimeBuffer[MAX_TIME_BUFF_SIZE];
-// 	uint8_t ucReg = 0x00;
-
-// 	ConvertEpochToTime(llLastUpdatedTime, &sTimeDate, cTimeBuffer);
-
-// 	do
-//     {
-//         if (i2c_reg_write_byte(i2c_dev, RTC_DEV_ADDR, 
-// 								ucReg, ConvertDecimalToBCD(sTimeDate.tm_sec)) != 0)
-//         {
-//             printk("writing seconds failed\n\r");
-//             break;
-//         }
-
-//         ucReg++;
-
-//         if (i2c_reg_write_byte(i2c_dev, RTC_DEV_ADDR, 
-// 								ucReg, ConvertDecimalToBCD(sTimeDate.tm_min)) != 0)
-//         {
-//             printk("writing minute failed\n\r");
-//             break;
-//         }
-
-//         ucReg++;
-
-//         if (i2c_reg_write_byte(i2c_dev, RTC_DEV_ADDR, 
-// 								ucReg, ConvertDecimalToBCD(sTimeDate.tm_hour)) != 0)
-//         {
-//             printk("writing hour failed\n\r");
-//             break;
-//         }
-
-//         ucReg++;
-
-//         if (i2c_reg_write_byte(i2c_dev, RTC_DEV_ADDR, 
-// 									ucReg, ConvertDecimalToBCD(sTimeDate.tm_wday)) != 0)
-//         {
-//             printk("writing Day failed\n\r");
-//             break;
-//         }
-
-//         ucReg++;
-
-//         if (i2c_reg_write_byte(i2c_dev, RTC_DEV_ADDR, 
-// 									ucReg, ConvertDecimalToBCD(sTimeDate.tm_mday)) != 0)
-//         {
-//             printk("writing Date failed\n\r");
-//             break;
-//         }
-
-//         ucReg++;
-// 		printk("Month set: %d\n\r", sTimeDate.tm_mon);
-// 		k_sleep(K_MSEC(1000));
-//         if (i2c_reg_write_byte(i2c_dev, RTC_DEV_ADDR, 
-// 									ucReg, ConvertDecimalToBCD(sTimeDate.tm_mon)) != 0)
-//         {
-//             printk("writing month failed\n\r");
-//             break;
-//         }
-
-//         ucReg++;
-
-//          if (i2c_reg_write_byte(i2c_dev, RTC_DEV_ADDR, 
-// 		 							ucReg, ConvertDecimalToBCD((sTimeDate.tm_year+1900)-2000)) != 0)
-//         {
-//             printk("writing year failed\n\r");
-//             break;
-//         }
-
-// 		bRetVal = true;
-
-//     } while (0);
-
-// 	return bRetVal;
-// }
-
-// /**
-//  * @brief Initialise RTC
-//  * @param None
-//  * @return true for success
-// */
-// bool InitRtc()
-// {
-//     bool bRetVal = false;
-
-//     if (i2c_reg_write_byte(i2c_dev, RTC_DEV_ADDR, RTC_CTRL_REG, 0x00) != 0)
-//     {
-//         printk("Configuring RTC failed\n\r");
-//     }
-//     else
-//     {
-//         printk("Configuring RTC success\n\r");
-//         bRetVal = true;
-//     }
-
-// 	bRetVal = SetTimeDate();
-
-//     return bRetVal;
-// }
-
-// /**
-//  * @brief Get time in epoch format
-//  * @param pllCurrEpoch : Epoch time 
-//  * @return true for success
-// */
-// bool GetCurrenTimeInEpoch(long long *pllCurrEpoch)
-// {
-// 	struct tm sTimeStamp = {0};
-// 	uint16_t ucData = 0x00;
-// 	uint8_t ucReg = 0x00;
-// 	char cTimeBuffer[MAX_TIME_BUFF_SIZE] = {0};
-// 	bool bRetval = false;
-// 	uint8_t ucRetry = 3;
-
-// 	if (pllCurrEpoch)
-// 	{
-// 		do
-// 		{
-// 			if (0 != i2c_reg_read_byte(i2c_dev, RTC_DEV_ADDR, ucReg, &ucData))
-// 			{
-// 				printk("Reading seconds failed\n\r");
-// 				break;
-// 			}
-
-// 			sTimeStamp.tm_sec = ConvertBCDToDecimal(ucData);
-// 			//printk("Seconds: %d\n\r",sTimeStamp.tm_sec);
-// 			ucReg++;
-
-// 			if (0 != i2c_reg_read_byte(i2c_dev, RTC_DEV_ADDR, ucReg, &ucData))
-// 			{
-// 				printk("Reading minutes failed\n\r");
-// 				break;
-// 			}
-			
-// 			sTimeStamp.tm_min = ConvertBCDToDecimal(ucData);
-// 			//printk("Min: %d\n\r",sTimeStamp.tm_min);
-// 			ucReg++;
-
-// 			if (0 != i2c_reg_read_byte(i2c_dev, RTC_DEV_ADDR, ucReg, &ucData))
-// 			{
-// 				printk("Reading hour failed\n\r");
-// 				break;
-// 			}
-			
-// 			sTimeStamp.tm_hour = ConvertBCDToDecimal(ucData);
-// 			//printk("Hours: %d\n\r",sTimeStamp.tm_hour);
-// 			ucReg++;
-
-// 			if (0 != i2c_reg_read_byte(i2c_dev, RTC_DEV_ADDR, ucReg, &ucData))
-// 			{
-// 				printk("Reading day failed\n\r");
-// 				break;
-// 			}
-			
-// 			sTimeStamp.tm_wday = ConvertBCDToDecimal(ucData);
-// 			//printk("Day: %d\n\r",sTimeStamp.tm_wday);
-// 			ucReg++;
-
-// 			if (0 != i2c_reg_read_byte(i2c_dev, RTC_DEV_ADDR, ucReg, &ucData))
-// 			{
-// 				printk("Reading date failed\n\r");
-// 				break;
-// 			}
-			
-// 			sTimeStamp.tm_mday = ConvertBCDToDecimal(ucData);
-// 			//printk("Date: %d\n\r",sTimeStamp.tm_mday);
-// 			ucReg++;	
-
-// 			if (0 != i2c_reg_read_byte(i2c_dev, RTC_DEV_ADDR, ucReg, &ucData))
-// 			{
-// 				printk("Reading month failed\n\r");
-// 				break;
-// 			}
-			
-// 			sTimeStamp.tm_mon = ConvertBCDToDecimal(ucData);
-// 			//printk("Month: %d\n\r",sTimeStamp.tm_mon);
-// 			ucReg++;		
-
-// 			if (0 != i2c_reg_read_byte(i2c_dev, RTC_DEV_ADDR, ucReg, &ucData))
-// 			{
-// 				printk("Reading year failed\n\r");
-// 				break;
-// 			}
-			
-// 			sTimeStamp.tm_year = ((ConvertBCDToDecimal(ucData)+2000) - 1900);
-// 			//printk("Year: %d\n\r",sTimeStamp.tm_year+1900);
-// 			strftime(cTimeBuffer, sizeof(cTimeBuffer), "%a %Y-%m-%d %H:%M:%S %Z", &sTimeStamp);
-// 			printk("Current Time: %s\n\r", cTimeBuffer);
-// 			sTimeStamp.tm_isdst = -1;
-// 			*pllCurrEpoch = mktime(&sTimeStamp);
-
-// 			bRetval = true;
-
-// 		} while (0);
-		
-		
-// 	}
-// 	return bRetval;
-// }

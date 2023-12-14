@@ -33,17 +33,34 @@
  * @param  None
  * @return 0 on exit
  */
+
 int main(void)
 {
 	uint16_t usADCResult = 0;
-	si5351aSetFrequency(113000000);
+	si5351aSetFrequency(8000000);
 	InitADC();
+    InitMuxInputPins();
 
 	while (1)
 	{
+        /*0th channel mwasurement*/
+        SelectMuxChannel(0);
 		usADCResult = AnalogRead();
-		printk("ADC Reading = %d\n\r", usADCResult);
-		k_msleep(500);
+		printk("ADC Reading1 = %d\n\r", usADCResult);
+		k_msleep(1000);
+
+        /*1st channel measurement*/
+        SelectMuxChannel(1);
+		usADCResult = AnalogRead();
+		printk("ADC Reading2 = %d\n\r", usADCResult);
+		k_msleep(1000);
+
+        /*2st channel measurement*/
+        SelectMuxChannel(2);
+		usADCResult = AnalogRead();
+		printk("ADC Reading3 = %d\n\r", usADCResult);
+        printk("\n\r");
+		k_msleep(1000);
 	}
 }
 
