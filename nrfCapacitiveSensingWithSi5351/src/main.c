@@ -55,7 +55,7 @@ int main(void)
 		printk("ADC Reading2 = %d\n\r", usADCResult);
 		k_msleep(1000);
 
-        /*2st channel measurement*/
+        /*2nd channel measurement*/
         SelectMuxChannel(2);
 		usADCResult = AnalogRead();
 		printk("ADC Reading3 = %d\n\r", usADCResult);

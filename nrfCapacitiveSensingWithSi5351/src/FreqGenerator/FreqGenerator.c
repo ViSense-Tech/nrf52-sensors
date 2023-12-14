@@ -25,6 +25,11 @@ const struct gpio_dt_spec sMuxInput2 = GPIO_DT_SPEC_GET(DT_ALIAS(muxinputb), gpi
 
 /***************************************FUNCTION DEFINITIONS********************/
 
+/**
+ * @brief Select MUX Channels 
+ * @param ucChannel : Channel to use
+ * @return None
+*/
 void SelectMuxChannel(uint8_t ucChannel)
 {
     switch(ucChannel)
@@ -165,8 +170,8 @@ void si5351aSetFrequency(uint32_t frequency)
 	i2c_reg_write_byte(i2c_dev, CK_GEN_ADDR, SI_PLL_RESET, 0xA0);	
 									// Finally switch on the CLK0 output (0x4F)
 									// and set the MultiSynth0 input to be PLL A
-	i2c_reg_write_byte(i2c_dev, CK_GEN_ADDR, SI_CLK0_CONTROL /*| SI_CLK1_CONTROL | SI_CLK2_CONTROL*/,
-														 0x4F | SI_CLK_SRC_PLL_A);
+	i2c_reg_write_byte(i2c_dev, CK_GEN_ADDR, SI_CLK0_CONTROL, 0x4F | SI_CLK_SRC_PLL_A);
+	
 	setupPLL(SI_SYNTH_PLL_B, mult, num, denom);													 
 
 	setupMultisynth(SI_SYNTH_MS_1, divider, SI_R_DIV_1);
