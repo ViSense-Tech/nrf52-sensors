@@ -4,6 +4,7 @@
 
 /**************************************************************GLOBAL VARIABLES*********************************/
 const struct device *flash_dev = DEVICE_DT_GET(DT_ALIAS(spi_flash0));
+static uint32_t uFlashIdx = 0;  // initialise data counter
 
 int nvs_initialisation( struct nvs_fs *fs, uint8_t selector)
 {
@@ -34,7 +35,7 @@ int nvs_initialisation( struct nvs_fs *fs, uint8_t selector)
 	
 	if (selector == CONFIG_DATA_FS) // config data
 	{
-		fs->offset = NVS_PARTITION_OFFSET;
+		fs->offset = NVS_PARTITION_OFFSET + 8192;
 		rc = flash_get_page_info_by_offs(fs->flash_device, fs->offset, &info);
 		if (rc) 
 		{
@@ -148,8 +149,7 @@ bool readJsonFromExternalFlash(char *pcBuffer, uint32_t flashIdx, int unLength)
 {
 	bool bRetval = false;
 	int rc = 0;
-	
-	// flashIdx = flashIdx * 256;
+
 	flashIdx = flashIdx * WRITE_ALIGNMENT;
 	
 
@@ -195,6 +195,11 @@ bool EraseExternalFlash(uint16_t uSectorIdx)
 	} while (0);
 
 	return bRetval;
+}
+
+uint32_t *GetFlashCounter()
+{
+	return &uFlashIdx;
 }
 
 

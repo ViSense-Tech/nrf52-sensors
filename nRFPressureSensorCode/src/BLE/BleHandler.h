@@ -24,7 +24,7 @@
 	BT_UUID_128_ENCODE(0xe076567e, 0x5d3b, 0x11ee, 0x8c99, 0x0242ac120002)
 
 /*************************************FUNCTION DECLARATION*******************/
-bool EnableBLE();
+// bool EnableBLE();
 uint8_t *GetAdvertisingBuffer();
 int InitExtendedAdv(void);
 int StartAdvertising(void);

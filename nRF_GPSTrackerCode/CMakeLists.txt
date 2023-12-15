@@ -14,6 +14,7 @@ target_include_directories(app PRIVATE src/GPS
                                         src/RTC
                                         src/SYSTEM
                                         src/Timer
+                                        src/MESH
 )
                                         
 target_sources(app PRIVATE  src/GPS/GPSHandler.c
@@ -27,4 +28,6 @@ target_sources(app PRIVATE  src/GPS/GPSHandler.c
                             src/NVS/nvs_flash.c
                             src/Json/Jsonhandler.c
                             src/Timer/TimerHandler.c
+                            src/MESH/MeshHandler.c
+                            src/MESH/MeshService.c
                             src/main.c)

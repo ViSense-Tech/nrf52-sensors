@@ -24,7 +24,7 @@
 /**************************************TYPEDEFS******************************/
 
 /*************************************FUNCTION DECLARATION*******************/
-bool EnableBLE();
+// bool EnableBLE();
 uint8_t *GetAdvertisingBuffer();
 int InitExtendedAdv(void);
 int StartAdvertising(void);

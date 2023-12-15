@@ -31,29 +31,29 @@ static const struct bt_data sd[] = {
                                                                                                                         
 /**********************************FUNCTION DEFINITION****************/
 
-/**
- * @brief  This function isfor Enabling BLE
- * @param  None 
- * @return True for success
-*/
-bool EnableBLE()
-{
-    int nError = 0;
-    bool bRetVal = false;
+// /**
+//  * @brief  This function isfor Enabling BLE
+//  * @param  None 
+//  * @return True for success
+// */
+// bool EnableBLE()
+// {
+//     int nError = 0;
+//     bool bRetVal = false;
 
-    nError = bt_enable(NULL);
+//     nError = bt_enable(NULL);
 
-	if (!nError) 
-    {
-        bRetVal = true;
-	}
-    else
-    {
-		printk("Bluetooth init failed (err %d)\n", nError);
-    }
+// 	if (!nError) 
+//     {
+//         bRetVal = true;
+// 	}
+//     else
+//     {
+// 		printk("Bluetooth init failed (err %d)\n", nError);
+//     }
 
-    return bRetVal;
-}
+//     return bRetVal;
+// }
 
 /**
  * @brief function to initialize extended advertising

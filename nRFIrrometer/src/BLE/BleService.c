@@ -78,7 +78,7 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 	}
 
 	memcpy(value + offset, buf, len);
-	memcpy(ucConfigData2, value, len);
+	memcpy(ucConfigData2, value, len);  //value in buf willbe trfrd to ucConfigData2
 
 	if (ParseRxData(ucConfigData2, "TS", len, &ucbuff))
 	{

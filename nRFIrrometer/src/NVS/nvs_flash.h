@@ -11,7 +11,7 @@
 #define NVS_PARTITION_DEVICE	FIXED_PARTITION_DEVICE(NVS_PARTITION)
 #define NVS_PARTITION_OFFSET	FIXED_PARTITION_OFFSET(NVS_PARTITION)
 /* SPI flash region*/
-#define SPI_FLASH_REGION_OFFSET 0x24000//0x10000//0xff000
+#define SPI_FLASH_REGION_OFFSET 0x24000//0x10000
 /* SPI flash sector size*/
 #define SPI_FLASH_SECTOR_SIZE        4096
 
@@ -44,10 +44,12 @@ typedef struct __attribute__((packed)) __sConfigData
     uint32_t sleepTime;
     uint32_t pressureZero;
     uint32_t pressureMax;
+    uint16_t pressureMin;
     uint8_t flag;
 }_sConfigData;
 
 /**********************************************************FUNCTION DECLARATIONS*******************************/
+uint32_t *GetFlashCounter();
  int nvs_logger(char* cjson, int data_count);
 int nvs_initialisation( struct nvs_fs *fs, uint8_t selector);
 int writeJsonToFlash(struct nvs_fs *fs, uint16_t data_count,uint16_t count_max, char *buf, uint8_t len);

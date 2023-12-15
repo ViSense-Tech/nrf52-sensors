@@ -18,9 +18,10 @@
 #include "AdcHandler.h"
 #include "Timerhandler.h"
 #include "TempSensor.h"
+#include "MeshService.h"
 
 /*******************************MACROS****************************************/
-#define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
+// #define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
 #define TIME_STAMP_ERROR   (1<<1)
 #define TIME_STAMP_OK      ~(1<<1)
 
@@ -32,7 +33,7 @@ struct nvs_fs fs;
 _sConfigData sConfigData = {0};
 struct nvs_fs fs;    //file system
 struct nvs_fs sConfigFs;
-uint32_t uFlashIdx = 0;  // initialise data counter
+static uint32_t uFlashIdx = 0;  // initialise data counter
 
 /*******************************FUNCTION DECLARATION********************************/
 static void PrintBanner();
@@ -222,7 +223,7 @@ int main(void)
             cJSON_free(cJsonBuffer);
             
             #ifndef SLEEP_ENABLE 
-            k_msleep(500);
+            k_msleep(2000);
             #endif
         #ifdef SLEEP_ENABLE
         }
@@ -261,7 +262,10 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
 
     char cBuffer[ADV_BUFF_SIZE];
     bool bRetval = false;
+    uint32_t *uFlashIdx = NULL;
 
+
+    uFlashIdx = GetFlashCounter();
 
     if (pcBuffer)
     {
@@ -270,16 +274,16 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
             
             memset(cBuffer, '\0', sizeof(cBuffer));
             memcpy(cBuffer, pcBuffer, unLength);
-            if(writeJsonToExternalFlash(cBuffer, uFlashIdx,WRITE_ALIGNMENT))
+            if(writeJsonToExternalFlash(cBuffer, *uFlashIdx, WRITE_ALIGNMENT))
             {
                 // NO OP
             }
             k_msleep(50);
-            if (readJsonFromExternalFlash(cBuffer, uFlashIdx, WRITE_ALIGNMENT))
+            if (readJsonFromExternalFlash(cBuffer, *uFlashIdx, WRITE_ALIGNMENT))
             {
-                printk("\nId: %d, Stored_Data: %s\n",uFlashIdx, cBuffer);
+                printk("\nId: %d, Stored_Data: %s\n",*uFlashIdx, cBuffer);
             }
-            uFlashIdx++;
+            *uFlashIdx = *uFlashIdx + 1;
             sConfigData.flashIdx = uFlashIdx;
             nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
             if(uFlashIdx>= NUMBER_OF_ENTRIES)
@@ -291,10 +295,10 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
 
         if(IshistoryNotificationenabled() && IsConnected())
         {
-            if(VisenseHistoryDataNotify(uFlashIdx))
+            if(VisenseHistoryDataNotify(*uFlashIdx))
             {
-                uFlashIdx = 0; 
-                sConfigData.flashIdx = uFlashIdx;
+                *uFlashIdx = 0; 
+                sConfigData.flashIdx = *uFlashIdx;
                 nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
             }
             
@@ -415,7 +419,7 @@ static bool InitBle()
         }
 #endif        
 
-        StartAdv();
+        // StartAdv();
         bRetVal = true;
     } while (0);
     
@@ -476,7 +480,9 @@ static bool CheckForConfigChange()
     uint32_t ulRetCode = 0;
     bool bRetVal = false;
     uint32_t *pDiagData = NULL;
+    uint32_t *uFlashIdx = NULL;
 
+    uFlashIdx = GetFlashCounter();
     pDiagData = GetDiagData();
 
     nvs_initialisation(&sConfigFs, CONFIG_DATA_FS); 
@@ -491,7 +497,7 @@ static bool CheckForConfigChange()
     else
     {
         SetSleepTime(sConfigData.sleepTime);
-        uFlashIdx = sConfigData.flashIdx;
+        *uFlashIdx = sConfigData.flashIdx;
         printk("sConfigFlag %d ,flashIdx = %d\n",
                                      sConfigData.flag,
                                      sConfigData.flashIdx); //get all the config params from the flash if a reboot occures

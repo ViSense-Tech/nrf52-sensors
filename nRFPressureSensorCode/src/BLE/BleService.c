@@ -38,7 +38,7 @@ static bool hNotificationEnabled = false;
 struct nvs_fs *FileSys;
 static bool bConfigNotifyEnabled = false;
 /*Read index from flash*/
-uint8_t ucIdx = 0;
+static uint8_t ucIdx = 0;
 
 
 

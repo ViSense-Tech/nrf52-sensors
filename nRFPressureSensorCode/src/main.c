@@ -17,6 +17,7 @@
 #include "SystemHandler.h"
 #include "nvs_flash.h"
 #include "TimerHandler.h"
+#include "MeshService.h"
 
 
 /*******************************MACROS****************************************/
@@ -38,7 +39,7 @@ uint8_t *pucAdvertisingdata = NULL;
 uint32_t diagnostic_data = 0;
 uint32_t pressureMax = 929; //analog reading of pressure transducer at 100psi
 uint32_t pressureZero = 110; //analog reading of pressure transducer at 0psi
-uint32_t uFlashIdx = 0;  // initialise data counter
+
 
 /*******************************FUNCTION DECLARATIONS********************************/
 extern void SetFileSystem(struct nvs_fs *fs);
@@ -192,7 +193,7 @@ int main(void)
             cJSON_free(cJsonBuffer);
 
         #ifndef SLEEP_ENABLE 
-            k_sleep(K_MSEC(100));
+            k_sleep(K_MSEC(1000));
         #endif
         #ifdef SLEEP_ENABLE
         }
@@ -276,7 +277,10 @@ static bool SendHistoryDataToApp(uint16_t uPressureValue, char *pcBuffer, uint16
 
     char cBuffer[ADV_BUFF_SIZE];
     bool bRetval = false;
+    uint32_t *uFlashIdx = NULL;
 
+
+    uFlashIdx = GetFlashCounter();
 
     if (pcBuffer)
     {
@@ -285,21 +289,21 @@ static bool SendHistoryDataToApp(uint16_t uPressureValue, char *pcBuffer, uint16
             
             memset(cBuffer, '\0', sizeof(cBuffer));
             memcpy(cBuffer, pcBuffer, unLength);
-            if(writeJsonToExternalFlash(cBuffer, uFlashIdx, WRITE_ALIGNMENT))
+            if(writeJsonToExternalFlash(cBuffer, *uFlashIdx, WRITE_ALIGNMENT))
             {
                 // NO OP
             }
             k_msleep(50);
-            if (readJsonFromExternalFlash(cBuffer, uFlashIdx, WRITE_ALIGNMENT))
+            if (readJsonFromExternalFlash(cBuffer, *uFlashIdx, WRITE_ALIGNMENT))
             {
-                printk("\nId: %d, Stored_Data: %s\n",uFlashIdx, cBuffer);
+                printk("\nId: %d, Stored_Data: %s\n", *uFlashIdx, cBuffer);
             }
-            uFlashIdx++;
-            sConfigData.flashIdx = uFlashIdx;
+            *uFlashIdx = *uFlashIdx + 1;
+            sConfigData.flashIdx = *uFlashIdx;
             nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
-            if(uFlashIdx>= NUMBER_OF_ENTRIES)
+            if(*uFlashIdx>= NUMBER_OF_ENTRIES)
             {
-                uFlashIdx = 0;
+                *uFlashIdx = 0;
             }
         }
  
@@ -307,10 +311,10 @@ static bool SendHistoryDataToApp(uint16_t uPressureValue, char *pcBuffer, uint16
         if(IshistoryNotificationenabled() && IsConnected())
         {
             printk("In history notif\n\r");
-            if (VisenseHistoryDataNotify(uFlashIdx))
+            if (VisenseHistoryDataNotify(*uFlashIdx))
             {
-                uFlashIdx = 0;
-                sConfigData.flashIdx = uFlashIdx;
+                *uFlashIdx = 0;
+                sConfigData.flashIdx = *uFlashIdx;
                 nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
             } 
         }
@@ -468,12 +472,12 @@ static bool InitBle()
         }
         StartAdvertising();
 #else
-        nError = StartAdvertising();
-        if (nError)
-        {
-            printk("Advertising failed to create (err %d)\n", nError);
-            break;
-        }
+        // nError = StartAdvertising();
+        // if (nError)
+        // {
+        //     printk("Advertising failed to create (err %d)\n", nError);
+        //     break;
+        // }
 #endif
         bRetVal = true;
     } while (0);
@@ -501,6 +505,9 @@ static bool CheckForConfigChange()
 {
     uint32_t ulRetCode = 0;
     bool bRetVal = false;
+    uint32_t *uFlashIdx = NULL;
+
+    uFlashIdx = GetFlashCounter();
 
     nvs_initialisation(&sConfigFs, CONFIG_DATA_FS); 
     k_msleep(100);
@@ -516,7 +523,7 @@ static bool CheckForConfigChange()
         SetPressureZero(sConfigData.pressureZero);       
         SetPressureMax(sConfigData.pressureMax);
         SetSleepTime(sConfigData.sleepTime);
-        uFlashIdx = sConfigData.flashIdx;
+        *uFlashIdx = sConfigData.flashIdx;
         SetPressureMin(sConfigData.pressureMin);
         printk("PressureZero = %d, PressureMax = %d, sConfigFlag %d ,flashIdx = %d\n",
                                      sConfigData.pressureZero, 

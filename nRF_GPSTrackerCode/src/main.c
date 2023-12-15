@@ -346,7 +346,11 @@ static bool CheckForConfigChange() // check for config change and update value f
 	uint8_t ucIdx = 0;
 	bool bRetVal = false;
 	uint32_t *pDiagData = NULL;
+	uint32_t *uFlashIdx = NULL;
+
+
 	pDiagData = GetDiagnosticData();
+	uFlashIdx = GetFlashCounter();
 
 	k_msleep(100);
 	ulRetCode = ReadJsonFromFlash(&sConfigFs, 0, (char *)&sConfigData, sizeof(sConfigData)); // read config params from the flash
@@ -359,7 +363,7 @@ static bool CheckForConfigChange() // check for config change and update value f
 	else
 	{
 		SetSleepTime(sConfigData.sleepTime);
-		ulFlashidx = sConfigData.flashIdx;
+		*uFlashIdx = sConfigData.flashIdx;
 		printk("sConfigFlag %d ,flashIdx = %d\n CC=%d",
 			   sConfigData.flag,
 			   sConfigData.flashIdx,
@@ -701,6 +705,9 @@ static bool SendHistoryDataToFlash(char *pcJsonBuffer)
  
     char cBuffer[WRITE_ALIGNMENT];
     bool bRetval = false;
+	uint32_t *uFlashIdx = NULL;
+
+    uFlashIdx = GetFlashCounter();
  
  
     if (pcJsonBuffer)
@@ -710,21 +717,21 @@ static bool SendHistoryDataToFlash(char *pcJsonBuffer)
            
             memset(cBuffer, '\0', sizeof(cBuffer));
             memcpy(cBuffer, pcJsonBuffer, strlen(pcJsonBuffer));
-            if(writeJsonToExternalFlash(cBuffer, ulFlashidx, WRITE_ALIGNMENT))
+            if(writeJsonToExternalFlash(cBuffer, *uFlashIdx, WRITE_ALIGNMENT))
             {
                 // NO OP
             }
             k_msleep(50);
-            if (readJsonFromExternalFlash(cBuffer, ulFlashidx, WRITE_ALIGNMENT))
+            if (readJsonFromExternalFlash(cBuffer, *uFlashIdx, WRITE_ALIGNMENT))
             {
-                printk("\nId: %d, Stored_Data: %s\n",ulFlashidx, cBuffer);
+                printk("\nId: %d, Stored_Data: %s\n",*uFlashIdx, cBuffer);
             }
-            ulFlashidx++;
+            *uFlashIdx = *uFlashIdx + 1;
             sConfigData.flashIdx = ulFlashidx;
             nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
             if(ulFlashidx>= NUMBER_OF_ENTRIES)
             {
-                ulFlashidx = 0;
+                *uFlashIdx = 0;
             }
         }
  
@@ -732,10 +739,10 @@ static bool SendHistoryDataToFlash(char *pcJsonBuffer)
         if(IshistoryNotificationenabled() && IsConnected())
         {
             printk("In history notif\n\r");
-            if (VisenseHistoryDataNotify(ulFlashidx))
+            if (VisenseHistoryDataNotify(*uFlashIdx))
             {
-                ulFlashidx = 0;
-                sConfigData.flashIdx = ulFlashidx;
+                *uFlashIdx = 0;
+                sConfigData.flashIdx = *uFlashIdx;
                 nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
             }
         }

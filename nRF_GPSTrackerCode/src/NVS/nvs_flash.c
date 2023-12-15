@@ -4,6 +4,7 @@
 
 /**************************************************************GLOBAL VARIABLES*********************************/
 static const struct device *const flash_dev = DEVICE_DT_GET(DT_ALIAS(spi_flash0));
+uint32_t uFlashIdx = 0;  // initialise data counter
 
 /**
  * @brief  Initialise flash
@@ -206,5 +207,7 @@ bool EraseExternalFlash(uint16_t uSectorIdx)
 	return bRetval;
 }
 
-
-
+uint32_t *GetFlashCounter()
+{
+	return &uFlashIdx;
+}
