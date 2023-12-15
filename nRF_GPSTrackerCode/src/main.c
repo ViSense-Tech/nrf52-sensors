@@ -67,7 +67,7 @@ int main(void)
 	uint8_t *pucAdvBuffer = NULL;
 	char cFlashReadBuf[128] = {0};
 	long long llEpochTime = 0;
-	uint32_t *pDiagData = NULL;
+	int *pDiagData = NULL;
 	cJSON *pMainObject = NULL;
 
 	PrintBanner();
@@ -112,6 +112,7 @@ int main(void)
 					{
 						DisplayLocation(fLatitude, fLongitude);
 					}
+					break;
 				}
 			}
 			if (!(*pDiagData & (1 << 4)))
@@ -127,19 +128,21 @@ int main(void)
 
 			TimeNow = sys_clock_tick_get();
 
-			while (sys_clock_tick_get() - TimeNow < COORD_READ_TIMEOUT)
+			while (sys_clock_tick_get() - TimeNow < SOG_READ_TIMEOUT)
 			{
 				if (ReadSOGData(&fSOG))
 				{
+					fSOG = fSOG * 1.51; /*knots to mph calculation*/
 					printk("SOG: %f\n\r", fSOG);
 					DisplaySOG(fSOG);
-					AddItemtoJsonObject(&pMainObject, NUMBER, "SOG", &fSOG, sizeof(float));
+					AddItemtoJsonObject(&pMainObject, FLOAT, "SOG", &fSOG, sizeof(fSOG));
 
 					if (targetStatus && fSOG > mSog) // if device inside fence & crossed threshold values
 					{
 						printk("/n/r________________INSIDE FENCE_____________: %f\n\r", fSOG);
 						DisplayFenceStatus();
 					}
+					break;
 				}
 			}
 
@@ -203,6 +206,8 @@ int main(void)
 			printk("JSON:\n%s\n", cJsonBuffer);
 			cJSON_Delete(pMainObject);
 			cJSON_free(cJsonBuffer);
+			memset(pucAdvBuffer, 0, 300);
+
 
 #ifdef SLEEP_ENABLE
 		}
