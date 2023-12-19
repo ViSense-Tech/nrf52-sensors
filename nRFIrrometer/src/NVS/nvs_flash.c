@@ -3,7 +3,7 @@
 
 
 /**************************************************************GLOBAL VARIABLES*********************************/
-const struct device *flash_dev = DEVICE_DT_GET(DT_ALIAS(spi_flash0));
+const struct device *flash_dev = DEVICE_DT_GET(DT_NODELABEL(mx66l1g));
 
 int nvs_initialisation( struct nvs_fs *fs, uint8_t selector)
 {
@@ -112,14 +112,8 @@ bool writeJsonToExternalFlash(char *pcBuffer, uint32_t flashIdx, int unLength) /
 	int rc = 0;
 	flashIdx = (flashIdx * WRITE_ALIGNMENT);
 
-
 	do
 	{
-		if (!device_is_ready(flash_dev)) 
-		{
-			printk("%s: device not ready.\n", flash_dev->name);
-			break;
-		}
 		rc = flash_write(flash_dev, SPI_FLASH_REGION_OFFSET + flashIdx, pcBuffer, unLength);
 		if (rc != 0)
 		{
@@ -129,10 +123,7 @@ bool writeJsonToExternalFlash(char *pcBuffer, uint32_t flashIdx, int unLength) /
 		printk("offset:%d\n",flashIdx);
 		
 		k_sleep(K_MSEC(10));
-		bRetval = true;
-
-
-		
+		bRetval = true;	
 	} while (0);
 
 	return bRetval;
