@@ -3,7 +3,7 @@
 
 
 /**************************************************************GLOBAL VARIABLES*********************************/
-static const struct device *const flash_dev = DEVICE_DT_GET(DT_ALIAS(spi_flash0));
+static const struct device *const flash_dev = DEVICE_DT_GET(DT_NODELABEL(mx66l1g));
 
 /**
  * @brief  Initialise flash
@@ -126,11 +126,6 @@ bool writeJsonToExternalFlash(char *pcBuffer, uint32_t flashIdx, int unLength) /
 
 	do
 	{
-		if (!device_is_ready(flash_dev)) 
-		{
-			printk("%s: device not ready.\n", flash_dev->name);
-			break;
-		}
 		rc = flash_write(flash_dev, SPI_FLASH_REGION_OFFSET + flashIdx, pcBuffer, WRITE_ALIGNMENT);
 		if (rc != 0)
 		{
