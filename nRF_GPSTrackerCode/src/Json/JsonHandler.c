@@ -100,13 +100,14 @@ bool AddItemtoJsonObject(cJSON **pcJsonHandle, _eJsonDataType JsondataType, cons
 bool ParseRxData(uint8_t *pData, const char *pckey, uint16_t ucLen, uint64_t *pucData)
 {
     bool bRetVal = false;
-    char cbuff[150] = {0};
+    char cbuff[500] = {0};
     cJSON *RxData = NULL;
     
     if (pData && pckey && pucData)
     {
         if (pData[0])     //length check
         {
+            printf("%s\n\r", (char *)pData+2);
             cJSON *root = cJSON_Parse(pData + 2);
             if (root != NULL)
             {

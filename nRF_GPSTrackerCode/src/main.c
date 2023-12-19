@@ -93,8 +93,7 @@ int main(void)
 	while (1)
 	{
 
-		pMainObject = cJSON_CreateObject();
-		UpdateConfigurations();
+
 		TimeNow = sys_clock_tick_get();
 
 #ifdef SLEEP_ENABLE
@@ -103,6 +102,9 @@ int main(void)
 		while (sys_clock_tick_get() - sysTime < (ALIVE_TIME * TICK_RATE))
 		{
 #endif
+			pMainObject = cJSON_CreateObject();
+			UpdateConfigurations();
+
 			while (sys_clock_tick_get() - TimeNow < COORD_READ_TIMEOUT)
 			{
 				if (ReadLocationData(pcLocation))
@@ -211,14 +213,15 @@ int main(void)
 
 #ifdef SLEEP_ENABLE
 		}
-		EnterSleepMode(GetSleepTime());
-		ExitSleepMode();
+		 EnterSleepMode(GetSleepTime());
+		 ExitSleepMode();
 
-		// printk("INFO: Syncing time with RTC\n\r");
+		printk("INFO: Syncing time with RTC\n\r");
 		if (!GetTimeFromRTC())
 		{
 			printk("WARN: Getting time from RTC failed\n\r");
 		}
+		k_msleep(100);
 #else
 		k_msleep(100);
 #endif

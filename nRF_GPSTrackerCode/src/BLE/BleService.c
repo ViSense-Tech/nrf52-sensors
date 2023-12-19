@@ -18,7 +18,7 @@
 #include "RtcHandler.h"
 
 /**************************** MACROS********************************************/
-#define VND_MAX_LEN 300
+#define VND_MAX_LEN 350
 /* Custom Service Variables */
 
 
@@ -109,7 +109,7 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 	printk("Written Data: %s\n\r", (char *)value);
 	printk("len%d\n", len);
 	printk("payl%d\n", uPayloadLen);
-	memset(ucbuff, 0, 150);
+	//memset(ucbuff, 0, sizeof(ucbuff));
 
 	/*coordinate count*/
 
