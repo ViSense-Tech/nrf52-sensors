@@ -45,7 +45,7 @@ static bool bConfigNotifyEnabled = false;
 static bool bFenceStatus = false;
 static uint8_t ucCoordCount;
 /*Read index from flash*/
-uint8_t ucIdx = 0;
+uint32_t ucIdx = 0;
 bool bFenceLat = false;
 bool bFenceLon = false;
 
@@ -388,7 +388,7 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 	char NotifyBuf[WRITE_ALIGNMENT];
 	int nRetVal = 0;
 	int uReadCount = 0;
-	uint8_t uFlashCounter = 0;
+	uint32_t uFlashCounter = 0;
 	if (ucIdx > ulWritePos)
 	{
 		uFlashCounter = ucIdx - ulWritePos;
