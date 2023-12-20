@@ -104,6 +104,7 @@ int main(void)
 #endif
 			pMainObject = cJSON_CreateObject();
 			UpdateConfigurations();
+			WriteConfiguredtimeToRTC();
 
 			while (sys_clock_tick_get() - TimeNow < COORD_READ_TIMEOUT)
 			{
@@ -153,7 +154,6 @@ int main(void)
 				printk("ERR: Acceleromtr process failed\n\r");
 			}
 
-			WriteConfiguredtimeToRTC();
 			SendConfigDataToApp();
 			if (GetCurrentTime(&llEpochTime))
 			{
@@ -366,6 +366,7 @@ static bool CheckForConfigChange() // check for config change and update value f
 	}
 	else
 	{
+		SetCurrentTime(sConfigData.lastUpdatedTime);
 		SetSleepTime(sConfigData.sleepTime);
 		ulFlashidx = sConfigData.flashIdx;
 		printk("sConfigFlag %d ,flashIdx = %d\n CC=%d",
@@ -430,7 +431,7 @@ static bool UpdateConfigurations()
 		sConfigData.ucCoordCount = GetCoordCount();
 
 		memcpy(sConfigData.FenceData, psFenceData, sizeof(_sFenceData) * 6);
-
+		free(psFenceData);
 		for (uint8_t ucIdx = 0; sConfigData.ucCoordCount > ucIdx ; ucIdx++)
 		{
 			printk("\n\rUCLat: %f UCLon: %f\n\r", 
@@ -451,11 +452,12 @@ static bool UpdateConfigurations()
 				printk("ERR: Write failed\n\r");
 				break;
 			}
-			
-			free(psFenceData);
+
+			bRetVal = true;
+
 		} while (0);
 
-		bRetVal = true;
+		
 
 		return bRetVal;
 	}
@@ -523,13 +525,6 @@ static bool InitAllModules()
 			printk("ERR: Flashinit failed\n\r");
 			break;
 		}
-
-		if (!InitRtc())
-		{
-			printk("WARN: RTC init failed\n\r");
-			break;
-		}
-
 		bRetVal = true;
 	} while (0);
 	
