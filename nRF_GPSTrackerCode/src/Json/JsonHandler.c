@@ -100,15 +100,22 @@ bool AddItemtoJsonObject(cJSON **pcJsonHandle, _eJsonDataType JsondataType, cons
 bool ParseRxData(uint8_t *pData, const char *pckey, uint16_t ucLen, uint64_t *pucData)
 {
     bool bRetVal = false;
-    char cbuff[500] = {0};
+    char cbuff[350] = {0}; /*We can write more than 247 bytes of data
+                            if MTU size is adjusted, and in Tracker firmware
+                            we have updated the MTU size to receive more than 247 bytes
+                            configurations written via BLE is beyond 247bytes
+                            updated the buff size to receive more than 247 bytes */
     cJSON *RxData = NULL;
     
     if (pData && pckey && pucData)
     {
         if (pData[0])     //length check
         {
-            printf("%s\n\r", (char *)pData+2);
-            cJSON *root = cJSON_Parse(pData + 2);
+            printf("%s\n\r", (char *)pData+3); 
+            cJSON *root = cJSON_Parse(pData + 3); /*Updated index of buffer to 3 because we are receiving more
+                                                    than 247 bytes to store length of payload we might require
+                                                    2 bytes. So updated index of payload to 3. This change is only 
+                                                    in Speed Tracker due to large config data size.*/
             if (root != NULL)
             {
                 RxData = cJSON_GetObjectItem(root, pckey);
@@ -146,7 +153,7 @@ bool ParseArray(uint8_t *pData, const char *pckey, uint16_t ucLen, char *pucData
     if (pData && pckey)
     {
 
-        cJSON *root = cJSON_Parse(pData + 2);
+        cJSON *root = cJSON_Parse(pData + 3); /*See comment on line 115*/
 
         if (root != NULL)
         {
