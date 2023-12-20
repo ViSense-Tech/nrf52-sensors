@@ -28,7 +28,7 @@ int32_t lDiagnosticdata = 0;
 _sConfigData sConfigData = {0};
 struct nvs_fs fs;    //file system
 struct nvs_fs sConfigFs;
-uint32_t uFlashIdx = 0;  // initialise data counter
+uint32_t ulFlashIdx = 0;  // initialise data counter
 
 /*************************FUNTION DECLARATION*****************/
 static bool InitPowerManager();
@@ -56,6 +56,7 @@ int main(void)
 	uint8_t ucIdx = 0;
 	uint8_t *pucAdvBuffer = NULL;
 	char *cJsonBuffer = NULL;
+    char cFlashReadBuf[350];
 	char cBuffer[30];
     char *pcEnd = NULL;
 	double dFlowRate = 0.0;
@@ -146,6 +147,14 @@ int main(void)
 			if(IsNotificationenabled())
 			{
 				VisenseSensordataNotify(ucNotifyBuffer, ADV_BUFF_SIZE);
+			}
+            else if (!IsConnected() && !IsNotificationenabled())
+			{
+				writeJsonToExternalFlash(cJsonBuffer, ulFlashIdx, WRITE_ALIGNMENT);
+				readJsonFromExternalFlash(cFlashReadBuf, ulFlashIdx, WRITE_ALIGNMENT);
+				printk("\n\rcFlash read%s\n\r", cFlashReadBuf);
+				ulFlashIdx++;
+				printk("flash count: %d\n\r", ulFlashIdx);
 			}
 
 			cJSON_Delete(pMainObject);
@@ -309,7 +318,7 @@ static bool CheckForConfigChange()
     else
     {
         SetSleepTime(sConfigData.sleepTime);
-        uFlashIdx = sConfigData.flashIdx;
+        ulFlashIdx = sConfigData.flashIdx;
         printk("sConfigFlag %d ,flashIdx = %d\n",
                                      sConfigData.flag,
                                      sConfigData.flashIdx); //get all the config params from the flash if a reboot occures
@@ -340,18 +349,21 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
             
             memset(cBuffer, '\0', sizeof(cBuffer));
             memcpy(cBuffer, pcBuffer, unLength);
-            writeJsonToFlash(&fs, uFlashIdx, NUMBER_OF_ENTRIES, cBuffer, strlen(cBuffer));
-            k_msleep(50);
-            if (readJsonToFlash(&fs, uFlashIdx, NUMBER_OF_ENTRIES, cBuffer, strlen(cBuffer)))
+            if(writeJsonToExternalFlash(cBuffer, ulFlashIdx,WRITE_ALIGNMENT))
             {
-                printk("Read succes\n\r");
+                // NO OP
             }
-            uFlashIdx++;
-            sConfigData.flashIdx = uFlashIdx;
-            nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
-            if(uFlashIdx>= NUMBER_OF_ENTRIES)
+            k_msleep(50);
+            if (readJsonFromExternalFlash(cBuffer, ulFlashIdx, WRITE_ALIGNMENT))
             {
-                uFlashIdx = 0;
+                printk("\nId: %d, Stored_Data: %s\n",ulFlashIdx, cBuffer);
+            }
+            ulFlashIdx++;
+            sConfigData.flashIdx = ulFlashIdx;
+            nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
+            if(ulFlashIdx>= NUMBER_OF_ENTRIES)
+            {
+                ulFlashIdx = 0;
             }
         }
  
@@ -359,7 +371,7 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
         if(IshistoryNotificationenabled() && IsConnected())
         {
             VisenseHistoryDataNotify();
-            uFlashIdx = 0; 
+            ulFlashIdx = 0; 
         }
 
         bRetval = true;
