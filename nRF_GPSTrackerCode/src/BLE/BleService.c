@@ -18,8 +18,12 @@
 #include "RtcHandler.h"
 
 /**************************** MACROS********************************************/
-#define VND_MAX_LEN 350
 /* Custom Service Variables */
+#define VND_MAX_LEN 350  /*We can write more than 247 bytes of data
+                            if MTU size is adjusted, and in Tracker firmware
+                            we have updated the MTU size to receive more than 247 bytes
+                            configurations written via BLE is beyond 247bytes
+                            updated the buff size to receive more than 247 bytes */
 
 
 /**************************** GLOBALS*******************************************/
