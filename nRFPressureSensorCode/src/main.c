@@ -280,18 +280,18 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
             memcpy(cBuffer, pcBuffer, unLength);
             // printk("Flash Idex%d\n\r",uFlashIdx);
 
-            WriteBatchDtataToFlash(cBuffer, &uFlashIdx);
-            // if(writeJsonToExternalFlash(cBuffer, uFlashIdx,(int) unLength))
-            // {
-            //     // NO OP
-            // }
-            // k_msleep(50);
-            // if (readJsonFromExternalFlash(cBuffer, uFlashIdx, unLength))
-            // {
-            //     printk("\nId: %d, Stored_Data: %s\n",uFlashIdx, cBuffer);
-            // }
+            // WriteBatchDtataToFlash(cBuffer, &uFlashIdx);
+            if(writeJsonToExternalFlash(cBuffer, uFlashIdx,WRITE_ALIGNMENT))
+            {
+                // NO OP
+            }
+            k_msleep(50);
+            if (readJsonFromExternalFlash(cBuffer, uFlashIdx, WRITE_ALIGNMENT))
+            {
+                printk("\nId: %d, Stored_Data: %s\n",uFlashIdx, cBuffer);
+            }
             
-        //    uFlashIdx++;
+            uFlashIdx++;
             printk("Flash Idex%d\n\r",uFlashIdx);
             sConfigData.flashIdx = uFlashIdx;
             nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));

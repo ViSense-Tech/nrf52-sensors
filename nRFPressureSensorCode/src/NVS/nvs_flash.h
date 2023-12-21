@@ -11,7 +11,7 @@
 #define NVS_PARTITION_DEVICE	FIXED_PARTITION_DEVICE(NVS_PARTITION)
 #define NVS_PARTITION_OFFSET	FIXED_PARTITION_OFFSET(NVS_PARTITION)
 /* SPI flash region*/
-#define SPI_FLASH_REGION_OFFSET 0xff000
+#define SPI_FLASH_REGION_OFFSET 0x24000//0x10000//0xff000
 /* SPI flash sector size*/
 #define SPI_FLASH_SECTOR_SIZE        4096
 
@@ -20,17 +20,17 @@
 /* File system for storing JSON payload */
 #define DATA_FS 0
 /* Specify number of hours of historical data is required to be stored on external flash. */
-#define HOURS_OF_STORAGE 3
+#define HOURS_OF_STORAGE 18
 /*Number of entries in one min to the flash*/
-#define NUMBER_OF_ENTRIES_IN_MINUTE 13//43
+#define NUMBER_OF_ENTRIES_IN_MINUTE 43
 /*write alignment of flash*/
-#define WRITE_ALIGNMENT 256//128
+#define WRITE_ALIGNMENT 128
 /*Number of minute in hour*/
 #define MINUTE_IN_HOUR 60
 /* Number of entries to the flash*/
 #define NUMBER_OF_ENTRIES  (NUMBER_OF_ENTRIES_IN_MINUTE * MINUTE_IN_HOUR * HOURS_OF_STORAGE)   // calculate accordingly
 /*NUmber of sector used for storing JSON*/
-#define SECTOR_COUNT ((NUMBER_OF_ENTRIES * WRITE_ALIGNMENT) / 4096)
+#define SECTOR_COUNT 1880//((NUMBER_OF_ENTRIES * WRITE_ALIGNMENT) / 4096)
 
 
 
