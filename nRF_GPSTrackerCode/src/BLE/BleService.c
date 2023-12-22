@@ -19,7 +19,7 @@
 
 /**************************** MACROS********************************************/
 /* Custom Service Variables */
-#define VND_MAX_LEN 350  /*We can write more than 247 bytes of data
+#define VND_MAX_LEN 300  /*We can write more than 247 bytes of data
                             if MTU size is adjusted, and in Tracker firmware
                             we have updated the MTU size to receive more than 247 bytes
                             configurations written via BLE is beyond 247bytes
@@ -48,6 +48,8 @@ struct nvs_fs *FileSys;
 static bool bConfigNotifyEnabled = false;
 static bool bFenceStatus = false;
 static uint8_t ucCoordCount;
+static bool bConfig = false;
+
 /*Read index from flash*/
 uint32_t ucIdx = 0;
 bool bFenceLat = false;
@@ -75,55 +77,22 @@ static ssize_t CharaRead(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 							 strlen(value));
 }
 
-/**
- * @brief Charcteristics Write callback
- * @param bt_conn - Connection handle
- * @param attr - GATT attributes
- * @param buf
- * @param len
- * @param offset
- * @return Length of the data read
- */
-static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
-						  const void *buf, uint16_t len, uint16_t offset,
-						  uint8_t flags)
+void ParseRcvdData()
 {
-	uint8_t *value = attr->user_data;
-	char ucbuff[1024];
 	_sFenceData *psFenceData = NULL;
 	uint32_t ucbuff2;
-	double dBuf = 0.0;
-	uint16_t uPayloadLen = 0;
+	uint16_t usPayloadLen = 0;
 	uint8_t ucIdx = 0;
 	char *cSplitStr = NULL;
-
+	char *ucbuff = NULL;
 	static uint8_t coordcount;
-	double latitudeArray[4];
-
-	if (offset + len > VND_MAX_LEN)
+	usPayloadLen = ucConfigData2[1] << 8 | ucConfigData2[2];
+	
+	if (ParseRxData(ucConfigData2, "cc", usPayloadLen, &ucbuff2))
 	{
-
-		return BT_GATT_ERR(BT_ATT_ERR_INVALID_OFFSET);
-	}
-
-	memcpy(value + offset, buf, len);
-
-	memcpy(ucConfigData2, value, len);
-	uPayloadLen = ucConfigData2[1];
-	printk("Written Data: %s\n\r", (char *)value);
-	printk("len%d\n", len);
-	printk("payl%d\n", uPayloadLen);
-	//memset(ucbuff, 0, sizeof(ucbuff));
-
-	/*coordinate count*/
-
-	if (ParseRxData(ucConfigData2, "cc", len, &ucbuff2))
-	{
-		if (len)
-		{
+		
 			printk("..cc:%d\n\r", ucbuff2);
 			SetFenceCoordCount(ucbuff2);
-		}
 	}
 	else
 	{
@@ -132,27 +101,27 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 
 	/*SoG value max threshold */
 
-	if (ParseRxData(ucConfigData2, "Speed", len, &ucbuff2))
+	if (ParseRxData(ucConfigData2, "Speed", usPayloadLen, &ucbuff2))
 	{
-		if (len)
-		{
+		// if (len)
+		// {
 			SetSogMax(ucbuff2);
 			printk("..smax:%d\n\r", ucbuff2);
 		
-		}
+		// }
 	}
 	else
 	{
 		printk("failed read smax\n");
 	}
 	/*timestamp */
-	if (ParseRxData(ucConfigData2, "TS", len, &ucbuff2))
+	if (ParseRxData(ucConfigData2, "TS", usPayloadLen, &ucbuff2))
 	{
-		if (len)
-		{
+		// if (len)
+		// {
 			SetRtcTime(ucbuff2);
 			printk("..ts:%d\n\r", ucbuff2);
-		}
+		// }
 	}
 	else
 	{
@@ -161,24 +130,22 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 
 	/*sleeptime */
 
-	if (ParseRxData(ucConfigData2, "Sleep", len, &ucbuff2))
+	if (ParseRxData(ucConfigData2, "Sleep", usPayloadLen, &ucbuff2))
 	{
-		if (len)
-		{
+		// if (len)
+		// {
 			SetSleepTime(ucbuff2);
 			printk(".st:%d\n\r", ucbuff2);
-		}
+		// }
 	}
 	else
 	{
 		printk("failed read ts\n");
 	}
-
 	/*parsing array of strings */
-	if (ParseArray(ucConfigData2, "lat", len, ucbuff)) // for lattitude
+	ucbuff = calloc(sizeof(char),275);
+	if (ParseArray(ucConfigData2, "lat", usPayloadLen, ucbuff)) // for lattitude
 	{
-		printk("ParseArray\n");
-		printk("\n\rlat: %s", ucbuff);
 		psFenceData = GetFenceTable();
 		cSplitStr = strtok(ucbuff, ",");
 		while (cSplitStr != NULL)
@@ -194,12 +161,15 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 	{
 		printk("Failed to read lt\n");
 	}
-
-	if (ParseArray(ucConfigData2, "lon", len, ucbuff)) // for longitude
+	printk("INFO: Lat set\n\r");
+	free(ucbuff);
+	ucbuff = calloc(sizeof(char), 275);
+	psFenceData = NULL;
+	cSplitStr = NULL;
+	if (ParseArray(ucConfigData2, "lon", usPayloadLen, ucbuff)) // for longitude
 	{
-		printk("ParseArray\n");
 		printk("\n\rlon: %s", ucbuff);
-		psFenceData = GetFenceTable(); //!
+		psFenceData = GetFenceTable(); 
 		cSplitStr = strtok(ucbuff, ",");
 		while (cSplitStr != NULL)
 		{
@@ -210,18 +180,66 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 		}
 		bFenceLon = true;
 	}
+	free(ucbuff);
+	printk("INFO: Lon set\n\r");
 
 	if (bFenceLat && bFenceLon)
 	{
 		bFenceStatus = true;
+		psFenceData = GetFenceTable();
+		for (ucIdx = 0; ucIdx < 4; ucIdx++)
+		{
+			printk("Lat[%d]: %lf Lon[%d]: %lf\n\r", ucIdx, psFenceData->dLatitude, ucIdx, psFenceData->dLongitude);
+			psFenceData++;
+		}
+	}
+}
+
+/**
+ * 
+*/
+void SetConfigStatus(bool bStatus)
+{
+	bConfig = bStatus;
+	if (!bConfig)
+	{
+		memset(ucConfigData2, 0, sizeof(ucConfigData2));
+	}
+	else
+	{
+		printk("INFO:Config Set\n\r");
+	}
+}
+
+bool GetConfigStatus()
+{
+	return bConfig;
+}
+
+/**
+ * @brief Charcteristics Write callback
+ * @param bt_conn - Connection handle
+ * @param attr - GATT attributes
+ * @param buf
+ * @param len
+ * @param offset
+ * @return Length of the data read
+ */
+static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
+						  const void *buf, uint16_t len, uint16_t offset,
+						  uint8_t flags)
+{
+	uint8_t *value = attr->user_data;
+
+
+	if (offset + len > VND_MAX_LEN)
+	{
+
+		return BT_GATT_ERR(BT_ATT_ERR_INVALID_OFFSET);
 	}
 
-	psFenceData = GetFenceTable();
-	for (ucIdx = 0; ucIdx < 4; ucIdx++)
-	{
-		printk("Lat[%d]: %lf Lon[%d]: %lf\n\r", ucIdx, psFenceData->dLatitude, ucIdx, psFenceData->dLongitude);
-		psFenceData++;
-	}
+	memcpy(ucConfigData2, buf, len);
+	SetConfigStatus(true);
 
 	return len;
 }

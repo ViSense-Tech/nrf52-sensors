@@ -55,11 +55,31 @@ int targetStatus;
 static void ReadGPSPacket(uint8_t ucByte);
 
 /*****************************FUNCTION DEFINITION***********************/
+/**
+ * @brief Check if device is inside of fence
+ * @param None
+ * @return status of device inside of fence
+*/
+int IsDeviceInsideofFence()
+{
+    return targetStatus;
+}
+
+/**
+ * @brief Set SOG value
+ * @param fVal : SOG value
+ * @return None
+*/
 void SetSogMax(float fVal)
 {
     fSOG = fVal;
 }
 
+/**
+ * @brief Get SOG value
+ * @param None
+ * @return SOG value
+*/
 float GetSogMax()
 {
     return fSOG;

@@ -100,19 +100,20 @@ bool AddItemtoJsonObject(cJSON **pcJsonHandle, _eJsonDataType JsondataType, cons
 bool ParseRxData(uint8_t *pData, const char *pckey, uint16_t ucLen, uint64_t *pucData)
 {
     bool bRetVal = false;
-    char cbuff[350] = {0}; /*We can write more than 247 bytes of data
-                            if MTU size is adjusted, and in Tracker firmware
-                            we have updated the MTU size to receive more than 247 bytes
-                            configurations written via BLE is beyond 247bytes
-                            updated the buff size to receive more than 247 bytes */
+    // char cbuff[350] = {0}; /*We can write more than 247 bytes of data
+    //                         if MTU size is adjusted, and in Tracker firmware
+    //                         we have updated the MTU size to receive more than 247 bytes
+    //                         configurations written via BLE is beyond 247bytes
+    //                         updated the buff size to receive more than 247 bytes */
     cJSON *RxData = NULL;
+    cJSON *root = NULL;
     
     if (pData && pckey && pucData)
     {
         if (pData[0])     //length check
         {
             printf("%s\n\r", (char *)pData+3); 
-            cJSON *root = cJSON_Parse(pData + 3); /*Updated index of buffer to 3 because we are receiving more
+            root = cJSON_Parse(pData + 3); /*Updated index of buffer to 3 because we are receiving more
                                                     than 247 bytes to store length of payload we might require
                                                     2 bytes. So updated index of payload to 3. This change is only 
                                                     in Speed Tracker due to large config data size.*/
@@ -122,7 +123,6 @@ bool ParseRxData(uint8_t *pData, const char *pckey, uint16_t ucLen, uint64_t *pu
                 if (RxData)
                 {
                     *pucData = (RxData->valuedouble);
-                    cJSON_Delete(root);
                     bRetVal = true;
                 }
             }
@@ -130,6 +130,9 @@ bool ParseRxData(uint8_t *pData, const char *pckey, uint16_t ucLen, uint64_t *pu
             {
                 printk("ERR: parse failed\n\r");
             }
+
+            cJSON_DeleteItemFromObject(RxData, pckey);
+            cJSON_Delete(root);
         }
     }
     return bRetVal;
@@ -146,26 +149,31 @@ bool ParseRxData(uint8_t *pData, const char *pckey, uint16_t ucLen, uint64_t *pu
 bool ParseArray(uint8_t *pData, const char *pckey, uint16_t ucLen, char *pucData)
 {
     bool bRetVal = false;
-    char *cbuff = NULL;
     cJSON *RxData = NULL;
+    cJSON *arrayItem = NULL;
+    cJSON *root = NULL;
     int arraySize;
 
-    if (pData && pckey)
+    if (pData && pckey && pucData)
     {
-
-        cJSON *root = cJSON_Parse(pData + 3); /*See comment on line 115*/
+        printk("Reaching before root\n\r");
+        root = cJSON_Parse(pData + 3); /*See comment on line 115*/
+        printk("Reaching after root\n\r");
 
         if (root != NULL)
         {
+           // printk("Reaching before parsing\n\r");
             RxData = cJSON_GetObjectItem(root, pckey);
+           // printk("Reaching after parsing\n\r");
 
             if (cJSON_IsArray(RxData))
             {
+               // printk("Reaching before arrsize\n\r");
                 arraySize = cJSON_GetArraySize(RxData);
-
+              //  printk("Reaching after arrsize\n\r");
                 for (int i = 0; i < arraySize; i++)
                 {
-                    cJSON *arrayItem = cJSON_GetArrayItem(RxData, i);
+                    arrayItem = cJSON_GetArrayItem(RxData, i);
                     if (arrayItem != NULL)
                     {
                         bRetVal = true;
@@ -174,12 +182,14 @@ bool ParseArray(uint8_t *pData, const char *pckey, uint16_t ucLen, char *pucData
                         pucData = pucData + (strlen(arrayItem->valuestring));
                         *pucData = ',';
                         pucData++;
-
                     }
                 }
+                
             }
 
             bRetVal = true;
+
+            cJSON_DeleteItemFromObject(RxData, pckey);
             cJSON_Delete(root); // Free the cJSON structure
         }
     }
