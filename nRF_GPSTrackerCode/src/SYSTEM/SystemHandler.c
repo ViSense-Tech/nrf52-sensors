@@ -18,7 +18,7 @@
 const struct gpio_dt_spec sSleepStatusLED = GPIO_DT_SPEC_GET(DT_ALIAS(led0), gpios);
 bool bSleepTimeSet = false;
 uint32_t ulSleepTime = SLEEP_TIME; 
-uint16_t usDiagnosticData = 0;
+uint32_t usDiagnosticData = 0;
 
 /***************************************FUNCTION DEFINITIONS********************/
 /*

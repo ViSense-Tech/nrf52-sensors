@@ -96,7 +96,6 @@ int main(void)
 		while (sys_clock_tick_get() - sysTime < (ALIVE_TIME * TICK_RATE))
 		{
 #endif
-
 			pMainObject = cJSON_CreateObject();
 			UpdateConfigurations();
 			WriteConfiguredtimeToRTC();
@@ -115,7 +114,7 @@ int main(void)
 
 			if(GetConfigStatus())
 			{
-				ParseLatAndLongitudesData();	
+				ParseFenceData();	
 				ParseRcvdData();
 				SetConfigStatus(false);
 			}
@@ -493,11 +492,10 @@ static bool UpdateConfigurations()
 	}
 	if (IsConfigLat() && IsConfigLon())
 	{
-		psFenceData = malloc(sizeof(_sFenceData));
 		psFenceData = GetFenceTable();
 		psConfigData->ucCoordCount = GetCoordCount();
-		memcpy(psConfigData->FenceData, psFenceData, sizeof(_sFenceData) * 6);
-		free(psFenceData);
+		memcpy(psConfigData->FenceData, psFenceData, sizeof(_sFenceData) * psConfigData->ucCoordCount);
+		//free(psFenceData);
 		// for (uint8_t ucIdx = 0; psConfigData->ucCoordCount > ucIdx ; ucIdx++)
 		// {
 		// 	printk("\n\rUCLat: %f UCLon: %f\n\r", 

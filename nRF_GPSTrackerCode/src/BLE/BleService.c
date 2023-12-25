@@ -56,10 +56,10 @@ uint32_t ucIdx = 0;
 bool bFenceLat = false;
 bool bFenceLon = false;
 
-
+/****************************FUNCTION DECLARATION********************************/
+static void ParseFenceCoordinate(char *pcKey)
 
 /****************************FUNCTION DEFINITION********************************/
-
 /**
  * @brief Charcteristics Read callback
  * @param bt_conn - Connection handle
@@ -78,7 +78,12 @@ static ssize_t CharaRead(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 							 strlen(value));
 }
 
-void ParseCoordinate(char *pcKey)
+/**
+ * @brief Parse latitudes and longitudes array from JSON payload
+ * @param pcKey : key specifying lat or lon
+ * @return None
+*/
+static void ParseFenceCoordinate(char *pcKey)
 {
 	char *cSplitStr = NULL;
 	char ucbuff[300];
@@ -128,11 +133,17 @@ void ParseCoordinate(char *pcKey)
 	free(psFenceData);
 }
 
-void ParseLatAndLongitudesData()
+/**
+ * @brief Parse latitudes and longitudes for fence table
+ * @param None
+ * @return None
+*/
+void ParseFenceData()
 {
 	ParseCoordinate("lat");
 	k_msleep(100);
 	ParseCoordinate("lon");
+	printk("INFO: All fence data parsed\n\r");
 }
 
 /**
@@ -566,5 +577,14 @@ void SetFenceCoordCount(int ucCount)
 */
 int GetCoordCount()
 {
+	_sConfigData *psConfigData = NULL;
+
+	psConfigData = GetConfigData();
+
+	if (psConfigData)
+	{
+		ucCoordCount = psConfigData->ucCoordCount;
+	}
+	
 	return ucCoordCount;
 }

@@ -39,7 +39,7 @@
 
 #define STRING_ID 0
 /*********************************************************TYPEDEFS*****************************************/
-typedef struct __attribute__((packed)) __sConfigData
+typedef struct __attribute__((__packed__)) __sConfigData
 {
     long long lastUpdatedTime;
     int ucCoordCount;

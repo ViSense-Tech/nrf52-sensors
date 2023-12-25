@@ -35,4 +35,4 @@ int GetCoordCount();
 void ParseRcvdData();
 void SetConfigStatus(bool bStatus);
 bool GetConfigStatus();
-void ParseLatAndLongitudesData();
+void ParseFenceData();
