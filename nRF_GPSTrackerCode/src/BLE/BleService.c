@@ -57,7 +57,7 @@ bool bFenceLat = false;
 bool bFenceLon = false;
 
 /****************************FUNCTION DECLARATION********************************/
-static void ParseFenceCoordinate(char *pcKey)
+static void ParseFenceCoordinate(char *pcKey);
 
 /****************************FUNCTION DEFINITION********************************/
 /**
@@ -140,9 +140,9 @@ static void ParseFenceCoordinate(char *pcKey)
 */
 void ParseFenceData()
 {
-	ParseCoordinate("lat");
+	ParseFenceCoordinate("lat");
 	k_msleep(100);
-	ParseCoordinate("lon");
+	ParseFenceCoordinate("lon");
 	printk("INFO: All fence data parsed\n\r");
 }
 
