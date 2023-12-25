@@ -7,7 +7,7 @@
 */
 /***************************************INCLUDES*********************************/
 #include "TimerHandler.h"
-#include "RtcHandler.h"
+#include "LCDHandler.h"
 
 /***************************************MACROS**********************************/
 #define PERIOD          1000
@@ -29,7 +29,6 @@ struct device *pRTC = NULL;
  */
 static void TimerExpiredCb(nrf_timer_event_t event_type, void * p_context)
 {
-    int64_t llEpochNow = 0;
     if(event_type == NRF_TIMER_EVENT_COMPARE0)
     {
         /*For test only will remove the following line*/
@@ -50,7 +49,7 @@ void InitTimer()
 {
     nrfx_err_t status;
 
-    pRTC = GetI2Chandle();
+    pRTC = GetI2CDevice();
     nrfx_timer_t sTimer0 = NRFX_TIMER_INSTANCE(TIMER_INST_IDX);
     nrfx_timer_config_t config = NRFX_TIMER_DEFAULT_CONFIG;
 

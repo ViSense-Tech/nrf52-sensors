@@ -39,7 +39,7 @@ static struct bt_uuid_128 sHistoryChara = BT_UUID_INIT_128(
 	BT_UUID_128_ENCODE(0x1f1e60b8, 0x98ad, 0x11ee, 0xb9d1, 0x0242ac120002));
 
 static uint8_t ucSensorData[VND_MAX_LEN + 1] = {0x11, 0x22, 0x33, 0x44, 0x55};
-static uint8_t ucConfigData2[VND_MAX_LEN + 1];
+static uint8_t ucConfigData[VND_MAX_LEN + 1];
 static bool bNotificationEnabled = false;
 static bool bConnected = false;
 struct bt_conn *psConnHandle = NULL;
@@ -47,8 +47,9 @@ static bool hNotificationEnabled = false;
 struct nvs_fs *FileSys;
 static bool bConfigNotifyEnabled = false;
 static bool bFenceStatus = false;
-static uint8_t ucCoordCount;
+static int ucCoordCount;
 static bool bConfig = false;
+static uint16_t usPayloadLen = 0;
 
 /*Read index from flash*/
 uint32_t ucIdx = 0;
@@ -77,76 +78,28 @@ static ssize_t CharaRead(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 							 strlen(value));
 }
 
-void ParseRcvdData()
+void ParseCoordinate(char *pcKey)
 {
-	_sFenceData *psFenceData = NULL;
-	uint32_t ucbuff2;
-	uint16_t usPayloadLen = 0;
-	uint8_t ucIdx = 0;
 	char *cSplitStr = NULL;
-	char *ucbuff = NULL;
-	static uint8_t coordcount;
-	usPayloadLen = ucConfigData2[1] << 8 | ucConfigData2[2];
-	
-	if (ParseRxData(ucConfigData2, "cc", usPayloadLen, &ucbuff2))
-	{
-		
-			printk("..cc:%d\n\r", ucbuff2);
-			SetFenceCoordCount(ucbuff2);
-	}
-	else
-	{
-		printk("failed read cc\n");
-	}
+	char ucbuff[300];
+	_sFenceData *psFenceData = NULL;
 
-	/*SoG value max threshold */
-
-	if (ParseRxData(ucConfigData2, "Speed", usPayloadLen, &ucbuff2))
-	{
-		// if (len)
-		// {
-			SetSogMax(ucbuff2);
-			printk("..smax:%d\n\r", ucbuff2);
-		
-		// }
-	}
-	else
-	{
-		printk("failed read smax\n");
-	}
-	/*timestamp */
-	if (ParseRxData(ucConfigData2, "TS", usPayloadLen, &ucbuff2))
-	{
-		// if (len)
-		// {
-			SetRtcTime(ucbuff2);
-			printk("..ts:%d\n\r", ucbuff2);
-		// }
-	}
-	else
-	{
-		printk("failed read ts\n");
-	}
-
-	/*sleeptime */
-
-	if (ParseRxData(ucConfigData2, "Sleep", usPayloadLen, &ucbuff2))
-	{
-		// if (len)
-		// {
-			SetSleepTime(ucbuff2);
-			printk(".st:%d\n\r", ucbuff2);
-		// }
-	}
-	else
-	{
-		printk("failed read ts\n");
-	}
 	/*parsing array of strings */
-	ucbuff = calloc(sizeof(char),275);
-	if (ParseArray(ucConfigData2, "lat", usPayloadLen, ucbuff)) // for lattitude
+	psFenceData = GetFenceTable();
+
+	if (!psFenceData)
 	{
-		psFenceData = GetFenceTable();
+		printk("ERR: fence table invalid \n\r");
+		return;
+	}
+
+	if (ParseArray(ucConfigData, pcKey, usPayloadLen, ucbuff)) // for lattitude
+	{
+		printk("INFO: Parsing coordinate success\n\r");
+	}
+
+	if (0 == strcmp(pcKey, "lat"))
+	{
 		cSplitStr = strtok(ucbuff, ",");
 		while (cSplitStr != NULL)
 		{
@@ -157,20 +110,10 @@ void ParseRcvdData()
 
 		bFenceLat = true;                 //lat array parse sucess flag
 	}
-	else
+	else if (0 == strcmp(pcKey, "lon"))
 	{
-		printk("Failed to read lt\n");
-	}
-	printk("INFO: Lat set\n\r");
-	free(ucbuff);
-	ucbuff = calloc(sizeof(char), 275);
-	psFenceData = NULL;
-	cSplitStr = NULL;
-	if (ParseArray(ucConfigData2, "lon", usPayloadLen, ucbuff)) // for longitude
-	{
-		printk("\n\rlon: %s", ucbuff);
-		psFenceData = GetFenceTable(); 
 		cSplitStr = strtok(ucbuff, ",");
+
 		while (cSplitStr != NULL)
 		{
 
@@ -178,20 +121,73 @@ void ParseRcvdData()
 			psFenceData++;
 			cSplitStr = strtok(NULL, ",");
 		}
-		bFenceLon = true;
-	}
-	free(ucbuff);
-	printk("INFO: Lon set\n\r");
 
-	if (bFenceLat && bFenceLon)
+		bFenceLon = true;		
+	}
+
+	free(psFenceData);
+}
+
+void ParseLatAndLongitudesData()
+{
+	ParseCoordinate("lat");
+	k_msleep(100);
+	ParseCoordinate("lon");
+}
+
+/**
+ * @brief Parsing received data
+ * @param None
+ * @return None
+*/
+void ParseRcvdData()
+{
+	uint32_t ucbuff2;
+	usPayloadLen = ucConfigData[1] << 8 | ucConfigData[2];
+	
+	if (ParseRxData(ucConfigData, "cc", usPayloadLen, &ucbuff2))
 	{
-		bFenceStatus = true;
-		psFenceData = GetFenceTable();
-		for (ucIdx = 0; ucIdx < 4; ucIdx++)
-		{
-			printk("Lat[%d]: %lf Lon[%d]: %lf\n\r", ucIdx, psFenceData->dLatitude, ucIdx, psFenceData->dLongitude);
-			psFenceData++;
-		}
+	
+		printk("cc:%d\n\r", ucbuff2);
+		SetFenceCoordCount(ucbuff2);
+	}
+	else
+	{
+		printk("failed read cc\n");
+	}
+
+	/*SoG value max threshold */
+
+	if (ParseRxData(ucConfigData, "Speed", usPayloadLen, &ucbuff2))
+	{
+		SetSogMax(ucbuff2);
+		printk("smax:%d\n\r", ucbuff2);
+	}
+	else
+	{
+		printk("failed read smax\n");
+	}
+	/*timestamp */
+	if (ParseRxData(ucConfigData, "TS", usPayloadLen, &ucbuff2))
+	{
+		SetRtcTime(ucbuff2);
+		printk("ts:%d\n\r", ucbuff2);
+	}
+	else
+	{
+		printk("failed read ts\n");
+	}
+
+	/*sleeptime */
+
+	if (ParseRxData(ucConfigData, "Sleep", usPayloadLen, &ucbuff2))
+	{
+		SetSleepTime(ucbuff2);
+		printk("sleep:%d\n\r", ucbuff2);
+	}
+	else
+	{
+		printk("failed read ts\n");
 	}
 }
 
@@ -203,7 +199,7 @@ void SetConfigStatus(bool bStatus)
 	bConfig = bStatus;
 	if (!bConfig)
 	{
-		memset(ucConfigData2, 0, sizeof(ucConfigData2));
+		memset(ucConfigData, 0, sizeof(ucConfigData));
 	}
 	else
 	{
@@ -229,8 +225,8 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 						  const void *buf, uint16_t len, uint16_t offset,
 						  uint8_t flags)
 {
-	uint8_t *value = attr->user_data;
-
+	//uint8_t *value = attr->user_data;
+	printk("INFO:Offset = %d\n\r", offset);
 
 	if (offset + len > VND_MAX_LEN)
 	{
@@ -238,7 +234,7 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 		return BT_GATT_ERR(BT_ATT_ERR_INVALID_OFFSET);
 	}
 
-	memcpy(ucConfigData2, buf, len);
+	memcpy(ucConfigData, buf, len);
 	SetConfigStatus(true);
 
 	return len;
@@ -303,7 +299,7 @@ BT_GATT_SERVICE_DEFINE(VisenseService,
 					   BT_GATT_CHARACTERISTIC(&sConfigChara.uuid,
 											  BT_GATT_CHRC_NOTIFY | BT_GATT_CHRC_WRITE,
 											  BT_GATT_PERM_READ | BT_GATT_PERM_WRITE,
-											  CharaRead, CharaWrite, ucConfigData2),
+											  CharaRead, CharaWrite, ucSensorData),
 					   BT_GATT_CCC(BleConfigDataNotify, BT_GATT_PERM_READ | BT_GATT_PERM_WRITE),
 					   BT_GATT_CHARACTERISTIC(&sHistoryChara.uuid,
 											  BT_GATT_CHRC_NOTIFY,
@@ -558,7 +554,7 @@ void SetFenceConfigStatus(bool bStatus)
  * @param ucCount : Coordinate count
  * @return None
 */
-void SetFenceCoordCount(uint8_t ucCount)
+void SetFenceCoordCount(int ucCount)
 {
 	ucCoordCount = ucCount;
 }
@@ -568,7 +564,7 @@ void SetFenceCoordCount(uint8_t ucCount)
  * @param None
  * @return Fence coordinate count
 */
-uint8_t GetCoordCount()
+int GetCoordCount()
 {
 	return ucCoordCount;
 }

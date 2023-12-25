@@ -42,9 +42,9 @@
 typedef struct __attribute__((packed)) __sConfigData
 {
     long long lastUpdatedTime;
-    uint8_t ucCoordCount;
+    int ucCoordCount;
     _sFenceData FenceData[6];
-     uint32_t flashIdx;
+    uint32_t flashIdx;
     uint32_t sleepTime;
     uint8_t flag;
 }_sConfigData;
@@ -61,3 +61,4 @@ int freeSpaceCalc(struct nvs_fs *fs);
 bool writeJsonToExternalFlash(char *pcBuffer, uint32_t flashIdx, int unLength);
 bool EraseExternalFlash(uint16_t);
 bool readJsonFromExternalFlash(char *pcBuffer, uint32_t flashIdx, int unLength);
+_sConfigData *GetConfigData();

@@ -10,6 +10,7 @@
 
 #include "RtcHandler.h"
 #include "SystemHandler.h"
+#include "BleHandler.h"
 
 /***************************************MACROS*********************************/
 
@@ -17,7 +18,7 @@
 const struct gpio_dt_spec sSleepStatusLED = GPIO_DT_SPEC_GET(DT_ALIAS(led0), gpios);
 bool bSleepTimeSet = false;
 uint32_t ulSleepTime = SLEEP_TIME; 
-uint16_t ulDiagnosticData = 0;
+uint16_t usDiagnosticData = 0;
 
 /***************************************FUNCTION DEFINITIONS********************/
 /*
@@ -50,7 +51,6 @@ void EnterSleepMode(int nDuration)
 {
     /*Need to add other functions also currently stopping ble 
     advertisement when entering sleep*/
-
     BleStopAdvertise();
     gpio_pin_set(sSleepStatusLED.port, sSleepStatusLED.pin, 1);
     k_sleep(K_SECONDS(nDuration));
@@ -116,6 +116,6 @@ uint32_t GetSleepTime()
 */
 uint32_t *GetDiagnosticData()
 {
-    return &ulDiagnosticData;
+    return &usDiagnosticData;
 }
 

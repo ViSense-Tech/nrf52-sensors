@@ -138,7 +138,7 @@ bool ConvertNMEAtoCoordinates(char *pcLocData, double *pfLat, double *pfLon)
         fMinutes = fDegrees/ 100;
         fMinutes = fMinutes - temp;
         fMinutes = fMinutes * 100;
-        printk("min: %f", fMinutes);
+        //printk("min: %f", fMinutes);
         *pfLat = temp + (fMinutes/60);
         cSubstr = strtok(NULL, ",");
 
@@ -163,7 +163,7 @@ bool ConvertNMEAtoCoordinates(char *pcLocData, double *pfLat, double *pfLon)
             fMinutes = fDegrees/ 100;
             fMinutes = fMinutes - temp;
             fMinutes = fMinutes * 100;
-            printk("min: %f", fMinutes);
+          //  printk("min: %f", fMinutes);
             *pfLon = temp + (fMinutes/60);
             bRetVal = true;
         }
@@ -381,7 +381,7 @@ bool ReadSOGData(float *pfSOG)
                     for (ucIdx = 1; cSOG[ucIdx] != ','; ucIdx++);
                     ucIdx++;
                     memcpy(cSOG, cSOG+1, strlen(cSOG+1));
-                    printk("SOG str: %s\n\r", cSOG);
+                  //  printk("SOG str: %s\n\r", cSOG);
                     memset(cSOG+ucIdx, '\0', strlen(cSOG+ucIdx));
                     *pfSOG = atof(cSOG);
                     bRetVal = true;

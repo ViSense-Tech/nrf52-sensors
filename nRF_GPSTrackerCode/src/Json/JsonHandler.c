@@ -8,6 +8,7 @@
 
 /**************************************INCLUDES***************************/
 #include "JsonHandler.h"
+#include "nvs_flash.h"
 #include <string.h>
 /**************************************MACROS*****************************/
 
@@ -15,7 +16,7 @@
 
 /***********************************FUNCTION DEFINITION*******************/
 
- _sFenceData sFenceData[6] = {0};
+static _sConfigData *psConfigData = NULL;
 
 /**
  * @brief  : Get Fence table
@@ -24,7 +25,15 @@
 */
 _sFenceData *GetFenceTable()
 {
-    return &sFenceData;
+    psConfigData = GetConfigData();
+
+    if (!psConfigData)
+    {
+        printk("ERR: failed to get config\n\r");
+        return NULL;
+    }
+
+    return &psConfigData->FenceData[0];
 }
 
 /**
@@ -35,7 +44,7 @@ _sFenceData *GetFenceTable()
 */
 void SetFenceTable(_sFenceData *sFenceTable)
 {
-    memcpy(&sFenceData, sFenceTable, sizeof(sFenceData));
+    memcpy(&psConfigData->FenceData[0], sFenceTable, sizeof(psConfigData->FenceData));
 }
 
 /**
@@ -100,11 +109,6 @@ bool AddItemtoJsonObject(cJSON **pcJsonHandle, _eJsonDataType JsondataType, cons
 bool ParseRxData(uint8_t *pData, const char *pckey, uint16_t ucLen, uint64_t *pucData)
 {
     bool bRetVal = false;
-    // char cbuff[350] = {0}; /*We can write more than 247 bytes of data
-    //                         if MTU size is adjusted, and in Tracker firmware
-    //                         we have updated the MTU size to receive more than 247 bytes
-    //                         configurations written via BLE is beyond 247bytes
-    //                         updated the buff size to receive more than 247 bytes */
     cJSON *RxData = NULL;
     cJSON *root = NULL;
     
@@ -113,10 +117,8 @@ bool ParseRxData(uint8_t *pData, const char *pckey, uint16_t ucLen, uint64_t *pu
         if (pData[0])     //length check
         {
             printf("%s\n\r", (char *)pData+3); 
-            root = cJSON_Parse(pData + 3); /*Updated index of buffer to 3 because we are receiving more
-                                                    than 247 bytes to store length of payload we might require
-                                                    2 bytes. So updated index of payload to 3. This change is only 
-                                                    in Speed Tracker due to large config data size.*/
+            root = cJSON_Parse(pData + 3); 
+            
             if (root != NULL)
             {
                 RxData = cJSON_GetObjectItem(root, pckey);
@@ -156,9 +158,7 @@ bool ParseArray(uint8_t *pData, const char *pckey, uint16_t ucLen, char *pucData
 
     if (pData && pckey && pucData)
     {
-        printk("Reaching before root\n\r");
-        root = cJSON_Parse(pData + 3); /*See comment on line 115*/
-        printk("Reaching after root\n\r");
+        root = cJSON_Parse(&pData[3]);
 
         if (root != NULL)
         {
@@ -166,7 +166,7 @@ bool ParseArray(uint8_t *pData, const char *pckey, uint16_t ucLen, char *pucData
             RxData = cJSON_GetObjectItem(root, pckey);
            // printk("Reaching after parsing\n\r");
 
-            if (cJSON_IsArray(RxData))
+            if (RxData && cJSON_IsArray(RxData))
             {
                // printk("Reaching before arrsize\n\r");
                 arraySize = cJSON_GetArraySize(RxData);
@@ -183,17 +183,17 @@ bool ParseArray(uint8_t *pData, const char *pckey, uint16_t ucLen, char *pucData
                         *pucData = ',';
                         pucData++;
                     }
+                    cJSON_DeleteItemFromArray(arrayItem, i);
                 }
                 
             }
 
-            bRetVal = true;
-
             cJSON_DeleteItemFromObject(RxData, pckey);
-            cJSON_Delete(root); // Free the cJSON structure
+            bRetVal = true;
         }
     }
 
+    cJSON_Delete(root); // Free the cJSON structure
     return bRetVal;
 }
 

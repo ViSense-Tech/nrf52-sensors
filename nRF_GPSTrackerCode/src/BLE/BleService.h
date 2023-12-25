@@ -17,17 +17,22 @@
 
 /*************************************FUNCTION DECLARATION*******************/
 int VisenseSensordataNotify(uint8_t *pucSensorData, uint16_t unLen);
+bool VisenseHistoryDataNotify(uint32_t ulWritePos);
 void BleSensorDataNotify(const struct bt_gatt_attr *attr, uint16_t value);
+int VisenseConfigDataNotify(uint8_t *pucCongigData, uint16_t unLen);
 bool IsNotificationenabled();
+bool IsConfigNotifyEnabled();
+bool IshistoryNotificationenabled();
 bool IsConnected();
 bool IsConfigLat();
-bool IsConfiglon();
+bool IsConfigLon();
 void SetConfigChangeLat(bool);
 void SetConfigChangeLon(bool);
 bool IsFenceConfigured();
 void SetFenceConfigStatus(bool bStatus);
-void SetFenceCoordCount(uint8_t ucCount);
-uint8_t GetCoordCount();
+void SetFenceCoordCount(int ucCount);
+int GetCoordCount();
 void ParseRcvdData();
 void SetConfigStatus(bool bStatus);
 bool GetConfigStatus();
+void ParseLatAndLongitudesData();
