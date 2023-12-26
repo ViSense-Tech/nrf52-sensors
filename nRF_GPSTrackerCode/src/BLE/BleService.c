@@ -329,7 +329,52 @@ void SetFileSystem(struct nvs_fs *fs)
 }
 
 /**
+ * @brief MTU exchange callback
+ * @param conn 	  : Connection handle
+ * @param att_err : Error code on MTU exchange
+ * @param params  : Exchange params
+ * @return None
+*/
+static void MTUExchangeCb(struct bt_conn *conn, uint8_t att_err,
+    					struct bt_gatt_exchange_params *params)
+{
+    if (att_err)
+    {
+        printk("\n\rERR:MTU exchange returned with error code %d\n\r", att_err);
+    }
+    else
+    {
+        printk("\n\rINFO:MTU sucessfully set to %d\n\r", CONFIG_BT_L2CAP_TX_MTU);
+    }
+}
+
+/**
+ * @brief Initiate MTU exchange from peripheral side
+ * @param conn  : connection handle
+ * @return None
+*/
+static void InitiateMTUExcahnge(struct bt_conn *conn)
+{
+    int err;
+    static struct bt_gatt_exchange_params exchange_params;
+    exchange_params.func = MTUExchangeCb;
+
+    err = bt_gatt_exchange_mtu(conn, &exchange_params);
+    if (err)
+    {
+        printk("\n\rERR:MTU exchange failed (err %d)\n\r", err);
+    }
+    else
+    {
+        printk("\n\rINFO:MTU exchange pending ...\n\r");
+    }
+}
+
+/**
  * @brief Connect callabcak
+ * @param conn : Connection handle
+ * @param err  : error code/return code on connection
+ * @return None
  */
 static void connected(struct bt_conn *conn, uint8_t err)
 {
@@ -343,10 +388,15 @@ static void connected(struct bt_conn *conn, uint8_t err)
 		bt_conn_le_data_len_update(conn, BT_LE_DATA_LEN_PARAM_MAX);
 		bConnected = true;
 	}
+
+	InitiateMTUExcahnge(conn);
 }
 
 /**
  * @brief Disconnect callback
+ * @param conn   : Connection handle
+ * @param reason : return code on disconnection
+ * @return None
  */
 static void disconnected(struct bt_conn *conn, uint8_t reason)
 {
