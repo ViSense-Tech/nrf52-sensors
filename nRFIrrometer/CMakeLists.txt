@@ -5,7 +5,7 @@ if(DEFINED CUSTOM_BOILERPLATE)
     include(${CUSTOM_BOILERPLATE})
     return()
 endif()
-
+set(BOARD_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 set(COMMON_PATH "C:/ncs/v2.4.2/modules/hal/nordic/nrfx/samples/common")
 include(${COMMON_PATH}/common.cmake)
 

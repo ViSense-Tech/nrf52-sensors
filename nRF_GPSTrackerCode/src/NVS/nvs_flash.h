@@ -33,11 +33,9 @@
 /*NUmber of sector used for storing JSON*/
 #define SECTOR_COUNT ((NUMBER_OF_ENTRIES * WRITE_ALIGNMENT) / 4096)
 
-
-
-
-
 #define STRING_ID 0
+
+//#define MX66FLASH_ENABLED //Uncomment here to enable MX66
 /*********************************************************TYPEDEFS*****************************************/
 typedef struct __attribute__((__packed__)) __sConfigData
 {

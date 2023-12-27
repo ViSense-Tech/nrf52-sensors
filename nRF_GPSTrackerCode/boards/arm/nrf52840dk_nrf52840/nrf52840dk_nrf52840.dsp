@@ -43,35 +43,20 @@
 			label = "Green LED 3";
 		};
 	};
-	
+
 	powerpins {
 		testpin0: testpin_0 {
 			compatible = "eac,testpin";
-			gpios = <&gpio1 11 GPIO_ACTIVE_LOW>;
+			gpios = < &gpio0 0x1b 0x1 >;
 			status = "okay";
 		};
 		testpin1: testpin_1 {
 			compatible = "eac,testpin";
-			gpios = <&gpio1 10 GPIO_ACTIVE_LOW>;
+			gpios = < &gpio0 0x1a 0x1 >;
 			status = "okay";
 		};
-		muxinputa: muxinput_a {
-			compatible = "eac,testpin";
-			gpios = <&gpio1 6 GPIO_ACTIVE_LOW>;
-			status = "okay";
-		};
-		muxinputb: muxinput_b {
-			compatible = "eac,testpin";
-			gpios = <&gpio1 7 GPIO_ACTIVE_LOW>;
-			status = "okay";
-		};
-		muxenable: mux_enable {
-			compatible = "eac,testpin";
-			gpios = <&gpio1 5 GPIO_ACTIVE_LOW>;
-			status = "okay";
-		};		
 	};
-	
+
 	pwmleds {
 		compatible = "pwm-leds";
 		pwm_led0: pwm_led_0 {
@@ -131,7 +116,12 @@
 	arduino_adc: analog-connector {
 		compatible = "arduino,uno-adc";
 		#io-channel-cells = <1>;
-		io-channel-map = <0 &adc 1>;	/* A0 = P0.3 = AIN1 */
+		io-channel-map = <0 &adc 1>,	/* A0 = P0.3 = AIN1 */
+				 <1 &adc 2>,	/* A1 = P0.4 = AIN2 */
+				 <2 &adc 4>,	/* A2 = P0.28 = AIN4 */
+				 <3 &adc 5>,	/* A3 = P0.29 = AIN5 */
+				 <4 &adc 6>,	/* A4 = P0.30 = AIN6 */
+				 <5 &adc 7>;	/* A5 = P0.31 = AIN7 */
 	};
 
 	/* These aliases are provided for compatibility with samples */
@@ -143,9 +133,6 @@
 		pwm-led0 = &pwm_led0;
 		testpin0 = &testpin0;
 		testpin1 = &testpin1;
-		muxinputa = &muxinputa;
-		muxinputb  = &muxinputb;
-		muxenable = &muxenable;
 		sw0 = &button0;
 		sw1 = &button1;
 		sw2 = &button2;
@@ -155,7 +142,6 @@
 		mcuboot-led0 = &led0;
 		watchdog0 = &wdt0;
 		spi-flash0 = &mx25r64;
-		spi-flash1 = &mx66l1g;
 	};
 };
 
@@ -202,6 +188,7 @@ arduino_i2c: &i2c0 {
 &i2c1 {
 	compatible = "nordic,nrf-twi";
 	/* Cannot be used together with spi1. */
+	/* status = "okay"; */
 	pinctrl-0 = <&i2c1_default>;
 	pinctrl-1 = <&i2c1_sleep>;
 	pinctrl-names = "default", "sleep";
@@ -225,7 +212,7 @@ arduino_i2c: &i2c0 {
 
 &spi1 {
 	compatible = "nordic,nrf-spi";
-	//status = "okay";
+	status = "okay";
 	pinctrl-0 = <&spi1_default>;
 	pinctrl-1 = <&spi1_sleep>;
 	pinctrl-names = "default", "sleep";
@@ -264,24 +251,6 @@ arduino_i2c: &i2c0 {
 		t-enter-dpd = <10000>;
 		t-exit-dpd = <35000>;
 	};
-	mx66l1g: mx66l1g45g@0 {
-		compatible = "nordic,qspi-nor";
-		reg = <0>;
-		/* MX66L1G supports only pp and pp4io */
-		writeoc = "pp4io";
-		/* MX66L1G supports all readoc options */
-		readoc = "read4io";
-		sck-frequency = <8000000>;
-		//label = "MX66L1G";
-		jedec-id = [c2 20 1b];
-		sfdp-bfp = [
-			e5 20 fb ff  ff ff ff 3f  44 eb 08 6b  08 3b 04 bb
-			fe ff ff ff  ff ff 00 ff  ff ff 44 eb  0c 20 0f 52
-			10 d8 00 ff  d6 49 c5 00  82 df 04 e3  44 03 67 38
-			30 b0 30 b0  f7 bd d5 5c  4a 9e 29 ff  f0 50 f9 85
-		];
-		size = <1073741824>;
-	};	
 };
 
 arduino_spi: &spi3 {

@@ -3,8 +3,12 @@
 #include <stdio.h>
 
 /**************************************************************GLOBAL VARIABLES*********************************/
+static _sConfigData sConfigData;
+#ifdef MX66FLASH_ENABLED
+static const struct device *const flash_dev = DEVICE_DT_GET(DT_NODELABEL(mx66l1g));
+#else
 static const struct device *const flash_dev = DEVICE_DT_GET(DT_ALIAS(spi_flash0));
-static _sConfigData sConfigData = {0};
+#endif
 
 /**
  * @brief  Initialise flash
@@ -127,11 +131,6 @@ bool writeJsonToExternalFlash(char *pcBuffer, uint32_t flashIdx, int unLength) /
 
 	do
 	{
-		if (!device_is_ready(flash_dev)) 
-		{
-			printk("%s: device not ready.\n", flash_dev->name);
-			break;
-		}
 		rc = flash_write(flash_dev, SPI_FLASH_REGION_OFFSET + flashIdx, pcBuffer, WRITE_ALIGNMENT);
 		if (rc != 0)
 		{

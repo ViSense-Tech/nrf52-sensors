@@ -32,10 +32,15 @@
 /*NUmber of sector used for storing JSON*/
 #define SECTOR_COUNT ((NUMBER_OF_ENTRIES * WRITE_ALIGNMENT) / 4096)
 
-
-
-
 #define STRING_ID 0
+
+/**
+ * @note : Below MACRO is used to enable MX66 flash support but if it is enabled will get a build error
+ *         which has tobe fixed by configuring dts file in boards directory. You can do that by commenting out
+ *         mx25 flash node in definition qspi node in dts file manually.
+*/
+//#define MX66FLASH_ENABLED //Uncomment this line to enable MX66 functionality
+
 /*********************************************************TYPEDEFS*****************************************/
 typedef struct __attribute__((packed)) __sConfigData
 {
