@@ -55,11 +55,31 @@ int targetStatus;
 static void ReadGPSPacket(uint8_t ucByte);
 
 /*****************************FUNCTION DEFINITION***********************/
+/**
+ * @brief Check if device is inside of fence
+ * @param None
+ * @return status of device inside of fence
+*/
+int IsDeviceInsideofFence()
+{
+    return targetStatus;
+}
+
+/**
+ * @brief Set SOG value
+ * @param fVal : SOG value
+ * @return None
+*/
 void SetSogMax(float fVal)
 {
     fSOG = fVal;
 }
 
+/**
+ * @brief Get SOG value
+ * @param None
+ * @return SOG value
+*/
 float GetSogMax()
 {
     return fSOG;
@@ -118,7 +138,7 @@ bool ConvertNMEAtoCoordinates(char *pcLocData, double *pfLat, double *pfLon)
         fMinutes = fDegrees/ 100;
         fMinutes = fMinutes - temp;
         fMinutes = fMinutes * 100;
-        printk("min: %f", fMinutes);
+        //printk("min: %f", fMinutes);
         *pfLat = temp + (fMinutes/60);
         cSubstr = strtok(NULL, ",");
 
@@ -143,7 +163,7 @@ bool ConvertNMEAtoCoordinates(char *pcLocData, double *pfLat, double *pfLon)
             fMinutes = fDegrees/ 100;
             fMinutes = fMinutes - temp;
             fMinutes = fMinutes * 100;
-            printk("min: %f", fMinutes);
+          //  printk("min: %f", fMinutes);
             *pfLon = temp + (fMinutes/60);
             bRetVal = true;
         }
@@ -361,7 +381,7 @@ bool ReadSOGData(float *pfSOG)
                     for (ucIdx = 1; cSOG[ucIdx] != ','; ucIdx++);
                     ucIdx++;
                     memcpy(cSOG, cSOG+1, strlen(cSOG+1));
-                    printk("SOG str: %s\n\r", cSOG);
+                  //  printk("SOG str: %s\n\r", cSOG);
                     memset(cSOG+ucIdx, '\0', strlen(cSOG+ucIdx));
                     *pfSOG = atof(cSOG);
                     bRetVal = true;

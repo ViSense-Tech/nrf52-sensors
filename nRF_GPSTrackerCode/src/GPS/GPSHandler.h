@@ -33,6 +33,7 @@ void setLat(double);
 void setLon(double);
 float GetSogMax();
 void SetSogMax(float fVal);
+int IsDeviceInsideofFence();
 #endif
 
 //EOF

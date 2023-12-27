@@ -1,9 +1,10 @@
 /*************************************************************INCLUDES*****************************************/
 #include "nvs_flash.h"
-
+#include <stdio.h>
 
 /**************************************************************GLOBAL VARIABLES*********************************/
 static const struct device *const flash_dev = DEVICE_DT_GET(DT_ALIAS(spi_flash0));
+static _sConfigData sConfigData = {0};
 
 /**
  * @brief  Initialise flash
@@ -14,7 +15,7 @@ static const struct device *const flash_dev = DEVICE_DT_GET(DT_ALIAS(spi_flash0)
 int FlashInit( struct nvs_fs *fs, uint8_t selector)
 {
     int rc = 0;
-	uint32_t counter = 0U, counter_his;
+	//uint32_t counter = 0U;
 	struct flash_pages_info info;
 	fs->flash_device = NVS_PARTITION_DEVICE;
 
@@ -207,4 +208,8 @@ bool EraseExternalFlash(uint16_t uSectorIdx)
 }
 
 
+_sConfigData *GetConfigData()
+{
+	return &sConfigData;
+}
 

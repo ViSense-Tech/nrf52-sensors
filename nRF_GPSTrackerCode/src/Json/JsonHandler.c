@@ -8,6 +8,7 @@
 
 /**************************************INCLUDES***************************/
 #include "JsonHandler.h"
+#include "nvs_flash.h"
 #include <string.h>
 /**************************************MACROS*****************************/
 
@@ -15,7 +16,7 @@
 
 /***********************************FUNCTION DEFINITION*******************/
 
- _sFenceData sFenceData[6] = {0};
+static _sConfigData *psConfigData = NULL;
 
 /**
  * @brief  : Get Fence table
@@ -24,7 +25,15 @@
 */
 _sFenceData *GetFenceTable()
 {
-    return &sFenceData;
+    psConfigData = GetConfigData();
+
+    if (!psConfigData)
+    {
+        printk("ERR: failed to get config\n\r");
+        return NULL;
+    }
+
+    return &psConfigData->FenceData[0];
 }
 
 /**
@@ -35,7 +44,7 @@ _sFenceData *GetFenceTable()
 */
 void SetFenceTable(_sFenceData *sFenceTable)
 {
-    memcpy(&sFenceData, sFenceTable, sizeof(sFenceData));
+    memcpy(&psConfigData->FenceData[0], sFenceTable, sizeof(psConfigData->FenceData));
 }
 
 /**
@@ -100,21 +109,22 @@ bool AddItemtoJsonObject(cJSON **pcJsonHandle, _eJsonDataType JsondataType, cons
 bool ParseRxData(uint8_t *pData, const char *pckey, uint16_t ucLen, uint64_t *pucData)
 {
     bool bRetVal = false;
-    char cbuff[150] = {0};
     cJSON *RxData = NULL;
+    cJSON *root = NULL;
     
     if (pData && pckey && pucData)
     {
         if (pData[0])     //length check
         {
-            cJSON *root = cJSON_Parse(pData + 2);
+            printf("%s\n\r", (char *)pData+3); 
+            root = cJSON_Parse(pData + 3); 
+            
             if (root != NULL)
             {
                 RxData = cJSON_GetObjectItem(root, pckey);
                 if (RxData)
                 {
                     *pucData = (RxData->valuedouble);
-                    cJSON_Delete(root);
                     bRetVal = true;
                 }
             }
@@ -122,6 +132,9 @@ bool ParseRxData(uint8_t *pData, const char *pckey, uint16_t ucLen, uint64_t *pu
             {
                 printk("ERR: parse failed\n\r");
             }
+
+            cJSON_DeleteItemFromObject(RxData, pckey);
+            cJSON_Delete(root);
         }
     }
     return bRetVal;
@@ -138,26 +151,29 @@ bool ParseRxData(uint8_t *pData, const char *pckey, uint16_t ucLen, uint64_t *pu
 bool ParseArray(uint8_t *pData, const char *pckey, uint16_t ucLen, char *pucData)
 {
     bool bRetVal = false;
-    char *cbuff = NULL;
     cJSON *RxData = NULL;
+    cJSON *arrayItem = NULL;
+    cJSON *root = NULL;
     int arraySize;
 
-    if (pData && pckey)
+    if (pData && pckey && pucData)
     {
-
-        cJSON *root = cJSON_Parse(pData + 2);
+        root = cJSON_Parse(&pData[3]);
 
         if (root != NULL)
         {
+           // printk("Reaching before parsing\n\r");
             RxData = cJSON_GetObjectItem(root, pckey);
+           // printk("Reaching after parsing\n\r");
 
-            if (cJSON_IsArray(RxData))
+            if (RxData && cJSON_IsArray(RxData))
             {
+               // printk("Reaching before arrsize\n\r");
                 arraySize = cJSON_GetArraySize(RxData);
-
+              //  printk("Reaching after arrsize\n\r");
                 for (int i = 0; i < arraySize; i++)
                 {
-                    cJSON *arrayItem = cJSON_GetArrayItem(RxData, i);
+                    arrayItem = cJSON_GetArrayItem(RxData, i);
                     if (arrayItem != NULL)
                     {
                         bRetVal = true;
@@ -166,16 +182,18 @@ bool ParseArray(uint8_t *pData, const char *pckey, uint16_t ucLen, char *pucData
                         pucData = pucData + (strlen(arrayItem->valuestring));
                         *pucData = ',';
                         pucData++;
-
                     }
+                    cJSON_DeleteItemFromArray(arrayItem, i);
                 }
+                
             }
 
+            cJSON_DeleteItemFromObject(RxData, pckey);
             bRetVal = true;
-            cJSON_Delete(root); // Free the cJSON structure
         }
     }
 
+    cJSON_Delete(root); // Free the cJSON structure
     return bRetVal;
 }
 

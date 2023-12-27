@@ -18,8 +18,12 @@
 #include "RtcHandler.h"
 
 /**************************** MACROS********************************************/
-#define VND_MAX_LEN 300
 /* Custom Service Variables */
+#define VND_MAX_LEN 300  /*We can write more than 247 bytes of data
+                            if MTU size is adjusted, and in Tracker firmware
+                            we have updated the MTU size to receive more than 247 bytes
+                            configurations written via BLE is beyond 247bytes
+                            updated the buff size to receive more than 247 bytes */
 
 
 /**************************** GLOBALS*******************************************/
@@ -35,7 +39,7 @@ static struct bt_uuid_128 sHistoryChara = BT_UUID_INIT_128(
 	BT_UUID_128_ENCODE(0x1f1e60b8, 0x98ad, 0x11ee, 0xb9d1, 0x0242ac120002));
 
 static uint8_t ucSensorData[VND_MAX_LEN + 1] = {0x11, 0x22, 0x33, 0x44, 0x55};
-static uint8_t ucConfigData2[VND_MAX_LEN + 1];
+static uint8_t ucConfigData[VND_MAX_LEN + 1];
 static bool bNotificationEnabled = false;
 static bool bConnected = false;
 struct bt_conn *psConnHandle = NULL;
@@ -43,16 +47,19 @@ static bool hNotificationEnabled = false;
 struct nvs_fs *FileSys;
 static bool bConfigNotifyEnabled = false;
 static bool bFenceStatus = false;
-static uint8_t ucCoordCount;
+static int ucCoordCount;
+static bool bConfig = false;
+static uint16_t usPayloadLen = 0;
+
 /*Read index from flash*/
 uint32_t ucIdx = 0;
 bool bFenceLat = false;
 bool bFenceLon = false;
 
-
+/****************************FUNCTION DECLARATION********************************/
+static void ParseFenceCoordinate(char *pcKey);
 
 /****************************FUNCTION DEFINITION********************************/
-
 /**
  * @brief Charcteristics Read callback
  * @param bt_conn - Connection handle
@@ -72,6 +79,151 @@ static ssize_t CharaRead(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 }
 
 /**
+ * @brief Parse latitudes and longitudes array from JSON payload
+ * @param pcKey : key specifying lat or lon
+ * @return None
+*/
+static void ParseFenceCoordinate(char *pcKey)
+{
+	char *cSplitStr = NULL;
+	char ucbuff[300];
+	_sFenceData *psFenceData = NULL;
+
+	/*parsing array of strings */
+	psFenceData = GetFenceTable();
+
+	if (!psFenceData)
+	{
+		printk("ERR: fence table invalid \n\r");
+		return;
+	}
+
+	if (ParseArray(ucConfigData, pcKey, usPayloadLen, ucbuff)) // for lattitude
+	{
+		printk("INFO: Parsing coordinate success\n\r");
+	}
+
+	if (0 == strcmp(pcKey, "lat"))
+	{
+		cSplitStr = strtok(ucbuff, ",");
+		while (cSplitStr != NULL)
+		{
+			psFenceData->dLatitude = atof(cSplitStr);
+			psFenceData++;
+			cSplitStr = strtok(NULL, ",");
+		}
+
+		bFenceLat = true;                 //lat array parse sucess flag
+	}
+	else if (0 == strcmp(pcKey, "lon"))
+	{
+		cSplitStr = strtok(ucbuff, ",");
+
+		while (cSplitStr != NULL)
+		{
+
+			psFenceData->dLongitude = atof(cSplitStr);
+			psFenceData++;
+			cSplitStr = strtok(NULL, ",");
+		}
+
+		bFenceLon = true;		
+	}
+
+	free(psFenceData);
+}
+
+/**
+ * @brief Parse latitudes and longitudes for fence table
+ * @param None
+ * @return None
+*/
+void ParseFenceData()
+{
+	ParseFenceCoordinate("lat");
+	k_msleep(100);
+	ParseFenceCoordinate("lon");
+	printk("INFO: All fence data parsed\n\r");
+}
+
+/**
+ * @brief Parsing received data
+ * @param None
+ * @return None
+*/
+void ParseRcvdData()
+{
+	uint32_t ucbuff2;
+	usPayloadLen = ucConfigData[1] << 8 | ucConfigData[2];
+	
+	if (ParseRxData(ucConfigData, "cc", usPayloadLen, &ucbuff2))
+	{
+	
+		printk("cc:%d\n\r", ucbuff2);
+		SetFenceCoordCount(ucbuff2);
+	}
+	else
+	{
+		printk("failed read cc\n");
+	}
+
+	/*SoG value max threshold */
+
+	if (ParseRxData(ucConfigData, "Speed", usPayloadLen, &ucbuff2))
+	{
+		SetSogMax(ucbuff2);
+		printk("smax:%d\n\r", ucbuff2);
+	}
+	else
+	{
+		printk("failed read smax\n");
+	}
+	/*timestamp */
+	if (ParseRxData(ucConfigData, "TS", usPayloadLen, &ucbuff2))
+	{
+		SetRtcTime(ucbuff2);
+		printk("ts:%d\n\r", ucbuff2);
+	}
+	else
+	{
+		printk("failed read ts\n");
+	}
+
+	/*sleeptime */
+
+	if (ParseRxData(ucConfigData, "Sleep", usPayloadLen, &ucbuff2))
+	{
+		SetSleepTime(ucbuff2);
+		printk("sleep:%d\n\r", ucbuff2);
+	}
+	else
+	{
+		printk("failed read ts\n");
+	}
+}
+
+/**
+ * 
+*/
+void SetConfigStatus(bool bStatus)
+{
+	bConfig = bStatus;
+	if (!bConfig)
+	{
+		memset(ucConfigData, 0, sizeof(ucConfigData));
+	}
+	else
+	{
+		printk("INFO:Config Set\n\r");
+	}
+}
+
+bool GetConfigStatus()
+{
+	return bConfig;
+}
+
+/**
  * @brief Charcteristics Write callback
  * @param bt_conn - Connection handle
  * @param attr - GATT attributes
@@ -84,17 +236,8 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 						  const void *buf, uint16_t len, uint16_t offset,
 						  uint8_t flags)
 {
-	uint8_t *value = attr->user_data;
-	char ucbuff[1024];
-	_sFenceData *psFenceData = NULL;
-	uint32_t ucbuff2;
-	double dBuf = 0.0;
-	uint16_t uPayloadLen = 0;
-	uint8_t ucIdx = 0;
-	char *cSplitStr = NULL;
-
-	static uint8_t coordcount;
-	double latitudeArray[4];
+	//uint8_t *value = attr->user_data;
+	printk("INFO:Offset = %d\n\r", offset);
 
 	if (offset + len > VND_MAX_LEN)
 	{
@@ -102,122 +245,8 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 		return BT_GATT_ERR(BT_ATT_ERR_INVALID_OFFSET);
 	}
 
-	memcpy(value + offset, buf, len);
-
-	memcpy(ucConfigData2, value, len);
-	uPayloadLen = ucConfigData2[1];
-	printk("Written Data: %s\n\r", (char *)value);
-	printk("len%d\n", len);
-	printk("payl%d\n", uPayloadLen);
-	memset(ucbuff, 0, 150);
-
-	/*coordinate count*/
-
-	if (ParseRxData(ucConfigData2, "cc", len, &ucbuff2))
-	{
-		if (len)
-		{
-			printk("..cc:%d\n\r", ucbuff2);
-			SetFenceCoordCount(ucbuff2);
-		}
-	}
-	else
-	{
-		printk("failed read cc\n");
-	}
-
-	/*SoG value max threshold */
-
-	if (ParseRxData(ucConfigData2, "Speed", len, &ucbuff2))
-	{
-		if (len)
-		{
-			SetSogMax(ucbuff2);
-			printk("..smax:%d\n\r", ucbuff2);
-		
-		}
-	}
-	else
-	{
-		printk("failed read smax\n");
-	}
-	/*timestamp */
-	if (ParseRxData(ucConfigData2, "TS", len, &ucbuff2))
-	{
-		if (len)
-		{
-			SetRtcTime(ucbuff2);
-			printk("..ts:%d\n\r", ucbuff2);
-		}
-	}
-	else
-	{
-		printk("failed read ts\n");
-	}
-
-	/*sleeptime */
-
-	if (ParseRxData(ucConfigData2, "Sleep", len, &ucbuff2))
-	{
-		if (len)
-		{
-			SetSleepTime(ucbuff2);
-			printk(".st:%d\n\r", ucbuff2);
-		}
-	}
-	else
-	{
-		printk("failed read ts\n");
-	}
-
-	/*parsing array of strings */
-	if (ParseArray(ucConfigData2, "lat", len, ucbuff)) // for lattitude
-	{
-		printk("ParseArray\n");
-		printk("\n\rlat: %s", ucbuff);
-		psFenceData = GetFenceTable();
-		cSplitStr = strtok(ucbuff, ",");
-		while (cSplitStr != NULL)
-		{
-			psFenceData->dLatitude = atof(cSplitStr);
-			psFenceData++;
-			cSplitStr = strtok(NULL, ",");
-		}
-
-		bFenceLat = true;                 //lat array parse sucess flag
-	}
-	else
-	{
-		printk("Failed to read lt\n");
-	}
-
-	if (ParseArray(ucConfigData2, "lon", len, ucbuff)) // for longitude
-	{
-		printk("ParseArray\n");
-		printk("\n\rlon: %s", ucbuff);
-		psFenceData = GetFenceTable(); //!
-		cSplitStr = strtok(ucbuff, ",");
-		while (cSplitStr != NULL)
-		{
-
-			psFenceData->dLongitude = atof(cSplitStr);
-			psFenceData++;
-			cSplitStr = strtok(NULL, ",");
-		}
-		bFenceLon = true;
-	}
-
-	if (bFenceLat && bFenceLon)
-	{
-		bFenceStatus = true;
-	}
-
-	psFenceData = GetFenceTable();
-	for (ucIdx = 0; ucIdx < 4; ucIdx++)
-	{
-		printk("Lat[%d]: %lf Lon[%d]: %lf\n\r", ucIdx, psFenceData->dLatitude, ucIdx, psFenceData->dLongitude);
-		psFenceData++;
-	}
+	memcpy(ucConfigData, buf, len);
+	SetConfigStatus(true);
 
 	return len;
 }
@@ -281,7 +310,7 @@ BT_GATT_SERVICE_DEFINE(VisenseService,
 					   BT_GATT_CHARACTERISTIC(&sConfigChara.uuid,
 											  BT_GATT_CHRC_NOTIFY | BT_GATT_CHRC_WRITE,
 											  BT_GATT_PERM_READ | BT_GATT_PERM_WRITE,
-											  CharaRead, CharaWrite, ucConfigData2),
+											  CharaRead, CharaWrite, ucSensorData),
 					   BT_GATT_CCC(BleConfigDataNotify, BT_GATT_PERM_READ | BT_GATT_PERM_WRITE),
 					   BT_GATT_CHARACTERISTIC(&sHistoryChara.uuid,
 											  BT_GATT_CHRC_NOTIFY,
@@ -300,7 +329,52 @@ void SetFileSystem(struct nvs_fs *fs)
 }
 
 /**
+ * @brief MTU exchange callback
+ * @param conn 	  : Connection handle
+ * @param att_err : Error code on MTU exchange
+ * @param params  : Exchange params
+ * @return None
+*/
+static void MTUExchangeCb(struct bt_conn *conn, uint8_t att_err,
+    					struct bt_gatt_exchange_params *params)
+{
+    if (att_err)
+    {
+        printk("\n\rERR:MTU exchange returned with error code %d\n\r", att_err);
+    }
+    else
+    {
+        printk("\n\rINFO:MTU sucessfully set to %d\n\r", CONFIG_BT_L2CAP_TX_MTU);
+    }
+}
+
+/**
+ * @brief Initiate MTU exchange from peripheral side
+ * @param conn  : connection handle
+ * @return None
+*/
+static void InitiateMTUExcahnge(struct bt_conn *conn)
+{
+    int err;
+    static struct bt_gatt_exchange_params exchange_params;
+    exchange_params.func = MTUExchangeCb;
+
+    err = bt_gatt_exchange_mtu(conn, &exchange_params);
+    if (err)
+    {
+        printk("\n\rERR:MTU exchange failed (err %d)\n\r", err);
+    }
+    else
+    {
+        printk("\n\rINFO:MTU exchange pending ...\n\r");
+    }
+}
+
+/**
  * @brief Connect callabcak
+ * @param conn : Connection handle
+ * @param err  : error code/return code on connection
+ * @return None
  */
 static void connected(struct bt_conn *conn, uint8_t err)
 {
@@ -314,10 +388,15 @@ static void connected(struct bt_conn *conn, uint8_t err)
 		bt_conn_le_data_len_update(conn, BT_LE_DATA_LEN_PARAM_MAX);
 		bConnected = true;
 	}
+
+	InitiateMTUExcahnge(conn);
 }
 
 /**
  * @brief Disconnect callback
+ * @param conn   : Connection handle
+ * @param reason : return code on disconnection
+ * @return None
  */
 static void disconnected(struct bt_conn *conn, uint8_t reason)
 {
@@ -536,7 +615,7 @@ void SetFenceConfigStatus(bool bStatus)
  * @param ucCount : Coordinate count
  * @return None
 */
-void SetFenceCoordCount(uint8_t ucCount)
+void SetFenceCoordCount(int ucCount)
 {
 	ucCoordCount = ucCount;
 }
@@ -546,7 +625,16 @@ void SetFenceCoordCount(uint8_t ucCount)
  * @param None
  * @return Fence coordinate count
 */
-uint8_t GetCoordCount()
+int GetCoordCount()
 {
+	_sConfigData *psConfigData = NULL;
+
+	psConfigData = GetConfigData();
+
+	if (psConfigData)
+	{
+		ucCoordCount = psConfigData->ucCoordCount;
+	}
+	
 	return ucCoordCount;
 }

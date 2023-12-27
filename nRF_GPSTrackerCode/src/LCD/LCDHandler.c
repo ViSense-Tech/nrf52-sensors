@@ -18,9 +18,9 @@
 /****************************TYPEDEFS********************************/
 
 /****************************GLOBALS*********************************/
-static const struct device *psI2CHandle = DEVICE_DT_GET(DT_NODELABEL(i2c0));
 unsigned char RS = 0;
 unsigned char BackLight_State = LCD_NOBACKLIGHT;
+struct device *psI2CHandle = DEVICE_DT_GET(DT_NODELABEL(i2c0));
 
 
 /***************************FUNCTION DECLARATION*********************/
@@ -127,7 +127,8 @@ void WriteCharacterToLCD(char Data)
 */
 void WriteStringToLCD(char* Str)
 {
-    for(int i=0; Str[i]!='\0'; i++)
+  int i;
+    for(i=0; Str[i]!='\0'; i++)
        WriteCharacterToLCD(Str[i]); 
 }
 
@@ -199,5 +200,9 @@ struct device *GetI2CDevice()
   if (psI2CHandle)
   {
       return psI2CHandle;
+  }
+  else
+  {
+    return NULL;
   }
 }
