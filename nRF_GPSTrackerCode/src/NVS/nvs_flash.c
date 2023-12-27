@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 /**************************************************************GLOBAL VARIABLES*********************************/
-static _sConfigData sConfigData;
+static _sConfigData sConfigData = {0};
 #ifdef MX66FLASH_ENABLED
 static const struct device *const flash_dev = DEVICE_DT_GET(DT_NODELABEL(mx66l1g));
 #else

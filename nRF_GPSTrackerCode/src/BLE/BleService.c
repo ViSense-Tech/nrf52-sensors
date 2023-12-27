@@ -87,8 +87,9 @@ static void ParseFenceCoordinate(char *pcKey)
 {
 	char *cSplitStr = NULL;
 	char ucbuff[300];
-	_sFenceData *psFenceData = NULL;
+	double dLat = 0.0;
 
+	_sFenceData *psFenceData = NULL;
 	/*parsing array of strings */
 	psFenceData = GetFenceTable();
 
@@ -108,7 +109,8 @@ static void ParseFenceCoordinate(char *pcKey)
 		cSplitStr = strtok(ucbuff, ",");
 		while (cSplitStr != NULL)
 		{
-			psFenceData->dLatitude = atof(cSplitStr);
+			dLat = atof(cSplitStr);
+			memcpy(&psFenceData->dLatitude, &dLat, sizeof(double));
 			psFenceData++;
 			cSplitStr = strtok(NULL, ",");
 		}
@@ -121,8 +123,8 @@ static void ParseFenceCoordinate(char *pcKey)
 
 		while (cSplitStr != NULL)
 		{
-
-			psFenceData->dLongitude = atof(cSplitStr);
+			dLat = atof(cSplitStr);
+			memcpy(&psFenceData->dLatitude, &dLat, sizeof(double));
 			psFenceData++;
 			cSplitStr = strtok(NULL, ",");
 		}
@@ -130,7 +132,7 @@ static void ParseFenceCoordinate(char *pcKey)
 		bFenceLon = true;		
 	}
 
-	free(psFenceData);
+	printk("Fence update success\n\r");
 }
 
 /**

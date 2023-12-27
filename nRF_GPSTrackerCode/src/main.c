@@ -7,7 +7,6 @@
 
 /************************INCLUDES***************************/
 #include "GPSHandler.h"
-#include "PMIC/PMICHandler.h"
 #include "LCDHandler.h"
 #include "Accelerometer.h"
 #include "BleHandler.h"
@@ -17,6 +16,9 @@
 #include "nvs_flash.h"
 #include "SystemHandler.h"
 #include "TimerHandler.h"
+#ifdef PMIC_ENABLED
+#include "PMIC/PMICHandler.h"
+#endif
 
 /*************************MACROS****************************/
 #define TICK_RATE 32768
@@ -52,6 +54,7 @@ static struct nvs_fs sConfigFs;
 static uint32_t ulFlashidx = 0; // flash idx init
 static cJSON *pMainObject = NULL;
 static char *cJsonBuffer = NULL;
+
 
 /*************************FUNTION DEFINITION******************************/
 /**
@@ -146,8 +149,9 @@ static void UpdateTimeAndDiagData()
 	float fSOC = 0.0;
 #endif	
 	int *pDiagData = NULL;
+#ifdef PMIC_ENABLED	
 	char cBuffer[30];
-
+#endif
 	pucAdvBuffer = GetAdvertisingBuffer();
 	pDiagData = GetDiagnosticData();
 
