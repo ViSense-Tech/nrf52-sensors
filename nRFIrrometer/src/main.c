@@ -457,7 +457,7 @@ static bool InitAllModules()
        InitTimer();
        k_sleep(K_TICKS(100));
 
-       InitDataPartition();
+    //    InitDataPartition();
 
        if (!InitBle())
        {
@@ -485,7 +485,7 @@ static bool CheckForConfigChange()
     uFlashIdx = GetFlashCounter();
     pDiagData = GetDiagData();
 
-    nvs_initialisation(&sConfigFs, CONFIG_DATA_FS); 
+    // nvs_initialisation(&sConfigFs, CONFIG_DATA_FS); 
     k_msleep(100);
     ulRetCode = readJsonToFlash(&sConfigFs, 0, 0, (char *)&sConfigData, sizeof(sConfigData)); // read config params from the flash
     if(sConfigData.flag == 0) 

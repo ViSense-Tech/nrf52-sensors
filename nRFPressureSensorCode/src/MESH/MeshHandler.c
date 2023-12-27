@@ -23,6 +23,7 @@ bool bSupervisorConnected = false;
 struct bt_mesh_msg_ctx sSupervisorCtx;
 static uint8_t ucIdx = 0;
 bool bSndStat = true;
+uint16_t ulRxCount = 0;
 /*True if complete message send 
 else false*/
 static bool bServerPayloadSendStatus = false;
@@ -143,6 +144,7 @@ static int handle_message(struct bt_mesh_model *model, struct bt_mesh_msg_ctx *c
     char *MeshPayload;
 	MeshPayload = extract_msg(buf);
 	printk("Paylaod From server...................................: %s\n",MeshPayload);
+    printk("\n\r Received Paylod count : %d\n\r", ++ulRxCount);
     
     if (IsNotificationenabled())
     {
@@ -269,33 +271,44 @@ bool SendMeshPayloadToSupervisor(struct bt_mesh_msg_ctx *ctx)
 {   
     bool bRetVal = false;
 	bool bFullDataRead = false;
-	char NotifyBuf[ADV_BUFF_SIZE];
+	char NotifyBuf[260];
 	int nRetVal = 0;
-	int uReadCount = 0;
+	int uReadCount = 1;
 	uint32_t *pulWritePos = NULL;
+    uint32_t ulFlshIdx = 0;
     uint32_t uFlashCounter = 0;
-    struct net_buf_simple *msg = NET_BUF_SIMPLE(200);
+    
+    // BT_MESH_MODEL_BUF_DEFINE(msg, RECIEVE_OPCODE_VISENSE, 256);
     
     pulWritePos = GetFlashCounter();
-
-    bt_mesh_model_msg_init(msg, RECIEVE_OPCODE_VISENSE);
-
-	if (ucIdx > *pulWritePos)
-	{
-		uFlashCounter = ucIdx - *pulWritePos;
-	}
-
+    ulFlshIdx = *pulWritePos;
     bSndStat = false;
+
+    printk("\n\rcontext net_idex is : %x",ctx->net_idx);
+    printk("\n\rcontext app_idx is : %x",ctx->app_idx);
+    printk("\n\rcontext addr is : %x",ctx->addr);
+    printk("\n\rcontext send_rel is : %d",ctx->send_rel);
+    ctx->send_rel = true;
+
+	// if (ucIdx > ulFlshIdx)
+	// {
+	// 	uFlashCounter = ucIdx - ulFlshIdx;
+	// }
+
+    bUnCompleteSendStatus = true;
 
 	while(ucIdx <= NUMBER_OF_ENTRIES)
 	{	
+        struct net_buf_simple *msg = NET_BUF_SIMPLE(BT_MESH_TX_SDU_MAX);
+        bt_mesh_model_msg_init(msg, RECIEVE_OPCODE_VISENSE);
 		// if (!IsConnected())
 		// {
 		// 	break;
 		// }
 		
-		memset(NotifyBuf, 0, ADV_BUFF_SIZE);
+		memset(NotifyBuf, 0, 260);
 		uReadCount = readJsonFromExternalFlash(NotifyBuf, ucIdx, WRITE_ALIGNMENT);
+        // strcpy(NotifyBuf, "{Test for mesh}");
 
 		printk("\nId: %d, Ble_Stored_Data: %s\n",ucIdx, NotifyBuf);
 		// if (uReadCount == true)
@@ -308,7 +321,7 @@ bool SendMeshPayloadToSupervisor(struct bt_mesh_msg_ctx *ctx)
 			// bFullDataRead = true;
 			break;
 		}
-		k_msleep(1000);
+		k_msleep(100);
 
 		if (uReadCount > 0)
 		{
@@ -322,6 +335,7 @@ bool SendMeshPayloadToSupervisor(struct bt_mesh_msg_ctx *ctx)
             else
             {   
                 printk("Sent  message\n");
+
             } 
 			if (nRetVal < 0)
 			{
@@ -330,17 +344,17 @@ bool SendMeshPayloadToSupervisor(struct bt_mesh_msg_ctx *ctx)
 			
 		}
 		ucIdx++;
-		uFlashCounter++;
+		// uFlashCounter++;
 		if (ucIdx == NUMBER_OF_ENTRIES)
 		{
 			ucIdx = 0;
 		}
-		if (*pulWritePos > NUMBER_OF_ENTRIES )
+		if (ulFlshIdx > NUMBER_OF_ENTRIES )
 		{
 			bFullDataRead = true;
 			break;	
 		}
-
+        // net_buf_simple_remove_mem(&msg, msg.len);
     }
 
     if (bFullDataRead == true) 
@@ -357,7 +371,7 @@ bool SendMeshPayloadToSupervisor(struct bt_mesh_msg_ctx *ctx)
         bUnCompleteSendStatus = false;
         *pulWritePos = 0;
     }
-    bSndStat = false;
+    bSndStat = true;
     return bRetVal;
     
       

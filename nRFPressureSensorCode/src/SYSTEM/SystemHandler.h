@@ -14,7 +14,7 @@
 
 /***************************************MACROS**********************************/
 #define ALIVE_TIME         30 //Time the device will be active after a sleep time(in seconds)
-#define SLEEP_TIME         30
+#define SLEEP_TIME         180
 #define TICK_RATE          32768
 
 /***************************************TYPEDEFS*********************************/

@@ -24,7 +24,7 @@
 /*Number of entries in one min to the flash*/
 #define NUMBER_OF_ENTRIES_IN_MINUTE 43
 /*write alignment of flash*/
-#define WRITE_ALIGNMENT 128
+#define WRITE_ALIGNMENT 256
 /*Number of minute in hour*/
 #define MINUTE_IN_HOUR 60
 /* Number of entries to the flash*/

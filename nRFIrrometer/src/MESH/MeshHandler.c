@@ -23,6 +23,7 @@ bool bSupervisorConnected = false;
 struct bt_mesh_msg_ctx sSupervisorCtx;
 static uint16_t ucIdx = 0;
 bool bSndStat = true;
+uint16_t ulRxCount = 0;
 /*True if complete message send 
 else false*/
 static bool bServerPayloadSendStatus = false;
@@ -138,6 +139,7 @@ static int handle_message(struct bt_mesh_model *model, struct bt_mesh_msg_ctx *c
 	MeshPayload = extract_msg(buf);
 
 	printk("Paylaod From server...................................: %s\n",MeshPayload);
+    printk("\n\r Received Paylod count : %d\n\r", ++ulRxCount);
     
     if (IsNotificationenabled())
     {
@@ -249,47 +251,40 @@ bool SendMeshPayloadToSupervisor(struct bt_mesh_msg_ctx *ctx)
 {   
     bool bRetVal = false;
 	bool bFullDataRead = false;
-	char NotifyBuf[260];
+	char NotifyBuf[WRITE_ALIGNMENT];
 	int nRetVal = 0;
-	int uReadCount = 1;
+	int uReadCount = 0;
 	uint32_t *pulWritePos = NULL;
-    uint32_t ulFlshIdx = 0;
     uint32_t uFlashCounter = 0;
     
-    // BT_MESH_MODEL_BUF_DEFINE(msg, RECIEVE_OPCODE_VISENSE, 256);
-    
     pulWritePos = GetFlashCounter();
-    ulFlshIdx = *pulWritePos;
     bSndStat = false;
 
-    
+    printk("\n\rcontext net_idex is : %x",ctx->net_idx);
+    printk("\n\rcontext app_idx is : %x",ctx->app_idx);
+    printk("\n\rcontext addr is : %x",ctx->addr);
+    printk("\n\rcontext send_rel is : %d",ctx->send_rel);
 
-	// if (ucIdx > ulFlshIdx)
-	// {
-	// 	uFlashCounter = ucIdx - ulFlshIdx;
-	// }
+    ctx->send_rel = true;
+
+
+
+	if (ucIdx > *pulWritePos)
+	{
+		uFlashCounter = ucIdx - *pulWritePos;
+	}
 
     bUnCompleteSendStatus = true;
 
-	while(ucIdx <= 247)
+	while(ucIdx <= NUMBER_OF_ENTRIES)
 	{	
         struct net_buf_simple *msg = NET_BUF_SIMPLE(BT_MESH_TX_SDU_MAX);
         bt_mesh_model_msg_init(msg, RECIEVE_OPCODE_VISENSE);
-		// if (!IsConnected())
-		// {
-		// 	break;
-		// }
 		
-		memset(NotifyBuf, 0, 260);
+		memset(NotifyBuf, 0, WRITE_ALIGNMENT);
 		uReadCount = readJsonFromExternalFlash(NotifyBuf, ucIdx, WRITE_ALIGNMENT);
-        // strcpy(NotifyBuf, "{Test for mesh}");
-
 		printk("\nId: %d, Ble_Stored_Data: %s\n",ucIdx, NotifyBuf);
-		// if (uReadCount == true)
-		// {
-		// 	bFullDataRead = true;
-		// 	break;
-		// }
+
 		if (NotifyBuf[0] != 0x7B)
 		{
 			// bFullDataRead = true;
@@ -303,6 +298,7 @@ bool SendMeshPayloadToSupervisor(struct bt_mesh_msg_ctx *ctx)
             if (bt_mesh_model_send(elements->vnd_models, ctx, msg, NULL, NULL) != 0) 
             {
                 printk("Failed to send  message\n");
+                // k_msleep(2000);
                 break;
 
             }
@@ -318,12 +314,12 @@ bool SendMeshPayloadToSupervisor(struct bt_mesh_msg_ctx *ctx)
 			
 		}
 		ucIdx++;
-		// uFlashCounter++;
+		uFlashCounter++;
 		if (ucIdx == NUMBER_OF_ENTRIES)
 		{
 			ucIdx = 0;
 		}
-		if (ulFlshIdx > NUMBER_OF_ENTRIES )
+		if (uFlashCounter > NUMBER_OF_ENTRIES )
 		{
 			bFullDataRead = true;
 			break;	
