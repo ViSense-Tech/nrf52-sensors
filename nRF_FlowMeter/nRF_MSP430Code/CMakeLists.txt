@@ -11,6 +11,7 @@ target_include_directories(app PRIVATE src/Uart
                                         src/RTC
                                         src/SYSTEM
                                         src/Timer
+                                        src/PMIC
                                         src/Flash)
                                         
 target_sources(app PRIVATE  src/Uart/UartHandler.c
@@ -22,4 +23,5 @@ target_sources(app PRIVATE  src/Uart/UartHandler.c
                             src/SYSTEM/SystemHandler.c
                             src/Timer/TimerHandler.c
                             src/Flash/FlashHandler.c
+                            src/PMIC/PMICHandler.c
                             src/main.c)

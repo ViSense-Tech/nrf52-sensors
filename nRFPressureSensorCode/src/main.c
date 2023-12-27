@@ -69,6 +69,9 @@ int main(void)
     cJSON *pMainObject = NULL;
     long long llEpochNow = 0;
     int64_t Timenow = 0;
+#ifdef PMIC_ENABLED  
+    float fSOC=0.0;
+#endif
 
     PrintBanner();
     printk("VISENSE_PRESSURE_FIRMWARE_VERSION: %s\n\r", VISENSE_PRESSURE_SENSOR_FIRMWARE_VERSION);
@@ -152,6 +155,13 @@ int main(void)
             }
         
             AddItemtoJsonObject(&pMainObject, NUMBER, "DIAG", &diagnostic_data, sizeof(uint32_t));
+#ifdef PMIC_ENABLED            
+            PMICUpdate(&fSOC);
+            memset(cbuffer, '\0', sizeof(cbuffer));
+            printk("soc=%f\n\r", fSOC);
+            sprintf(cbuffer,"%d%%", (int)fSOC);
+            AddItemtoJsonObject(&pMainObject, STRING, "Batt", cbuffer, sizeof(float));
+#endif            
             cJsonBuffer = cJSON_Print(pMainObject);
             pucAdvertisingdata[2] = PRESSURE_SENSOR;
             pucAdvertisingdata[3] = (uint8_t)strlen(cJsonBuffer);
@@ -547,6 +557,10 @@ static bool InitAllModules()
             printk("ERROR: Init PM failed\n\r");
             break;
        }
+       
+#ifdef PMIC_ENABLED	       
+       PMICInit();
+#endif       
        InitTimer();
        InitADC();
        k_sleep(K_TICKS(100));

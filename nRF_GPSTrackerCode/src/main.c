@@ -7,6 +7,7 @@
 
 /************************INCLUDES***************************/
 #include "GPSHandler.h"
+#include "PMIC/PMICHandler.h"
 #include "LCDHandler.h"
 #include "Accelerometer.h"
 #include "BleHandler.h"
@@ -141,7 +142,11 @@ static void UpdateTimeAndDiagData()
 {
 	uint8_t *pucAdvBuffer = NULL;
 	long long llEpochTime = 0;
+#ifdef PMIC_ENABLED	
+	float fSOC = 0.0;
+#endif	
 	int *pDiagData = NULL;
+	char cBuffer[30];
 
 	pucAdvBuffer = GetAdvertisingBuffer();
 	pDiagData = GetDiagnosticData();
@@ -154,6 +159,14 @@ static void UpdateTimeAndDiagData()
 	AddItemtoJsonObject(&pMainObject, NUMBER, "DIAG", pDiagData, sizeof(uint32_t));
 	*pDiagData = *pDiagData | GPS_LOC_FAILED;
 	cJsonBuffer = cJSON_Print(pMainObject);
+
+#ifdef PMIC_ENABLED	
+	PMICUpdate(&fSOC);
+	memset(cBuffer, '\0', sizeof(cBuffer));
+	printk("soc=%f\n\r", fSOC);
+	sprintf(cBuffer,"%d%%", (int)fSOC);
+	AddItemtoJsonObject(&pMainObject, STRING, "Batt", cBuffer, sizeof(float));
+#endif	
 
 	pucAdvBuffer[2] = 0x03;
 	pucAdvBuffer[3] = (uint8_t)strlen(cJsonBuffer);
@@ -572,6 +585,9 @@ static bool InitAllModules()
 	{
 		InitLCD();
 		InitTimer();
+#ifdef PMIC_ENABLED		
+		PMICInit();
+#endif		
 
 		if (!InitBle())
 		{

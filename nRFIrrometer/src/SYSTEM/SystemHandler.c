@@ -63,9 +63,15 @@ void EnterSleepMode(int nDuration)
     pAdc = GetADCdevice();
     psSensorExcitePin1 = GetExcitePin1();
     psSensorExcitePin2 = GetExcitePin2();
-    pm_device_action_run(pAdc, PM_DEVICE_ACTION_SUSPEND);
-    pm_device_action_run(psSensorExcitePin1, PM_DEVICE_ACTION_SUSPEND);
-    pm_device_action_run(psSensorExcitePin2, PM_DEVICE_ACTION_SUSPEND);
+
+    if (psSensorExcitePin1 && psSensorExcitePin2 && pAdc)
+    {
+        pm_device_action_run(pAdc, PM_DEVICE_ACTION_SUSPEND);
+        pm_device_action_run(psSensorExcitePin1, PM_DEVICE_ACTION_SUSPEND);
+        pm_device_action_run(psSensorExcitePin2, PM_DEVICE_ACTION_SUSPEND);
+        printf("INFO: Suspended modules\n\r");
+    }
+
     BleStopAdv();
     gpio_pin_set(sSleepStatusLED.port, sSleepStatusLED.pin, 1);
     printk("INFO: Entering Sleep for %dseconds\n\r", nDuration);
@@ -87,9 +93,15 @@ void ExitSleepMode()
     StartAdv();
     psSensorExcitePin1 = GetExcitePin1();
     psSensorExcitePin2 = GetExcitePin2();
-    pm_device_action_run(pAdc, PM_DEVICE_ACTION_RESUME);
-    pm_device_action_run(psSensorExcitePin1, PM_DEVICE_ACTION_RESUME);
-    pm_device_action_run(psSensorExcitePin2, PM_DEVICE_ACTION_RESUME);
+
+    if (psSensorExcitePin1 && psSensorExcitePin2 && pAdc)
+    {
+        pm_device_action_run(pAdc, PM_DEVICE_ACTION_RESUME);
+        pm_device_action_run(psSensorExcitePin1, PM_DEVICE_ACTION_RESUME);
+        pm_device_action_run(psSensorExcitePin2, PM_DEVICE_ACTION_RESUME);
+        printf("INFO: Resumed modules\n\r");
+    }
+
     gpio_pin_set(sSleepStatusLED.port, sSleepStatusLED.pin, 0);
 }
 
