@@ -14,9 +14,11 @@
 #include <zephyr/pm/device.h>
 
 /***************************************MACROS**********************************/
-#define ALIVE_TIME         10 //Time the device will be active after a sleep time(in seconds)
-#define SLEEP_TIME         10
-#define TICK_RATE          32768
+#define ALIVE_TIME              60 //Time the device will be active after a sleep time(in seconds)
+#define SLEEP_TIME              10
+#define TICK_RATE               32768
+#define LIVEDATA_TIMESLOT       TICK_RATE/100
+#define HISTORYDATA_TIMESLOT    TICK_RATE/100
 //#define PMIC_ENABLED //Uncomment this line to enable PMIC functionality
 
 /***************************************TYPEDEFS*********************************/
@@ -29,5 +31,6 @@ uint32_t GetSleepTime();
 void SetSleepTimeSetStataus(bool bStatus);
 bool IsSleepTimeSet();
 void SetSleepTime(uint32_t ulTime);
+uint32_t *GetDiagData();
 
 #endif

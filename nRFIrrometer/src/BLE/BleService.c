@@ -255,7 +255,7 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 		uFlashCounter = ucIdx - ulWritePos;
 	}
 
-	while(ucIdx <= NUMBER_OF_ENTRIES)
+	do
 	{	
 		if (!IsConnected())
 		{
@@ -293,10 +293,7 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 			bFullDataRead = true;
 			break;	
 		}
-		
-		
-		// bRetVal = true;
-	}
+	} while(0);
 	
 	hNotificationEnabled = false;     //history callback set 
 	if (bFullDataRead == true) 
