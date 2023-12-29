@@ -40,7 +40,8 @@
 typedef struct __attribute__((__packed__)) __sConfigData
 {
     long long lastUpdatedTime;
-    int ucCoordCount;
+    float fSpeedLimit;
+    int nCoordCount;
     _sFenceData FenceData[6];
     uint32_t flashIdx;
     uint32_t sleepTime;

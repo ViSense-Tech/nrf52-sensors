@@ -47,7 +47,7 @@ static bool hNotificationEnabled = false;
 struct nvs_fs *FileSys;
 static bool bConfigNotifyEnabled = false;
 static bool bFenceStatus = false;
-static int ucCoordCount;
+// static int ucCoordCount;
 static bool bConfig = false;
 static uint16_t usPayloadLen = 0;
 
@@ -205,7 +205,9 @@ void ParseRcvdData()
 }
 
 /**
- * 
+ * @brief Setting Config Status 
+ * @param bStatus : Config set status
+ * @return None
 */
 void SetConfigStatus(bool bStatus)
 {
@@ -238,7 +240,6 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 						  const void *buf, uint16_t len, uint16_t offset,
 						  uint8_t flags)
 {
-	//uint8_t *value = attr->user_data;
 	printk("INFO:Offset = %d\n\r", offset);
 
 	if (offset + len > VND_MAX_LEN)
@@ -470,12 +471,13 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 	int nRetVal = 0;
 	int uReadCount = 0;
 	uint32_t uFlashCounter = 0;
+
 	if (ucIdx > ulWritePos)
 	{
 		uFlashCounter = ucIdx - ulWritePos;
 	}
 
-	while(ucIdx <= NUMBER_OF_ENTRIES)
+	do
 	{	
 		if (!IsConnected())
 		{
@@ -516,9 +518,8 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 			break;	
 		}
 		
-	}
+	} while (0);
 	
-	hNotificationEnabled = false;     //history callback set 
 	if (bFullDataRead == true) 
 	{
 		if(!EraseExternalFlash(SECTOR_COUNT))
@@ -619,7 +620,14 @@ void SetFenceConfigStatus(bool bStatus)
 */
 void SetFenceCoordCount(int ucCount)
 {
-	ucCoordCount = ucCount;
+	_sConfigData *psConfigData = NULL;
+
+	psConfigData = GetConfigData();
+
+	if (psConfigData)
+	{
+		psConfigData->nCoordCount = ucCount;
+	}
 }
 
 /**
@@ -630,13 +638,18 @@ void SetFenceCoordCount(int ucCount)
 int GetCoordCount()
 {
 	_sConfigData *psConfigData = NULL;
+	int nCoordCount = 0;
 
 	psConfigData = GetConfigData();
 
 	if (psConfigData)
 	{
-		ucCoordCount = psConfigData->ucCoordCount;
+		nCoordCount = psConfigData->nCoordCount;
+	}
+	else
+	{
+		printk("ERR: Getting  coord count from config failed\n\r");
 	}
 	
-	return ucCoordCount;
+	return nCoordCount;
 }

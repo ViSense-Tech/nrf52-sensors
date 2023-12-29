@@ -16,8 +16,6 @@
 
 /***********************************FUNCTION DEFINITION*******************/
 
-static _sConfigData *psConfigData = NULL;
-
 /**
  * @brief  : Get Fence table
  * @param  : None
@@ -25,6 +23,7 @@ static _sConfigData *psConfigData = NULL;
 */
 _sFenceData *GetFenceTable()
 {
+    _sConfigData *psConfigData = NULL;
     psConfigData = GetConfigData();
 
     if (!psConfigData)
@@ -44,7 +43,15 @@ _sFenceData *GetFenceTable()
 */
 void SetFenceTable(_sFenceData *sFenceTable)
 {
-    memcpy(&psConfigData->FenceData[0], sFenceTable, sizeof(psConfigData->FenceData));
+    _sConfigData *psConfigData = NULL;
+    psConfigData = GetConfigData();
+
+    if (psConfigData)
+    {
+        memcpy(&psConfigData->FenceData[0], sFenceTable,
+                                             sizeof(psConfigData->FenceData));
+    }
+
 }
 
 /**
@@ -59,6 +66,7 @@ bool AddItemtoJsonObject(cJSON **pcJsonHandle, _eJsonDataType JsondataType, cons
                          void *pcValue, uint8_t ucLen)
 {
     uint8_t ucIndex = 0;
+    cJSON *pcData = NULL;
 
     bool bRetVal = false;
 
@@ -78,8 +86,8 @@ bool AddItemtoJsonObject(cJSON **pcJsonHandle, _eJsonDataType JsondataType, cons
         case OBJECT:
             break;
         case ARRAY:
-            cJSON *pcData = NULL;
-            pcData = cJSON_AddArrayToObject(*pcJsonHandle, "data");
+
+            pcData = cJSON_AddArrayToObject(*pcJsonHandle, pcKey);
 
             if (pcData)
             {
@@ -162,15 +170,14 @@ bool ParseArray(uint8_t *pData, const char *pckey, uint16_t ucLen, char *pucData
 
         if (root != NULL)
         {
-           // printk("Reaching before parsing\n\r");
+
             RxData = cJSON_GetObjectItem(root, pckey);
-           // printk("Reaching after parsing\n\r");
 
             if (RxData && cJSON_IsArray(RxData))
             {
-               // printk("Reaching before arrsize\n\r");
+
                 arraySize = cJSON_GetArraySize(RxData);
-              //  printk("Reaching after arrsize\n\r");
+
                 for (int i = 0; i < arraySize; i++)
                 {
                     arrayItem = cJSON_GetArrayItem(RxData, i);

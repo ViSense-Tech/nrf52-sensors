@@ -31,24 +31,21 @@ static const struct battery_model battery_model =
     #include "battery_model.inc"
 };
 
-static const struct device *pDevHandle = DEVICE_DT_GET(DT_NODELABEL(npm1300_ek_charger));
+static struct device *pDevHandle = DEVICE_DT_GET(DT_NODELABEL(npm1300_ek_charger));
 /***************************************FUNCTION DECLARTAION*********************/
 
 static int read_sensors(const struct device *pDevHandle, float *voltage, float *current, float *temp)
 {
 	struct sensor_value value;
 	int ret;
-	int retry =3;
 
 
-		ret = sensor_sample_fetch(pDevHandle);
-		if (ret < 0) {
-			return ret;
-		}
+	ret = sensor_sample_fetch(pDevHandle);
+	if (ret < 0) 
+	{
+		return ret;
+	}
 		
-	
-
-
 	sensor_channel_get(pDevHandle, SENSOR_CHAN_GAUGE_VOLTAGE, &value);
 	*voltage = (float)value.val1 + ((float)value.val2 / 1000000);
 
@@ -101,11 +98,8 @@ int PMICUpdate(float *pfSOC)
 	float current;
 	float temp;
 	float soc;
-	float tte;
-	float ttf;
 	float delta;
 	int ret;
-	int64_t uptime;
 
 	ret = read_sensors(pDevHandle, &voltage, &current, &temp);
 	if (ret < 0) {
@@ -115,11 +109,9 @@ int PMICUpdate(float *pfSOC)
 	delta = (float) k_uptime_delta(&ref_time) / 1000.f;
 
 	soc = nrf_fuel_gauge_process(voltage, current, temp, delta, NULL);
-	// tte = nrf_fuel_gauge_tte_get();
-	// ttf = nrf_fuel_gauge_ttf_get(-max_charge_current, -term_charge_current);
 
 	printk("V: %.3f, I: %.3f, T: %.2f, ", voltage, current, temp);
-	printk("SoC: %.2f, TTE: %.0f\n", soc);
+	printk("SoC: %.2f", soc);
 	*pfSOC = soc;
 
 	return 0;
