@@ -147,7 +147,7 @@ static bool DoTimedDataNotification(cJSON *pMainObject)
 
     llTimeNow = sys_clock_tick_get();
 
-    while(sys_clock_tick_get() - llTimeNow < (LIVEDATA_TIMESLOT * TICK_RATE))
+    while(sys_clock_tick_get() - llTimeNow < (LIVEDATA_TIMESLOT))
     {
         if (!SendLiveDataToApp(pMainObject))
         {
@@ -158,7 +158,7 @@ static bool DoTimedDataNotification(cJSON *pMainObject)
 
     llTimeNow = sys_clock_tick_get();
 
-    while(sys_clock_tick_get() - llTimeNow < (HISTORYDATA_TIMESLOT * TICK_RATE))
+    while(sys_clock_tick_get() - llTimeNow < (HISTORYDATA_TIMESLOT))
     {   
         if (!SendHistoryDataToApp(cJsonBuffer, strlen(cJsonBuffer)))
         {
@@ -377,7 +377,7 @@ static bool UpdateDiagInfoForSensors(uint8_t ucChannel, int *pnCBValue)
 
     pDiagData = GetDiagData();
 
-    if (!pnCBValue)
+    if (!pnCBValue || !pDiagData)
     {
         return bRetVal;
     }
@@ -426,6 +426,8 @@ static bool UpdateDiagInfoForSensors(uint8_t ucChannel, int *pnCBValue)
         default:
                 break;
     }
+
+    return bRetVal;
 
 
 }

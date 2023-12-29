@@ -17,7 +17,7 @@
 #include <zephyr/bluetooth/gatt.h>
 
 /***************************************MACROS*******************************/
-#define ADV_BUFF_SIZE           (247)
+#define ADV_BUFF_SIZE           (255)
 #define BT_UUID_CUSTOM_SERVICE_VAL \
 	BT_UUID_128_ENCODE(0xb484afa8, 0x5dee, 0x11ee, 0x8c99, 0x0242ac120002)
 //#define EXT_ADV               /*Uncomment this line to enable extended advertising*/

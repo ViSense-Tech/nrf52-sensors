@@ -250,6 +250,13 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 	char NotifyBuf[NOTIFY_BUFFER_SIZE];
 	int nRetVal = 0;
 	uint32_t uFlashCounter = 0;
+	
+	if (ulWritePos == 0)
+	{
+		printk("WARN: No data available\n\r");
+		return bRetVal;
+	}
+	
 	if (ucIdx > ulWritePos)
 	{
 		uFlashCounter = ucIdx - ulWritePos;
@@ -270,7 +277,7 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 			bFullDataRead = true;
 			break;
 		}
-		k_msleep(100);
+		// k_msleep(100);
 
 		if (nRetVal)
 		{
@@ -295,7 +302,7 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 		}
 	} while(0);
 	
-	hNotificationEnabled = false;     //history callback set 
+	// hNotificationEnabled = false;     //history callback set 
 	if (bFullDataRead == true) 
 	{
 		if(!EraseExternalFlash(SECTOR_COUNT))
