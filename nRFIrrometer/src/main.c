@@ -428,8 +428,6 @@ static bool UpdateDiagInfoForSensors(uint8_t ucChannel, int *pnCBValue)
     }
 
     return bRetVal;
-
-
 }
 
 /**

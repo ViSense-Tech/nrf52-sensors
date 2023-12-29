@@ -277,7 +277,6 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 			bFullDataRead = true;
 			break;
 		}
-		// k_msleep(100);
 
 		if (nRetVal)
 		{
@@ -302,7 +301,6 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 		}
 	} while(0);
 	
-	// hNotificationEnabled = false;     //history callback set 
 	if (bFullDataRead == true) 
 	{
 		if(!EraseExternalFlash(SECTOR_COUNT))
