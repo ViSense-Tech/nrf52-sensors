@@ -187,13 +187,13 @@ static void connected(struct bt_conn *conn, uint8_t err)
     {
 		bt_conn_le_data_len_update(conn, BT_LE_DATA_LEN_PARAM_MAX);
 		bConnected = true;
-		printk("\n\r\n\r\n\rConnected\n\r\n\r\n\r");
+		printk("INFO:Connected\n\r");
 	}
 }
 
 static void disconnected(struct bt_conn *conn, uint8_t reason)
 {
-	printk("\n\r\n\r\n\rDisconnected (reason 0x%02x)\n\r\n\r\n\r", reason);
+	printk("INFO:Disconnected (reason 0x%02x)\n\r", reason);
 	bConnected = false;
 }
 
