@@ -314,9 +314,11 @@ bool ReadLocationData(char *pcLocation)
             {
                 //strcpy(pcLocation, "xxxxxxxxx,N,xxxxxxxxxx,E");
             }
+
+            bRetVal = true;
         }
-        bRxCmplt = false;
-        bRetVal = true;
+
+         bRxCmplt = false;
     }
 
     return bRetVal;
@@ -410,9 +412,8 @@ bool ReadSOGData(float *pfSOG)
                 {
                     *pfSOG = 0.00;
                 }
-            }
+            }          
         }
-
         bRxCmplt = false;
     }
 

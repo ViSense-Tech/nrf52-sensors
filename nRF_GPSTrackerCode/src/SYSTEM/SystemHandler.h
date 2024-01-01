@@ -16,8 +16,8 @@
 #define ALIVE_TIME              60 //Time the device will be active after a sleep time(in seconds)
 #define SLEEP_TIME              10
 #define TICK_RATE               32768
-#define LIVEDATA_TIMESLOT       TICK_RATE/10
-#define HISTORYDATA_TIMESLOT    TICK_RATE/10
+#define LIVEDATA_TIMESLOT       TICK_RATE/100
+#define HISTORYDATA_TIMESLOT    TICK_RATE/100
 //#define SLEEP_ENABLE //Uncomment this line to enable sleep
 //#define PMIC_ENABLED //Uncomment this line to enable PMIC functionality
 

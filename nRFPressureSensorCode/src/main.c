@@ -183,10 +183,6 @@ int main(void)
                 StartAdvertising();
             }
 #endif
-            else
-            {
-                //NO OP
-            }
             
             if ((sConfigData.flag & (1 << 4))) //check whether config data is read from the flash / updated from mobile
             {

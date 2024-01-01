@@ -23,8 +23,8 @@
 
 /*************************MACROS****************************/
 #define TICK_RATE 32768
-#define COORD_READ_TIMEOUT TICK_RATE * 2 // 2 seconds for reading location coordinates
-#define SOG_READ_TIMEOUT TICK_RATE * 2	 // 2 seconds for reading SOG in knots.
+#define COORD_READ_TIMEOUT TICK_RATE * 7 // 2 seconds for reading location coordinates
+#define SOG_READ_TIMEOUT TICK_RATE * 7	 // 2 seconds for reading SOG in knots.
 #define TIME_STAMP_ERROR (1 << 1)
 #define TIME_STAMP_OK ~(1 << 1)
 /*************************TYPEDEFS***************************/
@@ -109,6 +109,8 @@ int main(void)
 			pMainObject = cJSON_CreateObject();
 			UpdateConfigurations();
 			WriteConfiguredtimeToRTC();
+			ReadAndProcessLocationData();
+			ReadAndProcessSOGData();
 			DoTimedDataNotification(pMainObject);
 			ResetAllBuffer();
 			if(GetConfigStatus())
@@ -130,10 +132,10 @@ int main(void)
 			{
 				printk("WARN: Getting time from RTC failed\n\r");
 			}
-			k_msleep(100);
+			k_msleep(10);
 		}
 #else
-		k_msleep(100);
+		//k_msleep(1);
 #endif
 	}
 	return 0;
@@ -174,8 +176,6 @@ static bool DoTimedDataNotification(cJSON *pMainObject)
 
     while(sys_clock_tick_get() - llTimeNow < LIVEDATA_TIMESLOT)
     {
- 			ReadAndProcessLocationData();
-			ReadAndProcessSOGData();
 
 			if (!GetAccelerometerDataAndUpdateJson(pMainObject))
 			{
@@ -346,6 +346,7 @@ static void ReadAndProcessSOGData(void)
 	float fSOG = 0.00;
 	long long TimeNow = 0;
 	int *pDiagData = NULL;
+	char cBuffer[30] = {0};
 
 	pDiagData = GetDiagnosticData();
 	TimeNow = sys_clock_tick_get();
@@ -356,8 +357,10 @@ static void ReadAndProcessSOGData(void)
 		{
 			fSOG = fSOG * 1.51; /*knots to mph calculation*/
 			printk("SOG: %f\n\r", fSOG);
+			sprintf(cBuffer, "%.1f", fSOG);
+			//fSOG = atof(cBuffer);
 			DisplaySOG(fSOG);
-			AddItemtoJsonObject(&pMainObject, FLOAT, "SOG", &fSOG, sizeof(fSOG));
+			AddItemtoJsonObject(&pMainObject, STRING, "SOG", cBuffer, sizeof(fSOG));
 
 			if (IsDeviceInsideofFence() && fSOG > mSog) // if device inside fence & crossed threshold values
 			{
@@ -819,7 +822,7 @@ static void DisplaySOG(float fSOG)
 	k_usleep(10);
 	
 	memset(cLCDMessage,'\0', sizeof(cLCDMessage));
-	sprintf(cLCDMessage, "SOG:%f", fSOG);
+	sprintf(cLCDMessage, "SOG:%.1f", fSOG);
 	WriteStringToLCD(cLCDMessage);
 	k_sleep(K_MSEC(200));
 }
