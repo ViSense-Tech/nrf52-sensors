@@ -88,14 +88,17 @@ static void ParseFenceCoordinate(char *pcKey)
 	char *cSplitStr = NULL;
 	char ucbuff[300];
 	double dLat = 0.0;
+	uint8_t ucIdx = 0;
 
-	_sFenceData *psFenceData = NULL;
+	//_sFenceData *psFenceData = NULL;
+	_sConfigData *psConfigData = NULL;
 	/*parsing array of strings */
-	psFenceData = GetFenceTable();
+	//psFenceData = GetFenceTable();
+	psConfigData = GetConfigData();
 
-	if (!psFenceData)
+	if (!psConfigData)
 	{
-		printk("ERR: fence table invalid \n\r");
+		printk("ERR: Got invalid configuration\n\r");
 		return;
 	}
 
@@ -104,14 +107,16 @@ static void ParseFenceCoordinate(char *pcKey)
 		printk("INFO: Parsing coordinate success\n\r");
 	}
 
+	ucIdx = 0;
+
 	if (0 == strcmp(pcKey, "lat"))
 	{
 		cSplitStr = strtok(ucbuff, ",");
 		while (cSplitStr != NULL)
 		{
 			dLat = atof(cSplitStr);
-			memcpy(&psFenceData->dLatitude, &dLat, sizeof(double));
-			psFenceData++;
+			memcpy(&psConfigData->FenceData[ucIdx].dLatitude, &dLat, sizeof(double));
+			ucIdx++;
 			cSplitStr = strtok(NULL, ",");
 		}
 
@@ -124,8 +129,8 @@ static void ParseFenceCoordinate(char *pcKey)
 		while (cSplitStr != NULL)
 		{
 			dLat = atof(cSplitStr);
-			memcpy(&psFenceData->dLatitude, &dLat, sizeof(double));
-			psFenceData++;
+			memcpy(&psConfigData->FenceData[ucIdx].dLongitude, &dLat, sizeof(double));
+			ucIdx++;
 			cSplitStr = strtok(NULL, ",");
 		}
 

@@ -19,6 +19,7 @@
 #ifdef PMIC_ENABLED
 #include "PMIC/PMICHandler.h"
 #endif
+#include <stdlib.h>
 
 /*************************MACROS****************************/
 #define TICK_RATE 32768
@@ -119,15 +120,18 @@ int main(void)
 
 #ifdef SLEEP_ENABLE
 		}
-		 EnterSleepMode(GetSleepTime());
-		 ExitSleepMode();
-
-		printk("INFO: Syncing time with RTC\n\r");
-		if (!GetTimeFromRTC())
+		if (!IsConnected())
 		{
-			printk("WARN: Getting time from RTC failed\n\r");
+			EnterSleepMode(GetSleepTime());
+			ExitSleepMode();
+
+			printk("INFO: Syncing time with RTC\n\r");
+			if (!GetTimeFromRTC())
+			{
+				printk("WARN: Getting time from RTC failed\n\r");
+			}
+			k_msleep(100);
 		}
-		k_msleep(100);
 #else
 		k_msleep(100);
 #endif
@@ -187,6 +191,7 @@ static bool DoTimedDataNotification(cJSON *pMainObject)
 
     while(sys_clock_tick_get() - llTimeNow < HISTORYDATA_TIMESLOT)
     {   
+		
 		if (!SendHistoryDataToFlash(cJsonBuffer))
 		{
 			printk("ERR: Sending history data failed\n\r");
@@ -302,9 +307,9 @@ static void SendLiveDataToApp()
 
 	do
 	{
-		if (psConfigData || pucAdvBuffer || pDiagData)
+		if (!pucAdvBuffer || !pDiagData || !psConfigData)
 		{
-			printk("ERR: Reading config or diag data failed\n\r");
+			printk("ERR: Reading diag or notifying buffer failed\n\r");
 			break;
 		}
 
@@ -314,7 +319,7 @@ static void SendLiveDataToApp()
 		}
 		else if (!IsConnected() && !IsNotificationenabled() && IsDeviceInsideofFence())
 		{
-			writeJsonToExternalFlash(cJsonBuffer, ulFlashidx, WRITE_ALIGNMENT);
+			writeJsonToExternalFlash(cJsonBuffer, ulFlashidx, ADV_BUFF_SIZE);
 		}
 
 		if ((psConfigData->flag & (1 << 1))) // check whether config data is read from the flash / updated from mobile at runtime
@@ -423,12 +428,12 @@ static void SendConfigDataToApp()
 {
     cJSON *pConfigObject = NULL;
     char *cJsonConfigBuffer = NULL;
-	_sFenceData *psFenceData = NULL;
+	_sConfigData *psConfigData = NULL;
     uint32_t ulSleepTime = 0;
 	int nCoordCount = 0;
 	uint8_t ucIdx = 0;
     char cBuffer[30] =  {0};
-	uint8_t cKeyBuff[10] = {0};
+	char cKeyBuff[10] = {0};
 
     pConfigObject = cJSON_CreateObject();
 
@@ -439,14 +444,17 @@ static void SendConfigDataToApp()
 		AddItemtoJsonObject(&pConfigObject, STRING, "Sleep", cBuffer, strlen(cBuffer));
 		nCoordCount = GetCoordCount();
 		AddItemtoJsonObject(&pConfigObject, NUMBER, "cc", &nCoordCount, sizeof(nCoordCount));
-		psFenceData = GetFenceTable();
+		psConfigData = GetConfigData();
 
-		if (psFenceData)
+		if (psConfigData)
 		{
 			for (ucIdx=0; ucIdx < nCoordCount; ucIdx++)
 			{
+				memset(cKeyBuff, 0, sizeof(cKeyBuff));
+				memset(cBuffer, 0, sizeof(cBuffer));
 				sprintf(cKeyBuff, "Lat%d", ucIdx+1);
-				sprintf(cBuffer, "%f", psFenceData->dLatitude);
+				sprintf(cBuffer, "%f", psConfigData->FenceData[ucIdx].dLatitude);
+				
 				if (!AddItemtoJsonObject(&pConfigObject, STRING, cKeyBuff, cBuffer, strlen(cBuffer)))
 				{
 					printk("ERR: Adding fence latitude failed\n\r");
@@ -455,7 +463,7 @@ static void SendConfigDataToApp()
 				memset(cKeyBuff, 0, sizeof(cKeyBuff));
 				memset(cBuffer, 0, sizeof(cBuffer));
 				sprintf(cKeyBuff, "Lon%d", ucIdx+1);
-				sprintf(cBuffer, "%f", psFenceData->dLongitude);
+				sprintf(cBuffer, "%f", psConfigData->FenceData[ucIdx].dLongitude);
 				if (!AddItemtoJsonObject(&pConfigObject, STRING, cKeyBuff, cBuffer, strlen(cBuffer)))
 				{
 					printk("ERR: Adding fence longitude failed\n\r");
@@ -957,17 +965,13 @@ static bool SendHistoryDataToFlash(char *pcJsonBuffer)
  
         if(IshistoryNotificationenabled() && IsConnected())
         {
-            printk("In history notif\n\r");
             if (VisenseHistoryDataNotify(ulFlashidx))
             {
+				printk("WARN: No Data available in Flash\n\r");
                 ulFlashidx = 0;
                 psConfigData->flashIdx = ulFlashidx;
                 nvs_write(&sConfigFs, 0, (char *)psConfigData, sizeof(_sConfigData));
             }
-			else
-			{
-				printk("WARN: No Data available in Flash\n\r");
-			}
         }
  
         bRetval = true;
