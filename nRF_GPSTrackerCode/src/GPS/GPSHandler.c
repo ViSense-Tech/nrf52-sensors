@@ -445,20 +445,20 @@ double haversineDistance(double lat1, double lon1, double lat2, double lon2) {
 bool polygonPoint(double latitude, double longitude, int fenceSize) 
 {
     double vectors[fenceSize][2];
-	_sFenceData *psFenceData = NULL;
+	//_sFenceData *psFenceData = NULL;
+    _sConfigData *psConfigData = NULL;
     double angle = 0;
     int i;
     double num, den;
 
-    psFenceData = GetFenceTable();
+    psConfigData = GetConfigData();
 
-    if (psFenceData)
+    if (psConfigData)
     {
         for(i = 0; i < fenceSize; i++) 
         {
-            vectors[i][0] = (psFenceData->dLatitude)- latitude;
-            vectors[i][1] = (psFenceData->dLongitude) - longitude;         
-            psFenceData++;
+            vectors[i][0] = (psConfigData->FenceData[i].dLatitude)- latitude;
+            vectors[i][1] = (psConfigData->FenceData[i].dLongitude) - longitude;
         }
         
         for(int i = 0; i < fenceSize; i++) 

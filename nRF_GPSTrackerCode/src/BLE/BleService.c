@@ -49,6 +49,7 @@ static bool bConfigNotifyEnabled = false;
 static bool bFenceStatus = false;
 // static int ucCoordCount;
 static bool bConfig = false;
+static bool bErased = false; 
 static uint16_t usPayloadLen = 0;
 
 /*Read index from flash*/
@@ -90,10 +91,8 @@ static void ParseFenceCoordinate(char *pcKey)
 	double dLat = 0.0;
 	uint8_t ucIdx = 0;
 
-	//_sFenceData *psFenceData = NULL;
 	_sConfigData *psConfigData = NULL;
 	/*parsing array of strings */
-	//psFenceData = GetFenceTable();
 	psConfigData = GetConfigData();
 
 	if (!psConfigData)
@@ -486,6 +485,7 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 	{	
 		if (!IsConnected())
 		{
+			bErased = false;
 			break;
 		}
 		
@@ -521,17 +521,26 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 		{
 			bFullDataRead = true;
 			break;	
-		}
+		} 
 		
 	} while (0);
 	
-	if (bFullDataRead == true) 
+	if (bFullDataRead == true ) 
 	{
-		if(!EraseExternalFlash(SECTOR_COUNT))
+		if (!bErased)
 		{
-			printk("Flash erase Failed");
+			if(!EraseExternalFlash(SECTOR_COUNT))
+			{
+				printk("Flash erase Failed");
+			}
+			else
+			{
+				bErased = true;
+			}
+			printk("Flash Cleared");
 		}
-		printk("Flash Cleared");
+
+
 		ucIdx = 0;
 		bRetVal = true;
 	}

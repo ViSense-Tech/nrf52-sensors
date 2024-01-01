@@ -16,43 +16,8 @@
 
 /***********************************FUNCTION DEFINITION*******************/
 
-/**
- * @brief  : Get Fence table
- * @param  : None
- * @return : Fence Table
-*/
-_sFenceData *GetFenceTable()
-{
-    _sConfigData *psConfigData = NULL;
-    psConfigData = GetConfigData();
 
-    if (!psConfigData)
-    {
-        printk("ERR: failed to get config\n\r");
-        return NULL;
-    }
 
-    return &psConfigData->FenceData[0];
-}
-
-/**
- * @brief : Set Fence data table
- * @param : sFenceTable : Fence data table
- * @return : None
- * 
-*/
-void SetFenceTable(_sFenceData *sFenceTable)
-{
-    _sConfigData *psConfigData = NULL;
-    psConfigData = GetConfigData();
-
-    if (psConfigData)
-    {
-        memcpy(&psConfigData->FenceData[0], sFenceTable,
-                                             sizeof(psConfigData->FenceData));
-    }
-
-}
 
 /**
  * @brief function to add json object to json

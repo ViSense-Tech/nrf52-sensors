@@ -604,7 +604,7 @@ static bool CheckForConfigChange() // check for config change and update value f
 			   psConfigData->flag,
 			   psConfigData->flashIdx,
 			   psConfigData->nCoordCount);		   // get all the config params from the flash if a reboot occures
-		SetFenceTable(&psConfigData->FenceData[0]); // get coordinates from the flash if a reboot occures
+
 		for (ucIdx = 0; psConfigData->nCoordCount > ucIdx ; ucIdx++)
 		{
 			printk("Lat: %f Lon: %f\n\r", 
