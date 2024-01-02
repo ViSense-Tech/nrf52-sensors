@@ -14,6 +14,7 @@
 
 /**************************** MACROS********************************************/
 #define VND_MAX_LEN 247
+#define VALID_HISTORY 0x7B
 /* Custom Service Variables */
 
 
@@ -38,8 +39,9 @@ static bool bConfigNotifyEnabled = false;
 static bool bConnected = false;
 struct nvs_fs *FileSys;
 struct bt_conn *psConnHandle = NULL;
+static bool bErased = false;
 /*Read index from flash*/
-uint8_t ucIdx = 0;
+uint32_t ulIdx = 0;
 
 /****************************FUNCTION DEFINITION********************************/
 
@@ -226,26 +228,33 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 {
 	bool bRetVal = false;
 	bool bFullDataRead = false;
-	char NotifyBuf[ADV_BUFF_SIZE];
+	char NotifyBuf[256];
 	int nRetVal = 0;
 	int uReadCount = 0;
 	uint8_t uFlashCounter = 0;
-	if (ucIdx > ulWritePos)
+	if (ulIdx > ulWritePos)
 	{
-		uFlashCounter = ucIdx - ulWritePos;
+		uFlashCounter = ulIdx - ulWritePos;
 	}
 
-	while(ucIdx <= NUMBER_OF_ENTRIES)
+	do
 	{	
 		if (!IsConnected())
 		{
+			bErased = false;
+			break;
+		}
+
+		if (bErased)
+		{
+			printk("WARN: No data available in flash\n\r");
 			break;
 		}
 		
-		memset(NotifyBuf, 0, ADV_BUFF_SIZE);
-		uReadCount = readJsonToFlash(FileSys, ucIdx, 0, NotifyBuf, ADV_BUFF_SIZE);
-		printk("\nId: %d, Ble_Stored_Data: %s\n",ucIdx, NotifyBuf);
-		if (uReadCount < 0)
+		memset(NotifyBuf, 0, 256);
+		readJsonFromExternalFlash(NotifyBuf, ulIdx, 256);
+		printk("\nId: %d, Ble_Stored_Data: %s\n",ulIdx, NotifyBuf);
+		if (NotifyBuf[0] !=  VALID_HISTORY)
 		{
 			bFullDataRead = true;
 			break;
@@ -253,21 +262,20 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 	
 		k_msleep(100);
 
-		if (uReadCount > 0)
+		if (NotifyBuf[0] == VALID_HISTORY)
 		{
 			nRetVal = bt_gatt_notify(NULL, &VisenseService.attrs[8], 
-			NotifyBuf,uReadCount);
+			NotifyBuf, strlen(NotifyBuf));
 			if (nRetVal < 0)
 			{
 				printk("Notification failed%d\n\r",nRetVal);
 			}
-			
 		}
-		ucIdx++;
+		ulIdx++;
 		uFlashCounter++;
-		if (ucIdx == NUMBER_OF_ENTRIES)
+		if (ulIdx == NUMBER_OF_ENTRIES)
 		{
-			ucIdx = 0;
+			ulIdx = 0;
 		}
 		if (uFlashCounter > NUMBER_OF_ENTRIES )
 		{
@@ -277,17 +285,26 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 		
 		
 		// bRetVal = true;
-	}
+	} while(0); 
 	
-	hNotificationEnabled = false;     //history callback set 
 	if (bFullDataRead == true) 
 	{
-		deleteFlash(FileSys);
-		printk("Flash Cleared");
-		ucIdx = 0;
+		if (!bErased)
+		{
+			if (!EraseExternalFlash(SECTOR_COUNT))
+			{
+				printk("ERR: Flash Clear failed\n\r");
+			}
+			else
+			{
+				printk("INFO: Flash Cleared\n\r");
+				bErased = true;
+			}			
+		}
+		ulIdx = 0;
 		bRetVal = true;
 	}
-	
+
 	return bRetVal;
 }
 
