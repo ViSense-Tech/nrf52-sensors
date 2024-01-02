@@ -147,7 +147,6 @@ static bool DoTimedDataNotification(cJSON **pMainObject, char **pcBuffer)
     }
 
     llTimeNow = sys_clock_tick_get();
-    printk("STr: %s\n\r", *pcBuffer);
 
     while(sys_clock_tick_get() - llTimeNow < HISTORYDATA_TIMESLOT)
     {   
