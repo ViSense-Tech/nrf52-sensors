@@ -147,6 +147,11 @@ void BleConfigDataNotify(const struct bt_gatt_attr *attr, uint16_t value)
 	
 }
 
+uint8_t *GetConfigBuffer()
+{
+	return ucConfigData2;
+}
+
 /* VSENCE SERVICE DEFINITION*/
 /**
  * @note Service registration and chara adding.
@@ -160,7 +165,7 @@ BT_GATT_SERVICE_DEFINE(VisenseService,
                 CharaRead, CharaWrite, ucSensorData),
     BT_GATT_CCC(BleSensorDataNotify, BT_GATT_PERM_READ | BT_GATT_PERM_WRITE),
 	BT_GATT_CHARACTERISTIC(&sConfigChara.uuid,
-					BT_GATT_CHRC_NOTIFY | BT_GATT_CHRC_WRITE,
+					BT_GATT_CHRC_READ | BT_GATT_CHRC_WRITE,
 						BT_GATT_PERM_READ | BT_GATT_PERM_WRITE,
 						CharaRead,CharaWrite,ucConfigData2),
     BT_GATT_CCC(BleConfigDataNotify, BT_GATT_PERM_READ | BT_GATT_PERM_WRITE),
