@@ -129,7 +129,7 @@ bool GetPressureReading(uint16_t *unPressureResult, uint32_t *unPressureRaw)
             count++;
             *unPressureRaw += unAdcSample;   
         }
-        k_msleep(100);
+        k_msleep(10);
     }
     if (count == 0)
     {
