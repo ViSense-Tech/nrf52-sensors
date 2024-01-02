@@ -43,7 +43,7 @@ static void PrintBanner();
 static bool UpdateConfigurations();
 static bool SendHistoryDataToFlash(char *pcJsonBuffer);
 static void DisplayFenceStatus();
-static void SendConfigDataToApp();
+static void UpdateConfigParameters();
 static void ReadAndProcessLocationData(void);
 static void ReadAndProcessSOGData(void);
 static void SendLiveDataToApp();
@@ -182,7 +182,7 @@ static bool DoTimedDataNotification(cJSON *pMainObject)
 				printk("WARN: Reading Accelerometer data failed\n\r");
 			}
 
-			SendConfigDataToApp();
+			UpdateConfigParameters();
 			UpdateSystemParameters();
 			SendLiveDataToApp();
     }
@@ -427,18 +427,20 @@ static void ReadAndProcessLocationData(void)
  * @param None
  * @return None
 */
-static void SendConfigDataToApp()
+static void UpdateConfigParameters()
 {
     cJSON *pConfigObject = NULL;
     char *cJsonConfigBuffer = NULL;
 	_sConfigData *psConfigData = NULL;
     uint32_t ulSleepTime = 0;
+	uint8_t *pucConfigBuffer = NULL;
 	int nCoordCount = 0;
 	uint8_t ucIdx = 0;
     char cBuffer[30] =  {0};
 	char cKeyBuff[10] = {0};
 
     pConfigObject = cJSON_CreateObject();
+	pucConfigBuffer = GetConfigBuffer();
 
 	if (pConfigObject)
 	{
@@ -480,12 +482,7 @@ static void SendConfigDataToApp()
 
 	if (cJsonConfigBuffer)
 	{
-		printk("ConfigJSON:\n%s\n", cJsonConfigBuffer);
-
-		if (IsConfigNotifyEnabled())
-		{
-			VisenseConfigDataNotify(cJsonConfigBuffer, (uint16_t)strlen(cJsonConfigBuffer));
-		}
+		memcpy(pucConfigBuffer, cJsonConfigBuffer, strlen(cJsonConfigBuffer));
 	}
 
     cJSON_free(cJsonConfigBuffer);

@@ -315,7 +315,7 @@ BT_GATT_SERVICE_DEFINE(VisenseService,
 											  CharaRead, CharaWrite, ucSensorData),
 					   BT_GATT_CCC(BleSensorDataNotify, BT_GATT_PERM_READ | BT_GATT_PERM_WRITE),
 					   BT_GATT_CHARACTERISTIC(&sConfigChara.uuid,
-											  BT_GATT_CHRC_NOTIFY | BT_GATT_CHRC_WRITE,
+											  BT_GATT_CHRC_READ | BT_GATT_CHRC_WRITE,
 											  BT_GATT_PERM_READ | BT_GATT_PERM_WRITE,
 											  CharaRead, CharaWrite, ucSensorData),
 					   BT_GATT_CCC(BleConfigDataNotify, BT_GATT_PERM_READ | BT_GATT_PERM_WRITE),
@@ -333,6 +333,12 @@ BT_GATT_SERVICE_DEFINE(VisenseService,
 void SetFileSystem(struct nvs_fs *fs)
 {
 	FileSys = fs;
+}
+
+
+uint8_t *GetConfigBuffer()
+{
+	return ucSensorData;
 }
 
 /**
