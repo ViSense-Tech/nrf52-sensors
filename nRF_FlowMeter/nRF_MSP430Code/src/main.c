@@ -41,10 +41,10 @@ static bool WriteConfiguredtimeToRTC(void);
 static bool GetTimeFromRTC();
 static bool UpdateConfigurations();
 static bool CheckForConfigChange();
-static void SendConfigDataToApp();
 static bool DoTimedDataNotification(cJSON **pMainObject, char **pcBuffer);
 static bool SendLiveDataToApp(cJSON *pMainObject, char **pcBuffer);
 static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength);
+static void UpdateConfigParameters();
 
 /*************************FUNTION DEFINITION*****************/
 /**
@@ -95,10 +95,10 @@ int main(void)
             }
 
             WriteConfiguredtimeToRTC();
-            SendConfigDataToApp();
 
 			pMainObject = cJSON_CreateObject();
             cJsonBuffer = NULL;
+            UpdateConfigParameters();
 
             if (DoTimedDataNotification(&pMainObject, &cJsonBuffer))
             {
@@ -505,10 +505,11 @@ static bool WriteConfiguredtimeToRTC(void)
  * @param None
  * @return None
 */
-static void SendConfigDataToApp()
+static void UpdateConfigParameters()
 {
     cJSON *pConfigObject = NULL;
     char *cJsonConfigBuffer = NULL;
+    uint8_t *pucConfig = NULL;
     uint32_t ulSleepTime = 0;
     double dGPM=0.00;
     char cBuffer[30] =  {0};
@@ -527,11 +528,8 @@ static void SendConfigDataToApp()
     cJsonConfigBuffer = cJSON_Print(pConfigObject);
 
     printk("ConfigJSON:\n%s\n", cJsonConfigBuffer);
-
-    if (IsConfigNotifyEnabled())
-    {
-        VisenseConfigDataNotify(cJsonConfigBuffer, (uint16_t)strlen(cJsonConfigBuffer));
-    }
+    pucConfig = GetConfigBuffer();
+    memcpy(pucConfig, cJsonConfigBuffer, strlen(cJsonConfigBuffer));
 
     cJSON_free(cJsonConfigBuffer);
     cJSON_Delete(pConfigObject);

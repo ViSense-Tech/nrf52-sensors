@@ -31,7 +31,7 @@ static struct bt_uuid_128 sConfigChara = BT_UUID_INIT_128(
 static struct bt_uuid_128 sHistoryChara = BT_UUID_INIT_128(
 	BT_UUID_128_ENCODE(0xe3ddb577, 0x8551, 0x11ee, 0xb9d1, 0x0242ac120002));
 
-static uint8_t ucSensorData[VND_MAX_LEN + 1] = {0x11,0x22,0x33, 0x44, 0x55};
+static uint8_t ucSensorData[VND_MAX_LEN + 1];
 static uint8_t ucConfigData2[VND_MAX_LEN + 1];
 static bool bNotificationEnabled = false; 
 static bool hNotificationEnabled = false;
@@ -57,7 +57,11 @@ void BleHistoryDataNotify(const struct bt_gatt_attr *attr, uint16_t value)
     {
         hNotificationEnabled = true;
     }
-    
+}
+
+uint8_t *GetConfigBuffer()
+{
+	return ucConfigData2;
 }
 
 /**
@@ -177,7 +181,7 @@ BT_GATT_SERVICE_DEFINE(VisenseService,
                 CharaRead, CharaWrite, ucSensorData),
 	BT_GATT_CCC(BleSensorDataNotify, BT_GATT_PERM_READ | BT_GATT_PERM_WRITE),
 	BT_GATT_CHARACTERISTIC(&sConfigChara.uuid,
-					BT_GATT_CHRC_NOTIFY | BT_GATT_CHRC_WRITE,
+					BT_GATT_CHRC_READ | BT_GATT_CHRC_WRITE,
 						BT_GATT_PERM_READ | BT_GATT_PERM_WRITE,
 						CharaRead,CharaWrite,ucConfigData2),
    BT_GATT_CCC(BleConfigDataNotify, BT_GATT_PERM_READ | BT_GATT_PERM_WRITE),
