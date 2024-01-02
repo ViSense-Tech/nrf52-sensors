@@ -95,7 +95,7 @@ int main(void)
             }
 
             WriteConfiguredtimeToRTC();
-            //SendConfigDataToApp();
+            SendConfigDataToApp();
 
 			pMainObject = cJSON_CreateObject();
             cJsonBuffer = NULL;
