@@ -359,7 +359,6 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 			}
 			printk("Flash Cleared");
 		}
-
 		ulIdx = 0;
 		bRetVal = true;
 	}
