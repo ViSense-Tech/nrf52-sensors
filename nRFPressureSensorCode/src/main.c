@@ -51,7 +51,7 @@ static bool InitAllModules();
 static void PrintBanner();
 static bool GetTimeFromRTC();
 static bool WriteConfiguredtimeToRTC(void);
-static void SendConfigDataToApp();
+static void UpdateConfigParameters();
 static bool DoTimedDataNotification(cJSON **pMainObject, char **pcBuffer);
 static bool SendHistoryDataToApp(uint16_t uPressureValue, char *pcBuffer, uint16_t unLength);
 static bool SendLiveData(cJSON *pMainObject, char **pcBuffer, uint16_t *pusPressureResult);
@@ -107,7 +107,7 @@ int main(void)
             }
 
             WriteConfiguredtimeToRTC();
-            SendConfigDataToApp();
+            UpdateConfigParameters();
 
             pMainObject = cJSON_CreateObject();
             pressureZero = GetPressureZero();
@@ -424,17 +424,20 @@ static bool SendHistoryDataToApp(uint16_t uPressureValue, char *pcBuffer, uint16
  * @param None
  * @return None
 */
-static void SendConfigDataToApp()
+static void UpdateConfigParameters()
 {
     cJSON *pConfigObject = NULL;
     char *cJsonConfigBuffer = NULL;
+    uint8_t *pucConfigBuffer = NULL;
     uint32_t ulSleepTime = 0;
     char cBuffer[30] =  {0};
     uint32_t unPressureMin = 0;
 
     pConfigObject = cJSON_CreateObject();
     ulSleepTime = GetSleepTime();
+    pucConfigBuffer = GetConfigBuffer();
     unPressureMin = (uint32_t)GetPressureMin();
+
     strcpy(cBuffer, VISENSE_PRESSURE_SENSOR_FIRMWARE_VERSION);
     AddItemtoJsonObject(&pConfigObject, NUMBER, "PressureZero", &pressureZero, sizeof(uint32_t));
     AddItemtoJsonObject(&pConfigObject, NUMBER, "PressureMax", &pressureMax, sizeof(uint32_t));
@@ -446,10 +449,7 @@ static void SendConfigDataToApp()
     cJsonConfigBuffer = cJSON_Print(pConfigObject);
     printk("ConfigJSON:\n%s\n", cJsonConfigBuffer);
 
-    if (IsConfigNotifyEnabled())
-    {
-        VisenseConfigDataNotify(cJsonConfigBuffer, (uint16_t)strlen(cJsonConfigBuffer));
-    }
+    memcpy(pucConfigBuffer, cJsonConfigBuffer, strlen(cJsonConfigBuffer));
 
     cJSON_free(cJsonConfigBuffer);
     cJSON_Delete(pConfigObject);
