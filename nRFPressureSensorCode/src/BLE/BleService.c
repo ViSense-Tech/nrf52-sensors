@@ -37,6 +37,7 @@ struct bt_conn *psConnHandle = NULL;
 static bool hNotificationEnabled = false;
 struct nvs_fs *FileSys;
 static bool bConfigNotifyEnabled = false;
+static bool bErased = false;
 /*Read index from flash*/
 uint32_t ulIdx = 0;
 
@@ -147,6 +148,12 @@ void BleSensorDataNotify(const struct bt_gatt_attr *attr, uint16_t value)
         bNotificationEnabled = false;
     }
 }
+
+uint8_t *GetConfigBuffer()
+{
+	return &ucConfigData2;
+}
+
 /**
  * @brief Notification callback for history
  * @param attr - pointer to GATT attributes
@@ -189,7 +196,7 @@ BT_GATT_SERVICE_DEFINE(VisenseService,
                 CharaRead, CharaWrite, ucSensorData),
 	BT_GATT_CCC(BleSensorDataNotify, BT_GATT_PERM_READ | BT_GATT_PERM_WRITE),
 	BT_GATT_CHARACTERISTIC(&sConfigChara.uuid,
-					BT_GATT_CHRC_NOTIFY | BT_GATT_CHRC_WRITE,
+					BT_GATT_CHRC_READ | BT_GATT_CHRC_WRITE,
 						BT_GATT_PERM_READ | BT_GATT_PERM_WRITE,
 						CharaRead,CharaWrite,ucConfigData2),
    BT_GATT_CCC(BleConfigDataNotify, BT_GATT_PERM_READ | BT_GATT_PERM_WRITE),
@@ -296,10 +303,11 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 		uFlashCounter = ulIdx - ulWritePos;
 	}
 
-	while(ulIdx <= NUMBER_OF_ENTRIES)
+	do
 	{	
 		if (!IsConnected())
-		{
+		{			
+			bErased = false;
 			break;
 		}
 		
@@ -337,17 +345,20 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 		
 		
 		// bRetVal = true;
-	}
+	} while(0);
 	
-	hNotificationEnabled = false;     //history callback set 
+	//hNotificationEnabled = false;     //history callback set 
 	if (bFullDataRead == true) 
 	{
-		if(!EraseExternalFlash(SECTOR_COUNT))
+		if (bErased)
 		{
-			printk("Flash erase failed!\n");
-			return bRetVal;
+			if(!EraseExternalFlash(SECTOR_COUNT))
+			{
+				printk("Flash erase failed!\n");
+				return bRetVal;
+			}
+			printk("Flash Cleared");
 		}
-		printk("Flash Cleared");
 		ulIdx = 0;
 		bRetVal = true;
 	}

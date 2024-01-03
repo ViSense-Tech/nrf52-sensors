@@ -22,3 +22,4 @@ bool IsConnected();
 void SetFileSystem(struct nvs_fs *fs);
 bool IsConfigNotifyEnabled();
 bool IshistoryNotificationenabled();
+uint8_t *GetConfigBuffer();

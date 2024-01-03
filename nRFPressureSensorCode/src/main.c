@@ -51,8 +51,10 @@ static bool InitAllModules();
 static void PrintBanner();
 static bool GetTimeFromRTC();
 static bool WriteConfiguredtimeToRTC(void);
-static void SendConfigDataToApp();
+static void UpdateConfigParameters();
+static bool DoTimedDataNotification(cJSON **pMainObject, char **pcBuffer);
 static bool SendHistoryDataToApp(uint16_t uPressureValue, char *pcBuffer, uint16_t unLength);
+static bool SendLiveData(cJSON *pMainObject, char **pcBuffer, uint16_t *pusPressureResult);
 
 /*******************************FUNCTION DEFINITIONS********************************/
 
@@ -62,12 +64,8 @@ static bool SendHistoryDataToApp(uint16_t uPressureValue, char *pcBuffer, uint16
 */
 int main(void)
 {
-    uint16_t unPressureResult =0;
-    uint32_t unPressureRaw = 0;
-    char cbuffer[50] = {0};
     char *cJsonBuffer= NULL;
     cJSON *pMainObject = NULL;
-    long long llEpochNow = 0;
     int64_t Timenow = 0;
 #ifdef PMIC_ENABLED  
     float fSOC=0.0;
@@ -109,85 +107,12 @@ int main(void)
             }
 
             WriteConfiguredtimeToRTC();
-            SendConfigDataToApp();
-
-            if (GetPressureReading(&unPressureResult, &unPressureRaw))
-            {
-                printk("PressureRaw: %d\n", unPressureRaw);
-            }
+            UpdateConfigParameters();
 
             pMainObject = cJSON_CreateObject();
             pressureZero = GetPressureZero();
             pressureMax = GetPressureMax();
 
-            if (GetCurrentTime(&llEpochNow))
-            {
-                printk("CurrentTime=%llu\n\r", llEpochNow);
-            }
-            AddItemtoJsonObject(&pMainObject, NUMBER, "ADCValue", &unPressureRaw, sizeof(uint16_t));
-            AddItemtoJsonObject(&pMainObject, NUMBER, "TS", &llEpochNow, sizeof(long long));
-
-            if (unPressureRaw > pressureZero && unPressureRaw < ADC_MAX_VALUE)
-            {
-                memset(cbuffer, '\0',sizeof(cbuffer));
-                
-                sprintf(cbuffer,"%dpsi", unPressureResult);
-                printk("Data:%s\n", cbuffer);
-                AddItemtoJsonObject(&pMainObject, STRING, "Pressure", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer));
-                diagnostic_data = diagnostic_data & SENSOR_STATUS_OK;
-
-            }
-            else if(unPressureRaw > 100 && unPressureRaw < 1023) //
-            {
-                memset(cbuffer, '\0',sizeof(cbuffer));
-                unPressureResult = 0;
-                sprintf(cbuffer,"%dpsi", unPressureResult);
-                AddItemtoJsonObject(&pMainObject, STRING, "Pressure", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer));
-                diagnostic_data = diagnostic_data & SENSOR_STATUS_OK;  
-            }
-            else if(unPressureRaw < 100 || unPressureRaw > 1023)
-            {
-                diagnostic_data = diagnostic_data | SENSOR_DIAGNOSTICS;
-            }
-            else
-            {
-                // NO OP
-            }
-        
-            AddItemtoJsonObject(&pMainObject, NUMBER, "DIAG", &diagnostic_data, sizeof(uint32_t));
-#ifdef PMIC_ENABLED            
-            PMICUpdate(&fSOC);
-            memset(cbuffer, '\0', sizeof(cbuffer));
-            printk("soc=%f\n\r", fSOC);
-            sprintf(cbuffer,"%d%%", (int)fSOC);
-            AddItemtoJsonObject(&pMainObject, STRING, "Batt", cbuffer, sizeof(float));
-#endif            
-            cJsonBuffer = cJSON_Print(pMainObject);
-            pucAdvertisingdata[2] = PRESSURE_SENSOR;
-            pucAdvertisingdata[3] = (uint8_t)strlen(cJsonBuffer);
-            memcpy(&pucAdvertisingdata[4], cJsonBuffer, strlen(cJsonBuffer));
-
-                
-            SendHistoryDataToApp(unPressureResult, cJsonBuffer, strlen(cJsonBuffer)); //save to flash only if Mobile Phone is NOT connected
-            
-            printk("JSON:\n*%s#\n", cJsonBuffer);
-
-            if(IsNotificationenabled())
-            {
-                VisenseSensordataNotify(pucAdvertisingdata+2, ADV_BUFF_SIZE);
-            }
-#ifdef EXTENDED_ADV
-            else if (!IsNotificationenabled() && !IsConnected())
-            {
-                UpdateAdvertiseData();
-                StartAdvertising();
-            }
-#endif
-            else
-            {
-                //NO OP
-            }
-            
             if ((sConfigData.flag & (1 << 4))) //check whether config data is read from the flash / updated from mobile
             {
                 diagnostic_data = diagnostic_data & CONFIG_WRITE_OK; //added a diagnostic information to the application
@@ -196,11 +121,13 @@ int main(void)
             {
                 diagnostic_data = diagnostic_data | CONFIG_WRITE_FAILED; //added a diagnostic information to the application
             }
-            
-            memset(pucAdvertisingdata, 0, ADV_BUFF_SIZE);
-            cJSON_Delete(pMainObject);
-            cJSON_free(cJsonBuffer);
 
+            if (DoTimedDataNotification(&pMainObject, &cJsonBuffer))
+            {
+                memset(pucAdvertisingdata, 0, ADV_BUFF_SIZE);
+                cJSON_Delete(pMainObject);
+                cJSON_free(cJsonBuffer);
+            }
         #ifndef SLEEP_ENABLE 
             k_sleep(K_MSEC(100));
         #endif
@@ -215,6 +142,166 @@ int main(void)
         }
         #endif
     }
+}
+
+/**
+ * @brief Running history and live data notification in timeslots
+ * @param pMainObject : Main object
+ * @return true for success
+*/
+static bool DoTimedDataNotification(cJSON **pMainObject, char **pcBuffer)
+{
+    int64_t  llTimeNow=0;
+    uint16_t unPressureResult =0;
+    bool bRetVal = false;
+
+    if (!pMainObject || !pcBuffer)
+    {
+        printk("ERR:Invalid arguments in timed Notification function\n\r");
+        return bRetVal;
+    }
+
+    llTimeNow = sys_clock_tick_get();
+
+    while(sys_clock_tick_get() - llTimeNow < (LIVEDATA_TIMESLOT))
+    {
+        if (!SendLiveData(*pMainObject, pcBuffer, &unPressureResult))
+        {
+            printk("ERR: Sennding live data failed\n\r");
+            break;
+        }
+    }
+
+    llTimeNow = sys_clock_tick_get();
+
+    while(sys_clock_tick_get() - llTimeNow < (HISTORYDATA_TIMESLOT))
+    {   
+        if (!SendHistoryDataToApp(unPressureResult, *pcBuffer, strlen(*pcBuffer)))
+        {
+            printk("ERR: Sennding history data failed\n\r");
+            break;            
+        }
+    }
+
+    bRetVal = true;
+
+    return bRetVal;
+}
+
+/**
+ * @brief Send live data to App
+ * @param pMainObject : JSON root object
+ * @param pcBuffer    : JSON data buffer
+ * @param pusPressurResult : Pressure result
+ * @return true for success
+*/
+static bool SendLiveData(cJSON *pMainObject, char **pcBuffer, uint16_t *pusPressureResult)
+{
+    bool bRetVal = false;
+    long long llEpochNow = 0;
+    uint32_t unPressureRaw = 0;
+    char cbuffer[50] = {0};
+
+    do
+    {
+
+        if (GetPressureReading(pusPressureResult, &unPressureRaw))
+        {
+            printk("INFO:PressureRaw: %d\n", unPressureRaw);
+        }
+
+        if (GetCurrentTime(&llEpochNow))
+        {
+            printk("CurrentTime=%llu\n\r", llEpochNow);
+        }
+        
+        if (!AddItemtoJsonObject(&pMainObject, NUMBER, "ADCValue", &unPressureRaw, sizeof(uint16_t)))
+        {
+            printk("ERR: Adding ADC value to JSON\n\r");
+            //break;
+        }
+       
+        if (!AddItemtoJsonObject(&pMainObject, NUMBER, "TS", &llEpochNow, sizeof(long long)))
+        {
+            printk("ERR: Adding timestamp value to JSON\n\r");
+            //break;
+        }
+
+        if (unPressureRaw > pressureZero && unPressureRaw < ADC_MAX_VALUE)
+        {
+            memset(cbuffer, '\0',sizeof(cbuffer));
+            
+            sprintf(cbuffer,"%dpsi", *pusPressureResult);
+            printk("Data:%s\n", cbuffer);
+            if (!AddItemtoJsonObject(&pMainObject, STRING, "Pressure", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer)))
+            {
+                printk("ERR: Adding pressure value to JSON\n\r");
+                //break;
+            }
+            diagnostic_data = diagnostic_data & SENSOR_STATUS_OK;
+
+        }
+        else if(unPressureRaw > 100 && unPressureRaw < 1023) //
+        {
+            memset(cbuffer, '\0',sizeof(cbuffer));
+            *pusPressureResult = 0;
+            sprintf(cbuffer,"%dpsi", *pusPressureResult);
+            if (!AddItemtoJsonObject(&pMainObject, STRING, "Pressure", (uint8_t*)cbuffer, (uint8_t)strlen(cbuffer)))
+            {
+                printk("ERR: Adding ADC value to JSON\n\r");
+                //break;
+            }
+            diagnostic_data = diagnostic_data & SENSOR_STATUS_OK;  
+        }
+        else if(unPressureRaw < 100 || unPressureRaw > 1023)
+        {
+            diagnostic_data = diagnostic_data | SENSOR_DIAGNOSTICS;
+        }
+        else
+        {
+            // NO OP
+        }
+
+        if (!AddItemtoJsonObject(&pMainObject, NUMBER, "DIAG", &diagnostic_data, sizeof(uint32_t)))
+        {
+            printk("ERR: Adding ADC value to JSON\n\r");
+            //return
+        }        
+        bRetVal = true;
+    } while (0);
+
+
+        
+
+#ifdef PMIC_ENABLED            
+    PMICUpdate(&fSOC);
+    memset(cbuffer, '\0', sizeof(cbuffer));
+    printk("soc=%f\n\r", fSOC);
+    sprintf(cbuffer,"%d%%", (int)fSOC);
+    AddItemtoJsonObject(&pMainObject, STRING, "Batt", cbuffer, sizeof(float));
+#endif            
+    *pcBuffer = cJSON_Print(pMainObject);
+    pucAdvertisingdata[2] = PRESSURE_SENSOR;
+    pucAdvertisingdata[3] = (uint8_t)strlen(*pcBuffer);
+    memcpy(&pucAdvertisingdata[4], *pcBuffer, strlen(*pcBuffer));
+
+    if(IsNotificationenabled())
+    {
+        VisenseSensordataNotify(pucAdvertisingdata+2, ADV_BUFF_SIZE);
+    }
+#ifdef EXTENDED_ADV
+    else if (!IsNotificationenabled() && !IsConnected())
+    {
+        UpdateAdvertiseData();
+        StartAdvertising();
+    }
+#endif
+
+    // SendHistoryDataToApp(unPressureResult, cJsonBuffer, strlen(cJsonBuffer)); //save to flash only if Mobile Phone is NOT connected
+    
+    printk("JSON:\n*%s#\n", *pcBuffer);
+    return bRetVal;
+    
 }
 
 
@@ -290,6 +377,7 @@ static bool SendHistoryDataToApp(uint16_t uPressureValue, char *pcBuffer, uint16
 
     if (pcBuffer)
     {
+        printk("INFO: In history notification\n\r");
         if(!IsConnected() && (uPressureValue >= GetPressureMin())) // && sConfigData.flag & (1 << 4) can include this condition also if config is mandetory during initial setup
         {
             
@@ -336,17 +424,20 @@ static bool SendHistoryDataToApp(uint16_t uPressureValue, char *pcBuffer, uint16
  * @param None
  * @return None
 */
-static void SendConfigDataToApp()
+static void UpdateConfigParameters()
 {
     cJSON *pConfigObject = NULL;
     char *cJsonConfigBuffer = NULL;
+    uint8_t *pucConfigBuffer = NULL;
     uint32_t ulSleepTime = 0;
     char cBuffer[30] =  {0};
     uint32_t unPressureMin = 0;
 
     pConfigObject = cJSON_CreateObject();
     ulSleepTime = GetSleepTime();
+    pucConfigBuffer = GetConfigBuffer();
     unPressureMin = (uint32_t)GetPressureMin();
+
     strcpy(cBuffer, VISENSE_PRESSURE_SENSOR_FIRMWARE_VERSION);
     AddItemtoJsonObject(&pConfigObject, NUMBER, "PressureZero", &pressureZero, sizeof(uint32_t));
     AddItemtoJsonObject(&pConfigObject, NUMBER, "PressureMax", &pressureMax, sizeof(uint32_t));
@@ -358,10 +449,7 @@ static void SendConfigDataToApp()
     cJsonConfigBuffer = cJSON_Print(pConfigObject);
     printk("ConfigJSON:\n%s\n", cJsonConfigBuffer);
 
-    if (IsConfigNotifyEnabled())
-    {
-        VisenseConfigDataNotify(cJsonConfigBuffer, (uint16_t)strlen(cJsonConfigBuffer));
-    }
+    memcpy(pucConfigBuffer, cJsonConfigBuffer, strlen(cJsonConfigBuffer));
 
     cJSON_free(cJsonConfigBuffer);
     cJSON_Delete(pConfigObject);

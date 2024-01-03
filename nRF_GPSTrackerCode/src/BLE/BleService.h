@@ -36,3 +36,4 @@ void ParseRcvdData();
 void SetConfigStatus(bool bStatus);
 bool GetConfigStatus();
 void ParseFenceData();
+uint8_t *GetConfigBuffer();

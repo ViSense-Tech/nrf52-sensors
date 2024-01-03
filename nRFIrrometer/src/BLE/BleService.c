@@ -147,6 +147,11 @@ void BleConfigDataNotify(const struct bt_gatt_attr *attr, uint16_t value)
 	
 }
 
+uint8_t *GetConfigBuffer()
+{
+	return ucConfigData2;
+}
+
 /* VSENCE SERVICE DEFINITION*/
 /**
  * @note Service registration and chara adding.
@@ -160,7 +165,7 @@ BT_GATT_SERVICE_DEFINE(VisenseService,
                 CharaRead, CharaWrite, ucSensorData),
     BT_GATT_CCC(BleSensorDataNotify, BT_GATT_PERM_READ | BT_GATT_PERM_WRITE),
 	BT_GATT_CHARACTERISTIC(&sConfigChara.uuid,
-					BT_GATT_CHRC_NOTIFY | BT_GATT_CHRC_WRITE,
+					BT_GATT_CHRC_READ | BT_GATT_CHRC_WRITE,
 						BT_GATT_PERM_READ | BT_GATT_PERM_WRITE,
 						CharaRead,CharaWrite,ucConfigData2),
     BT_GATT_CCC(BleConfigDataNotify, BT_GATT_PERM_READ | BT_GATT_PERM_WRITE),
@@ -187,13 +192,13 @@ static void connected(struct bt_conn *conn, uint8_t err)
     {
 		bt_conn_le_data_len_update(conn, BT_LE_DATA_LEN_PARAM_MAX);
 		bConnected = true;
-		printk("\n\r\n\r\n\rConnected\n\r\n\r\n\r");
+		printk("INFO:Connected\n\r");
 	}
 }
 
 static void disconnected(struct bt_conn *conn, uint8_t reason)
 {
-	printk("\n\r\n\r\n\rDisconnected (reason 0x%02x)\n\r\n\r\n\r", reason);
+	printk("INFO:Disconnected (reason 0x%02x)\n\r", reason);
 	bConnected = false;
 }
 
@@ -250,12 +255,19 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 	char NotifyBuf[NOTIFY_BUFFER_SIZE];
 	int nRetVal = 0;
 	uint32_t uFlashCounter = 0;
+	
+	if (ulWritePos == 0)
+	{
+		printk("WARN: No data available\n\r");
+		return bRetVal;
+	}
+	
 	if (ucIdx > ulWritePos)
 	{
 		uFlashCounter = ucIdx - ulWritePos;
 	}
 
-	while(ucIdx <= NUMBER_OF_ENTRIES)
+	do
 	{	
 		if (!IsConnected())
 		{
@@ -270,7 +282,6 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 			bFullDataRead = true;
 			break;
 		}
-		k_msleep(100);
 
 		if (nRetVal)
 		{
@@ -293,12 +304,8 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 			bFullDataRead = true;
 			break;	
 		}
-		
-		
-		// bRetVal = true;
-	}
+	} while(0);
 	
-	hNotificationEnabled = false;     //history callback set 
 	if (bFullDataRead == true) 
 	{
 		if(!EraseExternalFlash(SECTOR_COUNT))

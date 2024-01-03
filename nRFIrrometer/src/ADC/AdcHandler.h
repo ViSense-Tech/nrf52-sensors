@@ -18,6 +18,9 @@
 /***************************************MACROS**********************************/
 #define ADC_READING_LOWER  0
 #define ADC_READING_UPPER  1024
+#define CHANNEL_0           0
+#define CHANNEL_1           1
+#define CHANNEL_2           2
 #define IRROMETER_1_ERROR   (1<<2)
 #define IRROMETER_1_OK      ~(1<<2)
 #define IRROMETER_2_ERROR   (1<<3)

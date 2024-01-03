@@ -38,7 +38,6 @@ bool AddItemtoJsonObject(cJSON **pcJsonHandle, _eJsonDataType JsondataType, cons
                     void *pcValue, uint8_t ucLen);
 bool ParseRxData(uint8_t *pData,const char *pckey, uint16_t ucLen, uint64_t *pucData);
 bool ParseArray(uint8_t *pData,const char *pckey, uint16_t ucLen, char *pucData);
-_sFenceData *GetFenceTable();
-void SetFenceTable(_sFenceData *sFenceTable);
+
 
 #endif

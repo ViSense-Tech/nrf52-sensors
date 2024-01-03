@@ -16,36 +16,8 @@
 
 /***********************************FUNCTION DEFINITION*******************/
 
-static _sConfigData *psConfigData = NULL;
 
-/**
- * @brief  : Get Fence table
- * @param  : None
- * @return : Fence Table
-*/
-_sFenceData *GetFenceTable()
-{
-    psConfigData = GetConfigData();
 
-    if (!psConfigData)
-    {
-        printk("ERR: failed to get config\n\r");
-        return NULL;
-    }
-
-    return &psConfigData->FenceData[0];
-}
-
-/**
- * @brief : Set Fence data table
- * @param : sFenceTable : Fence data table
- * @return : None
- * 
-*/
-void SetFenceTable(_sFenceData *sFenceTable)
-{
-    memcpy(&psConfigData->FenceData[0], sFenceTable, sizeof(psConfigData->FenceData));
-}
 
 /**
  * @brief function to add json object to json
@@ -59,6 +31,7 @@ bool AddItemtoJsonObject(cJSON **pcJsonHandle, _eJsonDataType JsondataType, cons
                          void *pcValue, uint8_t ucLen)
 {
     uint8_t ucIndex = 0;
+    cJSON *pcData = NULL;
 
     bool bRetVal = false;
 
@@ -78,8 +51,8 @@ bool AddItemtoJsonObject(cJSON **pcJsonHandle, _eJsonDataType JsondataType, cons
         case OBJECT:
             break;
         case ARRAY:
-            cJSON *pcData = NULL;
-            pcData = cJSON_AddArrayToObject(*pcJsonHandle, "data");
+
+            pcData = cJSON_AddArrayToObject(*pcJsonHandle, pcKey);
 
             if (pcData)
             {
@@ -162,15 +135,14 @@ bool ParseArray(uint8_t *pData, const char *pckey, uint16_t ucLen, char *pucData
 
         if (root != NULL)
         {
-           // printk("Reaching before parsing\n\r");
+
             RxData = cJSON_GetObjectItem(root, pckey);
-           // printk("Reaching after parsing\n\r");
 
             if (RxData && cJSON_IsArray(RxData))
             {
-               // printk("Reaching before arrsize\n\r");
+
                 arraySize = cJSON_GetArraySize(RxData);
-              //  printk("Reaching after arrsize\n\r");
+
                 for (int i = 0; i < arraySize; i++)
                 {
                     arrayItem = cJSON_GetArrayItem(RxData, i);

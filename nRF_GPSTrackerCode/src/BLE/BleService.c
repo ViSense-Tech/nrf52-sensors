@@ -47,8 +47,9 @@ static bool hNotificationEnabled = false;
 struct nvs_fs *FileSys;
 static bool bConfigNotifyEnabled = false;
 static bool bFenceStatus = false;
-static int ucCoordCount;
+// static int ucCoordCount;
 static bool bConfig = false;
+static bool bErased = false; 
 static uint16_t usPayloadLen = 0;
 
 /*Read index from flash*/
@@ -88,14 +89,15 @@ static void ParseFenceCoordinate(char *pcKey)
 	char *cSplitStr = NULL;
 	char ucbuff[300];
 	double dLat = 0.0;
+	uint8_t ucIdx = 0;
 
-	_sFenceData *psFenceData = NULL;
+	_sConfigData *psConfigData = NULL;
 	/*parsing array of strings */
-	psFenceData = GetFenceTable();
+	psConfigData = GetConfigData();
 
-	if (!psFenceData)
+	if (!psConfigData)
 	{
-		printk("ERR: fence table invalid \n\r");
+		printk("ERR: Got invalid configuration\n\r");
 		return;
 	}
 
@@ -104,14 +106,16 @@ static void ParseFenceCoordinate(char *pcKey)
 		printk("INFO: Parsing coordinate success\n\r");
 	}
 
+	ucIdx = 0;
+
 	if (0 == strcmp(pcKey, "lat"))
 	{
 		cSplitStr = strtok(ucbuff, ",");
 		while (cSplitStr != NULL)
 		{
 			dLat = atof(cSplitStr);
-			memcpy(&psFenceData->dLatitude, &dLat, sizeof(double));
-			psFenceData++;
+			memcpy(&psConfigData->FenceData[ucIdx].dLatitude, &dLat, sizeof(double));
+			ucIdx++;
 			cSplitStr = strtok(NULL, ",");
 		}
 
@@ -124,8 +128,8 @@ static void ParseFenceCoordinate(char *pcKey)
 		while (cSplitStr != NULL)
 		{
 			dLat = atof(cSplitStr);
-			memcpy(&psFenceData->dLatitude, &dLat, sizeof(double));
-			psFenceData++;
+			memcpy(&psConfigData->FenceData[ucIdx].dLongitude, &dLat, sizeof(double));
+			ucIdx++;
 			cSplitStr = strtok(NULL, ",");
 		}
 
@@ -205,7 +209,9 @@ void ParseRcvdData()
 }
 
 /**
- * 
+ * @brief Setting Config Status 
+ * @param bStatus : Config set status
+ * @return None
 */
 void SetConfigStatus(bool bStatus)
 {
@@ -238,7 +244,6 @@ static ssize_t CharaWrite(struct bt_conn *conn, const struct bt_gatt_attr *attr,
 						  const void *buf, uint16_t len, uint16_t offset,
 						  uint8_t flags)
 {
-	//uint8_t *value = attr->user_data;
 	printk("INFO:Offset = %d\n\r", offset);
 
 	if (offset + len > VND_MAX_LEN)
@@ -310,7 +315,7 @@ BT_GATT_SERVICE_DEFINE(VisenseService,
 											  CharaRead, CharaWrite, ucSensorData),
 					   BT_GATT_CCC(BleSensorDataNotify, BT_GATT_PERM_READ | BT_GATT_PERM_WRITE),
 					   BT_GATT_CHARACTERISTIC(&sConfigChara.uuid,
-											  BT_GATT_CHRC_NOTIFY | BT_GATT_CHRC_WRITE,
+											  BT_GATT_CHRC_READ | BT_GATT_CHRC_WRITE,
 											  BT_GATT_PERM_READ | BT_GATT_PERM_WRITE,
 											  CharaRead, CharaWrite, ucSensorData),
 					   BT_GATT_CCC(BleConfigDataNotify, BT_GATT_PERM_READ | BT_GATT_PERM_WRITE),
@@ -328,6 +333,12 @@ BT_GATT_SERVICE_DEFINE(VisenseService,
 void SetFileSystem(struct nvs_fs *fs)
 {
 	FileSys = fs;
+}
+
+
+uint8_t *GetConfigBuffer()
+{
+	return ucConfigData;
 }
 
 /**
@@ -470,15 +481,17 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 	int nRetVal = 0;
 	int uReadCount = 0;
 	uint32_t uFlashCounter = 0;
+
 	if (ucIdx > ulWritePos)
 	{
 		uFlashCounter = ucIdx - ulWritePos;
 	}
 
-	while(ucIdx <= NUMBER_OF_ENTRIES)
+	do
 	{	
 		if (!IsConnected())
 		{
+			bErased = false;
 			break;
 		}
 		
@@ -514,18 +527,26 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 		{
 			bFullDataRead = true;
 			break;	
-		}
+		} 
 		
-	}
+	} while (0);
 	
-	hNotificationEnabled = false;     //history callback set 
-	if (bFullDataRead == true) 
+	if (bFullDataRead == true ) 
 	{
-		if(!EraseExternalFlash(SECTOR_COUNT))
+		if (!bErased)
 		{
-			printk("Flash erase Failed");
+			if(!EraseExternalFlash(SECTOR_COUNT))
+			{
+				printk("Flash erase Failed");
+			}
+			else
+			{
+				bErased = true;
+			}
+			printk("Flash Cleared");
 		}
-		printk("Flash Cleared");
+
+
 		ucIdx = 0;
 		bRetVal = true;
 	}
@@ -619,7 +640,14 @@ void SetFenceConfigStatus(bool bStatus)
 */
 void SetFenceCoordCount(int ucCount)
 {
-	ucCoordCount = ucCount;
+	_sConfigData *psConfigData = NULL;
+
+	psConfigData = GetConfigData();
+
+	if (psConfigData)
+	{
+		psConfigData->nCoordCount = ucCount;
+	}
 }
 
 /**
@@ -630,13 +658,18 @@ void SetFenceCoordCount(int ucCount)
 int GetCoordCount()
 {
 	_sConfigData *psConfigData = NULL;
+	int nCoordCount = 0;
 
 	psConfigData = GetConfigData();
 
 	if (psConfigData)
 	{
-		ucCoordCount = psConfigData->ucCoordCount;
+		nCoordCount = psConfigData->nCoordCount;
+	}
+	else
+	{
+		printk("ERR: Getting  coord count from config failed\n\r");
 	}
 	
-	return ucCoordCount;
+	return nCoordCount;
 }

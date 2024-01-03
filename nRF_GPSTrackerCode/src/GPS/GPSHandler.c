@@ -10,6 +10,7 @@
 #include "GPSHandler.h"
 #include<math.h>
 #include "JsonHandler.h"
+#include "nvs_flash.h"
 #include "BleService.h"
 
 /***************************MACROS***********************************/
@@ -41,8 +42,6 @@ static char cRxBuffer[MSG_SIZE] = {0};
 static int nRxBuffIdx = 0;
 static bool bRxCmplt = false;
 static _eRxState RxState = START;
-static float fSOG = 0.0;
-
 
 double latitude;
 double longitude;
@@ -72,7 +71,18 @@ int IsDeviceInsideofFence()
 */
 void SetSogMax(float fVal)
 {
-    fSOG = fVal;
+    _sConfigData *psConfigData = NULL;
+
+    psConfigData = GetConfigData();
+
+    if (psConfigData)
+    {
+        psConfigData->fSpeedLimit = fVal;
+    }
+    else
+    {
+        printk("ERR: Setting Speed limit to config failed\n\r");
+    }
 }
 
 /**
@@ -82,6 +92,20 @@ void SetSogMax(float fVal)
 */
 float GetSogMax()
 {
+    _sConfigData *psConfigData = NULL;
+    float fSOG = 0.0;
+
+    psConfigData = GetConfigData();
+
+    if (psConfigData)
+    {
+        fSOG = psConfigData->fSpeedLimit;
+    }
+    else
+    {
+        printk("ERR: Getting speed limit from config failed\n\r");
+    }
+
     return fSOG;
 }
 
@@ -138,7 +162,6 @@ bool ConvertNMEAtoCoordinates(char *pcLocData, double *pfLat, double *pfLon)
         fMinutes = fDegrees/ 100;
         fMinutes = fMinutes - temp;
         fMinutes = fMinutes * 100;
-        //printk("min: %f", fMinutes);
         *pfLat = temp + (fMinutes/60);
         cSubstr = strtok(NULL, ",");
 
@@ -163,7 +186,6 @@ bool ConvertNMEAtoCoordinates(char *pcLocData, double *pfLat, double *pfLon)
             fMinutes = fDegrees/ 100;
             fMinutes = fMinutes - temp;
             fMinutes = fMinutes * 100;
-          //  printk("min: %f", fMinutes);
             *pfLon = temp + (fMinutes/60);
             bRetVal = true;
         }
@@ -215,10 +237,9 @@ bool ProcessRxdData(void)
 {
     uint8_t ucByte = 0;
     bool bRetval = false;
-        /* read until FIFO empty */
+    /* read until FIFO empty */
     if (uart_fifo_read(psUartDev, &ucByte, 1) > 0) 
     {
-       // printk("%c", (char)ucByte);
         ReadGPSPacket(ucByte);
         bRetval = true;
     }
@@ -293,9 +314,11 @@ bool ReadLocationData(char *pcLocation)
             {
                 //strcpy(pcLocation, "xxxxxxxxx,N,xxxxxxxxxx,E");
             }
+
+            bRetVal = true;
         }
-        bRxCmplt = false;
-        bRetVal = true;
+
+         bRxCmplt = false;
     }
 
     return bRetVal;
@@ -381,7 +404,6 @@ bool ReadSOGData(float *pfSOG)
                     for (ucIdx = 1; cSOG[ucIdx] != ','; ucIdx++);
                     ucIdx++;
                     memcpy(cSOG, cSOG+1, strlen(cSOG+1));
-                  //  printk("SOG str: %s\n\r", cSOG);
                     memset(cSOG+ucIdx, '\0', strlen(cSOG+ucIdx));
                     *pfSOG = atof(cSOG);
                     bRetVal = true;
@@ -390,9 +412,8 @@ bool ReadSOGData(float *pfSOG)
                 {
                     *pfSOG = 0.00;
                 }
-            }
+            }          
         }
-
         bRxCmplt = false;
     }
 
@@ -425,34 +446,42 @@ double haversineDistance(double lat1, double lon1, double lat2, double lon2) {
 bool polygonPoint(double latitude, double longitude, int fenceSize) 
 {
     double vectors[fenceSize][2];
-	_sFenceData *psFenceData = NULL;
+	//_sFenceData *psFenceData = NULL;
+    _sConfigData *psConfigData = NULL;
     double angle = 0;
+    int i;
     double num, den;
 
-    psFenceData = GetFenceTable();
-    for(int i = 0; i < fenceSize; i++) 
+    psConfigData = GetConfigData();
+
+    if (psConfigData)
     {
-        vectors[i][0] = (psFenceData->dLatitude)- latitude;
-        vectors[i][1] = (psFenceData->dLongitude) - longitude;         
-        psFenceData++;
-    }
-    
-    for(int i = 0; i < fenceSize; i++) 
-    {
-        num = (vectors[i % fenceSize][0]) * (vectors[(i + 1) % fenceSize][0]) + (vectors[i % fenceSize][1]) * (vectors[(i + 1) % fenceSize][1]);
-        den = (sqrt(pow(vectors[i % fenceSize][0], 2) + pow(vectors[i % fenceSize][1], 2))) * 
-              (sqrt(pow(vectors[(i + 1) % fenceSize][0], 2) + pow(vectors[(i + 1) % fenceSize][1], 2)));
+        for(i = 0; i < fenceSize; i++) 
+        {
+            vectors[i][0] = (psConfigData->FenceData[i].dLatitude)- latitude;
+            vectors[i][1] = (psConfigData->FenceData[i].dLongitude) - longitude;
+        }
+        
+        for(int i = 0; i < fenceSize; i++) 
+        {
+            num = (vectors[i % fenceSize][0]) * (vectors[(i + 1) % fenceSize][0]) + (vectors[i % fenceSize][1]) * (vectors[(i + 1) % fenceSize][1]);
+            den = (sqrt(pow(vectors[i % fenceSize][0], 2) + pow(vectors[i % fenceSize][1], 2))) * 
+                (sqrt(pow(vectors[(i + 1) % fenceSize][0], 2) + pow(vectors[(i + 1) % fenceSize][1], 2)));
 
-        angle = angle + (180 * acos(num / den) / M_PI);
+            angle = angle + (180 * acos(num / den) / M_PI);
+        }
+
+        if (angle > 355 && angle < 365) 
+        { 
+            targetStatus = 1;
+        } else 
+        {
+            targetStatus = 0;
+        }
+
+        printk("Target: %d\n\r",targetStatus);
+        printk("Angle: %lf\n\r",angle);
     }
 
-    if (angle > 355 && angle < 365) { 
-        targetStatus = 1;
-    } else {
-        targetStatus = 0;
-    }
-
-    printk("Target: %d\n\r",targetStatus);
-    printk("Angle: %lf\n\r",angle);
     return targetStatus;
 }

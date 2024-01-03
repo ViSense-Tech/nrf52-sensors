@@ -41,8 +41,10 @@ static bool WriteConfiguredtimeToRTC(void);
 static bool GetTimeFromRTC();
 static bool UpdateConfigurations();
 static bool CheckForConfigChange();
-static void SendConfigDataToApp();
+static bool DoTimedDataNotification(cJSON **pMainObject, char **pcBuffer);
+static bool SendLiveDataToApp(cJSON *pMainObject, char **pcBuffer);
 static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength);
+static void UpdateConfigParameters();
 
 /*************************FUNTION DEFINITION*****************/
 /**
@@ -53,17 +55,8 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength);
 int main(void)
 {
 	int Ret = 0;
-	long long TimeNow = 0, llEpochNow;
-	uint8_t ucIdx = 0;
-	uint8_t *pucAdvBuffer = NULL;
+	long long TimeNow = 0;
 	char *cJsonBuffer = NULL;
-    char cFlashReadBuf[350];
-	char cBuffer[30];
-#ifdef PMIC_ENABLED    
-    float fSOC = 0.0;
-#endif    
-    char *pcEnd = NULL;
-	double dFlowRate = 0.0;
     cJSON * pMainObject = NULL;
 
 	PrintBanner();
@@ -102,74 +95,17 @@ int main(void)
             }
 
             WriteConfiguredtimeToRTC();
-            SendConfigDataToApp();
 
 			pMainObject = cJSON_CreateObject();
-			memset(ucNotifyBuffer, 0, ADV_BUFF_SIZE);
-			ucNotifyBuffer[0] = FLOW_METER;
+            cJsonBuffer = NULL;
+            UpdateConfigParameters();
 
-			if (IsRxComplete())
-			{
-				strcpy(cBuffer, GetFlowRate());
-                printk("flowrate test %s\n\r", cBuffer);
-                //dFlowRate = strtod(cBuffer, pcEnd);
-                //sscanf( cBuffer, "$Flowrate: %f", &dFlowRate);
-                pcEnd = strchr(cBuffer, ':');
-                pcEnd = pcEnd+2;
-                strcpy(cBuffer, pcEnd);
-                
-                //printk("double value: %s\n\r",cBuffer);
-				dFlowRate = atof(cBuffer);
-                printk("flow: %f\n\r",dFlowRate);
-                if (dFlowRate <= GetMinGPM())
-                {
-                    printk("WARN: flowrate is below minGPM\n\r");
-                }
-				memset(cBuffer, 0, sizeof(cBuffer));
-				sprintf(cBuffer, "%f", dFlowRate);
-                
-				AddItemtoJsonObject(&pMainObject, NUMBER_FLOAT, "FlowRate", &dFlowRate, sizeof(float));
-				SetRxStatus(false);
-			}
-            else
+            if (DoTimedDataNotification(&pMainObject, &cJsonBuffer))
             {
-                printk("Not ecieved data from msp\n\r");
+                cJSON_Delete(pMainObject);
+                cJSON_free(cJsonBuffer);
+                k_msleep(100);
             }
-
-			if (GetCurrentTime(&llEpochNow))
-			{
-				AddItemtoJsonObject(&pMainObject, NUMBER_INT, "TS", &llEpochNow, sizeof(long long));
-			}
-#ifdef PMIC_ENABLED            
-			PMICUpdate(&fSOC);
-            memset(cBuffer, '\0', sizeof(cBuffer));
-            printk("soc=%f\n\r", fSOC);
-            sprintf(cBuffer,"%d%%", (int)fSOC);
-            AddItemtoJsonObject(&pMainObject, STRING, "Batt", cBuffer, sizeof(float));
-#endif            
-			cJsonBuffer = cJSON_Print(pMainObject);
-            SendHistoryDataToApp(cJsonBuffer, strlen(cJsonBuffer));
-
-			strcpy((char *)ucNotifyBuffer+2, cJsonBuffer);
-			ucNotifyBuffer[1] = (uint8_t)strlen((char *)ucNotifyBuffer+2);
-			printk("packet:%s\n\r", (char *)ucNotifyBuffer);
-
-			if(IsNotificationenabled())
-			{
-				VisenseSensordataNotify(ucNotifyBuffer, ADV_BUFF_SIZE);
-			}
-            else if (!IsConnected() && !IsNotificationenabled())
-			{
-				writeJsonToExternalFlash(cJsonBuffer, ulFlashIdx, WRITE_ALIGNMENT);
-				readJsonFromExternalFlash(cFlashReadBuf, ulFlashIdx, WRITE_ALIGNMENT);
-				printk("\n\rcFlash read%s\n\r", cFlashReadBuf);
-				ulFlashIdx++;
-				printk("flash count: %d\n\r", ulFlashIdx);
-			}
-
-			cJSON_Delete(pMainObject);
-			cJSON_free(cJsonBuffer);
-			k_msleep(200);
 		#ifdef SLEEP_ENABLE	
 		}
 		EnterSleepMode(GetSleepTime());
@@ -180,11 +116,139 @@ int main(void)
             printk("WARN: Getting time from RTC failed\n\r");
         }
 		#else
-			k_msleep(400);
+			k_msleep(1000);
 		#endif
 	}
 
 	return 0;
+}
+
+static bool DoTimedDataNotification(cJSON **pMainObject, char **pcBuffer)
+{
+    int64_t  llTimeNow=0;
+    uint16_t unPressureResult =0;
+    bool bRetVal = false;
+
+    if (!pMainObject || !pcBuffer)
+    {
+        printk("ERR:Invalid arguments in timed Notification function\n\r");
+        return bRetVal;
+    }
+
+    llTimeNow = sys_clock_tick_get();
+
+    while(sys_clock_tick_get() - llTimeNow < LIVEDATA_TIMESLOT)
+    {
+        if (!SendLiveDataToApp(*pMainObject, pcBuffer))
+        {
+            printk("ERR: Sennding live data failed\n\r");
+            break;
+        }
+    }
+
+    llTimeNow = sys_clock_tick_get();
+
+    while(sys_clock_tick_get() - llTimeNow < HISTORYDATA_TIMESLOT)
+    {   
+        if (!SendHistoryDataToApp(*pcBuffer, strlen(*pcBuffer)))
+        {
+            printk("ERR: Sennding history data failed\n\r");
+            break;            
+        }
+    }
+
+    bRetVal = true;
+
+    return bRetVal;
+}
+
+/**
+ * @brief Send live stream data to Application
+ * @param pMainObject : JSON root object
+ * @param pcBuffer    : JSON data buffer
+ * @return true for success
+*/
+static bool SendLiveDataToApp(cJSON *pMainObject, char **pcBuffer)
+{
+    char cBuffer[30];
+    char cFlashReadBuf[350];
+    long long llEpochNow;
+    bool bRetVal = false;
+#ifdef PMIC_ENABLED    
+    float fSOC = 0.0;
+#endif    
+    char *pcEnd = NULL;
+	double dFlowRate = 0.0;
+
+    memset(ucNotifyBuffer, 0, ADV_BUFF_SIZE);
+    ucNotifyBuffer[0] = FLOW_METER;
+
+    if (!pMainObject || !pcBuffer)
+    {
+        printk("Invalid arguments to Live data sending function\n\r");
+        return bRetVal;
+    }
+
+    if (IsRxComplete())
+    {
+        strcpy(cBuffer, GetFlowRate());
+        printk("flowrate test %s\n\r", cBuffer);
+
+        pcEnd = strchr(cBuffer, ':');
+        pcEnd = pcEnd+2;
+        strcpy(cBuffer, pcEnd);
+        
+        dFlowRate = atof(cBuffer);
+        printk("flow: %f\n\r",dFlowRate);
+        if (dFlowRate <= GetMinGPM())
+        {
+            printk("WARN: flowrate is below minGPM\n\r");
+        }
+        memset(cBuffer, 0, sizeof(cBuffer));
+        sprintf(cBuffer, "%f", dFlowRate);
+        
+        AddItemtoJsonObject(&pMainObject, NUMBER_FLOAT, "FlowRate", &dFlowRate, sizeof(float));
+        SetRxStatus(false);
+    }
+    else
+    {
+        printk("Not ecieved data from msp\n\r");
+    }
+
+    if (GetCurrentTime(&llEpochNow))
+    {
+        AddItemtoJsonObject(&pMainObject, NUMBER_INT, "TS", &llEpochNow, sizeof(long long));
+    }
+#ifdef PMIC_ENABLED            
+    PMICUpdate(&fSOC);
+    memset(cBuffer, '\0', sizeof(cBuffer));
+    printk("soc=%f\n\r", fSOC);
+    sprintf(cBuffer,"%d%%", (int)fSOC);
+    AddItemtoJsonObject(&pMainObject, STRING, "Batt", cBuffer, sizeof(float));
+#endif            
+    *pcBuffer = cJSON_Print(pMainObject); 
+
+    strcpy((char *)ucNotifyBuffer+2, *pcBuffer);
+    ucNotifyBuffer[1] = (uint8_t)strlen((char *)ucNotifyBuffer+2);
+    printk("packet:%s\n\r", (char *)ucNotifyBuffer);
+
+    if(IsNotificationenabled())
+    {
+        VisenseSensordataNotify(ucNotifyBuffer, ADV_BUFF_SIZE);
+    }
+    else if (!IsConnected() && !IsNotificationenabled())
+    {
+        writeJsonToExternalFlash(*pcBuffer, ulFlashIdx, WRITE_ALIGNMENT);
+        readJsonFromExternalFlash(cFlashReadBuf, ulFlashIdx, WRITE_ALIGNMENT);
+        printk("\n\rcFlash read%s\n\r", cFlashReadBuf);
+        ulFlashIdx++;
+        printk("flash count: %d\n\r", ulFlashIdx);
+    }
+
+    bRetVal = true;
+
+    return bRetVal;
+
 }
 
 /**
@@ -326,6 +390,7 @@ static bool CheckForConfigChange()
     {
         printk("\n\rError occured while reading config data: %d\n", ulRetCode);
        // lDiagnosticdata = lDiagnosticdata | (1<<4); // flag will shows error while reading config data from flash and added to the application
+       EraseExternalFlash(SECTOR_COUNT);
     }
     else
     {
@@ -361,7 +426,8 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
             
             memset(cBuffer, '\0', sizeof(cBuffer));
             memcpy(cBuffer, pcBuffer, unLength);
-            if(writeJsonToExternalFlash(cBuffer, ulFlashIdx,WRITE_ALIGNMENT))
+
+            if(writeJsonToExternalFlash(pcBuffer, ulFlashIdx,WRITE_ALIGNMENT))
             {
                 // NO OP
             }
@@ -382,8 +448,10 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
 
         if(IshistoryNotificationenabled() && IsConnected())
         {
-            VisenseHistoryDataNotify();
-            ulFlashIdx = 0; 
+            if (VisenseHistoryDataNotify())
+            {
+                 ulFlashIdx = 0; 
+            }
         }
 
         bRetval = true;
@@ -437,10 +505,11 @@ static bool WriteConfiguredtimeToRTC(void)
  * @param None
  * @return None
 */
-static void SendConfigDataToApp()
+static void UpdateConfigParameters()
 {
     cJSON *pConfigObject = NULL;
     char *cJsonConfigBuffer = NULL;
+    uint8_t *pucConfig = NULL;
     uint32_t ulSleepTime = 0;
     double dGPM=0.00;
     char cBuffer[30] =  {0};
@@ -459,11 +528,8 @@ static void SendConfigDataToApp()
     cJsonConfigBuffer = cJSON_Print(pConfigObject);
 
     printk("ConfigJSON:\n%s\n", cJsonConfigBuffer);
-
-    if (IsConfigNotifyEnabled())
-    {
-        VisenseConfigDataNotify(cJsonConfigBuffer, (uint16_t)strlen(cJsonConfigBuffer));
-    }
+    pucConfig = GetConfigBuffer();
+    memcpy(pucConfig, cJsonConfigBuffer, strlen(cJsonConfigBuffer));
 
     cJSON_free(cJsonConfigBuffer);
     cJSON_Delete(pConfigObject);
