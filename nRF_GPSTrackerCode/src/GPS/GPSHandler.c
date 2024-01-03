@@ -237,7 +237,7 @@ bool ProcessRxdData(void)
 {
     uint8_t ucByte = 0;
     bool bRetval = false;
-        /* read until FIFO empty */
+    /* read until FIFO empty */
     if (uart_fifo_read(psUartDev, &ucByte, 1) > 0) 
     {
         ReadGPSPacket(ucByte);

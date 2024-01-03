@@ -338,7 +338,7 @@ void SetFileSystem(struct nvs_fs *fs)
 
 uint8_t *GetConfigBuffer()
 {
-	return ucSensorData;
+	return ucConfigData;
 }
 
 /**

@@ -13,8 +13,9 @@
 #include "UartHandler.h"
 
 /**************************** MACROS********************************************/
-#define VND_MAX_LEN 247
-#define VALID_HISTORY 0x7B
+#define VND_MAX_LEN 	247
+#define VALID_HISTORY 	0x7B
+#define NOTIFY_BUF_SIZE 256
 /* Custom Service Variables */
 
 
@@ -232,7 +233,7 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 {
 	bool bRetVal = false;
 	bool bFullDataRead = false;
-	char NotifyBuf[256];
+	char NotifyBuf[NOTIFY_BUF_SIZE];
 	int nRetVal = 0;
 	int uReadCount = 0;
 	uint8_t uFlashCounter = 0;
@@ -255,7 +256,7 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 			break;
 		}
 		
-		memset(NotifyBuf, 0, 256);
+		memset(NotifyBuf, 0, NOTIFY_BUF_SIZE);
 		readJsonFromExternalFlash(NotifyBuf, ulIdx, 256);
 		printk("\nId: %d, Ble_Stored_Data: %s\n",ulIdx, NotifyBuf);
 		if (NotifyBuf[0] !=  VALID_HISTORY)
@@ -287,8 +288,6 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 			break;	
 		}
 		
-		
-		// bRetVal = true;
 	} while(0); 
 	
 	if (bFullDataRead == true) 
