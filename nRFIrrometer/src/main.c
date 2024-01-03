@@ -51,7 +51,7 @@ static void UpdateConfigParameters();
 static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength);
 static bool AddSensorDataToPayload(uint8_t ucChannel, cJSON *pMainObject);
 static bool UpdateDiagInfoForSensors(uint8_t ucChannel, int *pnCBValue);
-static bool AppendSensorDataToMainObject(cJSON *pMainObject, int *pnCBValue);
+static bool AppendSensorDataToMainObject(cJSON *pMainObject, int *pnCBValue, uint8_t ucChannel);
 static bool GetAllSensorData(cJSON *pMainObject);
 static bool DoTimedDataNotification(cJSON *pMainObject);
 static bool SendLiveDataToApp(cJSON *pMainObject);
@@ -321,7 +321,7 @@ static bool SendLiveDataToApp(cJSON *pMainObject)
  * @param pnCBValue : CB value
  * @return true for success
 */
-static bool AppendSensorDataToMainObject(cJSON *pMainObject, int *pnCBValue)
+static bool AppendSensorDataToMainObject(cJSON *pMainObject, int *pnCBValue, uint8_t ucChannel)
 {
     cJSON *pSensorObj = NULL;
     bool bRetVal = false;
@@ -336,9 +336,21 @@ static bool AppendSensorDataToMainObject(cJSON *pMainObject, int *pnCBValue)
             memset(cBuffer, '\0', sizeof(cBuffer));
             sprintf(cBuffer,"CB=%d", abs(*pnCBValue));
             printk("Data:%s\n", cBuffer);
-            pSensorObj=cJSON_AddObjectToObject(pMainObject, "S2");
+
             ADCReading1 = GetADCReadingInForwardBias();
             ADCReading2 = GetADCReadingInReverseBias();
+
+            switch (ucChannel)
+            {
+                case 0: pSensorObj=cJSON_AddObjectToObject(pMainObject, "S1");
+                        break;
+                case 1: pSensorObj=cJSON_AddObjectToObject(pMainObject, "S2");
+                        break;
+                case 2: pSensorObj=cJSON_AddObjectToObject(pMainObject, "S3");
+                        break;
+                default:
+                        break;        
+            }
 
             if (!AddItemtoJsonObject(&pSensorObj, NUMBER_INT, "ADC1", &ADCReading1, sizeof(uint16_t)))
             {
@@ -449,7 +461,7 @@ static bool AddSensorDataToPayload(uint8_t ucChannel, cJSON *pMainObject)
             break;
         }
 
-        if (!AppendSensorDataToMainObject(pMainObject, &nCBValue))
+        if (!AppendSensorDataToMainObject(pMainObject, &nCBValue, ucChannel))
         {
             printk("ERR: Append data to JSON failed\n\r");
             break;          
