@@ -8,6 +8,15 @@
 /***************************************INCLUDES*********************************/
 #include "FlashHandler.h"
 
+
+/***************************************GLOBALS*********************************/
+uint32_t uFlashIdx = 0;  // initialise data counter
+#ifdef MX66FLASH_ENABLED
+static const struct device *const flash_dev = DEVICE_DT_GET(DT_NODELABEL(mx66l1g));
+#else
+static const struct device *const flash_dev = DEVICE_DT_GET(DT_ALIAS(spi_flash0));
+#endif
+
 /***************************************FUNCTION DECLARATION********************/
 int nvs_initialisation( struct nvs_fs *fs, uint8_t selector)
 {
@@ -23,7 +32,7 @@ int nvs_initialisation( struct nvs_fs *fs, uint8_t selector)
 
 	if (selector == DATA_FS) // data
 	{
-		fs->offset = NVS_PARTITION_OFFSET + 12288;
+		fs->offset = NVS_PARTITION_OFFSET + 8192;
 		rc = flash_get_page_info_by_offs(fs->flash_device, fs->offset, &info);
 		if (rc) 
 		{
@@ -31,7 +40,7 @@ int nvs_initialisation( struct nvs_fs *fs, uint8_t selector)
 			return 0;
 		}
 		fs->sector_size = info.size;
-		fs->sector_count = 4U;
+		fs->sector_count = 2U;
 	}
 	
 	if (selector == CONFIG_DATA_FS) // config data
@@ -44,7 +53,7 @@ int nvs_initialisation( struct nvs_fs *fs, uint8_t selector)
 			return 0;
 		}
 		fs->sector_size = info.size;
-		fs->sector_count = 3U;
+		fs->sector_count = 2U;
 	}
 
 	rc = nvs_mount(fs);
@@ -99,4 +108,96 @@ int freeSpaceCalc(struct nvs_fs *fs, uint16_t data_count,uint16_t count_max)
 	int free_space = nvs_calc_free_space(fs);
 	printk("\n free space %d ", free_space);
 	return free_space;
+}
+
+/**
+ * @brief  Write data to external flash
+ * @param pcBuffer : data to send
+ * @param unLength : Length of data
+ * @return True for success
+*/
+bool writeJsonToExternalFlash(char *pcBuffer, uint32_t flashIdx, int unLength) // &flashIdx
+{
+	bool bRetval = false;
+	int rc = 0;
+	flashIdx = (flashIdx * WRITE_ALIGNMENT);
+
+	do
+	{
+		rc = flash_write(flash_dev, SPI_FLASH_REGION_OFFSET + flashIdx, pcBuffer, unLength);
+		if (rc != 0)
+		{
+			printf("Flash write failed! %d\n", rc);
+			break;
+		}
+		printk("offset:%d\n",flashIdx);
+		
+		k_sleep(K_MSEC(10));
+		bRetval = true;	
+	} while (0);
+
+	return bRetval;
+
+}
+/**
+ * @brief  Read data from external flash
+ * @param pcBuffer : data buffer to store
+ * @param unLength : Length of data
+ * @return True for success
+*/
+bool readJsonFromExternalFlash(char *pcBuffer, uint32_t flashIdx, int unLength)
+{
+	bool bRetval = false;
+	int rc = 0;
+	
+	// flashIdx = flashIdx * 256;
+	flashIdx = flashIdx * WRITE_ALIGNMENT;
+	
+
+	do
+	{
+		rc = flash_read(flash_dev,SPI_FLASH_REGION_OFFSET + flashIdx, pcBuffer, WRITE_ALIGNMENT);
+		if (rc != 0)
+		{
+			printf("Flash read failed! %d\n", rc);
+			break;
+		}
+		printk("offset:%d\n",flashIdx);
+		bRetval = true;
+		
+	}while(0);
+
+	return bRetval;
+
+}
+/**
+ * @brief  Erase external flash
+ * @param None
+ * @return True for success
+*/
+bool EraseExternalFlash(uint16_t uSectorIdx)
+{
+	bool bRetval = false;
+	int rc = 0;
+
+	do
+	{
+		rc = flash_erase(flash_dev, SPI_FLASH_REGION_OFFSET,
+				SPI_FLASH_SECTOR_SIZE * uSectorIdx);
+		if (rc != 0) 
+		{
+			printf("Flash erase failed! %d\n", rc);
+			break;
+		} else 
+		{
+			printf("Flash erase succeeded!\n");
+		}
+		bRetval = true;
+	} while (0);
+
+	return bRetval;
+}
+uint32_t *GetFlashCounter()
+{
+	return &uFlashIdx;
 }

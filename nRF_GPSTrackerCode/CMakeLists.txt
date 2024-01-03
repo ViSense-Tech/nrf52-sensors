@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 cmake_minimum_required(VERSION 3.20.0)
+set(BOARD_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 
 find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 project(uart_echo_bot)
@@ -14,6 +15,7 @@ target_include_directories(app PRIVATE src/GPS
                                         src/RTC
                                         src/SYSTEM
                                         src/Timer
+                                        src/PMIC
                                         src/MESH
 )
                                         
@@ -28,6 +30,7 @@ target_sources(app PRIVATE  src/GPS/GPSHandler.c
                             src/NVS/nvs_flash.c
                             src/Json/Jsonhandler.c
                             src/Timer/TimerHandler.c
+                            src/PMIC/PMICHandler.c
                             src/MESH/MeshHandler.c
                             src/MESH/MeshService.c
                             src/main.c)

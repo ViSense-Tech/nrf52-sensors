@@ -13,10 +13,11 @@
 #include <zephyr/pm/device.h>
 
 /***************************************MACROS**********************************/
-#define ALIVE_TIME         30 //Time the device will be active after a sleep time(in seconds)
-#define SLEEP_TIME         60
+#define ALIVE_TIME         60 //Time the device will be active after a sleep time(in seconds)
+#define SLEEP_TIME         10
 #define TICK_RATE          32768
-#define SLEEP_ENABLE
+//#define SLEEP_ENABLE //Uncomment this line to enable sleep
+//#define PMIC_ENABLED //Uncomment this line to enable PMIC functionality
 
 /***************************************TYPEDEFS*********************************/
 

@@ -31,11 +31,11 @@ static const struct bt_data sd[] = {
                                                                                                                         
 /**********************************FUNCTION DEFINITION****************/
 
-// /**
-//  * @brief  This function isfor Enabling BLE
-//  * @param  None 
-//  * @return True for success
-// */
+/**
+ * @brief  This function isfor Enabling BLE
+ * @param  None 
+ * @return True for success
+*/
 // bool EnableBLE()
 // {
 //     int nError = 0;
@@ -108,7 +108,7 @@ int StartAdvertising(void)
 	}
     else
     {
-        printk("Advertiser %p set started\n", adv);
+        printk("Advertiser set started\n");
     }
 
     return nError;
@@ -159,7 +159,11 @@ bool BleStopAdvertise()
     int nError = 0;
     bool bRetVal = false;
 
+#ifdef EXTENDED_ADV
     nError = bt_le_ext_adv_stop(adv);
+#else
+    nError = bt_le_adv_stop();
+#endif
 
  	if (!nError) 
     {

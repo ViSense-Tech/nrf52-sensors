@@ -1,10 +1,15 @@
 /*************************************************************INCLUDES*****************************************/
 #include "nvs_flash.h"
-
+#include <stdio.h>
 
 /**************************************************************GLOBAL VARIABLES*********************************/
-static const struct device *const flash_dev = DEVICE_DT_GET(DT_ALIAS(spi_flash0));
+static _sConfigData sConfigData = {0};
 uint32_t uFlashIdx = 0;  // initialise data counter
+#ifdef MX66FLASH_ENABLED
+static const struct device *const flash_dev = DEVICE_DT_GET(DT_NODELABEL(mx66l1g));
+#else
+static const struct device *const flash_dev = DEVICE_DT_GET(DT_ALIAS(spi_flash0));
+#endif
 
 /**
  * @brief  Initialise flash
@@ -15,7 +20,7 @@ uint32_t uFlashIdx = 0;  // initialise data counter
 int FlashInit( struct nvs_fs *fs, uint8_t selector)
 {
     int rc = 0;
-	uint32_t counter = 0U, counter_his;
+	//uint32_t counter = 0U;
 	struct flash_pages_info info;
 	fs->flash_device = NVS_PARTITION_DEVICE;
 
@@ -127,11 +132,6 @@ bool writeJsonToExternalFlash(char *pcBuffer, uint32_t flashIdx, int unLength) /
 
 	do
 	{
-		if (!device_is_ready(flash_dev)) 
-		{
-			printk("%s: device not ready.\n", flash_dev->name);
-			break;
-		}
 		rc = flash_write(flash_dev, SPI_FLASH_REGION_OFFSET + flashIdx, pcBuffer, WRITE_ALIGNMENT);
 		if (rc != 0)
 		{
@@ -207,7 +207,13 @@ bool EraseExternalFlash(uint16_t uSectorIdx)
 	return bRetval;
 }
 
+
+_sConfigData *GetConfigData()
+{
+	return &sConfigData;
+}
 uint32_t *GetFlashCounter()
 {
 	return &uFlashIdx;
 }
+

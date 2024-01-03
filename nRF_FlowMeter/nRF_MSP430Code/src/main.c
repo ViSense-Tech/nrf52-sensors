@@ -13,6 +13,7 @@
 #include "TimerHandler.h"
 #include "FlashHandler.h"
 #include "SystemHandler.h"
+#include "PMIC/PMICHandler.h"
 #include "Common.h"
 
 /*************************MACROS****************************/
@@ -28,7 +29,7 @@ int32_t lDiagnosticdata = 0;
 _sConfigData sConfigData = {0};
 struct nvs_fs fs;    //file system
 struct nvs_fs sConfigFs;
-uint32_t uFlashIdx = 0;  // initialise data counter
+uint32_t ulFlashIdx = 0;  // initialise data counter
 
 /*************************FUNTION DECLARATION*****************/
 static bool InitPowerManager();
@@ -56,7 +57,11 @@ int main(void)
 	uint8_t ucIdx = 0;
 	uint8_t *pucAdvBuffer = NULL;
 	char *cJsonBuffer = NULL;
+    char cFlashReadBuf[350];
 	char cBuffer[30];
+#ifdef PMIC_ENABLED    
+    float fSOC = 0.0;
+#endif    
     char *pcEnd = NULL;
 	double dFlowRate = 0.0;
     cJSON * pMainObject = NULL;
@@ -73,10 +78,10 @@ int main(void)
         printk("ERROR: Initialising all modules failed \n\r");
     }
 
-    if (!CheckForConfigChange())
-    {
-        printk("ERROR: Config check failed\n\r");
-    }    
+    // if (!CheckForConfigChange())
+    // {
+    //     printk("ERROR: Config check failed\n\r");
+    // }    
 
     if (!GetTimeFromRTC())
     {
@@ -135,7 +140,13 @@ int main(void)
 			{
 				AddItemtoJsonObject(&pMainObject, NUMBER_INT, "TS", &llEpochNow, sizeof(long long));
 			}
-
+#ifdef PMIC_ENABLED            
+			PMICUpdate(&fSOC);
+            memset(cBuffer, '\0', sizeof(cBuffer));
+            printk("soc=%f\n\r", fSOC);
+            sprintf(cBuffer,"%d%%", (int)fSOC);
+            AddItemtoJsonObject(&pMainObject, STRING, "Batt", cBuffer, sizeof(float));
+#endif            
 			cJsonBuffer = cJSON_Print(pMainObject);
             SendHistoryDataToApp(cJsonBuffer, strlen(cJsonBuffer));
 
@@ -146,6 +157,14 @@ int main(void)
 			if(IsNotificationenabled())
 			{
 				VisenseSensordataNotify(ucNotifyBuffer, ADV_BUFF_SIZE);
+			}
+            else if (!IsConnected() && !IsNotificationenabled())
+			{
+				writeJsonToExternalFlash(cJsonBuffer, ulFlashIdx, WRITE_ALIGNMENT);
+				readJsonFromExternalFlash(cFlashReadBuf, ulFlashIdx, WRITE_ALIGNMENT);
+				printk("\n\rcFlash read%s\n\r", cFlashReadBuf);
+				ulFlashIdx++;
+				printk("flash count: %d\n\r", ulFlashIdx);
 			}
 
 			cJSON_Delete(pMainObject);
@@ -161,7 +180,7 @@ int main(void)
             printk("WARN: Getting time from RTC failed\n\r");
         }
 		#else
-			k_msleep(400);
+			k_msleep(1000);
 		#endif
 	}
 
@@ -175,7 +194,7 @@ int main(void)
 */
 static void InitDataPartition()
 {
-    nvs_initialisation(&fs, DATA_FS); 
+    // nvs_initialisation(&fs, DATA_FS); 
     SetFileSystem(&fs);
 }
 
@@ -211,7 +230,7 @@ static bool InitBle()
             printk("Bluetooth init failed (err %d)\n", nError);
             break;
         }
-        nError = StartAdvertising();
+        // nError = StartAdvertising();
         if (nError)
         {
             printk("Advertising failed to create (err %d)\n", nError);
@@ -239,11 +258,13 @@ static bool InitAllModules()
 			printk("ERROR: Init PM failed\n\r");
 			break;
 		}
-
+#ifdef PMIC_ENABLED        
+        PMICInit();
+#endif        
 		InitTimer();
 		k_sleep(K_TICKS(100));
 
-		InitDataPartition();
+		// InitDataPartition();
 
 		if (!InitUart())
 		{
@@ -297,19 +318,22 @@ static bool CheckForConfigChange()
 {
     uint32_t ulRetCode = 0;
     bool bRetVal = false;
+    uint32_t *uFlashIdx = NULL;
 
+    uFlashIdx = GetFlashCounter();
     nvs_initialisation(&sConfigFs, CONFIG_DATA_FS); 
     k_msleep(100);
     ulRetCode = readJsonToFlash(&sConfigFs, 0, 0, (char *)&sConfigData, sizeof(sConfigData)); // read config params from the flash
     if(sConfigData.flag == 0) 
     {
         printk("\n\rError occured while reading config data: %d\n", ulRetCode);
+        EraseExternalFlash(SECTOR_COUNT);
        // lDiagnosticdata = lDiagnosticdata | (1<<4); // flag will shows error while reading config data from flash and added to the application
     }
     else
     {
         SetSleepTime(sConfigData.sleepTime);
-        uFlashIdx = sConfigData.flashIdx;
+        *uFlashIdx = sConfigData.flashIdx;
         printk("sConfigFlag %d ,flashIdx = %d\n",
                                      sConfigData.flag,
                                      sConfigData.flashIdx); //get all the config params from the flash if a reboot occures
@@ -331,6 +355,9 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
 
     char cBuffer[ADV_BUFF_SIZE];
     bool bRetval = false;
+    uint32_t *uFlashIdx = NULL;
+
+    uFlashIdx = GetFlashCounter();
 
 
     if (pcBuffer)
@@ -340,18 +367,21 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
             
             memset(cBuffer, '\0', sizeof(cBuffer));
             memcpy(cBuffer, pcBuffer, unLength);
-            writeJsonToFlash(&fs, uFlashIdx, NUMBER_OF_ENTRIES, cBuffer, strlen(cBuffer));
-            k_msleep(50);
-            if (readJsonToFlash(&fs, uFlashIdx, NUMBER_OF_ENTRIES, cBuffer, strlen(cBuffer)))
+            if(writeJsonToExternalFlash(cBuffer, *uFlashIdx,WRITE_ALIGNMENT))
             {
-                printk("Read succes\n\r");
+                // NO OP
             }
-            uFlashIdx++;
-            sConfigData.flashIdx = uFlashIdx;
-            nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
-            if(uFlashIdx>= NUMBER_OF_ENTRIES)
+            k_msleep(50);
+            if (readJsonFromExternalFlash(cBuffer, *uFlashIdx, WRITE_ALIGNMENT))
             {
-                uFlashIdx = 0;
+                printk("\nId: %d, Stored_Data: %s\n",*uFlashIdx, cBuffer);
+            }
+            *uFlashIdx = *uFlashIdx + 1;
+            sConfigData.flashIdx = *uFlashIdx;
+            nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
+            if(*uFlashIdx>= NUMBER_OF_ENTRIES)
+            {
+                *uFlashIdx = 0;
             }
         }
  
@@ -359,7 +389,7 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
         if(IshistoryNotificationenabled() && IsConnected())
         {
             VisenseHistoryDataNotify();
-            uFlashIdx = 0; 
+            *uFlashIdx = 0; 
         }
 
         bRetval = true;

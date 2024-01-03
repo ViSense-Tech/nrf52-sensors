@@ -8,16 +8,17 @@
 
 /***************************************INCLUDES*********************************/
 #include "RtcHandler.h"
+#include "LCDHandler.h"
 #include <string.h>
 
 /***************************************MACROS*********************************/
-#define MAX_TIME_BUFF_SIZE 80
+#define MAX_TIME_BUFF_SIZE 50
 #define RTC_DEV_ADDR 0x68
 #define RTC_CTRL_REG 0x0E
 
 /***************************************GLOBALS*********************************/
 
-static const struct device *i2c_dev = DEVICE_DT_GET(DT_NODELABEL(i2c0));
+
 static long long llLastUpdatedTime = 1696585221;
 static bool bTimeUpdated = false;
 long long llCurrentTime = 0;
@@ -70,10 +71,10 @@ bool GetTimeUpdateStatus()
     return bTimeUpdated;
 }
 
-struct device *GetI2Chandle()
-{
-	return i2c_dev;
-}
+// struct device *GetI2Chandle()
+// {
+// 	return i2c_dev;
+// }
 
 /**
  * @brief Set time update status
@@ -175,11 +176,19 @@ static bool SetTimeDate()
 	struct tm sTimeDate;
 	char cTimeBuffer[MAX_TIME_BUFF_SIZE];
 	uint8_t ucReg = 0x00;
+	struct device *i2c_dev = NULL;
 
+	i2c_dev =GetI2CDevice();
 	ConvertEpochToTime(llLastUpdatedTime, &sTimeDate, cTimeBuffer);
 
 	do
     {
+		if (!i2c_dev)
+		{
+			printk("ERR: Got i2c device\n\r");
+			break;
+		}
+
         if (i2c_reg_write_byte(i2c_dev, RTC_DEV_ADDR, 
 								ucReg, ConvertDecimalToBCD(sTimeDate.tm_sec)) != 0)
         {
@@ -257,19 +266,31 @@ static bool SetTimeDate()
 bool InitRtc()
 {
     bool bRetVal = false;
+	struct device *i2c_dev = NULL;
 
-    if (i2c_reg_write_byte(i2c_dev, RTC_DEV_ADDR, RTC_CTRL_REG, 0x00) != 0)
-    {
-        printk("Configuring RTC failed\n\r");
-    }
-    else
-    {
-        printk("Configuring RTC success\n\r");
-        bRetVal = true;
-    }
+	i2c_dev =GetI2CDevice();
 
-	bRetVal = SetTimeDate();
+	do
+	{
+		if (!i2c_dev)
+		{
+			printk("ERR: Got i2c device\n\r");
+			break;
+		}
 
+		if (i2c_reg_write_byte(i2c_dev, RTC_DEV_ADDR, RTC_CTRL_REG, 0x00) != 0)
+		{
+			printk("Configuring RTC failed\n\r");
+		}
+		else
+		{
+			printk("Configuring RTC success\n\r");
+			bRetVal = true;
+		}
+
+		bRetVal = SetTimeDate();
+	} while (0);
+	
     return bRetVal;
 }
 
@@ -281,16 +302,24 @@ bool InitRtc()
 bool GetCurrenTimeInEpoch(long long *pllCurrEpoch)
 {
 	struct tm sTimeStamp = {0};
-	uint16_t ucData = 0x00;
+	uint8_t ucData = 0x00;
 	uint8_t ucReg = 0x00;
 	char cTimeBuffer[MAX_TIME_BUFF_SIZE] = {0};
 	bool bRetval = false;
-	uint8_t ucRetry = 3;
+	struct device *i2c_dev = NULL;
+
+	i2c_dev = GetI2CDevice();
 
 	if (pllCurrEpoch)
 	{
 		do
 		{
+			if (!i2c_dev)
+			{
+				printk("ERR: getting i2c handle failed\n\r");
+				break;
+			}
+
 			if (0 != i2c_reg_read_byte(i2c_dev, RTC_DEV_ADDR, ucReg, &ucData))
 			{
 				printk("Reading seconds failed\n\r");

@@ -15,13 +15,14 @@
 
 /************************************GLOBALS**************************/
 static struct bt_le_ext_adv *adv;
-
+//uint8_t ucSensorId[] = {0x05, 0x00, 0x00, 0x00}; /*Uncomment this line for adding sensor type to \
+                                                    advertising packet also uncomment line number 25*/
 uint8_t ucAdVertsingBuffer[ADV_BUFF_SIZE] = {0x00, 0x00, 0x00, 0x00, 0x00};
 
 static const struct bt_data ad[] = {
 	BT_DATA_BYTES(BT_DATA_FLAGS, (BT_LE_AD_GENERAL | BT_LE_AD_NO_BREDR)),
-	BT_DATA(BT_DATA_NAME_SHORTENED, DEVICE_NAME, DEVICE_NAME_LEN),
-	//BT_DATA(BT_DATA_MANUFACTURER_DATA, ucAdVertsingBuffer, ADV_BUFF_SIZE)
+	BT_DATA(BT_DATA_NAME_SHORTENED, DEVICE_NAME, DEVICE_NAME_LEN)
+	//, BT_DATA(BT_DATA_MANUFACTURER_DATA, ucSensorId, sizeof(ucSensorId))
 };
 
 static const struct bt_data sd[] = {
@@ -33,25 +34,25 @@ static const struct bt_data sd[] = {
  * @brief  This function isfor Enabling BLE
  * @param  None 
  * @return True for success
-*/
-bool EnableBLE()
-{
-    int nError = 0;
-    bool bRetVal = false;
+// */
+// bool EnableBLE()
+// {
+//     int nError = 0;
+//     bool bRetVal = false;
 
-    nError = bt_enable(NULL);
+//     nError = bt_enable(NULL);
 
-	if (!nError) 
-    {
-        bRetVal = true;
-	}
-    else
-    {
-		printk("Bluetooth init failed (err %d)\n", nError);
-    }
+// 	if (!nError) 
+//     {
+//         bRetVal = true;
+// 	}
+//     else
+//     {
+// 		printk("Bluetooth init failed (err %d)\n", nError);
+//     }
 
-    return bRetVal;
-}
+//     return bRetVal;
+// }
 
 /**
  * @brief function to initialize extended advertising

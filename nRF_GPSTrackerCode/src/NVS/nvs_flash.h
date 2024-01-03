@@ -33,25 +33,23 @@
 /*NUmber of sector used for storing JSON*/
 #define SECTOR_COUNT ((NUMBER_OF_ENTRIES * WRITE_ALIGNMENT) / 4096)
 
-
-
-
-
 #define STRING_ID 0
+
+//#define MX66FLASH_ENABLED //Uncomment here to enable MX66
 /*********************************************************TYPEDEFS*****************************************/
-typedef struct __attribute__((packed)) __sConfigData
+typedef struct __attribute__((__packed__)) __sConfigData
 {
     long long lastUpdatedTime;
-    uint8_t ucCoordCount;
+    int ucCoordCount;
     _sFenceData FenceData[6];
-     uint32_t flashIdx;
+    uint32_t flashIdx;
     uint32_t sleepTime;
     uint8_t flag;
 }_sConfigData;
 
 /**********************************************************FUNCTION DECLARATIONS*******************************/
-uint32_t *GetFlashCounter();
  int nvs_logger(char* cjson, int data_count);
+ uint32_t *GetFlashCounter();
 int FlashInit( struct nvs_fs *fs, uint8_t selector);
 // int writeJsonToFlash(struct nvs_fs *fs, uint16_t data_count,uint16_t count_max, char *buf, uint8_t len);
  int ReadJsonFromFlash(struct nvs_fs *fs, uint16_t data_count, char *buf, uint8_t len);
@@ -62,3 +60,4 @@ int freeSpaceCalc(struct nvs_fs *fs);
 bool writeJsonToExternalFlash(char *pcBuffer, uint32_t flashIdx, int unLength);
 bool EraseExternalFlash(uint16_t);
 bool readJsonFromExternalFlash(char *pcBuffer, uint32_t flashIdx, int unLength);
+_sConfigData *GetConfigData();

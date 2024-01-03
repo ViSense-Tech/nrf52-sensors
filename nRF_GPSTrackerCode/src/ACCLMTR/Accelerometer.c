@@ -73,7 +73,6 @@ bool ReadFromAccelerometer(_sAcclData *psAcclData)
     bool bRetVal = false;
     struct device *psI2CDevice = NULL;
     uint8_t ucAcclbuffer[9] = {0};
-    uint8_t ucbyte;
     uint32_t *pDiagData = NULL;
 
     psI2CDevice = GetI2CDevice();

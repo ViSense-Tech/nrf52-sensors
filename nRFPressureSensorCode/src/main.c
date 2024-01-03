@@ -83,10 +83,10 @@ int main(void)
         printk("ERROR: Initialising all modules failed \n\r");
    }
 
-    // if (!CheckForConfigChange())
-    // {
-    //     printk("ERROR: Config Check failed \n\r");
-    // }
+    if (!CheckForConfigChange())
+    {
+        printk("ERROR: Config Check failed \n\r");
+    }
 
     if (!GetTimeFromRTC())
     {
@@ -558,7 +558,7 @@ static bool InitAllModules()
        InitADC();
        k_sleep(K_TICKS(100));
 
-       InitDataPartition();
+    //    InitDataPartition();
 
        if (!InitBle())
        {
