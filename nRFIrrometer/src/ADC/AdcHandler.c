@@ -184,8 +184,8 @@ void SelectMuxChannel(uint8_t ucChannel)
     switch(ucChannel)
     {   
         /*State of pin is inverted in nRF52840 DK need to investigate*/
-        case 0: gpio_pin_set(sMuxInput1.port, sMuxInput1.pin , 1);
-                gpio_pin_set(sMuxInput2.port, sMuxInput2.pin , 1);
+        case 0: gpio_pin_set(sMuxInput1.port, sMuxInput1.pin , 0);
+                gpio_pin_set(sMuxInput2.port, sMuxInput2.pin , 0);
                 break;
 
         case 1: gpio_pin_set(sMuxInput1.port, sMuxInput1.pin , 0);
@@ -193,15 +193,15 @@ void SelectMuxChannel(uint8_t ucChannel)
                 break;
 
         case 2: gpio_pin_set(sMuxInput1.port, sMuxInput1.pin , 1);
-                gpio_pin_set(sMuxInput2.port, sMuxInput2.pin , 0);
+                gpio_pin_set(sMuxInput2.port, sMuxInput2.pin , 0);               
                 break;
 
-        case 3: gpio_pin_set(sMuxInput1.port, sMuxInput1.pin , 0);
-                gpio_pin_set(sMuxInput2.port, sMuxInput2.pin , 0);
+        case 3: gpio_pin_set(sMuxInput1.port, sMuxInput1.pin , 1);
+                gpio_pin_set(sMuxInput2.port, sMuxInput2.pin , 1);
                 break;   
 
         default:
-                 break;                     
+                break;                     
             
     }
    
