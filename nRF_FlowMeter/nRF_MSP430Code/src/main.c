@@ -15,6 +15,7 @@
 #include "SystemHandler.h"
 #include "PMIC/PMICHandler.h"
 #include "Common.h"
+#include "MeshHandler.h"
 
 /*************************MACROS****************************/
 //#define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
@@ -158,7 +159,7 @@ int main(void)
 			{
 				VisenseSensordataNotify(ucNotifyBuffer, ADV_BUFF_SIZE);
 			}
-            else if (!IsConnected() && !IsNotificationenabled())
+            else if (!IsConnected() && !IsNotificationenabled() && !IsSupervisorLiveNotifyEnable())
 			{
 				writeJsonToExternalFlash(cJsonBuffer, ulFlashIdx, WRITE_ALIGNMENT);
 				readJsonFromExternalFlash(cFlashReadBuf, ulFlashIdx, WRITE_ALIGNMENT);
@@ -166,6 +167,14 @@ int main(void)
 				ulFlashIdx++;
 				printk("flash count: %d\n\r", ulFlashIdx);
 			}
+            if (IsSupervisorLiveNotifyEnable())
+            {
+                if (SendLiveDataToSupervisor(cJsonBuffer, strlen(cJsonBuffer)))
+                {
+                    printk("INFO: LiveData sent to Supervisor\n\r");
+                }
+                
+            }
 
 			cJSON_Delete(pMainObject);
 			cJSON_free(cJsonBuffer);
@@ -386,11 +395,11 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
         }
  
 
-        if(IshistoryNotificationenabled() && IsConnected())
-        {
-            VisenseHistoryDataNotify();
-            *uFlashIdx = 0; 
-        }
+        // if(IshistoryNotificationenabled() && IsConnected())
+        // {
+        //     VisenseHistoryDataNotify();
+        //     *uFlashIdx = 0; 
+        // }
 
         bRetval = true;
     }

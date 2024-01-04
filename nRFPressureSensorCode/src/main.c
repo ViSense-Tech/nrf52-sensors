@@ -18,6 +18,7 @@
 #include "nvs_flash.h"
 #include "TimerHandler.h"
 #include "MeshService.h"
+#include "MeshHandler.h"
 
 
 /*******************************MACROS****************************************/
@@ -167,6 +168,15 @@ int main(void)
             {
                 VisenseSensordataNotify(pucAdvertisingdata+2, ADV_BUFF_SIZE);
             }
+            if (IsSupervisorLiveNotifyEnable())
+            {
+                if (SendLiveDataToSupervisor(cJsonBuffer, strlen(cJsonBuffer)))
+                {
+                    printk("INFO: LiveData sent to Supervisor\n\r");
+                }
+                
+            }
+            
 #ifdef EXTENDED_ADV
             else if (!IsNotificationenabled() && !IsConnected())
             {
@@ -284,7 +294,7 @@ static bool SendHistoryDataToApp(uint16_t uPressureValue, char *pcBuffer, uint16
 
     if (pcBuffer)
     {
-        if(!IsConnected() && (uPressureValue >= GetPressureMin())) // && sConfigData.flag & (1 << 4) can include this condition also if config is mandetory during initial setup
+        if(!IsConnected() && (uPressureValue >= GetPressureMin()) && !IsSupervisorLiveNotifyEnable()) // && sConfigData.flag & (1 << 4) can include this condition also if config is mandetory during initial setup
         {
             
             memset(cBuffer, '\0', sizeof(cBuffer));
@@ -308,16 +318,16 @@ static bool SendHistoryDataToApp(uint16_t uPressureValue, char *pcBuffer, uint16
         }
  
 
-        if(IshistoryNotificationenabled() && IsConnected())
-        {
-            printk("In history notif\n\r");
-            if (VisenseHistoryDataNotify(*uFlashIdx))
-            {
-                *uFlashIdx = 0;
-                sConfigData.flashIdx = *uFlashIdx;
-                nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
-            } 
-        }
+        // if(IshistoryNotificationenabled() && IsConnected())
+        // {
+        //     printk("In history notif\n\r");
+        //     if (VisenseHistoryDataNotify(*uFlashIdx))
+        //     {
+        //         *uFlashIdx = 0;
+        //         sConfigData.flashIdx = *uFlashIdx;
+        //         nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
+        //     } 
+        // }
 
         bRetval = true;
     }

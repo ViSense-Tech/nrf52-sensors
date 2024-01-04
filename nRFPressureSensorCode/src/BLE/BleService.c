@@ -159,6 +159,11 @@ void BleHistoryDataNotify(const struct bt_gatt_attr *attr, uint16_t value)
     {
         hNotificationEnabled = true;
     }
+	else
+	{
+		hNotificationEnabled = false;
+	}
+
     
 }
 /**
@@ -339,7 +344,7 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 		// bRetVal = true;
 	}
 	
-	hNotificationEnabled = false;     //history callback set 
+	// hNotificationEnabled = false;     //history callback set 
 	if (bFullDataRead == true) 
 	{
 		if(!EraseExternalFlash(SECTOR_COUNT))
@@ -354,6 +359,17 @@ bool VisenseHistoryDataNotify(uint32_t ulWritePos)  //history
 	
 	return bRetVal;
 }
+
+/**
+ * @brief 	History data notification
+ * @param 	len : length of data
+ * @return 	none
+*/
+void SendServerHistoryDataToApp(uint8_t *pucSensorData, uint16_t unLen)
+{
+	bt_gatt_notify(NULL, &VisenseService.attrs[8], 
+			pucSensorData, strlen(pucSensorData));
+}	
 
 /**
  * @brief Check if history notification is enabled

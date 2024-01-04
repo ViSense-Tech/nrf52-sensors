@@ -19,6 +19,7 @@
 #include "Timerhandler.h"
 #include "TempSensor.h"
 #include "MeshService.h"
+#include "MeshHandler.h"
 
 /*******************************MACROS****************************************/
 // #define SLEEP_ENABLE  //Uncomment this line to enable sleep functionality
@@ -201,6 +202,14 @@ int main(void)
             printk("JSON:\n*%s#\n", cJsonBuffer);
 
             SendHistoryDataToApp(cJsonBuffer, strlen(cJsonBuffer));
+            if (IsSupervisorLiveNotifyEnable())
+            {
+                if (SendLiveDataToSupervisor(cJsonBuffer, strlen(cJsonBuffer)))
+                {
+                    printk("INFO: LiveData sent to Supervisor\n\r");
+                }
+                
+            }
 
             if(IsNotificationenabled() && IsConnected())
             {
@@ -269,7 +278,7 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
 
     if (pcBuffer)
     {
-        if(!IsConnected()) // && sConfigData.flag & (1 << 4) can include this condition also if config is mandetory during initial setup
+        if(!IsConnected() && !IsSupervisorLiveNotifyEnable()) // && sConfigData.flag & (1 << 4) can include this condition also if config is mandetory during initial setup
         {
             
             memset(cBuffer, '\0', sizeof(cBuffer));
@@ -293,16 +302,16 @@ static bool SendHistoryDataToApp(char *pcBuffer, uint16_t unLength)
         }
  
 
-        if(IshistoryNotificationenabled() && IsConnected())
-        {
-            if(VisenseHistoryDataNotify(*uFlashIdx))
-            {
-                *uFlashIdx = 0; 
-                sConfigData.flashIdx = *uFlashIdx;
-                nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
-            }
+        // if(IshistoryNotificationenabled() && IsConnected())
+        // {
+        //     if(VisenseHistoryDataNotify(*uFlashIdx))
+        //     {
+        //         *uFlashIdx = 0; 
+        //         sConfigData.flashIdx = *uFlashIdx;
+        //         nvs_write(&sConfigFs, 0, (char *)&sConfigData, sizeof(_sConfigData));
+        //     }
             
-        }
+        // }
 
         bRetval = true;
     }

@@ -36,3 +36,4 @@ void ParseRcvdData();
 void SetConfigStatus(bool bStatus);
 bool GetConfigStatus();
 void ParseFenceData();
+void SendServerHistoryDataToApp(uint8_t *pucSensorData, uint16_t unLen);

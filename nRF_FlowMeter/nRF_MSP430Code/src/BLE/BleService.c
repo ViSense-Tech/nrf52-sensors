@@ -55,6 +55,11 @@ void BleHistoryDataNotify(const struct bt_gatt_attr *attr, uint16_t value)
     {
         hNotificationEnabled = true;
     }
+	else
+	{
+		hNotificationEnabled = false;
+	}
+	
     
 }
 
@@ -158,6 +163,10 @@ void BleConfigDataNotify(const struct bt_gatt_attr *attr, uint16_t value)
 	if (value == BT_GATT_CCC_NOTIFY)
 	{
 		bConfigNotifyEnabled = true;
+	}
+	else
+	{
+		bConfigNotifyEnabled = false;
 	}
 	
 }
@@ -326,7 +335,16 @@ int VisenseSensordataNotify(uint8_t *pucSensorData, uint16_t unLen)
 
 	return nRetVal;
 }
-
+/**
+ * @brief 	History data notification
+ * @param 	len : length of data
+ * @return 	none
+*/
+void SendServerHistoryDataToApp(uint8_t *pucSensorData, uint16_t unLen)
+{
+	bt_gatt_notify(NULL, &VisenseService.attrs[8], 
+			pucSensorData, unLen);
+}
 /**
  * @brief Set file pointer
  * @param fs : file pointer structure

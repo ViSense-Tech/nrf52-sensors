@@ -3,17 +3,16 @@
 #include "BleService.h"
 #include "nvs_flash.h"
 /*************************************MACROS****************************************************/
-#define PRESSURE_SENSOR_STATUS           0x01
-#define IRROMETER_SENSOR_STATUS          0x02
-#define RELAY_NODE_STATUS                0x03
-#define SUPERVISOR_STATUS                0x04
 
 #define RECIEVE_OPCODE_VISENSE          BT_MESH_MODEL_OP_3(0x0A, VISENSE_COMPANY_ID)
-#define IRROMETER_RX_OPCODE_VISENSE     BT_MESH_MODEL_OP_3(0x0B, VISENSE_COMPANY_ID)
-#define RELAY_NODE_OPCODE               BT_MESH_MODEL_OP_3(0x0C, VISENSE_COMPANY_ID)
-#define ACK_OPCODE_VISENSE              BT_MESH_MODEL_OP_3(0x0D, VISENSE_COMPANY_ID)
+#define HISTORY_DATA_OPCODE_VISENSE     BT_MESH_MODEL_OP_3(0x0B, VISENSE_COMPANY_ID)
 #define ROLE_STATUS_OPCODE              BT_MESH_MODEL_OP_3(0x0E, VISENSE_COMPANY_ID)
-
+/*************************************TYPEDEFS ******************************************/
+typedef enum __eNetworkRole{
+    ROLE_SUPERVISOR = 0,
+    NOTIFICATION_LIVE,
+    NOTIFICATION_HISTORY,
+} _eNetworkRole;
 /*************************************GLOBAL VARIABLES********************************************/
 
 static bool attention;
@@ -24,11 +23,17 @@ struct bt_mesh_msg_ctx sSupervisorCtx;
 static uint8_t ucIdx = 0;
 bool bSndStat = true;
 uint16_t ulRxCount = 0;
+uint16_t usHisCount = 0;
 /*True if complete message send 
 else false*/
 static bool bServerPayloadSendStatus = false;
 /*true if Uncomplete send else false complete send*/
 static bool bUnCompleteSendStatus = false;
+// static _eNetworkRole eNetworkRole = ROLE_SERVER;
+static bool bLiveDataNotificationEnabled = false;
+static bool bHistoryNotificationEnabled = false;
+static uint16_t ulSupervisorAddr = 0x0000;
+struct bt_mesh_send_cb *sMeshMsgSendCb = NULL;
 
 static struct bt_mesh_model_pub pub_ctx = {
     .msg = NET_BUF_SIMPLE(BT_MESH_MODEL_BUF_LEN(RECIEVE_OPCODE_VISENSE,
@@ -38,8 +43,7 @@ static struct bt_mesh_model_pub pub_ctx = {
 
 const struct bt_mesh_model_op _opcode_list[] = {
     { RECIEVE_OPCODE_VISENSE,    BT_MESH_LEN_MIN(0),    handle_message },
-    { IRROMETER_RX_OPCODE_VISENSE,    BT_MESH_LEN_MIN(0),    irrometer_handle },
-    {RELAY_NODE_OPCODE,    BT_MESH_LEN_MIN(0),    relay_node_handle },
+    { HISTORY_DATA_OPCODE_VISENSE,    BT_MESH_LEN_MIN(0),    HistoryDataHandle },
     {ROLE_STATUS_OPCODE,    BT_MESH_LEN_MIN(0),    role_handle_status },
     BT_MESH_MODEL_OP_END,
 };
@@ -84,7 +88,8 @@ static void attention_off(struct bt_mesh_model *mod)
 }
 static const uint8_t *extract_msg(struct net_buf_simple *buf)
 {
-	buf->data[buf->len - 1] = '\0';
+	buf->data[buf->len] = '\0';
+    
 	return net_buf_simple_pull_mem(buf, buf->len);
 }
 
@@ -92,63 +97,102 @@ static int role_handle_status(struct bt_mesh_model *model, struct bt_mesh_msg_ct
 			  struct net_buf_simple *buf)
 {
     uint32_t *ulFlashIdx;
+    size_t i;
 
     ulFlashIdx = GetFlashCounter();
-   #if 1
-    if (!IsConnected())
+    uint8_t uStatus = net_buf_simple_pull_u8(buf);
+    
+
+    if (!IsConnected() && uStatus)
     {
-        uint8_t status = net_buf_simple_pull_u8(buf);
-        printk("\nStatus: %d\n", status);
-        if(status == SUPERVISOR_STATUS)
+        for (i = 0; i < 3; i++)
         {
-            printk("INFO: CONNECTED TO SUPERVISOR\n");
-            if (bSndStat)
+            if (uStatus & (1 << i))
             {
-                SendMeshPayloadToSupervisor(ctx);
-            }
+                switch (i)
+                {
+                    case ROLE_SUPERVISOR:
+                        printk("\n\r Get Supervisor Waiting to enable notification \n\r");
+                        bSupervisorConnected = true;
+                        ulSupervisorAddr = ctx->addr;
+                        break;
+                    case NOTIFICATION_LIVE:
+                        bLiveDataNotificationEnabled = true;
+                        printk("\n\r Supervisor live notification enabled\n\r");
+                        break;
+                    case NOTIFICATION_HISTORY:
+                        bHistoryNotificationEnabled = true;
+                        SendMeshPayloadToSupervisor(ctx);
+                        printk("\n\r Supervisor history notification enabled\n\r");
+                        break;
+                }
                 
+            }
+            else
+            {
+                switch (i)
+                {
+                    if (ulSupervisorAddr == ctx->addr)
+                    {
+                        case ROLE_SUPERVISOR:
+                            bSupervisorConnected = false;
+                            printk("\n\r Supervisor disconnected\n\r");
+                            break;
+                        case NOTIFICATION_LIVE:
+                            bLiveDataNotificationEnabled = false;
+                            printk("\n\r Supervisor live notification disabled\n\r");
+                            break;
+                        case NOTIFICATION_HISTORY:
+                            bHistoryNotificationEnabled = false;
+                            printk("\n\r Supervisor history notification disabled\n\r");
+                            break;
+                    }
+                    
+                }
+            }
+            
         }
-        else
-        {
-            printk("INFO: CHECKING SUPERVISOR STATUS\n");
-            bSupervisorConnected = false;
-        }
+           
     }
-    else
+    else 
     {
-        printk("INFO: ALREADY CONNECTED\n");
+        if (ulSupervisorAddr == ctx->addr)
+        {
+            bLiveDataNotificationEnabled = false;
+            bHistoryNotificationEnabled = false;
+        }
+        
+        
     }
-#endif
+
+    return 0;
+    
 
 }
-static int relay_node_handle(struct bt_mesh_model *model, struct bt_mesh_msg_ctx *ctx,
-			  struct net_buf_simple *buf)
-{
-// 
-}
 
+/**
+ * @brief Handle message
+ * @param model - model handle
+ * @param ctx - context handle
+ * @param buf - buffer received
+ * @return int
+*/
 static int handle_message(struct bt_mesh_model *model, struct bt_mesh_msg_ctx *ctx,
 			  struct net_buf_simple *buf)
 {
-#if 1
     bServerBusy = true;
     uint32_t *pulFlashIdx = NULL;
     uint8_t uMeshPayloadFromServer[255] = {0};
-    // char *MeshPayload;
+    char *MeshPayload = NULL;
 
     pulFlashIdx = GetFlashCounter();
-	// MeshPayload = extract_msg(buf);
-
-    // memcpy(uMeshPayloadFromServer, MeshPayload, strlen(uMeshPayloadFromServer));
-
-    char *MeshPayload;
 	MeshPayload = extract_msg(buf);
 	printk("Paylaod From server...................................: %s\n",MeshPayload);
     printk("\n\r Received Paylod count : %d\n\r", ++ulRxCount);
     
     if (IsNotificationenabled())
     {
-        SendMeshPayloadToMaster(MeshPayload);
+        SendMeshPayloadToMaster(MeshPayload, (uint16_t)strlen(MeshPayload));
     }
     else
     {
@@ -163,53 +207,77 @@ static int handle_message(struct bt_mesh_model *model, struct bt_mesh_msg_ctx *c
                 printk("\n\rERROR: MESH PAYLOAD WRITE TO EXTERNAL FLASH FAILED\n\r");
             }
         }
-        else if (writeJsonToExternalFlash(MeshPayload, *pulFlashIdx, WRITE_ALIGNMENT))
+        else 
         {
-            *pulFlashIdx = *pulFlashIdx + 1;
-        }
-        else
-        {
-            printk("\n\rERROR: MESH PAYLOAD WRITE TO EXTERNAL FLASH FAILED\n\r");
+            if (writeJsonToExternalFlash(MeshPayload, *pulFlashIdx, WRITE_ALIGNMENT))
+            {
+                *pulFlashIdx = *pulFlashIdx + 1;
+            }
+            else
+            {
+                printk("\n\rERROR: MESH PAYLOAD WRITE TO EXTERNAL FLASH FAILED\n\r");
+            }
         }
         
     }
-#endif
-    // bServerBusy = true;
-    // char *MeshPayload;
-	// MeshPayload = extract_msg(buf);
-	// printk("Paylaod From server...................................: %s\n",MeshPayload);
-	// return 0;
-}
-static int irrometer_handle(struct bt_mesh_model *model, struct bt_mesh_msg_ctx *ctx,
-			  struct net_buf_simple *buf)
-{
-// 
+
+    return 0;
 }
 /**
- * @brief callback function for send mesh message
+ * @brief callback function for receiving history data
+ * @param model - model handle
+ * @param ctx - context handle
+ * @param buf - buffer received
+ * @return int
+*/
+static int HistoryDataHandle(struct bt_mesh_model *model, struct bt_mesh_msg_ctx *ctx,
+			  struct net_buf_simple *buf)
+{
+    char *MeshPayload = NULL;
+
+	MeshPayload = extract_msg(buf);
+    printk("\n\r Received History Paylod : %s\n\r", MeshPayload);
+    printk("\n\r Received History Paylod count : %d\n\r", ++usHisCount);
+    SendServerHistoryDataToApp(MeshPayload, strlen(MeshPayload));
+    
+    return 0;
+
+}
+/**
+ * @brief callback function for send mesh message status
  * @param model - model
  * @return None
 */
 static int update_handler(struct bt_mesh_model *model)
 {
 	struct net_buf_simple *buf = model->pub->msg;
+    uint8_t uDeviceRole = 0;
 	printk("update_handler\n");
 	bt_mesh_model_msg_init(buf, ROLE_STATUS_OPCODE);
 	
-	
-	if(IsConnected())
-	{
-		printk("\n\rRole : SUPERVISOR");
-        net_buf_simple_add_u8(buf, SUPERVISOR_STATUS);
-		// bSensorStatus = false;
-	}
-	else
-	{
-        net_buf_simple_add_u8(buf, PRESSURE_SENSOR_STATUS);
-		printk("\n\rRole : SERVER");
-		//k_msleep(10000);
-	}
+    if (IsConnected())
+    {
+        uDeviceRole = uDeviceRole | 1 << ROLE_SUPERVISOR;
 
+        if (IsNotificationenabled() || IshistoryNotificationenabled()) 
+        {
+            if (IsNotificationenabled())
+            {
+                uDeviceRole = uDeviceRole | 1 << NOTIFICATION_LIVE;
+            }
+            if (IshistoryNotificationenabled())
+            {
+                uDeviceRole = uDeviceRole | 1 << NOTIFICATION_HISTORY;
+            }
+            
+        } 
+    }
+    else
+    {
+        uDeviceRole = 0;
+    }
+    
+    net_buf_simple_add_u8(buf, uDeviceRole);
 	return 0;
 }
 /**
@@ -223,24 +291,17 @@ struct bt_mesh_model *GetMeshModel()
     // 
 }
 
+/**
+ * @brief model handler initialization
+ * @param None
+ * @return mesh Node Composition 
+*/
 const struct bt_mesh_comp *model_handler_init(void)
 {
     pub_ctx.update = update_handler;
+    sMeshMsgSendCb->start = MeshMsgSendStartCb;
+    sMeshMsgSendCb->end = MeshMsgSendEndCb;
 	return &comp;
-}
-
-void SendMeshPayload(void)
-{
-    uint32_t *pulFlashIdx;
-    pulFlashIdx = GetFlashCounter();
-    if(IshistoryNotificationenabled() && IsConnected())
-    {
-        printk("In history notif\n\r");
-        if (VisenseHistoryDataNotify(*pulFlashIdx))
-        {
-            *pulFlashIdx = 0;
-        } 
-    }    
 }
 
 /**
@@ -253,7 +314,7 @@ void sendAck(struct bt_mesh_msg_ctx *ctx, uint8_t uSensorStatus)
 {
     struct net_buf_simple *msg = NET_BUF_SIMPLE(BT_MESH_TX_SDU_MAX);
 
-    bt_mesh_model_msg_init(msg, IRROMETER_RX_OPCODE_VISENSE);
+    bt_mesh_model_msg_init(msg, HISTORY_DATA_OPCODE_VISENSE);
     // Build your status message payload
     net_buf_simple_add_u8(msg, uSensorStatus);
 
@@ -267,6 +328,11 @@ void sendAck(struct bt_mesh_msg_ctx *ctx, uint8_t uSensorStatus)
         printk("Sent status message\n");
     }
 }   
+/**
+ * @brief send Node history payload to supervisor
+ * @param ctx - supervisor context
+ * 
+*/
 bool SendMeshPayloadToSupervisor(struct bt_mesh_msg_ctx *ctx)
 {   
     bool bRetVal = false;
@@ -278,11 +344,10 @@ bool SendMeshPayloadToSupervisor(struct bt_mesh_msg_ctx *ctx)
     uint32_t ulFlshIdx = 0;
     uint32_t uFlashCounter = 0;
     
-    // BT_MESH_MODEL_BUF_DEFINE(msg, RECIEVE_OPCODE_VISENSE, 256);
-    
     pulWritePos = GetFlashCounter();
     ulFlshIdx = *pulWritePos;
     bSndStat = false;
+
 
     printk("\n\rcontext net_idex is : %x",ctx->net_idx);
     printk("\n\rcontext app_idx is : %x",ctx->app_idx);
@@ -290,26 +355,29 @@ bool SendMeshPayloadToSupervisor(struct bt_mesh_msg_ctx *ctx)
     printk("\n\rcontext send_rel is : %d",ctx->send_rel);
     ctx->send_rel = true;
 
-	// if (ucIdx > ulFlshIdx)
-	// {
-	// 	uFlashCounter = ucIdx - ulFlshIdx;
-	// }
+	if (ucIdx > ulFlshIdx)
+	{
+		uFlashCounter = ucIdx - ulFlshIdx;
+	}
 
     bUnCompleteSendStatus = true;
+    if (bHistoryNotificationEnabled == false)
+    {
+        return bRetVal;
+    }
+    
 
 	while(ucIdx <= NUMBER_OF_ENTRIES)
 	{	
         struct net_buf_simple *msg = NET_BUF_SIMPLE(BT_MESH_TX_SDU_MAX);
-        bt_mesh_model_msg_init(msg, RECIEVE_OPCODE_VISENSE);
-		// if (!IsConnected())
-		// {
-		// 	break;
-		// }
+        bt_mesh_model_msg_init(msg, HISTORY_DATA_OPCODE_VISENSE);
+		if (!bHistoryNotificationEnabled)
+		{
+			break;
+		}
 		
 		memset(NotifyBuf, 0, 260);
 		uReadCount = readJsonFromExternalFlash(NotifyBuf, ucIdx, WRITE_ALIGNMENT);
-        // strcpy(NotifyBuf, "{Test for mesh}");
-
 		printk("\nId: %d, Ble_Stored_Data: %s\n",ucIdx, NotifyBuf);
 		// if (uReadCount == true)
 		// {
@@ -318,7 +386,7 @@ bool SendMeshPayloadToSupervisor(struct bt_mesh_msg_ctx *ctx)
 		// }
 		if (NotifyBuf[0] != 0x7B)
 		{
-			// bFullDataRead = true;
+			bFullDataRead = true;
 			break;
 		}
 		k_msleep(100);
@@ -344,7 +412,7 @@ bool SendMeshPayloadToSupervisor(struct bt_mesh_msg_ctx *ctx)
 			
 		}
 		ucIdx++;
-		// uFlashCounter++;
+		uFlashCounter++;
 		if (ucIdx == NUMBER_OF_ENTRIES)
 		{
 			ucIdx = 0;
@@ -354,7 +422,6 @@ bool SendMeshPayloadToSupervisor(struct bt_mesh_msg_ctx *ctx)
 			bFullDataRead = true;
 			break;	
 		}
-        // net_buf_simple_remove_mem(&msg, msg.len);
     }
 
     if (bFullDataRead == true) 
@@ -376,9 +443,17 @@ bool SendMeshPayloadToSupervisor(struct bt_mesh_msg_ctx *ctx)
     
       
 }
-void SendMeshPayloadToMaster(char *cMeshPayload)
+
+/**
+ * 
+ * @brief send live payload to master
+ * @param cMeshPayload - payload
+ * @param unLen - length of payload
+ * @return None
+*/
+void SendMeshPayloadToMaster(char *cMeshPayload, uint16_t unLen)
 {
-    VisenseSensordataNotify(cMeshPayload, ADV_BUFF_SIZE);
+    VisenseSensordataNotify(cMeshPayload, unLen);
 }
 /**
  * @brief check if supervisor is connected
@@ -387,6 +462,24 @@ void SendMeshPayloadToMaster(char *cMeshPayload)
 bool IsSupervisorConnected()
 {
     return bSupervisorConnected;
+}
+
+/**
+ * @brief check if supervisor Notifies for live data
+ * @return true if connected else false
+*/
+bool IsSupervisorLiveNotifyEnable()
+{
+    return bLiveDataNotificationEnabled;
+}
+
+/**
+ * @brief check if supervisor Notifies for History data
+ * @return true if connected else false
+*/
+bool IsSupervisorHistoryNotifyEnable()
+{
+    return bHistoryNotificationEnabled;
 }
 
 /**
@@ -415,4 +508,79 @@ struct bt_mesh_msg_ctx *GetSupervisorCtx(void)
 void SetSupervisorCtx(struct bt_mesh_msg_ctx *ctx)
 {
     sSupervisorCtx = *ctx;
+}
+
+/**
+ * @brief send live data to supervisor
+ * @param pucBuffer : buffer
+ * @param unLength : length
+ * @return true for success
+*/
+bool SendLiveDataToSupervisor(uint8_t *pucBuffer, uint16_t unLength)
+{
+    bool bRetVal = false;
+    struct bt_mesh_msg_ctx sSuprvisrCtx = {0};
+    char cLiveData[260] = {0};
+    
+     uint32_t *uFlashIdx = NULL;
+     printk("\n\rLength of the live data %d", unLength);
+
+    memset(cLiveData, 0, 260);
+   
+    
+    uFlashIdx = GetFlashCounter();
+    struct net_buf_simple *msg = NET_BUF_SIMPLE(BT_MESH_TX_SDU_MAX);
+    bt_mesh_model_msg_init(msg, RECIEVE_OPCODE_VISENSE); 
+    sSuprvisrCtx.addr = ulSupervisorAddr;
+    do
+    {
+        printk("\n\rSupervisor Address is %d\n\r", sSuprvisrCtx.addr);
+
+        if (pucBuffer)
+        {
+            strncpy(cLiveData, pucBuffer, strlen(pucBuffer));
+            net_buf_simple_add_mem(msg, cLiveData, strlen(cLiveData));
+        }
+        if (bt_mesh_model_send(elements->vnd_models, &sSuprvisrCtx, msg, sMeshMsgSendCb, NULL) != 0) 
+        {
+            printk("Failed to send  message\n");
+            if(writeJsonToExternalFlash(pucBuffer, *uFlashIdx, WRITE_ALIGNMENT))
+            {
+                *uFlashIdx = *uFlashIdx + 1;
+            }
+            break;
+
+        }
+        else
+        {   
+            printk("Sent Live data to supervisor %s\n,", pucBuffer);
+            bRetVal = true;
+
+        } 
+    } while (0);
+    return bRetVal;
+    
+}
+
+/**
+ * @brief send start callback
+ * @param duration : The duration of the full transmission
+ * @param err : Error occurring during sending
+ * @param cb_data : data
+ * @return None
+*/
+void MeshMsgSendStartCb(uint16_t duration, int err, void *cb_data)
+{
+    printk("MEsh message send start duration %d\n", duration);
+}
+
+/**
+ * @brief send end callback
+ * @param err : Error occurring during sending
+ * @param cb_data : data
+ * @return None
+*/
+void MeshMsgSendEndCb(int err, void *cb_data)
+{
+    printk("MEsh message send end\n");
 }

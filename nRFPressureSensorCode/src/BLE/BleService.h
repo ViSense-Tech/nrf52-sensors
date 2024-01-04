@@ -24,3 +24,4 @@ bool IsConfigNotifyEnabled();
 int VisenseConfigDataNotify(uint8_t *pucConfigData, uint16_t unLen);
 bool IshistoryNotificationenabled();
 bool VisenseHistoryDataNotify(uint32_t);
+void SendServerHistoryDataToApp(uint8_t *pucSensorData, uint16_t unLen);

@@ -22,3 +22,4 @@ bool IsConnected();
 void SetFileSystem(struct nvs_fs *fs);
 bool IsConfigNotifyEnabled();
 bool IshistoryNotificationenabled();
+void SendServerHistoryDataToApp(uint8_t *pucSensorData, uint16_t unLen);

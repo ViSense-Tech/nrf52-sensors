@@ -16,6 +16,7 @@
 #include "nvs_flash.h"
 #include "SystemHandler.h"
 #include "TimerHandler.h"
+#include "MeshHandler.h"
 #ifdef PMIC_ENABLED
 #include "PMIC/PMICHandler.h"
 #endif
@@ -205,7 +206,14 @@ static void SendLiveDataToApp()
 		// ulFlashidx++;
 		// printk("flash count: %d\n\r", ulFlashidx);
 	}
-
+	if (IsSupervisorLiveNotifyEnable())
+	{
+		if (SendLiveDataToSupervisor(cJsonBuffer, strlen(cJsonBuffer)))
+		{
+			printk("INFO: LiveData sent to Supervisor\n\r");
+		}
+		
+	}
 	if ((psConfigData->flag & (1 << 1))) // check whether config data is read from the flash / updated from mobile at runtime
 	{
 		*pDiagData = *pDiagData & CONFIG_WRITE_OK; // added a diagnostic information to the application
@@ -799,7 +807,7 @@ static bool SendHistoryDataToFlash(char *pcJsonBuffer)
 
     if (pcJsonBuffer)
     {
-        if(!IsConnected()) // && psConfigData->flag & (1 << 4) can include this condition also if config is mandetory during initial setup
+        if(!IsConnected() && !IsSupervisorLiveNotifyEnable()) // && psConfigData->flag & (1 << 4) can include this condition also if config is mandetory during initial setup
         {
            
             memset(cBuffer, '\0', sizeof(cBuffer));
@@ -822,16 +830,16 @@ static bool SendHistoryDataToFlash(char *pcJsonBuffer)
             }
         }
  
-        if(IshistoryNotificationenabled() && IsConnected())
-        {
-            printk("In history notif\n\r");
-            if (VisenseHistoryDataNotify(*uFlashIdx))
-            {
-                *uFlashIdx = 0;
-                psConfigData->flashIdx = *uFlashIdx;
-                nvs_write(&sConfigFs, 0, (char *)psConfigData, sizeof(_sConfigData));
-            }
-        }
+        // if(IshistoryNotificationenabled() && IsConnected())
+        // {
+        //     printk("In history notif\n\r");
+        //     if (VisenseHistoryDataNotify(*uFlashIdx))
+        //     {
+        //         *uFlashIdx = 0;
+        //         psConfigData->flashIdx = *uFlashIdx;
+        //         nvs_write(&sConfigFs, 0, (char *)psConfigData, sizeof(_sConfigData));
+        //     }
+        // }
  
         bRetval = true;
     }

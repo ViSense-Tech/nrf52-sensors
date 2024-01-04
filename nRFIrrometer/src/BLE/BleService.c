@@ -130,6 +130,10 @@ void BleHistoryDataNotify(const struct bt_gatt_attr *attr, uint16_t value)
     {
         hNotificationEnabled = true;
     }
+	else
+	{
+		hNotificationEnabled = false;
+	}
     
 }
 /**
@@ -319,7 +323,16 @@ bool IshistoryNotificationenabled()
     return hNotificationEnabled;
 }
 
-
+/**
+ * @brief 	History data notification
+ * @param 	len : length of data
+ * @return 	none
+*/
+void SendServerHistoryDataToApp(uint8_t *pucSensorData, uint16_t unLen)
+{
+	bt_gatt_notify(NULL, &VisenseService.attrs[8], 
+			pucSensorData, strlen(pucSensorData));
+}
 
 /**
  * @brief Check if notification is enabled
