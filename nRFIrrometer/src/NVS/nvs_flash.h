@@ -39,7 +39,7 @@
  *         which has tobe fixed by configuring dts file in boards directory. You can do that by commenting out
  *         mx25 flash node in definition qspi node in dts file manually.
 */
-//#define MX66FLASH_ENABLED //Uncomment this line to enable external flash
+#define MX66FLASH_ENABLED //Uncomment this line to enable external flash
 /*********************************************************TYPEDEFS*****************************************/
 typedef struct __attribute__((packed)) __sConfigData
 {
